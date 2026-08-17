@@ -13,7 +13,8 @@ $tests = @(
     'Test-JobAgentCompanyInventory.ps1',
     'Test-JobAgentSourceAdapters.ps1',
     'Test-JobAgentSourceVerification.ps1',
-    'Test-JobAgentClassification.ps1'
+    'Test-JobAgentClassification.ps1',
+    'Test-JobAgentDeduplication.ps1'
 )
 
 $results = New-Object System.Collections.Generic.List[object]

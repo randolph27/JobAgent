@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren #comment: Bekannte Stellen dürfen bei späteren Läufen nicht erneut als `NEW` erscheinen, auch wenn Titel oder URL-Parameter variieren.
+  - [x] Beschreibung: `src/JobAgent.Deduplication.psm1` implementiert stabile Jobidentitaeten mit Prioritaet offizielle Job-ID, ATS-ID, kanonische URL und zusammengesetzter Fingerprint; bekannte Stellen werden als `KNOWN` oder `UPDATED` statt erneut als `NEW` erkannt.
+  - [x] Scope: Erstellt wurden `src/JobAgent.Deduplication.psm1` und `tests/Test-JobAgentDeduplication.ps1`; erweitert wurden `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Zusammenfuehrung getrennter Stellen ohne belastbare Identitaet, keine Live-Webrecherche.
+  - [x] Ist-Stand (2026-08-17 14:21): Deduplikation erkennt dieselbe Stelle im zweiten Lauf, priorisiert offizielle Job-ID vor ATS-ID und kanonischer URL, nutzt alternative offizielle URLs und trennt echte Neuausschreibungen mit neuer ID und neuer URL.
+  - [x] Abhängigkeiten: JA-002, JA-003, JA-006 und JA-007 sind abgeschlossen.
+  - [x] Aufwand/Dauer: Aufwand L, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 80/100, weil Dublettenvermeidung nun vor Statusmaschine, Daily-Run und Report deterministisch verfuegbar ist.
+  - [x] Risiken: Der zusammengesetzte Fingerprint bleibt bewusst konservativ; wenn eine Stelle gleichzeitig neue starke Identitaeten und gleiche weiche Merkmale besitzt, wird sie nicht automatisch zusammengefuehrt. JA-009 muss daraus spaeter ChangeEvents und Statusuebergaenge ableiten.
+  - [x] Schritte:
+    1. Identitaetskandidaten mit geordneten Keys fuer `OFFICIAL_JOB_ID`, `ATS_JOB_ID`, `CANONICAL_URL` und `COMPOSITE_FINGERPRINT` implementiert.
+    2. Wiedererkennung gegen bestehende Jobs inklusive `alternative_official_urls`, URL-Kanonisierung, geaenderter Titel und geaenderter Job-ID umgesetzt.
+    3. Entscheidungsobjekt mit `decision`, `job_id`, `identity_basis`, `confidence`, `changed_fields` und `reason` fuer die spaetere Statusmaschine bereitgestellt.
+  - [x] Evidence: `src/JobAgent.Deduplication.psm1`, `tests/Test-JobAgentDeduplication.ps1`, `tests/Test-JobAgentSupertest.ps1`, `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentDeduplication.ps1` exit=0; `git -c core.pager=cat -c color.ui=false --no-pager diff --check` exit=0.
+  - [x] Audit: Tests decken zweiten Lauf derselben Stelle, offizielle Job-ID-Prioritaet, Job-ID-Wechsel bei gleicher kanonischer URL, URL-Parameter-Kanonisierung, Titelwechsel, alternative offizielle URL und echte Neuausschreibung mit neuer ID plus neuer URL ab.
+  - [x] Supertest: `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` exit=0; JobAgent-Funktionstests fuer Schema, Persistenz, Firmeninventar, Quellenadapter, Quellenverifikation, Klassifikation und Deduplikation sind gebuendelt.
+
 - [x] JA-007 Stellenklassifikation für IT-Führungspositionen entwickeln #comment: Nur echte IT-Führungsrollen im Zielgebiet sollen als passende Treffer erscheinen.
   - [x] Beschreibung: `src/JobAgent.Classification.psm1` implementiert eine regelbasierte, nachvollziehbare Bewertung fuer Titel, Beschreibung, Fuehrungsverantwortung, IT-Gesamtverantwortung, Standort, Vollzeitbezug und Arbeitsmodell.
   - [x] Scope: Erstellt wurden `src/JobAgent.Classification.psm1`, `tests/Test-JobAgentClassification.ps1` und `tests/Test-JobAgentSupertest.ps1`; erweitert wurde `docs/data-model.md`. Keine automatische Bewerbung, keine Speicherung unnoetiger persoenlicher Daten und keine Live-Webrecherche.

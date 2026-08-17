@@ -129,6 +129,24 @@ Identitätspriorität:
 
 Eine bekannte unveränderte Stelle darf in späteren Läufen nicht erneut als `NEW` erscheinen.
 
+## Job-Deduplikation
+
+`src/JobAgent.Deduplication.psm1` implementiert den Vertrag fuer `JA-008`.
+
+- `New-JobAgentJobIdentityCandidate` erzeugt aus Firmen-ID, Titel, offizieller URL, offizieller Job-ID, ATS-ID, Standort und Source-ID eine geordnete Identitaetsliste.
+- Identitaetsprioritaet ist strikt: `OFFICIAL_JOB_ID`, danach `ATS_JOB_ID`, danach `CANONICAL_URL`, danach `COMPOSITE_FINGERPRINT`.
+- `Resolve-JobAgentJobDeduplication` entscheidet fuer einen neuen Treffer deterministisch zwischen `NEW`, `KNOWN` und `UPDATED`.
+- URL-Vergleiche nutzen `ConvertTo-JobAgentCanonicalUrl`; Tracking-, Session- und Fragment-Unterschiede erzeugen keine neue Stelle.
+- `alternative_official_urls` bestehender Jobs werden fuer `CANONICAL_URL`-Matches beruecksichtigt.
+- Eine neue offizielle Job-ID mit neuer kanonischer URL wird nicht allein wegen gleichem Titel/Standort zusammengefuehrt; solche Faelle bleiben als neue potenzielle Neuausschreibung getrennt nachvollziehbar.
+- Geaenderte Felder wie `title`, `official_url`, `external_job_id` und `ats_job_id` werden im Ergebnis ausgewiesen, damit JA-009 daraus ChangeEvents ableiten kann.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentDeduplication.ps1
+```
+
 ## Stellenklassifikation
 
 `src/JobAgent.Classification.psm1` implementiert den Vertrag fuer `JA-007`.

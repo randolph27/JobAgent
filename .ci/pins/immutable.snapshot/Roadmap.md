@@ -9,23 +9,6 @@
 
 ## M3 - Matching, Deduplication und Statuslogik
 
-- [ ] JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren #comment: Bekannte Stellen dürfen bei späteren Läufen nicht erneut als `NEW` erscheinen, auch wenn Titel oder URL-Parameter variieren.
-  - [ ] Beschreibung: Implementiere stabile Jobidentitäten mit Priorität offizielle Job-ID, ATS-ID, kanonische URL und sekundäre Merkmale; erkenne Titeländerungen, echte Updates und mögliche Neuausschreibungen.
-  - [ ] Scope: Deduplication-Service, ID-Normalisierung, Vergleichslogik, Tests; keine Zusammenführung getrennter Stellen ohne belastbare Identität.
-  - [ ] Ist-Stand (2026-08-17 12:20): Keine Jobdatenbank und keine Deduplikation vorhanden.
-  - [ ] Abhängigkeiten: JA-002, JA-003, JA-006.
-  - [ ] Aufwand/Dauer: Aufwand L, Dauer 2-3 PT; kritisch vor erstem produktiven Daily-Run.
-  - [ ] Prioritätsscore: 80/100, weil Dublettenvermeidung als hohe Priorität definiert ist.
-  - [ ] Risiken: Wiederverwendung von ATS-IDs, geänderte URLs und gelöschte/neuveröffentlichte Stellen können falsch zusammengeführt oder getrennt werden.
-  - [ ] Schritte:
-    1. Implementiere Identitätspriorität: offizielle Job-ID vor ATS-ID, ATS-ID vor kanonischer URL, URL vor zusammengesetzten Merkmalen aus Firma, Standort und Titel.
-    2. Implementiere Vergleich von JobSnapshot zu bestehendem Job mit Erkennung von unverändert, wesentlich geändert, entfernt, geschlossen und potenziell neu veröffentlicht.
-    3. Speichere Entscheidungsgründe im Änderungsverlauf, damit jede `NEW`-, `UPDATED`- oder `CLOSED`-Ausgabe nachvollziehbar ist.
-  - [ ] Evidence: Deduplikationslog mit Entscheidungsgrund; Testfixtures für bekannte Stelle, Titeländerung, URL-Parameteränderung, echte Neuausschreibung und entfernte Stelle.
-  - [ ] Funktionstest: Zwei-Lauf-Test, bei dem dieselbe Stelle im zweiten Lauf nicht erneut `NEW` wird; Tests für Job-ID-Wechsel, URL-Kanonisierung und Titeländerung.
-  - [ ] Audit: Prüfen, dass eine Titeländerung allein keine neue Stelle erzeugt und dass unsichere Fälle als unsicher markiert werden.
-  - [ ] Supertest: Deduplikations-Zwei-Lauf-Szenario als Pflichtteil des Supertests aufnehmen.
-
 - [ ] JA-009 Statusmaschine für Daily-Run-Ergebnisse und Änderungsverlauf bauen #comment: Neue, aktive, geänderte und entfernte Stellen müssen deterministisch aus Scanresultaten und Historie entstehen.
   - [ ] Beschreibung: Implementiere eine Statusmaschine, die pro Lauf Rohjobs mit der Historie vergleicht, first_seen/last_seen aktualisiert, Statuswechsel erzeugt und Ausgabe-Kandidaten ableitet.
   - [ ] Scope: Daily-State-Engine, ChangeEvent-Erzeugung, Testfixtures mit mehreren Läufen; keine Live-Webrecherche in Funktionstests.

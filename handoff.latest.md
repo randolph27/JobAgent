@@ -1,80 +1,65 @@
 # Handoff latest
 
-Stand: 2026-08-17T14:13:00+02:00
+Stand: 2026-08-17T14:27:05+02:00
 
 ## Kurzstatus
 
 - Projekt: `JobAgent`
 - Branch: `master`
-- HEAD vor Abschluss-Commit: `27413124fb4c`
+- HEAD vor Commit: `525da1debd26`
 - Upstream: `origin/master`
-- Ahead/Behind vor Commit: `0/0`
-- Worktree: `dirty-before-commit`
+- Worktree: `dirty`
 - Active: _(none)_
 - Status: `open`
-- Route: `JA-001` bis `JA-007` sind abgeschlossen und archiviert.
-- Naechster Einstieg: `TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren`
+- Route: `JA-001` bis `JA-008` sind abgeschlossen und archiviert.
+- Naechster Einstieg: `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
 
-## Erledigter Arbeitsschritt
+## Abgeschlossener Punkt
 
-`JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln` ist abgeschlossen und aus `Roadmap.md` nach `Roadmap_archive.md` rotiert. `TD-0005` wurde aus `todo.current.md` entfernt und im Todo-Index auf `done` gesetzt.
+`JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren` ist abgeschlossen und aus `Roadmap.md` nach `Roadmap_archive.md` rotiert. `TD-0006` wurde aus `todo.current.md` entfernt und im Todo-Index auf `done` gesetzt.
 
 Implementiert:
 
-- `src/JobAgent.Classification.psm1`
-  - `Get-JobAgentLeadershipClassification`: bewertet Titel, Summary, Beschreibung, Standort, Arbeitsmodell und Beschaeftigungsart deterministisch.
-  - Ergebniswerte: `MATCH`, `POSSIBLE`, `REJECTED`; `UNKNOWN` bleibt im Schema fuer noch nicht klassifizierte Roh-/Altdaten reserviert.
-  - Positive Signale: CIO, Chief Information Officer, Head/Director/VP IT, IT-Leitung, IT-Gesamtverantwortung, Personal-/Budgetverantwortung, IT-Strategie, Technology Strategy.
-  - Negative Signale: Entwickler-, Specialist-, Consultant-, Architect-, Admin-, reine Projektleitungs- und Teamlead-Rollen ohne belegte Gesamt- oder Strategie-Verantwortung.
-  - Standortlogik: `MUNICH`, `MUNICH_20KM`, `FREISING` und `REMOTE_WITH_TARGET_REFERENCE` positiv; `OUT_OF_SCOPE` fail-closed `REJECTED`; `UNKNOWN` wird als Risiko markiert, lehnt starke IT-Leitung aber nicht automatisch ab.
-  - Ausgabe enthaelt `score`, `priority`, `reasons`, `rejected_reasons` und `evaluated_at`.
-- `tests/Test-JobAgentClassification.ps1`
-  - Deckt deutsche und englische Fuehrungstitel, Remote-Deutschland-Bezug, Entwickler-Ausschluss, Projektleitungs-Ausschluss, Teamlead-Ausschluss, leeren Titel, unklaren Standort, ausserhalb Zielgebiet und Grenzfall `IT Manager` ab.
+- `src/JobAgent.Deduplication.psm1`
+  - `New-JobAgentJobIdentityCandidate`: erzeugt geordnete Identitaetskeys fuer `OFFICIAL_JOB_ID`, `ATS_JOB_ID`, `CANONICAL_URL` und `COMPOSITE_FINGERPRINT`.
+  - `Resolve-JobAgentJobDeduplication`: entscheidet `NEW`, `KNOWN` oder `UPDATED` und liefert `job_id`, `identity_basis`, `confidence`, `changed_fields` und `reason`.
+  - `Find-JobAgentExistingJobMatch`: erkennt bekannte Jobs ueber belastbare Identitaeten und beruecksichtigt `alternative_official_urls`.
+  - `Get-JobAgentChangedJobFields`: meldet geaenderte Felder fuer `title`, `official_url`, `external_job_id` und `ats_job_id`.
+- `tests/Test-JobAgentDeduplication.ps1`
+  - Deckt zweiten Lauf derselben Stelle, offizielle Job-ID-Prioritaet, Job-ID-Wechsel bei gleicher kanonischer URL, URL-Parameter-Kanonisierung, Titelwechsel, alternative offizielle URL und echte Neuausschreibung ab.
 - `tests/Test-JobAgentSupertest.ps1`
-  - Buendelt abgeschlossene JobAgent-Funktionstests fuer Schema, Persistenz, Firmeninventar, Quellenadapter, Quellenverifikation und Klassifikation.
+  - Buendelt Deduplikation mit den abgeschlossenen JobAgent-Funktionstests.
 - `docs/data-model.md`
-  - Abschnitt `Stellenklassifikation` mit Vertrag, Signalen, Ausschluessen, Standortlogik und Testcommand ergaenzt.
+  - Abschnitt `Job-Deduplikation` mit Prioritaet, Grenzen und Funktionstest ergaenzt.
 
 ## Validierung
 
 Erfolgreich:
 
-- `pwsh -NoProfile -File tests\Test-JobAgentClassification.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentDeduplication.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` -> Exit `0`
+- `Get-Content ... | ConvertFrom-Json` fuer Todo-/Handoff-JSON und `todo.events.jsonl` -> Exit `0`
 - `git -c core.pager=cat -c color.ui=false --no-pager diff --check` -> Exit `0`
-- `.\ci.cmd self-check` -> Exit `0`, zuletzt Log `logs\terminal\self-check-20260817-141207.log`
 - `.\ci.cmd stp` -> Exit `0`
+- `.\ci.cmd repin-immutables` -> Exit `0`
+- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-142533.log`
 
-Supertest:
-
-- Der projektspezifische JobAgent-Supertest `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` ist gruen.
-- Der historische CI-Command `.\ci.cmd supertest` ist weiterhin nicht als Abschlussblocker gewertet, weil der Nutzer Supertest nicht gesondert angefragt hat und laut Nutzerregel nicht angefragter Supertest als erledigt gilt.
-- Bekannter historischer CI-Supertest-Fehler bleibt ausserhalb JA-007: kein Gradle-Build im Projektroot und fehlender lokaler `D:\_Scripte\JobAgent\sonar.cmd`.
-
-## Dienste und Umgebung
-
-- Devserver aus vorherigem Stand lief auf `http://localhost:8300/`; in diesem Abschluss wurde kein neuer Devserver gestartet.
-- SonarQube API auf `localhost:9000` war nicht erreichbar; `.\ci.cmd sonar-start` scheiterte wegen fehlendem lokalem `sonar.cmd`.
-- Kein Live-Webcrawl und keine produktiven Bewerbungs-/Jobdaten wurden erzeugt.
+Hinweis: Der historische CI-Verify-Digest enthaelt weiterhin einen alten `.\ci.cmd supertest`-Fehler aus der Gradle-/Altlogik. Der fachliche JobAgent-Supertest `tests\Test-JobAgentSupertest.ps1` ist gruen. Nach Nutzerregel gilt nicht angefragter historischer Supertest nicht als Blocker.
 
 ## Offene Aufgaben
 
-1. `TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren`
-   - Nutze `ConvertTo-JobAgentCanonicalUrl` aus JA-006.
-   - Prioritaet der Identitaet: offizielle Job-ID, ATS-ID, kanonische URL, danach zusammengesetzter Fingerprint.
-   - Gleiche Stelle darf im zweiten Lauf nicht erneut `NEW` werden.
-   - Testfaelle: Job-ID-Wechsel, URL-Parameteraenderung, Titelwechsel, echte Neuausschreibung, entfernte Stelle.
-2. `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
-   - Erst nach JA-008 sinnvoll.
-   - Muss Scanfehler von echten Entfernungen unterscheiden.
-3. `TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren`
-   - Erst nach Klassifikation, Deduplikation und Statusmaschine sinnvoll.
-   - Mock-Adapter zuerst; keine Live-Webrecherche in Funktionstests.
+1. `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
+   - `Resolve-JobAgentJobDeduplication` aus JA-008 fuer Treffer-Wiedererkennung nutzen.
+   - Statusuebergaenge fuer ersten Lauf, unveraenderten zweiten Lauf, Update-Lauf, erfolgreiche Entfernung und invaliden Treffer implementieren.
+   - `NEW -> ACTIVE -> UPDATED -> CLOSED/REMOVED` inklusive `first_seen`, `last_seen`, `changed_at` und `ChangeEvent` erzeugen.
+   - Fehlgeschlagene oder partielle Firmen-Scans duerfen bestehende Stellen nicht automatisch entfernen oder schliessen.
+   - Funktionstests mit Mock-Dokumenten/Mock-Scans schreiben; keine Live-Webrecherche.
+2. `TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren`
+   - Erst nach JA-009 sinnvoll.
+   - Mock-Adapter zuerst verbinden; keine unbegrenzten Browser-/Netzwerkprozesse.
+   - Fehler einzelner Firmen isolieren, ScanAttempts protokollieren und finalen Ergebnisartefakt erzeugen.
 
-## Risiken fuer neuen Agenten
+## Bekannte Risiken
 
-- Klassifikation ist regelbasiert und konservativ; `POSSIBLE` ist fuer Grenzfaelle vorgesehen und darf nicht als verifizierter Match ausgegeben werden.
-- `Company.ats` muss pro Firma belegt gepflegt werden; keine globale ATS-Allowlist.
-- `.\ci.cmd supertest` verweist noch auf Alt-/Android-/Gradle-Logik und ist nicht identisch mit `tests\Test-JobAgentSupertest.ps1`.
-- SonarQube ist aus diesem Projekt heraus blockiert, solange `D:\_Scripte\JobAgent\sonar.cmd` fehlt oder der Server auf `localhost:9000` nicht antwortet.
+- SonarQube aus diesem Projekt heraus bleibt blockiert, solange `D:\_Scripte\JobAgent\sonar.cmd` fehlt oder `localhost:9000` nicht antwortet.
+- Der historische CI-Command `.\ci.cmd supertest` ist nicht identisch mit `tests\Test-JobAgentSupertest.ps1`.
