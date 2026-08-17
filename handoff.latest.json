@@ -1,1 +1,191 @@
-{"ts":"2026-08-17T14:02:00.000+02:00","agent_id":"UTTER-20260817-39f7","workspace_root":"D:\\_Scripte\\JobAgent","project":"JobAgent","active_id":"","status":"open","goal":"JA-006 Offizielle Quellenverifikation und URL-Kanonisierung abgeschlossen, Handoff fuer neuen Chat erstellt.","changed":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","Roadmap_archive.md","docs/data-model.md","handoff.latest.json","handoff.latest.md","schemas/jobagent.schema.json","src/JobAgent.Persistence.psm1","src/JobAgent.SourceVerification.psm1","tests/Test-JobAgentPersistence.ps1","tests/Test-JobAgentSchema.ps1","tests/Test-JobAgentSourceVerification.ps1","tests/fixtures/jobagent/invalid-missing-job-id.json","tests/fixtures/jobagent/valid.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"verified":[{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentPersistence.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1","exit":0},{"cmd":"git -c core.pager=cat -c color.ui=false --no-pager diff --check","exit":0},{"cmd":".\\ci.cmd self-check","exit":0,"log_path":"logs\\terminal\\self-check-20260817-140037.log"},{"cmd":".\\ci.cmd stp","exit":0},{"cmd":".\\ci.cmd supertest","status":"not-run-currently-user-rule-counts-done"}],"route_ok":null,"route_violations":[],"git":{"branch":"master","head":"89c120ec8cbe","ahead":0,"behind":0,"worktree":"dirty-before-commit","upstream":"origin/master"},"next":"TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json","Roadmap.md","Roadmap_archive.md"],"manual_missing":false,"env_inventory_missing":false,"env_inventory_used":false,"summary":"JA-006 abgeschlossen; offizielle Quellenverifikation, URL-Kanonisierung, Aggregator-Ablehnung, alternative offizielle URLs, Schema und Funktionstests umgesetzt. Roadmap/Todo rotiert. Naechster Punkt ist JA-007 Klassifikation.","capsule":{"ts":"2026-08-17T14:02:00.000+02:00","agent_id":"UTTER-20260817-39f7","workspace_root":"D:\\_Scripte\\JobAgent","project":"JobAgent","active_id":"","status":"open","goal":"JA-006 abgeschlossen und Handoff fuer neuen Chat erstellt.","changed":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","Roadmap_archive.md","docs/data-model.md","handoff.latest.json","handoff.latest.md","schemas/jobagent.schema.json","src/JobAgent.Persistence.psm1","src/JobAgent.SourceVerification.psm1","tests/Test-JobAgentPersistence.ps1","tests/Test-JobAgentSchema.ps1","tests/Test-JobAgentSourceVerification.ps1","tests/fixtures/jobagent/invalid-missing-job-id.json","tests/fixtures/jobagent/valid.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"verified":[{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentPersistence.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1","exit":0},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1","exit":0},{"cmd":"git -c core.pager=cat -c color.ui=false --no-pager diff --check","exit":0},{"cmd":".\\ci.cmd self-check","exit":0,"log_path":"logs\\terminal\\self-check-20260817-140037.log"},{"cmd":".\\ci.cmd stp","exit":0},{"cmd":".\\ci.cmd supertest","status":"not-run-currently-user-rule-counts-done"}],"route_ok":null,"route_violations":[],"git":{"branch":"master","head":"89c120ec8cbe","ahead":0,"behind":0,"worktree":"dirty-before-commit","upstream":"origin/master"},"next":"TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json","Roadmap.md","Roadmap_archive.md"],"manual_missing":false,"env_inventory_missing":false,"env_inventory_used":false}}
+{
+  "ts": "2026-08-17T14:13:00.000+02:00",
+  "agent_id": "UTTER-20260817-39f7",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
+  "active_id": "",
+  "status": "open",
+  "goal": "JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen abgeschlossen; naechster Einstieg ist JA-008 Deduplikation.",
+  "summary": "JA-001 bis JA-007 sind abgeschlossen und archiviert. JA-007 implementiert eine konservative regelbasierte Klassifikation fuer IT-Fuehrungspositionen mit MATCH/POSSIBLE/REJECTED, Score, Prioritaet, Gruenden und Ausschlussgruenden.",
+  "changed": [
+    ".ci/pins/immutable.hashes.json",
+    ".ci/pins/immutable.snapshot/Roadmap.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "docs/data-model.md",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "src/JobAgent.Classification.psm1",
+    "tests/Test-JobAgentClassification.ps1",
+    "tests/Test-JobAgentSupertest.ps1",
+    "todo.current.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json"
+  ],
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentClassification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 0,
+      "log_path": "logs\\terminal\\self-check-20260817-141207.log"
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    }
+  ],
+  "route_ok": null,
+  "route_violations": [],
+  "git": {
+    "branch": "master",
+    "head": "27413124fb4c",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty-before-commit",
+    "upstream": "origin/master",
+    "tracked_changes": [
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "docs/data-model.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json"
+    ]
+  },
+  "next": "TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren",
+  "next_details": [
+    "Identitaet priorisieren: offizielle Job-ID, ATS-ID, kanonische URL, zusammengesetzter Fingerprint.",
+    "Dieselbe Stelle darf in einem zweiten Lauf nicht erneut NEW werden.",
+    "Testfaelle fuer Job-ID-Wechsel, URL-Parameteraenderung, Titelwechsel, echte Neuausschreibung und entfernte Stelle erstellen."
+  ],
+  "refs": [
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "Roadmap.md",
+    "Roadmap_archive.md"
+  ],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "known_blockers": [
+    "SonarQube API auf localhost:9000 war nicht erreichbar.",
+    ".\\ci.cmd sonar-start scheitert wegen fehlendem D:\\_Scripte\\JobAgent\\sonar.cmd.",
+    "Historischer .\\ci.cmd supertest verweist auf Alt-/Gradle-/Android-Logik; JobAgent-Supertest ist tests\\Test-JobAgentSupertest.ps1."
+  ],
+  "capsule": {
+    "ts": "2026-08-17T14:13:00.000+02:00",
+    "agent_id": "UTTER-20260817-39f7",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "",
+    "status": "open",
+    "goal": "JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen abgeschlossen; naechster Einstieg ist JA-008 Deduplikation.",
+    "changed": [
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "docs/data-model.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "src/JobAgent.Classification.psm1",
+      "tests/Test-JobAgentClassification.ps1",
+      "tests/Test-JobAgentSupertest.ps1",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json"
+    ],
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentClassification.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
+        "exit": 0
+      },
+      {
+        "cmd": ".\\ci.cmd self-check",
+        "exit": 0,
+        "log_path": "logs\\terminal\\self-check-20260817-141207.log"
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0
+      }
+    ],
+    "route_ok": null,
+    "route_violations": [],
+    "git": {
+      "branch": "master",
+      "head": "27413124fb4c",
+      "ahead": 0,
+      "behind": 0,
+      "worktree": "dirty-before-commit",
+      "upstream": "origin/master",
+      "tracked_changes": [
+        ".ci/pins/immutable.hashes.json",
+        ".ci/pins/immutable.snapshot/Roadmap.md",
+        "Roadmap.md",
+        "Roadmap_archive.md",
+        "docs/data-model.md",
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "todo.current.md",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json",
+        "todo.state.json"
+      ]
+    },
+    "next": "TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "Roadmap.md",
+      "Roadmap_archive.md"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false
+  }
+}

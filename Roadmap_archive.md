@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-007 Stellenklassifikation für IT-Führungspositionen entwickeln #comment: Nur echte IT-Führungsrollen im Zielgebiet sollen als passende Treffer erscheinen.
+  - [x] Beschreibung: `src/JobAgent.Classification.psm1` implementiert eine regelbasierte, nachvollziehbare Bewertung fuer Titel, Beschreibung, Fuehrungsverantwortung, IT-Gesamtverantwortung, Standort, Vollzeitbezug und Arbeitsmodell.
+  - [x] Scope: Erstellt wurden `src/JobAgent.Classification.psm1`, `tests/Test-JobAgentClassification.ps1` und `tests/Test-JobAgentSupertest.ps1`; erweitert wurde `docs/data-model.md`. Keine automatische Bewerbung, keine Speicherung unnoetiger persoenlicher Daten und keine Live-Webrecherche.
+  - [x] Ist-Stand (2026-08-17 14:30): Klassifikation liefert `MATCH`, `POSSIBLE` oder `REJECTED` mit Score, Prioritaet, Gruenden, Ausschlussgruenden und Zeitstempel; starke IT-Leitungsrollen, Remote-Deutschland-Bezug und Ausschluesse fuer Entwickler-, Projektleitungs- und Teamlead-Grenzfaelle sind getestet.
+  - [x] Abhängigkeiten: JA-001, JA-002 und JA-005 sind abgeschlossen.
+  - [x] Aufwand/Dauer: Aufwand L, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 82/100, weil Trefferqualitaet nun durch belegte positive Fuehrungssignale und fail-closed Ausschluesse unpassender Rollen abgesichert ist.
+  - [x] Risiken: Regelbasierte Klassifikation bleibt bewusst konservativ; mehrdeutige Titel wie `IT Manager` werden als `POSSIBLE` statt als verifizierter Match markiert, bis Deduplikation/Status/Report mehr Kontext liefern.
+  - [x] Schritte:
+    1. Positive Signale fuer CIO, Head/Director/Leiter IT, IT-Gesamtverantwortung, Budget-/Personalverantwortung und strategische IT-Verantwortung implementiert.
+    2. Negative Signale fuer Entwickler-, Spezialisten-, Consultant-, Administrator-, Projektleitungs- und Teamlead-Rollen ohne belegte Gesamt- oder Strategie-Verantwortung implementiert.
+    3. Erklaerbare Bewertung mit Ergebnis, Score, Prioritaet, Gruenden und Ausschlussgruenden fuer spaetere Daily-Reports umgesetzt.
+  - [x] Evidence: `src/JobAgent.Classification.psm1`, `tests/Test-JobAgentClassification.ps1`, `tests/Test-JobAgentSupertest.ps1`, `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentClassification.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` exit=0.
+  - [x] Audit: Tests decken deutsche/englische Titel, leeren Titel, Entwickler-Ausschluss, Projektleitungs-Ausschluss, Teamlead-Ausschluss, unklaren Standort, Zielgebiet, ausserhalb Zielgebiet, Remote-Deutschland-Bezug und grenzwertigen `IT Manager` ab.
+  - [x] Supertest: `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` exit=0; JobAgent-Funktionstests fuer Schema, Persistenz, Firmeninventar, Quellenadapter, Quellenverifikation und Klassifikation sind gebuendelt.
+
 - [x] JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren #comment: Jeder Treffer muss auf eine offizielle Unternehmens- oder offiziell angebundene Recruiting-Seite zurückführbar sein.
   - [x] Beschreibung: `src/JobAgent.SourceVerification.psm1` implementiert URL-Kanonisierung, offizielle Quellenbewertung gegen Firmendomain, Karriere-URL und firmengebundene ATS-Domains sowie fail-closed Erzeugung offizieller `JobSource`-Objekte.
   - [x] Scope: Erstellt wurden `src/JobAgent.SourceVerification.psm1` und `tests/Test-JobAgentSourceVerification.ps1`; erweitert wurden `schemas/jobagent.schema.json`, `src/JobAgent.Persistence.psm1`, `tests/Test-JobAgentSchema.ps1`, `tests/Test-JobAgentPersistence.ps1`, Fixtures und `docs/data-model.md`. Keine pauschale globale ATS-Allowlist ohne Firmenbindung, keine Live-Webrecherche.

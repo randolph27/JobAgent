@@ -129,6 +129,23 @@ Identitätspriorität:
 
 Eine bekannte unveränderte Stelle darf in späteren Läufen nicht erneut als `NEW` erscheinen.
 
+## Stellenklassifikation
+
+`src/JobAgent.Classification.psm1` implementiert den Vertrag fuer `JA-007`.
+
+- `Get-JobAgentLeadershipClassification` bewertet Titel, Zusammenfassung, Beschreibung, Standort, Arbeitsmodell und Beschaeftigungsart deterministisch.
+- Ergebniswerte sind `MATCH`, `POSSIBLE` und `REJECTED`; die Schema-Option `UNKNOWN` bleibt fuer noch nicht klassifizierte Alt- oder Rohdaten reserviert.
+- Positive Signale sind IT-Gesamt-/Bereichsleitung, CIO/Head/Director/IT-Leitung, Budget- oder Personalverantwortung und strategische IT-Verantwortung.
+- Negative Signale sind Entwickler-, Spezialisten-, Consultant-, Administrator-, reine Projektleitungs- und Teamlead-Rollen ohne belegte Gesamt- oder Strategie-Verantwortung.
+- Standortbezug wird ueber `target_area` oder lesbaren Standorttext bewertet. `MUNICH`, `MUNICH_20KM`, `FREISING` und `REMOTE_WITH_TARGET_REFERENCE` sind positiv; `OUT_OF_SCOPE` schlaegt fail-closed fehl.
+- Jede Bewertung enthaelt Score, Prioritaet, Gruende, Ausschlussgruende und `evaluated_at`, damit Daily-Reports spaeter nachvollziehbar bleiben.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentClassification.ps1
+```
+
 ## Quellenverifikation und URL-Kanonisierung
 
 `src/JobAgent.SourceVerification.psm1` implementiert den Vertrag fuer `JA-006`.

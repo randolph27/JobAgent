@@ -9,23 +9,6 @@
 
 ## M3 - Matching, Deduplication und Statuslogik
 
-- [ ] JA-007 Stellenklassifikation für IT-Führungspositionen entwickeln #comment: Nur echte IT-Führungsrollen im Zielgebiet sollen als passende Treffer erscheinen.
-  - [ ] Beschreibung: Implementiere eine regelbasierte, nachvollziehbare Bewertung für Titel, Aufgaben, Führungsverantwortung, IT-Gesamtverantwortung, Standort, Vollzeitbezug und Arbeitsmodell.
-  - [ ] Scope: Matching-Regeln, Ausschlussregeln, Score-/Kategorie-Logik, Tests; keine automatische Bewerbung und keine Speicherung unnötiger persönlicher Daten.
-  - [ ] Ist-Stand (2026-08-17 12:20): Zielprofil liegt nur im Briefing vor; es gibt keine maschinenlesbare Klassifikation.
-  - [ ] Abhängigkeiten: JA-001, JA-002, JA-005.
-  - [ ] Aufwand/Dauer: Aufwand L, Dauer 2-4 PT; teilweise parallelisierbar mit JA-008.
-  - [ ] Prioritätsscore: 82/100, weil Trefferqualität vom präzisen Ausschluss unpassender Rollen abhängt.
-  - [ ] Risiken: Titel wie `IT Lead` oder `Team Lead` sind mehrdeutig; rein titelbasierte Regeln erzeugen False Positives.
-  - [ ] Schritte:
-    1. Definiere positive Signale für IT-Leitung, Head/Director/CIO, Gesamtverantwortung, Budget-/Personalverantwortung und strategische IT-Verantwortung.
-    2. Definiere negative Signale für reine Entwicklerstellen, Projektleitung ohne IT-Gesamtverantwortung, Spezialistenrollen und Teamleitung ohne wesentliche Führungsverantwortung.
-    3. Implementiere eine erklärbare Bewertung mit Ergebnis `MATCH`, `POSSIBLE`, `REJECTED` und Begründungsfeldern, die im Daily-Output nutzbar sind.
-  - [ ] Evidence: Fixture-Katalog mit passenden, grenzwertigen und abzulehnenden Stellen; Klassifikationsreport pro Testfall.
-  - [ ] Funktionstest: Tests für deutsche/englische Titel, leere Beschreibung, widersprüchlichen Titel, unklaren Standort, Remote-Deutschland-Bezug und Teamlead-Ausschluss.
-  - [ ] Audit: Manuell prüfen, dass eine Stelle ohne eindeutige IT-Führungsaufgabe nicht als verifizierter Treffer ausgegeben wird.
-  - [ ] Supertest: Nach grünen Klassifikationstests in Supertest aufnehmen.
-
 - [ ] JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren #comment: Bekannte Stellen dürfen bei späteren Läufen nicht erneut als `NEW` erscheinen, auch wenn Titel oder URL-Parameter variieren.
   - [ ] Beschreibung: Implementiere stabile Jobidentitäten mit Priorität offizielle Job-ID, ATS-ID, kanonische URL und sekundäre Merkmale; erkenne Titeländerungen, echte Updates und mögliche Neuausschreibungen.
   - [ ] Scope: Deduplication-Service, ID-Normalisierung, Vergleichslogik, Tests; keine Zusammenführung getrennter Stellen ohne belastbare Identität.
