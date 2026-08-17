@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/runtime-manifest.schema.json",
+  "title": "Workflow Bootstrap runtime manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "profile",
+    "profile_version",
+    "installed_utc",
+    "minimum_pwsh",
+    "entrypoint",
+    "command_catalog",
+    "workflow_audit_module",
+    "files",
+    "mutable_paths"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-bootstrap-runtime/v1"
+    },
+    "profile": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "profile_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "installed_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "minimum_pwsh": {
+      "type": "string",
+      "pattern": "^7\\.[0-9]+$"
+    },
+    "entrypoint": {
+      "$ref": "#/$defs/relativePath"
+    },
+    "command_catalog": {
+      "$ref": "#/$defs/relativePath"
+    },
+    "workflow_audit_module": {
+      "$ref": "#/$defs/relativePath"
+    },
+    "mutable_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/relativePath"
+      }
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "size", "role", "source"],
+        "properties": {
+          "path": {
+            "$ref": "#/$defs/relativePath"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "role": {
+            "enum": [
+              "launcher",
+              "trusted-loader",
+              "profile-entrypoint",
+              "profile-module",
+              "profile-helper",
+              "bootstrap-module",
+              "catalog"
+            ]
+          },
+          "source": {
+            "$ref": "#/$defs/relativePath"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "(^[A-Za-z]:)|(^[/\\\\])|((^|[/\\\\])\\.\\.([/\\\\]|$))"
+      }
+    }
+  }
+}

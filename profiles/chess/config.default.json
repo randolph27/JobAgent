@@ -1,0 +1,52 @@
+{
+    "mode":  "prod",
+    "agent_id":  "auto",
+    "workspace_lock":  "on",
+    "preflight":  "strict",
+    "manual":  "auto",
+    "env_inventory":  "auto",
+    "deps_bootstrap":  "auto",
+    "browser_tests":  "staged",
+    "browser_test_interval":  15,
+    "verify_profile":  "standard",
+    "verify_escalation":  "off",
+    "observer":  "staged",
+    "observer_interval":  15,
+    "route_check":  "standard",
+    "chat_flow_policy":  "autonomous",
+    "sixth_rules":  "on",
+    "terminal_profile":  "pwsh7",
+    "terminal_reuse":  "off",
+    "terminal_output_limit":  500,
+    "terminal_timeout_seconds":  1800,
+    "terminal":  {
+                     "default_timeout_seconds":  1800,
+                     "prompt_kill_timeout_seconds":  60,
+                     "no_output_timeout_seconds":  180,
+                     "heartbeat_seconds":  15
+                 },
+    "gradle":  {
+                   "required":  true,
+                   "desired_version":  "8.13"
+               },
+    "verify":  {
+                   "cmd":  "gradlew.bat secretScan :analysis:ktlintCheck :core-chess:ktlintCheck :core-notation:ktlintCheck :engine:ktlintCheck :storage:ktlintCheck :ui-web:ktlintCheck :core-chess:check :core-notation:check :analysis:check :ui-web:check :engine:check :storage:check :ui-web:jsBrowserProductionWebpack --console=plain"
+               },
+    "pyserver":  {
+                     "root":  "ui-web/build/dist/js/productionExecutable",
+                     "port":  8000,
+                     "wait_ready":  true,
+                     "wait_timeout_sec":  30
+                 },
+    "browser_smoke":  {
+                          "url":  "http://localhost:8080/",
+                          "requires_verify":  true,
+                          "interval_minutes":  15
+                      },
+    "devserver":  {
+                      "task":  ":ui-web:jsBrowserDevelopmentRun",
+                      "port":  8080,
+                      "wait_timeout_sec":  180
+                  }
+}
+

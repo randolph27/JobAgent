@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/workflow-checkpoint.schema.json",
+  "title": "Workflow checkpoint v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "created_utc",
+    "through_sequence",
+    "through_event_id",
+    "through_event_hash",
+    "state_sha256",
+    "state",
+    "archives"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-checkpoint/v2"
+    },
+    "created_utc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "through_sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "through_event_id": {
+      "type": ["string", "null"]
+    },
+    "through_event_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "state_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "state": {
+      "$ref": "workflow-state.schema.json"
+    },
+    "archives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "first_sequence", "last_sequence", "sha256", "event_count"],
+        "properties": {
+          "path": {
+            "type": "string"
+          },
+          "first_sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "last_sequence": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "event_count": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  }
+}

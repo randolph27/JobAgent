@@ -1,0 +1,4896 @@
+{
+  "schema": "workflow-bootstrap-compatibility-catalog/v1",
+  "generated_utc": "2026-08-02T18:35:19.9333006+00:00",
+  "guarantee": "Jede statisch definierte Legacy-Funktion und jeder statisch registrierte Legacy-Befehl ist in mindestens einem unverkuerzten Profilpaket enthalten.",
+  "profiles": [
+    {
+      "id": "ubuntu-web",
+      "source_function_definitions": 305,
+      "unique_functions": 291,
+      "commands": 63,
+      "payload_files": 19
+    },
+    {
+      "id": "chess",
+      "source_function_definitions": 328,
+      "unique_functions": 314,
+      "commands": 67,
+      "payload_files": 19
+    },
+    {
+      "id": "sound-profile",
+      "source_function_definitions": 292,
+      "unique_functions": 278,
+      "commands": 59,
+      "payload_files": 18
+    }
+  ],
+  "union_function_count": 487,
+  "union_command_count": 76,
+  "divergent_function_implementation_count": 54,
+  "functions": [
+    {
+      "name": "Add-SonarEvidenceCommandBlock",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Add-SonarParityComparison",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Append-Jsonl",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Append-TodoEvent",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Apply-CodexLoopTodoResult",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Assert-ExpectedRuntimeModuleSet",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Assert-GradleDistributionArchive",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Assert-ImmutableClean",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Assert-ImmutablePinSchemaBeforeLoad",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Assert-ImmutableRuntimeBeforeLoad",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Atomic-WriteTextUtf8",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Attach-GitIndexLockAclDiagnosis",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Build-CriticCapsule",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Build-RoadmapAutogrowItemLines",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "CI-Info",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "CI-Verbose",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "CI-Warn",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Clear-SonarCommandOutcome",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Autopatch",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-Bootstrap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-BrowserSmoke",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-Ci050UiReleaseGate",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-CodexLoop",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-CodexLoopAuto",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-CodexLoopFinish",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-ComprehensiveViewportTest",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Critic",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-DepsBootstrap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Dev",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-DevserverStart",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-DevserverStatus",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-DevserverStop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-Doctor",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-DriftCheck",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-EnvInventory",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Event",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Git",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-GitAclAudit",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-GradleAutopsy",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-GradleBootstrap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-LockTriage",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Menu",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-ObserverBaseline",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-ObserverCheck",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-ObserverCheck_Impl",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-ObserverdStart",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-ObserverdStatus",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-ObserverdStop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-OpenAiSeedRunner",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-PatchApply",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-PermissionTest",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Preflight",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-PyserverStart",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-PyserverStatus",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-PyserverStop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-RepinImmutables",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-RestoreImmutables",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-ReworkTest",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-RoadmapAutogrow",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-RouteCheck",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-SelfCheck",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Sonar",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-SonarStart",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-SonarStop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-Start",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Stp",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-Supertest",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-T2",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-TestLanePlan",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-Tick",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-TodoCompact",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-TodoPrune",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-TodoRebuild",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-TodoRotate",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-TodoSanitize",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-TodoSeed",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-Verify",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Cmd-VpTest",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-WsLockAcquire",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Cmd-WsLockRelease",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Compute-FailSignature",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Compute-ObserverSourcesHash",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "ConvertTo-ImmutableDisplayPath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "ConvertTo-ImmutableKey",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "ConvertTo-SonarParityDateString",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "ConvertTo-SonarParityNumber",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "ConvertTo-VpTestNullableBool",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Detect-BuildSystem",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Download-GradleZip",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Enable-Tls12IfNeeded",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-BootstrapFiles",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Ensure-CoreFolders",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-Dir",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-DriftTodo",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-GradleWrapper",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Ensure-JavaReady",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-LocalGradleDist",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Ensure-NonInteractiveEnv",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-ProjectStubs",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-StringArray",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ensure-TodoEventsFile",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Enter-GradleVersionLock",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Enter-ImmutableRuntimeLock",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Exit-ImmutableRuntimeLock",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Find-GradleProjectRoot",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Find-InboxGradleZip",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Find-LocalGradleDistCmd",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Find-LocalJdkHome",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-SonarAuthPreflightFailure",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-SonarFailedConditions",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestBottomSeamMetricsSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestCompareMetricSupportSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestLiveStatsMetricsSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestLookupCandidateSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestMetricSupportSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestPlayRightRailDetail",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestSuppressedHeuristicDetails",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestTypographyMetricsSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestUnderfillMetricsSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Format-VpTestWarningSurfaceSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ActiveTodoStatus",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-AgentId",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Get-BrowserSmokeAssetKind",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-BrowserSmokeAssetRefs",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-BrowserSmokeContractCommand",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-BrowserSmokeInactiveReason",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-BrowserSmokeManifestAssetRefs",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-BrowserTestsMode",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Ci050UiReleaseGateDoneStatus",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-CodexLoopStopReasons",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-CodexLoopSyncFiles",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-CommonJdkHomes",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ConfigPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-DefaultAndroidSdkPath",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-DevserverHealth",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-DriftConfig",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-DriftStatePath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-EventsPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GitDefaultPrefix",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GitFailureClassification",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GitIndexLockAclDiagnosis",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GitNoLfsPrefix",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GitStatusSnapshot",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GradleCmdRaw",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Get-GradleDesiredVersion",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GradleDistributionTrust",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GradleDistUrls",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Get-GradleEnv",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GradleInstallMarkerPath",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GradleProjectRoot",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-GradleStreamSha256",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-HandoffActiveBlockedTodo",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ImmutableBytesHash",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ImmutableContainedPath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ImmutablePinsPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ImmutableRuntimeModuleFiles",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ImmutableSnapshotMode",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ImmutableSnapshotObjectPath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ImmutableSnapshotSourcePath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-JavaHomesFromRegistryKey",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-JavaMinMajor",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-JavaTargetMajor",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-JavaVersionText",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-JavaVersionTextFor",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-JdkHomeFromJavaExe",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-LastEventType",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-LastTerminalLogs",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ListeningPid",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-LockPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-LoopGuardPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ObserverdLogPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ObserverdPidPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ObserverSourcePaths",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-ObserverStatePath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-OpenAiSeedRunnerImportReviewStatus",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-PriorityStatePath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Prop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-RoadmapArchivedDoneKeys",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-RoadmapArchivePath",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-RoadmapNextId",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-RoadmapPath",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-RoadmapTaskCatalog",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-RoadmapTaskKey",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarAnalysisQualityGateStatusOrFallback",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarApiAuthErrorClass",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarApiHeaders",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarBaseUrl",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarCommandOutcomePath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarEnv",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarFailureEvidencePath",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarFailureHandoffInfo",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarFailureNextCheck",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarFirstIpv4",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarGuardNextStep",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarGuardSummary",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarHttpStatusCodeFromError",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarLatestAnalysis",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarListeningPid",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarLiveParityContext",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarLiveQualityGateHotspotReviewedPercentage",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarParityArtifactPaths",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarParityPayload",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarPrivateJsonToken",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarProjectAnalysesEndpoint",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarProjectKey",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarProjectSearchEndpoint",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarQualityGateConditionValue",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarQualityGateStatusFromAnalysis",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackAnalysisQualityGateStatus",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackHotspotSearchReviewedPercentage",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackHotspotToReviewTotal",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackMetricValue",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackNewCodeIssueTotal",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackNewCodePeriod",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackQualityGate",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackQualityGateHotspotReviewedPercentage",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarReadbackReportPath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarScanContextPath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarStatusSnapshot",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarStatusUrl",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarTokenCandidates",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarTokenContext",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarWslFallbackDecision",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-SonarWslFallbackDiagnostics",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-StpGitSnapshot",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-StpGoalAndNext",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-StpNextSteps",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-StpVerification",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoCheckpointPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoConfig",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoCurrentPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoDigestPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoEventBoundaryId",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoEventsPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoIndexId",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoIndexPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoIndexStatus",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoIndexTimestamp",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoItemById",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoRoadmapId",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-TodoStatePath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450AdbTargetFromDevicesText",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450AndroidEnv",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450DefaultHumanEvidenceDir",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450EvidencePath",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450FileCount",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450HumanJourneySummary",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450JsonLineCount",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-Tst450VisualAuditSummary",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VerifiedGradleToolsRoot",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VerifyFailedTasks",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VerifyStatePath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VerifyTestsFailedCount",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestAnalyzeRightRailCaptureHeuristics",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestBundleExportCapture",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCaptureMode",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCaptureTimeoutMs",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCaptureUrl",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCaptureViewportDimension",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCaptureViewportProfile",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCompareEffectiveHeuristics",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCompareLocalhostUrl",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestCompareSuppressionContract",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestDeadlockContract",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestDefaultCompareLocalPreCaptureSetup",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestDefaultLocalPreCaptureSetup",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestFlaggedHeuristicIds",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLegacyAnalyzeSnapshot",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLegacyBottomSeamMetrics",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLegacyDerivedLiveLabelFontSizePx",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLegacyExpectedLiveStatsQualities",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLegacyLiveStatsMetrics",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLegacyRailTypographyMetrics",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLocalUmamiConfig",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestLookupCandidateSummary",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestMetricSupportDifferences",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestOptionalDoubleValue",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestOptionalIntValue",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestPathReconciliationTargetMetadata",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestPlayRightRailCaptureAssessment",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestRoundedDouble",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestToolPath",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestUmamiValue",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Get-VpTestWarningSurfaceSignal",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "HGet",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Insert-RoadmapAutogrowItem",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Install-VerifiedGradleDistribution",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-BrowserSmokeAssetProbe",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-BrowserSmokeRequest",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-GradleDistributionDownload",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-OpenAiChat",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-RoadmapAutogrow",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-SelfCheck",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Invoke-SonarApiJson",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-SonarCiJsonApi",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-SonarDockerReadOnly",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-SonarExternalReadOnly",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-StpGit",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-Tst450HumanVisualSupertest",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-Tst450RunStep",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-UiInternal",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Invoke-UiRoadmap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Is-GradleProject",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Is-GradleRequired",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Is-PathDenied",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Is-RoadmapSubtaskTitle",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Load-DriftState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Load-LoopGuard",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Load-PriorityState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Load-TodoIndex",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Load-TodoState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Load-VerifyState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Merge-EnvMap",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-CiPowerShellScriptCommand",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-CodexLoopOutputSchema",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-CodexLoopPrompt",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-EventId",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-GitTempIndexFile",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-HandoffMarkdown",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-SonarApiHeadersFromToken",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-SonarCiAuthHeader",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-Tst450HumanVisualReportLines",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "New-VpTestLocalhostCaptureEnv",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Next-TodoId",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Normalize-GitArgs",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Normalize-HandoffSummaryAnchor",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Normalize-Rel",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Normalize-RoutePath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Normalize-TodoIndexRows",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Normalize-TodoState",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Normalize-TodoStatus",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Normalize-TodoTimestamp",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "NowIso",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Parse-JavaMajor",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Parse-RoadmapAutogrowArgs",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Parse-RoadmapOpenTasks",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Parse-UnifiedDiffTouchedFiles",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Persist-GradleInfo",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Pin-ImmutableFiles",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Quote-IfNeeded",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Quote-PowerShellLiteral",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-CanonicalGradleWrapperProperties",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-ImmutablePins",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-ImmutablePinsBeforeLoad",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-LastJsonl",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-ObserverSources",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-PolicyRules",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-SonarCommandOutcome",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-SonarReadbackReport",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-SonarScanContext",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-SonarStartStatus",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-TextTrunc",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Read-ToolchainPins",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Receive-VpTestLocalhostCompareJob",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Register-CiCommand",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Remove-GradleManagedDirectory",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Remove-GradlePartialArchive",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Render-StpHandoffMarkdown",
+      "profiles": [
+        "chess",
+        "sound-profile"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Render-TodoCurrent",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Report-Priority",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-AndroidSupertestCommand",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-BrowserSmokeUrl",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-CiPowerShellExecutable",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-CodexLoopTodoSelection",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-HandoffSonarCheckpointStatus",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-HandoffSonarCheckpointSummary",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-SonarAnalysisFailureSignature",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-SonarPreflightFailureSignature",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-StpActiveStatus",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Resolve-Tst450AdbPath",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Restore-GradleInstallationAfterInterruptedSwap",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Restore-ImmutablePinsBeforeLoad",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Run-Cmd",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Run-GitCmd",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Run-TaskHookDetached",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Save-DriftState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Save-LoopGuard",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Save-PriorityState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Save-TodoIndex",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Save-TodoState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Save-VerifyState",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Select-JdkHomeForTarget",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Set-CodexLoopFocus",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Set-ImmutableReadOnlyBeforeLoad",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Set-ObjProp",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Set-PropSafe",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Set-ReadOnlyFlag",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Set-VpTestLookupContext",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Sha256Path",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Sha256Text",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Start-VpTestLocalhostCompareJob",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Sync-SonarParityCheckpoint",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Sync-TodoCheckpointState",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Tail-File",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-BrowserSmokeAssetContentType",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-BrowserSmokeContractInactive",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-BrowserSmokeHtmlFallback",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-BrowserSmokeSameOrigin",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-BrowserSmokeWasmMagic",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-GitAddDryRunArgs",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-GitIndexLockPermissionFailure",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-GitLfsSignalPipeFailure",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-GradleInstallationTree",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-GradleInstallationTrust",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-HandoffNoActiveFollowup",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-ImmutableVerificationOnlyPath",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-MalformedOpenRoadmapIndexEntry",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-MarkdownRenderFiles",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-RoadmapHasOpenMainTask",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-RouteRule",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarApiAuthentication",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarDockerEngineBlocker",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarParityMatch",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarPortProxy9000Mapping",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarServerHealthy",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarStatusUp",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarTimeoutError",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-SonarUbuntu2204Available",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-StpNoActiveFocus",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-TodoRotationRequired",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-TodoStateHasActiveWork",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-Tst450AdbTarget",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestAutoForbidPlayWarningSurface",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestBabachessBcTestTarget",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestBottomSeamMetricsComparable",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestCompareLocalhostEnabled",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestExpectationEnabled",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestLiveStatsMetricsComparable",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestLocalUrl",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestParallelCompareEnabled",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestPlayWarningTopslotExpected",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestRequireLocalhostCompare",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestTypographyMetricsComparable",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Test-VpTestUnderfillMetricsComparable",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "To-Hashtable",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "To-Json",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "To-RelPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Try-GitDiffNames",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Try-GitGrepFirst",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Try-ReadJson",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "TsId",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-CompareImages",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-DetectServeRoot",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-EnsureDir",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-GetFreePort",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-GetPythonExe",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-Info",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-ReadConfig",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-RunNode",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-StartServer",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-StopServer",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-ToRelPath",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Ui-TryWebBuild",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Update-EnvInventoryDigest",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Update-LoopGuard",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Update-ManualDigest",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Update-TodoHistoryDigest",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Wait-GradleDownloadRetry",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Wait-PortListening",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Wait-SonarQualityGate",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "With-ImmutableWrite",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Wrapper-FilesPresent",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Wrapper-Ok",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 2,
+      "profile_specific": true
+    },
+    {
+      "name": "Write-AutoCheckpoint",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 3,
+      "profile_specific": true
+    },
+    {
+      "name": "Write-BrowserSmokeDigest",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-CheckpointArtifacts",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-CodexLoopFinishReview",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-CodexLoopReview",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-CodexLoopStopReasonCatalog",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-DriftInboxTask",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-Failbundle",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-HandoffArtifacts",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-ImmutableBytesAtomically",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-ImmutablePinsBeforeLoad",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-Json",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-RoadmapAutogrowPatch",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-RoadmapTextSafely",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-SonarDockerEngineEvidence",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-SonarFailureEvidence",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-SonarParityArtifacts",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-SonarPidSnapshot",
+      "profiles": [
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-SonarRuntimeState",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-SonarStartSuccessEvidence",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-SonarWslFallbackEvidence",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-Tst450HumanVisualReport",
+      "profiles": [
+        "sound-profile"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-VerifyDigest",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    },
+    {
+      "name": "Write-VpTestLocalhostPlaceholderArtifacts",
+      "profiles": [
+        "chess"
+      ],
+      "implementation_count": 1,
+      "profile_specific": false
+    }
+  ],
+  "commands": [
+    {
+      "name": "android-emulator-test",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "android-physical-test",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "autopatch",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "bootstrap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "browser-smoke",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "ci050-ui-release-gate",
+      "profiles": [
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "codex-loop",
+      "profiles": [
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "codex-loop-auto",
+      "profiles": [
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "codex-loop-finish",
+      "profiles": [
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "comprehensive-viewport-test",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "critic",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "deps-bootstrap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "dev",
+      "profiles": [
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "devserver-start",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "devserver-status",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "devserver-stop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "doctor",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "drift-check",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "env-inventory",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "event",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "git",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "git-acl-audit",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "gradle-autopsy",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "gradle-bootstrap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "lock-triage",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "menu",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "o",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "obs",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "observer-baseline",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "observer-check",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "observerd-start",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "observerd-status",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "observerd-stop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "openai-seed-runner",
+      "profiles": [
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "patch-apply",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "permission-test",
+      "profiles": [
+        "sound-profile"
+      ]
+    },
+    {
+      "name": "preflight",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "pyserver-start",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "pyserver-status",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "pyserver-stop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "repin-immutables",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "restore-immutables",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "rework-test",
+      "profiles": [
+        "sound-profile"
+      ]
+    },
+    {
+      "name": "roadmap-autogrow",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "route-check",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "runtime-update",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "scholars",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "seed-runner",
+      "profiles": [
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "self-check",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "sonar",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "sonar-auth-preflight",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "sonar-guard-test",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "sonar-start",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "sonar-stop",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "start",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "stp",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "supertest",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "t",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "t2",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "test-full",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "tick",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "todo-compact",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "todo-prune",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "todo-rebuild",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "todo-rotate",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "todo-sanitize",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "todo-seed",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "ui-baseline",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "ui-check",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "ui-roadmap",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "verify",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "viewport-device-test",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "viewport-test",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "vp-test",
+      "profiles": [
+        "chess"
+      ]
+    },
+    {
+      "name": "ws-lock-acquire",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    },
+    {
+      "name": "ws-lock-release",
+      "profiles": [
+        "chess",
+        "sound-profile",
+        "ubuntu-web"
+      ]
+    }
+  ]
+}

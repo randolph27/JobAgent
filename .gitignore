@@ -1,0 +1,14 @@
+# Lokale Laufzeit- und Diagnoseartefakte
+logs/
+backups/
+state/
+.ci/tmp/
+.ci/run/
+
+# Allgemeine lokale Artefakte
+*.log
+*.tmp
+*.bak
+*.swp
+Thumbs.db
+Desktop.ini

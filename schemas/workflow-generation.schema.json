@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/workflow-generation.schema.json",
+  "title": "Immutable workflow generation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "generation_id",
+    "created_utc",
+    "parent_generation_id",
+    "parent_generation_manifest_sha256",
+    "state",
+    "checkpoint",
+    "segments",
+    "head"
+  ],
+  "properties": {
+    "schema": { "const": "workflow-generation/v2" },
+    "generation_id": {
+      "type": "string",
+      "pattern": "^[0-9]{8}T[0-9]{6}(?:[0-9]{3})?Z-[a-f0-9]{12}$"
+    },
+    "created_utc": { "type": "string", "format": "date-time" },
+    "parent_generation_id": { "type": ["string", "null"] },
+    "parent_generation_manifest_sha256": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "state": { "$ref": "#/$defs/artifact" },
+    "checkpoint": {
+      "oneOf": [{ "$ref": "#/$defs/artifact" }, { "type": "null" }]
+    },
+    "segments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/segment" }
+    },
+    "head": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequence", "event_id", "event_hash"],
+      "properties": {
+        "sequence": { "type": "integer", "minimum": 0 },
+        "event_id": { "type": ["string", "null"] },
+        "event_hash": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "migration": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "segment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256", "event_count", "first_sequence", "last_sequence"],
+      "properties": {
+        "path": { "type": "string", "minLength": 1 },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "event_count": { "type": "integer", "minimum": 1 },
+        "first_sequence": { "type": "integer", "minimum": 1 },
+        "last_sequence": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

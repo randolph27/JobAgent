@@ -1,0 +1,907 @@
+{
+  "schema": "workflow-bootstrap-release/v1",
+  "version": "1.0.0",
+  "generated_utc": "2026-08-02T18:35:20.8542521+00:00",
+  "files": [
+    {
+      "path": "bootstrap.cmd",
+      "sha256": "dba6e325270547f4436a464ddf33cd17c40584b35078d6d5127aef689a85efdd",
+      "size": 357
+    },
+    {
+      "path": "Bootstrap.ps1",
+      "sha256": "9822a2297592da68dfab1bc4c57d09c36c9a89b2faf58b4006b659a71fb2990e",
+      "size": 59372
+    },
+    {
+      "path": "catalog/compatibility.json",
+      "sha256": "b1a879c276ad8d32e4322a1bbc3b6e7984347359a166326ff672db12ff0be951",
+      "size": 105120
+    },
+    {
+      "path": "CHANGELOG.md",
+      "sha256": "d73a935c47ba6ced9a7b9115af1a24746167499e49b92da7edf0049cbb5b3668",
+      "size": 1383
+    },
+    {
+      "path": "docs/ANALYSE.md",
+      "sha256": "f4be593a380198d5f7dfb02350ae33c955ddd8b62443d9ddc34a1ded8687d2aa",
+      "size": 9835
+    },
+    {
+      "path": "docs/ARCHITEKTUR.md",
+      "sha256": "366c6ee9bb46cd76df842f8c71c29a49dbed96d28ecbae2d91b9ea1b3b1c44a8",
+      "size": 3930
+    },
+    {
+      "path": "docs/BOOTSTRAP-MANAGER.md",
+      "sha256": "eeebcd56c35a8925fa609db005a9dc4237f723d6560265b0619d1d8de7abd36a",
+      "size": 5062
+    },
+    {
+      "path": "docs/MIGRATION.md",
+      "sha256": "5cd407c19deaa2f5f6dc28a07009eb8833a55ad94c548f0215c50b391d46217c",
+      "size": 2867
+    },
+    {
+      "path": "docs/README-UNIVERSAL-INTRO.md",
+      "sha256": "0a809b6e2ea3da91259918f22a0daa759029ee8039707bc2230c2262dc9d4f4d",
+      "size": 13555
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "sha256": "07676d7bec31e07ce9333ffbacd324f83b081e5931f5a9673cc8b32fbc8f1e29",
+      "size": 6910
+    },
+    {
+      "path": "docs/SECURITY.md",
+      "sha256": "77629bd42c952671581e3d8171c314729777f60c8122cba57aa6911bdf8ee8ce",
+      "size": 2269
+    },
+    {
+      "path": "docs/WORKFLOW-V2.md",
+      "sha256": "6dea1e135c4272c565cd851451b4efdcca0a8df2382527bde582f8504c4bd672",
+      "size": 2980
+    },
+    {
+      "path": "profiles/chess/catalog/commands.json",
+      "sha256": "70be1da666507f8b00174602235a5871ed0ed1d57b7a98172af0b97021e7052f",
+      "size": 31417
+    },
+    {
+      "path": "profiles/chess/catalog/functions.json",
+      "sha256": "372696ba1b72a916bec622104a669297a454ddd59b19c8a8299deeb415a0a46c",
+      "size": 139766
+    },
+    {
+      "path": "profiles/chess/config.default.json",
+      "sha256": "f651afe9972786cb817bc0050d9ffe8e663a97a2d678457c59a873247dd0994e",
+      "size": 2025
+    },
+    {
+      "path": "profiles/chess/profile.json",
+      "sha256": "08f9f27e45f63910296e4dcb9a82af67dc57435bb8c4087506f8496fa5666835",
+      "size": 6392
+    },
+    {
+      "path": "profiles/chess/runtime/bin/legacy-ci.ps1",
+      "sha256": "b3d939cc7e42e81b05221818bbf3f560ca38f181c7bf4abe51a4fd3b9482e4d4",
+      "size": 19645
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/browser-logic.ps1",
+      "sha256": "5951f6ed1e881eb4e31c9a1eeaa27ed53748be1b2ffe5c77dee07f312d193fc8",
+      "size": 21533
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/ci-commands-main.ps1",
+      "sha256": "619c468615b8d2520439d1b5c233cdca3f87d27183efac146cbeeea4a762f9ce",
+      "size": 214031
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/ci-core.ps1",
+      "sha256": "8b0f161dcd96ef7e617fa457c9bdc27c494378758064b07d439b1b944ad5687b",
+      "size": 9923
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/core-utils.ps1",
+      "sha256": "f34e304d6152d6509fd8e989788049af37a07a37f5e0889375728e66cccd5114",
+      "size": 32523
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/critic-logic.ps1",
+      "sha256": "0c87f1326624841abd9b205e0badc8df18852eff559df96688ef104432d36fb2",
+      "size": 9864
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/observer-logic.ps1",
+      "sha256": "e8ab86d42a6416cc016551a4d96e6ef7e0feb11bd00c70788c0792cf48db49d7",
+      "size": 20565
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/project-logic.ps1",
+      "sha256": "6b062ac0e65864515c9a5b343d487469c02e5ff1f82b6d58b303ed2e9a61fdeb",
+      "size": 8767
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/sonar-logic.ps1",
+      "sha256": "c7194839f305dc2a23a3979ced586c4c1c000a2494c6d5173e200eb4b610d181",
+      "size": 6566
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/todo-engine.ps1",
+      "sha256": "76a24a8a878f161f95138e7129c107e4e0c53faf7d59727ad095a0da4a53cde7",
+      "size": 28589
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/toolchain-gradle.ps1",
+      "sha256": "189ae3a4122b2c8366d52ecf30a29f094e3a5b4db52fbf4670bde38b9eb0de97",
+      "size": 24971
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/ui-commands.ps1",
+      "sha256": "4dfbe01271a4befe7d69b7d7cb2d154543d04f220306e7f9f7ef97ea6c5f0670",
+      "size": 11396
+    },
+    {
+      "path": "profiles/chess/runtime/bin/modules/verify-logic.ps1",
+      "sha256": "851fcc91507e20c251af730fed246c33738984e9e2fee3cab5f9eadebbd2ad07",
+      "size": 14970
+    },
+    {
+      "path": "profiles/chess/runtime/bin/start_dev_server_internal.ps1",
+      "sha256": "40c4035dabd19cc78a4a8c0b98b16de06190d2fbeed1b2e5a60c045e0ac30777",
+      "size": 716
+    },
+    {
+      "path": "profiles/chess/runtime/bin/start_dev.ps1",
+      "sha256": "5ca50a38ae83a8d5f5f2c8eea839372eb32cb2c4818132f7749da023c2b11c3e",
+      "size": 806
+    },
+    {
+      "path": "profiles/chess/runtime/bin/start_devserver.ps1",
+      "sha256": "c55d72059e64444191f6bb77a538d4daa280b68284633cd6e459de2df2e50cd5",
+      "size": 1559
+    },
+    {
+      "path": "profiles/chess/runtime/bin/start_ktor.ps1",
+      "sha256": "cc00925cf4ced624b56c951e47351df6940085356e8b13b56da421bc77d1fa71",
+      "size": 813
+    },
+    {
+      "path": "profiles/chess/runtime/bin/start-sonar.ps1",
+      "sha256": "070d3f82c80372d2fab5d1b95170e9abadf6880ce5b14cc641a7fc938ab9c953",
+      "size": 1569
+    },
+    {
+      "path": "profiles/sound-profile/catalog/commands.json",
+      "sha256": "66dad107a3a862ce694480e39cb3aa23685e98f4a052ae37e039a979aadfe722",
+      "size": 27475
+    },
+    {
+      "path": "profiles/sound-profile/catalog/functions.json",
+      "sha256": "5ee281c46af3ba7e0d8aa1774d7657d0422ac9cc4691456ff5557915f2df06bf",
+      "size": 122667
+    },
+    {
+      "path": "profiles/sound-profile/config.default.json",
+      "sha256": "86c2ff9339145ee76dbab2fcd60e2359b0e82bfdb5c802104660267c5247e284",
+      "size": 827
+    },
+    {
+      "path": "profiles/sound-profile/profile.json",
+      "sha256": "6014ae13d129f8f1ca737789531d772290763a9096762cbe00ca0a60e03e8caf",
+      "size": 6440
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/legacy-ci.ps1",
+      "sha256": "f16b1cc03ca00dc3195ce8270e6a7a2794b01f5729a1e4975f12e5538814e9f2",
+      "size": 19398
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/browser-logic.ps1",
+      "sha256": "b0f9344efa01c1fb3aa7abe7eb8d708c65b02d7e43063f0d0bd55ad438fc2723",
+      "size": 15329
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/ci-commands-main.ps1",
+      "sha256": "96c54f2629d076414265e3188255dc232fadc6f211a79e4e3f1f999b032b17f5",
+      "size": 71741
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/ci-core.ps1",
+      "sha256": "9200d17d3da8dd658cceff7490bb47d5bff4e2b8ab7c3789c4f38870851ef272",
+      "size": 10141
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/core-utils.ps1",
+      "sha256": "00f816e274bfcbed91152e2cdc722e75392853f750509308ee9ff4953d519bff",
+      "size": 14691
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/critic-logic.ps1",
+      "sha256": "05a9eec7153f53817e7fdb51ebf94ab0e7aa9c957fe5fdce6976a0522f7436a7",
+      "size": 10077
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/observer-logic.ps1",
+      "sha256": "e8ab86d42a6416cc016551a4d96e6ef7e0feb11bd00c70788c0792cf48db49d7",
+      "size": 20565
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/project-logic.ps1",
+      "sha256": "265c00299ba05fee483b81aa8581c861a99b9c3c2ff3d0ad63b49419318aa6d7",
+      "size": 11880
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/sonar-logic.ps1",
+      "sha256": "93ea78902b609fb5bdccb7d4be32a3092a0cbe480c9e86747ac7f5510619f49c",
+      "size": 19049
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/todo-engine.ps1",
+      "sha256": "23e4d443f8ed32ecb9991507d64a97746e5b2a4dd4cf308e5ba1ae868dd9054e",
+      "size": 24957
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/toolchain-gradle.ps1",
+      "sha256": "142abde92561ed00390a9ce2ec26352c0caf3c3aee745b650ebaa41cac74ecb5",
+      "size": 13226
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/ui-commands.ps1",
+      "sha256": "4dfbe01271a4befe7d69b7d7cb2d154543d04f220306e7f9f7ef97ea6c5f0670",
+      "size": 11396
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/modules/verify-logic.ps1",
+      "sha256": "8290b22f0775cbb906fd700b1cb36e7fb876aa6150e651e35c98c80693a78274",
+      "size": 18849
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/start_dev_server_internal.ps1",
+      "sha256": "d9d9cd47e001d01afdf4b8f4457b3ede2813690cdffc5a9c79137a1039c392b1",
+      "size": 652
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/start_dev.ps1",
+      "sha256": "31dfae964cfe2b6b70ebc2ff7834acd9e576dc736278545b5ed7f74dc47721b6",
+      "size": 752
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/start_devserver.ps1",
+      "sha256": "5eeeba302748c18488a9dc521e598338ae883c87532a5cb19d39c715deaf0308",
+      "size": 1520
+    },
+    {
+      "path": "profiles/sound-profile/runtime/bin/start_ktor.ps1",
+      "sha256": "cc00925cf4ced624b56c951e47351df6940085356e8b13b56da421bc77d1fa71",
+      "size": 813
+    },
+    {
+      "path": "profiles/ubuntu-web/catalog/commands.json",
+      "sha256": "6388391d74cc40037c3e7da4ac7429f7de3e34f4f5259dd1ef699aa227ad9b49",
+      "size": 29394
+    },
+    {
+      "path": "profiles/ubuntu-web/catalog/functions.json",
+      "sha256": "33c91c313eec8d80fbf9b28eb667693c4f4ca8c73ba3644cc03a981904098105",
+      "size": 128426
+    },
+    {
+      "path": "profiles/ubuntu-web/config.default.json",
+      "sha256": "5052c8a935cdeb21d1803c4cc6eed8901e808497785951a43ffd162fa18d0bde",
+      "size": 833
+    },
+    {
+      "path": "profiles/ubuntu-web/profile.json",
+      "sha256": "f3a3d5c3a3983768e710d705473917ffce2c030b70f6e36a16ac635018978eb2",
+      "size": 6737
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/legacy-ci.ps1",
+      "sha256": "62987a5efe3471fdd1813e2e02f058219abceec720a7f45fdbb7e03ece7f3b53",
+      "size": 41222
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/browser-logic.ps1",
+      "sha256": "a2c1322f13bb2663013ee56b53018b841574e68d19fcbd862354be7a54d08786",
+      "size": 15478
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/ci-commands-main.ps1",
+      "sha256": "1bb7ee824d16287ee122f9304cf1839a35fa55a074139d72006f8aaf0de82c8b",
+      "size": 56884
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/ci-core.ps1",
+      "sha256": "1cd826a7ff98b5ec269458839787cdcd4407f9337193dd8bbf8e865e72301ca5",
+      "size": 10909
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/core-utils.ps1",
+      "sha256": "057bf77bb1efc8baea511042f3ee8098daebed2f168180c557b7ce26ef5ba27c",
+      "size": 14921
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/critic-logic.ps1",
+      "sha256": "b647317d2489e952d4ac7c1c3308ee9ce78a9c84459a870e9c73e0d3feb72e3d",
+      "size": 9985
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/handoff-logic.ps1",
+      "sha256": "29641ef8815cb707d7f7b8f51710c4ebafabea150cd29d06af2118c250c16aae",
+      "size": 4062
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/observer-logic.ps1",
+      "sha256": "f5ed85f68956812855285251e3a6ef9a5e2a74bedb9f9ee0bd9007d98f9a0724",
+      "size": 20347
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/project-logic.ps1",
+      "sha256": "286671ddf61efd2fed434dc5479a1a5116a80ab628ecdf9ec99f6db8141c8b5e",
+      "size": 13910
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/sonar-logic.ps1",
+      "sha256": "232ed6d45d13976c147b536f8c53ae7dfe140eb1fc36e385f3479406e1ab7bc1",
+      "size": 31679
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/todo-engine.ps1",
+      "sha256": "4f5ae86bab5143992cfe8aadf8ef9c6edcd8f5e9fe36d6448391bec576c5dbfc",
+      "size": 24350
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/toolchain-gradle.ps1",
+      "sha256": "8e75abf7d31e26683b8968fe17a226e26478e0163cc888d837523226db367dd1",
+      "size": 12751
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/ui-commands.ps1",
+      "sha256": "4dfbe01271a4befe7d69b7d7cb2d154543d04f220306e7f9f7ef97ea6c5f0670",
+      "size": 11396
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/modules/verify-logic.ps1",
+      "sha256": "50b3d8517a610efb8da0ba042e2d8da21aa0f5e56dacaa91b57de05484dd8306",
+      "size": 14444
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/start_dev_server_internal.ps1",
+      "sha256": "7909a54ecd1c8a0381060e86ffad73c29a23246f6221f5e50780550973924492",
+      "size": 655
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/start_dev.ps1",
+      "sha256": "e29b26788f8808f3bd8e6a76905ca8534bb5cfda30620f7954ed5ababc6902fc",
+      "size": 697
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/start_devserver.ps1",
+      "sha256": "c19ed98fac9933b4b270cbaca222a9c6a6d10ef60787f83a91ea9e256df956ec",
+      "size": 1195
+    },
+    {
+      "path": "profiles/ubuntu-web/runtime/bin/start_ktor.ps1",
+      "sha256": "013e43a6de058615432d10d3fae8208382381f9c3ce183e31b695ab720757a60",
+      "size": 802
+    },
+    {
+      "path": "README.md",
+      "sha256": "5df302f94e57f66f3021aa386bea7c28dbed75427fc36af23185b01d6b90905e",
+      "size": 215296
+    },
+    {
+      "path": "run.cmd",
+      "sha256": "598037358ccdb38f798c11413f8ec0def0daebe45871baa6dcbdabed3f4630d5",
+      "size": 351
+    },
+    {
+      "path": "Run.ps1",
+      "sha256": "ea6c6aaee7d4c37867a72bd648eff124b97d87f8192363175afb1093b2a61c45",
+      "size": 555
+    },
+    {
+      "path": "runtime/ci.cmd",
+      "sha256": "8182015abbfe188e8670a169b038ff7c5b4f50def52182113db1ab83aeb33f6a",
+      "size": 1240
+    },
+    {
+      "path": "runtime/ci.ps1",
+      "sha256": "b222abd15e06580a2d58f4096c5ffd29a7ccc4cb3f54eb24a9c21fd7eef7cc76",
+      "size": 12039
+    },
+    {
+      "path": "runtime/observer-daemon.ps1",
+      "sha256": "72c258998c31013810d9b7af662ec60f96e612780832487e578b134ebf0c4144",
+      "size": 694
+    },
+    {
+      "path": "runtime/root-ci.cmd",
+      "sha256": "03ecd633e2184b99db2c463665366928db6c6c98d53a7eb4439799a56ccd4e08",
+      "size": 311
+    },
+    {
+      "path": "runtime/workflow-audit.ps1",
+      "sha256": "a31d517014c522a98bdc3dd794ec9a42a80f452ffcfde8539950e55898eb519c",
+      "size": 11291
+    },
+    {
+      "path": "schemas/ci-config.compat.schema.json",
+      "sha256": "a320a0a41ee1e35aba3d378beda1fb23e1005d03627d4bbaab0a3a707d20f186",
+      "size": 1717
+    },
+    {
+      "path": "schemas/profile.schema.json",
+      "sha256": "ed68df378abe2f6a3b20d39c19105fccd286f1bc35f983cc465164f486ff1286",
+      "size": 2386
+    },
+    {
+      "path": "schemas/project-binding.schema.json",
+      "sha256": "66c29d67ad31260413cc913369fa328bb768db7dc8a1b68716d690d85db07e6f",
+      "size": 1017
+    },
+    {
+      "path": "schemas/release-manifest.schema.json",
+      "sha256": "1d85fac0e9029bec2ecd33f58cda66faca74937c1cf8af706d0ad7f2a5315904",
+      "size": 1164
+    },
+    {
+      "path": "schemas/runtime-manifest.schema.json",
+      "sha256": "786f283c2d4cfb1e755477d703f5d5e6dbd30f92eacc8665a6093da021634f94",
+      "size": 2426
+    },
+    {
+      "path": "schemas/workflow-checkpoint.schema.json",
+      "sha256": "44f9350e72ca1af37f431323bb7830cd4bad3671a71c3860c5a085afdb5aff6a",
+      "size": 1699
+    },
+    {
+      "path": "schemas/workflow-event.schema.json",
+      "sha256": "87fb0cfeecb92206ade9f4344039d70ad0dfd05018d45612c456289faadcade8",
+      "size": 1301
+    },
+    {
+      "path": "schemas/workflow-generation.schema.json",
+      "sha256": "3ea431ef4a6f961b4f2cfe86d2736b107865e2a8aa11519cb83215a7d5302aad",
+      "size": 2367
+    },
+    {
+      "path": "schemas/workflow-pointer.schema.json",
+      "sha256": "e35debeb6a1f9a0df6e737f16a7226bd5079bfcab8bb031088d41c8aca82a385",
+      "size": 691
+    },
+    {
+      "path": "schemas/workflow-segment.schema.json",
+      "sha256": "a08050f0628c554411ea45c85c5233d12531222720179ee280070fdb10b0488d",
+      "size": 979
+    },
+    {
+      "path": "schemas/workflow-state.schema.json",
+      "sha256": "119c7c4f46f257c2af5967f45f2d448862afa09cdc08e6e452ff18efe14b87be",
+      "size": 1666
+    },
+    {
+      "path": "templates/chess/.ci/bin/ci.cmd",
+      "sha256": "9186993c6d3d5346b7415170d3745ec240aa61bd8bd3b4cc4f7fa6b6200b8d24",
+      "size": 662
+    },
+    {
+      "path": "templates/chess/.ci/bin/ci.ps1",
+      "sha256": "4a7f93191dd744e57f4b9b6bc915844c939cf8d8c74a481e4f86c4a168922d4e",
+      "size": 19566
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/browser-logic.ps1",
+      "sha256": "5951f6ed1e881eb4e31c9a1eeaa27ed53748be1b2ffe5c77dee07f312d193fc8",
+      "size": 21533
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/ci-commands-main.ps1",
+      "sha256": "7ad1131a4064471be1ec6ecee888d6137f53ad352b27f48903f7d6bf332d131e",
+      "size": 213962
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/ci-core.ps1",
+      "sha256": "30f343e327b97b79fc773fbc9eed29b1322604299b5df5a5a9ac9ff4581b5376",
+      "size": 9741
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/core-utils.ps1",
+      "sha256": "f34e304d6152d6509fd8e989788049af37a07a37f5e0889375728e66cccd5114",
+      "size": 32523
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/critic-logic.ps1",
+      "sha256": "0c87f1326624841abd9b205e0badc8df18852eff559df96688ef104432d36fb2",
+      "size": 9864
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/observer-logic.ps1",
+      "sha256": "e8ab86d42a6416cc016551a4d96e6ef7e0feb11bd00c70788c0792cf48db49d7",
+      "size": 20565
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/project-logic.ps1",
+      "sha256": "6b062ac0e65864515c9a5b343d487469c02e5ff1f82b6d58b303ed2e9a61fdeb",
+      "size": 8767
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/sonar-logic.ps1",
+      "sha256": "21029609fd8e9cfc2c7f77f854251ada6e81c28a294ac28b4b62cfdfbb76bc9c",
+      "size": 6516
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/todo-engine.ps1",
+      "sha256": "76a24a8a878f161f95138e7129c107e4e0c53faf7d59727ad095a0da4a53cde7",
+      "size": 28589
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/toolchain-gradle.ps1",
+      "sha256": "189ae3a4122b2c8366d52ecf30a29f094e3a5b4db52fbf4670bde38b9eb0de97",
+      "size": 24971
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/ui-commands.ps1",
+      "sha256": "b3ba23d270af1f0ade63ec5f4a1aa6f8229ae4581c0afd89e341e7cfc8cd16c9",
+      "size": 11424
+    },
+    {
+      "path": "templates/chess/.ci/bin/modules/verify-logic.ps1",
+      "sha256": "88a56d9a54167e293b2a684fd553a022908e8e9621cb3b8a7f37e11e9d04dfd5",
+      "size": 14850
+    },
+    {
+      "path": "templates/chess/.ci/bin/start_dev_server_internal.ps1",
+      "sha256": "40c4035dabd19cc78a4a8c0b98b16de06190d2fbeed1b2e5a60c045e0ac30777",
+      "size": 716
+    },
+    {
+      "path": "templates/chess/.ci/bin/start_dev.ps1",
+      "sha256": "5ca50a38ae83a8d5f5f2c8eea839372eb32cb2c4818132f7749da023c2b11c3e",
+      "size": 806
+    },
+    {
+      "path": "templates/chess/.ci/bin/start_devserver.ps1",
+      "sha256": "c55d72059e64444191f6bb77a538d4daa280b68284633cd6e459de2df2e50cd5",
+      "size": 1559
+    },
+    {
+      "path": "templates/chess/.ci/bin/start_ktor.ps1",
+      "sha256": "cc00925cf4ced624b56c951e47351df6940085356e8b13b56da421bc77d1fa71",
+      "size": 813
+    },
+    {
+      "path": "templates/chess/.ci/bin/start-sonar.ps1",
+      "sha256": "bca6308d1f53dc6883e550d42bf5b430375c84573f807ee14cdbccb45ab19b87",
+      "size": 1394
+    },
+    {
+      "path": "templates/chess/.ci/ci.config.json",
+      "sha256": "f651afe9972786cb817bc0050d9ffe8e663a97a2d678457c59a873247dd0994e",
+      "size": 2025
+    },
+    {
+      "path": "templates/chess/ci.cmd",
+      "sha256": "3d1bb215875f764fb9f610f0c6132efca0e443ea0547526c967d87e1e5077c13",
+      "size": 347
+    },
+    {
+      "path": "templates/chess/README.md",
+      "sha256": "bef380fa1123af615a8a2cafaadf7cc51ea7cb4583edecb7c5e60542525cbb9c",
+      "size": 66865
+    },
+    {
+      "path": "templates/chess/template.manifest.json",
+      "sha256": "1abab43c36088869365b2699830dc35d8aeb80f1fc8736df53691ca2b19d65ec",
+      "size": 4148
+    },
+    {
+      "path": "templates/README.md",
+      "sha256": "a4a0d4a496e1a4309ce316d16a3932a4a5cff6d6ec9ffc81fd71c10a4eb30b17",
+      "size": 902
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/ci.cmd",
+      "sha256": "9186993c6d3d5346b7415170d3745ec240aa61bd8bd3b4cc4f7fa6b6200b8d24",
+      "size": 662
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/ci.ps1",
+      "sha256": "fb095ea0b3be2d81c95e24781820d43ca89ef70e4ae97655ae8ebb51b4c6024b",
+      "size": 19294
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/browser-logic.ps1",
+      "sha256": "b0f9344efa01c1fb3aa7abe7eb8d708c65b02d7e43063f0d0bd55ad438fc2723",
+      "size": 15329
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/ci-commands-main.ps1",
+      "sha256": "81e87f5cbbe48cad2d34492af22b165de2be708ca50a8af62f22abc99ff98453",
+      "size": 71458
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/ci-core.ps1",
+      "sha256": "7cbaf649ff4e226456f9447189df6d3825c86706513c8e762e35a9db4539f430",
+      "size": 9959
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/core-utils.ps1",
+      "sha256": "00f816e274bfcbed91152e2cdc722e75392853f750509308ee9ff4953d519bff",
+      "size": 14691
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/critic-logic.ps1",
+      "sha256": "05a9eec7153f53817e7fdb51ebf94ab0e7aa9c957fe5fdce6976a0522f7436a7",
+      "size": 10077
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/observer-logic.ps1",
+      "sha256": "e8ab86d42a6416cc016551a4d96e6ef7e0feb11bd00c70788c0792cf48db49d7",
+      "size": 20565
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/project-logic.ps1",
+      "sha256": "265c00299ba05fee483b81aa8581c861a99b9c3c2ff3d0ad63b49419318aa6d7",
+      "size": 11880
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/sonar-logic.ps1",
+      "sha256": "93ea78902b609fb5bdccb7d4be32a3092a0cbe480c9e86747ac7f5510619f49c",
+      "size": 19049
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/todo-engine.ps1",
+      "sha256": "23e4d443f8ed32ecb9991507d64a97746e5b2a4dd4cf308e5ba1ae868dd9054e",
+      "size": 24957
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/toolchain-gradle.ps1",
+      "sha256": "da5364b8235aa43df9ed97806f77146cb2950fd4de5bffcff52dda21e2992b18",
+      "size": 10437
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/ui-commands.ps1",
+      "sha256": "b3ba23d270af1f0ade63ec5f4a1aa6f8229ae4581c0afd89e341e7cfc8cd16c9",
+      "size": 11424
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/modules/verify-logic.ps1",
+      "sha256": "a111378b8c4b63ff9b39976cc8f1c369ad8d56febefbb88dca1113278191fdf2",
+      "size": 18707
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/start_dev_server_internal.ps1",
+      "sha256": "d9d9cd47e001d01afdf4b8f4457b3ede2813690cdffc5a9c79137a1039c392b1",
+      "size": 652
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/start_dev.ps1",
+      "sha256": "31dfae964cfe2b6b70ebc2ff7834acd9e576dc736278545b5ed7f74dc47721b6",
+      "size": 752
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/start_devserver.ps1",
+      "sha256": "5eeeba302748c18488a9dc521e598338ae883c87532a5cb19d39c715deaf0308",
+      "size": 1520
+    },
+    {
+      "path": "templates/sound-profile/.ci/bin/start_ktor.ps1",
+      "sha256": "cc00925cf4ced624b56c951e47351df6940085356e8b13b56da421bc77d1fa71",
+      "size": 813
+    },
+    {
+      "path": "templates/sound-profile/.ci/ci.config.json",
+      "sha256": "86c2ff9339145ee76dbab2fcd60e2359b0e82bfdb5c802104660267c5247e284",
+      "size": 827
+    },
+    {
+      "path": "templates/sound-profile/ci.cmd",
+      "sha256": "3d1bb215875f764fb9f610f0c6132efca0e443ea0547526c967d87e1e5077c13",
+      "size": 347
+    },
+    {
+      "path": "templates/sound-profile/README.md",
+      "sha256": "f790afa442306c705dd1467571c65c7b4a81778fa8d8f594c138ae959f990bec",
+      "size": 62437
+    },
+    {
+      "path": "templates/sound-profile/template.manifest.json",
+      "sha256": "2f3211e1651c9f88ac42ad4903cf1fbbefe13ceb9ec48f782058937c9e9f2c45",
+      "size": 4003
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/ci.cmd",
+      "sha256": "58a0f9c3ff98fa3293e6f5bbcb9824dc401d0ce5ab7f371529532070d9ccf924",
+      "size": 654
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/ci.ps1",
+      "sha256": "6c7dfa9d408b879d3bf3d350f29b2182f224f91dfc058b42e85ba98339d0a54b",
+      "size": 41044
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/browser-logic.ps1",
+      "sha256": "a2c1322f13bb2663013ee56b53018b841574e68d19fcbd862354be7a54d08786",
+      "size": 15478
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/ci-commands-main.ps1",
+      "sha256": "2fc4dba1a14db3c5a0bca960107a50cc673cce17969391bff9448ad0932afb81",
+      "size": 56701
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/ci-core.ps1",
+      "sha256": "de4d970a7849de3cbec9d48f2c54051899c58748534ed6c7a674159341ea5d67",
+      "size": 10722
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/core-utils.ps1",
+      "sha256": "057bf77bb1efc8baea511042f3ee8098daebed2f168180c557b7ce26ef5ba27c",
+      "size": 14921
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/critic-logic.ps1",
+      "sha256": "b647317d2489e952d4ac7c1c3308ee9ce78a9c84459a870e9c73e0d3feb72e3d",
+      "size": 9985
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/handoff-logic.ps1",
+      "sha256": "29641ef8815cb707d7f7b8f51710c4ebafabea150cd29d06af2118c250c16aae",
+      "size": 4062
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/observer-logic.ps1",
+      "sha256": "f5ed85f68956812855285251e3a6ef9a5e2a74bedb9f9ee0bd9007d98f9a0724",
+      "size": 20347
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/project-logic.ps1",
+      "sha256": "286671ddf61efd2fed434dc5479a1a5116a80ab628ecdf9ec99f6db8141c8b5e",
+      "size": 13910
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/sonar-logic.ps1",
+      "sha256": "232ed6d45d13976c147b536f8c53ae7dfe140eb1fc36e385f3479406e1ab7bc1",
+      "size": 31679
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/todo-engine.ps1",
+      "sha256": "4f5ae86bab5143992cfe8aadf8ef9c6edcd8f5e9fe36d6448391bec576c5dbfc",
+      "size": 24350
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/toolchain-gradle.ps1",
+      "sha256": "454bd0521bc308e23bb02e03a3bf645f96426b05a2869ade1a02d4d37b184ef3",
+      "size": 9944
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/ui-commands.ps1",
+      "sha256": "b3ba23d270af1f0ade63ec5f4a1aa6f8229ae4581c0afd89e341e7cfc8cd16c9",
+      "size": 11424
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/modules/verify-logic.ps1",
+      "sha256": "af240d22598772e04e7152b0dfdae8f25003bc4945c88fbb19840b277930273d",
+      "size": 14321
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/start_dev_server_internal.ps1",
+      "sha256": "7909a54ecd1c8a0381060e86ffad73c29a23246f6221f5e50780550973924492",
+      "size": 655
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/start_dev.ps1",
+      "sha256": "e29b26788f8808f3bd8e6a76905ca8534bb5cfda30620f7954ed5ababc6902fc",
+      "size": 697
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/start_devserver.ps1",
+      "sha256": "c19ed98fac9933b4b270cbaca222a9c6a6d10ef60787f83a91ea9e256df956ec",
+      "size": 1195
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/bin/start_ktor.ps1",
+      "sha256": "013e43a6de058615432d10d3fae8208382381f9c3ce183e31b695ab720757a60",
+      "size": 802
+    },
+    {
+      "path": "templates/ubuntu-web/.ci/ci.config.json",
+      "sha256": "5052c8a935cdeb21d1803c4cc6eed8901e808497785951a43ffd162fa18d0bde",
+      "size": 833
+    },
+    {
+      "path": "templates/ubuntu-web/ci.cmd",
+      "sha256": "9f8938c4ea2f57c36b00f20c421eb06e967fd2fec7da8a4f09cef0a76737ba28",
+      "size": 446
+    },
+    {
+      "path": "templates/ubuntu-web/README.md",
+      "sha256": "088f7651c53e03e8498d857f337214fb620a0d7e76272f1fbe24a14f4252b8d2",
+      "size": 66784
+    },
+    {
+      "path": "templates/ubuntu-web/template.manifest.json",
+      "sha256": "319cf79c889370d3b29b435a2156777d9e12e4d8cfdbf08747a7e436acb725bf",
+      "size": 4177
+    },
+    {
+      "path": "tests/Test-Bootstrap.ps1",
+      "sha256": "c605bea6b927078204f865957804feb9c84fdea1b79735a21ecfc85804fd7ca5",
+      "size": 9981
+    },
+    {
+      "path": "tests/Test-Compatibility.ps1",
+      "sha256": "67ac23cf3acf1e53ce9214fd50d6f00376eac1cbb950dc783fbdb4f49a7d3b08",
+      "size": 16580
+    },
+    {
+      "path": "tests/Test-LegacyPowerShell.ps1",
+      "sha256": "b0cb6f334ca2b663585966411f12f5bff08b87dc8b82ce7cecfd2b7916bdbd3a",
+      "size": 1392
+    },
+    {
+      "path": "tests/Test-Lifecycle.ps1",
+      "sha256": "3d7bbd3d0ee2c66fb5c060ae71154981c3162b0b6b7a6048752d75c8aaedf3f9",
+      "size": 9416
+    },
+    {
+      "path": "tests/Test-ReferenceTemplates.ps1",
+      "sha256": "89415dba6481d5ac3602c80fc4276fe8d29ad4d1e95e91c2a24dd825c969ef16",
+      "size": 6371
+    },
+    {
+      "path": "tools/Build-Catalogs.ps1",
+      "sha256": "01e0df6fb9166fda009fb5c9cfeb99086133a60cb6eb3ba1aad3f91ba814e441",
+      "size": 15577
+    },
+    {
+      "path": "tools/Build-ReferenceTemplates.ps1",
+      "sha256": "60810cf4f29aa0b30e8dabddbcc410614efd3535e5afdc2d5db0fce1fb75d73b",
+      "size": 6486
+    },
+    {
+      "path": "tools/Build-ReleaseManifest.ps1",
+      "sha256": "f90589106d59d50b516eaf8965d0872dfc4858826ff28dcf12c8ece1b0ddf58b",
+      "size": 2838
+    },
+    {
+      "path": "tools/Build-UniversalReadme.ps1",
+      "sha256": "e8b4deadc8bf08943003c7198ec0c36c2d89127680815acfd5e188693231c0a1",
+      "size": 3630
+    }
+  ]
+}

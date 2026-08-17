@@ -1,0 +1,121 @@
+{
+  "schema": "workflow-bootstrap-reference-template/v1",
+  "id": "sound-profile",
+  "source_root": "D:\\_Scripte\\Sound Profile",
+  "source_git_head": "7d6ad8f9eb0d6de1874554e15f4234ae0ba98cfa",
+  "source_selected_worktree": "clean",
+  "source_selected_status": [],
+  "captured_utc": "2026-08-02T18:35:06.3306218+00:00",
+  "files": [
+    {
+      "path": ".ci/bin/ci.cmd",
+      "sha256": "9186993c6d3d5346b7415170d3745ec240aa61bd8bd3b4cc4f7fa6b6200b8d24",
+      "size": 662
+    },
+    {
+      "path": ".ci/ci.config.json",
+      "sha256": "86c2ff9339145ee76dbab2fcd60e2359b0e82bfdb5c802104660267c5247e284",
+      "size": 827
+    },
+    {
+      "path": ".ci/bin/start_ktor.ps1",
+      "sha256": "cc00925cf4ced624b56c951e47351df6940085356e8b13b56da421bc77d1fa71",
+      "size": 813
+    },
+    {
+      "path": ".ci/bin/start_devserver.ps1",
+      "sha256": "5eeeba302748c18488a9dc521e598338ae883c87532a5cb19d39c715deaf0308",
+      "size": 1520
+    },
+    {
+      "path": ".ci/bin/start_dev.ps1",
+      "sha256": "31dfae964cfe2b6b70ebc2ff7834acd9e576dc736278545b5ed7f74dc47721b6",
+      "size": 752
+    },
+    {
+      "path": ".ci/bin/start_dev_server_internal.ps1",
+      "sha256": "d9d9cd47e001d01afdf4b8f4457b3ede2813690cdffc5a9c79137a1039c392b1",
+      "size": 652
+    },
+    {
+      "path": ".ci/bin/modules/verify-logic.ps1",
+      "sha256": "a111378b8c4b63ff9b39976cc8f1c369ad8d56febefbb88dca1113278191fdf2",
+      "size": 18707
+    },
+    {
+      "path": ".ci/bin/modules/ui-commands.ps1",
+      "sha256": "b3ba23d270af1f0ade63ec5f4a1aa6f8229ae4581c0afd89e341e7cfc8cd16c9",
+      "size": 11424
+    },
+    {
+      "path": ".ci/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": ".ci/bin/modules/toolchain-gradle.ps1",
+      "sha256": "da5364b8235aa43df9ed97806f77146cb2950fd4de5bffcff52dda21e2992b18",
+      "size": 10437
+    },
+    {
+      "path": ".ci/bin/modules/todo-engine.ps1",
+      "sha256": "23e4d443f8ed32ecb9991507d64a97746e5b2a4dd4cf308e5ba1ae868dd9054e",
+      "size": 24957
+    },
+    {
+      "path": ".ci/bin/modules/sonar-logic.ps1",
+      "sha256": "93ea78902b609fb5bdccb7d4be32a3092a0cbe480c9e86747ac7f5510619f49c",
+      "size": 19049
+    },
+    {
+      "path": ".ci/bin/modules/project-logic.ps1",
+      "sha256": "265c00299ba05fee483b81aa8581c861a99b9c3c2ff3d0ad63b49419318aa6d7",
+      "size": 11880
+    },
+    {
+      "path": ".ci/bin/modules/observer-logic.ps1",
+      "sha256": "e8ab86d42a6416cc016551a4d96e6ef7e0feb11bd00c70788c0792cf48db49d7",
+      "size": 20565
+    },
+    {
+      "path": ".ci/bin/modules/critic-logic.ps1",
+      "sha256": "05a9eec7153f53817e7fdb51ebf94ab0e7aa9c957fe5fdce6976a0522f7436a7",
+      "size": 10077
+    },
+    {
+      "path": ".ci/bin/modules/core-utils.ps1",
+      "sha256": "00f816e274bfcbed91152e2cdc722e75392853f750509308ee9ff4953d519bff",
+      "size": 14691
+    },
+    {
+      "path": ".ci/bin/modules/ci-core.ps1",
+      "sha256": "7cbaf649ff4e226456f9447189df6d3825c86706513c8e762e35a9db4539f430",
+      "size": 9959
+    },
+    {
+      "path": ".ci/bin/modules/ci-commands-main.ps1",
+      "sha256": "81e87f5cbbe48cad2d34492af22b165de2be708ca50a8af62f22abc99ff98453",
+      "size": 71458
+    },
+    {
+      "path": ".ci/bin/modules/browser-logic.ps1",
+      "sha256": "b0f9344efa01c1fb3aa7abe7eb8d708c65b02d7e43063f0d0bd55ad438fc2723",
+      "size": 15329
+    },
+    {
+      "path": ".ci/bin/ci.ps1",
+      "sha256": "fb095ea0b3be2d81c95e24781820d43ca89ef70e4ae97655ae8ebb51b4c6024b",
+      "size": 19294
+    },
+    {
+      "path": "ci.cmd",
+      "sha256": "3d1bb215875f764fb9f610f0c6132efca0e443ea0547526c967d87e1e5077c13",
+      "size": 347
+    },
+    {
+      "path": "README.md",
+      "sha256": "f790afa442306c705dd1467571c65c7b4a81778fa8d8f594c138ae959f990bec",
+      "size": 62437
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/workflow-pointer.schema.json",
+  "title": "Atomic pointer to the active workflow generation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "generation_id", "generation_manifest_sha256", "updated_utc"],
+  "properties": {
+    "schema": { "const": "workflow-current/v2" },
+    "generation_id": {
+      "type": "string",
+      "pattern": "^[0-9]{8}T[0-9]{6}(?:[0-9]{3})?Z-[a-f0-9]{12}$"
+    },
+    "generation_manifest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "updated_utc": { "type": "string", "format": "date-time" }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/workflow-segment.schema.json",
+  "title": "Immutable workflow event segment descriptor",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "path",
+    "sha256",
+    "event_count",
+    "first_sequence",
+    "last_sequence",
+    "first_previous_event_hash",
+    "last_event_hash"
+  ],
+  "properties": {
+    "schema": { "const": "workflow-segment/v2" },
+    "path": { "type": "string", "minLength": 1 },
+    "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "event_count": { "type": "integer", "minimum": 1 },
+    "first_sequence": { "type": "integer", "minimum": 1 },
+    "last_sequence": { "type": "integer", "minimum": 1 },
+    "first_previous_event_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "last_event_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+  }
+}

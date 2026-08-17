@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/release-manifest.schema.json",
+  "title": "Workflow Bootstrap release manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "version", "generated_utc", "files"],
+  "properties": {
+    "schema": { "const": "workflow-bootstrap-release/v1" },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "generated_utc": { "type": "string", "format": "date-time" },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "size"],
+        "properties": {
+          "path": { "$ref": "#/$defs/relativePath" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "size": { "type": "integer", "minimum": 0 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "(^[A-Za-z]:)|(^[/\\\\])|((^|[/\\\\])\\.\\.([/\\\\]|$))|:"
+      }
+    }
+  }
+}

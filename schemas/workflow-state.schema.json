@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/workflow-state.schema.json",
+  "title": "Workflow state v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "revision",
+    "through_sequence",
+    "through_event_id",
+    "through_event_hash",
+    "active_id",
+    "items"
+  ],
+  "properties": {
+    "schema": {
+      "const": "workflow-state/v2"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "through_sequence": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "through_event_id": {
+      "type": ["string", "null"]
+    },
+    "through_event_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "active_id": {
+      "type": ["string", "null"]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["todo_id", "title", "status", "priority", "updated_utc"],
+        "properties": {
+          "todo_id": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9]+-[0-9]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": ["open", "in-progress", "blocked", "done", "cancelled"]
+          },
+          "priority": {
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "updated_utc": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

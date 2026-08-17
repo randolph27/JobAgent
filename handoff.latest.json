@@ -1,0 +1,142 @@
+{
+  "ts": "2026-08-17T12:42:00+02:00",
+  "agent_id": "UTTER-20260817-39f7",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
+  "active_id": "",
+  "status": "open",
+  "goal": "Als naechstes das persistente Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
+  "next": "JA-002 Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
+  "summary": "JA-001 abgeschlossen: manual/PROGRAM.md enthaelt den verbindlichen JobAgent-Programmvertrag; JA-001 wurde aus Roadmap.md nach Roadmap_archive.md rotiert.",
+  "changed": [
+    ".gitignore",
+    "manual/PROGRAM.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "handoff.latest.md",
+    "handoff.latest.json",
+    "todo.current.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json"
+  ],
+  "verified": [
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 0,
+      "evidence": "logs/terminal/self-check-20260817-123608.log"
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 0,
+      "evidence": "logs/terminal/self-check-20260817-123942.log"
+    },
+    {
+      "cmd": "Select-String -Path manual\\PROGRAM.md -Pattern 'IT-Fuehrungspositionen','offizielle','NEW','CLOSED','Muenchen','Freising','keine nicht belegten'",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd repin-immutables",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    }
+  ],
+  "supertest": {
+    "status": "done-by-user-instruction",
+    "note": "Nicht separat ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt."
+  },
+  "git": {
+    "branch": "master",
+    "head": "siehe git log nach Commit",
+    "upstream": "origin/master pending",
+    "ahead": 1,
+    "behind": 0,
+    "worktree": "clean nach Commit erwartet",
+    "tracked_changes": [],
+    "has_repo": true,
+    "initial_state_note": "Das Verzeichnis war initial kein Git-Checkout; nach stp existiert ein lokales Git-Repository ohne Commit und ohne Remote."
+  },
+  "next_steps": [
+    "JA-002 bearbeiten.",
+    "Speicherentscheidung fuer fachliche JobAgent-Daten dokumentieren.",
+    "schemas/jobagent.schema.json und docs/data-model.md anlegen.",
+    "Company, Job, JobSource, ScanRun, ScanAttempt, JobSnapshot und ChangeEvent modellieren.",
+    "Schema-Funktionstests fuer gueltige und ungueltige Beispiele ergaenzen."
+  ],
+  "risks": [
+    "Remote-Branch-Zustand ist unklar: ls-remote --heads lieferte keine Ausgabe.",
+    "Kein Force-Push ausfuehren.",
+    "Keine Live-Recherche vor Abschluss von Datenmodell, Persistenz und Quellenverifikation."
+  ],
+  "refs": [
+    "manual/PROGRAM.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ],
+  "route_ok": null,
+  "route_violations": [],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "env_inventory_path": null,
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen. Arbeite sequenziell weiter, bis ein harter Blocker erreicht ist.",
+  "capsule": {
+    "ts": "2026-08-17T12:42:00+02:00",
+    "agent_id": "UTTER-20260817-39f7",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "",
+    "status": "open",
+    "goal": "Als naechstes das persistente Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
+    "changed": [
+      ".gitignore",
+      "manual/PROGRAM.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "handoff.latest.md",
+      "handoff.latest.json"
+    ],
+    "verified": [
+      {
+        "cmd": ".\\ci.cmd self-check",
+        "exit": 0,
+        "evidence": "logs/terminal/self-check-20260817-123942.log"
+      }
+    ],
+    "route_ok": null,
+    "route_violations": [],
+    "git": {
+      "branch": "master",
+      "head": "siehe git log nach Commit",
+      "upstream": "origin/master pending",
+      "ahead": 1,
+      "behind": 0,
+      "worktree": "clean nach Commit erwartet",
+      "tracked_changes": [],
+      "has_repo": true
+    },
+    "next": "JA-002 Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  }
+}

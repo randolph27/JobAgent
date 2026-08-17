@@ -1,0 +1,921 @@
+{
+  "schema": "workflow-bootstrap-command-catalog/v1",
+  "profile": "sound-profile",
+  "generated_utc": "2026-08-02T18:35:19.8205883+00:00",
+  "command_count": 59,
+  "commands": [
+    {
+      "name": "autopatch",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1358",
+      "implementation": "Cmd-Autopatch",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "autopatch",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1358,
+          "kind": "register",
+          "implementation": "Cmd-Autopatch"
+        }
+      ]
+    },
+    {
+      "name": "bootstrap",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1318",
+      "implementation": "Cmd-Bootstrap",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "bootstrap",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1318,
+          "kind": "register",
+          "implementation": "Cmd-Bootstrap"
+        }
+      ]
+    },
+    {
+      "name": "browser-smoke",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1336",
+      "implementation": "Cmd-BrowserSmoke",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "browser-smoke",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1336,
+          "kind": "register",
+          "implementation": "Cmd-BrowserSmoke"
+        }
+      ]
+    },
+    {
+      "name": "critic",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1357",
+      "implementation": "Cmd-Critic",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "critic",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1357,
+          "kind": "register",
+          "implementation": "Cmd-Critic"
+        }
+      ]
+    },
+    {
+      "name": "deps-bootstrap",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1322",
+      "implementation": "Cmd-DepsBootstrap",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "deps-bootstrap",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1322,
+          "kind": "register",
+          "implementation": "Cmd-DepsBootstrap"
+        }
+      ]
+    },
+    {
+      "name": "dev",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1337",
+      "implementation": "Cmd-Dev",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "dev",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1337,
+          "kind": "register",
+          "implementation": "Cmd-Dev"
+        }
+      ]
+    },
+    {
+      "name": "devserver-start",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1338",
+      "implementation": "Cmd-DevserverStart",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "devserver-start",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1338,
+          "kind": "register",
+          "implementation": "Cmd-DevserverStart"
+        }
+      ]
+    },
+    {
+      "name": "devserver-status",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1340",
+      "implementation": "Cmd-DevserverStatus",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "devserver-status",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1340,
+          "kind": "register",
+          "implementation": "Cmd-DevserverStatus"
+        }
+      ]
+    },
+    {
+      "name": "devserver-stop",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1339",
+      "implementation": "Cmd-DevserverStop",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "devserver-stop",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1339,
+          "kind": "register",
+          "implementation": "Cmd-DevserverStop"
+        }
+      ]
+    },
+    {
+      "name": "doctor",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1351",
+      "implementation": "Cmd-Doctor",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "doctor",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1351,
+          "kind": "register",
+          "implementation": "Cmd-Doctor"
+        }
+      ]
+    },
+    {
+      "name": "drift-check",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1359",
+      "implementation": "Cmd-DriftCheck",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "drift-check",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1359,
+          "kind": "register",
+          "implementation": "Cmd-DriftCheck"
+        }
+      ]
+    },
+    {
+      "name": "env-inventory",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1352",
+      "implementation": "Cmd-EnvInventory",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "env-inventory",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1352,
+          "kind": "register",
+          "implementation": "Cmd-EnvInventory"
+        }
+      ]
+    },
+    {
+      "name": "event",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1353",
+      "implementation": "Cmd-Event $script:CiCommandArgs",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "event",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1353,
+          "kind": "register",
+          "implementation": "Cmd-Event $script:CiCommandArgs"
+        }
+      ]
+    },
+    {
+      "name": "gradle-autopsy",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1326",
+      "implementation": "Cmd-GradleAutopsy",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "gradle-autopsy",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1326,
+          "kind": "register",
+          "implementation": "Cmd-GradleAutopsy"
+        }
+      ]
+    },
+    {
+      "name": "gradle-bootstrap",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1327",
+      "implementation": "Cmd-GradleBootstrap",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "gradle-bootstrap",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1327,
+          "kind": "register",
+          "implementation": "Cmd-GradleBootstrap"
+        }
+      ]
+    },
+    {
+      "name": "lock-triage",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1328",
+      "implementation": "Cmd-LockTriage",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "lock-triage",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1328,
+          "kind": "register",
+          "implementation": "Cmd-LockTriage"
+        }
+      ]
+    },
+    {
+      "name": "menu",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1370",
+      "implementation": "Cmd-Menu",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "menu",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1370,
+          "kind": "register",
+          "implementation": "Cmd-Menu"
+        }
+      ]
+    },
+    {
+      "name": "o",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1355",
+      "implementation": "Cmd-Tick @(\"--force\")",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "o",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1355,
+          "kind": "register",
+          "implementation": "Cmd-Tick @(\"--force\")"
+        }
+      ]
+    },
+    {
+      "name": "obs",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1356",
+      "implementation": "Cmd-Tick @(\"--force\")",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "obs",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1356,
+          "kind": "register",
+          "implementation": "Cmd-Tick @(\"--force\")"
+        }
+      ]
+    },
+    {
+      "name": "observer-baseline",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1329",
+      "implementation": "Cmd-ObserverBaseline",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "observer-baseline",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1329,
+          "kind": "register",
+          "implementation": "Cmd-ObserverBaseline"
+        }
+      ]
+    },
+    {
+      "name": "observer-check",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1330",
+      "implementation": "Cmd-ObserverCheck",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "observer-check",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1330,
+          "kind": "register",
+          "implementation": "Cmd-ObserverCheck"
+        }
+      ]
+    },
+    {
+      "name": "observerd-start",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1360",
+      "implementation": "Cmd-ObserverdStart",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "observerd-start",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1360,
+          "kind": "register",
+          "implementation": "Cmd-ObserverdStart"
+        }
+      ]
+    },
+    {
+      "name": "observerd-status",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1362",
+      "implementation": "Cmd-ObserverdStatus",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "observerd-status",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1362,
+          "kind": "register",
+          "implementation": "Cmd-ObserverdStatus"
+        }
+      ]
+    },
+    {
+      "name": "observerd-stop",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1361",
+      "implementation": "Cmd-ObserverdStop",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "observerd-stop",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1361,
+          "kind": "register",
+          "implementation": "Cmd-ObserverdStop"
+        }
+      ]
+    },
+    {
+      "name": "patch-apply",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1331",
+      "implementation": "Cmd-PatchApply",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "patch-apply",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1331,
+          "kind": "register",
+          "implementation": "Cmd-PatchApply"
+        }
+      ]
+    },
+    {
+      "name": "permission-test",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1367",
+      "implementation": "Cmd-PermissionTest",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "permission-test",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1367,
+          "kind": "register",
+          "implementation": "Cmd-PermissionTest"
+        }
+      ]
+    },
+    {
+      "name": "preflight",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1321",
+      "implementation": "Cmd-Preflight",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "preflight",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1321,
+          "kind": "register",
+          "implementation": "Cmd-Preflight"
+        }
+      ]
+    },
+    {
+      "name": "pyserver-start",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1342",
+      "implementation": "Cmd-PyserverStart",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "pyserver-start",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1342,
+          "kind": "register",
+          "implementation": "Cmd-PyserverStart"
+        }
+      ]
+    },
+    {
+      "name": "pyserver-status",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1344",
+      "implementation": "Cmd-PyserverStatus",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "pyserver-status",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1344,
+          "kind": "register",
+          "implementation": "Cmd-PyserverStatus"
+        }
+      ]
+    },
+    {
+      "name": "pyserver-stop",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1343",
+      "implementation": "Cmd-PyserverStop",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "pyserver-stop",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1343,
+          "kind": "register",
+          "implementation": "Cmd-PyserverStop"
+        }
+      ]
+    },
+    {
+      "name": "repin-immutables",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1333",
+      "implementation": "Cmd-RepinImmutables",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "repin-immutables",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1333,
+          "kind": "register",
+          "implementation": "Cmd-RepinImmutables"
+        }
+      ]
+    },
+    {
+      "name": "restore-immutables",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1332",
+      "implementation": "Cmd-RestoreImmutables",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "restore-immutables",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1332,
+          "kind": "register",
+          "implementation": "Cmd-RestoreImmutables"
+        }
+      ]
+    },
+    {
+      "name": "rework-test",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1324",
+      "implementation": "Cmd-ReworkTest",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "rework-test",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1324,
+          "kind": "register",
+          "implementation": "Cmd-ReworkTest"
+        }
+      ]
+    },
+    {
+      "name": "route-check",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1335",
+      "implementation": "Cmd-RouteCheck",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "route-check",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1335,
+          "kind": "register",
+          "implementation": "Cmd-RouteCheck"
+        }
+      ]
+    },
+    {
+      "name": "runtime-update",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1334",
+      "implementation": "Cmd-RepinImmutables",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "runtime-update",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1334,
+          "kind": "register",
+          "implementation": "Cmd-RepinImmutables"
+        }
+      ]
+    },
+    {
+      "name": "scholars",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1363",
+      "implementation": "node tests/ui/scholars_mate_test.js",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "scholars",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1363,
+          "kind": "register",
+          "implementation": "node tests/ui/scholars_mate_test.js"
+        }
+      ]
+    },
+    {
+      "name": "self-check",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1325",
+      "implementation": "Cmd-SelfCheck",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "self-check",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1325,
+          "kind": "register",
+          "implementation": "Cmd-SelfCheck"
+        }
+      ]
+    },
+    {
+      "name": "sonar",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1341",
+      "implementation": "Cmd-Sonar",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "sonar",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1341,
+          "kind": "register",
+          "implementation": "Cmd-Sonar"
+        }
+      ]
+    },
+    {
+      "name": "sonar-start",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1371",
+      "implementation": "Cmd-SonarStart",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "sonar-start",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1371,
+          "kind": "register",
+          "implementation": "Cmd-SonarStart"
+        }
+      ]
+    },
+    {
+      "name": "sonar-stop",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1372",
+      "implementation": "Cmd-SonarStop",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "sonar-stop",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1372,
+          "kind": "register",
+          "implementation": "Cmd-SonarStop"
+        }
+      ]
+    },
+    {
+      "name": "start",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1316",
+      "implementation": "Cmd-Start",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "start",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1316,
+          "kind": "register",
+          "implementation": "Cmd-Start"
+        }
+      ]
+    },
+    {
+      "name": "stp",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1369",
+      "implementation": "Cmd-Stp",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "stp",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1369,
+          "kind": "register",
+          "implementation": "Cmd-Stp"
+        }
+      ]
+    },
+    {
+      "name": "supertest",
+      "origin": "runtime/bin/legacy-ci.ps1:356, runtime/bin/modules/ci-commands-main.ps1:1366",
+      "implementation": "Cmd-Supertest",
+      "registration_count": 2,
+      "origins": [
+        {
+          "name": "supertest",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 356,
+          "kind": "assignment",
+          "implementation": ""
+        },
+        {
+          "name": "supertest",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1366,
+          "kind": "register",
+          "implementation": "Cmd-Supertest"
+        }
+      ]
+    },
+    {
+      "name": "t",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1364",
+      "implementation": "node tests/ui/scholars_mate_test.js",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "t",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1364,
+          "kind": "register",
+          "implementation": "node tests/ui/scholars_mate_test.js"
+        }
+      ]
+    },
+    {
+      "name": "t2",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1365",
+      "implementation": "Cmd-T2",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "t2",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1365,
+          "kind": "register",
+          "implementation": "Cmd-T2"
+        }
+      ]
+    },
+    {
+      "name": "test-full",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1368",
+      "implementation": "Cmd-T2",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "test-full",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1368,
+          "kind": "register",
+          "implementation": "Cmd-T2"
+        }
+      ]
+    },
+    {
+      "name": "tick",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1354",
+      "implementation": "Cmd-Tick $script:CiCommandArgs",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "tick",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1354,
+          "kind": "register",
+          "implementation": "Cmd-Tick $script:CiCommandArgs"
+        }
+      ]
+    },
+    {
+      "name": "todo-compact",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1346",
+      "implementation": "Cmd-TodoCompact",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "todo-compact",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1346,
+          "kind": "register",
+          "implementation": "Cmd-TodoCompact"
+        }
+      ]
+    },
+    {
+      "name": "todo-prune",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1347",
+      "implementation": "Cmd-TodoPrune",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "todo-prune",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1347,
+          "kind": "register",
+          "implementation": "Cmd-TodoPrune"
+        }
+      ]
+    },
+    {
+      "name": "todo-rebuild",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1349",
+      "implementation": "Cmd-TodoRebuild",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "todo-rebuild",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1349,
+          "kind": "register",
+          "implementation": "Cmd-TodoRebuild"
+        }
+      ]
+    },
+    {
+      "name": "todo-rotate",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1348",
+      "implementation": "Cmd-TodoRotate",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "todo-rotate",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1348,
+          "kind": "register",
+          "implementation": "Cmd-TodoRotate"
+        }
+      ]
+    },
+    {
+      "name": "todo-sanitize",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1350",
+      "implementation": "Cmd-TodoSanitize",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "todo-sanitize",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1350,
+          "kind": "register",
+          "implementation": "Cmd-TodoSanitize"
+        }
+      ]
+    },
+    {
+      "name": "todo-seed",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1345",
+      "implementation": "Cmd-TodoSeed",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "todo-seed",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1345,
+          "kind": "register",
+          "implementation": "Cmd-TodoSeed"
+        }
+      ]
+    },
+    {
+      "name": "ui-baseline",
+      "origin": "runtime/bin/legacy-ci.ps1:348, runtime/bin/modules/ui-commands.ps1:283",
+      "implementation": "$ec = Invoke-UiInternal \"baseline\"; if ($ec -is [array]) { $ec = $ec[-1]",
+      "registration_count": 2,
+      "origins": [
+        {
+          "name": "ui-baseline",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 348,
+          "kind": "assignment",
+          "implementation": "$ec = Invoke-UiInternal \"baseline\"; if ($ec -is [array]) { $ec = $ec[-1]"
+        },
+        {
+          "name": "ui-baseline",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 283,
+          "kind": "assignment",
+          "implementation": "$ec = Invoke-UiInternal \"baseline\"; if ($ec -is [array]) { $ec = $ec[-1]"
+        }
+      ]
+    },
+    {
+      "name": "ui-check",
+      "origin": "runtime/bin/legacy-ci.ps1:345, runtime/bin/modules/ui-commands.ps1:280",
+      "implementation": "$ec = Invoke-UiInternal \"check\"; if ($ec -is [array]) { $ec = $ec[-1]",
+      "registration_count": 2,
+      "origins": [
+        {
+          "name": "ui-check",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 345,
+          "kind": "assignment",
+          "implementation": "$ec = Invoke-UiInternal \"check\"; if ($ec -is [array]) { $ec = $ec[-1]"
+        },
+        {
+          "name": "ui-check",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 280,
+          "kind": "assignment",
+          "implementation": "$ec = Invoke-UiInternal \"check\"; if ($ec -is [array]) { $ec = $ec[-1]"
+        }
+      ]
+    },
+    {
+      "name": "ui-roadmap",
+      "origin": "runtime/bin/legacy-ci.ps1:351, runtime/bin/modules/ui-commands.ps1:286",
+      "implementation": "Invoke-UiRoadmap",
+      "registration_count": 2,
+      "origins": [
+        {
+          "name": "ui-roadmap",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 351,
+          "kind": "assignment",
+          "implementation": "Invoke-UiRoadmap"
+        },
+        {
+          "name": "ui-roadmap",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 286,
+          "kind": "assignment",
+          "implementation": "Invoke-UiRoadmap"
+        }
+      ]
+    },
+    {
+      "name": "verify",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1323",
+      "implementation": "Cmd-Verify 0",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "verify",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1323,
+          "kind": "register",
+          "implementation": "Cmd-Verify 0"
+        }
+      ]
+    },
+    {
+      "name": "ws-lock-acquire",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1319",
+      "implementation": "Cmd-WsLockAcquire; CI-Info \"ws-lock-acquire: ok\"",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "ws-lock-acquire",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1319,
+          "kind": "register",
+          "implementation": "Cmd-WsLockAcquire; CI-Info \"ws-lock-acquire: ok\""
+        }
+      ]
+    },
+    {
+      "name": "ws-lock-release",
+      "origin": "runtime/bin/modules/ci-commands-main.ps1:1320",
+      "implementation": "Cmd-WsLockRelease; CI-Info \"ws-lock-release: ok\"",
+      "registration_count": 1,
+      "origins": [
+        {
+          "name": "ws-lock-release",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1320,
+          "kind": "register",
+          "implementation": "Cmd-WsLockRelease; CI-Info \"ws-lock-release: ok\""
+        }
+      ]
+    }
+  ]
+}

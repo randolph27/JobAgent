@@ -1,0 +1,161 @@
+{
+  "schema": "workflow-bootstrap-profile/v1",
+  "id": "ubuntu-web",
+  "version": "1.0.0",
+  "display_name": "Ubuntu VPS Quiz – Web",
+  "description": "Node/Vite-Webprofil mit gehärtetem Legacy-Preloader, Seed-Runner und UI-/Release-Gates.",
+  "source": {
+    "project_root": "D:\\_Scripte\\UbuntuVPS_Quiz\\web",
+    "git_commit": "31e53354f0c50292c00dda94c30efeea46513512",
+    "captured_utc": "2026-08-02T18:35:18.8632206+00:00",
+    "entrypoint_sha256": "6c7dfa9d408b879d3bf3d350f29b2182f224f91dfc058b42e85ba98339d0a54b"
+  },
+  "transformations": [
+    "ImmutableBaseFiles und ImmutableRequiredBaseFiles auf Runtime-Code begrenzt; mutable Projektartefakte werden nicht gepinnt.",
+    "Der Legacy-Preloader und die Legacy-Pin-Autoritaet werden nur bei zentral gesetztem CI_BOOTSTRAP_PREVERIFIED=1 uebersprungen.",
+    "Cmd-Bootstrap erzeugt im zentral verifizierten Modus keine Legacy-Pins.",
+    "Event- und Tick-Argumente werden ueber den persistenten Dispatcher-Kontext weitergereicht.",
+    "Gradle-Distributionen werden vor Cache-Nutzung und Publikation zwingend per SHA-256 verifiziert; ein zuvor verifizierter lokaler Checksum-Sidecar erhaelt den Offline-Betrieb.",
+    "Self-Check und Patch-Apply delegieren die Runtime-Integritaet im zentralen Modus an den Bootstrap.",
+    "Die doppelt erhaltene UI-Build-Funktion behaelt in beiden Definitionen alle drei historischen Build-Fallbacks.",
+    "OPENAI_API_KEY_FILE kann den historisch erhaltenen Standardpfad portabel ueberschreiben."
+  ],
+  "default_config": "config.default.json",
+  "function_catalog": "catalog/functions.json",
+  "command_catalog": "catalog/commands.json",
+  "payload": [
+    {
+      "source": "runtime/bin/legacy-ci.ps1",
+      "destination": ".ci/bin/legacy-ci.ps1",
+      "sha256": "62987a5efe3471fdd1813e2e02f058219abceec720a7f45fdbb7e03ece7f3b53",
+      "size": 41222,
+      "role": "profile-entrypoint"
+    },
+    {
+      "source": "runtime/bin/modules/browser-logic.ps1",
+      "destination": ".ci/bin/modules/browser-logic.ps1",
+      "sha256": "a2c1322f13bb2663013ee56b53018b841574e68d19fcbd862354be7a54d08786",
+      "size": 15478,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/ci-commands-main.ps1",
+      "destination": ".ci/bin/modules/ci-commands-main.ps1",
+      "sha256": "1bb7ee824d16287ee122f9304cf1839a35fa55a074139d72006f8aaf0de82c8b",
+      "size": 56884,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/ci-core.ps1",
+      "destination": ".ci/bin/modules/ci-core.ps1",
+      "sha256": "1cd826a7ff98b5ec269458839787cdcd4407f9337193dd8bbf8e865e72301ca5",
+      "size": 10909,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/core-utils.ps1",
+      "destination": ".ci/bin/modules/core-utils.ps1",
+      "sha256": "057bf77bb1efc8baea511042f3ee8098daebed2f168180c557b7ce26ef5ba27c",
+      "size": 14921,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/critic-logic.ps1",
+      "destination": ".ci/bin/modules/critic-logic.ps1",
+      "sha256": "b647317d2489e952d4ac7c1c3308ee9ce78a9c84459a870e9c73e0d3feb72e3d",
+      "size": 9985,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/handoff-logic.ps1",
+      "destination": ".ci/bin/modules/handoff-logic.ps1",
+      "sha256": "29641ef8815cb707d7f7b8f51710c4ebafabea150cd29d06af2118c250c16aae",
+      "size": 4062,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/observer-logic.ps1",
+      "destination": ".ci/bin/modules/observer-logic.ps1",
+      "sha256": "f5ed85f68956812855285251e3a6ef9a5e2a74bedb9f9ee0bd9007d98f9a0724",
+      "size": 20347,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/project-logic.ps1",
+      "destination": ".ci/bin/modules/project-logic.ps1",
+      "sha256": "286671ddf61efd2fed434dc5479a1a5116a80ab628ecdf9ec99f6db8141c8b5e",
+      "size": 13910,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/sonar-logic.ps1",
+      "destination": ".ci/bin/modules/sonar-logic.ps1",
+      "sha256": "232ed6d45d13976c147b536f8c53ae7dfe140eb1fc36e385f3479406e1ab7bc1",
+      "size": 31679,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/todo-engine.ps1",
+      "destination": ".ci/bin/modules/todo-engine.ps1",
+      "sha256": "4f5ae86bab5143992cfe8aadf8ef9c6edcd8f5e9fe36d6448391bec576c5dbfc",
+      "size": 24350,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/toolchain-gradle.ps1",
+      "destination": ".ci/bin/modules/toolchain-gradle.ps1",
+      "sha256": "8e75abf7d31e26683b8968fe17a226e26478e0163cc888d837523226db367dd1",
+      "size": 12751,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/toolchain-java.ps1",
+      "destination": ".ci/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/ui-commands.ps1",
+      "destination": ".ci/bin/modules/ui-commands.ps1",
+      "sha256": "4dfbe01271a4befe7d69b7d7cb2d154543d04f220306e7f9f7ef97ea6c5f0670",
+      "size": 11396,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/verify-logic.ps1",
+      "destination": ".ci/bin/modules/verify-logic.ps1",
+      "sha256": "50b3d8517a610efb8da0ba042e2d8da21aa0f5e56dacaa91b57de05484dd8306",
+      "size": 14444,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/start_dev_server_internal.ps1",
+      "destination": ".ci/bin/start_dev_server_internal.ps1",
+      "sha256": "7909a54ecd1c8a0381060e86ffad73c29a23246f6221f5e50780550973924492",
+      "size": 655,
+      "role": "profile-helper"
+    },
+    {
+      "source": "runtime/bin/start_dev.ps1",
+      "destination": ".ci/bin/start_dev.ps1",
+      "sha256": "e29b26788f8808f3bd8e6a76905ca8534bb5cfda30620f7954ed5ababc6902fc",
+      "size": 697,
+      "role": "profile-helper"
+    },
+    {
+      "source": "runtime/bin/start_devserver.ps1",
+      "destination": ".ci/bin/start_devserver.ps1",
+      "sha256": "c19ed98fac9933b4b270cbaca222a9c6a6d10ef60787f83a91ea9e256df956ec",
+      "size": 1195,
+      "role": "profile-helper"
+    },
+    {
+      "source": "runtime/bin/start_ktor.ps1",
+      "destination": ".ci/bin/start_ktor.ps1",
+      "sha256": "013e43a6de058615432d10d3fae8208382381f9c3ce183e31b695ab720757a60",
+      "size": 802,
+      "role": "profile-helper"
+    }
+  ]
+}

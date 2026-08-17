@@ -1,0 +1,3986 @@
+{
+  "schema": "workflow-bootstrap-function-catalog/v1",
+  "profile": "sound-profile",
+  "generated_utc": "2026-08-02T18:35:19.7621775+00:00",
+  "source_file_count": 18,
+  "definition_count": 292,
+  "unique_function_count": 278,
+  "functions": [
+    {
+      "name": "Add-SonarEvidenceCommandBlock",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Add-SonarEvidenceCommandBlock",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 192,
+          "sha256": "7f5fd34f5677ec5aef07540c480728ebace8044c1d988c826d8f1e0af4b340b7"
+        }
+      ]
+    },
+    {
+      "name": "Append-Jsonl",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Append-Jsonl",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 84,
+          "sha256": "a52e2f82888eb7ec18136c6a0e1c4d7f7c6285a489aebf5a5a4632d42df09ddd"
+        }
+      ]
+    },
+    {
+      "name": "Append-TodoEvent",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Append-TodoEvent",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 330,
+          "sha256": "3def32d013aeee95c9a90e475450959c31e9683746c71db5c17a1e41f77359db"
+        }
+      ]
+    },
+    {
+      "name": "Assert-ImmutableClean",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Assert-ImmutableClean",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 118,
+          "sha256": "62a22794b91db229a30ad68471fa2661bd6bb95a5919d7cb428ab76fbd51d80f"
+        }
+      ]
+    },
+    {
+      "name": "Atomic-WriteTextUtf8",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Atomic-WriteTextUtf8",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 6,
+          "sha256": "5f36acc98855fc00ed1ce838b9d2b875596dad8ffefa6187c9a5dd75f82cea5a"
+        }
+      ]
+    },
+    {
+      "name": "Build-CriticCapsule",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Build-CriticCapsule",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 21,
+          "sha256": "dce66f5300916daec4bb581e9a7a7e9eca231828d84edd9579c55d9a4d0979a7"
+        }
+      ]
+    },
+    {
+      "name": "CI-Info",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "CI-Info",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 107,
+          "sha256": "e219e6daf7ee6f8cfd3a8a69f699351c25ad29dff0ab48a5455894ecf96f458b"
+        }
+      ]
+    },
+    {
+      "name": "CI-Verbose",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "CI-Verbose",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 109,
+          "sha256": "0d379a139cb265073aa4f21f33ddf98c685944861a7900b7303644ad56f63c0b"
+        }
+      ]
+    },
+    {
+      "name": "CI-Warn",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "CI-Warn",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 108,
+          "sha256": "34e663f2009e8a9e4774e5f4502b9b2c19a169148e4eb3d2a8b453578f1f9622"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Autopatch",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Autopatch",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 81,
+          "sha256": "18ef8b6e4d6174d89c36f1d63792353d499c1552ee37681f211a2545d67cd7aa"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Bootstrap",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Bootstrap",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1217,
+          "sha256": "fcfce1a20c9c37c72b5413e9dbb0a949cf7d8c345374662220a94077cee0d8ae"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-BrowserSmoke",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-BrowserSmoke",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 69,
+          "sha256": "6f176cabc318abdbec8d8857093cb49b1c957717f8c6537d9fe1582657f8d431"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Critic",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Critic",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 47,
+          "sha256": "35b975d13f98b7a20ef9d577195f9dbe6b4582b2dc9693db8623e65a1ec80bdf"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-DepsBootstrap",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-DepsBootstrap",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1255,
+          "sha256": "c99211fd60d4d0be4428c3d757d609aa60a153548b15f55dbecbc35016d1868f"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Dev",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Dev",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 972,
+          "sha256": "18c2bf963b4d2ab7065e6957cb1b50458d5daeae44e56cc2d1d9d1043318a392"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-DevserverStart",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-DevserverStart",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 130,
+          "sha256": "d825c7d6b0ef27da4252436e8ef1d4eb9fe31b89f3e48288a938c1297c8a5935"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-DevserverStatus",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-DevserverStatus",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 186,
+          "sha256": "5d18021a89f81d791fb0d3d0cbf8241dbe4dc4d211d4ba477ea6b0eb21f67626"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-DevserverStop",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-DevserverStop",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 176,
+          "sha256": "2c068aaddda8170437dd391a47af588b6741d2196534d87fad40c0aa815c6802"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Doctor",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Doctor",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1230,
+          "sha256": "c26cd595e5b9c4fa08b56d5bfcb32ca7d9f7492507b93eaab7caa5938c517a0b"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-DriftCheck",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-DriftCheck",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 138,
+          "sha256": "8260839e34be1c740acd6366f4a5bea35b14490739520c730b06b7c0f4440d4d"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-EnvInventory",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-EnvInventory",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1237,
+          "sha256": "a4f596088127155359c0bb3d927c8f0a00a3381ff46c0a3e9dbd1371e55fd993"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Event",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Event",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 1,
+          "sha256": "40d78d6f15b04c73dc4fe36bdbfdab73f27b53cb0c1f6537da97a5f9bcea0b92"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-GradleAutopsy",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-GradleAutopsy",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 225,
+          "sha256": "95f78ce8df2a5649cef825f174de2352bc6c1f6d4b1b488e25c68bf0eb828f09"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-GradleBootstrap",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-GradleBootstrap",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1260,
+          "sha256": "cf82bb3b9331575bef8a328a128e6a362c81216de0e0f53a5295ed6d460c6dc6"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-LockTriage",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-LockTriage",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 231,
+          "sha256": "aef69fb8e029f94dd66d121d68de65a702db6634baaae90795896220af05a9bf"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Menu",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Menu",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1138,
+          "sha256": "f63b521e3104589fc40f272210852f1d0e563dfd289b4c4daf10fa83b4ec2a0b"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-ObserverBaseline",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-ObserverBaseline",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 90,
+          "sha256": "a0bca11458e8e52cf1ee836b6045c6ab51407d4f8087b2d8709510d819ed7b34"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-ObserverCheck",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-ObserverCheck",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 101,
+          "sha256": "aa7a699c98c8647f87559d26202946b172e3920c065b2e197408ced173428a29"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-ObserverCheck_Impl",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-ObserverCheck_Impl",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 95,
+          "sha256": "c9288d401f9eae2bebc1149a6330f953752b7e469903a5a297e38d16e3764c17"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-ObserverdStart",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-ObserverdStart",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 173,
+          "sha256": "12befc9d87e16b6fb97f1d06c80c07e26e33f46ce0024b9b79c9305a6c25a1c6"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-ObserverdStatus",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-ObserverdStatus",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 187,
+          "sha256": "e48cad2ef68bf5228b4ab11369c71dd167c277352e661de69a8caf4ae196b3de"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-ObserverdStop",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-ObserverdStop",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 182,
+          "sha256": "595e150eab27ae586fef1c3307c6cd5e144bb025e084b36f5ef966e01376f28d"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-PatchApply",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-PatchApply",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 132,
+          "sha256": "4eeabe9123c99f472c5d9c1646e50e828491fb4c52b0049eaedb3097d8b82401"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-PermissionTest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-PermissionTest",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1265,
+          "sha256": "d469128d5a3d2f3a9e7d262b39674c8e8fab329a119b6c62072c62fd194329b8"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Preflight",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Preflight",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 239,
+          "sha256": "7a578cf874cd2648bf8f77c5cb686b275347d7b51697ffe4712c46ef53fb7172"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-PyserverStart",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-PyserverStart",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 194,
+          "sha256": "1094fa6ccb1ce11d618208c56ef7740d144f8656bfd9b5948a088cacd8b86ce3"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-PyserverStatus",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-PyserverStatus",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 226,
+          "sha256": "c980349d7bb0fb41f242ea4ed523132d4ae0c649e6c05463998049e0e49ca21e"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-PyserverStop",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-PyserverStop",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 216,
+          "sha256": "236add9ea58103ac541dcaaf4e09b1cde01d35639ea1b84779e381d5fb533016"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-RepinImmutables",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-RepinImmutables",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1249,
+          "sha256": "45621679cc77524038bbeff6c8759ac54f4f7c6f18ea44b97cdf845189eec256"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-RestoreImmutables",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-RestoreImmutables",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1243,
+          "sha256": "d02f123c98a98559f476ac6347ac659347708819de19355f34366d42dd570a8e"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-ReworkTest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-ReworkTest",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 967,
+          "sha256": "147d0ebef2b4735e5536781b2b615f850a722561cd096bda0d1c8f4b8840cbff"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-RouteCheck",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-RouteCheck",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 269,
+          "sha256": "8a3ba1e2cb847e33fc23f37fdb1c065d07dbe13eb6e6d51f2138ccd5f3da0841"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-SelfCheck",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-SelfCheck",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 188,
+          "sha256": "4412d3eb8a09e54e91abaf28a27e76174a94ab02893e5e4891fc2329080e63e2"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Sonar",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Sonar",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 909,
+          "sha256": "82638617930e2d705a56bccb0fc94cba546e4d08a7fc18d7b362ed83c1c6f55e"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-SonarStart",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-SonarStart",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 318,
+          "sha256": "2c349112efb4365b9f35c834030234d7c29c31f41e58aef6eb26cd45f15b4fbc"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-SonarStop",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-SonarStop",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 403,
+          "sha256": "93c6a2a9b8e41cb794af3b46ccb5e4c670273a11045ec45801f189864d40ffde"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Start",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Start",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1211,
+          "sha256": "5ce4e58e2a9237daacd7feac3450c8cde4402f37629835bbc88fde18d3e67986"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Stp",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Stp",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1090,
+          "sha256": "7dc587c2cc13c059c9540230c22cc508fdccc40d17c33bc2643c548f206755f8"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Supertest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Supertest",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 366,
+          "sha256": "2b4d5fa977f8fed76f082d5c34a40063d43886d95c97701015211fd816ef9100"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-T2",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-T2",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1,
+          "sha256": "e6873a94d20d5d96e4b84d74f6d0de1bf95067ce2dd25e73dc55d76a6bfdb448"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Tick",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Tick",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 162,
+          "sha256": "b75db705614b1219892d6ee64cabbf0a8882488a55ad6f1ffdfc913bb3c53863"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-TodoCompact",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-TodoCompact",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 459,
+          "sha256": "05fbe45db1967a1112005135c181b07af084d513c58f408ffb6231768e4dc1ea"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-TodoPrune",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-TodoPrune",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 501,
+          "sha256": "d14c4f67158a27a2ab89ba94243272e5556c152de7ca58a111e11616377604f8"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-TodoRebuild",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-TodoRebuild",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 577,
+          "sha256": "189251b49b1b0b17efd6f6d740577d828da92379bcfc56d97b5dce31da8f275e"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-TodoRotate",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-TodoRotate",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 547,
+          "sha256": "3d2a870e6fad700bfabf7c8ac6959971e8d4665726121332967d843059eb6e24"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-TodoSanitize",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-TodoSanitize",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 592,
+          "sha256": "89c624fac5e22df44e6b749cdda5ec108b1481ca08f5e29224ca4d68c02decac"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-TodoSeed",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-TodoSeed",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 419,
+          "sha256": "388db17158b326236ad8caddab06a07402098a4bff68d5d56cf93d4194d37d1d"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-Verify",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-Verify",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 194,
+          "sha256": "a3b65d535e10ac64cd5eaa2199e237a922348ed776c647e6661ec4dbad1d2143"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-WsLockAcquire",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-WsLockAcquire",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 74,
+          "sha256": "267564ac24291495920d3401a527b6b553ec7a4575ceb21f74e84e7c02657567"
+        }
+      ]
+    },
+    {
+      "name": "Cmd-WsLockRelease",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Cmd-WsLockRelease",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 88,
+          "sha256": "f4fb39c0d8c248e8cd4491a3f6a21c9d6cdc4907465495e45823cf176d55c840"
+        }
+      ]
+    },
+    {
+      "name": "Compute-FailSignature",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Compute-FailSignature",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 25,
+          "sha256": "54591d3dfd14ddd58f52b1fa0c8c4a0a91e9a2efed1448e68c959f38648aace3"
+        }
+      ]
+    },
+    {
+      "name": "Compute-ObserverSourcesHash",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Compute-ObserverSourcesHash",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 41,
+          "sha256": "fc2d4dd5cd13cb931ef35cc6cadc2733c693bff928ee35af81e357b8a3d683ad"
+        }
+      ]
+    },
+    {
+      "name": "Detect-BuildSystem",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Detect-BuildSystem",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 189,
+          "sha256": "08780cba9af0eaffd2ef784d2a23a36e694d969f0480a6150a7fcc67660688fc"
+        }
+      ]
+    },
+    {
+      "name": "Download-GradleZip",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Download-GradleZip",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 36,
+          "sha256": "9dcd9ccb06a1d3625aa954fedc46bc60dcd041b25120aabd5e3dd794bb78412b"
+        }
+      ]
+    },
+    {
+      "name": "Enable-Tls12IfNeeded",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Enable-Tls12IfNeeded",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 21,
+          "sha256": "a005c328545ebcb28bfa114f60a75b1a4e32ad4e8338d3d2341339bb79046367"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-BootstrapFiles",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-BootstrapFiles",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 21,
+          "sha256": "fb24ed898001c3564d234ee62feef27cffd06c95194e2d55c29e25a9e382bd6c"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-CoreFolders",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-CoreFolders",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 1,
+          "sha256": "4823c11f1f07ab5e77a79ab2fd7e0761438ebf9b0c51b5cd559d51f4b92bcdff"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-Dir",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-Dir",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 4,
+          "sha256": "1d35f861b62d0bd9b05a4eeba2255aa2ee581dbd72ec8da9c05ab20034d7c41d"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-DriftTodo",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-DriftTodo",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 120,
+          "sha256": "e981a2866467d0cd57d3893fd6fee259145d0f7c19bd42ec24c0f8f07b856c94"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-GradleWrapper",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-GradleWrapper",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 145,
+          "sha256": "70b9c6421c05137f33f5b7f738495a48cabf6d8daafdbc38959426e28cf41a27"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-JavaReady",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-JavaReady",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 137,
+          "sha256": "1995f2b958ceb9b4cbe073be829be15197dad0a9b54bcbead887d19782ed5cfc"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-LocalGradleDist",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-LocalGradleDist",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 95,
+          "sha256": "5e533a78962af9592d2c2330722f61e9319aecf6ba386aa302c6888003a3adca"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-NonInteractiveEnv",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-NonInteractiveEnv",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 147,
+          "sha256": "6cd63da9d07e9be29aa29b18739fe0e673ae44a779c5489f11d6150ba45a43dc"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-ProjectStubs",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-ProjectStubs",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 71,
+          "sha256": "c5c2cbd5ef2d2fd6ef56d9fbb0cd8c47859afd99dfe5b960ef1e7fee30073b10"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-StringArray",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-StringArray",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 379,
+          "sha256": "47c293f087a90a8bb1bfac3fa5d4e90ab7e3bdf504071ec2fe04d1ee94dd8f8e"
+        }
+      ]
+    },
+    {
+      "name": "Ensure-TodoEventsFile",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ensure-TodoEventsFile",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 43,
+          "sha256": "a5315679c1e9035d81defa9cb53c94eb6b54af5e69cb344801df56ebc0419583"
+        }
+      ]
+    },
+    {
+      "name": "Find-GradleProjectRoot",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Find-GradleProjectRoot",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 263,
+          "sha256": "95be5dd2df50b75c37579b3534cd0b454e741fe69cddb0eff3d958ab05aa42da"
+        }
+      ]
+    },
+    {
+      "name": "Find-InboxGradleZip",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Find-InboxGradleZip",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 13,
+          "sha256": "6dfbca160dfa75b76101b21eaf1a5c0ecd51f51aa107aa194d10fd65f0eb748a"
+        }
+      ]
+    },
+    {
+      "name": "Find-LocalGradleDistCmd",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Find-LocalGradleDistCmd",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 204,
+          "sha256": "320a18d4e85b61cdd2c827bd01543c09627635853d1b2cdc3f54884d0df7dcc5"
+        }
+      ]
+    },
+    {
+      "name": "Find-LocalJdkHome",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Find-LocalJdkHome",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 74,
+          "sha256": "f3e9b6bc908aa95be59fa03e695bd4eadc413ce381043c3dc7990479ab44e9a7"
+        }
+      ]
+    },
+    {
+      "name": "Format-SonarAuthPreflightFailure",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Format-SonarAuthPreflightFailure",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 815,
+          "sha256": "7568f08bb359fafc74df3cd5e3b86e0e8f64b7378165d2884ed49b480f51513b"
+        }
+      ]
+    },
+    {
+      "name": "Format-SonarFailedConditions",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Format-SonarFailedConditions",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 888,
+          "sha256": "cff61cf2a3b1b40038ddbff15080e41fb886fbe4b0c0e455e2eaa6ab38bbbce4"
+        }
+      ]
+    },
+    {
+      "name": "Get-AgentId",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-AgentId",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 81,
+          "sha256": "3c3aeba0223eafa424c704db5b2d8ea7b5bf20b06d2d704accaa43ddb9c08b60"
+        }
+      ]
+    },
+    {
+      "name": "Get-BrowserSmokeContractCommand",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-BrowserSmokeContractCommand",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 20,
+          "sha256": "31bd71bfa02c3494e0021eb30ba9773c3b741aaff40d70139f5e6f559a1da8f9"
+        }
+      ]
+    },
+    {
+      "name": "Get-BrowserSmokeInactiveReason",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-BrowserSmokeInactiveReason",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 61,
+          "sha256": "9848bb9a96d2f49b7feeb1eca1f03832eb88fbf24294bcc93225e218e0933c0b"
+        }
+      ]
+    },
+    {
+      "name": "Get-BrowserTestsMode",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-BrowserTestsMode",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 1,
+          "sha256": "a8432683f15848f886607b9a67e68c3ae96d3bb8457559c89f0941274d6f5cec"
+        }
+      ]
+    },
+    {
+      "name": "Get-CommonJdkHomes",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-CommonJdkHomes",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 51,
+          "sha256": "4ae46fd55170a420fdc54babf13d8e2923c80653709cb52d0e6278a4a03b9dd2"
+        }
+      ]
+    },
+    {
+      "name": "Get-ConfigPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-ConfigPath",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 79,
+          "sha256": "e7102acd057f734f0273d2dd96543968bf312485d5593dc59cc3b9f18e243d27"
+        }
+      ]
+    },
+    {
+      "name": "Get-DefaultAndroidSdkPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-DefaultAndroidSdkPath",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 380,
+          "sha256": "72f9456365b4072737f2dd9f1617d14a857806b391c076f801009b4820c32018"
+        }
+      ]
+    },
+    {
+      "name": "Get-DriftConfig",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-DriftConfig",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 116,
+          "sha256": "3a15ad07c76f956561417d7bbd2d45991784272d611c008260a615e2bc9a57b3"
+        }
+      ]
+    },
+    {
+      "name": "Get-DriftStatePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-DriftStatePath",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 108,
+          "sha256": "bceeb40124b0e19cae9b2dc62b4135cf48e0028d87c57afe3044d658a54961d0"
+        }
+      ]
+    },
+    {
+      "name": "Get-EventsPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-EventsPath",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 59,
+          "sha256": "053a911bf26b249c3e56a1815c506f17fa6c1b7c95cc2b90f7cd379a7c7bb843"
+        }
+      ]
+    },
+    {
+      "name": "Get-GradleCmdRaw",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-GradleCmdRaw",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 230,
+          "sha256": "0ec937349143ee362cfe321f6976b1e18d978900c905abe6c656d4203bfe5d39"
+        }
+      ]
+    },
+    {
+      "name": "Get-GradleDesiredVersion",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-GradleDesiredVersion",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 1,
+          "sha256": "d3415aafa48aa1b1f5b597bbe6e4f5e2cc966309bca3ffef085e3be415fac3d1"
+        }
+      ]
+    },
+    {
+      "name": "Get-GradleDistUrls",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-GradleDistUrls",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 25,
+          "sha256": "41f34ac04f37084c26214a3cb1f497dcdecac65b8979d67a7d25871fd34ac406"
+        }
+      ]
+    },
+    {
+      "name": "Get-GradleEnv",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-GradleEnv",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 167,
+          "sha256": "ef8263ffd90ad214156f9ab10f599949aee349af59509485cbb701e947c1b271"
+        }
+      ]
+    },
+    {
+      "name": "Get-GradleProjectRoot",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-GradleProjectRoot",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 281,
+          "sha256": "9518bc00a4761c783b7601d8ef708274e111c11d88cc58cd3073458af0cb0697"
+        }
+      ]
+    },
+    {
+      "name": "Get-ImmutablePinsPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-ImmutablePinsPath",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 93,
+          "sha256": "027ad14cf2f57c65c1e32c8a8603292d7686767096084554a9688cf23612b676"
+        }
+      ]
+    },
+    {
+      "name": "Get-JavaHomesFromRegistryKey",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-JavaHomesFromRegistryKey",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 28,
+          "sha256": "6c23845edffdc940ada07c7c8b4bd73258fb6465c94280424eec932e40871f64"
+        }
+      ]
+    },
+    {
+      "name": "Get-JavaMinMajor",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-JavaMinMajor",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 104,
+          "sha256": "996f136e6d849423d2b69b5e61115bbf1ab34c98c54b828e385872b80a9270c1"
+        }
+      ]
+    },
+    {
+      "name": "Get-JavaTargetMajor",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-JavaTargetMajor",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 111,
+          "sha256": "dde959d584d06259b8dd1a91f2496de403ea70976cb43a344f75efc1b6854e21"
+        }
+      ]
+    },
+    {
+      "name": "Get-JavaVersionText",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-JavaVersionText",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 9,
+          "sha256": "14e0fda118da65bb2bf6dab3e2258a30ccb52278bd1c312ae42d40bfc4a0e2e0"
+        }
+      ]
+    },
+    {
+      "name": "Get-JavaVersionTextFor",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-JavaVersionTextFor",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 13,
+          "sha256": "d80655f0d70928131447cf48c0da47a0be7d349778cb0dd7f7f22aa6816e37cf"
+        }
+      ]
+    },
+    {
+      "name": "Get-JdkHomeFromJavaExe",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-JdkHomeFromJavaExe",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 17,
+          "sha256": "5cc21246b48091a4424c7fb8708a971c463fe83521bd1fc8f4d26c85ff00a71c"
+        }
+      ]
+    },
+    {
+      "name": "Get-LastEventType",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-LastEventType",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 154,
+          "sha256": "319579a7cb643b2bc2d6e3a336bcb53afbecbd14864db5aa7b5a9153bec65f54"
+        }
+      ]
+    },
+    {
+      "name": "Get-LastTerminalLogs",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-LastTerminalLogs",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 12,
+          "sha256": "5403b3877d263f337947ee176ad5952e52112f403c81e2cffc1cd40f1e993cff"
+        }
+      ]
+    },
+    {
+      "name": "Get-ListeningPid",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-ListeningPid",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 120,
+          "sha256": "165f050dd0dbbf1aeb134c5959afc7a025008e3e7bc06a8d5696b5d7f2748454"
+        }
+      ]
+    },
+    {
+      "name": "Get-LockPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-LockPath",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 72,
+          "sha256": "1ac2b37f5c4f5a14ea4e933e1bae3e2b888324060bf578260c0c5dda5f99ea0b"
+        }
+      ]
+    },
+    {
+      "name": "Get-LoopGuardPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-LoopGuardPath",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 5,
+          "sha256": "4a0371bb1c8835bb619d9008e7635e67e79032fd4db938980b1b80c8423b72d0"
+        }
+      ]
+    },
+    {
+      "name": "Get-ObserverdLogPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-ObserverdLogPath",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 171,
+          "sha256": "8d4d0f26f2afe3f485c23f01e7d7dbd2df406b820777b81d7ec1067794a0e7db"
+        }
+      ]
+    },
+    {
+      "name": "Get-ObserverdPidPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-ObserverdPidPath",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 170,
+          "sha256": "e8e88ecaf3fbc13ced8577cf259ede5bd61302dfa6aa0ebd45b37080f13c01a7"
+        }
+      ]
+    },
+    {
+      "name": "Get-ObserverSourcePaths",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-ObserverSourcePaths",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 6,
+          "sha256": "0eb3b9fffc3699a96fcd46a63fd3e6a781fd0ee69b8a2ba3602235f9535c099b"
+        }
+      ]
+    },
+    {
+      "name": "Get-ObserverStatePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-ObserverStatePath",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 58,
+          "sha256": "4141956b7caeb7dc27f3006d4de85df2e913b66381c10199827fbd94e79c9a3f"
+        }
+      ]
+    },
+    {
+      "name": "Get-PriorityStatePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-PriorityStatePath",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 146,
+          "sha256": "6c190b5dad0f95fa2276ee2ba320f74ba93ae0a9c68e978a8971cd2d586b1f43"
+        }
+      ]
+    },
+    {
+      "name": "Get-Prop",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Prop",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 94,
+          "sha256": "0b38cee606b6eb16752c46d7e4d7a4d073154e3aaf0198d70379da89408af561"
+        }
+      ]
+    },
+    {
+      "name": "Get-RoadmapArchivedDoneKeys",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-RoadmapArchivedDoneKeys",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 187,
+          "sha256": "77ed3e928133eb4fe08f97654e0457e70d228a18d5b9a9e0d762d5c8130e75d0"
+        }
+      ]
+    },
+    {
+      "name": "Get-RoadmapArchivePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-RoadmapArchivePath",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 41,
+          "sha256": "d002edc8ca60ec076578be83a3a6ff0aea20fab10a3ddb7ef684e43b7a138992"
+        }
+      ]
+    },
+    {
+      "name": "Get-RoadmapTaskKey",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-RoadmapTaskKey",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 180,
+          "sha256": "0a3fb89a7fe17c3f85691e2e2911c182bf80b70264d309bbaa93d89a60a019ca"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarApiAuthErrorClass",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarApiAuthErrorClass",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 715,
+          "sha256": "0013773c7f4f29064b68de0ca3e3c62409acf73c733acacad44281d246a865c3"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarApiHeaders",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarApiHeaders",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 479,
+          "sha256": "f5f27e82dd507d06b8fc0e868309965fbc8eb1804fdb0c2c7d604344361a316d"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarBaseUrl",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarBaseUrl",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 410,
+          "sha256": "5cb72f3dfbbbfea181399b3bb4f304063d1c4f3e6544d220bedcd12ea9147077"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarEnv",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarEnv",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 388,
+          "sha256": "d761942f123e8326208f4215d9e7e83c4fb271e7f523dad91e5561f351065465"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarFailureEvidencePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarFailureEvidencePath",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 495,
+          "sha256": "81f929c4d366485639c37539d58f8554bf728bc4008aca3a836fb713c7e46c69"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarFailureHandoffInfo",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarFailureHandoffInfo",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 508,
+          "sha256": "3df02e93a5a2438f9336ce40d796c67a7a06c2891457eb6c8bc2c8cdd8f586d6"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarFailureNextCheck",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarFailureNextCheck",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 499,
+          "sha256": "285c108f202483f6a4fb29495ff78f968ce882d595b4c37504b1bbf8e405dfa2"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarFirstIpv4",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarFirstIpv4",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 111,
+          "sha256": "64e4382081d17bfc9bc1e6b149ed038f1152c67a9154690cd9f00803d4023802"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarHttpStatusCodeFromError",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarHttpStatusCodeFromError",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 683,
+          "sha256": "515011de5021825d327c9887765109ccdbb43b3ea370f8aec58b36238b298cc2"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarLatestAnalysis",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarLatestAnalysis",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 842,
+          "sha256": "3f5cc3f310671eb3ae9cc6209b6538eca4bb7a5fb49263b33c6792588ac45003"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarPrivateJsonToken",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarPrivateJsonToken",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 416,
+          "sha256": "3ca47e70715b7939faa4d96e959455c3d7474e00663db1a2cc79f79398ff930c"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarProjectAnalysesEndpoint",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarProjectAnalysesEndpoint",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 485,
+          "sha256": "7197854769890e6ef872498493ec0246da46491f87f819516d1e3c618a915305"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarProjectKey",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarProjectKey",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 463,
+          "sha256": "0559edd16d9fb3e8778364a1e3b84d2604f75fc6a37acec8cf09b969e82c70dc"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarProjectSearchEndpoint",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarProjectSearchEndpoint",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 490,
+          "sha256": "dacc362093532bc49687771b7c2fa492f7cf1598013f1fc4894bd427692fd57c"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarStatusSnapshot",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarStatusSnapshot",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 17,
+          "sha256": "2c139e137a084a344b97fd10a65b2d7f4a89c744bdfd01534c4b16020acc27ab"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarStatusUrl",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarStatusUrl",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 1,
+          "sha256": "0c151ce3c31dade835cca817ed594655918b6f7a702e9a5abe182e11c4efd22d"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarTokenCandidates",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarTokenCandidates",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 431,
+          "sha256": "fddc24a5ce1a2a12fe247e4f790cd5745b7e460815a3a367362756c2f464b44f"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarWslFallbackDecision",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarWslFallbackDecision",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 130,
+          "sha256": "71e61a8e5bcff3a581756fa3e004319c0d7fcb340f9c98e31edc1babc62d84cf"
+        }
+      ]
+    },
+    {
+      "name": "Get-SonarWslFallbackDiagnostics",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-SonarWslFallbackDiagnostics",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 164,
+          "sha256": "3a9f9548709096734be4be9f8afe20ee10cd67a4a677a8bd1710305f14581171"
+        }
+      ]
+    },
+    {
+      "name": "Get-StpGitSnapshot",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-StpGitSnapshot",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 985,
+          "sha256": "bb2ba994b5b67322def3a259570b2fd85dee31c90147ef459f9f363d459016c1"
+        }
+      ]
+    },
+    {
+      "name": "Get-StpGoalAndNext",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-StpGoalAndNext",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1039,
+          "sha256": "ebae07d5ad87e9dd07f9fe5ffe40b32581feaf757e623cab35fa72d1b6dd30d2"
+        }
+      ]
+    },
+    {
+      "name": "Get-StpVerification",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-StpVerification",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1028,
+          "sha256": "5663390794bd87b5de908f76b55b371668fcdbcea0dac4973b6f84887c1e40eb"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoCheckpointPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoCheckpointPath",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 39,
+          "sha256": "8953a5331c5cce68f01ad2b883c88a4f8003787d835cf69ef48628812d45bb3b"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoConfig",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoConfig",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 395,
+          "sha256": "6e8cb80c90e42e1ed6371d9696d58bd3383bcad2613209807d56d4f1b4bd42fa"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoCurrentPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoCurrentPath",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 40,
+          "sha256": "77559a3c456ce624beb82cb1a8502e0dc764f2e16db22b5a7b9ee2f5d9e88eaf"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoDigestPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoDigestPath",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 38,
+          "sha256": "07c4eb140a84c09fff1d8b72f8195cbe8ca1979ad7ed92e57dd0c14afab667b7"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoEventBoundaryId",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoEventBoundaryId",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 518,
+          "sha256": "e3539f75565d832945bf98ef6709865633f14a3f9964f81e03c070b2775f34ce"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoEventsPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoEventsPath",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 36,
+          "sha256": "dacb86174c3ce217e292784e705b3ff19eacd477ad75d987173fc1bc4751c546"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoIndexId",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoIndexId",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 129,
+          "sha256": "854b4a430577d93616e56a5f7d4015d53962bd3d9b82a42fd4c76ae946a4be9e"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoIndexPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoIndexPath",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 37,
+          "sha256": "6501898e90fa923c3723faf4981ecfe72849070876870197a8a6ff7f8d8fd0f2"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoIndexStatus",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoIndexStatus",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 135,
+          "sha256": "131b7a54f0c6ecf9deda30440a967a2518c5c70a78c1e9f226f694b1efa0ff33"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoIndexTimestamp",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoIndexTimestamp",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 165,
+          "sha256": "b84674fc10de28a531821731c26caa766d969eb3c7978ac7015b904b0b2e5512"
+        }
+      ]
+    },
+    {
+      "name": "Get-TodoStatePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-TodoStatePath",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 35,
+          "sha256": "010a9b98ead4de20e3ee97adebf79eb577a1bbbb0316ab98544f6ed10e4736f7"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450AdbTargetFromDevicesText",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450AdbTargetFromDevicesText",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 89,
+          "sha256": "fb638e4b6bcd67b255cfaa20656cac7bc9946cd84de33b730dfc77016e31eaf4"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450AndroidEnv",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450AndroidEnv",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 59,
+          "sha256": "b38b5b52260d4917e1e8359fa03ba0786cd0d3a2db178ec90e41beaa7ac46176"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450DefaultHumanEvidenceDir",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450DefaultHumanEvidenceDir",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 55,
+          "sha256": "f158ed0df9649d42b75ffb3d447f5505c33ab5028bccafee3b353b21a92567c3"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450EvidencePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450EvidencePath",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 51,
+          "sha256": "7b04229f2ac1995214a13184607a3caa935b1fcee7f00149b90e16170ff1162b"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450FileCount",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450FileCount",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 160,
+          "sha256": "c83354752a17f5fbe64527bb746806e4fe1a5f1233125accd5813dd878475fcf"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450HumanJourneySummary",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450HumanJourneySummary",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 165,
+          "sha256": "471b84fe336a866120cc0b403ceabf49c3e3d03b6a56e3e6af2deebdb23eb0b7"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450JsonLineCount",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450JsonLineCount",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 155,
+          "sha256": "2a1e35318cc3446768a3a8ceab7bbffad4e852ee6110a725ac361fb71b864d17"
+        }
+      ]
+    },
+    {
+      "name": "Get-Tst450VisualAuditSummary",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-Tst450VisualAuditSummary",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 206,
+          "sha256": "988a7f55615d912f6f75e5f0c70c4d6d5093f27578fb0b09696da621d11bb0c1"
+        }
+      ]
+    },
+    {
+      "name": "Get-VerifyStatePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Get-VerifyStatePath",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 4,
+          "sha256": "05dfb03f5ea321c397810e63c370aec06892acf272130f8dfd5f67966d9468d6"
+        }
+      ]
+    },
+    {
+      "name": "HGet",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "HGet",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 128,
+          "sha256": "b931c465912bdbab6858aa1fe425eac8da0356fe6a917d252d80ef0a69a0241b"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-OpenAiChat",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-OpenAiChat",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 37,
+          "sha256": "d6c4372d1f36f884d0c6ebc5b6470d71c0dc2d8022cfef28635a6dc475bc4631"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-SelfCheck",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-SelfCheck",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 45,
+          "sha256": "2b8ef7b870f718c8cb76a27b9c2df851c2a4634c35b91b5b0453135641e07a4e"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-SonarApiJson",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-SonarApiJson",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 833,
+          "sha256": "f19343f8946ec70e14a861554c99f8f42f746cc70eb14ea0f52fc432bf23d301"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-SonarDockerReadOnly",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-SonarDockerReadOnly",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 84,
+          "sha256": "30ee036a90d45c1b4846a2eba28110625c6d8bc8d763a693576d90b6ba8eba3d"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-SonarExternalReadOnly",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-SonarExternalReadOnly",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 93,
+          "sha256": "0c4fa832eeb7d1f24a91424aa15e8015e818988825ab870f81076d9879690120"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-StpGit",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-StpGit",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 977,
+          "sha256": "b07ea6c581b437944ec9eb24ab67d7252ca84542125ffce7b5bfa4ad5ee7e949"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-Tst450HumanVisualSupertest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-Tst450HumanVisualSupertest",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 273,
+          "sha256": "cb27bb696d452dc84b89e9730a7e319049002b1050375a9ebbdfc37c0f06dc53"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-Tst450RunStep",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-Tst450RunStep",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 146,
+          "sha256": "88deca9ec8e3479ef52c54dd1bad245328e2f5a9602bd580ab88abcc197fd136"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-UiInternal",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-UiInternal",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 214,
+          "sha256": "d66f2b1256fb0558c6f334cd9f048f9d14306767cfef211a6322b0a37209c3eb"
+        },
+        {
+          "name": "Invoke-UiInternal",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 149,
+          "sha256": "d66f2b1256fb0558c6f334cd9f048f9d14306767cfef211a6322b0a37209c3eb"
+        }
+      ]
+    },
+    {
+      "name": "Invoke-UiRoadmap",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Invoke-UiRoadmap",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 296,
+          "sha256": "352fc88082d6e7b371f1f8749eed2c215ee27e4051f4398618936601b353592e"
+        },
+        {
+          "name": "Invoke-UiRoadmap",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 231,
+          "sha256": "352fc88082d6e7b371f1f8749eed2c215ee27e4051f4398618936601b353592e"
+        }
+      ]
+    },
+    {
+      "name": "Is-GradleProject",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Is-GradleProject",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 176,
+          "sha256": "6047fb78c5e9af7760c6762a8a9cfe7881c39cc3340c527a2f8d16f05730c08d"
+        }
+      ]
+    },
+    {
+      "name": "Is-GradleRequired",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Is-GradleRequired",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 182,
+          "sha256": "c6578b4c92d7454b46803c8a8d6cf23335e3c345ed15016aeb3ccf2c50ae5331"
+        }
+      ]
+    },
+    {
+      "name": "Is-PathDenied",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Is-PathDenied",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 71,
+          "sha256": "1b185a8f57af5e2af8021658f41aa3a2334b61e143ed8b592edeb3c8e3ef8533"
+        }
+      ]
+    },
+    {
+      "name": "Is-RoadmapSubtaskTitle",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Is-RoadmapSubtaskTitle",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 171,
+          "sha256": "a33d47ce534352f02578d0e0c721a5eb5b239be2331a510e21a034303faccce2"
+        }
+      ]
+    },
+    {
+      "name": "Load-DriftState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Load-DriftState",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 110,
+          "sha256": "a6ff2d0728179ea117587819dd6f7ff9c4ba186682ffcdbd988bf330f9ce3411"
+        }
+      ]
+    },
+    {
+      "name": "Load-LoopGuard",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Load-LoopGuard",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 16,
+          "sha256": "025f58a5a900dbf1965f549a5bd9e808fe48943fd2178afeda37988d9488b869"
+        }
+      ]
+    },
+    {
+      "name": "Load-PriorityState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Load-PriorityState",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 148,
+          "sha256": "06a8e177de50eb5002f884a222ff6883f44c2e79a37eb3bd624608c841797ba6"
+        }
+      ]
+    },
+    {
+      "name": "Load-TodoIndex",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Load-TodoIndex",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 306,
+          "sha256": "f08fe93a9424b59f2c316604a1d70e34bf383a9c78ca89447090ac06f9e3f3b6"
+        }
+      ]
+    },
+    {
+      "name": "Load-TodoState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Load-TodoState",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 48,
+          "sha256": "034bf04069693392c93ddb50e57bf030139ff189079d3721bd947025a6805bb9"
+        }
+      ]
+    },
+    {
+      "name": "Load-VerifyState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Load-VerifyState",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 7,
+          "sha256": "2987c474908ac73ea400b2f795e8bd6240f4dbc1783324db659e05579a2c73ef"
+        }
+      ]
+    },
+    {
+      "name": "New-CiPowerShellScriptCommand",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "New-CiPowerShellScriptCommand",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 33,
+          "sha256": "db628d7c61f727d33251c210aab73756c7b09f95ed680026f7309b78282c05cd"
+        }
+      ]
+    },
+    {
+      "name": "New-EventId",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "New-EventId",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 373,
+          "sha256": "d8c4ecf47a6e3d4bd98330d8b1ae2d23d7c9c9e19a96e7fb71c95d845bd06747"
+        }
+      ]
+    },
+    {
+      "name": "New-SonarApiHeadersFromToken",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "New-SonarApiHeadersFromToken",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 453,
+          "sha256": "5f3785bb750da7dc3254f575dcb1298e686154f59d572464bb44ac58a1665bad"
+        }
+      ]
+    },
+    {
+      "name": "New-Tst450HumanVisualReportLines",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "New-Tst450HumanVisualReportLines",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 225,
+          "sha256": "757c0728908d7c6f549eb779716c0b6160a947ade78377d74a40a3f5342b577c"
+        }
+      ]
+    },
+    {
+      "name": "Next-TodoId",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Next-TodoId",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 366,
+          "sha256": "e4cc2466ef89d51eab137d9020bbe58fd827e743660994e2e1f44d5113d7d5f9"
+        }
+      ]
+    },
+    {
+      "name": "Normalize-Rel",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Normalize-Rel",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 1,
+          "sha256": "d6ac99151aad406ebb4d4236941f9691dd724f426b2d55cdda760807ce4f8dba"
+        }
+      ]
+    },
+    {
+      "name": "Normalize-RoutePath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Normalize-RoutePath",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 163,
+          "sha256": "530d2458d2c22ad10e9cdf336a36b65dc91087bba12466d35b9ade7333813b8f"
+        }
+      ]
+    },
+    {
+      "name": "Normalize-TodoIndexRows",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Normalize-TodoIndexRows",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 199,
+          "sha256": "cdd7ba8afd6bda4332fd029c65f9a9950fcf47ae4c569d8a5b5e397ee05e77f3"
+        }
+      ]
+    },
+    {
+      "name": "Normalize-TodoState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Normalize-TodoState",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 60,
+          "sha256": "da9554b3b59256931a6decaf7ed465a5ee64e0492cb47f481b14d67873c34920"
+        }
+      ]
+    },
+    {
+      "name": "Normalize-TodoStatus",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Normalize-TodoStatus",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 122,
+          "sha256": "ab178e743fc9a6f73c261022d1f89bb81d46cac0e7738927ffc88b3639092821"
+        }
+      ]
+    },
+    {
+      "name": "Normalize-TodoTimestamp",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Normalize-TodoTimestamp",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 141,
+          "sha256": "c621f9d329df1e1bc28873058f5c15fcaccda94cf11a435bed8be256249f3256"
+        }
+      ]
+    },
+    {
+      "name": "NowIso",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "NowIso",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 1,
+          "sha256": "b1f8f7b1490a04deb60164ccef5edc4e77359a1f13300d64fffad4c226c35d1c"
+        }
+      ]
+    },
+    {
+      "name": "Parse-JavaMajor",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Parse-JavaMajor",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 1,
+          "sha256": "cb0a0cae53ef42f9d08a9fcc78cdc1b8433524496ccd66eb26f46606e973ffeb"
+        }
+      ]
+    },
+    {
+      "name": "Parse-RoadmapOpenTasks",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Parse-RoadmapOpenTasks",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 404,
+          "sha256": "75cc6d2b2a97cf0fcd81471c10e804ee9b5965138f22445e85c17d18f8bbabec"
+        }
+      ]
+    },
+    {
+      "name": "Parse-UnifiedDiffTouchedFiles",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Parse-UnifiedDiffTouchedFiles",
+          "file": "runtime/bin/modules/critic-logic.ps1",
+          "line": 65,
+          "sha256": "a65295852fb94bff9ec04352a393287c3bd1e071600195137420a8b9b1a86185"
+        }
+      ]
+    },
+    {
+      "name": "Persist-GradleInfo",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Persist-GradleInfo",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 248,
+          "sha256": "a94aff73818b27d5b4fa13466dc7651daad019ccbdb6869ac8333dd976568940"
+        }
+      ]
+    },
+    {
+      "name": "Pin-ImmutableFiles",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Pin-ImmutableFiles",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 99,
+          "sha256": "d3b2a21ecbd63174c8d6c07989cef682b263b5d3bdbc40557d2ccba6935c4518"
+        }
+      ]
+    },
+    {
+      "name": "Quote-IfNeeded",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Quote-IfNeeded",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 140,
+          "sha256": "f4a8632b3784f941a5f3325ea448245173e93ca6c5b9aeb9330c32b8b6198425"
+        }
+      ]
+    },
+    {
+      "name": "Read-ImmutablePins",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Read-ImmutablePins",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 113,
+          "sha256": "c4520223f8fecf89b56b0ac4027a21cf3d28a9801ec8a9ec1ed05e1b54eff5b0"
+        }
+      ]
+    },
+    {
+      "name": "Read-LastJsonl",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Read-LastJsonl",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 70,
+          "sha256": "35ce6d6157bf1b70f513c2b310af29c1060c9b0e05599de5ff8303185d305708"
+        }
+      ]
+    },
+    {
+      "name": "Read-ObserverSources",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Read-ObserverSources",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 22,
+          "sha256": "708795537437ade98b01580211302a5dfeaa7a4c21f6ce177403d98c8cb33f12"
+        }
+      ]
+    },
+    {
+      "name": "Read-PolicyRules",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Read-PolicyRules",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 128,
+          "sha256": "ca841c98534e8229e61562b9416d4cf615932050ccbe6a55c5ee73e336c9b8bb"
+        }
+      ]
+    },
+    {
+      "name": "Read-TextTrunc",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Read-TextTrunc",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 61,
+          "sha256": "ac7cda1eadc67a168c545ceb13df2b5f6ad4f044dcc6b9704a73277c9852ce5e"
+        }
+      ]
+    },
+    {
+      "name": "Read-ToolchainPins",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Read-ToolchainPins",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 92,
+          "sha256": "c86009d78b31550be18f3124cd76278fc5684878008b5d457f029732d3320fac"
+        }
+      ]
+    },
+    {
+      "name": "Register-CiCommand",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Register-CiCommand",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 113,
+          "sha256": "74e86a3ced74b6068a5cac34a777eae1b0051289005416da3d7a1771dfe1133a"
+        }
+      ]
+    },
+    {
+      "name": "Render-StpHandoffMarkdown",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Render-StpHandoffMarkdown",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1055,
+          "sha256": "5ee9161e4ddfbae705b2bacc519857c6b282d33e2757a5dba32844e377169401"
+        }
+      ]
+    },
+    {
+      "name": "Render-TodoCurrent",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Render-TodoCurrent",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 1,
+          "sha256": "7604ed5b851f396deb8e5f01ce40cc2c26c7aad5e9603713ce4206baf87a688f"
+        }
+      ]
+    },
+    {
+      "name": "Report-Priority",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Report-Priority",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 158,
+          "sha256": "bafddaef610b0d9a2bc6d8bf4d5b3593ce318980393baee6cec81f71354e0cb1"
+        }
+      ]
+    },
+    {
+      "name": "Resolve-AndroidSupertestCommand",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Resolve-AndroidSupertestCommand",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 19,
+          "sha256": "a9f3b0825bd60bac6e6a1f3d9930e5b7124207afe0186e99ddc52b3b859036a3"
+        }
+      ]
+    },
+    {
+      "name": "Resolve-CiPowerShellExecutable",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Resolve-CiPowerShellExecutable",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 26,
+          "sha256": "7711aad4398acb8b518667a0bd8b7b0c2dd9d8f71169cb43a86112c07b59d8a6"
+        }
+      ]
+    },
+    {
+      "name": "Resolve-Tst450AdbPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Resolve-Tst450AdbPath",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 71,
+          "sha256": "9859dfa6ac0a8620845ff2441ff270fab43f3e7d42a674108e0593e8d8a4bede"
+        }
+      ]
+    },
+    {
+      "name": "Run-Cmd",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Run-Cmd",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 173,
+          "sha256": "0a29c7ac737dd2cead9809dc35c67002cff81e26fdc6c49d38bc37d5d34bc474"
+        }
+      ]
+    },
+    {
+      "name": "Run-TaskHookDetached",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Run-TaskHookDetached",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 133,
+          "sha256": "f686764585b434688f8f290129c2c57ae87890ad42db9b05a53b38dda5ddfbd5"
+        }
+      ]
+    },
+    {
+      "name": "Save-DriftState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Save-DriftState",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 114,
+          "sha256": "b06996710b0178b54ec77792e636cc9370dfe1f65d5bb0076cdb8ff59ec07432"
+        }
+      ]
+    },
+    {
+      "name": "Save-LoopGuard",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Save-LoopGuard",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 23,
+          "sha256": "510b7b7712f96f4362b288a07f5e65e0a76b74db7e180772cc6a2da8a1263bfd"
+        }
+      ]
+    },
+    {
+      "name": "Save-PriorityState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Save-PriorityState",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 152,
+          "sha256": "db5459a736b184dae2ac023bd98c9214c376625216ac4d9c2bd6829667362474"
+        }
+      ]
+    },
+    {
+      "name": "Save-TodoIndex",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Save-TodoIndex",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 314,
+          "sha256": "1777d9bb59733dc79e24b6e27c0aa55b939b2692816486758883616e821c20c1"
+        }
+      ]
+    },
+    {
+      "name": "Save-TodoState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Save-TodoState",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 104,
+          "sha256": "631f6cecd61cc7558d887ea40ac39070461836904c17c4ce28335eb065e51876"
+        }
+      ]
+    },
+    {
+      "name": "Save-VerifyState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Save-VerifyState",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 14,
+          "sha256": "e4f9830d7175a81f16139fb28b7fdf550ad4c58fbcdee5c880d3f836e47de8d4"
+        }
+      ]
+    },
+    {
+      "name": "Select-JdkHomeForTarget",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Select-JdkHomeForTarget",
+          "file": "runtime/bin/modules/toolchain-java.ps1",
+          "line": 117,
+          "sha256": "0b76e60c493d8a86646c63fa839097559f2c5b7e6765980f0a089fe6afdbb702"
+        }
+      ]
+    },
+    {
+      "name": "Set-ObjProp",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Set-ObjProp",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 122,
+          "sha256": "8553ea8e700ca37beb3499574c463d3be9a58df3f20ae34b570c7689c310dc48"
+        }
+      ]
+    },
+    {
+      "name": "Set-PropSafe",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Set-PropSafe",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 24,
+          "sha256": "fce4b3eb3c288b4975a10f5482c3b468e510a4382561cfef924b313d1503d3ec"
+        }
+      ]
+    },
+    {
+      "name": "Set-ReadOnlyFlag",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Set-ReadOnlyFlag",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 95,
+          "sha256": "2f7ed14691ea5c4ca132741cc989b031ec7ced47472f24b5c8955db8e0db23eb"
+        }
+      ]
+    },
+    {
+      "name": "Sha256Path",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Sha256Path",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 52,
+          "sha256": "0df103cdd2deb7c38f9112f17cc5264e08e28e07dcea49aaa1b78462d17248e3"
+        }
+      ]
+    },
+    {
+      "name": "Sha256Text",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Sha256Text",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 134,
+          "sha256": "f20121257c9fcc57d3b80d93554dea0dd31184e3ea0a1956bd8295d649ac4e5b"
+        }
+      ]
+    },
+    {
+      "name": "Sync-TodoCheckpointState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Sync-TodoCheckpointState",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 320,
+          "sha256": "c98e8e6b2f82d0b24b479de671dea6d7f43e54b9e687f92dd6cd020986db7397"
+        }
+      ]
+    },
+    {
+      "name": "Tail-File",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Tail-File",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 117,
+          "sha256": "8f7a7274749ade5985d3dcea4dc1c9d17be8b4700a14d587d957be208cc60934"
+        }
+      ]
+    },
+    {
+      "name": "Test-BrowserSmokeContractInactive",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-BrowserSmokeContractInactive",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 51,
+          "sha256": "ad07992f664bd1e42e27a6833447ca126966eb26213894c0a9242c1255c4350d"
+        }
+      ]
+    },
+    {
+      "name": "Test-MarkdownRenderFiles",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-MarkdownRenderFiles",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 185,
+          "sha256": "3cb5efed089c8d16a90770ec1b475b0e0a9f992d7bd881f26726c168c670d635"
+        }
+      ]
+    },
+    {
+      "name": "Test-RouteRule",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-RouteRule",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 168,
+          "sha256": "0d248e9d58403f99d6f33e20e3d8f8a0add31a0be42d891d52cd8ddc57b3ac66"
+        }
+      ]
+    },
+    {
+      "name": "Test-SonarApiAuthentication",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-SonarApiAuthentication",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 730,
+          "sha256": "e01d9d99aa83f04d2531ea9e335ec071ac2a71006222a031f82fe5b53bfa068b"
+        }
+      ]
+    },
+    {
+      "name": "Test-SonarDockerEngineBlocker",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-SonarDockerEngineBlocker",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 33,
+          "sha256": "4d9489588cc8f8664939cc202142dc1a47c5ac081533bba54842f800c6b1d621"
+        }
+      ]
+    },
+    {
+      "name": "Test-SonarPortProxy9000Mapping",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-SonarPortProxy9000Mapping",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 118,
+          "sha256": "7087221be0bd59163dc79fbb163b3673c2ee823175dd2ba4ab24afba2af7b5b3"
+        }
+      ]
+    },
+    {
+      "name": "Test-SonarServerHealthy",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-SonarServerHealthy",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 7,
+          "sha256": "12b5bc0ef67dc0733a72e54bc81e1fc4d2cffcdea85f977b8d97dac1b7390625"
+        }
+      ]
+    },
+    {
+      "name": "Test-SonarTimeoutError",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-SonarTimeoutError",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 707,
+          "sha256": "2630f23e43bfd4a4dd6e002dd9a010144c15cbf3b999d8fd276dcce0fc540b55"
+        }
+      ]
+    },
+    {
+      "name": "Test-SonarUbuntu2204Available",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-SonarUbuntu2204Available",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 105,
+          "sha256": "27fda5b98c97b1c74a025e501f68ef2d10876ce1b9d990970bff83f0500156e1"
+        }
+      ]
+    },
+    {
+      "name": "Test-TodoRotationRequired",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-TodoRotationRequired",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 530,
+          "sha256": "836800aea7e0b22d72772e5aea1bd2d33a8e432cc475a93762f1a7fccef95fcd"
+        }
+      ]
+    },
+    {
+      "name": "Test-Tst450AdbTarget",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Test-Tst450AdbTarget",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 130,
+          "sha256": "74d3a45b3a40450f47fc27cb9f1ba2753ca8b60f9abc93b704d13910ee5bce2f"
+        }
+      ]
+    },
+    {
+      "name": "To-Hashtable",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "To-Hashtable",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 385,
+          "sha256": "1cf12b79c87fa29c6dab901315ac216d342a56bc1f97d3ccb0ab56867160b597"
+        }
+      ]
+    },
+    {
+      "name": "To-Json",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "To-Json",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 64,
+          "sha256": "c85b55ad1ddfcb97dc9393bb865aa2a56f3d7b67b049b1b73c17c9e3984d4f94"
+        }
+      ]
+    },
+    {
+      "name": "To-RelPath",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "To-RelPath",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 39,
+          "sha256": "47de0bf04d403bfbacd5255b8be6a9f9c804130ffdaa965986f9112d11252cb9"
+        }
+      ]
+    },
+    {
+      "name": "Try-GitDiffNames",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Try-GitDiffNames",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 145,
+          "sha256": "aeff747b424a7a4b4660c5b5b1d0e837c9816efc19e65952682ee5819416b1ff"
+        }
+      ]
+    },
+    {
+      "name": "Try-GitGrepFirst",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Try-GitGrepFirst",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 152,
+          "sha256": "248d6ed133f7cb38fd2d43fdee4a099c5ea0496a251563daae9035eb9cfc5808"
+        }
+      ]
+    },
+    {
+      "name": "Try-ReadJson",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Try-ReadJson",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 66,
+          "sha256": "246e8d3ef731feaef98fb0d2da2286a0fbf9098ebe0f3a2ef02346e15122ce45"
+        }
+      ]
+    },
+    {
+      "name": "TsId",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "TsId",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 2,
+          "sha256": "77ffd9f63b59e86676bcb34543526db2d8f0989e07561214c07e15f0a2da5aca"
+        }
+      ]
+    },
+    {
+      "name": "Ui-CompareImages",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-CompareImages",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 200,
+          "sha256": "6827b311fff194346765eefc578499a21e254f41dad3acbc81844026242f9fef"
+        },
+        {
+          "name": "Ui-CompareImages",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 135,
+          "sha256": "6827b311fff194346765eefc578499a21e254f41dad3acbc81844026242f9fef"
+        }
+      ]
+    },
+    {
+      "name": "Ui-DetectServeRoot",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-DetectServeRoot",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 152,
+          "sha256": "9f27d05b91fd7bebdbda969234277a56aeccb8a3a18872ce8d155435d611040d"
+        },
+        {
+          "name": "Ui-DetectServeRoot",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 87,
+          "sha256": "9f27d05b91fd7bebdbda969234277a56aeccb8a3a18872ce8d155435d611040d"
+        }
+      ]
+    },
+    {
+      "name": "Ui-EnsureDir",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-EnsureDir",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 90,
+          "sha256": "6359b8fc9e3b337fddb0dcaf88f55acc1296ce5c1764ae7d792fc423eb11cfe9"
+        },
+        {
+          "name": "Ui-EnsureDir",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 25,
+          "sha256": "6359b8fc9e3b337fddb0dcaf88f55acc1296ce5c1764ae7d792fc423eb11cfe9"
+        }
+      ]
+    },
+    {
+      "name": "Ui-GetFreePort",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-GetFreePort",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 101,
+          "sha256": "bf529d4ba6d38cff569096b3a82221d245246e0d811e16d85455c9ca959b6009"
+        },
+        {
+          "name": "Ui-GetFreePort",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 36,
+          "sha256": "bf529d4ba6d38cff569096b3a82221d245246e0d811e16d85455c9ca959b6009"
+        }
+      ]
+    },
+    {
+      "name": "Ui-GetPythonExe",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-GetPythonExe",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 109,
+          "sha256": "ef6369f0a5be39cf7e943f381e9c715b638dab25b3decb664cbd6316ea51d051"
+        },
+        {
+          "name": "Ui-GetPythonExe",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 44,
+          "sha256": "ef6369f0a5be39cf7e943f381e9c715b638dab25b3decb664cbd6316ea51d051"
+        }
+      ]
+    },
+    {
+      "name": "Ui-Info",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-Info",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 84,
+          "sha256": "da6b429bd38b39e7281363abc85dc76d0f22f75e79f90652666a8077d3882edb"
+        },
+        {
+          "name": "Ui-Info",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 19,
+          "sha256": "da6b429bd38b39e7281363abc85dc76d0f22f75e79f90652666a8077d3882edb"
+        }
+      ]
+    },
+    {
+      "name": "Ui-ReadConfig",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-ReadConfig",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 188,
+          "sha256": "a801b3d229a4f94e445ff81c7144ac33d9ba098e89c5b0317fe015841132ab9d"
+        },
+        {
+          "name": "Ui-ReadConfig",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 123,
+          "sha256": "a801b3d229a4f94e445ff81c7144ac33d9ba098e89c5b0317fe015841132ab9d"
+        }
+      ]
+    },
+    {
+      "name": "Ui-RunNode",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-RunNode",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 193,
+          "sha256": "514ad3ea9a873dc86d03b9340311beff7d9e40f6914dc32e16e4944c90ae7f8e"
+        },
+        {
+          "name": "Ui-RunNode",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 128,
+          "sha256": "514ad3ea9a873dc86d03b9340311beff7d9e40f6914dc32e16e4944c90ae7f8e"
+        }
+      ]
+    },
+    {
+      "name": "Ui-StartServer",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-StartServer",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 117,
+          "sha256": "6437eae89dc7776956d0cc2f53879e57e968a6fc8020103e5c27f64ae4402b17"
+        },
+        {
+          "name": "Ui-StartServer",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 52,
+          "sha256": "6437eae89dc7776956d0cc2f53879e57e968a6fc8020103e5c27f64ae4402b17"
+        }
+      ]
+    },
+    {
+      "name": "Ui-StopServer",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-StopServer",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 144,
+          "sha256": "0a60daeb88d740644f195b5ed4ad07d9fde363c16e48da5cc77dd123e95c0442"
+        },
+        {
+          "name": "Ui-StopServer",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 79,
+          "sha256": "0a60daeb88d740644f195b5ed4ad07d9fde363c16e48da5cc77dd123e95c0442"
+        }
+      ]
+    },
+    {
+      "name": "Ui-ToRelPath",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-ToRelPath",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 94,
+          "sha256": "24b847253f9320d318075330ad5fb5f8cddc2c21f9f562f45be9c1af7072ce5b"
+        },
+        {
+          "name": "Ui-ToRelPath",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 29,
+          "sha256": "24b847253f9320d318075330ad5fb5f8cddc2c21f9f562f45be9c1af7072ce5b"
+        }
+      ]
+    },
+    {
+      "name": "Ui-TryWebBuild",
+      "definition_count": 2,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Ui-TryWebBuild",
+          "file": "runtime/bin/legacy-ci.ps1",
+          "line": 169,
+          "sha256": "78fff1ebda93a3b1eac05e52033ffcaa0bb3f71cf249b203235c1ec7d7387bdc"
+        },
+        {
+          "name": "Ui-TryWebBuild",
+          "file": "runtime/bin/modules/ui-commands.ps1",
+          "line": 104,
+          "sha256": "78fff1ebda93a3b1eac05e52033ffcaa0bb3f71cf249b203235c1ec7d7387bdc"
+        }
+      ]
+    },
+    {
+      "name": "Update-EnvInventoryDigest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Update-EnvInventoryDigest",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 54,
+          "sha256": "e0817720c8cf41d73582d350ba0cef132d00d78c73641f765cf2e48e0b939aaa"
+        }
+      ]
+    },
+    {
+      "name": "Update-LoopGuard",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Update-LoopGuard",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 31,
+          "sha256": "61b4b206e3ed94dfe2de47afa2dc3f3350ecdde4bcaa10aa344d497a864aff4d"
+        }
+      ]
+    },
+    {
+      "name": "Update-ManualDigest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Update-ManualDigest",
+          "file": "runtime/bin/modules/project-logic.ps1",
+          "line": 1,
+          "sha256": "bba489e48c04a094a841ff4f13fb74eb605f59d8885ef033dd9be650c4fba101"
+        }
+      ]
+    },
+    {
+      "name": "Update-TodoHistoryDigest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Update-TodoHistoryDigest",
+          "file": "runtime/bin/modules/todo-engine.ps1",
+          "line": 481,
+          "sha256": "115945c2ebe7cc8ddfc9b1f27495fa9a3dc01a40166104a362de28a5907c5a62"
+        }
+      ]
+    },
+    {
+      "name": "Wait-PortListening",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Wait-PortListening",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 124,
+          "sha256": "b9d0dae7965f3a0395f49bac7244ba183e295950ee486f693187ca9451db3a59"
+        }
+      ]
+    },
+    {
+      "name": "Wait-SonarQualityGate",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Wait-SonarQualityGate",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 857,
+          "sha256": "808bb4410e6ca2861999d3d0b26329f155a6112a92ac7affed616ce648e07863"
+        }
+      ]
+    },
+    {
+      "name": "With-ImmutableWrite",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "With-ImmutableWrite",
+          "file": "runtime/bin/modules/ci-core.ps1",
+          "line": 124,
+          "sha256": "106a0ca79031375b001231676ba2c7deb8b6df34765e9321812fc4804f9a85d7"
+        }
+      ]
+    },
+    {
+      "name": "Wrapper-Ok",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Wrapper-Ok",
+          "file": "runtime/bin/modules/toolchain-gradle.ps1",
+          "line": 196,
+          "sha256": "82ab9bd974a7644c699f20fb44d7d0458e7c5a56d1868de0de87d4f6ffa2e332"
+        }
+      ]
+    },
+    {
+      "name": "Write-AutoCheckpoint",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-AutoCheckpoint",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 1192,
+          "sha256": "4108c702d75992648015f50fdf09061daa19274ccd9714eae6e02f72b02f69ea"
+        }
+      ]
+    },
+    {
+      "name": "Write-BrowserSmokeDigest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-BrowserSmokeDigest",
+          "file": "runtime/bin/modules/browser-logic.ps1",
+          "line": 7,
+          "sha256": "6f866471b9a8aff98f6a47bd99f8cff9fe321b7b83354f63e82bea2c0606b1bc"
+        }
+      ]
+    },
+    {
+      "name": "Write-DriftInboxTask",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-DriftInboxTask",
+          "file": "runtime/bin/modules/observer-logic.ps1",
+          "line": 128,
+          "sha256": "c525ddd7f5837dce90a34bdbcbbc69ef6e1aad2ed602b230aab023acd103289d"
+        }
+      ]
+    },
+    {
+      "name": "Write-Failbundle",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-Failbundle",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 2,
+          "sha256": "7a683b10f2d09f9d2e110dcb7899d9d9331580bac282731358c145fa992f3b77"
+        }
+      ]
+    },
+    {
+      "name": "Write-Json",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-Json",
+          "file": "runtime/bin/modules/core-utils.ps1",
+          "line": 77,
+          "sha256": "6d7c0424a482f4da33df91b5265d1f645c4c9a0da3f9849cf0d37465efeed48f"
+        }
+      ]
+    },
+    {
+      "name": "Write-SonarDockerEngineEvidence",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-SonarDockerEngineEvidence",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 43,
+          "sha256": "ca423cb88e9e750987e2be5a9fba9b271d147d92d5656d04a7d8981c03f09c8b"
+        }
+      ]
+    },
+    {
+      "name": "Write-SonarFailureEvidence",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-SonarFailureEvidence",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 545,
+          "sha256": "4db726e91d500bf2525d90bb6b5991a5f63c0b9e022e84a9c43fbe8d18ac74b2"
+        }
+      ]
+    },
+    {
+      "name": "Write-SonarRuntimeState",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-SonarRuntimeState",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 301,
+          "sha256": "4e8b0e49532241877e90c78870747dd53bcbf0cb24ecd80a0de331e79b608410"
+        }
+      ]
+    },
+    {
+      "name": "Write-SonarStartSuccessEvidence",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-SonarStartSuccessEvidence",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 267,
+          "sha256": "3de9a29a78bf103550deff4c3d8faf880d3a0aa890c4605d7f689d451213379c"
+        }
+      ]
+    },
+    {
+      "name": "Write-SonarWslFallbackEvidence",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-SonarWslFallbackEvidence",
+          "file": "runtime/bin/modules/sonar-logic.ps1",
+          "line": 209,
+          "sha256": "d654080171ec0b54168393f53e39f4f7625f9d0532939b55b087d6fbf4ebb258"
+        }
+      ]
+    },
+    {
+      "name": "Write-Tst450HumanVisualReport",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-Tst450HumanVisualReport",
+          "file": "runtime/bin/modules/ci-commands-main.ps1",
+          "line": 267,
+          "sha256": "9f20b9732f8c8606e8e660005852e119244af113ad7148bf6e14e81f5b23690c"
+        }
+      ]
+    },
+    {
+      "name": "Write-VerifyDigest",
+      "definition_count": 1,
+      "implementation_count": 1,
+      "conflicting_implementations": false,
+      "definitions": [
+        {
+          "name": "Write-VerifyDigest",
+          "file": "runtime/bin/modules/verify-logic.ps1",
+          "line": 1,
+          "sha256": "8d503287db7ab30236620133debc232f3a5f659c3c7118bb3da06099e1495852"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "schema": "workflow-bootstrap-reference-template/v1",
+  "id": "chess",
+  "source_root": "D:\\_Scripte\\Chess",
+  "source_git_head": "fef812316c54be6d9170f7d63712b823671c4586",
+  "source_selected_worktree": "clean",
+  "source_selected_status": [],
+  "captured_utc": "2026-08-02T18:35:05.8776231+00:00",
+  "files": [
+    {
+      "path": ".ci/bin/ci.cmd",
+      "sha256": "9186993c6d3d5346b7415170d3745ec240aa61bd8bd3b4cc4f7fa6b6200b8d24",
+      "size": 662
+    },
+    {
+      "path": ".ci/ci.config.json",
+      "sha256": "f651afe9972786cb817bc0050d9ffe8e663a97a2d678457c59a873247dd0994e",
+      "size": 2025
+    },
+    {
+      "path": ".ci/bin/start-sonar.ps1",
+      "sha256": "bca6308d1f53dc6883e550d42bf5b430375c84573f807ee14cdbccb45ab19b87",
+      "size": 1394
+    },
+    {
+      "path": ".ci/bin/start_ktor.ps1",
+      "sha256": "cc00925cf4ced624b56c951e47351df6940085356e8b13b56da421bc77d1fa71",
+      "size": 813
+    },
+    {
+      "path": ".ci/bin/start_devserver.ps1",
+      "sha256": "c55d72059e64444191f6bb77a538d4daa280b68284633cd6e459de2df2e50cd5",
+      "size": 1559
+    },
+    {
+      "path": ".ci/bin/start_dev.ps1",
+      "sha256": "5ca50a38ae83a8d5f5f2c8eea839372eb32cb2c4818132f7749da023c2b11c3e",
+      "size": 806
+    },
+    {
+      "path": ".ci/bin/start_dev_server_internal.ps1",
+      "sha256": "40c4035dabd19cc78a4a8c0b98b16de06190d2fbeed1b2e5a60c045e0ac30777",
+      "size": 716
+    },
+    {
+      "path": ".ci/bin/modules/verify-logic.ps1",
+      "sha256": "88a56d9a54167e293b2a684fd553a022908e8e9621cb3b8a7f37e11e9d04dfd5",
+      "size": 14850
+    },
+    {
+      "path": ".ci/bin/modules/ui-commands.ps1",
+      "sha256": "b3ba23d270af1f0ade63ec5f4a1aa6f8229ae4581c0afd89e341e7cfc8cd16c9",
+      "size": 11424
+    },
+    {
+      "path": ".ci/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864
+    },
+    {
+      "path": "ci.cmd",
+      "sha256": "3d1bb215875f764fb9f610f0c6132efca0e443ea0547526c967d87e1e5077c13",
+      "size": 347
+    },
+    {
+      "path": ".ci/bin/modules/toolchain-gradle.ps1",
+      "sha256": "189ae3a4122b2c8366d52ecf30a29f094e3a5b4db52fbf4670bde38b9eb0de97",
+      "size": 24971
+    },
+    {
+      "path": ".ci/bin/modules/sonar-logic.ps1",
+      "sha256": "21029609fd8e9cfc2c7f77f854251ada6e81c28a294ac28b4b62cfdfbb76bc9c",
+      "size": 6516
+    },
+    {
+      "path": ".ci/bin/modules/project-logic.ps1",
+      "sha256": "6b062ac0e65864515c9a5b343d487469c02e5ff1f82b6d58b303ed2e9a61fdeb",
+      "size": 8767
+    },
+    {
+      "path": ".ci/bin/modules/observer-logic.ps1",
+      "sha256": "e8ab86d42a6416cc016551a4d96e6ef7e0feb11bd00c70788c0792cf48db49d7",
+      "size": 20565
+    },
+    {
+      "path": ".ci/bin/modules/critic-logic.ps1",
+      "sha256": "0c87f1326624841abd9b205e0badc8df18852eff559df96688ef104432d36fb2",
+      "size": 9864
+    },
+    {
+      "path": ".ci/bin/modules/core-utils.ps1",
+      "sha256": "f34e304d6152d6509fd8e989788049af37a07a37f5e0889375728e66cccd5114",
+      "size": 32523
+    },
+    {
+      "path": ".ci/bin/modules/ci-core.ps1",
+      "sha256": "30f343e327b97b79fc773fbc9eed29b1322604299b5df5a5a9ac9ff4581b5376",
+      "size": 9741
+    },
+    {
+      "path": ".ci/bin/modules/ci-commands-main.ps1",
+      "sha256": "7ad1131a4064471be1ec6ecee888d6137f53ad352b27f48903f7d6bf332d131e",
+      "size": 213962
+    },
+    {
+      "path": ".ci/bin/modules/browser-logic.ps1",
+      "sha256": "5951f6ed1e881eb4e31c9a1eeaa27ed53748be1b2ffe5c77dee07f312d193fc8",
+      "size": 21533
+    },
+    {
+      "path": ".ci/bin/ci.ps1",
+      "sha256": "4a7f93191dd744e57f4b9b6bc915844c939cf8d8c74a481e4f86c4a168922d4e",
+      "size": 19566
+    },
+    {
+      "path": ".ci/bin/modules/todo-engine.ps1",
+      "sha256": "76a24a8a878f161f95138e7129c107e4e0c53faf7d59727ad095a0da4a53cde7",
+      "size": 28589
+    },
+    {
+      "path": "README.md",
+      "sha256": "bef380fa1123af615a8a2cafaadf7cc51ea7cb4583edecb7c5e60542525cbb9c",
+      "size": 66865
+    }
+  ]
+}

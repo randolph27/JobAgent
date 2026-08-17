@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/workflow-bootstrap/project-binding.schema.json",
+  "title": "Workflow Bootstrap project binding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "project_id",
+    "target_root",
+    "profile",
+    "profile_version",
+    "installed_utc",
+    "target_manifest_sha256",
+    "backup_root"
+  ],
+  "properties": {
+    "schema": { "const": "workflow-bootstrap-project-binding/v1" },
+    "project_id": { "type": "string", "pattern": "^[a-f0-9]{24}$" },
+    "target_root": { "type": "string", "minLength": 1 },
+    "profile": { "enum": ["ubuntu-web", "chess", "sound-profile"] },
+    "profile_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "installed_utc": { "type": "string", "format": "date-time" },
+    "target_manifest_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "backup_root": { "type": "string", "minLength": 1 }
+  }
+}

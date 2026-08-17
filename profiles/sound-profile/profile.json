@@ -1,0 +1,154 @@
+{
+  "schema": "workflow-bootstrap-profile/v1",
+  "id": "sound-profile",
+  "version": "1.0.0",
+  "display_name": "Sound Profile",
+  "description": "Natives Android-Profil mit Berechtigungs-, Sonar- und Human-Visual-Supertest-Ablauf.",
+  "source": {
+    "project_root": "D:\\_Scripte\\Sound Profile",
+    "git_commit": "7d6ad8f9eb0d6de1874554e15f4234ae0ba98cfa",
+    "captured_utc": "2026-08-02T18:35:19.8320564+00:00",
+    "entrypoint_sha256": "fb095ea0b3be2d81c95e24781820d43ca89ef70e4ae97655ae8ebb51b4c6024b"
+  },
+  "transformations": [
+    "Legacy-Pin-Autoritaet wird nur bei zentral gesetztem CI_BOOTSTRAP_PREVERIFIED=1 deaktiviert.",
+    "Cmd-Bootstrap erzeugt im zentral verifizierten Modus keine Legacy-Pins.",
+    "Event- und Tick-Argumente werden ueber den persistenten Dispatcher-Kontext weitergereicht.",
+    "Der Android-SDK-Standardpfad wird benutzerunabhaengig aus LocalApplicationData ermittelt.",
+    "Gradle-Distributionen werden vor Cache-Nutzung und Publikation zwingend per SHA-256 verifiziert; ein zuvor verifizierter lokaler Checksum-Sidecar erhaelt den Offline-Betrieb.",
+    "Self-Check und Patch-Apply delegieren die Runtime-Integritaet im zentralen Modus an den Bootstrap.",
+    "Die doppelt erhaltene UI-Build-Funktion behaelt in beiden Definitionen alle drei historischen Build-Fallbacks.",
+    "Permission-Test, vollstaendiger STP-Handoff sowie Todo-Checkpoint-v2, Rotation, Rebuild und History-Digest entsprechen dem aktuellen Quellstand."
+  ],
+  "default_config": "config.default.json",
+  "function_catalog": "catalog/functions.json",
+  "command_catalog": "catalog/commands.json",
+  "payload": [
+    {
+      "source": "runtime/bin/legacy-ci.ps1",
+      "destination": ".ci/bin/legacy-ci.ps1",
+      "sha256": "f16b1cc03ca00dc3195ce8270e6a7a2794b01f5729a1e4975f12e5538814e9f2",
+      "size": 19398,
+      "role": "profile-entrypoint"
+    },
+    {
+      "source": "runtime/bin/modules/browser-logic.ps1",
+      "destination": ".ci/bin/modules/browser-logic.ps1",
+      "sha256": "b0f9344efa01c1fb3aa7abe7eb8d708c65b02d7e43063f0d0bd55ad438fc2723",
+      "size": 15329,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/ci-commands-main.ps1",
+      "destination": ".ci/bin/modules/ci-commands-main.ps1",
+      "sha256": "96c54f2629d076414265e3188255dc232fadc6f211a79e4e3f1f999b032b17f5",
+      "size": 71741,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/ci-core.ps1",
+      "destination": ".ci/bin/modules/ci-core.ps1",
+      "sha256": "9200d17d3da8dd658cceff7490bb47d5bff4e2b8ab7c3789c4f38870851ef272",
+      "size": 10141,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/core-utils.ps1",
+      "destination": ".ci/bin/modules/core-utils.ps1",
+      "sha256": "00f816e274bfcbed91152e2cdc722e75392853f750509308ee9ff4953d519bff",
+      "size": 14691,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/critic-logic.ps1",
+      "destination": ".ci/bin/modules/critic-logic.ps1",
+      "sha256": "05a9eec7153f53817e7fdb51ebf94ab0e7aa9c957fe5fdce6976a0522f7436a7",
+      "size": 10077,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/observer-logic.ps1",
+      "destination": ".ci/bin/modules/observer-logic.ps1",
+      "sha256": "e8ab86d42a6416cc016551a4d96e6ef7e0feb11bd00c70788c0792cf48db49d7",
+      "size": 20565,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/project-logic.ps1",
+      "destination": ".ci/bin/modules/project-logic.ps1",
+      "sha256": "265c00299ba05fee483b81aa8581c861a99b9c3c2ff3d0ad63b49419318aa6d7",
+      "size": 11880,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/sonar-logic.ps1",
+      "destination": ".ci/bin/modules/sonar-logic.ps1",
+      "sha256": "93ea78902b609fb5bdccb7d4be32a3092a0cbe480c9e86747ac7f5510619f49c",
+      "size": 19049,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/todo-engine.ps1",
+      "destination": ".ci/bin/modules/todo-engine.ps1",
+      "sha256": "23e4d443f8ed32ecb9991507d64a97746e5b2a4dd4cf308e5ba1ae868dd9054e",
+      "size": 24957,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/toolchain-gradle.ps1",
+      "destination": ".ci/bin/modules/toolchain-gradle.ps1",
+      "sha256": "142abde92561ed00390a9ce2ec26352c0caf3c3aee745b650ebaa41cac74ecb5",
+      "size": 13226,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/toolchain-java.ps1",
+      "destination": ".ci/bin/modules/toolchain-java.ps1",
+      "sha256": "ad0893eed8bde6a460f1686fc12a9b2daf4f78bde1a424d7f6736a4b83a7492a",
+      "size": 8864,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/ui-commands.ps1",
+      "destination": ".ci/bin/modules/ui-commands.ps1",
+      "sha256": "4dfbe01271a4befe7d69b7d7cb2d154543d04f220306e7f9f7ef97ea6c5f0670",
+      "size": 11396,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/modules/verify-logic.ps1",
+      "destination": ".ci/bin/modules/verify-logic.ps1",
+      "sha256": "8290b22f0775cbb906fd700b1cb36e7fb876aa6150e651e35c98c80693a78274",
+      "size": 18849,
+      "role": "profile-module"
+    },
+    {
+      "source": "runtime/bin/start_dev_server_internal.ps1",
+      "destination": ".ci/bin/start_dev_server_internal.ps1",
+      "sha256": "d9d9cd47e001d01afdf4b8f4457b3ede2813690cdffc5a9c79137a1039c392b1",
+      "size": 652,
+      "role": "profile-helper"
+    },
+    {
+      "source": "runtime/bin/start_dev.ps1",
+      "destination": ".ci/bin/start_dev.ps1",
+      "sha256": "31dfae964cfe2b6b70ebc2ff7834acd9e576dc736278545b5ed7f74dc47721b6",
+      "size": 752,
+      "role": "profile-helper"
+    },
+    {
+      "source": "runtime/bin/start_devserver.ps1",
+      "destination": ".ci/bin/start_devserver.ps1",
+      "sha256": "5eeeba302748c18488a9dc521e598338ae883c87532a5cb19d39c715deaf0308",
+      "size": 1520,
+      "role": "profile-helper"
+    },
+    {
+      "source": "runtime/bin/start_ktor.ps1",
+      "destination": ".ci/bin/start_ktor.ps1",
+      "sha256": "cc00925cf4ced624b56c951e47351df6940085356e8b13b56da421bc77d1fa71",
+      "size": 813,
+      "role": "profile-helper"
+    }
+  ]
+}
