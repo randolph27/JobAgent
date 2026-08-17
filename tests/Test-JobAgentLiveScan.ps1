@@ -23,7 +23,7 @@ function Assert-True {
 }
 
 function New-TestCompany {
-    New-JobAgentCompanySeed `
+    $company = New-JobAgentCompanySeed `
         -CanonicalName 'Example AG' `
         -OfficialWebsiteUrl 'https://example.invalid/' `
         -CareerUrl 'https://example.invalid/careers' `
@@ -34,6 +34,14 @@ function New-TestCompany {
         -DiscoverySourceUrl 'https://example.invalid/careers' `
         -CreatedAt ([datetime]'2026-08-17T09:00:00Z') `
         -NextScanAt ([datetime]'2026-08-17T09:00:00Z')
+    $company.ats = @(
+        [pscustomobject]@{
+            system = 'Workday'
+            official_domain = 'myworkdayjobs.invalid'
+            verified_by_url = 'https://example.invalid/careers'
+        }
+    )
+    return $company
 }
 
 function New-TestSource {
@@ -105,6 +113,49 @@ $candidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $html -BaseUrl 'https:/
 Assert-True -Condition ($candidates.Count -eq 1) -Message 'Live-Parser filtert offizielle Kandidaten nicht korrekt.'
 Assert-True -Condition ($candidates[0].detail_url -eq 'https://example.invalid/careers/head-of-it-123') -Message 'Live-Parser kanonisiert Detail-URL nicht.'
 
+$jsonLdHtml = @'
+<html>
+  <head>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "JobPosting",
+            "title": "Director IT",
+            "url": "https://example.myworkdayjobs.invalid/job/director-it-987?source=linkedin",
+            "identifier": {
+              "@type": "PropertyValue",
+              "name": "reqId",
+              "value": "WD-987"
+            },
+            "employmentType": "FULL_TIME",
+            "description": "<p>Strategische IT-Leitung.</p>",
+            "jobLocation": {
+              "@type": "Place",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Muenchen"
+              }
+            }
+          }
+        ]
+      }
+    </script>
+  </head>
+</html>
+'@
+$jsonLdCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $jsonLdHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @('Director IT'))
+Assert-True -Condition ($jsonLdCandidates.Count -eq 1) -Message 'JSON-LD JobPosting wurde nicht extrahiert.'
+Assert-True -Condition ($jsonLdCandidates[0].detail_url -eq 'https://example.myworkdayjobs.invalid/job/director-it-987') -Message 'JSON-LD ATS-URL wurde nicht kanonisiert.'
+Assert-True -Condition ($jsonLdCandidates[0].external_job_id -eq 'WD-987') -Message 'JSON-LD extrahiert keine externe Job-ID.'
+Assert-True -Condition ($jsonLdCandidates[0].location_label -eq 'Muenchen') -Message 'JSON-LD extrahiert den Ort nicht.'
+
+$atsAnchorHtml = '<html><body><a href="https://example.myworkdayjobs.invalid/en-US/search/job/Munich/987">Jetzt bewerben</a></body></html>'
+$atsCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $atsAnchorHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @())
+Assert-True -Condition ($atsCandidates.Count -eq 1) -Message 'ATS-URL-Muster ohne Titeltext wurde nicht erkannt.'
+Assert-True -Condition ($atsCandidates[0].detail_url -eq 'https://example.myworkdayjobs.invalid/en-US/search/job/Munich/987') -Message 'ATS-URL-Muster liefert falsche Detail-URL.'
+
 $fetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -139,6 +190,30 @@ $emptyResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $poli
 Assert-True -Condition ($emptyResult.status -eq 'PARTIAL') -Message 'Live-Adapter markiert leere offizielle Quelle nicht als PARTIAL.'
 Assert-True -Condition ($emptyResult.error_class -eq 'NO_JOBS_FOUND') -Message 'Live-Adapter setzt falsche Fehlerklasse fuer leere Quelle.'
 
+$jsonLdFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content $jsonLdHtml
+            break
+        }
+        'https://example.myworkdayjobs.invalid/job/director-it-987' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Director IT</h1><p>Strategische IT-Leitung in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$jsonLdResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $jsonLdFetcher
+Assert-True -Condition ($jsonLdResult.status -eq 'SUCCESS') -Message 'Live-Adapter verarbeitet JSON-LD JobPosting nicht erfolgreich.'
+Assert-True -Condition ($jsonLdResult.raw_jobs[0].ats_job_id -eq 'WD-987') -Message 'Live-Adapter uebernimmt ATS-/Job-ID aus JSON-LD nicht.'
+Assert-True -Condition ($jsonLdResult.raw_jobs[0].location_label -eq 'Muenchen') -Message 'Live-Adapter uebernimmt JSON-LD-Ort nicht.'
+Assert-True -Condition ($jsonLdResult.raw_jobs[0].employment_type -eq 'FULL_TIME') -Message 'Live-Adapter uebernimmt employmentType aus JSON-LD nicht.'
+
 $retryCounter = 0
 $retryFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -161,8 +236,11 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'policy_limits',
         'official_candidate_filter',
         'aggregator_rejection',
+        'jsonld_jobposting_extraction',
+        'ats_url_pattern_detection',
         'live_adapter_success_with_detail_verification',
         'live_adapter_no_jobs_found',
+        'live_adapter_jsonld_ats_success',
         'retry_attempt_log'
     )
 } | ConvertTo-Json -Depth 5

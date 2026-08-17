@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 Import-Module (Join-Path $root 'src\JobAgent.CompanyInventory.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.DailyRun.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $root 'src\JobAgent.LiveScan.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.SourceAdapters.psm1') -Force -DisableNameChecking
 
@@ -279,6 +280,131 @@ try {
     Assert-True -Condition ($careerJob.status -ne 'REMOVED') -Message 'Fehlgeschlagene Parallelquelle hat den Karriere-Job faelschlich entfernt.'
     Assert-True -Condition ($atsJob.status -eq 'REMOVED') -Message 'Erfolgreich leere Parallelquelle hat den eigenen ATS-Job nicht entfernt.'
 
+    $liveProjectRoot = New-TestProjectRoot
+    $liveDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
+    $liveCompany = New-TestCompany -Name 'Example AG' -Domain 'example.invalid' -Priority 95
+    $liveCompany.ats = @(
+        [pscustomobject]@{
+            system = 'Workday'
+            official_domain = 'myworkdayjobs.invalid'
+            verified_by_url = 'https://example.invalid/careers'
+        }
+    )
+    $liveDocument = Upsert-JobAgentCompany -Document $liveDocument -Company $liveCompany
+    $liveDocument = Upsert-JobAgentJobSource -Document $liveDocument -JobSource ([pscustomobject]@{
+            source_id = 'source:example_ag_ats'
+            company_id = 'company:example_ag'
+            source_type = 'OFFICIAL_ATS'
+            url = 'https://example.myworkdayjobs.invalid/en-US/search'
+            canonical_url = 'https://example.myworkdayjobs.invalid/en-US/search'
+            is_official = $true
+            verified_at = '2026-08-17T09:00:00.000Z'
+            verification_basis = 'COMPANY_LINKED_ATS'
+            verification_evidence = @(
+                [pscustomobject]@{
+                    status = 'VERIFIED'
+                    evidence_type = 'COMPANY_LINKED_ATS'
+                    url = 'https://example.myworkdayjobs.invalid/en-US/search'
+                    basis_url = 'https://example.invalid/careers'
+                    redirect_chain = @()
+                    observed_at = '2026-08-17T09:00:00.000Z'
+                    reason = 'ATS-Domain ist ueber die offizielle Karriere-URL belegt.'
+                },
+                [pscustomobject]@{
+                    status = 'VERIFIED'
+                    evidence_type = 'ATS_VERIFIED_BY_URL'
+                    url = 'https://example.invalid/careers'
+                    basis_url = 'https://example.invalid/careers'
+                    redirect_chain = @()
+                    observed_at = '2026-08-17T09:00:00.000Z'
+                    reason = 'Die ATS-Domain ist ueber die offizielle Firmen- oder Karriere-URL belegt.'
+                }
+            )
+        })
+    Write-JobAgentStore -ProjectRoot $liveProjectRoot -Document $liveDocument | Out-Null
+    $livePolicy = New-JobAgentLiveScanPolicy -TimeoutSeconds 10 -MaxRetries 0 -MaxResultsPerSource 5 -MaxDetailFetchesPerSource 2 -SearchTerms @('Director IT')
+    $liveJsonLd = @'
+<html>
+  <head>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "JobPosting",
+        "title": "Director IT",
+        "url": "https://example.myworkdayjobs.invalid/job/director-it-001?source=linkedin",
+        "identifier": { "@type": "PropertyValue", "value": "WD-001" },
+        "employmentType": "FULL_TIME",
+        "description": "<p>Strategische IT-Leitung mit Standort Muenchen.</p>",
+        "jobLocation": {
+          "@type": "Place",
+          "address": { "@type": "PostalAddress", "addressLocality": "Muenchen" }
+        }
+      }
+    </script>
+  </head>
+</html>
+'@
+    $liveAdapter = {
+        param([object]$AdapterInput)
+
+        $fetcher = {
+            param([string]$Url, [object]$Policy, [int]$Attempt)
+
+            switch ($Url) {
+                'https://example.myworkdayjobs.invalid/en-US/search' {
+                    [pscustomobject]@{
+                        ok = $true
+                        url = $Url
+                        final_url = $Url
+                        status_code = 200
+                        content = $liveJsonLd
+                        content_type = 'text/html'
+                        started_at = '2026-08-17T10:00:00.000Z'
+                        finished_at = '2026-08-17T10:00:01.000Z'
+                        error = $null
+                    }
+                    break
+                }
+                'https://example.myworkdayjobs.invalid/job/director-it-001' {
+                    [pscustomobject]@{
+                        ok = $true
+                        url = $Url
+                        final_url = $Url
+                        status_code = 200
+                        content = '<main><h1>Director IT</h1><p>Strategische IT-Leitung mit Standort Muenchen.</p></main>'
+                        content_type = 'text/html'
+                        started_at = '2026-08-17T10:00:01.000Z'
+                        finished_at = '2026-08-17T10:00:02.000Z'
+                        error = $null
+                    }
+                    break
+                }
+                default {
+                    [pscustomobject]@{
+                        ok = $false
+                        url = $Url
+                        final_url = $Url
+                        status_code = 404
+                        content = ''
+                        content_type = 'text/html'
+                        started_at = '2026-08-17T10:00:00.000Z'
+                        finished_at = '2026-08-17T10:00:01.000Z'
+                        error = 'not found'
+                    }
+                    break
+                }
+            }
+        }
+
+        Invoke-JobAgentLiveHtmlAdapter -AdapterInput $AdapterInput -Policy $livePolicy -Fetcher $fetcher
+    }
+    $liveRun = Invoke-JobAgentDailyRun -ProjectRoot $liveProjectRoot -AdapterResolver $liveAdapter -StartedAt ([datetime]'2026-08-21T10:00:00Z') -CompanyIds @('company:example_ag')
+    $liveJob = @($liveRun.document.jobs | Where-Object { [string]$_.company_id -eq 'company:example_ag' })[0]
+    Assert-True -Condition ($liveRun.status -eq 'SUCCESS') -Message 'Live-Daily-Run mit JSON-LD/ATS sollte erfolgreich sein.'
+    Assert-True -Condition ($liveJob.ats_job_id -eq 'WD-001') -Message 'Live-Daily-Run uebernimmt ATS-ID aus JSON-LD nicht.'
+    Assert-True -Condition ($liveJob.location.target_area -eq 'MUNICH') -Message 'Live-Daily-Run uebernimmt JSON-LD-Standort nicht.'
+    Assert-True -Condition ($liveJob.employment_type -eq 'FULL_TIME') -Message 'Live-Daily-Run uebernimmt employmentType aus JSON-LD nicht.'
+
     [pscustomobject]@{
         status = 'ok'
         cases = @(
@@ -288,11 +414,15 @@ try {
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
             'daily_run_cli_fixture_mode',
-            'daily_run_multi_source_partial_removal'
+            'daily_run_multi_source_partial_removal',
+            'daily_run_live_jsonld_ats_source'
         )
     } | ConvertTo-Json -Depth 4
 }
 finally {
+    if ($null -ne (Get-Variable -Name liveProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $liveProjectRoot)) {
+        Remove-Item -LiteralPath $liveProjectRoot -Recurse -Force
+    }
     if ($null -ne (Get-Variable -Name multiSourceProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $multiSourceProjectRoot)) {
         Remove-Item -LiteralPath $multiSourceProjectRoot -Recurse -Force
     }

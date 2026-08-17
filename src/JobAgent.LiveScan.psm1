@@ -135,6 +135,71 @@ function ConvertTo-JobAgentLivePlainText {
     return $text
 }
 
+function Get-JobAgentLiveTextValue {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value) {
+        return $null
+    }
+    if ($Value -is [string]) {
+        $text = $Value.Trim()
+        if ([string]::IsNullOrWhiteSpace($text)) {
+            return $null
+        }
+        return $text
+    }
+    if ($Value -is [System.Collections.IEnumerable] -and -not ($Value -is [string])) {
+        foreach ($item in $Value) {
+            $resolved = Get-JobAgentLiveTextValue -Value $item
+            if (-not [string]::IsNullOrWhiteSpace($resolved)) {
+                return $resolved
+            }
+        }
+        return $null
+    }
+    return Get-JobAgentLiveTextValue -Value ([string]$Value)
+}
+
+function Get-JobAgentLiveNestedValue {
+    param(
+        [Parameter()][AllowNull()][object]$Object,
+        [Parameter(Mandatory)][string[]]$Path
+    )
+
+    if ($Path.Count -eq 0) {
+        return $Object
+    }
+
+    $current = $Object
+    for ($index = 0; $index -lt $Path.Count; $index++) {
+        $segment = $Path[$index]
+        if ($null -eq $current) {
+            return $null
+        }
+        if ($current -is [System.Collections.IEnumerable] -and -not ($current -is [string])) {
+            foreach ($item in $current) {
+                $resolved = Get-JobAgentLiveNestedValue -Object $item -Path $Path[$index..($Path.Count - 1)]
+                if ($null -ne $resolved) {
+                    return $resolved
+                }
+            }
+            return $null
+        }
+        if ($current.PSObject.Properties.Name -notcontains $segment) {
+            return $null
+        }
+        $current = $current.$segment
+    }
+    return $current
+}
+
+function Test-JobAgentLiveDetailUrlPattern {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$Url)
+
+    return $Url -match '(?i)(/jobs?/|/job-details/|/vacanc(y|ies)/|/position/|/posting/|/requisition/|jobid=|job_id=|gh_jid=|gh_src=|lever\.co|workdayjobs|smartrecruiters|recruitee|join\.com|personio|softgarden|ashbyhq|successfactors)'
+}
+
 function Test-JobAgentLiveCandidateText {
     [CmdletBinding()]
     param(
@@ -154,6 +219,153 @@ function Test-JobAgentLiveCandidateText {
     return $false
 }
 
+function New-JobAgentLiveCandidate {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Title,
+        [Parameter(Mandatory)][string]$DetailUrl,
+        [Parameter(Mandatory)][string]$VerificationBasis,
+        [Parameter()][AllowNull()][string]$ExternalJobId,
+        [Parameter()][AllowNull()][string]$AtsJobId,
+        [Parameter()][AllowNull()][string]$LocationLabel,
+        [Parameter()][AllowNull()][string]$Summary,
+        [Parameter()][AllowNull()][string]$EmploymentType,
+        [Parameter()][ValidateRange(0, 100)][int]$ExtractionConfidence = 60
+    )
+
+    return [pscustomobject]@{
+        title = $Title
+        detail_url = $DetailUrl
+        verification_basis = $VerificationBasis
+        external_job_id = if ([string]::IsNullOrWhiteSpace($ExternalJobId)) { $null } else { $ExternalJobId }
+        ats_job_id = if ([string]::IsNullOrWhiteSpace($AtsJobId)) { $null } else { $AtsJobId }
+        location_label = if ([string]::IsNullOrWhiteSpace($LocationLabel)) { 'UNKNOWN' } else { $LocationLabel.Trim() }
+        summary = if ([string]::IsNullOrWhiteSpace($Summary)) { $null } else { (ConvertTo-JobAgentLivePlainText -Html $Summary -MaxLength 500) }
+        employment_type = if ([string]::IsNullOrWhiteSpace($EmploymentType)) { $null } else { $EmploymentType.Trim() }
+        extraction_confidence = $ExtractionConfidence
+    }
+}
+
+function Get-JobAgentLiveJsonLdNodes {
+    param([Parameter()][AllowNull()][object]$Node)
+
+    $nodes = New-Object System.Collections.Generic.List[object]
+    if ($null -eq $Node) {
+        return @()
+    }
+    if ($Node -is [System.Collections.IEnumerable] -and -not ($Node -is [string])) {
+        foreach ($item in $Node) {
+            foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $item)) {
+                $nodes.Add($resolved)
+            }
+        }
+        return $nodes.ToArray()
+    }
+
+    $nodes.Add($Node)
+    foreach ($propertyName in @('@graph', 'graph', 'itemListElement', 'jobs')) {
+        if ($Node.PSObject.Properties.Name -contains $propertyName) {
+            foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.$propertyName)) {
+                $nodes.Add($resolved)
+            }
+        }
+    }
+    if ($Node.PSObject.Properties.Name -contains 'item') {
+        foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.item)) {
+            $nodes.Add($resolved)
+        }
+    }
+    return $nodes.ToArray()
+}
+
+function ConvertFrom-JobAgentLiveJsonLdCandidates {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][ValidateRange(1, 100)][int]$MaxResults = 10
+    )
+
+    $scriptMatches = [regex]::Matches($Html, '<script\b[^>]*type\s*=\s*["'']application/(?:ld\+json|json)["''][^>]*>(?<json>.*?)</script>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    $candidates = New-Object System.Collections.Generic.List[object]
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+
+    foreach ($match in $scriptMatches) {
+        if ($candidates.Count -ge $MaxResults) {
+            break
+        }
+
+        $jsonText = [Net.WebUtility]::HtmlDecode($match.Groups['json'].Value).Trim()
+        if ([string]::IsNullOrWhiteSpace($jsonText)) {
+            continue
+        }
+
+        try {
+            $parsed = $jsonText | ConvertFrom-Json -Depth 100 -ErrorAction Stop
+        }
+        catch {
+            continue
+        }
+
+        foreach ($node in @(Get-JobAgentLiveJsonLdNodes -Node $parsed)) {
+            if ($candidates.Count -ge $MaxResults) {
+                break
+            }
+
+            $typeText = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('@type'))
+            if ([string]::IsNullOrWhiteSpace($typeText) -or $typeText -notmatch '(?i)\bJobPosting\b') {
+                continue
+            }
+
+            $detailUrlRaw = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('url'))
+            if ([string]::IsNullOrWhiteSpace($detailUrlRaw)) {
+                continue
+            }
+
+            $detailUrl = [Uri]::new([Uri]$BaseUrl, $detailUrlRaw).AbsoluteUri
+            $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $detailUrl
+            if ($evaluation.is_official -ne $true) {
+                continue
+            }
+
+            $title = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('title'))
+            if ([string]::IsNullOrWhiteSpace($title)) {
+                $title = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('name'))
+            }
+            if ([string]::IsNullOrWhiteSpace($title)) {
+                continue
+            }
+
+            $externalJobId = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('identifier', 'value'))
+            if ([string]::IsNullOrWhiteSpace($externalJobId)) {
+                $externalJobId = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('identifier'))
+            }
+            $locationLabel = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('jobLocation', 'address', 'addressLocality'))
+            if ([string]::IsNullOrWhiteSpace($locationLabel)) {
+                $locationLabel = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('jobLocation', 'name'))
+            }
+            $employmentType = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('employmentType'))
+            $summary = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('description'))
+
+            if ($seen.Add([string]$evaluation.canonical_url)) {
+                $candidates.Add((New-JobAgentLiveCandidate `
+                        -Title $title `
+                        -DetailUrl ([string]$evaluation.canonical_url) `
+                        -VerificationBasis ([string]$evaluation.verification_basis) `
+                        -ExternalJobId $externalJobId `
+                        -AtsJobId $externalJobId `
+                        -LocationLabel $locationLabel `
+                        -Summary $summary `
+                        -EmploymentType $employmentType `
+                        -ExtractionConfidence 90))
+            }
+        }
+    }
+
+    return $candidates.ToArray()
+}
+
 function ConvertFrom-JobAgentLiveCareerPage {
     [CmdletBinding()]
     param(
@@ -165,9 +377,18 @@ function ConvertFrom-JobAgentLiveCareerPage {
     )
 
     $baseUri = [Uri]$BaseUrl
-    $matches = [regex]::Matches($Html, '<a\b(?<attrs>[^>]*)>(?<text>.*?)</a>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
     $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     $candidates = New-Object System.Collections.Generic.List[object]
+    foreach ($candidate in @(ConvertFrom-JobAgentLiveJsonLdCandidates -Html $Html -BaseUrl $BaseUrl -Company $Company -MaxResults $MaxResults)) {
+        if ($candidates.Count -ge $MaxResults) {
+            break
+        }
+        if ($seen.Add([string]$candidate.detail_url)) {
+            $candidates.Add($candidate)
+        }
+    }
+
+    $matches = [regex]::Matches($Html, '<a\b(?<attrs>[^>]*)>(?<text>.*?)</a>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
     foreach ($match in $matches) {
         if ($candidates.Count -ge $MaxResults) {
             break
@@ -186,15 +407,15 @@ function ConvertFrom-JobAgentLiveCareerPage {
             continue
         }
         $text = ConvertTo-JobAgentLivePlainText -Html $match.Groups['text'].Value -MaxLength 160
-        if (-not (Test-JobAgentLiveCandidateText -Text ($text + ' ' + $evaluation.canonical_url) -SearchTerms $SearchTerms)) {
+        if (-not (Test-JobAgentLiveCandidateText -Text ($text + ' ' + $evaluation.canonical_url) -SearchTerms $SearchTerms) -and -not (Test-JobAgentLiveDetailUrlPattern -Url ([string]$evaluation.canonical_url))) {
             continue
         }
         if ($seen.Add([string]$evaluation.canonical_url)) {
-            $candidates.Add([pscustomobject]@{
-                title = if ([string]::IsNullOrWhiteSpace($text)) { 'UNKNOWN' } else { $text }
-                detail_url = [string]$evaluation.canonical_url
-                verification_basis = [string]$evaluation.verification_basis
-            })
+            $candidates.Add((New-JobAgentLiveCandidate `
+                    -Title $(if ([string]::IsNullOrWhiteSpace($text)) { 'UNKNOWN' } else { $text }) `
+                    -DetailUrl ([string]$evaluation.canonical_url) `
+                    -VerificationBasis ([string]$evaluation.verification_basis) `
+                    -ExtractionConfidence 65))
         }
     }
     return $candidates.ToArray()
@@ -227,16 +448,24 @@ function New-JobAgentLiveRawJob {
     )
 
     $summary = ConvertTo-JobAgentLivePlainText -Html ([string]$DetailFetch.content) -MaxLength 500
+    if ([string]::IsNullOrWhiteSpace($summary) -and $Candidate.PSObject.Properties.Name -contains 'summary') {
+        $summary = [string]$Candidate.summary
+    }
     $idMatch = [regex]::Match([string]$Candidate.detail_url, '(?i)(?:jobid|job_id|job|req|requisition|posting)[=/_-]?(?<id>[A-Za-z0-9._-]{2,})')
-    $externalId = if ($idMatch.Success) { $idMatch.Groups['id'].Value } else { $null }
+    $externalId = if (($Candidate.PSObject.Properties.Name -contains 'external_job_id') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.external_job_id)) { [string]$Candidate.external_job_id } elseif ($idMatch.Success) { $idMatch.Groups['id'].Value } else { $null }
+    $atsJobId = if (($Candidate.PSObject.Properties.Name -contains 'ats_job_id') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.ats_job_id)) { [string]$Candidate.ats_job_id } else { $externalId }
     $job = New-JobAgentRawJob `
         -Title ([string]$Candidate.title) `
         -DetailUrl ([string]$Candidate.detail_url) `
         -ExternalJobId $externalId `
-        -AtsJobId 'UNKNOWN' `
-        -LocationLabel 'UNKNOWN' `
+        -AtsJobId $atsJobId `
+        -LocationLabel $(if (($Candidate.PSObject.Properties.Name -contains 'location_label') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.location_label)) { [string]$Candidate.location_label } else { 'UNKNOWN' }) `
         -Summary $summary `
-        -ExtractionConfidence 60
+        -ExtractionConfidence $(if (($Candidate.PSObject.Properties.Name -contains 'extraction_confidence') -and $null -ne $Candidate.extraction_confidence) { [int]$Candidate.extraction_confidence } else { 60 }) `
+        -SourceStatus 'ACTIVE'
+    if (($Candidate.PSObject.Properties.Name -contains 'employment_type') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.employment_type)) {
+        $job | Add-Member -NotePropertyName employment_type -NotePropertyValue ([string]$Candidate.employment_type) -Force
+    }
     $job | Add-Member -NotePropertyName live_verification -NotePropertyValue ([pscustomobject]@{
         detail_http_status = [int]$DetailFetch.status_code
         detail_final_url = [string]$DetailFetch.final_url
