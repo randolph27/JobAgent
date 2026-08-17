@@ -107,7 +107,8 @@ function New-JobAgentRawJob {
         [Parameter()][AllowNull()][string]$AtsJobId,
         [Parameter()][AllowNull()][string]$LocationLabel,
         [Parameter()][AllowNull()][string]$Summary,
-        [Parameter()][ValidateRange(0, 100)][int]$ExtractionConfidence = 80
+        [Parameter()][ValidateRange(0, 100)][int]$ExtractionConfidence = 80,
+        [Parameter()][ValidateSet('ACTIVE', 'OPEN', 'PUBLISHED', 'CLOSED', 'EXPIRED', 'FILLED')][string]$SourceStatus = 'ACTIVE'
     )
 
     if ([string]::IsNullOrWhiteSpace($Title)) {
@@ -125,6 +126,7 @@ function New-JobAgentRawJob {
         location_label = if ([string]::IsNullOrWhiteSpace($LocationLabel)) { 'UNKNOWN' } else { $LocationLabel.Trim() }
         summary = if ([string]::IsNullOrWhiteSpace($Summary)) { 'UNKNOWN' } else { $Summary.Trim() }
         extraction_confidence = $ExtractionConfidence
+        source_status = $SourceStatus
     }
 }
 
@@ -337,6 +339,7 @@ function Get-JobAgentAdapterContract {
     [pscustomobject]@{
         input_required = @('company', 'source', 'scan_context')
         output_required = @('adapter', 'company_id', 'source_id', 'official_source_url', 'status', 'error_class', 'retry_recommendation', 'raw_jobs', 'scan_attempt', 'artifact_paths')
+        raw_job_optional = @('source_status', 'job_state')
         error_classes = $script:AdapterErrorClasses
         retry_recommendations = $script:RetryRecommendations
         no_go = @('no_login_bypass', 'no_captcha_bypass', 'no_job_board_as_primary_source', 'no_live_lookup_in_function_tests')

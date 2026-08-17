@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-018 Quellenbezogene Entfernungssicherheit und expliziten `CLOSED`-Nachweis implementieren #comment: Falsche Statuswechsel sind kritischer als fehlende Treffer, weil sie die persistente Historie beschädigen können.
+  - [x] Beschreibung: Ein erfolgreicher Scan einer Quelle markiert `REMOVED` jetzt nur noch für Jobs derselben `source_id`; `CLOSED` entsteht nur aus explizitem `source_status`/`job_state` der offiziellen Quelle oder eines offiziell angebundenen ATS.
+  - [x] Scope: Erweitert wurden `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.Persistence.psm1`, `src/JobAgent.SourceAdapters.psm1`, `tests/Test-JobAgentStatusMachine.ps1`, `tests/Test-JobAgentPersistence.ps1`, `tests/Test-JobAgentSourceAdapters.ps1` und `tests/Test-JobAgentDailyRun.ps1`. `src/JobAgent.LiveScan.psm1` brauchte für diesen Abschluss keine Codeänderung. No-Go bleibt: Fehler, Timeout, blockierte Quelle oder leere Teilquelle dürfen keine firmenweite Entfernung auslösen.
+  - [x] Ist-Stand (2026-08-17 17:25): `Mark-JobAgentMissingJobs` unterstützt jetzt Source-Scoping; die Statusmaschine entfernt nur pro erfolgreich geprüfter Quelle und verarbeitet explizite Closed-Signale zu `JOB_CLOSED`. Neue RawJobs erhalten optional `source_status`; der Adaptervertrag dokumentiert `source_status` und `job_state` als optionale RawJob-Felder.
+  - [x] Abhängigkeiten: JA-009, JA-010, JA-016 und JA-017 waren abgeschlossen; weiterer Live-Ausbau bleibt nachgelagert.
+  - [x] Aufwand/Dauer: Aufwand M, innerhalb der aktuellen Arbeitseinheit abgeschlossen.
+  - [x] Prioritätsscore: 94/100, weil Statusfehler den Kernauftrag `keine bekannten Stellen falsch neu/entfernt melden` direkt verletzen können.
+  - [x] Risiken und Unsicherheiten: Unterschiedliche ATS-Systeme signalisieren Schließung uneinheitlich; unbekannte Zustände bleiben fail-closed bei `ACTIVE` oder müssen später in JA-019/JA-020 explizit modelliert werden. Neue Closed-Treffer ohne bestehenden Job werden bewusst nicht als neuer Datensatz erzeugt.
+  - [x] Schritte:
+    1. `Mark-JobAgentMissingJobs` um optionales `SourceId`-Scoping erweitert und Aufrufer in der Statusmaschine von Firmen- auf Quellenebene umgestellt.
+    2. Statusmaschine um Lifecycle-Auswertung (`source_status`, `job_state`), `JOB_CLOSED`-Erzeugung und fail-closed Entfernung nur für erfolgreiche bzw. `NO_JOBS_FOUND`-Quellläufe ergänzt.
+    3. Mehrquellen-, Closed- und Daily-Run-Funktionsfälle ergänzt, damit leere/fehlerhafte Quellen andere Quellen nicht beeinflussen und explizite Closed-Signale korrekt persistiert werden.
+  - [x] Evidence: `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.Persistence.psm1`, `src/JobAgent.SourceAdapters.psm1`, `tests/Test-JobAgentStatusMachine.ps1`, `tests/Test-JobAgentPersistence.ps1`, `tests/Test-JobAgentSourceAdapters.ps1`, `tests/Test-JobAgentDailyRun.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0.
+  - [x] Audit: Kein Testfall erzeugt `REMOVED` aus Timeout oder Quellfehler; Mehrquellen-Fälle entfernen nur betroffene Quellen; explizite Closed-Signale erzeugen `CLOSED` und `JOB_CLOSED` ohne Seiteneffekte auf andere Quellen.
+  - [x] Supertest: Vom Nutzer nicht separat angefragt; gemaess Nutzeranweisung fuer diesen Abschluss als erledigt gewertet.
+
 - [x] JA-017 Reportfelder vollständig gegen Programmanweisung und Daily-Run-Ausgabeformat schließen #comment: Die Pflichtfelder aus der Programmanweisung sind jetzt im Reportmodell, in JSON/Markdown/HTML sichtbar und funktional abgesichert.
   - [x] Beschreibung: JSON-, Markdown- und HTML-Report zeigen jetzt Arbeitsmodell, Beschäftigungsart, Veröffentlichungsdatum oder `UNKNOWN`, Erkennungsdatum, letztes Sichtdatum, Gehalt oder `UNKNOWN`, wichtigste Anforderungen, offiziellen Bewerbungslink, Alter aktiver Stellen, neue Unternehmen, Fehler/unsichere Quellen, Recherche-Statistik und A/B/C-Begründung.
   - [x] Scope: Erweitert wurden `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `tests/Test-JobAgentReport.ps1` und `tests/Test-JobAgentDailyRun.ps1`; `schemas/jobagent.schema.json` und `docs/data-model.md` mussten für diesen Abschluss nicht geändert werden. Keine Ableitung fehlender Werte aus Titel/Snippets; unbekannte Felder bleiben `UNKNOWN`.

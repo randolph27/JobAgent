@@ -5,30 +5,11 @@
 - Kapazitätsannahme: 1 Entwickler/Agent, lokale Windows-Umgebung `D:\_Scripte\JobAgent`, App läuft nur lokal, Daily-Runs zunächst manuell oder über lokale Automatisierung, kein externer Schreibzugriff auf Bewerbungs- oder Unternehmenssysteme.
 - Projektgröße: PowerShell-Modulstack mit JSON-Store, CI-Vertrag, Funktions- und Supertest-Lane; keine Web-UI als Produktivserver, aber lokale HTML-Berichtsartefakte sind fachlich erforderlich.
 - Review-Basis: Implementierung bis JA-016 ist weitgehend fachlich angelegt, aber die angehängte Programmanweisung ist noch nicht vollständig umgesetzt. Gesichert vorhanden sind Persistenz, Firmen-Seed, offizielle Quellenverifikation, Fixture-/generischer HTML-/Live-Adapter, Klassifikation, Deduplikation, Statusmaschine, Daily-Run, JSON-/Markdown-/HTML-Report, Betriebsstatus, Coverage-Backlog und Supertest.
-- Kritische Lücken: Reportfelder aus der Programmanweisung sind unvollständig; Live-Recherche ist noch Pilotqualität; Firmeninventar wird nicht systematisch autonom erweitert; Status `CLOSED` und quellenbezogene Entfernungssicherheit sind noch nicht ausreichend; lokale App-/Artefaktablage und Audit-Nachweise sind noch nicht vollständig vertraglich abgesichert.
-- Priorisierung: zuerst Report-Vertragskonformität, weil der HTML-Output nun vorhanden ist und sichtbare Pflichtfelder noch fehlen; danach Status-/Quellensicherheit, weil falsche NEW/REMOVED/CLOSED-Ergebnisse fachlich schwerer wiegen; danach Live-Adapter und Firmenabdeckung; zuletzt lokale Betriebs-/Audit-Härtung.
+- Kritische Lücken: Verifikationsbelege für offizielle ATS-/Redirect-Anbindungen sind noch nicht persistent und auditierbar; Live-Recherche ist noch Pilotqualität; Firmeninventar wird nicht systematisch autonom erweitert; lokale App-/Artefaktablage und Audit-Nachweise sind noch nicht vollständig vertraglich abgesichert.
+- Priorisierung: zuerst Quellenbeweiskette, weil JA-018 die Statuslogik abgesichert hat und zusätzliche Live-/ATS-Quellen nun belastbare Verifikationsbelege brauchen; danach Live-Adapter und Firmenabdeckung; zuletzt lokale Betriebs-/Audit-Härtung.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis; keine Bewerbung; keine extern wirksame Aktion ohne ausdrückliche Bestätigung; keine Secrets in Reports, Logs, Todo, Handoff oder Git.
 
 ## M7 - Status-, Quellen- und Historienkorrektheit
-
-- [ ] JA-018 Quellenbezogene Entfernungssicherheit und expliziten `CLOSED`-Nachweis implementieren #comment: Falsche Statuswechsel sind kritischer als fehlende Treffer, weil sie die persistente Historie beschädigen können.
-  - [ ] Beschreibung: Ein erfolgreicher Scan einer Quelle darf nur Stellen als `REMOVED` markieren, die zu genau dieser erfolgreich geprüften Quelle gehören; `CLOSED` entsteht nur aus explizitem, belegtem Schließungs-/Expired-Signal der offiziellen Quelle oder eines offiziell angebundenen ATS.
-  - [ ] Scope: Betroffen sind `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.Persistence.psm1`, `src/JobAgent.SourceAdapters.psm1`, `src/JobAgent.LiveScan.psm1`, `tests/Test-JobAgentStatusMachine.ps1`, `tests/Test-JobAgentDailyRun.ps1`; No-Go: Fehler, Timeout, blockierte Quelle oder leere Teilquelle dürfen keine Firmen-weite Entfernung auslösen.
-  - [ ] Ist-Stand (2026-08-17 16:20): `Mark-JobAgentMissingJobs` arbeitet firmenbezogen; bei mehreren offiziellen Quellen eines Unternehmens kann ein erfolgreicher Scan einer Quelle theoretisch Jobs anderer Quellen als `REMOVED` markieren, wenn sie im Seen-Set fehlen. `JOB_CLOSED` existiert als Eventtyp, aber ein belegter Adapterpfad für CLOSED ist nicht erkennbar abgesichert.
-  - [ ] Abhängigkeiten: JA-009 und JA-010 sind abgeschlossen; JA-017 sollte vor UI-/Report-Abnahme laufen, ist für die Statuslogik aber nicht blockierend.
-  - [ ] Aufwand/Dauer: Aufwand M; Dauer 0,5-1 Arbeitstag bei 1 Agent; parallelisierbar mit JA-016 nach getrennten Testfixtures.
-  - [ ] Prioritätsscore: 94/100, weil Statusfehler den Kernauftrag `keine bekannten Stellen falsch neu/entfernt melden` direkt verletzen können.
-  - [ ] Ordnungsbegründung: Vor breiter Live-Abdeckung muss die Statusmaschine fail-closed sein, damit mehr Quellen nicht mehr falsche negative Status erzeugen.
-  - [ ] Risiken und Unsicherheiten: Unterschiedliche ATS-Systeme signalisieren Schließung uneinheitlich; ohne expliziten Beleg muss `REMOVED` oder `UNKNOWN` statt `CLOSED` verwendet werden.
-  - [ ] Schritte:
-    1. `Mark-JobAgentMissingJobs` um `SourceId` oder source-scoped Seen-Set erweitern und nur Jobs derselben `source_id` auf `REMOVED` setzen.
-    2. Adapter-Rohjob- oder AdapterResult-Vertrag um ein optionales, getestetes Closed-Signal erweitern, z.B. `source_status = CLOSED` oder `job_state = CLOSED`, und daraus `JOB_CLOSED` erzeugen.
-    3. Zwei-Quellen-Fixture testen: Quelle A erfolgreich ohne Job darf nur Jobs aus A entfernen; Quelle B-Jobs bleiben aktiv; Fehlerquelle entfernt gar nichts; explizites Closed-Signal erzeugt `CLOSED`.
-  - [ ] Evidence: Statusmaschinen-Test mit Multi-Source-Unternehmen; Daily-Run-Test mit Firmenfehler und paralleler offizieller Quelle; ChangeEvents für `JOB_REMOVED` und `JOB_CLOSED` mit Reason und Source-Bezug.
-  - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1`; optional `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` bei Signaturänderung.
-  - [ ] Audit: Prüfen, dass kein Testfall `REMOVED` aus Timeout, 403, 429, Parsingfehler oder Quelle-ohne-Zuständigkeit erzeugt; `last_seen` bleibt unverändert, wenn ein Job nicht offiziell wiedererkannt wurde.
-  - [ ] Supertest: Nach grünen Funktionstests `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1`.
-  - [ ] Meilenstein und Parallelisierung: M7; blockiert JA-020 und breite Live-Scans, kann aber parallel zu JA-016 vorbereitet werden.
 
 - [ ] JA-019 Verifikationsbelege für offizielle ATS-Anbindung und Redirects persistieren #comment: Die Anweisung erlaubt ATS-Seiten nur, wenn sie offiziell vom Unternehmen betrieben oder verlinkt sind; Domainvergleich allein ist dafür nicht in jedem Fall ausreichend.
   - [ ] Beschreibung: Für jede offizielle Dritt-/ATS-Quelle wird ein nachvollziehbarer Beleg gespeichert, z.B. verlinkende Unternehmensseite, verifizierte Career-URL, Redirect-Kette oder manuell gepflegte Firmenbindung; der Report kann unsichere Quellen klar ausweisen, ohne sie als verifizierten Treffer zu zählen.

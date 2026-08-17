@@ -78,6 +78,7 @@ catch {
 
 $rawJob = New-JobAgentRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/job-123' -ExternalJobId '123' -LocationLabel 'Muenchen' -Summary 'Fuehrungsrolle' -ExtractionConfidence 95
 Assert-True -Condition ($rawJob.external_job_id -eq '123') -Message 'RawJob speichert externe Job-ID nicht.'
+Assert-True -Condition ($rawJob.source_status -eq 'ACTIVE') -Message 'RawJob setzt keinen Default fuer source_status.'
 
 try {
     New-JobAgentRawJob -Title 'Head of IT' -DetailUrl 'not-a-url' | Out-Null
@@ -121,9 +122,10 @@ $contract = Get-JobAgentAdapterContract
 foreach ($errorClass in @('NONE', 'NOT_REACHABLE', 'TIMEOUT', 'BLOCKED', 'NO_JOBS_FOUND', 'UNCLEAR_SOURCE', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')) {
     Assert-True -Condition (@($contract.error_classes) -contains $errorClass) -Message "Adaptervertrag fehlt Fehlerklasse $errorClass."
 }
+Assert-True -Condition (@($contract.raw_job_optional) -contains 'source_status') -Message 'Adaptervertrag nennt source_status nicht als optionales RawJob-Feld.'
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('scan_context', 'official_source_guard', 'raw_job_validation', 'fixture_success', 'fixture_empty', 'html_success', 'html_no_jobs', 'html_parsing_error', 'contract_errors')
+    cases = @('scan_context', 'official_source_guard', 'raw_job_validation', 'fixture_success', 'fixture_empty', 'html_success', 'html_no_jobs', 'html_parsing_error', 'contract_errors', 'raw_job_source_status')
     raw_jobs = @($htmlResult.raw_jobs).Count
 } | ConvertTo-Json -Depth 4

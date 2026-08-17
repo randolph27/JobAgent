@@ -61,6 +61,29 @@ function New-TestStore {
     Write-JobAgentStore -ProjectRoot $ProjectRoot -Document $result.document | Out-Null
 }
 
+function Add-TestSource {
+    param(
+        [Parameter(Mandatory)][string]$ProjectRoot,
+        [Parameter(Mandatory)][string]$CompanyId,
+        [Parameter(Mandatory)][string]$SourceId,
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    $document = Read-JobAgentStore -ProjectRoot $ProjectRoot
+    $source = [pscustomobject]@{
+        source_id = $SourceId
+        company_id = $CompanyId
+        source_type = 'CAREER_PAGE'
+        url = $Url
+        canonical_url = $Url
+        is_official = $true
+        verified_at = '2026-08-17T09:00:00.000Z'
+        verification_basis = 'CAREER_URL'
+    }
+    $document = Upsert-JobAgentJobSource -Document $document -JobSource $source
+    Write-JobAgentStore -ProjectRoot $ProjectRoot -Document $document | Out-Null
+}
+
 $projectRoot = New-TestProjectRoot
 try {
     New-TestStore -ProjectRoot $projectRoot
@@ -171,6 +194,80 @@ try {
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.report_path)) -Message 'Daily-Run-CLI schreibt kein Reportartefakt.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.html_report_path)) -Message 'Daily-Run-CLI schreibt kein HTML-Artefakt.'
 
+    $multiSourceProjectRoot = New-TestProjectRoot
+    New-TestStore -ProjectRoot $multiSourceProjectRoot
+    Add-TestSource -ProjectRoot $multiSourceProjectRoot -CompanyId 'company:alpha_ag' -SourceId 'source:alpha_ag_ats' -Url 'https://jobs.alpha.example.invalid/search'
+    $multiSourceAdapter = {
+        param([object]$AdapterInput)
+
+        if ([string]$AdapterInput.company.company_id -ne 'company:alpha_ag') {
+            return Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @() -Status 'SKIPPED' -ErrorClass 'TECHNICAL_LIMITATION' -RetryRecommendation 'MANUAL_REVIEW' -HttpStatus $null
+        }
+
+        switch ([string]$AdapterInput.source.source_id) {
+            'source:alpha_ag_career' {
+                Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @(
+                    [pscustomobject]@{
+                        title = 'Head of IT'
+                        detail_url = 'https://alpha.example.invalid/careers/head-it-300'
+                        external_job_id = '300'
+                        ats_job_id = 'UNKNOWN'
+                        location_label = 'Muenchen'
+                        summary = 'Karriereseiten-Treffer.'
+                        extraction_confidence = 95
+                    }
+                )
+                break
+            }
+            'source:alpha_ag_ats' {
+                Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @(
+                    [pscustomobject]@{
+                        title = 'Head of IT'
+                        detail_url = 'https://jobs.alpha.example.invalid/posting/ats-301'
+                        external_job_id = 'ats-301'
+                        ats_job_id = 'ats-301'
+                        location_label = 'Muenchen'
+                        summary = 'ATS-Treffer.'
+                        extraction_confidence = 95
+                    }
+                )
+                break
+            }
+            default {
+                throw "Unerwartete Quelle im Multi-Source-Test: $($AdapterInput.source.source_id)"
+            }
+        }
+    }
+    $multiSourceFirst = Invoke-JobAgentDailyRun -ProjectRoot $multiSourceProjectRoot -AdapterResolver $multiSourceAdapter -StartedAt ([datetime]'2026-08-19T10:00:00Z') -CompanyIds @('company:alpha_ag')
+    Assert-True -Condition (@($multiSourceFirst.document.jobs).Count -eq 2) -Message 'Multi-Source-Initiallauf legt nicht beide Quelljobs an.'
+
+    $multiSourceFollowUpAdapter = {
+        param([object]$AdapterInput)
+
+        if ([string]$AdapterInput.company.company_id -ne 'company:alpha_ag') {
+            return Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @() -Status 'SKIPPED' -ErrorClass 'TECHNICAL_LIMITATION' -RetryRecommendation 'MANUAL_REVIEW' -HttpStatus $null
+        }
+
+        switch ([string]$AdapterInput.source.source_id) {
+            'source:alpha_ag_career' {
+                Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @() -Status 'FAILED' -ErrorClass 'TIMEOUT' -RetryRecommendation 'RETRY_NEXT_RUN' -HttpStatus 504
+                break
+            }
+            'source:alpha_ag_ats' {
+                Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @()
+                break
+            }
+            default {
+                throw "Unerwartete Quelle im Multi-Source-Follow-up-Test: $($AdapterInput.source.source_id)"
+            }
+        }
+    }
+    $multiSourceSecond = Invoke-JobAgentDailyRun -ProjectRoot $multiSourceProjectRoot -AdapterResolver $multiSourceFollowUpAdapter -StartedAt ([datetime]'2026-08-20T10:00:00Z') -CompanyIds @('company:alpha_ag')
+    $careerJob = @($multiSourceSecond.document.jobs | Where-Object { [string]$_.source_id -eq 'source:alpha_ag_career' })[0]
+    $atsJob = @($multiSourceSecond.document.jobs | Where-Object { [string]$_.source_id -eq 'source:alpha_ag_ats' })[0]
+    Assert-True -Condition ($careerJob.status -ne 'REMOVED') -Message 'Fehlgeschlagene Parallelquelle hat den Karriere-Job faelschlich entfernt.'
+    Assert-True -Condition ($atsJob.status -eq 'REMOVED') -Message 'Erfolgreich leere Parallelquelle hat den eigenen ATS-Job nicht entfernt.'
+
     [pscustomobject]@{
         status = 'ok'
         cases = @(
@@ -179,11 +276,15 @@ try {
             'daily_run_writes_markdown_and_html_report',
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
-            'daily_run_cli_fixture_mode'
+            'daily_run_cli_fixture_mode',
+            'daily_run_multi_source_partial_removal'
         )
     } | ConvertTo-Json -Depth 4
 }
 finally {
+    if ($null -ne (Get-Variable -Name multiSourceProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $multiSourceProjectRoot)) {
+        Remove-Item -LiteralPath $multiSourceProjectRoot -Recurse -Force
+    }
     if ($null -ne (Get-Variable -Name cliProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $cliProjectRoot)) {
         Remove-Item -LiteralPath $cliProjectRoot -Recurse -Force
     }

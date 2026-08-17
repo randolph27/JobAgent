@@ -506,6 +506,7 @@ function Mark-JobAgentMissingJobs {
     param(
         [Parameter(Mandatory)][object]$Document,
         [Parameter(Mandatory)][string]$CompanyId,
+        [Parameter()][AllowNull()][string]$SourceId,
         [Parameter(Mandatory)][AllowEmptyCollection()][string[]]$SeenJobIds,
         [Parameter(Mandatory)][string]$ScanRunId,
         [Parameter(Mandatory)][string]$ChangedAt
@@ -522,7 +523,9 @@ function Mark-JobAgentMissingJobs {
     }
 
     foreach ($job in @($Document.jobs)) {
-        if (($job.company_id -eq $CompanyId) -and (-not $seen.Contains([string]$job.job_id)) -and (@('NEW', 'ACTIVE', 'UPDATED') -contains [string]$job.status)) {
+        $matchesCompany = [string]$job.company_id -eq $CompanyId
+        $matchesSource = [string]::IsNullOrWhiteSpace($SourceId) -or ([string]$job.source_id -eq $SourceId)
+        if ($matchesCompany -and $matchesSource -and (-not $seen.Contains([string]$job.job_id)) -and (@('NEW', 'ACTIVE', 'UPDATED') -contains [string]$job.status)) {
             $oldStatus = [string]$job.status
             $job.status = 'REMOVED'
             $job.changed_at = $ChangedAt

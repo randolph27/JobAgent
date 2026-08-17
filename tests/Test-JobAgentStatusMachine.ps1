@@ -45,14 +45,16 @@ function New-TestScanAttempt {
         [string]$ScanRunId,
         [string]$Status = 'SUCCESS',
         [string]$ErrorClass = 'NONE',
-        [string]$Suffix = 'default'
+        [string]$Suffix = 'default',
+        [string]$CompanyId = 'company:example_ag',
+        [string]$SourceId = 'source:example_ag_career'
     )
 
     [pscustomobject]@{
         scan_attempt_id = 'scanattempt:example_ag_' + $Suffix
         scan_run_id = $ScanRunId
-        company_id = 'company:example_ag'
-        source_id = 'source:example_ag_career'
+        company_id = $CompanyId
+        source_id = $SourceId
         started_at = '2026-08-17T10:00:00.000Z'
         finished_at = '2026-08-17T10:00:01.000Z'
         status = $Status
@@ -69,19 +71,22 @@ function New-TestAdapterResult {
         [object[]]$RawJobs = @((New-TestRawJob)),
         [string]$Status = 'SUCCESS',
         [string]$ErrorClass = 'NONE',
-        [string]$Suffix = 'default'
+        [string]$Suffix = 'default',
+        [string]$CompanyId = 'company:example_ag',
+        [string]$SourceId = 'source:example_ag_career',
+        [string]$OfficialSourceUrl = 'https://example.invalid/careers'
     )
 
     [pscustomobject]@{
         adapter = 'fixture-adapter'
-        company_id = 'company:example_ag'
-        source_id = 'source:example_ag_career'
-        official_source_url = 'https://example.invalid/careers'
+        company_id = $CompanyId
+        source_id = $SourceId
+        official_source_url = $OfficialSourceUrl
         status = $Status
         error_class = $ErrorClass
         retry_recommendation = if ($ErrorClass -eq 'NONE') { 'NONE' } else { 'RETRY_NEXT_RUN' }
         raw_jobs = @($RawJobs)
-        scan_attempt = New-TestScanAttempt -ScanRunId $ScanRunId -Status $Status -ErrorClass $ErrorClass -Suffix $Suffix
+        scan_attempt = New-TestScanAttempt -ScanRunId $ScanRunId -Status $Status -ErrorClass $ErrorClass -Suffix $Suffix -CompanyId $CompanyId -SourceId $SourceId
         artifact_paths = @()
     }
 }
@@ -150,6 +155,48 @@ $invalid = Invoke-JobAgentStatusMachine `
 Assert-True -Condition (@($invalid.jobs).Count -eq 0) -Message 'Invalider Treffer wurde als Job gespeichert.'
 Assert-True -Condition (@($invalid.change_events | Where-Object event_type -eq 'JOB_INVALIDATED').Count -eq 1) -Message 'Invalider Treffer erzeugt kein JOB_INVALIDATED.'
 
+$multiSourceDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
+$multiSourceFirst = Invoke-JobAgentStatusMachine `
+    -Document $multiSourceDocument `
+    -ScanRunId 'scanrun:20260823T100000Z' `
+    -AdapterResults @(
+        (New-TestAdapterResult -ScanRunId 'scanrun:20260823T100000Z' -Suffix 'multi-a-first' -RawJobs @(
+                (New-TestRawJob -DetailUrl 'https://example.invalid/careers/job-a-1' -ExternalJobId 'a-1')
+            ))
+        (New-TestAdapterResult -ScanRunId 'scanrun:20260823T100000Z' -Suffix 'multi-b-first' -SourceId 'source:example_ag_ats' -OfficialSourceUrl 'https://jobs.example.invalid/search' -RawJobs @(
+                (New-TestRawJob -DetailUrl 'https://jobs.example.invalid/posting/b-1' -ExternalJobId 'b-1')
+            ))
+    ) `
+    -ObservedAt ([datetime]'2026-08-23T10:00:00Z')
+Assert-True -Condition (@($multiSourceFirst.jobs).Count -eq 2) -Message 'Mehrquellenlauf hat nicht beide Jobs angelegt.'
+
+$multiSourceSecond = Invoke-JobAgentStatusMachine `
+    -Document $multiSourceFirst `
+    -ScanRunId 'scanrun:20260824T100000Z' `
+    -AdapterResults @(
+        (New-TestAdapterResult -ScanRunId 'scanrun:20260824T100000Z' -Suffix 'multi-a-second' -RawJobs @())
+    ) `
+    -ObservedAt ([datetime]'2026-08-24T10:00:00Z')
+$careerJob = @($multiSourceSecond.jobs | Where-Object { [string]$_.source_id -eq 'source:example_ag_career' })[0]
+$atsJob = @($multiSourceSecond.jobs | Where-Object { [string]$_.source_id -eq 'source:example_ag_ats' })[0]
+Assert-True -Condition ($careerJob.status -eq 'REMOVED') -Message 'Quellbezogene Entfernung markiert den betroffenen Quelljob nicht als REMOVED.'
+Assert-True -Condition ($atsJob.status -ne 'REMOVED') -Message 'Quellbezogene Entfernung hat den Job einer anderen Quelle faelschlich entfernt.'
+
+$closedFirst = Invoke-JobAgentStatusMachine `
+    -Document (New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')) `
+    -ScanRunId 'scanrun:20260825T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260825T100000Z' -Suffix 'closed-first')) `
+    -ObservedAt ([datetime]'2026-08-25T10:00:00Z')
+$closedRaw = New-TestRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/head-it-123' -ExternalJobId '123'
+$closedRaw | Add-Member -NotePropertyName source_status -NotePropertyValue 'CLOSED' -Force
+$closedSecond = Invoke-JobAgentStatusMachine `
+    -Document $closedFirst `
+    -ScanRunId 'scanrun:20260826T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260826T100000Z' -RawJobs @($closedRaw) -Suffix 'closed-second')) `
+    -ObservedAt ([datetime]'2026-08-26T10:00:00Z')
+Assert-True -Condition ($closedSecond.jobs[0].status -eq 'CLOSED') -Message 'Explizites Closed-Signal setzt Status nicht auf CLOSED.'
+Assert-True -Condition (@($closedSecond.change_events | Where-Object event_type -eq 'JOB_CLOSED').Count -eq 1) -Message 'Explizites Closed-Signal erzeugt kein JOB_CLOSED.'
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -158,6 +205,8 @@ Assert-True -Condition (@($invalid.change_events | Where-Object event_type -eq '
         'updated_run_changed_fields',
         'failed_scan_no_removal',
         'successful_empty_scan_removed',
-        'invalid_hit_invalidated'
+        'invalid_hit_invalidated',
+        'source_scoped_removal',
+        'explicit_closed_signal'
     )
 } | ConvertTo-Json -Depth 4

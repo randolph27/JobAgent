@@ -50,6 +50,30 @@ function Get-JobAgentRawValue {
     return $Default
 }
 
+function Get-JobAgentRawSourceLifecycleState {
+    param([Parameter(Mandatory)][object]$RawJob)
+
+    foreach ($propertyName in @('source_status', 'job_state')) {
+        if ($RawJob.PSObject.Properties.Name -contains $propertyName) {
+            $value = [string]$RawJob.$propertyName
+            if ([string]::IsNullOrWhiteSpace($value)) {
+                continue
+            }
+
+            switch ($value.Trim().ToUpperInvariant()) {
+                'ACTIVE' { return 'ACTIVE' }
+                'OPEN' { return 'ACTIVE' }
+                'PUBLISHED' { return 'ACTIVE' }
+                'CLOSED' { return 'CLOSED' }
+                'EXPIRED' { return 'CLOSED' }
+                'FILLED' { return 'CLOSED' }
+            }
+        }
+    }
+
+    return 'ACTIVE'
+}
+
 function New-JobAgentStatusLocation {
     param([Parameter()][AllowNull()][object]$RawLocation)
 
@@ -243,6 +267,62 @@ function Update-JobAgentExistingJobFromRawJob {
     }
 }
 
+function Close-JobAgentExistingJobFromRawJob {
+    param(
+        [Parameter(Mandatory)][object]$ExistingJob,
+        [Parameter(Mandatory)][object]$RawJob,
+        [Parameter(Mandatory)][object]$Decision,
+        [Parameter(Mandatory)][string]$ObservedAt
+    )
+
+    $job = $ExistingJob.PSObject.Copy()
+    $oldStatus = [string]$job.status
+    $changedFields = New-Object System.Collections.Generic.List[string]
+
+    $newTitle = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'title' -Default $job.title)
+    $newUrl = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'detail_url' -Default $job.official_url)
+    $newExternalId = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'external_job_id' -Default $job.external_job_id)
+    $newAtsId = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'ats_job_id' -Default $job.ats_job_id)
+    $newLocation = New-JobAgentStatusLocation -RawLocation (Get-JobAgentRawValue -RawJob $RawJob -Name 'location' -Default (Get-JobAgentRawValue -RawJob $RawJob -Name 'location_label' -Default $job.location))
+
+    if ([string]$job.title -ne $newTitle) { $changedFields.Add('title') }
+    if ([string]$job.official_url -ne $newUrl) { $changedFields.Add('official_url') }
+    if ([string]$job.external_job_id -ne $newExternalId) { $changedFields.Add('external_job_id') }
+    if ([string]$job.ats_job_id -ne $newAtsId) { $changedFields.Add('ats_job_id') }
+    if (($job.location | ConvertTo-Json -Depth 10 -Compress) -ne ($newLocation | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('location') }
+    if ($oldStatus -ne 'CLOSED') { $changedFields.Add('status') }
+
+    $job.title = $newTitle
+    $job.official_url = $newUrl
+    $job.external_job_id = $newExternalId
+    $job.ats_job_id = $newAtsId
+    $job.location = $newLocation
+    $job.status = 'CLOSED'
+    $job.last_seen = $ObservedAt
+    $job.changed_at = $ObservedAt
+    $job.identity_basis = $Decision.identity_basis
+
+    [pscustomobject]@{
+        job = $job
+        old_status = $oldStatus
+        changed_fields = @($changedFields.ToArray() | Select-Object -Unique)
+    }
+}
+
+function Test-JobAgentRemovalEligibleAdapterResult {
+    param([Parameter(Mandatory)][object]$AdapterResult)
+
+    $status = [string]$AdapterResult.status
+    $errorClass = [string]$AdapterResult.error_class
+    if (($status -eq 'SUCCESS') -and ($errorClass -eq 'NONE')) {
+        return $true
+    }
+    if (($status -eq 'PARTIAL') -and ($errorClass -eq 'NO_JOBS_FOUND')) {
+        return $true
+    }
+    return $false
+}
+
 function Test-JobAgentRawJobValidForStatus {
     param([Parameter(Mandatory)][object]$RawJob)
 
@@ -263,18 +343,18 @@ function Invoke-JobAgentStatusMachine {
     )
 
     $observedAtText = ConvertTo-JobAgentStatusIso -Value $ObservedAt
-    $seenByCompany = @{}
-    $successfulCompanies = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $seenBySource = @{}
+    $successfulSources = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     $invalidEvents = New-Object System.Collections.Generic.List[object]
 
     foreach ($adapterResult in @($AdapterResults)) {
         $companyId = [string]$adapterResult.company_id
         $sourceId = [string]$adapterResult.source_id
-        if (-not $seenByCompany.ContainsKey($companyId)) {
-            $seenByCompany[$companyId] = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        if (-not $seenBySource.ContainsKey($sourceId)) {
+            $seenBySource[$sourceId] = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
         }
-        if (([string]$adapterResult.status -eq 'SUCCESS') -and ([string]$adapterResult.error_class -eq 'NONE')) {
-            [void]$successfulCompanies.Add($companyId)
+        if (Test-JobAgentRemovalEligibleAdapterResult -AdapterResult $adapterResult) {
+            [void]$successfulSources.Add($sourceId)
         }
 
         $Document = Record-JobAgentScanAttempt -Document $Document -ScanAttempt $adapterResult.scan_attempt
@@ -299,23 +379,32 @@ function Invoke-JobAgentStatusMachine {
                 -Location $location `
                 -SourceId $sourceId
             $decision = Resolve-JobAgentJobDeduplication -Document $Document -Candidate $candidate
+            $lifecycleState = Get-JobAgentRawSourceLifecycleState -RawJob $rawJob
 
             if ($decision.is_existing -eq $true) {
                 $existing = @($Document.jobs | Where-Object { [string]$_.job_id -eq [string]$decision.job_id } | Select-Object -First 1)[0]
-                $updated = Update-JobAgentExistingJobFromRawJob -ExistingJob $existing -RawJob $rawJob -Decision $decision -ObservedAt $observedAtText
+                $updated = if ($lifecycleState -eq 'CLOSED') {
+                    Close-JobAgentExistingJobFromRawJob -ExistingJob $existing -RawJob $rawJob -Decision $decision -ObservedAt $observedAtText
+                }
+                else {
+                    Update-JobAgentExistingJobFromRawJob -ExistingJob $existing -RawJob $rawJob -Decision $decision -ObservedAt $observedAtText
+                }
                 $job = $updated.job
                 $event = $null
                 if (@($updated.changed_fields).Count -gt 0) {
-                    $eventType = if ($decision.decision -eq 'UPDATED') { 'JOB_UPDATED' } else { 'JOB_UPDATED' }
+                    $eventType = if ($lifecycleState -eq 'CLOSED') { 'JOB_CLOSED' } else { 'JOB_UPDATED' }
                     $event = New-JobAgentStatusChangeEvent -JobId $job.job_id -ScanRunId $ScanRunId -EventType $eventType -OldStatus $updated.old_status -NewStatus $job.status -ChangedFields @($updated.changed_fields) -Reason $decision.reason -CreatedAt $observedAtText
                 }
             }
             else {
+                if ($lifecycleState -eq 'CLOSED') {
+                    continue
+                }
                 $job = New-JobAgentJobFromRawJob -RawJob $rawJob -Decision $decision -CompanyId $companyId -SourceId $sourceId -ObservedAt $observedAtText
                 $event = New-JobAgentStatusChangeEvent -JobId $job.job_id -ScanRunId $ScanRunId -EventType 'JOB_CREATED' -OldStatus $null -NewStatus 'NEW' -ChangedFields @('status', 'first_seen', 'last_seen') -Reason 'Erstmals ueber offiziellen Adapterlauf erkannt.' -CreatedAt $observedAtText
             }
 
-            [void]$seenByCompany[$companyId].Add([string]$job.job_id)
+            [void]$seenBySource[$sourceId].Add([string]$job.job_id)
             $snapshot = New-JobAgentSnapshotFromRawJob -RawJob $rawJob -Job $job -ScanRunId $ScanRunId -CapturedAt $observedAtText
             $Document = Upsert-JobAgentJobSnapshot -Document $Document -Job $job -Snapshot $snapshot -ChangeEvent $event
         }
@@ -338,14 +427,15 @@ function Invoke-JobAgentStatusMachine {
         }
         $Document.change_events = @($currentEvents.ToArray())
     }
-    foreach ($companyId in @($successfulCompanies)) {
+    foreach ($sourceId in @($successfulSources)) {
+        $companyId = [string](@($AdapterResults | Where-Object { [string]$_.source_id -eq $sourceId } | Select-Object -First 1).company_id)
         $seenList = [Collections.Generic.List[string]]::new()
-        if ($seenByCompany.ContainsKey($companyId)) {
-            foreach ($seenJobId in $seenByCompany[$companyId]) {
+        if ($seenBySource.ContainsKey($sourceId)) {
+            foreach ($seenJobId in $seenBySource[$sourceId]) {
                 $seenList.Add([string]$seenJobId)
             }
         }
-        $Document = Mark-JobAgentMissingJobs -Document $Document -CompanyId $companyId -SeenJobIds $seenList.ToArray() -ScanRunId $ScanRunId -ChangedAt $observedAtText
+        $Document = Mark-JobAgentMissingJobs -Document $Document -CompanyId $companyId -SourceId $sourceId -SeenJobIds $seenList.ToArray() -ScanRunId $ScanRunId -ChangedAt $observedAtText
     }
 
     Assert-JobAgentDocument -Document $Document

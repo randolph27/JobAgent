@@ -70,13 +70,18 @@ function New-TestSource {
 }
 
 function New-TestJob {
-    param([string]$Status = 'NEW')
+    param(
+        [string]$Status = 'NEW',
+        [string]$JobId = 'job:example_ag_head_it_123',
+        [string]$SourceId = 'source:example_ag_career',
+        [string]$OfficialUrl = 'https://example.invalid/careers/head-it-123'
+    )
     [pscustomobject]@{
-        job_id = 'job:example_ag_head_it_123'
+        job_id = $JobId
         company_id = 'company:example_ag'
-        official_url = 'https://example.invalid/careers/head-it-123'
+        official_url = $OfficialUrl
         alternative_official_urls = @()
-        source_id = 'source:example_ag_career'
+        source_id = $SourceId
         external_job_id = '123'
         ats_job_id = 'UNKNOWN'
         title = 'Head of IT'
@@ -207,6 +212,18 @@ try {
     Assert-True -Condition ($removed.jobs[0].status -eq 'REMOVED') -Message 'markMissingJobs setzt Status nicht auf REMOVED.'
     Assert-True -Condition (@($removed.change_events | Where-Object event_type -eq 'JOB_REMOVED').Count -eq 1) -Message 'markMissingJobs erzeugt kein ChangeEvent.'
 
+    $sourceScoped = $reloaded.PSObject.Copy()
+    $sourceScoped.jobs = @(
+        (New-TestJob -JobId 'job:example_ag_head_it_123' -SourceId 'source:example_ag_career' -OfficialUrl 'https://example.invalid/careers/head-it-123'),
+        (New-TestJob -JobId 'job:example_ag_head_it_456' -SourceId 'source:example_ag_ats' -OfficialUrl 'https://jobs.example.invalid/posting/456')
+    )
+    $sourceScoped.change_events = @()
+    $sourceScopedRemoved = Mark-JobAgentMissingJobs -Document $sourceScoped -CompanyId 'company:example_ag' -SourceId 'source:example_ag_career' -SeenJobIds @() -ScanRunId 'scanrun:20260817T123000Z' -ChangedAt '2026-08-17T12:30:00Z'
+    $sourceScopedCareerJob = @($sourceScopedRemoved.jobs | Where-Object { [string]$_.source_id -eq 'source:example_ag_career' })[0]
+    $sourceScopedAtsJob = @($sourceScopedRemoved.jobs | Where-Object { [string]$_.source_id -eq 'source:example_ag_ats' })[0]
+    Assert-True -Condition ($sourceScopedCareerJob.status -eq 'REMOVED') -Message 'Quellgefiltertes markMissingJobs entfernt den betroffenen Quelljob nicht.'
+    Assert-True -Condition ($sourceScopedAtsJob.status -ne 'REMOVED') -Message 'Quellgefiltertes markMissingJobs entfernt fremde Quellen faelschlich.'
+
     $badRoot = Join-Path $testRoot 'bad'
     New-Item -ItemType Directory -Path $badRoot -Force | Out-Null
     Set-Content -LiteralPath (Join-Path $badRoot 'store.json') -Value '{bad-json' -Encoding UTF8
@@ -243,7 +260,7 @@ try {
 
     [pscustomobject]@{
         status = 'ok'
-        cases = @('empty_store', 'write_reload', 'idempotent_upsert', 'backup', 'migration', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs')
+        cases = @('empty_store', 'write_reload', 'idempotent_upsert', 'backup', 'migration', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
         store_path = $paths.store_path
     } | ConvertTo-Json -Depth 4
 }
