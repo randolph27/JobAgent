@@ -282,6 +282,24 @@ Event-Typen:
 
 Jedes Event enthält alten und neuen Status, geänderte Felder und eine Begründung. Bei neuen Jobs ist `old_status` `null`.
 
+## Statusmaschine
+
+`src/JobAgent.StatusMachine.psm1` implementiert den Vertrag fuer `JA-009`.
+
+- `Invoke-JobAgentStatusMachine` verarbeitet Adapter-Ergebnisse eines Laufes, erzeugt oder aktualisiert Jobs, schreibt Snapshots, ScanAttempts und ChangeEvents.
+- Neue offizielle Treffer werden als `NEW` mit identischem `first_seen`, `last_seen` und `changed_at` gespeichert.
+- Wiedererkannte unveraenderte Treffer werden nach dem Folgelauf `ACTIVE`; `first_seen` bleibt stabil, `last_seen` wird aktualisiert.
+- Wiedererkannte Treffer mit geaenderten deduplizierten Feldern werden `UPDATED` und erhalten ein `JOB_UPDATED`-Event mit konkreten `changed_fields`.
+- Fehlgeschlagene Adapterlaeufe (`FAILED`, nicht autoritative Teilfehler) schliessen oder entfernen keine bestehenden Jobs.
+- Nur ein erfolgreicher Firmenlauf mit `status: SUCCESS` und `error_class: NONE` darf nicht mehr gesehene aktive Jobs per `Mark-JobAgentMissingJobs` auf `REMOVED` setzen.
+- Invalide Rohjobs ohne belastbaren Titel oder absolute Detail-URL werden nicht als Job gespeichert; sie erzeugen ein `JOB_INVALIDATED`-Event fuer das Laufprotokoll.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1
+```
+
 ## Beispiel: gültiger Mindestbestand
 
 ```json

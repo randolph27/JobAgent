@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-009 Statusmaschine für Daily-Run-Ergebnisse und Änderungsverlauf bauen #comment: Neue, aktive, geänderte und entfernte Stellen müssen deterministisch aus Scanresultaten und Historie entstehen.
+  - [x] Beschreibung: `src/JobAgent.StatusMachine.psm1` verarbeitet Adapter-Ergebnisse eines Laufes, vergleicht Rohjobs mit der Historie, aktualisiert `first_seen`/`last_seen`/`changed_at`, erzeugt JobSnapshots und schreibt ChangeEvents fuer neue, aktive, geaenderte, entfernte und invalide Treffer.
+  - [x] Scope: Erstellt wurden `src/JobAgent.StatusMachine.psm1` und `tests/Test-JobAgentStatusMachine.ps1`; erweitert wurden `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Live-Webrecherche, keine Daily-Run-Orchestrierung, keine Reportausgabe.
+  - [x] Ist-Stand (2026-08-17 15:05): Statusmaschine deckt `NEW -> ACTIVE -> UPDATED -> REMOVED` ab, protokolliert invalide Rohjobs als `JOB_INVALIDATED` und entfernt Jobs nur bei erfolgreichem autoritativem Firmenlauf.
+  - [x] Abhängigkeiten: JA-003, JA-007 und JA-008 sind abgeschlossen.
+  - [x] Aufwand/Dauer: Aufwand L, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 78/100, weil Daily-Run und Bericht nun eine deterministische Zustands- und Ereignislogik nutzen koennen.
+  - [x] Risiken: `CLOSED` bleibt fuer spaetere explizite Quellenhinweise reserviert; nicht mehr gefundene Stellen werden aktuell als `REMOVED` markiert. Autoritative Leerscans duerfen nur von `SUCCESS`/`NONE`-Adapterergebnissen kommen.
+  - [x] Schritte:
+    1. Mehrlauf-Verarbeitung mit Deduplikationsentscheidung, stabilen Job-IDs, Snapshot-Erzeugung und ScanAttempt-Protokoll umgesetzt.
+    2. Statusuebergaenge fuer neue, unveraenderte, geaenderte, fehlerhafte, leere erfolgreiche und invalide Treffer implementiert.
+    3. ChangeEvent-Ausgabe mit alten/neuen Statuswerten, konkreten `changed_fields`, Zeitpunkt, ScanRun und Begruendung erstellt.
+  - [x] Evidence: `src/JobAgent.StatusMachine.psm1`, `tests/Test-JobAgentStatusMachine.ps1`, `tests/Test-JobAgentSupertest.ps1`, `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentDeduplication.ps1` exit=0; `git -c core.pager=cat -c color.ui=false --no-pager diff --check` exit=0.
+  - [x] Audit: Tests pruefen, dass `first_seen` stabil bleibt, `last_seen` nur bei Wiedererkennung aktualisiert wird, fehlgeschlagene Scans keine Entfernung ausloesen und invalide Rohjobs nicht als Job gespeichert werden.
+  - [x] Supertest: `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` exit=0; Statusmaschine ist im fachlichen Supertest gebuendelt.
+
 - [x] JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren #comment: Bekannte Stellen dürfen bei späteren Läufen nicht erneut als `NEW` erscheinen, auch wenn Titel oder URL-Parameter variieren.
   - [x] Beschreibung: `src/JobAgent.Deduplication.psm1` implementiert stabile Jobidentitaeten mit Prioritaet offizielle Job-ID, ATS-ID, kanonische URL und zusammengesetzter Fingerprint; bekannte Stellen werden als `KNOWN` oder `UPDATED` statt erneut als `NEW` erkannt.
   - [x] Scope: Erstellt wurden `src/JobAgent.Deduplication.psm1` und `tests/Test-JobAgentDeduplication.ps1`; erweitert wurden `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Zusammenfuehrung getrennter Stellen ohne belastbare Identitaet, keine Live-Webrecherche.

@@ -7,25 +7,6 @@
 - Priorisierung: zuerst persistente Verträge und Datenmodelle, danach idempotente Laufsteuerung, danach Quellen-/Crawler-Adapter, Matching, Statuslogik, Ausgabe, Automatisierung und Qualitätssicherung.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis.
 
-## M3 - Matching, Deduplication und Statuslogik
-
-- [ ] JA-009 Statusmaschine für Daily-Run-Ergebnisse und Änderungsverlauf bauen #comment: Neue, aktive, geänderte und entfernte Stellen müssen deterministisch aus Scanresultaten und Historie entstehen.
-  - [ ] Beschreibung: Implementiere eine Statusmaschine, die pro Lauf Rohjobs mit der Historie vergleicht, first_seen/last_seen aktualisiert, Statuswechsel erzeugt und Ausgabe-Kandidaten ableitet.
-  - [ ] Scope: Daily-State-Engine, ChangeEvent-Erzeugung, Testfixtures mit mehreren Läufen; keine Live-Webrecherche in Funktionstests.
-  - [ ] Ist-Stand (2026-08-17 12:20): Keine Statusübergänge außer Bootstrap-Todo-Status vorhanden.
-  - [ ] Abhängigkeiten: JA-003, JA-008, JA-007.
-  - [ ] Aufwand/Dauer: Aufwand L, Dauer 2-4 PT; nach Deduplikation, vor Ausgabeformat.
-  - [ ] Prioritätsscore: 78/100, weil tägliche Differenzberichte Kernnutzen des Agenten sind.
-  - [ ] Risiken: Temporär nicht erreichbare Portale dürfen aktive Stellen nicht sofort fälschlich als geschlossen markieren.
-  - [ ] Schritte:
-    1. Implementiere Laufstart mit Laden von Company-, Job- und Scanstatus sowie Erzeugung eines neuen `scan_run_id`.
-    2. Implementiere Statusberechnung für gefundene, nicht gefundene, geänderte und ungültige Stellen unter Berücksichtigung erfolgreicher oder fehlgeschlagener Firmen-Scans.
-    3. Implementiere ChangeEvent-Ausgabe mit alten/neuen Feldwerten, Zeitpunkt, Quelle und Begründung für jede relevante Änderung.
-  - [ ] Evidence: Mehrlauf-Testbericht mit Statusverlauf `NEW -> ACTIVE -> UPDATED -> CLOSED/REMOVED`; ScanAttempt-Log für fehlerhafte Portale ohne voreilige Schließung.
-  - [ ] Funktionstest: Tests für ersten Lauf, zweiten unveränderten Lauf, Update-Lauf, fehlgeschlagenen Firmen-Scan, erfolgreiche Entfernung und invaliden Treffer.
-  - [ ] Audit: Prüfen, dass `last_seen` nur bei offizieller Wiedererkennung aktualisiert wird und dass Fehler nicht als fehlende Stelle interpretiert werden.
-  - [ ] Supertest: Mehrlauf-Statusszenario als Pflichtteil des Supertests aufnehmen.
-
 ## M4 - Daily-Run, Ausgabe und Automatisierung
 
 - [ ] JA-010 Deterministischen Daily-Run-Orchestrator implementieren #comment: Der tägliche Rechercheprozess braucht eine klare Reihenfolge, Retry-Logik, begrenzbare Laufzeit und reproduzierbare Nachweise.

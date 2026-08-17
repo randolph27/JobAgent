@@ -1,12 +1,12 @@
 {
-  "ts": "2026-08-17T14:27:05.000+02:00",
+  "ts": "2026-08-17T15:05:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "JA-008 Deduplikationslogik abgeschlossen; naechster Einstieg ist JA-009 Statusmaschine.",
-  "summary": "JA-001 bis JA-008 sind abgeschlossen und archiviert. JA-008 implementiert deterministische Job-Identitaeten, Wiedererkennung bekannter Stellen, alternative offizielle URL-Matches und Update-Erkennung fuer Titel, URL und Job-IDs.",
+  "goal": "JA-009 Statusmaschine abgeschlossen; naechster Einstieg ist JA-010 Daily-Run-Orchestrator.",
+  "summary": "JA-001 bis JA-009 sind abgeschlossen und archiviert. JA-009 implementiert deterministische Statusuebergaenge fuer Adapter-Ergebnisse inklusive NEW, ACTIVE, UPDATED, REMOVED und JOB_INVALIDATED.",
   "changed": [
     ".ci/pins/immutable.hashes.json",
     ".ci/pins/immutable.snapshot/Roadmap.md",
@@ -15,16 +15,19 @@
     "docs/data-model.md",
     "handoff.latest.json",
     "handoff.latest.md",
-    "src/JobAgent.Deduplication.psm1",
-    "tests/Test-JobAgentDeduplication.ps1",
+    "src/JobAgent.StatusMachine.psm1",
+    "tests/Test-JobAgentStatusMachine.ps1",
     "tests/Test-JobAgentSupertest.ps1",
     "todo.current.md",
     "todo.events.jsonl",
-    "todo.history.digest.json",
     "todo.master.index.json",
     "todo.state.json"
   ],
   "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
+      "exit": 0
+    },
     {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDeduplication.ps1",
       "exit": 0
@@ -34,34 +37,20 @@
       "exit": 0
     },
     {
-      "cmd": "Get-Content ... | ConvertFrom-Json",
-      "exit": 0
-    },
-    {
       "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
       "exit": 0
     },
     {
       "cmd": ".\\ci.cmd repin-immutables",
       "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd self-check",
-      "exit": 0,
-      "log_path": "logs\\terminal\\self-check-20260817-142533.log"
     }
   ],
   "route_ok": null,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "525da1debd26",
-    "head_before_commit": "525da1debd26",
-    "ahead": 0,
+    "head_before_commit": "88eb213",
+    "ahead_before_commit": 0,
     "behind": 0,
     "worktree": "dirty",
     "upstream": "origin/master",
@@ -73,23 +62,22 @@
       "docs/data-model.md",
       "handoff.latest.json",
       "handoff.latest.md",
-      "src/JobAgent.Deduplication.psm1",
-      "tests/Test-JobAgentDeduplication.ps1",
       "tests/Test-JobAgentSupertest.ps1",
       "todo.current.md",
       "todo.events.jsonl",
-      "todo.history.digest.json",
       "todo.master.index.json",
       "todo.state.json"
+    ],
+    "untracked_changes": [
+      "src/JobAgent.StatusMachine.psm1",
+      "tests/Test-JobAgentStatusMachine.ps1"
     ]
   },
-  "next": "TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen",
+  "next": "TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren",
   "next_details": [
-    "Resolve-JobAgentJobDeduplication aus JA-008 fuer Treffer-Wiedererkennung nutzen.",
-    "Statusuebergaenge fuer ersten Lauf, unveraenderten zweiten Lauf, Update-Lauf, erfolgreiche Entfernung und invaliden Treffer implementieren.",
-    "NEW -> ACTIVE -> UPDATED -> CLOSED/REMOVED inklusive first_seen, last_seen, changed_at und ChangeEvent erzeugen.",
-    "Fehlgeschlagene oder partielle Firmen-Scans duerfen bestehende Stellen nicht automatisch entfernen oder schliessen.",
-    "Funktionstests mit Mock-Dokumenten/Mock-Scans schreiben; keine Live-Webrecherche."
+    "Adapter, Klassifikation, Deduplikation, Statusmaschine und Persistenz transaktional verbinden.",
+    "Firmenpriorisierung und isolierte ScanAttempt-Ausfuehrung mit Timeout, Fehlerklasse und Fortsetzung bei Einzelproblemen implementieren.",
+    "Finales Ergebnisartefakt unter logs/jobagent/ erzeugen."
   ],
   "refs": [
     "todo.current.md",
@@ -105,16 +93,17 @@
   "env_inventory_used": false,
   "known_blockers": [
     "SonarQube aus diesem Projekt heraus bleibt blockiert, solange D:\\_Scripte\\JobAgent\\sonar.cmd fehlt oder localhost:9000 nicht antwortet.",
+    "Sonar-Pruefung am 2026-08-17T15:05+02:00: http://localhost:9000/api/system/status lief in 5s in ein Timeout; lokales .\\sonar.cmd und sonar.cmd im PATH wurden nicht gefunden.",
     "Historischer .\\ci.cmd supertest ist nicht identisch mit tests\\Test-JobAgentSupertest.ps1; der fachliche JobAgent-Supertest ist gruen."
   ],
   "capsule": {
-    "ts": "2026-08-17T14:27:05.000+02:00",
+    "ts": "2026-08-17T15:05:00.000+02:00",
     "agent_id": "UTTER-20260817-39f7",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
     "active_id": "",
     "status": "open",
-    "goal": "JA-008 Deduplikationslogik abgeschlossen; naechster Einstieg ist JA-009 Statusmaschine.",
+    "goal": "JA-009 Statusmaschine abgeschlossen; naechster Einstieg ist JA-010 Daily-Run-Orchestrator.",
     "changed": [
       ".ci/pins/immutable.hashes.json",
       ".ci/pins/immutable.snapshot/Roadmap.md",
@@ -123,16 +112,19 @@
       "docs/data-model.md",
       "handoff.latest.json",
       "handoff.latest.md",
-      "src/JobAgent.Deduplication.psm1",
-      "tests/Test-JobAgentDeduplication.ps1",
+      "src/JobAgent.StatusMachine.psm1",
+      "tests/Test-JobAgentStatusMachine.ps1",
       "tests/Test-JobAgentSupertest.ps1",
       "todo.current.md",
       "todo.events.jsonl",
-      "todo.history.digest.json",
       "todo.master.index.json",
       "todo.state.json"
     ],
     "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
+        "exit": 0
+      },
       {
         "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDeduplication.ps1",
         "exit": 0
@@ -142,26 +134,21 @@
         "exit": 0
       },
       {
-        "cmd": ".\\ci.cmd stp",
+        "cmd": ".\\ci.cmd repin-immutables",
         "exit": 0
-      },
-      {
-        "cmd": ".\\ci.cmd self-check",
-        "exit": 0,
-        "log_path": "logs\\terminal\\self-check-20260817-142533.log"
       }
     ],
     "route_ok": null,
     "route_violations": [],
     "git": {
       "branch": "master",
-      "head": "525da1debd26",
-      "ahead": 0,
+      "head_before_commit": "88eb213",
+      "ahead_before_commit": 0,
       "behind": 0,
       "worktree": "dirty",
       "upstream": "origin/master"
     },
-    "next": "TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen",
+    "next": "TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren",
     "refs": [
       "todo.current.md",
       "todo.state.json",
