@@ -9,23 +9,6 @@
 
 ## M5 - Qualität, Live-Abdeckung und Erweiterung
 
-- [ ] JA-013 Teststrategie und Supertest für Kernfunktionen konsolidieren #comment: Einzelne Funktionstests müssen vor dem Supertest grün sein; der Supertest bündelt erst abgeschlossene Roadmap-Funktionen.
-  - [ ] Beschreibung: Erstelle fokussierte Tests für Schema, Persistenz, Quellenverifikation, Klassifikation, Deduplikation, Statusmaschine, Daily-Run und Report; bündle abgeschlossene Funktionen in einem Supertest-Command.
-  - [ ] Scope: Testordner, Fixtures, CI-Command, Testdaten; keine Live-Webabhängigkeit in deterministischen Funktionstests.
-  - [ ] Ist-Stand (2026-08-17 12:20): Es gibt Bootstrap-Tests, aber keinen fachlichen JobAgent-Testvertrag.
-  - [ ] Abhängigkeiten: Mindestens JA-002 bis JA-011 für vollständigen Supertest; einzelne Tests entstehen jeweils mit der Funktion.
-  - [ ] Aufwand/Dauer: Aufwand L, Dauer laufend 2-5 PT über die Implementierung; parallel zu allen Funktionspunkten.
-  - [ ] Prioritätsscore: 72/100, weil Qualitätssicherung laufend mitentwickelt werden muss, aber vollständiger Supertest erst nach Kernfunktionen sinnvoll ist.
-  - [ ] Risiken: Live-Webtests können flakey sein; zu breite Tests erschweren schnelle Fehlerlokalisierung.
-  - [ ] Schritte:
-    1. Definiere Fixture-Format und Testdaten für Firmen, Jobs, URLs, Statusübergänge, fehlerhafte Portale und Berichtsausgaben.
-    2. Implementiere pro Kernfunktion fokussierte Tests mit typischen Werten, Grenzwerten, ungültigen Eingaben, Fehlermeldungen, Idempotenz und Nebenwirkungen.
-    3. Registriere einen Supertest, der nur abgeschlossene und bereits einzeln grüne Funktionsbereiche ausführt und Live-Crawls getrennt markiert.
-  - [ ] Evidence: Testmatrix mit Zuordnung Roadmap-ID -> Testdatei -> Command -> Status; Supertest-Log mit ausgeführten Teilbereichen.
-  - [ ] Funktionstest: `.\ci.cmd self-check`; projektspezifische Testcommands je implementierter Funktion; Supertest erst nach Abschluss des jeweiligen Roadmap-Punkts.
-  - [ ] Audit: Prüfen, dass Tests keine produktiven Daten überschreiben und dass Fixtures keine erfundenen realen Stellen als echte Treffer darstellen.
-  - [ ] Supertest: `.\ci.cmd supertest` nach grünem Abschluss einzelner Funktionstests.
-
 - [ ] JA-014 Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchführen #comment: Erst nach stabiler Mock-Logik darf eine kleine Live-Lane offizielle Quellen prüfen und reale Treffer belastbar nachweisen.
   - [ ] Beschreibung: Führe einen begrenzten Live-Pilot mit ausgewählten offiziellen Karrierequellen durch, speichere Scanversuche, verifizierte Treffer, Nicht-Treffer und technische Fehler ohne ungesicherte Behauptungen.
   - [ ] Scope: Kleine Firmenstichprobe aus dem Inventar, Live-Scan-Logs, Review der Ergebnisse; keine großflächige Recherche ohne Rate-/Laufzeitgrenzen.

@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-013 Teststrategie und Supertest für Kernfunktionen konsolidieren #comment: Einzelne Funktionstests müssen vor dem Supertest grün sein; der Supertest bündelt erst abgeschlossene Roadmap-Funktionen.
+  - [x] Beschreibung: Die fachliche Teststrategie ist als maschinenlesbare und menschlich lesbare Matrix dokumentiert; `.\ci.cmd supertest` bündelt alle abgeschlossenen deterministischen JobAgent-Kernfunktionen von JA-002 bis JA-013 und hält Live-Webrecherche explizit getrennt.
+  - [x] Scope: Erstellt wurden `docs/test-matrix.json`, `docs/test-matrix.md` und `tests/Test-JobAgentTestMatrix.ps1`; erweitert wurde `tests/Test-JobAgentSupertest.ps1`. Keine Live-Webabhängigkeit, keine produktiven Daten, keine Änderung an fachlicher Scanlogik.
+  - [x] Ist-Stand (2026-08-17 16:30): Die Matrix ordnet JA-002 bis JA-013 jeweils Roadmap-ID, Testdatei, Command, Status, Supertest-Aufnahme, Lane und Coverage-Punkte zu; der Matrix-Test prüft Datei-Existenz, deterministische Commands, vollständige Roadmap-ID-Abdeckung und Supertest-Synchronität.
+  - [x] Abhängigkeiten: JA-002 bis JA-012 sind abgeschlossen; JA-013 konsolidiert deren bestehende Funktionstests und ergänzt einen eigenen Matrix-Vertragstest.
+  - [x] Aufwand/Dauer: Aufwand S-M, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 72/100, weil die Qualitätssicherung den kritischen Pfad vor Live-Scans absichert und verhindert, dass abgeschlossene Kernfunktionen aus dem Supertest fallen.
+  - [x] Risiken: Coverage-Ziele bleiben für PowerShell-Funktionstests qualitativ über Fallabdeckung dokumentiert, da kein Coverage-Tool im Projekt eingerichtet ist; Live-Lane wird erst mit JA-014 belastbar geprüft.
+  - [x] Schritte:
+    1. Testmatrix für JA-002 bis JA-013 in `docs/test-matrix.json` und `docs/test-matrix.md` erstellt.
+    2. Matrix-Vertragstest implementiert, der Roadmap-Abdeckung, Testdateien, deterministische Commands, Live-Lane-Trennung und Supertest-Synchronität prüft.
+    3. `tests/Test-JobAgentSupertest.ps1` um den Matrix-Vertragstest erweitert und Abschlusslauf über `.\ci.cmd supertest` ausgeführt.
+  - [x] Evidence: `docs/test-matrix.json`, `docs/test-matrix.md`, `tests/Test-JobAgentTestMatrix.ps1`, `tests/Test-JobAgentSupertest.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` -> Exit 0.
+  - [x] Audit: Matrix und Test schließen Live-Webzugriffe in Funktionstests aus; Testcommands referenzieren nur lokale PowerShell-Testdateien und temporäre Fixture-Daten.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+
 - [x] JA-012 Lokalen Scheduler- und Betriebsmodus für tägliche Läufe dokumentieren und absichern #comment: Der Agent soll täglich laufen, ohne den Zustand vorheriger Läufe zu verlieren oder parallele Läufe zu starten.
   - [x] Beschreibung: `src/JobAgent.Operations.psm1` definiert einen sicheren lokalen Betriebsmodus fuer Daily-Runs mit separatem Betriebs-Lock, Statusdatei, Logrotation, Exitcodes und nicht-interaktiven Statusabfragen ueber Tool- und CI-Commands.
   - [x] Scope: Erstellt wurden `src/JobAgent.Operations.psm1`, `tools/Get-JobAgentDailyRunStatus.ps1` und `tests/Test-JobAgentOperations.ps1`; erweitert wurden `tools/Invoke-JobAgentDailyRun.ps1`, `.ci/bin/modules/ci-commands-main.ps1`, `.ci/pins/immutable.hashes.json`, `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Cloud-Scheduler-Einrichtung, keine Live-Webrecherche.

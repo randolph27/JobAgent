@@ -1,0 +1,220 @@
+{
+  "schema_version": "jobagent-test-matrix/v1",
+  "updated_at": "2026-08-17T16:30:00+02:00",
+  "policy": {
+    "default_lane": "deterministic-fixture",
+    "live_lane": "separate-not-supertest",
+    "supertest_command": ".\\ci.cmd supertest",
+    "no_live_web_in_function_tests": true
+  },
+  "items": [
+    {
+      "roadmap_id": "JA-002",
+      "title": "Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen",
+      "test_file": "tests/Test-JobAgentSchema.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Schema-Version und Pflichtdefinitionen",
+        "gueltiges Mindestdokument",
+        "fehlende official_url",
+        "fehlende stabile job_id",
+        "UPDATED- und REMOVED-Zustaende"
+      ]
+    },
+    {
+      "roadmap_id": "JA-003",
+      "title": "Speicher- und Migrationsschicht fuer idempotente Daily-Runs",
+      "test_file": "tests/Test-JobAgentPersistence.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentPersistence.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "leerer Store",
+        "atomarer Write und Reload",
+        "idempotentes Upsert",
+        "Backup und Migration",
+        "beschaedigter Store",
+        "Lock-Verletzung",
+        "Pfadschutz",
+        "Missing-Job-Markierung"
+      ]
+    },
+    {
+      "roadmap_id": "JA-004",
+      "title": "Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising",
+      "test_file": "tests/Test-JobAgentCompanyInventory.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Initial-Seed",
+        "Idempotenz",
+        "Domain-Deduplikation",
+        "Rechtsform-Deduplikation",
+        "getrennte Tochtergesellschaften",
+        "fehlende Karriere-URL"
+      ]
+    },
+    {
+      "roadmap_id": "JA-005",
+      "title": "Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme",
+      "test_file": "tests/Test-JobAgentSourceAdapters.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "ScanContext",
+        "offizielle Quellen-Guard",
+        "RawJob-Validierung",
+        "Fixture-Adapter",
+        "HTML-Fixture-Adapter",
+        "Fehlerklassenvertrag"
+      ]
+    },
+    {
+      "roadmap_id": "JA-006",
+      "title": "Offizielle Quellenverifikation und URL-Kanonisierung",
+      "test_file": "tests/Test-JobAgentSourceVerification.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "URL-Kanonisierung",
+        "Firmendomain",
+        "Karriere-URL",
+        "ATS-Domain",
+        "Aggregator-Ablehnung",
+        "unverifizierte Drittquelle",
+        "Verified JobSource",
+        "alternative offizielle URLs"
+      ]
+    },
+    {
+      "roadmap_id": "JA-007",
+      "title": "Stellenklassifikation fuer IT-Fuehrungspositionen",
+      "test_file": "tests/Test-JobAgentClassification.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentClassification.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Head of IT MATCH",
+        "englischer Director remote",
+        "Entwickler-Ablehnung",
+        "Projektleitungs-Ablehnung",
+        "Teamlead-Ablehnung",
+        "unklarer Standort",
+        "Out-of-scope-Standort",
+        "leerer Titel",
+        "IT-Manager-Grenzfall"
+      ]
+    },
+    {
+      "roadmap_id": "JA-008",
+      "title": "Job-ID-, Deduplikations- und Neuausschreibungslogik",
+      "test_file": "tests/Test-JobAgentDeduplication.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentDeduplication.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "bekannte Stelle im Folgelauf",
+        "offizielle Job-ID-Prioritaet",
+        "Job-ID-Wechsel ueber kanonische URL",
+        "URL-Parameter-Kanonisierung",
+        "Titel- und URL-Aenderung",
+        "alternative offizielle URL",
+        "Neuausschreibung mit neuer ID und URL"
+      ]
+    },
+    {
+      "roadmap_id": "JA-009",
+      "title": "Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf",
+      "test_file": "tests/Test-JobAgentStatusMachine.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "erster Lauf NEW",
+        "Folgelauf ACTIVE",
+        "Update mit changed_fields",
+        "fehlgeschlagener Scan entfernt nicht",
+        "erfolgreicher leerer Scan REMOVED",
+        "invalider Treffer invalidiert"
+      ]
+    },
+    {
+      "roadmap_id": "JA-010",
+      "title": "Deterministischer Daily-Run-Orchestrator",
+      "test_file": "tests/Test-JobAgentDailyRun.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "PARTIAL mit isoliertem Firmenfehler",
+        "Persistenz von ScanRun, Attempts, Jobs und Report",
+        "Markdown-Report",
+        "Klassifikation",
+        "Deduplikation im Folgelauf",
+        "CLI-Fixture-Modus"
+      ]
+    },
+    {
+      "roadmap_id": "JA-011",
+      "title": "Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte",
+      "test_file": "tests/Test-JobAgentReport.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Report-Sektionen",
+        "abgelehnte Jobs gefiltert",
+        "A/B/C-Prioritaet erklaert",
+        "UNKNOWN bleibt erhalten",
+        "stabiler Leerzustand"
+      ]
+    },
+    {
+      "roadmap_id": "JA-012",
+      "title": "Lokaler Scheduler- und Betriebsmodus fuer taegliche Laeufe",
+      "test_file": "tests/Test-JobAgentOperations.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentOperations.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Status- und Logschreibung",
+        "Statusabfrage",
+        "Fehler-Exitcode",
+        "Logrotation",
+        "Parallelstartschutz"
+      ]
+    },
+    {
+      "roadmap_id": "JA-013",
+      "title": "Teststrategie und Supertest fuer Kernfunktionen konsolidieren",
+      "test_file": "tests/Test-JobAgentTestMatrix.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Matrixschema",
+        "Roadmap-ID-Abdeckung JA-002 bis JA-013",
+        "Testdateien existieren",
+        "Supertest enthaelt alle abgeschlossenen deterministischen Funktionstests",
+        "Live-Lane bleibt vom Supertest getrennt"
+      ]
+    }
+  ]
+}
