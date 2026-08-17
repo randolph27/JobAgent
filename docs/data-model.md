@@ -4,13 +4,42 @@ Stand: 2026-08-17
 
 ## Speicherentscheidung
 
-Für den ersten fachlichen Stand wird ein versioniertes JSON-Dokument als kanonischer Austausch- und Testvertrag definiert. Die spätere Persistenzschicht kann JSON-Dateien, JSONL-Logs oder SQLite verwenden, muss aber die Felder, Statuswerte und Identitätsregeln aus `schemas/jobagent.schema.json` unverändert abbilden oder per dokumentierter Migration versionieren.
+Für den ersten fachlichen Stand wird ein versioniertes JSON-Dokument als kanonischer Austausch-, Test- und Persistenzvertrag verwendet. Die fachliche Persistenz liegt unter `data/jobagent/store.json`; Tests verwenden isolierte temporäre Projektwurzeln und schreiben keine produktiven Daten.
 
 Begründung:
 
-- Das Projekt besitzt noch keine fachliche Implementierung und kein festes Runtime-Framework.
-- JSON Schema ist als stabiler Vertrag für Tests, Fixtures, Migrationen und spätere Repository-APIs nutzbar.
-- Atomare Dateiablage unter `data/jobagent/` bleibt möglich, ohne früh eine Datenbankbindung zu erzwingen.
+- Das Projekt besitzt noch kein separates Runtime-Framework; PowerShell passt zur bestehenden lokalen CI-Umgebung.
+- JSON Schema bleibt der stabile Vertrag für Tests, Fixtures, Migrationen und Repository-APIs.
+- Atomare Dateiablage unter `data/jobagent/` vermeidet eine frühe Datenbankbindung und ist für idempotente lokale Daily-Runs ausreichend.
+
+## Persistenzschicht
+
+`src/JobAgent.Persistence.psm1` implementiert die lokale Store-Schicht:
+
+- `Read-JobAgentStore` lädt `data/jobagent/store.json` oder liefert ein leeres `jobagent/v1`-Dokument.
+- `Write-JobAgentStore` validiert das Dokument und schreibt atomar über temporäre Datei plus best-effort Flush.
+- `Invoke-JobAgentStoreTransaction` kapselt Laden, exklusives Locking, Änderung und atomaren Write.
+- `Update-JobAgentStoreMigration` migriert bekannte Altversionen auf `jobagent/v1`, erzeugt vorher ein Backup und schreibt `migration.log.jsonl`.
+- `Enter-JobAgentStoreLock` und `Exit-JobAgentStoreLock` schützen gegen parallele Daily-Runs über `data/jobagent/store.lock`.
+
+Repository-Funktionen:
+
+- `Upsert-JobAgentCompany`
+- `Upsert-JobAgentJobSource`
+- `Upsert-JobAgentScanRun`
+- `Upsert-JobAgentJobSnapshot`
+- `Record-JobAgentScanAttempt`
+- `Mark-JobAgentMissingJobs`
+- `Get-JobAgentDailyOutputCandidates`
+
+Backups liegen unter `data/jobagent/backups/`. Die Pfadprüfung verhindert absolute oder relative Store-Pfade außerhalb des Projektverzeichnisses.
+
+Recovery:
+
+1. Bei beschädigtem `store.json` schlägt `Read-JobAgentStore` fail-closed fehl.
+2. Letztes passendes Backup aus `data/jobagent/backups/` manuell prüfen.
+3. Backup nach `data/jobagent/store.json` zurückkopieren.
+4. `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` ausführen.
 
 ## Root-Dokument
 

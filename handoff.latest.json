@@ -1,13 +1,13 @@
 {
-  "ts": "2026-08-17T13:05:09+02:00",
+  "ts": "2026-08-17T13:16:30+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "Naechster Arbeitsschritt ist JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
-  "summary": "JA-002 abgeschlossen: jobagent/v1 Domain-Schema, Datenmodelldokumentation, Schema-Funktionstest und Fixtures wurden erstellt; JA-002 wurde archiviert; Todo-State wurde aus Roadmap neu geseedet.",
-  "next": "TD-0001 / JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
+  "goal": "Naechster Arbeitsschritt ist JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen.",
+  "summary": "JA-003 abgeschlossen: lokale jobagent/v1-Persistenz mit atomaren Writes, Locking, Backups, Migration und Repository-API wurde implementiert, getestet und archiviert.",
+  "next": "TD-0002 / JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen.",
   "changed": [
     ".ci/pins/immutable.hashes.json",
     ".ci/pins/immutable.snapshot/Roadmap.md",
@@ -15,11 +15,8 @@
     "Roadmap_archive.md",
     "Roadmap_index.md",
     "docs/data-model.md",
-    "schemas/jobagent.schema.json",
-    "tests/Test-JobAgentSchema.ps1",
-    "tests/fixtures/jobagent/valid.json",
-    "tests/fixtures/jobagent/invalid-missing-official-url.json",
-    "tests/fixtures/jobagent/invalid-missing-job-id.json",
+    "src/JobAgent.Persistence.psm1",
+    "tests/Test-JobAgentPersistence.ps1",
     "todo.current.md",
     "todo.events.jsonl",
     "todo.history.digest.json",
@@ -30,21 +27,17 @@
   ],
   "verified": [
     {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentPersistence.ps1",
+      "exit": 0
+    },
+    {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
       "exit": 0
     },
     {
-      "cmd": "npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s schemas\\jobagent.schema.json -d tests\\fixtures\\jobagent\\valid.json --spec=draft2020 -c ajv-formats",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd self-check",
       "exit": 0,
-      "evidence": "logs\\terminal\\self-check-20260817-130438.log"
-    },
-    {
-      "cmd": ".\\ci.cmd todo-seed",
-      "exit": 0
+      "cmd": ".\\ci.cmd self-check",
+      "evidence": "logs\\terminal\\self-check-20260817-131518.log"
     },
     {
       "cmd": ".\\ci.cmd stp",
@@ -52,58 +45,54 @@
     }
   ],
   "supertest": {
-    "status": "done-by-user-instruction",
-    "note": "Nicht angefragt; nach Nutzeranweisung gilt Supertest als erledigt/nicht blockierend. Ein vorheriger versehentlicher Supertest-Lauf scheiterte am unpassenden Gradle/Android-Profil, nicht an JA-002."
+    "note": "Nicht angefragt; laut Nutzeranweisung gilt Supertest als erledigt. Der fachliche Abschluss wurde mit fokussierten Funktionstests validiert.",
+    "status": "done-by-user-instruction"
   },
   "git": {
-    "branch": "master",
-    "head": "845bec02dd90",
-    "head_before_commit": "845bec02dd90",
     "upstream": "origin/master",
-    "ahead": 0,
-    "ahead_before_commit": 0,
-    "behind": 0,
-    "behind_before_commit": 0,
-    "worktree": "dirty",
-    "worktree_before_commit": "dirty",
+    "head": "c9ef2221683d",
     "tracked_changes": [
       ".ci/pins/immutable.hashes.json",
       ".ci/pins/immutable.snapshot/Roadmap.md",
       "Roadmap.md",
       "Roadmap_archive.md",
       "Roadmap_index.md",
-      "handoff.latest.json",
-      "handoff.latest.md",
+      "docs/data-model.md",
+      "src/JobAgent.Persistence.psm1",
+      "tests/Test-JobAgentPersistence.ps1",
       "todo.current.md",
       "todo.events.jsonl",
       "todo.history.digest.json",
       "todo.master.index.json",
-      "todo.state.json"
+      "todo.state.json",
+      "handoff.latest.md",
+      "handoff.latest.json"
     ],
-    "has_repo": true
+    "behind": 0,
+    "worktree": "dirty",
+    "branch": "master",
+    "ahead": 0
   },
   "next_steps": [
-    "JA-003 bearbeiten.",
-    "Persistenzentscheidung fuer JSON-Dateien, JSONL-Events oder SQLite final dokumentieren.",
-    "Atomare Writes mit temporaerer Datei, best-effort Flush, Backup und Recovery-Prozedur implementieren.",
-    "Locking gegen parallele Daily-Runs implementieren.",
-    "Repository-API auf Basis von jobagent/v1 bauen: upsertCompany, upsertJobSnapshot, recordScanAttempt, markMissingJobs, listDailyOutputCandidates.",
-    "Funktionstests fuer leeren Store, vorhandenen Store, beschaedigte Datei, Migration, idempotentes Speichern und Lock-Verletzung erstellen."
+    "JA-004 bearbeiten: initiales Firmeninventar fuer Muenchen/Freising mit offiziellen Websites, Karriere-URLs, Standortbezug, Branche, Aliasnamen und Scanprioritaet erstellen.",
+    "Deduplikationsregeln fuer Firmen ueber kanonischen Namen, Domain, Rechtsformnormalisierung, Aliasliste und vorsichtige Konzern-/Tochter-Regeln implementieren.",
+    "Seed-Ausfuehrung idempotent halten: erneutes Seed darf keine Duplikate erzeugen und muss neue Firmen nachvollziehbar protokollieren.",
+    "Keine Firmen als offiziell verifiziert markieren, solange keine offizielle Unternehmensquelle oder Karriere-URL belegt ist.",
+    "Danach JA-005 Quellenadapter-Vertrag und JA-006 URL-/Quellenverifikation umsetzen."
   ],
   "risks": [
-    "Finale Persistenztechnologie ist noch offen.",
-    "Keine Live-Recherche starten, bevor Persistenz, Quellenverifikation und Deduplikation stehen.",
-    "Keine personenbezogenen Bewerbungsdaten speichern.",
-    "Keine Firmen, Stellen, URLs, Geodaten oder Gehaelter erfinden.",
-    "SonarQube auf localhost:9000 reagierte beim Check nicht innerhalb des Timeouts, obwohl Port 9000 offen war."
+    "Dateibasierte Persistenz ist fuer lokale Einzellaeufe ausgelegt; bei groesserer Live-Abdeckung kann eine SQLite-Migration sinnvoll werden.",
+    "Noch keine Firmeninventar-, Quellenadapter-, URL-Kanonisierungs-, Deduplikations- oder Daily-Run-Implementierung.",
+    "Keine Live-Recherche starten, bevor Quellenverifikation, Adaptervertrag und Deduplikation stehen.",
+    "Keine Firmen, Stellen, URLs, Geodaten oder Gehaelter erfinden; unbekannte Angaben als UNKNOWN/TODO modellieren."
   ],
   "refs": [
-    "schemas/jobagent.schema.json",
+    "src/JobAgent.Persistence.psm1",
+    "tests/Test-JobAgentPersistence.ps1",
     "docs/data-model.md",
-    "tests/Test-JobAgentSchema.ps1",
-    "tests/fixtures/jobagent/valid.json",
     "Roadmap.md",
     "Roadmap_archive.md",
+    "Roadmap_index.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
@@ -117,52 +106,66 @@
   "env_inventory_used": false,
   "env_inventory_path": null,
   "capsule": {
-    "ts": "2026-08-17T13:05:09+02:00",
+    "ts": "2026-08-17T13:16:30+02:00",
     "agent_id": "UTTER-20260817-39f7",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
     "active_id": "",
     "status": "open",
-    "goal": "Naechster Arbeitsschritt ist JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
+    "goal": "Naechster Arbeitsschritt ist JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen.",
     "changed": [
-      "schemas/jobagent.schema.json",
-      "docs/data-model.md",
-      "tests/Test-JobAgentSchema.ps1",
-      "tests/fixtures/jobagent/",
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
       "Roadmap.md",
       "Roadmap_archive.md",
       "Roadmap_index.md",
+      "docs/data-model.md",
+      "src/JobAgent.Persistence.psm1",
+      "tests/Test-JobAgentPersistence.ps1",
       "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
       "todo.state.json",
       "handoff.latest.md",
       "handoff.latest.json"
     ],
     "verified": [
       {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentPersistence.ps1",
+        "exit": 0
+      },
+      {
         "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
         "exit": 0
       },
       {
+        "exit": 0,
         "cmd": ".\\ci.cmd self-check",
+        "evidence": "logs\\terminal\\self-check-20260817-131518.log"
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
         "exit": 0
       }
     ],
     "route_ok": null,
     "route_violations": [],
     "git": {
-      "branch": "master",
-      "head_before_commit": "845bec02dd90",
       "upstream": "origin/master",
-      "ahead_before_commit": 0,
-      "behind_before_commit": 0,
-      "worktree_before_commit": "dirty"
+      "head": "c9ef2221683d",
+      "behind": 0,
+      "worktree": "dirty",
+      "branch": "master",
+      "ahead": 0
     },
-    "next": "TD-0001 / JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
+    "next": "TD-0002 / JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen.",
     "refs": [
       "todo.current.md",
       "todo.state.json",
       "todo.events.jsonl",
-      "handoff.latest.json"
+      "handoff.latest.json",
+      "handoff.latest.md"
     ],
     "manual_missing": false,
     "env_inventory_missing": false,

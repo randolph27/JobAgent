@@ -7,25 +7,6 @@
 - Priorisierung: zuerst persistente Verträge und Datenmodelle, danach idempotente Laufsteuerung, danach Quellen-/Crawler-Adapter, Matching, Statuslogik, Ausgabe, Automatisierung und Qualitätssicherung.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis.
 
-## M1 - Fachlicher Daten- und Zustandsvertrag
-
-- [ ] JA-003 Speicher- und Migrationsschicht für idempotente Daily-Runs implementieren #comment: Der Agent braucht eine wiederverwendbare lokale Datenbasis, die Läufe deterministisch fortsetzen und Änderungen nachvollziehbar speichern kann.
-  - [ ] Beschreibung: Implementiere eine Persistenzschicht mit atomaren Schreibvorgängen, Backups, Schema-Version, Migrationspfad und Repository-API für Unternehmen, Stellen, Scanläufe und ChangeEvents.
-  - [ ] Scope: Neue Runtime-Daten unter z.B. `data/jobagent/` oder `state/jobagent/`, Repository-Code, Tests; keine Secrets im Speicher; keine Speicherung außerhalb `D:\_Scripte\JobAgent`.
-  - [ ] Ist-Stand (2026-08-17 12:20): Persistenz existiert nur für Bootstrap-Todos; fachliche JobAgent-Daten würden ohne Implementierung bei jedem Lauf verloren gehen.
-  - [ ] Abhängigkeiten: JA-002 abgeschlossen; technische Entscheidung für JSONL/SQLite/andere lokale Persistenz dokumentiert.
-  - [ ] Aufwand/Dauer: Aufwand L, Dauer 2-4 PT; nicht sinnvoll parallelisierbar mit Crawlern, solange Repository-Vertrag fehlt.
-  - [ ] Prioritätsscore: 96/100, weil idempotente Läufe und Historie Kernanforderungen sind.
-  - [ ] Risiken: Dateisperren, Teilabbrüche und parallele Läufe können Daten beschädigen; atomare Writes und Locking sind Pflicht.
-  - [ ] Schritte:
-    1. Implementiere Lade-, Speicher- und Validierungsfunktionen für Firmeninventar, Jobdatenbank, Scanstatus und Änderungsverlauf mit Schema-Versionierung.
-    2. Ergänze atomare Schreibstrategie mit temporärer Datei, fsync/best-effort Flush, Backup vor Migration und klarer Recovery-Prozedur bei beschädigten Dateien.
-    3. Erstelle Repository-Methoden wie `upsertCompany`, `upsertJobSnapshot`, `recordScanAttempt`, `markMissingJobs` und `listDailyOutputCandidates`.
-  - [ ] Evidence: Testdaten unter kontrolliertem Testpfad; Migrationslog; Validierungslog für einen erfolgreichen Lade-/Speicher-/Reload-Zyklus.
-  - [ ] Funktionstest: Tests für leeren Store, vorhandenen Store, beschädigte Datei, Migration, idempotentes Speichern und parallele Lock-Verletzung.
-  - [ ] Audit: Manuell prüfen, dass produktive Daten und CI-Todos getrennt bleiben und keine fremden Projektpfade in JobAgent-Daten geschrieben werden.
-  - [ ] Supertest: Nach Abschluss mit Repository-Tests in den Supertest aufnehmen; Supertest darf keine produktive Datenbank zerstören.
-
 ## M2 - Quelleninventar und offizielle Verifikation
 
 - [ ] JA-004 Firmeninventar-Seed und Erweiterungsstrategie für München/Freising erstellen #comment: Eine breite, dauerhaft gepflegte Unternehmensbasis entscheidet über Trefferqualität und darf nicht täglich neu generiert werden.
