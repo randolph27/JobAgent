@@ -231,6 +231,22 @@
         "NO_JOBS_FOUND fuer leere offizielle Quellen",
         "vollstaendige Retry-Versuchsprotokollierung"
       ]
+    },
+    {
+      "roadmap_id": "JA-015",
+      "title": "Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren",
+      "test_file": "tests/Test-JobAgentCoverage.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Coverage-Metriken fuer Firmeninventar, Scanversuche und passende Stellen",
+        "Priorisierung unbekannter und lange nicht gepruefter Firmen",
+        "Adapter-Backlog fuer fehlerhafte Portale",
+        "Rotationsmalus fuer kuerzlich erfolgreiche Scans",
+        "Report-Hinweis als Naeherung ohne Vollstaendigkeitsbehauptung"
+      ]
     }
   ]
 }

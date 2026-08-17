@@ -2,6 +2,8 @@
 
 Set-StrictMode -Version 3.0
 
+Import-Module (Join-Path $PSScriptRoot 'JobAgent.Coverage.psm1') -Force -DisableNameChecking
+
 function ConvertTo-JobAgentReportText {
     param(
         [Parameter()][AllowNull()][object]$Value,
@@ -227,6 +229,7 @@ function New-JobAgentDailyReport {
             new_companies = @($newCompanies)
         }
         statistics = New-JobAgentReportStatistics -Document $Document -ScanRunId $ScanRunId
+        coverage = New-JobAgentCoverageReport -Document $Document -Now $finished -MaxPriorityItems 10
     }
 }
 
@@ -334,6 +337,52 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add('|---|---:|')
     foreach ($metric in @('new_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'errors')) {
         [void]$lines.Add(('| {0} | {1} |' -f $metric, $Report.statistics.$metric))
+    }
+    [void]$lines.Add('')
+    [void]$lines.Add('## Coverage und Adapter-Backlog')
+    [void]$lines.Add($Report.coverage.approximation_notice)
+    [void]$lines.Add('')
+    [void]$lines.Add('| Metrik | Wert |')
+    [void]$lines.Add('|---|---:|')
+    foreach ($metric in @('companies_total', 'with_career_url', 'without_career_url', 'successfully_scanned', 'failed_scanned', 'never_scanned', 'without_matching_jobs', 'with_matching_jobs', 'stale_or_unscanned')) {
+        [void]$lines.Add(('| {0} | {1} |' -f $metric, $Report.coverage.metrics.$metric))
+    }
+    [void]$lines.Add('')
+    [void]$lines.Add('### Naechste Scanprioritaeten')
+    if (@($Report.coverage.scan_priority).Count -eq 0) {
+        [void]$lines.Add('Keine Scanprioritaeten vorhanden.')
+    }
+    else {
+        [void]$lines.Add('| Score | Firma | Aktion | Gruende |')
+        [void]$lines.Add('|---:|---|---|---|')
+        foreach ($item in @($Report.coverage.scan_priority | Select-Object -First 10)) {
+            $cells = @(
+                (ConvertTo-JobAgentReportMarkdownText $item.priority_score),
+                (ConvertTo-JobAgentReportMarkdownText $item.company),
+                (ConvertTo-JobAgentReportMarkdownText $item.next_action),
+                (ConvertTo-JobAgentReportMarkdownText ((@($item.reasons) -join ', ')))
+            )
+            [void]$lines.Add('| ' + ($cells -join ' | ') + ' |')
+        }
+    }
+    [void]$lines.Add('')
+    [void]$lines.Add('### Adapter- und Coverage-Backlog')
+    if (@($Report.coverage.backlog).Count -eq 0) {
+        [void]$lines.Add('Kein Coverage-Backlog vorhanden.')
+    }
+    else {
+        [void]$lines.Add('| Score | Typ | Firma | Begruendung | Naechster Schritt |')
+        [void]$lines.Add('|---:|---|---|---|---|')
+        foreach ($item in @($Report.coverage.backlog | Select-Object -First 10)) {
+            $cells = @(
+                (ConvertTo-JobAgentReportMarkdownText $item.priority_score),
+                (ConvertTo-JobAgentReportMarkdownText $item.kind),
+                (ConvertTo-JobAgentReportMarkdownText $item.company),
+                (ConvertTo-JobAgentReportMarkdownText $item.reason),
+                (ConvertTo-JobAgentReportMarkdownText $item.next_step)
+            )
+            [void]$lines.Add('| ' + ($cells -join ' | ') + ' |')
+        }
     }
 
     return ($lines.ToArray() -join "`n")

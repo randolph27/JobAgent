@@ -37,13 +37,12 @@ Assert-True -Condition ($matrix.schema_version -eq 'jobagent-test-matrix/v1') -M
 Assert-True -Condition ($matrix.policy.no_live_web_in_function_tests -eq $true) -Message 'Testmatrix muss Live-Web in Funktionstests ausschliessen.'
 Assert-True -Condition ($matrix.policy.live_lane -eq 'separate-not-supertest') -Message 'Live-Lane muss vom Supertest getrennt sein.'
 
-$expectedIds = 2..13 | ForEach-Object { 'JA-{0:D3}' -f $_ }
+$expectedIds = 2..15 | ForEach-Object { 'JA-{0:D3}' -f $_ }
 $items = @($matrix.items)
 $actualIds = @($items | ForEach-Object { [string]$_.roadmap_id })
 foreach ($id in $expectedIds) {
     Assert-True -Condition ($actualIds -contains $id) -Message "Testmatrix fehlt $id."
 }
-Assert-True -Condition ($actualIds -contains 'JA-014') -Message 'Testmatrix fehlt JA-014 Live-Lane.'
 Assert-True -Condition ($actualIds.Count -eq (@($actualIds | Select-Object -Unique).Count)) -Message 'Testmatrix enthaelt doppelte Roadmap-IDs.'
 
 $markdown = Get-Content -LiteralPath $matrixDocPath -Raw
@@ -86,7 +85,7 @@ Assert-True -Condition (($expected -join '|') -eq ($actual -join '|')) -Message 
     status = 'ok'
     cases = @(
         'matrix_schema',
-        'roadmap_id_coverage_ja002_to_ja014',
+        'roadmap_id_coverage_ja002_to_ja015',
         'test_files_exist',
         'commands_are_deterministic',
         'supertest_matches_matrix',

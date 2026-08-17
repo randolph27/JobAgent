@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen.
+  - [x] Beschreibung: `src/JobAgent.Coverage.psm1` erzeugt Coverage-Metriken, Adapter-/Portal-Backlog und Scanpriorisierung aus dem lokalen Store; Daily-Run-Markdownberichte enthalten nun einen Coverage-Abschnitt mit ausdrücklichem Näherungshinweis.
+  - [x] Scope: Erstellt wurden `src/JobAgent.Coverage.psm1` und `tests/Test-JobAgentCoverage.ps1`; erweitert wurden `src/JobAgent.Report.psm1`, `docs/test-matrix.json`, `docs/test-matrix.md`, `tests/Test-JobAgentSupertest.ps1` und `tests/Test-JobAgentTestMatrix.ps1`. Keine automatische Zusammenführung unklarer Unternehmensgruppen, keine Live-Webrecherche, keine Vollständigkeitsbehauptung.
+  - [x] Ist-Stand (2026-08-17 16:03): Coverage-Report zählt Firmen gesamt, mit/ohne Karriere-URL, erfolgreich/fehlerhaft/nie gescannt, ohne/mit passenden Stellen und stale/ungescannt; Backlog priorisiert fehlende Karriere-URLs, fehlerhafte Portale, stale Scans und erfolgreiche Firmen ohne Match.
+  - [x] Abhängigkeiten: JA-004, JA-005, JA-010 und JA-014 sind abgeschlossen.
+  - [x] Aufwand/Dauer: Aufwand M, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 52/100, weil nachhaltige Trefferqualität nach Kernbetrieb und Live-Pilot skaliert.
+  - [x] Risiken: Coverage bleibt eine operative Näherung aus dem lokalen Firmeninventar; die Implementierung behauptet keine vollständige Marktdeckung. Portal-/ATS-Typen werden nur aus vorhandenen Store- und Fehlerdaten abgeleitet, nicht live verifiziert.
+  - [x] Schritte:
+    1. Coverage-Metriken für Firmeninventar, Scanversuche, passende Stellen und stale/ungescannte Firmen implementiert.
+    2. Priorisierten Backlog für fehlende Karriere-URLs, fehlerhafte Portale, lange nicht geprüfte Firmen und erfolgreiche Firmen ohne Match erzeugt.
+    3. Scanpriorisierung mit Rotationsmalus für kürzlich erfolgreiche Scans und Daily-Run-Reportintegration umgesetzt.
+  - [x] Evidence: `src/JobAgent.Coverage.psm1`, `tests/Test-JobAgentCoverage.ps1`, `src/JobAgent.Report.psm1`, `docs/test-matrix.json`, `docs/test-matrix.md`, `tests/Test-JobAgentSupertest.ps1`, `tests/Test-JobAgentTestMatrix.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` -> Exit 0.
+  - [x] Audit: Coverage-Text enthält ausdrücklich, dass Werte operative Näherungen aus dem lokalen Inventar sind und keine vollständige Marktdeckung behaupten; Funktionstests nutzen nur lokale Fixtures.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+
 - [x] JA-014 Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchführen #comment: Erst nach stabiler Mock-Logik darf eine kleine Live-Lane offizielle Quellen prüfen und reale Treffer belastbar nachweisen.
   - [x] Beschreibung: `src/JobAgent.LiveScan.psm1` implementiert eine getrennte Live-Lane mit offizieller Quellenbindung, Timeout-/Retry-/User-Agent-Policy, Kandidatenfilterung, Detailseitenabruf und Live-Pilot-Zusammenfassung ohne Supertest-Pflichtgate.
   - [x] Scope: Erstellt wurden `src/JobAgent.LiveScan.psm1`, `tools/Invoke-JobAgentLivePilot.ps1` und `tests/Test-JobAgentLiveScan.ps1`; erweitert wurden `src/JobAgent.DailyRun.psm1`, `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.SourceAdapters.psm1`, `docs/test-matrix.json`, `docs/test-matrix.md` und `tests/Test-JobAgentTestMatrix.ps1`. Keine Jobbörsen als Primärquelle, keine Bewerbungs- oder Schreibaktionen.
