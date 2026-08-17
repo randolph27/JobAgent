@@ -1,47 +1,36 @@
 {
-  "ts": "2026-08-17T16:30:58.182+02:00",
+  "ts": "2026-08-17T16:46:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": ".",
   "project": "JobAgent",
   "status": "open",
   "active_id": "",
-  "summary": "JA-016 abgeschlossen, archiviert und fuer den naechsten Chat auf JA-017 uebergeben.",
-  "goal": "Naechster fachlicher Einstieg ist JA-017 Reportfelder vervollstaendigen; danach JA-018 und JA-019 fuer Status- und Quellenkorrektheit.",
-  "next": "JA-017 zuerst in Report/DailyRun/Testdateien umsetzen; danach JA-018 source-scope REMOVED/CLOSED und JA-019 verification_evidence.",
+  "summary": "JA-017 ist abgeschlossen und nach Roadmap_archive.md rotiert; der naechste Einstieg ist TD-0014/JA-018.",
+  "goal": "Naechster fachlicher Schwerpunkt ist die quellenbezogene Statuskorrektheit in JA-018; danach JA-019 fuer Verifikationsbelege.",
+  "next": "Mit TD-0014/JA-018 starten: REMOVED auf source_id begrenzen und CLOSED explizit vom Adaptervertrag bis zur Statusmaschine durchziehen.",
   "next_steps": [
-    "JA-017: New-JobAgentReportJobEntry und Statistikmodell um published_at, first_seen, last_seen, salary, requirements, age_basis, age_days und erweiterte Recherchemetriken ausbauen.",
-    "JA-017: Markdown- und HTML-Renderer synchron halten; Tests in tests/Test-JobAgentReport.ps1 und tests/Test-JobAgentDailyRun.ps1 auf Pflichtfelder erweitern.",
-    "JA-018: REMOVED auf source_id begrenzen und CLOSED-Signal vom Adaptervertrag bis zur Statusmaschine durchziehen.",
-    "JA-019: verification_evidence fuer offizielle ATS-/Redirect-Belege in Schema, Persistenz und SourceVerification einfuehren.",
-    "JA-020 und JA-021 erst nach JA-018/JA-019 verbreitern; JA-022 erst nach JA-017 anfangen."
+    "TD-0014 / JA-018: Mark-JobAgentMissingJobs auf source-scoped Seen-Set oder SourceId erweitern, damit nur Jobs derselben Quelle auf REMOVED gehen.",
+    "TD-0014 / JA-018: Adapter-/RawJob-Vertrag um ein getestetes Closed-Signal erweitern und JOB_CLOSED durch StatusMachine, DailyRun und Tests verdrahten.",
+    "TD-0015 / JA-019: verification_evidence in SourceVerification, Persistence, CompanyInventory und Schema einfuehren; ATS-/Redirect-Belege persistieren.",
+    "TD-0016 / JA-020 und TD-0017 / JA-021 erst nach JA-018 und JA-019 angehen.",
+    "TD-0018 / JA-022 bleibt nachgelagert, wenn Report-/Status-/Quellenvertrag stabil ist."
   ],
   "completed": [
     {
-      "id": "JA-016",
-      "title": "Lokalen HTML-Report als Daily-Run-Artefakt erzeugen und in html/ ablegen",
+      "id": "JA-017",
+      "title": "Reportfelder vollstaendig gegen Programmanweisung und Daily-Run-Ausgabeformat geschlossen",
       "result": [
-        "Daily-Run schreibt html/jobagent/daily-run-<stamp>.html.",
-        "html_report_path ist in Rueckgabe, Summary-JSON, CLI-Output und Live-Pilot-Summary verfuegbar.",
-        "HTML rendert lokale CSS/HTML-Ressourcen und escaped problematische Inhalte."
+        "Reporteintraege enthalten jetzt published_at, first_seen, last_seen, salary, requirements, age_basis und age_days.",
+        "Markdown- und HTML-Tabellen rendern diese Pflichtfelder sichtbar, inklusive Fehler-/Quellen-Sektion.",
+        "Daily-Run-Summary uebernimmt die erweiterten Statistikfelder aus dem gemeinsamen Reportmodell."
       ]
     }
   ],
   "open_priorities": [
     {
-      "id": "JA-017",
-      "priority": 1,
-      "files": [
-        "src/JobAgent.Report.psm1",
-        "src/JobAgent.DailyRun.psm1",
-        "tests/Test-JobAgentReport.ps1",
-        "tests/Test-JobAgentDailyRun.ps1",
-        "docs/data-model.md"
-      ],
-      "focus": "Pflichtfelder aus der Programmanweisung im JSON-/Markdown-/HTML-Report sichtbar und getestet machen."
-    },
-    {
+      "todo_id": "TD-0014",
       "id": "JA-018",
-      "priority": 2,
+      "priority": 1,
       "files": [
         "src/JobAgent.StatusMachine.psm1",
         "src/JobAgent.Persistence.psm1",
@@ -50,11 +39,12 @@
         "tests/Test-JobAgentStatusMachine.ps1",
         "tests/Test-JobAgentDailyRun.ps1"
       ],
-      "focus": "REMOVED auf Quellenkontext begrenzen und explizites CLOSED modellieren."
+      "focus": "REMOVED strikt quellenbezogen machen und CLOSED nur bei explizitem belegtem Signal erzeugen."
     },
     {
+      "todo_id": "TD-0015",
       "id": "JA-019",
-      "priority": 3,
+      "priority": 2,
       "files": [
         "src/JobAgent.SourceVerification.psm1",
         "src/JobAgent.CompanyInventory.psm1",
@@ -65,7 +55,25 @@
         "tests/Test-JobAgentSchema.ps1",
         "tests/Test-JobAgentPersistence.ps1"
       ],
-      "focus": "ATS-/Redirect-Verifikationsbelege persistieren und spaeter reportbar machen."
+      "focus": "verification_evidence fuer offizielle ATS-/Redirect-Verbindungen modellieren und persistieren."
+    },
+    {
+      "todo_id": "TD-0016",
+      "id": "JA-020",
+      "priority": 3,
+      "focus": "Live-Adapter erst nach JA-018/JA-019 auf robuste Karriere- und ATS-Erkennung ausbauen."
+    },
+    {
+      "todo_id": "TD-0017",
+      "id": "JA-021",
+      "priority": 4,
+      "focus": "Firmeninventar erst nach Status-/Quellenhaertung autonom und dedupliziert verbreitern."
+    },
+    {
+      "todo_id": "TD-0018",
+      "id": "JA-022",
+      "priority": 5,
+      "focus": "Lokalen Devserver-Portvertrag und HTML-Visual-Audit nachziehen, wenn die fachlichen Report-/Statuspunkte stabil sind."
     }
   ],
   "changed": [
@@ -74,14 +82,17 @@
     "Roadmap.md",
     "Roadmap_archive.md",
     "Roadmap_index.md",
+    "handoff.latest.json",
+    "handoff.latest.md",
     "src/JobAgent.DailyRun.psm1",
-    "src/JobAgent.LiveScan.psm1",
     "src/JobAgent.Report.psm1",
     "tests/Test-JobAgentDailyRun.ps1",
     "tests/Test-JobAgentReport.ps1",
+    "todo.current.md",
+    "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "tools/Invoke-JobAgentDailyRun.ps1"
+    "todo.state.json"
   ],
   "verified": [
     {
@@ -93,11 +104,11 @@
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1",
+      "cmd": ".\\ci.cmd stp",
       "exit": 0
     },
     {
-      "cmd": ".\\ci.cmd self-check",
+      "cmd": ".\\ci.cmd todo-seed",
       "exit": 0
     }
   ],
@@ -111,14 +122,15 @@
     "handoff.latest.md"
   ],
   "notes": [
-    "Roadmap.md enthaelt nur noch JA-017 bis JA-022.",
-    "Roadmap_archive.md enthaelt jetzt JA-001 bis JA-016.",
-    "html/jobagent/latest.html wurde bewusst nicht eingefuehrt.",
-    "Browser-/Viewport-Audit fuer HTML bleibt Teil von JA-022."
+    "Roadmap.md enthaelt jetzt nur noch JA-018 bis JA-022.",
+    "Roadmap_archive.md enthaelt JA-001 bis JA-017.",
+    "todo-seed hat TD-0014 bis TD-0018 aus den offenen Roadmap-Punkten erzeugt.",
+    "Supertest wurde fuer JA-017 nicht separat gestartet; gemaess aktueller Nutzeranweisung gilt das Gate fuer diesen Abschluss als erledigt.",
+    "Der browserbasierte Layout-Audit fuer HTML bleibt Teil von JA-022."
   ],
   "git": {
     "branch": "master",
-    "head": "4c7d6a55ca75",
+    "head": "16bc75c80ee5",
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,

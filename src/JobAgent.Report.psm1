@@ -33,6 +33,35 @@ function ConvertTo-JobAgentReportHtmlText {
     return [Net.WebUtility]::HtmlEncode((ConvertTo-JobAgentReportText -Value $Value))
 }
 
+function ConvertTo-JobAgentReportDateText {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    $text = ConvertTo-JobAgentReportText -Value $Value
+    if ($text -eq 'UNKNOWN') {
+        return $text
+    }
+    try {
+        return ([datetime]::Parse($text, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()).ToString('yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture)
+    }
+    catch {
+        return $text
+    }
+}
+
+function ConvertTo-JobAgentReportListText {
+    param(
+        [Parameter()][AllowNull()][object[]]$Values = @(),
+        [Parameter()][AllowEmptyString()][string]$Fallback = 'UNKNOWN',
+        [Parameter()][ValidateRange(1, 20)][int]$MaxItems = 3
+    )
+
+    $items = @($Values | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object { [string]$_ })
+    if ($items.Count -eq 0) {
+        return $Fallback
+    }
+    return (($items | Select-Object -First $MaxItems) -join '; ')
+}
+
 function Get-JobAgentReportProperty {
     param(
         [Parameter()][AllowNull()][object]$Object,
@@ -98,12 +127,49 @@ function Get-JobAgentReportPriorityExplanation {
     return ($parts.ToArray() -join ' ')
 }
 
+function Get-JobAgentReportAgeInfo {
+    param(
+        [Parameter()][AllowNull()][object]$PublishedAt,
+        [Parameter()][AllowNull()][object]$FirstSeen,
+        [Parameter(Mandatory)][datetime]$ReferenceTime
+    )
+
+    $publishedText = ConvertTo-JobAgentReportText -Value $PublishedAt
+    $firstSeenText = ConvertTo-JobAgentReportText -Value $FirstSeen
+    $basis = if ($publishedText -ne 'UNKNOWN') { 'published_at' } elseif ($firstSeenText -ne 'UNKNOWN') { 'first_seen' } else { 'UNKNOWN' }
+    $value = if ($basis -eq 'published_at') { $publishedText } elseif ($basis -eq 'first_seen') { $firstSeenText } else { 'UNKNOWN' }
+    $ageDays = 'UNKNOWN'
+    if ($value -ne 'UNKNOWN') {
+        try {
+            $baseline = [datetime]::Parse($value, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
+            $delta = $ReferenceTime.ToUniversalTime() - $baseline
+            $days = [math]::Floor([math]::Max(0, $delta.TotalDays))
+            $ageDays = [string][int]$days
+        }
+        catch {
+            $ageDays = 'UNKNOWN'
+        }
+    }
+
+    [pscustomobject]@{
+        age_basis = $basis
+        age_days = $ageDays
+    }
+}
+
 function New-JobAgentReportJobEntry {
     param(
         [Parameter(Mandatory)][object]$Job,
         [Parameter(Mandatory)][hashtable]$CompaniesById,
-        [Parameter()][AllowNull()][object]$ChangeEvent = $null
+        [Parameter()][AllowNull()][object]$ChangeEvent = $null,
+        [Parameter(Mandatory)][datetime]$ReferenceTime
     )
+
+    $publishedAt = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'published_at' -Default 'UNKNOWN')
+    $firstSeen = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'first_seen' -Default 'UNKNOWN')
+    $lastSeen = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'last_seen' -Default 'UNKNOWN')
+    $requirements = @((Get-JobAgentReportProperty -Object $Job -Name 'requirements' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object { [string]$_ })
+    $ageInfo = Get-JobAgentReportAgeInfo -PublishedAt $publishedAt -FirstSeen $firstSeen -ReferenceTime $ReferenceTime
 
     [pscustomobject]@{
         job_id = [string]$Job.job_id
@@ -115,6 +181,14 @@ function New-JobAgentReportJobEntry {
         location = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job.location -Name 'label' -Default 'UNKNOWN')
         work_model = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'work_model' -Default 'UNKNOWN')
         employment_type = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'employment_type' -Default 'UNKNOWN')
+        published_at = $publishedAt
+        first_seen = $firstSeen
+        last_seen = $lastSeen
+        salary = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'salary' -Default 'UNKNOWN')
+        requirements = @($requirements)
+        requirements_text = ConvertTo-JobAgentReportListText -Values $requirements -Fallback 'UNKNOWN' -MaxItems 3
+        age_basis = [string]$ageInfo.age_basis
+        age_days = [string]$ageInfo.age_days
         official_url = ConvertTo-JobAgentReportText -Value $Job.official_url
         changed_fields = @((Get-JobAgentReportProperty -Object $ChangeEvent -Name 'changed_fields' -Default @()) | ForEach-Object { [string]$_ })
         change_reason = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $ChangeEvent -Name 'reason' -Default 'UNKNOWN')
@@ -125,25 +199,64 @@ function New-JobAgentReportJobEntry {
 function New-JobAgentReportStatistics {
     param(
         [Parameter(Mandatory)][object]$Document,
-        [Parameter(Mandatory)][string]$ScanRunId
+        [Parameter(Mandatory)][string]$ScanRunId,
+        [Parameter()][AllowEmptyCollection()][object[]]$ActiveEntries = @(),
+        [Parameter()][AllowEmptyCollection()][object[]]$NewCompanies = @()
     )
 
     $scanRun = @($Document.scan_runs | Where-Object { [string]$_.scan_run_id -eq $ScanRunId } | Select-Object -First 1)[0]
     $attempts = @($Document.scan_attempts | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
     $snapshots = @($Document.job_snapshots | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
     $changes = @($Document.change_events | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
+    $uncertainSourceErrors = @('UNCLEAR_SOURCE', 'BLOCKED', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')
+    $unreachableSourceErrors = @('NOT_REACHABLE', 'TIMEOUT')
 
     [pscustomobject]@{
         scan_run_id = $ScanRunId
         status = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $scanRun -Name 'status' -Default 'UNKNOWN')
         companies_scanned = @($attempts | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count
         adapter_attempts = $attempts.Count
+        checked_jobs = $snapshots.Count
         snapshots = $snapshots.Count
         new_jobs = @($changes | Where-Object event_type -eq 'JOB_CREATED').Count
+        active_matching_jobs = @($ActiveEntries).Count
         updated_jobs = @($changes | Where-Object event_type -eq 'JOB_UPDATED').Count
         removed_or_closed_jobs = @($changes | Where-Object { @('JOB_REMOVED', 'JOB_CLOSED') -contains [string]$_.event_type }).Count
         invalid_jobs = @($changes | Where-Object event_type -eq 'JOB_INVALIDATED').Count
+        new_companies = @($NewCompanies).Count
+        uncertain_sources = @($attempts | Where-Object { $uncertainSourceErrors -contains [string]$_.error_class }).Count
+        unreachable_career_pages = @($attempts | Where-Object { $unreachableSourceErrors -contains [string]$_.error_class }).Count
         errors = @($attempts | Where-Object { [string]$_.error_class -ne 'NONE' }).Count
+    }
+}
+
+function New-JobAgentReportSourceIssueEntry {
+    param(
+        [Parameter(Mandatory)][object]$Attempt,
+        [Parameter(Mandatory)][hashtable]$CompaniesById,
+        [Parameter(Mandatory)][hashtable]$SourcesById
+    )
+
+    $source = $null
+    if ($SourcesById.ContainsKey([string]$Attempt.source_id)) {
+        $source = $SourcesById[[string]$Attempt.source_id]
+    }
+    $errorClass = ConvertTo-JobAgentReportText -Value $Attempt.error_class
+    $category = switch ($errorClass) {
+        { @('UNCLEAR_SOURCE', 'BLOCKED', 'PARSING_ERROR', 'TECHNICAL_LIMITATION') -contains $_ } { 'UNSICHER' ; break }
+        { @('NOT_REACHABLE', 'TIMEOUT') -contains $_ } { 'NICHT_ERREICHBAR' ; break }
+        default { 'HINWEIS' }
+    }
+
+    [pscustomobject]@{
+        company = Get-JobAgentReportCompanyName -CompaniesById $CompaniesById -CompanyId ([string]$Attempt.company_id)
+        source_id = ConvertTo-JobAgentReportText -Value $Attempt.source_id
+        source_url = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $source -Name 'canonical_url' -Default 'UNKNOWN')
+        status = ConvertTo-JobAgentReportText -Value $Attempt.status
+        error_class = $errorClass
+        category = $category
+        retry_recommendation = ConvertTo-JobAgentReportText -Value $Attempt.retry_recommendation
+        http_status = ConvertTo-JobAgentReportText -Value $Attempt.http_status
     }
 }
 
@@ -167,7 +280,14 @@ function New-JobAgentDailyReport {
     foreach ($job in @($Document.jobs)) {
         $jobsById[[string]$job.job_id] = $job
     }
+    $sourcesById = @{}
+    foreach ($source in @($Document.job_sources)) {
+        $sourcesById[[string]$source.source_id] = $source
+    }
     $events = @($Document.change_events | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
+    $attempts = @($Document.scan_attempts | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
+    $started = [datetime]::Parse([string]$scanRun.started_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
+    $finished = if ($null -eq $scanRun.finished_at) { $started } else { [datetime]::Parse([string]$scanRun.finished_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime() }
 
     $createdEntries = New-Object System.Collections.Generic.List[object]
     $changedEntries = New-Object System.Collections.Generic.List[object]
@@ -181,17 +301,17 @@ function New-JobAgentDailyReport {
         switch ([string]$event.event_type) {
             'JOB_CREATED' {
                 if (Test-JobAgentReportMatch -Job $job) {
-                    $createdEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event))
+                    $createdEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event -ReferenceTime $finished))
                 }
             }
             'JOB_UPDATED' {
                 if (Test-JobAgentReportMatch -Job $job) {
-                    $changedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event))
+                    $changedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event -ReferenceTime $finished))
                 }
             }
             { @('JOB_REMOVED', 'JOB_CLOSED') -contains $_ } {
                 if (Test-JobAgentReportMatch -Job $job) {
-                    $removedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event))
+                    $removedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event -ReferenceTime $finished))
                 }
             }
         }
@@ -203,11 +323,8 @@ function New-JobAgentDailyReport {
     }
     $activeEntries = @($Document.jobs |
         Where-Object { (@('NEW', 'ACTIVE', 'UPDATED') -contains [string]$_.status) -and (Test-JobAgentReportMatch -Job $_) -and (-not $changedIds.Contains([string]$_.job_id)) } |
-        ForEach-Object { New-JobAgentReportJobEntry -Job $_ -CompaniesById $companiesById } |
+        ForEach-Object { New-JobAgentReportJobEntry -Job $_ -CompaniesById $companiesById -ReferenceTime $finished } |
         Sort-Object priority, company, title)
-
-    $started = [datetime]::Parse([string]$scanRun.started_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
-    $finished = if ($null -eq $scanRun.finished_at) { $started } else { [datetime]::Parse([string]$scanRun.finished_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime() }
     $newCompanies = @($Document.companies |
         Where-Object {
             $created = [datetime]::Parse([string]$_.created_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
@@ -223,6 +340,10 @@ function New-JobAgentDailyReport {
                 verification_status = ConvertTo-JobAgentReportText -Value $_.verification_status
             }
         })
+    $sourceIssues = @($attempts |
+        Where-Object { [string]$_.error_class -ne 'NONE' } |
+        Sort-Object company_id, source_id |
+        ForEach-Object { New-JobAgentReportSourceIssueEntry -Attempt $_ -CompaniesById $companiesById -SourcesById $sourcesById })
 
     [pscustomobject]@{
         scan_run_id = $ScanRunId
@@ -233,8 +354,9 @@ function New-JobAgentDailyReport {
             changed_jobs = @($changedEntries.ToArray() | Sort-Object priority, company, title)
             closed_or_removed_jobs = @($removedEntries.ToArray() | Sort-Object priority, company, title)
             new_companies = @($newCompanies)
+            source_issues = @($sourceIssues)
         }
-        statistics = New-JobAgentReportStatistics -Document $Document -ScanRunId $ScanRunId
+        statistics = New-JobAgentReportStatistics -Document $Document -ScanRunId $ScanRunId -ActiveEntries $activeEntries -NewCompanies $newCompanies
         coverage = New-JobAgentCoverageReport -Document $Document -Now $finished -MaxPriorityItems 10
     }
 }
@@ -251,13 +373,14 @@ function Add-JobAgentReportMarkdownTable {
         [void]$Lines.Add($EmptyText)
         return
     }
-    $header = if ($IncludeChange) { '| Prioritaet | Firma | Titel | Status | Standort | Aenderung | Offizielle URL | Begruendung |' } else { '| Prioritaet | Firma | Titel | Status | Standort | Offizielle URL | Begruendung |' }
-    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|' }
+    $header = if ($IncludeChange) { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Aenderung | Offizielle URL | Begruendung |' } else { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Offizielle URL | Begruendung |' }
+    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' }
     [void]$Lines.Add($header)
     [void]$Lines.Add($separator)
     foreach ($item in $Items) {
         $change = ((@($item.changed_fields) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }) -join ', ')
         if ([string]::IsNullOrWhiteSpace($change)) { $change = $item.change_reason }
+        $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'UNKNOWN' } else { ('{0} ({1})' -f $item.age_days, $item.age_basis) }
         if ($IncludeChange) {
             $cells = @(
                     (ConvertTo-JobAgentReportMarkdownText $item.priority),
@@ -265,6 +388,14 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $item.title),
                     (ConvertTo-JobAgentReportMarkdownText $item.status),
                     (ConvertTo-JobAgentReportMarkdownText $item.location),
+                    (ConvertTo-JobAgentReportMarkdownText $item.work_model),
+                    (ConvertTo-JobAgentReportMarkdownText $item.employment_type),
+                    (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.published_at)),
+                    (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.first_seen)),
+                    (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.last_seen)),
+                    (ConvertTo-JobAgentReportMarkdownText $ageText),
+                    (ConvertTo-JobAgentReportMarkdownText $item.salary),
+                    (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
                     (ConvertTo-JobAgentReportMarkdownText $change),
                     (ConvertTo-JobAgentReportMarkdownText $item.official_url),
                     (ConvertTo-JobAgentReportMarkdownText $item.priority_explanation)
@@ -278,11 +409,46 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $item.title),
                     (ConvertTo-JobAgentReportMarkdownText $item.status),
                     (ConvertTo-JobAgentReportMarkdownText $item.location),
+                    (ConvertTo-JobAgentReportMarkdownText $item.work_model),
+                    (ConvertTo-JobAgentReportMarkdownText $item.employment_type),
+                    (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.published_at)),
+                    (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.first_seen)),
+                    (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.last_seen)),
+                    (ConvertTo-JobAgentReportMarkdownText $ageText),
+                    (ConvertTo-JobAgentReportMarkdownText $item.salary),
+                    (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
                     (ConvertTo-JobAgentReportMarkdownText $item.official_url),
                     (ConvertTo-JobAgentReportMarkdownText $item.priority_explanation)
             )
             [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
         }
+    }
+}
+
+function Add-JobAgentReportSourceIssueMarkdownTable {
+    param(
+        [Parameter(Mandatory)][object]$Lines,
+        [Parameter()][AllowEmptyCollection()][object[]]$Items = @()
+    )
+
+    if ($Items.Count -eq 0) {
+        [void]$Lines.Add('Keine Fehler oder unsicheren Quellen im Lauf.')
+        return
+    }
+
+    [void]$Lines.Add('| Kategorie | Firma | Quelle | Status | Fehlerklasse | Retry | HTTP |')
+    [void]$Lines.Add('|---|---|---|---|---|---|---:|')
+    foreach ($item in $Items) {
+        $cells = @(
+            (ConvertTo-JobAgentReportMarkdownText $item.category),
+            (ConvertTo-JobAgentReportMarkdownText $item.company),
+            (ConvertTo-JobAgentReportMarkdownText $item.source_url),
+            (ConvertTo-JobAgentReportMarkdownText $item.status),
+            (ConvertTo-JobAgentReportMarkdownText $item.error_class),
+            (ConvertTo-JobAgentReportMarkdownText $item.retry_recommendation),
+            (ConvertTo-JobAgentReportMarkdownText $item.http_status)
+        )
+        [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
     }
 }
 
@@ -326,10 +492,10 @@ function Add-JobAgentReportHtmlTable {
     [void]$Lines.Add('<table>')
     [void]$Lines.Add('<thead>')
     if ($IncludeChange) {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Aenderung</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Aenderung</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
     }
     else {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
     }
     [void]$Lines.Add('</thead>')
     [void]$Lines.Add('<tbody>')
@@ -338,6 +504,7 @@ function Add-JobAgentReportHtmlTable {
         if ([string]::IsNullOrWhiteSpace($change)) {
             $change = $item.change_reason
         }
+        $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'UNKNOWN' } else { ('{0} Tage ({1})' -f $item.age_days, $item.age_basis) }
         $url = ConvertTo-JobAgentReportText -Value $item.official_url
         $urlCell = if ($url -eq 'UNKNOWN') {
             '<span class="unknown">UNKNOWN</span>'
@@ -353,6 +520,14 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.work_model) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.employment_type) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.published_at)) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.first_seen)) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.last_seen)) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $ageText) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.salary) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $change) +
                 '</td><td>' + $urlCell +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
@@ -366,11 +541,53 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.work_model) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.employment_type) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.published_at)) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.first_seen)) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.last_seen)) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $ageText) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.salary) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
                 '</td><td>' + $urlCell +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
                 '</td></tr>'
             )
         }
+    }
+    [void]$Lines.Add('</tbody>')
+    [void]$Lines.Add('</table>')
+    [void]$Lines.Add('</div>')
+}
+
+function Add-JobAgentReportSourceIssueHtmlTable {
+    param(
+        [Parameter(Mandatory)][object]$Lines,
+        [Parameter()][AllowEmptyCollection()][object[]]$Items = @()
+    )
+
+    if ($Items.Count -eq 0) {
+        [void]$Lines.Add('<p>Keine Fehler oder unsicheren Quellen im Lauf.</p>')
+        return
+    }
+
+    [void]$Lines.Add('<div class="table-wrap">')
+    [void]$Lines.Add('<table>')
+    [void]$Lines.Add('<thead><tr><th>Kategorie</th><th>Firma</th><th>Quelle</th><th>Status</th><th>Fehlerklasse</th><th>Retry</th><th>HTTP</th></tr></thead>')
+    [void]$Lines.Add('<tbody>')
+    foreach ($item in $Items) {
+        $sourceUrl = ConvertTo-JobAgentReportText -Value $item.source_url
+        $sourceCell = if ($sourceUrl -eq 'UNKNOWN') { '<span class="unknown">UNKNOWN</span>' } else { '<a href="' + ([Net.WebUtility]::HtmlEncode($sourceUrl)) + '">' + ([Net.WebUtility]::HtmlEncode($sourceUrl)) + '</a>' }
+        [void]$Lines.Add(
+            '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.category) +
+            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
+            '</td><td>' + $sourceCell +
+            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
+            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.error_class) +
+            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.retry_recommendation) +
+            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.http_status) +
+            '</td></tr>'
+        )
     }
     [void]$Lines.Add('</tbody>')
     [void]$Lines.Add('</table>')
@@ -439,10 +656,13 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add('## Neue Unternehmen')
     Add-JobAgentReportCompanyMarkdownTable -Lines $lines -Items @($Report.sections.new_companies)
     [void]$lines.Add('')
+    [void]$lines.Add('## Fehler und unsichere Quellen')
+    Add-JobAgentReportSourceIssueMarkdownTable -Lines $lines -Items @($Report.sections.source_issues)
+    [void]$lines.Add('')
     [void]$lines.Add('## Recherche-Statistik')
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
-    foreach ($metric in @('new_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'errors')) {
+    foreach ($metric in @('checked_jobs', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
         [void]$lines.Add(('| {0} | {1} |' -f $metric, $Report.statistics.$metric))
     }
     [void]$lines.Add('')
@@ -568,8 +788,12 @@ function ConvertTo-JobAgentDailyReportHtml {
     Add-JobAgentReportCompanyHtmlTable -Lines $lines -Items @($Report.sections.new_companies)
     [void]$lines.Add('</section>')
 
+    [void]$lines.Add('<section><h2>Fehler und unsichere Quellen</h2>')
+    Add-JobAgentReportSourceIssueHtmlTable -Lines $lines -Items @($Report.sections.source_issues)
+    [void]$lines.Add('</section>')
+
     [void]$lines.Add('<section><h2>Recherche-Statistik</h2><div class="summary">')
-    foreach ($metric in @('new_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'errors')) {
+    foreach ($metric in @('checked_jobs', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
         [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportHtmlText $metric) + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.statistics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')

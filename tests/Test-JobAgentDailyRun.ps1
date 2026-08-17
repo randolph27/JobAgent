@@ -128,13 +128,19 @@ try {
 
     $report = Get-Content -LiteralPath $second.report_path -Raw | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($report.statistics.companies_scanned -eq 3) -Message 'Report enthaelt falsche Firmenanzahl.'
+    Assert-True -Condition ($report.statistics.checked_jobs -eq 2) -Message 'Report enthaelt falsche Anzahl gepruefter Stellen.'
     Assert-True -Condition ($report.statistics.snapshots -eq 2) -Message 'Report enthaelt falsche Snapshot-Anzahl.'
+    Assert-True -Condition ($report.statistics.unreachable_career_pages -eq 1) -Message 'Report enthaelt falsche Anzahl nicht erreichbarer Karriereportale.'
     Assert-True -Condition ($report.html_report_path -eq $second.html_report_path) -Message 'Summary-JSON verliert den HTML-Report-Pfad.'
     $markdownReport = Get-Content -LiteralPath $second.markdown_report_path -Raw
     Assert-True -Condition ($markdownReport.Contains('## Aktive passende Stellen')) -Message 'Markdown-Report enthaelt keine aktiven passenden Stellen.'
+    Assert-True -Condition ($markdownReport.Contains('## Fehler und unsichere Quellen')) -Message 'Markdown-Report enthaelt keine Fehler-/Quellen-Sektion.'
+    Assert-True -Condition ($markdownReport.Contains('https://gamma.example.invalid/careers')) -Message 'Markdown-Report enthaelt keine fehlerhafte Karriere-Quelle.'
     Assert-True -Condition ($markdownReport.Contains('https://alpha.example.invalid/careers/head-it-100')) -Message 'Markdown-Report enthaelt keine offizielle URL.'
     $htmlReport = Get-Content -LiteralPath $second.html_report_path -Raw
     Assert-True -Condition ($htmlReport.Contains('<h2>Aktive passende Stellen</h2>')) -Message 'HTML-Report enthaelt keine aktiven passenden Stellen.'
+    Assert-True -Condition ($htmlReport.Contains('<h2>Fehler und unsichere Quellen</h2>')) -Message 'HTML-Report enthaelt keine Fehler-/Quellen-Sektion.'
+    Assert-True -Condition ($htmlReport.Contains('https://gamma.example.invalid/careers')) -Message 'HTML-Report enthaelt keine fehlerhafte Karriere-Quelle.'
     Assert-True -Condition ($htmlReport.Contains('https://alpha.example.invalid/careers/head-it-100')) -Message 'HTML-Report enthaelt keine offizielle URL.'
     Assert-True -Condition (@($second.document.scan_runs[0].artifact_paths).Count -eq 3) -Message 'ScanRun-Artefakte muessen JSON, Markdown und HTML enthalten.'
 

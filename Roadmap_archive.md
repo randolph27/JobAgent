@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-017 Reportfelder vollständig gegen Programmanweisung und Daily-Run-Ausgabeformat schließen #comment: Die Pflichtfelder aus der Programmanweisung sind jetzt im Reportmodell, in JSON/Markdown/HTML sichtbar und funktional abgesichert.
+  - [x] Beschreibung: JSON-, Markdown- und HTML-Report zeigen jetzt Arbeitsmodell, Beschäftigungsart, Veröffentlichungsdatum oder `UNKNOWN`, Erkennungsdatum, letztes Sichtdatum, Gehalt oder `UNKNOWN`, wichtigste Anforderungen, offiziellen Bewerbungslink, Alter aktiver Stellen, neue Unternehmen, Fehler/unsichere Quellen, Recherche-Statistik und A/B/C-Begründung.
+  - [x] Scope: Erweitert wurden `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `tests/Test-JobAgentReport.ps1` und `tests/Test-JobAgentDailyRun.ps1`; `schemas/jobagent.schema.json` und `docs/data-model.md` mussten für diesen Abschluss nicht geändert werden. Keine Ableitung fehlender Werte aus Titel/Snippets; unbekannte Felder bleiben `UNKNOWN`.
+  - [x] Ist-Stand (2026-08-17 17:15): Reporteinträge tragen nun `published_at`, `first_seen`, `last_seen`, `salary`, `requirements`, `age_basis`, `age_days`; Markdown und HTML rendern diese Felder als sichtbare Spalten. Die Statistik weist zusätzlich geprüfte Stellen, aktive passende Stellen, neue Unternehmen, unsichere Quellen und nicht erreichbare Karriereportale aus.
+  - [x] Abhängigkeiten: JA-016 stellte das gemeinsame HTML-/Markdown-Viewmodel bereit; JA-002 bis JA-011 waren abgeschlossen.
+  - [x] Aufwand/Dauer: Aufwand M-L, innerhalb der aktuellen Arbeitseinheit abgeschlossen.
+  - [x] Prioritätsscore: 96/100, weil Report-Vertragskonformität die Voraussetzung für belastbare Bewertung späterer Live- und Quellenarbeit ist.
+  - [x] Risiken und Unsicherheiten: `published_at`, `salary` und `requirements` bleiben bewusst `UNKNOWN`, wenn der Store diese Informationen nicht belastbar liefert. Das Altersfeld verwendet `published_at`, sonst `first_seen`, und macht die gewählte Basis explizit sichtbar.
+  - [x] Schritte:
+    1. `New-JobAgentReportJobEntry` und Hilfsfunktionen um Datums-, Anforderungs- und Alterslogik ergänzt.
+    2. Markdown-/HTML-Renderer um zusätzliche Spalten und eine Sektion `Fehler und unsichere Quellen` erweitert.
+    3. Daily-Run-Summary an das gemeinsame Report-Statistikmodell angebunden und Funktionstests mit Fixture-Dokumenten erweitert.
+  - [x] Evidence: `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `tests/Test-JobAgentReport.ps1`, `tests/Test-JobAgentDailyRun.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0.
+  - [x] Audit: Renderer zeigen Pflichtfelder explizit, lange Anforderungen umbrechen im HTML/Markdown, bekannte aktive Stellen werden nicht erneut als `NEW` gerendert und fehlerhafte/unsichere Quellen erscheinen separat.
+  - [x] Supertest: Vom Nutzer für diesen Abschluss als erledigt gewertet; kein zusätzlicher Lauf erforderlich.
+
 - [x] JA-016 Lokalen HTML-Report als Daily-Run-Artefakt erzeugen und in `html/` ablegen #comment: Die Nutzeranforderung verlangt zusätzlich zum bestehenden JSON-/Markdown-Report einen lokal öffnbaren HTML-Output im Projektverzeichnis.
   - [x] Beschreibung: Jeder `Invoke-JobAgentDailyRun` erzeugt jetzt zusätzlich zu JSON und Markdown einen HTML-Bericht unter `html/jobagent/daily-run-<stamp>.html`; Rückgabewert, Summary-JSON, CLI-Output und `scan_run.artifact_paths` enthalten den HTML-Pfad deterministisch.
   - [x] Scope: Erweitert wurden `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `src/JobAgent.LiveScan.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tests/Test-JobAgentReport.ps1` und `tests/Test-JobAgentDailyRun.ps1`. Kein externer CDN-Link, kein Devserver-Zwang, kein JavaScript für Kerninhalt und keine ungeescapten HTML-Ausgaben.

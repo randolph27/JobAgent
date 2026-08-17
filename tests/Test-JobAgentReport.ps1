@@ -77,6 +77,7 @@ function New-TestJob {
         work_model = $WorkModel
         employment_type = $EmploymentType
         status = $Status
+        published_at = 'UNKNOWN'
         first_seen = '2026-08-17T10:00:00.000Z'
         last_seen = '2026-08-17T10:00:00.000Z'
         changed_at = '2026-08-17T10:00:00.000Z'
@@ -133,8 +134,13 @@ $document.jobs = @(
     New-TestJob -Id 'job:beta_removed' -CompanyId 'company:beta_ag' -Title 'CIO' -Status 'REMOVED' -Priority 'A' -Score 96
     New-TestJob -Id 'job:beta_rejected' -CompanyId 'company:beta_ag' -Title 'Software Engineer' -Status 'NEW' -Priority 'UNRATED' -Score 0
 )
+$document.jobs[0].published_at = '2026-08-10T08:00:00.000Z'
+$document.jobs[0].salary = '120000 EUR'
 $document.jobs[4].classification = New-TestClassification -Result 'REJECTED' -Priority 'UNRATED' -Score 0 -Reasons @()
-$document.job_sources = @()
+$document.job_sources = @(
+    [pscustomobject]@{ source_id = 'source:alpha_ag_career'; company_id = 'company:alpha_ag'; source_type = 'CAREER_PAGE'; url = 'https://alpha_ag.example.invalid/careers'; canonical_url = 'https://alpha_ag.example.invalid/careers'; is_official = $true; verified_at = '2026-08-17T09:00:00.000Z'; verification_basis = 'CAREER_URL' }
+    [pscustomobject]@{ source_id = 'source:beta_ag_career'; company_id = 'company:beta_ag'; source_type = 'CAREER_PAGE'; url = 'https://beta_ag.example.invalid/careers'; canonical_url = 'https://beta_ag.example.invalid/careers'; is_official = $true; verified_at = '2026-08-17T09:00:00.000Z'; verification_basis = 'CAREER_URL' }
+)
 $document.scan_runs = @([pscustomobject]@{
         scan_run_id = $scanRunId
         started_at = '2026-08-17T10:00:00.000Z'
@@ -165,19 +171,30 @@ Assert-True -Condition (@($report.sections.active_matching_jobs).Count -eq 1) -M
 Assert-True -Condition (@($report.sections.changed_jobs).Count -eq 1) -Message 'Geaenderte passende Stellen fehlen.'
 Assert-True -Condition (@($report.sections.closed_or_removed_jobs).Count -eq 1) -Message 'Entfernte passende Stellen fehlen.'
 Assert-True -Condition (@($report.sections.new_companies).Count -eq 1) -Message 'Neue Unternehmen im Lauf werden nicht erkannt.'
+Assert-True -Condition (@($report.sections.source_issues).Count -eq 1) -Message 'Fehler oder unsichere Quellen fehlen im Report.'
 Assert-True -Condition ($report.statistics.errors -eq 1) -Message 'Recherche-Statistik zaehlt Adapterfehler nicht.'
+Assert-True -Condition ($report.statistics.checked_jobs -eq 2) -Message 'Recherche-Statistik zaehlt gepruefte Stellen falsch.'
+Assert-True -Condition ($report.statistics.active_matching_jobs -eq 1) -Message 'Recherche-Statistik zaehlt aktive passende Stellen falsch.'
+Assert-True -Condition ($report.statistics.new_companies -eq 1) -Message 'Recherche-Statistik zaehlt neue Unternehmen falsch.'
+Assert-True -Condition ($report.statistics.unreachable_career_pages -eq 1) -Message 'Nicht erreichbare Karriereportale werden nicht ausgewiesen.'
 Assert-True -Condition ([string]$report.sections.changed_jobs[0].location -eq 'UNKNOWN') -Message 'Fehlende optionale Felder muessen UNKNOWN bleiben.'
 Assert-True -Condition ($report.sections.new_matching_jobs[0].priority_explanation -match 'Prioritaet A') -Message 'A/B/C-Priorisierung wird nicht erklaert.'
+Assert-True -Condition ($report.sections.new_matching_jobs[0].published_at -eq '2026-08-10T08:00:00.000Z') -Message 'Veroeffentlichungsdatum fehlt im Reporteintrag.'
+Assert-True -Condition ($report.sections.new_matching_jobs[0].salary -eq '120000 EUR') -Message 'Gehalt fehlt im Reporteintrag.'
+Assert-True -Condition ($report.sections.new_matching_jobs[0].requirements_text -match 'Budgetverantwortung') -Message 'Wichtigste Anforderungen fehlen im Reporteintrag.'
+Assert-True -Condition ($report.sections.new_matching_jobs[0].age_basis -eq 'published_at') -Message 'Altersbasis fuer aktive Stellen ist falsch.'
+Assert-True -Condition ([int]$report.sections.new_matching_jobs[0].age_days -ge 7) -Message 'Alter der Stelle wird nicht berechnet.'
+Assert-True -Condition ($report.sections.source_issues[0].category -eq 'NICHT_ERREICHBAR') -Message 'Fehlerkategorie fuer nicht erreichbare Karriereportale ist falsch.'
 
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
-foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Recherche-Statistik', 'https://alpha_ag.example.invalid/jobs/alpha_new')) {
+foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '120000 EUR', 'Budgetverantwortung', 'published_at', 'https://beta_ag.example.invalid/careers', 'https://alpha_ag.example.invalid/jobs/alpha_new')) {
     Assert-True -Condition ($markdown.Contains($expected)) -Message "Markdown-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $markdown.Contains('Software Engineer')) -Message 'Abgelehnte Stellen duerfen nicht als passende Stellen gerendert werden.'
 
 $report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
-foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', 'JobAgent Daily-Run-Bericht', 'https://alpha_ag.example.invalid/jobs/alpha_new')) {
+foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', 'JobAgent Daily-Run-Bericht', '120000 EUR', 'Budgetverantwortung', 'https://beta_ag.example.invalid/careers', 'https://alpha_ag.example.invalid/jobs/alpha_new')) {
     Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'

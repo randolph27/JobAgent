@@ -9,27 +9,6 @@
 - Priorisierung: zuerst Report-Vertragskonformität, weil der HTML-Output nun vorhanden ist und sichtbare Pflichtfelder noch fehlen; danach Status-/Quellensicherheit, weil falsche NEW/REMOVED/CLOSED-Ergebnisse fachlich schwerer wiegen; danach Live-Adapter und Firmenabdeckung; zuletzt lokale Betriebs-/Audit-Härtung.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis; keine Bewerbung; keine extern wirksame Aktion ohne ausdrückliche Bestätigung; keine Secrets in Reports, Logs, Todo, Handoff oder Git.
 
-## M6 - Report-Vertrag und lokaler HTML-Output
-
-- [ ] JA-017 Reportfelder vollständig gegen Programmanweisung und Daily-Run-Ausgabeformat schließen #comment: Der bestehende Report erfüllt die Struktur grob, lässt aber mehrere Pflichtfelder aus der angehängten Anweisung nur indirekt oder gar nicht sichtbar werden.
-  - [ ] Beschreibung: JSON, Markdown und HTML zeigen je Abschnitt exakt die geforderten Informationen: Arbeitsmodell, Beschäftigungsart, Veröffentlichungsdatum oder `UNKNOWN`, Erkennungsdatum, Gehalt oder `UNKNOWN`, wichtigste Anforderungen, offizieller Bewerbungslink, Alter aktiver Stellen, neue Unternehmen, Fehler/unsichere Quellen, Recherche-Statistik und A/B/C-Begründung.
-  - [ ] Scope: Betroffen sind `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `schemas/jobagent.schema.json` nur falls fehlende Felder wirklich persistiert werden müssen, `docs/data-model.md`, `tests/Test-JobAgentReport.ps1`, `tests/Test-JobAgentDailyRun.ps1`; No-Go: fehlende Werte nicht aus Titel/Snippet raten, Gehalt/Publikationsdatum nur aus Daten übernehmen oder `UNKNOWN`.
-  - [ ] Ist-Stand (2026-08-17 16:20): Reporteinträge enthalten intern `work_model` und `employment_type`, Markdown-Tabellen zeigen sie aber nicht als eigene Spalten; `published_at`, `first_seen`, `salary`, Alter der Stelle, geprüfte Stellen, neu entdeckte Unternehmen und nicht eindeutig verifizierbare Treffer sind nicht vollständig als sichtbarer Vertrag abgebildet.
-  - [ ] Abhängigkeiten: JA-016 ist abgeschlossen und stellt das gemeinsame HTML-/Markdown-Viewmodel bereit; JA-002 bis JA-011 sind abgeschlossen.
-  - [ ] Aufwand/Dauer: Aufwand M-L; Dauer 1 Arbeitstag bei 1 Agent; parallelisierbar mit JA-019 bei getrennten Tests.
-  - [ ] Prioritätsscore: 96/100, weil ein Report ohne Pflichtfelder die fachliche Nutzbarkeit einschränkt und später schwerer gegen Live-Ergebnisse zu auditieren ist.
-  - [ ] Ordnungsbegründung: Erst wenn der Reportvertrag vollständig ist, können Live-Adapter und Firmenabdeckung mit verlässlichen Nachweisen bewertet werden.
-  - [ ] Risiken und Unsicherheiten: Einige Felder sind im Store möglicherweise nur als `UNKNOWN` verfügbar; das ist zulässig, muss aber explizit sichtbar und getestet sein. Die genaue Definition von `Alter der Stelle` hängt an `first_seen` oder `published_at`; wenn `published_at` fehlt, ist `first_seen` als technische Altersbasis auszuweisen.
-  - [ ] Schritte:
-    1. `New-JobAgentReportJobEntry` um `published_at`, `first_seen`, `last_seen`, `salary`, `requirements`, `age_basis` und `age_days` erweitern, wobei fehlende oder leere Felder stabil `UNKNOWN` liefern.
-    2. Markdown-/HTML-Renderfunktionen je Abschnitt so anpassen, dass neue, aktive, geänderte und entfernte Stellen die jeweils geforderten Spalten ohne redundante Vollwiederholung zeigen.
-    3. Statistikmodell um geprüfte Stellen, neu entdeckte Unternehmen, weiterhin aktive Stellen, nicht eindeutig verifizierbare Treffer und nicht erreichbare Karriereportale ergänzen und Tests mit Fixture-Dokumenten absichern.
-  - [ ] Evidence: Aktualisierte Report-Tests mit expliziten Assertions für alle Pflichtfelder; Beispiel-Markdown und Beispiel-HTML aus temporärem Daily-Run; optional `docs/data-model.md` mit Feldherkunft.
-  - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1`; bei Schemaänderung zusätzlich `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1`.
-  - [ ] Audit: Manuelle Sichtprüfung eines Fixture-Reports bei 1920/1366/800 px; Akzeptanz: Pflichtabschnitte und Pflichtfelder sind sichtbar, unbekannte Werte stehen als `UNKNOWN`, lange Anforderungen umbrechen, keine doppelte NEW-Ausgabe bekannter aktiver Stellen.
-  - [ ] Supertest: Erst nach grünen Funktionstests `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1`.
-  - [ ] Meilenstein und Parallelisierung: M6; blockiert spätere Abnahme von JA-019 bis JA-021, weil deren Ergebnisqualität über den Report nachgewiesen wird.
-
 ## M7 - Status-, Quellen- und Historienkorrektheit
 
 - [ ] JA-018 Quellenbezogene Entfernungssicherheit und expliziten `CLOSED`-Nachweis implementieren #comment: Falsche Statuswechsel sind kritischer als fehlende Treffer, weil sie die persistente Historie beschädigen können.

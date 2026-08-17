@@ -212,7 +212,8 @@ function New-JobAgentDailyRunSummary {
         [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$AdapterResults,
         [Parameter(Mandatory)][string]$ReportPath,
         [Parameter(Mandatory)][datetime]$StartedAt,
-        [Parameter(Mandatory)][datetime]$FinishedAt
+        [Parameter(Mandatory)][datetime]$FinishedAt,
+        [Parameter()][AllowNull()][object]$Report = $null
     )
 
     $jobsForRun = @($Document.job_snapshots | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
@@ -226,6 +227,7 @@ function New-JobAgentDailyRunSummary {
                 messages = @($_.artifact_paths)
             }
         })
+    $reportStatistics = if ($null -ne $Report) { $Report.statistics } else { $null }
     [pscustomobject]@{
         scan_run_id = $ScanRunId
         started_at = ConvertTo-JobAgentDailyIso -Value $StartedAt
@@ -236,11 +238,16 @@ function New-JobAgentDailyRunSummary {
             companies_scanned = @($AdapterResults | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count
             adapter_attempts = $AdapterResults.Count
             raw_jobs = @($AdapterResults | ForEach-Object { @($_.raw_jobs).Count } | Measure-Object -Sum).Sum
+            checked_jobs = if ($null -ne $reportStatistics) { [int]$reportStatistics.checked_jobs } else { $jobsForRun.Count }
             snapshots = $jobsForRun.Count
             created = @($changesForRun | Where-Object event_type -eq 'JOB_CREATED').Count
+            active_matching_jobs = if ($null -ne $reportStatistics) { [int]$reportStatistics.active_matching_jobs } else { 0 }
             updated = @($changesForRun | Where-Object event_type -eq 'JOB_UPDATED').Count
             removed = @($changesForRun | Where-Object event_type -eq 'JOB_REMOVED').Count
             invalid = @($changesForRun | Where-Object event_type -eq 'JOB_INVALIDATED').Count
+            new_companies = if ($null -ne $reportStatistics) { [int]$reportStatistics.new_companies } else { 0 }
+            uncertain_sources = if ($null -ne $reportStatistics) { [int]$reportStatistics.uncertain_sources } else { 0 }
+            unreachable_career_pages = if ($null -ne $reportStatistics) { [int]$reportStatistics.unreachable_career_pages } else { 0 }
             errors = $errors.Count
         }
         errors = $errors
@@ -268,7 +275,8 @@ function Write-JobAgentDailyRunMarkdownReport {
         [Parameter(Mandatory)][string]$ProjectRoot,
         [Parameter(Mandatory)][object]$Document,
         [Parameter(Mandatory)][string]$ScanRunId,
-        [Parameter(Mandatory)][string]$ReportPath
+        [Parameter(Mandatory)][string]$ReportPath,
+        [Parameter()][AllowNull()][object]$Report = $null
     )
 
     $path = if ([IO.Path]::IsPathRooted($ReportPath)) {
@@ -277,8 +285,10 @@ function Write-JobAgentDailyRunMarkdownReport {
     else {
         Join-Path $ProjectRoot $ReportPath
     }
-    $report = New-JobAgentDailyReport -Document $Document -ScanRunId $ScanRunId
-    Write-JobAgentDailyAtomicFile -Path $path -Content (ConvertTo-JobAgentDailyReportMarkdown -Report $report)
+    if ($null -eq $Report) {
+        $Report = New-JobAgentDailyReport -Document $Document -ScanRunId $ScanRunId
+    }
+    Write-JobAgentDailyAtomicFile -Path $path -Content (ConvertTo-JobAgentDailyReportMarkdown -Report $Report)
     return $path
 }
 
@@ -287,7 +297,8 @@ function Write-JobAgentDailyRunHtmlReport {
         [Parameter(Mandatory)][string]$ProjectRoot,
         [Parameter(Mandatory)][object]$Document,
         [Parameter(Mandatory)][string]$ScanRunId,
-        [Parameter(Mandatory)][string]$ReportPath
+        [Parameter(Mandatory)][string]$ReportPath,
+        [Parameter()][AllowNull()][object]$Report = $null
     )
 
     $path = if ([IO.Path]::IsPathRooted($ReportPath)) {
@@ -296,8 +307,10 @@ function Write-JobAgentDailyRunHtmlReport {
     else {
         Join-Path $ProjectRoot $ReportPath
     }
-    $report = New-JobAgentDailyReport -Document $Document -ScanRunId $ScanRunId
-    Write-JobAgentDailyAtomicFile -Path $path -Content (ConvertTo-JobAgentDailyReportHtml -Report $report)
+    if ($null -eq $Report) {
+        $Report = New-JobAgentDailyReport -Document $Document -ScanRunId $ScanRunId
+    }
+    Write-JobAgentDailyAtomicFile -Path $path -Content (ConvertTo-JobAgentDailyReportHtml -Report $Report)
     return $path
 }
 
@@ -388,9 +401,10 @@ function Invoke-JobAgentDailyRun {
         $document = Upsert-JobAgentScanRun -Document $document -ScanRun $scanRun
         $storePath = Write-JobAgentStore -ProjectRoot $projectRootFull -DataRoot $DataRoot -Document $document -CreateBackup
 
-        $summary = New-JobAgentDailyRunSummary -Document $document -ScanRunId $scanRunId -AdapterResults $resultsArray -ReportPath $reportRelativePath -StartedAt $StartedAt -FinishedAt $finishedAt
-        $markdownReportPath = Write-JobAgentDailyRunMarkdownReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $markdownReportRelativePath
-        $htmlReportPath = Write-JobAgentDailyRunHtmlReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $htmlReportRelativePath
+        $report = New-JobAgentDailyReport -Document $document -ScanRunId $scanRunId
+        $summary = New-JobAgentDailyRunSummary -Document $document -ScanRunId $scanRunId -AdapterResults $resultsArray -ReportPath $reportRelativePath -StartedAt $StartedAt -FinishedAt $finishedAt -Report $report
+        $markdownReportPath = Write-JobAgentDailyRunMarkdownReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $markdownReportRelativePath -Report $report
+        $htmlReportPath = Write-JobAgentDailyRunHtmlReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $htmlReportRelativePath -Report $report
         $summary.report_path = Join-Path $projectRootFull $reportRelativePath
         $summary | Add-Member -NotePropertyName markdown_report_path -NotePropertyValue $markdownReportPath -Force
         $summary | Add-Member -NotePropertyName html_report_path -NotePropertyValue $htmlReportPath -Force
