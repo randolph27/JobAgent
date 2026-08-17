@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-012 Lokalen Scheduler- und Betriebsmodus für tägliche Läufe dokumentieren und absichern #comment: Der Agent soll täglich laufen, ohne den Zustand vorheriger Läufe zu verlieren oder parallele Läufe zu starten.
+  - [x] Beschreibung: `src/JobAgent.Operations.psm1` definiert einen sicheren lokalen Betriebsmodus fuer Daily-Runs mit separatem Betriebs-Lock, Statusdatei, Logrotation, Exitcodes und nicht-interaktiven Statusabfragen ueber Tool- und CI-Commands.
+  - [x] Scope: Erstellt wurden `src/JobAgent.Operations.psm1`, `tools/Get-JobAgentDailyRunStatus.ps1` und `tests/Test-JobAgentOperations.ps1`; erweitert wurden `tools/Invoke-JobAgentDailyRun.ps1`, `.ci/bin/modules/ci-commands-main.ps1`, `.ci/pins/immutable.hashes.json`, `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Cloud-Scheduler-Einrichtung, keine Live-Webrecherche.
+  - [x] Ist-Stand (2026-08-17 16:05): `.\ci.cmd daily-run-status` liefert JSON; `.\ci.cmd supertest` fuehrt die fachliche JobAgent-Suite aus; Daily-Run-CLI schreibt `logs/jobagent/daily-run.status.json`, verwaltete `daily-run-*.log` und blockiert parallele Starts.
+  - [x] Abhängigkeiten: JA-010 und JA-011 sind abgeschlossen; Store-Locking aus JA-003 bleibt fuer Persistenz aktiv, der neue Betriebs-Lock schuetzt den gesamten Lauf.
+  - [x] Aufwand/Dauer: Aufwand M, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 60/100, weil Automatisierung nach korrektem Einzellauf kam und nun den Betrieb fuer manuelle oder geplante Laeufe absichert.
+  - [x] Risiken: Produktive Live-Recherche bleibt bis JA-014 deaktiviert; der dokumentierte Task-Scheduler-Befehl nutzt deshalb bewusst Fixture-/Mock-Modus. Aktive Locks werden fail-closed behandelt, wenn das Payload waehrend eines laufenden Prozesses nicht lesbar ist.
+  - [x] Schritte:
+    1. CI-Commands `daily-run` und `daily-run-status` registriert; `supertest` auf die JobAgent-Funktionstest-Suite umgebogen.
+    2. Betriebswrapper mit Lockdatei, Statusdatei, Run-Log, Exitcode, Fehlerstatus und Logrotation implementiert.
+    3. Scheduler-Bedienung, Re-Run-Regeln, Exitcodes und Secret-Grenzen in `docs/data-model.md` dokumentiert.
+  - [x] Evidence: `src/JobAgent.Operations.psm1`, `tools/Get-JobAgentDailyRunStatus.ps1`, `tools/Invoke-JobAgentDailyRun.ps1`, `.ci/bin/modules/ci-commands-main.ps1`, `.ci/pins/immutable.hashes.json`, `tests/Test-JobAgentOperations.ps1`, `tests/Test-JobAgentSupertest.ps1`, `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File tools\Get-JobAgentDailyRunStatus.ps1` -> Exit 0.
+  - [x] Audit: Tests decken freien Start, Statusschreibung, Fehler-Exitcode, Logrotation und blockierten Parallelstart ab; Betriebsdokumentation verbietet Secrets in Logs und kennzeichnet Live-Recherche als spaetere Lane.
+  - [x] Supertest: `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` -> Exit 0; `.\ci.cmd supertest` -> Exit 0.
+
 - [x] JA-011 Ausgabeformat und Priorisierung A/B/C für Rechercheberichte umsetzen #comment: Ergebnisse müssen kompakt, differenziert und ohne redundante Wiederholung bekannter unveränderter Stellen nutzbar sein.
   - [x] Beschreibung: `src/JobAgent.Report.psm1` erzeugt pro Daily-Run einen strukturierten Bericht mit neuen passenden Stellen, aktiven passenden Stellen, Änderungen, geschlossenen/entfernten Stellen, neuen Unternehmen, Recherche-Statistik und A/B/C-Priorisierung.
   - [x] Scope: Erstellt wurden `src/JobAgent.Report.psm1` und `tests/Test-JobAgentReport.ps1`; erweitert wurden `src/JobAgent.DailyRun.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Bewerbung, keine Kontaktaufnahme, keine externen Schreibaktionen und keine Live-Webrecherche.

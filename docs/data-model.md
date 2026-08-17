@@ -334,6 +334,40 @@ Funktionstest:
 pwsh -NoProfile -File tests\Test-JobAgentReport.ps1
 ```
 
+## Betriebsmodus: Daily-Run und Status
+
+`src/JobAgent.Operations.psm1` implementiert den lokalen Betriebsvertrag fuer `JA-012`:
+
+- `Invoke-JobAgentManagedDailyRun` kapselt den fachlichen Daily-Run mit separatem Betriebs-Lock unter `logs/jobagent/daily-run.lock`, Statusdatei `logs/jobagent/daily-run.status.json`, Run-Log und Exitcode-Vertrag.
+- `Get-JobAgentDailyRunOperationalStatus` liefert nicht-interaktiv den letzten bekannten Laufzustand und erkennt einen laufenden Prozess ueber das Lock-Payload.
+- `Invoke-JobAgentLogRotation` begrenzt `logs/jobagent/daily-run-*.log` auf die konfigurierte Anzahl und entfernt nur diese verwalteten Betriebslogs.
+- `tools\Invoke-JobAgentDailyRun.ps1` nutzt den Betriebswrapper. Ohne `-FixturePath` bleibt die Live-Lane weiterhin fail-closed.
+- `tools\Get-JobAgentDailyRunStatus.ps1` gibt den Status als JSON aus und ist fuer Scheduler-Checks geeignet.
+
+Exitcodes:
+
+- `0`: Lauf erfolgreich oder ohne fatalen technischen Fehler abgeschlossen.
+- `1`: fachlicher Laufstatus `FAILED`, ungefangener Adapter-/Persistenzfehler oder aktives Lock.
+
+Windows Task Scheduler:
+
+```powershell
+schtasks /Create /TN "JobAgent Daily Run" /SC DAILY /ST 07:30 /TR "pwsh -NoProfile -File D:\_Scripte\JobAgent\tools\Invoke-JobAgentDailyRun.ps1 -ProjectRoot D:\_Scripte\JobAgent -FixturePath D:\_Scripte\JobAgent\tests\fixtures\jobagent\daily-run.json" /F
+```
+
+Hinweise:
+
+- Arbeitsverzeichnis muss `D:\_Scripte\JobAgent` sein, wenn spaeter `.\ci.cmd daily-run` verwendet wird.
+- Produktive Live-Recherche wird erst mit JA-014 aktiviert; bis dahin nur Fixture- oder Mock-Laeufe planen.
+- Vor einem manuellen Re-Run `pwsh -NoProfile -File tools\Get-JobAgentDailyRunStatus.ps1` ausfuehren und bei `is_running=true` keinen zweiten Lauf starten.
+- Logs und Statusdateien duerfen keine Secrets enthalten; Fixture- und Live-Parameter mit Secrets sind nicht vorgesehen.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1
+```
+
 ## Beispiel: gültiger Mindestbestand
 
 ```json

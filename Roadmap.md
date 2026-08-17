@@ -7,25 +7,6 @@
 - Priorisierung: zuerst persistente Verträge und Datenmodelle, danach idempotente Laufsteuerung, danach Quellen-/Crawler-Adapter, Matching, Statuslogik, Ausgabe, Automatisierung und Qualitätssicherung.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis.
 
-## M4 - Daily-Run, Ausgabe und Automatisierung
-
-- [ ] JA-012 Lokalen Scheduler- und Betriebsmodus für tägliche Läufe dokumentieren und absichern #comment: Der Agent soll täglich laufen, ohne den Zustand vorheriger Läufe zu verlieren oder parallele Läufe zu starten.
-  - [ ] Beschreibung: Definiere und implementiere einen sicheren lokalen Betriebsmodus für tägliche Ausführung mit Locking, Logrotation, Exitcodes, Retry-Hinweisen und klarer Bedienung über `.\ci.cmd`.
-  - [ ] Scope: CI-Command-Integration, Scheduler-Dokumentation, Lock-/Statusdateien, Tests; keine Einrichtung eines externen Cloud-Dienstes ohne separaten Auftrag.
-  - [ ] Ist-Stand (2026-08-17 12:20): Bootstrap kennt CI-Commands, aber keinen fachlichen `daily-run`-Scheduler.
-  - [ ] Abhängigkeiten: JA-010, JA-011; Locking aus JA-003 wiederverwenden.
-  - [ ] Aufwand/Dauer: Aufwand M, Dauer 1-2 PT; kann nach Daily-Run-CLI parallel zur Dokumentation erfolgen.
-  - [ ] Prioritätsscore: 60/100, weil Automatisierung nach korrektem Einzellauf kommt.
-  - [ ] Risiken: Parallele Scheduler-Starts können Daten beschädigen; Logdateien können wachsen; Netzwerkfehler dürfen nicht still verschluckt werden.
-  - [ ] Schritte:
-    1. Registriere einen CI-Command wie `.\ci.cmd daily-run`, der den fachlichen Orchestrator startet, Exitcodes setzt und Logs unter `logs/jobagent/` schreibt.
-    2. Dokumentiere Windows Task Scheduler Einrichtung mit Arbeitsverzeichnis, Kommando, Zeitplan, Umgebungsannahmen und sicheren Re-Run-Regeln.
-    3. Implementiere Status-/Lockdateien, Logrotation und `daily-run-status`, damit laufende oder zuletzt fehlgeschlagene Läufe ohne Kontextverlust geprüft werden können.
-  - [ ] Evidence: Betriebsdokumentation, Beispiel-Scheduler-Konfiguration ohne Secrets, Logrotationstest und Statusdatei eines Mock-Laufs.
-  - [ ] Funktionstest: Tests für Start bei freiem Lock, Start bei bestehendem Lock, Statusabfrage, Logrotation und Exitcode bei Adapterfehlern.
-  - [ ] Audit: Prüfen, dass keine Secrets in Logs oder Handoff landen und dass der Scheduler keine interaktiven Prompts erzeugt.
-  - [ ] Supertest: Scheduler-/CLI-Mocklauf in Supertest aufnehmen, produktive Webrecherche als separate Live-Lane kennzeichnen.
-
 ## M5 - Qualität, Live-Abdeckung und Erweiterung
 
 - [ ] JA-013 Teststrategie und Supertest für Kernfunktionen konsolidieren #comment: Einzelne Funktionstests müssen vor dem Supertest grün sein; der Supertest bündelt erst abgeschlossene Roadmap-Funktionen.

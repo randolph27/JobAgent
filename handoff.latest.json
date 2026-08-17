@@ -1,40 +1,41 @@
 {
-  "ts": "2026-08-17T15:45:00+02:00",
-  "agent_id": "codex-20260817-ja011-final",
+  "ts": "2026-08-17T16:12:00+02:00",
+  "agent_id": "codex-20260817-ja012-final",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "Neuen Chat bei TD-0010 / JA-012 fortsetzen.",
-  "summary": "JA-011 ist abgeschlossen, archiviert und getestet. Der Recherchebericht-Renderer erzeugt strukturierte Reports und Markdown-Ausgaben mit A/B/C-Erklaerung; STP wurde ausgefuehrt. Naechster fachlicher Schritt ist der lokale Scheduler- und Betriebsmodus JA-012.",
-  "completed": [
-    "JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
-    "Roadmap-Rotation: JA-011 aus Roadmap.md nach Roadmap_archive.md verschoben",
-    "Todo-Rotation: TD-0009 erledigt, TD-0010 offen",
-    ".\\ci.cmd stp ausgefuehrt"
+  "goal": "Neuen Chat bei TD-0011 / JA-013 fortsetzen.",
+  "summary": "JA-012 ist abgeschlossen, archiviert und getestet. Daily-Run-Betrieb besitzt Locking, Status, Logrotation, CI-Commands und Scheduler-Dokumentation. STP wurde ausgefuehrt; naechster fachlicher Schritt ist JA-013 Teststrategie und Supertest konsolidieren.",
+  "next": "M5 - Qualität, Live-Abdeckung und Erweiterung: JA-013 Teststrategie und Supertest für Kernfunktionen konsolidieren #comment: Einzelne Funktionstests müssen vor dem Supertest grün sein; der Supertest bündelt erst abgeschlossene Roadmap-Funktionen.",
+  "next_steps": [
+    "Testmatrix fuer JA-002 bis JA-012 aus vorhandenen Testdateien und Commands erstellen.",
+    "Supertest-Vertrag pruefen und dokumentieren, inklusive Trennung deterministischer Mock-Lane von spaeterer Live-Lane.",
+    "Roadmap-/Todo-/Handoff-Konsistenz nach JA-013 erneut validieren."
   ],
   "changed": [
+    ".ci/bin/modules/ci-commands-main.ps1",
+    ".ci/pins/immutable.hashes.json",
+    ".ci/pins/immutable.snapshot/Roadmap.md",
     "Roadmap.md",
     "Roadmap_archive.md",
-    "Roadmap_index.md",
     "docs/data-model.md",
-    "handoff.latest.md",
     "handoff.latest.json",
-    "src/JobAgent.DailyRun.psm1",
-    "src/JobAgent.Report.psm1",
-    "tests/Test-JobAgentDailyRun.ps1",
-    "tests/Test-JobAgentReport.ps1",
+    "handoff.latest.md",
+    "src/JobAgent.Operations.psm1",
+    "tests/Test-JobAgentOperations.ps1",
     "tests/Test-JobAgentSupertest.ps1",
     "todo.current.md",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
     "todo.state.json",
+    "tools/Get-JobAgentDailyRunStatus.ps1",
     "tools/Invoke-JobAgentDailyRun.ps1"
   ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentOperations.ps1",
       "exit": 0
     },
     {
@@ -46,7 +47,27 @@
       "exit": 0
     },
     {
-      "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
+      "cmd": "pwsh -NoProfile -File tools\\Get-JobAgentDailyRunStatus.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd runtime-update",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd daily-run-status",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd supertest",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
       "exit": 0
     },
     {
@@ -58,66 +79,25 @@
       "cmd": "Invoke-WebRequest http://localhost:8300/",
       "exit": 0,
       "status": 200
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0
     }
-  ],
-  "stp_note": ".\\ci.cmd stp schreibt aus einem alten Verify-Digest weiterhin .\\ci.cmd supertest -> Exit 1 in seine CAPSULE. Der aktuelle fachliche Supertest pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1 ist gruen.",
-  "next": "TD-0010 / JA-012 Lokalen Scheduler- und Betriebsmodus fuer taegliche Laeufe dokumentieren und absichern",
-  "next_details": [
-    "Bestehende CI-/CLI-Struktur pruefen: ci.cmd, Runtime-Commandrouter, tools/Invoke-JobAgentDailyRun.ps1, Locking aus src/JobAgent.Persistence.psm1.",
-    "Einen sicheren lokalen Betriebsmodus fuer daily-run und daily-run-status ueber .\\ci.cmd entwerfen und implementieren.",
-    "Status-/Lockdateien unter logs/jobagent/ oder data/jobagent/ so modellieren, dass parallele Starts blockiert und letzte Ergebnisse nachvollziehbar bleiben.",
-    "Logrotation fuer Daily-Run-Logs und Statusabfrage mit Mock-Laeufen testen.",
-    "Windows Task Scheduler Dokumentation mit Arbeitsverzeichnis D:\\_Scripte\\JobAgent, Kommando, Zeitplan, Umgebungsannahmen, Exitcodes und Re-Run-Regeln erstellen.",
-    "Supertest erst nach gruenen fokussierten JA-012-Funktionstests aktualisieren oder ausfuehren."
-  ],
-  "known_notes": [
-    "Funktionstests bleiben mock-/fixture-basiert; keine Live-Webrecherche fuer JA-012.",
-    "Live-Webrecherche ist erst JA-014.",
-    "Keine produktiven Bewerbungen, keine Kontaktaufnahme, keine externen Schreibaktionen.",
-    "Devserver laeuft nach Projektkonfiguration auf http://localhost:8300/, nicht 8090.",
-    "SonarQube ist auf http://localhost:9000 UP; lokales sonar.cmd fehlt im JobAgent-Repo weiterhin."
   ],
   "git": {
     "branch": "master",
     "upstream": "origin/master",
-    "pushed": false
-  },
-  "refs": [
-    "Roadmap.md",
-    "Roadmap_archive.md",
-    "todo.current.md",
-    "todo.state.json",
-    "handoff.latest.md",
-    "handoff.latest.json",
-    "src/JobAgent.Report.psm1",
-    "src/JobAgent.DailyRun.psm1",
-    "tests/Test-JobAgentReport.ps1",
-    "tests/Test-JobAgentDailyRun.ps1",
-    "docs/data-model.md"
-  ],
-  "capsule": {
-    "ts": "2026-08-17T15:45:00+02:00",
-    "agent_id": "codex-20260817-ja011-final",
-    "workspace_root": "D:\\_Scripte\\JobAgent",
-    "project": "JobAgent",
-    "active_id": "",
-    "status": "open",
-    "goal": "Neuen Chat bei TD-0010 / JA-012 fortsetzen.",
-    "changed": [
+    "head": "7eb0b13be51e",
+    "ahead_behind": "0/0",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty",
+    "tracked_changes": [
+      ".ci/bin/modules/ci-commands-main.ps1",
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
       "Roadmap.md",
       "Roadmap_archive.md",
-      "Roadmap_index.md",
       "docs/data-model.md",
-      "handoff.latest.md",
       "handoff.latest.json",
-      "src/JobAgent.DailyRun.psm1",
-      "src/JobAgent.Report.psm1",
-      "tests/Test-JobAgentDailyRun.ps1",
-      "tests/Test-JobAgentReport.ps1",
+      "handoff.latest.md",
       "tests/Test-JobAgentSupertest.ps1",
       "todo.current.md",
       "todo.events.jsonl",
@@ -125,10 +105,54 @@
       "todo.master.index.json",
       "todo.state.json",
       "tools/Invoke-JobAgentDailyRun.ps1"
+    ]
+  },
+  "route_ok": null,
+  "route_violations": [],
+  "refs": [
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "src/JobAgent.Operations.psm1",
+    "tests/Test-JobAgentOperations.ps1",
+    "tools/Get-JobAgentDailyRunStatus.ps1",
+    "docs/data-model.md"
+  ],
+  "capsule": {
+    "ts": "2026-08-17T16:12:00+02:00",
+    "agent_id": "codex-20260817-ja012-final",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "",
+    "status": "open",
+    "goal": "Neuen Chat bei TD-0011 / JA-013 fortsetzen.",
+    "changed": [
+      ".ci/bin/modules/ci-commands-main.ps1",
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "docs/data-model.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "src/JobAgent.Operations.psm1",
+      "tests/Test-JobAgentOperations.ps1",
+      "tests/Test-JobAgentSupertest.ps1",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Get-JobAgentDailyRunStatus.ps1",
+      "tools/Invoke-JobAgentDailyRun.ps1"
     ],
     "verified": [
       {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentOperations.ps1",
         "exit": 0
       },
       {
@@ -140,18 +164,8 @@
         "exit": 0
       },
       {
-        "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
+        "cmd": ".\\ci.cmd supertest",
         "exit": 0
-      },
-      {
-        "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-        "exit": 0,
-        "status": "UP"
-      },
-      {
-        "cmd": "Invoke-WebRequest http://localhost:8300/",
-        "exit": 0,
-        "status": 200
       },
       {
         "cmd": ".\\ci.cmd stp",
@@ -163,21 +177,18 @@
     "git": {
       "branch": "master",
       "upstream": "origin/master",
-      "pushed": false
+      "head": "7eb0b13be51e",
+      "ahead_behind": "0/0",
+      "ahead": 0,
+      "behind": 0,
+      "worktree": "dirty"
     },
-    "next": "TD-0010 / JA-012 Lokalen Scheduler- und Betriebsmodus fuer taegliche Laeufe dokumentieren und absichern",
+    "next": "M5 - Qualität, Live-Abdeckung und Erweiterung: JA-013 Teststrategie und Supertest für Kernfunktionen konsolidieren #comment: Einzelne Funktionstests müssen vor dem Supertest grün sein; der Supertest bündelt erst abgeschlossene Roadmap-Funktionen.",
     "refs": [
-      "Roadmap.md",
-      "Roadmap_archive.md",
       "todo.current.md",
       "todo.state.json",
-      "handoff.latest.md",
-      "handoff.latest.json",
-      "src/JobAgent.Report.psm1",
-      "src/JobAgent.DailyRun.psm1",
-      "tests/Test-JobAgentReport.ps1",
-      "tests/Test-JobAgentDailyRun.ps1",
-      "docs/data-model.md"
+      "todo.events.jsonl",
+      "handoff.latest.json"
     ],
     "manual_missing": false,
     "env_inventory_missing": false,

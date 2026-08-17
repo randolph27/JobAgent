@@ -2,4 +2,4 @@
 
 Active: _(none)_
 
-- [open] TD-0010 M4 - Daily-Run, Ausgabe und Automatisierung: JA-012 Lokalen Scheduler- und Betriebsmodus für tägliche Läufe dokumentieren und absichern #comment: Der Agent soll täglich laufen, ohne den Zustand vorheriger Läufe zu verlieren oder parallele Läufe zu starten.
+- [open] TD-0011 M5 - Qualität, Live-Abdeckung und Erweiterung: JA-013 Teststrategie und Supertest für Kernfunktionen konsolidieren #comment: Einzelne Funktionstests müssen vor dem Supertest grün sein; der Supertest bündelt erst abgeschlossene Roadmap-Funktionen.

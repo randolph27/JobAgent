@@ -373,6 +373,13 @@ function Invoke-Tst450HumanVisualSupertest([object]$gradleInfo) {
 
 function Cmd-Supertest() {
   Ensure-CoreFolders; Ensure-BootstrapFiles
+  $jobAgentSupertest = Join-Path $RepoRoot "tests\Test-JobAgentSupertest.ps1"
+  if (Test-Path -LiteralPath $jobAgentSupertest -PathType Leaf) {
+    CI-Info "supertest: JobAgent function suite"
+    & pwsh -NoProfile -File $jobAgentSupertest
+    if ($LASTEXITCODE -ne 0) { throw "supertest: JobAgent function suite failed." }
+    return
+  }
   CI-Info "supertest: Gradle Android release-readiness suite + TST-450 human visual audit"
   $g = Get-GradleCmdRaw
   if (-not $g.cmd) { throw "supertest: kein Gradle-Command gefunden." }
@@ -383,6 +390,22 @@ function Cmd-Supertest() {
     throw ("supertest: TST-450 human visual suite failed. See " + (To-RelPath (Get-Tst450EvidencePath)))
   }
   CI-Info ("supertest: ok (evidence=" + (To-RelPath (Get-Tst450EvidencePath)) + ")")
+}
+
+function Cmd-JobAgentDailyRun([string[]]$ForwardArgs = @()) {
+  Ensure-CoreFolders; Ensure-BootstrapFiles
+  $scriptPath = Join-Path $RepoRoot "tools\Invoke-JobAgentDailyRun.ps1"
+  if (-not (Test-Path -LiteralPath $scriptPath -PathType Leaf)) { throw "daily-run: Skript fehlt: " + $scriptPath }
+  & pwsh -NoProfile -File $scriptPath @ForwardArgs
+  if ($LASTEXITCODE -ne 0) { throw "daily-run: fehlgeschlagen." }
+}
+
+function Cmd-JobAgentDailyRunStatus([string[]]$ForwardArgs = @()) {
+  Ensure-CoreFolders; Ensure-BootstrapFiles
+  $scriptPath = Join-Path $RepoRoot "tools\Get-JobAgentDailyRunStatus.ps1"
+  if (-not (Test-Path -LiteralPath $scriptPath -PathType Leaf)) { throw "daily-run-status: Skript fehlt: " + $scriptPath }
+  & pwsh -NoProfile -File $scriptPath @ForwardArgs
+  if ($LASTEXITCODE -ne 0) { throw "daily-run-status: fehlgeschlagen." }
 }
 
 function Cmd-SuperVpTest([string[]]$ForwardArgs = @()) {
@@ -1267,6 +1290,8 @@ function Cmd-Menu() {
 #ci devserver-start    (Gradle Devserver detached + devserver.log)
 #ci devserver-stop     (Stop Gradle Devserver)
 #ci devserver-status   (Status Gradle Devserver)
+#ci daily-run          (JobAgent Daily-Run, fixturebasiert bis Live-Lane aktiv ist)
+#ci daily-run-status   (JobAgent Daily-Run-Status als JSON)
 #ci sonar              (Gradle-Sonar-Lauf fuer das Android-Repository)
 #ci pyserver-start     (Python http.server detached; auto-detect dist)
 #ci pyserver-stop      (Stop Python http.server)
@@ -1446,6 +1471,8 @@ Register-CiCommand "dev" { Cmd-Dev }
 Register-CiCommand "devserver-start" { Cmd-DevserverStart }
 Register-CiCommand "devserver-stop" { Cmd-DevserverStop }
 Register-CiCommand "devserver-status" { Cmd-DevserverStatus }
+Register-CiCommand "daily-run" { Cmd-JobAgentDailyRun $Args }
+Register-CiCommand "daily-run-status" { Cmd-JobAgentDailyRunStatus $Args }
 Register-CiCommand "sonar" { Cmd-Sonar }
 Register-CiCommand "pyserver-start" { Cmd-PyserverStart }
 Register-CiCommand "pyserver-stop" { Cmd-PyserverStop }
