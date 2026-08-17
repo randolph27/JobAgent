@@ -80,6 +80,54 @@ function ConvertTo-JobAgentJson {
     return ($Document | ConvertTo-Json -Depth 100)
 }
 
+function Complete-JobAgentSourceVerificationEvidence {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Source
+    )
+
+    if (($Source.PSObject.Properties.Name -contains 'verification_evidence') -and @($Source.verification_evidence).Count -gt 0) {
+        return @($Source.verification_evidence)
+    }
+
+    $evidenceType = switch ([string]$Source.verification_basis) {
+        'COMPANY_DOMAIN' { 'COMPANY_DOMAIN' }
+        'CAREER_URL' { 'CAREER_URL' }
+        'COMPANY_LINKED_ATS' { 'COMPANY_LINKED_ATS' }
+        default { 'UNVERIFIED' }
+    }
+    $status = if ([string]$Source.verification_basis -eq 'UNVERIFIED') { 'UNVERIFIED' } else { 'VERIFIED' }
+    $reason = switch ([string]$Source.verification_basis) {
+        'COMPANY_DOMAIN' { 'Legacy-Quelle wurde ueber die offizielle Firmendomain verifiziert.' }
+        'CAREER_URL' { 'Legacy-Quelle wurde ueber die gepflegte Karriere-URL verifiziert.' }
+        'COMPANY_LINKED_ATS' { 'Legacy-Quelle wurde ueber eine gepflegte ATS-Domain verifiziert.' }
+        default { 'Legacy-Quelle hat keinen detaillierten Verifikationsbeleg.' }
+    }
+
+    return @([pscustomobject]@{
+            status = $status
+            evidence_type = $evidenceType
+            url = [string]$Source.canonical_url
+            basis_url = [string]$Source.url
+            redirect_chain = @()
+            observed_at = [string]$Source.verified_at
+            reason = $reason
+        })
+}
+
+function Repair-JobAgentDocumentShape {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Document
+    )
+
+    foreach ($source in @($Document.job_sources)) {
+        $source | Add-Member -NotePropertyName verification_evidence -NotePropertyValue (Complete-JobAgentSourceVerificationEvidence -Source $source) -Force
+    }
+
+    return $Document
+}
+
 function Test-JobAgentId {
     param(
         [Parameter(Mandatory)][AllowEmptyString()][string]$Value,
@@ -127,6 +175,12 @@ function Assert-JobAgentDocument {
         if ($source.is_official -ne $true) {
             throw "JobSource ist nicht offiziell: $($source.source_id)"
         }
+        if ($source.PSObject.Properties.Name -notcontains 'verification_evidence') {
+            throw "JobSource ohne verification_evidence: $($source.source_id)"
+        }
+        if (@($source.verification_evidence).Count -lt 1) {
+            throw "JobSource ohne Verifikationsbeleg: $($source.source_id)"
+        }
     }
     foreach ($job in @($Document.jobs)) {
         if (-not (Test-JobAgentId -Value ([string]$job.job_id) -Prefix 'job')) {
@@ -168,6 +222,7 @@ function Read-JobAgentStore {
 
     try {
         $document = Get-Content -LiteralPath $paths.store_path -Raw | ConvertFrom-Json -Depth 100
+        $document = Repair-JobAgentDocumentShape -Document $document
         Assert-JobAgentDocument -Document $document
         return $document
     }
@@ -329,6 +384,7 @@ function Write-JobAgentStore {
     )
 
     $paths = Get-JobAgentStorePaths -ProjectRoot $ProjectRoot -DataRoot $DataRoot
+    $Document = Repair-JobAgentDocumentShape -Document $Document
     Assert-JobAgentDocument -Document $Document
     if ($CreateBackup) {
         Backup-JobAgentStore -Paths $paths -Reason 'pre-write' | Out-Null
@@ -564,6 +620,7 @@ function Get-JobAgentDailyOutputCandidates {
 Export-ModuleMember -Function @(
     'Assert-JobAgentDocument',
     'Backup-JobAgentStore',
+    'Complete-JobAgentSourceVerificationEvidence',
     'Enter-JobAgentStoreLock',
     'Exit-JobAgentStoreLock',
     'Get-JobAgentDailyOutputCandidates',

@@ -103,6 +103,17 @@ function New-ValidJobAgentDocument {
                 is_official = $true
                 verified_at = '2026-08-17T10:30:00Z'
                 verification_basis = 'CAREER_URL'
+                verification_evidence = @(
+                    [pscustomobject]@{
+                        status = 'VERIFIED'
+                        evidence_type = 'CAREER_URL'
+                        url = 'https://example.invalid/careers'
+                        basis_url = 'https://example.invalid/'
+                        redirect_chain = @()
+                        observed_at = '2026-08-17T10:30:00Z'
+                        reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.'
+                    }
+                )
             }
         )
         scan_runs = @(
@@ -205,10 +216,11 @@ function Test-JobAgentDocument {
     }
 
     foreach ($source in @($Document.job_sources)) {
-        foreach ($property in @('source_id', 'company_id', 'source_type', 'url', 'canonical_url', 'is_official', 'verified_at', 'verification_basis')) {
+        foreach ($property in @('source_id', 'company_id', 'source_type', 'url', 'canonical_url', 'is_official', 'verified_at', 'verification_basis', 'verification_evidence')) {
             Assert-RequiredProperty -Object $source -Property $property -Context 'job_source'
         }
         Assert-True -Condition ($source.is_official -eq $true) -Message 'JobSource muss offiziell sein.'
+        Assert-True -Condition (@($source.verification_evidence).Count -ge 1) -Message 'JobSource braucht mindestens einen Verifikationsbeleg.'
     }
 
     foreach ($job in @($Document.jobs)) {

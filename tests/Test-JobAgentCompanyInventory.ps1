@@ -58,6 +58,8 @@ Assert-True -Condition (@($seeded.document.companies).Count -ge 10) -Message 'In
 Assert-True -Condition (@($seeded.document.companies | Where-Object { $_.career_url -ne $null }).Count -eq @($seeded.document.job_sources).Count) -Message 'Career-URLs wurden nicht als offizielle Quellen angelegt.'
 Assert-True -Condition (@($seeded.document.companies | Where-Object { $_.locations[0].target_area -eq 'FREISING' }).Count -ge 1) -Message 'Seed enthaelt keinen Freising-Bezug.'
 Assert-True -Condition (@($seeded.document.job_sources | Where-Object { $_.is_official -ne $true }).Count -eq 0) -Message 'Seed hat nicht-offizielle JobSource erzeugt.'
+Assert-True -Condition (@($seeded.document.job_sources | Where-Object { @($_.verification_evidence).Count -lt 1 }).Count -eq 0) -Message 'Seed hat Quellen ohne Verifikationsbelege erzeugt.'
+Assert-True -Condition (@($seeded.document.job_sources | Where-Object { $_.verification_evidence[0].evidence_type -ne 'CAREER_URL' }).Count -eq 0) -Message 'Seed hat Career-Quellen mit falschem Evidenztyp erzeugt.'
 
 $secondRun = Add-JobAgentCompanySeedInventory -Document $seeded.document -Seeds (Get-JobAgentCompanySeedInventory -CreatedAt (New-TestSeedDate) -NextScanAt (New-TestNextScanDate)) -SeededAt (New-TestSeedDate)
 Assert-JobAgentDocument -Document $secondRun.document

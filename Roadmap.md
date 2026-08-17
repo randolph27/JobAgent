@@ -5,30 +5,9 @@
 - Kapazitätsannahme: 1 Entwickler/Agent, lokale Windows-Umgebung `D:\_Scripte\JobAgent`, App läuft nur lokal, Daily-Runs zunächst manuell oder über lokale Automatisierung, kein externer Schreibzugriff auf Bewerbungs- oder Unternehmenssysteme.
 - Projektgröße: PowerShell-Modulstack mit JSON-Store, CI-Vertrag, Funktions- und Supertest-Lane; keine Web-UI als Produktivserver, aber lokale HTML-Berichtsartefakte sind fachlich erforderlich.
 - Review-Basis: Implementierung bis JA-016 ist weitgehend fachlich angelegt, aber die angehängte Programmanweisung ist noch nicht vollständig umgesetzt. Gesichert vorhanden sind Persistenz, Firmen-Seed, offizielle Quellenverifikation, Fixture-/generischer HTML-/Live-Adapter, Klassifikation, Deduplikation, Statusmaschine, Daily-Run, JSON-/Markdown-/HTML-Report, Betriebsstatus, Coverage-Backlog und Supertest.
-- Kritische Lücken: Verifikationsbelege für offizielle ATS-/Redirect-Anbindungen sind noch nicht persistent und auditierbar; Live-Recherche ist noch Pilotqualität; Firmeninventar wird nicht systematisch autonom erweitert; lokale App-/Artefaktablage und Audit-Nachweise sind noch nicht vollständig vertraglich abgesichert.
-- Priorisierung: zuerst Quellenbeweiskette, weil JA-018 die Statuslogik abgesichert hat und zusätzliche Live-/ATS-Quellen nun belastbare Verifikationsbelege brauchen; danach Live-Adapter und Firmenabdeckung; zuletzt lokale Betriebs-/Audit-Härtung.
+- Kritische Lücken: Live-Recherche ist noch Pilotqualität; Firmeninventar wird nicht systematisch autonom erweitert; lokale App-/Artefaktablage und Audit-Nachweise sind noch nicht vollständig vertraglich abgesichert.
+- Priorisierung: zuerst Live-Adapter-Härtung, weil JA-019 die Quellenbeweiskette für ATS-/Redirect-Anbindungen jetzt persistent und auditierbar absichert; danach Firmenabdeckung; zuletzt lokale Betriebs-/Audit-Härtung.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis; keine Bewerbung; keine extern wirksame Aktion ohne ausdrückliche Bestätigung; keine Secrets in Reports, Logs, Todo, Handoff oder Git.
-
-## M7 - Status-, Quellen- und Historienkorrektheit
-
-- [ ] JA-019 Verifikationsbelege für offizielle ATS-Anbindung und Redirects persistieren #comment: Die Anweisung erlaubt ATS-Seiten nur, wenn sie offiziell vom Unternehmen betrieben oder verlinkt sind; Domainvergleich allein ist dafür nicht in jedem Fall ausreichend.
-  - [ ] Beschreibung: Für jede offizielle Dritt-/ATS-Quelle wird ein nachvollziehbarer Beleg gespeichert, z.B. verlinkende Unternehmensseite, verifizierte Career-URL, Redirect-Kette oder manuell gepflegte Firmenbindung; der Report kann unsichere Quellen klar ausweisen, ohne sie als verifizierten Treffer zu zählen.
-  - [ ] Scope: Betroffen sind `src/JobAgent.SourceVerification.psm1`, `src/JobAgent.CompanyInventory.psm1`, `src/JobAgent.Persistence.psm1`, `schemas/jobagent.schema.json`, `tests/Test-JobAgentSourceVerification.ps1`, `tests/Test-JobAgentCompanyInventory.ps1`; No-Go: keine globale ATS-Allowlist ohne Firmenbindung, keine Annahme aufgrund bekannter ATS-Domain allein.
-  - [ ] Ist-Stand (2026-08-17 16:20): `Company.ats.official_domain` wird akzeptiert, wenn es zur URL passt; es ist nicht vollständig erkennbar, ob der Beleg als eigenständiger Nachweis mit Quelle, Zeitpunkt und Begründung persistiert und im Report auditierbar wird.
-  - [ ] Abhängigkeiten: JA-006 ist abgeschlossen; JA-018 und JA-017 ergänzen Status-/Report-Sichtbarkeit.
-  - [ ] Aufwand/Dauer: Aufwand M; Dauer 1 Arbeitstag bei 1 Agent; parallelisierbar mit JA-020, sofern Schemaänderungen koordiniert werden.
-  - [ ] Prioritätsscore: 88/100, weil Verifikation über offizielle Quellen ein harter fachlicher Vertrag ist und Live-ATS-Quellen sonst schwer auditierbar bleiben.
-  - [ ] Ordnungsbegründung: Nach Statussicherheit muss die Quellenbeweiskette belastbar werden, bevor zusätzliche ATS-Adapter Treffer erzeugen.
-  - [ ] Risiken und Unsicherheiten: Viele ATS-Links sind dynamisch oder nur über JavaScript erreichbar; ohne belegbaren Link muss die Quelle als `UNVERIFIED` oder `MANUAL_REVIEW` behandelt werden.
-  - [ ] Schritte:
-    1. `JobSource` um `verification_evidence` mit Typ, URL, beobachtetem Zeitpunkt, Basis, Redirect-Kette und Begründung erweitern oder bestehende Felder kompatibel ergänzen.
-    2. Source-Verifikation so anpassen, dass firmengebundene ATS-Domains nur mit gepflegtem Beleg oder offizieller Career-URL-/Redirect-Basis als `is_official = true` gelten.
-    3. Tests für Unternehmensdomain, Career-Subpath, offiziell verlinkte ATS-Domain, nicht verlinkte ATS-Domain, Aggregator und Redirect-Kanonisierung erstellen.
-  - [ ] Evidence: Schema-/Fixture-Update mit `verification_evidence`; Testausgabe Quellenverifikation; Beispiel-Store mit belegter ATS-Quelle und abgelehnter unklarer Drittquelle.
-  - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1`.
-  - [ ] Audit: Prüfen, dass StepStone, Indeed, LinkedIn, XING, Kununu, Glassdoor und nicht belegte Drittseiten nicht als Primärquelle erscheinen; offizielle ATS-Belege sind im Store ohne Secret und ohne Login-Daten sichtbar.
-  - [ ] Supertest: Nach grünen Funktionstests `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1`.
-  - [ ] Meilenstein und Parallelisierung: M7; unterstützt JA-020 und JA-021, kann nach Schemaentscheidung parallel zu Firmeninventar-Erweiterung laufen.
 
 ## M8 - Live-Recherche und Firmenabdeckung
 

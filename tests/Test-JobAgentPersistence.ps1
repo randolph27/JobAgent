@@ -66,6 +66,17 @@ function New-TestSource {
         is_official = $true
         verified_at = '2026-08-17T10:30:00Z'
         verification_basis = 'CAREER_URL'
+        verification_evidence = @(
+            [pscustomobject]@{
+                status = 'VERIFIED'
+                evidence_type = 'CAREER_URL'
+                url = 'https://example.invalid/careers'
+                basis_url = 'https://example.invalid/'
+                redirect_chain = @()
+                observed_at = '2026-08-17T10:30:00Z'
+                reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.'
+            }
+        )
     }
 }
 
@@ -184,6 +195,7 @@ try {
     Assert-True -Condition (@($loaded.companies).Count -eq 1) -Message 'Company wurde nicht persistiert.'
     Assert-True -Condition (@($loaded.jobs).Count -eq 1) -Message 'Job wurde nicht persistiert.'
     Assert-True -Condition (@($loaded.scan_attempts).Count -eq 1) -Message 'ScanAttempt wurde nicht persistiert.'
+    Assert-True -Condition (@($loaded.job_sources[0].verification_evidence).Count -eq 1) -Message 'Verifikationsbeleg wurde nicht persistiert.'
 
     Invoke-JobAgentStoreTransaction -ProjectRoot $testRoot -CreateBackup -ScriptBlock {
         param($document)
@@ -204,6 +216,27 @@ try {
     Assert-True -Condition ($migration.migrated -eq $true) -Message 'Migration wurde nicht ausgefuehrt.'
     Assert-True -Condition ((Read-JobAgentStore -ProjectRoot $testRoot -DataRoot 'migration').schema_version -eq 'jobagent/v1') -Message 'Migration hat Schema-Version nicht angehoben.'
     Assert-True -Condition (Test-Path -LiteralPath $migrationPaths.migration_log_path) -Message 'Migrationslog wurde nicht geschrieben.'
+
+    $legacyPaths = Get-JobAgentStorePaths -ProjectRoot $testRoot -DataRoot 'legacy-v1'
+    New-Item -ItemType Directory -Path $legacyPaths.data_root -Force | Out-Null
+    $legacyV1 = New-JobAgentEmptyDocument
+    $legacyV1.companies = @((New-TestCompany))
+    $legacyV1.job_sources = @(
+        [pscustomobject]@{
+            source_id = 'source:example_ag_career'
+            company_id = 'company:example_ag'
+            source_type = 'CAREER_PAGE'
+            url = 'https://example.invalid/careers'
+            canonical_url = 'https://example.invalid/careers'
+            is_official = $true
+            verified_at = '2026-08-17T10:30:00Z'
+            verification_basis = 'CAREER_URL'
+        }
+    )
+    Set-Content -LiteralPath $legacyPaths.store_path -Value ($legacyV1 | ConvertTo-Json -Depth 100) -Encoding UTF8
+    $legacyLoaded = Read-JobAgentStore -ProjectRoot $testRoot -DataRoot 'legacy-v1'
+    Assert-True -Condition (@($legacyLoaded.job_sources[0].verification_evidence).Count -eq 1) -Message 'Legacy-v1-Quelle wurde nicht mit Verifikationsbeleg normalisiert.'
+    Assert-True -Condition ($legacyLoaded.job_sources[0].verification_evidence[0].evidence_type -eq 'CAREER_URL') -Message 'Legacy-v1-Normalisierung nutzt falschen Evidenztyp.'
 
     $candidates = @(Get-JobAgentDailyOutputCandidates -Document $reloaded)
     Assert-True -Condition ($candidates.Count -eq 1) -Message 'DailyOutputCandidates liefert unerwartete Anzahl.'
@@ -260,7 +293,7 @@ try {
 
     [pscustomobject]@{
         status = 'ok'
-        cases = @('empty_store', 'write_reload', 'idempotent_upsert', 'backup', 'migration', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
+        cases = @('empty_store', 'write_reload', 'idempotent_upsert', 'backup', 'migration', 'legacy_v1_source_evidence_normalization', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
         store_path = $paths.store_path
     } | ConvertTo-Json -Depth 4
 }

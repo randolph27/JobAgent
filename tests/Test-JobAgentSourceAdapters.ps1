@@ -58,6 +58,17 @@ function New-TestSource {
         is_official = $Official
         verified_at = '2026-08-17T10:30:00Z'
         verification_basis = 'CAREER_URL'
+        verification_evidence = @(
+            [pscustomobject]@{
+                status = 'VERIFIED'
+                evidence_type = 'CAREER_URL'
+                url = 'https://example.invalid/careers'
+                basis_url = 'https://example.invalid/'
+                redirect_chain = @()
+                observed_at = '2026-08-17T10:30:00Z'
+                reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.'
+            }
+        )
     }
 }
 

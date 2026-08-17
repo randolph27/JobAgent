@@ -79,6 +79,17 @@ function Add-TestSource {
         is_official = $true
         verified_at = '2026-08-17T09:00:00.000Z'
         verification_basis = 'CAREER_URL'
+        verification_evidence = @(
+            [pscustomobject]@{
+                status = 'VERIFIED'
+                evidence_type = 'CAREER_URL'
+                url = $Url
+                basis_url = ('https://' + ([Uri]$Url).Host + '/')
+                redirect_chain = @()
+                observed_at = '2026-08-17T09:00:00.000Z'
+                reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.'
+            }
+        )
     }
     $document = Upsert-JobAgentJobSource -Document $document -JobSource $source
     Write-JobAgentStore -ProjectRoot $ProjectRoot -Document $document | Out-Null

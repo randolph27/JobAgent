@@ -89,6 +89,71 @@ function Test-JobAgentAggregatorUrl {
     return $false
 }
 
+function New-JobAgentVerificationEvidence {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][ValidateSet('VERIFIED', 'UNVERIFIED', 'REJECTED')][string]$Status,
+        [Parameter(Mandatory)][ValidateSet('COMPANY_DOMAIN', 'CAREER_URL', 'ATS_VERIFIED_BY_URL', 'COMPANY_LINKED_ATS', 'AGGREGATOR_REJECTED', 'UNVERIFIED')][string]$EvidenceType,
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter()][AllowNull()][string]$BasisUrl,
+        [Parameter()][string[]]$RedirectChain = @(),
+        [Parameter(Mandatory)][string]$Reason
+    )
+
+    if (-not [Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
+        throw "Evidence-URL ist nicht absolut oder ungueltig: $Url"
+    }
+
+    $canonicalUrl = ConvertTo-JobAgentCanonicalUrl -Url $Url
+    $canonicalBasisUrl = $null
+    if (-not [string]::IsNullOrWhiteSpace($BasisUrl)) {
+        $canonicalBasisUrl = ConvertTo-JobAgentCanonicalUrl -Url $BasisUrl
+    }
+
+    $canonicalRedirectChain = @(
+        $RedirectChain |
+            Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
+            ForEach-Object { ConvertTo-JobAgentCanonicalUrl -Url ([string]$_) } |
+            Sort-Object -Unique
+    )
+
+    [pscustomobject]@{
+        status = $Status
+        evidence_type = $EvidenceType
+        url = $canonicalUrl
+        basis_url = $canonicalBasisUrl
+        redirect_chain = $canonicalRedirectChain
+        observed_at = $null
+        reason = $Reason
+    }
+}
+
+function Complete-JobAgentVerificationEvidence {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowEmptyCollection()][object[]]$Evidence = @(),
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $observedAtText = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+    $completed = New-Object System.Collections.Generic.List[object]
+    foreach ($item in @($Evidence)) {
+        if ($null -eq $item) {
+            continue
+        }
+        $completed.Add([pscustomobject]@{
+                status = [string]$item.status
+                evidence_type = [string]$item.evidence_type
+                url = [string]$item.url
+                basis_url = if ($item.PSObject.Properties.Name -contains 'basis_url') { $item.basis_url } else { $null }
+                redirect_chain = @($item.redirect_chain)
+                observed_at = if (($item.PSObject.Properties.Name -contains 'observed_at') -and -not [string]::IsNullOrWhiteSpace([string]$item.observed_at)) { [string]$item.observed_at } else { $observedAtText }
+                reason = [string]$item.reason
+            })
+    }
+    return $completed.ToArray()
+}
+
 function ConvertTo-JobAgentCanonicalUrl {
     [CmdletBinding()]
     param(
@@ -136,7 +201,8 @@ function Get-JobAgentOfficialSourceEvaluation {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][object]$Company,
-        [Parameter(Mandatory)][string]$Url
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter()][bool]$AllowAtsEvidence = $true
     )
 
     $canonicalUrl = ConvertTo-JobAgentCanonicalUrl -Url $Url
@@ -146,6 +212,13 @@ function Get-JobAgentOfficialSourceEvaluation {
             status = 'INVALID'
             canonical_url = $canonicalUrl
             verification_basis = 'AGGREGATOR_REJECTED'
+            verification_evidence = @(
+                New-JobAgentVerificationEvidence `
+                    -Status 'REJECTED' `
+                    -EvidenceType 'AGGREGATOR_REJECTED' `
+                    -Url $canonicalUrl `
+                    -Reason 'Aggregatoren, Jobboersen und soziale Netzwerke duerfen keine Primaerquelle sein.'
+            )
             reason = 'Aggregatoren, Jobboersen und soziale Netzwerke duerfen keine Primaerquelle sein.'
         }
     }
@@ -160,23 +233,98 @@ function Get-JobAgentOfficialSourceEvaluation {
                 $basis = 'CAREER_URL'
             }
         }
+        $evidence = if ($basis -eq 'CAREER_URL') {
+            @(
+                New-JobAgentVerificationEvidence `
+                    -Status 'VERIFIED' `
+                    -EvidenceType 'CAREER_URL' `
+                    -Url $canonicalUrl `
+                    -BasisUrl ([string]$Company.career_url) `
+                    -Reason 'URL liegt auf der gepflegten offiziellen Karriere-URL oder darunter.'
+            )
+        }
+        else {
+            @(
+                New-JobAgentVerificationEvidence `
+                    -Status 'VERIFIED' `
+                    -EvidenceType 'COMPANY_DOMAIN' `
+                    -Url $canonicalUrl `
+                    -BasisUrl ([string]$Company.official_website_url) `
+                    -Reason 'URL liegt auf der offiziellen Firmendomain.'
+            )
+        }
         return [pscustomobject]@{
             is_official = $true
             status = 'VALID'
             canonical_url = $canonicalUrl
             verification_basis = $basis
+            verification_evidence = $evidence
             reason = 'URL gehoert zur Firmen- oder Karriere-Domain.'
         }
     }
 
     foreach ($ats in @($Company.ats)) {
+        if (-not $AllowAtsEvidence) {
+            continue
+        }
         if (($ats.PSObject.Properties.Name -contains 'official_domain') -and -not [string]::IsNullOrWhiteSpace([string]$ats.official_domain)) {
             if (Test-JobAgentDomainMatch -Host $host -Domain ([string]$ats.official_domain)) {
+                $verifiedByUrl = if ($ats.PSObject.Properties.Name -contains 'verified_by_url') { [string]$ats.verified_by_url } else { $null }
+                if ([string]::IsNullOrWhiteSpace($verifiedByUrl)) {
+                    return [pscustomobject]@{
+                        is_official = $false
+                        status = 'UNVERIFIED'
+                        canonical_url = $canonicalUrl
+                        verification_basis = 'UNVERIFIED'
+                        verification_evidence = @(
+                            New-JobAgentVerificationEvidence `
+                                -Status 'UNVERIFIED' `
+                                -EvidenceType 'UNVERIFIED' `
+                                -Url $canonicalUrl `
+                                -Reason 'ATS-Domain passt, aber es fehlt ein offizieller Firmenbeleg in verified_by_url.'
+                        )
+                        reason = 'ATS-Domain passt, aber es fehlt ein offizieller Firmenbeleg in verified_by_url.'
+                    }
+                }
+
+                $atsProof = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $verifiedByUrl -AllowAtsEvidence $false
+                if ($atsProof.is_official -ne $true) {
+                    return [pscustomobject]@{
+                        is_official = $false
+                        status = 'UNVERIFIED'
+                        canonical_url = $canonicalUrl
+                        verification_basis = 'UNVERIFIED'
+                        verification_evidence = @(
+                            New-JobAgentVerificationEvidence `
+                                -Status 'UNVERIFIED' `
+                                -EvidenceType 'UNVERIFIED' `
+                                -Url $canonicalUrl `
+                                -BasisUrl $verifiedByUrl `
+                                -Reason 'verified_by_url ist selbst keine offizielle Firmen- oder Karriere-URL.'
+                        )
+                        reason = 'verified_by_url ist selbst keine offizielle Firmen- oder Karriere-URL.'
+                    }
+                }
+
                 return [pscustomobject]@{
                     is_official = $true
                     status = 'VALID'
                     canonical_url = $canonicalUrl
                     verification_basis = 'COMPANY_LINKED_ATS'
+                    verification_evidence = @(
+                        (New-JobAgentVerificationEvidence `
+                            -Status 'VERIFIED' `
+                            -EvidenceType 'COMPANY_LINKED_ATS' `
+                            -Url $canonicalUrl `
+                            -BasisUrl $verifiedByUrl `
+                            -Reason 'URL gehoert zu einer gepflegten ATS-Domain fuer dieses Unternehmen.'),
+                        (New-JobAgentVerificationEvidence `
+                            -Status 'VERIFIED' `
+                            -EvidenceType 'ATS_VERIFIED_BY_URL' `
+                            -Url $verifiedByUrl `
+                            -BasisUrl $atsProof.canonical_url `
+                            -Reason 'Die ATS-Domain ist ueber eine offizielle Firmen- oder Karriere-URL belegt.')
+                    )
                     reason = 'URL gehoert zu einer firmengebundenen ATS-Domain.'
                 }
             }
@@ -188,6 +336,13 @@ function Get-JobAgentOfficialSourceEvaluation {
         status = 'UNVERIFIED'
         canonical_url = $canonicalUrl
         verification_basis = 'UNVERIFIED'
+        verification_evidence = @(
+            New-JobAgentVerificationEvidence `
+                -Status 'UNVERIFIED' `
+                -EvidenceType 'UNVERIFIED' `
+                -Url $canonicalUrl `
+                -Reason 'URL passt weder zur Firmendomain noch zu einer firmengebundenen ATS-Domain mit offiziellem Beleg.'
+        )
         reason = 'URL passt weder zur Firmendomain noch zu einer firmengebundenen ATS-Domain.'
     }
 }
@@ -215,6 +370,7 @@ function New-JobAgentVerifiedJobSource {
         is_official = $true
         verified_at = $VerifiedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         verification_basis = $evaluation.verification_basis
+        verification_evidence = @(Complete-JobAgentVerificationEvidence -Evidence @($evaluation.verification_evidence) -ObservedAt $VerifiedAt)
     }
 }
 
@@ -251,6 +407,7 @@ function Resolve-JobAgentOfficialJobUrl {
 
 Export-ModuleMember -Function @(
     'ConvertTo-JobAgentCanonicalUrl',
+    'Complete-JobAgentVerificationEvidence',
     'Get-JobAgentOfficialSourceEvaluation',
     'New-JobAgentVerifiedJobSource',
     'Resolve-JobAgentOfficialJobUrl',

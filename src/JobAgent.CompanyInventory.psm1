@@ -2,6 +2,8 @@
 
 Set-StrictMode -Version 3.0
 
+Import-Module (Join-Path $PSScriptRoot 'JobAgent.SourceVerification.psm1') -Force -DisableNameChecking
+
 function ConvertTo-JobAgentAsciiSlug {
     [CmdletBinding()]
     param(
@@ -243,6 +245,19 @@ function New-JobAgentCompanyCareerSource {
         is_official = $true
         verified_at = $VerifiedAt
         verification_basis = 'CAREER_URL'
+        verification_evidence = @(
+            Complete-JobAgentVerificationEvidence -ObservedAt ([datetime]::Parse($VerifiedAt, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal)) -Evidence @(
+                [pscustomobject]@{
+                    status = 'VERIFIED'
+                    evidence_type = 'CAREER_URL'
+                    url = [string]$Company.career_url
+                    basis_url = [string]$Company.official_website_url
+                    redirect_chain = @()
+                    observed_at = $VerifiedAt
+                    reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.'
+                }
+            )
+        )
     }
 }
 
