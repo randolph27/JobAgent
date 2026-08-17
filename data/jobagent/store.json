@@ -1,0 +1,538 @@
+{
+  "schema_version": "jobagent/v1",
+  "generated_at": "2026-08-17T11:25:03.677Z",
+  "companies": [
+    {
+      "company_id": "company:bmw_group",
+      "canonical_name": "BMW Group",
+      "canonical_domain": "bmwgroup.com",
+      "official_website_url": "https://www.bmwgroup.com/",
+      "career_url": "https://www.bmwgroup.jobs/de/en.html",
+      "aliases": [
+        "Bayerische Motoren Werke",
+        "BMW AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 95,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bmwgroup.jobs/de/en.html",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:siemens_ag",
+      "canonical_name": "Siemens AG",
+      "canonical_domain": "siemens.com",
+      "official_website_url": "https://www.siemens.com/",
+      "career_url": "https://jobs.siemens.com/",
+      "aliases": [
+        "Siemens"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 94,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.siemens.com/",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:allianz_se",
+      "canonical_name": "Allianz SE",
+      "canonical_domain": "allianz.com",
+      "official_website_url": "https://www.allianz.com/",
+      "career_url": "https://careers.allianz.com/",
+      "aliases": [
+        "Allianz"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 92,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.allianz.com/",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:munich_re",
+      "canonical_name": "Munich Re",
+      "canonical_domain": "munichre.com",
+      "official_website_url": "https://www.munichre.com/",
+      "career_url": "https://careers.munichre.com/",
+      "aliases": [
+        "Muenchener Rueck",
+        "Muenchener Rueckversicherungs-Gesellschaft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 91,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.munichre.com/",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+      "canonical_name": "Rohde & Schwarz GmbH & Co. KG",
+      "canonical_domain": "rohde-schwarz.com",
+      "official_website_url": "https://www.rohde-schwarz.com/",
+      "career_url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+      "aliases": [
+        "R&S",
+        "Rohde Schwarz"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Electronics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 89,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:infineon_technologies_ag",
+      "canonical_name": "Infineon Technologies AG",
+      "canonical_domain": "infineon.com",
+      "official_website_url": "https://www.infineon.com/",
+      "career_url": "https://www.infineon.com/careers",
+      "aliases": [
+        "Infineon"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Semiconductors",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 88,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.infineon.com/careers",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:giesecke_plus_devrient_gmbh",
+      "canonical_name": "Giesecke+Devrient GmbH",
+      "canonical_domain": "gi-de.com",
+      "official_website_url": "https://www.gi-de.com/",
+      "career_url": "https://careers.gi-de.com/",
+      "aliases": [
+        "G+D",
+        "Giesecke Devrient"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Security Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 86,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.gi-de.com/",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:mtu_aero_engines_ag",
+      "canonical_name": "MTU Aero Engines AG",
+      "canonical_domain": "mtu.de",
+      "official_website_url": "https://www.mtu.de/",
+      "career_url": "https://www.mtu.de/careers/",
+      "aliases": [
+        "MTU",
+        "MTU Aero Engines"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 84,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.mtu.de/careers/",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:flughafen_muenchen_gmbh",
+      "canonical_name": "Flughafen Muenchen GmbH",
+      "canonical_domain": "munich-airport.com",
+      "official_website_url": "https://www.munich-airport.com/",
+      "career_url": "https://www.munich-airport.com/careers-263141",
+      "aliases": [
+        "FMG",
+        "Munich Airport"
+      ],
+      "locations": [
+        {
+          "label": "Flughafen Muenchen / Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Airport Operations",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 83,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.munich-airport.com/careers-263141",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "canonical_name": "Stadtwerke Muenchen GmbH",
+      "canonical_domain": "swm.de",
+      "official_website_url": "https://www.swm.de/",
+      "career_url": "https://www.swm.de/karriere",
+      "aliases": [
+        "Stadtwerke Munchen",
+        "SWM"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Utilities",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 82,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.swm.de/karriere",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:landeshauptstadt_muenchen",
+      "canonical_name": "Landeshauptstadt Muenchen",
+      "canonical_domain": "stadt.muenchen.de",
+      "official_website_url": "https://stadt.muenchen.de/",
+      "career_url": "https://stadt.muenchen.de/rathaus/karriere.html",
+      "aliases": [
+        "LHM",
+        "Stadt Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Sector",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/rathaus/karriere.html",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:texas_instruments_deutschland_gmbh",
+      "canonical_name": "Texas Instruments Deutschland GmbH",
+      "canonical_domain": "ti.com",
+      "official_website_url": "https://www.ti.com/",
+      "career_url": "https://careers.ti.com/",
+      "aliases": [
+        "Texas Instruments",
+        "TI"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Semiconductors",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 76,
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.ti.com/",
+        "observed_at": "2026-08-17T11:25:03.559Z"
+      },
+      "created_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T11:25:03.559Z",
+      "last_successful_scan_at": null
+    }
+  ],
+  "jobs": [],
+  "job_sources": [
+    {
+      "source_id": "source:allianz_se_career",
+      "company_id": "company:allianz_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.allianz.com/",
+      "canonical_url": "https://careers.allianz.com/",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:bmw_group_career",
+      "company_id": "company:bmw_group",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bmwgroup.jobs/de/en.html",
+      "canonical_url": "https://www.bmwgroup.jobs/de/en.html",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:flughafen_muenchen_gmbh_career",
+      "company_id": "company:flughafen_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.munich-airport.com/careers-263141",
+      "canonical_url": "https://www.munich-airport.com/careers-263141",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:giesecke_plus_devrient_gmbh_career",
+      "company_id": "company:giesecke_plus_devrient_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.gi-de.com/",
+      "canonical_url": "https://careers.gi-de.com/",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:infineon_technologies_ag_career",
+      "company_id": "company:infineon_technologies_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.infineon.com/careers",
+      "canonical_url": "https://www.infineon.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:landeshauptstadt_muenchen_career",
+      "company_id": "company:landeshauptstadt_muenchen",
+      "source_type": "CAREER_PAGE",
+      "url": "https://stadt.muenchen.de/rathaus/karriere.html",
+      "canonical_url": "https://stadt.muenchen.de/rathaus/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:mtu_aero_engines_ag_career",
+      "company_id": "company:mtu_aero_engines_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.mtu.de/careers/",
+      "canonical_url": "https://www.mtu.de/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:munich_re_career",
+      "company_id": "company:munich_re",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.munichre.com/",
+      "canonical_url": "https://careers.munichre.com/",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:rohde_and_schwarz_gmbh_and_co_kg_career",
+      "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+      "canonical_url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:siemens_ag_career",
+      "company_id": "company:siemens_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.siemens.com/",
+      "canonical_url": "https://jobs.siemens.com/",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:stadtwerke_muenchen_gmbh_career",
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.swm.de/karriere",
+      "canonical_url": "https://www.swm.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    },
+    {
+      "source_id": "source:texas_instruments_deutschland_gmbh_career",
+      "company_id": "company:texas_instruments_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.ti.com/",
+      "canonical_url": "https://careers.ti.com/",
+      "is_official": true,
+      "verified_at": "2026-08-17T11:25:03.559Z",
+      "verification_basis": "CAREER_URL"
+    }
+  ],
+  "scan_runs": [],
+  "scan_attempts": [],
+  "job_snapshots": [],
+  "change_events": []
+}

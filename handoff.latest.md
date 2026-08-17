@@ -1,75 +1,111 @@
 # Handoff latest
 
-Stand: 
-2026-08-17T13:16:30+02:00
+Stand:
+2026-08-17T13:34:00+02:00
 
-## Zustand
+## Zustand fuer neuen Chat
 
 - Active: _(none)_
 - Status: `open`
-- Ziel: Naechster Arbeitsschritt ist `TD-0002 / JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen`.
+- Naechster Arbeitsschritt: `TD-0003 / JA-005 Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme definieren`
 - Branch: `master`
-- HEAD vor Commit: `c9ef2221683d`
+- HEAD vor Abschluss-Commit: `06356534b8b9`
 - Upstream: `origin/master`
-- Ahead/Behind vor Commit: `0/0`
-- Worktree vor Commit: `dirty`
-- Route: `JA-001` bis `JA-003` sind abgeschlossen und archiviert; aktive Roadmap startet bei `JA-004`.
+- Ahead/Behind vor Abschluss-Commit: `0/0`
+- Worktree: `dirty`
+- Route: `JA-001` bis `JA-004` sind abgeschlossen und archiviert; aktive Roadmap startet bei `JA-005`.
+- STP wurde am `2026-08-17T13:32:30+02:00` ausgefuehrt.
 
 ## Abgeschlossener Arbeitsschritt
 
-- `JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren` ist abgeschlossen.
-- `src/JobAgent.Persistence.psm1` implementiert Store-Pfade, leeren `jobagent/v1`-Store, Lesen, Validieren, atomares Schreiben, exklusives Locking, Backups und Migration von `jobagent/v0` nach `jobagent/v1`.
-- Repository-Funktionen vorhanden: `Upsert-JobAgentCompany`, `Upsert-JobAgentJobSource`, `Upsert-JobAgentScanRun`, `Upsert-JobAgentJobSnapshot`, `Record-JobAgentScanAttempt`, `Mark-JobAgentMissingJobs`, `Get-JobAgentDailyOutputCandidates`.
-- `docs/data-model.md` dokumentiert Persistenzentscheidung, Pfadvertrag, Recovery und Repository-API.
-- `Roadmap.md` wurde bereinigt; `JA-003` wurde nach `Roadmap_archive.md` rotiert.
-- `todo.state.json` und `todo.current.md` starten jetzt bei `TD-0002 / JA-004`.
-- `todo-prune` hat das erledigte JA-003-Event nach `logs/todo/done-events-20260817-131547.jsonl` verschoben.
+`JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen` ist abgeschlossen.
 
-## Neue Dateien
+Implementiert:
 
+- `src/JobAgent.CompanyInventory.psm1`
+  - Seed-Erzeugung fuer Firmen im Zielraum Muenchen/Freising.
+  - Standortobjekte fuer `MUNICH` und `FREISING`.
+  - Domain-, Slug- und Rechtsformnormalisierung.
+  - Deduplikation ueber `company_id`, kanonische Domain, rechtsformnormalisierten Namen und Aliasnamen.
+  - Vorsichtige Konzern-/Tochter-Regel: gemeinsame Konzernbestandteile allein fuehren nicht zur Zusammenfuehrung.
+  - Erzeugung offizieller `JobSource`-Eintraege nur bei vorhandener Karriere-URL.
+- `tools/Seed-JobAgentCompanies.ps1`
+  - Schreibt den Firmen-Seed transaktional ueber die bestehende Store-API.
+  - Erzeugt einen Seed-Bericht unter `logs/jobagent/company-seed-*.json`.
+- `data/jobagent/store.json`
+  - Enthalt 12 initiale Firmen und 12 offizielle Karrierequellen.
+  - Keine Stellen, keine Live-Scans, keine Bewerbungsdaten.
+
+Schema/Dokumentation erweitert:
+
+- `schemas/jobagent.schema.json`
 - `src/JobAgent.Persistence.psm1`
-- `tests/Test-JobAgentPersistence.ps1`
+- `docs/data-model.md`
+- `tests/fixtures/jobagent/valid.json`
 
-## Geaenderte Zustandsdateien
+Neue Company-Felder:
 
-- `.ci/pins/immutable.hashes.json`
-- `.ci/pins/immutable.snapshot/Roadmap.md`
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `todo.current.md`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `todo.state.json`
-- `handoff.latest.md`
-- `handoff.latest.json`
+- `scan_priority`
+- `next_scan_at`
+- `verification_status`
+- `discovery_source`
 
-## Verifikation
+## Validierung
 
+Funktionstests erfolgreich:
+
+- `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
-- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-131518.log`
+- `pwsh -NoProfile -File tools\Seed-JobAgentCompanies.ps1` -> Exit `0`, 12 Firmen, 12 Quellen
+- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-133157.log`
 - `.\ci.cmd stp` -> Exit `0`
 
-## Supertest-Hinweis
+Supertest:
 
-- Nicht angefragt; laut Nutzeranweisung gilt Supertest als erledigt. Der fachliche Abschluss wurde mit fokussierten Funktionstests validiert.
+- Nicht erneut ausgefuehrt.
+- Gemaess Nutzeranweisung gilt Supertest als erledigt, wenn er nicht angefragt wurde.
+- Alter Supertest-Fehler in `logs\verify\tst-450-human-visual-supertest.md` ist kein aktueller Blocker fuer diesen Abschluss.
 
-## Offene Aufgaben
+## Roadmap/Todo
 
-1. `TD-0002 / JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen`
-   - Persistentes Firmeninventar auf Basis der neuen Store-API erstellen.
-   - Pro Firma speichern: offizielle Website, Karriere-URL, Standortbezug, Branche, Aliasnamen, Scanprioritaet, Status und naechster geplanter Scanzeitpunkt.
-   - Deduplikation ueber kanonischen Namen, Domain, Rechtsformnormalisierung, Aliasliste und vorsichtige Konzern-/Tochter-Regeln implementieren.
-   - Keine Firma als offiziell verifiziert markieren, solange keine offizielle Unternehmensquelle belegt ist.
-   - Funktionstests fuer identische Domain, Namensvariante mit Rechtsform, getrennte Tochtergesellschaft, fehlende Karriere-URL und erneute Seed-Ausfuehrung ohne Duplikate erstellen.
-2. Danach `JA-005` Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme.
-3. Danach `JA-006` offizielle Quellenverifikation und URL-Kanonisierung.
+Rausrotiert:
+
+- `JA-004` wurde aus `Roadmap.md` entfernt und nach `Roadmap_archive.md` verschoben.
+
+Aktiv:
+
+1. `TD-0003 / JA-005 Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme definieren`
+2. `TD-0004 / JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren`
+3. `TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln`
+4. `TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren`
+5. `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
+6. `TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren`
+
+## Konkreter Einstieg fuer JA-005
+
+Der naechste Agent soll bei `JA-005` beginnen:
+
+1. Adaptervertrag definieren:
+   - Input: Company, Karriere-URL, Suchbegriffe, Scan-Kontext, Budget/Timeout.
+   - Output: Rohjobs, offizielle Quell-URL, Detail-URL, Extraktionsvertrauen, Fehlerklasse, Retry-Empfehlung, Artefaktreferenzen.
+2. Fehlerklassen verwenden:
+   - `NONE`
+   - `NOT_REACHABLE`
+   - `TIMEOUT`
+   - `BLOCKED`
+   - `NO_JOBS_FOUND`
+   - `UNCLEAR_SOURCE`
+   - `PARSING_ERROR`
+   - `TECHNICAL_LIMITATION`
+3. Einen generischen HTML-/Suchseiten-Adapter und einen Fixture-Testadapter bauen.
+4. Tests ohne externe Live-Webrecherche schreiben.
+5. Keine Jobboerse als Primaerquelle akzeptieren.
+6. Keine Live-Recherche starten, bevor `JA-006` Quellenverifikation und URL-Kanonisierung steht.
 
 ## Risiken und Annahmen
 
-- Dateibasierte Persistenz ist fuer lokale Einzellaeufe ausgelegt; bei groesserer Live-Abdeckung kann eine SQLite-Migration sinnvoll werden.
-- Noch keine Firmen-, Quellenadapter-, Deduplikations-, Statusmaschinen- oder Daily-Run-Implementierung.
-- Keine Live-Recherche starten, bevor Quellenverifikation, Adaptervertrag und Deduplikation stehen.
-- Keine Firmen, Stellen, URLs, Geodaten oder Gehaelter erfinden; unbekannte Angaben als `UNKNOWN` oder `TODO` modellieren.
+- Der Firmen-Seed ist initial und behauptet keine vollstaendige Marktabdeckung.
+- Karriere-URLs koennen sich aendern; spaetere Live-Verifikation bleibt Aufgabe von `JA-005`/`JA-006`.
+- Fehlende oder unsichere Werte weiter als `UNKNOWN`, `null` oder `TODO` modellieren, nicht erfinden.
+- Produktive Laufzeitdaten liegen unter `data/jobagent/`; Lock- und Backup-Dateien sind ignoriert.

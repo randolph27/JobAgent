@@ -49,6 +49,14 @@ function New-ValidJobAgentDocument {
                 industry = 'UNKNOWN'
                 ats = @()
                 scan_status = 'SUCCESS'
+                scan_priority = 80
+                next_scan_at = '2026-08-18T10:30:00Z'
+                verification_status = 'CAREER_URL_VERIFIED'
+                discovery_source = [pscustomobject]@{
+                    type = 'OFFICIAL_WEBSITE'
+                    url = 'https://example.invalid/careers'
+                    observed_at = '2026-08-17T10:00:00Z'
+                }
                 created_at = '2026-08-17T10:00:00Z'
                 updated_at = '2026-08-17T10:30:00Z'
                 last_successful_scan_at = '2026-08-17T10:30:00Z'
@@ -183,12 +191,16 @@ function Test-JobAgentDocument {
     Assert-True -Condition ($Document.schema_version -eq 'jobagent/v1') -Message 'schema_version muss jobagent/v1 sein.'
 
     foreach ($company in @($Document.companies)) {
-        foreach ($property in @('company_id', 'canonical_name', 'canonical_domain', 'official_website_url', 'career_url', 'locations', 'scan_status', 'created_at', 'updated_at')) {
+        foreach ($property in @('company_id', 'canonical_name', 'canonical_domain', 'official_website_url', 'career_url', 'locations', 'scan_status', 'scan_priority', 'next_scan_at', 'verification_status', 'discovery_source', 'created_at', 'updated_at')) {
             Assert-RequiredProperty -Object $company -Property $property -Context 'company'
         }
         Assert-True -Condition ($company.company_id -match '^company:') -Message 'company_id braucht Prefix company:.'
         Assert-True -Condition (Test-UriValue $company.official_website_url) -Message 'official_website_url ist keine absolute URL.'
-        Assert-True -Condition (Test-UriValue $company.career_url) -Message 'career_url ist keine absolute URL.'
+        if ($null -ne $company.career_url) {
+            Assert-True -Condition (Test-UriValue $company.career_url) -Message 'career_url ist keine absolute URL.'
+        }
+        Assert-True -Condition (($company.scan_priority -ge 1) -and ($company.scan_priority -le 100)) -Message 'scan_priority liegt ausserhalb 1..100.'
+        Assert-True -Condition (@('COMPANY_DOMAIN_VERIFIED', 'CAREER_URL_VERIFIED', 'UNVERIFIED') -contains $company.verification_status) -Message "Ungueltiger verification_status $($company.verification_status)."
     }
 
     foreach ($source in @($Document.job_sources)) {

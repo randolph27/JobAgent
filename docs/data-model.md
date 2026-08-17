@@ -32,6 +32,24 @@ Repository-Funktionen:
 - `Mark-JobAgentMissingJobs`
 - `Get-JobAgentDailyOutputCandidates`
 
+## Firmeninventar-Seed
+
+`src/JobAgent.CompanyInventory.psm1` ergaenzt die fachliche Firmeninventar-Schicht fuer `JA-004`.
+
+- `Get-JobAgentCompanySeedInventory` liefert einen initialen, vorsichtig kuratierten Seed fuer Muenchen/Freising mit offiziellen Websites, Karriere-URLs, Standortbezug, Branche, Aliasnamen, Scanprioritaet und naechstem Scanzeitpunkt.
+- `Add-JobAgentCompanySeedInventory` fuehrt Seeds idempotent in das Store-Dokument zusammen.
+- Deduplikation nutzt stabile Keys in dieser Reihenfolge: `company_id`, kanonische Domain, rechtsformnormalisierter Name und Aliasnamen.
+- Getrennte Tochter-/Konzernunternehmen werden nur bei gleicher Domain, gleicher ID oder gleicher rechtsformbereinigter Namensidentitaet zusammengefuehrt; gemeinsame Konzernbestandteile allein reichen nicht aus.
+- Firmen ohne bekannte Karriere-URL bleiben als Company erhalten, erzeugen aber keine `JobSource` und erhalten `verification_status: COMPANY_DOMAIN_VERIFIED`.
+
+Der schreibende Einstieg fuer den lokalen Store ist:
+
+```powershell
+pwsh -NoProfile -File tools\Seed-JobAgentCompanies.ps1
+```
+
+Das Skript schreibt `data/jobagent/store.json` transaktional und erzeugt einen Seed-Bericht unter `logs/jobagent/company-seed-*.json`.
+
 Backups liegen unter `data/jobagent/backups/`. Die Pfadprüfung verhindert absolute oder relative Store-Pfade außerhalb des Projektverzeichnisses.
 
 Recovery:
@@ -70,7 +88,7 @@ Pflichtfelder:
 - `locations`: mindestens ein Standort- oder Zielgebietsobjekt.
 - `industry`: Branche oder `UNKNOWN`.
 - `ats`: firmengebundene ATS-Domains mit Beleg-URL.
-- `scan_status`, `created_at`, `updated_at`, `last_successful_scan_at`.
+- `scan_status`, `scan_priority`, `next_scan_at`, `verification_status`, `discovery_source`, `created_at`, `updated_at`, `last_successful_scan_at`.
 
 ## JobSource
 

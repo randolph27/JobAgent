@@ -108,6 +108,17 @@ function Assert-JobAgentDocument {
         if (-not (Test-JobAgentId -Value ([string]$company.company_id) -Prefix 'company')) {
             throw "Ungueltige company_id: $($company.company_id)"
         }
+        foreach ($property in @('scan_priority', 'next_scan_at', 'verification_status', 'discovery_source')) {
+            if ($company.PSObject.Properties.Name -notcontains $property) {
+                throw "Company fehlt Pflichtfeld ${property}: $($company.company_id)"
+            }
+        }
+        if (($company.scan_priority -lt 1) -or ($company.scan_priority -gt 100)) {
+            throw "Ungueltige scan_priority fuer $($company.company_id): $($company.scan_priority)"
+        }
+        if (@('COMPANY_DOMAIN_VERIFIED', 'CAREER_URL_VERIFIED', 'UNVERIFIED') -notcontains [string]$company.verification_status) {
+            throw "Ungueltige verification_status fuer $($company.company_id): $($company.verification_status)"
+        }
     }
     foreach ($source in @($Document.job_sources)) {
         if (-not (Test-JobAgentId -Value ([string]$source.source_id) -Prefix 'source')) {

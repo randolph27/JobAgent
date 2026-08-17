@@ -42,6 +42,14 @@ function New-TestCompany {
         industry = 'UNKNOWN'
         ats = @()
         scan_status = 'SUCCESS'
+        scan_priority = 80
+        next_scan_at = '2026-08-18T10:30:00Z'
+        verification_status = 'CAREER_URL_VERIFIED'
+        discovery_source = [pscustomobject]@{
+            type = 'OFFICIAL_WEBSITE'
+            url = 'https://example.invalid/careers'
+            observed_at = '2026-08-17T10:00:00Z'
+        }
         created_at = '2026-08-17T10:00:00Z'
         updated_at = '2026-08-17T10:30:00Z'
         last_successful_scan_at = '2026-08-17T10:30:00Z'

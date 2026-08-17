@@ -158,6 +158,10 @@
         "industry",
         "ats",
         "scan_status",
+        "scan_priority",
+        "next_scan_at",
+        "verification_status",
+        "discovery_source",
         "created_at",
         "updated_at",
         "last_successful_scan_at"
@@ -178,7 +182,14 @@
           "$ref": "#/$defs/uri"
         },
         "career_url": {
-          "$ref": "#/$defs/uri"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uri"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "aliases": {
           "type": "array",
@@ -207,6 +218,24 @@
         "scan_status": {
           "$ref": "#/$defs/scan_status"
         },
+        "scan_priority": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "next_scan_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "verification_status": {
+          "enum": [
+            "COMPANY_DOMAIN_VERIFIED",
+            "CAREER_URL_VERIFIED",
+            "UNVERIFIED"
+          ]
+        },
+        "discovery_source": {
+          "$ref": "#/$defs/company_discovery_source"
+        },
         "created_at": {
           "$ref": "#/$defs/date_time"
         },
@@ -222,6 +251,30 @@
               "type": "null"
             }
           ]
+        }
+      }
+    },
+    "company_discovery_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "url",
+        "observed_at"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "OFFICIAL_WEBSITE",
+            "MANUAL_REVIEW",
+            "DISCOVERY_HINT"
+          ]
+        },
+        "url": {
+          "$ref": "#/$defs/uri"
+        },
+        "observed_at": {
+          "$ref": "#/$defs/date_time"
         }
       }
     },

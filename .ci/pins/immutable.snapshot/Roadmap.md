@@ -9,23 +9,6 @@
 
 ## M2 - Quelleninventar und offizielle Verifikation
 
-- [ ] JA-004 Firmeninventar-Seed und Erweiterungsstrategie für München/Freising erstellen #comment: Eine breite, dauerhaft gepflegte Unternehmensbasis entscheidet über Trefferqualität und darf nicht täglich neu generiert werden.
-  - [ ] Beschreibung: Erstelle ein initiales, persistentes Inventar relevanter Arbeitgeber mit offizieller Website, Karriere-URL, Standortbezug, Branche, Aliasnamen und Scanpriorität; Erweiterungen werden dedupliziert und als neue Firmen nachvollziehbar protokolliert.
-  - [ ] Scope: Firmeninventar-Daten, Discovery-Regeln, Tests für Firmen-Deduplikation; keine Behauptung, dass alle Firmen bereits vollständig oder aktuell geprüft sind.
-  - [ ] Ist-Stand (2026-08-17 12:20): Es existiert kein fachliches Firmeninventar; der Auftrag fordert langfristig möglichst vollständige Abdeckung.
-  - [ ] Abhängigkeiten: JA-002 und JA-003; optional JA-001 für verbindliche Branchen- und Quellenregeln.
-  - [ ] Aufwand/Dauer: Aufwand L, Dauer 2-5 PT für initiale Struktur und erste Seed-Daten; laufende Erweiterung dauerhaft.
-  - [ ] Prioritätsscore: 88/100, weil ohne Firmenliste keine systematische Quellabdeckung entsteht.
-  - [ ] Risiken: Firmen können über Tochtergesellschaften, Holdings und unterschiedliche Rechtsformen mehrfach erscheinen; unklare Karriere-URLs dürfen nicht als verifiziert gelten.
-  - [ ] Schritte:
-    1. Definiere Seed-Kriterien für große Arbeitgeber, regionale Unternehmen, Konzerne, Mittelstand, öffentliche/staatnahe Arbeitgeber und Branchen mit eigener IT-Abteilung im Zielgebiet.
-    2. Implementiere Firmen-Deduplikation über kanonischen Namen, Domain, Rechtsformnormalisierung, Aliasliste und vorsichtige Konzern-/Tochter-Regeln.
-    3. Speichere pro Firma Scanpriorität, Discovery-Quelle, offizielle Karriere-URL, ATS-Hinweis, Status und nächsten geplanten Scanzeitpunkt.
-  - [ ] Evidence: Persistentes Firmeninventar mit validiertem Schema; Log der erstmalig hinzugefügten Firmen; Deduplikationsbericht für Alias-/Domain-Kollisionen.
-  - [ ] Funktionstest: Tests für identische Domain, Namensvariante mit Rechtsform, getrennte Tochtergesellschaft, fehlende Karriere-URL und erneute Seed-Ausführung ohne Duplikate.
-  - [ ] Audit: Stichprobe prüfen, dass Firmen nicht aus Jobbörsen als offiziell verifiziert markiert werden, solange keine offizielle Unternehmensquelle vorhanden ist.
-  - [ ] Supertest: Nach grünen Inventar- und Deduplikationstests in Daily-Run-Supertest aufnehmen.
-
 - [ ] JA-005 Quellenadapter-Vertrag für Karriereseiten und ATS-Systeme definieren #comment: Offizielle Quellen haben unterschiedliche technische Formen; ein einheitlicher Adaptervertrag verhindert Sonderlogik im Daily-Workflow.
   - [ ] Beschreibung: Definiere eine Adapter-Schnittstelle, die offizielle Unternehmensseiten und offiziell verlinkte ATS-Systeme durchsucht, Rohstellen extrahiert, Fehler klassifiziert und Quellnachweise liefert.
   - [ ] Scope: Adapter-Interfaces, Fehlerklassen, Rate-Limits, Retry-Regeln, Tests mit lokalen Fixtures; keine Umgehung von Logins, Paywalls, Captchas oder robots/ToS-Grenzen.

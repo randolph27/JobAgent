@@ -4,6 +4,8 @@ backups/
 state/
 .ci/tmp/
 .ci/run/
+data/jobagent/store.lock
+data/jobagent/backups/
 
 # Allgemeine lokale Artefakte
 *.log
