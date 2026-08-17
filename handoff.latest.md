@@ -1,111 +1,90 @@
 # Handoff latest
 
-Stand:
-2026-08-17T13:34:00+02:00
+Stand: 2026-08-17T13:47:33.940+02:00
 
 ## Zustand fuer neuen Chat
 
 - Active: _(none)_
 - Status: `open`
-- Naechster Arbeitsschritt: `TD-0003 / JA-005 Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme definieren`
+- Naechster Arbeitsschritt: `TD-0004 / JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren`
 - Branch: `master`
-- HEAD vor Abschluss-Commit: `06356534b8b9`
+- HEAD: `ad1d8dc94e58`
 - Upstream: `origin/master`
-- Ahead/Behind vor Abschluss-Commit: `0/0`
-- Worktree: `dirty`
-- Route: `JA-001` bis `JA-004` sind abgeschlossen und archiviert; aktive Roadmap startet bei `JA-005`.
-- STP wurde am `2026-08-17T13:32:30+02:00` ausgefuehrt.
+- Ahead/Behind vor Commit: `0/0`
+- Worktree vor Commit: `dirty`
+- Route: `JA-001` bis `JA-005` sind abgeschlossen und archiviert; aktive Roadmap startet bei `JA-006`.
+- STP wurde am `2026-08-17T13:47:33+02:00` ausgefuehrt.
 
 ## Abgeschlossener Arbeitsschritt
 
-`JA-004 Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising erstellen` ist abgeschlossen.
+`JA-005 Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme definieren` ist abgeschlossen.
 
 Implementiert:
 
-- `src/JobAgent.CompanyInventory.psm1`
-  - Seed-Erzeugung fuer Firmen im Zielraum Muenchen/Freising.
-  - Standortobjekte fuer `MUNICH` und `FREISING`.
-  - Domain-, Slug- und Rechtsformnormalisierung.
-  - Deduplikation ueber `company_id`, kanonische Domain, rechtsformnormalisierten Namen und Aliasnamen.
-  - Vorsichtige Konzern-/Tochter-Regel: gemeinsame Konzernbestandteile allein fuehren nicht zur Zusammenfuehrung.
-  - Erzeugung offizieller `JobSource`-Eintraege nur bei vorhandener Karriere-URL.
-- `tools/Seed-JobAgentCompanies.ps1`
-  - Schreibt den Firmen-Seed transaktional ueber die bestehende Store-API.
-  - Erzeugt einen Seed-Bericht unter `logs/jobagent/company-seed-*.json`.
-- `data/jobagent/store.json`
-  - Enthalt 12 initiale Firmen und 12 offizielle Karrierequellen.
-  - Keine Stellen, keine Live-Scans, keine Bewerbungsdaten.
+- `src/JobAgent.SourceAdapters.psm1`
+  - Adaptervertrag fuer Company, offizielle JobSource und ScanContext.
+  - Validierung gegen nicht-offizielle Quellen.
+  - Rohjobmodell mit Titel, Detail-URL, offizieller/ATS-ID, Standorttext, Zusammenfassung und Extraktionsvertrauen.
+  - Persistierbarer `ScanAttempt` je Adapterlauf.
+  - Fehlerklassen `NONE`, `NOT_REACHABLE`, `TIMEOUT`, `BLOCKED`, `NO_JOBS_FOUND`, `UNCLEAR_SOURCE`, `PARSING_ERROR`, `TECHNICAL_LIMITATION`.
+  - Retry-Empfehlungen `NONE`, `RETRY_SOON`, `RETRY_NEXT_RUN`, `MANUAL_REVIEW`.
+  - `Invoke-JobAgentFixtureAdapter` fuer deterministische Funktionstests ohne externe Website.
+  - `Invoke-JobAgentGenericHtmlAdapter` fuer statische HTML-/Suchseiten-Fixtures.
+- `tests/Test-JobAgentSourceAdapters.ps1`
+  - Tests fuer ScanContext, offizielle Quellen-Grenze, RawJob-Validierung, Fixture-Erfolg, leere Trefferliste, HTML-Erfolg, HTML ohne Jobs, Parsingfehler und Vertragsfehlerklassen.
 
 Schema/Dokumentation erweitert:
 
 - `schemas/jobagent.schema.json`
-- `src/JobAgent.Persistence.psm1`
+  - `adapter_result`
+  - `raw_job`
 - `docs/data-model.md`
-- `tests/fixtures/jobagent/valid.json`
-
-Neue Company-Felder:
-
-- `scan_priority`
-- `next_scan_at`
-- `verification_status`
-- `discovery_source`
+  - Abschnitt `Quellenadapter-Vertrag`.
+- `tests/Test-JobAgentSchema.ps1`
+  - Schema-Pruefung fuer `adapter_result` und `raw_job`.
 
 ## Validierung
 
 Funktionstests erfolgreich:
 
-- `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tools\Seed-JobAgentCompanies.ps1` -> Exit `0`, 12 Firmen, 12 Quellen
-- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-133157.log`
+- `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` -> Exit `0`
+- `git -c core.pager=cat -c color.ui=false --no-pager diff --check` -> Exit `0`
+- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-134722.log`
 - `.\ci.cmd stp` -> Exit `0`
 
 Supertest:
 
 - Nicht erneut ausgefuehrt.
 - Gemaess Nutzeranweisung gilt Supertest als erledigt, wenn er nicht angefragt wurde.
-- Alter Supertest-Fehler in `logs\verify\tst-450-human-visual-supertest.md` ist kein aktueller Blocker fuer diesen Abschluss.
+- Der alte Eintrag in `logs\verify\tst-450-human-visual-supertest.md` ist kein aktueller Blocker fuer JA-005.
 
 ## Roadmap/Todo
 
 Rausrotiert:
 
-- `JA-004` wurde aus `Roadmap.md` entfernt und nach `Roadmap_archive.md` verschoben.
+- `JA-005` wurde aus `Roadmap.md` entfernt und nach `Roadmap_archive.md` verschoben.
+- `TD-0003` ist erledigt und aus `todo.current.md` entfernt.
 
 Aktiv:
 
-1. `TD-0003 / JA-005 Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme definieren`
-2. `TD-0004 / JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren`
-3. `TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln`
-4. `TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren`
-5. `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
-6. `TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren`
+1. `TD-0004 / JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren`
+2. `TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln`
+3. `TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren`
+4. `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
+5. `TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren`
 
-## Konkreter Einstieg fuer JA-005
+## Konkreter Einstieg fuer JA-006
 
-Der naechste Agent soll bei `JA-005` beginnen:
-
-1. Adaptervertrag definieren:
-   - Input: Company, Karriere-URL, Suchbegriffe, Scan-Kontext, Budget/Timeout.
-   - Output: Rohjobs, offizielle Quell-URL, Detail-URL, Extraktionsvertrauen, Fehlerklasse, Retry-Empfehlung, Artefaktreferenzen.
-2. Fehlerklassen verwenden:
-   - `NONE`
-   - `NOT_REACHABLE`
-   - `TIMEOUT`
-   - `BLOCKED`
-   - `NO_JOBS_FOUND`
-   - `UNCLEAR_SOURCE`
-   - `PARSING_ERROR`
-   - `TECHNICAL_LIMITATION`
-3. Einen generischen HTML-/Suchseiten-Adapter und einen Fixture-Testadapter bauen.
-4. Tests ohne externe Live-Webrecherche schreiben.
-5. Keine Jobboerse als Primaerquelle akzeptieren.
-6. Keine Live-Recherche starten, bevor `JA-006` Quellenverifikation und URL-Kanonisierung steht.
+1. `isOfficialSource(company, url)` mit Unternehmensdomain, expliziter Karriere-URL und firmenbezogenen ATS-Domains implementieren.
+2. URL-Kanonisierung ohne Trackingparameter, Session-IDs oder Suchfilter umsetzen; jobrelevante Pfad-/ID-Bestandteile erhalten.
+3. Pro Stelle primaere offizielle URL und optionale alternative offizielle URLs modellieren; nicht verifizierbare Quellen als `INVALID` oder `unverified` markieren, nie als Treffer.
+4. Aggregatoren wie StepStone, Indeed, LinkedIn, XING, Kununu und Glassdoor als Primaerquelle ablehnen.
+5. Funktionstests fuer Firmen-Domain, ATS-Domain, Redirect, Trackingparameter, Aggregator-Ablehnung und mehrfache offizielle URLs schreiben.
 
 ## Risiken und Annahmen
 
-- Der Firmen-Seed ist initial und behauptet keine vollstaendige Marktabdeckung.
-- Karriere-URLs koennen sich aendern; spaetere Live-Verifikation bleibt Aufgabe von `JA-005`/`JA-006`.
-- Fehlende oder unsichere Werte weiter als `UNKNOWN`, `null` oder `TODO` modellieren, nicht erfinden.
-- Produktive Laufzeitdaten liegen unter `data/jobagent/`; Lock- und Backup-Dateien sind ignoriert.
+- Rohjobs aus JA-005 sind noch keine verifizierten Treffer. Ohne JA-006 duerfen sie nicht produktiv als Stellen gespeichert werden.
+- Der generische HTML-Adapter ist fuer statische Fixture-Strukturen gebaut; dynamische ATS-Systeme bleiben Folgearbeit.
+- Keine Live-Recherche wurde gestartet.

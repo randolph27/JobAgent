@@ -231,7 +231,7 @@ function Test-JobAgentDocument {
 
 Assert-True -Condition ($schema.'$schema' -eq 'https://json-schema.org/draft/2020-12/schema') -Message 'Schema nutzt nicht Draft 2020-12.'
 Assert-True -Condition ($schema.properties.schema_version.const -eq 'jobagent/v1') -Message 'Schema-Version ist nicht fixiert.'
-foreach ($definition in @('company', 'job', 'job_source', 'scan_run', 'scan_attempt', 'job_snapshot', 'change_event')) {
+foreach ($definition in @('company', 'job', 'job_source', 'scan_run', 'scan_attempt', 'adapter_result', 'raw_job', 'job_snapshot', 'change_event')) {
     Assert-True -Condition ($schema.'$defs'.PSObject.Properties.Name -contains $definition) -Message "Schema-Definition fehlt: $definition."
 }
 

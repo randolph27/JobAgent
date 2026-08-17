@@ -673,6 +673,100 @@
         }
       }
     },
+    "adapter_result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "adapter",
+        "company_id",
+        "source_id",
+        "official_source_url",
+        "status",
+        "error_class",
+        "retry_recommendation",
+        "raw_jobs",
+        "scan_attempt",
+        "artifact_paths"
+      ],
+      "properties": {
+        "adapter": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "company_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_id": {
+          "$ref": "#/$defs/id"
+        },
+        "official_source_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "status": {
+          "$ref": "#/$defs/scan_status"
+        },
+        "error_class": {
+          "$ref": "#/$defs/scan_attempt/properties/error_class"
+        },
+        "retry_recommendation": {
+          "$ref": "#/$defs/scan_attempt/properties/retry_recommendation"
+        },
+        "raw_jobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/raw_job"
+          }
+        },
+        "scan_attempt": {
+          "$ref": "#/$defs/scan_attempt"
+        },
+        "artifact_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "raw_job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "detail_url",
+        "external_job_id",
+        "ats_job_id",
+        "location_label",
+        "summary",
+        "extraction_confidence"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "external_job_id": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "ats_job_id": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "location_label": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "summary": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "extraction_confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
     "scan_error": {
       "type": "object",
       "additionalProperties": false,

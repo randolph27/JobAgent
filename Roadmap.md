@@ -9,23 +9,6 @@
 
 ## M2 - Quelleninventar und offizielle Verifikation
 
-- [ ] JA-005 Quellenadapter-Vertrag für Karriereseiten und ATS-Systeme definieren #comment: Offizielle Quellen haben unterschiedliche technische Formen; ein einheitlicher Adaptervertrag verhindert Sonderlogik im Daily-Workflow.
-  - [ ] Beschreibung: Definiere eine Adapter-Schnittstelle, die offizielle Unternehmensseiten und offiziell verlinkte ATS-Systeme durchsucht, Rohstellen extrahiert, Fehler klassifiziert und Quellnachweise liefert.
-  - [ ] Scope: Adapter-Interfaces, Fehlerklassen, Rate-Limits, Retry-Regeln, Tests mit lokalen Fixtures; keine Umgehung von Logins, Paywalls, Captchas oder robots/ToS-Grenzen.
-  - [ ] Ist-Stand (2026-08-17 12:20): Keine Crawler- oder Adapterlogik vorhanden.
-  - [ ] Abhängigkeiten: JA-001 Quellenregeln, JA-002 Datenfelder, JA-003 Persistenz.
-  - [ ] Aufwand/Dauer: Aufwand L, Dauer 2-4 PT für Vertrag und erste generische Adapter; weitere ATS-Adapter separat.
-  - [ ] Prioritätsscore: 86/100, weil Verifikation nur über offizielle Quellen belastbar ist.
-  - [ ] Risiken: Seitenstrukturänderungen, dynamisches Rendering, Captchas und fehlerhafte ATS-Suchen können False Negatives erzeugen.
-  - [ ] Schritte:
-    1. Lege Adapter-Input und -Output fest: Company, Karriere-URL, Suchbegriffe, Scan-Kontext, gefundene Rohjobs, offizielle URL, Extraktionsvertrauen, Fehler und Retry-Empfehlung.
-    2. Implementiere mindestens einen generischen HTML-/Suchseiten-Adapter und einen Fixture-basierten Testadapter, der keine externe Website benötigt.
-    3. Definiere Fehlercodes für nicht erreichbar, Timeout, blockiert, keine Jobs gefunden, unklare Quelle, Parsingfehler und technische Einschränkung.
-  - [ ] Evidence: Adaptervertrag dokumentiert; Fixtures mit offiziellen Beispielstrukturen; ScanAttempt-Logs zeigen Erfolg und Fehler deterministisch.
-  - [ ] Funktionstest: Fixture-Tests für statische Karriereseite, ATS-Listing, Detailseite, Timeout-Simulation, unklare Quelle und leere Trefferliste.
-  - [ ] Audit: Prüfen, dass Adapter keine Jobbörse als Primärquelle akzeptieren und externe Probleme nicht als Nichtvorhandensein von Stellen bewerten.
-  - [ ] Supertest: Nach Adaptertests in Supertest aufnehmen, externe Live-Crawls nur als gesonderte optionale Lane.
-
 - [ ] JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren #comment: Jeder Treffer muss auf eine offizielle Unternehmens- oder offiziell angebundene Recruiting-Seite zurückführbar sein.
   - [ ] Beschreibung: Implementiere Regeln zur Prüfung, ob eine URL offiziell ist, zur Kanonisierung von Joblinks, zur Speicherung alternativer offizieller URLs und zur Ablehnung nicht verifizierter Treffer.
   - [ ] Scope: URL-/Domain-Validierung, Company-Domain-Bezug, ATS-Allowlist pro Firma, JobSource-Modell, Tests; keine pauschale globale Allowlist ohne Firmenbindung.

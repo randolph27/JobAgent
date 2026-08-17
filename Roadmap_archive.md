@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-005 Quellenadapter-Vertrag für Karriereseiten und ATS-Systeme definieren #comment: Offizielle Quellen haben unterschiedliche technische Formen; ein einheitlicher Adaptervertrag verhindert Sonderlogik im Daily-Workflow.
+  - [x] Beschreibung: `src/JobAgent.SourceAdapters.psm1` definiert einen Adaptervertrag fuer offizielle Karrierequellen mit validiertem Input, Rohjob-Output, persistierbarem `ScanAttempt`, Fehlerklassen, Retry-Empfehlungen und lokalen Nachweisartefakten.
+  - [x] Scope: Erstellt wurden `src/JobAgent.SourceAdapters.psm1` und `tests/Test-JobAgentSourceAdapters.ps1`; erweitert wurden `schemas/jobagent.schema.json`, `tests/Test-JobAgentSchema.ps1` und `docs/data-model.md`. Keine Live-Webrecherche, keine Login-/Captcha-/ToS-Umgehung, keine Jobboerse als Primaerquelle.
+  - [x] Ist-Stand (2026-08-17 13:41): Adaptervertrag, Fixture-Adapter und generischer HTML-Fixture-Adapter sind implementiert; Rohjobs werden noch nicht als verifizierte Jobs persistiert, weil JA-006 URL-Verifikation und Kanonisierung noch offen ist.
+  - [x] Abhängigkeiten: JA-001 bis JA-004 sind abgeschlossen; der Adaptervertrag nutzt `Company`, `JobSource`, `ScanAttempt` und `jobagent/v1`.
+  - [x] Aufwand/Dauer: Aufwand L, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 86/100, weil offizielle Quellen nun einheitlich und testbar an spätere Verifikation, Klassifikation und Daily-Runs angebunden werden koennen.
+  - [x] Risiken: Der generische HTML-Adapter ist bewusst nur fuer statische Link-Fixtures geeignet; dynamische ATS-Systeme, Redirect-Verifikation und URL-Kanonisierung bleiben Folgepunkte. Leere oder fehlerhafte Adapterlaeufe schliessen keine bestehenden Jobs.
+  - [x] Schritte:
+    1. Adapter-Input fuer Company, offizielle JobSource, Scan-Kontext, Timeout, Ergebnisbudget und Suchbegriffe umgesetzt.
+    2. Adapter-Output mit Rohjobs, offizieller Quell-URL, Extraktionsvertrauen, `ScanAttempt`, Fehlerklasse und Retry-Empfehlung implementiert.
+    3. Fixture-Adapter und generischen HTML-Link-Extraktor erstellt; Fehlerfaelle fuer leeres HTML, keine Treffer und nicht-offizielle Quelle getestet.
+  - [x] Evidence: `src/JobAgent.SourceAdapters.psm1`, `tests/Test-JobAgentSourceAdapters.ps1`, `schemas/jobagent.schema.json`, `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` exit=0.
+  - [x] Audit: Tests blockieren nicht-offizielle Quellen, validieren absolute Detail-URLs, erzeugen persistierbare ScanAttempts und bewerten leere Trefferlisten als `NO_JOBS_FOUND` statt als Entfernen von Stellen.
+  - [x] Supertest: Nicht ausgeführt; der bestehende Projekt-Supertest ist noch nicht fachlich auf JobAgent-Funktionstests zugeschnitten und JA-013 bündelt abgeschlossene Kernfunktionen später.
+
 - [x] JA-004 Firmeninventar-Seed und Erweiterungsstrategie für München/Freising erstellen #comment: Eine breite, dauerhaft gepflegte Unternehmensbasis entscheidet über Trefferqualität und darf nicht täglich neu generiert werden.
   - [x] Beschreibung: `src/JobAgent.CompanyInventory.psm1` liefert ein initiales Firmeninventar für Muenchen/Freising mit offiziellen Websites, Karriere-URLs, Standortbezug, Branche, Aliasnamen, Scanprioritaet, naechstem Scanzeitpunkt, Discovery-Quelle und Verifikationsstatus; `tools/Seed-JobAgentCompanies.ps1` schreibt den Seed transaktional in `data/jobagent/store.json`.
   - [x] Scope: Erstellt wurden `src/JobAgent.CompanyInventory.psm1`, `tests/Test-JobAgentCompanyInventory.ps1`, `tools/Seed-JobAgentCompanies.ps1` und `data/jobagent/store.json`; erweitert wurden `schemas/jobagent.schema.json`, `src/JobAgent.Persistence.psm1`, `tests/Test-JobAgentSchema.ps1`, `tests/Test-JobAgentPersistence.ps1`, `tests/fixtures/jobagent/valid.json` und `docs/data-model.md`.

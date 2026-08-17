@@ -160,6 +160,38 @@ Fehlerklassen:
 
 Ein fehlgeschlagener Versuch darf bestehende Jobs nicht automatisch schließen oder entfernen.
 
+## Quellenadapter-Vertrag
+
+`src/JobAgent.SourceAdapters.psm1` definiert den Vertrag fuer `JA-005`.
+
+Adapter-Input:
+
+- `company`: Company-Objekt mit `company_id`, `canonical_name` und `canonical_domain`.
+- `source`: offizielle `JobSource` derselben Firma. `is_official` muss `true` sein; Aggregatoren und Jobboersen werden abgelehnt.
+- `scan_context`: `scan_run_id`, Startzeit, Timeout, Ergebnisbudget und optionale Suchbegriffe.
+
+Adapter-Output:
+
+- `adapter`, `company_id`, `source_id`, `official_source_url`.
+- `status`: `SUCCESS`, `PARTIAL`, `FAILED` oder `SKIPPED`.
+- `error_class`: `NONE`, `NOT_REACHABLE`, `TIMEOUT`, `BLOCKED`, `NO_JOBS_FOUND`, `UNCLEAR_SOURCE`, `PARSING_ERROR`, `TECHNICAL_LIMITATION`.
+- `retry_recommendation`: `NONE`, `RETRY_SOON`, `RETRY_NEXT_RUN`, `MANUAL_REVIEW`.
+- `raw_jobs`: rohe, noch nicht deduplizierte Treffer mit Titel, Detail-URL, optionaler offizieller Job-ID/ATS-ID, Standorttext, Zusammenfassung und Extraktionsvertrauen.
+- `scan_attempt`: persistierbarer ScanAttempt fuer das Laufprotokoll.
+- `artifact_paths`: optionale lokale Nachweisartefakte.
+
+Implementierte Adapter:
+
+- `Invoke-JobAgentFixtureAdapter`: deterministischer Testadapter ohne externe Website.
+- `Invoke-JobAgentGenericHtmlAdapter`: generischer HTML-Link-Extraktor fuer statische Karriere-/Suchseiten-Fixtures.
+
+Grenzen:
+
+- Keine Login-, Paywall-, Captcha- oder ToS-Umgehung.
+- Keine Live-Webrecherche in Funktionstests.
+- Keine Jobboerse als Primaerquelle.
+- Ein leerer oder technisch fehlerhafter Adapterlauf schliesst keine bestehenden Jobs.
+
 ## JobSnapshot
 
 `JobSnapshot` hält den beobachteten Stand eines Jobs in einem Lauf fest.
