@@ -120,6 +120,8 @@ function New-JobAgentCompanySeed {
         [Parameter()][ValidateSet('OFFICIAL_WEBSITE', 'MANUAL_REVIEW', 'DISCOVERY_HINT')][string]$DiscoverySourceType = 'OFFICIAL_WEBSITE',
         [Parameter()][string]$DiscoveryOrigin = 'seed.manual',
         [Parameter()][string]$DiscoveryEvidenceNote = 'Offizielle Firmenquelle wurde manuell gepflegt.',
+        [Parameter()][AllowNull()][string]$DiscoveryVerificationUrl,
+        [Parameter()][ValidateSet('COMPANY_DOMAIN_VERIFIED', 'CAREER_URL_VERIFIED', 'UNVERIFIED')][string]$VerificationStatus,
         [Parameter()][object[]]$Ats = @(),
         [Parameter()][datetime]$CreatedAt = [datetime]::UtcNow,
         [Parameter()][datetime]$NextScanAt = ([datetime]::UtcNow.Date.AddDays(1))
@@ -128,7 +130,24 @@ function New-JobAgentCompanySeed {
     $domain = ConvertTo-JobAgentCanonicalDomain -UrlOrDomain $OfficialWebsiteUrl
     $id = 'company:' + (ConvertTo-JobAgentAsciiSlug -Value $CanonicalName)
     $career = if ([string]::IsNullOrWhiteSpace($CareerUrl)) { $null } else { $CareerUrl }
-    $verificationStatus = if ($null -eq $career) { 'COMPANY_DOMAIN_VERIFIED' } else { 'CAREER_URL_VERIFIED' }
+    $verificationStatus = if ($PSBoundParameters.ContainsKey('VerificationStatus')) {
+        $VerificationStatus
+    }
+    elseif ($null -eq $career) {
+        'COMPANY_DOMAIN_VERIFIED'
+    }
+    else {
+        'CAREER_URL_VERIFIED'
+    }
+    $discoveryVerificationUrl = if ($PSBoundParameters.ContainsKey('DiscoveryVerificationUrl')) {
+        if ([string]::IsNullOrWhiteSpace($DiscoveryVerificationUrl)) { $null } else { $DiscoveryVerificationUrl }
+    }
+    elseif ($null -eq $career) {
+        $OfficialWebsiteUrl
+    }
+    else {
+        $career
+    }
     $targetArea = @($Locations | ForEach-Object { [string]$_.target_area } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -First 1)
 
     [pscustomobject]@{
@@ -149,7 +168,7 @@ function New-JobAgentCompanySeed {
             -Type $DiscoverySourceType `
             -Url $DiscoverySourceUrl `
             -ObservedAt $CreatedAt `
-            -VerificationUrl $(if ($null -eq $career) { $OfficialWebsiteUrl } else { $career }) `
+            -VerificationUrl $discoveryVerificationUrl `
             -DiscoveryOrigin $DiscoveryOrigin `
             -TargetArea $(if ($targetArea.Count -gt 0) { [string]$targetArea[0] } else { 'UNKNOWN' }) `
             -IndustryHint $Industry `
@@ -430,12 +449,116 @@ function Add-JobAgentCompanySeedInventory {
     }
 }
 
+function ConvertTo-JobAgentCompanyDiscoverySeed {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$DiscoveryItem,
+        [Parameter()][datetime]$ImportedAt = [datetime]::UtcNow,
+        [Parameter()][datetime]$NextScanAt = ([datetime]::UtcNow.Date.AddDays(1))
+    )
+
+    foreach ($property in @('canonical_name', 'official_website_url', 'locations', 'industry', 'scan_priority')) {
+        if ($DiscoveryItem.PSObject.Properties.Name -notcontains $property) {
+            throw "Discovery-Eintrag fehlt Pflichtfeld $property."
+        }
+    }
+
+    $discoveryType = if ($DiscoveryItem.PSObject.Properties.Name -contains 'discovery_type' -and -not [string]::IsNullOrWhiteSpace([string]$DiscoveryItem.discovery_type)) {
+        [string]$DiscoveryItem.discovery_type
+    }
+    else {
+        'OFFICIAL_WEBSITE'
+    }
+    if (@('OFFICIAL_WEBSITE', 'MANUAL_REVIEW', 'DISCOVERY_HINT') -notcontains $discoveryType) {
+        throw "Ungueltiger discovery_type: $discoveryType"
+    }
+
+    $careerUrl = if ($DiscoveryItem.PSObject.Properties.Name -contains 'career_url' -and -not [string]::IsNullOrWhiteSpace([string]$DiscoveryItem.career_url)) {
+        [string]$DiscoveryItem.career_url
+    }
+    else {
+        $null
+    }
+    $discoveryUrl = if ($DiscoveryItem.PSObject.Properties.Name -contains 'discovery_url' -and -not [string]::IsNullOrWhiteSpace([string]$DiscoveryItem.discovery_url)) {
+        [string]$DiscoveryItem.discovery_url
+    }
+    elseif ($null -ne $careerUrl) {
+        $careerUrl
+    }
+    else {
+        [string]$DiscoveryItem.official_website_url
+    }
+    if (($discoveryType -ne 'OFFICIAL_WEBSITE') -and [string]::IsNullOrWhiteSpace($discoveryUrl)) {
+        throw 'Discovery-Hinweise und Manual-Review-Eintraege benoetigen discovery_url.'
+    }
+
+    $verificationStatus = if ($null -ne $careerUrl) {
+        'CAREER_URL_VERIFIED'
+    }
+    elseif ($discoveryType -eq 'OFFICIAL_WEBSITE') {
+        'COMPANY_DOMAIN_VERIFIED'
+    }
+    else {
+        'UNVERIFIED'
+    }
+    $verificationUrl = if ($verificationStatus -eq 'CAREER_URL_VERIFIED') {
+        $careerUrl
+    }
+    elseif ($verificationStatus -eq 'COMPANY_DOMAIN_VERIFIED') {
+        [string]$DiscoveryItem.official_website_url
+    }
+    else {
+        $null
+    }
+
+    return New-JobAgentCompanySeed `
+        -CanonicalName ([string]$DiscoveryItem.canonical_name) `
+        -OfficialWebsiteUrl ([string]$DiscoveryItem.official_website_url) `
+        -CareerUrl $careerUrl `
+        -Aliases @($DiscoveryItem.aliases) `
+        -Locations @($DiscoveryItem.locations) `
+        -Industry ([string]$DiscoveryItem.industry) `
+        -ScanPriority ([int]$DiscoveryItem.scan_priority) `
+        -DiscoverySourceUrl $discoveryUrl `
+        -DiscoverySourceType $discoveryType `
+        -DiscoveryOrigin $(if ($DiscoveryItem.PSObject.Properties.Name -contains 'discovery_origin' -and -not [string]::IsNullOrWhiteSpace([string]$DiscoveryItem.discovery_origin)) { [string]$DiscoveryItem.discovery_origin } else { 'seed.discovery' }) `
+        -DiscoveryEvidenceNote $(if ($DiscoveryItem.PSObject.Properties.Name -contains 'evidence_note' -and -not [string]::IsNullOrWhiteSpace([string]$DiscoveryItem.evidence_note)) { [string]$DiscoveryItem.evidence_note } else { 'Discovery-Feed importiert; offizielle Quelle muss nachvollziehbar bleiben.' }) `
+        -DiscoveryVerificationUrl $verificationUrl `
+        -VerificationStatus $verificationStatus `
+        -Ats $(if ($DiscoveryItem.PSObject.Properties.Name -contains 'ats') { @($DiscoveryItem.ats) } else { @() }) `
+        -CreatedAt $ImportedAt `
+        -NextScanAt $NextScanAt
+}
+
+function Import-JobAgentCompanyDiscoveryInventory {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$DiscoveryItems,
+        [Parameter()][datetime]$ImportedAt = [datetime]::UtcNow,
+        [Parameter()][datetime]$NextScanAt = ([datetime]::UtcNow.Date.AddDays(1))
+    )
+
+    $seeds = foreach ($item in @($DiscoveryItems)) {
+        ConvertTo-JobAgentCompanyDiscoverySeed -DiscoveryItem $item -ImportedAt $ImportedAt -NextScanAt $NextScanAt
+    }
+    $result = Add-JobAgentCompanySeedInventory -Document $Document -Seeds $seeds -SeededAt $ImportedAt
+    $manualReviewRequired = @($result.document.companies | Where-Object {
+            ($_.verification_status -eq 'UNVERIFIED') -or (@('MANUAL_REVIEW', 'DISCOVERY_HINT') -contains [string]$_.discovery_source.type)
+        } | ForEach-Object { [string]$_.company_id } | Sort-Object -Unique)
+    $result | Add-Member -NotePropertyName imported -NotePropertyValue @($seeds | ForEach-Object { [string]$_.company_id }) -Force
+    $result | Add-Member -NotePropertyName manual_review_required -NotePropertyValue $manualReviewRequired -Force
+    return $result
+}
+
 Export-ModuleMember -Function @(
     'Add-JobAgentCompanySeedInventory',
     'ConvertTo-JobAgentCanonicalDomain',
+    'ConvertTo-JobAgentCompanyDiscoverySeed',
     'ConvertTo-JobAgentCompanyNameKey',
     'Find-JobAgentCompanyDuplicate',
     'Get-JobAgentCompanySeedInventory',
+    'Import-JobAgentCompanyDiscoveryInventory',
     'Merge-JobAgentCompanySeed',
     'New-JobAgentDiscoverySource',
     'New-JobAgentCompanySeed',

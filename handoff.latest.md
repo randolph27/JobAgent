@@ -1,57 +1,73 @@
 # Handoff latest
 
-Stand: 2026-08-17T17:53:56.738+02:00
+Stand: 2026-08-17T18:05:25.093+02:00
 
 ## Zustand
 
-- Active: `TD-0017`
+- Active: `TD-0018`
 - Status: `in-progress`
-- Ziel: `JA-021 Firmeninventar autonom, dedupliziert und quellenorientiert erweitern`
+- Ziel: `JA-022 Lokale App-/Artefaktablage, Devserver-Port und Visual-Audit fuer HTML-Berichte absichern`
 - Branch: `master`
-- HEAD: `0c47fb4a6852`
+- HEAD: `8ea93abe6645`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
 
 ## Abgeschlossener Arbeitsschritt
 
-- `src/JobAgent.CompanyInventory.psm1` erweitert den Discovery-Vertrag fuer Firmen um `verification_url`, `discovery_origin`, `target_area`, `industry_hint` und `evidence_note`.
-- Das Seed-/Merge-Verhalten ist jetzt strenger und verlustfrei: staerkere Verifikationsstufe bleibt erhalten, `scan_priority` wird maximiert, der fruehere `next_scan_at` bleibt bestehen, Standorte/Aliase/ATS-Bindings werden zusammengefuehrt.
-- `src/JobAgent.Coverage.psm1` bewertet Firmen jetzt zusaetzlich mit Inventar-Zustaenden wie `MANUAL_REVIEW_REQUIRED`, `VERIFIED_WEBSITE_ONLY`, `RETRY_REQUIRED`, `STALE_SCAN`; daraus werden Backlog-Typen und Scanprioritaeten abgeleitet.
-- `schemas/jobagent.schema.json` und alle betroffenen Fixtures/Tests wurden auf das erweiterte `discovery_source`-Schema angehoben.
-- `tools/Seed-JobAgentCompanies.ps1` wurde erfolgreich gegen den echten Store ausgefuehrt; `data/jobagent/store.json` ist auf das neue Discovery-Schema normalisiert, Log unter `logs/jobagent/company-seed-20260817-155258.json`.
-- `.\ci.cmd stp` wurde ausgefuehrt; `todo.events.jsonl`, `todo.history.digest.json`, `todo.master.index.json`, `handoff.latest.json` und `handoff.latest.md` sind synchronisiert.
+- `JA-021` ist fachlich abgeschlossen und aus [Roadmap.md](D:/_Scripte/JobAgent/Roadmap.md) nach [Roadmap_archive.md](D:/_Scripte/JobAgent/Roadmap_archive.md) rotiert.
+- [src/JobAgent.CompanyInventory.psm1](D:/_Scripte/JobAgent/src/JobAgent.CompanyInventory.psm1) unterstuetzt jetzt Discovery-Importe mit `OFFICIAL_WEBSITE`, `MANUAL_REVIEW` und `DISCOVERY_HINT`, inklusive sauberem `verification_status` und `verification_url`.
+- [tools/Import-JobAgentCompanyDiscovery.ps1](D:/_Scripte/JobAgent/tools/Import-JobAgentCompanyDiscovery.ps1) importiert Discovery-Feeds transaktional in den Store, erzeugt Backups und schreibt ein Import-Log.
+- [data/jobagent/company-discovery.official.json](D:/_Scripte/JobAgent/data/jobagent/company-discovery.official.json) enthaelt einen offiziellen Feed fuer acht neue Arbeitgeber im Zielgebiet oder mit anschliessend pruefbarem Zielgebietsbezug.
+- [data/jobagent/store.json](D:/_Scripte/JobAgent/data/jobagent/store.json) wurde erfolgreich erweitert. Der Store enthaelt jetzt 20 Firmen und 20 offizielle Quellen.
+- [tests/Test-JobAgentCompanyInventory.ps1](D:/_Scripte/JobAgent/tests/Test-JobAgentCompanyInventory.ps1) deckt jetzt auch Discovery-Hinweise, `COMPANY_DOMAIN_VERIFIED` ohne Karrierepfad und den CLI-Importpfad ab.
 
-## Roadmap- und Todo-Status
+## Neu importierte Firmen
 
-- `JA-021` ist nicht abgeschlossen und bleibt in `Roadmap.md` aktiv.
-- `JA-022` bleibt nachgelagert offen; keine Rotation aus `Roadmap.md`.
-- `todo.current.md` und `todo.state.json` bleiben korrekt auf `TD-0017` / `JA-021`.
-- Regel des Nutzers: Wenn `supertest` nicht erneut angefragt wurde, gilt der letzte gruene Lauf als erledigt. Diese Annahme bleibt aktiv.
+- `Microsoft Deutschland GmbH`
+- `Google Germany GmbH`
+- `MAN Truck & Bus SE`
+- `Knorr-Bremse AG`
+- `BWI GmbH`
+- `Bayerische Landesbank`
+- `Versicherungskammer Bayern`
+- `msg systems ag`
+
+## Wichtige Artefakte
+
+- Discovery-Feed: [data/jobagent/company-discovery.official.json](D:/_Scripte/JobAgent/data/jobagent/company-discovery.official.json)
+- Produktiver Store: [data/jobagent/store.json](D:/_Scripte/JobAgent/data/jobagent/store.json)
+- Import-Log: [logs/jobagent/company-discovery-import-20260817-160219.json](D:/_Scripte/JobAgent/logs/jobagent/company-discovery-import-20260817-160219.json)
+- Todo-Status: [todo.current.md](D:/_Scripte/JobAgent/todo.current.md), [todo.state.json](D:/_Scripte/JobAgent/todo.state.json), [todo.events.jsonl](D:/_Scripte/JobAgent/todo.events.jsonl)
 
 ## Verifikation
 
 - `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tools\Seed-JobAgentCompanies.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tools\Import-JobAgentCompanyDiscovery.ps1` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
-- `.\ci.cmd supertest` -> letzter gruener Digest gilt gemaess Nutzerregel als erledigt
+- `.\ci.cmd supertest` gilt gemaess Nutzerregel als erledigt und ist im Verify-Digest weiterhin gruen
 
-## Naechste Arbeit
+## Offene Aufgabe fuer den naechsten Chat
 
-1. `JA-021` fachlich abschliessen: echte autonome Firmen-Erweiterung fehlt noch. Bisher existiert nur der Vertrag, die Merge-/Priorisierungslogik und die Schemahaertung.
-2. Neue Firmen-Discovery implementieren: neue erlaubte Discovery-Quellen oder Seed-Importer anlegen, damit systematisch weitere Arbeitgeber fuer Muenchen/Freising aufgenommen werden koennen.
-3. Discovery sauber verifizieren: Sekundaerquellen duerfen nur `DISCOVERY_HINT` erzeugen; eine Firma darf erst als belastbar gelten, wenn offizielle Website und idealerweise Karriere-URL belegt sind.
-4. Coverage-/Daily-Run-Nutzung fertigstellen: pruefen, ob die neuen Inventar-Zustaende und Priorisierungen in weiteren operativen Pfaden genutzt oder sichtbar gemacht werden muessen.
-5. Erst nach Abschluss von `JA-021`: `JA-022` beginnen, also Devserver-Portvertrag `8500`/`8300` bereinigen, lokalen HTML-Audit bauen und Reportpfade/Betriebsstatus absichern.
+`JA-022` ist jetzt der einzige aktive Roadmap-Punkt.
+
+1. Devserver-Portvertrag klaeren und implementieren.
+   Dateien/Kontext: `.ci/ci.config.json`, `.ci/bin/modules/*`, README/Manual-Hinweise.
+   Aktueller Konflikt: Nutzer nennt Port `8500`, Konfiguration verweist noch auf `8300`.
+   Ziel: `.\ci.cmd devserver-start/status/stop` im Hintergrund, reproduzierbar und ohne Fremdprozesse zu beenden.
+2. Lokalen HTML-Audit fuer `html/jobagent/*.html` bauen.
+   Erwartung: Pflichtsektionen vorhanden, keine externen Ressourcen, keine abgeschnittenen oder ueberlaufenden Inhalte bei langen Texten.
+   Wahrscheinliche Ziele: neuer Funktionstest neben [tests/Test-JobAgentOperations.ps1](D:/_Scripte/JobAgent/tests/Test-JobAgentOperations.ps1) oder eigener HTML-Audit-Test.
+3. Betriebsstatus und Reportpfade absichern.
+   Erwartung: letzter JSON-, Markdown- und HTML-Reportpfad ist fuer den Nutzer ohne weitere Serverinteraktion auffindbar.
+   Relevante Module: `src/JobAgent.Operations.psm1`, Daily-Run-/Report-Artefakte, Handoff-Ausgabe.
 
 ## Risiken und No-Gos
 
-- Keine neue Firma ohne belastbare Quelle.
-- Discovery aus Jobboersen oder anderen Sekundaerquellen nie als Verifikation behandeln.
-- Rechtlich getrennte Arbeitgeber nicht ueber Alias-, Konzern- oder Domain-Aehnlichkeit falsch zusammenfuehren.
-- Keine Vollstaendigkeitsbehauptung; der aktuelle Stand ist eine gehaertete Grundlage, aber noch keine autonome Firmenabdeckung.
+- Keine Jobboerse oder Branchenliste als Primaerquelle in produktive Discovery-Feeds aufnehmen.
+- `DISCOVERY_HINT` darf nie automatisch in eine offizielle Quelle hochgestuft werden.
+- Fuer `JA-022` keine blockierenden Vordergrund-Server starten; Devserver nur ueber `.\ci.cmd`.
+- Keine fremden Prozesse auf `8500` oder `8300` ohne Identitaetspruefung beenden.

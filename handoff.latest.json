@@ -1,149 +1,81 @@
 {
-  "ts": "2026-08-17T17:53:56.738+02:00",
+  "ts": "2026-08-17T18:05:25.093+02:00",
   "agent_id": "UTTER-20260817-39f7",
-  "workspace_root": ".",
   "project": "JobAgent",
-  "active_id": "TD-0017",
   "status": "in-progress",
-  "summary": "JA-021 ist weiterhin aktiv. Discovery-Vertrag, Merge-Logik, Coverage-Zustaende und Store-Schema sind gehaertet, aber die echte autonome Firmen-Erweiterung ist noch nicht implementiert.",
-  "goal": "TD-0017 / JA-021 abschliessen: Firmeninventar autonom, dedupliziert und quellenorientiert erweitern.",
-  "next": "Neue Firmen-Discovery/Importer fuer relevante Arbeitgeber im Zielgebiet implementieren und sauber gegen offizielle Unternehmensquellen verifizieren; danach JA-022 fuer lokalen Betrieb und HTML-Audit starten.",
+  "active_id": "TD-0018",
+  "goal": "JA-022 Lokale App-/Artefaktablage, Devserver-Port und Visual-Audit fuer HTML-Berichte absichern",
+  "summary": "JA-021 abgeschlossen, nach Roadmap_archive.md rotiert und der produktive Firmenstore ueber einen offiziellen Discovery-Feed auf 20 Firmen erweitert.",
+  "completed": [
+    "JA-021 Firmeninventar autonom, dedupliziert und quellenorientiert erweitern"
+  ],
   "next_steps": [
-    "JA-021 Schritt 1: neue Discovery- oder Seed-Quellen implementieren, damit weitere Arbeitgeber fuer Muenchen/Freising systematisch aufgenommen werden koennen.",
-    "JA-021 Schritt 2: Discovery-Hinweise strikt von Verifikation trennen; DISCOVERY_HINT darf nur ein Vorstufe-Eintrag sein, keine bestaetigte Firmenquelle.",
-    "JA-021 Schritt 3: die neue Inventar- und Coverage-Logik auf operative Folgepfade pruefen, falls Daily-Run oder Reports weitere Anpassungen benoetigen.",
-    "JA-022 erst danach: Devserver-Portvertrag 8500/8300 bereinigen, lokalen HTML-Audit bauen, Reportpfade und Betriebsstatus absichern."
+    "Devserver-Portvertrag 8500 versus 8300 in .ci/ci.config.json und den .ci-Modulen klaeren und ueber .\\ci.cmd devserver-start/status/stop verifizieren.",
+    "Lokalen HTML-Audit fuer html/jobagent/*.html implementieren, der Pflichtsektionen, fehlende externe Ressourcen und Layout-Fehler prueft.",
+    "Betriebsstatus und Handoff so erweitern, dass letzter JSON-, Markdown- und HTML-Reportpfad direkt sichtbar bleibt."
   ],
-  "changed": [
-    "data/jobagent/store.json",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "schemas/jobagent.schema.json",
-    "src/JobAgent.CompanyInventory.psm1",
-    "src/JobAgent.Coverage.psm1",
-    "tests/Test-JobAgentCompanyInventory.ps1",
-    "tests/Test-JobAgentCoverage.ps1",
-    "tests/Test-JobAgentPersistence.ps1",
-    "tests/Test-JobAgentReport.ps1",
-    "tests/Test-JobAgentSchema.ps1",
-    "tests/Test-JobAgentSourceAdapters.ps1",
-    "tests/fixtures/jobagent/valid.json",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json"
-  ],
-  "verified": [
+  "artifacts": {
+    "roadmap_active": "Roadmap.md",
+    "roadmap_archive": "Roadmap_archive.md",
+    "discovery_feed": "data/jobagent/company-discovery.official.json",
+    "store": "data/jobagent/store.json",
+    "import_log": "logs/jobagent/company-discovery-import-20260817-160219.json",
+    "todo_current": "todo.current.md",
+    "todo_state": "todo.state.json",
+    "todo_events": "todo.events.jsonl"
+  },
+  "verification": [
     {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
-      "exit": 0,
-      "status": "pass"
+      "exit": 0
     },
     {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
-      "exit": 0,
-      "status": "pass"
+      "exit": 0
     },
     {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentPersistence.ps1",
-      "exit": 0,
-      "status": "pass"
+      "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1",
-      "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
+      "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tools\\Seed-JobAgentCompanies.ps1",
-      "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File tools\\Import-JobAgentCompanyDiscovery.ps1",
+      "exit": 0
     },
     {
       "cmd": ".\\ci.cmd stp",
-      "exit": 0,
-      "status": "pass"
+      "exit": 0
     },
     {
       "cmd": ".\\ci.cmd supertest",
       "exit": 0,
-      "status": "pass",
-      "note": "Nicht erneut angefragt; letzter gruener Digest gilt gemaess Nutzerregel als erledigt."
+      "note": "Nicht neu angefragt; gemaess Nutzerregel als erledigt gewertet, Verify-Digest weiterhin gruen."
     }
+  ],
+  "imported_companies": [
+    "Microsoft Deutschland GmbH",
+    "Google Germany GmbH",
+    "MAN Truck & Bus SE",
+    "Knorr-Bremse AG",
+    "BWI GmbH",
+    "Bayerische Landesbank",
+    "Versicherungskammer Bayern",
+    "msg systems ag"
   ],
   "git": {
     "branch": "master",
-    "head": "0c47fb4a6852",
+    "head": "8ea93abe6645",
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,
-    "worktree": "dirty",
-    "remote": "origin",
-    "detached": false,
-    "has_repo": true
+    "worktree": "dirty"
   },
-  "route_ok": null,
-  "route_violations": [],
-  "refs": [
-    "file:Roadmap.md",
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.json",
-    "file:handoff.latest.md"
-  ],
-  "roadmap": {
-    "active": [
-      "JA-021",
-      "JA-022"
-    ],
-    "completed": [],
-    "rotated": [],
-    "note": "Kein offener Roadmap-Punkt wurde in diesem Schritt abgeschlossen; daher keine Rotation aus Roadmap.md."
-  },
-  "handoff_detail": {
-    "current_focus": {
-      "todo_id": "TD-0017",
-      "roadmap_id": "JA-021",
-      "status": "in-progress",
-      "objective": "Firmeninventar fachlich ueber den statischen Seed hinaus erweitern und Discovery sauber in verifizierte Firmenquellen ueberfuehren.",
-      "implemented_now": [
-        "Discovery-Vertrag fuer Firmen ist im Datenmodell verankert.",
-        "Merge-Logik priorisiert staerkere Verifikation, hoehere Prioritaet und frueheren Scanzeitpunkt.",
-        "Coverage kennt jetzt Discovery-Review-, Retry- und Website-only-Zustaende."
-      ],
-      "missing_for_done": [
-        "Es fehlt noch echte automatische oder halbautomatische Firmen-Erweiterung ueber neue Discovery- oder Seed-Quellen.",
-        "Es fehlt noch Nachweis, dass neue Firmen systematisch aufgenommen und korrekt als verifiziert oder manueller Review markiert werden.",
-        "Es ist noch offen, ob weitere operative Pfade ausser Coverage/Seed von den neuen Zustaenden profitieren muessen."
-      ],
-      "files": [
-        "src/JobAgent.CompanyInventory.psm1",
-        "src/JobAgent.Coverage.psm1",
-        "tools/Seed-JobAgentCompanies.ps1",
-        "tests/Test-JobAgentCompanyInventory.ps1",
-        "tests/Test-JobAgentCoverage.ps1",
-        "tests/Test-JobAgentReport.ps1"
-      ]
-    },
-    "next_after_current": {
-      "todo_id": "TD-0018",
-      "roadmap_id": "JA-022",
-      "summary": "Lokalen Devserver-Portvertrag bereinigen, HTML-Audit bauen und lokale Reportpfade/Betriebsstatus absichern."
-    },
-    "risks": [
-      "Keine neue Firma ohne belastbare Quelle.",
-      "Sekundaerquellen duerfen Discovery nur anstossen, aber nie als Verifikation gelten.",
-      "Rechtlich getrennte Arbeitgeber nicht ueber Alias- oder Konzernnaehe falsch deduplizieren."
-    ]
-  }
+  "risks": [
+    "Discovery-Hinweise duerfen nicht als offizielle Quellen behandelt werden.",
+    "Fuer JA-022 darf kein Vordergrundserver gestartet werden; Devserver nur ueber .\\ci.cmd.",
+    "Port 8500 oder 8300 darf nicht ohne Prozessidentitaetspruefung freigeraeumt werden."
+  ]
 }

@@ -5,30 +5,9 @@
 - Kapazitätsannahme: 1 Entwickler/Agent, lokale Windows-Umgebung `D:\_Scripte\JobAgent`, App läuft nur lokal, Daily-Runs zunächst manuell oder über lokale Automatisierung, kein externer Schreibzugriff auf Bewerbungs- oder Unternehmenssysteme.
 - Projektgröße: PowerShell-Modulstack mit JSON-Store, CI-Vertrag, Funktions- und Supertest-Lane; keine Web-UI als Produktivserver, aber lokale HTML-Berichtsartefakte sind fachlich erforderlich.
 - Review-Basis: Implementierung bis JA-016 ist weitgehend fachlich angelegt, aber die angehängte Programmanweisung ist noch nicht vollständig umgesetzt. Gesichert vorhanden sind Persistenz, Firmen-Seed, offizielle Quellenverifikation, Fixture-/generischer HTML-/Live-Adapter, Klassifikation, Deduplikation, Statusmaschine, Daily-Run, JSON-/Markdown-/HTML-Report, Betriebsstatus, Coverage-Backlog und Supertest.
-- Kritische Lücken: Live-Recherche ist noch Pilotqualität; Firmeninventar wird nicht systematisch autonom erweitert; lokale App-/Artefaktablage und Audit-Nachweise sind noch nicht vollständig vertraglich abgesichert.
-- Priorisierung: zuerst Live-Adapter-Härtung, weil JA-019 die Quellenbeweiskette für ATS-/Redirect-Anbindungen jetzt persistent und auditierbar absichert; danach Firmenabdeckung; zuletzt lokale Betriebs-/Audit-Härtung.
+- Kritische Lücken: Live-Recherche bleibt trotz robusterer Adapter begrenzt; lokale App-/Artefaktablage, Devserver-Portvertrag und Visual-Audit-Nachweise sind noch nicht vollständig vertraglich abgesichert.
+- Priorisierung: nach abgeschlossener Firmenabdeckung folgt jetzt die lokale Betriebs-/Audit-Härtung, weil HTML-Artefakte bereits existieren, aber Port-, Ablage- und Sichtbarkeitsvertrag noch offen sind.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis; keine Bewerbung; keine extern wirksame Aktion ohne ausdrückliche Bestätigung; keine Secrets in Reports, Logs, Todo, Handoff oder Git.
-
-## M8 - Live-Recherche und Firmenabdeckung
-
-- [ ] JA-021 Firmeninventar autonom, dedupliziert und quellenorientiert erweitern #comment: Die angehängte Anweisung verlangt langfristig möglichst vollständige Firmenabdeckung statt einer statischen Seedliste.
-  - [ ] Beschreibung: Der JobAgent kann neue relevante Unternehmen im Zielgebiet aus erlaubten Entdeckungsquellen oder gepflegten Seeds aufnehmen, Dubletten vermeiden, offizielle Website/Karriere-URL verifizieren und den Recherchefortschritt mit Scanstatus, Priorität und nächstem Schritt persistieren.
-  - [ ] Scope: Betroffen sind `src/JobAgent.CompanyInventory.psm1`, `src/JobAgent.Coverage.psm1`, `tools/Seed-JobAgentCompanies.ps1`, neue optionale Discovery-Tools, `tests/Test-JobAgentCompanyInventory.ps1`, `tests/Test-JobAgentCoverage.ps1`; No-Go: keine neue Firma ohne belastbare Quelle, keine Zusammenführung rechtlich unterschiedlicher Arbeitgeber ohne eindeutigen Beleg.
-  - [ ] Ist-Stand (2026-08-17 16:20): Es gibt einen initialen Store mit 12 Firmen und Coverage-Priorisierung; eine systematische autonome Erweiterung über Branchen, regionale Arbeitgeber, Banken, Versicherungen, Automotive, Gesundheitswesen, öffentliche Arbeitgeber und Technologieunternehmen ist noch nicht umgesetzt.
-  - [ ] Abhängigkeiten: JA-004 und JA-015 sind abgeschlossen; JA-019 ist für neue ATS-Belege relevant, aber nicht für reine Firmenseeds blockierend.
-  - [ ] Aufwand/Dauer: Aufwand L; Dauer 1-2 Arbeitstage bei 1 Agent für lokale Seed-/Discovery-Lane ohne Webvollcrawl; parallelisierbar mit JA-020.
-  - [ ] Prioritätsscore: 78/100, weil Abdeckung Trefferwahrscheinlichkeit stark erhöht, aber ohne robuste Adapter nur begrenzt sofort auswertbar ist.
-  - [ ] Ordnungsbegründung: Nach Report-, Status- und Quellenhärtung kann die Firmenbasis wachsen, ohne die Historie mit unsicheren Quellen zu verschmutzen.
-  - [ ] Risiken und Unsicherheiten: Vollständigkeit kann nicht belegt werden; Unternehmensstandorte und Karriere-URLs ändern sich; Discovery aus Sekundärquellen darf nicht als Verifikation missverstanden werden.
-  - [ ] Schritte:
-    1. Firmen-Discovery-Vertrag definieren: erlaubte Entdeckungsquelle, offizielle Website-Verifikation, Karriere-URL-Prüfung, Branche, Zielgebietsbezug, Priorität und `discovery_source`.
-    2. Deduplikation erweitern: Domain, Rechtsformvarianten, Aliasnamen, Konzern-/Tochtergesellschaften und Standortbezug testen; neue Firmen nur als neue Unternehmen im Report ausgeben.
-    3. Backlog-/Scanpriorität so anpassen, dass nie oder lange nicht untersuchte Firmen vor routinemäßigen Wiederholungen stehen und fehlerhafte Karriereportale Retry-Status behalten.
-  - [ ] Evidence: Erweiterter Firmen-Seed oder Discovery-Import mit Quellenbelegen; Store-Diff ohne Dubletten; Coverage-Report mit `never_scanned`, `stale_or_unscanned`, `without_career_url` und neuen Firmen.
-  - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1`; bei Reportauswirkung `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1`.
-  - [ ] Audit: Stichprobe neuer Firmen: offizielle Website/Karriere-URL erreichbar oder als `UNVERIFIED`/`MANUAL_REVIEW` markiert; keine Jobbörse als Primärbeleg; keine bereits bekannte Firma erscheint erneut als neue Firma.
-  - [ ] Supertest: Nach grünen Funktionstests `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1`.
-  - [ ] Meilenstein und Parallelisierung: M8; parallel mit JA-020 möglich, sofern nur Inventar- und Coverage-Dateien bearbeitet werden.
 
 ## M9 - Lokaler Betrieb, Audit und Abnahme
 

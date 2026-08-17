@@ -118,9 +118,83 @@ Assert-True -Condition ($missingCareer.document.companies[0].career_url -eq $nul
 Assert-True -Condition ($missingCareer.document.companies[0].verification_status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'Fehlende Karriere-URL hat falschen Verifikationsstatus.'
 Assert-True -Condition (@($missingCareer.document.job_sources).Count -eq 0) -Message 'Fehlende Karriere-URL darf keine JobSource erzeugen.'
 
+$discoveryImport = Import-JobAgentCompanyDiscoveryInventory -Document (New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)) -DiscoveryItems @(
+    [pscustomobject]@{
+        canonical_name = 'Discovery Hint AG'
+        official_website_url = 'https://discovery-hint.invalid/'
+        career_url = $null
+        aliases = @('Discovery Hint')
+        locations = @((New-JobAgentTargetLocation -Label 'Muenchen' -City 'Muenchen' -TargetArea 'MUNICH'))
+        industry = 'Technology'
+        scan_priority = 88
+        discovery_type = 'DISCOVERY_HINT'
+        discovery_url = 'https://directory.invalid/discovery-hint'
+        discovery_origin = 'directory.seed'
+        evidence_note = 'Sekundaerquelle fuer Discovery.'
+    },
+    [pscustomobject]@{
+        canonical_name = 'Official Only AG'
+        official_website_url = 'https://official-only.invalid/'
+        career_url = $null
+        aliases = @('Official Only')
+        locations = @((New-JobAgentTargetLocation -Label 'Freising' -City 'Freising' -TargetArea 'FREISING'))
+        industry = 'Industrial'
+        scan_priority = 74
+        discovery_type = 'OFFICIAL_WEBSITE'
+        discovery_url = 'https://official-only.invalid/'
+        discovery_origin = 'official.manual'
+        evidence_note = 'Offizielle Website ohne Karrierepfad.'
+    }
+) -ImportedAt (New-TestSeedDate) -NextScanAt (New-TestNextScanDate)
+Assert-JobAgentDocument -Document $discoveryImport.document
+$hintCompany = @($discoveryImport.document.companies | Where-Object { $_.company_id -eq 'company:discovery_hint_ag' })[0]
+$officialOnlyCompany = @($discoveryImport.document.companies | Where-Object { $_.company_id -eq 'company:official_only_ag' })[0]
+Assert-True -Condition ($hintCompany.verification_status -eq 'UNVERIFIED') -Message 'Discovery-Hinweis muss unverifiziert importiert werden.'
+Assert-True -Condition ($hintCompany.discovery_source.verification_url -eq $null) -Message 'Discovery-Hinweis darf keine verification_url vortaeuschen.'
+Assert-True -Condition ($officialOnlyCompany.verification_status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'Offizielle Website ohne Karrierepfad muss domain-verifiziert bleiben.'
+Assert-True -Condition ($officialOnlyCompany.discovery_source.verification_url -eq 'https://official-only.invalid/') -Message 'Offizielle Website ohne Karrierepfad muss Website als verification_url tragen.'
+Assert-True -Condition (@($discoveryImport.document.job_sources).Count -eq 0) -Message 'Discovery-Import ohne Karriere-URL darf keine JobSource erzeugen.'
+Assert-True -Condition (@($discoveryImport.manual_review_required | Where-Object { $_ -eq 'company:discovery_hint_ag' }).Count -eq 1) -Message 'Discovery-Hinweis muss im Manual-Review-Backlog landen.'
+
+$importProjectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-discovery-import-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $importProjectRoot -Force | Out-Null
+try {
+    $feedPath = Join-Path $importProjectRoot 'company-discovery.json'
+    [pscustomobject]@{
+        items = @(
+            [pscustomobject]@{
+                canonical_name = 'Script Import AG'
+                official_website_url = 'https://script-import.invalid/'
+                career_url = 'https://script-import.invalid/careers'
+                aliases = @('Script Import')
+                locations = @((New-JobAgentTargetLocation -Label 'Muenchen' -City 'Muenchen' -TargetArea 'MUNICH'))
+                industry = 'Technology'
+                scan_priority = 79
+                discovery_type = 'OFFICIAL_WEBSITE'
+                discovery_url = 'https://script-import.invalid/careers'
+                discovery_origin = 'official.manual'
+                evidence_note = 'Script-Import-Test.'
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $feedPath -Encoding UTF8
+    $scriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Import-JobAgentCompanyDiscovery.ps1') -ProjectRoot $importProjectRoot -FeedPath $feedPath 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Discovery-Import-Script ist fehlgeschlagen: " + ($scriptOutput -join "`n"))
+    $scriptResult = ($scriptOutput -join "`n") | ConvertFrom-Json -Depth 20
+    $scriptStore = Read-JobAgentStore -ProjectRoot $importProjectRoot
+    Assert-True -Condition (@($scriptStore.companies | Where-Object { $_.company_id -eq 'company:script_import_ag' }).Count -eq 1) -Message 'Discovery-Import-Script persistiert die Firma nicht.'
+    Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:script_import_ag' }).Count -eq 1) -Message 'Discovery-Import-Script erzeugt keine offizielle Karrierequelle.'
+    Assert-True -Condition (@($scriptResult.added_company_ids | Where-Object { $_ -eq 'company:script_import_ag' }).Count -eq 1) -Message 'Discovery-Import-Script meldet neue Firma nicht als hinzugefuegt.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Discovery-Import-Script schreibt kein Logartefakt.'
+}
+finally {
+    if (Test-Path -LiteralPath $importProjectRoot) {
+        Remove-Item -LiteralPath $importProjectRoot -Recurse -Force
+    }
+}
+
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'discovery_import_script')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4
