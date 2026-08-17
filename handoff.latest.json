@@ -1,29 +1,31 @@
 {
-  "ts": "2026-08-17T15:05:00+02:00",
-  "agent_id": "codex-20260817-ja010",
+  "ts": "2026-08-17T14:58:54+02:00",
+  "agent_id": "codex-20260817-ja010-final",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "JA-010 ist abgeschlossen; JA-011 Recherchebericht-Renderer ist der naechste Einstieg.",
-  "summary": "JA-010 implementiert den deterministischen Daily-Run-Orchestrator mit Firmenpriorisierung, isolierten Adapterfehlern, Klassifikation, Statusmaschine, atomarer Persistenz, Fixture-CLI und JSON-Laufartefakt.",
+  "goal": "Neuen Chat bei TD-0009 / JA-011 fortsetzen.",
+  "summary": "JA-010 ist abgeschlossen, archiviert, getestet und gepusht. Der Daily-Run-Orchestrator ist implementiert; naechster fachlicher Schritt ist der Recherchebericht-Renderer JA-011.",
+  "completed": [
+    "JA-010 Deterministischen Daily-Run-Orchestrator implementieren",
+    "Roadmap-Rotation: JA-010 aus Roadmap.md nach Roadmap_archive.md verschoben",
+    "Todo-Rotation: TD-0008 erledigt, TD-0009 offen"
+  ],
   "changed": [
-    ".ci/pins/immutable.hashes.json",
-    ".ci/pins/immutable.snapshot/Roadmap.md",
-    "Roadmap.md",
-    "Roadmap_archive.md",
-    "docs/data-model.md",
-    "handoff.latest.json",
-    "handoff.latest.md",
     "src/JobAgent.DailyRun.psm1",
     "tools/Invoke-JobAgentDailyRun.ps1",
     "tests/Test-JobAgentDailyRun.ps1",
     "tests/Test-JobAgentSupertest.ps1",
+    "docs/data-model.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
     "todo.current.md",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
+    "todo.state.json",
     "todo.master.index.json",
-    "todo.state.json"
+    "todo.history.digest.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
   "verified": [
     {
@@ -53,67 +55,65 @@
       "status": 200
     },
     {
-      "cmd": ".\\ci.cmd repin-immutables",
-      "exit": 0
-    },
-    {
       "cmd": ".\\ci.cmd stp",
       "exit": 0
     }
   ],
-  "route_ok": null,
-  "route_violations": [],
+  "next": "TD-0009 / JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
+  "next_details": [
+    "Neues Report-Modul anlegen, z.B. src/JobAgent.Report.psm1.",
+    "Markdown- und optional JSON-Renderer aus Store + ScanRun + ChangeEvents bauen.",
+    "Abschnitte: neue passende Stellen, aktive passende Stellen, Aenderungen, entfernte/geschlossene Stellen, neue Unternehmen, Statistik.",
+    "A/B/C-Priorisierung aus classification.priority, Score, Gruenden, Standort, Arbeitsmodell und Bewerbungsrelevanz erklaeren.",
+    "Unveraenderte bekannte Stellen nicht erneut als neue Treffer rendern; nur kompakt unter aktiv auffuehren.",
+    "Funktionstest erstellen, z.B. tests/Test-JobAgentReport.ps1, mit leeren Ergebnissen, neuen Stellen, Updates, entfernten Stellen und fehlenden optionalen Feldern.",
+    "Nach gruenem Funktionstest Report-Test in tests/Test-JobAgentSupertest.ps1 aufnehmen."
+  ],
+  "known_notes": [
+    "Funktionstests bleiben mock-/fixture-basiert; keine Live-Webrecherche fuer JA-011.",
+    "Devserver laeuft nach Projektkonfiguration auf http://localhost:8300/, nicht 8090.",
+    "SonarQube ist auf http://localhost:9000 UP; .\\ci.cmd sonar-start ist im JobAgent-Repo weiterhin nicht nutzbar, weil lokales sonar.cmd fehlt."
+  ],
   "git": {
     "branch": "master",
     "upstream": "origin/master",
-    "head": "finaler Commit, siehe git rev-parse --short HEAD",
-    "worktree": "clean_after_commit"
+    "final_commit": "nach finalem Commit per git rev-parse --short HEAD pruefen",
+    "pushed": false
   },
-  "next": "TD-0009 / JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
   "refs": [
-    "todo.current.md",
-    "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.json",
-    "handoff.latest.md",
     "Roadmap.md",
     "Roadmap_archive.md",
+    "todo.current.md",
+    "todo.state.json",
+    "handoff.latest.md",
+    "handoff.latest.json",
     "src/JobAgent.DailyRun.psm1",
     "tools/Invoke-JobAgentDailyRun.ps1",
-    "tests/Test-JobAgentDailyRun.ps1"
-  ],
-  "manual_missing": false,
-  "env_inventory_missing": false,
-  "env_inventory_used": false,
-  "notes": [
-    "Devserver laeuft gemaess .ci\\ci.config.json auf http://localhost:8300/; die Nutzerangabe 8090 weicht von der Projektkonfiguration ab.",
-    "SonarQube wurde ueber die vorhandene WSL-Installation gestartet; .\\ci.cmd sonar-start bleibt im JobAgent-Repo blockiert, weil ein lokales sonar.cmd fehlt."
+    "tests/Test-JobAgentDailyRun.ps1",
+    "docs/data-model.md"
   ],
   "capsule": {
-    "ts": "2026-08-17T15:05:00+02:00",
-    "agent_id": "codex-20260817-ja010",
+    "ts": "2026-08-17T14:58:54+02:00",
+    "agent_id": "codex-20260817-ja010-final",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
     "active_id": "",
     "status": "open",
-    "goal": "JA-010 ist abgeschlossen; JA-011 Recherchebericht-Renderer ist der naechste Einstieg.",
+    "goal": "Neuen Chat bei TD-0009 / JA-011 fortsetzen.",
     "changed": [
-      ".ci/pins/immutable.hashes.json",
-      ".ci/pins/immutable.snapshot/Roadmap.md",
-      "Roadmap.md",
-      "Roadmap_archive.md",
-      "docs/data-model.md",
-      "handoff.latest.json",
-      "handoff.latest.md",
       "src/JobAgent.DailyRun.psm1",
       "tools/Invoke-JobAgentDailyRun.ps1",
       "tests/Test-JobAgentDailyRun.ps1",
       "tests/Test-JobAgentSupertest.ps1",
+      "docs/data-model.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
       "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
+      "todo.state.json",
       "todo.master.index.json",
-      "todo.state.json"
+      "todo.history.digest.json",
+      "handoff.latest.md",
+      "handoff.latest.json"
     ],
     "verified": [
       {
@@ -143,10 +143,6 @@
         "status": 200
       },
       {
-        "cmd": ".\\ci.cmd repin-immutables",
-        "exit": 0
-      },
-      {
         "cmd": ".\\ci.cmd stp",
         "exit": 0
       }
@@ -156,21 +152,21 @@
     "git": {
       "branch": "master",
       "upstream": "origin/master",
-      "head": "finaler Commit, siehe git rev-parse --short HEAD",
-      "worktree": "clean_after_commit"
+      "final_commit": "nach finalem Commit per git rev-parse --short HEAD pruefen",
+      "pushed": false
     },
     "next": "TD-0009 / JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
     "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.json",
-      "handoff.latest.md",
       "Roadmap.md",
       "Roadmap_archive.md",
+      "todo.current.md",
+      "todo.state.json",
+      "handoff.latest.md",
+      "handoff.latest.json",
       "src/JobAgent.DailyRun.psm1",
       "tools/Invoke-JobAgentDailyRun.ps1",
-      "tests/Test-JobAgentDailyRun.ps1"
+      "tests/Test-JobAgentDailyRun.ps1",
+      "docs/data-model.md"
     ],
     "manual_missing": false,
     "env_inventory_missing": false,
