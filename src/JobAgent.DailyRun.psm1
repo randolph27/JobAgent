@@ -4,6 +4,7 @@ Set-StrictMode -Version 3.0
 
 Import-Module (Join-Path $PSScriptRoot 'JobAgent.Classification.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot 'JobAgent.Persistence.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $PSScriptRoot 'JobAgent.Report.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot 'JobAgent.SourceAdapters.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $PSScriptRoot 'JobAgent.StatusMachine.psm1') -Force -DisableNameChecking
 
@@ -262,6 +263,25 @@ function Write-JobAgentDailyRunReport {
     return $path
 }
 
+function Write-JobAgentDailyRunMarkdownReport {
+    param(
+        [Parameter(Mandatory)][string]$ProjectRoot,
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter(Mandatory)][string]$ScanRunId,
+        [Parameter(Mandatory)][string]$ReportPath
+    )
+
+    $path = if ([IO.Path]::IsPathRooted($ReportPath)) {
+        $ReportPath
+    }
+    else {
+        Join-Path $ProjectRoot $ReportPath
+    }
+    $report = New-JobAgentDailyReport -Document $Document -ScanRunId $ScanRunId
+    Write-JobAgentDailyAtomicFile -Path $path -Content (ConvertTo-JobAgentDailyReportMarkdown -Report $report)
+    return $path
+}
+
 function Write-JobAgentDailyAtomicFile {
     param(
         [Parameter(Mandatory)][string]$Path,
@@ -302,6 +322,7 @@ function Invoke-JobAgentDailyRun {
     $projectRootFull = Resolve-JobAgentStoreRoot -RootPath $ProjectRoot
     $scanRunId = New-JobAgentDailyRunId -StartedAt $StartedAt
     $reportRelativePath = 'logs/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.json'
+    $markdownReportRelativePath = 'logs/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.md'
     $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootFull -DataRoot $DataRoot
     try {
         $document = Read-JobAgentStore -ProjectRoot $projectRootFull -DataRoot $DataRoot
@@ -341,7 +362,7 @@ function Invoke-JobAgentDailyRun {
             finished_at = ConvertTo-JobAgentDailyIso -Value $finishedAt
             status = Get-JobAgentDailyRunStatus -AdapterResults $resultsArray
             company_ids = @($companies.company_id)
-            artifact_paths = @($reportRelativePath)
+            artifact_paths = @($reportRelativePath, $markdownReportRelativePath)
             errors = @($resultsArray | Where-Object { [string]$_.status -eq 'FAILED' } | ForEach-Object { $_.error_class })
         }
         $document = Upsert-JobAgentScanRun -Document $document -ScanRun $scanRun
@@ -349,13 +370,16 @@ function Invoke-JobAgentDailyRun {
 
         $summary = New-JobAgentDailyRunSummary -Document $document -ScanRunId $scanRunId -AdapterResults $resultsArray -ReportPath $reportRelativePath -StartedAt $StartedAt -FinishedAt $finishedAt
         $reportPath = Write-JobAgentDailyRunReport -ProjectRoot $projectRootFull -Summary $summary
+        $markdownReportPath = Write-JobAgentDailyRunMarkdownReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $markdownReportRelativePath
         $summary.report_path = $reportPath
+        $summary | Add-Member -NotePropertyName markdown_report_path -NotePropertyValue $markdownReportPath -Force
 
         [pscustomobject]@{
             scan_run_id = $scanRunId
             status = $summary.status
             store_path = $storePath
             report_path = $reportPath
+            markdown_report_path = $markdownReportPath
             summary = $summary
             document = $document
         }

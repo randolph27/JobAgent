@@ -317,6 +317,23 @@ Funktionstest:
 pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1
 ```
 
+## Recherchebericht
+
+`src/JobAgent.Report.psm1` implementiert den Berichtvertrag fuer `JA-011`.
+
+- `New-JobAgentDailyReport` erzeugt aus Store-Dokument und `scan_run_id` einen strukturierten Report mit neuen passenden Stellen, unveraenderten aktiven passenden Stellen, geaenderten Stellen, geschlossenen oder entfernten Stellen, neuen Unternehmen und Recherche-Statistik.
+- Passende Stellen sind nur Klassifikationen mit `MATCH` oder `POSSIBLE` und Prioritaet `A`, `B` oder `C`; abgelehnte oder unbewertete Rollen werden nicht als passende Treffer gerendert.
+- `ConvertTo-JobAgentDailyReportMarkdown` rendert den Bericht als Markdown mit offizieller URL, A/B/C-Prioritaet, Score, Standort, Arbeitsmodell, Beschaeftigungsart, Klassifikationsgruenden und Anforderungen.
+- Fehlende optionale Werte bleiben `UNKNOWN`; der Renderer erfindet keine Standorte, Anforderungen, Gehaelter oder Verifikationsaussagen.
+- Unveraenderte bekannte Stellen erscheinen nicht erneut als neue Treffer, sondern kompakt unter aktiven passenden Stellen.
+- `Invoke-JobAgentDailyRun` schreibt weiterhin das JSON-Laufartefakt und zusaetzlich einen Markdown-Bericht unter `logs/jobagent/daily-run-<timestamp>.md`.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentReport.ps1
+```
+
 ## Beispiel: gültiger Mindestbestand
 
 ```json

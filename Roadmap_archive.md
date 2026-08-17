@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-011 Ausgabeformat und Priorisierung A/B/C für Rechercheberichte umsetzen #comment: Ergebnisse müssen kompakt, differenziert und ohne redundante Wiederholung bekannter unveränderter Stellen nutzbar sein.
+  - [x] Beschreibung: `src/JobAgent.Report.psm1` erzeugt pro Daily-Run einen strukturierten Bericht mit neuen passenden Stellen, aktiven passenden Stellen, Änderungen, geschlossenen/entfernten Stellen, neuen Unternehmen, Recherche-Statistik und A/B/C-Priorisierung.
+  - [x] Scope: Erstellt wurden `src/JobAgent.Report.psm1` und `tests/Test-JobAgentReport.ps1`; erweitert wurden `src/JobAgent.DailyRun.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Bewerbung, keine Kontaktaufnahme, keine externen Schreibaktionen und keine Live-Webrecherche.
+  - [x] Ist-Stand (2026-08-17 15:35): Daily-Run schreibt weiterhin JSON-Laufartefakte und zusätzlich Markdown-Berichte unter `logs/jobagent/daily-run-<timestamp>.md`; der Renderer trennt neue, aktive, geänderte und entfernte passende Stellen und erklärt die Priorisierung.
+  - [x] Abhängigkeiten: JA-007, JA-008, JA-009 und JA-010 sind abgeschlossen.
+  - [x] Aufwand/Dauer: Aufwand M, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 68/100, weil nutzbare Berichte erst nach korrekter Klassifikation, Deduplikation, Statusmaschine und Daily-Run sinnvoll sind.
+  - [x] Risiken: Reportqualität hängt weiter von Klassifikationssignalen und offiziellen Quellen ab; fehlende optionale Werte werden bewusst als `UNKNOWN` gerendert, statt sie zu ergänzen.
+  - [x] Schritte:
+    1. Berichtabschnitte für neue passende Stellen, aktive passende Stellen, Änderungen, geschlossene/entfernte Stellen, neue Unternehmen und Recherche-Statistik implementiert.
+    2. A/B/C-Erklärung aus Priorität, Klassifikationsergebnis, Score, Gründen, Standort, Arbeitsmodell, Beschäftigungsart und Anforderungen umgesetzt.
+    3. Daily-Run-Integration ergänzt, sodass unveränderte bekannte Stellen nicht erneut als neue Treffer erscheinen, sondern kompakt unter aktiven Stellen stehen.
+  - [x] Evidence: `src/JobAgent.Report.psm1`, `tests/Test-JobAgentReport.ps1`, `src/JobAgent.DailyRun.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentSupertest.ps1`, `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0.
+  - [x] Audit: Funktionstest deckt leere Ergebnisse, neue Stellen, aktive unveränderte Stellen, Änderungen, entfernte Stellen, neue Unternehmen, fehlende optionale Felder als `UNKNOWN`, A/B/C-Begründung und Ausschluss abgelehnter Rollen ab.
+  - [x] Supertest: `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` -> Exit 0.
+
 - [x] JA-010 Deterministischen Daily-Run-Orchestrator implementieren #comment: Der tägliche Rechercheprozess braucht eine klare Reihenfolge, Retry-Logik, begrenzbare Laufzeit und reproduzierbare Nachweise.
   - [x] Beschreibung: Implementiere einen Orchestrator, der Zustand lädt, Firmen priorisiert, Adapter ausführt, Jobs klassifiziert, Historie aktualisiert, Ergebnis erzeugt und Fehler einzelner Portale isoliert protokolliert.
   - [x] Scope: CLI-Command z.B. `daily-run`, Priorisierungslogik, Scanbudget, Logging, Tests mit Mock-Adaptern; keine unbegrenzten Browser-/Netzwerkprozesse.

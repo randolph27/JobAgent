@@ -67,6 +67,7 @@ $result = Invoke-JobAgentDailyRun `
     scan_run_id = $result.scan_run_id
     store_path = $result.store_path
     report_path = $result.report_path
+    markdown_report_path = $result.markdown_report_path
     statistics = $result.summary.statistics
 } | ConvertTo-Json -Depth 20
 

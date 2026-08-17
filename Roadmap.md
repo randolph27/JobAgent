@@ -9,23 +9,6 @@
 
 ## M4 - Daily-Run, Ausgabe und Automatisierung
 
-- [ ] JA-011 Ausgabeformat und Priorisierung A/B/C für Rechercheberichte umsetzen #comment: Ergebnisse müssen kompakt, differenziert und ohne redundante Wiederholung bekannter unveränderter Stellen nutzbar sein.
-  - [ ] Beschreibung: Erzeuge pro Daily-Run einen strukturierten Bericht mit neuen passenden Stellen, aktiven passenden Stellen, Änderungen, geschlossenen/entfernten Stellen, neuen Unternehmen, Recherche-Statistik und A/B/C-Priorisierung.
-  - [ ] Scope: Report-Renderer für Markdown und optional JSON, Bewertungserklärung, Snapshot-Verlinkung; keine Bewerbung, keine Kontaktaufnahme, keine externen Schreibaktionen.
-  - [ ] Ist-Stand (2026-08-17 12:20): Kein fachlicher Daily-Run-Report vorhanden.
-  - [ ] Abhängigkeiten: JA-007, JA-008, JA-009, JA-010.
-  - [ ] Aufwand/Dauer: Aufwand M, Dauer 1-2 PT; parallelisierbar mit Scheduler erst nach stabiler Daily-Run-Ausgabe.
-  - [ ] Prioritätsscore: 68/100, weil ein nutzbarer Bericht erst nach korrekter Datenlogik sinnvoll ist.
-  - [ ] Risiken: Zu ausführliche aktive Stellen erzeugen Rauschen; zu knappe geänderte Stellen verlieren Nachvollziehbarkeit.
-  - [ ] Schritte:
-    1. Implementiere Berichtabschnitte exakt nach Auftrag: neue Stellen, aktive Stellen, Änderungen, geschlossene/entfernte Stellen, neue Unternehmen, Statistik und Priorisierung.
-    2. Implementiere A/B/C-Bewertung anhand fachlicher Passung, Führungsverantwortung, Unternehmensrelevanz, Standort, Arbeitsmodell, strategischer Verantwortung, Anforderungen und Bewerbungsrelevanz.
-    3. Stelle sicher, dass unveränderte bekannte Stellen nicht erneut vollständig als neue Treffer erscheinen, aber kompakt unter aktiven Stellen auffindbar bleiben.
-  - [ ] Evidence: Beispielbericht aus Mock-Daten mit mindestens einem Eintrag je Abschnitt; JSON-Report optional maschinenlesbar.
-  - [ ] Funktionstest: Renderer-Tests für leere Ergebnisse, nur neue Stellen, nur Änderungen, geschlossene Stellen, fehlende optionale Felder und A/B/C-Begründung.
-  - [ ] Audit: Manuell prüfen, dass jeder verifizierte Treffer eine offizielle URL enthält und unsichere Werte als `UNKNOWN` oder unklar markiert sind.
-  - [ ] Supertest: Berichtsgenerierung mit Mock-Daily-Run in Supertest aufnehmen.
-
 - [ ] JA-012 Lokalen Scheduler- und Betriebsmodus für tägliche Läufe dokumentieren und absichern #comment: Der Agent soll täglich laufen, ohne den Zustand vorheriger Läufe zu verlieren oder parallele Läufe zu starten.
   - [ ] Beschreibung: Definiere und implementiere einen sicheren lokalen Betriebsmodus für tägliche Ausführung mit Locking, Logrotation, Exitcodes, Retry-Hinweisen und klarer Bedienung über `.\ci.cmd`.
   - [ ] Scope: CI-Command-Integration, Scheduler-Dokumentation, Lock-/Statusdateien, Tests; keine Einrichtung eines externen Cloud-Dienstes ohne separaten Auftrag.

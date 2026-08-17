@@ -1,39 +1,44 @@
 {
-  "ts": "2026-08-17T14:58:54+02:00",
-  "agent_id": "codex-20260817-ja010-final",
+  "ts": "2026-08-17T15:45:00+02:00",
+  "agent_id": "codex-20260817-ja011-final",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "Neuen Chat bei TD-0009 / JA-011 fortsetzen.",
-  "summary": "JA-010 ist abgeschlossen, archiviert, getestet und gepusht. Der Daily-Run-Orchestrator ist implementiert; naechster fachlicher Schritt ist der Recherchebericht-Renderer JA-011.",
+  "goal": "Neuen Chat bei TD-0010 / JA-012 fortsetzen.",
+  "summary": "JA-011 ist abgeschlossen, archiviert und getestet. Der Recherchebericht-Renderer erzeugt strukturierte Reports und Markdown-Ausgaben mit A/B/C-Erklaerung; STP wurde ausgefuehrt. Naechster fachlicher Schritt ist der lokale Scheduler- und Betriebsmodus JA-012.",
   "completed": [
-    "JA-010 Deterministischen Daily-Run-Orchestrator implementieren",
-    "Roadmap-Rotation: JA-010 aus Roadmap.md nach Roadmap_archive.md verschoben",
-    "Todo-Rotation: TD-0008 erledigt, TD-0009 offen"
+    "JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
+    "Roadmap-Rotation: JA-011 aus Roadmap.md nach Roadmap_archive.md verschoben",
+    "Todo-Rotation: TD-0009 erledigt, TD-0010 offen",
+    ".\\ci.cmd stp ausgefuehrt"
   ],
   "changed": [
-    "src/JobAgent.DailyRun.psm1",
-    "tools/Invoke-JobAgentDailyRun.ps1",
-    "tests/Test-JobAgentDailyRun.ps1",
-    "tests/Test-JobAgentSupertest.ps1",
-    "docs/data-model.md",
     "Roadmap.md",
     "Roadmap_archive.md",
-    "todo.current.md",
-    "todo.state.json",
-    "todo.master.index.json",
-    "todo.history.digest.json",
+    "Roadmap_index.md",
+    "docs/data-model.md",
     "handoff.latest.md",
-    "handoff.latest.json"
+    "handoff.latest.json",
+    "src/JobAgent.DailyRun.psm1",
+    "src/JobAgent.Report.psm1",
+    "tests/Test-JobAgentDailyRun.ps1",
+    "tests/Test-JobAgentReport.ps1",
+    "tests/Test-JobAgentSupertest.ps1",
+    "todo.current.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "tools/Invoke-JobAgentDailyRun.ps1"
   ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
       "exit": 0
     },
     {
@@ -59,25 +64,26 @@
       "exit": 0
     }
   ],
-  "next": "TD-0009 / JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
+  "stp_note": ".\\ci.cmd stp schreibt aus einem alten Verify-Digest weiterhin .\\ci.cmd supertest -> Exit 1 in seine CAPSULE. Der aktuelle fachliche Supertest pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1 ist gruen.",
+  "next": "TD-0010 / JA-012 Lokalen Scheduler- und Betriebsmodus fuer taegliche Laeufe dokumentieren und absichern",
   "next_details": [
-    "Neues Report-Modul anlegen, z.B. src/JobAgent.Report.psm1.",
-    "Markdown- und optional JSON-Renderer aus Store + ScanRun + ChangeEvents bauen.",
-    "Abschnitte: neue passende Stellen, aktive passende Stellen, Aenderungen, entfernte/geschlossene Stellen, neue Unternehmen, Statistik.",
-    "A/B/C-Priorisierung aus classification.priority, Score, Gruenden, Standort, Arbeitsmodell und Bewerbungsrelevanz erklaeren.",
-    "Unveraenderte bekannte Stellen nicht erneut als neue Treffer rendern; nur kompakt unter aktiv auffuehren.",
-    "Funktionstest erstellen, z.B. tests/Test-JobAgentReport.ps1, mit leeren Ergebnissen, neuen Stellen, Updates, entfernten Stellen und fehlenden optionalen Feldern.",
-    "Nach gruenem Funktionstest Report-Test in tests/Test-JobAgentSupertest.ps1 aufnehmen."
+    "Bestehende CI-/CLI-Struktur pruefen: ci.cmd, Runtime-Commandrouter, tools/Invoke-JobAgentDailyRun.ps1, Locking aus src/JobAgent.Persistence.psm1.",
+    "Einen sicheren lokalen Betriebsmodus fuer daily-run und daily-run-status ueber .\\ci.cmd entwerfen und implementieren.",
+    "Status-/Lockdateien unter logs/jobagent/ oder data/jobagent/ so modellieren, dass parallele Starts blockiert und letzte Ergebnisse nachvollziehbar bleiben.",
+    "Logrotation fuer Daily-Run-Logs und Statusabfrage mit Mock-Laeufen testen.",
+    "Windows Task Scheduler Dokumentation mit Arbeitsverzeichnis D:\\_Scripte\\JobAgent, Kommando, Zeitplan, Umgebungsannahmen, Exitcodes und Re-Run-Regeln erstellen.",
+    "Supertest erst nach gruenen fokussierten JA-012-Funktionstests aktualisieren oder ausfuehren."
   ],
   "known_notes": [
-    "Funktionstests bleiben mock-/fixture-basiert; keine Live-Webrecherche fuer JA-011.",
+    "Funktionstests bleiben mock-/fixture-basiert; keine Live-Webrecherche fuer JA-012.",
+    "Live-Webrecherche ist erst JA-014.",
+    "Keine produktiven Bewerbungen, keine Kontaktaufnahme, keine externen Schreibaktionen.",
     "Devserver laeuft nach Projektkonfiguration auf http://localhost:8300/, nicht 8090.",
-    "SonarQube ist auf http://localhost:9000 UP; .\\ci.cmd sonar-start ist im JobAgent-Repo weiterhin nicht nutzbar, weil lokales sonar.cmd fehlt."
+    "SonarQube ist auf http://localhost:9000 UP; lokales sonar.cmd fehlt im JobAgent-Repo weiterhin."
   ],
   "git": {
     "branch": "master",
     "upstream": "origin/master",
-    "final_commit": "nach finalem Commit per git rev-parse --short HEAD pruefen",
     "pushed": false
   },
   "refs": [
@@ -87,41 +93,46 @@
     "todo.state.json",
     "handoff.latest.md",
     "handoff.latest.json",
+    "src/JobAgent.Report.psm1",
     "src/JobAgent.DailyRun.psm1",
-    "tools/Invoke-JobAgentDailyRun.ps1",
+    "tests/Test-JobAgentReport.ps1",
     "tests/Test-JobAgentDailyRun.ps1",
     "docs/data-model.md"
   ],
   "capsule": {
-    "ts": "2026-08-17T14:58:54+02:00",
-    "agent_id": "codex-20260817-ja010-final",
+    "ts": "2026-08-17T15:45:00+02:00",
+    "agent_id": "codex-20260817-ja011-final",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
     "active_id": "",
     "status": "open",
-    "goal": "Neuen Chat bei TD-0009 / JA-011 fortsetzen.",
+    "goal": "Neuen Chat bei TD-0010 / JA-012 fortsetzen.",
     "changed": [
-      "src/JobAgent.DailyRun.psm1",
-      "tools/Invoke-JobAgentDailyRun.ps1",
-      "tests/Test-JobAgentDailyRun.ps1",
-      "tests/Test-JobAgentSupertest.ps1",
-      "docs/data-model.md",
       "Roadmap.md",
       "Roadmap_archive.md",
-      "todo.current.md",
-      "todo.state.json",
-      "todo.master.index.json",
-      "todo.history.digest.json",
+      "Roadmap_index.md",
+      "docs/data-model.md",
       "handoff.latest.md",
-      "handoff.latest.json"
+      "handoff.latest.json",
+      "src/JobAgent.DailyRun.psm1",
+      "src/JobAgent.Report.psm1",
+      "tests/Test-JobAgentDailyRun.ps1",
+      "tests/Test-JobAgentReport.ps1",
+      "tests/Test-JobAgentSupertest.ps1",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Invoke-JobAgentDailyRun.ps1"
     ],
     "verified": [
       {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
         "exit": 0
       },
       {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
         "exit": 0
       },
       {
@@ -152,10 +163,9 @@
     "git": {
       "branch": "master",
       "upstream": "origin/master",
-      "final_commit": "nach finalem Commit per git rev-parse --short HEAD pruefen",
       "pushed": false
     },
-    "next": "TD-0009 / JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
+    "next": "TD-0010 / JA-012 Lokalen Scheduler- und Betriebsmodus fuer taegliche Laeufe dokumentieren und absichern",
     "refs": [
       "Roadmap.md",
       "Roadmap_archive.md",
@@ -163,8 +173,9 @@
       "todo.state.json",
       "handoff.latest.md",
       "handoff.latest.json",
+      "src/JobAgent.Report.psm1",
       "src/JobAgent.DailyRun.psm1",
-      "tools/Invoke-JobAgentDailyRun.ps1",
+      "tests/Test-JobAgentReport.ps1",
       "tests/Test-JobAgentDailyRun.ps1",
       "docs/data-model.md"
     ],

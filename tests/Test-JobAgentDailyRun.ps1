@@ -110,6 +110,7 @@ try {
     $first = Invoke-JobAgentDailyRun -ProjectRoot $projectRoot -AdapterResolver $adapter -StartedAt ([datetime]'2026-08-17T10:00:00Z') -MaxCompanies 3
     Assert-True -Condition ($first.status -eq 'PARTIAL') -Message 'Daily-Run mit isoliertem Firmenfehler muss PARTIAL sein.'
     Assert-True -Condition (Test-Path -LiteralPath $first.report_path) -Message 'Daily-Run-Report wurde nicht geschrieben.'
+    Assert-True -Condition (Test-Path -LiteralPath $first.markdown_report_path) -Message 'Daily-Run-Markdown-Report wurde nicht geschrieben.'
     Assert-True -Condition (@($first.document.scan_runs).Count -eq 1) -Message 'ScanRun wurde nicht persistiert.'
     Assert-True -Condition (@($first.document.scan_attempts).Count -eq 3) -Message 'Nicht alle ScanAttempts wurden persistiert.'
     Assert-True -Condition (@($first.document.jobs).Count -eq 2) -Message 'Erfolgreiche Firmen haben keine Jobs erzeugt.'
@@ -127,6 +128,9 @@ try {
     $report = Get-Content -LiteralPath $second.report_path -Raw | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($report.statistics.companies_scanned -eq 3) -Message 'Report enthaelt falsche Firmenanzahl.'
     Assert-True -Condition ($report.statistics.snapshots -eq 2) -Message 'Report enthaelt falsche Snapshot-Anzahl.'
+    $markdownReport = Get-Content -LiteralPath $second.markdown_report_path -Raw
+    Assert-True -Condition ($markdownReport.Contains('## Aktive passende Stellen')) -Message 'Markdown-Report enthaelt keine aktiven passenden Stellen.'
+    Assert-True -Condition ($markdownReport.Contains('https://alpha.example.invalid/careers/head-it-100')) -Message 'Markdown-Report enthaelt keine offizielle URL.'
 
     $cliProjectRoot = New-TestProjectRoot
     New-TestStore -ProjectRoot $cliProjectRoot
@@ -159,6 +163,7 @@ try {
         cases = @(
             'daily_run_partial_with_isolated_company_error',
             'daily_run_persists_scan_run_attempts_jobs_and_report',
+            'daily_run_writes_markdown_report',
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
             'daily_run_cli_fixture_mode'
