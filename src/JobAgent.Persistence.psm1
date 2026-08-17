@@ -135,6 +135,9 @@ function Assert-JobAgentDocument {
         if ([string]::IsNullOrWhiteSpace([string]$job.official_url)) {
             throw "Job ohne official_url: $($job.job_id)"
         }
+        if ($job.PSObject.Properties.Name -notcontains 'alternative_official_urls') {
+            throw "Job ohne alternative_official_urls: $($job.job_id)"
+        }
         if ([string]::IsNullOrWhiteSpace([string]$job.source_id)) {
             throw "Job ohne source_id: $($job.job_id)"
         }

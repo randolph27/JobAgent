@@ -67,6 +67,7 @@ function New-ValidJobAgentDocument {
                 job_id = 'job:example_ag_head_it_123'
                 company_id = 'company:example_ag'
                 official_url = 'https://example.invalid/careers/head-it-123'
+                alternative_official_urls = @('https://jobs.example.invalid/job/123')
                 source_id = 'source:example_ag_career'
                 external_job_id = '123'
                 ats_job_id = 'UNKNOWN'
@@ -211,11 +212,16 @@ function Test-JobAgentDocument {
     }
 
     foreach ($job in @($Document.jobs)) {
-        foreach ($property in @('job_id', 'company_id', 'official_url', 'source_id', 'external_job_id', 'ats_job_id', 'title', 'location', 'work_model', 'employment_type', 'status', 'first_seen', 'last_seen', 'changed_at', 'classification', 'priority', 'requirements', 'salary', 'identity_basis')) {
+        foreach ($property in @('job_id', 'company_id', 'official_url', 'alternative_official_urls', 'source_id', 'external_job_id', 'ats_job_id', 'title', 'location', 'work_model', 'employment_type', 'status', 'first_seen', 'last_seen', 'changed_at', 'classification', 'priority', 'requirements', 'salary', 'identity_basis')) {
             Assert-RequiredProperty -Object $job -Property $property -Context 'job'
         }
         Assert-True -Condition ($job.job_id -match '^job:') -Message 'job_id braucht Prefix job:.'
         Assert-True -Condition (Test-UriValue $job.official_url) -Message 'official_url ist keine absolute URL.'
+        if ($job.PSObject.Properties.Name -contains 'alternative_official_urls') {
+            foreach ($alternativeUrl in @($job.alternative_official_urls)) {
+                Assert-True -Condition (Test-UriValue $alternativeUrl) -Message 'alternative_official_urls enthaelt keine absolute URL.'
+            }
+        }
         Assert-True -Condition (@('NEW', 'ACTIVE', 'UPDATED', 'CLOSED', 'REMOVED', 'INVALID') -contains $job.status) -Message "Ungueltiger Jobstatus $($job.status)."
         Assert-True -Condition (($job.external_job_id -ne 'UNKNOWN') -or ($job.ats_job_id -ne 'UNKNOWN') -or ($job.identity_basis -eq 'CANONICAL_URL')) -Message 'Job braucht eine stabile Identitaetsgrundlage.'
     }

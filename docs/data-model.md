@@ -112,6 +112,7 @@ Pflichtfelder:
 - `job_id`: stabile ID im Format `job:<wert>`.
 - `company_id`: Referenz auf `Company`.
 - `official_url`: offizielle Detail- oder ATS-URL; ohne dieses Feld ist ein Treffer ungültig.
+- `alternative_official_urls`: weitere verifizierte offizielle Detail-/ATS-URLs derselben Stelle; Aggregatoren und unverifizierte Drittquellen werden nicht gespeichert.
 - `source_id`: Referenz auf den offiziellen Beleg.
 - `external_job_id`, `ats_job_id`: offizielle oder ATS-ID, sonst `UNKNOWN`.
 - `title`, `location`, `work_model`, `employment_type`.
@@ -127,6 +128,26 @@ Identitätspriorität:
 4. `COMPOSITE_FINGERPRINT`
 
 Eine bekannte unveränderte Stelle darf in späteren Läufen nicht erneut als `NEW` erscheinen.
+
+## Quellenverifikation und URL-Kanonisierung
+
+`src/JobAgent.SourceVerification.psm1` implementiert den Vertrag fuer `JA-006`.
+
+- `ConvertTo-JobAgentCanonicalUrl` normalisiert Schema/Host, entfernt Fragmente, trailing Slash, Tracking- und Sessionparameter, erhaelt aber jobrelevante Parameter wie `jobId`.
+- `Get-JobAgentOfficialSourceEvaluation` bewertet URLs anhand der Firmendomain, der expliziten Karriere-URL und firmengebundener ATS-Domains aus `Company.ats`.
+- `New-JobAgentVerifiedJobSource` erzeugt nur offizielle `JobSource`-Objekte; nicht-offizielle URLs schlagen fail-closed fehl.
+- `Resolve-JobAgentOfficialJobUrl` liefert eine primaere offizielle URL und filtert alternative offizielle URLs.
+
+Abgelehnte Primaerquellen:
+
+- StepStone
+- Indeed
+- LinkedIn
+- XING
+- Kununu
+- Glassdoor
+
+Nicht verifizierbare Quellen erhalten `UNVERIFIED`; bekannte Aggregatoren erhalten `INVALID`. Beide duerfen nicht als Treffer gespeichert werden.
 
 ## ScanRun
 
@@ -262,6 +283,7 @@ Jedes Event enthält alten und neuen Status, geänderte Felder und eine Begründ
       "job_id": "job:example_ag_head_it_123",
       "company_id": "company:example_ag",
       "official_url": "https://example.invalid/careers/head-it-123",
+      "alternative_official_urls": [],
       "source_id": "source:example_ag_career",
       "external_job_id": "123",
       "ats_job_id": "UNKNOWN",

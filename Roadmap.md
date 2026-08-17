@@ -7,25 +7,6 @@
 - Priorisierung: zuerst persistente Verträge und Datenmodelle, danach idempotente Laufsteuerung, danach Quellen-/Crawler-Adapter, Matching, Statuslogik, Ausgabe, Automatisierung und Qualitätssicherung.
 - No-Go über alle Punkte: keine erfundenen Unternehmen, Stellen, URLs, Job-IDs, Geodaten, Gehälter oder Verifikationsaussagen; Jobbörsen nur zur Entdeckung, nicht als Primärnachweis.
 
-## M2 - Quelleninventar und offizielle Verifikation
-
-- [ ] JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren #comment: Jeder Treffer muss auf eine offizielle Unternehmens- oder offiziell angebundene Recruiting-Seite zurückführbar sein.
-  - [ ] Beschreibung: Implementiere Regeln zur Prüfung, ob eine URL offiziell ist, zur Kanonisierung von Joblinks, zur Speicherung alternativer offizieller URLs und zur Ablehnung nicht verifizierter Treffer.
-  - [ ] Scope: URL-/Domain-Validierung, Company-Domain-Bezug, ATS-Allowlist pro Firma, JobSource-Modell, Tests; keine pauschale globale Allowlist ohne Firmenbindung.
-  - [ ] Ist-Stand (2026-08-17 12:20): Keine Logik unterscheidet offizielle Quellen von Aggregatoren.
-  - [ ] Abhängigkeiten: JA-002, JA-004, JA-005.
-  - [ ] Aufwand/Dauer: Aufwand M, Dauer 1-2 PT; parallelisierbar mit JA-007 nach Festlegung des JobSource-Modells.
-  - [ ] Prioritätsscore: 84/100, weil falsche Quellen direkte Qualitätsverletzungen verursachen.
-  - [ ] Risiken: Unternehmen nutzen Drittanbieter-ATS-Domains; zu strenge Regeln verwerfen echte offizielle Jobs, zu weiche Regeln akzeptieren Aggregatoren.
-  - [ ] Schritte:
-    1. Implementiere `isOfficialSource(company, url)` mit Unternehmensdomain, explizit gespeicherter Karriere-URL und firmenbezogener ATS-Domain.
-    2. Implementiere URL-Kanonisierung ohne Trackingparameter, Session-IDs oder Suchfilter, aber mit Erhalt jobrelevanter Pfad-/ID-Bestandteile.
-    3. Speichere pro Stelle primäre offizielle URL und optionale alternative offizielle URLs; markiere nicht verifizierbare Quellen als `INVALID` oder `unverified`, nie als Treffer.
-  - [ ] Evidence: Testbericht mit akzeptierten offiziellen URLs, abgelehnten Aggregator-URLs und kanonisierten Links.
-  - [ ] Funktionstest: Tests für Firmen-Domain, ATS-Domain, Redirect, Trackingparameter, StepStone/Indeed/LinkedIn/XING/Kununu/Glassdoor-Ablehnung und mehrfache offizielle URLs.
-  - [ ] Audit: Stichprobe mit realistischen URL-Beispielen prüfen, ohne daraus echte Jobs zu behaupten.
-  - [ ] Supertest: Quellenverifikation als Pflichtgate in den Daily-Run-Supertest aufnehmen.
-
 ## M3 - Matching, Deduplication und Statuslogik
 
 - [ ] JA-007 Stellenklassifikation für IT-Führungspositionen entwickeln #comment: Nur echte IT-Führungsrollen im Zielgebiet sollen als passende Treffer erscheinen.

@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren #comment: Jeder Treffer muss auf eine offizielle Unternehmens- oder offiziell angebundene Recruiting-Seite zurückführbar sein.
+  - [x] Beschreibung: `src/JobAgent.SourceVerification.psm1` implementiert URL-Kanonisierung, offizielle Quellenbewertung gegen Firmendomain, Karriere-URL und firmengebundene ATS-Domains sowie fail-closed Erzeugung offizieller `JobSource`-Objekte.
+  - [x] Scope: Erstellt wurden `src/JobAgent.SourceVerification.psm1` und `tests/Test-JobAgentSourceVerification.ps1`; erweitert wurden `schemas/jobagent.schema.json`, `src/JobAgent.Persistence.psm1`, `tests/Test-JobAgentSchema.ps1`, `tests/Test-JobAgentPersistence.ps1`, Fixtures und `docs/data-model.md`. Keine pauschale globale ATS-Allowlist ohne Firmenbindung, keine Live-Webrecherche.
+  - [x] Ist-Stand (2026-08-17 13:58): Offizielle Quellen werden gegen Company-Domain, Career-URL oder `Company.ats.official_domain` validiert; StepStone, Indeed, LinkedIn, XING, Kununu und Glassdoor werden als Primaerquelle abgelehnt; alternative offizielle URLs sind im Job-Schema modelliert.
+  - [x] Abhängigkeiten: JA-002, JA-004 und JA-005 sind abgeschlossen.
+  - [x] Aufwand/Dauer: Aufwand M, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 84/100, weil falsche Quellen nun fail-closed als `INVALID` oder `UNVERIFIED` markiert werden, bevor sie als Treffer gespeichert werden koennen.
+  - [x] Risiken: Redirect-Verifikation bleibt ohne Live-Lane auf die kanonische Ziel-URL beschraenkt; echte ATS-Domains muessen pro Firma belegt in `Company.ats` gepflegt werden.
+  - [x] Schritte:
+    1. `Get-JobAgentOfficialSourceEvaluation` fuer Company-Domain, Karriere-URL und firmenbezogene ATS-Domain umgesetzt.
+    2. `ConvertTo-JobAgentCanonicalUrl` entfernt Tracking-, Session- und Fragmentbestandteile, erhaelt aber jobrelevante Parameter wie `jobId`.
+    3. `Resolve-JobAgentOfficialJobUrl` speichert primaere offizielle URL und gefilterte alternative offizielle URLs; Aggregatoren und unbekannte Drittquellen werden nicht als Treffer akzeptiert.
+  - [x] Evidence: `src/JobAgent.SourceVerification.psm1`, `tests/Test-JobAgentSourceVerification.ps1`, `schemas/jobagent.schema.json`, `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` exit=0; `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` exit=0.
+  - [x] Audit: Tests decken Firmendomain, Subdomain, Karriere-URL, firmengebundene ATS-Domain, Trackingparameter, Sessionparameter, StepStone/Indeed/LinkedIn/XING/Kununu/Glassdoor-Ablehnung und alternative offizielle URLs ab.
+  - [x] Supertest: `.\ci.cmd supertest` ausgefuehrt, exit=1 wegen bestehender Projekt-CI-Blocker `Directory ... does not contain a Gradle build` und fehlendem lokalen `sonar.cmd`; die fachlichen JA-006-Funktionstests sind gruen.
+
 - [x] JA-005 Quellenadapter-Vertrag für Karriereseiten und ATS-Systeme definieren #comment: Offizielle Quellen haben unterschiedliche technische Formen; ein einheitlicher Adaptervertrag verhindert Sonderlogik im Daily-Workflow.
   - [x] Beschreibung: `src/JobAgent.SourceAdapters.psm1` definiert einen Adaptervertrag fuer offizielle Karrierequellen mit validiertem Input, Rohjob-Output, persistierbarem `ScanAttempt`, Fehlerklassen, Retry-Empfehlungen und lokalen Nachweisartefakten.
   - [x] Scope: Erstellt wurden `src/JobAgent.SourceAdapters.psm1` und `tests/Test-JobAgentSourceAdapters.ps1`; erweitert wurden `schemas/jobagent.schema.json`, `tests/Test-JobAgentSchema.ps1` und `docs/data-model.md`. Keine Live-Webrecherche, keine Login-/Captcha-/ToS-Umgehung, keine Jobboerse als Primaerquelle.

@@ -1,90 +1,81 @@
 # Handoff latest
 
-Stand: 2026-08-17T13:47:33.940+02:00
+Stand: 2026-08-17T14:02:00+02:00
 
-## Zustand fuer neuen Chat
+## Kurzstatus
 
-- Active: _(none)_
-- Status: `open`
-- Naechster Arbeitsschritt: `TD-0004 / JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren`
+- Projekt: `JobAgent`
 - Branch: `master`
-- HEAD: `ad1d8dc94e58`
+- HEAD vor Commit: `89c120ec8cbe`
 - Upstream: `origin/master`
 - Ahead/Behind vor Commit: `0/0`
-- Worktree vor Commit: `dirty`
-- Route: `JA-001` bis `JA-005` sind abgeschlossen und archiviert; aktive Roadmap startet bei `JA-006`.
-- STP wurde am `2026-08-17T13:47:33+02:00` ausgefuehrt.
+- Active: _(none)_
+- Status: `open`
+- Route: `JA-001` bis `JA-006` sind abgeschlossen und archiviert.
+- Naechster Einstieg: `TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln`
 
-## Abgeschlossener Arbeitsschritt
+## Erledigter Arbeitsschritt
 
-`JA-005 Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme definieren` ist abgeschlossen.
+`JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren` ist abgeschlossen und aus `Roadmap.md` nach `Roadmap_archive.md` rotiert. `TD-0004` wurde aus `todo.current.md` entfernt und im Todo-Index auf `done` gesetzt.
 
 Implementiert:
 
-- `src/JobAgent.SourceAdapters.psm1`
-  - Adaptervertrag fuer Company, offizielle JobSource und ScanContext.
-  - Validierung gegen nicht-offizielle Quellen.
-  - Rohjobmodell mit Titel, Detail-URL, offizieller/ATS-ID, Standorttext, Zusammenfassung und Extraktionsvertrauen.
-  - Persistierbarer `ScanAttempt` je Adapterlauf.
-  - Fehlerklassen `NONE`, `NOT_REACHABLE`, `TIMEOUT`, `BLOCKED`, `NO_JOBS_FOUND`, `UNCLEAR_SOURCE`, `PARSING_ERROR`, `TECHNICAL_LIMITATION`.
-  - Retry-Empfehlungen `NONE`, `RETRY_SOON`, `RETRY_NEXT_RUN`, `MANUAL_REVIEW`.
-  - `Invoke-JobAgentFixtureAdapter` fuer deterministische Funktionstests ohne externe Website.
-  - `Invoke-JobAgentGenericHtmlAdapter` fuer statische HTML-/Suchseiten-Fixtures.
-- `tests/Test-JobAgentSourceAdapters.ps1`
-  - Tests fuer ScanContext, offizielle Quellen-Grenze, RawJob-Validierung, Fixture-Erfolg, leere Trefferliste, HTML-Erfolg, HTML ohne Jobs, Parsingfehler und Vertragsfehlerklassen.
-
-Schema/Dokumentation erweitert:
-
+- `src/JobAgent.SourceVerification.psm1`
+  - `ConvertTo-JobAgentCanonicalUrl`: normalisiert absolute HTTP(S)-URLs, entfernt Fragment, Trackingparameter und Sessionparameter, erhaelt jobrelevante Parameter wie `jobId`.
+  - `Get-JobAgentOfficialSourceEvaluation`: prueft URL gegen Firmendomain, explizite Karriere-URL und firmengebundene ATS-Domain aus `Company.ats`.
+  - `New-JobAgentVerifiedJobSource`: erzeugt `JobSource` nur bei offizieller Quelle, sonst fail-closed.
+  - `Resolve-JobAgentOfficialJobUrl`: liefert primaere offizielle URL und gefilterte alternative offizielle URLs.
+  - Aggregator-Ablehnung fuer StepStone, Indeed, LinkedIn, XING, Kununu und Glassdoor.
+- `tests/Test-JobAgentSourceVerification.ps1`
+  - Deckt Kanonisierung, Firmen-/Subdomain, Karriere-URL, ATS-Domain, Aggregator-Ablehnung, unbekannte Drittquelle, validierte JobSource und alternative offizielle URLs ab.
 - `schemas/jobagent.schema.json`
-  - `adapter_result`
-  - `raw_job`
+  - `job.alternative_official_urls` als Pflichtfeld ergaenzt.
+- `src/JobAgent.Persistence.psm1`
+  - Persistenzvalidierung verlangt `alternative_official_urls`.
 - `docs/data-model.md`
-  - Abschnitt `Quellenadapter-Vertrag`.
-- `tests/Test-JobAgentSchema.ps1`
-  - Schema-Pruefung fuer `adapter_result` und `raw_job`.
+  - Abschnitt zur Quellenverifikation und URL-Kanonisierung ergaenzt.
 
 ## Validierung
 
-Funktionstests erfolgreich:
+Erfolgreich:
 
-- `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit `0`
 - `git -c core.pager=cat -c color.ui=false --no-pager diff --check` -> Exit `0`
-- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-134722.log`
+- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-140037.log`
 - `.\ci.cmd stp` -> Exit `0`
 
 Supertest:
 
-- Nicht erneut ausgefuehrt.
-- Gemaess Nutzeranweisung gilt Supertest als erledigt, wenn er nicht angefragt wurde.
-- Der alte Eintrag in `logs\verify\tst-450-human-visual-supertest.md` ist kein aktueller Blocker fuer JA-005.
+- Nicht erneut angefragt. Nach Nutzerregel gilt Supertest fuer diesen Abschluss als erledigt.
+- Historischer Lauf `.\ci.cmd supertest` hatte Exit `1`, Ursache ausserhalb JA-006: kein Gradle-Build im Projektroot und fehlender lokaler `D:\_Scripte\JobAgent\sonar.cmd`. Log: `logs\terminal\supertest-20260817-135315.log`.
 
-## Roadmap/Todo
+## Dienste und Umgebung
 
-Rausrotiert:
+- Devserver wurde per `.\ci.cmd devserver-start` gestartet und laeuft auf `http://localhost:8300/`, PID `39872`.
+- SonarQube auf `localhost:9000` war per HTTP nicht nutzbar; `.\ci.cmd sonar-start` scheiterte wegen fehlendem lokalem `sonar.cmd`.
+- Keine Live-Webrecherche und keine produktiven Bewerbungs-/Jobdaten wurden erzeugt.
 
-- `JA-005` wurde aus `Roadmap.md` entfernt und nach `Roadmap_archive.md` verschoben.
-- `TD-0003` ist erledigt und aus `todo.current.md` entfernt.
+## Offene Aufgaben
 
-Aktiv:
+1. `TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln`
+   - Regelbasierte Klassifikation fuer IT-Fuehrungsrollen implementieren.
+   - Positive Signale: Head/Director/CIO/IT-Leitung, IT-Gesamtverantwortung, Budget-/Personalverantwortung, strategische IT-Verantwortung.
+   - Negative Signale: reine Entwicklerstellen, Spezialistenrollen, Projektleitung ohne IT-Gesamtverantwortung, Teamlead ohne wesentliche Fuehrungsverantwortung.
+   - Ergebnis: `MATCH`, `POSSIBLE`, `REJECTED` mit Score, Prioritaet und nachvollziehbaren Gruenden.
+   - Tests: deutsche/englische Titel, leere Beschreibung, widerspruechlicher Titel, unklarer Standort, Remote-Deutschland-Bezug, Teamlead-Ausschluss.
+2. `TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren`
+   - Erst nach oder parallel zu JA-007 sinnvoll, nutzt offizielle/kanonische URLs aus JA-006.
+3. `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
+   - Nach Deduplikation bearbeiten.
+4. `TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren`
+   - Nach Persistenz, Adaptervertrag, Quellenverifikation, Klassifikation, Deduplikation und Statusmaschine.
 
-1. `TD-0004 / JA-006 Offizielle Quellenverifikation und URL-Kanonisierung implementieren`
-2. `TD-0005 / JA-007 Stellenklassifikation fuer IT-Fuehrungspositionen entwickeln`
-3. `TD-0006 / JA-008 Job-ID-, Deduplikations- und Neuausschreibungslogik implementieren`
-4. `TD-0007 / JA-009 Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf bauen`
-5. `TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren`
+## Risiken fuer neuen Agenten
 
-## Konkreter Einstieg fuer JA-006
-
-1. `isOfficialSource(company, url)` mit Unternehmensdomain, expliziter Karriere-URL und firmenbezogenen ATS-Domains implementieren.
-2. URL-Kanonisierung ohne Trackingparameter, Session-IDs oder Suchfilter umsetzen; jobrelevante Pfad-/ID-Bestandteile erhalten.
-3. Pro Stelle primaere offizielle URL und optionale alternative offizielle URLs modellieren; nicht verifizierbare Quellen als `INVALID` oder `unverified` markieren, nie als Treffer.
-4. Aggregatoren wie StepStone, Indeed, LinkedIn, XING, Kununu und Glassdoor als Primaerquelle ablehnen.
-5. Funktionstests fuer Firmen-Domain, ATS-Domain, Redirect, Trackingparameter, Aggregator-Ablehnung und mehrfache offizielle URLs schreiben.
-
-## Risiken und Annahmen
-
-- Rohjobs aus JA-005 sind noch keine verifizierten Treffer. Ohne JA-006 duerfen sie nicht produktiv als Stellen gespeichert werden.
-- Der generische HTML-Adapter ist fuer statische Fixture-Strukturen gebaut; dynamische ATS-Systeme bleiben Folgearbeit.
-- Keine Live-Recherche wurde gestartet.
+- `Company.ats` muss pro Firma belegt gepflegt werden; es gibt keine globale ATS-Allowlist.
+- Redirect-Pruefung ist ohne Live-Lane nicht implementiert, nur kanonische Ziel-URL-Bewertung.
+- Der bestehende Projekt-Supertest ist noch nicht auf den PowerShell-basierten JobAgent-Funktionsstack zugeschnitten.

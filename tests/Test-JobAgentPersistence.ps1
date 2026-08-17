@@ -75,6 +75,7 @@ function New-TestJob {
         job_id = 'job:example_ag_head_it_123'
         company_id = 'company:example_ag'
         official_url = 'https://example.invalid/careers/head-it-123'
+        alternative_official_urls = @()
         source_id = 'source:example_ag_career'
         external_job_id = '123'
         ats_job_id = 'UNKNOWN'
