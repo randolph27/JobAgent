@@ -9,23 +9,6 @@
 
 ## M4 - Daily-Run, Ausgabe und Automatisierung
 
-- [ ] JA-010 Deterministischen Daily-Run-Orchestrator implementieren #comment: Der tägliche Rechercheprozess braucht eine klare Reihenfolge, Retry-Logik, begrenzbare Laufzeit und reproduzierbare Nachweise.
-  - [ ] Beschreibung: Implementiere einen Orchestrator, der Zustand lädt, Firmen priorisiert, Adapter ausführt, Jobs klassifiziert, Historie aktualisiert, Ergebnis erzeugt und Fehler einzelner Portale isoliert protokolliert.
-  - [ ] Scope: CLI-Command z.B. `daily-run`, Priorisierungslogik, Scanbudget, Logging, Tests mit Mock-Adaptern; keine unbegrenzten Browser-/Netzwerkprozesse.
-  - [ ] Ist-Stand (2026-08-17 12:20): Kein Daily-Run-Command vorhanden; README/CI bieten nur Bootstrap-Commands.
-  - [ ] Abhängigkeiten: JA-003 bis JA-009.
-  - [ ] Aufwand/Dauer: Aufwand L-XL, Dauer 3-6 PT; nicht sinnvoll vor Persistenz und Adaptervertrag.
-  - [ ] Prioritätsscore: 74/100, weil erst hier aus den Kernkomponenten ein nutzbarer Tageslauf entsteht.
-  - [ ] Risiken: Laufzeit kann durch viele Portale wachsen; fehlende Timeouts oder Retry-Grenzen können den gesamten Lauf blockieren.
-  - [ ] Schritte:
-    1. Implementiere Priorisierung der Firmen nach unbekannt/lang nicht geprüft, hoher Trefferwahrscheinlichkeit, bekannter Karriere-URL, kürzlich passenden Stellen und regulären Wiederholungsläufen.
-    2. Implementiere pro Firma isolierte ScanAttempt-Ausführung mit Timeout, Retry-Klasse, Fehlerprotokoll und Fortsetzung des Gesamtlaufs bei Einzelproblemen.
-    3. Verbinde Adapter, Klassifikation, Deduplikation, Statusmaschine und Persistenz in einer transaktionalen Laufsequenz mit finalem Ergebnisartefakt.
-  - [ ] Evidence: `logs/jobagent/daily-run-<date>.json` und menschenlesbarer Report; Scanstatistik mit untersuchten Firmen, neuen Firmen, geprüften Jobs, neuen/aktiven/geänderten/geschlossenen Stellen und Fehlern.
-  - [ ] Funktionstest: Mock-Daily-Run mit drei Firmen: eine erfolgreich mit neuer Stelle, eine unverändert, eine nicht erreichbar; erwartete Persistenz und Ausgabe prüfen.
-  - [ ] Audit: Prüfen, dass keine externe Aktion außer lesender Recherche erfolgt und dass ein Firmenfehler den Lauf nicht abbricht.
-  - [ ] Supertest: Daily-Run-Mock-Szenario erst nach grünen Komponenten-Funktionstests in Supertest aufnehmen.
-
 - [ ] JA-011 Ausgabeformat und Priorisierung A/B/C für Rechercheberichte umsetzen #comment: Ergebnisse müssen kompakt, differenziert und ohne redundante Wiederholung bekannter unveränderter Stellen nutzbar sein.
   - [ ] Beschreibung: Erzeuge pro Daily-Run einen strukturierten Bericht mit neuen passenden Stellen, aktiven passenden Stellen, Änderungen, geschlossenen/entfernten Stellen, neuen Unternehmen, Recherche-Statistik und A/B/C-Priorisierung.
   - [ ] Scope: Report-Renderer für Markdown und optional JSON, Bewertungserklärung, Snapshot-Verlinkung; keine Bewerbung, keine Kontaktaufnahme, keine externen Schreibaktionen.

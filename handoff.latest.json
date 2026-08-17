@@ -1,12 +1,12 @@
 {
-  "ts": "2026-08-17T14:41:35.000+02:00",
-  "agent_id": "UTTER-20260817-39f7",
+  "ts": "2026-08-17T15:05:00+02:00",
+  "agent_id": "codex-20260817-ja010",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "JA-009 ist abgeschlossen; JA-010 Daily-Run-Orchestrator ist der naechste Einstieg.",
-  "summary": "JA-001 bis JA-009 sind abgeschlossen und archiviert. JA-009 implementiert die Statusmaschine fuer AdapterResults inklusive NEW, ACTIVE, UPDATED, REMOVED und JOB_INVALIDATED. TD-0008 / JA-010 ist der einzige offene aktuelle Todo-Eintrag.",
+  "goal": "JA-010 ist abgeschlossen; JA-011 Recherchebericht-Renderer ist der naechste Einstieg.",
+  "summary": "JA-010 implementiert den deterministischen Daily-Run-Orchestrator mit Firmenpriorisierung, isolierten Adapterfehlern, Klassifikation, Statusmaschine, atomarer Persistenz, Fixture-CLI und JSON-Laufartefakt.",
   "changed": [
     ".ci/pins/immutable.hashes.json",
     ".ci/pins/immutable.snapshot/Roadmap.md",
@@ -15,8 +15,9 @@
     "docs/data-model.md",
     "handoff.latest.json",
     "handoff.latest.md",
-    "src/JobAgent.StatusMachine.psm1",
-    "tests/Test-JobAgentStatusMachine.ps1",
+    "src/JobAgent.DailyRun.psm1",
+    "tools/Invoke-JobAgentDailyRun.ps1",
+    "tests/Test-JobAgentDailyRun.ps1",
     "tests/Test-JobAgentSupertest.ps1",
     "todo.current.md",
     "todo.events.jsonl",
@@ -26,11 +27,11 @@
   ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDeduplication.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
       "exit": 0
     },
     {
@@ -40,6 +41,16 @@
     {
       "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
       "exit": 0
+    },
+    {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "exit": 0,
+      "status": "UP"
+    },
+    {
+      "cmd": "Invoke-WebRequest http://localhost:8300/",
+      "exit": 0,
+      "status": 200
     },
     {
       "cmd": ".\\ci.cmd repin-immutables",
@@ -54,21 +65,11 @@
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head_before_final_stp_commit": "3d7c38c",
-    "ahead_before_push": 1,
-    "behind_before_push": 0,
-    "worktree_after_stp": "dirty",
-    "upstream": "origin/master"
+    "upstream": "origin/master",
+    "head": "finaler Commit, siehe git rev-parse --short HEAD",
+    "worktree": "clean_after_commit"
   },
-  "next": "TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren",
-  "next_details": [
-    "Neues Modul fuer Orchestrierung anlegen, z.B. src/JobAgent.DailyRun.psm1.",
-    "Mock-Daily-Run-Test erstellen, z.B. tests/Test-JobAgentDailyRun.ps1.",
-    "Fixture-Szenario mit drei Firmen abdecken: erfolgreich mit neuer Stelle, unveraendert, nicht erreichbar.",
-    "Bestehende Module verbinden: Persistence, SourceAdapters, Classification, Deduplication, StatusMachine.",
-    "Ergebnisartefakt unter logs/jobagent/ erzeugen.",
-    "Erst nach gruenem Funktionstest Daily-Run-Test in tests/Test-JobAgentSupertest.ps1 aufnehmen."
-  ],
+  "next": "TD-0009 / JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
   "refs": [
     "todo.current.md",
     "todo.state.json",
@@ -77,24 +78,25 @@
     "handoff.latest.md",
     "Roadmap.md",
     "Roadmap_archive.md",
-    "src/JobAgent.StatusMachine.psm1",
-    "tests/Test-JobAgentStatusMachine.ps1"
+    "src/JobAgent.DailyRun.psm1",
+    "tools/Invoke-JobAgentDailyRun.ps1",
+    "tests/Test-JobAgentDailyRun.ps1"
   ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "known_blockers": [
-    "SonarQube: http://localhost:9000/api/system/status lief in 5s in ein Timeout; lokales .\\sonar.cmd und sonar.cmd im PATH wurden nicht gefunden.",
-    "Historischer .\\ci.cmd supertest ist Gradle-/Altlogik und nicht identisch mit tests\\Test-JobAgentSupertest.ps1; der fachliche JobAgent-Supertest ist gruen."
+  "notes": [
+    "Devserver laeuft gemaess .ci\\ci.config.json auf http://localhost:8300/; die Nutzerangabe 8090 weicht von der Projektkonfiguration ab.",
+    "SonarQube wurde ueber die vorhandene WSL-Installation gestartet; .\\ci.cmd sonar-start bleibt im JobAgent-Repo blockiert, weil ein lokales sonar.cmd fehlt."
   ],
   "capsule": {
-    "ts": "2026-08-17T14:41:35.000+02:00",
-    "agent_id": "UTTER-20260817-39f7",
+    "ts": "2026-08-17T15:05:00+02:00",
+    "agent_id": "codex-20260817-ja010",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
     "active_id": "",
     "status": "open",
-    "goal": "JA-009 ist abgeschlossen; JA-010 Daily-Run-Orchestrator ist der naechste Einstieg.",
+    "goal": "JA-010 ist abgeschlossen; JA-011 Recherchebericht-Renderer ist der naechste Einstieg.",
     "changed": [
       ".ci/pins/immutable.hashes.json",
       ".ci/pins/immutable.snapshot/Roadmap.md",
@@ -103,8 +105,9 @@
       "docs/data-model.md",
       "handoff.latest.json",
       "handoff.latest.md",
-      "src/JobAgent.StatusMachine.psm1",
-      "tests/Test-JobAgentStatusMachine.ps1",
+      "src/JobAgent.DailyRun.psm1",
+      "tools/Invoke-JobAgentDailyRun.ps1",
+      "tests/Test-JobAgentDailyRun.ps1",
       "tests/Test-JobAgentSupertest.ps1",
       "todo.current.md",
       "todo.events.jsonl",
@@ -114,11 +117,33 @@
     ],
     "verified": [
       {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
+        "exit": 0
+      },
+      {
         "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
         "exit": 0
       },
       {
         "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
+        "exit": 0
+      },
+      {
+        "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+        "exit": 0,
+        "status": "UP"
+      },
+      {
+        "cmd": "Invoke-WebRequest http://localhost:8300/",
+        "exit": 0,
+        "status": 200
+      },
+      {
+        "cmd": ".\\ci.cmd repin-immutables",
         "exit": 0
       },
       {
@@ -130,13 +155,11 @@
     "route_violations": [],
     "git": {
       "branch": "master",
-      "head_before_final_stp_commit": "3d7c38c",
-      "ahead_before_push": 1,
-      "behind_before_push": 0,
-      "worktree_after_stp": "dirty",
-      "upstream": "origin/master"
+      "upstream": "origin/master",
+      "head": "finaler Commit, siehe git rev-parse --short HEAD",
+      "worktree": "clean_after_commit"
     },
-    "next": "TD-0008 / JA-010 Deterministischen Daily-Run-Orchestrator implementieren",
+    "next": "TD-0009 / JA-011 Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte umsetzen",
     "refs": [
       "todo.current.md",
       "todo.state.json",
@@ -144,7 +167,10 @@
       "handoff.latest.json",
       "handoff.latest.md",
       "Roadmap.md",
-      "Roadmap_archive.md"
+      "Roadmap_archive.md",
+      "src/JobAgent.DailyRun.psm1",
+      "tools/Invoke-JobAgentDailyRun.ps1",
+      "tests/Test-JobAgentDailyRun.ps1"
     ],
     "manual_missing": false,
     "env_inventory_missing": false,

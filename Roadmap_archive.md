@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-010 Deterministischen Daily-Run-Orchestrator implementieren #comment: Der tägliche Rechercheprozess braucht eine klare Reihenfolge, Retry-Logik, begrenzbare Laufzeit und reproduzierbare Nachweise.
+  - [x] Beschreibung: Implementiere einen Orchestrator, der Zustand lädt, Firmen priorisiert, Adapter ausführt, Jobs klassifiziert, Historie aktualisiert, Ergebnis erzeugt und Fehler einzelner Portale isoliert protokolliert.
+  - [x] Scope: CLI-Command z.B. `daily-run`, Priorisierungslogik, Scanbudget, Logging, Tests mit Mock-Adaptern; keine unbegrenzten Browser-/Netzwerkprozesse.
+  - [x] Ist-Stand (2026-08-17 12:20): Kein Daily-Run-Command vorhanden; README/CI bieten nur Bootstrap-Commands.
+  - [x] Abhängigkeiten: JA-003 bis JA-009.
+  - [x] Aufwand/Dauer: Aufwand L-XL, Dauer 3-6 PT; nicht sinnvoll vor Persistenz und Adaptervertrag.
+  - [x] Prioritätsscore: 74/100, weil erst hier aus den Kernkomponenten ein nutzbarer Tageslauf entsteht.
+  - [x] Risiken: Laufzeit kann durch viele Portale wachsen; fehlende Timeouts oder Retry-Grenzen können den gesamten Lauf blockieren. Umsetzung begrenzt Firmenzahl, Timeout und Ergebnisbudget pro Quelle.
+  - [x] Schritte:
+    1. Implementiere Priorisierung der Firmen nach unbekannt/lang nicht geprüft, hoher Trefferwahrscheinlichkeit, bekannter Karriere-URL, kürzlich passenden Stellen und regulären Wiederholungsläufen.
+    2. Implementiere pro Firma isolierte ScanAttempt-Ausführung mit Timeout, Retry-Klasse, Fehlerprotokoll und Fortsetzung des Gesamtlaufs bei Einzelproblemen.
+    3. Verbinde Adapter, Klassifikation, Deduplikation, Statusmaschine und Persistenz in einer transaktionalen Laufsequenz mit finalem Ergebnisartefakt.
+  - [x] Evidence: `src/JobAgent.DailyRun.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tests/Test-JobAgentDailyRun.ps1`, Supertest-Eintrag in `tests/Test-JobAgentSupertest.ps1`, Dokumentation in `docs/data-model.md`; Laufartefakte werden als `logs/jobagent/daily-run-<timestamp>.json` geschrieben.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0.
+  - [x] Audit: Fixture-Test bestätigt: keine Live-Recherche, Firmenfehler bleibt isoliert, bestehende Stellen werden durch Firmenfehler nicht entfernt.
+  - [x] Supertest: `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` -> Exit 0.
+
 - [x] JA-009 Statusmaschine für Daily-Run-Ergebnisse und Änderungsverlauf bauen #comment: Neue, aktive, geänderte und entfernte Stellen müssen deterministisch aus Scanresultaten und Historie entstehen.
   - [x] Beschreibung: `src/JobAgent.StatusMachine.psm1` verarbeitet Adapter-Ergebnisse eines Laufes, vergleicht Rohjobs mit der Historie, aktualisiert `first_seen`/`last_seen`/`changed_at`, erzeugt JobSnapshots und schreibt ChangeEvents fuer neue, aktive, geaenderte, entfernte und invalide Treffer.
   - [x] Scope: Erstellt wurden `src/JobAgent.StatusMachine.psm1` und `tests/Test-JobAgentStatusMachine.ps1`; erweitert wurden `tests/Test-JobAgentSupertest.ps1` und `docs/data-model.md`. Keine Live-Webrecherche, keine Daily-Run-Orchestrierung, keine Reportausgabe.

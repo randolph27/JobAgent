@@ -300,6 +300,23 @@ Funktionstest:
 pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1
 ```
 
+## Daily-Run-Orchestrator
+
+`src/JobAgent.DailyRun.psm1` implementiert den Vertrag fuer `JA-010`.
+
+- `Invoke-JobAgentDailyRun` laedt den Store unter exklusivem Lock, waehlt faellige Firmen mit offizieller Quelle, fuehrt Adapter je Firma isoliert aus, klassifiziert Rohjobs, ruft die Statusmaschine auf und schreibt den aktualisierten Store atomar.
+- `Get-JobAgentDailyRunCandidateCompanies` priorisiert Firmen mit offizieller Quelle nach fehlendem erfolgreichem Scan, hoher `scan_priority`, faelligem `next_scan_at` und stabilem Namen. Mit `CompanyIds` kann ein Lauf fuer Tests oder fokussierte Wiederholungen begrenzt werden.
+- Adapterfehler werden als `ScanAttempt` mit `FAILED` und konkreter Fehlerklasse persistiert; sie brechen den Gesamtlauf nicht ab und entfernen keine bestehenden Stellen.
+- Jeder Lauf erzeugt genau einen `ScanRun` und ein JSON-Ergebnisartefakt unter `logs/jobagent/daily-run-<timestamp>.json`.
+- `tools/Invoke-JobAgentDailyRun.ps1` stellt den lokalen CLI-Einstieg fuer deterministische Fixture-Laeufe bereit. Ohne `-FixturePath` bricht das Skript bewusst ab, bis Live-Adapter als getrennte Lane angebunden sind.
+- Der Orchestrator nutzt in Funktionstests ausschliesslich Fixture-Adapter; Live-Recherche bleibt eine getrennte Lane.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1
+```
+
 ## Beispiel: gültiger Mindestbestand
 
 ```json
