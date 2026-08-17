@@ -2,5 +2,5 @@
 
 Stand: 2026-08-17
 
-- `Roadmap.md`: aktive Roadmap-Punkte ab JA-002.
-- `Roadmap_archive.md`: archivierte abgeschlossene Punkte, aktuell JA-001.
+- `Roadmap.md`: aktive Roadmap-Punkte ab JA-003.
+- `Roadmap_archive.md`: archivierte abgeschlossene Punkte, aktuell JA-001 bis JA-002.

@@ -1,48 +1,94 @@
 # Handoff latest
 
-Stand: 2026-08-17T12:42:00+02:00
+Stand: 2026-08-17T13:05:09+02:00
 
 ## Zustand
 
-- Active: `JA-002`
+- Active: _(none)_
 - Status: `open`
-- Ziel: Als naechstes das persistente Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.
+- Ziel: Naechster Arbeitsschritt ist `TD-0001 / JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren`.
 - Branch: `master`
-- HEAD: `siehe git log nach Commit`
-- Upstream: `origin/master` nach Remote-Konfiguration
-- Ahead/Behind: `1/0 vor erstem Push`
-- Worktree: `clean nach Commit erwartet`
-- Route: `JA-001 abgeschlossen und archiviert; aktive Roadmap startet praktisch bei JA-002`
+- HEAD vor Commit: `845bec02dd90`
+- Upstream: `origin/master`
+- Ahead/Behind vor Commit: `0/0`
+- Worktree vor Commit: `dirty`
+- Route: `JA-001` und `JA-002` sind abgeschlossen und archiviert; aktive Roadmap startet bei `JA-003`.
 
 ## Abgeschlossener Arbeitsschritt
 
-- `manual/PROGRAM.md` wurde vom Platzhalter zum verbindlichen JobAgent-Programmvertrag ausgebaut.
-- Der Vertrag definiert Zweck, Zielprofil, Zielgebiet Muenchen/Freising, Quellenprioritaet, ausgeschlossene Quellen, Persistenzpflicht, Statusmodell, Daily Workflow, Deduplikation, Ausgabeformat, Qualitaetssicherung, Betrieb und offene Annahmen.
-- Harte No-Gos sind festgehalten: keine Bewerbungen, keine Kontaktaufnahme, keine personenbezogenen Bewerbungsdaten, keine nicht belegten Stellen/Firmen/URLs/Geodaten/Gehaelter/Verifikationsaussagen, keine Primaerbelege aus Aggregatoren.
-- `JA-001` wurde aus `Roadmap.md` nach `Roadmap_archive.md` rotiert.
-- `Roadmap_index.md` wurde angelegt und verweist auf aktive Roadmap und Archiv.
-- `.gitignore` wurde angelegt, damit lokale Logs, Backups, State und CI-Laufzeitverzeichnisse nicht in den Commit geraten.
+- `JA-002 Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren` ist abgeschlossen.
+- `schemas/jobagent.schema.json` definiert den Domainvertrag `jobagent/v1` fuer:
+  - `Company`
+  - `Job`
+  - `JobSource`
+  - `ScanRun`
+  - `ScanAttempt`
+  - `JobSnapshot`
+  - `ChangeEvent`
+- Das Schema enthaelt stabile ID-Regeln, Pflichtfelder, Zeitstempel, offizielle Quellbelege, Jobstatus, Scanstatus, Fehlerklassen, Klassifikation und A/B/C-Prioritaet.
+- `docs/data-model.md` dokumentiert Speicherentscheidung, Root-Dokument, Pflichtfelder, Identitaetsprioritaet, Beispielbestand und Negativregeln.
+- `tests/Test-JobAgentSchema.ps1` prueft das Schema und die fachlichen Mindestinvarianten.
+- Fixtures wurden angelegt unter `tests/fixtures/jobagent/`.
+- `Roadmap.md` wurde bereinigt: `JA-002` wurde nach `Roadmap_archive.md` rotiert.
+- `Roadmap_index.md` zeigt jetzt aktive Punkte ab `JA-003`.
+- `todo-seed` hat die naechsten acht offenen Roadmap-Punkte in `todo.state.json` und `todo.current.md` erzeugt.
+
+## Neue Dateien
+
+- `schemas/jobagent.schema.json`
+- `docs/data-model.md`
+- `tests/Test-JobAgentSchema.ps1`
+- `tests/fixtures/jobagent/valid.json`
+- `tests/fixtures/jobagent/invalid-missing-official-url.json`
+- `tests/fixtures/jobagent/invalid-missing-job-id.json`
+
+## Geaenderte Zustandsdateien
+
+- `.ci/pins/immutable.hashes.json`
+- `.ci/pins/immutable.snapshot/Roadmap.md`
+- `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `todo.current.md`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
+- `handoff.latest.md`
+- `handoff.latest.json`
 
 ## Verifikation
 
-- `.\ci.cmd self-check` am 2026-08-17 12:36:08: exit=0, issues=0, Log `logs/terminal/self-check-20260817-123608.log`.
-- `.\ci.cmd self-check` am 2026-08-17 12:39:42: exit=0, issues=0, Log `logs/terminal/self-check-20260817-123942.log`.
-- Textuelle Contract-Pruefung per `Select-String` auf `IT-Fuehrungspositionen`, `offizielle`, `NEW`, `CLOSED`, `Muenchen`, `Freising`, `keine nicht belegten`: exit=0.
-- `.\ci.cmd repin-immutables`: exit=0 nach Aenderung von `manual/PROGRAM.md` und `Roadmap.md`.
-- `.\ci.cmd stp`: exit=0, Todo-Rotation lief ohne erledigte Todo-IDs; Roadmap-Rotation wurde manuell als `JA-001`-Archivierung umgesetzt.
-- Supertest wurde nicht separat ausgefuehrt; gemaess Nutzeranweisung gilt er fuer diesen Abschluss als erledigt.
+- `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
+- `npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s schemas\jobagent.schema.json -d tests\fixtures\jobagent\valid.json --spec=draft2020 -c ajv-formats` -> Exit `0`
+- `.\ci.cmd self-check` -> Exit `0`, Log `logs\terminal\self-check-20260817-130438.log`
+- `.\ci.cmd todo-seed` -> Exit `0`
+- `.\ci.cmd stp` -> Exit `0`
 
-## Naechster Anker
+## Supertest-Hinweis
 
-1. `JA-002 Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren` bearbeiten.
-2. Vor Implementierung technische Speicherentscheidung treffen und dokumentieren: JSON/JSONL oder SQLite. Keine Produktiv-Recherche starten.
-3. Schema-Datei anlegen, voraussichtlich `schemas/jobagent.schema.json`, plus Dokumentation `docs/data-model.md`.
-4. Pflichtobjekte definieren: Company, Job, JobSource, ScanRun, ScanAttempt, JobSnapshot, ChangeEvent.
-5. Funktionstests fuer Schema-Validierung ergaenzen: fehlende `official_url`, fehlende stabile ID, gueltige Beispiele fuer Unternehmen, Job, geaenderten Job und entfernte Stelle.
+- Ein Supertest wurde in diesem Arbeitsschritt nicht vom Nutzer angefragt und gilt nach aktueller Nutzeranweisung als erledigt/nicht blockierend.
+- Ein versehentlicher Lauf von `.\ci.cmd supertest` schlug vorher fehl, weil das aktuelle Projekt kein Gradle-Build enthaelt und `D:\_Scripte\JobAgent\sonar.cmd` fehlt. Das ist kein fachlicher Fehler von `JA-002`.
+- Der konkrete JA-002-Funktionstest ist gruen.
 
-## Risiken und offene Annahmen
+## Offene Aufgaben
 
-- Das Verzeichnis war initial kein Git-Checkout. `.\ci.cmd stp` hat ein lokales Git-Repository auf `master` sichtbar gemacht, aber ohne Commit und ohne Remote.
-- Push ist nur moeglich, wenn `origin` korrekt auf `https://github.com/randolph27/JobAgent.git` gesetzt wird und Credentials verfuegbar sind.
-- Remote `ls-remote --heads https://github.com/randolph27/JobAgent.git` lieferte keine Branch-Ausgabe. Das kann ein leeres Repository oder fehlende Sichtbarkeit bedeuten.
-- Nicht force-pushen. Wenn Push nach `master` abgelehnt wird, neuen Branch verwenden oder Remote-Zustand im neuen Chat klaeren.
+1. `TD-0001 / JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren`
+   - Persistenz unterhalb des Projektverzeichnisses definieren und implementieren.
+   - Entscheidung fuer JSON-Dateien, JSONL-Events oder SQLite final dokumentieren.
+   - Atomare Writes mit temporaerer Datei und best-effort Flush bauen.
+   - Backup vor Migration und Recovery-Prozedur implementieren.
+   - Locking gegen parallele Daily-Runs ergaenzen.
+   - Repository-API auf Basis von `jobagent/v1` bauen: `upsertCompany`, `upsertJobSnapshot`, `recordScanAttempt`, `markMissingJobs`, `listDailyOutputCandidates`.
+   - Funktionstests fuer leeren Store, vorhandenen Store, beschaedigte Datei, Migration, idempotentes Speichern und Lock-Verletzung erstellen.
+2. Danach `JA-004` Firmeninventar-Seed und Erweiterungsstrategie.
+3. Danach `JA-005` Quellenadapter-Vertrag.
+4. Danach `JA-006` offizielle Quellenverifikation und URL-Kanonisierung.
+
+## Risiken und Annahmen
+
+- Die finale Persistenztechnologie ist noch offen; `docs/data-model.md` setzt bewusst nur den Schema- und Austauschvertrag.
+- Keine Live-Recherche starten, bevor Persistenz, Quellenverifikation und Deduplikation stehen.
+- Keine personenbezogenen Bewerbungsdaten speichern.
+- Keine Firmen, Stellen, URLs, Geodaten oder Gehaelter erfinden.
+- SonarQube auf `localhost:9000` reagierte beim Check nicht innerhalb des Timeouts, obwohl Port 9000 offen war.

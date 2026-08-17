@@ -1,0 +1,758 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/jobagent/jobagent.schema.json",
+  "title": "JobAgent domain data v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "companies",
+    "jobs",
+    "job_sources",
+    "scan_runs",
+    "scan_attempts",
+    "job_snapshots",
+    "change_events"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "jobagent/v1"
+    },
+    "generated_at": {
+      "$ref": "#/$defs/date_time"
+    },
+    "companies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/company"
+      }
+    },
+    "jobs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/job"
+      }
+    },
+    "job_sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/job_source"
+      }
+    },
+    "scan_runs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scan_run"
+      }
+    },
+    "scan_attempts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scan_attempt"
+      }
+    },
+    "job_snapshots": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/job_snapshot"
+      }
+    },
+    "change_events": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/change_event"
+      }
+    }
+  },
+  "$defs": {
+    "date_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "uri": {
+      "type": "string",
+      "format": "uri",
+      "minLength": 8
+    },
+    "unknownable_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*:[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "job_status": {
+      "enum": [
+        "NEW",
+        "ACTIVE",
+        "UPDATED",
+        "CLOSED",
+        "REMOVED",
+        "INVALID"
+      ]
+    },
+    "scan_status": {
+      "enum": [
+        "PENDING",
+        "RUNNING",
+        "SUCCESS",
+        "PARTIAL",
+        "FAILED",
+        "SKIPPED"
+      ]
+    },
+    "source_type": {
+      "enum": [
+        "COMPANY_WEBSITE",
+        "CAREER_PAGE",
+        "OFFICIAL_ATS",
+        "JOB_DETAIL"
+      ]
+    },
+    "priority": {
+      "enum": [
+        "A",
+        "B",
+        "C",
+        "UNRATED"
+      ]
+    },
+    "classification_result": {
+      "enum": [
+        "MATCH",
+        "POSSIBLE",
+        "REJECTED",
+        "UNKNOWN"
+      ]
+    },
+    "work_model": {
+      "enum": [
+        "ON_SITE",
+        "HYBRID",
+        "REMOTE",
+        "UNKNOWN"
+      ]
+    },
+    "employment_type": {
+      "enum": [
+        "FULL_TIME",
+        "PART_TIME",
+        "CONTRACT",
+        "TEMPORARY",
+        "UNKNOWN"
+      ]
+    },
+    "company": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "company_id",
+        "canonical_name",
+        "canonical_domain",
+        "official_website_url",
+        "career_url",
+        "aliases",
+        "locations",
+        "industry",
+        "ats",
+        "scan_status",
+        "created_at",
+        "updated_at",
+        "last_successful_scan_at"
+      ],
+      "properties": {
+        "company_id": {
+          "$ref": "#/$defs/id"
+        },
+        "canonical_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "canonical_domain": {
+          "type": "string",
+          "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$"
+        },
+        "official_website_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "career_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "locations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/location"
+          }
+        },
+        "industry": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "ats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ats_binding"
+          }
+        },
+        "scan_status": {
+          "$ref": "#/$defs/scan_status"
+        },
+        "created_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "updated_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "last_successful_scan_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/date_time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "city",
+        "region",
+        "country",
+        "target_area"
+      ],
+      "properties": {
+        "label": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "city": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "region": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "country": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "target_area": {
+          "enum": [
+            "MUNICH",
+            "MUNICH_20KM",
+            "FREISING",
+            "REMOTE_WITH_TARGET_REFERENCE",
+            "UNKNOWN",
+            "OUT_OF_SCOPE"
+          ]
+        }
+      }
+    },
+    "ats_binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "official_domain",
+        "verified_by_url"
+      ],
+      "properties": {
+        "system": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "official_domain": {
+          "type": "string",
+          "pattern": "^[a-z0-9.-]+\\.[a-z]{2,}$"
+        },
+        "verified_by_url": {
+          "$ref": "#/$defs/uri"
+        }
+      }
+    },
+    "job": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "job_id",
+        "company_id",
+        "official_url",
+        "source_id",
+        "external_job_id",
+        "ats_job_id",
+        "title",
+        "location",
+        "work_model",
+        "employment_type",
+        "status",
+        "first_seen",
+        "last_seen",
+        "changed_at",
+        "classification",
+        "priority",
+        "requirements",
+        "salary",
+        "identity_basis"
+      ],
+      "anyOf": [
+        {
+          "required": [
+            "external_job_id"
+          ],
+          "properties": {
+            "external_job_id": {
+              "type": "string",
+              "minLength": 1,
+              "not": {
+                "const": "UNKNOWN"
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "ats_job_id"
+          ],
+          "properties": {
+            "ats_job_id": {
+              "type": "string",
+              "minLength": 1,
+              "not": {
+                "const": "UNKNOWN"
+              }
+            }
+          }
+        },
+        {
+          "required": [
+            "official_url"
+          ]
+        }
+      ],
+      "properties": {
+        "job_id": {
+          "$ref": "#/$defs/id"
+        },
+        "company_id": {
+          "$ref": "#/$defs/id"
+        },
+        "official_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "source_id": {
+          "$ref": "#/$defs/id"
+        },
+        "external_job_id": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "ats_job_id": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "$ref": "#/$defs/location"
+        },
+        "work_model": {
+          "$ref": "#/$defs/work_model"
+        },
+        "employment_type": {
+          "$ref": "#/$defs/employment_type"
+        },
+        "status": {
+          "$ref": "#/$defs/job_status"
+        },
+        "first_seen": {
+          "$ref": "#/$defs/date_time"
+        },
+        "last_seen": {
+          "$ref": "#/$defs/date_time"
+        },
+        "changed_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "classification": {
+          "$ref": "#/$defs/classification"
+        },
+        "priority": {
+          "$ref": "#/$defs/priority"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/unknownable_string"
+          }
+        },
+        "salary": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "identity_basis": {
+          "enum": [
+            "OFFICIAL_JOB_ID",
+            "ATS_JOB_ID",
+            "CANONICAL_URL",
+            "COMPOSITE_FINGERPRINT"
+          ]
+        }
+      }
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "result",
+        "priority",
+        "score",
+        "reasons",
+        "rejected_reasons",
+        "evaluated_at"
+      ],
+      "properties": {
+        "result": {
+          "$ref": "#/$defs/classification_result"
+        },
+        "priority": {
+          "$ref": "#/$defs/priority"
+        },
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "rejected_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evaluated_at": {
+          "$ref": "#/$defs/date_time"
+        }
+      }
+    },
+    "job_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "company_id",
+        "source_type",
+        "url",
+        "canonical_url",
+        "is_official",
+        "verified_at",
+        "verification_basis"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/$defs/id"
+        },
+        "company_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_type": {
+          "$ref": "#/$defs/source_type"
+        },
+        "url": {
+          "$ref": "#/$defs/uri"
+        },
+        "canonical_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "is_official": {
+          "const": true
+        },
+        "verified_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "verification_basis": {
+          "enum": [
+            "COMPANY_DOMAIN",
+            "CAREER_URL",
+            "COMPANY_LINKED_ATS",
+            "OFFICIAL_JOB_DETAIL"
+          ]
+        }
+      }
+    },
+    "scan_run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scan_run_id",
+        "started_at",
+        "finished_at",
+        "status",
+        "company_ids",
+        "artifact_paths",
+        "errors"
+      ],
+      "properties": {
+        "scan_run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "started_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "finished_at": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/date_time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "status": {
+          "$ref": "#/$defs/scan_status"
+        },
+        "company_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "artifact_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scan_error"
+          }
+        }
+      }
+    },
+    "scan_attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "scan_attempt_id",
+        "scan_run_id",
+        "company_id",
+        "source_id",
+        "started_at",
+        "finished_at",
+        "status",
+        "adapter",
+        "error_class",
+        "retry_recommendation",
+        "http_status"
+      ],
+      "properties": {
+        "scan_attempt_id": {
+          "$ref": "#/$defs/id"
+        },
+        "scan_run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "company_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_id": {
+          "$ref": "#/$defs/id"
+        },
+        "started_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "finished_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "status": {
+          "$ref": "#/$defs/scan_status"
+        },
+        "adapter": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "error_class": {
+          "enum": [
+            "NONE",
+            "NOT_REACHABLE",
+            "TIMEOUT",
+            "BLOCKED",
+            "NO_JOBS_FOUND",
+            "UNCLEAR_SOURCE",
+            "PARSING_ERROR",
+            "TECHNICAL_LIMITATION"
+          ]
+        },
+        "retry_recommendation": {
+          "enum": [
+            "NONE",
+            "RETRY_SOON",
+            "RETRY_NEXT_RUN",
+            "MANUAL_REVIEW"
+          ]
+        },
+        "http_status": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 100,
+          "maximum": 599
+        }
+      }
+    },
+    "scan_error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "error_class",
+        "message"
+      ],
+      "properties": {
+        "error_class": {
+          "$ref": "#/$defs/scan_attempt/properties/error_class"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "job_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_id",
+        "job_id",
+        "scan_run_id",
+        "source_id",
+        "captured_at",
+        "content_hash",
+        "status",
+        "title",
+        "location",
+        "official_url",
+        "summary"
+      ],
+      "properties": {
+        "snapshot_id": {
+          "$ref": "#/$defs/id"
+        },
+        "job_id": {
+          "$ref": "#/$defs/id"
+        },
+        "scan_run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "source_id": {
+          "$ref": "#/$defs/id"
+        },
+        "captured_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "content_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "status": {
+          "$ref": "#/$defs/job_status"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location": {
+          "$ref": "#/$defs/location"
+        },
+        "official_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "summary": {
+          "$ref": "#/$defs/unknownable_string"
+        }
+      }
+    },
+    "change_event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "change_event_id",
+        "job_id",
+        "scan_run_id",
+        "event_type",
+        "created_at",
+        "old_status",
+        "new_status",
+        "changed_fields",
+        "reason"
+      ],
+      "properties": {
+        "change_event_id": {
+          "$ref": "#/$defs/id"
+        },
+        "job_id": {
+          "$ref": "#/$defs/id"
+        },
+        "scan_run_id": {
+          "$ref": "#/$defs/id"
+        },
+        "event_type": {
+          "enum": [
+            "JOB_CREATED",
+            "JOB_UPDATED",
+            "JOB_CLOSED",
+            "JOB_REMOVED",
+            "JOB_INVALIDATED"
+          ]
+        },
+        "created_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "old_status": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/job_status"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "new_status": {
+          "$ref": "#/$defs/job_status"
+        },
+        "changed_fields": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

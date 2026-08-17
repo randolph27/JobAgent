@@ -9,23 +9,6 @@
 
 ## M1 - Fachlicher Daten- und Zustandsvertrag
 
-- [ ] JA-002 Persistentes Datenmodell für Firmen, Stellen, Scanläufe und Änderungen definieren #comment: Stabile Identitäten und Historie sind der kritische Pfad, damit tägliche Läufe nicht dieselben Stellen erneut als neu melden.
-  - [ ] Beschreibung: Lege ein versioniertes Schema für Company, Job, JobSource, ScanRun, ScanAttempt, JobSnapshot und ChangeEvent fest; jedes Objekt hat stabile IDs, Zeitstempel, Statuswerte, Herkunftsfelder und Validierungsregeln.
-  - [ ] Scope: Neue Dateien z.B. `schemas/jobagent.schema.json`, `docs/data-model.md`, spätere Implementierungsmodelle; keine Webrecherche, kein produktiver Crawl, keine personenbezogenen Bewerbungsdaten.
-  - [ ] Ist-Stand (2026-08-17 12:20): Es gibt nur Bootstrap-Zustandsdateien (`todo.*`, `handoff.*`), aber keine fachliche JobAgent-Datenbank und kein Domänenschema.
-  - [ ] Abhängigkeiten: JA-001 muss die fachlichen Pflichtfelder und Statussemantik liefern.
-  - [ ] Aufwand/Dauer: Aufwand M-L, Dauer 1-2 PT; teilweise parallelisierbar mit JA-003 nach Festlegung der ID-Regeln.
-  - [ ] Prioritätsscore: 98/100, weil jede Recherche- und Deduplication-Funktion auf stabilen IDs und Statusübergängen basiert.
-  - [ ] Risiken: zu frühe Bindung an ein ungeeignetes Speicherformat kann spätere ATS-Adapter erschweren; zu weiche IDs verursachen Dubletten.
-  - [ ] Schritte:
-    1. Definiere Pflichtfelder für Unternehmen: `company_id`, Name, kanonische Website, Karriere-URL, Branche, relevante Standorte, ATS-System, Scanstatus, letzter erfolgreicher Scan und Aliasnamen.
-    2. Definiere Pflichtfelder für Stellen: `job_id`, `company_id`, offizielle URL, externe Job-/ATS-ID, Titel, Standort, Arbeitsmodell, Beschäftigungsart, Status, first_seen, last_seen, changed_at, Anforderungen, Gehalt, Bewertung und Änderungsverlauf.
-    3. Definiere Statusübergänge für `NEW`, `ACTIVE`, `UPDATED`, `CLOSED`, `REMOVED`, `INVALID` inklusive Regeln, wann ein bekannter Job wieder ausgegeben werden darf.
-  - [ ] Evidence: Schema-Datei validiert syntaktisch; Dokumentation enthält Beispiele für mindestens ein Unternehmen, einen Job, einen geänderten Job und eine entfernte Stelle.
-  - [ ] Funktionstest: Schema-Validierung mit lokalem JSON-Validator oder projektspezifischem Test; negativer Test für fehlende `official_url`; negativer Test für Job ohne stabile ID.
-  - [ ] Audit: Prüfen, dass keine Felder personenbezogene Bewerbungsdaten erzwingen und dass fehlende Daten als `UNKNOWN` modelliert werden können.
-  - [ ] Supertest: Erst nach grünen Schema-/Modelltests in den späteren Supertest aufnehmen.
-
 - [ ] JA-003 Speicher- und Migrationsschicht für idempotente Daily-Runs implementieren #comment: Der Agent braucht eine wiederverwendbare lokale Datenbasis, die Läufe deterministisch fortsetzen und Änderungen nachvollziehbar speichern kann.
   - [ ] Beschreibung: Implementiere eine Persistenzschicht mit atomaren Schreibvorgängen, Backups, Schema-Version, Migrationspfad und Repository-API für Unternehmen, Stellen, Scanläufe und ChangeEvents.
   - [ ] Scope: Neue Runtime-Daten unter z.B. `data/jobagent/` oder `state/jobagent/`, Repository-Code, Tests; keine Secrets im Speicher; keine Speicherung außerhalb `D:\_Scripte\JobAgent`.

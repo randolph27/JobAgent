@@ -1,0 +1,151 @@
+{
+  "schema_version": "jobagent/v1",
+  "generated_at": "2026-08-17T10:30:00Z",
+  "companies": [
+    {
+      "company_id": "company:example_ag",
+      "canonical_name": "Example AG",
+      "canonical_domain": "example.invalid",
+      "official_website_url": "https://example.invalid/",
+      "career_url": "https://example.invalid/careers",
+      "aliases": [
+        "Example"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "SUCCESS",
+      "created_at": "2026-08-17T10:00:00Z",
+      "updated_at": "2026-08-17T10:30:00Z",
+      "last_successful_scan_at": "2026-08-17T10:30:00Z"
+    }
+  ],
+  "jobs": [
+    {
+      "job_id": "job:example_ag_head_it_123",
+      "company_id": "company:example_ag",
+      "official_url": "https://example.invalid/careers/head-it-123",
+      "source_id": "source:example_ag_career",
+      "external_job_id": "123",
+      "ats_job_id": "UNKNOWN",
+      "title": "Head of IT",
+      "location": {
+        "label": "Muenchen",
+        "city": "Muenchen",
+        "region": "Bayern",
+        "country": "DE",
+        "target_area": "MUNICH"
+      },
+      "work_model": "HYBRID",
+      "employment_type": "FULL_TIME",
+      "status": "NEW",
+      "first_seen": "2026-08-17T10:30:00Z",
+      "last_seen": "2026-08-17T10:30:00Z",
+      "changed_at": "2026-08-17T10:30:00Z",
+      "classification": {
+        "result": "MATCH",
+        "priority": "A",
+        "score": 92,
+        "reasons": [
+          "IT-Gesamtverantwortung belegt",
+          "Zielgebiet Muenchen"
+        ],
+        "rejected_reasons": [],
+        "evaluated_at": "2026-08-17T10:30:00Z"
+      },
+      "priority": "A",
+      "requirements": [
+        "Fuehrungserfahrung",
+        "IT-Strategie"
+      ],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    }
+  ],
+  "job_sources": [
+    {
+      "source_id": "source:example_ag_career",
+      "company_id": "company:example_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://example.invalid/careers",
+      "canonical_url": "https://example.invalid/careers",
+      "is_official": true,
+      "verified_at": "2026-08-17T10:30:00Z",
+      "verification_basis": "CAREER_URL"
+    }
+  ],
+  "scan_runs": [
+    {
+      "scan_run_id": "scanrun:20260817T103000Z",
+      "started_at": "2026-08-17T10:30:00Z",
+      "finished_at": "2026-08-17T10:31:00Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:example_ag"
+      ],
+      "artifact_paths": [
+        "logs/jobagent/daily-run-2026-08-17.json"
+      ],
+      "errors": []
+    }
+  ],
+  "scan_attempts": [
+    {
+      "scan_attempt_id": "scanattempt:example_ag_20260817T103000Z",
+      "scan_run_id": "scanrun:20260817T103000Z",
+      "company_id": "company:example_ag",
+      "source_id": "source:example_ag_career",
+      "started_at": "2026-08-17T10:30:00Z",
+      "finished_at": "2026-08-17T10:30:10Z",
+      "status": "SUCCESS",
+      "adapter": "fixture-html",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200
+    }
+  ],
+  "job_snapshots": [
+    {
+      "snapshot_id": "snapshot:example_ag_head_it_123_20260817",
+      "job_id": "job:example_ag_head_it_123",
+      "scan_run_id": "scanrun:20260817T103000Z",
+      "source_id": "source:example_ag_career",
+      "captured_at": "2026-08-17T10:30:10Z",
+      "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "NEW",
+      "title": "Head of IT",
+      "location": {
+        "label": "Muenchen",
+        "city": "Muenchen",
+        "region": "Bayern",
+        "country": "DE",
+        "target_area": "MUNICH"
+      },
+      "official_url": "https://example.invalid/careers/head-it-123",
+      "summary": "IT-Fuehrungsrolle mit offizieller Detailseite."
+    }
+  ],
+  "change_events": [
+    {
+      "change_event_id": "change:example_ag_head_it_123_created",
+      "job_id": "job:example_ag_head_it_123",
+      "scan_run_id": "scanrun:20260817T103000Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-08-17T10:30:10Z",
+      "old_status": null,
+      "new_status": "NEW",
+      "changed_fields": [
+        "status"
+      ],
+      "reason": "Erstmals ueber offizielle Karriere-URL erkannt."
+    }
+  ]
+}

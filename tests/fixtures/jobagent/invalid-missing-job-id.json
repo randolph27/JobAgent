@@ -1,0 +1,47 @@
+{
+  "schema_version": "jobagent/v1",
+  "generated_at": "2026-08-17T10:30:00Z",
+  "companies": [],
+  "jobs": [
+    {
+      "company_id": "company:example_ag",
+      "official_url": "https://example.invalid/careers/head-it-123",
+      "source_id": "source:example_ag_career",
+      "external_job_id": "123",
+      "ats_job_id": "UNKNOWN",
+      "title": "Head of IT",
+      "location": {
+        "label": "Muenchen",
+        "city": "Muenchen",
+        "region": "Bayern",
+        "country": "DE",
+        "target_area": "MUNICH"
+      },
+      "work_model": "HYBRID",
+      "employment_type": "FULL_TIME",
+      "status": "NEW",
+      "first_seen": "2026-08-17T10:30:00Z",
+      "last_seen": "2026-08-17T10:30:00Z",
+      "changed_at": "2026-08-17T10:30:00Z",
+      "classification": {
+        "result": "MATCH",
+        "priority": "A",
+        "score": 92,
+        "reasons": [
+          "IT-Gesamtverantwortung belegt"
+        ],
+        "rejected_reasons": [],
+        "evaluated_at": "2026-08-17T10:30:00Z"
+      },
+      "priority": "A",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    }
+  ],
+  "job_sources": [],
+  "scan_runs": [],
+  "scan_attempts": [],
+  "job_snapshots": [],
+  "change_events": []
+}

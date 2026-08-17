@@ -1,44 +1,49 @@
 {
-  "ts": "2026-08-17T12:42:00+02:00",
+  "ts": "2026-08-17T13:05:09+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "Als naechstes das persistente Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
-  "next": "JA-002 Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
-  "summary": "JA-001 abgeschlossen: manual/PROGRAM.md enthaelt den verbindlichen JobAgent-Programmvertrag; JA-001 wurde aus Roadmap.md nach Roadmap_archive.md rotiert.",
+  "goal": "Naechster Arbeitsschritt ist JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
+  "summary": "JA-002 abgeschlossen: jobagent/v1 Domain-Schema, Datenmodelldokumentation, Schema-Funktionstest und Fixtures wurden erstellt; JA-002 wurde archiviert; Todo-State wurde aus Roadmap neu geseedet.",
+  "next": "TD-0001 / JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
   "changed": [
-    ".gitignore",
-    "manual/PROGRAM.md",
+    ".ci/pins/immutable.hashes.json",
+    ".ci/pins/immutable.snapshot/Roadmap.md",
     "Roadmap.md",
     "Roadmap_archive.md",
     "Roadmap_index.md",
-    "handoff.latest.md",
-    "handoff.latest.json",
+    "docs/data-model.md",
+    "schemas/jobagent.schema.json",
+    "tests/Test-JobAgentSchema.ps1",
+    "tests/fixtures/jobagent/valid.json",
+    "tests/fixtures/jobagent/invalid-missing-official-url.json",
+    "tests/fixtures/jobagent/invalid-missing-job-id.json",
     "todo.current.md",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json"
+    "todo.state.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
   "verified": [
     {
-      "cmd": ".\\ci.cmd self-check",
-      "exit": 0,
-      "evidence": "logs/terminal/self-check-20260817-123608.log"
-    },
-    {
-      "cmd": ".\\ci.cmd self-check",
-      "exit": 0,
-      "evidence": "logs/terminal/self-check-20260817-123942.log"
-    },
-    {
-      "cmd": "Select-String -Path manual\\PROGRAM.md -Pattern 'IT-Fuehrungspositionen','offizielle','NEW','CLOSED','Muenchen','Freising','keine nicht belegten'",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
       "exit": 0
     },
     {
-      "cmd": ".\\ci.cmd repin-immutables",
+      "cmd": "npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s schemas\\jobagent.schema.json -d tests\\fixtures\\jobagent\\valid.json --spec=draft2020 -c ajv-formats",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 0,
+      "evidence": "logs\\terminal\\self-check-20260817-130438.log"
+    },
+    {
+      "cmd": ".\\ci.cmd todo-seed",
       "exit": 0
     },
     {
@@ -48,36 +53,57 @@
   ],
   "supertest": {
     "status": "done-by-user-instruction",
-    "note": "Nicht separat ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt."
+    "note": "Nicht angefragt; nach Nutzeranweisung gilt Supertest als erledigt/nicht blockierend. Ein vorheriger versehentlicher Supertest-Lauf scheiterte am unpassenden Gradle/Android-Profil, nicht an JA-002."
   },
   "git": {
     "branch": "master",
-    "head": "siehe git log nach Commit",
-    "upstream": "origin/master pending",
-    "ahead": 1,
+    "head": "845bec02dd90",
+    "head_before_commit": "845bec02dd90",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "ahead_before_commit": 0,
     "behind": 0,
-    "worktree": "clean nach Commit erwartet",
-    "tracked_changes": [],
-    "has_repo": true,
-    "initial_state_note": "Das Verzeichnis war initial kein Git-Checkout; nach stp existiert ein lokales Git-Repository ohne Commit und ohne Remote."
+    "behind_before_commit": 0,
+    "worktree": "dirty",
+    "worktree_before_commit": "dirty",
+    "tracked_changes": [
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json"
+    ],
+    "has_repo": true
   },
   "next_steps": [
-    "JA-002 bearbeiten.",
-    "Speicherentscheidung fuer fachliche JobAgent-Daten dokumentieren.",
-    "schemas/jobagent.schema.json und docs/data-model.md anlegen.",
-    "Company, Job, JobSource, ScanRun, ScanAttempt, JobSnapshot und ChangeEvent modellieren.",
-    "Schema-Funktionstests fuer gueltige und ungueltige Beispiele ergaenzen."
+    "JA-003 bearbeiten.",
+    "Persistenzentscheidung fuer JSON-Dateien, JSONL-Events oder SQLite final dokumentieren.",
+    "Atomare Writes mit temporaerer Datei, best-effort Flush, Backup und Recovery-Prozedur implementieren.",
+    "Locking gegen parallele Daily-Runs implementieren.",
+    "Repository-API auf Basis von jobagent/v1 bauen: upsertCompany, upsertJobSnapshot, recordScanAttempt, markMissingJobs, listDailyOutputCandidates.",
+    "Funktionstests fuer leeren Store, vorhandenen Store, beschaedigte Datei, Migration, idempotentes Speichern und Lock-Verletzung erstellen."
   ],
   "risks": [
-    "Remote-Branch-Zustand ist unklar: ls-remote --heads lieferte keine Ausgabe.",
-    "Kein Force-Push ausfuehren.",
-    "Keine Live-Recherche vor Abschluss von Datenmodell, Persistenz und Quellenverifikation."
+    "Finale Persistenztechnologie ist noch offen.",
+    "Keine Live-Recherche starten, bevor Persistenz, Quellenverifikation und Deduplikation stehen.",
+    "Keine personenbezogenen Bewerbungsdaten speichern.",
+    "Keine Firmen, Stellen, URLs, Geodaten oder Gehaelter erfinden.",
+    "SonarQube auf localhost:9000 reagierte beim Check nicht innerhalb des Timeouts, obwohl Port 9000 offen war."
   ],
   "refs": [
-    "manual/PROGRAM.md",
+    "schemas/jobagent.schema.json",
+    "docs/data-model.md",
+    "tests/Test-JobAgentSchema.ps1",
+    "tests/fixtures/jobagent/valid.json",
     "Roadmap.md",
     "Roadmap_archive.md",
-    "Roadmap_index.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
@@ -90,44 +116,48 @@
   "env_inventory_missing": false,
   "env_inventory_used": false,
   "env_inventory_path": null,
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen. Arbeite sequenziell weiter, bis ein harter Blocker erreicht ist.",
   "capsule": {
-    "ts": "2026-08-17T12:42:00+02:00",
+    "ts": "2026-08-17T13:05:09+02:00",
     "agent_id": "UTTER-20260817-39f7",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
     "active_id": "",
     "status": "open",
-    "goal": "Als naechstes das persistente Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
+    "goal": "Naechster Arbeitsschritt ist JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
     "changed": [
-      ".gitignore",
-      "manual/PROGRAM.md",
+      "schemas/jobagent.schema.json",
+      "docs/data-model.md",
+      "tests/Test-JobAgentSchema.ps1",
+      "tests/fixtures/jobagent/",
       "Roadmap.md",
       "Roadmap_archive.md",
       "Roadmap_index.md",
+      "todo.current.md",
+      "todo.state.json",
       "handoff.latest.md",
       "handoff.latest.json"
     ],
     "verified": [
       {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
+        "exit": 0
+      },
+      {
         "cmd": ".\\ci.cmd self-check",
-        "exit": 0,
-        "evidence": "logs/terminal/self-check-20260817-123942.log"
+        "exit": 0
       }
     ],
     "route_ok": null,
     "route_violations": [],
     "git": {
       "branch": "master",
-      "head": "siehe git log nach Commit",
-      "upstream": "origin/master pending",
-      "ahead": 1,
-      "behind": 0,
-      "worktree": "clean nach Commit erwartet",
-      "tracked_changes": [],
-      "has_repo": true
+      "head_before_commit": "845bec02dd90",
+      "upstream": "origin/master",
+      "ahead_before_commit": 0,
+      "behind_before_commit": 0,
+      "worktree_before_commit": "dirty"
     },
-    "next": "JA-002 Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen definieren.",
+    "next": "TD-0001 / JA-003 Speicher- und Migrationsschicht fuer idempotente Daily-Runs implementieren.",
     "refs": [
       "todo.current.md",
       "todo.state.json",
