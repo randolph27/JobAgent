@@ -277,7 +277,12 @@
       "required": [
         "type",
         "url",
-        "observed_at"
+        "observed_at",
+        "verification_url",
+        "discovery_origin",
+        "target_area",
+        "industry_hint",
+        "evidence_note"
       ],
       "properties": {
         "type": {
@@ -292,6 +297,28 @@
         },
         "observed_at": {
           "$ref": "#/$defs/date_time"
+        },
+        "verification_url": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uri"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "discovery_origin": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "target_area": {
+          "$ref": "#/$defs/location/properties/target_area"
+        },
+        "industry_hint": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "evidence_note": {
+          "$ref": "#/$defs/unknownable_string"
         }
       }
     },

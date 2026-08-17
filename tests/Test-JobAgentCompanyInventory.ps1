@@ -60,6 +60,8 @@ Assert-True -Condition (@($seeded.document.companies | Where-Object { $_.locatio
 Assert-True -Condition (@($seeded.document.job_sources | Where-Object { $_.is_official -ne $true }).Count -eq 0) -Message 'Seed hat nicht-offizielle JobSource erzeugt.'
 Assert-True -Condition (@($seeded.document.job_sources | Where-Object { @($_.verification_evidence).Count -lt 1 }).Count -eq 0) -Message 'Seed hat Quellen ohne Verifikationsbelege erzeugt.'
 Assert-True -Condition (@($seeded.document.job_sources | Where-Object { $_.verification_evidence[0].evidence_type -ne 'CAREER_URL' }).Count -eq 0) -Message 'Seed hat Career-Quellen mit falschem Evidenztyp erzeugt.'
+Assert-True -Condition (@($seeded.document.companies | Where-Object { $_.discovery_source.verification_url -eq $null }).Count -eq 0) -Message 'Seed hat Discovery-Quellen ohne verification_url erzeugt.'
+Assert-True -Condition (@($seeded.document.companies | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.discovery_source.discovery_origin) }).Count -eq 0) -Message 'Seed hat Discovery-Quellen ohne discovery_origin erzeugt.'
 
 $secondRun = Add-JobAgentCompanySeedInventory -Document $seeded.document -Seeds (Get-JobAgentCompanySeedInventory -CreatedAt (New-TestSeedDate) -NextScanAt (New-TestNextScanDate)) -SeededAt (New-TestSeedDate)
 Assert-JobAgentDocument -Document $secondRun.document
@@ -89,6 +91,25 @@ $separateSubsidiaries = @(
 $subsidiaryResult = Add-JobAgentCompanySeedInventory -Document (New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)) -Seeds $separateSubsidiaries -SeededAt (New-TestSeedDate)
 Assert-True -Condition (@($subsidiaryResult.document.companies).Count -eq 2) -Message 'Getrennte Tochtergesellschaften wurden faelschlich zusammengefuehrt.'
 
+$mergeExisting = New-TestCompanySeed -CanonicalName 'Merge AG' -Website 'https://merge.invalid/' -CareerUrl $null -Aliases @('Merge') -City 'Muenchen'
+$mergeExisting.scan_priority = 60
+$mergeExisting.discovery_source = New-JobAgentDiscoverySource -Type 'DISCOVERY_HINT' -Url 'https://hint.invalid/merge' -ObservedAt (New-TestSeedDate) -VerificationUrl $null -DiscoveryOrigin 'hint.directory' -TargetArea 'MUNICH' -IndustryHint 'UNKNOWN' -EvidenceNote 'Hinweisquelle'
+$mergeExisting.locations = @(
+    (New-JobAgentTargetLocation -Label 'Muenchen' -City 'Muenchen' -TargetArea 'MUNICH')
+)
+$mergeExisting.next_scan_at = '2026-08-20T06:00:00.000Z'
+$mergeSeed = New-TestCompanySeed -CanonicalName 'Merge AG' -Website 'https://merge.invalid/' -CareerUrl 'https://merge.invalid/careers' -Aliases @('Merge Careers') -City 'Freising'
+$mergeSeed.scan_priority = 90
+$mergeSeed.next_scan_at = '2026-08-18T06:00:00.000Z'
+$mergeResult = Add-JobAgentCompanySeedInventory -Document (New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)) -Seeds @($mergeExisting, $mergeSeed) -SeededAt (New-TestSeedDate)
+$mergedCompany = $mergeResult.document.companies[0]
+Assert-True -Condition ($mergedCompany.verification_status -eq 'CAREER_URL_VERIFIED') -Message 'Merge bevorzugt keinen staerkeren Verifikationsstatus.'
+Assert-True -Condition ($mergedCompany.scan_priority -eq 90) -Message 'Merge behaelt nicht die hoehere Scan-Prioritaet.'
+Assert-True -Condition ($mergedCompany.next_scan_at -eq '2026-08-18T06:00:00.000Z') -Message 'Merge behaelt nicht den frueheren naechsten Scan.'
+Assert-True -Condition (@($mergedCompany.locations).Count -eq 2) -Message 'Merge vereinigt Standorte nicht verlustfrei.'
+Assert-True -Condition (@($mergedCompany.aliases | Where-Object { $_ -eq 'Merge Careers' }).Count -eq 1) -Message 'Merge uebernimmt neue Aliasnamen nicht.'
+Assert-True -Condition ($mergedCompany.discovery_source.type -eq 'OFFICIAL_WEBSITE') -Message 'Merge bevorzugt keine staerkere Discovery-Quelle.'
+
 $missingCareer = Add-JobAgentCompanySeedInventory -Document (New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)) -Seeds @(
     (New-TestCompanySeed -CanonicalName 'No Career GmbH' -Website 'https://nocareer.invalid/' -CareerUrl $null -Aliases @('No Career'))
 ) -SeededAt (New-TestSeedDate)
@@ -99,7 +120,7 @@ Assert-True -Condition (@($missingCareer.document.job_sources).Count -eq 0) -Mes
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'missing_career_url')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4

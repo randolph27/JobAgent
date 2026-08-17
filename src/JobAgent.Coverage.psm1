@@ -99,6 +99,40 @@ function Get-JobAgentCoverageCompanyMetric {
     $latestScanSucceeded = $wasScanned -and $latestAttemptStatus -eq 'SUCCESS'
     $isStale = $null -eq $lastSuccessfulScanAt -or $lastSuccessfulScanAt -lt $Now.ToUniversalTime().AddDays(-$StaleAfterDays)
     $ats = @((Get-JobAgentCoverageProperty -Object $Company -Name 'ats' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+    $verificationStatus = [string](Get-JobAgentCoverageProperty -Object $Company -Name 'verification_status' -Default 'UNVERIFIED')
+    $discoverySource = Get-JobAgentCoverageProperty -Object $Company -Name 'discovery_source' -Default $null
+    $discoveryType = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'type' -Default 'UNKNOWN')
+    $discoveryOrigin = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'discovery_origin' -Default 'UNKNOWN')
+    $targetArea = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'target_area' -Default 'UNKNOWN')
+    $inventoryState = if (-not $hasCareerUrl -and $verificationStatus -eq 'CAREER_URL_VERIFIED') {
+        'DATA_INCONSISTENT'
+    }
+    elseif (-not $hasCareerUrl -and $verificationStatus -eq 'COMPANY_DOMAIN_VERIFIED') {
+        'VERIFIED_WEBSITE_ONLY'
+    }
+    elseif ($verificationStatus -eq 'UNVERIFIED' -or $discoveryType -in @('MANUAL_REVIEW', 'DISCOVERY_HINT')) {
+        'MANUAL_REVIEW_REQUIRED'
+    }
+    elseif (-not $wasScanned) {
+        'NEVER_SCANNED'
+    }
+    elseif ($latestScanFailed) {
+        'RETRY_REQUIRED'
+    }
+    elseif ($isStale) {
+        'STALE_SCAN'
+    }
+    else {
+        'ACTIVE_ROTATION'
+    }
+    $nextStep = switch ($inventoryState) {
+        'VERIFIED_WEBSITE_ONLY' { 'Offizielle Website erneut auf Karrierepfad pruefen und Quelle ergaenzen.' ; break }
+        'MANUAL_REVIEW_REQUIRED' { 'Discovery-Hinweis gegen offizielle Unternehmensquelle verifizieren.' ; break }
+        'NEVER_SCANNED' { 'Offizielle Quelle in den naechsten Daily-Run aufnehmen.' ; break }
+        'RETRY_REQUIRED' { 'Fehlerklasse pruefen und Quelle gezielt erneut scannen.' ; break }
+        'STALE_SCAN' { 'Firma in die planmaessige Rotationspruefung aufnehmen.' ; break }
+        default { 'In der regulaeren Rotation belassen.' }
+    }
 
     [pscustomobject]@{
         company_id = $companyId
@@ -113,6 +147,12 @@ function Get-JobAgentCoverageCompanyMetric {
         is_stale = $isStale
         ats_known = $ats.Count -gt 0
         scan_priority = [int](Get-JobAgentCoverageProperty -Object $Company -Name 'scan_priority' -Default 0)
+        verification_status = $verificationStatus
+        discovery_type = $discoveryType
+        discovery_origin = $discoveryOrigin
+        target_area = $targetArea
+        inventory_state = $inventoryState
+        next_step = $nextStep
     }
 }
 
@@ -143,6 +183,10 @@ function Get-JobAgentCoverageBacklog {
 
     $items = [System.Collections.Generic.List[object]]::new()
     foreach ($metric in @($CompanyMetrics)) {
+        if ([string]$metric.inventory_state -eq 'MANUAL_REVIEW_REQUIRED') {
+            $items.Add((New-JobAgentCoverageBacklogItem -Metric $metric -Kind 'MANUAL_REVIEW_DISCOVERY' -Reason ('Discovery-Quelle ist noch nicht als offizielle Firmenquelle verifiziert: ' + [string]$metric.discovery_type + '.') -NextStep 'Offizielle Unternehmenswebsite oder Karriere-URL als Primärbeleg dokumentieren.' -Score 98))
+            continue
+        }
         if (-not [bool]$metric.has_career_url) {
             $items.Add((New-JobAgentCoverageBacklogItem -Metric $metric -Kind 'CAREER_URL_DISCOVERY' -Reason 'Keine Karriere-URL im Firmeninventar.' -NextStep 'Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.' -Score 95))
             continue
@@ -178,6 +222,10 @@ function Get-JobAgentCoverageScanPriority {
             $score += 50
             $reasons.Add('career_url_missing')
         }
+        if ([string]$metric.inventory_state -eq 'MANUAL_REVIEW_REQUIRED') {
+            $score += 40
+            $reasons.Add('manual_review_source')
+        }
         if (-not [bool]$metric.was_scanned) {
             $score += 45
             $reasons.Add('never_scanned')
@@ -204,7 +252,7 @@ function Get-JobAgentCoverageScanPriority {
             company = [string]$metric.company
             priority_score = $score
             reasons = @($reasons.ToArray())
-            next_action = if (-not [bool]$metric.has_career_url) { 'discover_career_url' } elseif ([bool]$metric.latest_scan_failed) { 'retry_or_adapter_review' } else { 'scan_rotation' }
+            next_action = if ([string]$metric.inventory_state -eq 'MANUAL_REVIEW_REQUIRED') { 'verify_discovery_hint' } elseif (-not [bool]$metric.has_career_url) { 'discover_career_url' } elseif ([bool]$metric.latest_scan_failed) { 'retry_or_adapter_review' } else { 'scan_rotation' }
         }
     }
 
@@ -244,6 +292,9 @@ function New-JobAgentCoverageReport {
             without_matching_jobs = @($metricsArray | Where-Object { [bool]$_.latest_scan_succeeded -and -not [bool]$_.has_matching_jobs }).Count
             with_matching_jobs = @($metricsArray | Where-Object has_matching_jobs).Count
             stale_or_unscanned = @($metricsArray | Where-Object is_stale).Count
+            manual_review_required = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'MANUAL_REVIEW_REQUIRED' }).Count
+            verified_without_career_url = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'VERIFIED_WEBSITE_ONLY' }).Count
+            retry_required = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'RETRY_REQUIRED' }).Count
         }
         companies = @($metricsArray | Sort-Object company)
         backlog = @(Get-JobAgentCoverageBacklog -CompanyMetrics $metricsArray)

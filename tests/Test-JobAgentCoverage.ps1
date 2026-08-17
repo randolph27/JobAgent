@@ -55,6 +55,20 @@ $document.companies = @(
     New-TestCoverageCompany -Name 'Stale AG' -Domain 'stale.example.invalid' -CareerUrl 'https://stale.example.invalid/careers' -Priority 80 -LastSuccessfulScanAt '2026-07-01T00:00:00.000Z'
     New-TestCoverageCompany -Name 'Recent AG' -Domain 'recent.example.invalid' -CareerUrl 'https://recent.example.invalid/careers' -Priority 90 -LastSuccessfulScanAt '2026-08-16T00:00:00.000Z'
     New-TestCoverageCompany -Name 'Match AG' -Domain 'match.example.invalid' -CareerUrl 'https://match.example.invalid/careers' -Priority 75 -LastSuccessfulScanAt '2026-08-16T00:00:00.000Z'
+    (New-JobAgentCompanySeed `
+        -CanonicalName 'Hint AG' `
+        -OfficialWebsiteUrl 'https://hint.example.invalid/' `
+        -CareerUrl 'https://hint.example.invalid/careers' `
+        -Aliases @() `
+        -Locations @((New-JobAgentTargetLocation -Label 'Muenchen' -City 'Muenchen' -TargetArea 'MUNICH')) `
+        -Industry 'UNKNOWN' `
+        -ScanPriority 65 `
+        -DiscoverySourceUrl 'https://directory.example.invalid/hint' `
+        -DiscoverySourceType 'DISCOVERY_HINT' `
+        -DiscoveryOrigin 'directory.seed' `
+        -DiscoveryEvidenceNote 'Sekundaerquelle, offizielle Verifikation fehlt.' `
+        -CreatedAt ([datetime]'2026-08-01T00:00:00Z') `
+        -NextScanAt ([datetime]'2026-08-17T00:00:00Z'))
 )
 $document.scan_attempts = @(
     [pscustomobject]@{ scan_attempt_id = 'scanattempt:failed'; scan_run_id = 'scanrun:1'; company_id = 'company:failed_ag'; source_id = 'source:failed'; started_at = '2026-08-17T08:00:00.000Z'; finished_at = '2026-08-17T08:01:00.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'NOT_REACHABLE'; retry_recommendation = 'RETRY_NEXT_RUN'; http_status = 503 }
@@ -71,14 +85,17 @@ $document.scan_runs = @(
 $document.change_events = @()
 
 $coverage = New-JobAgentCoverageReport -Document $document -Now ([datetime]'2026-08-17T12:00:00Z') -StaleAfterDays 7 -MaxPriorityItems 5
-Assert-True -Condition ($coverage.metrics.companies_total -eq 5) -Message 'Coverage zaehlt Firmen falsch.'
+Assert-True -Condition ($coverage.metrics.companies_total -eq 6) -Message 'Coverage zaehlt Firmen falsch.'
 Assert-True -Condition ($coverage.metrics.without_career_url -eq 1) -Message 'Coverage zaehlt Firmen ohne Karriere-URL falsch.'
 Assert-True -Condition ($coverage.metrics.failed_scanned -eq 1) -Message 'Coverage zaehlt fehlgeschlagene Portale falsch.'
-Assert-True -Condition ($coverage.metrics.never_scanned -eq 1) -Message 'Coverage zaehlt nie gescannte Firmen falsch.'
+Assert-True -Condition ($coverage.metrics.never_scanned -eq 2) -Message 'Coverage zaehlt nie gescannte Firmen falsch.'
 Assert-True -Condition ($coverage.metrics.with_matching_jobs -eq 1) -Message 'Coverage zaehlt passende Stellen falsch.'
 Assert-True -Condition ($coverage.approximation_notice -match 'keine vollstaendige Marktdeckung') -Message 'Coverage-Hinweis darf keine Vollstaendigkeit behaupten.'
+Assert-True -Condition ($coverage.metrics.manual_review_required -eq 1) -Message 'Coverage zaehlt manuell zu pruefende Discovery-Hinweise falsch.'
+Assert-True -Condition ($coverage.metrics.verified_without_career_url -eq 1) -Message 'Coverage zaehlt verifizierte Firmen ohne Karriere-URL falsch.'
 
 $backlogKinds = @($coverage.backlog | ForEach-Object { [string]$_.kind })
+Assert-True -Condition ($backlogKinds -contains 'MANUAL_REVIEW_DISCOVERY') -Message 'Backlog priorisiert unbestaetigte Discovery-Hinweise nicht.'
 Assert-True -Condition ($backlogKinds -contains 'CAREER_URL_DISCOVERY') -Message 'Backlog priorisiert fehlende Karriere-URL nicht.'
 Assert-True -Condition ($backlogKinds -contains 'ATS_OR_PORTAL_ADAPTER_REVIEW') -Message 'Backlog priorisiert fehlerhafte Portale nicht.'
 Assert-True -Condition ($backlogKinds -contains 'STALE_SCAN_ROTATION') -Message 'Backlog priorisiert lange nicht gepruefte Firmen nicht.'
@@ -87,19 +104,23 @@ Assert-True -Condition ($backlogKinds -contains 'NO_MATCH_RECHECK') -Message 'Ba
 $priority = @($coverage.scan_priority)
 Assert-True -Condition (($priority | Where-Object company_id -eq 'company:failed_ag').priority_score -gt ($priority | Where-Object company_id -eq 'company:recent_ag').priority_score) -Message 'Fehlerhafte Portale muessen vor kuerzlich erfolgreichen Scans priorisiert werden.'
 Assert-True -Condition (@($priority | Where-Object company_id -eq 'company:unknown_ag').Count -eq 1) -Message 'Unbekannte Firmen muessen in der Scanprioritaet enthalten sein.'
+Assert-True -Condition ((($priority | Where-Object company_id -eq 'company:hint_ag').next_action) -eq 'verify_discovery_hint') -Message 'Discovery-Hinweise muessen eigene Folgeaktion erhalten.'
 Assert-True -Condition (@($priority | Where-Object { $_.company_id -eq 'company:recent_ag' -and (@($_.reasons) -contains 'recent_success_rotation_penalty') }).Count -eq 1) -Message 'Kuerzlich erfolgreiche Firmen muessen Rotationsmalus erhalten.'
+Assert-True -Condition ((@($coverage.companies | Where-Object { $_.company_id -eq 'company:hint_ag' })[0].inventory_state) -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Discovery-Hinweis wurde nicht als manueller Review-Fall markiert.'
 
 $report = New-JobAgentDailyReport -Document $document -ScanRunId 'scanrun:1'
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
 Assert-True -Condition ($markdown.Contains('## Coverage und Adapter-Backlog')) -Message 'Markdown-Report enthaelt keinen Coverage-Abschnitt.'
 Assert-True -Condition ($markdown.Contains('Coverage-Werte sind operative Naeherungen')) -Message 'Markdown-Report enthaelt keinen Naeherungshinweis.'
 Assert-True -Condition ($markdown.Contains('ATS_OR_PORTAL_ADAPTER_REVIEW')) -Message 'Markdown-Report enthaelt keinen Adapter-Backlog.'
+Assert-True -Condition ($markdown.Contains('MANUAL_REVIEW_DISCOVERY')) -Message 'Markdown-Report enthaelt keinen Discovery-Review-Backlog.'
 
 [pscustomobject]@{
     status = 'ok'
     cases = @(
         'coverage_metrics_for_inventory_attempts_and_matches',
         'unknown_companies_prioritized',
+        'manual_review_discovery_prioritized',
         'stale_companies_prioritized',
         'failed_portals_prioritized_for_adapter_review',
         'recent_success_rotation_penalty',

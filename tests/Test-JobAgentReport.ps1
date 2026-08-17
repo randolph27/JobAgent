@@ -114,6 +114,11 @@ function New-TestCompany {
             type = 'OFFICIAL_WEBSITE'
             url = "https://$($Id.Substring(8)).example.invalid/"
             observed_at = $CreatedAt
+            verification_url = "https://$($Id.Substring(8)).example.invalid/careers"
+            discovery_origin = 'seed.manual'
+            target_area = 'MUNICH'
+            industry_hint = 'UNKNOWN'
+            evidence_note = 'Offizielle Firmenquelle wurde manuell gepflegt.'
         }
         created_at = $CreatedAt
         updated_at = $CreatedAt

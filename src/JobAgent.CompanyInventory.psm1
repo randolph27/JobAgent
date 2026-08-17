@@ -81,6 +81,31 @@ function New-JobAgentTargetLocation {
     }
 }
 
+function New-JobAgentDiscoverySource {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][ValidateSet('OFFICIAL_WEBSITE', 'MANUAL_REVIEW', 'DISCOVERY_HINT')][string]$Type,
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][datetime]$ObservedAt,
+        [Parameter()][AllowNull()][string]$VerificationUrl = $null,
+        [Parameter()][string]$DiscoveryOrigin = 'seed.manual',
+        [Parameter()][ValidateSet('MUNICH', 'MUNICH_20KM', 'FREISING', 'REMOTE_WITH_TARGET_REFERENCE', 'UNKNOWN', 'OUT_OF_SCOPE')][string]$TargetArea = 'UNKNOWN',
+        [Parameter()][string]$IndustryHint = 'UNKNOWN',
+        [Parameter()][string]$EvidenceNote = 'Offizielle Firmenquelle wurde manuell gepflegt.'
+    )
+
+    [pscustomobject]@{
+        type = $Type
+        url = $Url
+        observed_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        verification_url = if ([string]::IsNullOrWhiteSpace($VerificationUrl)) { $null } else { $VerificationUrl }
+        discovery_origin = $DiscoveryOrigin
+        target_area = $TargetArea
+        industry_hint = $IndustryHint
+        evidence_note = $EvidenceNote
+    }
+}
+
 function New-JobAgentCompanySeed {
     [CmdletBinding()]
     param(
@@ -92,6 +117,9 @@ function New-JobAgentCompanySeed {
         [Parameter(Mandatory)][string]$Industry,
         [Parameter(Mandatory)][ValidateRange(1, 100)][int]$ScanPriority,
         [Parameter(Mandatory)][string]$DiscoverySourceUrl,
+        [Parameter()][ValidateSet('OFFICIAL_WEBSITE', 'MANUAL_REVIEW', 'DISCOVERY_HINT')][string]$DiscoverySourceType = 'OFFICIAL_WEBSITE',
+        [Parameter()][string]$DiscoveryOrigin = 'seed.manual',
+        [Parameter()][string]$DiscoveryEvidenceNote = 'Offizielle Firmenquelle wurde manuell gepflegt.',
         [Parameter()][object[]]$Ats = @(),
         [Parameter()][datetime]$CreatedAt = [datetime]::UtcNow,
         [Parameter()][datetime]$NextScanAt = ([datetime]::UtcNow.Date.AddDays(1))
@@ -101,6 +129,7 @@ function New-JobAgentCompanySeed {
     $id = 'company:' + (ConvertTo-JobAgentAsciiSlug -Value $CanonicalName)
     $career = if ([string]::IsNullOrWhiteSpace($CareerUrl)) { $null } else { $CareerUrl }
     $verificationStatus = if ($null -eq $career) { 'COMPANY_DOMAIN_VERIFIED' } else { 'CAREER_URL_VERIFIED' }
+    $targetArea = @($Locations | ForEach-Object { [string]$_.target_area } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -First 1)
 
     [pscustomobject]@{
         company_id = $id
@@ -116,11 +145,15 @@ function New-JobAgentCompanySeed {
         scan_priority = $ScanPriority
         next_scan_at = $NextScanAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         verification_status = $verificationStatus
-        discovery_source = [pscustomobject]@{
-            type = 'OFFICIAL_WEBSITE'
-            url = $DiscoverySourceUrl
-            observed_at = $CreatedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
-        }
+        discovery_source = New-JobAgentDiscoverySource `
+            -Type $DiscoverySourceType `
+            -Url $DiscoverySourceUrl `
+            -ObservedAt $CreatedAt `
+            -VerificationUrl $(if ($null -eq $career) { $OfficialWebsiteUrl } else { $career }) `
+            -DiscoveryOrigin $DiscoveryOrigin `
+            -TargetArea $(if ($targetArea.Count -gt 0) { [string]$targetArea[0] } else { 'UNKNOWN' }) `
+            -IndustryHint $Industry `
+            -EvidenceNote $DiscoveryEvidenceNote
         created_at = $CreatedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         updated_at = $CreatedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         last_successful_scan_at = $null
@@ -152,6 +185,68 @@ function Get-JobAgentCompanySeedInventory {
         New-JobAgentCompanySeed -CanonicalName 'Landeshauptstadt Muenchen' -OfficialWebsiteUrl 'https://stadt.muenchen.de/' -CareerUrl 'https://stadt.muenchen.de/rathaus/karriere.html' -Aliases @('Stadt Muenchen', 'LHM') -Locations @($munich) -Industry 'Public Sector' -ScanPriority 80 -DiscoverySourceUrl 'https://stadt.muenchen.de/rathaus/karriere.html' -CreatedAt $CreatedAt -NextScanAt $NextScanAt
         New-JobAgentCompanySeed -CanonicalName 'Texas Instruments Deutschland GmbH' -OfficialWebsiteUrl 'https://www.ti.com/' -CareerUrl 'https://careers.ti.com/' -Aliases @('Texas Instruments', 'TI') -Locations @($freising) -Industry 'Semiconductors' -ScanPriority 76 -DiscoverySourceUrl 'https://careers.ti.com/' -CreatedAt $CreatedAt -NextScanAt $NextScanAt
     )
+}
+
+function Merge-JobAgentCompanyLocations {
+    param(
+        [Parameter()][object[]]$Existing = @(),
+        [Parameter()][object[]]$Seed = @()
+    )
+
+    $map = [ordered]@{}
+    foreach ($location in @($Existing) + @($Seed)) {
+        if ($null -eq $location) {
+            continue
+        }
+        $key = '{0}|{1}|{2}' -f ([string]$location.label), ([string]$location.city), ([string]$location.target_area)
+        if (-not $map.Contains($key)) {
+            $map[$key] = $location
+        }
+    }
+    return @($map.Values)
+}
+
+function Merge-JobAgentCompanyAtsBindings {
+    param(
+        [Parameter()][object[]]$Existing = @(),
+        [Parameter()][object[]]$Seed = @()
+    )
+
+    $map = [ordered]@{}
+    foreach ($binding in @($Existing) + @($Seed)) {
+        if ($null -eq $binding) {
+            continue
+        }
+        $key = '{0}|{1}' -f ([string]$binding.system), ([string]$binding.official_domain)
+        if (-not $map.Contains($key)) {
+            $map[$key] = $binding
+        }
+    }
+    return @($map.Values)
+}
+
+function Get-JobAgentVerificationStatusRank {
+    param([Parameter(Mandatory)][string]$Status)
+
+    switch ($Status) {
+        'CAREER_URL_VERIFIED' { return 3 }
+        'COMPANY_DOMAIN_VERIFIED' { return 2 }
+        'UNVERIFIED' { return 1 }
+        default { return 0 }
+    }
+}
+
+function Get-JobAgentPreferredDiscoverySource {
+    param(
+        [Parameter(Mandatory)][object]$Existing,
+        [Parameter(Mandatory)][object]$Seed,
+        [Parameter(Mandatory)][string]$VerificationStatus
+    )
+
+    if ((Get-JobAgentVerificationStatusRank -Status $VerificationStatus) -ge (Get-JobAgentVerificationStatusRank -Status ([string]$Existing.verification_status))) {
+        return $Seed.discovery_source
+    }
+    return $Existing.discovery_source
 }
 
 function Get-JobAgentCompanyIdentityKeys {
@@ -206,18 +301,32 @@ function Merge-JobAgentCompanySeed {
         Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
         Sort-Object -Unique
 
-    $Existing.canonical_name = $Seed.canonical_name
-    $Existing.canonical_domain = $Seed.canonical_domain
-    $Existing.official_website_url = $Seed.official_website_url
-    $Existing.career_url = $Seed.career_url
+    $preferredVerificationStatus = if ((Get-JobAgentVerificationStatusRank -Status ([string]$Seed.verification_status)) -ge (Get-JobAgentVerificationStatusRank -Status ([string]$Existing.verification_status))) {
+        [string]$Seed.verification_status
+    }
+    else {
+        [string]$Existing.verification_status
+    }
+    $existingNextScanAt = if ([string]::IsNullOrWhiteSpace([string]$Existing.next_scan_at)) { $null } else { [datetime]::Parse([string]$Existing.next_scan_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime() }
+    $seedNextScanAt = if ([string]::IsNullOrWhiteSpace([string]$Seed.next_scan_at)) { $null } else { [datetime]::Parse([string]$Seed.next_scan_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime() }
+    $mergedNextScanAt = if ($null -eq $existingNextScanAt) { $seedNextScanAt } elseif ($null -eq $seedNextScanAt) { $existingNextScanAt } elseif ($seedNextScanAt -lt $existingNextScanAt) { $seedNextScanAt } else { $existingNextScanAt }
+
+    $Existing.canonical_name = if ((Get-JobAgentVerificationStatusRank -Status ([string]$Seed.verification_status)) -ge (Get-JobAgentVerificationStatusRank -Status ([string]$Existing.verification_status))) { $Seed.canonical_name } else { $Existing.canonical_name }
+    $Existing.canonical_domain = if ((Get-JobAgentVerificationStatusRank -Status ([string]$Seed.verification_status)) -ge (Get-JobAgentVerificationStatusRank -Status ([string]$Existing.verification_status))) { $Seed.canonical_domain } else { $Existing.canonical_domain }
+    $Existing.official_website_url = if (-not [string]::IsNullOrWhiteSpace([string]$Seed.official_website_url)) { $Seed.official_website_url } else { $Existing.official_website_url }
+    $Existing.career_url = if (-not [string]::IsNullOrWhiteSpace([string]$Seed.career_url)) { $Seed.career_url } else { $Existing.career_url }
     $Existing.aliases = @($aliases)
-    $Existing.locations = @($Seed.locations)
-    $Existing.industry = $Seed.industry
-    $Existing.ats = @($Seed.ats)
-    $Existing.scan_priority = $Seed.scan_priority
-    $Existing.next_scan_at = $Seed.next_scan_at
-    $Existing.verification_status = $Seed.verification_status
-    $Existing.discovery_source = $Seed.discovery_source
+    $Existing.locations = @(Merge-JobAgentCompanyLocations -Existing @($Existing.locations) -Seed @($Seed.locations))
+    if ([string]::IsNullOrWhiteSpace([string]$Existing.industry) -or [string]$Existing.industry -eq 'UNKNOWN') {
+        $Existing.industry = $Seed.industry
+    }
+    $Existing.ats = @(Merge-JobAgentCompanyAtsBindings -Existing @($Existing.ats) -Seed @($Seed.ats))
+    $Existing.scan_priority = [Math]::Max([int]$Existing.scan_priority, [int]$Seed.scan_priority)
+    if ($null -ne $mergedNextScanAt) {
+        $Existing.next_scan_at = $mergedNextScanAt.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+    }
+    $Existing.verification_status = $preferredVerificationStatus
+    $Existing.discovery_source = Get-JobAgentPreferredDiscoverySource -Existing $Existing -Seed $Seed -VerificationStatus $preferredVerificationStatus
     $Existing.updated_at = $Seed.updated_at
     if ($null -eq $Existing.last_successful_scan_at) {
         $Existing.last_successful_scan_at = $Seed.last_successful_scan_at
@@ -328,6 +437,7 @@ Export-ModuleMember -Function @(
     'Find-JobAgentCompanyDuplicate',
     'Get-JobAgentCompanySeedInventory',
     'Merge-JobAgentCompanySeed',
+    'New-JobAgentDiscoverySource',
     'New-JobAgentCompanySeed',
     'New-JobAgentTargetLocation'
 )

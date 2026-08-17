@@ -39,6 +39,11 @@ function New-TestCompany {
             type = 'OFFICIAL_WEBSITE'
             url = 'https://example.invalid/careers'
             observed_at = '2026-08-17T10:00:00Z'
+            verification_url = 'https://example.invalid/careers'
+            discovery_origin = 'seed.manual'
+            target_area = 'MUNICH'
+            industry_hint = 'UNKNOWN'
+            evidence_note = 'Offizielle Firmenquelle wurde manuell gepflegt.'
         }
         created_at = '2026-08-17T10:00:00Z'
         updated_at = '2026-08-17T10:00:00Z'

@@ -10,7 +10,8 @@
       "career_url": "https://www.bmwgroup.jobs/de/en.html",
       "aliases": [
         "Bayerische Motoren Werke",
-        "BMW AG"
+        "BMW AG",
+        "BMW Group"
       ],
       "locations": [
         {
@@ -25,15 +26,20 @@
       "ats": [],
       "scan_status": "FAILED",
       "scan_priority": 95,
-      "next_scan_at": "2026-08-17T19:48:05.98Z",
+      "next_scan_at": "2026-08-17T19:48:05.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.bmwgroup.jobs/de/en.html",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://www.bmwgroup.jobs/de/en.html",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T13:48:05.98Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -43,7 +49,8 @@
       "official_website_url": "https://www.siemens.com/",
       "career_url": "https://jobs.siemens.com/",
       "aliases": [
-        "Siemens"
+        "Siemens",
+        "Siemens AG"
       ],
       "locations": [
         {
@@ -58,16 +65,21 @@
       "ats": [],
       "scan_status": "SUCCESS",
       "scan_priority": 94,
-      "next_scan_at": "2026-08-18T13:49:12.490Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://jobs.siemens.com/",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://jobs.siemens.com/",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial Technology",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T13:49:12.490Z",
-      "last_successful_scan_at": "2026-08-17T13:49:12.490Z"
+      "updated_at": "2026-08-17T15:52:58.666Z",
+      "last_successful_scan_at": "2026-08-17T13:49:12.49Z"
     },
     {
       "company_id": "company:allianz_se",
@@ -76,7 +88,8 @@
       "official_website_url": "https://www.allianz.com/",
       "career_url": "https://careers.allianz.com/",
       "aliases": [
-        "Allianz"
+        "Allianz",
+        "Allianz SE"
       ],
       "locations": [
         {
@@ -91,15 +104,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 92,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://careers.allianz.com/",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://careers.allianz.com/",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -110,7 +128,8 @@
       "career_url": "https://careers.munichre.com/",
       "aliases": [
         "Muenchener Rueck",
-        "Muenchener Rueckversicherungs-Gesellschaft"
+        "Muenchener Rueckversicherungs-Gesellschaft",
+        "Munich Re"
       ],
       "locations": [
         {
@@ -125,15 +144,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 91,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://careers.munichre.com/",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://careers.munichre.com/",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -144,6 +168,7 @@
       "career_url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
       "aliases": [
         "R&S",
+        "Rohde & Schwarz GmbH & Co. KG",
         "Rohde Schwarz"
       ],
       "locations": [
@@ -159,15 +184,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 89,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Electronics",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -177,7 +207,8 @@
       "official_website_url": "https://www.infineon.com/",
       "career_url": "https://www.infineon.com/careers",
       "aliases": [
-        "Infineon"
+        "Infineon",
+        "Infineon Technologies AG"
       ],
       "locations": [
         {
@@ -192,15 +223,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 88,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.infineon.com/careers",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://www.infineon.com/careers",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Semiconductors",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -211,7 +247,8 @@
       "career_url": "https://careers.gi-de.com/",
       "aliases": [
         "G+D",
-        "Giesecke Devrient"
+        "Giesecke Devrient",
+        "Giesecke+Devrient GmbH"
       ],
       "locations": [
         {
@@ -226,15 +263,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://careers.gi-de.com/",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://careers.gi-de.com/",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Security Technology",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -245,7 +287,8 @@
       "career_url": "https://www.mtu.de/careers/",
       "aliases": [
         "MTU",
-        "MTU Aero Engines"
+        "MTU Aero Engines",
+        "MTU Aero Engines AG"
       ],
       "locations": [
         {
@@ -260,15 +303,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 84,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.mtu.de/careers/",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://www.mtu.de/careers/",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Aerospace",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -278,6 +326,7 @@
       "official_website_url": "https://www.munich-airport.com/",
       "career_url": "https://www.munich-airport.com/careers-263141",
       "aliases": [
+        "Flughafen Muenchen GmbH",
         "FMG",
         "Munich Airport"
       ],
@@ -294,15 +343,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.munich-airport.com/careers-263141",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://www.munich-airport.com/careers-263141",
+        "discovery_origin": "seed.manual",
+        "target_area": "FREISING",
+        "industry_hint": "Airport Operations",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -312,6 +366,7 @@
       "official_website_url": "https://www.swm.de/",
       "career_url": "https://www.swm.de/karriere",
       "aliases": [
+        "Stadtwerke Muenchen GmbH",
         "Stadtwerke Munchen",
         "SWM"
       ],
@@ -328,16 +383,21 @@
       "ats": [],
       "scan_status": "SUCCESS",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-18T13:49:12.490Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.swm.de/karriere",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://www.swm.de/karriere",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Utilities",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T13:49:12.490Z",
-      "last_successful_scan_at": "2026-08-17T13:49:12.490Z"
+      "updated_at": "2026-08-17T15:52:58.666Z",
+      "last_successful_scan_at": "2026-08-17T13:49:12.49Z"
     },
     {
       "company_id": "company:landeshauptstadt_muenchen",
@@ -346,6 +406,7 @@
       "official_website_url": "https://stadt.muenchen.de/",
       "career_url": "https://stadt.muenchen.de/rathaus/karriere.html",
       "aliases": [
+        "Landeshauptstadt Muenchen",
         "LHM",
         "Stadt Muenchen"
       ],
@@ -362,15 +423,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://stadt.muenchen.de/rathaus/karriere.html",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://stadt.muenchen.de/rathaus/karriere.html",
+        "discovery_origin": "seed.manual",
+        "target_area": "MUNICH",
+        "industry_hint": "Public Sector",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     },
     {
@@ -381,6 +447,7 @@
       "career_url": "https://careers.ti.com/",
       "aliases": [
         "Texas Instruments",
+        "Texas Instruments Deutschland GmbH",
         "TI"
       ],
       "locations": [
@@ -396,15 +463,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 76,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://careers.ti.com/",
-        "observed_at": "2026-08-17T11:25:03.559Z"
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "verification_url": "https://careers.ti.com/",
+        "discovery_origin": "seed.manual",
+        "target_area": "FREISING",
+        "industry_hint": "Semiconductors",
+        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T15:52:58.666Z",
       "last_successful_scan_at": null
     }
   ],
@@ -429,8 +501,8 @@
       "employment_type": "UNKNOWN",
       "status": "ACTIVE",
       "first_seen": "2026-08-17T13:48:40.205Z",
-      "last_seen": "2026-08-17T13:49:12.490Z",
-      "changed_at": "2026-08-17T13:49:12.490Z",
+      "last_seen": "2026-08-17T13:49:12.49Z",
+      "changed_at": "2026-08-17T13:49:12.49Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -467,8 +539,8 @@
       "employment_type": "UNKNOWN",
       "status": "ACTIVE",
       "first_seen": "2026-08-17T13:48:40.205Z",
-      "last_seen": "2026-08-17T13:49:12.490Z",
-      "changed_at": "2026-08-17T13:49:12.490Z",
+      "last_seen": "2026-08-17T13:49:12.49Z",
+      "changed_at": "2026-08-17T13:49:12.49Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -505,8 +577,8 @@
       "employment_type": "UNKNOWN",
       "status": "ACTIVE",
       "first_seen": "2026-08-17T13:48:40.205Z",
-      "last_seen": "2026-08-17T13:49:12.490Z",
-      "changed_at": "2026-08-17T13:49:12.490Z",
+      "last_seen": "2026-08-17T13:49:12.49Z",
+      "changed_at": "2026-08-17T13:49:12.49Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -534,8 +606,17 @@
       "url": "https://careers.allianz.com/",
       "canonical_url": "https://careers.allianz.com/",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://careers.allianz.com/",
+        "basis_url": "https://www.allianz.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:bmw_group_career",
@@ -544,8 +625,17 @@
       "url": "https://www.bmwgroup.jobs/de/en.html",
       "canonical_url": "https://www.bmwgroup.jobs/de/en.html",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.bmwgroup.jobs/de/en.html",
+        "basis_url": "https://www.bmwgroup.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:flughafen_muenchen_gmbh_career",
@@ -554,8 +644,17 @@
       "url": "https://www.munich-airport.com/careers-263141",
       "canonical_url": "https://www.munich-airport.com/careers-263141",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.munich-airport.com/careers-263141",
+        "basis_url": "https://www.munich-airport.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:giesecke_plus_devrient_gmbh_career",
@@ -564,8 +663,17 @@
       "url": "https://careers.gi-de.com/",
       "canonical_url": "https://careers.gi-de.com/",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://careers.gi-de.com/",
+        "basis_url": "https://www.gi-de.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:infineon_technologies_ag_career",
@@ -574,8 +682,17 @@
       "url": "https://www.infineon.com/careers",
       "canonical_url": "https://www.infineon.com/careers",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.infineon.com/careers",
+        "basis_url": "https://www.infineon.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:landeshauptstadt_muenchen_career",
@@ -584,8 +701,17 @@
       "url": "https://stadt.muenchen.de/rathaus/karriere.html",
       "canonical_url": "https://stadt.muenchen.de/rathaus/karriere.html",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://stadt.muenchen.de/rathaus/karriere.html",
+        "basis_url": "https://stadt.muenchen.de/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:mtu_aero_engines_ag_career",
@@ -594,8 +720,17 @@
       "url": "https://www.mtu.de/careers/",
       "canonical_url": "https://www.mtu.de/careers/",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.mtu.de/careers/",
+        "basis_url": "https://www.mtu.de/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:munich_re_career",
@@ -604,8 +739,17 @@
       "url": "https://careers.munichre.com/",
       "canonical_url": "https://careers.munichre.com/",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://careers.munichre.com/",
+        "basis_url": "https://www.munichre.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:rohde_and_schwarz_gmbh_and_co_kg_career",
@@ -614,8 +758,17 @@
       "url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
       "canonical_url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+        "basis_url": "https://www.rohde-schwarz.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:siemens_ag_career",
@@ -624,8 +777,17 @@
       "url": "https://jobs.siemens.com/",
       "canonical_url": "https://jobs.siemens.com/",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://jobs.siemens.com/",
+        "basis_url": "https://www.siemens.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:stadtwerke_muenchen_gmbh_career",
@@ -634,8 +796,17 @@
       "url": "https://www.swm.de/karriere",
       "canonical_url": "https://www.swm.de/karriere",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.swm.de/karriere",
+        "basis_url": "https://www.swm.de/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     },
     {
       "source_id": "source:texas_instruments_deutschland_gmbh_career",
@@ -644,8 +815,17 @@
       "url": "https://careers.ti.com/",
       "canonical_url": "https://careers.ti.com/",
       "is_official": true,
-      "verified_at": "2026-08-17T11:25:03.559Z",
-      "verification_basis": "CAREER_URL"
+      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://careers.ti.com/",
+        "basis_url": "https://www.ti.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
     }
   ],
   "scan_runs": [
@@ -732,8 +912,8 @@
     },
     {
       "scan_run_id": "scanrun:20260817T134912490Z",
-      "started_at": "2026-08-17T13:49:12.490Z",
-      "finished_at": "2026-08-17T13:49:16.280Z",
+      "started_at": "2026-08-17T13:49:12.49Z",
+      "finished_at": "2026-08-17T13:49:16.28Z",
       "status": "SUCCESS",
       "company_ids": [
         "company:siemens_ag",
@@ -941,7 +1121,7 @@
       "job_id": "job:company_siemens_ag_official_job_id_s_siemens_com",
       "scan_run_id": "scanrun:20260817T134912490Z",
       "source_id": "source:siemens_ag_career",
-      "captured_at": "2026-08-17T13:49:12.490Z",
+      "captured_at": "2026-08-17T13:49:12.49Z",
       "content_hash": "659c264e066a13272139dae317e1d4165c1d773abe5e6041515b0a0a8ae6dd80",
       "status": "ACTIVE",
       "title": "Job Search",
@@ -960,7 +1140,7 @@
       "job_id": "job:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html",
       "scan_run_id": "scanrun:20260817T134912490Z",
       "source_id": "source:siemens_ag_career",
-      "captured_at": "2026-08-17T13:49:12.490Z",
+      "captured_at": "2026-08-17T13:49:12.49Z",
       "content_hash": "685cc6d0e237b3fb05c32b90ca504f0234c3f897e72642dfb6c26047fae1b934",
       "status": "ACTIVE",
       "title": "FAQs & Support We answer questions we get asked most often, from how to apply to how to further your career once you're on board.",
@@ -979,7 +1159,7 @@
       "job_id": "job:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it",
       "scan_run_id": "scanrun:20260817T134912490Z",
       "source_id": "source:stadtwerke_muenchen_gmbh_career",
-      "captured_at": "2026-08-17T13:49:12.490Z",
+      "captured_at": "2026-08-17T13:49:12.49Z",
       "content_hash": "1829cc4390b5ac014d33a5e13bc7cdfecb0bfc83d6f0bff3296992f4dcbf686b",
       "status": "ACTIVE",
       "title": "IT-Expert*in",
@@ -1045,7 +1225,7 @@
       "job_id": "job:company_siemens_ag_official_job_id_s_siemens_com",
       "scan_run_id": "scanrun:20260817T134912490Z",
       "event_type": "JOB_UPDATED",
-      "created_at": "2026-08-17T13:49:12.490Z",
+      "created_at": "2026-08-17T13:49:12.49Z",
       "old_status": "NEW",
       "new_status": "ACTIVE",
       "changed_fields": [
@@ -1058,7 +1238,7 @@
       "job_id": "job:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html",
       "scan_run_id": "scanrun:20260817T134912490Z",
       "event_type": "JOB_UPDATED",
-      "created_at": "2026-08-17T13:49:12.490Z",
+      "created_at": "2026-08-17T13:49:12.49Z",
       "old_status": "NEW",
       "new_status": "ACTIVE",
       "changed_fields": [
@@ -1071,7 +1251,7 @@
       "job_id": "job:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it",
       "scan_run_id": "scanrun:20260817T134912490Z",
       "event_type": "JOB_UPDATED",
-      "created_at": "2026-08-17T13:49:12.490Z",
+      "created_at": "2026-08-17T13:49:12.49Z",
       "old_status": "NEW",
       "new_status": "ACTIVE",
       "changed_fields": [
