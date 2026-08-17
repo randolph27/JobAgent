@@ -1,1 +1,119 @@
-{"goal":"","route_violations":[],"agent_id":"UTTER-20260817-39f7","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","project":"JobAgent","refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"active_id":"","route":null,"next_steps":["M5 - Qualität, Live-Abdeckung und Erweiterung: JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen."],"git":{"tracked_changes":["todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"branch":"master","remote":"origin","upstream":"origin/master","ahead":1,"worktree":"dirty","detached":false,"has_repo":true,"behind":0,"head":"00043b66a2ac"},"verified":[{"exit":0,"cmd":".\\ci.cmd supertest","status":"pass"}],"capsule":{"agent_id":"UTTER-20260817-39f7","project":"JobAgent","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"manual_missing":false,"workspace_root":".","env_inventory_missing":false,"env_inventory_path":null,"verified":[{"exit":0,"cmd":".\\ci.cmd supertest","status":"pass"}],"active_id":"","ts":"2026-08-17T15:56:15.143+02:00","route_ok":null,"next":"M5 - Qualität, Live-Abdeckung und Erweiterung: JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen.","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","status":"open","changed":["todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"route_violations":[],"git":{"tracked_changes":["todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"branch":"master","remote":"origin","upstream":"origin/master","ahead":1,"worktree":"dirty","detached":false,"has_repo":true,"behind":0,"head":"00043b66a2ac"},"goal":"","env_inventory_used":false},"changed":["todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"workspace_root":".","summary":"stp sync","verify_digest":{"ts":"2026-08-17T15:37:24.1633138+02:00","exit":0,"fail_signature":null,"failed_tasks":[],"cmd":".\\ci.cmd supertest","tests":["Test-JobAgentSchema.ps1","Test-JobAgentPersistence.ps1","Test-JobAgentCompanyInventory.ps1","Test-JobAgentSourceAdapters.ps1","Test-JobAgentSourceVerification.ps1","Test-JobAgentClassification.ps1","Test-JobAgentDeduplication.ps1","Test-JobAgentStatusMachine.ps1","Test-JobAgentDailyRun.ps1","Test-JobAgentReport.ps1","Test-JobAgentOperations.ps1","Test-JobAgentTestMatrix.ps1"],"status":"pass","log_path":null},"route_ok":null,"next":"M5 - Qualität, Live-Abdeckung und Erweiterung: JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen.","toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"status":"open","ts":"2026-08-17T15:56:15.143+02:00"}
+{
+  "goal": "",
+  "route_violations": [],
+  "agent_id": "UTTER-20260817-39f7",
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+  "project": "JobAgent",
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:logs/verify/verify.digest.json"
+  ],
+  "active_id": "",
+  "route": null,
+  "next_steps": [
+    "M5 - Qualität, Live-Abdeckung und Erweiterung: JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen."
+  ],
+  "git": {
+    "tracked_changes": [],
+    "branch": "master",
+    "remote": "origin",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "worktree": "clean",
+    "detached": false,
+    "has_repo": true,
+    "behind": 0,
+    "head": "30d2c77"
+  },
+  "verified": [
+    {
+      "exit": 0,
+      "cmd": ".\\ci.cmd supertest",
+      "status": "pass"
+    }
+  ],
+  "capsule": {
+    "agent_id": "UTTER-20260817-39f7",
+    "project": "JobAgent",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "manual_missing": false,
+    "workspace_root": ".",
+    "env_inventory_missing": false,
+    "env_inventory_path": null,
+    "verified": [
+      {
+        "exit": 0,
+        "cmd": ".\\ci.cmd supertest",
+        "status": "pass"
+      }
+    ],
+    "active_id": "",
+    "ts": "2026-08-17T15:58:00.000+02:00",
+    "route_ok": null,
+    "next": "M5 - Qualität, Live-Abdeckung und Erweiterung: JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen.",
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+    "status": "open",
+    "changed": [],
+    "route_violations": [],
+    "git": {
+      "tracked_changes": [],
+      "branch": "master",
+      "remote": "origin",
+      "upstream": "origin/master",
+      "ahead": 0,
+      "worktree": "clean",
+      "detached": false,
+      "has_repo": true,
+      "behind": 0,
+      "head": "30d2c77"
+    },
+    "goal": "",
+    "env_inventory_used": false
+  },
+  "changed": [],
+  "workspace_root": ".",
+  "summary": "stp sync",
+  "verify_digest": {
+    "ts": "2026-08-17T15:37:24.1633138+02:00",
+    "exit": 0,
+    "fail_signature": null,
+    "failed_tasks": [],
+    "cmd": ".\\ci.cmd supertest",
+    "tests": [
+      "Test-JobAgentSchema.ps1",
+      "Test-JobAgentPersistence.ps1",
+      "Test-JobAgentCompanyInventory.ps1",
+      "Test-JobAgentSourceAdapters.ps1",
+      "Test-JobAgentSourceVerification.ps1",
+      "Test-JobAgentClassification.ps1",
+      "Test-JobAgentDeduplication.ps1",
+      "Test-JobAgentStatusMachine.ps1",
+      "Test-JobAgentDailyRun.ps1",
+      "Test-JobAgentReport.ps1",
+      "Test-JobAgentOperations.ps1",
+      "Test-JobAgentTestMatrix.ps1"
+    ],
+    "status": "pass",
+    "log_path": null
+  },
+  "route_ok": null,
+  "next": "M5 - Qualität, Live-Abdeckung und Erweiterung: JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen.",
+  "toolchain": {
+    "ts": "2026-08-17T13:53:15.642+02:00",
+    "gradle": {
+      "cmd": "gradle",
+      "mode": "path",
+      "root": "D:\\_Scripte\\JobAgent"
+    }
+  },
+  "status": "open",
+  "ts": "2026-08-17T15:58:00.000+02:00"
+}

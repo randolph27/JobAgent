@@ -6,8 +6,10 @@ Stand: 2026-08-17T15:56:15+02:00
 
 - Projekt: JobAgent
 - Branch: `master`
-- HEAD vor STP-Commit: `00043b6`
+- HEAD nach STP-Commit: `30d2c77`
+- Vorheriger JA-014-Commit: `00043b66a2ac`
 - Upstream: `origin/master`
+- Worktree: `clean`
 - Active: _(none)_
 - Status: `open`
 - Abgeschlossen und rotiert: JA-014 / TD-0012
