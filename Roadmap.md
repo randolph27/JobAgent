@@ -9,23 +9,6 @@
 
 ## M5 - Qualität, Live-Abdeckung und Erweiterung
 
-- [ ] JA-014 Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchführen #comment: Erst nach stabiler Mock-Logik darf eine kleine Live-Lane offizielle Quellen prüfen und reale Treffer belastbar nachweisen.
-  - [ ] Beschreibung: Führe einen begrenzten Live-Pilot mit ausgewählten offiziellen Karrierequellen durch, speichere Scanversuche, verifizierte Treffer, Nicht-Treffer und technische Fehler ohne ungesicherte Behauptungen.
-  - [ ] Scope: Kleine Firmenstichprobe aus dem Inventar, Live-Scan-Logs, Review der Ergebnisse; keine großflächige Recherche ohne Rate-/Laufzeitgrenzen.
-  - [ ] Ist-Stand (2026-08-17 12:20): Keine Live-Recherche durchgeführt; keine Firmen oder Stellen sind fachlich verifiziert.
-  - [ ] Abhängigkeiten: JA-004 bis JA-013, insbesondere Quellenverifikation und Statusmaschine.
-  - [ ] Aufwand/Dauer: Aufwand M-L, Dauer 1-3 PT je nach Portalen; parallelisierbar mit Ausbau weiterer Adapter nach Pilotbefund.
-  - [ ] Prioritätsscore: 58/100, weil Live-Abdeckung wertvoll ist, aber erst nach deterministischer Kernlogik belastbar wird.
-  - [ ] Risiken: Websites ändern Struktur, blockieren Abrufe oder liefern dynamische Inhalte; einzelne Fehler dürfen nicht als fehlende Stellen gelten.
-  - [ ] Schritte:
-    1. Wähle eine kleine, dokumentierte Firmenstichprobe mit offizieller Karriere-URL und klarer Firmen-ID aus dem Inventar.
-    2. Führe Live-Scans mit festen Timeouts, User-Agent-Regeln, Retry-Grenzen und vollständigen ScanAttempt-Logs aus.
-    3. Prüfe jede gefundene potenzielle Stelle gegen offizielle Detailseite, Zielprofil, Standort und Status, bevor sie im Bericht als verifiziert erscheint.
-  - [ ] Evidence: `logs/jobagent/live-pilot-<date>.json`, Bericht mit geprüften Firmen, Trefferstatus, Fehlerklassen und offizieller URL je verifiziertem Treffer.
-  - [ ] Funktionstest: Vor Live-Pilot alle Mock-Funktionstests ausführen; nach Pilot Validierung der erzeugten Datenbank gegen Schema und keine Duplikate.
-  - [ ] Audit: Manuelle Stichprobe jeder als verifiziert ausgegebenen Stelle; unklare Treffer müssen als nicht verifiziert markiert oder ausgeschlossen sein.
-  - [ ] Supertest: Supertest bleibt mock-basiert; Live-Pilot als separate Lane dokumentieren und nicht als deterministisches Pflichtgate verwenden.
-
 - [ ] JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen.
   - [ ] Beschreibung: Implementiere einen Verbesserungszyklus, der unbekannte Firmen, fehlerhafte Portale, neue ATS-Systeme und lange nicht geprüfte Unternehmen priorisiert und die Abdeckung messbar erweitert.
   - [ ] Scope: Coverage-Metriken, Backlog für Firmen/Adapter, Scanpriorisierung, Reportabschnitt für Abdeckung; keine automatische Zusammenführung unklarer Unternehmensgruppen.

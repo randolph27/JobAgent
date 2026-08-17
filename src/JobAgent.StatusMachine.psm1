@@ -258,7 +258,7 @@ function Invoke-JobAgentStatusMachine {
     param(
         [Parameter(Mandatory)][object]$Document,
         [Parameter(Mandatory)][string]$ScanRunId,
-        [Parameter(Mandatory)][object[]]$AdapterResults,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$AdapterResults,
         [Parameter()][datetime]$ObservedAt = [datetime]::UtcNow
     )
 

@@ -43,6 +43,7 @@ $actualIds = @($items | ForEach-Object { [string]$_.roadmap_id })
 foreach ($id in $expectedIds) {
     Assert-True -Condition ($actualIds -contains $id) -Message "Testmatrix fehlt $id."
 }
+Assert-True -Condition ($actualIds -contains 'JA-014') -Message 'Testmatrix fehlt JA-014 Live-Lane.'
 Assert-True -Condition ($actualIds.Count -eq (@($actualIds | Select-Object -Unique).Count)) -Message 'Testmatrix enthaelt doppelte Roadmap-IDs.'
 
 $markdown = Get-Content -LiteralPath $matrixDocPath -Raw
@@ -57,10 +58,15 @@ foreach ($item in $items) {
     }
 
     Assert-True -Condition ($item.status -eq 'done') -Message "Testmatrix-Eintrag $($item.roadmap_id) ist nicht abgeschlossen markiert."
-    Assert-True -Condition ($item.lane -eq 'deterministic-fixture') -Message "Testmatrix-Eintrag $($item.roadmap_id) nutzt keine deterministische Fixture-Lane."
     Assert-True -Condition (@($item.coverage).Count -ge 3) -Message "Testmatrix-Eintrag $($item.roadmap_id) hat zu wenig Coverage-Punkte."
     Assert-True -Condition ($item.command -match '^pwsh -NoProfile -File tests\\Test-JobAgent.*\.ps1$') -Message "Ungueltiger Command fuer $($item.roadmap_id): $($item.command)"
     Assert-True -Condition ($item.command -notmatch 'http://|https://|Invoke-WebRequest|Invoke-RestMethod|curl') -Message "Funktionstest darf keine Live-Webabhängigkeit enthalten: $($item.roadmap_id)"
+    if ($item.include_in_supertest -eq $true) {
+        Assert-True -Condition ($item.lane -eq 'deterministic-fixture') -Message "Supertest-Eintrag $($item.roadmap_id) nutzt keine deterministische Fixture-Lane."
+    }
+    else {
+        Assert-True -Condition ($item.lane -eq 'separate-live-pilot') -Message "Nicht-Supertest-Eintrag $($item.roadmap_id) muss als separate Live-Lane markiert sein."
+    }
 
     $relativeTestFile = Get-RelativePath -Path ([string]$item.test_file)
     Assert-True -Condition (Test-Path -LiteralPath (Join-Path $root $relativeTestFile) -PathType Leaf) -Message "Testdatei fehlt: $relativeTestFile"
@@ -80,7 +86,7 @@ Assert-True -Condition (($expected -join '|') -eq ($actual -join '|')) -Message 
     status = 'ok'
     cases = @(
         'matrix_schema',
-        'roadmap_id_coverage_ja002_to_ja013',
+        'roadmap_id_coverage_ja002_to_ja014',
         'test_files_exist',
         'commands_are_deterministic',
         'supertest_matches_matrix',

@@ -191,7 +191,7 @@ function Update-JobAgentDailyRunCompanyState {
 }
 
 function Get-JobAgentDailyRunStatus {
-    param([Parameter(Mandatory)][object[]]$AdapterResults)
+    param([Parameter(Mandatory)][AllowEmptyCollection()][object[]]$AdapterResults)
 
     if ($AdapterResults.Count -eq 0) {
         return 'SKIPPED'
@@ -209,7 +209,7 @@ function New-JobAgentDailyRunSummary {
     param(
         [Parameter(Mandatory)][object]$Document,
         [Parameter(Mandatory)][string]$ScanRunId,
-        [Parameter(Mandatory)][object[]]$AdapterResults,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$AdapterResults,
         [Parameter(Mandatory)][string]$ReportPath,
         [Parameter(Mandatory)][datetime]$StartedAt,
         [Parameter(Mandatory)][datetime]$FinishedAt
@@ -233,7 +233,7 @@ function New-JobAgentDailyRunSummary {
         status = Get-JobAgentDailyRunStatus -AdapterResults $AdapterResults
         report_path = $ReportPath
         statistics = [pscustomobject]@{
-            companies_scanned = @($AdapterResults.company_id | Select-Object -Unique).Count
+            companies_scanned = @($AdapterResults | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count
             adapter_attempts = $AdapterResults.Count
             raw_jobs = @($AdapterResults | ForEach-Object { @($_.raw_jobs).Count } | Measure-Object -Sum).Sum
             snapshots = $jobsForRun.Count
@@ -361,7 +361,7 @@ function Invoke-JobAgentDailyRun {
             started_at = ConvertTo-JobAgentDailyIso -Value $StartedAt
             finished_at = ConvertTo-JobAgentDailyIso -Value $finishedAt
             status = Get-JobAgentDailyRunStatus -AdapterResults $resultsArray
-            company_ids = @($companies.company_id)
+            company_ids = @($companies | ForEach-Object { [string]$_.company_id })
             artifact_paths = @($reportRelativePath, $markdownReportRelativePath)
             errors = @($resultsArray | Where-Object { [string]$_.status -eq 'FAILED' } | ForEach-Object { $_.error_class })
         }

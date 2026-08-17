@@ -1,129 +1,195 @@
 {
-  "next_steps": [
-    "Kleine Firmenstichprobe aus data/jobagent/store.json mit offizieller Karriere-URL waehlen.",
-    "Live-Lane mit Timeouts, User-Agent-Regeln, Retry-Grenzen und ScanAttempt-Logs anbinden.",
-    "Potenzielle Stellen nur nach offizieller Detailseite, Zielprofil, Standort und Status als verifiziert ausgeben.",
-    "Live-Pilot getrennt vom deterministischen Supertest dokumentieren."
+  "ts": "2026-08-17T15:52:00+02:00",
+  "project": "JobAgent",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "active_id": "",
+  "status": "open",
+  "goal": "JA-014 abgeschlossen; naechster Einstieg TD-0013 / JA-015.",
+  "summary": "JA-014 Live-Scan-Pilot ist umgesetzt, validiert und archiviert. Live-Pilot lief erfolgreich fuer Siemens AG und Stadtwerke Muenchen GmbH; keine passende IT-Fuehrungsstelle wurde verifiziert.",
+  "next": "TD-0013 / JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren.",
+  "changed": [
+    "src/JobAgent.LiveScan.psm1",
+    "tools/Invoke-JobAgentLivePilot.ps1",
+    "tests/Test-JobAgentLiveScan.ps1",
+    "src/JobAgent.DailyRun.psm1",
+    "src/JobAgent.StatusMachine.psm1",
+    "src/JobAgent.SourceAdapters.psm1",
+    ".ci/bin/modules/core-utils.ps1",
+    "docs/test-matrix.json",
+    "docs/test-matrix.md",
+    "tests/Test-JobAgentTestMatrix.ps1",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "data/jobagent/store.json",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.master.index.json",
+    "todo.checkpoint.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
-  "route_ok": null,
-  "ts": "2026-08-17T15:39:00.959+02:00",
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd supertest",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd runtime-update",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd self-check",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0
-    },
-    {
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
       "exit": 0,
-      "status": "UP"
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": ".\\ci.cmd supertest"
+    },
+    {
+      "exit": 0,
+      "cmd": ".\\ci.cmd runtime-update"
+    },
+    {
+      "exit": 0,
+      "cmd": ".\\ci.cmd self-check"
     },
     {
       "cmd": ".\\ci.cmd devserver-status",
       "exit": 0,
       "status": "port=8300 listening=True"
+    },
+    {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "exit": 0,
+      "status": "UP"
     }
   ],
   "refs": [
     "Roadmap.md",
     "Roadmap_archive.md",
-    "docs/test-matrix.json",
-    "docs/test-matrix.md",
-    "tests/Test-JobAgentTestMatrix.ps1",
-    "tests/Test-JobAgentSupertest.ps1",
+    "logs/jobagent/live-pilot-20260817.json",
+    "logs/jobagent/daily-run-20260817T134912490Z.json",
+    "logs/jobagent/daily-run-20260817T134912490Z.md",
     "todo.current.md",
     "todo.state.json",
     "handoff.latest.md",
     "handoff.latest.json"
   ],
-  "goal": "Neuen Chat bei TD-0012 / JA-014 fortsetzen.",
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+  "route_ok": null,
   "route_violations": [],
-  "verify_digest": {
-    "ts": "2026-08-17T15:37:24.1633138+02:00",
-    "exit": 0,
-    "fail_signature": null,
-    "failed_tasks": [],
-    "cmd": ".\\ci.cmd supertest",
-    "tests": [
-      "Test-JobAgentSchema.ps1",
-      "Test-JobAgentPersistence.ps1",
-      "Test-JobAgentCompanyInventory.ps1",
-      "Test-JobAgentSourceAdapters.ps1",
-      "Test-JobAgentSourceVerification.ps1",
-      "Test-JobAgentClassification.ps1",
-      "Test-JobAgentDeduplication.ps1",
-      "Test-JobAgentStatusMachine.ps1",
-      "Test-JobAgentDailyRun.ps1",
-      "Test-JobAgentReport.ps1",
-      "Test-JobAgentOperations.ps1",
-      "Test-JobAgentTestMatrix.ps1"
+  "live_pilot": {
+    "scan_run_id": "scanrun:20260817T134912490Z",
+    "verified_matching_jobs": 0,
+    "adapter_attempts": 2,
+    "pilot_path": "logs/jobagent/live-pilot-20260817.json",
+    "companies": [
+      "company:siemens_ag",
+      "company:stadtwerke_muenchen_gmbh"
     ],
-    "status": "pass",
-    "log_path": null
+    "status": "SUCCESS",
+    "official_detail_pages_checked": 3,
+    "errors": 0
   },
-  "next": "TD-0012 / JA-014 Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchführen.",
-  "toolchain": {
-    "ts": "2026-08-17T13:53:15.642+02:00",
-    "gradle": {
-      "cmd": "gradle",
-      "mode": "path",
-      "root": "D:\\_Scripte\\JobAgent"
-    }
+  "git": {
+    "remote": "origin",
+    "worktree": "dirty",
+    "branch": "master",
+    "behind": 0,
+    "ahead": 0,
+    "head": "5c1aa92",
+    "upstream": "origin/master",
+    "tracked_changes": [
+      ".ci/bin/modules/core-utils.ps1",
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "data/jobagent/store.json",
+      "docs/test-matrix.json",
+      "docs/test-matrix.md",
+      "src/JobAgent.DailyRun.psm1",
+      "src/JobAgent.SourceAdapters.psm1",
+      "src/JobAgent.StatusMachine.psm1",
+      "tests/Test-JobAgentTestMatrix.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.master.index.json",
+      "todo.state.json",
+      "handoff.latest.md",
+      "handoff.latest.json"
+    ]
   },
-  "active_id": "",
-  "project": "JobAgent",
-  "summary": "JA-013 ist abgeschlossen, getestet und archiviert. Testmatrix und Matrix-Vertragstest sind angelegt; der Supertest umfasst JA-002 bis JA-013. Naechster Einstieg ist TD-0012 / JA-014 Live-Scan-Pilot.",
   "capsule": {
+    "route_ok": null,
+    "route_violations": [],
+    "project": "JobAgent",
     "git": {
-      "detached": false,
-      "branch": "master",
       "ahead": 0,
-      "head": "8cdf88e51e45",
       "worktree": "dirty",
-      "remote": "origin",
+      "branch": "master",
+      "head": "5c1aa92",
       "behind": 0,
       "upstream": "origin/master",
       "tracked_changes": [
+        ".ci/bin/modules/core-utils.ps1",
         ".ci/pins/immutable.hashes.json",
         ".ci/pins/immutable.snapshot/Roadmap.md",
         "Roadmap.md",
         "Roadmap_archive.md",
         "Roadmap_index.md",
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "tests/Test-JobAgentSupertest.ps1",
+        "data/jobagent/store.json",
+        "docs/test-matrix.json",
+        "docs/test-matrix.md",
+        "src/JobAgent.DailyRun.psm1",
+        "src/JobAgent.SourceAdapters.psm1",
+        "src/JobAgent.StatusMachine.psm1",
+        "tests/Test-JobAgentTestMatrix.ps1",
+        "todo.checkpoint.json",
         "todo.current.md",
         "todo.events.jsonl",
-        "todo.history.digest.json",
         "todo.master.index.json",
-        "todo.state.json"
-      ],
-      "has_repo": true
+        "todo.state.json",
+        "handoff.latest.md",
+        "handoff.latest.json"
+      ]
     },
+    "ts": "2026-08-17T15:52:00+02:00",
     "manual_missing": false,
-    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-    "active_id": "",
-    "goal": "Neuen Chat bei TD-0012 / JA-014 fortsetzen.",
     "env_inventory_used": false,
-    "route_ok": null,
-    "ts": "2026-08-17T15:39:00.959+02:00",
-    "agent_id": "UTTER-20260817-39f7",
+    "active_id": "",
+    "verified": [
+      {
+        "exit": 0,
+        "cmd": ".\\ci.cmd supertest"
+      },
+      {
+        "exit": 0,
+        "cmd": ".\\ci.cmd self-check"
+      }
+    ],
+    "status": "open",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "goal": "JA-014 abgeschlossen; naechster Einstieg TD-0013 / JA-015.",
+    "changed": [
+      "src/JobAgent.LiveScan.psm1",
+      "tools/Invoke-JobAgentLivePilot.ps1",
+      "tests/Test-JobAgentLiveScan.ps1",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "todo.state.json"
+    ],
     "refs": [
       "todo.current.md",
       "todo.state.json",
@@ -131,90 +197,9 @@
       "handoff.latest.json",
       "handoff.latest.md"
     ],
-    "next": "TD-0012 / JA-014 Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchführen.",
     "env_inventory_path": null,
-    "status": "open",
-    "workspace_root": ".",
-    "changed": [
-      ".ci/pins/immutable.hashes.json",
-      ".ci/pins/immutable.snapshot/Roadmap.md",
-      "Roadmap.md",
-      "Roadmap_archive.md",
-      "Roadmap_index.md",
-      "docs/test-matrix.json",
-      "docs/test-matrix.md",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "tests/Test-JobAgentSupertest.ps1",
-      "tests/Test-JobAgentTestMatrix.ps1",
-      "todo.checkpoint.json",
-      "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "env_inventory_missing": false,
-    "project": "JobAgent",
-    "verified": [
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": ".\\ci.cmd supertest",
-        "exit": 0
-      }
-    ],
-    "route_violations": []
-  },
-  "status": "open",
-  "changed": [
-    ".ci/pins/immutable.hashes.json",
-    ".ci/pins/immutable.snapshot/Roadmap.md",
-    "Roadmap.md",
-    "Roadmap_archive.md",
-    "Roadmap_index.md",
-    "docs/test-matrix.json",
-    "docs/test-matrix.md",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "tests/Test-JobAgentSupertest.ps1",
-    "tests/Test-JobAgentTestMatrix.ps1",
-    "todo.checkpoint.json",
-    "todo.current.md",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "todo.state.json"
-  ],
-  "git": {
-    "detached": false,
-    "branch": "master",
-    "ahead": 0,
-    "head": "8cdf88e51e45",
-    "worktree": "dirty",
-    "remote": "origin",
-    "behind": 0,
-    "upstream": "origin/master",
-    "tracked_changes": [
-      ".ci/pins/immutable.hashes.json",
-      ".ci/pins/immutable.snapshot/Roadmap.md",
-      "Roadmap.md",
-      "Roadmap_archive.md",
-      "Roadmap_index.md",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "tests/Test-JobAgentSupertest.ps1",
-      "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "has_repo": true
-  },
-  "agent_id": "UTTER-20260817-39f7",
-  "route": null,
-  "workspace_root": "."
+    "agent_id": "UTTER-20260817-39f7",
+    "next": "TD-0013 / JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren.",
+    "env_inventory_missing": false
+  }
 }

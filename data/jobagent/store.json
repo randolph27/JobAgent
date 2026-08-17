@@ -23,9 +23,9 @@
       ],
       "industry": "Automotive",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 95,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-17T19:48:05.98Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -33,7 +33,7 @@
         "observed_at": "2026-08-17T11:25:03.559Z"
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
+      "updated_at": "2026-08-17T13:48:05.98Z",
       "last_successful_scan_at": null
     },
     {
@@ -56,9 +56,9 @@
       ],
       "industry": "Industrial Technology",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 94,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T13:49:12.490Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -66,8 +66,8 @@
         "observed_at": "2026-08-17T11:25:03.559Z"
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-08-17T13:49:12.490Z",
+      "last_successful_scan_at": "2026-08-17T13:49:12.490Z"
     },
     {
       "company_id": "company:allianz_se",
@@ -91,7 +91,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 92,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -125,7 +125,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 91,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -159,7 +159,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 89,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -192,7 +192,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 88,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -226,7 +226,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -260,7 +260,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 84,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -294,7 +294,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -326,9 +326,9 @@
       ],
       "industry": "Utilities",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T13:49:12.490Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -336,8 +336,8 @@
         "observed_at": "2026-08-17T11:25:03.559Z"
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T11:25:03.559Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-08-17T13:49:12.490Z",
+      "last_successful_scan_at": "2026-08-17T13:49:12.490Z"
     },
     {
       "company_id": "company:landeshauptstadt_muenchen",
@@ -362,7 +362,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -396,7 +396,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 76,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -408,7 +408,124 @@
       "last_successful_scan_at": null
     }
   ],
-  "jobs": [],
+  "jobs": [
+    {
+      "job_id": "job:company_siemens_ag_official_job_id_s_siemens_com",
+      "company_id": "company:siemens_ag",
+      "official_url": "https://jobs.siemens.com/en_US/externaljobs/Home",
+      "alternative_official_urls": [],
+      "source_id": "source:siemens_ag_career",
+      "external_job_id": "s.siemens.com",
+      "ats_job_id": "UNKNOWN",
+      "title": "Job Search",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "status": "ACTIVE",
+      "first_seen": "2026-08-17T13:48:40.205Z",
+      "last_seen": "2026-08-17T13:49:12.490Z",
+      "changed_at": "2026-08-17T13:49:12.490Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-08-17T13:48:40.205Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html",
+      "company_id": "company:siemens_ag",
+      "official_url": "https://siemens.com/global/en/company/jobs/faq.html",
+      "alternative_official_urls": [],
+      "source_id": "source:siemens_ag_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "FAQs & Support We answer questions we get asked most often, from how to apply to how to further your career once you're on board.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "status": "ACTIVE",
+      "first_seen": "2026-08-17T13:48:40.205Z",
+      "last_seen": "2026-08-17T13:49:12.490Z",
+      "changed_at": "2026-08-17T13:49:12.490Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-08-17T13:48:40.205Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it",
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "official_url": "https://swm.de/karriere/it",
+      "alternative_official_urls": [],
+      "source_id": "source:stadtwerke_muenchen_gmbh_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "IT-Expert*in",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "status": "ACTIVE",
+      "first_seen": "2026-08-17T13:48:40.205Z",
+      "last_seen": "2026-08-17T13:49:12.490Z",
+      "changed_at": "2026-08-17T13:49:12.490Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [
+          "IT-Bezug ist explizit vorhanden."
+        ],
+        "rejected_reasons": [
+          "Standortbezug ist unklar.",
+          "Titel wirkt wie Spezialisten- oder Entwicklerrolle ohne belegte Gesamtverantwortung."
+        ],
+        "evaluated_at": "2026-08-17T13:48:40.205Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    }
+  ],
   "job_sources": [
     {
       "source_id": "source:allianz_se_career",
@@ -531,8 +648,436 @@
       "verification_basis": "CAREER_URL"
     }
   ],
-  "scan_runs": [],
-  "scan_attempts": [],
-  "job_snapshots": [],
-  "change_events": []
+  "scan_runs": [
+    {
+      "scan_run_id": "scanrun:20260817T134637888Z",
+      "started_at": "2026-08-17T13:46:37.888Z",
+      "finished_at": "2026-08-17T13:46:38.053Z",
+      "status": "SKIPPED",
+      "company_ids": [],
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260817T134637888Z.json",
+        "logs/jobagent/daily-run-20260817T134637888Z.md"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260817T134644041Z",
+      "started_at": "2026-08-17T13:46:44.041Z",
+      "finished_at": "2026-08-17T13:47:00.489Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:bmw_group",
+        "company:siemens_ag"
+      ],
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260817T134644041Z.json",
+        "logs/jobagent/daily-run-20260817T134644041Z.md"
+      ],
+      "errors": [
+        "TECHNICAL_LIMITATION",
+        "TECHNICAL_LIMITATION"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260817T134723638Z",
+      "started_at": "2026-08-17T13:47:23.638Z",
+      "finished_at": "2026-08-17T13:47:39.739Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:bmw_group",
+        "company:siemens_ag"
+      ],
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260817T134723638Z.json",
+        "logs/jobagent/daily-run-20260817T134723638Z.md"
+      ],
+      "errors": [
+        "TECHNICAL_LIMITATION",
+        "TECHNICAL_LIMITATION"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260817T134805980Z",
+      "started_at": "2026-08-17T13:48:05.98Z",
+      "finished_at": "2026-08-17T13:48:22.04Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:bmw_group",
+        "company:siemens_ag"
+      ],
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260817T134805980Z.json",
+        "logs/jobagent/daily-run-20260817T134805980Z.md"
+      ],
+      "errors": [
+        "NOT_REACHABLE",
+        "NOT_REACHABLE"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "started_at": "2026-08-17T13:48:40.205Z",
+      "finished_at": "2026-08-17T13:48:45.362Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:siemens_ag",
+        "company:stadtwerke_muenchen_gmbh"
+      ],
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260817T134840205Z.json",
+        "logs/jobagent/daily-run-20260817T134840205Z.md"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "started_at": "2026-08-17T13:49:12.490Z",
+      "finished_at": "2026-08-17T13:49:16.280Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:siemens_ag",
+        "company:stadtwerke_muenchen_gmbh"
+      ],
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260817T134912490Z.json",
+        "logs/jobagent/daily-run-20260817T134912490Z.md"
+      ],
+      "errors": []
+    }
+  ],
+  "scan_attempts": [
+    {
+      "scan_attempt_id": "scanattempt:bmw_group_bmw_group_career_20260817t134644220z",
+      "scan_run_id": "scanrun:20260817T134644041Z",
+      "company_id": "company:bmw_group",
+      "source_id": "source:bmw_group_career",
+      "started_at": "2026-08-17T13:46:44.22Z",
+      "finished_at": "2026-08-17T13:46:59.28Z",
+      "status": "FAILED",
+      "adapter": "daily-run-adapter-wrapper",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 599
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_ag_siemens_ag_career_20260817t134659300z",
+      "scan_run_id": "scanrun:20260817T134644041Z",
+      "company_id": "company:siemens_ag",
+      "source_id": "source:siemens_ag_career",
+      "started_at": "2026-08-17T13:46:59.3Z",
+      "finished_at": "2026-08-17T13:47:00.454Z",
+      "status": "FAILED",
+      "adapter": "daily-run-adapter-wrapper",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 599
+    },
+    {
+      "scan_attempt_id": "scanattempt:bmw_group_bmw_group_career_20260817t134723808z",
+      "scan_run_id": "scanrun:20260817T134723638Z",
+      "company_id": "company:bmw_group",
+      "source_id": "source:bmw_group_career",
+      "started_at": "2026-08-17T13:47:23.808Z",
+      "finished_at": "2026-08-17T13:47:38.873Z",
+      "status": "FAILED",
+      "adapter": "daily-run-adapter-wrapper",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 599
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_ag_siemens_ag_career_20260817t134738885z",
+      "scan_run_id": "scanrun:20260817T134723638Z",
+      "company_id": "company:siemens_ag",
+      "source_id": "source:siemens_ag_career",
+      "started_at": "2026-08-17T13:47:38.885Z",
+      "finished_at": "2026-08-17T13:47:39.707Z",
+      "status": "FAILED",
+      "adapter": "daily-run-adapter-wrapper",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 599
+    },
+    {
+      "scan_attempt_id": "scanattempt:bmw_group_bmw_group_career_20260817t134806157z",
+      "scan_run_id": "scanrun:20260817T134805980Z",
+      "company_id": "company:bmw_group",
+      "source_id": "source:bmw_group_career",
+      "started_at": "2026-08-17T13:48:06.157Z",
+      "finished_at": "2026-08-17T13:48:21.204Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_ag_siemens_ag_career_20260817t134821222z",
+      "scan_run_id": "scanrun:20260817T134805980Z",
+      "company_id": "company:siemens_ag",
+      "source_id": "source:siemens_ag_career",
+      "started_at": "2026-08-17T13:48:21.222Z",
+      "finished_at": "2026-08-17T13:48:22.008Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_ag_siemens_ag_career_20260817t134840386z",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "company_id": "company:siemens_ag",
+      "source_id": "source:siemens_ag_career",
+      "started_at": "2026-08-17T13:48:40.386Z",
+      "finished_at": "2026-08-17T13:48:44.942Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200
+    },
+    {
+      "scan_attempt_id": "scanattempt:stadtwerke_muenchen_gmbh_stadtwerke_muenchen_gmbh_career_20260817t134845012z",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "source_id": "source:stadtwerke_muenchen_gmbh_career",
+      "started_at": "2026-08-17T13:48:45.012Z",
+      "finished_at": "2026-08-17T13:48:45.276Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_ag_siemens_ag_career_20260817t134912672z",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "company_id": "company:siemens_ag",
+      "source_id": "source:siemens_ag_career",
+      "started_at": "2026-08-17T13:49:12.672Z",
+      "finished_at": "2026-08-17T13:49:15.896Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200
+    },
+    {
+      "scan_attempt_id": "scanattempt:stadtwerke_muenchen_gmbh_stadtwerke_muenchen_gmbh_career_20260817t134915935z",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "source_id": "source:stadtwerke_muenchen_gmbh_career",
+      "started_at": "2026-08-17T13:49:15.935Z",
+      "finished_at": "2026-08-17T13:49:16.173Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200
+    }
+  ],
+  "job_snapshots": [
+    {
+      "snapshot_id": "snapshot:company_siemens_ag_official_job_id_s_siemens_com_20260817t134840205z",
+      "job_id": "job:company_siemens_ag_official_job_id_s_siemens_com",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "source_id": "source:siemens_ag_career",
+      "captured_at": "2026-08-17T13:48:40.205Z",
+      "content_hash": "659c264e066a13272139dae317e1d4165c1d773abe5e6041515b0a0a8ae6dd80",
+      "status": "NEW",
+      "title": "Job Search",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens.com/en_US/externaljobs/Home",
+      "summary": "Jobs at Siemens Skip to content Skip to footer Job Search All Jobs AI Recommendations FAQs & Support English Deutsch English Español Français Nederlands Portuguese Čestina 中文 (简体) 中文 (繁体) 日本語 Login Job Search All Jobs AI Recommendations FAQs & Support Siemens Jobs Search for open positions Job title, keyword or skill Country State/Province/County City Search Not sure where to start? Get AI Recommendations Your account has been successfully created. To activate your account and continue, please v"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html_20260817t134840205z",
+      "job_id": "job:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "source_id": "source:siemens_ag_career",
+      "captured_at": "2026-08-17T13:48:40.205Z",
+      "content_hash": "685cc6d0e237b3fb05c32b90ca504f0234c3f897e72642dfb6c26047fae1b934",
+      "status": "NEW",
+      "title": "FAQs & Support We answer questions we get asked most often, from how to apply to how to further your career once you're on board.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://siemens.com/global/en/company/jobs/faq.html",
+      "summary": "Frequently asked questions | Siemens Skip to main content Home Company Jobs & careers Frequently asked questions FAQs & Support Ready to start your future with us, but you still have a few questions? We’ve got you covered. We’ve compiled answers to a range of questions, from how to apply to how to further your career once you’re on board. Explore all jobs Application How can I join Siemens? You can apply by searching for open positions on the Siemens Job Search using keywords, job titles, or ski"
+    },
+    {
+      "snapshot_id": "snapshot:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it_20260817t134840205z",
+      "job_id": "job:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "source_id": "source:stadtwerke_muenchen_gmbh_career",
+      "captured_at": "2026-08-17T13:48:40.205Z",
+      "content_hash": "1829cc4390b5ac014d33a5e13bc7cdfecb0bfc83d6f0bff3296992f4dcbf686b",
+      "status": "NEW",
+      "title": "IT-Expert*in",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://swm.de/karriere/it",
+      "summary": "IT-Jobs: Karriere bei den SWM --> Zum Inhalt springen Logo Logo Jobs & Bewerbung Jobs & Bewerbung Freie Stellen Bewerbungstipps Einstiegsmöglichkeiten Einstiegsmöglichkeiten Schüler*in Ausbildung | Schülerpraktikum Duales Studium Student*in Übersicht Erfahrungsberichte Fach- oder Führungskraft Ingenieur*in Technische Fachkraft Kaufmännische Fachkraft IT-Expert*in Fahrer*in Saisonkraft Bäder SWM als Arbeitgeber SWM als Arbeitgeber Die SWM als Arbeitgeber Unsere Unternehmenswerte Unsere Arbeitskul"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_ag_official_job_id_s_siemens_com_20260817t134912490z",
+      "job_id": "job:company_siemens_ag_official_job_id_s_siemens_com",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "source_id": "source:siemens_ag_career",
+      "captured_at": "2026-08-17T13:49:12.490Z",
+      "content_hash": "659c264e066a13272139dae317e1d4165c1d773abe5e6041515b0a0a8ae6dd80",
+      "status": "ACTIVE",
+      "title": "Job Search",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens.com/en_US/externaljobs/Home",
+      "summary": "Jobs at Siemens Skip to content Skip to footer Job Search All Jobs AI Recommendations FAQs & Support English Deutsch English Español Français Nederlands Portuguese Čestina 中文 (简体) 中文 (繁体) 日本語 Login Job Search All Jobs AI Recommendations FAQs & Support Siemens Jobs Search for open positions Job title, keyword or skill Country State/Province/County City Search Not sure where to start? Get AI Recommendations Your account has been successfully created. To activate your account and continue, please v"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html_20260817t134912490z",
+      "job_id": "job:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "source_id": "source:siemens_ag_career",
+      "captured_at": "2026-08-17T13:49:12.490Z",
+      "content_hash": "685cc6d0e237b3fb05c32b90ca504f0234c3f897e72642dfb6c26047fae1b934",
+      "status": "ACTIVE",
+      "title": "FAQs & Support We answer questions we get asked most often, from how to apply to how to further your career once you're on board.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://siemens.com/global/en/company/jobs/faq.html",
+      "summary": "Frequently asked questions | Siemens Skip to main content Home Company Jobs & careers Frequently asked questions FAQs & Support Ready to start your future with us, but you still have a few questions? We’ve got you covered. We’ve compiled answers to a range of questions, from how to apply to how to further your career once you’re on board. Explore all jobs Application How can I join Siemens? You can apply by searching for open positions on the Siemens Job Search using keywords, job titles, or ski"
+    },
+    {
+      "snapshot_id": "snapshot:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it_20260817t134912490z",
+      "job_id": "job:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "source_id": "source:stadtwerke_muenchen_gmbh_career",
+      "captured_at": "2026-08-17T13:49:12.490Z",
+      "content_hash": "1829cc4390b5ac014d33a5e13bc7cdfecb0bfc83d6f0bff3296992f4dcbf686b",
+      "status": "ACTIVE",
+      "title": "IT-Expert*in",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://swm.de/karriere/it",
+      "summary": "IT-Jobs: Karriere bei den SWM --> Zum Inhalt springen Logo Logo Jobs & Bewerbung Jobs & Bewerbung Freie Stellen Bewerbungstipps Einstiegsmöglichkeiten Einstiegsmöglichkeiten Schüler*in Ausbildung | Schülerpraktikum Duales Studium Student*in Übersicht Erfahrungsberichte Fach- oder Führungskraft Ingenieur*in Technische Fachkraft Kaufmännische Fachkraft IT-Expert*in Fahrer*in Saisonkraft Bäder SWM als Arbeitgeber SWM als Arbeitgeber Die SWM als Arbeitgeber Unsere Unternehmenswerte Unsere Arbeitskul"
+    }
+  ],
+  "change_events": [
+    {
+      "change_event_id": "change:company_siemens_ag_official_job_id_s_siemens_com_created_20260817t134840205z",
+      "job_id": "job:company_siemens_ag_official_job_id_s_siemens_com",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-08-17T13:48:40.205Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html_created_20260817t134840205z",
+      "job_id": "job:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-08-17T13:48:40.205Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it_created_20260817t134840205z",
+      "job_id": "job:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it",
+      "scan_run_id": "scanrun:20260817T134840205Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-08-17T13:48:40.205Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_ag_official_job_id_s_siemens_com_updated_20260817t134912490z",
+      "job_id": "job:company_siemens_ag_official_job_id_s_siemens_com",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-08-17T13:49:12.490Z",
+      "old_status": "NEW",
+      "new_status": "ACTIVE",
+      "changed_fields": [
+        "status"
+      ],
+      "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html_updated_20260817t134912490z",
+      "job_id": "job:company_siemens_ag_canonical_url_https_siemens_com_global_en_company_jobs_faq_html",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-08-17T13:49:12.490Z",
+      "old_status": "NEW",
+      "new_status": "ACTIVE",
+      "changed_fields": [
+        "status"
+      ],
+      "reason": "Identitaet ueber CANONICAL_URL wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it_updated_20260817t134912490z",
+      "job_id": "job:company_stadtwerke_muenchen_gmbh_canonical_url_https_swm_de_karriere_it",
+      "scan_run_id": "scanrun:20260817T134912490Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-08-17T13:49:12.490Z",
+      "old_status": "NEW",
+      "new_status": "ACTIVE",
+      "changed_fields": [
+        "status"
+      ],
+      "reason": "Identitaet ueber CANONICAL_URL wiedererkannt."
+    }
+  ]
 }

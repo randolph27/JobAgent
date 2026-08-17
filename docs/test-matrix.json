@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent-test-matrix/v1",
-  "updated_at": "2026-08-17T16:30:00+02:00",
+  "updated_at": "2026-08-17T15:50:00+02:00",
   "policy": {
     "default_lane": "deterministic-fixture",
     "live_lane": "separate-not-supertest",
@@ -214,6 +214,22 @@
         "Testdateien existieren",
         "Supertest enthaelt alle abgeschlossenen deterministischen Funktionstests",
         "Live-Lane bleibt vom Supertest getrennt"
+      ]
+    },
+    {
+      "roadmap_id": "JA-014",
+      "title": "Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchfuehren",
+      "test_file": "tests/Test-JobAgentLiveScan.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
+      "status": "done",
+      "include_in_supertest": false,
+      "lane": "separate-live-pilot",
+      "coverage": [
+        "Live-Policy mit Timeout, Retry-Grenze, User-Agent und Ergebnislimits",
+        "offizielle Kandidatenfilterung mit Aggregator-Ablehnung",
+        "abrufbare offizielle Detailseite als Voraussetzung fuer RawJob-Erzeugung",
+        "NO_JOBS_FOUND fuer leere offizielle Quellen",
+        "vollstaendige Retry-Versuchsprotokollierung"
       ]
     }
   ]

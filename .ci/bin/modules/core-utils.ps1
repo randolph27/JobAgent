@@ -20,14 +20,14 @@ function Atomic-WriteTextUtf8([string]$path, [string]$content) {
         [System.IO.File]::Replace($tmp, $path, $null, $true)
       } catch {
         if (Test-Path -LiteralPath $path) {
-          Remove-Item -Force -LiteralPath $path -ErrorAction Stop
+          [System.IO.File]::Delete($path)
         }
         if (Test-Path -LiteralPath $tmp) {
-          [System.IO.File]::Move($tmp, $path)
+          [System.IO.File]::Move($tmp, $path, $true)
         }
       }
     } else {
-      [System.IO.File]::Move($tmp, $path)
+      [System.IO.File]::Move($tmp, $path, $true)
     }
   } finally {
     if (Test-Path -LiteralPath $tmp) {

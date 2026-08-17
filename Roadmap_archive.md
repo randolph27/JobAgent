@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-014 Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchführen #comment: Erst nach stabiler Mock-Logik darf eine kleine Live-Lane offizielle Quellen prüfen und reale Treffer belastbar nachweisen.
+  - [x] Beschreibung: `src/JobAgent.LiveScan.psm1` implementiert eine getrennte Live-Lane mit offizieller Quellenbindung, Timeout-/Retry-/User-Agent-Policy, Kandidatenfilterung, Detailseitenabruf und Live-Pilot-Zusammenfassung ohne Supertest-Pflichtgate.
+  - [x] Scope: Erstellt wurden `src/JobAgent.LiveScan.psm1`, `tools/Invoke-JobAgentLivePilot.ps1` und `tests/Test-JobAgentLiveScan.ps1`; erweitert wurden `src/JobAgent.DailyRun.psm1`, `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.SourceAdapters.psm1`, `docs/test-matrix.json`, `docs/test-matrix.md` und `tests/Test-JobAgentTestMatrix.ps1`. Keine Jobbörsen als Primärquelle, keine Bewerbungs- oder Schreibaktionen.
+  - [x] Ist-Stand (2026-08-17 15:50): Live-Pilot lief begrenzt mit `company:siemens_ag` und `company:stadtwerke_muenchen_gmbh`, Status `SUCCESS`, 2 Firmen, 2 Adapterversuche, 3 offizielle Detailseiten geprüft, 0 Fehler; keine passende IT-Führungsstelle wurde als `verified_matching_jobs` ausgegeben.
+  - [x] Abhängigkeiten: JA-004 bis JA-013 sind abgeschlossen; die Live-Lane nutzt Firmeninventar, offizielle Quellenprüfung, Adaptervertrag, Klassifikation, Statusmaschine, Daily-Run-Report und Testmatrix.
+  - [x] Aufwand/Dauer: Aufwand M-L, umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 58/100, weil Live-Abdeckung erst nach deterministischer Kernlogik belastbar wurde und nun als getrennte Nachweis-Lane existiert.
+  - [x] Risiken: Generische HTML-Erkennung kann Navigations- oder Themenseiten als offizielle Detailseiten prüfen; deshalb trennt `live-pilot` zwischen `official_detail_pages_checked` und `verified_matching_jobs`. Dynamische ATS-Suche und präzisere Jobdetail-Erkennung bleiben Folgearbeit.
+  - [x] Schritte:
+    1. Live-Policy mit festen Timeouts, User-Agent, Retry-Grenze, Firmen-/Ergebnislimits und No-Go-Liste implementiert.
+    2. Offizielle Karrierequellen werden abgerufen, Kandidatenlinks gegen Firmendomain/ATS-Regeln und Aggregator-Ausschluss geprüft und nur abrufbare offizielle Detailseiten als RawJob an die Statusmaschine gegeben.
+    3. Live-Pilot-CLI schreibt verwaltete Run-Logs, Daily-Run-Berichte und `logs/jobagent/live-pilot-20260817.json` mit Attempts, geprüften Detailseiten und verifizierten passenden Treffern.
+  - [x] Evidence: `src/JobAgent.LiveScan.psm1`, `tools/Invoke-JobAgentLivePilot.ps1`, `tests/Test-JobAgentLiveScan.ps1`, `logs/jobagent/live-pilot-20260817.json`, `logs/jobagent/daily-run-20260817T134912490Z.json`, `logs/jobagent/daily-run-20260817T134912490Z.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` -> Exit 0.
+  - [x] Audit: Live-Pilot nutzte ausschließlich offizielle Firmenquellen, schrieb alle ScanAttempts, führte keine externe Schreibaktion aus und gab keine passende Stelle aus, weil die geprüften Seiten nicht als MATCH/POSSIBLE klassifiziert wurden.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0; Live-Web bleibt gemäß Testmatrix vom Supertest getrennt.
+
 - [x] JA-013 Teststrategie und Supertest für Kernfunktionen konsolidieren #comment: Einzelne Funktionstests müssen vor dem Supertest grün sein; der Supertest bündelt erst abgeschlossene Roadmap-Funktionen.
   - [x] Beschreibung: Die fachliche Teststrategie ist als maschinenlesbare und menschlich lesbare Matrix dokumentiert; `.\ci.cmd supertest` bündelt alle abgeschlossenen deterministischen JobAgent-Kernfunktionen von JA-002 bis JA-013 und hält Live-Webrecherche explizit getrennt.
   - [x] Scope: Erstellt wurden `docs/test-matrix.json`, `docs/test-matrix.md` und `tests/Test-JobAgentTestMatrix.ps1`; erweitert wurde `tests/Test-JobAgentSupertest.ps1`. Keine Live-Webabhängigkeit, keine produktiven Daten, keine Änderung an fachlicher Scanlogik.

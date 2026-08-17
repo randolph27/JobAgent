@@ -136,7 +136,7 @@ function New-JobAgentScanAttemptRecord {
         [Parameter(Mandatory)][ValidateSet('SUCCESS', 'PARTIAL', 'FAILED', 'SKIPPED')][string]$Status,
         [Parameter(Mandatory)][ValidateSet('NONE', 'NOT_REACHABLE', 'TIMEOUT', 'BLOCKED', 'NO_JOBS_FOUND', 'UNCLEAR_SOURCE', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')][string]$ErrorClass,
         [Parameter(Mandatory)][ValidateSet('NONE', 'RETRY_SOON', 'RETRY_NEXT_RUN', 'MANUAL_REVIEW')][string]$RetryRecommendation,
-        [Parameter()][AllowNull()][int]$HttpStatus,
+        [Parameter()][AllowNull()][Nullable[int]]$HttpStatus,
         [Parameter()][datetime]$StartedAt = [datetime]::UtcNow,
         [Parameter()][datetime]$FinishedAt = [datetime]::UtcNow
     )
@@ -174,7 +174,7 @@ function New-JobAgentAdapterResult {
         [Parameter(Mandatory)][ValidateSet('NONE', 'NOT_REACHABLE', 'TIMEOUT', 'BLOCKED', 'NO_JOBS_FOUND', 'UNCLEAR_SOURCE', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')][string]$ErrorClass,
         [Parameter(Mandatory)][ValidateSet('NONE', 'RETRY_SOON', 'RETRY_NEXT_RUN', 'MANUAL_REVIEW')][string]$RetryRecommendation,
         [Parameter()][object[]]$RawJobs = @(),
-        [Parameter()][AllowNull()][int]$HttpStatus,
+        [Parameter()][AllowNull()][Nullable[int]]$HttpStatus,
         [Parameter()][string[]]$ArtifactPaths = @(),
         [Parameter()][datetime]$StartedAt = [datetime]::UtcNow,
         [Parameter()][datetime]$FinishedAt = [datetime]::UtcNow
