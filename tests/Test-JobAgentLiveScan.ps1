@@ -39,6 +39,11 @@ function New-TestCompany {
             system = 'Workday'
             official_domain = 'myworkdayjobs.invalid'
             verified_by_url = 'https://example.invalid/careers'
+        },
+        [pscustomobject]@{
+            system = 'Greenhouse'
+            official_domain = 'boards.greenhouse.io'
+            verified_by_url = 'https://example.invalid/careers'
         }
     )
     return $company
@@ -156,6 +161,11 @@ $atsCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $atsAnchorHtml -Base
 Assert-True -Condition ($atsCandidates.Count -eq 1) -Message 'ATS-URL-Muster ohne Titeltext wurde nicht erkannt.'
 Assert-True -Condition ($atsCandidates[0].detail_url -eq 'https://example.myworkdayjobs.invalid/en-US/search/job/Munich/987') -Message 'ATS-URL-Muster liefert falsche Detail-URL.'
 
+$greenhouseHtml = '<html><body><a href="https://boards.greenhouse.io/example/jobs/4242">Bewerben</a></body></html>'
+$greenhouseCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $greenhouseHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @())
+Assert-True -Condition ($greenhouseCandidates.Count -eq 1) -Message 'Greenhouse-ATS-URL wurde nicht als offizieller Kandidat erkannt.'
+Assert-True -Condition ($greenhouseCandidates[0].detail_url -eq 'https://boards.greenhouse.io/example/jobs/4242') -Message 'Greenhouse-ATS-URL wurde nicht korrekt kanonisiert.'
+
 $fetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -190,6 +200,26 @@ $emptyResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $poli
 Assert-True -Condition ($emptyResult.status -eq 'PARTIAL') -Message 'Live-Adapter markiert leere offizielle Quelle nicht als PARTIAL.'
 Assert-True -Condition ($emptyResult.error_class -eq 'NO_JOBS_FOUND') -Message 'Live-Adapter setzt falsche Fehlerklasse fuer leere Quelle.'
 
+$blockedFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    New-FetchResult -Url $Url -Ok $true -Content '<html><body><h1>Access denied</h1><p>Please verify you are human to continue.</p></body></html>'
+}
+$blockedResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $blockedFetcher
+Assert-True -Condition ($blockedResult.status -eq 'PARTIAL') -Message 'Live-Adapter markiert blockierte Quellseite nicht als PARTIAL.'
+Assert-True -Condition ($blockedResult.error_class -eq 'BLOCKED') -Message 'Live-Adapter setzt fuer blockierte Quellseite nicht BLOCKED.'
+Assert-True -Condition ($blockedResult.retry_recommendation -eq 'MANUAL_REVIEW') -Message 'Live-Adapter setzt fuer blockierte Quellseite keine manuelle Pruefung.'
+
+$dynamicFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    New-FetchResult -Url $Url -Ok $true -Content '<html><body><div id="root"></div><script id="__NEXT_DATA__" type="application/json">{}</script><noscript>Enable JavaScript</noscript></body></html>'
+}
+$dynamicResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $dynamicFetcher
+Assert-True -Condition ($dynamicResult.status -eq 'PARTIAL') -Message 'Live-Adapter markiert clientseitige Quellseite nicht als PARTIAL.'
+Assert-True -Condition ($dynamicResult.error_class -eq 'TECHNICAL_LIMITATION') -Message 'Live-Adapter setzt fuer clientseitige Quellseite nicht TECHNICAL_LIMITATION.'
+Assert-True -Condition ($dynamicResult.retry_recommendation -eq 'MANUAL_REVIEW') -Message 'Live-Adapter setzt fuer clientseitige Quellseite keine manuelle Pruefung.'
+
 $jsonLdFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -213,6 +243,52 @@ Assert-True -Condition ($jsonLdResult.status -eq 'SUCCESS') -Message 'Live-Adapt
 Assert-True -Condition ($jsonLdResult.raw_jobs[0].ats_job_id -eq 'WD-987') -Message 'Live-Adapter uebernimmt ATS-/Job-ID aus JSON-LD nicht.'
 Assert-True -Condition ($jsonLdResult.raw_jobs[0].location_label -eq 'Muenchen') -Message 'Live-Adapter uebernimmt JSON-LD-Ort nicht.'
 Assert-True -Condition ($jsonLdResult.raw_jobs[0].employment_type -eq 'FULL_TIME') -Message 'Live-Adapter uebernimmt employmentType aus JSON-LD nicht.'
+
+$blockedDetailFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content $html
+            break
+        }
+        'https://example.invalid/careers/head-of-it-123' {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 403 -ErrorMessage 'forbidden'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$blockedDetailResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $blockedDetailFetcher
+Assert-True -Condition ($blockedDetailResult.status -eq 'PARTIAL') -Message 'Live-Adapter markiert blockierten Detailfetch nicht als PARTIAL.'
+Assert-True -Condition ($blockedDetailResult.error_class -eq 'BLOCKED') -Message 'Live-Adapter setzt fuer blockierten Detailfetch nicht BLOCKED.'
+Assert-True -Condition ($blockedDetailResult.retry_recommendation -eq 'MANUAL_REVIEW') -Message 'Live-Adapter setzt fuer blockierten Detailfetch keine manuelle Pruefung.'
+
+$timeoutDetailFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content $html
+            break
+        }
+        'https://example.invalid/careers/head-of-it-123' {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 504 -ErrorMessage 'gateway timeout'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$timeoutDetailResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $timeoutDetailFetcher
+Assert-True -Condition ($timeoutDetailResult.status -eq 'PARTIAL') -Message 'Live-Adapter markiert Timeout-Detailfetch nicht als PARTIAL.'
+Assert-True -Condition ($timeoutDetailResult.error_class -eq 'TIMEOUT') -Message 'Live-Adapter setzt fuer Timeout-Detailfetch nicht TIMEOUT.'
+Assert-True -Condition ($timeoutDetailResult.retry_recommendation -eq 'RETRY_NEXT_RUN') -Message 'Live-Adapter setzt fuer Timeout-Detailfetch nicht RETRY_NEXT_RUN.'
 
 $retryCounter = 0
 $retryFetcher = {
@@ -238,9 +314,14 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'aggregator_rejection',
         'jsonld_jobposting_extraction',
         'ats_url_pattern_detection',
+        'greenhouse_ats_url_pattern_detection',
         'live_adapter_success_with_detail_verification',
         'live_adapter_no_jobs_found',
+        'live_adapter_blocked_source_detection',
+        'live_adapter_dynamic_source_detection',
         'live_adapter_jsonld_ats_success',
+        'live_adapter_blocked_detail_fetch',
+        'live_adapter_timeout_detail_fetch',
         'retry_attempt_log'
     )
 } | ConvertTo-Json -Depth 5

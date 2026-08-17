@@ -185,7 +185,8 @@ function Get-JobAgentLiveNestedValue {
             }
             return $null
         }
-        if ($current.PSObject.Properties.Name -notcontains $segment) {
+        $propertyNames = @($current.PSObject.Properties | ForEach-Object { $_.Name })
+        if ($propertyNames -notcontains $segment) {
             return $null
         }
         $current = $current.$segment
@@ -197,7 +198,7 @@ function Test-JobAgentLiveDetailUrlPattern {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$Url)
 
-    return $Url -match '(?i)(/jobs?/|/job-details/|/vacanc(y|ies)/|/position/|/posting/|/requisition/|jobid=|job_id=|gh_jid=|gh_src=|lever\.co|workdayjobs|smartrecruiters|recruitee|join\.com|personio|softgarden|ashbyhq|successfactors)'
+    return $Url -match '(?i)(/jobs?/|/job-details/|/vacanc(y|ies)/|/position/|/posting/|/requisition/|jobid=|job_id=|gh_jid=|gh_src=|lever\.co|workdayjobs|smartrecruiters|recruitee|join\.com|personio|softgarden|ashbyhq|successfactors|greenhouse\.io)'
 }
 
 function Test-JobAgentLiveCandidateText {
@@ -263,14 +264,15 @@ function Get-JobAgentLiveJsonLdNodes {
     }
 
     $nodes.Add($Node)
+    $propertyNames = @($Node.PSObject.Properties | ForEach-Object { $_.Name })
     foreach ($propertyName in @('@graph', 'graph', 'itemListElement', 'jobs')) {
-        if ($Node.PSObject.Properties.Name -contains $propertyName) {
+        if ($propertyNames -contains $propertyName) {
             foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.$propertyName)) {
                 $nodes.Add($resolved)
             }
         }
     }
-    if ($Node.PSObject.Properties.Name -contains 'item') {
+    if ($propertyNames -contains 'item') {
         foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.item)) {
             $nodes.Add($resolved)
         }
@@ -440,6 +442,66 @@ function ConvertTo-JobAgentLiveErrorClass {
     return 'NOT_REACHABLE'
 }
 
+function Test-JobAgentLiveBlockedContentHint {
+    [CmdletBinding()]
+    param([Parameter()][AllowEmptyString()][string]$Html)
+
+    if ([string]::IsNullOrWhiteSpace($Html)) {
+        return $false
+    }
+
+    $text = (ConvertTo-JobAgentLivePlainText -Html $Html -MaxLength 1500).ToLowerInvariant()
+    return $text -match '(access denied|forbidden|captcha|security check|verify you are human|unusual traffic|blocked request|bot detection|cloudflare)'
+}
+
+function Test-JobAgentLiveDynamicContentHint {
+    [CmdletBinding()]
+    param([Parameter()][AllowEmptyString()][string]$Html)
+
+    if ([string]::IsNullOrWhiteSpace($Html)) {
+        return $false
+    }
+
+    $normalized = $Html.ToLowerInvariant()
+    $hasAppShell = $normalized -match '(__next_data__|__nuxt__|window\.__initial_state__|data-reactroot|id="app"|id=''app''|id="root"|id=''root''|ng-version=|application/json)'
+    $hasScriptHeavyMarkup = $normalized -match '<script\b' -and $normalized -notmatch '<a\b'
+    $hasJsRequirement = (ConvertTo-JobAgentLivePlainText -Html $Html -MaxLength 1500).ToLowerInvariant() -match '(enable javascript|javascript is required|requires javascript|client-side rendering)'
+    return $hasJsRequirement -or ($hasAppShell -and $hasScriptHeavyMarkup)
+}
+
+function Resolve-JobAgentLiveRetryRecommendation {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$ErrorClass)
+
+    switch ($ErrorClass) {
+        'TIMEOUT' { return 'RETRY_NEXT_RUN' }
+        'NOT_REACHABLE' { return 'RETRY_NEXT_RUN' }
+        'BLOCKED' { return 'MANUAL_REVIEW' }
+        'TECHNICAL_LIMITATION' { return 'MANUAL_REVIEW' }
+        default { return 'MANUAL_REVIEW' }
+    }
+}
+
+function Resolve-JobAgentLiveFailureOutcome {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object[]]$Failures,
+        [Parameter()][string]$DefaultErrorClass = 'UNCLEAR_SOURCE'
+    )
+
+    $errorClasses = @(
+        $Failures |
+            ForEach-Object { ConvertTo-JobAgentLiveErrorClass -FetchResult $_ } |
+            Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }
+    )
+    $distinct = @($errorClasses | Select-Object -Unique)
+    $resolved = if ($distinct.Count -eq 1) { [string]$distinct[0] } else { $DefaultErrorClass }
+    [pscustomobject]@{
+        error_class = $resolved
+        retry_recommendation = Resolve-JobAgentLiveRetryRecommendation -ErrorClass $resolved
+    }
+}
+
 function New-JobAgentLiveRawJob {
     [CmdletBinding()]
     param(
@@ -505,20 +567,26 @@ function Invoke-JobAgentLiveHtmlAdapter {
             -MaxResults ([int]$Policy.max_results_per_source) `
             -SearchTerms @($Policy.search_terms))
     if ($candidates.Count -eq 0) {
+        $blockedByContent = Test-JobAgentLiveBlockedContentHint -Html ([string]$sourceFetch.content)
+        $dynamicOnly = if (-not $blockedByContent) { Test-JobAgentLiveDynamicContentHint -Html ([string]$sourceFetch.content) } else { $false }
+        $errorClass = if ($blockedByContent) { 'BLOCKED' } elseif ($dynamicOnly) { 'TECHNICAL_LIMITATION' } else { 'NO_JOBS_FOUND' }
+        $retryRecommendation = Resolve-JobAgentLiveRetryRecommendation -ErrorClass $errorClass
+        $artifactPath = if ($blockedByContent) { 'source_blocked_or_challenged' } elseif ($dynamicOnly) { 'dynamic_client_side_only' } else { 'no_verified_job_candidates' }
         return New-JobAgentAdapterResult `
             -AdapterInput $AdapterInput `
             -AdapterName 'live-html-adapter' `
             -Status 'PARTIAL' `
-            -ErrorClass 'NO_JOBS_FOUND' `
-            -RetryRecommendation 'RETRY_NEXT_RUN' `
+            -ErrorClass $errorClass `
+            -RetryRecommendation $retryRecommendation `
             -RawJobs @() `
             -HttpStatus $sourceFetch.status_code `
-            -ArtifactPaths @('no_verified_job_candidates') `
+            -ArtifactPaths @($artifactPath) `
             -StartedAt $startedAt `
             -FinishedAt ([datetime]::UtcNow)
     }
 
     $jobs = New-Object System.Collections.Generic.List[object]
+    $detailFailures = New-Object System.Collections.Generic.List[object]
     $messages = New-Object System.Collections.Generic.List[string]
     foreach ($candidate in @($candidates | Select-Object -First ([int]$Policy.max_detail_fetches_per_source))) {
         $detailFetch = Invoke-JobAgentLiveFetchWithRetry -Url ([string]$candidate.detail_url) -Policy $Policy -Fetcher $Fetcher
@@ -526,17 +594,20 @@ function Invoke-JobAgentLiveHtmlAdapter {
             $jobs.Add((New-JobAgentLiveRawJob -Candidate $candidate -DetailFetch $detailFetch))
         }
         else {
-            $messages.Add("detail_fetch_failed: $($candidate.detail_url): $($detailFetch.error)")
+            $detailFailures.Add($detailFetch)
+            $failureClass = ConvertTo-JobAgentLiveErrorClass -FetchResult $detailFetch
+            $messages.Add("detail_fetch_failed[$failureClass]: $($candidate.detail_url): $($detailFetch.error)")
         }
     }
 
     if ($jobs.Count -eq 0) {
+        $failureOutcome = Resolve-JobAgentLiveFailureOutcome -Failures @($detailFailures.ToArray())
         return New-JobAgentAdapterResult `
             -AdapterInput $AdapterInput `
             -AdapterName 'live-html-adapter' `
             -Status 'PARTIAL' `
-            -ErrorClass 'UNCLEAR_SOURCE' `
-            -RetryRecommendation 'MANUAL_REVIEW' `
+            -ErrorClass ([string]$failureOutcome.error_class) `
+            -RetryRecommendation ([string]$failureOutcome.retry_recommendation) `
             -RawJobs @() `
             -HttpStatus $sourceFetch.status_code `
             -ArtifactPaths @($messages.ToArray()) `
