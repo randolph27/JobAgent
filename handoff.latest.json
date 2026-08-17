@@ -1,90 +1,24 @@
 {
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-  "next_steps": [
-    "TD-0016 / JA-020 weiterfuehren: mindestens ein weiteres belegtes offizielles Karriereportal- oder ATS-Muster neben Workday/Greenhouse absichern; Kandidaten sind nur offizielle Firmen-/Karriere-/ATS-Quellen.",
-    "Fuer JA-020 fehlen trotz neuer Tests noch Abschlusskriterien aus der Roadmap: weitere robuste Muster, ggf. staerkere Detailseiten-Extraktion und ein finaler Nachweis, dass technische Limitierungen/blocked/no-jobs deterministisch fail-closed bleiben.",
-    "Erst nach JA-020 zu TD-0017 / JA-021 wechseln: Discovery-Vertrag, Deduplikation fuer Firmenvarianten und Coverage-Priorisierung erweitern.",
-    "TD-0018 / JA-022 bleibt danach: Portvertrag 8500/8300 bereinigen, HTML-Audit einfuehren, lokale Reportpfade im Handoff/Betriebsstatus absichern."
-  ],
-  "workspace_root": ".",
-  "route": null,
-  "goal": "TD-0016 / JA-020 fertigstellen: Live-Adapter auf weitere offizielle Karriere-/ATS-Muster erweitern und die restlichen Roadmap-Akzeptanzkriterien belegen.",
-  "summary": "JA-020 weiter gehaertet, aber nicht abgeschlossen. Live-Lane erkennt jetzt zusaetzlich Greenhouse-ATS-URLs und klassifiziert blockierte, dynamische sowie fehlerhafte Detailseiten fail-closed.",
-  "status": "in-progress",
-  "toolchain": {
-    "ts": "2026-08-17T13:53:15.642+02:00",
-    "gradle": {
-      "cmd": "gradle",
-      "mode": "path",
-      "root": "D:\\_Scripte\\JobAgent"
-    }
-  },
-  "project": "JobAgent",
-  "route_ok": null,
-  "active_id": "TD-0016",
+  "ts": "2026-08-17T17:45:29.7402523+02:00",
   "agent_id": "UTTER-20260817-39f7",
-  "refs": [
-    "file:Roadmap.md",
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:todo.checkpoint.json",
-    "file:handoff.latest.json",
-    "file:logs/verify/verify.digest.json"
+  "workspace_root": ".",
+  "project": "JobAgent",
+  "active_id": "TD-0017",
+  "status": "in-progress",
+  "summary": "JA-020 ist abgeschlossen und aus der aktiven Roadmap rotiert. TD-0017 / JA-021 ist jetzt der aktive Arbeitsanker.",
+  "goal": "TD-0017 / JA-021 umsetzen: Firmeninventar autonom, dedupliziert und quellenorientiert erweitern.",
+  "next": "Mit JA-021 in src/JobAgent.CompanyInventory.psm1, src/JobAgent.Coverage.psm1 und tools/Seed-JobAgentCompanies.ps1 weitermachen; danach JA-022 fuer lokalen Betrieb und HTML-Audit.",
+  "next_steps": [
+    "JA-021 Schritt 1: Discovery-Vertrag fuer neue Firmen definieren, inklusive discovery_source, offizieller Website-Verifikation, Karriere-URL-Pruefung, Branche und Zielgebietsbezug.",
+    "JA-021 Schritt 2: Deduplikation fuer Domain, Rechtsformvarianten, Aliasnamen, Konzern-/Tochtergesellschaften und Standortbezug erweitern.",
+    "JA-021 Schritt 3: Coverage-/Scanpriorisierung anpassen, damit never_scanned und stale_or_unscanned vor Routinelaufen kommen und Retry-Status fuer fehlerhafte Karriereportale erhalten bleiben.",
+    "JA-021 Funktionstests: pwsh -NoProfile -File tests\\\\Test-JobAgentCompanyInventory.ps1; pwsh -NoProfile -File tests\\\\Test-JobAgentCoverage.ps1; bei Report-Auswirkungen zusaetzlich pwsh -NoProfile -File tests\\\\Test-JobAgentReport.ps1.",
+    "JA-022 bleibt nachgelagert: Devserver-Portvertrag 8500/8300 klaeren, lokalen HTML-Audit einfuehren, Reportpfade und Betriebsstatus absichern."
   ],
-  "verified": [
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd supertest",
-      "exit": 0,
-      "status": "pass",
-      "note": "Nicht erneut separat angefordert; letzter gruener Digest gilt gemaess Nutzerregel als erledigt."
-    }
-  ],
-  "next": "TD-0016 / JA-020: weitere robuste offizielle Karriere-/ATS-Muster implementieren und verbleibende Fehlerfall-Akzeptanz vervollstaendigen.",
-  "git": {
-    "tracked_changes": [
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "src/JobAgent.LiveScan.psm1",
-      "tests/Test-JobAgentLiveScan.ps1",
-      "todo.checkpoint.json",
-      "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "has_repo": true,
-    "ahead": 0,
-    "behind": 0,
-    "worktree": "dirty",
-    "detached": false,
-    "upstream": "origin/master",
-    "remote": "origin",
-    "branch": "master",
-    "head": "99badba4b0b8"
-  },
   "changed": [
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
     "src/JobAgent.LiveScan.psm1",
     "tests/Test-JobAgentLiveScan.ps1",
     "todo.checkpoint.json",
@@ -96,41 +30,48 @@
     "handoff.latest.json",
     "handoff.latest.md"
   ],
-  "capsule": {
-    "goal": "TD-0016 / JA-020 fertigstellen: Live-Adapter auf weitere offizielle Karriere-/ATS-Muster erweitern und die restlichen Roadmap-Akzeptanzkriterien belegen.",
-    "next": "TD-0016 / JA-020: weitere robuste offizielle Karriere-/ATS-Muster implementieren und verbleibende Fehlerfall-Akzeptanz vervollstaendigen.",
-    "route_violations": [],
-    "active_id": "TD-0016",
-    "status": "in-progress",
-    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-    "env_inventory_missing": false,
-    "git": {
-      "tracked_changes": [
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "src/JobAgent.LiveScan.psm1",
-        "tests/Test-JobAgentLiveScan.ps1",
-        "todo.checkpoint.json",
-        "todo.current.md",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json",
-        "todo.state.json"
-      ],
-      "has_repo": true,
-      "ahead": 0,
-      "behind": 0,
-      "worktree": "dirty",
-      "detached": false,
-      "upstream": "origin/master",
-      "remote": "origin",
-      "branch": "master",
-      "head": "99badba4b0b8"
+  "verified": [
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\\\Test-JobAgentLiveScan.ps1",
+      "status": "pass"
     },
-    "project": "JobAgent",
-    "env_inventory_used": false,
-    "route_ok": null,
-    "changed": [
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\\\Test-JobAgentDailyRun.ps1",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\\\Test-JobAgentSourceAdapters.ps1",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": ".\\\\ci.cmd stp",
+      "status": "pass"
+    },
+    {
+      "note": "Nicht separat angefragt; gemaess Nutzerregel als erledigt gewertet.",
+      "exit": 0,
+      "cmd": ".\\\\ci.cmd supertest",
+      "status": "pass"
+    }
+  ],
+  "git": {
+    "ahead": 0,
+    "upstream": "origin/master",
+    "behind": 0,
+    "worktree": "dirty",
+    "has_repo": true,
+    "branch": "master",
+    "detached": false,
+    "head": "5753530a3dea",
+    "remote": "origin",
+    "tracked_changes": [
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
       "src/JobAgent.LiveScan.psm1",
       "tests/Test-JobAgentLiveScan.ps1",
       "todo.checkpoint.json",
@@ -141,97 +82,90 @@
       "todo.state.json",
       "handoff.latest.json",
       "handoff.latest.md"
-    ],
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.json"
-    ],
-    "ts": "2026-08-17T17:28:30+02:00",
-    "env_inventory_path": null,
-    "agent_id": "UTTER-20260817-39f7",
-    "workspace_root": ".",
-    "manual_missing": false,
-    "verified": [
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": ".\\ci.cmd stp",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": ".\\ci.cmd supertest",
-        "exit": 0,
-        "status": "pass",
-        "note": "Nicht erneut separat angefordert; letzter gruener Digest gilt gemaess Nutzerregel als erledigt."
-      }
     ]
   },
-  "verify_digest": {
-    "cmd": ".\\ci.cmd supertest",
-    "exit": 0,
-    "status": "pass",
-    "note": "Letzter gruener Digest; nicht erneut separat angefordert und gemaess Nutzerregel als erledigt gewertet."
-  },
+  "route_ok": null,
   "route_violations": [],
-  "ts": "2026-08-17T17:28:30+02:00",
-  "handoff_detail": {
-    "current_focus": {
-      "todo_id": "TD-0016",
-      "roadmap_id": "JA-020",
-      "status": "in-progress",
-      "done": [
-        "JSON-LD JobPosting wird aus offiziellen Live-Quellen extrahiert und in RawJobs uebernommen.",
-        "ATS-Detail-URL-Erkennung deckt jetzt Workday-aehnliche Muster und Greenhouse-URLs ab, auch wenn der Linktext schwach ist.",
-        "Leere Quellen, blockierte Seiten, clientseitig/dynamische App-Shells, 403-Detailfetches und 504-Detailfetches sind durch Funktionstests abgedeckt und werden fail-closed klassifiziert.",
-        "Daily-Run ueber offiziellen ATS-JSON-LD-Pfad bleibt gruen; SourceAdapters-Vertrag ist ebenfalls gruen geblieben."
-      ],
-      "remaining": [
-        "JA-020 ist noch offen, weil die Roadmap weitere robuste offizielle Karriere-/ATS-Muster fordert; aktuell sind Workday-aehnliche und Greenhouse-Pfade belegt, aber noch kein weiterer Portaltyp.",
-        "Pruefen, ob die Extraktion fuer weitere strukturierte oder listenbasierte offizielle Portale erweitert werden muss, ohne Aggregatoren oder Login/Captcha-Bypass einzufuehren.",
-        "Nach finaler JA-020-Abnahme kann erst TD-0017 / JA-021 begonnen werden."
-      ]
-    },
-    "open_priorities": [
-      {
-        "todo_id": "TD-0017",
-        "roadmap_id": "JA-021",
-        "focus": "Firmeninventar autonom erweitern, Discovery-Vertrag definieren, Firmenvarianten deduplizieren und Coverage-Priorisierung verbessern."
-      },
-      {
-        "todo_id": "TD-0018",
-        "roadmap_id": "JA-022",
-        "focus": "Devserver-Portvertrag, lokales HTML-Audit und lokale Reportbedienung absichern."
-      }
+  "refs": [
+    "file:Roadmap.md",
+    "file:Roadmap_archive.md",
+    "file:Roadmap_index.md",
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:todo.checkpoint.json",
+    "file:handoff.latest.json",
+    "file:logs/verify/verify.digest.json"
+  ],
+  "verify_digest": {
+    "note": "Letzter gruener Digest; nicht erneut separat angefordert und gemaess Nutzerregel als erledigt gewertet.",
+    "exit": 0,
+    "cmd": ".\\\\ci.cmd supertest",
+    "status": "pass"
+  },
+  "roadmap": {
+    "note": "JA-020 wurde nach Roadmap_archive.md rotiert. Roadmap.md enthaelt jetzt nur noch JA-021 und JA-022.",
+    "active": [
+      "JA-021",
+      "JA-022"
     ],
-    "roadmap": {
-      "rotated": [],
-      "still_open": [
-        "JA-020",
-        "JA-021",
-        "JA-022"
-      ],
-      "note": "Kein Roadmap-Punkt wurde in diesem Schritt komplett abgeschlossen; daher keine Rotation aus Roadmap.md."
-    },
-    "notes": [
-      "todo.current.md und todo.state.json setzen TD-0016 jetzt explizit als in-progress.",
-      "Supertest wurde nicht erneut angefordert; gemaess Nutzerregel gilt der letzte gruene Digest als erledigt.",
-      "Der naechste Chat soll bei TD-0016 / JA-020 weitermachen, nicht bei JA-021."
+    "rotated": [
+      "JA-020"
+    ],
+    "completed": [
+      "JA-020"
     ]
+  },
+  "handoff_detail": {
+    "notes": [
+      "todo.current.md und todo.state.json zeigen jetzt TD-0017 als aktiven Punkt; TD-0016 ist aus der aktiven Todo-Liste entfernt und ueber History/Handoff dokumentiert.",
+      "todo.events.jsonl enthaelt Statusereignisse fuer JA-020 done und JA-021 in-progress; stp hat diese in die laufende Historie uebernommen und erledigte Ereignisse teilweise nach logs/todo/done-events-*.jsonl verschoben.",
+      "Supertest wurde nicht neu gestartet; gemaess Nutzerregel gilt der letzte gruene Digest als erledigt."
+    ],
+    "current_focus": {
+      "concrete_next_work": [
+        "Bestehende Seed- und Inventarstruktur pruefen: welche Company-Felder fuer discovery_source, verification_status, offizielle Website und Karriere-URL schon vorhanden sind und wo neue Felder oder Normalisierung noetig sind.",
+        "Deduplikation so erweitern, dass Domain, rechtsformbereinigte Namen, Aliasnamen und Tochter-/Konzernbezug getestet werden, ohne rechtlich getrennte Arbeitgeber falsch zusammenzufuehren.",
+        "Coverage-Report und Priorisierung anpassen, damit never_scanned, stale_or_unscanned und without_career_url sichtbar und fuer den naechsten Daily-Run nutzbar sind."
+      ],
+      "roadmap_id": "JA-021",
+      "objective": "Firmeninventar autonom erweitern, Dubletten vermeiden, Discovery-Quellen sauber verifizieren und die Coverage-/Scanpriorisierung auf neue Firmen ausrichten.",
+      "files": [
+        "src/JobAgent.CompanyInventory.psm1",
+        "src/JobAgent.Coverage.psm1",
+        "tools/Seed-JobAgentCompanies.ps1",
+        "tests/Test-JobAgentCompanyInventory.ps1",
+        "tests/Test-JobAgentCoverage.ps1",
+        "tests/Test-JobAgentReport.ps1"
+      ],
+      "risks": [
+        "Keine neue Firma ohne belastbare Quelle aufnehmen.",
+        "Sekundaerquellen duerfen nur Discovery ausloesen, nicht Verifikation.",
+        "Keine Vollstaendigkeitsbehauptung fuer den Markt; nur nachvollziehbare lokale Inventarerweiterung."
+      ],
+      "todo_id": "TD-0017",
+      "status": "in-progress"
+    },
+    "completed_step": {
+      "implementation": [
+        "src/JobAgent.LiveScan.psm1 wurde um strukturierte ATS-JSON-Extraktion erweitert: zusaetzliche Node-Sammlungen wie postings/positions/results/openings sowie URL-/ID-/Location-/EmploymentType-Aufloesung ueber hostedUrl, absolute_url, id, categories.location und categories.commitment.",
+        "tests/Test-JobAgentLiveScan.ps1 deckt jetzt strukturierte ATS-JSON-Listen und den offiziellen Lever-aehnlichen Pfad ab sowie weiterhin BLOCKED, TIMEOUT, TECHNICAL_LIMITATION und NO_JOBS_FOUND.",
+        "Deterministische Daily-Run-Verifikation blieb gruen; der SourceAdapters-Vertrag blieb kompatibel und wurde erneut erfolgreich getestet."
+      ],
+      "roadmap_id": "JA-020",
+      "acceptance": [
+        "Roadmap-Kriterium weiterer offizieller ATS-Typ ist durch strukturierte ATS-JSON-Liste plus Lever-aehnliche offizielle Detailseite erfuellt.",
+        "Fail-closed-Verhalten fuer blockierte, dynamische und fehlerhafte Quellen bleibt belegt.",
+        "JA-020 ist in Roadmap_archive.md archiviert und nicht mehr in Roadmap.md aktiv."
+      ],
+      "todo_id": "TD-0016",
+      "summary": "Live-Adapter erkennt jetzt neben generischen HTML-Karriereseiten auch JSON-LD-JobPosting, Workday-aehnliche ATS-URLs, Greenhouse-Detailseiten und strukturierte ATS-JSON-Listen.",
+      "status": "done"
+    },
+    "next_after_current": {
+      "summary": "Lokalen Devserver-Portvertrag bereinigen, HTML-Audit einfuehren und lokale Reportpfade/Betriebsstatus absichern.",
+      "roadmap_id": "JA-022",
+      "todo_id": "TD-0018"
+    }
   }
 }

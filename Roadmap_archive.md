@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-020 Live-Adapter von Pilotqualitaet auf robuste offizielle Karriereseiten- und ATS-Erkennung erweitern #comment: Die Live-Lane verarbeitet jetzt statische Karriereseiten, JSON-LD und strukturierte ATS-Listen deterministisch, begrenzt und fail-closed.
+  - [x] Beschreibung: Live-Scans erkennen statische Karriereseiten, Such-/Listen-Seiten und mehrere explizit belegte ATS-Strukturen deterministisch, begrenzt und fail-closed; jedes Ergebnis enthaelt offizielle Detail-URL, HTTP-/Fetch-Nachweis, Extraktionsvertrauen, Klassifikation und Fehlerklasse.
+  - [x] Scope: Erweitert wurden `src/JobAgent.LiveScan.psm1`, `tests/Test-JobAgentLiveScan.ps1` und mittelbar die bestehende Daily-Run-Lane ueber die Live-Adapter-Verwendung. `src/JobAgent.SourceAdapters.psm1` blieb vertraglich unveraendert, wurde aber gegen die neue Extraktion erneut verifiziert. No-Go blieb eingehalten: kein Login-/Captcha-Bypass, kein Aggregator als Primaerquelle, keine ungebremste Volltextsuche, keine Live-Abhaengigkeit in deterministischen Funktionstests.
+  - [x] Ist-Stand (2026-08-17 17:48): `Invoke-JobAgentLiveHtmlAdapter` verarbeitet jetzt offizielle HTML-Linklisten, JSON-LD-`JobPosting`, Workday-aehnliche ATS-URLs, Greenhouse-Detailseiten und strukturierte ATS-JSON-Listen mit Feldern wie `postings`, `hostedUrl`, `absolute_url`, `id`, `categories.location`, `categories.commitment` und `descriptionPlain`. Leere, blockierte, dynamische oder fehlerhafte Quellen bleiben fail-closed als `NO_JOBS_FOUND`, `BLOCKED`, `TECHNICAL_LIMITATION` oder `TIMEOUT` klassifiziert.
+  - [x] Abhaengigkeiten: JA-018 und JA-019 waren abgeschlossen und liefern die benoetigte Status- und Verifikationssicherheit; JA-021 und JA-022 bauen nun auf der gehaerteten Live-Lane auf.
+  - [x] Aufwand/Dauer: Aufwand L; innerhalb der aktuellen Arbeitseinheit fachlich abgeschlossen.
+  - [x] Prioritaetsscore: 82/100, weil die Live-Abdeckung jetzt belastbar genug fuer die nachgelagerte Firmenabdeckung ist.
+  - [x] Ordnungsbegruendung: Nach Quellenbeweiskette und Statushaertung wurde die Live-Lane auf robuste offizielle Karriere- und ATS-Muster erweitert, bevor das Firmeninventar weiter skaliert.
+  - [x] Risiken und Unsicherheiten: Weitere Karriereportale koennen spaeter eigene Muster benoetigen; JavaScript-only-Seiten ohne verwertbare strukturierte Daten bleiben bewusst `TECHNICAL_LIMITATION` oder `MANUAL_REVIEW` statt falscher Treffer.
+  - [x] Schritte:
+    1. JSON-LD-Extraktion gegen primitive und uneinheitliche Nodes gehaertet und auf offizielle Detailseiten begrenzt.
+    2. ATS-Erkennung um Workday-aehnliche Pfade, Greenhouse-Detailseiten und strukturierte ATS-JSON-Listen erweitert, inklusive kanonisierter Detail-URL, Job-ID, Ort und Beschaeftigungsart.
+    3. Deterministische Funktionstests fuer strukturierte ATS-Listen, blockierte Quellen, dynamische App-Shells, blockierte Detailfetches und Timeout-Detailfetches ergaenzt und gegen Daily-Run verifiziert.
+  - [x] Evidence: `src/JobAgent.LiveScan.psm1`, `tests/Test-JobAgentLiveScan.ps1`, aktualisierte Handoff-/Todo-Artefakte nach `./ci.cmd stp`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit 0.
+  - [x] Audit: Aggregatoren bleiben ausgeschlossen; nur offizielle Firmen-, Karriere- oder belegte ATS-Quellen werden akzeptiert; blockierte, dynamische oder nicht erreichbare Seiten erzeugen keine verifizierten Treffer.
+  - [x] Supertest: Vom Nutzer fuer diesen Abschluss nicht separat angefragt; gemaess Nutzeranweisung als erledigt gewertet.
 - [x] JA-019 Verifikationsbelege für offizielle ATS-Anbindung und Redirects persistieren #comment: Die Anweisung erlaubt ATS-Seiten nur, wenn sie offiziell vom Unternehmen betrieben oder verlinkt sind; Domainvergleich allein ist dafür nicht in jedem Fall ausreichend.
   - [x] Beschreibung: `JobSource` persistiert jetzt `verification_evidence` als auditierbaren Belegsatz mit Status, Evidenztyp, URL, Basis-URL, Redirect-Kette, Beobachtungszeitpunkt und Begründung; ATS-Domains gelten nur noch als offiziell, wenn ein belastbarer Firmenbeleg über `verified_by_url` vorliegt.
   - [x] Scope: Erweitert wurden `src/JobAgent.SourceVerification.psm1`, `src/JobAgent.CompanyInventory.psm1`, `src/JobAgent.Persistence.psm1`, `schemas/jobagent.schema.json`, `tests/Test-JobAgentSourceVerification.ps1`, `tests/Test-JobAgentCompanyInventory.ps1`, `tests/Test-JobAgentPersistence.ps1`, `tests/Test-JobAgentSchema.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentLiveScan.ps1`, `tests/Test-JobAgentSourceAdapters.ps1`, `tests/Test-JobAgentReport.ps1` und `tests/fixtures/jobagent/valid.json`. No-Go bleibt: keine globale ATS-Allowlist ohne Firmenbindung, keine Annahme aufgrund bekannter ATS-Domain allein.
@@ -325,3 +342,4 @@
   - [x] Funktionstest: `.\ci.cmd self-check` lief mit exit=0 und issues=0; textuelle Contract-Prüfung per `Select-String` auf Kernbegriffe lief mit exit=0.
   - [x] Audit: Keine widersprüchlichen Regeln zu Quellen, Statuswerten oder Zielgebiet im Programmvertrag festgestellt; nicht belegbare Informationen sind verboten oder als `UNKNOWN` markiert.
   - [x] Supertest: Vom Nutzer nicht angefragt; gemäß Nutzeranweisung für diesen Abschluss als erledigt gewertet, ohne separaten Lauf.
+

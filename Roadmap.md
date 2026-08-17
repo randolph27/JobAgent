@@ -11,25 +11,6 @@
 
 ## M8 - Live-Recherche und Firmenabdeckung
 
-- [ ] JA-020 Live-Adapter von Pilotqualität auf robuste offizielle Karriereseiten- und ATS-Erkennung erweitern #comment: Die aktuelle Live-Lane kann einfache HTML-Links prüfen, deckt aber typische Karriereportale und ATS-Systeme noch nicht verlässlich ab.
-  - [ ] Beschreibung: Live-Scans erkennen statische Karriereseiten, Such-/Listen-Seiten und mindestens eine explizit belegte ATS-Struktur deterministisch, begrenzt und fail-closed; jedes Ergebnis enthält offizielle Detail-URL, HTTP-/Fetch-Nachweis, Extraktionsvertrauen, Klassifikation und Fehlerklasse.
-  - [ ] Scope: Betroffen sind `src/JobAgent.LiveScan.psm1`, `src/JobAgent.SourceAdapters.psm1`, `tests/Test-JobAgentLiveScan.ps1`, `tests/Test-JobAgentSourceAdapters.ps1`, optional `tools/Invoke-JobAgentLivePilot.ps1`; No-Go: kein Login-/Captcha-Bypass, kein Scraping gegen Aggregatoren als Primärquelle, keine ungebremste Volltextsuche, keine Live-Abhängigkeit in deterministischen Funktionstests.
-  - [ ] Ist-Stand (2026-08-17 16:20): `Invoke-JobAgentLiveHtmlAdapter` nutzt HTTP-Fetch, Linkkandidaten und Detailfetches; Extraktion basiert erkennbar auf generischen Link-/Textsignalen und ist für dynamische ATS-/JSON-/Suchseiten noch nicht robust genug.
-  - [ ] Abhängigkeiten: JA-018 und JA-019 sollten zuerst abgeschlossen sein, damit mehr Live-Quellen nicht falsche Status oder unklare Verifikationen erzeugen; JA-016/017 verbessern Nachweise.
-  - [ ] Aufwand/Dauer: Aufwand L-XL; Dauer 2-3 Arbeitstage bei 1 Agent für erste robuste Erweiterung; parallelisierbar mit JA-021, wenn Firmenliste und Adapter-Backlog getrennt bearbeitet werden.
-  - [ ] Prioritätsscore: 82/100, weil Live-Abdeckung direkten Produktwert erzeugt, aber erst nach Report- und Statushärtung sicher skalierbar ist.
-  - [ ] Ordnungsbegründung: Live-Adapter folgen nach Vertrags- und Statussicherheit, damit neue reale Daten nicht mit unvollständiger Ausgabe oder unsicherer Historie vermischt werden.
-  - [ ] Risiken und Unsicherheiten: Karriereportale ändern HTML/JSON-Strukturen; manche Seiten blockieren einfache HTTP-Clients oder benötigen JavaScript. Solche Fälle müssen als `BLOCKED`, `TECHNICAL_LIMITATION` oder `MANUAL_REVIEW` enden, nicht als verifizierter Treffer.
-  - [ ] Schritte:
-    1. Adapter-Backlog aus `coverage.backlog` und Store-Quellen auswerten und konkrete erste ATS-/Karriereseitenmuster priorisieren, ohne reale Treffer zu erfinden.
-    2. Extraktion für strukturierte JSON-LD/JobPosting, Linklisten und mindestens ein belegtes ATS-Pattern implementieren, jeweils mit MaxResults, Timeout, Retry und offizieller URL-Prüfung.
-    3. Deterministische Fixtures für HTML, JSON-LD, ATS-ähnliche Listen, blockierte Seite, leere Seite und Detailfetch-Fehler erstellen; optional separaten Live-Pilot nur als nicht-deterministische Lane belassen.
-  - [ ] Evidence: Neue oder erweiterte Tests mit lokalen Fixtures; Live-Pilot-Log unter `logs/jobagent/live-pilot-<stamp>.json` nur bei explizitem Pilotlauf; Report zeigt Fehlerklassen und unsichere Quellen.
-  - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1`.
-  - [ ] Audit: Für Live-Pilot maximal begrenzte Firmenzahl, User-Agent, Timeout, Retry und keine Aggregator-Primärquelle prüfen; reale Treffer nur zählen, wenn offizielle Detailseite erreichbar und klassifiziert ist.
-  - [ ] Supertest: Nach grünen Funktionstests `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1`; Live-Pilot nicht in den deterministischen Supertest aufnehmen.
-  - [ ] Meilenstein und Parallelisierung: M8; parallel mit JA-021 möglich, solange JA-018/019 abgeschlossen sind.
-
 - [ ] JA-021 Firmeninventar autonom, dedupliziert und quellenorientiert erweitern #comment: Die angehängte Anweisung verlangt langfristig möglichst vollständige Firmenabdeckung statt einer statischen Seedliste.
   - [ ] Beschreibung: Der JobAgent kann neue relevante Unternehmen im Zielgebiet aus erlaubten Entdeckungsquellen oder gepflegten Seeds aufnehmen, Dubletten vermeiden, offizielle Website/Karriere-URL verifizieren und den Recherchefortschritt mit Scanstatus, Priorität und nächstem Schritt persistieren.
   - [ ] Scope: Betroffen sind `src/JobAgent.CompanyInventory.psm1`, `src/JobAgent.Coverage.psm1`, `tools/Seed-JobAgentCompanies.ps1`, neue optionale Discovery-Tools, `tests/Test-JobAgentCompanyInventory.ps1`, `tests/Test-JobAgentCoverage.ps1`; No-Go: keine neue Firma ohne belastbare Quelle, keine Zusammenführung rechtlich unterschiedlicher Arbeitgeber ohne eindeutigen Beleg.

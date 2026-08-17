@@ -44,6 +44,11 @@ function New-TestCompany {
             system = 'Greenhouse'
             official_domain = 'boards.greenhouse.io'
             verified_by_url = 'https://example.invalid/careers'
+        },
+        [pscustomobject]@{
+            system = 'Lever'
+            official_domain = 'jobs.lever.co'
+            verified_by_url = 'https://example.invalid/careers'
         }
     )
     return $company
@@ -166,6 +171,34 @@ $greenhouseCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $greenhouseHt
 Assert-True -Condition ($greenhouseCandidates.Count -eq 1) -Message 'Greenhouse-ATS-URL wurde nicht als offizieller Kandidat erkannt.'
 Assert-True -Condition ($greenhouseCandidates[0].detail_url -eq 'https://boards.greenhouse.io/example/jobs/4242') -Message 'Greenhouse-ATS-URL wurde nicht korrekt kanonisiert.'
 
+$structuredJsonHtml = @'
+<html>
+  <head>
+    <script type="application/json">
+      {
+        "postings": [
+          {
+            "id": "lever-123",
+            "text": "Head of IT",
+            "hostedUrl": "https://jobs.lever.co/example/lever-123?utm_source=test",
+            "categories": {
+              "location": "Muenchen",
+              "commitment": "FULL_TIME"
+            },
+            "descriptionPlain": "Fuehrt die zentrale IT-Organisation."
+          }
+        ]
+      }
+    </script>
+  </head>
+</html>
+'@
+$structuredJsonCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $structuredJsonHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @('Head of IT'))
+Assert-True -Condition ($structuredJsonCandidates.Count -eq 1) -Message 'Strukturierte ATS-JSON-Liste wurde nicht extrahiert.'
+Assert-True -Condition ($structuredJsonCandidates[0].detail_url -eq 'https://jobs.lever.co/example/lever-123') -Message 'Strukturierte ATS-JSON-Liste wurde nicht kanonisiert.'
+Assert-True -Condition ($structuredJsonCandidates[0].external_job_id -eq 'lever-123') -Message 'Strukturierte ATS-JSON-Liste extrahiert keine Job-ID.'
+Assert-True -Condition ($structuredJsonCandidates[0].employment_type -eq 'FULL_TIME') -Message 'Strukturierte ATS-JSON-Liste extrahiert employmentType nicht.'
+
 $fetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -244,6 +277,30 @@ Assert-True -Condition ($jsonLdResult.raw_jobs[0].ats_job_id -eq 'WD-987') -Mess
 Assert-True -Condition ($jsonLdResult.raw_jobs[0].location_label -eq 'Muenchen') -Message 'Live-Adapter uebernimmt JSON-LD-Ort nicht.'
 Assert-True -Condition ($jsonLdResult.raw_jobs[0].employment_type -eq 'FULL_TIME') -Message 'Live-Adapter uebernimmt employmentType aus JSON-LD nicht.'
 
+$structuredJsonFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content $structuredJsonHtml
+            break
+        }
+        'https://jobs.lever.co/example/lever-123' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Head of IT</h1><p>Fuehrt die zentrale IT-Organisation in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$structuredJsonResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $structuredJsonFetcher
+Assert-True -Condition ($structuredJsonResult.status -eq 'SUCCESS') -Message 'Live-Adapter verarbeitet strukturierte ATS-JSON-Liste nicht erfolgreich.'
+Assert-True -Condition ($structuredJsonResult.raw_jobs[0].ats_job_id -eq 'lever-123') -Message 'Live-Adapter uebernimmt ATS-/Job-ID aus strukturierter JSON-Liste nicht.'
+Assert-True -Condition ($structuredJsonResult.raw_jobs[0].employment_type -eq 'FULL_TIME') -Message 'Live-Adapter uebernimmt employmentType aus strukturierter JSON-Liste nicht.'
+Assert-True -Condition ($structuredJsonResult.raw_jobs[0].location_label -eq 'Muenchen') -Message 'Live-Adapter uebernimmt Ort aus strukturierter JSON-Liste nicht.'
+
 $blockedDetailFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -315,11 +372,13 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'jsonld_jobposting_extraction',
         'ats_url_pattern_detection',
         'greenhouse_ats_url_pattern_detection',
+        'structured_ats_json_extraction',
         'live_adapter_success_with_detail_verification',
         'live_adapter_no_jobs_found',
         'live_adapter_blocked_source_detection',
         'live_adapter_dynamic_source_detection',
         'live_adapter_jsonld_ats_success',
+        'live_adapter_structured_json_ats_success',
         'live_adapter_blocked_detail_fetch',
         'live_adapter_timeout_detail_fetch',
         'retry_attempt_log'

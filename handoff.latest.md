@@ -1,40 +1,25 @@
 # Handoff latest
 
-Stand: 2026-08-17T17:28:30.000+02:00
+Stand: 2026-08-17T17:45:29.7402523+02:00
 
 ## Zustand
 
-- Active: `TD-0016`
+- Active: `TD-0017`
 - Status: `in-progress`
-- Ziel: `JA-020 weiter haerten und abschliessen; JA-021 und JA-022 bleiben nachgelagert.`
+- Ziel: `TD-0017 / JA-021 umsetzen: Firmeninventar autonom, dedupliziert und quellenorientiert erweitern.`
 - Branch: `master`
-- HEAD: `99badba4b0b8`
+- HEAD: `5753530a3dea`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
-- Route: ``
 
 ## Abgeschlossener Arbeitsschritt
 
-- `src/JobAgent.LiveScan.psm1` erkennt jetzt zusaetzlich Greenhouse-ATS-URLs als offizielle Detailkandidaten.
-- Leere Seiten, blockierte Seiten, clientseitig/dynamische App-Shells sowie blockierte oder getimte Detailfetches werden fail-closed klassifiziert statt pauschal als unklar behandelt.
-- Die JSON-LD-Hilfsfunktionen wurden gegen primitive oder uneinheitliche Nodes robust gemacht.
-- `tests/Test-JobAgentLiveScan.ps1` deckt jetzt Greenhouse, blockierte Quellen, dynamische Quellen, 403-Detailfetches und 504-Detailfetches ab.
-- `todo.current.md` und `todo.state.json` markieren `TD-0016` jetzt explizit als `in-progress`.
-- `todo.checkpoint.json`, `todo.events.jsonl`, `todo.history.digest.json` und `todo.master.index.json` wurden ueber `./ci.cmd stp` synchronisiert.
-
-## Geaenderte Dateien
-
-- `src/JobAgent.LiveScan.psm1`
-- `tests/Test-JobAgentLiveScan.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `todo.state.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
+- `JA-020` ist abgeschlossen und wurde aus `Roadmap.md` nach `Roadmap_archive.md` rotiert.
+- `src/JobAgent.LiveScan.psm1` verarbeitet jetzt zusaetzlich strukturierte ATS-JSON-Listen sowie einen Lever-aehnlichen offiziellen ATS-Pfad neben JSON-LD, Workday-aehnlichen und Greenhouse-Pfaden.
+- `tests/Test-JobAgentLiveScan.ps1` deckt jetzt strukturierte ATS-JSON-Extraktion, offizielle ATS-Detailseiten und die fail-closed-Faelle `BLOCKED`, `TIMEOUT`, `TECHNICAL_LIMITATION` und `NO_JOBS_FOUND` ab.
+- `todo.current.md` und `todo.state.json` setzen jetzt `TD-0017 / JA-021` als aktiven Punkt; `TD-0016 / JA-020` ist erledigt.
+- `./ci.cmd stp` wurde ausgefuehrt; `todo.checkpoint.json`, `todo.events.jsonl`, `todo.history.digest.json` und `todo.master.index.json` wurden synchronisiert.
 
 ## Verifikation
 
@@ -42,30 +27,19 @@ Stand: 2026-08-17T17:28:30.000+02:00
 - `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
 - `./ci.cmd stp` -> Exit `0`
-- `./ci.cmd supertest` -> letzter verifizierter Digest `Exit 0`; nicht erneut separat angefordert und gemaess Nutzerregel als erledigt gewertet.
+- `./ci.cmd supertest` -> letzter verifizierter Digest `Exit 0`; nicht erneut separat angefragt und gemaess Nutzerregel als erledigt gewertet.
 
-## Offene Prioritaeten
+## Naechste Arbeit
 
-1. `TD-0016 / JA-020`
-   `src/JobAgent.LiveScan.psm1`, `tests/Test-JobAgentLiveScan.ps1`, `tests/Test-JobAgentDailyRun.ps1`
-   Bereits erledigt:
-   - JSON-LD-`JobPosting` aus offiziellen Quellen.
-   - Workday-aehnliche und Greenhouse-ATS-Detailpfade.
-   - Fail-closed-Tests fuer `NO_JOBS_FOUND`, `BLOCKED`, `TECHNICAL_LIMITATION`, blockierten Detailfetch und Timeout-Detailfetch.
-   Noch offen fuer Roadmap-Abnahme:
-   - mindestens ein weiterer belegter offizieller Karriereportal-/ATS-Typ oder eine gleichwertige robuste Erweiterung ueber den aktuellen Satz hinaus;
-   - pruefen, ob weitere strukturierte/listenbasierte offizielle Seiten noch nicht sauber extrahiert werden;
-   - nach Abschluss JA-020 erst dann Roadmap/Todo/Handoff auf done drehen.
-2. `TD-0017 / JA-021`
-   `src/JobAgent.CompanyInventory.psm1`, `src/JobAgent.Coverage.psm1`, `tools/Seed-JobAgentCompanies.ps1`, `tests/Test-JobAgentCompanyInventory.ps1`, `tests/Test-JobAgentCoverage.ps1`
-   Discovery-Vertrag, Firmenvarianten-Deduplikation und Coverage-Priorisierung erweitern.
-3. `TD-0018 / JA-022`
-   `.ci/ci.config.json`, `.ci/bin/modules/*`, `tests/Test-JobAgentOperations.ps1`, `manual/PROGRAM.md`
-   Devserver-Portvertrag bereinigen, HTML-Audit einfuehren und lokale Reportpfade absichern.
+1. `TD-0017 / JA-021` in `src/JobAgent.CompanyInventory.psm1`, `src/JobAgent.Coverage.psm1` und `tools/Seed-JobAgentCompanies.ps1` fortsetzen.
+2. Discovery-Vertrag definieren: `discovery_source`, offizielle Website-Verifikation, Karriere-URL-Pruefung, Branche, Zielgebietsbezug und Prioritaet sauber modellieren.
+3. Deduplikation erweitern: Domain, Rechtsformvarianten, Aliasnamen, Konzern-/Tochtergesellschaften und Standortbezug testen, ohne rechtlich getrennte Arbeitgeber falsch zusammenzufuehren.
+4. Coverage-/Scanpriorisierung anpassen, damit `never_scanned`, `stale_or_unscanned` und `without_career_url` sichtbar und fuer Daily-Runs nutzbar werden.
+5. Funktionstests fuer JA-021: `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1`; bei Report-Auswirkung zusaetzlich `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1`.
+6. Erst danach `TD-0018 / JA-022`: Devserver-Portvertrag `8500/8300` bereinigen, lokalen HTML-Audit einfuehren, Reportpfade und Betriebsstatus absichern.
 
-## Wichtige Hinweise fuer den naechsten Chat
+## Hinweise
 
-- `Roadmap.md` bleibt unveraendert offen fuer `JA-020`, `JA-021`, `JA-022`; es wurde kein Punkt komplett abgeschlossen, daher keine Rotation.
-- Der naechste Chat soll bei `TD-0016 / JA-020` weitermachen, nicht bei `JA-021`.
-- Aggregatoren bleiben weiterhin strikt ausgeschlossen; nur offizielle Firmen-, Karriere- oder belegte ATS-Quellen sind erlaubt.
-- Wenn `JA-020` abgeschlossen wird, erst dann Roadmap-Rotation pruefen und anschliessend `JA-021` aktivieren.
+- Aggregatoren bleiben strikt ausgeschlossen; Discovery aus Sekundaerquellen darf nie als Verifikation behandelt werden.
+- Keine neue Firma ohne belastbare Quelle aufnehmen.
+- `Roadmap.md` enthaelt jetzt nur noch `JA-021` und `JA-022`; `Roadmap_archive.md` reicht jetzt bis `JA-020`.

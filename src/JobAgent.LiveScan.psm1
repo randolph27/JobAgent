@@ -265,7 +265,7 @@ function Get-JobAgentLiveJsonLdNodes {
 
     $nodes.Add($Node)
     $propertyNames = @($Node.PSObject.Properties | ForEach-Object { $_.Name })
-    foreach ($propertyName in @('@graph', 'graph', 'itemListElement', 'jobs')) {
+    foreach ($propertyName in @('@graph', 'graph', 'itemListElement', 'jobs', 'postings', 'positions', 'results', 'openings')) {
         if ($propertyNames -contains $propertyName) {
             foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.$propertyName)) {
                 $nodes.Add($resolved)
@@ -278,6 +278,22 @@ function Get-JobAgentLiveJsonLdNodes {
         }
     }
     return $nodes.ToArray()
+}
+
+function Get-JobAgentLiveStructuredValue {
+    param(
+        [Parameter(Mandatory)][AllowNull()][object]$Node,
+        [Parameter(Mandatory)][string[][]]$Paths
+    )
+
+    foreach ($path in $Paths) {
+        $resolved = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $Node -Path $path)
+        if (-not [string]::IsNullOrWhiteSpace($resolved)) {
+            return $resolved
+        }
+    }
+
+    return $null
 }
 
 function ConvertFrom-JobAgentLiveJsonLdCandidates {
@@ -316,11 +332,15 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
             }
 
             $typeText = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('@type'))
-            if ([string]::IsNullOrWhiteSpace($typeText) -or $typeText -notmatch '(?i)\bJobPosting\b') {
-                continue
-            }
-
-            $detailUrlRaw = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('url'))
+            $detailUrlRaw = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('url'),
+                @('absolute_url'),
+                @('absoluteUrl'),
+                @('hosted_url'),
+                @('hostedUrl'),
+                @('apply_url'),
+                @('applyUrl')
+            )
             if ([string]::IsNullOrWhiteSpace($detailUrlRaw)) {
                 continue
             }
@@ -331,24 +351,48 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
                 continue
             }
 
-            $title = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('title'))
-            if ([string]::IsNullOrWhiteSpace($title)) {
-                $title = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('name'))
-            }
+            $title = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('title'),
+                @('text'),
+                @('name')
+            )
             if ([string]::IsNullOrWhiteSpace($title)) {
                 continue
             }
 
-            $externalJobId = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('identifier', 'value'))
-            if ([string]::IsNullOrWhiteSpace($externalJobId)) {
-                $externalJobId = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('identifier'))
+            $isJobPosting = -not [string]::IsNullOrWhiteSpace($typeText) -and $typeText -match '(?i)\bJobPosting\b'
+            if ((-not $isJobPosting) -and (-not (Test-JobAgentLiveDetailUrlPattern -Url ([string]$evaluation.canonical_url))) -and (-not (Test-JobAgentLiveCandidateText -Text ($title + ' ' + $evaluation.canonical_url)))) {
+                continue
             }
-            $locationLabel = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('jobLocation', 'address', 'addressLocality'))
-            if ([string]::IsNullOrWhiteSpace($locationLabel)) {
-                $locationLabel = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('jobLocation', 'name'))
-            }
-            $employmentType = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('employmentType'))
-            $summary = Get-JobAgentLiveTextValue -Value (Get-JobAgentLiveNestedValue -Object $node -Path @('description'))
+
+            $externalJobId = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('identifier', 'value'),
+                @('identifier'),
+                @('id'),
+                @('jobId'),
+                @('job_id'),
+                @('requisition_id'),
+                @('requisitionId')
+            )
+            $locationLabel = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('jobLocation', 'address', 'addressLocality'),
+                @('jobLocation', 'name'),
+                @('location', 'name'),
+                @('categories', 'location'),
+                @('workplace', 'location'),
+                @('location')
+            )
+            $employmentType = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('employmentType'),
+                @('categories', 'commitment'),
+                @('type')
+            )
+            $summary = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('description'),
+                @('descriptionPlain'),
+                @('content')
+            )
+            $confidence = if ($isJobPosting) { 90 } else { 82 }
 
             if ($seen.Add([string]$evaluation.canonical_url)) {
                 $candidates.Add((New-JobAgentLiveCandidate `
@@ -360,7 +404,7 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
                         -LocationLabel $locationLabel `
                         -Summary $summary `
                         -EmploymentType $employmentType `
-                        -ExtractionConfidence 90))
+                        -ExtractionConfidence $confidence))
             }
         }
     }
