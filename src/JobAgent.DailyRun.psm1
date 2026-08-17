@@ -282,6 +282,25 @@ function Write-JobAgentDailyRunMarkdownReport {
     return $path
 }
 
+function Write-JobAgentDailyRunHtmlReport {
+    param(
+        [Parameter(Mandatory)][string]$ProjectRoot,
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter(Mandatory)][string]$ScanRunId,
+        [Parameter(Mandatory)][string]$ReportPath
+    )
+
+    $path = if ([IO.Path]::IsPathRooted($ReportPath)) {
+        $ReportPath
+    }
+    else {
+        Join-Path $ProjectRoot $ReportPath
+    }
+    $report = New-JobAgentDailyReport -Document $Document -ScanRunId $ScanRunId
+    Write-JobAgentDailyAtomicFile -Path $path -Content (ConvertTo-JobAgentDailyReportHtml -Report $report)
+    return $path
+}
+
 function Write-JobAgentDailyAtomicFile {
     param(
         [Parameter(Mandatory)][string]$Path,
@@ -323,6 +342,7 @@ function Invoke-JobAgentDailyRun {
     $scanRunId = New-JobAgentDailyRunId -StartedAt $StartedAt
     $reportRelativePath = 'logs/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.json'
     $markdownReportRelativePath = 'logs/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.md'
+    $htmlReportRelativePath = 'html/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.html'
     $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootFull -DataRoot $DataRoot
     try {
         $document = Read-JobAgentStore -ProjectRoot $projectRootFull -DataRoot $DataRoot
@@ -362,17 +382,19 @@ function Invoke-JobAgentDailyRun {
             finished_at = ConvertTo-JobAgentDailyIso -Value $finishedAt
             status = Get-JobAgentDailyRunStatus -AdapterResults $resultsArray
             company_ids = @($companies | ForEach-Object { [string]$_.company_id })
-            artifact_paths = @($reportRelativePath, $markdownReportRelativePath)
+            artifact_paths = @($reportRelativePath, $markdownReportRelativePath, $htmlReportRelativePath)
             errors = @($resultsArray | Where-Object { [string]$_.status -eq 'FAILED' } | ForEach-Object { $_.error_class })
         }
         $document = Upsert-JobAgentScanRun -Document $document -ScanRun $scanRun
         $storePath = Write-JobAgentStore -ProjectRoot $projectRootFull -DataRoot $DataRoot -Document $document -CreateBackup
 
         $summary = New-JobAgentDailyRunSummary -Document $document -ScanRunId $scanRunId -AdapterResults $resultsArray -ReportPath $reportRelativePath -StartedAt $StartedAt -FinishedAt $finishedAt
-        $reportPath = Write-JobAgentDailyRunReport -ProjectRoot $projectRootFull -Summary $summary
         $markdownReportPath = Write-JobAgentDailyRunMarkdownReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $markdownReportRelativePath
-        $summary.report_path = $reportPath
+        $htmlReportPath = Write-JobAgentDailyRunHtmlReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $htmlReportRelativePath
+        $summary.report_path = Join-Path $projectRootFull $reportRelativePath
         $summary | Add-Member -NotePropertyName markdown_report_path -NotePropertyValue $markdownReportPath -Force
+        $summary | Add-Member -NotePropertyName html_report_path -NotePropertyValue $htmlReportPath -Force
+        $reportPath = Write-JobAgentDailyRunReport -ProjectRoot $projectRootFull -Summary $summary
 
         [pscustomobject]@{
             scan_run_id = $scanRunId
@@ -380,6 +402,7 @@ function Invoke-JobAgentDailyRun {
             store_path = $storePath
             report_path = $reportPath
             markdown_report_path = $markdownReportPath
+            html_report_path = $htmlReportPath
             summary = $summary
             document = $document
         }

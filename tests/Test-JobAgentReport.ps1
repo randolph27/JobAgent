@@ -175,11 +175,21 @@ foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen'
 }
 Assert-True -Condition (-not $markdown.Contains('Software Engineer')) -Message 'Abgelehnte Stellen duerfen nicht als passende Stellen gerendert werden.'
 
+$report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
+$html = ConvertTo-JobAgentDailyReportHtml -Report $report
+foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', 'JobAgent Daily-Run-Bericht', 'https://alpha_ag.example.invalid/jobs/alpha_new')) {
+    Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt erwarteten Inhalt nicht: $expected"
+}
+Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'
+Assert-True -Condition ($html.Contains('&lt;script&gt;alert(1)&lt;/script&gt;')) -Message 'HTML-Report escaped problematische Inhalte nicht.'
+
 $empty = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
 $empty.scan_runs = @($document.scan_runs[0])
 $emptyReport = New-JobAgentDailyReport -Document $empty -ScanRunId $scanRunId
 $emptyMarkdown = ConvertTo-JobAgentDailyReportMarkdown -Report $emptyReport
 Assert-True -Condition ($emptyMarkdown.Contains('Keine neuen passenden Stellen im Lauf.')) -Message 'Leere Reports erhalten keinen stabilen Leerzustand.'
+$emptyHtml = ConvertTo-JobAgentDailyReportHtml -Report $emptyReport
+Assert-True -Condition ($emptyHtml.Contains('Keine neuen passenden Stellen im Lauf.')) -Message 'Leere HTML-Reports erhalten keinen stabilen Leerzustand.'
 
 [pscustomobject]@{
     status = 'ok'
@@ -188,6 +198,8 @@ Assert-True -Condition ($emptyMarkdown.Contains('Keine neuen passenden Stellen i
         'report_filters_rejected_jobs',
         'report_explains_a_b_c_priority',
         'report_preserves_unknown_optional_values',
+        'report_renders_markdown_and_html',
+        'report_escapes_html_content',
         'report_renders_empty_state'
     )
 } | ConvertTo-Json -Depth 4

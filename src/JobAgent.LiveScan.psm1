@@ -354,6 +354,7 @@ function New-JobAgentLivePilotSummary {
         verified_matching_jobs = @($verifiedMatchingJobs | Sort-Object company_id, title)
         report_path = [string]$DailyRunResult.report_path
         markdown_report_path = [string]$DailyRunResult.markdown_report_path
+        html_report_path = [string]$DailyRunResult.html_report_path
         note = 'Live-Pilot ist eine separate Lane. verified_matching_jobs enthaelt nur offizielle Detailseiten mit MATCH/POSSIBLE-Klassifikation; verworfene oder unpassende offizielle Detailseiten bleiben separat unter official_detail_pages_checked.'
     }
 }

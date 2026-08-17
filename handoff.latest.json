@@ -1,1 +1,127 @@
-{"summary":"stp sync","active_id":"","changed":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","todo.history.digest.json","todo.master.index.json"],"ts":"2026-08-17T16:21:44.128+02:00","verified":[{"status":"pass","cmd":".\\ci.cmd supertest","exit":0}],"goal":"","route":null,"capsule":{"env_inventory_missing":false,"agent_id":"UTTER-20260817-39f7","goal":"","project":"JobAgent","active_id":"","next":"","workspace_root":".","status":"open","ts":"2026-08-17T16:21:44.128+02:00","changed":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","todo.history.digest.json","todo.master.index.json"],"manual_missing":false,"git":{"has_repo":true,"worktree":"dirty","branch":"master","ahead":0,"upstream":"origin/master","remote":"origin","detached":false,"behind":0,"tracked_changes":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","todo.history.digest.json","todo.master.index.json"],"head":"1c83b4208b1d"},"refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"env_inventory_used":false,"route_ok":null,"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","route_violations":[],"env_inventory_path":null,"verified":[{"status":"pass","cmd":".\\ci.cmd supertest","exit":0}]},"route_violations":[],"refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"route_ok":null,"next":"","git":{"has_repo":true,"worktree":"dirty","branch":"master","ahead":0,"upstream":"origin/master","remote":"origin","detached":false,"behind":0,"tracked_changes":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","todo.history.digest.json","todo.master.index.json"],"head":"1c83b4208b1d"},"verify_digest":{"ts":"2026-08-17T15:37:24.1633138+02:00","exit":0,"fail_signature":null,"failed_tasks":[],"cmd":".\\ci.cmd supertest","tests":["Test-JobAgentSchema.ps1","Test-JobAgentPersistence.ps1","Test-JobAgentCompanyInventory.ps1","Test-JobAgentSourceAdapters.ps1","Test-JobAgentSourceVerification.ps1","Test-JobAgentClassification.ps1","Test-JobAgentDeduplication.ps1","Test-JobAgentStatusMachine.ps1","Test-JobAgentDailyRun.ps1","Test-JobAgentReport.ps1","Test-JobAgentOperations.ps1","Test-JobAgentTestMatrix.ps1"],"status":"pass","log_path":null},"toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"project":"JobAgent","next_steps":[],"status":"open","workspace_root":".","agent_id":"UTTER-20260817-39f7","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp."}
+{
+  "ts": "2026-08-17T16:30:58.182+02:00",
+  "agent_id": "UTTER-20260817-39f7",
+  "workspace_root": ".",
+  "project": "JobAgent",
+  "status": "open",
+  "active_id": "",
+  "summary": "JA-016 abgeschlossen, archiviert und fuer den naechsten Chat auf JA-017 uebergeben.",
+  "goal": "Naechster fachlicher Einstieg ist JA-017 Reportfelder vervollstaendigen; danach JA-018 und JA-019 fuer Status- und Quellenkorrektheit.",
+  "next": "JA-017 zuerst in Report/DailyRun/Testdateien umsetzen; danach JA-018 source-scope REMOVED/CLOSED und JA-019 verification_evidence.",
+  "next_steps": [
+    "JA-017: New-JobAgentReportJobEntry und Statistikmodell um published_at, first_seen, last_seen, salary, requirements, age_basis, age_days und erweiterte Recherchemetriken ausbauen.",
+    "JA-017: Markdown- und HTML-Renderer synchron halten; Tests in tests/Test-JobAgentReport.ps1 und tests/Test-JobAgentDailyRun.ps1 auf Pflichtfelder erweitern.",
+    "JA-018: REMOVED auf source_id begrenzen und CLOSED-Signal vom Adaptervertrag bis zur Statusmaschine durchziehen.",
+    "JA-019: verification_evidence fuer offizielle ATS-/Redirect-Belege in Schema, Persistenz und SourceVerification einfuehren.",
+    "JA-020 und JA-021 erst nach JA-018/JA-019 verbreitern; JA-022 erst nach JA-017 anfangen."
+  ],
+  "completed": [
+    {
+      "id": "JA-016",
+      "title": "Lokalen HTML-Report als Daily-Run-Artefakt erzeugen und in html/ ablegen",
+      "result": [
+        "Daily-Run schreibt html/jobagent/daily-run-<stamp>.html.",
+        "html_report_path ist in Rueckgabe, Summary-JSON, CLI-Output und Live-Pilot-Summary verfuegbar.",
+        "HTML rendert lokale CSS/HTML-Ressourcen und escaped problematische Inhalte."
+      ]
+    }
+  ],
+  "open_priorities": [
+    {
+      "id": "JA-017",
+      "priority": 1,
+      "files": [
+        "src/JobAgent.Report.psm1",
+        "src/JobAgent.DailyRun.psm1",
+        "tests/Test-JobAgentReport.ps1",
+        "tests/Test-JobAgentDailyRun.ps1",
+        "docs/data-model.md"
+      ],
+      "focus": "Pflichtfelder aus der Programmanweisung im JSON-/Markdown-/HTML-Report sichtbar und getestet machen."
+    },
+    {
+      "id": "JA-018",
+      "priority": 2,
+      "files": [
+        "src/JobAgent.StatusMachine.psm1",
+        "src/JobAgent.Persistence.psm1",
+        "src/JobAgent.SourceAdapters.psm1",
+        "src/JobAgent.LiveScan.psm1",
+        "tests/Test-JobAgentStatusMachine.ps1",
+        "tests/Test-JobAgentDailyRun.ps1"
+      ],
+      "focus": "REMOVED auf Quellenkontext begrenzen und explizites CLOSED modellieren."
+    },
+    {
+      "id": "JA-019",
+      "priority": 3,
+      "files": [
+        "src/JobAgent.SourceVerification.psm1",
+        "src/JobAgent.CompanyInventory.psm1",
+        "src/JobAgent.Persistence.psm1",
+        "schemas/jobagent.schema.json",
+        "tests/Test-JobAgentSourceVerification.ps1",
+        "tests/Test-JobAgentCompanyInventory.ps1",
+        "tests/Test-JobAgentSchema.ps1",
+        "tests/Test-JobAgentPersistence.ps1"
+      ],
+      "focus": "ATS-/Redirect-Verifikationsbelege persistieren und spaeter reportbar machen."
+    }
+  ],
+  "changed": [
+    ".ci/pins/immutable.hashes.json",
+    ".ci/pins/immutable.snapshot/Roadmap.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "src/JobAgent.DailyRun.psm1",
+    "src/JobAgent.LiveScan.psm1",
+    "src/JobAgent.Report.psm1",
+    "tests/Test-JobAgentDailyRun.ps1",
+    "tests/Test-JobAgentReport.ps1",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "tools/Invoke-JobAgentDailyRun.ps1"
+  ],
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 0
+    }
+  ],
+  "refs": [
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md"
+  ],
+  "notes": [
+    "Roadmap.md enthaelt nur noch JA-017 bis JA-022.",
+    "Roadmap_archive.md enthaelt jetzt JA-001 bis JA-016.",
+    "html/jobagent/latest.html wurde bewusst nicht eingefuehrt.",
+    "Browser-/Viewport-Audit fuer HTML bleibt Teil von JA-022."
+  ],
+  "git": {
+    "branch": "master",
+    "head": "4c7d6a55ca75",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty"
+  }
+}

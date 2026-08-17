@@ -27,6 +27,12 @@ function ConvertTo-JobAgentReportMarkdownText {
     return ($text -replace '\|', '\|' -replace "`r?`n", ' ')
 }
 
+function ConvertTo-JobAgentReportHtmlText {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    return [Net.WebUtility]::HtmlEncode((ConvertTo-JobAgentReportText -Value $Value))
+}
+
 function Get-JobAgentReportProperty {
     param(
         [Parameter()][AllowNull()][object]$Object,
@@ -303,6 +309,107 @@ function Add-JobAgentReportCompanyMarkdownTable {
     }
 }
 
+function Add-JobAgentReportHtmlTable {
+    param(
+        [Parameter(Mandatory)][object]$Lines,
+        [Parameter()][AllowEmptyCollection()][object[]]$Items = @(),
+        [Parameter(Mandatory)][string]$EmptyText,
+        [Parameter()][switch]$IncludeChange
+    )
+
+    if ($Items.Count -eq 0) {
+        [void]$Lines.Add('<p>' + (ConvertTo-JobAgentReportHtmlText $EmptyText) + '</p>')
+        return
+    }
+
+    [void]$Lines.Add('<div class="table-wrap">')
+    [void]$Lines.Add('<table>')
+    [void]$Lines.Add('<thead>')
+    if ($IncludeChange) {
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Aenderung</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
+    }
+    else {
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
+    }
+    [void]$Lines.Add('</thead>')
+    [void]$Lines.Add('<tbody>')
+    foreach ($item in $Items) {
+        $change = ((@($item.changed_fields) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }) -join ', ')
+        if ([string]::IsNullOrWhiteSpace($change)) {
+            $change = $item.change_reason
+        }
+        $url = ConvertTo-JobAgentReportText -Value $item.official_url
+        $urlCell = if ($url -eq 'UNKNOWN') {
+            '<span class="unknown">UNKNOWN</span>'
+        }
+        else {
+            '<a href="' + ([Net.WebUtility]::HtmlEncode($url)) + '">' + ([Net.WebUtility]::HtmlEncode($url)) + '</a>'
+        }
+
+        if ($IncludeChange) {
+            [void]$Lines.Add(
+                '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $change) +
+                '</td><td>' + $urlCell +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
+                '</td></tr>'
+            )
+        }
+        else {
+            [void]$Lines.Add(
+                '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
+                '</td><td>' + $urlCell +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
+                '</td></tr>'
+            )
+        }
+    }
+    [void]$Lines.Add('</tbody>')
+    [void]$Lines.Add('</table>')
+    [void]$Lines.Add('</div>')
+}
+
+function Add-JobAgentReportCompanyHtmlTable {
+    param(
+        [Parameter(Mandatory)][object]$Lines,
+        [Parameter()][AllowEmptyCollection()][object[]]$Items = @()
+    )
+
+    if ($Items.Count -eq 0) {
+        [void]$Lines.Add('<p>Keine neuen Unternehmen im Lauf.</p>')
+        return
+    }
+
+    [void]$Lines.Add('<div class="table-wrap">')
+    [void]$Lines.Add('<table>')
+    [void]$Lines.Add('<thead><tr><th>Firma</th><th>Website</th><th>Karriere-URL</th><th>Verifikation</th></tr></thead>')
+    [void]$Lines.Add('<tbody>')
+    foreach ($item in $Items) {
+        $website = ConvertTo-JobAgentReportText -Value $item.official_website_url
+        $career = ConvertTo-JobAgentReportText -Value $item.career_url
+        $websiteCell = if ($website -eq 'UNKNOWN') { '<span class="unknown">UNKNOWN</span>' } else { '<a href="' + ([Net.WebUtility]::HtmlEncode($website)) + '">' + ([Net.WebUtility]::HtmlEncode($website)) + '</a>' }
+        $careerCell = if ($career -eq 'UNKNOWN') { '<span class="unknown">UNKNOWN</span>' } else { '<a href="' + ([Net.WebUtility]::HtmlEncode($career)) + '">' + ([Net.WebUtility]::HtmlEncode($career)) + '</a>' }
+        [void]$Lines.Add(
+            '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
+            '</td><td>' + $websiteCell +
+            '</td><td>' + $careerCell +
+            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.verification_status) +
+            '</td></tr>'
+        )
+    }
+    [void]$Lines.Add('</tbody>')
+    [void]$Lines.Add('</table>')
+    [void]$Lines.Add('</div>')
+}
+
 function ConvertTo-JobAgentDailyReportMarkdown {
     [CmdletBinding()]
     param([Parameter(Mandatory)][object]$Report)
@@ -388,7 +495,126 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     return ($lines.ToArray() -join "`n")
 }
 
+function ConvertTo-JobAgentDailyReportHtml {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][object]$Report)
+
+    $lines = [System.Collections.Generic.List[string]]::new()
+    [void]$lines.Add('<!DOCTYPE html>')
+    [void]$lines.Add('<html lang="de">')
+    [void]$lines.Add('<head>')
+    [void]$lines.Add('<meta charset="utf-8">')
+    [void]$lines.Add('<meta name="viewport" content="width=device-width, initial-scale=1">')
+    [void]$lines.Add('<title>JobAgent Daily-Run-Bericht</title>')
+    [void]$lines.Add('<style>')
+    [void]$lines.Add(':root { color-scheme: light; --bg: #f4f1ea; --surface: #fffdf8; --surface-alt: #f7efe2; --line: #d8c7a9; --text: #1f2933; --muted: #5d6b78; --accent: #7a4b20; --ok: #155e3b; --warn: #8a4b0f; }')
+    [void]$lines.Add('* { box-sizing: border-box; }')
+    [void]$lines.Add('body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: linear-gradient(180deg, #f7f2e8 0%, #efe6d6 100%); color: var(--text); }')
+    [void]$lines.Add('main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; }')
+    [void]$lines.Add('section { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(31, 41, 51, 0.06); }')
+    [void]$lines.Add('h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; }')
+    [void]$lines.Add('h1 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--accent); }')
+    [void]$lines.Add('h2 { font-size: 1.25rem; }')
+    [void]$lines.Add('p, li { line-height: 1.5; }')
+    [void]$lines.Add('.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }')
+    [void]$lines.Add('.card { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 12px; padding: 12px; min-width: 0; }')
+    [void]$lines.Add('.label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }')
+    [void]$lines.Add('.value { display: block; font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }')
+    [void]$lines.Add('.table-wrap { overflow-x: auto; }')
+    [void]$lines.Add('table { width: 100%; border-collapse: collapse; min-width: 720px; }')
+    [void]$lines.Add('th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }')
+    [void]$lines.Add('th { background: #f2e7d4; font-size: 0.92rem; }')
+    [void]$lines.Add('tbody tr:nth-child(even) { background: rgba(122, 75, 32, 0.04); }')
+    [void]$lines.Add('a { color: var(--accent); }')
+    [void]$lines.Add('.unknown { color: var(--muted); font-style: italic; }')
+    [void]$lines.Add('@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } }')
+    [void]$lines.Add('</style>')
+    [void]$lines.Add('</head>')
+    [void]$lines.Add('<body>')
+    [void]$lines.Add('<main>')
+    [void]$lines.Add('<section>')
+    [void]$lines.Add('<h1>JobAgent Daily-Run-Bericht</h1>')
+    [void]$lines.Add('<div class="summary">')
+    foreach ($item in @(
+            @{ Label = 'ScanRun'; Value = $Report.scan_run_id },
+            @{ Label = 'Status'; Value = $Report.statistics.status },
+            @{ Label = 'Firmen'; Value = $Report.statistics.companies_scanned },
+            @{ Label = 'Adapterversuche'; Value = $Report.statistics.adapter_attempts },
+            @{ Label = 'Snapshots'; Value = $Report.statistics.snapshots },
+            @{ Label = 'Fehler'; Value = $Report.statistics.errors }
+        )) {
+        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportHtmlText $item.Label) + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $item.Value) + '</span></div>')
+    }
+    [void]$lines.Add('</div>')
+    [void]$lines.Add('</section>')
+
+    [void]$lines.Add('<section><h2>Neue passende Stellen</h2>')
+    Add-JobAgentReportHtmlTable -Lines $lines -Items @($Report.sections.new_matching_jobs) -EmptyText 'Keine neuen passenden Stellen im Lauf.'
+    [void]$lines.Add('</section>')
+
+    [void]$lines.Add('<section><h2>Aktive passende Stellen</h2>')
+    Add-JobAgentReportHtmlTable -Lines $lines -Items @($Report.sections.active_matching_jobs) -EmptyText 'Keine unveraenderten aktiven passenden Stellen im Lauf.'
+    [void]$lines.Add('</section>')
+
+    [void]$lines.Add('<section><h2>Aenderungen</h2>')
+    Add-JobAgentReportHtmlTable -Lines $lines -Items @($Report.sections.changed_jobs) -EmptyText 'Keine geaenderten passenden Stellen im Lauf.' -IncludeChange
+    [void]$lines.Add('</section>')
+
+    [void]$lines.Add('<section><h2>Geschlossene oder entfernte Stellen</h2>')
+    Add-JobAgentReportHtmlTable -Lines $lines -Items @($Report.sections.closed_or_removed_jobs) -EmptyText 'Keine geschlossenen oder entfernten passenden Stellen im Lauf.' -IncludeChange
+    [void]$lines.Add('</section>')
+
+    [void]$lines.Add('<section><h2>Neue Unternehmen</h2>')
+    Add-JobAgentReportCompanyHtmlTable -Lines $lines -Items @($Report.sections.new_companies)
+    [void]$lines.Add('</section>')
+
+    [void]$lines.Add('<section><h2>Recherche-Statistik</h2><div class="summary">')
+    foreach ($metric in @('new_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'errors')) {
+        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportHtmlText $metric) + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.statistics.$metric) + '</span></div>')
+    }
+    [void]$lines.Add('</div></section>')
+
+    [void]$lines.Add('<section><h2>Coverage und Adapter-Backlog</h2>')
+    [void]$lines.Add('<p>' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.approximation_notice) + '</p>')
+    [void]$lines.Add('<div class="summary">')
+    foreach ($metric in @('companies_total', 'with_career_url', 'without_career_url', 'successfully_scanned', 'failed_scanned', 'never_scanned', 'without_matching_jobs', 'with_matching_jobs', 'stale_or_unscanned')) {
+        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportHtmlText $metric) + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.metrics.$metric) + '</span></div>')
+    }
+    [void]$lines.Add('</div>')
+
+    [void]$lines.Add('<h3>Naechste Scanprioritaeten</h3>')
+    if (@($Report.coverage.scan_priority).Count -eq 0) {
+        [void]$lines.Add('<p>Keine Scanprioritaeten vorhanden.</p>')
+    }
+    else {
+        [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Score</th><th>Firma</th><th>Aktion</th><th>Gruende</th></tr></thead><tbody>')
+        foreach ($item in @($Report.coverage.scan_priority | Select-Object -First 10)) {
+            [void]$lines.Add('<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.next_action) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText ((@($item.reasons) -join ', '))) + '</td></tr>')
+        }
+        [void]$lines.Add('</tbody></table></div>')
+    }
+
+    [void]$lines.Add('<h3>Adapter- und Coverage-Backlog</h3>')
+    if (@($Report.coverage.backlog).Count -eq 0) {
+        [void]$lines.Add('<p>Kein Coverage-Backlog vorhanden.</p>')
+    }
+    else {
+        [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Score</th><th>Typ</th><th>Firma</th><th>Begruendung</th><th>Naechster Schritt</th></tr></thead><tbody>')
+        foreach ($item in @($Report.coverage.backlog | Select-Object -First 10)) {
+            [void]$lines.Add('<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.kind) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.reason) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.next_step) + '</td></tr>')
+        }
+        [void]$lines.Add('</tbody></table></div>')
+    }
+    [void]$lines.Add('</section>')
+    [void]$lines.Add('</main>')
+    [void]$lines.Add('</body>')
+    [void]$lines.Add('</html>')
+
+    return ($lines.ToArray() -join "`n")
+}
+
 Export-ModuleMember -Function @(
+    'ConvertTo-JobAgentDailyReportHtml',
     'ConvertTo-JobAgentDailyReportMarkdown',
     'New-JobAgentDailyReport'
 )

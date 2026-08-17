@@ -2,6 +2,23 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-016 Lokalen HTML-Report als Daily-Run-Artefakt erzeugen und in `html/` ablegen #comment: Die Nutzeranforderung verlangt zusätzlich zum bestehenden JSON-/Markdown-Report einen lokal öffnbaren HTML-Output im Projektverzeichnis.
+  - [x] Beschreibung: Jeder `Invoke-JobAgentDailyRun` erzeugt jetzt zusätzlich zu JSON und Markdown einen HTML-Bericht unter `html/jobagent/daily-run-<stamp>.html`; Rückgabewert, Summary-JSON, CLI-Output und `scan_run.artifact_paths` enthalten den HTML-Pfad deterministisch.
+  - [x] Scope: Erweitert wurden `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `src/JobAgent.LiveScan.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tests/Test-JobAgentReport.ps1` und `tests/Test-JobAgentDailyRun.ps1`. Kein externer CDN-Link, kein Devserver-Zwang, kein JavaScript für Kerninhalt und keine ungeescapten HTML-Ausgaben.
+  - [x] Ist-Stand (2026-08-17 16:27): Der HTML-Renderer baut ein lokales HTML5-Dokument mit responsivem CSS, escaped Textzellen, Coverage-/Backlog-Sektionen und Linkdarstellung; Daily-Run, Live-Pilot-Summary und CLI geben `html_report_path` aus.
+  - [x] Abhängigkeiten: JA-010 und JA-011 waren abgeschlossen; JA-016 wurde ohne Live-Webrecherche umgesetzt.
+  - [x] Aufwand/Dauer: Aufwand M, innerhalb der aktuellen Arbeitseinheit umgesetzt.
+  - [x] Prioritätsscore: 100/100, weil dies die explizite aktuelle Nutzeranforderung für lokal nutzbare Ergebnisartefakte war.
+  - [x] Risiken: Ein stabiler Alias wie `html/jobagent/latest.html` wurde bewusst nicht eingeführt; falls später gewünscht, bleibt das ein separater Folgepunkt. Visueller Browser-Audit über verschiedene Viewports ist noch Teil von JA-022.
+  - [x] Schritte:
+    1. `ConvertTo-JobAgentDailyReportHtml` mit lokalem CSS, semantischen Sektionen, HTML-Escaping und Tabellenrenderer implementiert.
+    2. `Write-JobAgentDailyRunHtmlReport` ergänzt und HTML-Artefakt in Daily-Run, Summary-JSON, ScanRun-Artefakten, CLI und Live-Pilot-Summary verdrahtet.
+    3. Funktionstests für HTML-Existenz, Pflichtüberschriften, Escaping von `<script>`, leeren Zustand und Summary-Felder ergänzt.
+  - [x] Evidence: `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `src/JobAgent.LiveScan.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tests/Test-JobAgentReport.ps1`, `tests/Test-JobAgentDailyRun.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0.
+  - [x] Audit: HTML-Ausgabe verwendet keine externen Ressourcen, escaped problematische Inhalte und rendert einen stabilen Leerzustand; viewport-basierter Browser-Audit bleibt als offener Betriebspunkt in JA-022.
+  - [x] Supertest: `pwsh -NoProfile -File tests\Test-JobAgentSupertest.ps1` -> Exit 0; `.\ci.cmd self-check` -> Exit 0.
+
 - [x] JA-015 Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren #comment: Nach dem Pilot muss die Abdeckung systematisch wachsen, statt täglich dieselben Unternehmen abzufragen.
   - [x] Beschreibung: `src/JobAgent.Coverage.psm1` erzeugt Coverage-Metriken, Adapter-/Portal-Backlog und Scanpriorisierung aus dem lokalen Store; Daily-Run-Markdownberichte enthalten nun einen Coverage-Abschnitt mit ausdrücklichem Näherungshinweis.
   - [x] Scope: Erstellt wurden `src/JobAgent.Coverage.psm1` und `tests/Test-JobAgentCoverage.ps1`; erweitert wurden `src/JobAgent.Report.psm1`, `docs/test-matrix.json`, `docs/test-matrix.md`, `tests/Test-JobAgentSupertest.ps1` und `tests/Test-JobAgentTestMatrix.ps1`. Keine automatische Zusammenführung unklarer Unternehmensgruppen, keine Live-Webrecherche, keine Vollständigkeitsbehauptung.

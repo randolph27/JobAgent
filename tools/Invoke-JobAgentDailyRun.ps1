@@ -81,6 +81,7 @@ $result = $managed.result
     store_path = if ($result) { $result.store_path } else { $null }
     report_path = if ($result) { $result.report_path } else { $null }
     markdown_report_path = if ($result) { $result.markdown_report_path } else { $null }
+    html_report_path = if ($result) { $result.html_report_path } else { $null }
     run_log_path = $managed.run_log_path
     status_path = $managed.status_path
     statistics = if ($result) { $result.summary.statistics } else { $null }
