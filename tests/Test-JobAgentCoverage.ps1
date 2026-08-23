@@ -144,6 +144,19 @@ $missingUsageNotes = @($sourceRegistry.items | Where-Object {
     })
 Assert-True -Condition ($missingUsageNotes.Count -eq 0) -Message 'Quellen muessen Nutzungs-, Rate- und Robots-Hinweise tragen.'
 
+$hintStorePath = Join-Path $root 'data\jobagent\company-discovery.hints.json'
+Assert-True -Condition (Test-Path -LiteralPath $hintStorePath -PathType Leaf) -Message 'Discovery-Hint-Store fehlt.'
+$hintStore = Get-Content -Raw -LiteralPath $hintStorePath | ConvertFrom-Json -Depth 100
+Assert-True -Condition ($hintStore.schema_version -eq 'jobagent/company-discovery-hints/v1') -Message 'Discovery-Hint-Store hat falsche Schema-Version.'
+Assert-True -Condition ($hintStore.search_matrix_count -eq 72) -Message 'Discovery-Hint-Store dokumentiert falsche Suchmatrix-Groesse.'
+Assert-True -Condition ($hintStore.hints_total -ge 5) -Message 'Discovery-Hint-Store enthaelt zu wenige Sekundaerhinweise.'
+Assert-True -Condition ($hintStore.unverified_hints -eq $hintStore.hints_total) -Message 'Discovery-Hint-Store darf keine verifizierten Hints enthalten.'
+Assert-True -Condition (@($hintStore.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' }).Count -eq 0) -Message 'Discovery-Hint-Store darf keine anderen Kandidatenstatus speichern.'
+Assert-True -Condition (@($hintStore.hints | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.search_parameters.keyword) -or [string]::IsNullOrWhiteSpace([string]$_.observed_url) }).Count -eq 0) -Message 'Discovery-Hints muessen Suchparameter und Fund-URL tragen.'
+$hintSourceIds = @($hintStore.hints | ForEach-Object { [string]$_.source_id } | Sort-Object -Unique)
+$secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -ne 'OFFICIAL_DIRECTORY' -and [string]$_.source_class -ne 'REJECTED' } | ForEach-Object { [string]$_.source_id })
+Assert-True -Condition (@($hintSourceIds | Where-Object { $secondarySourceIds -notcontains $_ }).Count -eq 0) -Message 'Discovery-Hints duerfen nur erlaubte Sekundaerquellen referenzieren.'
+
 $coverageLog = Join-Path $root 'logs\jobagent\ja-023-source-coverage.json'
 New-Item -ItemType Directory -Path (Split-Path -Parent $coverageLog) -Force | Out-Null
 $sourceCoverage | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $coverageLog -Encoding UTF8
@@ -162,6 +175,7 @@ $sourceCoverage | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $coverageL
         'discovery_source_registry_schema_valid',
         'discovery_source_coverage_by_class_and_decision',
         'discovery_source_secondary_sources_are_not_official',
-        'discovery_source_usage_notes_required'
+        'discovery_source_usage_notes_required',
+        'secondary_hint_store_contract'
     )
 } | ConvertTo-Json -Depth 4

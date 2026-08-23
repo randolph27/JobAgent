@@ -551,15 +551,155 @@ function Import-JobAgentCompanyDiscoveryInventory {
     return $result
 }
 
+function New-JobAgentCompanyDiscoveryHintSearch {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][ValidateSet('Muenchen', 'Freising', 'Garching', 'Unterfoehring', 'Ismaning', 'Taufkirchen', 'Neubiberg', 'Pullach', 'Gruenwald')][string]$Location,
+        [Parameter(Mandatory)][ValidateRange(1, 100)][int]$RadiusKm,
+        [Parameter(Mandatory)][ValidateSet('Head IT', 'Leiter IT', 'Director IT', 'CIO', 'IT Operations', 'IT Security', 'Digitalisierung', 'Enterprise Applications')][string]$Keyword
+    )
+
+    [pscustomobject]@{
+        location = $Location
+        radius_km = $RadiusKm
+        keyword = $Keyword
+    }
+}
+
+function Get-JobAgentCompanyDiscoveryHintSearchMatrix {
+    [CmdletBinding()]
+    param()
+
+    $locations = @('Muenchen', 'Freising', 'Garching', 'Unterfoehring', 'Ismaning', 'Taufkirchen', 'Neubiberg', 'Pullach', 'Gruenwald')
+    $keywords = @('Head IT', 'Leiter IT', 'Director IT', 'CIO', 'IT Operations', 'IT Security', 'Digitalisierung', 'Enterprise Applications')
+    foreach ($location in $locations) {
+        $radius = if ($location -eq 'Muenchen') { 20 } else { 25 }
+        foreach ($keyword in $keywords) {
+            New-JobAgentCompanyDiscoveryHintSearch -Location $location -RadiusKm $radius -Keyword $keyword
+        }
+    }
+}
+
+function Get-JobAgentCompanyDiscoveryHintTargetArea {
+    param([Parameter(Mandatory)][string]$Location)
+
+    switch ($Location) {
+        'Muenchen' { return 'MUNICH' }
+        'Freising' { return 'FREISING' }
+        default { return 'MUNICH_20KM' }
+    }
+}
+
+function New-JobAgentCompanyDiscoveryHint {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$EmployerName,
+        [Parameter(Mandatory)][string]$Location,
+        [Parameter(Mandatory)][string]$IndustryOrKeyword,
+        [Parameter(Mandatory)][string]$ObservedUrl,
+        [Parameter(Mandatory)][string]$SourceId,
+        [Parameter(Mandatory)][object]$Search,
+        [Parameter()][datetime]$ObservedAt = [datetime]::UtcNow,
+        [Parameter()][AllowNull()][string]$KnownCompanyId = $null,
+        [Parameter()][AllowNull()][string]$KnownCompanyDomain = $null
+    )
+
+    if ([string]::IsNullOrWhiteSpace($EmployerName)) {
+        throw 'EmployerName darf nicht leer sein.'
+    }
+    if ([string]::IsNullOrWhiteSpace($ObservedUrl) -or $ObservedUrl -notmatch '^https?://') {
+        throw "Ungueltige beobachtete Hint-URL: $ObservedUrl"
+    }
+    if ($SourceId -notmatch '^source-registry:[a-z0-9][a-z0-9._-]*$') {
+        throw "Ungueltige SourceId: $SourceId"
+    }
+
+    $normalizedName = ConvertTo-JobAgentCompanyNameKey -Name $EmployerName
+    $searchLocation = [string]$Search.location
+    [pscustomobject]@{
+        hint_id = 'hint:' + (ConvertTo-JobAgentAsciiSlug -Value ($SourceId.Substring(16) + '-' + $normalizedName + '-' + [string]$Search.keyword + '-' + $searchLocation))
+        employer_name = $EmployerName
+        normalized_name = $normalizedName
+        location = $Location
+        target_area = Get-JobAgentCompanyDiscoveryHintTargetArea -Location $searchLocation
+        industry_or_keyword = $IndustryOrKeyword
+        source_id = $SourceId
+        observed_url = $ObservedUrl
+        observed_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        search_parameters = [pscustomobject]@{
+            location = $searchLocation
+            radius_km = [int]$Search.radius_km
+            keyword = [string]$Search.keyword
+        }
+        verification_status = 'UNVERIFIED'
+        candidate_status = 'DISCOVERY_HINT'
+        known_company_id = if ([string]::IsNullOrWhiteSpace($KnownCompanyId)) { $null } else { $KnownCompanyId }
+        known_company_domain = if ([string]::IsNullOrWhiteSpace($KnownCompanyDomain)) { $null } else { $KnownCompanyDomain }
+        next_action = 'verify_official_company_website_or_career_url'
+    }
+}
+
+function Find-JobAgentKnownCompanyForHint {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Companies,
+        [Parameter(Mandatory)][string]$EmployerName
+    )
+
+    $nameKey = ConvertTo-JobAgentCompanyNameKey -Name $EmployerName
+    foreach ($company in @($Companies)) {
+        $keys = Get-JobAgentCompanyIdentityKeys -Company $company
+        if ($keys.Contains('name:' + $nameKey)) {
+            return $company
+        }
+    }
+    return $null
+}
+
+function New-JobAgentCompanyDiscoveryHintReport {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Hints,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$SearchMatrix,
+        [Parameter()][datetime]$GeneratedAt = [datetime]::UtcNow
+    )
+
+    $sourceCounts = [ordered]@{}
+    foreach ($hint in @($Hints)) {
+        $sourceId = [string]$hint.source_id
+        if (-not $sourceCounts.Contains($sourceId)) {
+            $sourceCounts[$sourceId] = 0
+        }
+        $sourceCounts[$sourceId]++
+    }
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-hints/v1'
+        generated_at = $GeneratedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        contract = 'Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.'
+        search_matrix_count = @($SearchMatrix).Count
+        hints_total = @($Hints).Count
+        known_company_hints = @($Hints | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_.known_company_id) }).Count
+        unverified_hints = @($Hints | Where-Object { [string]$_.verification_status -eq 'UNVERIFIED' }).Count
+        source_counts = [pscustomobject]$sourceCounts
+        hints = @($Hints | Sort-Object employer_name, source_id)
+    }
+}
+
 Export-ModuleMember -Function @(
     'Add-JobAgentCompanySeedInventory',
     'ConvertTo-JobAgentCanonicalDomain',
     'ConvertTo-JobAgentCompanyDiscoverySeed',
     'ConvertTo-JobAgentCompanyNameKey',
     'Find-JobAgentCompanyDuplicate',
+    'Find-JobAgentKnownCompanyForHint',
     'Get-JobAgentCompanySeedInventory',
+    'Get-JobAgentCompanyDiscoveryHintSearchMatrix',
     'Import-JobAgentCompanyDiscoveryInventory',
     'Merge-JobAgentCompanySeed',
+    'New-JobAgentCompanyDiscoveryHint',
+    'New-JobAgentCompanyDiscoveryHintReport',
+    'New-JobAgentCompanyDiscoveryHintSearch',
     'New-JobAgentDiscoverySource',
     'New-JobAgentCompanySeed',
     'New-JobAgentTargetLocation'

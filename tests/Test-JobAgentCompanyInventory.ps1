@@ -180,6 +180,35 @@ Assert-True -Condition (@($regionalImport.document.job_sources).Count -eq @($reg
 Assert-True -Condition (@($regionalImport.manual_review_required).Count -eq 0) -Message 'Regionaler Feed darf nach Website-/Karrierepruefung kein Manual-Review-Backlog erzeugen.'
 Assert-True -Condition (@($regionalImport.document.companies | Where-Object { @($_.ats | Where-Object { $null -eq $_ }).Count -gt 0 }).Count -eq 0) -Message 'Regionaler Feed darf keine null-ATS-Bindings erzeugen.'
 
+$hintSearchMatrix = @(Get-JobAgentCompanyDiscoveryHintSearchMatrix)
+Assert-True -Condition ($hintSearchMatrix.Count -eq 72) -Message 'Hint-Suchmatrix hat falsche Groesse.'
+Assert-True -Condition (@($hintSearchMatrix | Where-Object { $_.location -eq 'Freising' -and $_.radius_km -eq 25 }).Count -eq 8) -Message 'Hint-Suchmatrix bildet Freising-Radius nicht ab.'
+Assert-True -Condition (@($hintSearchMatrix | Where-Object { $_.location -eq 'Muenchen' -and $_.radius_km -eq 20 }).Count -eq 8) -Message 'Hint-Suchmatrix bildet Muenchen-Radius nicht ab.'
+
+$hintSearch = @($hintSearchMatrix | Where-Object { $_.location -eq 'Muenchen' -and $_.keyword -eq 'Head IT' })[0]
+$hint = New-JobAgentCompanyDiscoveryHint `
+    -EmployerName 'BMW Group' `
+    -Location 'Muenchen' `
+    -IndustryOrKeyword 'Head IT' `
+    -ObservedUrl 'https://www.arbeitsagentur.de/jobsuche/suche?was=Head%20IT&wo=Muenchen' `
+    -SourceId 'source-registry:ba_jobsuche' `
+    -Search $hintSearch `
+    -ObservedAt (New-TestSeedDate) `
+    -KnownCompanyId 'company:bmw_group' `
+    -KnownCompanyDomain 'bmwgroup.com'
+Assert-True -Condition ($hint.verification_status -eq 'UNVERIFIED') -Message 'Sekundaerhint darf nicht verifiziert werden.'
+Assert-True -Condition ($hint.candidate_status -eq 'DISCOVERY_HINT') -Message 'Sekundaerhint muss Discovery-Hint bleiben.'
+Assert-True -Condition ($hint.target_area -eq 'MUNICH') -Message 'Sekundaerhint hat falschen Zielraum.'
+Assert-True -Condition ($hint.known_company_id -eq 'company:bmw_group') -Message 'Sekundaerhint markiert bekannte Firmen nicht.'
+Assert-True -Condition ($hint.next_action -eq 'verify_official_company_website_or_career_url') -Message 'Sekundaerhint hat falsche Folgeaktion.'
+
+$hintReport = New-JobAgentCompanyDiscoveryHintReport -Hints @($hint) -SearchMatrix $hintSearchMatrix -GeneratedAt (New-TestSeedDate)
+Assert-True -Condition ($hintReport.schema_version -eq 'jobagent/company-discovery-hints/v1') -Message 'Hint-Report hat falsche Schema-Version.'
+Assert-True -Condition ($hintReport.search_matrix_count -eq 72) -Message 'Hint-Report zaehlt Suchmatrix falsch.'
+Assert-True -Condition ($hintReport.hints_total -eq 1) -Message 'Hint-Report zaehlt Hints falsch.'
+Assert-True -Condition ($hintReport.unverified_hints -eq 1) -Message 'Hint-Report muss alle Hints unverifiziert ausweisen.'
+Assert-True -Condition ($hintReport.contract -match 'keine JobSource') -Message 'Hint-Report dokumentiert JobSource-Sperre nicht.'
+
 $importProjectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-discovery-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $importProjectRoot -Force | Out-Null
 try {
@@ -216,6 +245,18 @@ try {
     Assert-True -Condition ([IO.Path]::GetFileName([string]$regionalScriptResult.log_path).StartsWith('company-discovery-regional-import-', [StringComparison]::Ordinal)) -Message 'Regionaler Import schreibt kein regional benanntes Logartefakt.'
     Assert-True -Condition (@($regionalScriptResult.imported_company_ids).Count -eq $regionalItems.Count) -Message 'Regionaler Import meldet falsche Kandidatenanzahl.'
     Assert-True -Condition (@($regionalScriptResult.manual_review_required).Count -eq 0) -Message 'Regionaler Import erzeugt unerwarteten Manual-Review-Bestand.'
+
+    $beforeHintStore = Read-JobAgentStore -ProjectRoot $importProjectRoot
+    $hintScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Find-JobAgentCompanyDiscoveryHints.ps1') -ProjectRoot $importProjectRoot 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Discovery-Hint-Script ist fehlgeschlagen: " + ($hintScriptOutput -join "`n"))
+    $hintScriptResult = ($hintScriptOutput -join "`n") | ConvertFrom-Json -Depth 20
+    $hintScriptStore = Read-JobAgentStore -ProjectRoot $importProjectRoot
+    Assert-True -Condition ($hintScriptResult.schema_version -eq 'jobagent/company-discovery-hints/v1') -Message 'Discovery-Hint-Script schreibt falsche Schema-Version.'
+    Assert-True -Condition ($hintScriptResult.hints_total -ge 5) -Message 'Discovery-Hint-Script erzeugt zu wenige Hints.'
+    Assert-True -Condition ($hintScriptResult.unverified_hints -eq $hintScriptResult.hints_total) -Message 'Discovery-Hint-Script darf Hints nicht verifizieren.'
+    Assert-True -Condition (@($hintScriptStore.job_sources).Count -eq @($beforeHintStore.job_sources).Count) -Message 'Discovery-Hint-Script darf keine JobSources erzeugen.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$hintScriptResult.output_path) -PathType Leaf) -Message 'Discovery-Hint-Script schreibt keinen Hint-Store.'
+    Assert-True -Condition ([IO.Path]::GetFileName([string]$hintScriptResult.log_path).StartsWith('company-discovery-hints-', [StringComparison]::Ordinal)) -Message 'Discovery-Hint-Script schreibt kein Hint-Logartefakt.'
 }
 finally {
     if (Test-Path -LiteralPath $importProjectRoot) {
@@ -225,7 +266,7 @@ finally {
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'regional_discovery_import_script', 'discovery_import_script')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4

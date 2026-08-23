@@ -1,0 +1,144 @@
+{
+  "schema_version": "jobagent/company-discovery-hints/v1",
+  "generated_at": "2026-08-23T06:30:57.446Z",
+  "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
+  "search_matrix_count": 72,
+  "hints_total": 6,
+  "known_company_hints": 6,
+  "unverified_hints": 6,
+  "source_counts": {
+    "source-registry:ba_jobsuche": 2,
+    "source-registry:make_it_in_germany_jobs": 1,
+    "source-registry:eures_jobseekers": 1,
+    "source-registry:yourfirm": 1,
+    "source-registry:emm_members": 1
+  },
+  "hints": [
+    {
+      "hint_id": "hint:ba_jobsuche_bmw_group_it_operations_muenchen",
+      "employer_name": "BMW Group",
+      "normalized_name": "bmw group",
+      "location": "Muenchen",
+      "target_area": "MUNICH",
+      "industry_or_keyword": "IT Operations",
+      "source_id": "source-registry:ba_jobsuche",
+      "observed_url": "https://www.arbeitsagentur.de/jobsuche/suche?was=IT%20Operations&wo=Muenchen",
+      "observed_at": "2026-08-23T06:30:57.421Z",
+      "search_parameters": {
+        "location": "Muenchen",
+        "radius_km": 20,
+        "keyword": "IT Operations"
+      },
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "known_company_id": "company:bmw_group",
+      "known_company_domain": "bmwgroup.com",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "hint:yourfirm_cancom_director_it_muenchen",
+      "employer_name": "CANCOM SE",
+      "normalized_name": "cancom",
+      "location": "Muenchen",
+      "target_area": "MUNICH",
+      "industry_or_keyword": "Director IT",
+      "source_id": "source-registry:yourfirm",
+      "observed_url": "https://www.yourfirm.de/jobs/muenchen/director-it/",
+      "observed_at": "2026-08-23T06:30:57.442Z",
+      "search_parameters": {
+        "location": "Muenchen",
+        "radius_km": 20,
+        "keyword": "Director IT"
+      },
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "known_company_id": "company:cancom_se",
+      "known_company_domain": "cancom.de",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "hint:make_it_in_germany_jobs_flughafen_muenchen_it_security_freising",
+      "employer_name": "Flughafen Muenchen GmbH",
+      "normalized_name": "flughafen muenchen",
+      "location": "Freising",
+      "target_area": "FREISING",
+      "industry_or_keyword": "IT Security",
+      "source_id": "source-registry:make_it_in_germany_jobs",
+      "observed_url": "https://www.make-it-in-germany.com/en/working-in-germany/job-listings?location=Freising&keyword=IT%20Security",
+      "observed_at": "2026-08-23T06:30:57.435Z",
+      "search_parameters": {
+        "location": "Freising",
+        "radius_km": 25,
+        "keyword": "IT Security"
+      },
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "known_company_id": "company:flughafen_muenchen_gmbh",
+      "known_company_domain": "munich-airport.com",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "hint:emm_members_fraunhofer_ivv_cio_freising",
+      "employer_name": "Fraunhofer IVV",
+      "normalized_name": "fraunhofer ivv",
+      "location": "Freising",
+      "target_area": "FREISING",
+      "industry_or_keyword": "CIO",
+      "source_id": "source-registry:emm_members",
+      "observed_url": "https://www.metropolregion-muenchen.eu/ueber-uns/mitglieder",
+      "observed_at": "2026-08-23T06:30:57.445Z",
+      "search_parameters": {
+        "location": "Freising",
+        "radius_km": 25,
+        "keyword": "CIO"
+      },
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "known_company_id": "company:fraunhofer_ivv",
+      "known_company_domain": "ivv.fraunhofer.de",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "hint:ba_jobsuche_siemens_digitalisierung_muenchen",
+      "employer_name": "Siemens AG",
+      "normalized_name": "siemens",
+      "location": "Muenchen",
+      "target_area": "MUNICH",
+      "industry_or_keyword": "Digitalisierung",
+      "source_id": "source-registry:ba_jobsuche",
+      "observed_url": "https://www.arbeitsagentur.de/jobsuche/suche?was=Digitalisierung&wo=Muenchen",
+      "observed_at": "2026-08-23T06:30:57.431Z",
+      "search_parameters": {
+        "location": "Muenchen",
+        "radius_km": 20,
+        "keyword": "Digitalisierung"
+      },
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "known_company_id": "company:siemens_ag",
+      "known_company_domain": "siemens.com",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "hint:eures_jobseekers_texas_instruments_deutschland_enterprise_applications_freising",
+      "employer_name": "Texas Instruments Deutschland GmbH",
+      "normalized_name": "texas instruments deutschland",
+      "location": "Freising",
+      "target_area": "FREISING",
+      "industry_or_keyword": "Enterprise Applications",
+      "source_id": "source-registry:eures_jobseekers",
+      "observed_url": "https://eures.europa.eu/jobseekers_en?location=Freising&keywords=Enterprise%20Applications",
+      "observed_at": "2026-08-23T06:30:57.439Z",
+      "search_parameters": {
+        "location": "Freising",
+        "radius_km": 25,
+        "keyword": "Enterprise Applications"
+      },
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "known_company_id": "company:texas_instruments_deutschland_gmbh",
+      "known_company_domain": "ti.com",
+      "next_action": "verify_official_company_website_or_career_url"
+    }
+  ]
+}

@@ -420,3 +420,23 @@
   - [x] Supertest: `pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1` -> Exit 0.
   - [x] Meilenstein: M2 regionaler Arbeitgeberkern; Basis fuer JA-025 und JA-026.
 
+## Archiviert am 2026-08-23
+
+- [x] JA-025 Sekundaere Job- und Unternehmensverzeichnisse als Hinweisquellen operationalisieren #comment: Jobboersen und Firmenprofile koennen viele Arbeitgeber sichtbar machen, duerfen aber nur Discovery-Hints erzeugen, bis eine offizielle Karrierequelle bestaetigt ist.
+  - [x] Beschreibung: BA-Jobsuche, Make it in Germany, EURES sowie regionale Firmen-/Arbeitgeberverzeichnisse werden als kontrollierte Hinweisquellen angebunden; der Import erzeugt ausschliesslich `DISCOVERY_HINT`-Kandidaten mit Suchparametern, Fund-URL, Arbeitgebername, Ort, Branche/Keyword und spaeterer Pflichtverifikation gegen offizielle Website/Karriere-URL.
+  - [x] Scope: Erstellt wurde `tools/Find-JobAgentCompanyDiscoveryHints.ps1` und `data/jobagent/company-discovery.hints.json`; erweitert wurden `src/JobAgent.CompanyInventory.psm1`, `tests/Test-JobAgentCompanyInventory.ps1` und `tests/Test-JobAgentCoverage.ps1`. No-Go eingehalten: keine Stellen aus Sekundaerquellen als Treffer gespeichert, keine BA/EURES/Make-it-in-Germany-URL als offizielle Bewerbung-URL akzeptiert, kein dynamisches UI/Login/Captcha umgangen.
+  - [x] Ist-Stand (2026-08-23 08:31): Die Hint-Lane erzeugt eine 72er Suchmatrix aus Zielorten und IT-Fuehrungskeywords, persistiert 6 unverifizierte Sekundaerhinweise in `data/jobagent/company-discovery.hints.json`, markiert bekannte Firmen ueber bestehende Store-Identitaeten und erzeugt ein Laufprotokoll unter `logs/jobagent/company-discovery-hints-20260823-063057.json`.
+  - [x] Abhängigkeiten: JA-023 und JA-024 sind abgeschlossen; die Hint-Lane nutzt den Quellenkatalog und den bestehenden Firmenstore nur lesend.
+  - [x] Aufwand/Dauer: Aufwand L; umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent mit Fixture-/Seed-Modus ohne Live-Massenimport.
+  - [x] Prioritätsscore: 82/100, weil diese Quellen die Abdeckung vergroessern koennen, aber ein hoeheres Falschpositiv- und Nutzungsgrenzenrisiko haben.
+  - [x] Ordnungsbegründung: Nach regionalen offiziellen Quellen umgesetzt, weil Jobboersen nur Entdeckung liefern und zwingend nachgelagerte Firmen-/Karriereverifikation brauchen.
+  - [x] Risiken und Unsicherheiten: Es wurde kein Live-Massenabruf aktiviert; die aktuellen Hints sind kontrollierte, unverifizierte Hinweise. Tagesaktuelle Jobboersenfluktuation, Recruiter-/Zeitarbeits-Treffer und Nutzungsbedingungen bleiben fuer spaetere Live-Erweiterungen als Risiko bestehen.
+  - [x] Schritte:
+    1. Suchmatrix fuer `Muenchen`, `Freising`, `Garching`, `Unterfoehring`, `Ismaning`, `Taufkirchen`, `Neubiberg`, `Pullach`, `Gruenwald` mit 20/25-km-Radius und acht IT-Fuehrungskeywords implementiert.
+    2. Hint-Erzeugung gebaut, die pro Treffer nur Arbeitgebername, Ort, Sekundaerquelle, Suchparameter, beobachtete URL, Zeitstempel, `verification_status = UNVERIFIED` und bekannte Store-Identitaet speichert.
+    3. Review-Report/Hint-Store erzeugt, der alle Kandidaten fail-closed als `DISCOVERY_HINT` ausweist und keine JobSources oder offiziellen Karrierequellen schreibt.
+  - [x] Evidence: `tools/Find-JobAgentCompanyDiscoveryHints.ps1`, `data/jobagent/company-discovery.hints.json`, `logs/jobagent/company-discovery-hints-20260823-063057.json`, Coverage-Testfall `secondary_hint_store_contract`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1` -> Exit 0; `pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tools\\Find-JobAgentCompanyDiscoveryHints.ps1` -> Exit 0.
+  - [x] Audit: Tests pruefen, dass keine Hint-Quelle eine JobSource erzeugt, alle Hints `UNVERIFIED` bleiben, Suchparameter/Fund-URLs vorhanden sind, nur erlaubte Sekundaerquellen referenziert werden und bekannte Firmen markiert statt dupliziert werden.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Meilenstein: M3 breiter Discovery-Hint-Backlog; Basis fuer JA-026.
