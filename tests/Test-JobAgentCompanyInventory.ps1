@@ -257,6 +257,35 @@ try {
     Assert-True -Condition (@($hintScriptStore.job_sources).Count -eq @($beforeHintStore.job_sources).Count) -Message 'Discovery-Hint-Script darf keine JobSources erzeugen.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$hintScriptResult.output_path) -PathType Leaf) -Message 'Discovery-Hint-Script schreibt keinen Hint-Store.'
     Assert-True -Condition ([IO.Path]::GetFileName([string]$hintScriptResult.log_path).StartsWith('company-discovery-hints-', [StringComparison]::Ordinal)) -Message 'Discovery-Hint-Script schreibt kein Hint-Logartefakt.'
+
+    $careerVerifyStore = Read-JobAgentStore -ProjectRoot $importProjectRoot
+    $unverifiedSeed = New-JobAgentCompanySeed `
+        -CanonicalName 'Verify Script AG' `
+        -OfficialWebsiteUrl 'https://verify-script.invalid/' `
+        -CareerUrl $null `
+        -Aliases @('Verify Script') `
+        -Locations @((New-JobAgentTargetLocation -Label 'Muenchen' -City 'Muenchen' -TargetArea 'MUNICH')) `
+        -Industry 'Technology' `
+        -ScanPriority 99 `
+        -DiscoverySourceUrl 'https://verify-script.invalid/' `
+        -DiscoverySourceType 'DISCOVERY_HINT' `
+        -DiscoveryOrigin 'test.verify-script' `
+        -VerificationStatus 'UNVERIFIED' `
+        -CreatedAt (New-TestSeedDate) `
+        -NextScanAt (New-TestNextScanDate)
+    $careerVerifyStore.companies = @($careerVerifyStore.companies) + @($unverifiedSeed)
+    Write-JobAgentStore -ProjectRoot $importProjectRoot -Document $careerVerifyStore | Out-Null
+
+    $verifyOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCareers.ps1') -ProjectRoot $importProjectRoot -MaxCompanies 1 -TimeoutSeconds 1 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Career-Verifikationsscript ist fehlgeschlagen: " + ($verifyOutput -join "`n"))
+    $verifyResult = ($verifyOutput -join "`n") | ConvertFrom-Json -Depth 20
+    $verifyStore = Read-JobAgentStore -ProjectRoot $importProjectRoot
+    $verifiedScriptCompany = @($verifyStore.companies | Where-Object { $_.company_id -eq 'company:verify_script_ag' })[0]
+    Assert-True -Condition ($verifyResult.schema_version -eq 'jobagent/company-career-verification/v1') -Message 'Career-Verifikationsscript schreibt falsche Schema-Version.'
+    Assert-True -Condition (@($verifyResult.checked_company_ids | Where-Object { $_ -eq 'company:verify_script_ag' }).Count -eq 1) -Message 'Career-Verifikationsscript prueft den priorisierten Kandidaten nicht.'
+    Assert-True -Condition (@('UNVERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'CAREER_URL_VERIFIED') -contains [string]$verifiedScriptCompany.verification_status) -Message 'Career-Verifikationsscript erzeugt ungueltigen Store-Verifikationsstatus.'
+    Assert-True -Condition (-not [string]::IsNullOrWhiteSpace([string]$verifiedScriptCompany.career_verification_status)) -Message 'Career-Verifikationsscript persistiert keinen Reviewstatus.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$verifyResult.log_path) -PathType Leaf) -Message 'Career-Verifikationsscript schreibt kein Logartefakt.'
 }
 finally {
     if (Test-Path -LiteralPath $importProjectRoot) {
@@ -266,7 +295,7 @@ finally {
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script', 'company_career_verification_script')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4

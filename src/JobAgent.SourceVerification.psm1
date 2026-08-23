@@ -30,6 +30,45 @@ $script:DiscardQueryParameters = @(
     'utm_term'
 )
 
+$script:CareerLinkPatterns = @(
+    'karriere',
+    'career',
+    'careers',
+    'jobs',
+    'stellen',
+    'stellenangebote',
+    'jobboerse',
+    'bewerbung',
+    'workday',
+    'successfactors',
+    'greenhouse',
+    'smartrecruiters',
+    'personio',
+    'recruitee',
+    'lever',
+    'softgarden',
+    'ashbyhq',
+    'join.com'
+)
+
+$script:AtsDomainBindings = @(
+    @{ system = 'Workday'; domain = 'myworkdayjobs.com' },
+    @{ system = 'Workday'; domain = 'myworkdayjobs.de' },
+    @{ system = 'SAP SuccessFactors'; domain = 'successfactors.eu' },
+    @{ system = 'SAP SuccessFactors'; domain = 'successfactors.com' },
+    @{ system = 'SAP SuccessFactors'; domain = 'sapsf.eu' },
+    @{ system = 'Greenhouse'; domain = 'greenhouse.io' },
+    @{ system = 'Greenhouse'; domain = 'boards.greenhouse.io' },
+    @{ system = 'SmartRecruiters'; domain = 'smartrecruiters.com' },
+    @{ system = 'Personio'; domain = 'jobs.personio.de' },
+    @{ system = 'Personio'; domain = 'personio.de' },
+    @{ system = 'Recruitee'; domain = 'recruitee.com' },
+    @{ system = 'Lever'; domain = 'jobs.lever.co' },
+    @{ system = 'Softgarden'; domain = 'softgarden.io' },
+    @{ system = 'Ashby'; domain = 'ashbyhq.com' },
+    @{ system = 'Join'; domain = 'join.com' }
+)
+
 function ConvertTo-JobAgentSourceSlug {
     [CmdletBinding()]
     param(
@@ -87,6 +126,299 @@ function Test-JobAgentAggregatorUrl {
         }
     }
     return $false
+}
+
+function Get-JobAgentAtsBindingForUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    $host = Get-JobAgentUrlHost -Url $Url
+    foreach ($binding in $script:AtsDomainBindings) {
+        if (Test-JobAgentDomainMatch -Host $host -Domain ([string]$binding.domain)) {
+            return [pscustomobject]@{
+                system = [string]$binding.system
+                official_domain = [string]$binding.domain
+            }
+        }
+    }
+    return $null
+}
+
+function New-JobAgentCompanyCareerVerificationPolicy {
+    [CmdletBinding()]
+    param(
+        [Parameter()][ValidateRange(1, 60)][int]$TimeoutSeconds = 12,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxFetchesPerCompany = 6,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxCandidatesPerCompany = 10,
+        [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+company-career-verification; fail-closed)'
+    )
+
+    [pscustomobject]@{
+        timeout_seconds = $TimeoutSeconds
+        max_fetches_per_company = $MaxFetchesPerCompany
+        max_candidates_per_company = $MaxCandidatesPerCompany
+        user_agent = $UserAgent
+        policy = 'official-site-linked-career-or-ats-only'
+    }
+}
+
+function Invoke-JobAgentCompanyVerificationHttpRequest {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    try {
+        $response = Invoke-WebRequest `
+            -Uri $Url `
+            -Method Get `
+            -TimeoutSec ([int]$Policy.timeout_seconds) `
+            -UserAgent ([string]$Policy.user_agent) `
+            -MaximumRedirection 5 `
+            -ErrorAction Stop
+
+        [pscustomobject]@{
+            ok = $true
+            url = $Url
+            final_url = if ($response.BaseResponse.PSObject.Properties.Name -contains 'ResponseUri' -and $response.BaseResponse.ResponseUri) { [string]$response.BaseResponse.ResponseUri.AbsoluteUri } else { $Url }
+            status_code = [int]$response.StatusCode
+            content = [string]$response.Content
+            content_type = [string]$response.Headers['Content-Type']
+            error = $null
+        }
+    }
+    catch {
+        $statusCode = $null
+        if ($_.Exception.PSObject.Properties.Name -contains 'Response' -and $_.Exception.Response -and $_.Exception.Response.StatusCode) {
+            $statusCode = [int]$_.Exception.Response.StatusCode
+        }
+        [pscustomobject]@{
+            ok = $false
+            url = $Url
+            final_url = $Url
+            status_code = $statusCode
+            content = ''
+            content_type = ''
+            error = $_.Exception.Message
+        }
+    }
+}
+
+function Get-JobAgentCompanyVerificationRedirectChain {
+    param(
+        [Parameter(Mandatory)][object]$Fetch
+    )
+
+    $chain = New-Object System.Collections.Generic.List[string]
+    foreach ($property in @('url', 'final_url')) {
+        if (($Fetch.PSObject.Properties.Name -contains $property) -and -not [string]::IsNullOrWhiteSpace([string]$Fetch.$property)) {
+            $canonical = ConvertTo-JobAgentCanonicalUrl -Url ([string]$Fetch.$property)
+            if (-not $chain.Contains($canonical)) {
+                $chain.Add($canonical)
+            }
+        }
+    }
+    return $chain.ToArray()
+}
+
+function ConvertTo-JobAgentCompanyVerificationPlainText {
+    param(
+        [Parameter()][AllowEmptyString()][string]$Html,
+        [Parameter()][ValidateRange(1, 400)][int]$MaxLength = 160
+    )
+
+    $text = [regex]::Replace($Html, '<(script|style)\b.*?</\1>', ' ', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    $text = [regex]::Replace($text, '<[^>]+>', ' ')
+    $text = [Net.WebUtility]::HtmlDecode($text)
+    $text = [regex]::Replace($text, '\s+', ' ').Trim()
+    if ($text.Length -gt $MaxLength) {
+        return $text.Substring(0, $MaxLength)
+    }
+    return $text
+}
+
+function Test-JobAgentCompanyCareerLinkText {
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Value
+    )
+
+    $normalized = $Value.ToLowerInvariant()
+    foreach ($pattern in $script:CareerLinkPatterns) {
+        if ($normalized.Contains($pattern)) {
+            return $true
+        }
+    }
+    return $false
+}
+
+function Get-JobAgentCompanyCareerCandidateLinks {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][ValidateRange(1, 50)][int]$MaxCandidates = 10
+    )
+
+    $baseUri = [Uri]$BaseUrl
+    $links = New-Object System.Collections.Generic.List[object]
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $matches = [regex]::Matches($Html, '<a\b(?<attrs>[^>]*)>(?<text>.*?)</a>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    foreach ($match in $matches) {
+        if ($links.Count -ge $MaxCandidates) {
+            break
+        }
+        $hrefMatch = [regex]::Match($match.Groups['attrs'].Value, 'href\s*=\s*["''](?<href>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if (-not $hrefMatch.Success) {
+            continue
+        }
+        $href = [Net.WebUtility]::HtmlDecode($hrefMatch.Groups['href'].Value)
+        if ($href -match '^(mailto:|tel:|javascript:|#)') {
+            continue
+        }
+        $absolute = [Uri]::new($baseUri, $href).AbsoluteUri
+        $text = ConvertTo-JobAgentCompanyVerificationPlainText -Html $match.Groups['text'].Value
+        if (-not (Test-JobAgentCompanyCareerLinkText -Value ($text + ' ' + $absolute))) {
+            continue
+        }
+        $canonical = ConvertTo-JobAgentCanonicalUrl -Url $absolute
+        if (Test-JobAgentAggregatorUrl -Url $canonical) {
+            continue
+        }
+        $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $canonical -AllowAtsEvidence:$false
+        $atsBinding = Get-JobAgentAtsBindingForUrl -Url $canonical
+        $isCompanyDomain = $evaluation.is_official -eq $true
+        $isAts = $null -ne $atsBinding
+        if ((-not $isCompanyDomain) -and (-not $isAts)) {
+            continue
+        }
+        if ($seen.Add($canonical)) {
+            $links.Add([pscustomobject]@{
+                    url = $canonical
+                    link_text = $text
+                    source_url = ConvertTo-JobAgentCanonicalUrl -Url $BaseUrl
+                    is_company_domain = $isCompanyDomain
+                    ats = $atsBinding
+                })
+        }
+    }
+    return $links.ToArray()
+}
+
+function New-JobAgentCompanyCareerVerificationResult {
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter(Mandatory)][string]$Status,
+        [Parameter()][AllowNull()][string]$CareerUrl,
+        [Parameter()][AllowNull()][object]$AtsBinding,
+        [Parameter()][AllowNull()][object]$Evidence,
+        [Parameter(Mandatory)][object[]]$Fetches,
+        [Parameter(Mandatory)][string]$Reason
+    )
+
+    [pscustomobject]@{
+        company_id = [string]$Company.company_id
+        status = $Status
+        career_url = $CareerUrl
+        ats = $AtsBinding
+        verification_evidence = if ($null -eq $Evidence) { @() } else { @($Evidence) }
+        fetches = @($Fetches)
+        reason = $Reason
+    }
+}
+
+function Resolve-JobAgentCompanyCareerVerification {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][object]$Policy = (New-JobAgentCompanyCareerVerificationPolicy),
+        [Parameter()][scriptblock]$Fetcher
+    )
+
+    $fetches = New-Object System.Collections.Generic.List[object]
+    $urlsToFetch = New-Object System.Collections.Generic.List[string]
+    $seenFetchUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+
+    foreach ($url in @($Company.official_website_url, $Company.career_url)) {
+        if (-not [string]::IsNullOrWhiteSpace([string]$url)) {
+            $canonical = ConvertTo-JobAgentCanonicalUrl -Url ([string]$url)
+            if ($seenFetchUrls.Add($canonical)) {
+                $urlsToFetch.Add($canonical)
+            }
+        }
+    }
+    if (-not [string]::IsNullOrWhiteSpace([string]$Company.official_website_url)) {
+        $website = [Uri](ConvertTo-JobAgentCanonicalUrl -Url ([string]$Company.official_website_url))
+        foreach ($path in @('/sitemap.xml', '/sitemap_index.xml')) {
+            $candidate = [Uri]::new($website, $path).AbsoluteUri
+            if ($seenFetchUrls.Add($candidate)) {
+                $urlsToFetch.Add($candidate)
+            }
+        }
+    }
+
+    $candidates = New-Object System.Collections.Generic.List[object]
+    for ($index = 0; $index -lt $urlsToFetch.Count -and $fetches.Count -lt [int]$Policy.max_fetches_per_company; $index++) {
+        $url = [string]$urlsToFetch[$index]
+        $fetch = if ($Fetcher) { & $Fetcher $url $Policy } else { Invoke-JobAgentCompanyVerificationHttpRequest -Url $url -Policy $Policy }
+        $fetches.Add($fetch)
+        if ($fetch.ok -ne $true) {
+            continue
+        }
+        $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$fetch.final_url)) { $url } else { [string]$fetch.final_url }
+        foreach ($candidate in @(Get-JobAgentCompanyCareerCandidateLinks -Html ([string]$fetch.content) -BaseUrl $finalUrl -Company $Company -MaxCandidates ([int]$Policy.max_candidates_per_company))) {
+            $candidates.Add($candidate)
+        }
+        foreach ($candidate in @($candidates | Where-Object { $_.is_company_domain -eq $true })) {
+            if ($fetches.Count -ge [int]$Policy.max_fetches_per_company) {
+                break
+            }
+            if ($seenFetchUrls.Add([string]$candidate.url)) {
+                $candidateFetch = if ($Fetcher) { & $Fetcher ([string]$candidate.url) $Policy } else { Invoke-JobAgentCompanyVerificationHttpRequest -Url ([string]$candidate.url) -Policy $Policy }
+                $fetches.Add($candidateFetch)
+                if ($candidateFetch.ok -eq $true) {
+                    $evidence = New-JobAgentVerificationEvidence `
+                        -Status 'VERIFIED' `
+                        -EvidenceType 'CAREER_URL' `
+                        -Url ([string]$candidateFetch.final_url) `
+                        -BasisUrl ([string]$candidate.source_url) `
+                        -RedirectChain (Get-JobAgentCompanyVerificationRedirectChain -Fetch $candidateFetch) `
+                        -Reason ('Karrierepfad wurde auf der offiziellen Website verlinkt: ' + [string]$candidate.link_text)
+                    return New-JobAgentCompanyCareerVerificationResult -Company $Company -Status 'CAREER_URL_VERIFIED' -CareerUrl ([string]$evidence.url) -Evidence $evidence -Fetches $fetches.ToArray() -Reason 'Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.'
+                }
+            }
+        }
+    }
+
+    $atsCandidate = @($candidates | Where-Object { $null -ne $_.ats } | Select-Object -First 1)
+    if ($atsCandidate.Count -gt 0) {
+        $ats = [pscustomobject]@{
+            system = [string]$atsCandidate[0].ats.system
+            official_domain = [string]$atsCandidate[0].ats.official_domain
+            verified_by_url = [string]$atsCandidate[0].source_url
+        }
+        $evidence = New-JobAgentVerificationEvidence `
+            -Status 'VERIFIED' `
+            -EvidenceType 'COMPANY_LINKED_ATS' `
+            -Url ([string]$atsCandidate[0].url) `
+            -BasisUrl ([string]$atsCandidate[0].source_url) `
+            -RedirectChain @([string]$atsCandidate[0].source_url, [string]$atsCandidate[0].url) `
+            -Reason ('ATS-URL wurde von der offiziellen Website verlinkt: ' + [string]$atsCandidate[0].link_text)
+        return New-JobAgentCompanyCareerVerificationResult -Company $Company -Status 'ATS_VERIFIED_BY_COMPANY_LINK' -CareerUrl ([string]$atsCandidate[0].url) -AtsBinding $ats -Evidence $evidence -Fetches $fetches.ToArray() -Reason 'ATS-Karriere-URL ist ueber offiziellen Firmenlink belegt.'
+    }
+
+    $successfulFetches = @($fetches | Where-Object { $_.ok -eq $true })
+    $dynamicOnly = $false
+    if ($successfulFetches.Count -gt 0) {
+        $plainText = ($successfulFetches | ForEach-Object { ConvertTo-JobAgentCompanyVerificationPlainText -Html ([string]$_.content) -MaxLength 400 }) -join ' '
+        $scriptHeavy = @($successfulFetches | Where-Object { ([string]$_.content).ToLowerInvariant() -match '(__next_data__|__nuxt__|id="root"|id=''root''|id="app"|id=''app'')' -and ([string]$_.content).ToLowerInvariant() -notmatch '<a\b' }).Count -gt 0
+        $dynamicOnly = $scriptHeavy -or ($plainText.ToLowerInvariant() -match '(enable javascript|javascript is required|requires javascript)')
+    }
+    $status = if ($dynamicOnly) { 'TECHNICAL_LIMITATION' } elseif ($successfulFetches.Count -gt 0) { 'MANUAL_REVIEW' } else { 'TECHNICAL_LIMITATION' }
+    return New-JobAgentCompanyCareerVerificationResult -Company $Company -Status $status -CareerUrl $null -Fetches $fetches.ToArray() -Reason 'Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.'
 }
 
 function New-JobAgentVerificationEvidence {
@@ -408,9 +740,13 @@ function Resolve-JobAgentOfficialJobUrl {
 Export-ModuleMember -Function @(
     'ConvertTo-JobAgentCanonicalUrl',
     'Complete-JobAgentVerificationEvidence',
+    'Get-JobAgentAtsBindingForUrl',
     'Get-JobAgentOfficialSourceEvaluation',
+    'Get-JobAgentCompanyCareerCandidateLinks',
     'New-JobAgentVerifiedJobSource',
+    'New-JobAgentCompanyCareerVerificationPolicy',
     'Resolve-JobAgentOfficialJobUrl',
+    'Resolve-JobAgentCompanyCareerVerification',
     'Test-JobAgentAggregatorUrl',
     'Test-JobAgentDomainMatch'
 )

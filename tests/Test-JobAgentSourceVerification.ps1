@@ -107,7 +107,116 @@ Assert-True -Condition ($resolved.status -eq 'VALID') -Message 'Primaere offizie
 Assert-True -Condition ($resolved.official_url -eq 'https://example.invalid/careers/job-123') -Message 'Primaere offizielle URL wurde falsch aufgeloest.'
 Assert-True -Condition (@($resolved.alternative_official_urls).Count -eq 1) -Message 'Alternative offizielle URLs wurden nicht korrekt gefiltert.'
 
+$careerPolicy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds 3 -MaxFetchesPerCompany 4 -MaxCandidatesPerCompany 5
+Assert-True -Condition ($careerPolicy.policy -eq 'official-site-linked-career-or-ats-only') -Message 'Career-Verifikationspolicy dokumentiert den Fail-closed-Vertrag nicht.'
+
+$careerHtml = '<html><body><a href="/de/karriere">Karriere</a><a href="https://www.linkedin.com/jobs/view/123">Jobs</a></body></html>'
+$careerLinks = @(Get-JobAgentCompanyCareerCandidateLinks -Html $careerHtml -BaseUrl 'https://example.invalid/' -Company (New-TestCompany) -MaxCandidates 5)
+Assert-True -Condition ($careerLinks.Count -eq 1) -Message 'Career-Linksuche filtert offizielle Karrierekandidaten nicht korrekt.'
+Assert-True -Condition ($careerLinks[0].url -eq 'https://example.invalid/de/karriere') -Message 'Career-Linksuche kanonisiert Kandidaten nicht.'
+
+function New-CareerFetchResult {
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][bool]$Ok,
+        [Parameter()][string]$FinalUrl = $Url,
+        [Parameter()][string]$Content = '',
+        [Parameter()][int]$StatusCode = 200
+    )
+
+    [pscustomobject]@{
+        ok = $Ok
+        url = $Url
+        final_url = $FinalUrl
+        status_code = $StatusCode
+        content = $Content
+        content_type = 'text/html'
+        error = if ($Ok) { $null } else { 'failed' }
+    }
+}
+
+$companyCareerFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    switch ($Url) {
+        'https://example.invalid/' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<html><a href="/jobs">Jobs & Karriere</a></html>'
+            break
+        }
+        'https://example.invalid/careers' {
+            New-CareerFetchResult -Url $Url -Ok $false -StatusCode 404
+            break
+        }
+        'https://example.invalid/sitemap.xml' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<urlset></urlset>'
+            break
+        }
+        'https://example.invalid/sitemap_index.xml' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<sitemapindex></sitemapindex>'
+            break
+        }
+        'https://example.invalid/jobs' {
+            New-CareerFetchResult -Url $Url -Ok $true -FinalUrl 'https://example.invalid/jobs/' -Content '<html><h1>Jobs</h1></html>'
+            break
+        }
+        default {
+            New-CareerFetchResult -Url $Url -Ok $false -StatusCode 404
+            break
+        }
+    }
+}
+$companyCareerVerification = Resolve-JobAgentCompanyCareerVerification -Company (New-TestCompany) -Policy $careerPolicy -Fetcher $companyCareerFetcher
+Assert-True -Condition ($companyCareerVerification.status -eq 'CAREER_URL_VERIFIED') -Message 'Offizieller Karrierepfad wurde nicht verifiziert.'
+Assert-True -Condition ($companyCareerVerification.career_url -eq 'https://example.invalid/jobs') -Message 'Offizieller Karrierepfad wurde falsch kanonisiert.'
+Assert-True -Condition ($companyCareerVerification.verification_evidence[0].evidence_type -eq 'CAREER_URL') -Message 'Offizieller Karrierepfad erzeugt falschen Evidenztyp.'
+Assert-True -Condition (@($companyCareerVerification.verification_evidence[0].redirect_chain).Count -ge 1) -Message 'Offizieller Karrierepfad protokolliert keine Redirect-Kette.'
+
+$atsCompany = New-TestCompany
+$atsCompany.career_url = $null
+$atsFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    switch ($Url) {
+        'https://example.invalid/' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<html><a href="https://example.myworkdayjobs.com/de-DE/jobs">Offene Stellen</a></html>'
+            break
+        }
+        'https://example.invalid/sitemap.xml' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<urlset></urlset>'
+            break
+        }
+        'https://example.invalid/sitemap_index.xml' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<sitemapindex></sitemapindex>'
+            break
+        }
+        default {
+            New-CareerFetchResult -Url $Url -Ok $false -StatusCode 404
+            break
+        }
+    }
+}
+$atsVerification = Resolve-JobAgentCompanyCareerVerification -Company $atsCompany -Policy $careerPolicy -Fetcher $atsFetcher
+Assert-True -Condition ($atsVerification.status -eq 'ATS_VERIFIED_BY_COMPANY_LINK') -Message 'Offiziell verlinkte ATS-URL wurde nicht verifiziert.'
+Assert-True -Condition ($atsVerification.ats.official_domain -eq 'myworkdayjobs.com') -Message 'ATS-Domain wurde nicht erkannt.'
+Assert-True -Condition ($atsVerification.verification_evidence[0].evidence_type -eq 'COMPANY_LINKED_ATS') -Message 'ATS-Verifikation erzeugt falschen Evidenztyp.'
+
+$dynamicFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-CareerFetchResult -Url $Url -Ok $true -Content '<html><body><div id="root"></div><script id="__NEXT_DATA__" type="application/json">{}</script><noscript>Enable JavaScript</noscript></body></html>'
+}
+$dynamicVerification = Resolve-JobAgentCompanyCareerVerification -Company $atsCompany -Policy $careerPolicy -Fetcher $dynamicFetcher
+Assert-True -Condition ($dynamicVerification.status -eq 'TECHNICAL_LIMITATION') -Message 'JS-only-Seite wird nicht als technische Limitation markiert.'
+
+$manualFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-CareerFetchResult -Url $Url -Ok $true -Content '<html><body><a href="/about">About</a></body></html>'
+}
+$manualVerification = Resolve-JobAgentCompanyCareerVerification -Company $atsCompany -Policy $careerPolicy -Fetcher $manualFetcher
+Assert-True -Condition ($manualVerification.status -eq 'MANUAL_REVIEW') -Message 'Belegloser HTML-Fall wird nicht fail-closed als Manual Review markiert.'
+
 [pscustomobject]@{
     status = 'ok'
-    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives')
+    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_link_extraction', 'company_career_path_verification', 'company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
 } | ConvertTo-Json -Depth 4
