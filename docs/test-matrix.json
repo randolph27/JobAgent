@@ -282,6 +282,23 @@
         "minimale Hash-Evidenz ohne Anzeigenvolltexte",
         "keine JobSource-Seiteneffekte"
       ]
+    },
+    {
+      "roadmap_id": "JA-026",
+      "title": "Regionale Branchen-, Kommunal- und Arbeitgeberlisten fuer Muenchen/Freising importieren",
+      "test_file": "tests/Test-JobAgentRegionalDiscovery.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentRegionalDiscovery.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Source-Registry-Fail-Closed fuer regionale Verzeichnisse",
+        "Tabellen-, Karten- und JSON-Snapshot-Parser",
+        "Zielgebietsfilter fuer Muenchen, Freising, 20-km-Umkreis und unsichere Orte",
+        "Deduplikation regionaler Kandidatenhinweise",
+        "minimale Hash-Evidenz ohne Kontaktfelddaten",
+        "Tool schreibt Regionaldatei und gemergten Hint-Store"
+      ]
     }
   ]
 }

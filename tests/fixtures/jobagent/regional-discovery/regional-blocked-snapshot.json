@@ -1,0 +1,19 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-23T08:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:manual_review_list",
+      "format": "json_items",
+      "source_page": "https://local.invalid/jobagent/manual-review",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "organization_name": "Manual Only GmbH",
+          "sector": "Review",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

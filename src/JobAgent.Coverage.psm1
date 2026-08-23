@@ -545,9 +545,9 @@ function New-JobAgentCoverageHintWaveCandidate {
     [pscustomobject]@{
         kind = 'discovery_hint'
         company_id = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'known_company_id' -Default '')
-        company = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'employer_name' -Default 'UNKNOWN')
+        company = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'employer_name' -Default (Get-JobAgentCoverageProperty -Object $Hint -Name 'company_name' -Default 'UNKNOWN'))
         target_area = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'target_area' -Default 'UNKNOWN')
-        industry = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'industry_or_keyword' -Default 'UNKNOWN')
+        industry = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'industry_or_keyword' -Default (Get-JobAgentCoverageProperty -Object $Hint -Name 'sector_hint' -Default 'UNKNOWN'))
         verification_status = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'verification_status' -Default 'UNVERIFIED')
         review_status = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'candidate_status' -Default 'DISCOVERY_HINT')
         discovery_origin = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'source_id' -Default 'UNKNOWN')
@@ -591,7 +591,7 @@ function New-JobAgentCoverageImportWavePlan {
         $hintCandidates = @()
         if ($null -ne $HintStore -and $definition.wave_id -eq 'D') {
             $hintCandidates = @($HintStore.hints |
-                Where-Object { [string](Get-JobAgentCoverageProperty -Object $_ -Name 'candidate_status' -Default '') -eq 'DISCOVERY_HINT' } |
+                Where-Object { [string](Get-JobAgentCoverageProperty -Object $_ -Name 'candidate_status' -Default '') -in @('DISCOVERY_HINT', 'REGIONAL_DISCOVERY_HINT') } |
                 ForEach-Object { New-JobAgentCoverageHintWaveCandidate -Hint $_ })
         }
 

@@ -1,0 +1,43 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-23T08:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+      "format": "table_html",
+      "source_page": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+      "region_reference": "Muenchen",
+      "html": "<table><tr data-jobagent-regional><td data-jobagent-name>Alpha Regional AG</td><td data-jobagent-sector>Software</td><td data-jobagent-location>Muenchen</td></tr><tr data-jobagent-regional><td data-jobagent-name>Alpha Regional AG</td><td data-jobagent-sector>Software</td><td data-jobagent-location>Muenchen</td></tr><tr data-jobagent-regional><td data-jobagent-name>Out Hamburg AG</td><td data-jobagent-sector>Media</td><td data-jobagent-location>Hamburg</td></tr></table>"
+    },
+    {
+      "source_id": "source-registry:landkreis_freising_wirtschaft",
+      "format": "card_html",
+      "source_page": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
+      "region_reference": "Freising",
+      "html": "<section><article data-jobagent-regional data-jobagent-name=\"Airport Logistics GmbH\" data-jobagent-sector=\"Logistik\" data-jobagent-location=\"Flughafen Muenchen / Freising\"></article><article data-jobagent-regional><h3 data-jobagent-name>Weihenstephan Research GmbH</h3><p data-jobagent-sector>Research</p><p data-jobagent-location>Freising</p></article></section>"
+    },
+    {
+      "source_id": "source-registry:stadt_freising_weihenstephan",
+      "format": "json_items",
+      "source_page": "https://www.freising.de/wirtschaft/weihenstephan",
+      "region_reference": "",
+      "items": [
+        {
+          "organization_name": "Bio Campus GmbH",
+          "sector": "Biotech",
+          "location": "Freising"
+        },
+        {
+          "organization_name": "",
+          "sector": "Invalid",
+          "location": "Freising"
+        },
+        {
+          "organization_name": "Unknown Place GmbH",
+          "sector": "Services",
+          "location": ""
+        }
+      ]
+    }
+  ]
+}

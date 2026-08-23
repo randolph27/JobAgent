@@ -37,7 +37,7 @@ Assert-True -Condition ($matrix.schema_version -eq 'jobagent-test-matrix/v1') -M
 Assert-True -Condition ($matrix.policy.no_live_web_in_function_tests -eq $true) -Message 'Testmatrix muss Live-Web in Funktionstests ausschliessen.'
 Assert-True -Condition ($matrix.policy.live_lane -eq 'separate-not-supertest') -Message 'Live-Lane muss vom Supertest getrennt sein.'
 
-$expectedIds = @((2..15 | ForEach-Object { 'JA-{0:D3}' -f $_ }) + @('JA-024', 'JA-025'))
+$expectedIds = @((2..15 | ForEach-Object { 'JA-{0:D3}' -f $_ }) + @('JA-024', 'JA-025', 'JA-026'))
 $items = @($matrix.items)
 $actualIds = @($items | ForEach-Object { [string]$_.roadmap_id })
 foreach ($id in $expectedIds) {

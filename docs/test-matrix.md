@@ -31,6 +31,7 @@ Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 | JA-015 | `tests/Test-JobAgentCoverage.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` | ja | Coverage-Metriken, Adapter-Backlog, Scanpriorisierung, Rotationslogik |
 | JA-024 | `tests/Test-JobAgentRegisterDiscovery.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentRegisterDiscovery.ps1` | ja | Register-Fixtures, Zielgebietsfilter, Dedupe, Snapshot-Freshness, personenbezogene Feldsperre |
 | JA-025 | `tests/Test-JobAgentJobBoardDiscovery.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentJobBoardDiscovery.ps1` | ja | Jobboersen-Fixtures, Source-Policy, Pagination, Dedupe, Personaldienstleister, minimale Hash-Evidenz |
+| JA-026 | `tests/Test-JobAgentRegionalDiscovery.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentRegionalDiscovery.ps1` | ja | Regionale Tabellen-/Karten-/JSON-Fixtures, Source-Policy, Zielgebiet, Dedupe, minimale Hash-Evidenz ohne Kontaktdaten |
 
 ## Live-Lane
 
