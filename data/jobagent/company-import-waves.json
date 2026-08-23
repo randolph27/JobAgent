@@ -1,0 +1,84 @@
+{
+  "schema_version": "jobagent/company-import-waves/v1",
+  "contract": "Produktive Importwellen duerfen nur offiziell belegte Firmen in den Store uebernehmen. Unverifizierte Register-, Regional- oder Jobboersenhinweise bleiben in Review-/Verification-Queues.",
+  "waves": [
+    {
+      "wave_id": "A",
+      "title": "Grosse regionale Arbeitgeber und bereits verifizierte Firmen",
+      "target_size": 250,
+      "min_added_companies": 1,
+      "max_duplicate_rate": 0.25,
+      "max_manual_review_rate": 0.0,
+      "allowed_verification_statuses": [
+        "CAREER_URL_VERIFIED",
+        "COMPANY_DOMAIN_VERIFIED",
+        "OFFICIAL_ATS_VERIFIED"
+      ],
+      "required_evidence": [
+        "official_website_url",
+        "discovery_source.verification_url"
+      ],
+      "rollback": {
+        "backup_required": true,
+        "reason": "pre-wave-import"
+      }
+    },
+    {
+      "wave_id": "B",
+      "title": "Register-/Regional-Kandidaten mit offizieller Website",
+      "target_size": 750,
+      "min_added_companies": 1,
+      "max_duplicate_rate": 0.35,
+      "max_manual_review_rate": 0.0,
+      "allowed_verification_statuses": [
+        "CAREER_URL_VERIFIED",
+        "COMPANY_DOMAIN_VERIFIED",
+        "OFFICIAL_ATS_VERIFIED"
+      ],
+      "required_evidence": [
+        "official_website_url",
+        "discovery_source.verification_url"
+      ],
+      "rollback": {
+        "backup_required": true,
+        "reason": "pre-wave-import"
+      }
+    },
+    {
+      "wave_id": "C",
+      "title": "Jobboersen-aktive Arbeitgeber mit verifizierter Karrierequelle",
+      "target_size": 1500,
+      "min_added_companies": 1,
+      "max_duplicate_rate": 0.40,
+      "max_manual_review_rate": 0.0,
+      "allowed_verification_statuses": [
+        "CAREER_URL_VERIFIED",
+        "OFFICIAL_ATS_VERIFIED"
+      ],
+      "required_evidence": [
+        "official_website_url",
+        "career_url",
+        "discovery_source.verification_url"
+      ],
+      "rollback": {
+        "backup_required": true,
+        "reason": "pre-wave-import"
+      }
+    },
+    {
+      "wave_id": "D",
+      "title": "Manuelle Review-Queue ohne produktiven Upsert",
+      "target_size": 0,
+      "min_added_companies": 0,
+      "max_duplicate_rate": 1.0,
+      "max_manual_review_rate": 0.0,
+      "allowed_verification_statuses": [],
+      "required_evidence": [],
+      "productive_upsert_allowed": false,
+      "rollback": {
+        "backup_required": true,
+        "reason": "pre-wave-import"
+      }
+    }
+  ]
+}

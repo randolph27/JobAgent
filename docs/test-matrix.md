@@ -33,6 +33,7 @@ Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 | JA-025 | `tests/Test-JobAgentJobBoardDiscovery.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentJobBoardDiscovery.ps1` | ja | Jobboersen-Fixtures, Source-Policy, Pagination, Dedupe, Personaldienstleister, minimale Hash-Evidenz |
 | JA-026 | `tests/Test-JobAgentRegionalDiscovery.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentRegionalDiscovery.ps1` | ja | Regionale Tabellen-/Karten-/JSON-Fixtures, Source-Policy, Zielgebiet, Dedupe, minimale Hash-Evidenz ohne Kontaktdaten |
 | JA-027 | `tests/Test-JobAgentCompanyDedupeScale.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCompanyDedupeScale.ps1` | ja | Skalierte Kandidaten-Cluster, starke Identitaetskeys, Konfliktflags, Review-Queue, 5.000+ Kandidaten |
+| JA-029 | `tests/Test-JobAgentImportWaves.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentImportWaves.ps1` | ja | Importwellen-Konfiguration, produktive Gate-Pruefung, Rollback-Backup, fail-closed CLI ohne Store-Aenderung |
 
 ## Live-Lane
 

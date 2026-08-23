@@ -1,94 +1,81 @@
 # Handoff latest
 
-Stand: 2026-08-23T11:45:00+02:00
+Stand: 2026-08-23T11:46:47+02:00
 
 ## Ziel fuer neuen Chat
 
-Direkt mit `TD-0029` / `JA-029` weitermachen: produktive Erweiterungswellen fuer tausende Muenchen-/Freising-Arbeitgeber mit Coverage-Gates einfuehren.
-
-Nicht mit JA-030 starten. `JA-030` ist weiterhin offen, aber fachlich nachgelagert zu JA-029.
+Direkt mit `TD-0029` / `JA-029` weitermachen. Nicht mit `JA-030` starten: `JA-030` bleibt fachlich nachgelagert, bis `JA-029` komplett abgeschlossen und rotiert ist.
 
 ## Aktueller Zustand
 
 - Active: `TD-0029`
 - Status: `in-progress`
 - Branch: `master`
-- HEAD vor Abschluss-Commit: `0a871afb9079`
-- Worktree vor Abschluss-Commit: `dirty`
-- Roadmap aktiv: `JA-029`, `JA-030`
-- Roadmap rotiert: `JA-028` wurde nach `Roadmap_archive.md` verschoben und in `Roadmap_index.md` als archiviert bis `JA-028` erfasst.
-- Todo rotiert: `TD-0028` ist `done`, `TD-0029` ist `in-progress`, `TD-0030` ist `open`.
-- STP: `.\ci.cmd stp` lief erfolgreich mit Exit 0 am 2026-08-23T11:38:06+02:00.
-- Supertest: nicht erneut ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt.
+- HEAD vor diesem Commit: `728f3b9`
+- Worktree vor Stage/Commit: dirty
+- STP: `./ci.cmd stp` lief am 2026-08-23T11:46:47+02:00 erfolgreich mit Exit 0.
+- Roadmap: `JA-029` und `JA-030` sind noch aktiv. `JA-029` ist noch nicht abgeschlossen und wurde nicht nach `Roadmap_archive.md` rotiert.
+- Supertest: nicht ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt.
 
-## Abgeschlossener Punkt
+## In diesem Arbeitsabschnitt umgesetzt
 
-`JA-028 Offizielle Firmenwebsite-, Karriere- und ATS-Verifikation fuer Kandidaten automatisieren` ist fachlich abgeschlossen.
+Teilumsetzung fuer `JA-029`:
 
-Umgesetzt:
-
-- Candidate-Verification-Queue unter `data/jobagent/company-candidate-verification.queue.json`.
-- Queue-Eintraege mit Cluster-ID, Kandidaten-IDs, Canonical Name, Source Count, Priority Score, Zielgebietsbasis, Status, Review-Grund, Retry Count, letzter Versuch, naechster Versuch, letztem Status und letztem Grund.
-- Verifikationslauf in `tools/Verify-JobAgentCompanyCandidates.ps1` verarbeitet nur faellige Kandidaten, respektiert MaxCandidates/Timeout/MaxRetries und persistiert `VERIFIED`, `MANUAL_REVIEW_REQUIRED`, `RETRY_SCHEDULED`, `RETRY_EXHAUSTED`.
-- Produktiver Upsert bleibt fail-closed: Firmen werden nur bei `CAREER_URL_VERIFIED`, `COMPANY_DOMAIN_VERIFIED` oder `OFFICIAL_ATS_VERIFIED` aktualisiert; JobSources entstehen nur bei `CAREER_URL_VERIFIED` oder `OFFICIAL_ATS_VERIFIED`.
-- `src/JobAgent.SourceVerification.psm1` erzwingt `KNOWN_COMPANY_DOMAIN_MISMATCH` in Manual Review.
-- `src/JobAgent.Coverage.psm1` erzeugt Queue-Metriken und `candidate_verification_decision_report`.
-- `tools/Measure-JobAgentCompanyCoverage.ps1` gibt den Review-/Reject-Report in JSON, Markdown und HTML aus.
-- `html/jobagent/company-coverage.html` wurde aktualisiert und enthaelt die Abschnitte `Kandidaten-Verifikationsqueue` und `Review-/Reject-Report`.
-- Immutable Pins wurden mit `.\ci.cmd repin-immutables` aktualisiert.
+- Neue Wellenkonfiguration `data/jobagent/company-import-waves.json` mit Schema `jobagent/company-import-waves/v1`.
+- Wellen A-D definieren Zielgroessen, erlaubte Verifikationsstatus, Pflicht-Evidence, Dubletten-/Review-Grenzen und Rollback-Pflicht.
+- `src/JobAgent.CompanyInventory.psm1` enthaelt jetzt `Test-JobAgentCompanyImportWaveGate`.
+- Gate prueft vor produktivem Wellenimport Schema, definierte Welle, Store-Dokument vor/nach Import, Coverage-Delta, Dublettenrate, Manual-Review-Rate, erlaubte `verification_status`, Pflicht-Evidence, Sperre fuer produktive `DISCOVERY_HINT`-/`MANUAL_REVIEW`-Upserts und vorhandenen Rollback-Backup.
+- `tools/Import-JobAgentCompanyDiscovery.ps1` akzeptiert jetzt `-WaveId` und `-WaveConfigPath`.
+- Bei `-WaveId` erstellt der Import vor dem Gate einen Backup unter `data/jobagent/backups/`, prueft das Gate und schreibt den Store nur bei `passed`.
+- Bei Gate-Fehler wird fail-closed abgebrochen; der Store wird nicht geschrieben.
+- Neuer Funktionstest `tests/Test-JobAgentImportWaves.ps1`.
+- `docs/test-matrix.json`, `docs/test-matrix.md`, `tests/Test-JobAgentSupertest.ps1` und `tests/Test-JobAgentTestMatrix.ps1` wurden um `JA-029` / `Test-JobAgentImportWaves.ps1` erweitert.
 
 ## Verifikation
 
 Gruen:
 
-- `pwsh -NoProfile -File tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1` -> Exit 0
+- `pwsh -NoProfile -File tests\Test-JobAgentImportWaves.ps1` -> Exit 0
 - `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit 0
+- `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0
 - `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0
-- `.\ci.cmd repin-immutables` -> Exit 0
-- `.\ci.cmd stp` -> Exit 0
+- `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` -> Exit 0
+- `./ci.cmd stp` -> Exit 0
 
 Nicht ausgefuehrt:
 
-- `.\ci.cmd supertest`; nicht angefragt und laut Nutzeranweisung als erledigt zu werten.
+- `./ci.cmd supertest`; nicht angefragt und laut Nutzeranweisung als erledigt zu werten.
 
 ## Geaenderte Dateien
 
-- `.ci/pins/immutable.hashes.json`
-- `.ci/pins/immutable.snapshot/Roadmap.md`
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
+- `data/jobagent/company-import-waves.json`
+- `docs/test-matrix.json`
+- `docs/test-matrix.md`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `html/jobagent/company-coverage.html`
-- `src/JobAgent.Coverage.psm1`
-- `tests/Test-JobAgentCompanyCandidateVerification.ps1`
-- `tests/Test-JobAgentCoverage.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
+- `src/JobAgent.CompanyInventory.psm1`
+- `tests/Test-JobAgentImportWaves.ps1`
+- `tests/Test-JobAgentSupertest.ps1`
+- `tests/Test-JobAgentTestMatrix.ps1`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
-- `tools/Measure-JobAgentCompanyCoverage.ps1`
-- `tools/Verify-JobAgentCompanyCandidates.ps1`
+- `tools/Import-JobAgentCompanyDiscovery.ps1`
 
 ## Naechste Aufgabe
 
-Mit `JA-029` beginnen:
+`JA-029` weiter abschliessen:
 
-1. Wellenkonfiguration erstellen: Zielgroessen, Quellmix, Mindest-Evidence, maximale Dublettenquote, maximale Review-Quote und Rollback-Backup pro Welle definieren.
-2. Import-Gate implementieren: Vor jedem produktiven Upsert Schema, Dedupe, Evidence, Rate-Limit, Coverage-Delta und Backup pruefen; bei Gate-Verletzung keine Teiluebernahme.
-3. Store und Report skalieren: Sortierung, Pagination/HTML-Tabellen, Coverage-Ausgabe und Daily-Run-Kandidatenpriorisierung fuer tausende Firmen stabilisieren.
+1. Store-/Report-Skalierung fuer tausende Firmen umsetzen: sortierte/segmentierte Ausgaben, grosse HTML-Tabellen bedienbar halten, Coverage-Ausgabe auf Wellenmetriken erweitern.
+2. Produktiven Wellenlauf mit vorhandenen verifizierten Feeds vorbereiten, aber keine unverifizierten Kandidaten massenhaft in `data/jobagent/store.json` aufnehmen.
+3. Wellenmetriken im Coverage-Report sichtbar machen: Firmen gesamt, verifiziert, nur Hinweis, Review, Dublettenquote, Akzeptanzquote, Scanfaehigkeit, Coverage-Delta und Backup-Pfad.
+4. Funktionstests erneut fokussiert ausfuehren: `tests\Test-JobAgentImportWaves.ps1`, `tests\Test-JobAgentCoverage.ps1`, bei Report-Aenderungen `tests\Test-JobAgentReport.ps1`.
+5. Erst wenn `JA-029` vollstaendig ist: `./ci.cmd supertest`, Roadmap-Rotation nach `Roadmap_archive.md`, Todo-Abschluss und finaler Commit.
 
-Pflicht fuer JA-029:
+## Harte Grenzen fuer Folgeagent
 
 - Keine Massenaufnahme unverifizierter Kandidaten.
-- Kein Loeschen bestehender Firmen ohne expliziten Auftrag.
+- Keine Loeschung bestehender Firmen ohne expliziten Auftrag.
 - Keine riesigen Rohdaten-Dumps committen.
-- Keine Vollstaendigkeitsbehauptung "alle Firmen" ohne definierte Quellenabdeckung.
-- Funktionstests zuerst: `tests\Test-JobAgentImportWaves.ps1`, `tests\Test-JobAgentCoverage.ps1`.
-- Supertest erst nach gruenen Funktionstests und nur, wenn der Roadmap-Punkt abgeschlossen wird oder explizit angefragt ist.
+- Keine Behauptung "alle Firmen", solange die Quellenabdeckung nicht definiert und messbar ist.
+- `JA-030` erst beginnen, wenn `JA-029` abgeschlossen und rotiert ist.

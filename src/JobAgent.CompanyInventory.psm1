@@ -551,6 +551,138 @@ function Import-JobAgentCompanyDiscoveryInventory {
     return $result
 }
 
+function Get-JobAgentCompanyImportWaveProperty {
+    param(
+        [Parameter()][AllowNull()][object]$Object,
+        [Parameter(Mandatory)][string]$Name,
+        [Parameter()][AllowNull()][object]$Default = $null
+    )
+
+    if ($null -eq $Object -or $Object.PSObject.Properties.Name -notcontains $Name) {
+        return $Default
+    }
+    return $Object.$Name
+}
+
+function Resolve-JobAgentCompanyImportWave {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Config,
+        [Parameter(Mandatory)][string]$WaveId
+    )
+
+    if ([string](Get-JobAgentCompanyImportWaveProperty -Object $Config -Name 'schema_version') -ne 'jobagent/company-import-waves/v1') {
+        throw 'Importwellen-Konfiguration hat falsche Schema-Version.'
+    }
+    $wave = @($Config.waves | Where-Object { [string]$_.wave_id -eq $WaveId } | Select-Object -First 1)
+    if ($wave.Count -ne 1) {
+        throw "Importwelle nicht definiert: $WaveId"
+    }
+    return $wave[0]
+}
+
+function Test-JobAgentCompanyImportWaveEvidence {
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter(Mandatory)][AllowEmptyCollection()][string[]]$RequiredEvidence
+    )
+
+    foreach ($field in @($RequiredEvidence)) {
+        $value = switch ($field) {
+            'official_website_url' { $Company.official_website_url ; break }
+            'career_url' { $Company.career_url ; break }
+            'discovery_source.verification_url' { $Company.discovery_source.verification_url ; break }
+            default { throw "Unbekanntes Evidence-Feld: $field" }
+        }
+        if ([string]::IsNullOrWhiteSpace([string]$value)) {
+            return $false
+        }
+    }
+    return $true
+}
+
+function Test-JobAgentCompanyImportWaveGate {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$BeforeDocument,
+        [Parameter(Mandatory)][object]$ImportSummary,
+        [Parameter(Mandatory)][object]$WaveConfig,
+        [Parameter(Mandatory)][string]$WaveId,
+        [Parameter()][AllowNull()][string]$BackupPath = $null
+    )
+
+    $wave = Resolve-JobAgentCompanyImportWave -Config $WaveConfig -WaveId $WaveId
+    $afterDocument = $ImportSummary.document
+    Assert-JobAgentDocument -Document $BeforeDocument
+    Assert-JobAgentDocument -Document $afterDocument
+
+    $productiveUpsertAllowed = [bool](Get-JobAgentCompanyImportWaveProperty -Object $wave -Name 'productive_upsert_allowed' -Default $true)
+    $importedIds = @($ImportSummary.imported | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
+    $addedIds = @($ImportSummary.added | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
+    $updatedIds = @($ImportSummary.updated | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
+    $changedIds = @($addedIds + $updatedIds | Sort-Object -Unique)
+    $changedCompanies = @($afterDocument.companies | Where-Object { $changedIds -contains [string]$_.company_id })
+    $manualReviewIds = @($ImportSummary.manual_review_required | ForEach-Object { [string]$_ } | Where-Object { $changedIds -contains $_ } | Sort-Object -Unique)
+    $dedupeCount = @($ImportSummary.deduplicated).Count
+    $importedCount = [Math]::Max(1, $importedIds.Count)
+    $duplicateRate = [double]$dedupeCount / [double]$importedCount
+    $manualReviewRate = [double]$manualReviewIds.Count / [double]$importedCount
+    $coverageDelta = @($afterDocument.companies).Count - @($BeforeDocument.companies).Count
+    $violations = [System.Collections.Generic.List[string]]::new()
+
+    if (-not $productiveUpsertAllowed -and $changedIds.Count -gt 0) {
+        $violations.Add('PRODUCTIVE_UPSERT_NOT_ALLOWED')
+    }
+    if ($coverageDelta -lt [int](Get-JobAgentCompanyImportWaveProperty -Object $wave -Name 'min_added_companies' -Default 0)) {
+        $violations.Add('MIN_ADDED_COMPANIES_NOT_REACHED')
+    }
+    if ($duplicateRate -gt [double](Get-JobAgentCompanyImportWaveProperty -Object $wave -Name 'max_duplicate_rate' -Default 1.0)) {
+        $violations.Add('DUPLICATE_RATE_EXCEEDED')
+    }
+    if ($manualReviewRate -gt [double](Get-JobAgentCompanyImportWaveProperty -Object $wave -Name 'max_manual_review_rate' -Default 0.0)) {
+        $violations.Add('MANUAL_REVIEW_RATE_EXCEEDED')
+    }
+
+    $allowedStatuses = @($wave.allowed_verification_statuses | ForEach-Object { [string]$_ })
+    $requiredEvidence = @($wave.required_evidence | ForEach-Object { [string]$_ })
+    foreach ($company in @($changedCompanies)) {
+        $status = [string]$company.verification_status
+        if ($allowedStatuses.Count -gt 0 -and $allowedStatuses -notcontains $status) {
+            $violations.Add('VERIFICATION_STATUS_NOT_ALLOWED:' + [string]$company.company_id)
+        }
+        if (-not (Test-JobAgentCompanyImportWaveEvidence -Company $company -RequiredEvidence $requiredEvidence)) {
+            $violations.Add('REQUIRED_EVIDENCE_MISSING:' + [string]$company.company_id)
+        }
+        if (@('DISCOVERY_HINT', 'MANUAL_REVIEW') -contains [string]$company.discovery_source.type) {
+            $violations.Add('SECONDARY_SOURCE_PRODUCTIVE_UPSERT:' + [string]$company.company_id)
+        }
+    }
+
+    $rollback = Get-JobAgentCompanyImportWaveProperty -Object $wave -Name 'rollback'
+    $backupRequired = [bool](Get-JobAgentCompanyImportWaveProperty -Object $rollback -Name 'backup_required' -Default $true)
+    if ($backupRequired -and ([string]::IsNullOrWhiteSpace($BackupPath) -or -not (Test-Path -LiteralPath $BackupPath -PathType Leaf))) {
+        $violations.Add('ROLLBACK_BACKUP_MISSING')
+    }
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-import-wave-gate/v1'
+        wave_id = $WaveId
+        status = if ($violations.Count -eq 0) { 'passed' } else { 'failed' }
+        violations = @($violations.ToArray())
+        metrics = [pscustomobject]@{
+            imported = $importedIds.Count
+            added = $addedIds.Count
+            updated = $updatedIds.Count
+            deduplicated = $dedupeCount
+            duplicate_rate = [Math]::Round($duplicateRate, 4)
+            manual_review_required = $manualReviewIds.Count
+            manual_review_rate = [Math]::Round($manualReviewRate, 4)
+            coverage_delta = $coverageDelta
+        }
+        backup_path = $BackupPath
+    }
+}
+
 function New-JobAgentCompanyDiscoveryHintSearch {
     [CmdletBinding()]
     param(
@@ -1023,6 +1155,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCompanySeedInventory',
     'Get-JobAgentCompanyDiscoveryHintSearchMatrix',
     'Import-JobAgentCompanyDiscoveryInventory',
+    'Test-JobAgentCompanyImportWaveGate',
     'Merge-JobAgentCompanySeed',
     'ConvertTo-JobAgentCompanyCandidateRecord',
     'New-JobAgentCompanyDiscoveryHint',

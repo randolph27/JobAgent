@@ -5,7 +5,9 @@ param(
     [Parameter()][string]$ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [Parameter()][string]$FeedPath = 'data/jobagent/company-discovery.official.json',
     [Parameter()][string]$DataRoot = 'data/jobagent',
-    [Parameter()][string]$LogRoot = 'logs/jobagent'
+    [Parameter()][string]$LogRoot = 'logs/jobagent',
+    [Parameter()][AllowNull()][string]$WaveId = $null,
+    [Parameter()][string]$WaveConfigPath = 'data/jobagent/company-import-waves.json'
 )
 
 Set-StrictMode -Version 3.0
@@ -21,6 +23,25 @@ if (-not (Test-Path -LiteralPath $resolvedFeedPath -PathType Leaf)) {
 Import-Module (Join-Path $toolRoot 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $toolRoot 'src\JobAgent.CompanyInventory.psm1') -Force -DisableNameChecking
 
+function New-ToolStoreBackup {
+    param(
+        [Parameter(Mandatory)][string]$Root,
+        [Parameter(Mandatory)][string]$DataRootPath,
+        [Parameter(Mandatory)][string]$Reason
+    )
+
+    $store = Join-Path (Join-Path $Root $DataRootPath) 'store.json'
+    if (-not (Test-Path -LiteralPath $store -PathType Leaf)) {
+        return $null
+    }
+    $backupRoot = Join-Path (Join-Path $Root $DataRootPath) 'backups'
+    New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
+    $stamp = [datetime]::UtcNow.ToString('yyyyMMddTHHmmssfffZ', [Globalization.CultureInfo]::InvariantCulture)
+    $backupPath = Join-Path $backupRoot ("store-$stamp-$Reason.json")
+    Copy-Item -LiteralPath $store -Destination $backupPath -Force
+    return $backupPath
+}
+
 $importedAt = [datetime]::UtcNow
 $nextScanAt = $importedAt.Date.AddDays(1)
 $feed = Get-Content -LiteralPath $resolvedFeedPath -Raw | ConvertFrom-Json -Depth 100
@@ -32,8 +53,23 @@ if ($discoveryItems.Count -eq 0) {
 $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRoot -DataRoot $DataRoot
 try {
     $document = Read-JobAgentStore -ProjectRoot $projectRoot -DataRoot $DataRoot
+    $beforeDocument = $document | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100
     $importSummary = Import-JobAgentCompanyDiscoveryInventory -Document $document -DiscoveryItems $discoveryItems -ImportedAt $importedAt -NextScanAt $nextScanAt
-    $storePath = Write-JobAgentStore -ProjectRoot $projectRoot -DataRoot $DataRoot -Document $importSummary.document -CreateBackup
+    $backupPath = $null
+    $waveGate = $null
+    if (-not [string]::IsNullOrWhiteSpace($WaveId)) {
+        $resolvedWaveConfigPath = if ([IO.Path]::IsPathRooted($WaveConfigPath)) { $WaveConfigPath } else { Join-Path $projectRoot $WaveConfigPath }
+        if (-not (Test-Path -LiteralPath $resolvedWaveConfigPath -PathType Leaf)) {
+            throw "Importwellen-Konfiguration fehlt: $resolvedWaveConfigPath"
+        }
+        $backupPath = New-ToolStoreBackup -Root $projectRoot -DataRootPath $DataRoot -Reason 'pre-wave-import'
+        $waveConfig = Get-Content -Raw -LiteralPath $resolvedWaveConfigPath | ConvertFrom-Json -Depth 100
+        $waveGate = Test-JobAgentCompanyImportWaveGate -BeforeDocument $beforeDocument -ImportSummary $importSummary -WaveConfig $waveConfig -WaveId $WaveId -BackupPath $backupPath
+        if ([string]$waveGate.status -ne 'passed') {
+            throw ('Importwellen-Gate fehlgeschlagen: ' + ((@($waveGate.violations) | Sort-Object) -join ', '))
+        }
+    }
+    $storePath = Write-JobAgentStore -ProjectRoot $projectRoot -DataRoot $DataRoot -Document $importSummary.document -CreateBackup:([string]::IsNullOrWhiteSpace($WaveId))
 }
 finally {
     Exit-JobAgentStoreLock -Lock $lock
@@ -56,6 +92,9 @@ $summary = [pscustomobject]@{
     updated_company_ids = @($importSummary.updated)
     deduplicated = @($importSummary.deduplicated)
     manual_review_required = @($importSummary.manual_review_required)
+    wave_id = if ([string]::IsNullOrWhiteSpace($WaveId)) { $null } else { $WaveId }
+    wave_gate = $waveGate
+    backup_path = $backupPath
     company_count = @($after.companies).Count
     source_count = @($after.job_sources).Count
 }

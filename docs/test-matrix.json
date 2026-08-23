@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent-test-matrix/v1",
-  "updated_at": "2026-08-23T11:20:00+02:00",
+  "updated_at": "2026-08-23T12:20:00+02:00",
   "policy": {
     "default_lane": "deterministic-fixture",
     "live_lane": "separate-not-supertest",
@@ -314,6 +314,22 @@
         "Personaldienstleister-, Zielgebiets- und Out-of-Scope-Konfliktflags",
         "stabile Cluster-IDs, Source-Counts, First-/Last-Seen und Review-Queue",
         "5.000+ synthetische Kandidaten in begrenzter Laufzeit"
+      ]
+    },
+    {
+      "roadmap_id": "JA-029",
+      "title": "Produktive Erweiterungswellen fuer tausende Muenchen-/Freising-Arbeitgeber mit Coverage-Gates einfuehren",
+      "test_file": "tests/Test-JobAgentImportWaves.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentImportWaves.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Importwellen-Konfiguration A-D mit Zielgroessen, Review-Grenzen und Rollback-Vertrag",
+        "Gate erlaubt nur offiziell belegte produktive Upserts",
+        "unverifizierte Discovery-Hints werden fail-closed abgelehnt",
+        "Rollback-Backup ist fuer Wellenimporte Pflicht",
+        "CLI-Import schreibt Gate-Report und veraendert den Store bei Gate-Fehler nicht"
       ]
     }
   ]
