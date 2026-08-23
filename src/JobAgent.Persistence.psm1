@@ -164,7 +164,7 @@ function Assert-JobAgentDocument {
         if (($company.scan_priority -lt 1) -or ($company.scan_priority -gt 100)) {
             throw "Ungueltige scan_priority fuer $($company.company_id): $($company.scan_priority)"
         }
-        if (@('COMPANY_DOMAIN_VERIFIED', 'CAREER_URL_VERIFIED', 'UNVERIFIED') -notcontains [string]$company.verification_status) {
+        if (@('COMPANY_DOMAIN_VERIFIED', 'CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED', 'UNVERIFIED') -notcontains [string]$company.verification_status) {
             throw "Ungueltige verification_status fuer $($company.company_id): $($company.verification_status)"
         }
     }

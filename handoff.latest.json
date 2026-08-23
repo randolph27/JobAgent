@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-23T11:12:00.000+02:00",
+  "ts": "2026-08-23T11:19:59.535+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -7,92 +7,80 @@
   "status": "in-progress",
   "goal": "JA-028 Offizielle Firmenwebsite-, Karriere- und ATS-Verifikation fuer Kandidaten automatisieren.",
   "changed": [
-    "Roadmap.md",
-    "Roadmap_archive.md",
-    "Roadmap_index.md",
-    "docs/test-matrix.json",
-    "docs/test-matrix.md",
     "handoff.latest.json",
     "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
-    "src/JobAgent.Coverage.psm1",
-    "tests/Test-JobAgentCoverage.ps1",
-    "tests/Test-JobAgentSupertest.ps1",
-    "tests/Test-JobAgentTestMatrix.ps1",
-    "todo.checkpoint.json",
-    "todo.current.md",
+    "src/JobAgent.Persistence.psm1",
+    "src/JobAgent.SourceVerification.psm1",
+    "tests/Test-JobAgentCompanyCandidateVerification.ps1",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json",
-    "tools/Measure-JobAgentCompanyCoverage.ps1",
-    "tools/Measure-JobAgentCompanyCandidateDedupe.ps1"
+    "tools/Verify-JobAgentCompanyCandidates.ps1"
   ],
   "verified": [
     {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyDedupeScale.ps1",
       "status": "pass"
     },
     {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
       "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
+      "exit": 0,
       "status": "pass"
     },
     {
-      "exit": 0,
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0,
       "status": "pass"
     },
     {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
-      "status": "pass"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File tools\\Measure-JobAgentCompanyCandidateDedupe.ps1",
-      "status": "pass"
-    },
-    {
-      "exit": 0,
-      "cmd": ".\\ci.cmd supertest",
-      "status": "pass"
-    },
-    {
-      "exit": 0,
       "cmd": ".\\ci.cmd stp",
+      "exit": 0,
       "status": "pass"
     },
     {
+      "cmd": ".\\ci.cmd self-check",
       "exit": 1,
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-      "status": "timeout"
+      "status": "fail"
     },
     {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status -TimeoutSec 5",
       "exit": 1,
-      "cmd": ".\\ci.cmd sonar-start",
-      "status": "fail"
+      "status": "timeout"
     }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
-    "ahead_behind": "0/0",
-    "head": "6ee717f4c210",
+    "branch": "master",
+    "head": "0ea28d3602f5",
     "upstream": "origin/master",
-    "worktree": "dirty-before-commit",
-    "branch": "master"
+    "ahead_behind": "0/0",
+    "worktree": "dirty-before-commit"
   },
-  "next": "JA-028: Verification-Queue und offizielle Evidence-Gates fuer deduplizierte Kandidaten implementieren.",
+  "next": "JA-028 fortsetzen: Candidate-Verification-Queue auf Cluster-/Retry-Ebene erweitern und Coverage-/Review-Report integrieren.",
   "refs": [
     "README.md",
     "Roadmap.md",
-    "Roadmap_archive.md",
     "todo.current.md",
     "todo.state.json",
     "handoff.latest.md",
     "handoff.latest.json"
   ],
-  "blocker": "SonarQube nicht startbar, weil lokales sonar.cmd im Projekt fehlt."
+  "notes": [
+    "JA-028 ist noch nicht abgeschlossen und wurde nicht rotiert.",
+    "Das automatische STP-Feld next zeigte JA-029, fachlich korrekt ist aber die Fortsetzung von JA-028.",
+    "Supertest wurde fuer diesen Zwischenstand nicht ausgefuehrt; laut Nutzer gilt ein nicht angefragter Supertest als erledigt."
+  ],
+  "blocker": "SonarQube/self-check weiterhin nicht gruen; lokaler sonar.cmd/Portproxy separat klaeren."
 }

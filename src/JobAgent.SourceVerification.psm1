@@ -330,6 +330,239 @@ function New-JobAgentCompanyCareerVerificationResult {
     }
 }
 
+function Get-JobAgentVerificationEvidenceTextHash {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowEmptyString()][string]$Text
+    )
+
+    $bytes = [Text.UTF8Encoding]::new($false).GetBytes($Text)
+    $hash = [Security.Cryptography.SHA256]::Create()
+    try {
+        return ([BitConverter]::ToString($hash.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
+    }
+    finally {
+        $hash.Dispose()
+    }
+}
+
+function Get-JobAgentCandidateTextProperty {
+    param(
+        [Parameter()][AllowNull()][object]$Object,
+        [Parameter(Mandatory)][string[]]$Names,
+        [Parameter()][AllowNull()][string]$Default = $null
+    )
+
+    if ($null -eq $Object) {
+        return $Default
+    }
+    foreach ($name in $Names) {
+        if ($Object.PSObject.Properties.Name -contains $name -and -not [string]::IsNullOrWhiteSpace([string]$Object.$name)) {
+            return [string]$Object.$name
+        }
+    }
+    return $Default
+}
+
+function ConvertTo-JobAgentCandidateCompanyStub {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter()][AllowEmptyCollection()][object[]]$ExistingCompanies = @()
+    )
+
+    $knownCompanyId = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('known_company_id', 'company_id')
+    if (-not [string]::IsNullOrWhiteSpace($knownCompanyId)) {
+        $existing = @($ExistingCompanies | Where-Object { [string]$_.company_id -eq $knownCompanyId } | Select-Object -First 1)
+        if ($existing.Count -gt 0) {
+            return $existing[0]
+        }
+    }
+
+    $domain = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('known_company_domain', 'canonical_domain')
+    if ([string]::IsNullOrWhiteSpace($domain)) {
+        return $null
+    }
+
+    $name = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('employer_name', 'company_name', 'register_name', 'canonical_name') -Default $domain
+    $canonicalDomain = $domain.ToLowerInvariant() -replace '^www\.', ''
+    [pscustomobject]@{
+        company_id = if ([string]::IsNullOrWhiteSpace($knownCompanyId)) { 'company:' + (ConvertTo-JobAgentSourceSlug -Value $name) } else { $knownCompanyId }
+        canonical_name = $name
+        canonical_domain = $canonicalDomain
+        official_website_url = 'https://' + $canonicalDomain + '/'
+        career_url = $null
+        aliases = @()
+        locations = @()
+        industry = 'UNKNOWN'
+        ats = @()
+        scan_status = 'PENDING'
+        scan_priority = 50
+        verification_status = 'UNVERIFIED'
+    }
+}
+
+function ConvertTo-JobAgentCandidateVerificationStatus {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$CareerVerification,
+        [Parameter(Mandatory)][object[]]$Fetches
+    )
+
+    switch ([string]$CareerVerification.status) {
+        'CAREER_URL_VERIFIED' { return 'CAREER_URL_VERIFIED' }
+        'ATS_VERIFIED_BY_COMPANY_LINK' { return 'OFFICIAL_ATS_VERIFIED' }
+        default {
+            $successful = @($Fetches | Where-Object { $_.ok -eq $true })
+            if ($successful.Count -gt 0) {
+                return 'COMPANY_DOMAIN_VERIFIED'
+            }
+            return 'UNVERIFIED'
+        }
+    }
+}
+
+function New-JobAgentCandidateVerificationEvidence {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter(Mandatory)][object]$CareerVerification,
+        [Parameter(Mandatory)][datetime]$ObservedAt,
+        [Parameter(Mandatory)][datetime]$ExpiresAt
+    )
+
+    $fetches = @($CareerVerification.fetches)
+    $successfulFetch = @($fetches | Where-Object { $_.ok -eq $true } | Select-Object -First 1)
+    $basisEvidence = @($CareerVerification.verification_evidence | Select-Object -First 1)
+    $status = ConvertTo-JobAgentCandidateVerificationStatus -CareerVerification $CareerVerification -Fetches $fetches
+    $verificationUrl = if ($basisEvidence.Count -gt 0 -and -not [string]::IsNullOrWhiteSpace([string]$basisEvidence[0].url)) {
+        [string]$basisEvidence[0].url
+    }
+    elseif ($successfulFetch.Count -gt 0) {
+        [string]$successfulFetch[0].final_url
+    }
+    else {
+        [string]$Company.official_website_url
+    }
+    $verifiedByUrl = if ($basisEvidence.Count -gt 0 -and -not [string]::IsNullOrWhiteSpace([string]$basisEvidence[0].basis_url)) {
+        [string]$basisEvidence[0].basis_url
+    }
+    elseif ($successfulFetch.Count -gt 0) {
+        [string]$successfulFetch[0].url
+    }
+    else {
+        $null
+    }
+    $finalUrl = if ($successfulFetch.Count -gt 0) { [string]$successfulFetch[0].final_url } else { $null }
+    $httpStatus = if ($successfulFetch.Count -gt 0) { $successfulFetch[0].status_code } else { $null }
+    $evidenceText = if ($successfulFetch.Count -gt 0) {
+        ConvertTo-JobAgentCompanyVerificationPlainText -Html ([string]$successfulFetch[0].content) -MaxLength 400
+    }
+    else {
+        [string]$CareerVerification.reason
+    }
+
+    [pscustomobject]@{
+        candidate_id = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('hint_id', 'candidate_id') -Default ([string]$Company.company_id)
+        company_id = [string]$Company.company_id
+        canonical_name = [string]$Company.canonical_name
+        status = $status
+        verification_url = if ([string]::IsNullOrWhiteSpace($verificationUrl)) { $null } else { ConvertTo-JobAgentCanonicalUrl -Url $verificationUrl }
+        verified_by_url = if ([string]::IsNullOrWhiteSpace($verifiedByUrl)) { $null } else { ConvertTo-JobAgentCanonicalUrl -Url $verifiedByUrl }
+        redirect_chain = if ($basisEvidence.Count -gt 0) { @($basisEvidence[0].redirect_chain) } else { @($fetches | ForEach-Object { Get-JobAgentCompanyVerificationRedirectChain -Fetch $_ } | Select-Object -Unique) }
+        evidence_type = if ($basisEvidence.Count -gt 0) { [string]$basisEvidence[0].evidence_type } elseif ($status -eq 'COMPANY_DOMAIN_VERIFIED') { 'COMPANY_DOMAIN' } else { 'UNVERIFIED' }
+        evidence_text_hash = Get-JobAgentVerificationEvidenceTextHash -Text $evidenceText
+        observed_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        http_status = $httpStatus
+        final_url = if ([string]::IsNullOrWhiteSpace($finalUrl)) { $null } else { ConvertTo-JobAgentCanonicalUrl -Url $finalUrl }
+        reason = [string]$CareerVerification.reason
+        expires_at = $ExpiresAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+    }
+}
+
+function Resolve-JobAgentCompanyCandidateVerification {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter()][AllowEmptyCollection()][object[]]$ExistingCompanies = @(),
+        [Parameter()][object]$Policy = (New-JobAgentCompanyCareerVerificationPolicy),
+        [Parameter()][scriptblock]$Fetcher,
+        [Parameter()][datetime]$ObservedAt = [datetime]::UtcNow,
+        [Parameter()][ValidateRange(1, 730)][int]$ExpiresAfterDays = 90
+    )
+
+    $company = ConvertTo-JobAgentCandidateCompanyStub -Candidate $Candidate -ExistingCompanies $ExistingCompanies
+    $candidateId = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('hint_id', 'candidate_id') -Default 'UNKNOWN'
+    $expiresAt = $ObservedAt.ToUniversalTime().AddDays($ExpiresAfterDays)
+
+    $reviewReasons = New-Object System.Collections.Generic.List[string]
+    if ($Candidate.PSObject.Properties.Name -contains 'is_staffing_agency' -and [bool]$Candidate.is_staffing_agency -eq $true) {
+        $reviewReasons.Add('STAFFING_AGENCY_REVIEW')
+    }
+    $targetArea = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('target_area_match', 'target_area') -Default 'UNKNOWN'
+    if (@('TARGET_AREA_UNCERTAIN', 'UNKNOWN', 'OUT_OF_SCOPE') -contains $targetArea) {
+        $reviewReasons.Add('TARGET_AREA_REVIEW_REQUIRED')
+    }
+    if ($null -eq $company) {
+        $reviewReasons.Add('OFFICIAL_COMPANY_DOMAIN_MISSING')
+        return [pscustomobject]@{
+            candidate_id = $candidateId
+            company_id = $null
+            status = 'MANUAL_REVIEW_REQUIRED'
+            priority_score = [int]([string](Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('confidence_score', 'priority_score') -Default '50'))
+            review_reasons = @($reviewReasons.ToArray())
+            evidence = @([pscustomobject]@{
+                    candidate_id = $candidateId
+                    company_id = $null
+                    canonical_name = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('employer_name', 'company_name', 'register_name', 'canonical_name') -Default 'UNKNOWN'
+                    status = 'MANUAL_REVIEW_REQUIRED'
+                    verification_url = $null
+                    verified_by_url = $null
+                    redirect_chain = @()
+                    evidence_type = 'UNVERIFIED'
+                    evidence_text_hash = Get-JobAgentVerificationEvidenceTextHash -Text 'official company domain missing'
+                    observed_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+                    http_status = $null
+                    final_url = $null
+                    reason = 'Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.'
+                    expires_at = $expiresAt.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+                })
+            fetches = @()
+            next_action = 'manual_review_official_company_domain'
+        }
+    }
+
+    $careerVerification = Resolve-JobAgentCompanyCareerVerification -Company $company -Policy $Policy -Fetcher $Fetcher
+    $evidence = New-JobAgentCandidateVerificationEvidence -Candidate $Candidate -Company $company -CareerVerification $careerVerification -ObservedAt $ObservedAt -ExpiresAt $expiresAt
+    $status = [string]$evidence.status
+    if ($reviewReasons.Count -gt 0) {
+        $status = 'MANUAL_REVIEW_REQUIRED'
+        $evidence.status = $status
+    }
+    $nextAction = switch ($status) {
+        'CAREER_URL_VERIFIED' { 'upsert_verified_company_and_career_source' }
+        'OFFICIAL_ATS_VERIFIED' { 'upsert_verified_company_and_ats_source' }
+        'COMPANY_DOMAIN_VERIFIED' { 'upsert_verified_company_without_job_source' }
+        'MANUAL_REVIEW_REQUIRED' { 'manual_review_required' }
+        default { 'retry_or_manual_review_official_source' }
+    }
+
+    [pscustomobject]@{
+        candidate_id = $candidateId
+        company_id = [string]$company.company_id
+        status = $status
+        priority_score = [int]([string](Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('confidence_score', 'priority_score') -Default '50'))
+        review_reasons = @($reviewReasons.ToArray())
+        evidence = @($evidence)
+        fetches = @($careerVerification.fetches)
+        company = $company
+        career_url = $careerVerification.career_url
+        ats = $careerVerification.ats
+        next_action = $nextAction
+    }
+}
+
 function Resolve-JobAgentCompanyCareerVerification {
     [CmdletBinding()]
     param(
@@ -745,6 +978,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCompanyCareerCandidateLinks',
     'New-JobAgentVerifiedJobSource',
     'New-JobAgentCompanyCareerVerificationPolicy',
+    'Resolve-JobAgentCompanyCandidateVerification',
     'Resolve-JobAgentOfficialJobUrl',
     'Resolve-JobAgentCompanyCareerVerification',
     'Test-JobAgentAggregatorUrl',
