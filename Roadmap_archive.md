@@ -2,6 +2,24 @@
 
 ## Archiviert am 2026-08-17
 
+- [x] JA-022 Lokale App-/Artefaktablage, Devserver-Port und Visual-Audit für HTML-Berichte absichern #comment: Die App laeuft nur lokal; Berichte muessen reproduzierbar abgelegt, geoeffnet und visuell geprueft werden koennen.
+  - [x] Beschreibung: Der lokale Static-/Devserver wird ueber `.\ci.cmd` im Hintergrund auf Port `8500` betrieben, HTML-Reports werden reproduzierbar unter `html/jobagent/` abgelegt und ein lokaler Viewport-Audit liefert belastbare Nachweise fuer `1920`, `1366` und `800` Pixel Breite.
+  - [x] Scope: Umgesetzt wurden Anpassungen in `.ci/ci.config.json`, `.ci/bin/modules/browser-logic.ps1`, `.ci/bin/modules/ci-core.ps1`, `src/JobAgent.Operations.psm1`, `src/JobAgent.Report.psm1`, `tests/Test-JobAgentOperations.ps1`, `tests/Test-JobAgentHtmlAudit.ps1` und `tests/Test-JobAgentHtmlViewportAudit.ps1`. No-Go blieb eingehalten: kein blockierender Vordergrundserver, kein Start ausserhalb `.\ci.cmd`, kein blindes Beenden fremder Prozesse.
+  - [x] Ist-Stand (2026-08-23 07:36): Der Devserver-Vertrag ist auf `8500` vereinheitlicht, der lokale Audit-Report ist per HTTP `200` unter `http://127.0.0.1:8500/html/jobagent/ja-022-viewport-audit.html` erreichbar, HTML-/Markdown-/JSON-Artefakte liegen reproduzierbar im Repo und Screenshots fuer `1920`, `1366` und `800` Breite wurden erzeugt.
+  - [x] Abhängigkeiten: JA-016 und JA-017 lieferten HTML-Artefakte und die sichtbaren Pflichtfelder; der Abschluss nutzte die bestehende lokale Reporting- und Betriebs-Lane.
+  - [x] Aufwand/Dauer: Aufwand M; innerhalb der aktuellen Arbeitseinheit fachlich abgeschlossen.
+  - [x] Prioritätsscore: 72/100, weil lokale Bedienbarkeit und Abnahmefaehigkeit fuer die HTML-Berichte jetzt vertraglich belegt sind.
+  - [x] Ordnungsbegründung: Nach vorhandenem HTML-Output wurde die lokale Betriebs- und Sichtbarkeits-Haertung abgeschlossen, damit der tatsaechlich ausgelieferte Bericht pruefbar ist.
+  - [x] Risiken und Unsicherheiten: Portkonflikte auf `8500` bleiben ein Betriebsrisiko; die `800px`-Ansicht nutzt bewusst horizontales Tabellen-Scrolling statt eines separaten Kartenlayouts. SonarQube auf `:9000` blieb ausserhalb dieses Punkts offen.
+  - [x] Schritte:
+    1. Devserver-Port und Statuspersistenz auf `8500` gehaertet; `html_report_path` wurde im Betriebsstatus verankert.
+    2. Lokalen HTML-Audit-Test fuer Pflichtsektionen, Overflow-Schutz, fehlende externe Runtime-Ressourcen und offizielle Links erstellt.
+    3. Reproduzierbaren Viewport-Audit mit Artefakterzeugung fuer `1920/1366/800` umgesetzt und das Handoff auf konkrete JSON-/Markdown-/HTML-Reportpfade sowie Screenshot-Pfade zugespitzt.
+  - [x] Evidence: `html/jobagent/ja-022-viewport-audit.html`, `logs/jobagent/ja-022-viewport-audit.md`, `logs/jobagent/ja-022-viewport-audit.json`, `output/playwright/ja-022-viewport-1920.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-800.png`, `logs/devserver/devserver.log`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `.\ci.cmd devserver-start` -> Exit 0; `Invoke-WebRequest http://127.0.0.1:8500/` -> HTTP 200.
+  - [x] Audit: Viewport-Screenshots fuer `1920`, `1366` und `800` liegen vor; der lokale Server liefert HTML ohne externe Runtime-Ressourcen; Job-Tabellen bleiben lesbar und scrollen auf kleinen Viewports horizontal statt Spalten unkontrolliert zusammenzudruecken.
+  - [x] Supertest: Nicht separat angefragt; gemaess Nutzeranweisung fuer diesen Abschluss als erledigt gewertet.
+
 - [x] JA-021 Firmeninventar autonom, dedupliziert und quellenorientiert erweitern #comment: Die Firmenbasis wird jetzt ueber verifizierte Discovery-Feeds und Seeds ausgebaut, ohne Dubletten oder falsche Verifikation zu erzeugen.
   - [x] Beschreibung: Der JobAgent importiert neue Unternehmen aus gepflegten Discovery-Feeds oder Seeds, unterscheidet offizielle Quellen von `DISCOVERY_HINT`/`MANUAL_REVIEW`, fuehrt Dubletten ueber ID, Domain und rechtsformnormalisierte Namen zusammen und persistiert Prioritaet, Zielgebiet, Discovery-Herkunft und Verifikationsstatus verlustfrei.
   - [x] Scope: Erweitert wurden `src/JobAgent.CompanyInventory.psm1`, `tools/Import-JobAgentCompanyDiscovery.ps1`, `data/jobagent/company-discovery.official.json`, `tests/Test-JobAgentCompanyInventory.ps1` und der produktive Store `data/jobagent/store.json`. `src/JobAgent.Coverage.psm1` blieb inhaltlich unveraendert, wurde aber gegen das neue Discovery-Verhalten erneut verifiziert. No-Go blieb eingehalten: keine neue Firma ohne belastbare offizielle Quelle im produktiven Feed, keine Zusammenfuehrung rechtlich getrennter Arbeitgeber ohne Identitaetsbeleg.

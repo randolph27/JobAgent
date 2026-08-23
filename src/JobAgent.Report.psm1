@@ -489,7 +489,7 @@ function Add-JobAgentReportHtmlTable {
     }
 
     [void]$Lines.Add('<div class="table-wrap">')
-    [void]$Lines.Add('<table>')
+    [void]$Lines.Add('<table class="job-table">')
     [void]$Lines.Add('<thead>')
     if ($IncludeChange) {
         [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Aenderung</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
@@ -742,12 +742,13 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('.value { display: block; font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }')
     [void]$lines.Add('.table-wrap { overflow-x: auto; }')
     [void]$lines.Add('table { width: 100%; border-collapse: collapse; min-width: 720px; }')
+    [void]$lines.Add('.job-table { min-width: 1320px; }')
     [void]$lines.Add('th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }')
     [void]$lines.Add('th { background: #f2e7d4; font-size: 0.92rem; }')
     [void]$lines.Add('tbody tr:nth-child(even) { background: rgba(122, 75, 32, 0.04); }')
     [void]$lines.Add('a { color: var(--accent); }')
     [void]$lines.Add('.unknown { color: var(--muted); font-style: italic; }')
-    [void]$lines.Add('@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } }')
+    [void]$lines.Add('@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1200px; } th, td { padding: 9px 10px; } }')
     [void]$lines.Add('</style>')
     [void]$lines.Add('</head>')
     [void]$lines.Add('<body>')

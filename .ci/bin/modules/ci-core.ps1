@@ -55,7 +55,7 @@ function Ensure-BootstrapFiles() {
   if (-not (Test-Path -LiteralPath $lockLatest))   { Write-Json $lockLatest @{} }
   if (-not (Test-Path -LiteralPath $cfgPath)) {
     Write-Json $cfgPath @{
-      ts=$now; features=@{ browser_tests="off"; observer="staged" }; verify=@{ cmd=$null }; route_check="standard"; browser_smoke=@{ cmd=$null; interval_minutes=15; requires_verify=$false }; devserver=@{ cmd="python -m http.server 8300 --bind 127.0.0.1"; cwd="."; port=8300; wait_timeout_sec=15; wait_ready=$true }; pyserver=@{ cmd=$null }; todo=@{ autoseed_from_roadmap=$true; seed_max_items=8 }; deps_bootstrap=@{ auto_install=$true; allow_choco=$true }; toolchain=@{ gradle_cmd=$null; gradle_default_version="8.13"; java_min_major=17 }; workspace_lock=@{ on=$true; stale_minutes=30 }; gradle=@{ wrapper_autorepair=$true; wrapper_default_version="8.13" }
+      ts=$now; features=@{ browser_tests="off"; observer="staged" }; verify=@{ cmd=$null }; route_check="standard"; browser_smoke=@{ cmd=$null; interval_minutes=15; requires_verify=$false }; devserver=@{ cmd="python -m http.server 8500 --bind 127.0.0.1"; cwd="."; port=8500; wait_timeout_sec=15; wait_ready=$true }; pyserver=@{ cmd=$null }; todo=@{ autoseed_from_roadmap=$true; seed_max_items=8 }; deps_bootstrap=@{ auto_install=$true; allow_choco=$true }; toolchain=@{ gradle_cmd=$null; gradle_default_version="8.13"; java_min_major=17 }; workspace_lock=@{ on=$true; stale_minutes=30 }; gradle=@{ wrapper_autorepair=$true; wrapper_default_version="8.13" }
     }
   }
   $st = Try-ReadJson $todoState; if ($null -eq $st) { $st = @{ cursor=0; active_id=$null; items=@() } }

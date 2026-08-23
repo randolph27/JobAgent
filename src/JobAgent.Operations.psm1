@@ -302,6 +302,9 @@ function Invoke-JobAgentManagedDailyRun {
             pid = $PID
             run_log_path = $runLogPath
             result_status = $null
+            report_path = $null
+            markdown_report_path = $null
+            html_report_path = $null
             exit_code = $null
             error = $null
         }
@@ -330,6 +333,7 @@ function Invoke-JobAgentManagedDailyRun {
             scan_run_id = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'scan_run_id')
             report_path = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'report_path')
             markdown_report_path = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'markdown_report_path')
+            html_report_path = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'html_report_path')
             exit_code = $exitCode
             error = $errorMessage
         }

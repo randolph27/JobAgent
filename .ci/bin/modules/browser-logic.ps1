@@ -194,7 +194,7 @@ function Cmd-DevserverStatus() {
 function Cmd-PyserverStart() {
   Ensure-CoreFolders; Ensure-BootstrapFiles; $cfg = Try-ReadJson (Get-ConfigPath); $ps = Get-Prop $cfg "pyserver" $null; $root = Get-Prop $ps "root" $null
   if ((Get-BrowserTestsMode) -eq "off" -and -not $root -and -not (Get-Prop $ps "cmd" $null)) {
-    throw "pyserver-start ist in diesem nativen Android-Projekt inaktiv; nutze .\ci.cmd devserver-start fuer den konfigurierten statischen Server auf :8300."
+    throw "pyserver-start ist in diesem nativen Android-Projekt inaktiv; nutze .\ci.cmd devserver-start fuer den konfigurierten statischen Server auf :8500."
   }
   if (-not $root) {
     $candidates = @("web-adapter\build\dist\js\productionExecutable", "web-adapter\build\dist\js\developmentExecutable", "web-adapter\build\kotlin-webpack\js\productionExecutable", "web-adapter\build\kotlin-webpack\js\developmentExecutable", "web-adapter\build\processedResources\js\main", "web\build\dist\js\productionExecutable", "web\build\dist\js\developmentExecutable", "web\build\kotlin-webpack\js\productionExecutable", "web\build\kotlin-webpack\js\developmentExecutable", "web\build\processedResources\js\main", "build\dist\js\productionExecutable", "build\dist\js\developmentExecutable", "build\kotlin-webpack\js\productionExecutable", "build\kotlin-webpack\js\developmentExecutable", "build\processedResources\js\main")

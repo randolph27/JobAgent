@@ -33,6 +33,7 @@ try {
             scan_run_id = 'scanrun:test'
             report_path = 'logs/jobagent/report.json'
             markdown_report_path = 'logs/jobagent/report.md'
+            html_report_path = 'html/jobagent/report.html'
         }
     } -StartedAt ([datetime]'2026-08-17T10:00:00Z') -RetainLogs 10
 
@@ -44,6 +45,7 @@ try {
     Assert-True -Condition ($status.state -eq 'SUCCEEDED') -Message 'Statusabfrage erkennt letzten Erfolg nicht.'
     Assert-True -Condition (-not $status.is_running) -Message 'Statusabfrage markiert abgeschlossenen Lauf als RUNNING.'
     Assert-True -Condition ($status.last_status.scan_run_id -eq 'scanrun:test') -Message 'Statusdatei enthaelt keine ScanRun-ID.'
+    Assert-True -Condition ($status.last_status.html_report_path -eq 'html/jobagent/report.html') -Message 'Statusdatei enthaelt keinen HTML-Report-Pfad.'
 
     $failure = Invoke-JobAgentManagedDailyRun -ProjectRoot $projectRoot -ScriptBlock {
         throw 'fixture failure'

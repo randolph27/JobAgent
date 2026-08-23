@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JobAgent Daily-Run-Bericht</title>
+<style>
+:root { color-scheme: light; --bg: #f4f1ea; --surface: #fffdf8; --surface-alt: #f7efe2; --line: #d8c7a9; --text: #1f2933; --muted: #5d6b78; --accent: #7a4b20; --ok: #155e3b; --warn: #8a4b0f; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: linear-gradient(180deg, #f7f2e8 0%, #efe6d6 100%); color: var(--text); }
+main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; }
+section { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(31, 41, 51, 0.06); }
+h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; }
+h1 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--accent); }
+h2 { font-size: 1.25rem; }
+p, li { line-height: 1.5; }
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.card { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 12px; padding: 12px; min-width: 0; }
+.label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.value { display: block; font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 720px; }
+.job-table { min-width: 1320px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+th { background: #f2e7d4; font-size: 0.92rem; }
+tbody tr:nth-child(even) { background: rgba(122, 75, 32, 0.04); }
+a { color: var(--accent); }
+.unknown { color: var(--muted); font-style: italic; }
+@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1200px; } th, td { padding: 9px 10px; } }
+</style>
+</head>
+<body>
+<main>
+<section>
+<h1>JobAgent Daily-Run-Bericht</h1>
+<div class="summary">
+<div class="card"><span class="label">ScanRun</span><span class="value">scanrun:ja022-viewport-audit</span></div>
+<div class="card"><span class="label">Status</span><span class="value">PARTIAL</span></div>
+<div class="card"><span class="label">Firmen</span><span class="value">2</span></div>
+<div class="card"><span class="label">Adapterversuche</span><span class="value">2</span></div>
+<div class="card"><span class="label">Snapshots</span><span class="value">2</span></div>
+<div class="card"><span class="label">Fehler</span><span class="value">1</span></div>
+</div>
+</section>
+<section><h2>Neue passende Stellen</h2>
+<div class="table-wrap">
+<table class="job-table">
+<thead>
+<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Offizielle URL</th><th>Begruendung</th></tr>
+</thead>
+<tbody>
+<tr><td>A</td><td>Alpha AG</td><td>Head of IT mit sehr langem Titel fuer responsiven Layouttest und Ueberlaufpruefung</td><td>NEW</td><td>Muenchen</td><td>HYBRID</td><td>FULL_TIME</td><td>2026-08-20</td><td>2026-08-23</td><td>2026-08-23</td><td>3 Tage (published_at)</td><td>UNKNOWN</td><td>Budgetverantwortung fuer einen europaweit verteilten IT-Betrieb mit langen Freitexten zur Layoutpruefung; Fuehrung mehrerer Plattformteams und eines Security-Enablement-Streams</td><td><a href="https://alpha.example.invalid/jobs/head-it">https://alpha.example.invalid/jobs/head-it</a></td><td>Prioritaet A, Ergebnis MATCH, Score 97. Standort Muenchen, Arbeitsmodell HYBRID, Beschaeftigung FULL_TIME. Gruende: Belegte Gesamtverantwortung fuer IT-Strategie, Betrieb und Budget.; Standort Muenchen liegt im Zielgebiet.. Anforderungen: Budgetverantwortung fuer einen europaweit verteilten IT-Betrieb mit langen Freitexten zur Layoutpruefung; Fuehrung mehrerer Plattformteams und eines Security-Enablement-Streams.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section><h2>Aktive passende Stellen</h2>
+<div class="table-wrap">
+<table class="job-table">
+<thead>
+<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Offizielle URL</th><th>Begruendung</th></tr>
+</thead>
+<tbody>
+<tr><td>A</td><td>Alpha AG</td><td>Director Platform Engineering</td><td>ACTIVE</td><td>Freising</td><td>REMOTE</td><td>FULL_TIME</td><td>2026-08-18</td><td>2026-08-22</td><td>2026-08-23</td><td>5 Tage (published_at)</td><td>UNKNOWN</td><td>Skalierung von Plattform-, Infrastruktur- und SRE-Prozessen; Stakeholder-Steuerung mit CTO und CIO</td><td><a href="https://alpha.example.invalid/jobs/director-platforms">https://alpha.example.invalid/jobs/director-platforms</a></td><td>Prioritaet A, Ergebnis MATCH, Score 93. Standort Freising, Arbeitsmodell REMOTE, Beschaeftigung FULL_TIME. Gruende: Fuehrungsverantwortung fuer Plattform- und Infrastrukturteams ist belegt.; Freising liegt im Zielgebiet.. Anforderungen: Skalierung von Plattform-, Infrastruktur- und SRE-Prozessen; Stakeholder-Steuerung mit CTO und CIO.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section><h2>Aenderungen</h2>
+<p>Keine geaenderten passenden Stellen im Lauf.</p>
+</section>
+<section><h2>Geschlossene oder entfernte Stellen</h2>
+<p>Keine geschlossenen oder entfernten passenden Stellen im Lauf.</p>
+</section>
+<section><h2>Neue Unternehmen</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Firma</th><th>Website</th><th>Karriere-URL</th><th>Verifikation</th></tr></thead>
+<tbody>
+<tr><td>Alpha AG</td><td><a href="https://alpha.example.invalid/">https://alpha.example.invalid/</a></td><td><a href="https://alpha.example.invalid/careers">https://alpha.example.invalid/careers</a></td><td>CAREER_URL_VERIFIED</td></tr>
+<tr><td>Beta GmbH</td><td><a href="https://beta.example.invalid/">https://beta.example.invalid/</a></td><td><a href="https://beta.example.invalid/jobs">https://beta.example.invalid/jobs</a></td><td>CAREER_URL_VERIFIED</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section><h2>Fehler und unsichere Quellen</h2>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Kategorie</th><th>Firma</th><th>Quelle</th><th>Status</th><th>Fehlerklasse</th><th>Retry</th><th>HTTP</th></tr></thead>
+<tbody>
+<tr><td>NICHT_ERREICHBAR</td><td>Beta GmbH</td><td><a href="https://beta.example.invalid/jobs">https://beta.example.invalid/jobs</a></td><td>FAILED</td><td>NOT_REACHABLE</td><td>RETRY_NEXT_RUN</td><td>503</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<section><h2>Recherche-Statistik</h2><div class="summary">
+<div class="card"><span class="label">checked_jobs</span><span class="value">2</span></div>
+<div class="card"><span class="label">new_jobs</span><span class="value">1</span></div>
+<div class="card"><span class="label">active_matching_jobs</span><span class="value">1</span></div>
+<div class="card"><span class="label">updated_jobs</span><span class="value">0</span></div>
+<div class="card"><span class="label">removed_or_closed_jobs</span><span class="value">0</span></div>
+<div class="card"><span class="label">invalid_jobs</span><span class="value">0</span></div>
+<div class="card"><span class="label">new_companies</span><span class="value">2</span></div>
+<div class="card"><span class="label">uncertain_sources</span><span class="value">0</span></div>
+<div class="card"><span class="label">unreachable_career_pages</span><span class="value">1</span></div>
+<div class="card"><span class="label">errors</span><span class="value">1</span></div>
+</div></section>
+<section><h2>Coverage und Adapter-Backlog</h2>
+<p>Coverage-Werte sind operative Naeherungen aus dem lokalen Firmeninventar und behaupten keine vollstaendige Marktdeckung.</p>
+<div class="summary">
+<div class="card"><span class="label">companies_total</span><span class="value">2</span></div>
+<div class="card"><span class="label">with_career_url</span><span class="value">2</span></div>
+<div class="card"><span class="label">without_career_url</span><span class="value">0</span></div>
+<div class="card"><span class="label">successfully_scanned</span><span class="value">1</span></div>
+<div class="card"><span class="label">failed_scanned</span><span class="value">1</span></div>
+<div class="card"><span class="label">never_scanned</span><span class="value">0</span></div>
+<div class="card"><span class="label">without_matching_jobs</span><span class="value">0</span></div>
+<div class="card"><span class="label">with_matching_jobs</span><span class="value">1</span></div>
+<div class="card"><span class="label">stale_or_unscanned</span><span class="value">0</span></div>
+</div>
+<h3>Naechste Scanprioritaeten</h3>
+<div class="table-wrap"><table><thead><tr><th>Score</th><th>Firma</th><th>Aktion</th><th>Gruende</th></tr></thead><tbody>
+<tr><td>105</td><td>Beta GmbH</td><td>retry_or_adapter_review</td><td>last_scan_failed</td></tr>
+<tr><td>60</td><td>Alpha AG</td><td>scan_rotation</td><td>recent_success_rotation_penalty, matching_job_already_known</td></tr>
+</tbody></table></div>
+<h3>Adapter- und Coverage-Backlog</h3>
+<div class="table-wrap"><table><thead><tr><th>Score</th><th>Typ</th><th>Firma</th><th>Begruendung</th><th>Naechster Schritt</th></tr></thead><tbody>
+<tr><td>90</td><td>ATS_OR_PORTAL_ADAPTER_REVIEW</td><td>Beta GmbH</td><td>Letzter Scan fehlgeschlagen: NOT_REACHABLE.</td><td>Fehlerklasse, Portaltyp und moeglichen Adapterbedarf mit offizieller Quelle pruefen.</td></tr>
+</tbody></table></div>
+</section>
+</main>
+</body>
+</html>
