@@ -259,6 +259,83 @@ function Get-JobAgentCoverageScanPriority {
     return @($items | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, company | Select-Object -First $MaxCompanies)
 }
 
+function Test-JobAgentCoverageImportableSource {
+    param([Parameter(Mandatory)][object]$Source)
+
+    $decision = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'import_decision' -Default '')
+    return @('IMPORT_CANDIDATES', 'IMPORT_HINTS_ONLY') -contains $decision
+}
+
+function Test-JobAgentCoverageRejectedSource {
+    param([Parameter(Mandatory)][object]$Source)
+
+    return [string](Get-JobAgentCoverageProperty -Object $Source -Name 'source_class' -Default '') -eq 'REJECTED'
+}
+
+function Test-JobAgentCoverageManualReviewSource {
+    param([Parameter(Mandatory)][object]$Source)
+
+    $sourceClass = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'source_class' -Default '')
+    $decision = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'import_decision' -Default '')
+    $verificationRequired = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'verification_required' -Default '')
+    return $sourceClass -eq 'MANUAL_REVIEW_ONLY' -or $decision -eq 'MANUAL_REVIEW_ONLY' -or $verificationRequired -eq 'MANUAL_REVIEW_REQUIRED'
+}
+
+function Test-JobAgentCoverageSourceVerificationGap {
+    param([Parameter(Mandatory)][object]$Source)
+
+    if (Test-JobAgentCoverageRejectedSource -Source $Source) {
+        return $false
+    }
+    $sourceClass = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'source_class' -Default '')
+    $verificationRequired = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'verification_required' -Default '')
+    return $sourceClass -ne 'OFFICIAL_DIRECTORY' -or @('MANUAL_REVIEW_REQUIRED', 'COMPANY_DOMAIN_OR_CAREER_URL_REQUIRED') -contains $verificationRequired
+}
+
+function New-JobAgentDiscoverySourceCoverageReport {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$SourceRegistry,
+        [Parameter()][datetime]$Now = [datetime]::UtcNow
+    )
+
+    $items = @($SourceRegistry.items)
+    $classCounts = [ordered]@{}
+    $decisionCounts = [ordered]@{}
+    foreach ($source in $items) {
+        $sourceClass = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_class' -Default 'UNKNOWN')
+        $decision = [string](Get-JobAgentCoverageProperty -Object $source -Name 'import_decision' -Default 'UNKNOWN')
+        if (-not $classCounts.Contains($sourceClass)) {
+            $classCounts[$sourceClass] = 0
+        }
+        if (-not $decisionCounts.Contains($decision)) {
+            $decisionCounts[$decision] = 0
+        }
+        $classCounts[$sourceClass]++
+        $decisionCounts[$decision]++
+    }
+
+    $manualReviewSources = @($items | Where-Object { Test-JobAgentCoverageManualReviewSource -Source $_ })
+    $rejectedSources = @($items | Where-Object { Test-JobAgentCoverageRejectedSource -Source $_ })
+    $verificationGaps = @($items | Where-Object { Test-JobAgentCoverageSourceVerificationGap -Source $_ })
+    $importableSources = @($items | Where-Object { Test-JobAgentCoverageImportableSource -Source $_ })
+
+    [pscustomobject]@{
+        generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        source_registry_version = [string](Get-JobAgentCoverageProperty -Object $SourceRegistry -Name 'schema_version' -Default 'UNKNOWN')
+        sources_total = $items.Count
+        class_counts = [pscustomobject]$classCounts
+        import_decision_counts = [pscustomobject]$decisionCounts
+        importable_sources = $importableSources.Count
+        rejected_sources = $rejectedSources.Count
+        manual_review_sources = $manualReviewSources.Count
+        verification_gap_sources = $verificationGaps.Count
+        rejected_source_ids = @($rejectedSources | ForEach-Object { [string]$_.source_id } | Sort-Object)
+        manual_review_source_ids = @($manualReviewSources | ForEach-Object { [string]$_.source_id } | Sort-Object)
+        verification_gap_source_ids = @($verificationGaps | ForEach-Object { [string]$_.source_id } | Sort-Object)
+    }
+}
+
 function New-JobAgentCoverageReport {
     [CmdletBinding()]
     param(
@@ -305,5 +382,6 @@ function New-JobAgentCoverageReport {
 Export-ModuleMember -Function @(
     'Get-JobAgentCoverageBacklog',
     'Get-JobAgentCoverageScanPriority',
+    'New-JobAgentDiscoverySourceCoverageReport',
     'New-JobAgentCoverageReport'
 )

@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/jobagent/jobagent.discovery-source.schema.json",
+  "title": "JobAgent discovery source registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "generated_at",
+    "items"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "jobagent/discovery-source/v1"
+    },
+    "generated_at": {
+      "$ref": "#/$defs/date_time"
+    },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/discovery_source"
+      }
+    }
+  },
+  "$defs": {
+    "date_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "uri": {
+      "type": "string",
+      "format": "uri",
+      "minLength": 8
+    },
+    "non_empty_string": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_class": {
+      "enum": [
+        "OFFICIAL_DIRECTORY",
+        "PUBLIC_JOBBOARD_HINT",
+        "BUSINESS_NETWORK_HINT",
+        "REGISTER_HINT",
+        "STARTUP_CLUSTER_HINT",
+        "SECTOR_CLUSTER_HINT",
+        "MANUAL_REVIEW_ONLY",
+        "REJECTED"
+      ]
+    },
+    "import_decision": {
+      "enum": [
+        "IMPORT_CANDIDATES",
+        "IMPORT_HINTS_ONLY",
+        "MANUAL_REVIEW_ONLY",
+        "REJECT"
+      ]
+    },
+    "verification_requirement": {
+      "enum": [
+        "OFFICIAL_WEBSITE_REQUIRED",
+        "OFFICIAL_CAREER_URL_REQUIRED",
+        "COMPANY_DOMAIN_OR_CAREER_URL_REQUIRED",
+        "MANUAL_REVIEW_REQUIRED",
+        "NOT_IMPORTABLE"
+      ]
+    },
+    "discovery_source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "source_url",
+        "operator",
+        "source_class",
+        "allowed_use",
+        "expected_fields",
+        "verification_required",
+        "rate_limit_note",
+        "robots_note",
+        "priority",
+        "import_decision",
+        "last_reviewed_at",
+        "rejection_reason"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "pattern": "^source-registry:[a-z0-9][a-z0-9._-]*$"
+        },
+        "source_url": {
+          "$ref": "#/$defs/uri"
+        },
+        "operator": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "source_class": {
+          "$ref": "#/$defs/source_class"
+        },
+        "allowed_use": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "expected_fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/non_empty_string"
+          },
+          "uniqueItems": true
+        },
+        "verification_required": {
+          "$ref": "#/$defs/verification_requirement"
+        },
+        "rate_limit_note": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "robots_note": {
+          "$ref": "#/$defs/non_empty_string"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "import_decision": {
+          "$ref": "#/$defs/import_decision"
+        },
+        "last_reviewed_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "rejection_reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "source_class": {
+                "const": "REJECTED"
+              }
+            },
+            "required": [
+              "source_class"
+            ]
+          },
+          "then": {
+            "properties": {
+              "import_decision": {
+                "const": "REJECT"
+              },
+              "verification_required": {
+                "const": "NOT_IMPORTABLE"
+              },
+              "rejection_reason": {
+                "$ref": "#/$defs/non_empty_string"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "rejection_reason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source_class": {
+                "enum": [
+                  "PUBLIC_JOBBOARD_HINT",
+                  "BUSINESS_NETWORK_HINT",
+                  "REGISTER_HINT",
+                  "STARTUP_CLUSTER_HINT",
+                  "SECTOR_CLUSTER_HINT",
+                  "MANUAL_REVIEW_ONLY"
+                ]
+              }
+            },
+            "required": [
+              "source_class"
+            ]
+          },
+          "then": {
+            "not": {
+              "properties": {
+                "verification_required": {
+                  "const": "OFFICIAL_CAREER_URL_REQUIRED"
+                },
+                "import_decision": {
+                  "const": "IMPORT_CANDIDATES"
+                }
+              },
+              "required": [
+                "verification_required",
+                "import_decision"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -115,6 +115,39 @@ Assert-True -Condition ($markdown.Contains('Coverage-Werte sind operative Naeher
 Assert-True -Condition ($markdown.Contains('ATS_OR_PORTAL_ADAPTER_REVIEW')) -Message 'Markdown-Report enthaelt keinen Adapter-Backlog.'
 Assert-True -Condition ($markdown.Contains('MANUAL_REVIEW_DISCOVERY')) -Message 'Markdown-Report enthaelt keinen Discovery-Review-Backlog.'
 
+$sourceRegistryPath = Join-Path $root 'data\jobagent\company-discovery.sources.json'
+$sourceSchemaPath = Join-Path $root 'schemas\jobagent.discovery-source.schema.json'
+$sourceRegistryJson = Get-Content -Raw -LiteralPath $sourceRegistryPath
+$sourceSchemaJson = Get-Content -Raw -LiteralPath $sourceSchemaPath
+Assert-True -Condition (Test-Json -Json $sourceRegistryJson -Schema $sourceSchemaJson) -Message 'Discovery-Quellenkatalog verletzt das JSON-Schema.'
+$sourceRegistry = $sourceRegistryJson | ConvertFrom-Json -Depth 20
+$sourceCoverage = New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $sourceRegistry -Now ([datetime]'2026-08-23T08:30:00Z')
+Assert-True -Condition ($sourceCoverage.sources_total -ge 10) -Message 'Discovery-Quellenkatalog enthaelt zu wenige Quellen.'
+Assert-True -Condition ($sourceCoverage.class_counts.OFFICIAL_DIRECTORY -ge 2) -Message 'Offizielle Verzeichnisquellen werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.class_counts.PUBLIC_JOBBOARD_HINT -ge 3) -Message 'Sekundaere Jobboersen-Hinweise werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.class_counts.REGISTER_HINT -ge 2) -Message 'Register-Hinweise werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.class_counts.REJECTED -ge 1) -Message 'Abgelehnte Quellen werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.importable_sources -ge 6) -Message 'Importierbare Quellen werden falsch gezaehlt.'
+Assert-True -Condition ($sourceCoverage.manual_review_sources -ge 7) -Message 'Manual-Review-Quellen werden falsch gezaehlt.'
+Assert-True -Condition ($sourceCoverage.verification_gap_sources -ge 8) -Message 'Offene Verifikationsluecken werden falsch gezaehlt.'
+Assert-True -Condition (@($sourceCoverage.rejected_source_ids | Where-Object { $_ -eq 'source-registry:linkedin_jobs' }).Count -eq 1) -Message 'Abgelehnte Quelle wird nicht ausgewiesen.'
+$invalidOfficialSemantics = @($sourceRegistry.items | Where-Object {
+        [string]$_.source_class -ne 'OFFICIAL_DIRECTORY' -and
+        [string]$_.import_decision -eq 'IMPORT_CANDIDATES' -and
+        [string]$_.verification_required -eq 'OFFICIAL_CAREER_URL_REQUIRED'
+    })
+Assert-True -Condition ($invalidOfficialSemantics.Count -eq 0) -Message 'Sekundaerquelle darf keine offizielle Karrierequellen-Semantik erhalten.'
+$missingUsageNotes = @($sourceRegistry.items | Where-Object {
+        [string]::IsNullOrWhiteSpace([string]$_.allowed_use) -or
+        [string]::IsNullOrWhiteSpace([string]$_.rate_limit_note) -or
+        [string]::IsNullOrWhiteSpace([string]$_.robots_note)
+    })
+Assert-True -Condition ($missingUsageNotes.Count -eq 0) -Message 'Quellen muessen Nutzungs-, Rate- und Robots-Hinweise tragen.'
+
+$coverageLog = Join-Path $root 'logs\jobagent\ja-023-source-coverage.json'
+New-Item -ItemType Directory -Path (Split-Path -Parent $coverageLog) -Force | Out-Null
+$sourceCoverage | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $coverageLog -Encoding UTF8
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -125,6 +158,10 @@ Assert-True -Condition ($markdown.Contains('MANUAL_REVIEW_DISCOVERY')) -Message 
         'failed_portals_prioritized_for_adapter_review',
         'recent_success_rotation_penalty',
         'coverage_report_has_approximation_notice',
-        'daily_report_includes_coverage_and_backlog'
+        'daily_report_includes_coverage_and_backlog',
+        'discovery_source_registry_schema_valid',
+        'discovery_source_coverage_by_class_and_decision',
+        'discovery_source_secondary_sources_are_not_official',
+        'discovery_source_usage_notes_required'
     )
 } | ConvertTo-Json -Depth 4

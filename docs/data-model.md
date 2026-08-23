@@ -59,6 +59,34 @@ Recovery:
 3. Backup nach `data/jobagent/store.json` zurückkopieren.
 4. `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` ausführen.
 
+## Discovery Source Registry
+
+`data/jobagent/company-discovery.sources.json` ist der maschinenlesbare Quellenvertrag fuer breite Arbeitgeber-Discovery. Das zugehoerige Schema liegt unter `schemas/jobagent.discovery-source.schema.json`.
+
+Jede Quelle enthaelt:
+
+- `source_id`, `source_url`, `operator`
+- `source_class`: `OFFICIAL_DIRECTORY`, `PUBLIC_JOBBOARD_HINT`, `BUSINESS_NETWORK_HINT`, `REGISTER_HINT`, `STARTUP_CLUSTER_HINT`, `SECTOR_CLUSTER_HINT`, `MANUAL_REVIEW_ONLY` oder `REJECTED`
+- `allowed_use`, `expected_fields`, `verification_required`
+- `rate_limit_note`, `robots_note`, `priority`, `import_decision`
+- `last_reviewed_at`, `rejection_reason`
+
+Importregeln:
+
+- `OFFICIAL_DIRECTORY` darf Kandidaten fuer den kuratierten Firmenfeed liefern, erzeugt aber ohne separate Unternehmenswebsite-/Karrierepfadpruefung keine `JobSource`.
+- `PUBLIC_JOBBOARD_HINT`, `BUSINESS_NETWORK_HINT`, `REGISTER_HINT`, `STARTUP_CLUSTER_HINT` und `SECTOR_CLUSTER_HINT` duerfen nur Hints oder Manual-Review-Faelle erzeugen.
+- `MANUAL_REVIEW_ONLY` wird nicht automatisiert importiert.
+- `REJECTED` ist fail-closed: `import_decision` muss `REJECT`, `verification_required` muss `NOT_IMPORTABLE`, und `rejection_reason` muss gesetzt sein.
+- Jobboersen, Business-Netzwerke und Register duerfen nie als offizielle Karriere- oder Bewerbungsquelle gespeichert werden.
+
+`New-JobAgentDiscoverySourceCoverageReport` in `src/JobAgent.Coverage.psm1` wertet Quellebene und Firmenebene getrennt aus. Der Funktionsbericht zaehlt Quellen nach Klasse, Importentscheidung, importierbaren Quellen, abgelehnten Quellen, Manual-Review-Quellen und offenen Verifikationsluecken. Der fokussierte Test schreibt `logs/jobagent/ja-023-source-coverage.json`.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1
+```
+
 ## Root-Dokument
 
 Das Root-Dokument trägt `schema_version: "jobagent/v1"` und enthält getrennte Sammlungen:

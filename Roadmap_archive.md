@@ -378,4 +378,24 @@
   - [x] Funktionstest: `.\ci.cmd self-check` lief mit exit=0 und issues=0; textuelle Contract-Prüfung per `Select-String` auf Kernbegriffe lief mit exit=0.
   - [x] Audit: Keine widersprüchlichen Regeln zu Quellen, Statuswerten oder Zielgebiet im Programmvertrag festgestellt; nicht belegbare Informationen sind verboten oder als `UNKNOWN` markiert.
   - [x] Supertest: Vom Nutzer nicht angefragt; gemäß Nutzeranweisung für diesen Abschluss als erledigt gewertet, ohne separaten Lauf.
+## Archiviert am 2026-08-23
+
+- [x] JA-023 Quellenkatalog fuer maximale Firmen-Discovery nach Evidenzklasse erstellen #comment: Vollstaendigkeit ist nur steuerbar, wenn jede nutzbare Quelle mit Herkunft, Lizenz-/Nutzungsgrenze, Belegtyp und Importentscheidung katalogisiert ist.
+  - [x] Beschreibung: Es existiert ein maschinenlesbarer Discovery-Quellenkatalog, der alle geprueften Quellenklassen fuer Muenchen, Muenchen 20 km und Freising nach `OFFICIAL_DIRECTORY`, `PUBLIC_JOBBOARD_HINT`, `BUSINESS_NETWORK_HINT`, `REGISTER_HINT`, `STARTUP_CLUSTER_HINT`, `SECTOR_CLUSTER_HINT`, `MANUAL_REVIEW_ONLY` und `REJECTED` klassifiziert; jede Quelle enthaelt URL, Betreiber, erlaubte Nutzung im JobAgent, erwartete Felder, Verifikationsanforderung, Rate-/Robots-Hinweis und Importprioritaet.
+  - [x] Scope: Geaendert/erstellt wurden `data/jobagent/company-discovery.sources.json`, `schemas/jobagent.discovery-source.schema.json`, `src/JobAgent.Coverage.psm1`, `tests/Test-JobAgentCoverage.ps1` und `docs/data-model.md`. No-Go: keine Firma direkt in `data/jobagent/store.json` schreiben, keine Scraping-Regeln fuer Login/Captcha/Paywall, keine Sekundaerquelle als offizielle Karrierequelle markieren.
+  - [x] Ist-Stand (2026-08-23 08:30): Der Quellenkatalog ist als `data/jobagent/company-discovery.sources.json` umgesetzt, gegen `schemas/jobagent.discovery-source.schema.json` validiert und in Coverage-Auswertung, Dokumentation und Funktionstest eingebunden.
+  - [x] Abhängigkeiten: Keine fachliche Code-Abhaengigkeit ausser JA-021/JA-022; dieser Punkt ist Grundlage fuer JA-024 bis JA-027.
+  - [x] Aufwand/Dauer: Aufwand M; Annahme 1 Entwickler/Agent, 0,5-1 Arbeitstag fuer Schema, Katalog, Tests und Dokumentation ohne produktiven Massenimport.
+  - [x] Prioritätsscore: 100/100, weil ohne deterministischen Quellenvertrag jede breite Firmenaufstockung uneinheitlich, schwer auditierbar und dublettenanfaellig bleibt.
+  - [x] Ordnungsbegründung: Grundlagen vor Import: Erst Quellen, Evidenzklassen und No-Gos festlegen, dann konkrete Arbeitgeber importieren.
+  - [x] Risiken und Unsicherheiten: Nutzungsbedingungen einzelner Verzeichnisse koennen automatisches Auslesen begrenzen; einige Quellen liefern nur Namen ohne Website; private Verzeichnisse koennen veralten oder Dubletten enthalten; offizielle APIs fuer Handelsregister/Unternehmensregister sind fuer allgemeine Suche nicht gesichert verfuegbar.
+  - [x] Schritte:
+    1. Schema und Beispieldaten fuer `company-discovery.sources.json` erstellen; jede Quelle muss `source_id`, `source_url`, `operator`, `source_class`, `allowed_use`, `expected_fields`, `verification_required`, `rate_limit_note`, `robots_note`, `priority`, `last_reviewed_at` und `rejection_reason` validieren.
+    2. Coverage-Auswertung erweitern, damit Quellebene und Firmenebene getrennt reportet werden: Anzahl Quellen je Klasse, importierbare Quellen, abgelehnte Quellen, manuelle Review-Quellen und offene Verifikationsluecken.
+    3. Katalog initial mit mindestens diesen Quellenklassen fuellen: Stadt Muenchen Wirtschaft/boersennotierte Unternehmen, EMM-Mitglieder, EMM-Branchencluster, Landkreis/Freising/Weihenstephan, BA-Jobsuche, Make it in Germany, EURES, Berufsstart/Yourfirm/Karriereakademie als Sekundaerhinweis, Unternehmensregister/Handelsregister als Registerhinweis.
+  - [x] Evidence: `data/jobagent/company-discovery.sources.json`, `schemas/jobagent.discovery-source.schema.json`, `logs/jobagent/ja-023-source-coverage.json` und Dokumentationsabschnitt `Discovery Source Registry` in `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1` -> Exit 0; JSON-Schema-Validierung fuer `data/jobagent/company-discovery.sources.json` gegen `schemas/jobagent.discovery-source.schema.json` ist Teil des Funktionstests.
+  - [x] Audit: Manuell pruefen, dass jede Quelle genau eine Klasse hat, dass Sekundaerquellen keine `OFFICIAL_WEBSITE`-Semantik erhalten, dass Nutzungs-/Robots-Hinweise nicht leer sind und dass Quellen ohne gesicherte Nutzung als `MANUAL_REVIEW_ONLY` oder `REJECTED` markiert sind.
+  - [x] Supertest: `pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1` -> Exit 0.
+  - [x] Meilenstein: M1 Quellenvertrag; parallelisierbar mit JA-024 nur fuer reine manuelle Quellenrecherche, nicht fuer Schema-/Katalogformat.
 
