@@ -656,6 +656,237 @@ function Find-JobAgentKnownCompanyForHint {
     return $null
 }
 
+function Get-JobAgentCompanyCandidateProperty {
+    param(
+        [Parameter()][AllowNull()][object]$Object,
+        [Parameter(Mandatory)][string[]]$Names,
+        [Parameter()][AllowNull()][object]$Default = $null
+    )
+
+    if ($null -eq $Object) {
+        return $Default
+    }
+    foreach ($name in $Names) {
+        if ($Object.PSObject.Properties.Name -contains $name) {
+            return $Object.$name
+        }
+    }
+    return $Default
+}
+
+function ConvertTo-JobAgentCompanyCandidateDate {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter(Mandatory)][datetime]$Fallback
+    )
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
+        return $Fallback.ToUniversalTime()
+    }
+    return [datetime]::Parse([string]$Value, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
+}
+
+function Get-JobAgentCompanyCandidateTargetBasis {
+    param([Parameter(Mandatory)][object]$Candidate)
+
+    $status = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('candidate_status') -Default '')
+    $area = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('target_area_match', 'target_area') -Default 'UNKNOWN')
+    if ($area -in @('TARGET_AREA_UNCERTAIN', 'UNKNOWN')) {
+        return 'TARGET_UNCERTAIN'
+    }
+    if ($area -eq 'OUT_OF_SCOPE') {
+        return 'OUT_OF_SCOPE'
+    }
+    if ($area -eq 'REMOTE_WITH_TARGET_REFERENCE') {
+        return 'REMOTE_WITH_TARGET_REFERENCE'
+    }
+    if ($status -eq 'REGISTER_DISCOVERY_HINT') {
+        return 'REGISTER_SEAT_IN_TARGET'
+    }
+    if ($status -eq 'REGIONAL_DISCOVERY_HINT') {
+        return 'BRANCH_HINT_IN_TARGET'
+    }
+    return 'JOB_LOCATION_IN_TARGET'
+}
+
+function ConvertTo-JobAgentCompanyCandidateRecord {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter()][datetime]$ObservedAt = [datetime]::UtcNow
+    )
+
+    $name = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('employer_name', 'company_name', 'register_name', 'canonical_name') -Default '')
+    if ([string]::IsNullOrWhiteSpace($name)) {
+        throw 'Kandidat enthaelt keinen Firmennamen.'
+    }
+    $normalizedName = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('normalized_name') -Default '')
+    if ([string]::IsNullOrWhiteSpace($normalizedName)) {
+        $normalizedName = ConvertTo-JobAgentCompanyNameKey -Name $name
+    }
+
+    $candidateId = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('candidate_id', 'hint_id', 'company_id') -Default '')
+    if ([string]::IsNullOrWhiteSpace($candidateId)) {
+        $candidateId = 'candidate:' + (ConvertTo-JobAgentAsciiSlug -Value $name)
+    }
+
+    $observed = ConvertTo-JobAgentCompanyCandidateDate -Value (Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('observed_at', 'created_at') -Default $null) -Fallback $ObservedAt
+    $domain = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('known_company_domain', 'canonical_domain') -Default '')
+    $dedupeKeys = [System.Collections.Generic.List[string]]::new()
+    foreach ($key in @((Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('dedupe_keys') -Default @()))) {
+        if (-not [string]::IsNullOrWhiteSpace([string]$key)) {
+            $dedupeKeys.Add([string]$key)
+        }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($domain)) {
+        $dedupeKeys.Add('domain:' + (ConvertTo-JobAgentCanonicalDomain -UrlOrDomain $domain))
+    }
+    if (-not [string]::IsNullOrWhiteSpace($normalizedName)) {
+        $dedupeKeys.Add('name:' + $normalizedName)
+    }
+
+    $registerNumber = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('register_number') -Default '')
+    $registerCourt = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('register_court') -Default '')
+    if (-not [string]::IsNullOrWhiteSpace($registerNumber) -and $registerNumber -ne 'UNKNOWN' -and -not [string]::IsNullOrWhiteSpace($registerCourt)) {
+        $dedupeKeys.Add('register:' + (ConvertTo-JobAgentAsciiSlug -Value ($registerCourt + '-' + $registerNumber)))
+    }
+
+    [pscustomobject]@{
+        candidate_id = $candidateId
+        employer_name = $name
+        normalized_name = $normalizedName
+        candidate_status = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('candidate_status') -Default 'DISCOVERY_HINT')
+        source_id = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('source_id') -Default 'UNKNOWN')
+        dedupe_keys = @($dedupeKeys.ToArray() | Sort-Object -Unique)
+        strong_identity_keys = @($dedupeKeys.ToArray() | Where-Object { [string]$_ -match '^(domain|register|company_id):' } | Sort-Object -Unique)
+        target_area = [string](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('target_area_match', 'target_area') -Default 'UNKNOWN')
+        target_area_basis = Get-JobAgentCompanyCandidateTargetBasis -Candidate $Candidate
+        observed_at = $observed.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        confidence_score = [int](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('confidence_score', 'priority_score') -Default 50)
+        is_staffing_agency = [bool](Get-JobAgentCompanyCandidateProperty -Object $Candidate -Names @('is_staffing_agency') -Default $false)
+    }
+}
+
+function New-JobAgentCompanyCandidateClusterId {
+    param([Parameter(Mandatory)][string]$Basis)
+
+    return 'identity-cluster:' + (ConvertTo-JobAgentAsciiSlug -Value $Basis)
+}
+
+function Join-JobAgentCompanyCandidateCluster {
+    param(
+        [Parameter(Mandatory)][object]$Cluster,
+        [Parameter(Mandatory)][object]$Candidate
+    )
+
+    $Cluster.candidates.Add($Candidate)
+    foreach ($key in @($Candidate.dedupe_keys)) {
+        [void]$Cluster.dedupe_keys.Add([string]$key)
+    }
+    foreach ($basis in @($Candidate.target_area_basis)) {
+        [void]$Cluster.target_area_basis.Add([string]$basis)
+    }
+    if ([bool]$Candidate.is_staffing_agency) {
+        [void]$Cluster.conflict_flags.Add('STAFFING_AGENCY_REVIEW')
+    }
+    if ([string]$Candidate.target_area_basis -eq 'TARGET_UNCERTAIN') {
+        [void]$Cluster.conflict_flags.Add('TARGET_AREA_UNCERTAIN')
+    }
+    if ([string]$Candidate.target_area_basis -eq 'OUT_OF_SCOPE') {
+        [void]$Cluster.conflict_flags.Add('OUT_OF_SCOPE_HINT')
+    }
+}
+
+function Resolve-JobAgentCompanyCandidateClusters {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Candidates,
+        [Parameter()][datetime]$ObservedAt = [datetime]::UtcNow
+    )
+
+    $records = @($Candidates | ForEach-Object { ConvertTo-JobAgentCompanyCandidateRecord -Candidate $_ -ObservedAt $ObservedAt })
+    $clusters = New-Object System.Collections.Generic.List[object]
+    $strongKeyToCluster = @{}
+    foreach ($record in $records) {
+        $strongKeys = @($record.strong_identity_keys)
+        $cluster = $null
+        foreach ($key in $strongKeys) {
+            if ($strongKeyToCluster.ContainsKey([string]$key)) {
+                $cluster = $strongKeyToCluster[[string]$key]
+                break
+            }
+        }
+        if ($null -eq $cluster) {
+            $basis = if ($strongKeys.Count -gt 0) { [string]$strongKeys[0] } else { [string]$record.candidate_id }
+            $cluster = [pscustomobject]@{
+                identity_cluster_id = New-JobAgentCompanyCandidateClusterId -Basis $basis
+                candidates = [System.Collections.Generic.List[object]]::new()
+                dedupe_keys = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+                target_area_basis = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+                conflict_flags = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+            }
+            $clusters.Add($cluster)
+        }
+        Join-JobAgentCompanyCandidateCluster -Cluster $cluster -Candidate $record
+        foreach ($key in $strongKeys) {
+            $strongKeyToCluster[[string]$key] = $cluster
+        }
+    }
+
+    $nameGroups = @($records | Group-Object normalized_name | Where-Object { $_.Count -gt 1 })
+    foreach ($group in $nameGroups) {
+        $candidateIds = @($group.Group | ForEach-Object { [string]$_.candidate_id })
+        $relatedClusters = @($clusters | Where-Object {
+                @($_.candidates.ToArray() | Where-Object { $candidateIds -contains [string]$_.candidate_id }).Count -gt 0
+            })
+        $clusterIds = @($relatedClusters | ForEach-Object { [string]$_.identity_cluster_id } | Sort-Object -Unique)
+        if ($clusterIds.Count -gt 1) {
+            foreach ($cluster in @($relatedClusters)) {
+                [void]$cluster.conflict_flags.Add('NAME_MATCH_WITHOUT_STRONG_IDENTITY')
+            }
+        }
+    }
+
+    $clusterResults = foreach ($cluster in @($clusters.ToArray())) {
+        $items = @($cluster.candidates.ToArray())
+        $firstSeen = @($items | ForEach-Object { ConvertTo-JobAgentCompanyCandidateDate -Value $_.observed_at -Fallback $ObservedAt } | Sort-Object | Select-Object -First 1)[0]
+        $lastSeen = @($items | ForEach-Object { ConvertTo-JobAgentCompanyCandidateDate -Value $_.observed_at -Fallback $ObservedAt } | Sort-Object -Descending | Select-Object -First 1)[0]
+        $flags = @($cluster.conflict_flags | Sort-Object)
+        $reviewReason = if ($flags.Count -gt 0) {
+            ($flags -join ',')
+        }
+        elseif (@($items | Where-Object { @($_.strong_identity_keys).Count -eq 0 }).Count -gt 0) {
+            'OFFICIAL_VERIFICATION_REQUIRED'
+        }
+        else {
+            'READY_FOR_OFFICIAL_VERIFICATION'
+        }
+        [pscustomobject]@{
+            identity_cluster_id = [string]$cluster.identity_cluster_id
+            canonical_name = [string](@($items | Sort-Object @{ Expression = { -[int]$_.confidence_score }; Ascending = $true }, employer_name | Select-Object -First 1)[0].employer_name)
+            candidate_ids = @($items | ForEach-Object { [string]$_.candidate_id } | Sort-Object)
+            dedupe_keys = @($cluster.dedupe_keys | Sort-Object)
+            conflict_flags = $flags
+            target_area_basis = @($cluster.target_area_basis | Sort-Object)
+            source_count = @($items.source_id | Sort-Object -Unique).Count
+            first_seen_at = $firstSeen.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+            last_seen_at = $lastSeen.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+            review_queue_reason = $reviewReason
+            candidates = $items
+        }
+    }
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-clusters/v1'
+        generated_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        candidates_total = $records.Count
+        clusters_total = @($clusterResults).Count
+        conflict_clusters = @($clusterResults | Where-Object { @($_.conflict_flags).Count -gt 0 }).Count
+        review_queue_total = @($clusterResults | Where-Object { [string]$_.review_queue_reason -ne 'READY_FOR_OFFICIAL_VERIFICATION' }).Count
+        clusters = @($clusterResults | Sort-Object canonical_name, identity_cluster_id)
+    }
+}
+
 function New-JobAgentCompanyDiscoveryHintReport {
     [CmdletBinding()]
     param(
@@ -793,11 +1024,13 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCompanyDiscoveryHintSearchMatrix',
     'Import-JobAgentCompanyDiscoveryInventory',
     'Merge-JobAgentCompanySeed',
+    'ConvertTo-JobAgentCompanyCandidateRecord',
     'New-JobAgentCompanyDiscoveryHint',
     'New-JobAgentCompanyDiscoveryHintReport',
     'New-JobAgentCompanyDiscoveryHintSearch',
     'New-JobAgentDiscoverySource',
     'New-JobAgentCompanySeed',
     'New-JobAgentTargetLocation',
+    'Resolve-JobAgentCompanyCandidateClusters',
     'Test-JobAgentDiscoverySourcePrimaryEvidence'
 )

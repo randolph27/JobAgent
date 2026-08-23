@@ -290,6 +290,57 @@
               "type": "null"
             }
           ]
+        },
+        "identity_cluster_id": {
+          "$ref": "#/$defs/id"
+        },
+        "dedupe_keys": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "conflict_flags": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+              "STAFFING_AGENCY_REVIEW",
+              "TARGET_AREA_UNCERTAIN",
+              "OUT_OF_SCOPE_HINT"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "target_area_basis": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "REGISTER_SEAT_IN_TARGET",
+              "JOB_LOCATION_IN_TARGET",
+              "BRANCH_HINT_IN_TARGET",
+              "REMOTE_WITH_TARGET_REFERENCE",
+              "TARGET_UNCERTAIN",
+              "OUT_OF_SCOPE"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "source_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "first_seen_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "last_seen_at": {
+          "$ref": "#/$defs/date_time"
+        },
+        "review_queue_reason": {
+          "type": "string",
+          "minLength": 1
         }
       }
     },
