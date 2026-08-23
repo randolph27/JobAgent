@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-23T10:01:53.650+02:00
+Stand: 2026-08-23T10:02:53.252+02:00
 
 ## Zustand
 
@@ -8,34 +8,19 @@ Stand: 2026-08-23T10:01:53.650+02:00
 - Status: `open`
 - Ziel: 
 - Branch: `master`
-- HEAD: `067e873ab725`
+- HEAD: `f066116e9766`
 - Upstream: `origin/master`
-- Ahead/Behind: `0/0`
+- Ahead/Behind: `1/0`
 - Worktree: `dirty`
 - Route: ``
 
 ## Versionierte Aenderungen
 
-- `.ci/pins/immutable.hashes.json`
-- `.ci/pins/immutable.snapshot/Roadmap.md`
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `data/jobagent/company-discovery.hints.json`
-- `data/jobagent/company-discovery.sources.json`
-- `docs/data-model.md`
-- `schemas/jobagent.discovery-source.schema.json`
-- `schemas/jobagent.schema.json`
-- `src/JobAgent.CompanyInventory.psm1`
-- `src/JobAgent.Coverage.psm1`
-- `tests/Test-JobAgentCoverage.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
+- `handoff.latest.json`
+- `handoff.latest.md`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
-- `tools/Find-JobAgentCompanyDiscoveryHints.ps1`
 
 ## Verifikation
 
