@@ -1,6 +1,6 @@
 # JobAgent Testmatrix
 
-Stand: 2026-08-17
+Stand: 2026-08-23
 
 Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 
@@ -29,6 +29,7 @@ Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 | JA-013 | `tests/Test-JobAgentTestMatrix.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` | ja | Matrixvollständigkeit, Supertest-Synchronität, Live-Lane-Trennung |
 | JA-014 | `tests/Test-JobAgentLiveScan.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1` | ja | Live-Policy, offizielle Kandidatenfilterung, Detailseitenprüfung, Retry-Protokoll |
 | JA-015 | `tests/Test-JobAgentCoverage.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` | ja | Coverage-Metriken, Adapter-Backlog, Scanpriorisierung, Rotationslogik |
+| JA-024 | `tests/Test-JobAgentRegisterDiscovery.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentRegisterDiscovery.ps1` | ja | Register-Fixtures, Zielgebietsfilter, Dedupe, Snapshot-Freshness, personenbezogene Feldsperre |
 
 ## Live-Lane
 

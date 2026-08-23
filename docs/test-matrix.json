@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent-test-matrix/v1",
-  "updated_at": "2026-08-17T15:50:00+02:00",
+  "updated_at": "2026-08-23T10:12:00+02:00",
   "policy": {
     "default_lane": "deterministic-fixture",
     "live_lane": "separate-not-supertest",
@@ -246,6 +246,23 @@
         "Adapter-Backlog fuer fehlerhafte Portale",
         "Rotationsmalus fuer kuerzlich erfolgreiche Scans",
         "Report-Hinweis als Naeherung ohne Vollstaendigkeitsbehauptung"
+      ]
+    },
+    {
+      "roadmap_id": "JA-024",
+      "title": "Register- und Open-Data-Kandidatenimport fuer Muenchen/Freising",
+      "test_file": "tests/Test-JobAgentRegisterDiscovery.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentRegisterDiscovery.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Source-Registry-Fail-Closed fuer Open-Register-Bulk-Snapshot",
+        "JSONL- und CSV-Fixture-Import",
+        "Zielgebietsfilter fuer Muenchen, Freising und 20-km-Umkreis",
+        "Dedupe-Keys und Snapshot-Hashes",
+        "stale und zukuenftige Snapshot-Metadaten",
+        "keine personenbezogenen Registerrollen"
       ]
     }
   ]

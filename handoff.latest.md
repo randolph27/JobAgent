@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-23T10:02:53.252+02:00
+Stand: 2026-08-23T10:14:59.870+02:00
 
 ## Zustand
 
@@ -8,19 +8,34 @@ Stand: 2026-08-23T10:02:53.252+02:00
 - Status: `open`
 - Ziel: 
 - Branch: `master`
-- HEAD: `f066116e9766`
+- HEAD: `013d8b79c747`
 - Upstream: `origin/master`
-- Ahead/Behind: `1/0`
+- Ahead/Behind: `0/0`
 - Worktree: `dirty`
 - Route: ``
 
 ## Versionierte Aenderungen
 
+- `.ci/pins/immutable.hashes.json`
+- `.ci/pins/immutable.snapshot/Roadmap.md`
+- `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `data/jobagent/company-discovery.hints.json`
+- `docs/test-matrix.json`
+- `docs/test-matrix.md`
 - `handoff.latest.json`
 - `handoff.latest.md`
+- `html/jobagent/company-coverage.html`
+- `tests/Test-JobAgentCoverage.ps1`
+- `tests/Test-JobAgentSupertest.ps1`
+- `tests/Test-JobAgentTestMatrix.ps1`
+- `todo.checkpoint.json`
+- `todo.current.md`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
+- `todo.state.json`
 
 ## Verifikation
 
@@ -28,4 +43,4 @@ Stand: 2026-08-23T10:02:53.252+02:00
 
 ## Naechster Anker
 
-Aktive Punkte: JA-024 Register- und Open-Data-Kandidatenimport fuer Muenchen/Freising aufbauen #comment: Die groesste Firmenbasis kommt aus Registerdaten; sie muss als Kandidatenbestand importiert werden, ohne amtliche Vollstaendigkeit oder Aktivitaet zu behaupten.
+Aktive Punkte: JA-025 Jobboersen-Arbeitgeberhinweise aus StepStone, Arbeitsagentur, Indeed und weiteren Quellen rechtssicher importieren #comment: Jobboersen liefern viele aktuelle Arbeitgebernamen, duerfen aber nur Discovery-Hinweise und keine offiziellen Karrierebelege erzeugen.

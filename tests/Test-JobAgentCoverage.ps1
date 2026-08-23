@@ -188,10 +188,13 @@ Assert-True -Condition ($hintStore.schema_version -eq 'jobagent/company-discover
 Assert-True -Condition ($hintStore.search_matrix_count -eq 72) -Message 'Discovery-Hint-Store dokumentiert falsche Suchmatrix-Groesse.'
 Assert-True -Condition ($hintStore.hints_total -ge 5) -Message 'Discovery-Hint-Store enthaelt zu wenige Sekundaerhinweise.'
 Assert-True -Condition ($hintStore.unverified_hints -eq $hintStore.hints_total) -Message 'Discovery-Hint-Store darf keine verifizierten Hints enthalten.'
-Assert-True -Condition (@($hintStore.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' }).Count -eq 0) -Message 'Discovery-Hint-Store darf keine anderen Kandidatenstatus speichern.'
-Assert-True -Condition (@($hintStore.hints | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.search_parameters.keyword) -or [string]::IsNullOrWhiteSpace([string]$_.observed_url) }).Count -eq 0) -Message 'Discovery-Hints muessen Suchparameter und Fund-URL tragen.'
+Assert-True -Condition (@($hintStore.hints | Where-Object { [string]$_.candidate_status -notin @('DISCOVERY_HINT', 'REGISTER_DISCOVERY_HINT') }).Count -eq 0) -Message 'Discovery-Hint-Store darf nur definierte unverifizierte Kandidatenstatus speichern.'
+$jobBoardHints = @($hintStore.hints | Where-Object { [string]$_.candidate_status -eq 'DISCOVERY_HINT' })
+Assert-True -Condition (@($jobBoardHints | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.search_parameters.keyword) -or [string]::IsNullOrWhiteSpace([string]$_.observed_url) }).Count -eq 0) -Message 'Jobboersen-Discovery-Hints muessen Suchparameter und Fund-URL tragen.'
+$registerHints = @($hintStore.hints | Where-Object { [string]$_.candidate_status -eq 'REGISTER_DISCOVERY_HINT' })
+Assert-True -Condition (@($registerHints | Where-Object { [bool]$_.official_verification_required -ne $true -or @($_.dedupe_keys).Count -lt 1 -or [string]::IsNullOrWhiteSpace([string]$_.source_snapshot.record_hash) }).Count -eq 0) -Message 'Register-Discovery-Hints muessen Verifikationspflicht, Dedupe-Keys und Snapshot-Hash tragen.'
 $hintSourceIds = @($hintStore.hints | ForEach-Object { [string]$_.source_id } | Sort-Object -Unique)
-$secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -eq 'JOB_BOARD_DISCOVERY' -and [string]$_.evidence_level -eq 'DISCOVERY_HINT' } | ForEach-Object { [string]$_.source_id })
+$secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -in @('JOB_BOARD_DISCOVERY', 'OPEN_REGISTER_DUMP') -and [string]$_.evidence_level -eq 'DISCOVERY_HINT' } | ForEach-Object { [string]$_.source_id })
 Assert-True -Condition (@($hintSourceIds | Where-Object { $secondarySourceIds -notcontains $_ }).Count -eq 0) -Message 'Discovery-Hints duerfen nur erlaubte Sekundaerquellen referenzieren.'
 
 $coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -Now ([datetime]'2026-08-23T08:30:00Z')

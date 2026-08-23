@@ -541,3 +541,25 @@
   - [x] Supertest: `.\\ci.cmd supertest` -> Exit 0.
   - [x] Meilenstein: M1 Source Registry v2 und Evidenzvertrag abgeschlossen; JA-024 bis JA-030 koennen auf fail-closed Quellenklassen aufsetzen.
 
+
+## Archiviert am 2026-08-23
+
+- [x] JA-024 Register- und Open-Data-Kandidatenimport fuer Muenchen/Freising aufbauen #comment: Die groesste Firmenbasis kommt aus Registerdaten; sie muss als Kandidatenbestand importiert werden, ohne amtliche Vollstaendigkeit oder Aktivitaet zu behaupten.
+  - [x] Beschreibung: Es existiert eine deterministische Import-Lane, die grosse Registerdatenquellen in lokale Kandidaten-Hints fuer Muenchen, 20-km-Umkreis und Freising umwandelt. OffeneRegister-Dumps werden bevorzugt als bulk-faehige, nicht-amtliche Kandidatenquelle verarbeitet; offizielle Portale wie Unternehmensregister und Handelsregister dienen fuer gezielte Nachpruefung einzelner Kandidaten und nicht fuer ungebremstes Scraping. Kandidaten erhalten `register_name`, `register_city`, `register_court`, `register_number`, `legal_form`, `source_snapshot`, `source_freshness`, `target_area_match`, `confidence_score`, `review_status`, `official_verification_required` und `dedupe_keys`.
+  - [x] Scope: Neu oder erweitert werden `tools/Import-JobAgentRegisterCandidates.ps1`, `src/JobAgent.RegisterDiscovery.psm1`, `data/jobagent/company-discovery.register.json`, `data/jobagent/company-discovery.hints.json`, `schemas/jobagent.schema.json`, `tests/Test-JobAgentRegisterDiscovery.ps1` und `docs/company-discovery-register-import.md`. No-Go: keine Speicherung von Geschaeftsfuehrer-/Gesellschafterdaten, keine Bonitaets-/Compliance-Bewertung, keine automatische Behauptung "aktiv" ohne Beleg, keine produktive Karrierequelle aus Registerdaten allein.
+  - [x] Ist-Stand (2026-08-23 10:15): Registerimporter, Fixture-Daten, Output-Datei, Hint-Merge und Dokumentation sind implementiert. Der produktive Store bleibt unveraendert; Registerdaten erzeugen ausschliesslich unverifizierte Kandidaten-Hints mit offizieller Verifikationspflicht.
+  - [x] Abhängigkeiten: JA-023 muss abgeschlossen sein; JA-027 nutzt die erzeugten Kandidaten fuer Deduplikation und Standortbewertung.
+  - [x] Aufwand/Dauer: Aufwand M innerhalb der aktuellen Arbeitseinheit; umgesetzt fixture-first ohne Live-Download.
+  - [x] Prioritätsscore: 96/100, weil Registerdaten die notwendige Groessenordnung von tausenden Firmen liefern.
+  - [x] Ordnungsbegründung: Bulk-Kandidaten muessen vor Jobboersen-Hinweisen und Verifikation vorliegen, damit spaetere Quellen gegen eine breite Basis dedupliziert werden koennen.
+  - [x] Risiken und Unsicherheiten: OffeneRegister-Daten koennen veraltet, nicht vollstaendig und nicht amtlich sein; offizielle Registerportale koennen Abruflimits haben; Firmen mit Sitz ausserhalb, aber Standort in Muenchen/Freising, fehlen in reinen Registerstadt-Filtern.
+  - [x] Schritte:
+    1. Fixture-first Parser bauen: Kleinen lokalen JSONL/CSV-Fixture-Dump mit Muenchen-, Freising-, Randgemeinde-, Dubletten-, geloeschten und unvollstaendigen Registereintraegen erstellen und Parser auf Streaming-Verarbeitung auslegen, damit grosse Dumps ohne komplettes Laden in den Speicher verarbeitet werden.
+    2. Zielgebietsfilter implementieren: `Muenchen`, `München`, `Munich`, `Freising` und definierte Gemeinden im 20-km-Umkreis als Kandidatenfilter modellieren; unklare Orte als `TARGET_AREA_UNCERTAIN` statt Ausschluss markieren.
+    3. Hints statt Firmen schreiben: Importer schreibt nur Discovery-Hints mit Register-Evidenz, Snapshot-ID, Hash, Zeilennummer/Record-ID und Review-Pflicht; produktive `companies` bleiben unveraendert, bis JA-028 offizielle Firmen-/Karrierebelege liefert.
+  - [x] Evidence: `data/jobagent/company-discovery.register.json` oder generierte lokale Hint-Datei, Importlog mit Record-Zaehlern, Reject-Gründen und Hashes, Dokumentation der genutzten Registerquelle, Testfixture unter `tests/fixtures/jobagent/register-discovery/`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\\Test-JobAgentRegisterDiscovery.ps1` -> Exit 0; deckt JSONL/CSV, Zeichensatz, Ortsfilter, Dubletten, unvollstaendige Registerdaten, stale/future Snapshot-Metadaten und fail-closed Verhalten bei fehlender Source Registry ab.
+  - [x] Audit: Registerdaten erzeugen nur `REGISTER_DISCOVERY_HINT`; Tests pruefen, dass keine personenbezogenen Registerrollen persistiert werden. Source Registry trennt offizielle Registerportale von Open-Register-Dumps; Importzahlen werden als Kandidaten-Hints und nicht als Marktdeckung ausgegeben.
+  - [x] Supertest: `.\\ci.cmd supertest` -> Exit 0; `Test-JobAgentRegisterDiscovery.ps1` ist in Supertest und Testmatrix aufgenommen.
+  - [x] Meilenstein: M2 Register-Kandidatenimport abgeschlossen; JA-027 kann die Register-Hints fuer skalierte Deduplikation nutzen.
+

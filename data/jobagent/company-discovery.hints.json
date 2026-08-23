@@ -1,16 +1,17 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-23T07:58:27.616Z",
+  "generated_at": "2026-08-23T08:14:14.858Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
-  "hints_total": 6,
+  "hints_total": 11,
   "known_company_hints": 6,
-  "unverified_hints": 6,
+  "unverified_hints": 11,
   "source_counts": {
     "source-registry:ba_jobsuche": 2,
-    "source-registry:stepstone_muenchen": 1,
+    "source-registry:indeed_de": 1,
     "source-registry:stepstone_freising": 2,
-    "source-registry:indeed_de": 1
+    "source-registry:stepstone_muenchen": 1,
+    "source-registry:offeneregister_dump": 5
   },
   "hints": [
     {
@@ -32,6 +33,27 @@
       "candidate_status": "DISCOVERY_HINT",
       "known_company_id": "company:bmw_group",
       "known_company_domain": "bmwgroup.com",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "hint:ba_jobsuche_texas_instruments_deutschland_enterprise_applications_freising",
+      "employer_name": "Texas Instruments Deutschland GmbH",
+      "normalized_name": "texas instruments deutschland",
+      "location": "Freising",
+      "target_area": "FREISING",
+      "industry_or_keyword": "Enterprise Applications",
+      "source_id": "source-registry:ba_jobsuche",
+      "observed_url": "https://www.arbeitsagentur.de/jobsuche/suche?was=Enterprise%20Applications&wo=Freising",
+      "observed_at": "2026-08-23T07:58:27.603Z",
+      "search_parameters": {
+        "location": "Freising",
+        "radius_km": 25,
+        "keyword": "Enterprise Applications"
+      },
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "known_company_id": "company:texas_instruments_deutschland_gmbh",
+      "known_company_domain": "ti.com",
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -119,24 +141,138 @@
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
-      "hint_id": "hint:ba_jobsuche_texas_instruments_deutschland_enterprise_applications_freising",
-      "employer_name": "Texas Instruments Deutschland GmbH",
-      "normalized_name": "texas instruments deutschland",
-      "location": "Freising",
-      "target_area": "FREISING",
-      "industry_or_keyword": "Enterprise Applications",
-      "source_id": "source-registry:ba_jobsuche",
-      "observed_url": "https://www.arbeitsagentur.de/jobsuche/suche?was=Enterprise%20Applications&wo=Freising",
-      "observed_at": "2026-08-23T07:58:27.603Z",
-      "search_parameters": {
-        "location": "Freising",
-        "radius_km": 25,
-        "keyword": "Enterprise Applications"
+      "hint_id": "register-hint:offeneregister_sample_2026_08_alpha_technik_gmbh_muenchen_1",
+      "register_name": "Alpha Technik GmbH",
+      "normalized_name": "alpha technik",
+      "register_city": "Muenchen",
+      "register_court": "Amtsgericht München",
+      "register_number": "HRB 1001",
+      "legal_form": "GmbH",
+      "source_id": "source-registry:offeneregister_dump",
+      "source_snapshot": {
+        "snapshot_id": "offeneregister-sample-2026-08",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "line_number": 1,
+        "record_hash": "1b64d382c89c5af3cdcebb28ebb3f940f258882ecdc6086cf7d4f2230e7a68b8"
       },
-      "verification_status": "UNVERIFIED",
-      "candidate_status": "DISCOVERY_HINT",
-      "known_company_id": "company:texas_instruments_deutschland_gmbh",
-      "known_company_domain": "ti.com",
+      "source_freshness": "CURRENT",
+      "target_area_match": "MUNICH",
+      "confidence_score": 88,
+      "review_status": "OFFICIAL_VERIFICATION_REQUIRED",
+      "official_verification_required": true,
+      "dedupe_keys": [
+        "name:alpha technik",
+        "register:amtsgericht_muenchen_hrb_1001"
+      ],
+      "candidate_status": "REGISTER_DISCOVERY_HINT",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "register-hint:offeneregister_sample_2026_08_beta_analytics_ag_munich_2",
+      "register_name": "Beta Analytics AG",
+      "normalized_name": "beta analytics",
+      "register_city": "Muenchen",
+      "register_court": "Amtsgericht München",
+      "register_number": "HRB 1002",
+      "legal_form": "AG",
+      "source_id": "source-registry:offeneregister_dump",
+      "source_snapshot": {
+        "snapshot_id": "offeneregister-sample-2026-08",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "line_number": 2,
+        "record_hash": "38bc24463aaa9fa0c53eb418e8bee9221f845b5300abc7290747c5899d66595c"
+      },
+      "source_freshness": "CURRENT",
+      "target_area_match": "MUNICH",
+      "confidence_score": 88,
+      "review_status": "OFFICIAL_VERIFICATION_REQUIRED",
+      "official_verification_required": true,
+      "dedupe_keys": [
+        "name:beta analytics",
+        "register:amtsgericht_muenchen_hrb_1002"
+      ],
+      "candidate_status": "REGISTER_DISCOVERY_HINT",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "register-hint:offeneregister_sample_2026_08_delta_research_se_garching_b_muenchen_4",
+      "register_name": "Delta Research SE",
+      "normalized_name": "delta research",
+      "register_city": "Garching",
+      "register_court": "Amtsgericht München",
+      "register_number": "HRB 3001",
+      "legal_form": "SE",
+      "source_id": "source-registry:offeneregister_dump",
+      "source_snapshot": {
+        "snapshot_id": "offeneregister-sample-2026-08",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "line_number": 4,
+        "record_hash": "9130450dc84b23cb48023c55fb0cf62f0def294b92b07604d93b0f4404fb18a2"
+      },
+      "source_freshness": "CURRENT",
+      "target_area_match": "MUNICH_20KM",
+      "confidence_score": 74,
+      "review_status": "OFFICIAL_VERIFICATION_REQUIRED",
+      "official_verification_required": true,
+      "dedupe_keys": [
+        "name:delta research",
+        "register:amtsgericht_muenchen_hrb_3001"
+      ],
+      "candidate_status": "REGISTER_DISCOVERY_HINT",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "register-hint:offeneregister_sample_2026_08_epsilon_alt_gmbh_muenchen_6",
+      "register_name": "Epsilon Alt GmbH",
+      "normalized_name": "epsilon alt",
+      "register_city": "Muenchen",
+      "register_court": "Amtsgericht München",
+      "register_number": "HRB 9999",
+      "legal_form": "GmbH",
+      "source_id": "source-registry:offeneregister_dump",
+      "source_snapshot": {
+        "snapshot_id": "offeneregister-sample-2026-08",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "line_number": 6,
+        "record_hash": "72f662d0a27d5d9ce61c67e592a12002a51fcf89bcbae21b475c1f5a6400c1c6"
+      },
+      "source_freshness": "CURRENT",
+      "target_area_match": "MUNICH",
+      "confidence_score": 88,
+      "review_status": "MANUAL_REVIEW_REQUIRED",
+      "official_verification_required": true,
+      "dedupe_keys": [
+        "name:epsilon alt",
+        "register:amtsgericht_muenchen_hrb_9999"
+      ],
+      "candidate_status": "REGISTER_DISCOVERY_HINT",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "register-hint:offeneregister_sample_2026_08_gamma_logistics_gmbh_freising_3",
+      "register_name": "Gamma Logistics GmbH",
+      "normalized_name": "gamma logistics",
+      "register_city": "Freising",
+      "register_court": "Amtsgericht München",
+      "register_number": "HRB 2001",
+      "legal_form": "GmbH",
+      "source_id": "source-registry:offeneregister_dump",
+      "source_snapshot": {
+        "snapshot_id": "offeneregister-sample-2026-08",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "line_number": 3,
+        "record_hash": "1c703b62538c243fd7aafb33d2a482ad5044ffd1a171dddd535dda31f62dc06c"
+      },
+      "source_freshness": "CURRENT",
+      "target_area_match": "FREISING",
+      "confidence_score": 86,
+      "review_status": "OFFICIAL_VERIFICATION_REQUIRED",
+      "official_verification_required": true,
+      "dedupe_keys": [
+        "name:gamma logistics",
+        "register:amtsgericht_muenchen_hrb_2001"
+      ],
+      "candidate_status": "REGISTER_DISCOVERY_HINT",
       "next_action": "verify_official_company_website_or_career_url"
     }
   ]

@@ -1,0 +1,4 @@
+register_name,register_city,register_court,register_number,legal_form,status
+Csv München GmbH,München,Amtsgericht München,HRB 5101,GmbH,active
+Csv Freising AG,Freising,Amtsgericht München,HRB 5102,AG,active
+Csv Outside GmbH,Nürnberg,Amtsgericht Nürnberg,HRB 5103,GmbH,active
