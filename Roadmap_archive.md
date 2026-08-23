@@ -399,3 +399,24 @@
   - [x] Supertest: `pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1` -> Exit 0.
   - [x] Meilenstein: M1 Quellenvertrag; parallelisierbar mit JA-024 nur fuer reine manuelle Quellenrecherche, nicht fuer Schema-/Katalogformat.
 
+## Archiviert am 2026-08-23
+
+- [x] JA-024 Offizielle regionale Arbeitgeberlisten in Discovery-Feed importieren #comment: Oeffentliche und halb-offizielle Standortlisten liefern den schnellsten qualitaetsgesicherten Zuwachs, muessen aber pro Arbeitgeber gegen Website und Karrierepfad belegt werden.
+  - [x] Beschreibung: Aus den priorisierten regionalen Quellen wurden Arbeitgeberkandidaten fuer Muenchen, Muenchen 20 km und Freising in einen neuen kuratierten Feed importiert; jeder Kandidat enthaelt kanonischen Namen, offizielle Website, Karriere-URL, Zielgebiet, Quellenbeleg, Branche, Prioritaet und Reviewstatus, ohne dass unverifizierte Hinweise als JobSource erzeugt werden.
+  - [x] Scope: Geaendert/erstellt wurden `data/jobagent/company-discovery.regional.json`, `tools/Import-JobAgentCompanyDiscovery.ps1`, `src/JobAgent.CompanyInventory.psm1`, `tests/Test-JobAgentCompanyInventory.ps1`, `docs/data-model.md` und `data/jobagent/store.json`. No-Go eingehalten: keine Arbeitgeber ohne Unternehmenswebsite in den produktiven Store uebernommen; keine Karriere-URL aus Aggregator oder Jobboerse uebernommen; bestehende Firmen wurden dedupliziert.
+  - [x] Ist-Stand (2026-08-23 08:20): Regionaler Feed enthaelt 20 Arbeitgeberkandidaten; produktiver Import erhoehte den Store auf 38 Firmen und 38 offizielle JobSources. 18 Firmen wurden neu hinzugefuegt, Flughafen Muenchen und Texas Instruments wurden aktualisiert/dedupliziert.
+  - [x] Abhängigkeiten: JA-023 war abgeschlossen und lieferte Quellenklassen und Katalogformat.
+  - [x] Aufwand/Dauer: Aufwand L; umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 94/100, weil offizielle regionale Listen hohe Trefferwahrscheinlichkeit bei niedrigerem Falschpositiv-Risiko liefern und den produktiven Store sofort deutlich vergroessert haben.
+  - [x] Ordnungsbegründung: Nach Quellenvertrag wurden die quellenstaerksten regionalen Arbeitgeber vor breiteren Jobboersen-Hinweisen importiert.
+  - [x] Risiken und Unsicherheiten: Einige Karrierepfade sind globale Jobportale und benoetigen spaeter Standort-/Stellenfilter; die manuelle Stichprobe wurde durch HTTP-/Suchbelege und Aggregator-Guardrails ergaenzt, ersetzt aber keine tiefe ATS-Verifikation aus JA-026.
+  - [x] Schritte:
+    1. Kandidaten aus der Muenchen-Boersenquelle, Landkreis-Freising-Wirtschaft und Freising-Weihenstephan extrahiert; pro Kandidat `discovery_origin` auf die konkrete Quelle gesetzt.
+    2. Pro Kandidat offizielle Website und Karrierepfad gepflegt; fehlende ATS-Bindings werden nicht mehr als `null` gespeichert.
+    3. Feed importiert und Deduplikationsreport erzeugt: 20 importierte Kandidaten, 18 neue Firmen, 2 aktualisierte/deduplizierte Firmen, 0 Manual-Review-Faelle.
+  - [x] Evidence: `data/jobagent/company-discovery.regional.json`, `logs/jobagent/company-discovery-regional-import-20260823-062001.json`, `logs/jobagent/company-discovery-regional-import-20260823-062056.json`, `data/jobagent/store.json`, Dokumentationsabschnitt `Regionaler Firmen-Discovery-Feed` in `docs/data-model.md`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1` -> Exit 0; `pwsh -NoProfile -File tools\\Import-JobAgentCompanyDiscovery.ps1 -FeedPath data\\jobagent\\company-discovery.regional.json` -> Exit 0.
+  - [x] Audit: Tests pruefen Feed-Schema, Mindestanzahl, Quellenherkunft, keine Aggregator-Karriere-URLs, keine doppelten offiziellen Domains, Import ohne Manual-Review-Backlog und keine `null`-ATS-Bindings; produktiver Import meldete `manual_review_required: []`.
+  - [x] Supertest: `pwsh -NoProfile -File tests\\Test-JobAgentSupertest.ps1` -> Exit 0.
+  - [x] Meilenstein: M2 regionaler Arbeitgeberkern; Basis fuer JA-025 und JA-026.
+

@@ -87,6 +87,26 @@ Funktionstest:
 pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1
 ```
 
+## Regionaler Firmen-Discovery-Feed
+
+`data/jobagent/company-discovery.regional.json` ist der kuratierte Import-Feed fuer `JA-024`. Er enthaelt regionale Arbeitgeberkandidaten aus offiziellen oder halb-offiziellen Quellen fuer Muenchen, Muenchen 20 km und Freising. Der Feed erzeugt erst beim Import Firmen und nur dann `JobSource`-Eintraege, wenn `career_url` gesetzt ist.
+
+Pflichtregeln:
+
+- Jeder Eintrag enthaelt `canonical_name`, `official_website_url`, `career_url` oder `null`, `locations`, `industry`, `scan_priority`, `discovery_type`, `discovery_url`, `discovery_origin` und `evidence_note`.
+- `discovery_origin` verweist auf eine `source_id` aus `company-discovery.sources.json`.
+- Karriere-URLs duerfen nur offizielle Firmen-, Corporate- oder belegte firmeneigene Karriere-/ATS-Domains sein.
+- Aggregatoren und Jobboersen wie LinkedIn, StepStone, Indeed, XING, Kununu oder Glassdoor duerfen im regionalen Feed nicht als Karriere-URL erscheinen.
+- Bereits vorhandene Firmen wie Flughafen Muenchen oder Texas Instruments werden ueber Domain/Name dedupliziert und nicht als neue Firma dupliziert.
+- Der Import schreibt fuer regionale Feeds ein Log nach `logs/jobagent/company-discovery-regional-import-<timestamp>.json`.
+
+Funktionstest:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1
+pwsh -NoProfile -File tools\Import-JobAgentCompanyDiscovery.ps1 -FeedPath data\jobagent\company-discovery.regional.json
+```
+
 ## Root-Dokument
 
 Das Root-Dokument trägt `schema_version: "jobagent/v1"` und enthält getrennte Sammlungen:

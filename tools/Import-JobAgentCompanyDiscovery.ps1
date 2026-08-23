@@ -44,7 +44,9 @@ $logPathRoot = if ([IO.Path]::IsPathRooted($LogRoot)) { $LogRoot } else { Join-P
 if (-not (Test-Path -LiteralPath $logPathRoot)) {
     New-Item -ItemType Directory -Path $logPathRoot -Force | Out-Null
 }
-$logPath = Join-Path $logPathRoot ('company-discovery-import-' + $importedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
+$feedName = [IO.Path]::GetFileNameWithoutExtension($resolvedFeedPath)
+$logPrefix = if ($feedName -match 'regional') { 'company-discovery-regional-import-' } else { 'company-discovery-import-' }
+$logPath = Join-Path $logPathRoot ($logPrefix + $importedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
 $summary = [pscustomobject]@{
     ts = $importedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
     feed_path = $resolvedFeedPath

@@ -155,6 +155,30 @@ Assert-True -Condition ($officialOnlyCompany.verification_status -eq 'COMPANY_DO
 Assert-True -Condition ($officialOnlyCompany.discovery_source.verification_url -eq 'https://official-only.invalid/') -Message 'Offizielle Website ohne Karrierepfad muss Website als verification_url tragen.'
 Assert-True -Condition (@($discoveryImport.document.job_sources).Count -eq 0) -Message 'Discovery-Import ohne Karriere-URL darf keine JobSource erzeugen.'
 Assert-True -Condition (@($discoveryImport.manual_review_required | Where-Object { $_ -eq 'company:discovery_hint_ag' }).Count -eq 1) -Message 'Discovery-Hinweis muss im Manual-Review-Backlog landen.'
+Assert-True -Condition (@($discoveryImport.document.companies | Where-Object { @($_.ats | Where-Object { $null -eq $_ }).Count -gt 0 }).Count -eq 0) -Message 'Discovery-Import darf fehlende ATS-Felder nicht als null-Binding speichern.'
+
+$regionalFeedPath = Join-Path $root 'data\jobagent\company-discovery.regional.json'
+Assert-True -Condition (Test-Path -LiteralPath $regionalFeedPath -PathType Leaf) -Message 'Regionaler Discovery-Feed fehlt.'
+$regionalFeed = Get-Content -LiteralPath $regionalFeedPath -Raw | ConvertFrom-Json -Depth 100
+$regionalItems = @($regionalFeed.items)
+Assert-True -Condition ($regionalFeed.schema_version -eq 'jobagent/company-discovery-feed/v1') -Message 'Regionaler Discovery-Feed hat falsche Schema-Version.'
+Assert-True -Condition ($regionalItems.Count -ge 20) -Message 'Regionaler Discovery-Feed enthaelt zu wenige Arbeitgeberkandidaten.'
+Assert-True -Condition (@($regionalItems | Where-Object { $_.discovery_origin -eq 'source-registry:stadt_muenchen_boersennotierte_unternehmen' }).Count -ge 15) -Message 'Regionaler Feed nutzt die Muenchen-Boersenquelle nicht ausreichend.'
+Assert-True -Condition (@($regionalItems | Where-Object { $_.discovery_origin -eq 'source-registry:landkreis_freising_wirtschaft' }).Count -ge 2) -Message 'Regionaler Feed enthaelt zu wenige Freising-Wirtschaft-Kandidaten.'
+Assert-True -Condition (@($regionalItems | Where-Object { $_.discovery_origin -eq 'source-registry:stadt_freising_weihenstephan' }).Count -ge 1) -Message 'Regionaler Feed enthaelt keinen Weihenstephan-Kandidaten.'
+Assert-True -Condition (@($regionalItems | Where-Object { $_.discovery_type -ne 'OFFICIAL_WEBSITE' }).Count -eq 0) -Message 'Regionaler Feed darf keine unverifizierten Hint-Typen importieren.'
+Assert-True -Condition (@($regionalItems | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.official_website_url) }).Count -eq 0) -Message 'Regionaler Feed enthaelt Firmen ohne offizielle Website.'
+Assert-True -Condition (@($regionalItems | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.evidence_note) }).Count -eq 0) -Message 'Regionaler Feed enthaelt Firmen ohne Evidenznotiz.'
+Assert-True -Condition (@($regionalItems | Where-Object { [string]$_.career_url -match 'linkedin|stepstone|indeed|xing|kununu|glassdoor' }).Count -eq 0) -Message 'Regionaler Feed enthaelt Aggregator-Karriere-URLs.'
+$regionalDomains = @($regionalItems | ForEach-Object { ConvertTo-JobAgentCanonicalDomain -UrlOrDomain ([string]$_.official_website_url) })
+Assert-True -Condition (($regionalDomains | Sort-Object -Unique).Count -eq $regionalDomains.Count) -Message 'Regionaler Feed enthaelt doppelte offizielle Domains.'
+
+$regionalImport = Import-JobAgentCompanyDiscoveryInventory -Document (New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)) -DiscoveryItems $regionalItems -ImportedAt (New-TestSeedDate) -NextScanAt (New-TestNextScanDate)
+Assert-JobAgentDocument -Document $regionalImport.document
+Assert-True -Condition (@($regionalImport.document.companies).Count -eq $regionalItems.Count) -Message 'Regionaler Feed importiert nicht alle Kandidaten in ein leeres Dokument.'
+Assert-True -Condition (@($regionalImport.document.job_sources).Count -eq @($regionalItems | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_.career_url) }).Count) -Message 'Regionaler Feed erzeugt unerwartete JobSource-Anzahl.'
+Assert-True -Condition (@($regionalImport.manual_review_required).Count -eq 0) -Message 'Regionaler Feed darf nach Website-/Karrierepruefung kein Manual-Review-Backlog erzeugen.'
+Assert-True -Condition (@($regionalImport.document.companies | Where-Object { @($_.ats | Where-Object { $null -eq $_ }).Count -gt 0 }).Count -eq 0) -Message 'Regionaler Feed darf keine null-ATS-Bindings erzeugen.'
 
 $importProjectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-discovery-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $importProjectRoot -Force | Out-Null
@@ -185,6 +209,13 @@ try {
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:script_import_ag' }).Count -eq 1) -Message 'Discovery-Import-Script erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (@($scriptResult.added_company_ids | Where-Object { $_ -eq 'company:script_import_ag' }).Count -eq 1) -Message 'Discovery-Import-Script meldet neue Firma nicht als hinzugefuegt.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Discovery-Import-Script schreibt kein Logartefakt.'
+
+    $regionalScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Import-JobAgentCompanyDiscovery.ps1') -ProjectRoot $importProjectRoot -FeedPath $regionalFeedPath 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Regionaler Discovery-Import ist fehlgeschlagen: " + ($regionalScriptOutput -join "`n"))
+    $regionalScriptResult = ($regionalScriptOutput -join "`n") | ConvertFrom-Json -Depth 20
+    Assert-True -Condition ([IO.Path]::GetFileName([string]$regionalScriptResult.log_path).StartsWith('company-discovery-regional-import-', [StringComparison]::Ordinal)) -Message 'Regionaler Import schreibt kein regional benanntes Logartefakt.'
+    Assert-True -Condition (@($regionalScriptResult.imported_company_ids).Count -eq $regionalItems.Count) -Message 'Regionaler Import meldet falsche Kandidatenanzahl.'
+    Assert-True -Condition (@($regionalScriptResult.manual_review_required).Count -eq 0) -Message 'Regionaler Import erzeugt unerwarteten Manual-Review-Bestand.'
 }
 finally {
     if (Test-Path -LiteralPath $importProjectRoot) {
@@ -194,7 +225,7 @@ finally {
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'discovery_import_script')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'regional_discovery_import_script', 'discovery_import_script')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4

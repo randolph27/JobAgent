@@ -159,7 +159,7 @@ function New-JobAgentCompanySeed {
         aliases = @($Aliases | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
         locations = @($Locations)
         industry = $Industry
-        ats = @($Ats)
+        ats = @($Ats | Where-Object { $null -ne $_ })
         scan_status = 'PENDING'
         scan_priority = $ScanPriority
         next_scan_at = $NextScanAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)

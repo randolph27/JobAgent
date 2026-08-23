@@ -161,6 +161,84 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:siemens_energy_ag",
+      "canonical_name": "Siemens Energy AG",
+      "canonical_domain": "siemens-energy.com",
+      "official_website_url": "https://www.siemens-energy.com/",
+      "career_url": "https://jobs.siemens-energy.com/",
+      "aliases": [
+        "Siemens Energy",
+        "Siemens Energy AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Energy Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 90,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://jobs.siemens-energy.com/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Energy Technology",
+        "evidence_note": "Regionale offizielle Quelle nennt Siemens Energy; offizielle Jobdomain ist erreichbar."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:scout24_se",
+      "canonical_name": "Scout24 SE",
+      "canonical_domain": "scout24.com",
+      "official_website_url": "https://www.scout24.com/",
+      "career_url": "https://www.scout24.com/en/career/jobs/",
+      "aliases": [
+        "Scout24",
+        "Scout24 SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Marketplace",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 90,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.scout24.com/en/career/jobs/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Marketplace",
+        "evidence_note": "Regionale offizielle Quelle nennt Scout24; Karrierepfad ist auf der offiziellen Unternehmensdomain erreichbar."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
       "canonical_name": "Rohde & Schwarz GmbH & Co. KG",
       "canonical_domain": "rohde-schwarz.com",
@@ -263,7 +341,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 87,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -277,6 +355,45 @@
       },
       "created_at": "2026-08-17T16:01:23.149Z",
       "updated_at": "2026-08-17T16:02:19.059Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hensoldt_ag",
+      "canonical_name": "HENSOLDT AG",
+      "canonical_domain": "hensoldt.net",
+      "official_website_url": "https://www.hensoldt.net/",
+      "career_url": "https://www.hensoldt.net/career/",
+      "aliases": [
+        "HENSOLDT",
+        "HENSOLDT AG"
+      ],
+      "locations": [
+        {
+          "label": "Taufkirchen bei Muenchen",
+          "city": "Taufkirchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Defense Electronics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 86,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.hensoldt.net/career/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Defense Electronics",
+        "evidence_note": "Regionale offizielle Quelle nennt HENSOLDT; Karrierebereich liegt auf der offiziellen Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
     },
     {
@@ -303,7 +420,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -360,6 +477,85 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:cts_eventim_ag_and_co_kgaa",
+      "canonical_name": "CTS Eventim AG & Co. KGaA",
+      "canonical_domain": "corporate.eventim.de",
+      "official_website_url": "https://corporate.eventim.de/",
+      "career_url": "https://corporate.eventim.de/en/career/",
+      "aliases": [
+        "CTS Eventim",
+        "CTS Eventim AG & Co. KGaA",
+        "Eventim"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Entertainment Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 86,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://corporate.eventim.de/en/career/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Entertainment Technology",
+        "evidence_note": "Regionale offizielle Quelle nennt CTS Eventim; Karrierebereich liegt auf der Corporate-Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:nemetschek_se",
+      "canonical_name": "Nemetschek SE",
+      "canonical_domain": "nemetschek.com",
+      "official_website_url": "https://www.nemetschek.com/",
+      "career_url": "https://www.nemetschek.com/en/career/",
+      "aliases": [
+        "Nemetschek",
+        "Nemetschek SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 85,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.nemetschek.com/en/career/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Software",
+        "evidence_note": "Regionale offizielle Quelle nennt Nemetschek; Karrierebereich ist auf der offiziellen Domain belegt."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:man_truck_and_bus_se",
       "canonical_name": "MAN Truck & Bus SE",
       "canonical_domain": "man.eu",
@@ -383,7 +579,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 85,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -397,6 +593,45 @@
       },
       "created_at": "2026-08-17T16:01:23.149Z",
       "updated_at": "2026-08-17T16:02:19.059Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:traton_se",
+      "canonical_name": "TRATON SE",
+      "canonical_domain": "traton.com",
+      "official_website_url": "https://traton.com/",
+      "career_url": "https://traton.com/en/career.html",
+      "aliases": [
+        "TRATON",
+        "TRATON SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 84,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://traton.com/en/career.html",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive",
+        "evidence_note": "Regionale offizielle Quelle nennt TRATON; Karrierebereich liegt auf der offiziellen Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
     },
     {
@@ -462,7 +697,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 84,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -476,6 +711,45 @@
       },
       "created_at": "2026-08-17T16:01:23.149Z",
       "updated_at": "2026-08-17T16:02:19.059Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:wacker_chemie_ag",
+      "canonical_name": "Wacker Chemie AG",
+      "canonical_domain": "wacker.com",
+      "official_website_url": "https://www.wacker.com/",
+      "career_url": "https://www.wacker.com/cms/en-us/careers/overview.html",
+      "aliases": [
+        "WACKER",
+        "Wacker Chemie AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Chemicals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 83,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.wacker.com/cms/en-us/careers/overview.html",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Chemicals",
+        "evidence_note": "Regionale offizielle Quelle nennt Wacker Chemie; Karrierebereich ist auf der offiziellen Domain belegt."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
     },
     {
@@ -502,20 +776,20 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.munich-airport.com/careers-263141",
-        "observed_at": "2026-08-17T15:52:58.666Z",
+        "url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
         "verification_url": "https://www.munich-airport.com/careers-263141",
-        "discovery_origin": "seed.manual",
+        "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
         "target_area": "FREISING",
         "industry_hint": "Airport Operations",
-        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
+        "evidence_note": "Freising-Umfeldquelle und bestehender offizieller Karrierepfad; Import muss gegen vorhandenen Store deduplizieren."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
     },
     {
@@ -541,7 +815,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -555,6 +829,45 @@
       },
       "created_at": "2026-08-17T16:01:23.149Z",
       "updated_at": "2026-08-17T16:02:19.059Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:atoss_software_se",
+      "canonical_name": "ATOSS Software SE",
+      "canonical_domain": "atoss.com",
+      "official_website_url": "https://www.atoss.com/",
+      "career_url": "https://www.atoss.com/en/company/career",
+      "aliases": [
+        "ATOSS",
+        "ATOSS Software SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 83,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.atoss.com/en/company/career",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Software",
+        "evidence_note": "Regionale offizielle Quelle nennt ATOSS; Karrierebereich liegt auf der offiziellen Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
     },
     {
@@ -598,6 +911,45 @@
       "last_successful_scan_at": "2026-08-17T13:49:12.49Z"
     },
     {
+      "company_id": "company:cancom_se",
+      "canonical_name": "CANCOM SE",
+      "canonical_domain": "cancom.de",
+      "official_website_url": "https://www.cancom.de/",
+      "career_url": "https://career.cancom.com/jobs/",
+      "aliases": [
+        "CANCOM",
+        "CANCOM SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 82,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://career.cancom.com/jobs/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services",
+        "evidence_note": "Regionale offizielle Quelle nennt CANCOM; dedizierte CANCOM-Karrieredomain ist erreichbar."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bayerische_landesbank",
       "canonical_name": "Bayerische Landesbank",
       "canonical_domain": "bayernlb.de",
@@ -620,7 +972,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -659,7 +1011,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 81,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -673,6 +1025,45 @@
       },
       "created_at": "2026-08-17T16:01:23.149Z",
       "updated_at": "2026-08-17T16:02:19.059Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:nagarro_se",
+      "canonical_name": "Nagarro SE",
+      "canonical_domain": "nagarro.com",
+      "official_website_url": "https://www.nagarro.com/",
+      "career_url": "https://www.nagarro.com/en/careers",
+      "aliases": [
+        "Nagarro",
+        "Nagarro SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.nagarro.com/en/careers",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services",
+        "evidence_note": "Regionale offizielle Quelle nennt Nagarro; Karrierebereich liegt auf der offiziellen Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
     },
     {
@@ -699,7 +1090,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -756,6 +1147,282 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:deutsche_pfandbriefbank_ag",
+      "canonical_name": "Deutsche Pfandbriefbank AG",
+      "canonical_domain": "pfandbriefbank.com",
+      "official_website_url": "https://www.pfandbriefbank.com/",
+      "career_url": "https://www.pfandbriefbank.com/en/career/",
+      "aliases": [
+        "Deutsche Pfandbriefbank AG",
+        "pbb",
+        "Pfandbriefbank"
+      ],
+      "locations": [
+        {
+          "label": "Garching bei Muenchen",
+          "city": "Garching",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Banking",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.pfandbriefbank.com/en/career/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Banking",
+        "evidence_note": "Regionale offizielle Quelle nennt Deutsche Pfandbriefbank; Karrierebereich liegt auf der offiziellen Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:prosiebensat_1_media_se",
+      "canonical_name": "ProSiebenSat.1 Media SE",
+      "canonical_domain": "prosiebensat1.com",
+      "official_website_url": "https://www.prosiebensat1.com/",
+      "career_url": "https://jobs.prosiebensat1.com/",
+      "aliases": [
+        "P7S1",
+        "ProSiebenSat.1",
+        "ProSiebenSat.1 Media SE"
+      ],
+      "locations": [
+        {
+          "label": "Unterfoehring bei Muenchen",
+          "city": "Unterfoehring",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Media Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://jobs.prosiebensat1.com/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Media Technology",
+        "evidence_note": "Regionale offizielle Quelle nennt ProSiebenSat.1; Jobportal ist als ProSiebenSat.1-Karriereportal belegt."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:sixt_se",
+      "canonical_name": "Sixt SE",
+      "canonical_domain": "sixt.com",
+      "official_website_url": "https://www.sixt.com/",
+      "career_url": "https://www.sixt.jobs/",
+      "aliases": [
+        "SIXT",
+        "Sixt SE"
+      ],
+      "locations": [
+        {
+          "label": "Pullach bei Muenchen",
+          "city": "Pullach",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Mobility Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.sixt.jobs/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Mobility Services",
+        "evidence_note": "Regionale offizielle Quelle nennt Sixt; dedizierte SIXT-Karriereplattform ist erreichbar."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:siltronic_ag",
+      "canonical_name": "Siltronic AG",
+      "canonical_domain": "siltronic.com",
+      "official_website_url": "https://www.siltronic.com/",
+      "career_url": "https://www.siltronic.com/en/career/working-in-germany.html",
+      "aliases": [
+        "Siltronic",
+        "Siltronic AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Semiconductors",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.siltronic.com/en/career/working-in-germany.html",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Semiconductors",
+        "evidence_note": "Regionale offizielle Quelle nennt Siltronic; Deutschland-Karrierebereich liegt auf der offiziellen Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:sfc_energy_ag",
+      "canonical_name": "SFC Energy AG",
+      "canonical_domain": "sfc.com",
+      "official_website_url": "https://www.sfc.com/",
+      "career_url": "https://www.sfc.com/career/germany/",
+      "aliases": [
+        "SFC Energy",
+        "SFC Energy AG"
+      ],
+      "locations": [
+        {
+          "label": "Brunnthal und Kirchheim bei Muenchen",
+          "city": "Brunnthal",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Energy Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.sfc.com/career/germany/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Energy Technology",
+        "evidence_note": "Regionale offizielle Quelle nennt SFC Energy; Deutschland-Karrierebereich nennt Standorte nahe Muenchen."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:wacker_neuson_se",
+      "canonical_name": "Wacker Neuson SE",
+      "canonical_domain": "wackerneusongroup.com",
+      "official_website_url": "https://wackerneusongroup.com/",
+      "career_url": "https://wackerneusongroup.com/en/career",
+      "aliases": [
+        "Wacker Neuson",
+        "Wacker Neuson SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Construction Equipment",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://wackerneusongroup.com/en/career",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Construction Equipment",
+        "evidence_note": "Regionale offizielle Quelle nennt Wacker Neuson; Karrierebereich liegt auf der offiziellen Group-Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:suss_microtec_se",
+      "canonical_name": "SUSS MicroTec SE",
+      "canonical_domain": "suss.com",
+      "official_website_url": "https://www.suss.com/",
+      "career_url": "https://career.suss.com/en/jobs",
+      "aliases": [
+        "SUSS",
+        "SUSS MicroTec",
+        "SUSS MicroTec SE"
+      ],
+      "locations": [
+        {
+          "label": "Garching bei Muenchen",
+          "city": "Garching",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Semiconductor Equipment",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://career.suss.com/en/jobs",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Semiconductor Equipment",
+        "evidence_note": "Regionale offizielle Quelle nennt SUSS MicroTec; Karriereportal ist als SUSS-Jobportal belegt."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:texas_instruments_deutschland_gmbh",
       "canonical_name": "Texas Instruments Deutschland GmbH",
       "canonical_domain": "ti.com",
@@ -779,20 +1446,60 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 76,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-08-18T00:00:00.000Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://careers.ti.com/",
-        "observed_at": "2026-08-17T15:52:58.666Z",
+        "url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
+        "observed_at": "2026-08-23T06:20:56.355Z",
         "verification_url": "https://careers.ti.com/",
-        "discovery_origin": "seed.manual",
+        "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
         "target_area": "FREISING",
         "industry_hint": "Semiconductors",
-        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
+        "evidence_note": "Freising-Umfeldquelle und bestehender offizieller Karrierepfad; Import muss gegen vorhandenen Store deduplizieren."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:fraunhofer_ivv",
+      "canonical_name": "Fraunhofer IVV",
+      "canonical_domain": "ivv.fraunhofer.de",
+      "official_website_url": "https://www.ivv.fraunhofer.de/",
+      "career_url": "https://www.ivv.fraunhofer.de/en/jobs-career.html",
+      "aliases": [
+        "Fraunhofer IVV",
+        "Fraunhofer IVV Freising",
+        "Fraunhofer-Institut fuer Verfahrenstechnik und Verpackung"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Research",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 74,
+      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.freising.de/wirtschaft/weihenstephan",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "verification_url": "https://www.ivv.fraunhofer.de/en/jobs-career.html",
+        "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+        "target_area": "FREISING",
+        "industry_hint": "Research",
+        "evidence_note": "Weihenstephan-Clusterhinweis; Karrierebereich liegt auf der offiziellen Fraunhofer-IVV-Domain."
+      },
+      "created_at": "2026-08-23T06:20:01.451Z",
+      "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
     }
   ],
@@ -935,6 +1642,25 @@
       }
     },
     {
+      "source_id": "source:atoss_software_se_career",
+      "company_id": "company:atoss_software_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.atoss.com/en/company/career",
+      "canonical_url": "https://www.atoss.com/en/company/career",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.atoss.com/en/company/career",
+        "basis_url": "https://www.atoss.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
       "source_id": "source:bayerische_landesbank_career",
       "company_id": "company:bayerische_landesbank",
       "source_type": "CAREER_PAGE",
@@ -992,13 +1718,70 @@
       }
     },
     {
+      "source_id": "source:cancom_se_career",
+      "company_id": "company:cancom_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://career.cancom.com/jobs/",
+      "canonical_url": "https://career.cancom.com/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://career.cancom.com/jobs/",
+        "basis_url": "https://www.cancom.de/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:cts_eventim_ag_and_co_kgaa_career",
+      "company_id": "company:cts_eventim_ag_and_co_kgaa",
+      "source_type": "CAREER_PAGE",
+      "url": "https://corporate.eventim.de/en/career/",
+      "canonical_url": "https://corporate.eventim.de/en/career/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://corporate.eventim.de/en/career/",
+        "basis_url": "https://corporate.eventim.de/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:deutsche_pfandbriefbank_ag_career",
+      "company_id": "company:deutsche_pfandbriefbank_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.pfandbriefbank.com/en/career/",
+      "canonical_url": "https://www.pfandbriefbank.com/en/career/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.pfandbriefbank.com/en/career/",
+        "basis_url": "https://www.pfandbriefbank.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
       "source_id": "source:flughafen_muenchen_gmbh_career",
       "company_id": "company:flughafen_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
       "url": "https://www.munich-airport.com/careers-263141",
       "canonical_url": "https://www.munich-airport.com/careers-263141",
       "is_official": true,
-      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verified_at": "2026-08-23T06:20:56.355Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": {
         "status": "VERIFIED",
@@ -1006,7 +1789,26 @@
         "url": "https://www.munich-airport.com/careers-263141",
         "basis_url": "https://www.munich-airport.com/",
         "redirect_chain": [],
-        "observed_at": "2026-08-17T15:52:58.666Z",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:fraunhofer_ivv_career",
+      "company_id": "company:fraunhofer_ivv",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ivv.fraunhofer.de/en/jobs-career.html",
+      "canonical_url": "https://www.ivv.fraunhofer.de/en/jobs-career.html",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.ivv.fraunhofer.de/en/jobs-career.html",
+        "basis_url": "https://www.ivv.fraunhofer.de/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
     },
@@ -1045,6 +1847,25 @@
         "basis_url": "https://www.google.com/",
         "redirect_chain": [],
         "observed_at": "2026-08-17T16:02:19.059Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:hensoldt_ag_career",
+      "company_id": "company:hensoldt_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hensoldt.net/career/",
+      "canonical_url": "https://www.hensoldt.net/career/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.hensoldt.net/career/",
+        "basis_url": "https://www.hensoldt.net/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
     },
@@ -1201,6 +2022,63 @@
       }
     },
     {
+      "source_id": "source:nagarro_se_career",
+      "company_id": "company:nagarro_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.nagarro.com/en/careers",
+      "canonical_url": "https://www.nagarro.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.nagarro.com/en/careers",
+        "basis_url": "https://www.nagarro.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:nemetschek_se_career",
+      "company_id": "company:nemetschek_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.nemetschek.com/en/career/",
+      "canonical_url": "https://www.nemetschek.com/en/career/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.nemetschek.com/en/career/",
+        "basis_url": "https://www.nemetschek.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:prosiebensat_1_media_se_career",
+      "company_id": "company:prosiebensat_1_media_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.prosiebensat1.com/",
+      "canonical_url": "https://jobs.prosiebensat1.com/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://jobs.prosiebensat1.com/",
+        "basis_url": "https://www.prosiebensat1.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
       "source_id": "source:rohde_and_schwarz_gmbh_and_co_kg_career",
       "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
       "source_type": "CAREER_PAGE",
@@ -1216,6 +2094,44 @@
         "basis_url": "https://www.rohde-schwarz.com/",
         "redirect_chain": [],
         "observed_at": "2026-08-17T15:52:58.666Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:scout24_se_career",
+      "company_id": "company:scout24_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.scout24.com/en/career/jobs/",
+      "canonical_url": "https://www.scout24.com/en/career/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.scout24.com/en/career/jobs/",
+        "basis_url": "https://www.scout24.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:sfc_energy_ag_career",
+      "company_id": "company:sfc_energy_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.sfc.com/career/germany/",
+      "canonical_url": "https://www.sfc.com/career/germany/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.sfc.com/career/germany/",
+        "basis_url": "https://www.sfc.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
     },
@@ -1239,6 +2155,63 @@
       }
     },
     {
+      "source_id": "source:siemens_energy_ag_career",
+      "company_id": "company:siemens_energy_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.siemens-energy.com/",
+      "canonical_url": "https://jobs.siemens-energy.com/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://jobs.siemens-energy.com/",
+        "basis_url": "https://www.siemens-energy.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:siltronic_ag_career",
+      "company_id": "company:siltronic_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.siltronic.com/en/career/working-in-germany.html",
+      "canonical_url": "https://www.siltronic.com/en/career/working-in-germany.html",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.siltronic.com/en/career/working-in-germany.html",
+        "basis_url": "https://www.siltronic.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:sixt_se_career",
+      "company_id": "company:sixt_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.sixt.jobs/",
+      "canonical_url": "https://www.sixt.jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.sixt.jobs/",
+        "basis_url": "https://www.sixt.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
       "source_id": "source:stadtwerke_muenchen_gmbh_career",
       "company_id": "company:stadtwerke_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -1258,13 +2231,32 @@
       }
     },
     {
+      "source_id": "source:suss_microtec_se_career",
+      "company_id": "company:suss_microtec_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://career.suss.com/en/jobs",
+      "canonical_url": "https://career.suss.com/en/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://career.suss.com/en/jobs",
+        "basis_url": "https://www.suss.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
       "source_id": "source:texas_instruments_deutschland_gmbh_career",
       "company_id": "company:texas_instruments_deutschland_gmbh",
       "source_type": "CAREER_PAGE",
       "url": "https://careers.ti.com/",
       "canonical_url": "https://careers.ti.com/",
       "is_official": true,
-      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verified_at": "2026-08-23T06:20:56.355Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": {
         "status": "VERIFIED",
@@ -1272,7 +2264,26 @@
         "url": "https://careers.ti.com/",
         "basis_url": "https://www.ti.com/",
         "redirect_chain": [],
-        "observed_at": "2026-08-17T15:52:58.666Z",
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:traton_se_career",
+      "company_id": "company:traton_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://traton.com/en/career.html",
+      "canonical_url": "https://traton.com/en/career.html",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://traton.com/en/career.html",
+        "basis_url": "https://traton.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
     },
@@ -1292,6 +2303,44 @@
         "basis_url": "https://www.versicherungskammer-bayern.de/",
         "redirect_chain": [],
         "observed_at": "2026-08-17T16:02:19.059Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:wacker_chemie_ag_career",
+      "company_id": "company:wacker_chemie_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.wacker.com/cms/en-us/careers/overview.html",
+      "canonical_url": "https://www.wacker.com/cms/en-us/careers/overview.html",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://www.wacker.com/cms/en-us/careers/overview.html",
+        "basis_url": "https://www.wacker.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
+        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+      }
+    },
+    {
+      "source_id": "source:wacker_neuson_se_career",
+      "company_id": "company:wacker_neuson_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://wackerneusongroup.com/en/career",
+      "canonical_url": "https://wackerneusongroup.com/en/career",
+      "is_official": true,
+      "verified_at": "2026-08-23T06:20:56.355Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": {
+        "status": "VERIFIED",
+        "evidence_type": "CAREER_URL",
+        "url": "https://wackerneusongroup.com/en/career",
+        "basis_url": "https://wackerneusongroup.com/",
+        "redirect_chain": [],
+        "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
     }
