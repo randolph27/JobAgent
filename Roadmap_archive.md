@@ -460,3 +460,23 @@
   - [x] Audit: `logs/jobagent/company-career-audit-20260823-070635.json` auditiert 38 verifizierte Firmen, davon 36 HTTP-erfolgreich; mindestens 20 offiziell gepflegte Karriere-URLs sind damit belegt. Keine Aggregator-URL wurde akzeptiert; BMW Timeout und Fraunhofer-IVV-404 bleiben als technische bzw. Pflege-Risiken dokumentiert.
   - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
   - [x] Meilenstein: M4 skalierbare Quellenverifikation abgeschlossen; JA-027 kann auf Audit- und Coverage-Artefakten aufsetzen.
+## Archiviert am 2026-08-23
+
+- [x] JA-027 Firmen-Coverage-Audit und priorisierte Importwellen fuer maximale Abdeckung einfuehren #comment: Nach Quellen- und Verifikationsaufbau braucht der JobAgent messbare Abdeckung nach Region, Branche, Quelle und Reviewstatus, damit die Liste systematisch waechst.
+  - [x] Beschreibung: Der JobAgent erzeugt einen Coverage-Audit fuer Firmeninventar und Discovery-Backlog mit Zielwerten je Welle; Importwellen priorisieren offizielle/verifizierte Arbeitgeber aus grossen IT-relevanten Branchen, Grossarbeitgebern, oeffentlichem Sektor, Hochschulen/Forschung, Flughafen/Freising, Startups/Scaleups und Dienstleistern, bis alle Kandidaten mit Website und Karriere-/Jobs-Seite entweder importiert, dedupliziert oder begruendet verworfen sind.
+  - [x] Scope: Geaendert/erstellt wurden `src/JobAgent.Coverage.psm1`, `tools/Measure-JobAgentCompanyCoverage.ps1`, `logs/jobagent/company-coverage-20260823-072556.json`, `logs/jobagent/company-coverage-20260823-072556.md`, `html/jobagent/company-coverage.html` und `tests/Test-JobAgentCoverage.ps1`. No-Go eingehalten: keine Vollstaendigkeitsbehauptung ohne dokumentierten Nenner; unverifizierte Hints bleiben ausserhalb des Firmenbestands; der HTML-Bericht nutzt keine externen Runtime-Ressourcen.
+  - [x] Ist-Stand (2026-08-23 09:28): Coverage-Audit ist implementiert und ausgefuehrt. Der aktuelle Bericht zaehlt 38 Firmen, 38 `CAREER_URL_VERIFIED`, 0 Dublettengruppen, 6 unverifizierte Discovery-Hints, 35 nie gescannte Firmen, 1 Retry-Fall und 5 priorisierte Importwellen.
+  - [x] Abhängigkeiten: JA-023 bis JA-026 sind abgeschlossen; der Audit nutzt Quellenkatalog, Regionalimport, Hint-Store und Karriere-/ATS-Verifikation.
+  - [x] Aufwand/Dauer: Aufwand M; umgesetzt innerhalb der aktuellen Arbeitseinheit bei 1 Agent.
+  - [x] Prioritätsscore: 86/100, weil hohe Abdeckung ohne auditierbare Metriken nicht steuerbar ist und spaetere Chats sonst wieder punktuell Firmen ergaenzen.
+  - [x] Ordnungsbegründung: Nach Import- und Verifikationspfad wurde die Skalierung messbar gemacht; weitere Wellen koennen jetzt nach Status, Quelle, Zielgebiet und Risiko priorisiert werden.
+  - [x] Risiken und Unsicherheiten: Ein echter Vollstaendigkeitsnenner fuer den regionalen Markt bleibt nicht gesichert; Coverage ist eine operative Quote ueber bekannte Quellen und Store-Zustand. BMW Timeout und Fraunhofer-IVV-404 bleiben im Backlog als Pflege-/Retry-Risiken sichtbar.
+  - [x] Schritte:
+    1. Coverage-Metriken fuer Verifikationsstatus, Reviewstatus, Zielgebiet, Branche, Quellenursprung, Dubletten, Discovery-Hints, letztes Reviewdatum und Scanprioritaet implementiert.
+    2. Importwellenplan umgesetzt: Welle A grosse regionale/boersennotierte Arbeitgeber, Welle B Freising/Weihenstephan/Flughafen-Umfeld, Welle C EMM/Cluster/Institutionen, Welle D BA/EURES/Make-it-in-Germany-Hints, Welle E Startup-/Scaleup- und manuelle Review-Reste.
+    3. CLI-Tool erzeugt JSON-, Markdown- und HTML-Coverage-Berichte mit fail-closed Hinweistext und ohne externe Ressourcen.
+  - [x] Evidence: `logs/jobagent/company-coverage-20260823-072556.json`, `logs/jobagent/company-coverage-20260823-072556.md`, `html/jobagent/company-coverage.html`, `tools/Measure-JobAgentCompanyCoverage.ps1`, Coverage-Testfaelle `coverage_tool_generates_json_markdown_html_artifacts` und `coverage_import_wave_plan`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit 0.
+  - [x] Audit: HTML-Coverage-Bericht enthaelt Viewport-Meta, Overflow-Schutz und keine externen Skript-/Stylesheet-Ressourcen. Der bestehende Viewport-Audit lief ueber den lokalen Devserver bei 1920/1366/800 px mit HTTP 200 und erzeugte Screenshots unter `output/playwright/`.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Meilenstein: M5 messbare Firmenabdeckung abgeschlossen; weitere Firmenimportwellen koennen auf dem Coverage-Bericht aufsetzen.

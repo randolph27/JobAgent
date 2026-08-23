@@ -93,6 +93,10 @@ Assert-True -Condition ($coverage.metrics.with_matching_jobs -eq 1) -Message 'Co
 Assert-True -Condition ($coverage.approximation_notice -match 'keine vollstaendige Marktdeckung') -Message 'Coverage-Hinweis darf keine Vollstaendigkeit behaupten.'
 Assert-True -Condition ($coverage.metrics.manual_review_required -eq 1) -Message 'Coverage zaehlt manuell zu pruefende Discovery-Hinweise falsch.'
 Assert-True -Condition ($coverage.metrics.verified_without_career_url -eq 1) -Message 'Coverage zaehlt verifizierte Firmen ohne Karriere-URL falsch.'
+Assert-True -Condition ($coverage.metrics.career_url_verified -eq 5) -Message 'Coverage zaehlt CAREER_URL_VERIFIED falsch.'
+Assert-True -Condition ($coverage.dimensions.by_target_area.MUNICH -eq 6) -Message 'Coverage zaehlt Zielgebiete falsch.'
+Assert-True -Condition ($coverage.dimensions.by_industry.UNKNOWN -eq 6) -Message 'Coverage zaehlt Branchen falsch.'
+Assert-True -Condition ($coverage.dimensions.by_inventory_state.MANUAL_REVIEW_REQUIRED -eq 1) -Message 'Coverage zaehlt Reviewstatus falsch.'
 
 $backlogKinds = @($coverage.backlog | ForEach-Object { [string]$_.kind })
 Assert-True -Condition ($backlogKinds -contains 'MANUAL_REVIEW_DISCOVERY') -Message 'Backlog priorisiert unbestaetigte Discovery-Hinweise nicht.'
@@ -107,6 +111,14 @@ Assert-True -Condition (@($priority | Where-Object company_id -eq 'company:unkno
 Assert-True -Condition ((($priority | Where-Object company_id -eq 'company:hint_ag').next_action) -eq 'verify_discovery_hint') -Message 'Discovery-Hinweise muessen eigene Folgeaktion erhalten.'
 Assert-True -Condition (@($priority | Where-Object { $_.company_id -eq 'company:recent_ag' -and (@($_.reasons) -contains 'recent_success_rotation_penalty') }).Count -eq 1) -Message 'Kuerzlich erfolgreiche Firmen muessen Rotationsmalus erhalten.'
 Assert-True -Condition ((@($coverage.companies | Where-Object { $_.company_id -eq 'company:hint_ag' })[0].inventory_state) -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Discovery-Hinweis wurde nicht als manueller Review-Fall markiert.'
+
+$duplicateDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
+$duplicateDocument.companies = @(
+    New-TestCoverageCompany -Name 'Duplicate AG' -Domain 'duplicate.example.invalid' -CareerUrl 'https://duplicate.example.invalid/careers' -Priority 70
+    New-TestCoverageCompany -Name 'Duplicate GmbH' -Domain 'duplicate.example.invalid' -CareerUrl 'https://duplicate.example.invalid/jobs' -Priority 70
+)
+$duplicates = Get-JobAgentCoverageDuplicateGroups -Document $duplicateDocument
+Assert-True -Condition (@($duplicates | Where-Object { $_.basis -eq 'canonical_domain' -and $_.key -eq 'duplicate.example.invalid' }).Count -eq 1) -Message 'Coverage-Dubletten nach Domain werden nicht erkannt.'
 
 $report = New-JobAgentDailyReport -Document $document -ScanRunId 'scanrun:1'
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
@@ -157,9 +169,33 @@ $hintSourceIds = @($hintStore.hints | ForEach-Object { [string]$_.source_id } | 
 $secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -ne 'OFFICIAL_DIRECTORY' -and [string]$_.source_class -ne 'REJECTED' } | ForEach-Object { [string]$_.source_id })
 Assert-True -Condition (@($hintSourceIds | Where-Object { $secondarySourceIds -notcontains $_ }).Count -eq 0) -Message 'Discovery-Hints duerfen nur erlaubte Sekundaerquellen referenzieren.'
 
+$coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -Now ([datetime]'2026-08-23T08:30:00Z')
+Assert-True -Condition ($coverageWithInputs.metrics.discovery_hints_total -eq $hintStore.hints_total) -Message 'Coverage uebernimmt Discovery-Hint-Zaehler falsch.'
+Assert-True -Condition ($coverageWithInputs.source_coverage.sources_total -eq $sourceCoverage.sources_total) -Message 'Coverage bettet Quellen-Coverage nicht ein.'
+Assert-True -Condition (@($coverageWithInputs.import_waves.waves).Count -eq 5) -Message 'Coverage erzeugt nicht alle Importwellen.'
+Assert-True -Condition (@($coverageWithInputs.import_waves.waves | Where-Object { $_.wave_id -eq 'D' -and $_.candidates_total -ge 1 }).Count -eq 1) -Message 'Importwelle D enthaelt keine Sekundaerhinweise.'
+Assert-True -Condition ($coverageWithInputs.import_waves.contract -match 'unverifizierte Hints') -Message 'Importwellen muessen Hints fail-closed beschreiben.'
+
 $coverageLog = Join-Path $root 'logs\jobagent\ja-023-source-coverage.json'
 New-Item -ItemType Directory -Path (Split-Path -Parent $coverageLog) -Force | Out-Null
 $sourceCoverage | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $coverageLog -Encoding UTF8
+
+$toolOutput = & (Join-Path $root 'tools\Measure-JobAgentCompanyCoverage.ps1') -ProjectRoot $root -MaxPriorityItems 10 | ConvertFrom-Json -Depth 20
+Assert-True -Condition ($toolOutput.status -eq 'ok') -Message 'Coverage-Tool liefert keinen OK-Status.'
+Assert-True -Condition (Test-Path -LiteralPath $toolOutput.json_path -PathType Leaf) -Message 'Coverage-Tool erzeugt kein JSON-Artefakt.'
+Assert-True -Condition (Test-Path -LiteralPath $toolOutput.markdown_path -PathType Leaf) -Message 'Coverage-Tool erzeugt kein Markdown-Artefakt.'
+Assert-True -Condition (Test-Path -LiteralPath $toolOutput.html_path -PathType Leaf) -Message 'Coverage-Tool erzeugt kein HTML-Artefakt.'
+$toolJson = Get-Content -Raw -LiteralPath $toolOutput.json_path | ConvertFrom-Json -Depth 100
+$toolMarkdown = Get-Content -Raw -LiteralPath $toolOutput.markdown_path
+$toolHtml = Get-Content -Raw -LiteralPath $toolOutput.html_path
+Assert-True -Condition ($toolJson.approximation_notice -match 'keine vollstaendige Marktdeckung') -Message 'Coverage-Tool-JSON behauptet Vollstaendigkeit oder Hinweis fehlt.'
+Assert-True -Condition (@($toolJson.import_waves.waves).Count -eq 5) -Message 'Coverage-Tool-JSON enthaelt keine fuenf Importwellen.'
+Assert-True -Condition ($toolMarkdown.Contains('## Importwellen')) -Message 'Coverage-Tool-Markdown enthaelt keine Importwellen.'
+Assert-True -Condition ($toolHtml.Contains('<meta name="viewport" content="width=device-width, initial-scale=1">')) -Message 'Coverage-Tool-HTML enthaelt keinen Viewport-Meta-Tag.'
+Assert-True -Condition ($toolHtml.Contains('.table-wrap { overflow-x: auto; }')) -Message 'Coverage-Tool-HTML enthaelt keinen Tabellen-Overflow-Schutz.'
+Assert-True -Condition (-not ($toolHtml -match '<script\b[^>]*\bsrc=')) -Message 'Coverage-Tool-HTML darf keine externen Skripte laden.'
+Assert-True -Condition (-not ($toolHtml -match '<link\b[^>]*\bhref=')) -Message 'Coverage-Tool-HTML darf keine externen Stylesheets laden.'
+
 
 [pscustomobject]@{
     status = 'ok'
@@ -171,11 +207,16 @@ $sourceCoverage | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $coverageL
         'failed_portals_prioritized_for_adapter_review',
         'recent_success_rotation_penalty',
         'coverage_report_has_approximation_notice',
+        'coverage_dimensions_by_status_target_industry_and_source',
+        'coverage_duplicate_groups_by_domain',
+        'coverage_import_wave_plan',
         'daily_report_includes_coverage_and_backlog',
         'discovery_source_registry_schema_valid',
         'discovery_source_coverage_by_class_and_decision',
         'discovery_source_secondary_sources_are_not_official',
         'discovery_source_usage_notes_required',
-        'secondary_hint_store_contract'
+        'secondary_hint_store_contract',
+        'coverage_tool_generates_json_markdown_html_artifacts',
+        'coverage_tool_html_has_responsive_guards'
     )
 } | ConvertTo-Json -Depth 4

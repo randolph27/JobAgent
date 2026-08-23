@@ -40,6 +40,79 @@ function Test-JobAgentCoverageMatchingJob {
     return @('MATCH', 'POSSIBLE') -contains $result
 }
 
+function ConvertTo-JobAgentCoverageNameKey {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value) {
+        return 'UNKNOWN'
+    }
+    $text = ([string]$Value).ToLowerInvariant().
+        Replace('ä', 'ae').
+        Replace('ö', 'oe').
+        Replace('ü', 'ue').
+        Replace('ß', 'ss').
+        Replace('&', ' and ').
+        Replace('+', ' plus ')
+    $text = [regex]::Replace($text, '\b(gmbh\s+and\s+co\.?\s+kg|gmbh\s+und\s+co\.?\s+kg|gmbh|ag|se|kg|kgaa|inc|ltd|llc)\b', ' ')
+    $text = [regex]::Replace($text, '[^a-z0-9]+', ' ').Trim()
+    if ([string]::IsNullOrWhiteSpace($text)) {
+        return 'UNKNOWN'
+    }
+    return [regex]::Replace($text, '\s+', ' ')
+}
+
+function Add-JobAgentCoverageCount {
+    param(
+        [Parameter(Mandatory)][hashtable]$Counts,
+        [Parameter()][AllowNull()][object]$Key
+    )
+
+    $name = if ($null -eq $Key -or [string]::IsNullOrWhiteSpace([string]$Key)) { 'UNKNOWN' } else { [string]$Key }
+    if (-not $Counts.ContainsKey($name)) {
+        $Counts[$name] = 0
+    }
+    $Counts[$name]++
+}
+
+function ConvertTo-JobAgentCoverageCountsObject {
+    param([Parameter(Mandatory)][hashtable]$Counts)
+
+    $ordered = [ordered]@{}
+    foreach ($key in @($Counts.Keys | Sort-Object)) {
+        $ordered[$key] = [int]$Counts[$key]
+    }
+    return [pscustomobject]$ordered
+}
+
+function Get-JobAgentCoverageCompanyTargetAreas {
+    param([Parameter(Mandatory)][object]$Company)
+
+    $areas = @($Company.locations |
+        Where-Object { $null -ne $_ } |
+        ForEach-Object { Get-JobAgentCoverageProperty -Object $_ -Name 'target_area' -Default 'UNKNOWN' } |
+        Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
+        ForEach-Object { [string]$_ } |
+        Sort-Object -Unique)
+    if ($areas.Count -eq 0) {
+        $discoverySource = Get-JobAgentCoverageProperty -Object $Company -Name 'discovery_source'
+        $area = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'target_area' -Default 'UNKNOWN')
+        return @($area)
+    }
+    return @($areas)
+}
+
+function Get-JobAgentCoverageCompanyLastReviewAt {
+    param([Parameter(Mandatory)][object]$Company)
+
+    foreach ($property in @('career_verification_reviewed_at', 'career_verification_checked_at', 'updated_at', 'created_at')) {
+        $value = Get-JobAgentCoverageProperty -Object $Company -Name $property
+        if ($null -ne (ConvertTo-JobAgentCoverageDate -Value $value)) {
+            return (ConvertTo-JobAgentCoverageDate -Value $value).ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        }
+    }
+    return $null
+}
+
 function Get-JobAgentCoverageLatestAttemptMap {
     param([Parameter(Mandatory)][object]$Document)
 
@@ -104,6 +177,12 @@ function Get-JobAgentCoverageCompanyMetric {
     $discoveryType = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'type' -Default 'UNKNOWN')
     $discoveryOrigin = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'discovery_origin' -Default 'UNKNOWN')
     $targetArea = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'target_area' -Default 'UNKNOWN')
+    $targetAreas = @(Get-JobAgentCoverageCompanyTargetAreas -Company $Company)
+    if ($targetAreas.Count -gt 0 -and $targetAreas[0] -ne 'UNKNOWN') {
+        $targetArea = [string]$targetAreas[0]
+    }
+    $industry = [string](Get-JobAgentCoverageProperty -Object $Company -Name 'industry' -Default 'UNKNOWN')
+    $lastReviewAt = Get-JobAgentCoverageCompanyLastReviewAt -Company $Company
     $inventoryState = if (-not $hasCareerUrl -and $verificationStatus -eq 'CAREER_URL_VERIFIED') {
         'DATA_INCONSISTENT'
     }
@@ -151,6 +230,9 @@ function Get-JobAgentCoverageCompanyMetric {
         discovery_type = $discoveryType
         discovery_origin = $discoveryOrigin
         target_area = $targetArea
+        target_areas = @($targetAreas)
+        industry = $industry
+        last_review_at = $lastReviewAt
         inventory_state = $inventoryState
         next_step = $nextStep
     }
@@ -336,10 +418,201 @@ function New-JobAgentDiscoverySourceCoverageReport {
     }
 }
 
+function Get-JobAgentCoverageDuplicateGroups {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Document
+    )
+
+    $domainGroups = @($Document.companies |
+        Where-Object { -not [string]::IsNullOrWhiteSpace([string](Get-JobAgentCoverageProperty -Object $_ -Name 'canonical_domain')) } |
+        Group-Object { [string]$_.canonical_domain } |
+        Where-Object { $_.Count -gt 1 } |
+        ForEach-Object {
+            [pscustomobject]@{
+                basis = 'canonical_domain'
+                key = [string]$_.Name
+                company_ids = @($_.Group | ForEach-Object { [string]$_.company_id } | Sort-Object)
+                companies = @($_.Group | ForEach-Object { [string]$_.canonical_name } | Sort-Object)
+            }
+        })
+    $nameGroups = @($Document.companies |
+        Group-Object { ConvertTo-JobAgentCoverageNameKey -Value (Get-JobAgentCoverageProperty -Object $_ -Name 'canonical_name') } |
+        Where-Object { $_.Name -ne 'UNKNOWN' -and $_.Count -gt 1 } |
+        ForEach-Object {
+            [pscustomobject]@{
+                basis = 'normalized_name'
+                key = [string]$_.Name
+                company_ids = @($_.Group | ForEach-Object { [string]$_.company_id } | Sort-Object)
+                companies = @($_.Group | ForEach-Object { [string]$_.canonical_name } | Sort-Object)
+            }
+        })
+
+    return @(@($domainGroups) + @($nameGroups) | Sort-Object basis, key)
+}
+
+function New-JobAgentCoverageDimensions {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$CompanyMetrics
+    )
+
+    $verification = @{}
+    $inventory = @{}
+    $target = @{}
+    $industry = @{}
+    $sourceType = @{}
+    $sourceOrigin = @{}
+    foreach ($metric in @($CompanyMetrics)) {
+        Add-JobAgentCoverageCount -Counts $verification -Key $metric.verification_status
+        Add-JobAgentCoverageCount -Counts $inventory -Key $metric.inventory_state
+        Add-JobAgentCoverageCount -Counts $industry -Key $metric.industry
+        Add-JobAgentCoverageCount -Counts $sourceType -Key $metric.discovery_type
+        Add-JobAgentCoverageCount -Counts $sourceOrigin -Key $metric.discovery_origin
+        foreach ($area in @($metric.target_areas)) {
+            Add-JobAgentCoverageCount -Counts $target -Key $area
+        }
+    }
+
+    [pscustomobject]@{
+        by_verification_status = ConvertTo-JobAgentCoverageCountsObject -Counts $verification
+        by_inventory_state = ConvertTo-JobAgentCoverageCountsObject -Counts $inventory
+        by_target_area = ConvertTo-JobAgentCoverageCountsObject -Counts $target
+        by_industry = ConvertTo-JobAgentCoverageCountsObject -Counts $industry
+        by_discovery_type = ConvertTo-JobAgentCoverageCountsObject -Counts $sourceType
+        by_discovery_origin = ConvertTo-JobAgentCoverageCountsObject -Counts $sourceOrigin
+    }
+}
+
+function Test-JobAgentCoverageWaveCompanyMatch {
+    param(
+        [Parameter(Mandatory)][object]$Metric,
+        [Parameter(Mandatory)][string]$WaveId
+    )
+
+    $origin = [string]$Metric.discovery_origin
+    $industry = [string]$Metric.industry
+    $area = [string]$Metric.target_area
+    switch ($WaveId) {
+        'A' {
+            return [int]$Metric.scan_priority -ge 85 -or $origin -eq 'source-registry:stadt_muenchen_boersennotierte_unternehmen'
+        }
+        'B' {
+            return @('FREISING', 'MUNICH_20KM') -contains $area -or $industry -match 'Airport|Research|Semiconductor'
+        }
+        'C' {
+            return $origin -match 'emm|metropolregion|cluster' -or $industry -match 'Public Sector|Research|University|Hochschule'
+        }
+        'D' {
+            return $origin -match 'ba_jobsuche|eures|make_it_in_germany|yourfirm'
+        }
+        default {
+            return $true
+        }
+    }
+}
+
+function New-JobAgentCoverageWaveCandidate {
+    param(
+        [Parameter(Mandatory)][object]$Metric,
+        [Parameter(Mandatory)][string]$Kind
+    )
+
+    [pscustomobject]@{
+        kind = $Kind
+        company_id = [string]$Metric.company_id
+        company = [string]$Metric.company
+        target_area = [string]$Metric.target_area
+        industry = [string]$Metric.industry
+        verification_status = [string]$Metric.verification_status
+        review_status = [string]$Metric.inventory_state
+        discovery_origin = [string]$Metric.discovery_origin
+        next_step = [string]$Metric.next_step
+    }
+}
+
+function New-JobAgentCoverageHintWaveCandidate {
+    param([Parameter(Mandatory)][object]$Hint)
+
+    [pscustomobject]@{
+        kind = 'discovery_hint'
+        company_id = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'known_company_id' -Default '')
+        company = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'employer_name' -Default 'UNKNOWN')
+        target_area = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'target_area' -Default 'UNKNOWN')
+        industry = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'industry_or_keyword' -Default 'UNKNOWN')
+        verification_status = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'verification_status' -Default 'UNVERIFIED')
+        review_status = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'candidate_status' -Default 'DISCOVERY_HINT')
+        discovery_origin = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'source_id' -Default 'UNKNOWN')
+        next_step = [string](Get-JobAgentCoverageProperty -Object $Hint -Name 'next_action' -Default 'verify_official_company_website_or_career_url')
+    }
+}
+
+function New-JobAgentCoverageImportWavePlan {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$CompanyMetrics,
+        [Parameter()][AllowNull()][object]$HintStore = $null,
+        [Parameter()][ValidateRange(1, 100)][int]$MaxCandidatesPerWave = 12
+    )
+
+    $waveDefinitions = @(
+        [pscustomobject]@{ wave_id = 'A'; title = 'Grosse regionale Arbeitgeber und boersennotierte Unternehmen'; milestone = 'M5-A'; dependency = 'JA-024/JA-026'; priority_score = 100 }
+        [pscustomobject]@{ wave_id = 'B'; title = 'Freising, Weihenstephan und Flughafen-Umfeld'; milestone = 'M5-B'; dependency = 'JA-024/JA-026'; priority_score = 92 }
+        [pscustomobject]@{ wave_id = 'C'; title = 'EMM-Mitglieder, Branchencluster und oeffentliche Institutionen'; milestone = 'M5-C'; dependency = 'JA-023'; priority_score = 84 }
+        [pscustomobject]@{ wave_id = 'D'; title = 'BA, EURES und Make-it-in-Germany-Hints'; milestone = 'M5-D'; dependency = 'JA-025'; priority_score = 76 }
+        [pscustomobject]@{ wave_id = 'E'; title = 'Startup-, Scaleup- und manuelle Review-Reste'; milestone = 'M5-E'; dependency = 'JA-027 Coverage-Audit'; priority_score = 68 }
+    )
+
+    $assigned = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $waves = New-Object System.Collections.Generic.List[object]
+    foreach ($definition in $waveDefinitions) {
+        $companyCandidates = foreach ($metric in @($CompanyMetrics)) {
+            if ($assigned.Contains([string]$metric.company_id)) {
+                continue
+            }
+            if (Test-JobAgentCoverageWaveCompanyMatch -Metric $metric -WaveId ([string]$definition.wave_id)) {
+                New-JobAgentCoverageWaveCandidate -Metric $metric -Kind 'company'
+            }
+        }
+        foreach ($candidate in @($companyCandidates)) {
+            if (-not [string]::IsNullOrWhiteSpace([string]$candidate.company_id)) {
+                [void]$assigned.Add([string]$candidate.company_id)
+            }
+        }
+
+        $hintCandidates = @()
+        if ($null -ne $HintStore -and $definition.wave_id -eq 'D') {
+            $hintCandidates = @($HintStore.hints |
+                Where-Object { [string](Get-JobAgentCoverageProperty -Object $_ -Name 'candidate_status' -Default '') -eq 'DISCOVERY_HINT' } |
+                ForEach-Object { New-JobAgentCoverageHintWaveCandidate -Hint $_ })
+        }
+
+        $allCandidates = @(@($companyCandidates) + @($hintCandidates) |
+            Sort-Object @{ Expression = { [string]$_.review_status -eq 'CAREER_URL_VERIFIED' }; Ascending = $true }, company |
+            Select-Object -First $MaxCandidatesPerWave)
+        $waves.Add([pscustomobject]@{
+                wave_id = [string]$definition.wave_id
+                title = [string]$definition.title
+                dependency = [string]$definition.dependency
+                priority_score = [int]$definition.priority_score
+                milestone = [string]$definition.milestone
+                candidates_total = @($allCandidates).Count
+                candidates = @($allCandidates)
+            })
+    }
+
+    [pscustomobject]@{
+        contract = 'Importwellen sind operative Kandidatenlisten; unverifizierte Hints bleiben ausserhalb des Firmenbestands, bis offizielle Website oder Karriere-URL belegt ist.'
+        waves = @($waves.ToArray())
+    }
+}
+
 function New-JobAgentCoverageReport {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][object]$Document,
+        [Parameter()][AllowNull()][object]$SourceRegistry = $null,
+        [Parameter()][AllowNull()][object]$HintStore = $null,
         [Parameter()][datetime]$Now = [datetime]::UtcNow,
         [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 7,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxPriorityItems = 25
@@ -372,16 +645,29 @@ function New-JobAgentCoverageReport {
             manual_review_required = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'MANUAL_REVIEW_REQUIRED' }).Count
             verified_without_career_url = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'VERIFIED_WEBSITE_ONLY' }).Count
             retry_required = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'RETRY_REQUIRED' }).Count
+            career_url_verified = @($metricsArray | Where-Object { [string]$_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count
+            company_domain_verified = @($metricsArray | Where-Object { [string]$_.verification_status -eq 'COMPANY_DOMAIN_VERIFIED' }).Count
+            unverified = @($metricsArray | Where-Object { [string]$_.verification_status -eq 'UNVERIFIED' }).Count
+            duplicate_groups = @(Get-JobAgentCoverageDuplicateGroups -Document $Document).Count
+            discovery_hints_total = if ($null -eq $HintStore) { 0 } else { @($HintStore.hints).Count }
+            unverified_discovery_hints = if ($null -eq $HintStore) { 0 } else { @($HintStore.hints | Where-Object { [string](Get-JobAgentCoverageProperty -Object $_ -Name 'verification_status' -Default 'UNVERIFIED') -eq 'UNVERIFIED' }).Count }
         }
+        dimensions = New-JobAgentCoverageDimensions -CompanyMetrics $metricsArray
         companies = @($metricsArray | Sort-Object company)
+        duplicates = @(Get-JobAgentCoverageDuplicateGroups -Document $Document)
         backlog = @(Get-JobAgentCoverageBacklog -CompanyMetrics $metricsArray)
         scan_priority = @(Get-JobAgentCoverageScanPriority -CompanyMetrics $metricsArray -MaxCompanies $MaxPriorityItems)
+        source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
+        import_waves = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore
     }
 }
 
 Export-ModuleMember -Function @(
     'Get-JobAgentCoverageBacklog',
     'Get-JobAgentCoverageScanPriority',
+    'Get-JobAgentCoverageDuplicateGroups',
     'New-JobAgentDiscoverySourceCoverageReport',
+    'New-JobAgentCoverageDimensions',
+    'New-JobAgentCoverageImportWavePlan',
     'New-JobAgentCoverageReport'
 )

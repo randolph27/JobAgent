@@ -1,46 +1,42 @@
 {
-  "ts": "2026-08-23T09:17:13.705+02:00",
+  "ts": "2026-08-23T09:28:13.000+02:00",
   "project": "JobAgent",
-  "status": "open",
+  "status": "done",
   "active_id": null,
-  "active_roadmap_id": "JA-027",
+  "active_roadmap_id": null,
   "completed_roadmap_ids": [
-    "JA-026"
+    "JA-027"
   ],
-  "next": "JA-027 Firmen-Coverage-Audit und priorisierte Importwellen fuer maximale Abdeckung einfuehren",
+  "next": "Keine aktiven Roadmap-Punkte.",
   "changed": [
     "Roadmap.md",
     "Roadmap_archive.md",
     "Roadmap_index.md",
-    "docs/test-matrix.json",
-    "docs/test-matrix.md",
-    "handoff.latest.md",
-    "handoff.latest.json",
+    "src/JobAgent.Coverage.psm1",
+    "tools/Measure-JobAgentCompanyCoverage.ps1",
+    "tests/Test-JobAgentCoverage.ps1",
+    "html/jobagent/company-coverage.html",
     "todo.checkpoint.json",
     "todo.current.md",
     "todo.events.jsonl",
-    "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json"
+    "todo.state.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
       "status": "pass",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
       "status": "pass",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
-      "status": "pass",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlViewportAudit.ps1",
       "status": "pass",
       "exit": 0
     },
@@ -53,35 +49,29 @@
       "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
       "status": "pass",
       "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "status": "pass",
-      "exit": 0
     }
   ],
   "artifacts": [
-    "logs/jobagent/company-career-verification-20260823-070101.json",
-    "logs/jobagent/company-career-audit-20260823-070635.json",
-    "logs/jobagent/company-career-audit-20260823-070635.md"
+    "logs/jobagent/company-coverage-20260823-072556.json",
+    "logs/jobagent/company-coverage-20260823-072556.md",
+    "html/jobagent/company-coverage.html"
   ],
   "audit": {
-    "review_company_ids": [
-      "company:bmw_group",
-      "company:fraunhofer_ivv"
-    ],
-    "pass": 36,
-    "fail": 2,
-    "audited": 38
+    "companies_total": 38,
+    "career_url_verified": 38,
+    "duplicate_groups": 0,
+    "unverified_discovery_hints": 6,
+    "import_waves": 5,
+    "known_risks": [
+      "company:bmw_group timeout/retry",
+      "company:fraunhofer_ivv career URL HTTP 404 review"
+    ]
   },
   "blocker": {
     "sonarqube": "localhost:9000 timeout; .\\ci.cmd sonar-start fails because D:\\_Scripte\\JobAgent\\sonar.cmd is missing"
   },
-  "next_steps": [
-    "Implement tools/Measure-JobAgentCompanyCoverage.ps1",
-    "Extend src/JobAgent.Coverage.psm1",
-    "Extend tests/Test-JobAgentCoverage.ps1",
-    "Generate JSON/Markdown/HTML coverage reports",
-    "Surface BMW timeout and Fraunhofer IVV 404 as review risks"
-  ]
+  "services": {
+    "devserver": "http://localhost:8500/ started via .\\ci.cmd devserver-start"
+  },
+  "next_steps": []
 }
