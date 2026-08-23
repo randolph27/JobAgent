@@ -686,8 +686,104 @@ function New-JobAgentCompanyDiscoveryHintReport {
     }
 }
 
+function Test-JobAgentDiscoverySourcePrimaryEvidence {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Source
+    )
+
+    $sourceClass = [string]$Source.source_class
+    $evidenceLevel = [string]$Source.evidence_level
+    $reviewRequired = [bool]$Source.review_required
+    return @('OFFICIAL_COMPANY', 'OFFICIAL_ATS') -contains $sourceClass -and $evidenceLevel -eq 'PRIMARY_OFFICIAL' -and -not $reviewRequired
+}
+
+function Assert-JobAgentDiscoverySource {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Source
+    )
+
+    $requiredFields = @(
+        'source_id',
+        'source_class',
+        'source_url',
+        'operator',
+        'allowed_use',
+        'forbidden_use',
+        'rate_limit_policy',
+        'robots_or_terms_note',
+        'expected_fields',
+        'evidence_level',
+        'freshness_policy',
+        'retention_policy',
+        'import_mode',
+        'review_required',
+        'legal_risk'
+    )
+    foreach ($field in $requiredFields) {
+        if ($Source.PSObject.Properties.Name -notcontains $field) {
+            throw "Discovery-Quelle fehlt Pflichtfeld $field."
+        }
+    }
+
+    foreach ($field in @('source_id', 'source_class', 'source_url', 'operator', 'allowed_use', 'forbidden_use', 'rate_limit_policy', 'robots_or_terms_note', 'evidence_level', 'freshness_policy', 'retention_policy', 'import_mode', 'legal_risk')) {
+        if ([string]::IsNullOrWhiteSpace([string]$Source.$field)) {
+            throw "Discovery-Quelle $($Source.source_id) hat leeres Pflichtfeld $field."
+        }
+    }
+    if (@($Source.expected_fields).Count -lt 1) {
+        throw "Discovery-Quelle $($Source.source_id) hat keine expected_fields."
+    }
+
+    $sourceClass = [string]$Source.source_class
+    if (@('JOB_BOARD_DISCOVERY', 'OPEN_REGISTER_DUMP', 'REGIONAL_DIRECTORY', 'PUBLIC_INSTITUTION_DIRECTORY', 'MANUAL_REVIEW') -contains $sourceClass) {
+        if ([bool]$Source.review_required -ne $true) {
+            throw "Discovery-Quelle $($Source.source_id) muss review_required=true setzen."
+        }
+        if ([string]$Source.evidence_level -eq 'PRIMARY_OFFICIAL') {
+            throw "Discovery-Quelle $($Source.source_id) darf kein Primaerbeleg sein."
+        }
+    }
+
+    if ($sourceClass -eq 'JOB_BOARD_DISCOVERY' -and [string]$Source.evidence_level -ne 'DISCOVERY_HINT') {
+        throw "Jobboerse $($Source.source_id) darf nur Discovery-Hinweise erzeugen."
+    }
+
+    if ($sourceClass -eq 'REJECTED') {
+        if ([string]$Source.import_mode -ne 'REJECT' -or [string]$Source.evidence_level -ne 'NOT_IMPORTABLE' -or [string]$Source.legal_risk -ne 'BLOCKED') {
+            throw "Abgelehnte Quelle $($Source.source_id) ist nicht fail-closed."
+        }
+        return
+    }
+
+    if (([string]$Source.import_mode -eq 'REJECT') -or ([string]$Source.evidence_level -eq 'NOT_IMPORTABLE')) {
+        throw "Nicht abgelehnte Quelle $($Source.source_id) ist als nicht importierbar markiert."
+    }
+}
+
+function Assert-JobAgentDiscoverySourceRegistry {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Registry
+    )
+
+    if ([string]$Registry.schema_version -ne 'jobagent/discovery-source/v2') {
+        throw 'Discovery-Source-Registry hat falsche Schema-Version.'
+    }
+    $ids = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($source in @($Registry.items)) {
+        Assert-JobAgentDiscoverySource -Source $source
+        if (-not $ids.Add([string]$source.source_id)) {
+            throw "Doppelte Discovery-Quelle: $($source.source_id)"
+        }
+    }
+}
+
 Export-ModuleMember -Function @(
     'Add-JobAgentCompanySeedInventory',
+    'Assert-JobAgentDiscoverySource',
+    'Assert-JobAgentDiscoverySourceRegistry',
     'ConvertTo-JobAgentCanonicalDomain',
     'ConvertTo-JobAgentCompanyDiscoverySeed',
     'ConvertTo-JobAgentCompanyNameKey',
@@ -702,5 +798,6 @@ Export-ModuleMember -Function @(
     'New-JobAgentCompanyDiscoveryHintSearch',
     'New-JobAgentDiscoverySource',
     'New-JobAgentCompanySeed',
-    'New-JobAgentTargetLocation'
+    'New-JobAgentTargetLocation',
+    'Test-JobAgentDiscoverySourcePrimaryEvidence'
 )

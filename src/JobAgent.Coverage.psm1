@@ -344,8 +344,8 @@ function Get-JobAgentCoverageScanPriority {
 function Test-JobAgentCoverageImportableSource {
     param([Parameter(Mandatory)][object]$Source)
 
-    $decision = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'import_decision' -Default '')
-    return @('IMPORT_CANDIDATES', 'IMPORT_HINTS_ONLY') -contains $decision
+    $mode = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'import_mode' -Default '')
+    return @('TARGETED_LOOKUP_ONLY', 'BULK_SNAPSHOT', 'FIXTURE_OR_SNAPSHOT_ONLY') -contains $mode
 }
 
 function Test-JobAgentCoverageRejectedSource {
@@ -358,9 +358,9 @@ function Test-JobAgentCoverageManualReviewSource {
     param([Parameter(Mandatory)][object]$Source)
 
     $sourceClass = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'source_class' -Default '')
-    $decision = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'import_decision' -Default '')
-    $verificationRequired = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'verification_required' -Default '')
-    return $sourceClass -eq 'MANUAL_REVIEW_ONLY' -or $decision -eq 'MANUAL_REVIEW_ONLY' -or $verificationRequired -eq 'MANUAL_REVIEW_REQUIRED'
+    $mode = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'import_mode' -Default '')
+    $reviewRequired = [bool](Get-JobAgentCoverageProperty -Object $Source -Name 'review_required' -Default $false)
+    return $sourceClass -eq 'MANUAL_REVIEW' -or $mode -eq 'MANUAL_REVIEW_ONLY' -or $reviewRequired
 }
 
 function Test-JobAgentCoverageSourceVerificationGap {
@@ -370,8 +370,9 @@ function Test-JobAgentCoverageSourceVerificationGap {
         return $false
     }
     $sourceClass = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'source_class' -Default '')
-    $verificationRequired = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'verification_required' -Default '')
-    return $sourceClass -ne 'OFFICIAL_DIRECTORY' -or @('MANUAL_REVIEW_REQUIRED', 'COMPANY_DOMAIN_OR_CAREER_URL_REQUIRED') -contains $verificationRequired
+    $evidenceLevel = [string](Get-JobAgentCoverageProperty -Object $Source -Name 'evidence_level' -Default '')
+    $reviewRequired = [bool](Get-JobAgentCoverageProperty -Object $Source -Name 'review_required' -Default $true)
+    return -not (@('OFFICIAL_COMPANY', 'OFFICIAL_ATS') -contains $sourceClass -and $evidenceLevel -eq 'PRIMARY_OFFICIAL' -and -not $reviewRequired)
 }
 
 function New-JobAgentDiscoverySourceCoverageReport {
@@ -383,18 +384,24 @@ function New-JobAgentDiscoverySourceCoverageReport {
 
     $items = @($SourceRegistry.items)
     $classCounts = [ordered]@{}
-    $decisionCounts = [ordered]@{}
+    $modeCounts = [ordered]@{}
+    $evidenceCounts = [ordered]@{}
     foreach ($source in $items) {
         $sourceClass = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_class' -Default 'UNKNOWN')
-        $decision = [string](Get-JobAgentCoverageProperty -Object $source -Name 'import_decision' -Default 'UNKNOWN')
+        $mode = [string](Get-JobAgentCoverageProperty -Object $source -Name 'import_mode' -Default 'UNKNOWN')
+        $evidenceLevel = [string](Get-JobAgentCoverageProperty -Object $source -Name 'evidence_level' -Default 'UNKNOWN')
         if (-not $classCounts.Contains($sourceClass)) {
             $classCounts[$sourceClass] = 0
         }
-        if (-not $decisionCounts.Contains($decision)) {
-            $decisionCounts[$decision] = 0
+        if (-not $modeCounts.Contains($mode)) {
+            $modeCounts[$mode] = 0
+        }
+        if (-not $evidenceCounts.Contains($evidenceLevel)) {
+            $evidenceCounts[$evidenceLevel] = 0
         }
         $classCounts[$sourceClass]++
-        $decisionCounts[$decision]++
+        $modeCounts[$mode]++
+        $evidenceCounts[$evidenceLevel]++
     }
 
     $manualReviewSources = @($items | Where-Object { Test-JobAgentCoverageManualReviewSource -Source $_ })
@@ -407,7 +414,8 @@ function New-JobAgentDiscoverySourceCoverageReport {
         source_registry_version = [string](Get-JobAgentCoverageProperty -Object $SourceRegistry -Name 'schema_version' -Default 'UNKNOWN')
         sources_total = $items.Count
         class_counts = [pscustomobject]$classCounts
-        import_decision_counts = [pscustomobject]$decisionCounts
+        import_mode_counts = [pscustomobject]$modeCounts
+        evidence_level_counts = [pscustomobject]$evidenceCounts
         importable_sources = $importableSources.Count
         rejected_sources = $rejectedSources.Count
         manual_review_sources = $manualReviewSources.Count

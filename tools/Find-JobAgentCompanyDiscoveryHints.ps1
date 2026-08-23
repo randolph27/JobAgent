@@ -46,19 +46,21 @@ function New-DefaultDiscoveryHintSeed {
 
     @(
         [pscustomobject]@{ employer_name = 'BMW Group'; location = 'Muenchen'; industry_or_keyword = 'IT Operations'; source_id = 'source-registry:ba_jobsuche'; observed_url = 'https://www.arbeitsagentur.de/jobsuche/suche?was=IT%20Operations&wo=Muenchen'; search = $byKey['Muenchen|IT Operations'] }
-        [pscustomobject]@{ employer_name = 'Siemens AG'; location = 'Muenchen'; industry_or_keyword = 'Digitalisierung'; source_id = 'source-registry:ba_jobsuche'; observed_url = 'https://www.arbeitsagentur.de/jobsuche/suche?was=Digitalisierung&wo=Muenchen'; search = $byKey['Muenchen|Digitalisierung'] }
-        [pscustomobject]@{ employer_name = 'Flughafen Muenchen GmbH'; location = 'Freising'; industry_or_keyword = 'IT Security'; source_id = 'source-registry:make_it_in_germany_jobs'; observed_url = 'https://www.make-it-in-germany.com/en/working-in-germany/job-listings?location=Freising&keyword=IT%20Security'; search = $byKey['Freising|IT Security'] }
-        [pscustomobject]@{ employer_name = 'Texas Instruments Deutschland GmbH'; location = 'Freising'; industry_or_keyword = 'Enterprise Applications'; source_id = 'source-registry:eures_jobseekers'; observed_url = 'https://eures.europa.eu/jobseekers_en?location=Freising&keywords=Enterprise%20Applications'; search = $byKey['Freising|Enterprise Applications'] }
-        [pscustomobject]@{ employer_name = 'CANCOM SE'; location = 'Muenchen'; industry_or_keyword = 'Director IT'; source_id = 'source-registry:yourfirm'; observed_url = 'https://www.yourfirm.de/jobs/muenchen/director-it/'; search = $byKey['Muenchen|Director IT'] }
-        [pscustomobject]@{ employer_name = 'Fraunhofer IVV'; location = 'Freising'; industry_or_keyword = 'CIO'; source_id = 'source-registry:emm_members'; observed_url = 'https://www.metropolregion-muenchen.eu/ueber-uns/mitglieder'; search = $byKey['Freising|CIO'] }
+        [pscustomobject]@{ employer_name = 'Siemens AG'; location = 'Muenchen'; industry_or_keyword = 'Digitalisierung'; source_id = 'source-registry:stepstone_muenchen'; observed_url = 'https://www.stepstone.de/jobs/digitalisierung/in-muenchen'; search = $byKey['Muenchen|Digitalisierung'] }
+        [pscustomobject]@{ employer_name = 'Flughafen Muenchen GmbH'; location = 'Freising'; industry_or_keyword = 'IT Security'; source_id = 'source-registry:stepstone_freising'; observed_url = 'https://www.stepstone.de/jobs/it-security/in-freising'; search = $byKey['Freising|IT Security'] }
+        [pscustomobject]@{ employer_name = 'Texas Instruments Deutschland GmbH'; location = 'Freising'; industry_or_keyword = 'Enterprise Applications'; source_id = 'source-registry:ba_jobsuche'; observed_url = 'https://www.arbeitsagentur.de/jobsuche/suche?was=Enterprise%20Applications&wo=Freising'; search = $byKey['Freising|Enterprise Applications'] }
+        [pscustomobject]@{ employer_name = 'CANCOM SE'; location = 'Muenchen'; industry_or_keyword = 'Director IT'; source_id = 'source-registry:indeed_de'; observed_url = 'https://de.indeed.com/jobs?q=Director+IT&l=Muenchen'; search = $byKey['Muenchen|Director IT'] }
+        [pscustomobject]@{ employer_name = 'Fraunhofer IVV'; location = 'Freising'; industry_or_keyword = 'CIO'; source_id = 'source-registry:stepstone_freising'; observed_url = 'https://www.stepstone.de/jobs/cio/in-freising'; search = $byKey['Freising|CIO'] }
     )
 }
 
 $sourceRegistry = Get-Content -LiteralPath $resolvedSourceRegistryPath -Raw | ConvertFrom-Json -Depth 100
+Assert-JobAgentDiscoverySourceRegistry -Registry $sourceRegistry
 $allowedSourceIds = @($sourceRegistry.items | Where-Object {
-        [string]$_.source_class -ne 'OFFICIAL_DIRECTORY' -and
-        [string]$_.source_class -ne 'REJECTED' -and
-        @('IMPORT_HINTS_ONLY', 'MANUAL_REVIEW_ONLY') -contains [string]$_.import_decision
+        [string]$_.source_class -eq 'JOB_BOARD_DISCOVERY' -and
+        [string]$_.evidence_level -eq 'DISCOVERY_HINT' -and
+        [bool]$_.review_required -eq $true -and
+        [string]$_.import_mode -ne 'REJECT'
     } | ForEach-Object { [string]$_.source_id })
 
 $searchMatrix = @(Get-JobAgentCompanyDiscoveryHintSearchMatrix)

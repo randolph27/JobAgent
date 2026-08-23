@@ -65,21 +65,23 @@ Recovery:
 
 Jede Quelle enthaelt:
 
-- `source_id`, `source_url`, `operator`
-- `source_class`: `OFFICIAL_DIRECTORY`, `PUBLIC_JOBBOARD_HINT`, `BUSINESS_NETWORK_HINT`, `REGISTER_HINT`, `STARTUP_CLUSTER_HINT`, `SECTOR_CLUSTER_HINT`, `MANUAL_REVIEW_ONLY` oder `REJECTED`
-- `allowed_use`, `expected_fields`, `verification_required`
-- `rate_limit_note`, `robots_note`, `priority`, `import_decision`
-- `last_reviewed_at`, `rejection_reason`
+- `source_id`, `source_class`, `source_url`, `operator`
+- `allowed_use`, `forbidden_use`, `rate_limit_policy`, `robots_or_terms_note`
+- `expected_fields`, `evidence_level`, `freshness_policy`, `retention_policy`
+- `import_mode`, `review_required`, `legal_risk`
 
 Importregeln:
 
-- `OFFICIAL_DIRECTORY` darf Kandidaten fuer den kuratierten Firmenfeed liefern, erzeugt aber ohne separate Unternehmenswebsite-/Karrierepfadpruefung keine `JobSource`.
-- `PUBLIC_JOBBOARD_HINT`, `BUSINESS_NETWORK_HINT`, `REGISTER_HINT`, `STARTUP_CLUSTER_HINT` und `SECTOR_CLUSTER_HINT` duerfen nur Hints oder Manual-Review-Faelle erzeugen.
-- `MANUAL_REVIEW_ONLY` wird nicht automatisiert importiert.
-- `REJECTED` ist fail-closed: `import_decision` muss `REJECT`, `verification_required` muss `NOT_IMPORTABLE`, und `rejection_reason` muss gesetzt sein.
-- Jobboersen, Business-Netzwerke und Register duerfen nie als offizielle Karriere- oder Bewerbungsquelle gespeichert werden.
+- `OFFICIAL_REGISTER` und `OPEN_REGISTER_DUMP` erzeugen nur Register-/Kandidatenhints; offizielle Portale werden nicht massenhaft gescraped.
+- `REGIONAL_DIRECTORY` und `PUBLIC_INSTITUTION_DIRECTORY` duerfen Kandidaten liefern, aber ohne separate Unternehmenswebsite-/Karrierepfadpruefung keine `JobSource`.
+- `JOB_BOARD_DISCOVERY` erzeugt ausschliesslich volatile Arbeitgeber-Hints mit Suchparametern und Snapshot-Evidenz; Jobboersen duerfen nie als offizielle Karriere- oder Bewerbungsquelle gespeichert werden.
+- `OFFICIAL_COMPANY` und `OFFICIAL_ATS` sind die einzigen Klassen mit `evidence_level: PRIMARY_OFFICIAL`.
+- `MANUAL_REVIEW` wird nicht automatisch produktiv importiert.
+- `REJECTED` ist fail-closed: `import_mode` muss `REJECT`, `evidence_level` muss `NOT_IMPORTABLE`, `review_required` muss `true`, und `legal_risk` muss `BLOCKED` sein.
 
-`New-JobAgentDiscoverySourceCoverageReport` in `src/JobAgent.Coverage.psm1` wertet Quellebene und Firmenebene getrennt aus. Der Funktionsbericht zaehlt Quellen nach Klasse, Importentscheidung, importierbaren Quellen, abgelehnten Quellen, Manual-Review-Quellen und offenen Verifikationsluecken. Der fokussierte Test schreibt `logs/jobagent/ja-023-source-coverage.json`.
+`Assert-JobAgentDiscoverySourceRegistry` in `src/JobAgent.CompanyInventory.psm1` validiert fail-closed Pflichtfelder, Review-Pflichten und Primaerbeleggrenzen. `New-JobAgentDiscoverySourceCoverageReport` in `src/JobAgent.Coverage.psm1` wertet Quellebene und Firmenebene getrennt aus. Der Funktionsbericht zaehlt Quellen nach Klasse, Importmodus, Evidenzlevel, importierbaren Quellen, abgelehnten Quellen, Manual-Review-Quellen und offenen Verifikationsluecken. Der fokussierte Test schreibt `logs/jobagent/ja-023-source-coverage.json`.
+
+Der ausfuehrliche fachliche Vertrag steht in `docs/company-discovery-source-contract.md`.
 
 Funktionstest:
 

@@ -133,28 +133,53 @@ $sourceRegistryJson = Get-Content -Raw -LiteralPath $sourceRegistryPath
 $sourceSchemaJson = Get-Content -Raw -LiteralPath $sourceSchemaPath
 Assert-True -Condition (Test-Json -Json $sourceRegistryJson -Schema $sourceSchemaJson) -Message 'Discovery-Quellenkatalog verletzt das JSON-Schema.'
 $sourceRegistry = $sourceRegistryJson | ConvertFrom-Json -Depth 20
+Assert-JobAgentDiscoverySourceRegistry -Registry $sourceRegistry
 $sourceCoverage = New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $sourceRegistry -Now ([datetime]'2026-08-23T08:30:00Z')
 Assert-True -Condition ($sourceCoverage.sources_total -ge 10) -Message 'Discovery-Quellenkatalog enthaelt zu wenige Quellen.'
-Assert-True -Condition ($sourceCoverage.class_counts.OFFICIAL_DIRECTORY -ge 2) -Message 'Offizielle Verzeichnisquellen werden nicht gezaehlt.'
-Assert-True -Condition ($sourceCoverage.class_counts.PUBLIC_JOBBOARD_HINT -ge 3) -Message 'Sekundaere Jobboersen-Hinweise werden nicht gezaehlt.'
-Assert-True -Condition ($sourceCoverage.class_counts.REGISTER_HINT -ge 2) -Message 'Register-Hinweise werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.class_counts.REGIONAL_DIRECTORY -ge 1) -Message 'Regionale Verzeichnisquellen werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.class_counts.JOB_BOARD_DISCOVERY -ge 3) -Message 'Sekundaere Jobboersen-Hinweise werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.class_counts.OFFICIAL_REGISTER -ge 2) -Message 'Offizielle Register-Hinweise werden nicht gezaehlt.'
+Assert-True -Condition ($sourceCoverage.class_counts.OPEN_REGISTER_DUMP -ge 1) -Message 'Open-Register-Dumps werden nicht gezaehlt.'
 Assert-True -Condition ($sourceCoverage.class_counts.REJECTED -ge 1) -Message 'Abgelehnte Quellen werden nicht gezaehlt.'
 Assert-True -Condition ($sourceCoverage.importable_sources -ge 6) -Message 'Importierbare Quellen werden falsch gezaehlt.'
-Assert-True -Condition ($sourceCoverage.manual_review_sources -ge 7) -Message 'Manual-Review-Quellen werden falsch gezaehlt.'
+Assert-True -Condition ($sourceCoverage.manual_review_sources -ge 10) -Message 'Manual-Review-Quellen werden falsch gezaehlt.'
 Assert-True -Condition ($sourceCoverage.verification_gap_sources -ge 8) -Message 'Offene Verifikationsluecken werden falsch gezaehlt.'
 Assert-True -Condition (@($sourceCoverage.rejected_source_ids | Where-Object { $_ -eq 'source-registry:linkedin_jobs' }).Count -eq 1) -Message 'Abgelehnte Quelle wird nicht ausgewiesen.'
 $invalidOfficialSemantics = @($sourceRegistry.items | Where-Object {
-        [string]$_.source_class -ne 'OFFICIAL_DIRECTORY' -and
-        [string]$_.import_decision -eq 'IMPORT_CANDIDATES' -and
-        [string]$_.verification_required -eq 'OFFICIAL_CAREER_URL_REQUIRED'
+        [string]$_.source_class -notin @('OFFICIAL_COMPANY', 'OFFICIAL_ATS') -and
+        [string]$_.evidence_level -eq 'PRIMARY_OFFICIAL'
     })
 Assert-True -Condition ($invalidOfficialSemantics.Count -eq 0) -Message 'Sekundaerquelle darf keine offizielle Karrierequellen-Semantik erhalten.'
 $missingUsageNotes = @($sourceRegistry.items | Where-Object {
         [string]::IsNullOrWhiteSpace([string]$_.allowed_use) -or
-        [string]::IsNullOrWhiteSpace([string]$_.rate_limit_note) -or
-        [string]::IsNullOrWhiteSpace([string]$_.robots_note)
+        [string]::IsNullOrWhiteSpace([string]$_.forbidden_use) -or
+        [string]::IsNullOrWhiteSpace([string]$_.rate_limit_policy) -or
+        [string]::IsNullOrWhiteSpace([string]$_.robots_or_terms_note)
     })
 Assert-True -Condition ($missingUsageNotes.Count -eq 0) -Message 'Quellen muessen Nutzungs-, Rate- und Robots-Hinweise tragen.'
+
+$invalidSource = $sourceRegistry.items[0].PSObject.Copy()
+$invalidSource.PSObject.Properties.Remove('allowed_use')
+try {
+    Assert-JobAgentDiscoverySource -Source $invalidSource
+    throw 'ungueltige Quelle wurde akzeptiert'
+}
+catch {
+    Assert-True -Condition ([string]$_.Exception.Message -match 'allowed_use') -Message 'Fehlendes allowed_use muss fail-closed abgelehnt werden.'
+}
+
+$jobBoardPrimary = $sourceRegistry.items[0].PSObject.Copy()
+$jobBoardPrimary.source_id = 'source-registry:test_jobboard_primary'
+$jobBoardPrimary.source_class = 'JOB_BOARD_DISCOVERY'
+$jobBoardPrimary.evidence_level = 'PRIMARY_OFFICIAL'
+$jobBoardPrimary.review_required = $true
+try {
+    Assert-JobAgentDiscoverySource -Source $jobBoardPrimary
+    throw 'Jobboerse als Primaerbeleg wurde akzeptiert'
+}
+catch {
+    Assert-True -Condition ([string]$_.Exception.Message -match 'Primaerbeleg|Jobboerse') -Message 'Jobboerse als Primaerbeleg muss fail-closed abgelehnt werden.'
+}
 
 $hintStorePath = Join-Path $root 'data\jobagent\company-discovery.hints.json'
 Assert-True -Condition (Test-Path -LiteralPath $hintStorePath -PathType Leaf) -Message 'Discovery-Hint-Store fehlt.'
@@ -166,7 +191,7 @@ Assert-True -Condition ($hintStore.unverified_hints -eq $hintStore.hints_total) 
 Assert-True -Condition (@($hintStore.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' }).Count -eq 0) -Message 'Discovery-Hint-Store darf keine anderen Kandidatenstatus speichern.'
 Assert-True -Condition (@($hintStore.hints | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.search_parameters.keyword) -or [string]::IsNullOrWhiteSpace([string]$_.observed_url) }).Count -eq 0) -Message 'Discovery-Hints muessen Suchparameter und Fund-URL tragen.'
 $hintSourceIds = @($hintStore.hints | ForEach-Object { [string]$_.source_id } | Sort-Object -Unique)
-$secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -ne 'OFFICIAL_DIRECTORY' -and [string]$_.source_class -ne 'REJECTED' } | ForEach-Object { [string]$_.source_id })
+$secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -eq 'JOB_BOARD_DISCOVERY' -and [string]$_.evidence_level -eq 'DISCOVERY_HINT' } | ForEach-Object { [string]$_.source_id })
 Assert-True -Condition (@($hintSourceIds | Where-Object { $secondarySourceIds -notcontains $_ }).Count -eq 0) -Message 'Discovery-Hints duerfen nur erlaubte Sekundaerquellen referenzieren.'
 
 $coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -Now ([datetime]'2026-08-23T08:30:00Z')

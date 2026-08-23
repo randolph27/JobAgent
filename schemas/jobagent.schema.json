@@ -111,6 +111,28 @@
         "JOB_DETAIL"
       ]
     },
+    "discovery_registry_source_class": {
+      "enum": [
+        "OFFICIAL_REGISTER",
+        "OPEN_REGISTER_DUMP",
+        "REGIONAL_DIRECTORY",
+        "PUBLIC_INSTITUTION_DIRECTORY",
+        "JOB_BOARD_DISCOVERY",
+        "OFFICIAL_COMPANY",
+        "OFFICIAL_ATS",
+        "MANUAL_REVIEW",
+        "REJECTED"
+      ]
+    },
+    "discovery_registry_evidence_level": {
+      "enum": [
+        "PRIMARY_OFFICIAL",
+        "SECONDARY_OFFICIAL_DIRECTORY",
+        "DISCOVERY_HINT",
+        "MANUAL_REVIEW_ONLY",
+        "NOT_IMPORTABLE"
+      ]
+    },
     "verification_evidence_status": {
       "enum": [
         "VERIFIED",
