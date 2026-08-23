@@ -234,6 +234,22 @@ $candidateVerificationQueue = [pscustomobject]@{
             next_attempt_at = '2026-08-24T08:00:00.000Z'
             last_status = 'UNVERIFIED'
             last_reason = 'Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.'
+        },
+        [pscustomobject]@{
+            identity_cluster_id = 'identity-cluster:domain_review_invalid'
+            candidate_id = 'hint:queue-review'
+            candidate_ids = @('hint:queue-review')
+            canonical_name = 'Queue Review AG'
+            source_count = 1
+            priority_score = 70
+            target_area_basis = @('TARGET_AREA_UNCERTAIN')
+            status = 'MANUAL_REVIEW_REQUIRED'
+            review_reason = 'TARGET_AREA_REVIEW_REQUIRED'
+            retry_count = 0
+            last_attempt_at = '2026-08-23T08:00:00.000Z'
+            next_attempt_at = $null
+            last_status = 'MANUAL_REVIEW_REQUIRED'
+            last_reason = 'Standortbezug muss manuell geprueft werden.'
         }
     )
 }
@@ -245,9 +261,12 @@ Assert-True -Condition ($coverageWithInputs.candidate_clusters.candidates_total 
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.review_queue_total -gt 0) -Message 'Coverage-Dedupe weist keine Review-Queue aus.'
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.dimensions.by_target_area_basis.REGISTER_SEAT_IN_TARGET -ge 1) -Message 'Coverage-Dedupe zaehlt Register-Standortbasis nicht.'
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.dimensions.by_conflict_flag.STAFFING_AGENCY_REVIEW -ge 1) -Message 'Coverage-Dedupe zaehlt Personaldienstleister-Konflikte nicht.'
-Assert-True -Condition ($coverageWithInputs.metrics.candidate_verification_queue_total -eq 2) -Message 'Coverage zaehlt Kandidaten-Verifikationsqueue falsch.'
+Assert-True -Condition ($coverageWithInputs.metrics.candidate_verification_queue_total -eq 3) -Message 'Coverage zaehlt Kandidaten-Verifikationsqueue falsch.'
 Assert-True -Condition ($coverageWithInputs.metrics.candidate_verification_verified -eq 1) -Message 'Coverage zaehlt verifizierte Kandidatenqueue falsch.'
 Assert-True -Condition ($coverageWithInputs.metrics.candidate_verification_ready -eq 1) -Message 'Coverage zaehlt offene Retry-Kandidatenqueue falsch.'
+Assert-True -Condition ($coverageWithInputs.candidate_verification_decision_report.productive_upsert_allowed_total -eq 1) -Message 'Coverage-Decision-Report zaehlt produktive Upserts falsch.'
+Assert-True -Condition ($coverageWithInputs.candidate_verification_decision_report.fail_closed_total -eq 1) -Message 'Coverage-Decision-Report zaehlt fail-closed Review falsch.'
+Assert-True -Condition ($coverageWithInputs.candidate_verification_decision_report.retry_deferred_total -eq 1) -Message 'Coverage-Decision-Report zaehlt Retry-Reject falsch.'
 Assert-True -Condition (@($coverageWithInputs.import_waves.waves).Count -eq 5) -Message 'Coverage erzeugt nicht alle Importwellen.'
 Assert-True -Condition (@($coverageWithInputs.import_waves.waves | Where-Object { $_.wave_id -eq 'D' -and $_.candidates_total -ge 1 }).Count -eq 1) -Message 'Importwelle D enthaelt keine Sekundaerhinweise.'
 Assert-True -Condition ($coverageWithInputs.import_waves.contract -match 'unverifizierte Hints') -Message 'Importwellen muessen Hints fail-closed beschreiben.'
@@ -271,9 +290,11 @@ Assert-True -Condition (@($toolJson.candidate_clusters.review_queue).Count -gt 0
 Assert-True -Condition ($toolMarkdown.Contains('## Importwellen')) -Message 'Coverage-Tool-Markdown enthaelt keine Importwellen.'
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Dedupe')) -Message 'Coverage-Tool-Markdown enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Verifikationsqueue')) -Message 'Coverage-Tool-Markdown enthaelt keine Kandidaten-Verifikationsqueue.'
+Assert-True -Condition ($toolMarkdown.Contains('## Review-/Reject-Report')) -Message 'Coverage-Tool-Markdown enthaelt keinen Review-/Reject-Report.'
 Assert-True -Condition ($toolHtml.Contains('<meta name="viewport" content="width=device-width, initial-scale=1">')) -Message 'Coverage-Tool-HTML enthaelt keinen Viewport-Meta-Tag.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Dedupe</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Verifikationsqueue</h2>')) -Message 'Coverage-Tool-HTML enthaelt keine Kandidaten-Verifikationsqueue.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Review-/Reject-Report</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Review-/Reject-Report.'
 Assert-True -Condition ($toolHtml.Contains('.table-wrap { overflow-x: auto; }')) -Message 'Coverage-Tool-HTML enthaelt keinen Tabellen-Overflow-Schutz.'
 Assert-True -Condition (-not ($toolHtml -match '<script\b[^>]*\bsrc=')) -Message 'Coverage-Tool-HTML darf keine externen Skripte laden.'
 Assert-True -Condition (-not ($toolHtml -match '<link\b[^>]*\bhref=')) -Message 'Coverage-Tool-HTML darf keine externen Stylesheets laden.'
@@ -316,6 +337,7 @@ Assert-True -Condition (@($enrichedHints.hints | Where-Object { [string]::IsNull
         'coverage_tool_generates_json_markdown_html_artifacts',
         'coverage_tool_html_has_responsive_guards',
         'coverage_candidate_cluster_metrics',
+        'coverage_candidate_verification_decision_report',
         'candidate_dedupe_tool_generates_json_markdown_and_enriched_hints'
     )
 } | ConvertTo-Json -Depth 4

@@ -140,6 +140,19 @@ function ConvertTo-ToolCoverageMarkdown {
                 (ConvertTo-ToolMarkdownText $entry.next_attempt_at)))
     }
     [void]$lines.Add('')
+    [void]$lines.Add('## Review-/Reject-Report')
+    [void]$lines.Add('| Entscheidung | Kandidat | Firma | Status | Grund | Naechster Versuch |')
+    [void]$lines.Add('|---|---|---|---|---|---|')
+    foreach ($entry in @($Coverage.candidate_verification_decision_report.items | Select-Object -First 25)) {
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
+                (ConvertTo-ToolMarkdownText $entry.decision),
+                (ConvertTo-ToolMarkdownText $entry.candidate_id),
+                (ConvertTo-ToolMarkdownText $entry.canonical_name),
+                (ConvertTo-ToolMarkdownText $entry.queue_status),
+                (ConvertTo-ToolMarkdownText $entry.reason),
+                (ConvertTo-ToolMarkdownText $entry.next_attempt_at)))
+    }
+    [void]$lines.Add('')
     [void]$lines.Add('## Backlog')
     [void]$lines.Add('| Score | Typ | Firma | Begruendung | Naechster Schritt |')
     [void]$lines.Add('|---:|---|---|---|---|')
@@ -194,6 +207,11 @@ function ConvertTo-ToolCoverageHtml {
     $queueEntries = if ($null -eq $Coverage.candidate_verification_queue) { @() } else { @($Coverage.candidate_verification_queue.queue) }
     foreach ($entry in @($queueEntries | Select-Object -First 25)) {
         [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.status) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.review_reason) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_attempt_at) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div></section>')
+    [void]$lines.Add('<section><h2>Review-/Reject-Report</h2><div class="table-wrap"><table><thead><tr><th>Entscheidung</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Grund</th><th>Naechster Versuch</th></tr></thead><tbody>')
+    foreach ($entry in @($Coverage.candidate_verification_decision_report.items | Select-Object -First 25)) {
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.decision) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.queue_status) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.reason) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_attempt_at) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Importwellen</h2>')

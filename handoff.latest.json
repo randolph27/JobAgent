@@ -1,75 +1,172 @@
 {
-  "ts": "2026-08-23T11:30:17.300+02:00",
+  "ts": "2026-08-23T11:45:00+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
-  "active_id": "TD-0028",
+  "active_id": "TD-0029",
   "status": "in-progress",
-  "goal": "JA-028 Offizielle Firmenwebsite-, Karriere- und ATS-Verifikation fuer Kandidaten automatisieren.",
+  "goal": "JA-029 Produktive Erweiterungswellen fuer tausende Muenchen-/Freising-Arbeitgeber mit Coverage-Gates einfuehren.",
+  "completed": [
+    "JA-028 rotiert nach Roadmap_archive.md",
+    "TD-0028 auf done gesetzt",
+    "Review-/Reject-Report fuer Candidate Verification in Log, Coverage, Markdown und HTML ergaenzt",
+    "STP ausgefuehrt"
+  ],
   "changed": [
+    ".ci/pins/immutable.hashes.json",
+    ".ci/pins/immutable.snapshot/Roadmap.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
     "handoff.latest.json",
     "handoff.latest.md",
     "html/jobagent/company-coverage.html",
     "src/JobAgent.Coverage.psm1",
-    "src/JobAgent.SourceVerification.psm1",
     "tests/Test-JobAgentCompanyCandidateVerification.ps1",
     "tests/Test-JobAgentCoverage.ps1",
+    "todo.checkpoint.json",
+    "todo.current.md",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
+    "todo.state.json",
     "tools/Measure-JobAgentCompanyCoverage.ps1",
     "tools/Verify-JobAgentCompanyCandidates.ps1"
   ],
   "verified": [
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0,
-      "status": "pass"
-    }
+    { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1", "exit": 0, "status": "pass" },
+    { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1", "exit": 0, "status": "pass" },
+    { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1", "exit": 0, "status": "pass" },
+    { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1", "exit": 0, "status": "pass" },
+    { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1", "exit": 0, "status": "pass" },
+    { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1", "exit": 0, "status": "pass" },
+    { "cmd": ".\\ci.cmd repin-immutables", "exit": 0, "status": "pass" },
+    { "cmd": ".\\ci.cmd stp", "exit": 0, "status": "pass" }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "2297711334a6",
+    "head": "0a871afb9079",
     "upstream": "origin/master",
-    "ahead_behind": "0/0-before-commit",
-    "worktree": "dirty-before-commit"
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty",
+    "tracked_changes": [
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Coverage.psm1",
+      "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+      "tests/Test-JobAgentCoverage.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Measure-JobAgentCompanyCoverage.ps1",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ]
   },
-  "next": "JA-028 abschliessen: Review-/Reject-Report aus echten Verifikationslaeufen konsistent in Coverage, Logs und Handoff-Evidence verwenden.",
+  "capsule": {
+    "ts": "2026-08-23T11:45:00+02:00",
+    "agent_id": "codex",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "TD-0029",
+    "status": "in-progress",
+    "goal": "JA-029 Produktive Erweiterungswellen fuer tausende Muenchen-/Freising-Arbeitgeber mit Coverage-Gates einfuehren.",
+    "changed": [
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Coverage.psm1",
+      "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+      "tests/Test-JobAgentCoverage.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Measure-JobAgentCompanyCoverage.ps1",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ],
+    "verified": [
+      { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1", "exit": 0, "status": "pass" },
+      { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1", "exit": 0, "status": "pass" },
+      { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1", "exit": 0, "status": "pass" },
+      { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1", "exit": 0, "status": "pass" },
+      { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1", "exit": 0, "status": "pass" },
+      { "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1", "exit": 0, "status": "pass" },
+      { "cmd": ".\\ci.cmd repin-immutables", "exit": 0, "status": "pass" },
+      { "cmd": ".\\ci.cmd stp", "exit": 0, "status": "pass" }
+    ],
+    "route_ok": true,
+    "route_violations": [],
+    "git": {
+      "branch": "master",
+      "head": "0a871afb9079",
+      "upstream": "origin/master",
+      "ahead": 0,
+      "behind": 0,
+      "worktree": "dirty",
+      "tracked_changes": [
+        ".ci/pins/immutable.hashes.json",
+        ".ci/pins/immutable.snapshot/Roadmap.md",
+        "Roadmap.md",
+        "Roadmap_archive.md",
+        "Roadmap_index.md",
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "html/jobagent/company-coverage.html",
+        "src/JobAgent.Coverage.psm1",
+        "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+        "tests/Test-JobAgentCoverage.ps1",
+        "todo.checkpoint.json",
+        "todo.current.md",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json",
+        "todo.state.json",
+        "tools/Measure-JobAgentCompanyCoverage.ps1",
+        "tools/Verify-JobAgentCompanyCandidates.ps1"
+      ]
+    },
+    "next": "Mit JA-029 starten: Wellenkonfiguration, Import-Gates, Store-/Report-Skalierung und Funktionstest tests\\Test-JobAgentImportWaves.ps1 vorbereiten.",
+    "refs": [
+      "README.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.md",
+      "handoff.latest.json"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  },
+  "next": "Mit JA-029 starten: Wellenkonfiguration, Import-Gates, Store-/Report-Skalierung und Funktionstest tests\\Test-JobAgentImportWaves.ps1 vorbereiten.",
   "refs": [
     "README.md",
     "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
@@ -77,8 +174,8 @@
     "handoff.latest.json"
   ],
   "notes": [
-    "JA-028 ist noch nicht abgeschlossen und wurde nicht rotiert.",
-    "STP generierte next=JA-029; fachlich ist TD-0028/JA-028 weiter der aktive Anker.",
-    "Supertest wurde fuer diesen Uebergabestand nicht ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt."
+    "Nicht mit JA-030 starten; JA-030 ist nach JA-029 nachgelagert.",
+    "Supertest wurde nicht erneut ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt.",
+    "Keine unverifizierten Kandidaten produktiv importieren."
   ]
 }

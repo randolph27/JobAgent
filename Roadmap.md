@@ -11,24 +11,6 @@
 
 ## Aktive Punkte
 
-- [ ] JA-028 Offizielle Firmenwebsite-, Karriere- und ATS-Verifikation fuer Kandidaten automatisieren #comment: Kandidaten aus Registern und Jobboersen werden erst nutzbar, wenn offizielle Firmen- oder Karrierequellen belegt sind.
-  - [ ] Beschreibung: Es existiert eine begrenzte Verifikations-Lane, die aus Kandidaten offizielle Website-, Karriere- und ATS-Quellen ableitet, prueft und als `CAREER_URL_VERIFIED`, `COMPANY_DOMAIN_VERIFIED`, `OFFICIAL_ATS_VERIFIED`, `MANUAL_REVIEW_REQUIRED` oder `UNVERIFIED` persistiert. Suchmaschinen-/Websuche, Unternehmensregister-Detailseiten, Impressum, offizielle Kontakt-/Karriereseiten und ATS-Redirects werden nur im erlaubten Umfang verwendet; Jobboersen bleiben Hinweisgeber. Jede Verifikation enthaelt `verification_url`, `verified_by_url`, `redirect_chain`, `evidence_type`, `evidence_text_hash`, `observed_at`, `http_status`, `final_url`, `reason` und `expires_at`.
-  - [ ] Scope: Erweitert werden `src/JobAgent.SourceVerification.psm1`, `src/JobAgent.LiveScan.psm1`, `src/JobAgent.CompanyInventory.psm1`, `tools/Verify-JobAgentCompanyCandidates.ps1`, `tests/Test-JobAgentSourceVerification.ps1`, `tests/Test-JobAgentLiveScan.ps1` und neue Tests `tests/Test-JobAgentCompanyCandidateVerification.ps1`. No-Go: kein Scraping hinter Login/Captcha, keine automatische Bewerbung, keine Kontaktformulare, keine globale ATS-Allowlist ohne Firmenbeleg, keine Uebernahme von Jobboersenlinks als offizielle Bewerbungslinks.
-  - [ ] Ist-Stand (2026-08-23 10:00): Verifikation offizieller Karrierequellen und ATS-Belege existiert fuer kleine Seeds; eine skalierte Candidate-Verification-Queue mit Retry, Ablaufdatum, manueller Review-Queue und tausenden Kandidaten ist nicht belegt.
-  - [ ] Abhängigkeiten: JA-023 und JA-027 muessen abgeschlossen sein; JA-024 bis JA-026 liefern Kandidatenprioritaeten.
-  - [ ] Aufwand/Dauer: Aufwand XL, Dauer 5-8 PT bei 1 Entwickler/Agent; ATS-Muster und Review-Queue koennen nach Kernvertrag parallel erweitert werden.
-  - [ ] Prioritätsscore: 92/100, weil produktive Store-Erweiterung ohne offizielle Verifikation fachlich unsicher waere.
-  - [ ] Ordnungsbegründung: Nach Kandidatenimport und Deduplikation folgt die Verifikation als Gate vor produktiver Aufnahme.
-  - [ ] Risiken und Unsicherheiten: Viele Karriereseiten sind JavaScript-only, blockiert oder verwenden wechselnde ATS-Subdomains; automatische Websuche kann falsche Domains liefern; kleine Firmen haben keine Karrierepage.
-  - [ ] Schritte:
-    1. Verifikationsqueue bauen: Kandidaten nach Quelle, Aktivitaetsindikator, Zielgebietsconfidence und fehlender Karrierequelle priorisieren; pro Lauf harte Limits fuer Kandidaten, Fetches, Domains, Timeouts und Retry setzen.
-    2. Offizielle Evidenz pruefen: Domain gegen Firmenname/Registerhinweis validieren, Impressum/Karrierepfad/ATS-Redirects auswerten, Evidence-Objekte persistieren und unsichere Faelle fail-closed in `MANUAL_REVIEW_REQUIRED` lassen.
-    3. Produktiven Upsert begrenzen: Nur Kandidaten mit offiziellem Firmen-/Karrierebeleg in `companies` und `job_sources` uebernehmen; alle anderen bleiben als Hints mit naechster Aktion und Review-Grund erhalten.
-  - [ ] Evidence: Verifikationslog je Lauf, Kandidatenqueue mit Statuswechseln, Evidence-Objekte im Store, Reject-/Review-Report, aktualisierte HTML-Coverage mit verifizierten und unverifizierten Kandidaten.
-  - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCompanyCandidateVerification.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1`; Tests muessen offizielle Domain, falsche Domain, ATS mit und ohne Firmenbeleg, Redirects, JavaScript-only, Timeout, 404 und Review-Queue abdecken.
-  - [ ] Audit: Manuell pruefen, dass jede produktive neue Firma einen offiziellen Beleg hat, dass Jobboersen-Hinweise nie allein reichen, dass Fehler nicht zu falscher Verifikation fuehren und dass Rate-Limits in Logs sichtbar eingehalten wurden.
-  - [ ] Supertest: Erst nach gruenen Verifikations-Funktionstests `.\ci.cmd supertest`; Abschluss nur bei Exit 0.
-
 - [ ] JA-029 Produktive Erweiterungswellen fuer tausende Muenchen-/Freising-Arbeitgeber mit Coverage-Gates einfuehren #comment: Der Store darf erst breit wachsen, wenn Import, Deduplikation und Verifikation messbare Qualitaetsgates erfuellen.
   - [ ] Beschreibung: Es existiert ein Wellenmodell, das verifizierte Kandidaten kontrolliert in den produktiven Store uebernimmt. Welle A umfasst grosse regionale Arbeitgeber und bereits verifizierte Firmen; Welle B umfasst Register-/Regional-Kandidaten mit offizieller Website; Welle C umfasst Jobboersen-aktive Arbeitgeber mit verifizierter Karrierequelle; Welle D bleibt manuelle Review-Queue. Jede Welle hat Zielgroesse, Akzeptanzquote, Reject-Gruende, Dublettenquote, Verifikationsquote, Scan-Erfolgsquote, Coverage-Delta und Rollback-/Backup-Pfad.
   - [ ] Scope: Erweitert werden `tools/Import-JobAgentCompanyDiscovery.ps1`, `tools/Verify-JobAgentCompanyCandidates.ps1`, `src/JobAgent.Coverage.psm1`, `src/JobAgent.Report.psm1`, `data/jobagent/store.json`, `tests/Test-JobAgentCoverage.ps1`, `tests/Test-JobAgentReport.ps1` und neue Tests `tests/Test-JobAgentImportWaves.ps1`. No-Go: keine Massenaufnahme unverifizierter Kandidaten, kein Loeschen bestehender Firmen ohne expliziten Auftrag, kein Commit riesiger Rohdaten-Dumps, keine Vollstaendigkeitsbehauptung "alle Firmen" ohne definierte Quellenabdeckung.
@@ -64,5 +46,3 @@
   - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1`; Tests muessen Freshness, Ablauf, Recheck-Prioritaet, Fehlerbudgets und grosse Reports abdecken.
   - [ ] Audit: Manuell pruefen, dass Reports keine Vollstaendigkeit suggerieren, dass veraltete Hinweise sichtbar bleiben statt geloescht zu werden, dass grosse HTML-Listen keine Layoutfehler haben und dass Live-Refresh nur ueber erlaubte Quellen laeuft.
   - [ ] Supertest: Erst nach gruenen Funktionstests `.\ci.cmd supertest`; Abschluss nur bei Exit 0.
-
-

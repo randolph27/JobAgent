@@ -356,6 +356,59 @@ function Update-ToolCandidateVerificationQueue {
     return $Queue
 }
 
+function New-ToolCandidateVerificationDecisionReport {
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Results,
+        [Parameter(Mandatory)][object]$Queue
+    )
+
+    $queueByCandidate = @{}
+    foreach ($entry in @($Queue.queue)) {
+        $queueByCandidate[[string]$entry.candidate_id] = $entry
+    }
+
+    $items = foreach ($result in @($Results)) {
+        $candidateId = [string]$result.candidate_id
+        $queueEntry = if ($queueByCandidate.ContainsKey($candidateId)) { $queueByCandidate[$candidateId] } else { $null }
+        $evidence = @($result.evidence | Select-Object -First 1)
+        $verificationUrl = if ($evidence.Count -gt 0) { $evidence[0].verification_url } else { $null }
+        $reason = if (@($result.review_reasons).Count -gt 0) {
+            @($result.review_reasons) -join ','
+        }
+        elseif ($evidence.Count -gt 0 -and -not [string]::IsNullOrWhiteSpace([string]$evidence[0].reason)) {
+            [string]$evidence[0].reason
+        }
+        else {
+            [string]$result.next_action
+        }
+        $queueStatus = if ($null -eq $queueEntry) { 'UNKNOWN' } else { [string]$queueEntry.status }
+        [pscustomobject]@{
+            candidate_id = $candidateId
+            company_id = if ($result.PSObject.Properties.Name -contains 'company_id') { $result.company_id } else { $null }
+            canonical_name = if ($evidence.Count -gt 0) { [string]$evidence[0].canonical_name } elseif ($null -ne $queueEntry) { [string]$queueEntry.canonical_name } else { 'UNKNOWN' }
+            verification_status = [string]$result.status
+            queue_status = $queueStatus
+            decision = if (@('VERIFIED') -contains $queueStatus) { 'PRODUCTIVE_UPSERT_ALLOWED' } elseif ($queueStatus -eq 'RETRY_SCHEDULED') { 'RETRY_DEFERRED' } else { 'FAIL_CLOSED_REVIEW_OR_REJECT' }
+            reason = $reason
+            verification_url = $verificationUrl
+            next_attempt_at = if ($null -eq $queueEntry) { $null } else { $queueEntry.next_attempt_at }
+        }
+    }
+
+    $reviewItems = @($items | Where-Object { [string]$_.queue_status -eq 'MANUAL_REVIEW_REQUIRED' })
+    $rejectItems = @($items | Where-Object { [string]$_.queue_status -in @('RETRY_SCHEDULED', 'RETRY_EXHAUSTED') })
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-decision-report/v1'
+        processed_total = @($items).Count
+        productive_upsert_allowed_total = @($items | Where-Object { [string]$_.decision -eq 'PRODUCTIVE_UPSERT_ALLOWED' }).Count
+        manual_review_total = $reviewItems.Count
+        fail_closed_reject_total = $rejectItems.Count
+        review_items = @($reviewItems | Sort-Object canonical_name, candidate_id)
+        reject_items = @($rejectItems | Sort-Object canonical_name, candidate_id)
+        items = @($items | Sort-Object decision, canonical_name, candidate_id)
+    }
+}
+
 $startedAt = [datetime]::UtcNow
 $hintStoreResolved = Resolve-ToolPath -Root $projectRootResolved -Path $HintStorePath
 $queueResolved = Resolve-ToolPath -Root $projectRootResolved -Path $QueuePath
@@ -435,6 +488,7 @@ $summary = [pscustomobject]@{
     verified_candidate_ids = $verifiedCandidateIds
     manual_review_candidate_ids = $manualReviewCandidateIds
     unverified_candidate_ids = $unverifiedCandidateIds
+    decision_report = New-ToolCandidateVerificationDecisionReport -Results $resultItems -Queue $queue
     results = $resultItems
 }
 $summary | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $logPath -Encoding UTF8

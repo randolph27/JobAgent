@@ -220,6 +220,11 @@ try {
     Assert-True -Condition (@($scriptResult.manual_review_candidate_ids | Where-Object { $_ -eq 'hint:hays' }).Count -eq 1) -Message 'Candidate-Verifikationsscript laesst Review-Kandidaten nicht fail-closed.'
     Assert-True -Condition (@($scriptResult.unverified_candidate_ids | Where-Object { $_ -eq 'hint:noresponse' }).Count -eq 1) -Message 'Candidate-Verifikationsscript meldet unverifizierten Retry-Kandidaten nicht.'
     Assert-True -Condition ($scriptResult.verification_queue.clusters_total -ge 3) -Message 'Candidate-Verifikationsscript erzeugt keine Cluster-Queue.'
+    Assert-True -Condition ($scriptResult.decision_report.schema_version -eq 'jobagent/company-candidate-verification-decision-report/v1') -Message 'Candidate-Verifikationsscript schreibt keinen Decision-Report.'
+    Assert-True -Condition ($scriptResult.decision_report.productive_upsert_allowed_total -eq 1) -Message 'Decision-Report zaehlt produktive Upserts falsch.'
+    Assert-True -Condition ($scriptResult.decision_report.manual_review_total -eq 1) -Message 'Decision-Report zaehlt Manual-Review falsch.'
+    Assert-True -Condition ($scriptResult.decision_report.fail_closed_reject_total -eq 1) -Message 'Decision-Report zaehlt fail-closed Rejects falsch.'
+    Assert-True -Condition (@($scriptResult.decision_report.reject_items | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and $_.decision -eq 'RETRY_DEFERRED' }).Count -eq 1) -Message 'Decision-Report weist Retry-Reject nicht aus.'
     Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:example' -and $_.status -eq 'VERIFIED' }).Count -eq 1) -Message 'Queue markiert verifizierten Kandidaten nicht.'
     Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:hays' -and $_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count -eq 1) -Message 'Queue markiert Manual-Review-Kandidaten nicht.'
     Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.retry_count -eq 1 }).Count -eq 1) -Message 'Queue plant unverifizierten Kandidaten nicht fuer Retry ein.'
@@ -246,6 +251,7 @@ finally {
         'candidate_js_only_domain_only',
         'aggregator_not_accepted_as_career_source',
         'candidate_verification_script_upserts_only_verified_sources',
-        'candidate_verification_cluster_queue_retry_and_review'
+        'candidate_verification_cluster_queue_retry_and_review',
+        'candidate_verification_decision_report_review_and_reject'
     )
 } | ConvertTo-Json -Depth 4

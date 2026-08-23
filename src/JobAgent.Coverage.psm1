@@ -497,6 +497,42 @@ function New-JobAgentDiscoverySourceCoverageReport {
     }
 }
 
+function New-JobAgentCoverageCandidateVerificationDecisionReport {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowNull()][object]$CandidateVerificationQueue = $null,
+        [Parameter()][ValidateRange(1, 1000)][int]$MaxItems = 25
+    )
+
+    $entries = if ($null -eq $CandidateVerificationQueue) { @() } else { @($CandidateVerificationQueue.queue) }
+    $decisionItems = foreach ($entry in @($entries)) {
+        $status = [string]$entry.status
+        [pscustomobject]@{
+            candidate_id = [string]$entry.candidate_id
+            identity_cluster_id = [string]$entry.identity_cluster_id
+            canonical_name = [string]$entry.canonical_name
+            queue_status = $status
+            decision = if ($status -eq 'VERIFIED') { 'PRODUCTIVE_UPSERT_ALLOWED' } elseif ($status -eq 'PENDING') { 'PENDING_VERIFICATION' } elseif ($status -eq 'RETRY_SCHEDULED') { 'RETRY_DEFERRED' } else { 'FAIL_CLOSED_REVIEW_OR_REJECT' }
+            reason = if (-not [string]::IsNullOrWhiteSpace([string]$entry.review_reason)) { [string]$entry.review_reason } else { [string]$entry.last_reason }
+            retry_count = [int]$entry.retry_count
+            next_attempt_at = $entry.next_attempt_at
+            last_status = $entry.last_status
+        }
+    }
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-decision-report/v1'
+        queue_total = @($entries).Count
+        productive_upsert_allowed_total = @($decisionItems | Where-Object { [string]$_.decision -eq 'PRODUCTIVE_UPSERT_ALLOWED' }).Count
+        pending_total = @($decisionItems | Where-Object { [string]$_.decision -eq 'PENDING_VERIFICATION' }).Count
+        retry_deferred_total = @($decisionItems | Where-Object { [string]$_.decision -eq 'RETRY_DEFERRED' }).Count
+        fail_closed_total = @($decisionItems | Where-Object { [string]$_.decision -eq 'FAIL_CLOSED_REVIEW_OR_REJECT' }).Count
+        review_items = @($decisionItems | Where-Object { [string]$_.queue_status -eq 'MANUAL_REVIEW_REQUIRED' } | Sort-Object canonical_name, candidate_id | Select-Object -First $MaxItems)
+        reject_items = @($decisionItems | Where-Object { [string]$_.queue_status -in @('RETRY_SCHEDULED', 'RETRY_EXHAUSTED') } | Sort-Object canonical_name, candidate_id | Select-Object -First $MaxItems)
+        items = @($decisionItems | Sort-Object decision, canonical_name, candidate_id | Select-Object -First $MaxItems)
+    }
+}
+
 function Get-JobAgentCoverageDuplicateGroups {
     [CmdletBinding()]
     param(
@@ -709,6 +745,7 @@ function New-JobAgentCoverageReport {
 
     $metricsArray = @($metrics)
     $candidateClusters = New-JobAgentCoverageCandidateClusterReport -HintStore $HintStore -Now $Now -MaxReviewItems $MaxPriorityItems
+    $candidateVerificationDecisionReport = New-JobAgentCoverageCandidateVerificationDecisionReport -CandidateVerificationQueue $CandidateVerificationQueue -MaxItems $MaxPriorityItems
     [pscustomobject]@{
         generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         stale_after_days = $StaleAfterDays
@@ -749,6 +786,7 @@ function New-JobAgentCoverageReport {
         source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
         candidate_clusters = $candidateClusters
         candidate_verification_queue = if ($null -eq $CandidateVerificationQueue) { $null } else { $CandidateVerificationQueue }
+        candidate_verification_decision_report = $candidateVerificationDecisionReport
         import_waves = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore
     }
 }
@@ -758,6 +796,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCoverageScanPriority',
     'Get-JobAgentCoverageDuplicateGroups',
     'New-JobAgentCoverageCandidateClusterReport',
+    'New-JobAgentCoverageCandidateVerificationDecisionReport',
     'New-JobAgentDiscoverySourceCoverageReport',
     'New-JobAgentCoverageDimensions',
     'New-JobAgentCoverageImportWavePlan',
