@@ -84,7 +84,7 @@ function ConvertTo-ToolCoverageMarkdown {
     [void]$lines.Add('## Kernmetriken')
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
+    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
         [void]$lines.Add(('| {0} | {1} |' -f $metric, $Coverage.metrics.$metric))
     }
     [void]$lines.Add('')
@@ -95,6 +95,24 @@ function ConvertTo-ToolCoverageMarkdown {
     Add-ToolMarkdownCounts -Lines $lines -Title 'Branche' -Counts $Coverage.dimensions.by_industry
     [void]$lines.Add('')
     Add-ToolMarkdownCounts -Lines $lines -Title 'Quellenursprung' -Counts $Coverage.dimensions.by_discovery_origin
+    [void]$lines.Add('')
+    Add-ToolMarkdownCounts -Lines $lines -Title 'Freshness-Status' -Counts $Coverage.dimensions.by_staleness_status
+    [void]$lines.Add('')
+    Add-ToolMarkdownCounts -Lines $lines -Title 'Refresh-Gruende' -Counts $Coverage.dimensions.by_refresh_reason
+    [void]$lines.Add('')
+    [void]$lines.Add('## Kandidaten-Freshness')
+    [void]$lines.Add('| Status | Kandidat | Firma | Quelle | Ablauf | Naechster Refresh | Grund |')
+    [void]$lines.Add('|---|---|---|---|---|---|---|')
+    foreach ($item in @($Coverage.candidate_freshness.items | Select-Object -First 25)) {
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} |' -f
+                (ConvertTo-ToolMarkdownText $item.staleness_status),
+                (ConvertTo-ToolMarkdownText $item.candidate_id),
+                (ConvertTo-ToolMarkdownText $item.company),
+                (ConvertTo-ToolMarkdownText $item.source_id),
+                (ConvertTo-ToolMarkdownText $item.expires_at),
+                (ConvertTo-ToolMarkdownText $item.next_refresh_at),
+                (ConvertTo-ToolMarkdownText $item.refresh_reason)))
+    }
     [void]$lines.Add('')
     [void]$lines.Add('## Kandidaten-Dedupe')
     [void]$lines.Add('| Cluster | Firma | Grund | Kandidaten |')
@@ -185,13 +203,15 @@ function ConvertTo-ToolCoverageMarkdown {
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Firmeninventar')
-    [void]$lines.Add('| Firma | Zielgebiet | Verifikation | Status | Scanfaehig | Naechster Schritt |')
-    [void]$lines.Add('|---|---|---|---|---|---|')
+    [void]$lines.Add('| Firma | Zielgebiet | Verifikation | Freshness | Naechster Refresh | Status | Scanfaehig | Naechster Schritt |')
+    [void]$lines.Add('|---|---|---|---|---|---|---|---|')
     foreach ($company in @($Coverage.companies | Select-Object -First 250)) {
-        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |' -f
                 (ConvertTo-ToolMarkdownText $company.company),
                 (ConvertTo-ToolMarkdownText $company.target_area),
                 (ConvertTo-ToolMarkdownText $company.verification_status),
+                (ConvertTo-ToolMarkdownText $company.staleness_status),
+                (ConvertTo-ToolMarkdownText $company.next_refresh_at),
                 (ConvertTo-ToolMarkdownText $company.inventory_state),
                 (ConvertTo-ToolMarkdownText $company.has_career_url),
                 (ConvertTo-ToolMarkdownText $company.next_step)))
@@ -223,13 +243,20 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } .table-wrap { overflow-y: auto; max-height: 68vh; border: 1px solid var(--line); } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; position: sticky; top: 0; z-index: 1; } .wave { border-left: 4px solid var(--accent-alt); padding-left: 12px; margin-top: 14px; } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }')
     [void]$lines.Add('</style></head><body><main>')
     [void]$lines.Add('<section><h1>JobAgent Firmen-Coverage-Audit</h1><p>' + (ConvertTo-ToolHtmlText $Coverage.approximation_notice) + '</p><div class="summary">')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
+    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
         [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolHtmlText $metric) + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')
     Add-ToolHtmlCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state
     Add-ToolHtmlCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area
     Add-ToolHtmlCounts -Lines $lines -Title 'Branche' -Counts $Coverage.dimensions.by_industry
+    Add-ToolHtmlCounts -Lines $lines -Title 'Freshness-Status' -Counts $Coverage.dimensions.by_staleness_status
+    Add-ToolHtmlCounts -Lines $lines -Title 'Refresh-Gruende' -Counts $Coverage.dimensions.by_refresh_reason
+    [void]$lines.Add('<section><h2>Kandidaten-Freshness</h2><div class="table-wrap"><table><thead><tr><th>Status</th><th>Kandidat</th><th>Firma</th><th>Quelle</th><th>Ablauf</th><th>Naechster Refresh</th><th>Grund</th></tr></thead><tbody>')
+    foreach ($item in @($Coverage.candidate_freshness.items | Select-Object -First 25)) {
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.staleness_status) + '</td><td>' + (ConvertTo-ToolHtmlText $item.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlText $item.source_id) + '</td><td>' + (ConvertTo-ToolHtmlText $item.expires_at) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_refresh_at) + '</td><td>' + (ConvertTo-ToolHtmlText $item.refresh_reason) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Kandidaten-Dedupe</h2><div class="table-wrap"><table><thead><tr><th>Cluster</th><th>Firma</th><th>Grund</th><th>Kandidaten</th></tr></thead><tbody>')
     foreach ($cluster in @($Coverage.candidate_clusters.review_queue | Select-Object -First 25)) {
         [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $cluster.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.review_queue_reason) + '</td><td>' + (ConvertTo-ToolHtmlText @($cluster.candidate_ids).Count) + '</td></tr>')
@@ -260,9 +287,9 @@ function ConvertTo-ToolCoverageHtml {
         }
         [void]$lines.Add('</tbody></table></div></div>')
     }
-    [void]$lines.Add('</section><section><h2>Firmeninventar</h2><p>Segmentierte Anzeige: maximal 250 sortierte Firmen im HTML-Audit; vollstaendige Daten stehen im JSON-Artefakt.</p><div class="table-wrap"><table><thead><tr><th>Firma</th><th>Zielgebiet</th><th>Verifikation</th><th>Status</th><th>Scanfaehig</th><th>Naechster Schritt</th></tr></thead><tbody>')
+    [void]$lines.Add('</section><section><h2>Firmeninventar</h2><p>Segmentierte Anzeige: maximal 250 sortierte Firmen im HTML-Audit; vollstaendige Daten stehen im JSON-Artefakt.</p><div class="table-wrap"><table><thead><tr><th>Firma</th><th>Zielgebiet</th><th>Verifikation</th><th>Freshness</th><th>Naechster Refresh</th><th>Status</th><th>Scanfaehig</th><th>Naechster Schritt</th></tr></thead><tbody>')
     foreach ($company in @($Coverage.companies | Select-Object -First 250)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $company.company) + '</td><td>' + (ConvertTo-ToolHtmlText $company.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $company.verification_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.inventory_state) + '</td><td>' + (ConvertTo-ToolHtmlText $company.has_career_url) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_step) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $company.company) + '</td><td>' + (ConvertTo-ToolHtmlText $company.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $company.verification_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.staleness_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_refresh_at) + '</td><td>' + (ConvertTo-ToolHtmlText $company.inventory_state) + '</td><td>' + (ConvertTo-ToolHtmlText $company.has_career_url) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_step) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section></main></body></html>')
     return ($lines.ToArray() -join "`n")

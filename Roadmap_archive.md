@@ -663,3 +663,24 @@
   - [x] Audit: HTML-Coverage enthaelt responsive Tabellen, `overflow-x`, Sticky-Header, keine externen Skripte oder Stylesheets und segmentierte Firmenanzeige. Unverifizierte Hints bleiben ausserhalb des produktiven Stores; erneute Aufnahme bereits vorhandener offizieller Firmen bricht fail-closed ab.
   - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
   - [x] Meilenstein: M5 Importwellen- und Coverage-Gate abgeschlossen; JA-030 kann auf Freshness, Drift und laufenden Betrieb aufsetzen.
+
+## Archiviert am 2026-08-23
+
+- [x] JA-030 Laufender Coverage-Betrieb, Drift-Erkennung und Quellen-Freshness fuer Muenchen/Freising etablieren #comment: Tausende Quellen veralten schnell; der Agent braucht einen Betrieb, der neue Firmen findet, alte Hinweise ablaufen laesst und Verifikationen periodisch erneuert.
+  - [x] Beschreibung: Es existiert ein Betriebsmodell fuer wiederholte Discovery-, Verifikations- und Coverage-Laeufe. Quellen, Firmen und Kandidaten erhalten Freshness-Felder (`last_imported_at`, `last_verified_at`, `expires_at`, `next_refresh_at`, `refresh_reason`, `staleness_status`). Reports zeigen Coverage nach Quelle, Gebiet, Verifikationsstatus, Freshness, Review-Queue und naechster Aktion. Der Daily-Run priorisiert refresh-faellige Firmen vor regulaeren Scanfaellen.
+  - [x] Scope: Erweitert wurden `src/JobAgent.DailyRun.psm1`, `src/JobAgent.Coverage.psm1`, `tools/Measure-JobAgentCompanyCoverage.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentCoverage.ps1`, `tests/Test-JobAgentOperations.ps1` und `docs/company-discovery-operations.md`. No-Go eingehalten: keine unbegrenzten Hintergrundprozesse, kein externes Schreiben, keine stille Loeschung abgelaufener Kandidaten, keine Live-Webabhaengigkeiten im Supertest.
+  - [x] Ist-Stand (2026-08-23 12:25): Freshness-Modell, Kandidaten-Freshness-Report, Source-Freshness-Metriken, HTML-/Markdown-Coverage-Erweiterungen, Daily-Run-Priorisierung und Persistenz der Firmen-Freshness-Felder sind implementiert.
+  - [x] Abhängigkeiten: JA-023 bis JA-029 sind abgeschlossen; Devserver-Port `8500` und SonarQube `9000` waren erreichbar.
+  - [x] Aufwand/Dauer: Aufwand L geplant; umgesetzt in einem fokussierten Agentenlauf mit bestehenden Fixture- und Funktionstests.
+  - [x] Prioritätsscore: 80/100, weil nachhaltige Inventarqualitaet nach initialer Massenerweiterung kritisch wird.
+  - [x] Ordnungsbegründung: Betrieb und Freshness folgen nach produktiven Wellen, damit reale Metriken statt hypothetischer Grenzwerte gesteuert werden.
+  - [x] Risiken und Unsicherheiten: Externe Quellen koennen Markup, Terms und Abruflimits aendern; Coverage bleibt eine lokale Naeherung und behauptet keine Vollstaendigkeit fuer alle Firmen.
+  - [x] Schritte:
+    1. Freshness-Modell implementiert: Firmen, Quellen und Kandidaten berechnen Ablauf, Recheck und Staleness-Status deterministisch aus Import-, Verifikations- und Planungsdaten.
+    2. Drift- und Betriebsreports erweitert: Coverage-JSON, Markdown und HTML enthalten Freshness-Status, Refresh-Gruende, Kandidaten-Freshness und segmentiertes Firmeninventar mit Sticky-Headern.
+    3. Daily-Run-Priorisierung angepasst: `next_refresh_at` und Verifikationsalter steuern die Kandidatenreihenfolge; erfolgreiche und fehlgeschlagene Läufe persistieren Freshness-Felder.
+  - [x] Evidence: `docs/company-discovery-operations.md`, `html/jobagent/company-coverage.html`, `logs/jobagent/company-coverage-*.json`, `logs/jobagent/company-coverage-*.md`, Tests `tests/Test-JobAgentCoverage.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentOperations.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1` -> Exit 0.
+  - [x] Audit: Reports enthalten weiterhin den Naeherungshinweis, loeschen abgelaufene Hinweise nicht, zeigen Freshness sichtbar an und laden keine externen Ressourcen im HTML-Coverage-Audit.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Meilenstein: M6 Laufender Coverage-Betrieb und Freshness-Drift-Gate abgeschlossen.

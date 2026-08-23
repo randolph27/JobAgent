@@ -40,6 +40,57 @@ function Get-JobAgentDailyRunSources {
         Sort-Object -Property source_id
 }
 
+function ConvertTo-JobAgentDailyDateOrNull {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
+        return $null
+    }
+    try {
+        return [datetime]::Parse([string]$Value, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
+    }
+    catch {
+        return $null
+    }
+}
+
+function Get-JobAgentDailyRunRefreshDue {
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter(Mandatory)][datetime]$Now
+    )
+
+    $nextRefreshValue = if ($Company.PSObject.Properties.Name -contains 'next_refresh_at') { $Company.next_refresh_at } else { $null }
+    $nextRefreshAt = ConvertTo-JobAgentDailyDateOrNull -Value $nextRefreshValue
+    if ($null -ne $nextRefreshAt) {
+        return $nextRefreshAt -le $Now.ToUniversalTime()
+    }
+    $lastVerifiedValue = if ($Company.PSObject.Properties.Name -contains 'last_verified_at') { $Company.last_verified_at } else { $null }
+    $lastVerifiedAt = ConvertTo-JobAgentDailyDateOrNull -Value $lastVerifiedValue
+    $verificationStatus = if ($Company.PSObject.Properties.Name -contains 'verification_status') { [string]$Company.verification_status } else { 'UNVERIFIED' }
+    if ($verificationStatus -eq 'UNVERIFIED') {
+        return $true
+    }
+    if ($null -eq $lastVerifiedAt) {
+        return $true
+    }
+    $maxAgeDays = if ($verificationStatus -eq 'COMPANY_DOMAIN_VERIFIED') { 90 } else { 30 }
+    return $lastVerifiedAt.AddDays($maxAgeDays) -le $Now.ToUniversalTime()
+}
+
+function Get-JobAgentDailyRunSortKey {
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter(Mandatory)][datetime]$Now
+    )
+
+    $refreshRank = if (Get-JobAgentDailyRunRefreshDue -Company $Company -Now $Now) { 0 } else { 1 }
+    $scanRank = if ($null -eq $Company.last_successful_scan_at) { 0 } else { 1 }
+    $priorityRank = 1000 - [int]$Company.scan_priority
+    $nextRefresh = if ($Company.PSObject.Properties.Name -contains 'next_refresh_at') { [string]$Company.next_refresh_at } else { '' }
+    return ('{0:D2}|{1:D2}|{2:D4}|{3}|{4}|{5}' -f $refreshRank, $scanRank, $priorityRank, $nextRefresh, [string]$Company.next_scan_at, [string]$Company.canonical_name)
+}
+
 function Get-JobAgentDailyRunCandidateCompanies {
     [CmdletBinding()]
     param(
@@ -78,11 +129,7 @@ function Get-JobAgentDailyRunCandidateCompanies {
                 return $true
             }
         } |
-        Sort-Object `
-            @{ Expression = { if ($null -eq $_.last_successful_scan_at) { 0 } else { 1 } }; Ascending = $true },
-            @{ Expression = { -[int]$_.scan_priority }; Ascending = $true },
-            @{ Expression = { [string]$_.next_scan_at }; Ascending = $true },
-            @{ Expression = { [string]$_.canonical_name }; Ascending = $true } |
+        Sort-Object -Property { Get-JobAgentDailyRunSortKey -Company $_ -Now $nowUtc } |
         Select-Object -First $MaxCompanies
 }
 
@@ -174,17 +221,33 @@ function Update-JobAgentDailyRunCompanyState {
     $hasSuccess = @($CompanyResults | Where-Object { ([string]$_.status -eq 'SUCCESS') -and ([string]$_.error_class -eq 'NONE') }).Count -gt 0
     $nowText = ConvertTo-JobAgentDailyIso -Value $Now
     $company.updated_at = $nowText
+    if ($company.PSObject.Properties.Name -notcontains 'last_imported_at' -or [string]::IsNullOrWhiteSpace([string]$company.last_imported_at)) {
+        $company | Add-Member -NotePropertyName last_imported_at -NotePropertyValue $nowText -Force
+    }
     if ($hasSuccess) {
         $company.scan_status = 'SUCCESS'
         $company.last_successful_scan_at = $nowText
+        $company | Add-Member -NotePropertyName last_verified_at -NotePropertyValue $nowText -Force
+        $company | Add-Member -NotePropertyName expires_at -NotePropertyValue (ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddDays(30)) -Force
+        $company | Add-Member -NotePropertyName next_refresh_at -NotePropertyValue (ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddDays(1)) -Force
+        $company | Add-Member -NotePropertyName refresh_reason -NotePropertyValue 'scheduled_company_rotation' -Force
+        $company | Add-Member -NotePropertyName staleness_status -NotePropertyValue 'FRESH' -Force
         $company.next_scan_at = ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddDays(1)
     }
     elseif ($hasFailure) {
         $company.scan_status = 'FAILED'
+        $company | Add-Member -NotePropertyName expires_at -NotePropertyValue (ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddHours(6)) -Force
+        $company | Add-Member -NotePropertyName next_refresh_at -NotePropertyValue (ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddHours(6)) -Force
+        $company | Add-Member -NotePropertyName refresh_reason -NotePropertyValue 'last_scan_failed' -Force
+        $company | Add-Member -NotePropertyName staleness_status -NotePropertyValue 'REFRESH_DUE' -Force
         $company.next_scan_at = ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddHours(6)
     }
     else {
         $company.scan_status = 'PARTIAL'
+        $company | Add-Member -NotePropertyName expires_at -NotePropertyValue (ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddDays(1)) -Force
+        $company | Add-Member -NotePropertyName next_refresh_at -NotePropertyValue (ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddDays(1)) -Force
+        $company | Add-Member -NotePropertyName refresh_reason -NotePropertyValue 'partial_scan_recheck' -Force
+        $company | Add-Member -NotePropertyName staleness_status -NotePropertyValue 'REFRESH_DUE' -Force
         $company.next_scan_at = ConvertTo-JobAgentDailyIso -Value $Now.ToUniversalTime().AddDays(1)
     }
     return $company

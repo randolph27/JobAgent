@@ -94,6 +94,9 @@ Assert-True -Condition ($coverage.approximation_notice -match 'keine vollstaendi
 Assert-True -Condition ($coverage.metrics.manual_review_required -eq 1) -Message 'Coverage zaehlt manuell zu pruefende Discovery-Hinweise falsch.'
 Assert-True -Condition ($coverage.metrics.verified_without_career_url -eq 1) -Message 'Coverage zaehlt verifizierte Firmen ohne Karriere-URL falsch.'
 Assert-True -Condition ($coverage.metrics.career_url_verified -eq 5) -Message 'Coverage zaehlt CAREER_URL_VERIFIED falsch.'
+Assert-True -Condition ($coverage.metrics.company_refresh_due -ge 2) -Message 'Coverage zaehlt refresh-faellige Firmen nicht.'
+Assert-True -Condition ($coverage.dimensions.by_staleness_status.EXPIRED -ge 1) -Message 'Coverage weist abgelaufene Firmen-Freshness nicht aus.'
+Assert-True -Condition ($coverage.dimensions.by_refresh_reason.official_verification_required -ge 1) -Message 'Coverage zaehlt Refresh-Gruende nicht.'
 Assert-True -Condition ($coverage.dimensions.by_target_area.MUNICH -eq 6) -Message 'Coverage zaehlt Zielgebiete falsch.'
 Assert-True -Condition ($coverage.dimensions.by_industry.UNKNOWN -eq 6) -Message 'Coverage zaehlt Branchen falsch.'
 Assert-True -Condition ($coverage.dimensions.by_inventory_state.MANUAL_REVIEW_REQUIRED -eq 1) -Message 'Coverage zaehlt Reviewstatus falsch.'
@@ -256,6 +259,9 @@ $candidateVerificationQueue = [pscustomobject]@{
 $coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now ([datetime]'2026-08-23T08:30:00Z')
 Assert-True -Condition ($coverageWithInputs.metrics.discovery_hints_total -eq $hintStore.hints_total) -Message 'Coverage uebernimmt Discovery-Hint-Zaehler falsch.'
 Assert-True -Condition ($coverageWithInputs.source_coverage.sources_total -eq $sourceCoverage.sources_total) -Message 'Coverage bettet Quellen-Coverage nicht ein.'
+Assert-True -Condition ($coverageWithInputs.source_coverage.PSObject.Properties.Name -contains 'refresh_due_sources') -Message 'Quellen-Coverage weist Refresh-Faelligkeit nicht aus.'
+Assert-True -Condition ($coverageWithInputs.candidate_freshness.schema_version -eq 'jobagent/candidate-freshness/v1') -Message 'Coverage erzeugt keinen Kandidaten-Freshness-Report.'
+Assert-True -Condition ($coverageWithInputs.candidate_freshness.candidates_total -eq $hintStore.hints_total) -Message 'Coverage zaehlt Kandidaten-Freshness falsch.'
 Assert-True -Condition ($coverageWithInputs.metrics.candidate_clusters_total -gt 0) -Message 'Coverage erzeugt keine Kandidaten-Cluster-Metrik.'
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.candidates_total -eq $hintStore.hints_total) -Message 'Coverage-Dedupe uebernimmt Hint-Kandidaten falsch.'
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.review_queue_total -gt 0) -Message 'Coverage-Dedupe weist keine Review-Queue aus.'
@@ -294,10 +300,14 @@ Assert-True -Condition ($toolMarkdown.Contains('## Importwellen')) -Message 'Cov
 Assert-True -Condition ($toolMarkdown.Contains('Annahmequote')) -Message 'Coverage-Tool-Markdown enthaelt keine Wellen-Annahmequote.'
 Assert-True -Condition ($toolMarkdown.Contains('## Firmeninventar')) -Message 'Coverage-Tool-Markdown enthaelt kein segmentiertes Firmeninventar.'
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Dedupe')) -Message 'Coverage-Tool-Markdown enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
+Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Freshness')) -Message 'Coverage-Tool-Markdown enthaelt keinen Kandidaten-Freshness-Abschnitt.'
+Assert-True -Condition ($toolMarkdown.Contains('### Freshness-Status')) -Message 'Coverage-Tool-Markdown enthaelt keine Freshness-Dimension.'
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Verifikationsqueue')) -Message 'Coverage-Tool-Markdown enthaelt keine Kandidaten-Verifikationsqueue.'
 Assert-True -Condition ($toolMarkdown.Contains('## Review-/Reject-Report')) -Message 'Coverage-Tool-Markdown enthaelt keinen Review-/Reject-Report.'
 Assert-True -Condition ($toolHtml.Contains('<meta name="viewport" content="width=device-width, initial-scale=1">')) -Message 'Coverage-Tool-HTML enthaelt keinen Viewport-Meta-Tag.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Dedupe</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Freshness</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Freshness-Abschnitt.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Freshness-Status</h2>')) -Message 'Coverage-Tool-HTML enthaelt keine Freshness-Status-Tabelle.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Firmeninventar</h2>')) -Message 'Coverage-Tool-HTML enthaelt kein Firmeninventar.'
 Assert-True -Condition ($toolHtml.Contains('position: sticky')) -Message 'Coverage-Tool-HTML enthaelt keine Sticky-Tabellenkoepfe fuer grosse Listen.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Verifikationsqueue</h2>')) -Message 'Coverage-Tool-HTML enthaelt keine Kandidaten-Verifikationsqueue.'
@@ -333,6 +343,7 @@ Assert-True -Condition (@($enrichedHints.hints | Where-Object { [string]::IsNull
         'recent_success_rotation_penalty',
         'coverage_report_has_approximation_notice',
         'coverage_dimensions_by_status_target_industry_and_source',
+        'coverage_freshness_metrics_for_companies_sources_and_candidates',
         'coverage_duplicate_groups_by_domain',
         'coverage_import_wave_plan',
         'daily_report_includes_coverage_and_backlog',

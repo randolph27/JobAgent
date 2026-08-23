@@ -1,65 +1,33 @@
 {
-  "ts": "2026-08-23T12:02:30+02:00",
-  "agent_id": "codex",
-  "workspace_root": "D:\\_Scripte\\JobAgent",
-  "project": "JobAgent",
-  "active_id": "TD-0030",
-  "status": "open",
+  "status": "done",
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:Roadmap.md",
+    "file:Roadmap_archive.md"
+  ],
+  "ts": "2026-08-23T12:25:00+02:00",
+  "summary": "JA-030 abgeschlossen: Freshness-Modell, Coverage-Drift-Reports, Daily-Run-Priorisierung und Betriebsdokumentation umgesetzt.",
+  "route_ok": null,
+  "active_id": null,
+  "next_steps": [],
   "goal": "JA-030 Laufender Coverage-Betrieb, Drift-Erkennung und Quellen-Freshness fuer Muenchen/Freising etablieren.",
-  "summary": "JA-029 ist abgeschlossen, archiviert und als Commit bd9ba8f vorhanden. STP fuer Chatwechsel wurde ausgefuehrt; aktueller aktiver Punkt ist JA-030.",
-  "completed": [
-    "JA-029 nach Roadmap_archive.md rotiert",
-    "Importwellen-Gates und Coverage-Wellenmetriken implementiert",
-    "Failure-Evidence-Logs fuer fail-closed Import-Gates implementiert",
-    "Coverage-HTML fuer grosse Listen mit Scroll-Containern, Sticky-Headern und segmentiertem Firmeninventar aktualisiert",
-    "Todo auf TD-0030 / JA-030 umgestellt",
-    "Feature-Commit bd9ba8f erstellt"
-  ],
-  "next_steps": [
-    "In JA-030 Freshness-Felder modellieren: last_imported_at, last_verified_at, expires_at, next_refresh_at, refresh_reason, staleness_status.",
-    "Coverage- und Operations-Reports nach Gebiet, Quelle, Verifikationsstatus, Alter, Review-Queue, Fehlerklasse und naechster Aktion erweitern.",
-    "Daily-Run-Priorisierung in Firmen-Jobscan, Kandidatenverifikation und Quellenrefresh aufteilen; Live-Web nicht in deterministische Supertests aufnehmen.",
-    "Dokumentation docs/company-discovery-operations.md erstellen oder erweitern.",
-    "Funktionstests fokussiert: tests\\Test-JobAgentCoverage.ps1, tests\\Test-JobAgentDailyRun.ps1, tests\\Test-JobAgentOperations.ps1. Supertest erst nach Abschluss von JA-030."
-  ],
-  "guardrails": [
-    "Keine Massenaufnahme unverifizierter Kandidaten.",
-    "Keine stillen Loeschungen abgelaufener Kandidaten oder Firmen.",
-    "Keine Vollstaendigkeitsbehauptung fuer alle Muenchner/Freisinger Firmen ohne definierte Quellenabdeckung.",
-    "Jobboersen bleiben Discovery-Hinweise, keine Primaerbelege.",
-    "Keine extern wirksame Aktion wie Bewerbung, Kontaktformular oder Schreibzugriff ohne ausdrueckliche Bestaetigung.",
-    "Keine Secrets in Logs, Reports, Todo, Handoff oder Git."
-  ],
-  "changed": [
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json"
-  ],
+  "route_violations": [],
   "verified": [
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentImportWaves.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
     {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
       "exit": 0,
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
       "exit": 0,
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentOperations.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -79,86 +47,99 @@
       "status": "pass"
     }
   ],
-  "not_run": [
-    {
-      "cmd": ".\\gradlew.bat verify --console=plain --no-daemon",
-      "reason": "Nicht lauffaehig in diesem Projekt: kein gradlew/gradlew.bat vorhanden; alter verify.digest meldet running und ist nicht als aktueller Abschlussnachweis zu werten."
-    }
+  "changed": [
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "docs/company-discovery-operations.md",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.Coverage.psm1",
+    "src/JobAgent.DailyRun.psm1",
+    "tests/Test-JobAgentCoverage.ps1",
+    "tests/Test-JobAgentDailyRun.ps1",
+    "todo.checkpoint.json",
+    "todo.current.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "tools/Measure-JobAgentCompanyCoverage.ps1"
   ],
-  "route_ok": null,
-  "route_violations": [],
   "git": {
     "has_repo": true,
     "branch": "master",
     "detached": false,
-    "head": "bd9ba8f9d700",
+    "head": "3faf1eb6b676",
     "upstream": "origin/master",
     "remote": "origin",
-    "ahead": 1,
+    "ahead": 0,
     "behind": 0,
     "worktree": "dirty",
     "tracked_changes": [
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "docs/company-discovery-operations.md",
       "handoff.latest.json",
       "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Coverage.psm1",
+      "src/JobAgent.DailyRun.psm1",
+      "tests/Test-JobAgentCoverage.ps1",
+      "tests/Test-JobAgentDailyRun.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
       "todo.events.jsonl",
       "todo.history.digest.json",
-      "todo.master.index.json"
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Measure-JobAgentCompanyCoverage.ps1"
     ]
   },
-  "next": "Mit TD-0030 / JA-030 starten: Freshness-Modell, Drift-/Betriebsreports und Daily-Run-Priorisierung implementieren.",
-  "refs": [
-    "README.md",
-    "Roadmap.md",
-    "Roadmap_archive.md",
-    "Roadmap_index.md",
-    "todo.current.md",
-    "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.md",
-    "handoff.latest.json"
-  ],
-  "manual_missing": false,
-  "env_inventory_missing": false,
-  "env_inventory_used": false,
-  "env_inventory_path": null,
+  "project": "JobAgent",
+  "agent_id": "codex",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "next": "Keine aktive Roadmap-Aufgabe vorhanden.",
   "capsule": {
-    "ts": "2026-08-23T12:02:30+02:00",
+    "ts": "2026-08-23T12:25:00+02:00",
     "agent_id": "codex",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
-    "active_id": "TD-0030",
-    "status": "open",
+    "active_id": null,
+    "status": "done",
     "goal": "JA-030 Laufender Coverage-Betrieb, Drift-Erkennung und Quellen-Freshness fuer Muenchen/Freising etablieren.",
     "changed": [
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "docs/company-discovery-operations.md",
       "handoff.latest.json",
       "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Coverage.psm1",
+      "src/JobAgent.DailyRun.psm1",
+      "tests/Test-JobAgentCoverage.ps1",
+      "tests/Test-JobAgentDailyRun.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
       "todo.events.jsonl",
       "todo.history.digest.json",
-      "todo.master.index.json"
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Measure-JobAgentCompanyCoverage.ps1"
     ],
     "verified": [
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentImportWaves.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
       {
         "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
         "exit": 0,
         "status": "pass"
       },
       {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
         "exit": 0,
         "status": "pass"
       },
       {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentOperations.ps1",
         "exit": 0,
         "status": "pass"
       },
@@ -184,21 +165,33 @@
       "has_repo": true,
       "branch": "master",
       "detached": false,
-      "head": "bd9ba8f9d700",
+      "head": "3faf1eb6b676",
       "upstream": "origin/master",
       "remote": "origin",
-      "ahead": 1,
+      "ahead": 0,
       "behind": 0,
       "worktree": "dirty",
       "tracked_changes": [
+        "Roadmap.md",
+        "Roadmap_archive.md",
+        "docs/company-discovery-operations.md",
         "handoff.latest.json",
         "handoff.latest.md",
+        "html/jobagent/company-coverage.html",
+        "src/JobAgent.Coverage.psm1",
+        "src/JobAgent.DailyRun.psm1",
+        "tests/Test-JobAgentCoverage.ps1",
+        "tests/Test-JobAgentDailyRun.ps1",
+        "todo.checkpoint.json",
+        "todo.current.md",
         "todo.events.jsonl",
         "todo.history.digest.json",
-        "todo.master.index.json"
+        "todo.master.index.json",
+        "todo.state.json",
+        "tools/Measure-JobAgentCompanyCoverage.ps1"
       ]
     },
-    "next": "Mit TD-0030 / JA-030 starten: Freshness-Modell, Drift-/Betriebsreports und Daily-Run-Priorisierung implementieren.",
+    "next": "Keine aktive Roadmap-Aufgabe vorhanden.",
     "refs": [
       "todo.current.md",
       "todo.state.json",

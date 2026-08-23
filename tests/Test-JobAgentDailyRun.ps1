@@ -153,6 +153,9 @@ try {
     Assert-True -Condition (@($first.document.jobs | Where-Object { $_.status -eq 'NEW' }).Count -eq 2) -Message 'Erste Treffer sind nicht NEW.'
     Assert-True -Condition (@($first.document.jobs | Where-Object { $_.classification.result -eq 'MATCH' }).Count -eq 2) -Message 'Daily-Run klassifiziert Rohjobs nicht.'
     Assert-True -Condition (($first.document.companies | Where-Object company_id -eq 'company:gamma_ag').scan_status -eq 'FAILED') -Message 'Fehlerhafte Firma wurde nicht isoliert als FAILED markiert.'
+    Assert-True -Condition (($first.document.companies | Where-Object company_id -eq 'company:alpha_ag').staleness_status -eq 'FRESH') -Message 'Erfolgreicher Daily-Run persistiert Freshness-Status nicht.'
+    Assert-True -Condition (-not [string]::IsNullOrWhiteSpace([string](($first.document.companies | Where-Object company_id -eq 'company:alpha_ag').last_verified_at))) -Message 'Erfolgreicher Daily-Run persistiert last_verified_at nicht.'
+    Assert-True -Condition (($first.document.companies | Where-Object company_id -eq 'company:gamma_ag').refresh_reason -eq 'last_scan_failed') -Message 'Fehlerhafter Daily-Run persistiert Refresh-Grund nicht.'
 
     $second = Invoke-JobAgentDailyRun -ProjectRoot $projectRoot -AdapterResolver $adapter -StartedAt ([datetime]'2026-08-18T10:00:00Z') -CompanyIds @('company:alpha_ag', 'company:beta_ag', 'company:gamma_ag')
     Assert-True -Condition ($second.status -eq 'PARTIAL') -Message 'Zweiter Lauf mit einem Firmenfehler muss PARTIAL bleiben.'
@@ -279,6 +282,23 @@ try {
     $atsJob = @($multiSourceSecond.document.jobs | Where-Object { [string]$_.source_id -eq 'source:alpha_ag_ats' })[0]
     Assert-True -Condition ($careerJob.status -ne 'REMOVED') -Message 'Fehlgeschlagene Parallelquelle hat den Karriere-Job faelschlich entfernt.'
     Assert-True -Condition ($atsJob.status -eq 'REMOVED') -Message 'Erfolgreich leere Parallelquelle hat den eigenen ATS-Job nicht entfernt.'
+
+    $refreshProjectRoot = New-TestProjectRoot
+    New-TestStore -ProjectRoot $refreshProjectRoot
+    $refreshDocument = Read-JobAgentStore -ProjectRoot $refreshProjectRoot
+    foreach ($company in @($refreshDocument.companies)) {
+        if ([string]$company.company_id -eq 'company:gamma_ag') {
+            $company | Add-Member -NotePropertyName next_refresh_at -NotePropertyValue '2026-08-17T08:00:00.000Z' -Force
+            $company | Add-Member -NotePropertyName last_verified_at -NotePropertyValue '2026-07-01T08:00:00.000Z' -Force
+        }
+        else {
+            $company | Add-Member -NotePropertyName next_refresh_at -NotePropertyValue '2026-08-20T08:00:00.000Z' -Force
+            $company | Add-Member -NotePropertyName last_verified_at -NotePropertyValue '2026-08-17T08:00:00.000Z' -Force
+        }
+    }
+    Write-JobAgentStore -ProjectRoot $refreshProjectRoot -Document $refreshDocument | Out-Null
+    $refreshCandidates = @(Get-JobAgentDailyRunCandidateCompanies -Document (Read-JobAgentStore -ProjectRoot $refreshProjectRoot) -Now ([datetime]'2026-08-17T10:00:00Z') -MaxCompanies 1)
+    Assert-True -Condition ($refreshCandidates[0].company_id -eq 'company:gamma_ag') -Message 'Daily-Run priorisiert faellige next_refresh_at-Firmen nicht.'
 
     $liveProjectRoot = New-TestProjectRoot
     $liveDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
@@ -414,7 +434,9 @@ try {
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
             'daily_run_cli_fixture_mode',
-            'daily_run_multi_source_partial_removal',
+        'daily_run_multi_source_partial_removal',
+            'daily_run_prioritizes_refresh_due_companies',
+            'daily_run_persists_company_freshness_fields',
             'daily_run_live_jsonld_ats_source'
         )
     } | ConvertTo-Json -Depth 4
@@ -425,6 +447,9 @@ finally {
     }
     if ($null -ne (Get-Variable -Name multiSourceProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $multiSourceProjectRoot)) {
         Remove-Item -LiteralPath $multiSourceProjectRoot -Recurse -Force
+    }
+    if ($null -ne (Get-Variable -Name refreshProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $refreshProjectRoot)) {
+        Remove-Item -LiteralPath $refreshProjectRoot -Recurse -Force
     }
     if ($null -ne (Get-Variable -Name cliProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $cliProjectRoot)) {
         Remove-Item -LiteralPath $cliProjectRoot -Recurse -Force

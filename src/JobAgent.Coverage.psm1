@@ -36,6 +36,89 @@ function ConvertTo-JobAgentCoverageDate {
     }
 }
 
+function ConvertTo-JobAgentCoverageIso {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value) {
+        return $null
+    }
+    $date = if ($Value -is [datetime]) { $Value.ToUniversalTime() } else { ConvertTo-JobAgentCoverageDate -Value $Value }
+    if ($null -eq $date) {
+        return $null
+    }
+    return $date.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+}
+
+function Get-JobAgentCoveragePolicyDays {
+    param(
+        [Parameter()][AllowEmptyString()][string]$Kind,
+        [Parameter()][ValidateRange(1, 3650)][int]$DefaultDays = 30
+    )
+
+    switch ($Kind) {
+        'JOB_BOARD_DISCOVERY' { return 7 }
+        'DISCOVERY_HINT' { return 7 }
+        'REGISTER_DISCOVERY_HINT' { return 30 }
+        'OPEN_REGISTER_DUMP' { return 30 }
+        'OFFICIAL_REGISTER' { return 30 }
+        'REGIONAL_DIRECTORY' { return 90 }
+        'PUBLIC_INSTITUTION_DIRECTORY' { return 90 }
+        'REGIONAL_DISCOVERY_HINT' { return 90 }
+        'OFFICIAL_COMPANY' { return 30 }
+        'OFFICIAL_ATS' { return 30 }
+        'CAREER_URL_VERIFIED' { return 30 }
+        'COMPANY_DOMAIN_VERIFIED' { return 90 }
+        'UNVERIFIED' { return 14 }
+        'REJECTED' { return 3650 }
+        default { return $DefaultDays }
+    }
+}
+
+function New-JobAgentCoverageFreshnessRecord {
+    param(
+        [Parameter(Mandatory)][datetime]$Now,
+        [Parameter()][AllowNull()][object]$LastImportedAt,
+        [Parameter()][AllowNull()][object]$LastVerifiedAt,
+        [Parameter()][AllowNull()][object]$NextRefreshAt,
+        [Parameter()][ValidateRange(1, 3650)][int]$ExpiresAfterDays,
+        [Parameter()][AllowEmptyString()][string]$RefreshReason = 'scheduled_refresh'
+    )
+
+    $lastImported = if ($LastImportedAt -is [datetime]) { $LastImportedAt.ToUniversalTime() } else { ConvertTo-JobAgentCoverageDate -Value $LastImportedAt }
+    $lastVerified = if ($LastVerifiedAt -is [datetime]) { $LastVerifiedAt.ToUniversalTime() } else { ConvertTo-JobAgentCoverageDate -Value $LastVerifiedAt }
+    $nextRefresh = if ($NextRefreshAt -is [datetime]) { $NextRefreshAt.ToUniversalTime() } else { ConvertTo-JobAgentCoverageDate -Value $NextRefreshAt }
+    $basis = if ($null -ne $lastVerified) { $lastVerified } else { $lastImported }
+    $expiresAt = if ($null -eq $basis) { $null } else { $basis.AddDays($ExpiresAfterDays) }
+    $effectiveNext = if ($null -ne $nextRefresh) {
+        if ($null -ne $expiresAt -and $expiresAt -lt $nextRefresh) { $expiresAt } else { $nextRefresh }
+    }
+    else {
+        $expiresAt
+    }
+    $nowUtc = $Now.ToUniversalTime()
+    $status = if ($null -eq $basis) {
+        'UNKNOWN'
+    }
+    elseif ($null -ne $expiresAt -and $expiresAt -lt $nowUtc) {
+        'EXPIRED'
+    }
+    elseif ($null -ne $effectiveNext -and $effectiveNext -le $nowUtc) {
+        'REFRESH_DUE'
+    }
+    else {
+        'FRESH'
+    }
+
+    [pscustomobject]@{
+        last_imported_at = ConvertTo-JobAgentCoverageIso -Value $lastImported
+        last_verified_at = ConvertTo-JobAgentCoverageIso -Value $lastVerified
+        expires_at = ConvertTo-JobAgentCoverageIso -Value $expiresAt
+        next_refresh_at = ConvertTo-JobAgentCoverageIso -Value $effectiveNext
+        refresh_reason = $RefreshReason
+        staleness_status = $status
+    }
+}
+
 function Test-JobAgentCoverageMatchingJob {
     param([Parameter(Mandatory)][object]$Job)
 
@@ -254,6 +337,32 @@ function Get-JobAgentCoverageCompanyMetric {
     }
     $industry = [string](Get-JobAgentCoverageProperty -Object $Company -Name 'industry' -Default 'UNKNOWN')
     $lastReviewAt = Get-JobAgentCoverageCompanyLastReviewAt -Company $Company
+    $lastImportedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Company -Name 'last_imported_at')
+    if ($null -eq $lastImportedAt) {
+        $lastImportedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $discoverySource -Name 'observed_at')
+    }
+    if ($null -eq $lastImportedAt) {
+        $lastImportedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Company -Name 'created_at')
+    }
+    $lastVerifiedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Company -Name 'last_verified_at')
+    if ($null -eq $lastVerifiedAt) {
+        $lastVerifiedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Company -Name 'career_verification_reviewed_at')
+    }
+    if ($null -eq $lastVerifiedAt) {
+        $lastVerifiedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Company -Name 'career_verification_checked_at')
+    }
+    if ($null -eq $lastVerifiedAt -and $verificationStatus -in @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED')) {
+        $lastVerifiedAt = $lastImportedAt
+    }
+    $nextScanAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Company -Name 'next_scan_at')
+    $policyKey = if ($verificationStatus -eq 'UNVERIFIED') { $verificationStatus } elseif ($discoveryType -in @('DISCOVERY_HINT', 'MANUAL_REVIEW')) { $discoveryType } else { $verificationStatus }
+    $freshness = New-JobAgentCoverageFreshnessRecord `
+        -Now $Now `
+        -LastImportedAt $lastImportedAt `
+        -LastVerifiedAt $lastVerifiedAt `
+        -NextRefreshAt $nextScanAt `
+        -ExpiresAfterDays (Get-JobAgentCoveragePolicyDays -Kind $policyKey -DefaultDays $StaleAfterDays) `
+        -RefreshReason $(if ($verificationStatus -eq 'UNVERIFIED' -or $discoveryType -in @('DISCOVERY_HINT', 'MANUAL_REVIEW')) { 'official_verification_required' } elseif ($latestScanFailed) { 'last_scan_failed' } elseif ($null -eq $lastSuccessfulScanAt) { 'initial_scan_required' } else { 'scheduled_company_rotation' })
     $inventoryState = if (-not $hasCareerUrl -and $verificationStatus -eq 'CAREER_URL_VERIFIED') {
         'DATA_INCONSISTENT'
     }
@@ -304,6 +413,12 @@ function Get-JobAgentCoverageCompanyMetric {
         target_areas = @($targetAreas)
         industry = $industry
         last_review_at = $lastReviewAt
+        last_imported_at = $freshness.last_imported_at
+        last_verified_at = $freshness.last_verified_at
+        expires_at = $freshness.expires_at
+        next_refresh_at = $freshness.next_refresh_at
+        refresh_reason = $freshness.refresh_reason
+        staleness_status = $freshness.staleness_status
         inventory_state = $inventoryState
         next_step = $nextStep
     }
@@ -358,7 +473,7 @@ function Get-JobAgentCoverageBacklog {
         }
     }
 
-    return @($items.ToArray() | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, company)
+    return @($items.ToArray() | Sort-Object -Property { '{0:D4}|{1}' -f (1000 - [int]$_.priority_score), [string]$_.company })
 }
 
 function Get-JobAgentCoverageScanPriority {
@@ -409,7 +524,7 @@ function Get-JobAgentCoverageScanPriority {
         }
     }
 
-    return @($items | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, company | Select-Object -First $MaxCompanies)
+    return @($items | Sort-Object -Property { '{0:D4}|{1}' -f (1000 - [int]$_.priority_score), [string]$_.company } | Select-Object -First $MaxCompanies)
 }
 
 function Test-JobAgentCoverageImportableSource {
@@ -457,6 +572,7 @@ function New-JobAgentDiscoverySourceCoverageReport {
     $classCounts = [ordered]@{}
     $modeCounts = [ordered]@{}
     $evidenceCounts = [ordered]@{}
+    $freshnessItems = [System.Collections.Generic.List[object]]::new()
     foreach ($source in $items) {
         $sourceClass = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_class' -Default 'UNKNOWN')
         $mode = [string](Get-JobAgentCoverageProperty -Object $source -Name 'import_mode' -Default 'UNKNOWN')
@@ -473,6 +589,28 @@ function New-JobAgentDiscoverySourceCoverageReport {
         $classCounts[$sourceClass]++
         $modeCounts[$mode]++
         $evidenceCounts[$evidenceLevel]++
+        $lastImportedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $source -Name 'last_imported_at')
+        if ($null -eq $lastImportedAt) {
+            $lastImportedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $SourceRegistry -Name 'generated_at')
+        }
+        $freshness = New-JobAgentCoverageFreshnessRecord `
+            -Now $Now `
+            -LastImportedAt $lastImportedAt `
+            -LastVerifiedAt (ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $source -Name 'last_verified_at')) `
+            -NextRefreshAt (ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $source -Name 'next_refresh_at')) `
+            -ExpiresAfterDays (Get-JobAgentCoveragePolicyDays -Kind $sourceClass) `
+            -RefreshReason $(if ($sourceClass -eq 'REJECTED') { 'blocked_source_not_refreshed' } elseif (Test-JobAgentCoverageManualReviewSource -Source $source) { 'review_required_before_import' } else { 'source_registry_refresh' })
+        $freshnessItems.Add([pscustomobject]@{
+                source_id = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_id' -Default 'UNKNOWN')
+                source_class = $sourceClass
+                import_mode = $mode
+                last_imported_at = $freshness.last_imported_at
+                last_verified_at = $freshness.last_verified_at
+                expires_at = $freshness.expires_at
+                next_refresh_at = $freshness.next_refresh_at
+                refresh_reason = $freshness.refresh_reason
+                staleness_status = $freshness.staleness_status
+            })
     }
 
     $manualReviewSources = @($items | Where-Object { Test-JobAgentCoverageManualReviewSource -Source $_ })
@@ -491,10 +629,67 @@ function New-JobAgentDiscoverySourceCoverageReport {
         rejected_sources = $rejectedSources.Count
         manual_review_sources = $manualReviewSources.Count
         verification_gap_sources = $verificationGaps.Count
+        refresh_due_sources = @($freshnessItems.ToArray() | Where-Object { [string]$_.staleness_status -in @('REFRESH_DUE', 'EXPIRED', 'UNKNOWN') }).Count
         rejected_source_ids = @($rejectedSources | ForEach-Object { [string]$_.source_id } | Sort-Object)
         manual_review_source_ids = @($manualReviewSources | ForEach-Object { [string]$_.source_id } | Sort-Object)
         verification_gap_source_ids = @($verificationGaps | ForEach-Object { [string]$_.source_id } | Sort-Object)
+        freshness = @($freshnessItems.ToArray() | Sort-Object staleness_status, source_class, source_id)
     }
+}
+
+function New-JobAgentCoverageCandidateFreshnessReport {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowNull()][object]$HintStore = $null,
+        [Parameter()][datetime]$Now = [datetime]::UtcNow,
+        [Parameter()][ValidateRange(1, 1000)][int]$MaxItems = 25
+    )
+
+    $hints = if ($null -eq $HintStore) { @() } else { @($HintStore.hints) }
+    $items = foreach ($hint in @($hints)) {
+        $status = [string](Get-JobAgentCoverageProperty -Object $hint -Name 'candidate_status' -Default 'DISCOVERY_HINT')
+        $freshness = New-JobAgentCoverageFreshnessRecord `
+            -Now $Now `
+            -LastImportedAt (ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $hint -Name 'observed_at')) `
+            -LastVerifiedAt (ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $hint -Name 'last_verified_at')) `
+            -NextRefreshAt (ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $hint -Name 'next_refresh_at')) `
+            -ExpiresAfterDays (Get-JobAgentCoveragePolicyDays -Kind $status) `
+            -RefreshReason 'candidate_official_verification_or_refresh'
+        [pscustomobject]@{
+            candidate_id = [string](Get-JobAgentCoverageProperty -Object $hint -Name 'hint_id' -Default (Get-JobAgentCoverageProperty -Object $hint -Name 'candidate_id' -Default 'UNKNOWN'))
+            company = [string](Get-JobAgentCoverageProperty -Object $hint -Name 'employer_name' -Default (Get-JobAgentCoverageProperty -Object $hint -Name 'company_name' -Default 'UNKNOWN'))
+            source_id = [string](Get-JobAgentCoverageProperty -Object $hint -Name 'source_id' -Default 'UNKNOWN')
+            candidate_status = $status
+            target_area = [string](Get-JobAgentCoverageProperty -Object $hint -Name 'target_area' -Default 'UNKNOWN')
+            last_imported_at = $freshness.last_imported_at
+            last_verified_at = $freshness.last_verified_at
+            expires_at = $freshness.expires_at
+            next_refresh_at = $freshness.next_refresh_at
+            refresh_reason = $freshness.refresh_reason
+            staleness_status = $freshness.staleness_status
+        }
+    }
+    $itemsArray = @($items)
+    [pscustomobject]@{
+        schema_version = 'jobagent/candidate-freshness/v1'
+        candidates_total = $itemsArray.Count
+        refresh_due_total = @($itemsArray | Where-Object { [string]$_.staleness_status -in @('REFRESH_DUE', 'EXPIRED', 'UNKNOWN') }).Count
+        by_staleness_status = ConvertTo-JobAgentCoverageCountsObject -Counts (Get-JobAgentCoverageCountsByProperty -Items $itemsArray -PropertyName 'staleness_status')
+        items = @($itemsArray | Sort-Object staleness_status, company, candidate_id | Select-Object -First $MaxItems)
+    }
+}
+
+function Get-JobAgentCoverageCountsByProperty {
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Items,
+        [Parameter(Mandatory)][string]$PropertyName
+    )
+
+    $counts = @{}
+    foreach ($item in @($Items)) {
+        Add-JobAgentCoverageCount -Counts $counts -Key (Get-JobAgentCoverageProperty -Object $item -Name $PropertyName -Default 'UNKNOWN')
+    }
+    return $counts
 }
 
 function New-JobAgentCoverageCandidateVerificationDecisionReport {
@@ -578,12 +773,16 @@ function New-JobAgentCoverageDimensions {
     $industry = @{}
     $sourceType = @{}
     $sourceOrigin = @{}
+    $staleness = @{}
+    $refreshReason = @{}
     foreach ($metric in @($CompanyMetrics)) {
         Add-JobAgentCoverageCount -Counts $verification -Key $metric.verification_status
         Add-JobAgentCoverageCount -Counts $inventory -Key $metric.inventory_state
         Add-JobAgentCoverageCount -Counts $industry -Key $metric.industry
         Add-JobAgentCoverageCount -Counts $sourceType -Key $metric.discovery_type
         Add-JobAgentCoverageCount -Counts $sourceOrigin -Key $metric.discovery_origin
+        Add-JobAgentCoverageCount -Counts $staleness -Key $metric.staleness_status
+        Add-JobAgentCoverageCount -Counts $refreshReason -Key $metric.refresh_reason
         foreach ($area in @($metric.target_areas)) {
             Add-JobAgentCoverageCount -Counts $target -Key $area
         }
@@ -596,6 +795,8 @@ function New-JobAgentCoverageDimensions {
         by_industry = ConvertTo-JobAgentCoverageCountsObject -Counts $industry
         by_discovery_type = ConvertTo-JobAgentCoverageCountsObject -Counts $sourceType
         by_discovery_origin = ConvertTo-JobAgentCoverageCountsObject -Counts $sourceOrigin
+        by_staleness_status = ConvertTo-JobAgentCoverageCountsObject -Counts $staleness
+        by_refresh_reason = ConvertTo-JobAgentCoverageCountsObject -Counts $refreshReason
     }
 }
 
@@ -662,6 +863,13 @@ function New-JobAgentCoverageHintWaveCandidate {
     }
 }
 
+function Get-JobAgentCoverageWaveCandidateSortKey {
+    param([Parameter(Mandatory)][object]$Candidate)
+
+    $rank = if ([string]$Candidate.review_status -eq 'CAREER_URL_VERIFIED') { '0' } else { '1' }
+    return '{0}|{1}' -f $rank, [string]$Candidate.company
+}
+
 function New-JobAgentCoverageImportWavePlan {
     [CmdletBinding()]
     param(
@@ -726,7 +934,7 @@ function New-JobAgentCoverageImportWavePlan {
         }
 
         $allCandidates = @(@($companyCandidates) + @($hintCandidates) |
-            Sort-Object @{ Expression = { [string]$_.review_status -eq 'CAREER_URL_VERIFIED' }; Ascending = $true }, company |
+            Sort-Object -Property { Get-JobAgentCoverageWaveCandidateSortKey -Candidate $_ } |
             Select-Object -First $MaxCandidatesPerWave)
         $waves.Add([pscustomobject]@{
                 wave_id = [string]$definition.wave_id
@@ -836,6 +1044,7 @@ function New-JobAgentCoverageReport {
 
     $metricsArray = @($metrics)
     $candidateClusters = New-JobAgentCoverageCandidateClusterReport -HintStore $HintStore -Now $Now -MaxReviewItems $MaxPriorityItems
+    $candidateFreshness = New-JobAgentCoverageCandidateFreshnessReport -HintStore $HintStore -Now $Now -MaxItems $MaxPriorityItems
     $candidateVerificationDecisionReport = New-JobAgentCoverageCandidateVerificationDecisionReport -CandidateVerificationQueue $CandidateVerificationQueue -MaxItems $MaxPriorityItems
     $importWavePlan = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore -WaveConfig $WaveConfig
     [pscustomobject]@{
@@ -852,6 +1061,9 @@ function New-JobAgentCoverageReport {
             without_matching_jobs = @($metricsArray | Where-Object { [bool]$_.latest_scan_succeeded -and -not [bool]$_.has_matching_jobs }).Count
             with_matching_jobs = @($metricsArray | Where-Object has_matching_jobs).Count
             stale_or_unscanned = @($metricsArray | Where-Object is_stale).Count
+            company_refresh_due = @($metricsArray | Where-Object { [string]$_.staleness_status -in @('REFRESH_DUE', 'EXPIRED', 'UNKNOWN') }).Count
+            company_fresh = @($metricsArray | Where-Object { [string]$_.staleness_status -eq 'FRESH' }).Count
+            candidate_refresh_due = $candidateFreshness.refresh_due_total
             manual_review_required = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'MANUAL_REVIEW_REQUIRED' }).Count
             verified_without_career_url = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'VERIFIED_WEBSITE_ONLY' }).Count
             retry_required = @($metricsArray | Where-Object { [string]$_.inventory_state -eq 'RETRY_REQUIRED' }).Count
@@ -877,6 +1089,7 @@ function New-JobAgentCoverageReport {
         scan_priority = @(Get-JobAgentCoverageScanPriority -CompanyMetrics $metricsArray -MaxCompanies $MaxPriorityItems)
         source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
         candidate_clusters = $candidateClusters
+        candidate_freshness = $candidateFreshness
         candidate_verification_queue = if ($null -eq $CandidateVerificationQueue) { $null } else { $CandidateVerificationQueue }
         candidate_verification_decision_report = $candidateVerificationDecisionReport
         import_waves = $importWavePlan
@@ -889,6 +1102,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCoverageScanPriority',
     'Get-JobAgentCoverageDuplicateGroups',
     'New-JobAgentCoverageCandidateClusterReport',
+    'New-JobAgentCoverageCandidateFreshnessReport',
     'New-JobAgentCoverageCandidateVerificationDecisionReport',
     'New-JobAgentDiscoverySourceCoverageReport',
     'New-JobAgentCoverageDimensions',
