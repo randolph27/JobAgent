@@ -1,16 +1,16 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-23T08:14:14.858Z",
+  "generated_at": "2026-08-23T08:22:16.035Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
-  "hints_total": 11,
-  "known_company_hints": 6,
-  "unverified_hints": 11,
+  "hints_total": 14,
+  "known_company_hints": 8,
+  "unverified_hints": 14,
   "source_counts": {
     "source-registry:ba_jobsuche": 2,
     "source-registry:indeed_de": 1,
     "source-registry:stepstone_freising": 2,
-    "source-registry:stepstone_muenchen": 1,
+    "source-registry:stepstone_muenchen": 4,
     "source-registry:offeneregister_dump": 5
   },
   "hints": [
@@ -141,6 +141,111 @@
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
+      "hint_id": "jobboard-hint:stepstone_muenchen_hays_professional_solutions_it_operations_muenchen",
+      "employer_name": "Hays Professional Solutions GmbH",
+      "normalized_name": "hays professional solutions",
+      "job_title": "IT Projektleiter",
+      "job_location": "Muenchen",
+      "location": "Muenchen",
+      "target_area": "MUNICH",
+      "industry_or_keyword": "IT Operations",
+      "source_id": "source-registry:stepstone_muenchen",
+      "observed_url": "https://www.stepstone.de/stellenangebote/it-projektleiter-hays-222.html",
+      "posting_url": "https://www.stepstone.de/stellenangebote/it-projektleiter-hays-222.html",
+      "platform": "StepStone",
+      "observed_at": "2026-08-23T08:00:00.000Z",
+      "search_parameters": {
+        "query": "IT",
+        "keyword": "IT Operations",
+        "location": "Muenchen",
+        "radius_km": 20,
+        "page_limit": 2
+      },
+      "page_number": 1,
+      "source_record_hash": "ad64987682ad159688fb55a7e329c28a0ff9f80f8b07987e6fd0c8d912531016",
+      "evidence_snippet_hash": "b7f618c80e11fa86bbebf2ade5e475aac1dc3cf25f4c6809530c0048e0db0895",
+      "confidence_score": 45,
+      "raw_retention_policy": "minimal_metadata_only_no_full_posting_content",
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "job_board_discovery_status": "JOB_BOARD_DISCOVERY",
+      "official_verification_required": true,
+      "is_staffing_agency": true,
+      "known_company_id": null,
+      "known_company_domain": null,
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen",
+      "employer_name": "Rohde & Schwarz GmbH & Co. KG",
+      "normalized_name": "rohde and schwarz",
+      "job_title": "Enterprise Applications Manager",
+      "job_location": "Garching b. Muenchen",
+      "location": "Garching b. Muenchen",
+      "target_area": "MUNICH",
+      "industry_or_keyword": "IT Operations",
+      "source_id": "source-registry:stepstone_muenchen",
+      "observed_url": "https://www.stepstone.de/Details",
+      "posting_url": "https://www.stepstone.de/Details",
+      "platform": "StepStone",
+      "observed_at": "2026-08-23T08:00:00.000Z",
+      "search_parameters": {
+        "query": "IT",
+        "keyword": "IT Operations",
+        "location": "Muenchen",
+        "radius_km": 20,
+        "page_limit": 2
+      },
+      "page_number": 2,
+      "source_record_hash": "c1756b477cff8d6024140eeb1ef66bff143688c134c774db522163b6b77ef71b",
+      "evidence_snippet_hash": "00aecf1725c8c3dbe4dce9a8b2e9da1384bfe7b1a5a03d546646bc93c84f30f5",
+      "confidence_score": 70,
+      "raw_retention_policy": "minimal_metadata_only_no_full_posting_content",
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "job_board_discovery_status": "JOB_BOARD_DISCOVERY",
+      "official_verification_required": true,
+      "is_staffing_agency": false,
+      "known_company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+      "known_company_domain": "rohde-schwarz.com",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
+      "hint_id": "jobboard-hint:stepstone_muenchen_siemens_it_operations_muenchen",
+      "employer_name": "Siemens AG",
+      "normalized_name": "siemens",
+      "job_title": "IT Operations Lead",
+      "job_location": "Muenchen",
+      "location": "Muenchen",
+      "target_area": "MUNICH",
+      "industry_or_keyword": "IT Operations",
+      "source_id": "source-registry:stepstone_muenchen",
+      "observed_url": "https://www.stepstone.de/stellenangebote/it-operations-lead-siemens-111.html",
+      "posting_url": "https://www.stepstone.de/stellenangebote/it-operations-lead-siemens-111.html",
+      "platform": "StepStone",
+      "observed_at": "2026-08-23T08:00:00.000Z",
+      "search_parameters": {
+        "query": "IT",
+        "keyword": "IT Operations",
+        "location": "Muenchen",
+        "radius_km": 20,
+        "page_limit": 2
+      },
+      "page_number": 1,
+      "source_record_hash": "cacd0d006622a16a4dcacf5739b8963433b3575370ffe7a5744736c9ad2fe7c1",
+      "evidence_snippet_hash": "ec106c194b4e9889dffd627ce29c1984a214dac0d4a69389cfe9c44bb9a421ce",
+      "confidence_score": 70,
+      "raw_retention_policy": "minimal_metadata_only_no_full_posting_content",
+      "verification_status": "UNVERIFIED",
+      "candidate_status": "DISCOVERY_HINT",
+      "job_board_discovery_status": "JOB_BOARD_DISCOVERY",
+      "official_verification_required": true,
+      "is_staffing_agency": false,
+      "known_company_id": "company:siemens_ag",
+      "known_company_domain": "siemens.com",
+      "next_action": "verify_official_company_website_or_career_url"
+    },
+    {
       "hint_id": "register-hint:offeneregister_sample_2026_08_alpha_technik_gmbh_muenchen_1",
       "register_name": "Alpha Technik GmbH",
       "normalized_name": "alpha technik",
@@ -151,7 +256,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "snapshot_date": "2026-08-01T00:00:00Z",
         "line_number": 1,
         "record_hash": "1b64d382c89c5af3cdcebb28ebb3f940f258882ecdc6086cf7d4f2230e7a68b8"
       },
@@ -178,7 +283,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "snapshot_date": "2026-08-01T00:00:00Z",
         "line_number": 2,
         "record_hash": "38bc24463aaa9fa0c53eb418e8bee9221f845b5300abc7290747c5899d66595c"
       },
@@ -205,7 +310,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "snapshot_date": "2026-08-01T00:00:00Z",
         "line_number": 4,
         "record_hash": "9130450dc84b23cb48023c55fb0cf62f0def294b92b07604d93b0f4404fb18a2"
       },
@@ -232,7 +337,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "snapshot_date": "2026-08-01T00:00:00Z",
         "line_number": 6,
         "record_hash": "72f662d0a27d5d9ce61c67e592a12002a51fcf89bcbae21b475c1f5a6400c1c6"
       },
@@ -259,7 +364,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00.000Z",
+        "snapshot_date": "2026-08-01T00:00:00Z",
         "line_number": 3,
         "record_hash": "1c703b62538c243fd7aafb33d2a482ad5044ffd1a171dddd535dda31f62dc06c"
       },

@@ -264,6 +264,24 @@
         "stale und zukuenftige Snapshot-Metadaten",
         "keine personenbezogenen Registerrollen"
       ]
+    },
+    {
+      "roadmap_id": "JA-025",
+      "title": "Jobboersen-Arbeitgeberhinweise rechtssicher importieren",
+      "test_file": "tests/Test-JobAgentJobBoardDiscovery.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentJobBoardDiscovery.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Source-Registry-Fail-Closed fuer Jobboersen",
+        "StepStone-Snapshot-Extraktion aus HTML-Fixtures",
+        "Pagination-Grenzen und leere Ergebnisse",
+        "Deduplikation von Arbeitgeberhinweisen",
+        "Personaldienstleister-Markierung",
+        "minimale Hash-Evidenz ohne Anzeigenvolltexte",
+        "keine JobSource-Seiteneffekte"
+      ]
     }
   ]
 }

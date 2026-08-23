@@ -1,0 +1,19 @@
+{
+  "source_id": "source-registry:indeed_de",
+  "platform": "Indeed",
+  "base_url": "https://de.indeed.com/",
+  "fetched_at": "2026-08-23T08:20:00.000Z",
+  "search_parameters": {
+    "query": "Director IT",
+    "keyword": "Director IT",
+    "location": "Muenchen",
+    "radius_km": 20,
+    "page_limit": 1
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "html": "<html><body><article data-jobagent-job data-jobagent-employer=\"CANCOM SE\" data-jobagent-title=\"Director IT\" data-jobagent-location=\"Muenchen\" data-jobagent-url=\"/viewjob?jk=abc\"></article></body></html>"
+    }
+  ]
+}

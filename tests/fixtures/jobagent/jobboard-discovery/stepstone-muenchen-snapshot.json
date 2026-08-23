@@ -1,0 +1,27 @@
+{
+  "source_id": "source-registry:stepstone_muenchen",
+  "platform": "StepStone",
+  "base_url": "https://www.stepstone.de/",
+  "fetched_at": "2026-08-23T08:00:00.000Z",
+  "search_parameters": {
+    "query": "IT",
+    "keyword": "IT Operations",
+    "location": "Muenchen",
+    "radius_km": 20,
+    "page_limit": 2
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "html": "<html><body><article data-jobagent-job data-jobagent-employer=\"Siemens AG\" data-jobagent-title=\"IT Operations Lead\" data-jobagent-location=\"Muenchen\" data-jobagent-url=\"/stellenangebote/it-operations-lead-siemens-111.html\"><a href=\"/stellenangebote/it-operations-lead-siemens-111.html\">IT Operations Lead</a></article><article data-jobagent-job data-jobagent-employer=\"Hays Professional Solutions GmbH\" data-jobagent-title=\"IT Projektleiter\" data-jobagent-location=\"Muenchen\" data-jobagent-url=\"/stellenangebote/it-projektleiter-hays-222.html\"><a href=\"/stellenangebote/it-projektleiter-hays-222.html\">IT Projektleiter</a></article></body></html>"
+    },
+    {
+      "page_number": 2,
+      "html": "<html><body><article data-jobagent-job><span data-jobagent-employer>Rohde &amp; Schwarz GmbH &amp; Co. KG</span><span data-jobagent-title>Enterprise Applications Manager</span><span data-jobagent-location>Garching b. Muenchen</span><a data-jobagent-url=\"/stellenangebote/enterprise-applications-rs-333.html\" href=\"/stellenangebote/enterprise-applications-rs-333.html\">Details</a></article><article data-jobagent-job data-jobagent-employer=\"Siemens AG\" data-jobagent-title=\"IT Operations Lead\" data-jobagent-location=\"Muenchen\" data-jobagent-url=\"/stellenangebote/it-operations-lead-siemens-111.html\"></article></body></html>"
+    },
+    {
+      "page_number": 3,
+      "html": "<html><body><article data-jobagent-job data-jobagent-employer=\"Out Of Scope AG\" data-jobagent-title=\"IT Leitung\" data-jobagent-location=\"Hamburg\" data-jobagent-url=\"/stellenangebote/out-of-scope-444.html\"></article></body></html>"
+    }
+  ]
+}

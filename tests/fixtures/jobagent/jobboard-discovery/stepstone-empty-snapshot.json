@@ -1,0 +1,19 @@
+{
+  "source_id": "source-registry:stepstone_freising",
+  "platform": "StepStone",
+  "base_url": "https://www.stepstone.de/",
+  "fetched_at": "2026-08-23T08:10:00.000Z",
+  "search_parameters": {
+    "query": "CIO",
+    "keyword": "CIO",
+    "location": "Freising",
+    "radius_km": 25,
+    "page_limit": 1
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "html": "<html><body><main><p>Keine passenden Treffer.</p></main></body></html>"
+    }
+  ]
+}

@@ -22,6 +22,7 @@ $tests = @(
     'Test-JobAgentOperations.ps1',
     'Test-JobAgentCoverage.ps1',
     'Test-JobAgentRegisterDiscovery.ps1',
+    'Test-JobAgentJobBoardDiscovery.ps1',
     'Test-JobAgentTestMatrix.ps1'
 )
 

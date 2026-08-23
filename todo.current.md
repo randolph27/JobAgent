@@ -2,7 +2,6 @@
 
 Active: _(none)_
 
-- [open] TD-0025 Aktive Punkte: JA-025 Jobboersen-Arbeitgeberhinweise aus StepStone, Arbeitsagentur, Indeed und weiteren Quellen rechtssicher importieren #comment: Jobboersen liefern viele aktuelle Arbeitgebernamen, duerfen aber nur Discovery-Hinweise und keine offiziellen Karrierebelege erzeugen.
 - [open] TD-0026 Aktive Punkte: JA-026 Regionale Branchen-, Kommunal- und Arbeitgeberlisten fuer Muenchen/Freising importieren #comment: Register und Jobboersen reichen nicht aus, weil Niederlassungen, Hochschulen, Kliniken, Verwaltungen, Mittelstand und Clusterlisten eigene Quellen brauchen.
 - [open] TD-0027 Aktive Punkte: JA-027 Deduplikation, Standortlogik und Kandidatenqualitaet fuer tausende Firmen skalieren #comment: Massenimporte erzeugen Dubletten, Niederlassungsfaelle und unsichere Orte; ohne robuste Normalisierung wird der Store unbrauchbar.
 - [open] TD-0028 Aktive Punkte: JA-028 Offizielle Firmenwebsite-, Karriere- und ATS-Verifikation fuer Kandidaten automatisieren #comment: Kandidaten aus Registern und Jobboersen werden erst nutzbar, wenn offizielle Firmen- oder Karrierequellen belegt sind.
