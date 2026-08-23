@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent-test-matrix/v1",
-  "updated_at": "2026-08-23T10:12:00+02:00",
+  "updated_at": "2026-08-23T11:20:00+02:00",
   "policy": {
     "default_lane": "deterministic-fixture",
     "live_lane": "separate-not-supertest",
@@ -298,6 +298,22 @@
         "Deduplikation regionaler Kandidatenhinweise",
         "minimale Hash-Evidenz ohne Kontaktfelddaten",
         "Tool schreibt Regionaldatei und gemergten Hint-Store"
+      ]
+    },
+    {
+      "roadmap_id": "JA-027",
+      "title": "Deduplikation, Standortlogik und Kandidatenqualitaet fuer tausende Firmen skalieren",
+      "test_file": "tests/Test-JobAgentCompanyDedupeScale.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyDedupeScale.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "Register-ID- und Domain-Merge ueber starke Identitaetskeys",
+        "Namensgleichheit ohne starke Identitaet bleibt getrennt und wird als Review-Konflikt markiert",
+        "Personaldienstleister-, Zielgebiets- und Out-of-Scope-Konfliktflags",
+        "stabile Cluster-IDs, Source-Counts, First-/Last-Seen und Review-Queue",
+        "5.000+ synthetische Kandidaten in begrenzter Laufzeit"
       ]
     }
   ]

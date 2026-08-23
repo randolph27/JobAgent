@@ -2,6 +2,10 @@
 
 Set-StrictMode -Version 3.0
 
+if ($null -eq (Get-Command -Name Resolve-JobAgentCompanyCandidateClusters -ErrorAction SilentlyContinue)) {
+    Import-Module (Join-Path $PSScriptRoot 'JobAgent.CompanyInventory.psm1') -DisableNameChecking
+}
+
 function Get-JobAgentCoverageProperty {
     param(
         [Parameter()][AllowNull()][object]$Object,
@@ -82,6 +86,73 @@ function ConvertTo-JobAgentCoverageCountsObject {
         $ordered[$key] = [int]$Counts[$key]
     }
     return [pscustomobject]$ordered
+}
+
+function New-JobAgentCoverageCandidateClusterDimensions {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Clusters
+    )
+
+    $targetBasis = @{}
+    $conflicts = @{}
+    $reviewReasons = @{}
+    foreach ($cluster in @($Clusters)) {
+        foreach ($basis in @($cluster.target_area_basis)) {
+            Add-JobAgentCoverageCount -Counts $targetBasis -Key $basis
+        }
+        foreach ($flag in @($cluster.conflict_flags)) {
+            Add-JobAgentCoverageCount -Counts $conflicts -Key $flag
+        }
+        Add-JobAgentCoverageCount -Counts $reviewReasons -Key $cluster.review_queue_reason
+    }
+
+    [pscustomobject]@{
+        by_target_area_basis = ConvertTo-JobAgentCoverageCountsObject -Counts $targetBasis
+        by_conflict_flag = ConvertTo-JobAgentCoverageCountsObject -Counts $conflicts
+        by_review_queue_reason = ConvertTo-JobAgentCoverageCountsObject -Counts $reviewReasons
+    }
+}
+
+function New-JobAgentCoverageCandidateClusterReport {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowNull()][object]$HintStore = $null,
+        [Parameter()][datetime]$Now = [datetime]::UtcNow,
+        [Parameter()][ValidateRange(1, 1000)][int]$MaxReviewItems = 25
+    )
+
+    if ($null -eq $HintStore) {
+        return [pscustomobject]@{
+            schema_version = 'jobagent/company-candidate-coverage/v1'
+            generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+            candidates_total = 0
+            clusters_total = 0
+            conflict_clusters = 0
+            review_queue_total = 0
+            dimensions = New-JobAgentCoverageCandidateClusterDimensions -Clusters @()
+            review_queue = @()
+            clusters = @()
+        }
+    }
+
+    $clusterReport = Resolve-JobAgentCompanyCandidateClusters -Candidates @($HintStore.hints) -ObservedAt $Now
+    $reviewQueue = @($clusterReport.clusters |
+        Where-Object { [string]$_.review_queue_reason -ne 'READY_FOR_OFFICIAL_VERIFICATION' } |
+        Sort-Object review_queue_reason, canonical_name |
+        Select-Object -First $MaxReviewItems)
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-coverage/v1'
+        generated_at = $clusterReport.generated_at
+        candidates_total = $clusterReport.candidates_total
+        clusters_total = $clusterReport.clusters_total
+        conflict_clusters = $clusterReport.conflict_clusters
+        review_queue_total = $clusterReport.review_queue_total
+        dimensions = New-JobAgentCoverageCandidateClusterDimensions -Clusters @($clusterReport.clusters)
+        review_queue = @($reviewQueue)
+        clusters = @($clusterReport.clusters)
+    }
 }
 
 function Get-JobAgentCoverageCompanyTargetAreas {
@@ -636,6 +707,7 @@ function New-JobAgentCoverageReport {
     }
 
     $metricsArray = @($metrics)
+    $candidateClusters = New-JobAgentCoverageCandidateClusterReport -HintStore $HintStore -Now $Now -MaxReviewItems $MaxPriorityItems
     [pscustomobject]@{
         generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         stale_after_days = $StaleAfterDays
@@ -659,6 +731,9 @@ function New-JobAgentCoverageReport {
             duplicate_groups = @(Get-JobAgentCoverageDuplicateGroups -Document $Document).Count
             discovery_hints_total = if ($null -eq $HintStore) { 0 } else { @($HintStore.hints).Count }
             unverified_discovery_hints = if ($null -eq $HintStore) { 0 } else { @($HintStore.hints | Where-Object { [string](Get-JobAgentCoverageProperty -Object $_ -Name 'verification_status' -Default 'UNVERIFIED') -eq 'UNVERIFIED' }).Count }
+            candidate_clusters_total = $candidateClusters.clusters_total
+            candidate_conflict_clusters = $candidateClusters.conflict_clusters
+            candidate_review_queue_total = $candidateClusters.review_queue_total
         }
         dimensions = New-JobAgentCoverageDimensions -CompanyMetrics $metricsArray
         companies = @($metricsArray | Sort-Object company)
@@ -666,6 +741,7 @@ function New-JobAgentCoverageReport {
         backlog = @(Get-JobAgentCoverageBacklog -CompanyMetrics $metricsArray)
         scan_priority = @(Get-JobAgentCoverageScanPriority -CompanyMetrics $metricsArray -MaxCompanies $MaxPriorityItems)
         source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
+        candidate_clusters = $candidateClusters
         import_waves = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore
     }
 }
@@ -674,6 +750,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCoverageBacklog',
     'Get-JobAgentCoverageScanPriority',
     'Get-JobAgentCoverageDuplicateGroups',
+    'New-JobAgentCoverageCandidateClusterReport',
     'New-JobAgentDiscoverySourceCoverageReport',
     'New-JobAgentCoverageDimensions',
     'New-JobAgentCoverageImportWavePlan',

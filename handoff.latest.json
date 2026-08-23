@@ -1,1 +1,98 @@
-{"ts":"2026-08-23T10:56:49.388+02:00","agent_id":"codex","workspace_root":"D:\\_Scripte\\JobAgent","project":"JobAgent","active_id":"TD-0027","status":"in-progress","goal":"JA-027 Deduplikation, Standortlogik und Kandidatenqualitaet fuer tausende Firmen skalieren; erster Baustein Kandidaten-Clusterbildung ist implementiert.","next":"Reale Hint-Stores an Resolve-JobAgentCompanyCandidateClusters anbinden, Dedupe-Report/Review-Queue erzeugen und Coverage-Metriken integrieren.","changed":["src/JobAgent.CompanyInventory.psm1","schemas/jobagent.schema.json","tests/Test-JobAgentCompanyDedupeScale.ps1","handoff.latest.md","handoff.latest.json","todo.current.md","todo.state.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"verified":[{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentCompanyDedupeScale.ps1","exit":0,"status":"pass"},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1","exit":0,"status":"pass"},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1","exit":0,"status":"pass"},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1","exit":0,"status":"pass"},{"cmd":".\\ci.cmd stp","exit":0,"status":"pass"},{"cmd":".\\ci.cmd supertest","exit":null,"status":"not-requested-not-blocking","reason":"Nutzeranweisung: Wenn supertest nicht angefragt wurde, gilt er als erledigt."}],"git":{"branch":"master","head":"3b3906f6385b","upstream":"origin/master","ahead_behind":"0/0","worktree":"dirty-before-commit"},"route_ok":true,"route_violations":[],"refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"manual_missing":false,"env_inventory_missing":false,"env_inventory_used":false,"env_inventory_path":null}
+{
+  "ts": "2026-08-23T11:12:00.000+02:00",
+  "agent_id": "codex",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
+  "active_id": "TD-0028",
+  "status": "in-progress",
+  "goal": "JA-028 Offizielle Firmenwebsite-, Karriere- und ATS-Verifikation fuer Kandidaten automatisieren.",
+  "changed": [
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "docs/test-matrix.json",
+    "docs/test-matrix.md",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.Coverage.psm1",
+    "tests/Test-JobAgentCoverage.ps1",
+    "tests/Test-JobAgentSupertest.ps1",
+    "tests/Test-JobAgentTestMatrix.ps1",
+    "todo.checkpoint.json",
+    "todo.current.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "tools/Measure-JobAgentCompanyCoverage.ps1",
+    "tools/Measure-JobAgentCompanyCandidateDedupe.ps1"
+  ],
+  "verified": [
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyDedupeScale.ps1",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File tools\\Measure-JobAgentCompanyCandidateDedupe.ps1",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": ".\\ci.cmd supertest",
+      "status": "pass"
+    },
+    {
+      "exit": 0,
+      "cmd": ".\\ci.cmd stp",
+      "status": "pass"
+    },
+    {
+      "exit": 1,
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "status": "timeout"
+    },
+    {
+      "exit": 1,
+      "cmd": ".\\ci.cmd sonar-start",
+      "status": "fail"
+    }
+  ],
+  "route_ok": true,
+  "route_violations": [],
+  "git": {
+    "ahead_behind": "0/0",
+    "head": "6ee717f4c210",
+    "upstream": "origin/master",
+    "worktree": "dirty-before-commit",
+    "branch": "master"
+  },
+  "next": "JA-028: Verification-Queue und offizielle Evidence-Gates fuer deduplizierte Kandidaten implementieren.",
+  "refs": [
+    "README.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "todo.current.md",
+    "todo.state.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ],
+  "blocker": "SonarQube nicht startbar, weil lokales sonar.cmd im Projekt fehlt."
+}

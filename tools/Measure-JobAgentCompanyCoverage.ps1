@@ -82,7 +82,7 @@ function ConvertTo-ToolCoverageMarkdown {
     [void]$lines.Add('## Kernmetriken')
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints')) {
+    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total')) {
         [void]$lines.Add(('| {0} | {1} |' -f $metric, $Coverage.metrics.$metric))
     }
     [void]$lines.Add('')
@@ -93,6 +93,17 @@ function ConvertTo-ToolCoverageMarkdown {
     Add-ToolMarkdownCounts -Lines $lines -Title 'Branche' -Counts $Coverage.dimensions.by_industry
     [void]$lines.Add('')
     Add-ToolMarkdownCounts -Lines $lines -Title 'Quellenursprung' -Counts $Coverage.dimensions.by_discovery_origin
+    [void]$lines.Add('')
+    [void]$lines.Add('## Kandidaten-Dedupe')
+    [void]$lines.Add('| Cluster | Firma | Grund | Kandidaten |')
+    [void]$lines.Add('|---|---|---|---:|')
+    foreach ($cluster in @($Coverage.candidate_clusters.review_queue | Select-Object -First 25)) {
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} |' -f
+                (ConvertTo-ToolMarkdownText $cluster.identity_cluster_id),
+                (ConvertTo-ToolMarkdownText $cluster.canonical_name),
+                (ConvertTo-ToolMarkdownText $cluster.review_queue_reason),
+                @($cluster.candidate_ids).Count))
+    }
     [void]$lines.Add('')
     [void]$lines.Add('## Importwellen')
     foreach ($wave in @($Coverage.import_waves.waves)) {
@@ -152,13 +163,18 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; } .wave { border-left: 4px solid var(--accent-alt); } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }')
     [void]$lines.Add('</style></head><body><main>')
     [void]$lines.Add('<section><h1>JobAgent Firmen-Coverage-Audit</h1><p>' + (ConvertTo-ToolHtmlText $Coverage.approximation_notice) + '</p><div class="summary">')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints')) {
+    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total')) {
         [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolHtmlText $metric) + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')
     Add-ToolHtmlCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state
     Add-ToolHtmlCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area
     Add-ToolHtmlCounts -Lines $lines -Title 'Branche' -Counts $Coverage.dimensions.by_industry
+    [void]$lines.Add('<section><h2>Kandidaten-Dedupe</h2><div class="table-wrap"><table><thead><tr><th>Cluster</th><th>Firma</th><th>Grund</th><th>Kandidaten</th></tr></thead><tbody>')
+    foreach ($cluster in @($Coverage.candidate_clusters.review_queue | Select-Object -First 25)) {
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $cluster.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.review_queue_reason) + '</td><td>' + (ConvertTo-ToolHtmlText @($cluster.candidate_ids).Count) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Importwellen</h2>')
     foreach ($wave in @($Coverage.import_waves.waves)) {
         [void]$lines.Add('<div class="wave"><h3>Welle ' + (ConvertTo-ToolHtmlText $wave.wave_id) + ': ' + (ConvertTo-ToolHtmlText $wave.title) + '</h3><p>Abhaengigkeit: ' + (ConvertTo-ToolHtmlText $wave.dependency) + ' | Meilenstein: ' + (ConvertTo-ToolHtmlText $wave.milestone) + ' | Score: ' + (ConvertTo-ToolHtmlText $wave.priority_score) + '</p>')

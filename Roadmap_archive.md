@@ -600,3 +600,24 @@
   - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentRegionalDiscovery.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` -> Exit 0.
   - [x] Audit: Tests sichern regionale Listen als selektive, unverifizierte Kandidatenquellen; Kontaktfelder werden nicht persistiert; Muenchen/Freising/20-km/unsichere Orte werden unterscheidbar; bestehender offizieller Regionalfeed bleibt getrennt.
   - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+
+## Archiviert am 2026-08-23
+
+- [x] JA-027 Deduplikation, Standortlogik und Kandidatenqualitaet fuer tausende Firmen skalieren #comment: Massenimporte erzeugen Dubletten, Niederlassungsfaelle und unsichere Orte; ohne robuste Normalisierung wird der Store unbrauchbar.
+  - [x] Beschreibung: Es existiert ein skalierbarer Kandidaten-Merge, der Register-, Jobboersen- und Regional-Hints zu stabilen Arbeitgeberkandidaten verdichtet. Die Logik nutzt normalisierte Rechtsformen, Domains, Registerdaten, Adressen/Orte, Namensvarianten, Konzern-/Niederlassungsbeziehungen, Personaldienstleister-Markierung und Confidence-Scores. Zielgebiet wird getrennt modelliert als `REGISTER_SEAT_IN_TARGET`, `JOB_LOCATION_IN_TARGET`, `BRANCH_HINT_IN_TARGET`, `REMOTE_WITH_TARGET_REFERENCE`, `TARGET_UNCERTAIN` oder `OUT_OF_SCOPE`.
+  - [x] Scope: Erweitert werden `src/JobAgent.CompanyInventory.psm1`, `src/JobAgent.Coverage.psm1`, `schemas/jobagent.schema.json`, `data/jobagent/company-discovery.hints.json`, `tests/Test-JobAgentCompanyInventory.ps1`, `tests/Test-JobAgentCoverage.ps1` und neue Tests `tests/Test-JobAgentCompanyDedupeScale.ps1`. No-Go: keine automatische Verschmelzung rechtlich getrennter Unternehmen nur wegen aehnlichem Namen; keine harte Entfernung unsicherer Kandidaten ohne Review-Spur; keine Geodaten erfinden.
+  - [x] Ist-Stand (2026-08-23 11:20): Kandidaten-Clusterbildung, Coverage-Integration, Dedupe-Report-Tool, angereicherte Hint-Artefakte, Testmatrix und Supertest-Aufnahme sind implementiert. Der produktive Store bleibt unveraendert; unverifizierte Kandidaten bleiben Review-Queue-Faelle.
+  - [x] Abhängigkeiten: JA-024, JA-025 und JA-026 liefern Kandidaten; JA-028 nutzt die deduplizierten Kandidaten fuer Verifikation.
+  - [x] Aufwand/Dauer: Aufwand L, Dauer 3-5 PT bei 1 Entwickler/Agent; Performance-Tests und Regeltests koennen parallel laufen.
+  - [x] Prioritätsscore: 88/100, weil Deduplikation die Voraussetzung fuer jede produktive Erweiterungswelle ist.
+  - [x] Ordnungsbegründung: Erst nach massenhaften Kandidatenquellen ist erkennbar, welche Normalisierungs- und Konfliktfaelle tatsaechlich geloest werden muessen.
+  - [x] Risiken und Unsicherheiten: Konzernstrukturen, Marken, Franchise, Zeitarbeit und mehrere Standorte koennen fachlich mehrdeutig sein; Geokodierung kann externe Dienste oder lokale Datensaetze erfordern; falsche Merges sind schwerer zu korrigieren als offene Review-Faelle.
+  - [x] Schritte:
+    1. Kandidatenmodell erweitern: `candidate_id`, `identity_cluster_id`, `dedupe_keys`, `conflict_flags`, `target_area_basis`, `source_count`, `first_seen_at`, `last_seen_at` und `review_queue_reason` einfuehren.
+    2. Merge-Regeln deterministisch machen: Exakte Register-ID/Domain hoch gewichten, normalisierte Namen nur mit weiterer Evidenz mergen, Personaldienstleister/Einsatzunternehmen trennen und Konflikte in eine Review-Queue statt in automatische Merges schreiben.
+    3. Scale- und Regressionstest bauen: Mindestens 5.000 synthetische Kandidaten mit Namensvarianten, Rechtsformen, Dubletten, Ortsvarianten und widerspruechlichen Quellen in akzeptabler Laufzeit verarbeiten und stabile IDs nachweisen.
+  - [x] Evidence: `tools/Measure-JobAgentCompanyCandidateDedupe.ps1`, `logs/jobagent/company-candidate-dedupe-*.json`, `logs/jobagent/company-candidate-dedupe-*.md`, `logs/jobagent/company-discovery-hints-clustered-*.json`, Coverage-Kandidatencluster in `logs/jobagent/company-coverage-*.json`, Testfixture in `tests/Test-JobAgentCompanyDedupeScale.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` -> Exit 0.
+  - [x] Audit: Manuell pruefen, dass Review-Queue-Faelle nachvollziehbar sind, dass keine Geodaten ohne Quelle erzeugt wurden, dass Firmen mit gleichem Konzernnamen aber anderer Rechtseinheit nicht automatisch verschmolzen werden und dass Performance fuer tausende Kandidaten reicht.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0; `Test-JobAgentCompanyDedupeScale.ps1` ist in Supertest und Testmatrix aufgenommen.
+

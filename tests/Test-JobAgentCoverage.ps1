@@ -202,6 +202,11 @@ Assert-True -Condition (@($hintSourceIds | Where-Object { $secondarySourceIds -n
 $coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -Now ([datetime]'2026-08-23T08:30:00Z')
 Assert-True -Condition ($coverageWithInputs.metrics.discovery_hints_total -eq $hintStore.hints_total) -Message 'Coverage uebernimmt Discovery-Hint-Zaehler falsch.'
 Assert-True -Condition ($coverageWithInputs.source_coverage.sources_total -eq $sourceCoverage.sources_total) -Message 'Coverage bettet Quellen-Coverage nicht ein.'
+Assert-True -Condition ($coverageWithInputs.metrics.candidate_clusters_total -gt 0) -Message 'Coverage erzeugt keine Kandidaten-Cluster-Metrik.'
+Assert-True -Condition ($coverageWithInputs.candidate_clusters.candidates_total -eq $hintStore.hints_total) -Message 'Coverage-Dedupe uebernimmt Hint-Kandidaten falsch.'
+Assert-True -Condition ($coverageWithInputs.candidate_clusters.review_queue_total -gt 0) -Message 'Coverage-Dedupe weist keine Review-Queue aus.'
+Assert-True -Condition ($coverageWithInputs.candidate_clusters.dimensions.by_target_area_basis.REGISTER_SEAT_IN_TARGET -ge 1) -Message 'Coverage-Dedupe zaehlt Register-Standortbasis nicht.'
+Assert-True -Condition ($coverageWithInputs.candidate_clusters.dimensions.by_conflict_flag.STAFFING_AGENCY_REVIEW -ge 1) -Message 'Coverage-Dedupe zaehlt Personaldienstleister-Konflikte nicht.'
 Assert-True -Condition (@($coverageWithInputs.import_waves.waves).Count -eq 5) -Message 'Coverage erzeugt nicht alle Importwellen.'
 Assert-True -Condition (@($coverageWithInputs.import_waves.waves | Where-Object { $_.wave_id -eq 'D' -and $_.candidates_total -ge 1 }).Count -eq 1) -Message 'Importwelle D enthaelt keine Sekundaerhinweise.'
 Assert-True -Condition ($coverageWithInputs.import_waves.contract -match 'unverifizierte Hints') -Message 'Importwellen muessen Hints fail-closed beschreiben.'
@@ -220,12 +225,31 @@ $toolMarkdown = Get-Content -Raw -LiteralPath $toolOutput.markdown_path
 $toolHtml = Get-Content -Raw -LiteralPath $toolOutput.html_path
 Assert-True -Condition ($toolJson.approximation_notice -match 'keine vollstaendige Marktdeckung') -Message 'Coverage-Tool-JSON behauptet Vollstaendigkeit oder Hinweis fehlt.'
 Assert-True -Condition (@($toolJson.import_waves.waves).Count -eq 5) -Message 'Coverage-Tool-JSON enthaelt keine fuenf Importwellen.'
+Assert-True -Condition ($toolJson.metrics.candidate_clusters_total -gt 0) -Message 'Coverage-Tool-JSON enthaelt keine Kandidaten-Cluster-Metrik.'
+Assert-True -Condition (@($toolJson.candidate_clusters.review_queue).Count -gt 0) -Message 'Coverage-Tool-JSON enthaelt keine Dedupe-Review-Queue.'
 Assert-True -Condition ($toolMarkdown.Contains('## Importwellen')) -Message 'Coverage-Tool-Markdown enthaelt keine Importwellen.'
+Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Dedupe')) -Message 'Coverage-Tool-Markdown enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
 Assert-True -Condition ($toolHtml.Contains('<meta name="viewport" content="width=device-width, initial-scale=1">')) -Message 'Coverage-Tool-HTML enthaelt keinen Viewport-Meta-Tag.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Dedupe</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
 Assert-True -Condition ($toolHtml.Contains('.table-wrap { overflow-x: auto; }')) -Message 'Coverage-Tool-HTML enthaelt keinen Tabellen-Overflow-Schutz.'
 Assert-True -Condition (-not ($toolHtml -match '<script\b[^>]*\bsrc=')) -Message 'Coverage-Tool-HTML darf keine externen Skripte laden.'
 Assert-True -Condition (-not ($toolHtml -match '<link\b[^>]*\bhref=')) -Message 'Coverage-Tool-HTML darf keine externen Stylesheets laden.'
 
+$dedupeToolOutput = & (Join-Path $root 'tools\Measure-JobAgentCompanyCandidateDedupe.ps1') -ProjectRoot $root -MaxReviewItems 10 | ConvertFrom-Json -Depth 20
+Assert-True -Condition ($dedupeToolOutput.status -eq 'ok') -Message 'Kandidaten-Dedupe-Tool liefert keinen OK-Status.'
+Assert-True -Condition ($dedupeToolOutput.candidates_total -eq $hintStore.hints_total) -Message 'Kandidaten-Dedupe-Tool zaehlt Hints falsch.'
+Assert-True -Condition ($dedupeToolOutput.clusters_total -gt 0) -Message 'Kandidaten-Dedupe-Tool erzeugt keine Cluster.'
+Assert-True -Condition ($dedupeToolOutput.review_queue_total -gt 0) -Message 'Kandidaten-Dedupe-Tool erzeugt keine Review-Queue.'
+Assert-True -Condition ($dedupeToolOutput.performance_ms -lt 10000) -Message 'Kandidaten-Dedupe-Tool ist fuer kleine Hint-Stores zu langsam.'
+Assert-True -Condition (Test-Path -LiteralPath $dedupeToolOutput.json_path -PathType Leaf) -Message 'Kandidaten-Dedupe-Tool schreibt kein JSON-Artefakt.'
+Assert-True -Condition (Test-Path -LiteralPath $dedupeToolOutput.markdown_path -PathType Leaf) -Message 'Kandidaten-Dedupe-Tool schreibt kein Markdown-Artefakt.'
+Assert-True -Condition (Test-Path -LiteralPath $dedupeToolOutput.enriched_hints_path -PathType Leaf) -Message 'Kandidaten-Dedupe-Tool schreibt keine angereicherten Hints.'
+$dedupeToolJson = Get-Content -Raw -LiteralPath $dedupeToolOutput.json_path | ConvertFrom-Json -Depth 100
+$dedupeToolMarkdown = Get-Content -Raw -LiteralPath $dedupeToolOutput.markdown_path
+$enrichedHints = Get-Content -Raw -LiteralPath $dedupeToolOutput.enriched_hints_path | ConvertFrom-Json -Depth 100
+Assert-True -Condition ($dedupeToolJson.schema_version -eq 'jobagent/company-candidate-clusters/v1') -Message 'Kandidaten-Dedupe-Tool-JSON hat falsche Schema-Version.'
+Assert-True -Condition ($dedupeToolMarkdown.Contains('## Review-Queue')) -Message 'Kandidaten-Dedupe-Tool-Markdown enthaelt keine Review-Queue.'
+Assert-True -Condition (@($enrichedHints.hints | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.identity_cluster_id) }).Count -eq 0) -Message 'Angereicherte Hints enthalten fehlende Cluster-IDs.'
 
 [pscustomobject]@{
     status = 'ok'
@@ -247,6 +271,8 @@ Assert-True -Condition (-not ($toolHtml -match '<link\b[^>]*\bhref=')) -Message 
         'discovery_source_usage_notes_required',
         'secondary_hint_store_contract',
         'coverage_tool_generates_json_markdown_html_artifacts',
-        'coverage_tool_html_has_responsive_guards'
+        'coverage_tool_html_has_responsive_guards',
+        'coverage_candidate_cluster_metrics',
+        'candidate_dedupe_tool_generates_json_markdown_and_enriched_hints'
     )
 } | ConvertTo-Json -Depth 4
