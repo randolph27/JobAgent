@@ -9,6 +9,7 @@ param(
     [Parameter()][string]$SourceRegistryPath = 'data/jobagent/company-discovery.sources.json',
     [Parameter()][string]$HintStorePath = 'data/jobagent/company-discovery.hints.json',
     [Parameter()][string]$CandidateVerificationQueuePath = 'data/jobagent/company-candidate-verification.queue.json',
+    [Parameter()][string]$WaveConfigPath = 'data/jobagent/company-import-waves.json',
     [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 7,
     [Parameter()][ValidateRange(1, 1000)][int]$MaxPriorityItems = 25
 )
@@ -107,6 +108,24 @@ function ConvertTo-ToolCoverageMarkdown {
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Importwellen')
+    [void]$lines.Add('| Welle | Ziel | Kandidaten | Firmen | Verifiziert | Nur Hinweis | Review | Scanfaehig | Annahmequote | Dublettenquote | Coverage-Delta | Gate | Backup |')
+    [void]$lines.Add('|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|')
+    foreach ($metric in @($Coverage.import_wave_metrics.waves)) {
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12} |' -f
+                (ConvertTo-ToolMarkdownText $metric.wave_id),
+                $metric.target_size,
+                $metric.candidates_total,
+                $metric.companies_total,
+                $metric.verified_total,
+                $metric.hint_only_total,
+                $metric.review_total,
+                $metric.scannable_total,
+                $metric.acceptance_rate,
+                $metric.duplicate_rate,
+                $metric.coverage_delta,
+                (ConvertTo-ToolMarkdownText $metric.latest_gate_status),
+                (ConvertTo-ToolMarkdownText $metric.latest_backup_path)))
+    }
     foreach ($wave in @($Coverage.import_waves.waves)) {
         [void]$lines.Add('')
         [void]$lines.Add("### Welle $($wave.wave_id): $($wave.title)")
@@ -164,6 +183,19 @@ function ConvertTo-ToolCoverageMarkdown {
                 (ConvertTo-ToolMarkdownText $item.reason),
                 (ConvertTo-ToolMarkdownText $item.next_step)))
     }
+    [void]$lines.Add('')
+    [void]$lines.Add('## Firmeninventar')
+    [void]$lines.Add('| Firma | Zielgebiet | Verifikation | Status | Scanfaehig | Naechster Schritt |')
+    [void]$lines.Add('|---|---|---|---|---|---|')
+    foreach ($company in @($Coverage.companies | Select-Object -First 250)) {
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
+                (ConvertTo-ToolMarkdownText $company.company),
+                (ConvertTo-ToolMarkdownText $company.target_area),
+                (ConvertTo-ToolMarkdownText $company.verification_status),
+                (ConvertTo-ToolMarkdownText $company.inventory_state),
+                (ConvertTo-ToolMarkdownText $company.has_career_url),
+                (ConvertTo-ToolMarkdownText $company.next_step)))
+    }
     return ($lines.ToArray() -join "`n")
 }
 
@@ -188,7 +220,7 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">')
     [void]$lines.Add('<title>JobAgent Firmen-Coverage-Audit</title><style>')
     [void]$lines.Add(':root { color-scheme: light; --bg: #eef2f5; --surface: #ffffff; --surface-alt: #f6f8fa; --line: #c8d1dc; --text: #17202a; --muted: #52616f; --accent: #0f6b6d; --accent-alt: #8a5a00; }')
-    [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; } .wave { border-left: 4px solid var(--accent-alt); } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }')
+    [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } .table-wrap { overflow-y: auto; max-height: 68vh; border: 1px solid var(--line); } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; position: sticky; top: 0; z-index: 1; } .wave { border-left: 4px solid var(--accent-alt); padding-left: 12px; margin-top: 14px; } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }')
     [void]$lines.Add('</style></head><body><main>')
     [void]$lines.Add('<section><h1>JobAgent Firmen-Coverage-Audit</h1><p>' + (ConvertTo-ToolHtmlText $Coverage.approximation_notice) + '</p><div class="summary">')
     foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
@@ -215,6 +247,11 @@ function ConvertTo-ToolCoverageHtml {
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Importwellen</h2>')
+    [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Welle</th><th>Ziel</th><th>Kandidaten</th><th>Firmen</th><th>Verifiziert</th><th>Nur Hinweis</th><th>Review</th><th>Scanfaehig</th><th>Annahmequote</th><th>Dublettenquote</th><th>Coverage-Delta</th><th>Gate</th><th>Backup</th></tr></thead><tbody>')
+    foreach ($metric in @($Coverage.import_wave_metrics.waves)) {
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $metric.wave_id) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.target_size) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.candidates_total) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.companies_total) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.verified_total) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.hint_only_total) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.review_total) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.scannable_total) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.acceptance_rate) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.duplicate_rate) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.coverage_delta) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.latest_gate_status) + '</td><td>' + (ConvertTo-ToolHtmlText $metric.latest_backup_path) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div>')
     foreach ($wave in @($Coverage.import_waves.waves)) {
         [void]$lines.Add('<div class="wave"><h3>Welle ' + (ConvertTo-ToolHtmlText $wave.wave_id) + ': ' + (ConvertTo-ToolHtmlText $wave.title) + '</h3><p>Abhaengigkeit: ' + (ConvertTo-ToolHtmlText $wave.dependency) + ' | Meilenstein: ' + (ConvertTo-ToolHtmlText $wave.milestone) + ' | Score: ' + (ConvertTo-ToolHtmlText $wave.priority_score) + '</p>')
         [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>')
@@ -223,8 +260,42 @@ function ConvertTo-ToolCoverageHtml {
         }
         [void]$lines.Add('</tbody></table></div></div>')
     }
-    [void]$lines.Add('</section></main></body></html>')
+    [void]$lines.Add('</section><section><h2>Firmeninventar</h2><p>Segmentierte Anzeige: maximal 250 sortierte Firmen im HTML-Audit; vollstaendige Daten stehen im JSON-Artefakt.</p><div class="table-wrap"><table><thead><tr><th>Firma</th><th>Zielgebiet</th><th>Verifikation</th><th>Status</th><th>Scanfaehig</th><th>Naechster Schritt</th></tr></thead><tbody>')
+    foreach ($company in @($Coverage.companies | Select-Object -First 250)) {
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $company.company) + '</td><td>' + (ConvertTo-ToolHtmlText $company.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $company.verification_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.inventory_state) + '</td><td>' + (ConvertTo-ToolHtmlText $company.has_career_url) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_step) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div></section></main></body></html>')
     return ($lines.ToArray() -join "`n")
+}
+
+function Get-ToolWaveGateHistory {
+    param([Parameter(Mandatory)][string]$Root)
+
+    $logRootPath = Resolve-ToolPath -Root $Root -Path $LogRoot
+    if (-not (Test-Path -LiteralPath $logRootPath -PathType Container)) {
+        return @()
+    }
+    $items = foreach ($file in @(Get-ChildItem -LiteralPath $logRootPath -Filter 'company-discovery-import*.json' -File -ErrorAction SilentlyContinue)) {
+        try {
+            $entry = Get-Content -Raw -LiteralPath $file.FullName | ConvertFrom-Json -Depth 100
+            if ($null -eq $entry.wave_gate) {
+                continue
+            }
+            [pscustomobject]@{
+                ts = [string]$entry.ts
+                wave_id = [string]$entry.wave_id
+                status = [string]$entry.wave_gate.status
+                metrics = $entry.wave_gate.metrics
+                violations = @($entry.wave_gate.violations)
+                backup_path = [string]$entry.backup_path
+                log_path = $file.FullName
+            }
+        }
+        catch {
+            continue
+        }
+    }
+    return @($items | Sort-Object ts)
 }
 
 $sourceRegistry = $null
@@ -245,9 +316,16 @@ if (Test-Path -LiteralPath $candidateVerificationQueueResolved -PathType Leaf) {
     $candidateVerificationQueue = Get-Content -Raw -LiteralPath $candidateVerificationQueueResolved | ConvertFrom-Json -Depth 100
 }
 
+$waveConfig = $null
+$waveConfigResolved = Resolve-ToolPath -Root $projectRoot -Path $WaveConfigPath
+if (Test-Path -LiteralPath $waveConfigResolved -PathType Leaf) {
+    $waveConfig = Get-Content -Raw -LiteralPath $waveConfigResolved | ConvertFrom-Json -Depth 100
+}
+$waveGateHistory = @(Get-ToolWaveGateHistory -Root $projectRoot)
+
 $generatedAt = [datetime]::UtcNow
 $document = Read-JobAgentStore -ProjectRoot $projectRoot -DataRoot $DataRoot
-$coverage = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now $generatedAt -StaleAfterDays $StaleAfterDays -MaxPriorityItems $MaxPriorityItems
+$coverage = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -WaveConfig $waveConfig -WaveGateHistory $waveGateHistory -Now $generatedAt -StaleAfterDays $StaleAfterDays -MaxPriorityItems $MaxPriorityItems
 $stamp = $generatedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture)
 
 $logRootPath = Resolve-ToolPath -Root $projectRoot -Path $LogRoot
@@ -273,4 +351,5 @@ ConvertTo-ToolCoverageHtml -Coverage $coverage | Set-Content -LiteralPath $htmlP
     backlog_items = @($coverage.backlog).Count
     duplicate_groups = $coverage.metrics.duplicate_groups
     import_waves = @($coverage.import_waves.waves).Count
+    import_wave_metrics = $coverage.import_wave_metrics
 } | ConvertTo-Json -Depth 6

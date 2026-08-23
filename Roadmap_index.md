@@ -1,5 +1,5 @@
 # Roadmap Index
 Stand: 2026-08-23
-- Roadmap.md: aktive Punkte JA-029 bis JA-030.
-- Roadmap_archive.md: archivierte abgeschlossene Punkte, aktuell JA-001 bis JA-028.
+- Roadmap.md: aktive Punkte JA-030.
+- Roadmap_archive.md: archivierte abgeschlossene Punkte, aktuell JA-001 bis JA-029.
 

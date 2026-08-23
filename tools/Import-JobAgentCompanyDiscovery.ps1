@@ -42,6 +42,31 @@ function New-ToolStoreBackup {
     return $backupPath
 }
 
+function Write-ToolImportGateFailureLog {
+    param(
+        [Parameter(Mandatory)][string]$Root,
+        [Parameter(Mandatory)][string]$LogRootPath,
+        [Parameter(Mandatory)][datetime]$Timestamp,
+        [Parameter(Mandatory)][string]$FeedPath,
+        [Parameter(Mandatory)][string]$WaveIdValue,
+        [Parameter(Mandatory)][object]$WaveGate,
+        [Parameter()][AllowNull()][string]$BackupPath
+    )
+
+    $resolvedLogRoot = if ([IO.Path]::IsPathRooted($LogRootPath)) { $LogRootPath } else { Join-Path $Root $LogRootPath }
+    New-Item -ItemType Directory -Path $resolvedLogRoot -Force | Out-Null
+    $logPath = Join-Path $resolvedLogRoot ('company-discovery-import-failed-' + $Timestamp.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
+    [pscustomobject]@{
+        ts = $Timestamp.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        status = 'failed'
+        feed_path = $FeedPath
+        wave_id = $WaveIdValue
+        wave_gate = $WaveGate
+        backup_path = $BackupPath
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $logPath -Encoding UTF8
+    return $logPath
+}
+
 $importedAt = [datetime]::UtcNow
 $nextScanAt = $importedAt.Date.AddDays(1)
 $feed = Get-Content -LiteralPath $resolvedFeedPath -Raw | ConvertFrom-Json -Depth 100
@@ -66,6 +91,7 @@ try {
         $waveConfig = Get-Content -Raw -LiteralPath $resolvedWaveConfigPath | ConvertFrom-Json -Depth 100
         $waveGate = Test-JobAgentCompanyImportWaveGate -BeforeDocument $beforeDocument -ImportSummary $importSummary -WaveConfig $waveConfig -WaveId $WaveId -BackupPath $backupPath
         if ([string]$waveGate.status -ne 'passed') {
+            Write-ToolImportGateFailureLog -Root $projectRoot -LogRootPath $LogRoot -Timestamp $importedAt -FeedPath $resolvedFeedPath -WaveIdValue $WaveId -WaveGate $waveGate -BackupPath $backupPath | Out-Null
             throw ('Importwellen-Gate fehlgeschlagen: ' + ((@($waveGate.violations) | Sort-Object) -join ', '))
         }
     }

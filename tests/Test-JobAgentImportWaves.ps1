@@ -111,6 +111,10 @@ try {
     Assert-True -Condition ($LASTEXITCODE -ne 0) -Message 'Wellen-Import-Script akzeptiert unverifizierten Hint.'
     $blockedStore = Read-JobAgentStore -ProjectRoot $scriptProjectRoot
     Assert-True -Condition (@($blockedStore.companies | Where-Object { [string]$_.company_id -eq 'company:wave_blocked_ag' }).Count -eq 0) -Message 'Fail-Closed-Gate hat Store trotzdem veraendert.'
+    $failureLogs = @(Get-ChildItem -LiteralPath (Join-Path $scriptProjectRoot 'logs\jobagent') -Filter 'company-discovery-import-failed-*.json' -File)
+    Assert-True -Condition ($failureLogs.Count -eq 1) -Message 'Fail-Closed-Gate schreibt keinen Failure-Evidence-Log.'
+    $failureLog = Get-Content -Raw -LiteralPath $failureLogs[0].FullName | ConvertFrom-Json -Depth 100
+    Assert-True -Condition (@($failureLog.wave_gate.violations | Where-Object { $_ -match 'VERIFICATION_STATUS_NOT_ALLOWED|SECONDARY_SOURCE_PRODUCTIVE_UPSERT|MANUAL_REVIEW_RATE_EXCEEDED' }).Count -ge 1) -Message 'Failure-Evidence-Log enthaelt keine Reject-Gruende.'
 }
 finally {
     if (Test-Path -LiteralPath $scriptProjectRoot) {
@@ -126,6 +130,7 @@ finally {
         'wave_gate_rejects_unverified_productive_upsert',
         'wave_gate_requires_rollback_backup',
         'wave_import_script_writes_backup_and_gate_report',
-        'wave_import_script_fail_closed_without_store_change'
+        'wave_import_script_fail_closed_without_store_change',
+        'wave_import_script_writes_failure_evidence_log'
     )
 } | ConvertTo-Json -Depth 4

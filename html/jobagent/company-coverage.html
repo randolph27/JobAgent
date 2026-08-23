@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JobAgent Firmen-Coverage-Audit</title><style>
 :root { color-scheme: light; --bg: #eef2f5; --surface: #ffffff; --surface-alt: #f6f8fa; --line: #c8d1dc; --text: #17202a; --muted: #52616f; --accent: #0f6b6d; --accent-alt: #8a5a00; }
-* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; } .wave { border-left: 4px solid var(--accent-alt); } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }
+* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } .table-wrap { overflow-y: auto; max-height: 68vh; border: 1px solid var(--line); } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; position: sticky; top: 0; z-index: 1; } .wave { border-left: 4px solid var(--accent-alt); padding-left: 12px; margin-top: 14px; } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }
 </style></head><body><main>
 <section><h1>JobAgent Firmen-Coverage-Audit</h1><p>Coverage-Werte sind operative Naeherungen aus dem lokalen Firmeninventar und behaupten keine vollstaendige Marktdeckung.</p><div class="summary">
 <div class="metric"><span class="label">companies_total</span><span class="value">38</span></div>
@@ -74,7 +74,13 @@
 <section><h2>Review-/Reject-Report</h2><div class="table-wrap"><table><thead><tr><th>Entscheidung</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Grund</th><th>Naechster Versuch</th></tr></thead><tbody>
 </tbody></table></div></section>
 <section><h2>Importwellen</h2>
-<div class="wave"><h3>Welle A: Grosse regionale Arbeitgeber und boersennotierte Unternehmen</h3><p>Abhaengigkeit: JA-024/JA-026 | Meilenstein: M5-A | Score: 100</p>
+<div class="table-wrap"><table><thead><tr><th>Welle</th><th>Ziel</th><th>Kandidaten</th><th>Firmen</th><th>Verifiziert</th><th>Nur Hinweis</th><th>Review</th><th>Scanfaehig</th><th>Annahmequote</th><th>Dublettenquote</th><th>Coverage-Delta</th><th>Gate</th><th>Backup</th></tr></thead><tbody>
+<tr><td>A</td><td>250</td><td>12</td><td>12</td><td>12</td><td>0</td><td>0</td><td>12</td><td>1</td><td>0</td><td>0</td><td>not-run</td><td>UNKNOWN</td></tr>
+<tr><td>B</td><td>750</td><td>4</td><td>4</td><td>4</td><td>0</td><td>0</td><td>4</td><td>1</td><td>0</td><td>0</td><td>not-run</td><td>UNKNOWN</td></tr>
+<tr><td>C</td><td>1500</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>not-run</td><td>UNKNOWN</td></tr>
+<tr><td>D</td><td>0</td><td>12</td><td>0</td><td>0</td><td>12</td><td>12</td><td>0</td><td>0</td><td>0</td><td>0</td><td>not-run</td><td>UNKNOWN</td></tr>
+</tbody></table></div>
+<div class="wave"><h3>Welle A: Grosse regionale Arbeitgeber und bereits verifizierte Firmen</h3><p>Abhaengigkeit: JA-023 bis JA-028 | Meilenstein: M5-A | Score: 100</p>
 <div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>
 <tr><td>company</td><td>Allianz SE</td><td>MUNICH</td><td>Insurance</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 <tr><td>company</td><td>ATOSS Software SE</td><td>MUNICH</td><td>Software</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
@@ -89,18 +95,18 @@
 <tr><td>company</td><td>MAN Truck &amp; Bus SE</td><td>MUNICH</td><td>Automotive</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 <tr><td>company</td><td>Microsoft Deutschland GmbH</td><td>MUNICH</td><td>Technology</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 </tbody></table></div></div>
-<div class="wave"><h3>Welle B: Freising, Weihenstephan und Flughafen-Umfeld</h3><p>Abhaengigkeit: JA-024/JA-026 | Meilenstein: M5-B | Score: 92</p>
+<div class="wave"><h3>Welle B: Register-/Regional-Kandidaten mit offizieller Website</h3><p>Abhaengigkeit: JA-023 bis JA-028 | Meilenstein: M5-B | Score: 92</p>
 <div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>
 <tr><td>company</td><td>Flughafen Muenchen GmbH</td><td>FREISING</td><td>Airport Operations</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 <tr><td>company</td><td>Fraunhofer IVV</td><td>FREISING</td><td>Research</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 <tr><td>company</td><td>msg systems ag</td><td>MUNICH_20KM</td><td>IT Consulting</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 <tr><td>company</td><td>Texas Instruments Deutschland GmbH</td><td>FREISING</td><td>Semiconductors</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 </tbody></table></div></div>
-<div class="wave"><h3>Welle C: EMM-Mitglieder, Branchencluster und oeffentliche Institutionen</h3><p>Abhaengigkeit: JA-023 | Meilenstein: M5-C | Score: 84</p>
+<div class="wave"><h3>Welle C: Jobboersen-aktive Arbeitgeber mit verifizierter Karrierequelle</h3><p>Abhaengigkeit: JA-023 bis JA-028 | Meilenstein: M5-C | Score: 84</p>
 <div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>
 <tr><td>company</td><td>Landeshauptstadt Muenchen</td><td>MUNICH</td><td>Public Sector</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
 </tbody></table></div></div>
-<div class="wave"><h3>Welle D: BA, EURES und Make-it-in-Germany-Hints</h3><p>Abhaengigkeit: JA-025 | Meilenstein: M5-D | Score: 76</p>
+<div class="wave"><h3>Welle D: Manuelle Review-Queue ohne produktiven Upsert</h3><p>Abhaengigkeit: JA-023 bis JA-028 | Meilenstein: M5-D | Score: 76</p>
 <div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>
 <tr><td>discovery_hint</td><td>Airport Logistics GmbH</td><td>FREISING</td><td>Logistik</td><td>REGIONAL_DISCOVERY_HINT</td><td>verify_official_company_website_or_career_url</td></tr>
 <tr><td>discovery_hint</td><td>Alpha Regional AG</td><td>MUNICH</td><td>Software</td><td>REGIONAL_DISCOVERY_HINT</td><td>verify_official_company_website_or_career_url</td></tr>
@@ -115,13 +121,43 @@
 <tr><td>discovery_hint</td><td>Siemens AG</td><td>MUNICH</td><td>IT Operations</td><td>DISCOVERY_HINT</td><td>verify_official_company_website_or_career_url</td></tr>
 <tr><td>discovery_hint</td><td>Texas Instruments Deutschland GmbH</td><td>FREISING</td><td>Enterprise Applications</td><td>DISCOVERY_HINT</td><td>verify_official_company_website_or_career_url</td></tr>
 </tbody></table></div></div>
-<div class="wave"><h3>Welle E: Startup-, Scaleup- und manuelle Review-Reste</h3><p>Abhaengigkeit: JA-027 Coverage-Audit | Meilenstein: M5-E | Score: 68</p>
-<div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>
-<tr><td>company</td><td>Bayerische Landesbank</td><td>MUNICH</td><td>Banking</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
-<tr><td>company</td><td>BWI GmbH</td><td>UNKNOWN</td><td>IT Services</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
-<tr><td>company</td><td>Knorr-Bremse AG</td><td>MUNICH</td><td>Mobility Technology</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
-<tr><td>company</td><td>MTU Aero Engines AG</td><td>MUNICH</td><td>Aerospace</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
-<tr><td>company</td><td>Stadtwerke Muenchen GmbH</td><td>MUNICH</td><td>Utilities</td><td>ACTIVE_ROTATION</td><td>In der regulaeren Rotation belassen.</td></tr>
-<tr><td>company</td><td>Versicherungskammer Bayern</td><td>MUNICH</td><td>Insurance</td><td>NEVER_SCANNED</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
-</tbody></table></div></div>
-</section></main></body></html>
+</section><section><h2>Firmeninventar</h2><p>Segmentierte Anzeige: maximal 250 sortierte Firmen im HTML-Audit; vollstaendige Daten stehen im JSON-Artefakt.</p><div class="table-wrap"><table><thead><tr><th>Firma</th><th>Zielgebiet</th><th>Verifikation</th><th>Status</th><th>Scanfaehig</th><th>Naechster Schritt</th></tr></thead><tbody>
+<tr><td>Allianz SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>ATOSS Software SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Bayerische Landesbank</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>BMW Group</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>RETRY_REQUIRED</td><td>True</td><td>Fehlerklasse pruefen und Quelle gezielt erneut scannen.</td></tr>
+<tr><td>BWI GmbH</td><td>UNKNOWN</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>CANCOM SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>CTS Eventim AG &amp; Co. KGaA</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Deutsche Pfandbriefbank AG</td><td>MUNICH_20KM</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Flughafen Muenchen GmbH</td><td>FREISING</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Fraunhofer IVV</td><td>FREISING</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Giesecke+Devrient GmbH</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Google Germany GmbH</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>HENSOLDT AG</td><td>MUNICH_20KM</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Infineon Technologies AG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Knorr-Bremse AG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Landeshauptstadt Muenchen</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>MAN Truck &amp; Bus SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Microsoft Deutschland GmbH</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>msg systems ag</td><td>MUNICH_20KM</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>MTU Aero Engines AG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Munich Re</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Nagarro SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Nemetschek SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>ProSiebenSat.1 Media SE</td><td>MUNICH_20KM</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Rohde &amp; Schwarz GmbH &amp; Co. KG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Scout24 SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>SFC Energy AG</td><td>MUNICH_20KM</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Siemens AG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>ACTIVE_ROTATION</td><td>True</td><td>In der regulaeren Rotation belassen.</td></tr>
+<tr><td>Siemens Energy AG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Siltronic AG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Sixt SE</td><td>MUNICH_20KM</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Stadtwerke Muenchen GmbH</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>ACTIVE_ROTATION</td><td>True</td><td>In der regulaeren Rotation belassen.</td></tr>
+<tr><td>SUSS MicroTec SE</td><td>MUNICH_20KM</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Texas Instruments Deutschland GmbH</td><td>FREISING</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>TRATON SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Versicherungskammer Bayern</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Wacker Chemie AG</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+<tr><td>Wacker Neuson SE</td><td>MUNICH</td><td>CAREER_URL_VERIFIED</td><td>NEVER_SCANNED</td><td>True</td><td>Offizielle Quelle in den naechsten Daily-Run aufnehmen.</td></tr>
+</tbody></table></div></section></main></body></html>

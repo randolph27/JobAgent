@@ -667,16 +667,39 @@ function New-JobAgentCoverageImportWavePlan {
     param(
         [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$CompanyMetrics,
         [Parameter()][AllowNull()][object]$HintStore = $null,
+        [Parameter()][AllowNull()][object]$WaveConfig = $null,
         [Parameter()][ValidateRange(1, 100)][int]$MaxCandidatesPerWave = 12
     )
 
-    $waveDefinitions = @(
-        [pscustomobject]@{ wave_id = 'A'; title = 'Grosse regionale Arbeitgeber und boersennotierte Unternehmen'; milestone = 'M5-A'; dependency = 'JA-024/JA-026'; priority_score = 100 }
-        [pscustomobject]@{ wave_id = 'B'; title = 'Freising, Weihenstephan und Flughafen-Umfeld'; milestone = 'M5-B'; dependency = 'JA-024/JA-026'; priority_score = 92 }
-        [pscustomobject]@{ wave_id = 'C'; title = 'EMM-Mitglieder, Branchencluster und oeffentliche Institutionen'; milestone = 'M5-C'; dependency = 'JA-023'; priority_score = 84 }
-        [pscustomobject]@{ wave_id = 'D'; title = 'BA, EURES und Make-it-in-Germany-Hints'; milestone = 'M5-D'; dependency = 'JA-025'; priority_score = 76 }
-        [pscustomobject]@{ wave_id = 'E'; title = 'Startup-, Scaleup- und manuelle Review-Reste'; milestone = 'M5-E'; dependency = 'JA-027 Coverage-Audit'; priority_score = 68 }
-    )
+    $waveDefinitions = if ($null -ne $WaveConfig -and @($WaveConfig.waves).Count -gt 0) {
+        @($WaveConfig.waves | ForEach-Object {
+                [pscustomobject]@{
+                    wave_id = [string]$_.wave_id
+                    title = [string]$_.title
+                    milestone = 'M5-' + [string]$_.wave_id
+                    dependency = 'JA-023 bis JA-028'
+                    priority_score = switch ([string]$_.wave_id) {
+                        'A' { 100; break }
+                        'B' { 92; break }
+                        'C' { 84; break }
+                        'D' { 76; break }
+                        default { 60 }
+                    }
+                    target_size = [int](Get-JobAgentCoverageProperty -Object $_ -Name 'target_size' -Default 0)
+                    allowed_verification_statuses = @($_.allowed_verification_statuses | ForEach-Object { [string]$_ })
+                    productive_upsert_allowed = [bool](Get-JobAgentCoverageProperty -Object $_ -Name 'productive_upsert_allowed' -Default $true)
+                }
+            })
+    }
+    else {
+        @(
+            [pscustomobject]@{ wave_id = 'A'; title = 'Grosse regionale Arbeitgeber und boersennotierte Unternehmen'; milestone = 'M5-A'; dependency = 'JA-024/JA-026'; priority_score = 100; target_size = 250; allowed_verification_statuses = @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED'); productive_upsert_allowed = $true }
+            [pscustomobject]@{ wave_id = 'B'; title = 'Freising, Weihenstephan und Flughafen-Umfeld'; milestone = 'M5-B'; dependency = 'JA-024/JA-026'; priority_score = 92; target_size = 750; allowed_verification_statuses = @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED'); productive_upsert_allowed = $true }
+            [pscustomobject]@{ wave_id = 'C'; title = 'EMM-Mitglieder, Branchencluster und oeffentliche Institutionen'; milestone = 'M5-C'; dependency = 'JA-023'; priority_score = 84; target_size = 1500; allowed_verification_statuses = @('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED'); productive_upsert_allowed = $true }
+            [pscustomobject]@{ wave_id = 'D'; title = 'BA, EURES und Make-it-in-Germany-Hints'; milestone = 'M5-D'; dependency = 'JA-025'; priority_score = 76; target_size = 0; allowed_verification_statuses = @(); productive_upsert_allowed = $false }
+            [pscustomobject]@{ wave_id = 'E'; title = 'Startup-, Scaleup- und manuelle Review-Reste'; milestone = 'M5-E'; dependency = 'JA-027 Coverage-Audit'; priority_score = 68; target_size = 0; allowed_verification_statuses = @(); productive_upsert_allowed = $false }
+        )
+    }
 
     $assigned = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     $waves = New-Object System.Collections.Generic.List[object]
@@ -711,6 +734,8 @@ function New-JobAgentCoverageImportWavePlan {
                 dependency = [string]$definition.dependency
                 priority_score = [int]$definition.priority_score
                 milestone = [string]$definition.milestone
+                target_size = [int]$definition.target_size
+                productive_upsert_allowed = [bool]$definition.productive_upsert_allowed
                 candidates_total = @($allCandidates).Count
                 candidates = @($allCandidates)
             })
@@ -722,6 +747,70 @@ function New-JobAgentCoverageImportWavePlan {
     }
 }
 
+function New-JobAgentCoverageImportWaveMetrics {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$ImportWavePlan,
+        [Parameter()][AllowEmptyCollection()][object[]]$GateHistory = @()
+    )
+
+    $waves = foreach ($wave in @($ImportWavePlan.waves)) {
+        $candidates = @($wave.candidates)
+        $companyCandidates = @($candidates | Where-Object { [string]$_.kind -eq 'company' })
+        $hintCandidates = @($candidates | Where-Object { [string]$_.kind -ne 'company' })
+        $verifiedCandidates = @($companyCandidates | Where-Object { [string]$_.verification_status -in @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') })
+        $reviewCandidates = @($candidates | Where-Object {
+                [string]$_.review_status -in @('MANUAL_REVIEW_REQUIRED', 'DISCOVERY_HINT', 'REGISTER_DISCOVERY_HINT', 'REGIONAL_DISCOVERY_HINT') -or
+                [string]$_.verification_status -eq 'UNVERIFIED'
+            })
+        $scannableCandidates = @($companyCandidates | Where-Object { [string]$_.verification_status -in @('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') })
+        $latestGate = @($GateHistory |
+            Where-Object { [string]$_.wave_id -eq [string]$wave.wave_id } |
+            Sort-Object ts |
+            Select-Object -Last 1)
+        $gateMetrics = if ($latestGate.Count -eq 1) { Get-JobAgentCoverageProperty -Object $latestGate[0] -Name 'metrics' } else { $null }
+        $targetSize = [int](Get-JobAgentCoverageProperty -Object $wave -Name 'target_size' -Default 0)
+        $acceptedTotal = if ($null -ne $gateMetrics) { [int](Get-JobAgentCoverageProperty -Object $gateMetrics -Name 'added' -Default 0) } else { $verifiedCandidates.Count }
+        $rejectedTotal = if ($null -ne $gateMetrics) { [int](Get-JobAgentCoverageProperty -Object $gateMetrics -Name 'deduplicated' -Default 0) + [int](Get-JobAgentCoverageProperty -Object $gateMetrics -Name 'manual_review_required' -Default 0) } else { $reviewCandidates.Count }
+        $denominator = [math]::Max(1, $acceptedTotal + $rejectedTotal)
+
+        [pscustomobject]@{
+            wave_id = [string]$wave.wave_id
+            title = [string]$wave.title
+            target_size = $targetSize
+            candidates_total = $candidates.Count
+            companies_total = $companyCandidates.Count
+            verified_total = $verifiedCandidates.Count
+            hint_only_total = $hintCandidates.Count
+            review_total = $reviewCandidates.Count
+            scannable_total = $scannableCandidates.Count
+            accepted_total = $acceptedTotal
+            rejected_total = $rejectedTotal
+            acceptance_rate = [Math]::Round([double]$acceptedTotal / [double]$denominator, 4)
+            duplicate_rate = if ($null -eq $gateMetrics) { 0.0 } else { [double](Get-JobAgentCoverageProperty -Object $gateMetrics -Name 'duplicate_rate' -Default 0.0) }
+            verification_rate = [Math]::Round([double]$verifiedCandidates.Count / [double][math]::Max(1, $companyCandidates.Count), 4)
+            scan_readiness_rate = [Math]::Round([double]$scannableCandidates.Count / [double][math]::Max(1, $companyCandidates.Count), 4)
+            coverage_delta = if ($null -eq $gateMetrics) { 0 } else { [int](Get-JobAgentCoverageProperty -Object $gateMetrics -Name 'coverage_delta' -Default 0) }
+            latest_gate_status = if ($latestGate.Count -eq 1) { [string]$latestGate[0].status } else { 'not-run' }
+            latest_backup_path = if ($latestGate.Count -eq 1) { [string]$latestGate[0].backup_path } else { $null }
+            latest_reject_reasons = if ($latestGate.Count -eq 1) { @($latestGate[0].violations | ForEach-Object { [string]$_ }) } else { @() }
+            remaining_to_target = if ($targetSize -le 0) { 0 } else { [math]::Max(0, $targetSize - $acceptedTotal) }
+        }
+    }
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-import-wave-metrics/v1'
+        waves_total = @($waves).Count
+        target_size_total = (@($waves) | Measure-Object -Property target_size -Sum).Sum
+        candidates_total = (@($waves) | Measure-Object -Property candidates_total -Sum).Sum
+        verified_total = (@($waves) | Measure-Object -Property verified_total -Sum).Sum
+        hint_only_total = (@($waves) | Measure-Object -Property hint_only_total -Sum).Sum
+        review_total = (@($waves) | Measure-Object -Property review_total -Sum).Sum
+        scannable_total = (@($waves) | Measure-Object -Property scannable_total -Sum).Sum
+        waves = @($waves)
+    }
+}
+
 function New-JobAgentCoverageReport {
     [CmdletBinding()]
     param(
@@ -729,6 +818,8 @@ function New-JobAgentCoverageReport {
         [Parameter()][AllowNull()][object]$SourceRegistry = $null,
         [Parameter()][AllowNull()][object]$HintStore = $null,
         [Parameter()][AllowNull()][object]$CandidateVerificationQueue = $null,
+        [Parameter()][AllowNull()][object]$WaveConfig = $null,
+        [Parameter()][AllowEmptyCollection()][object[]]$WaveGateHistory = @(),
         [Parameter()][datetime]$Now = [datetime]::UtcNow,
         [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 7,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxPriorityItems = 25
@@ -746,6 +837,7 @@ function New-JobAgentCoverageReport {
     $metricsArray = @($metrics)
     $candidateClusters = New-JobAgentCoverageCandidateClusterReport -HintStore $HintStore -Now $Now -MaxReviewItems $MaxPriorityItems
     $candidateVerificationDecisionReport = New-JobAgentCoverageCandidateVerificationDecisionReport -CandidateVerificationQueue $CandidateVerificationQueue -MaxItems $MaxPriorityItems
+    $importWavePlan = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore -WaveConfig $WaveConfig
     [pscustomobject]@{
         generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         stale_after_days = $StaleAfterDays
@@ -787,7 +879,8 @@ function New-JobAgentCoverageReport {
         candidate_clusters = $candidateClusters
         candidate_verification_queue = if ($null -eq $CandidateVerificationQueue) { $null } else { $CandidateVerificationQueue }
         candidate_verification_decision_report = $candidateVerificationDecisionReport
-        import_waves = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore
+        import_waves = $importWavePlan
+        import_wave_metrics = New-JobAgentCoverageImportWaveMetrics -ImportWavePlan $importWavePlan -GateHistory $WaveGateHistory
     }
 }
 
@@ -800,5 +893,6 @@ Export-ModuleMember -Function @(
     'New-JobAgentDiscoverySourceCoverageReport',
     'New-JobAgentCoverageDimensions',
     'New-JobAgentCoverageImportWavePlan',
+    'New-JobAgentCoverageImportWaveMetrics',
     'New-JobAgentCoverageReport'
 )
