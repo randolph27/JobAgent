@@ -222,8 +222,8 @@
       "test_file": "tests/Test-JobAgentLiveScan.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
       "status": "done",
-      "include_in_supertest": false,
-      "lane": "separate-live-pilot",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
       "coverage": [
         "Live-Policy mit Timeout, Retry-Grenze, User-Agent und Ergebnislimits",
         "offizielle Kandidatenfilterung mit Aggregator-Ablehnung",

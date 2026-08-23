@@ -1,4 +1,4 @@
 # Roadmap Index
 Stand: 2026-08-23
-- Roadmap.md: aktive Punkte JA-026 bis JA-027 zu Karriere-/ATS-Verifikation und Coverage-Audit.
-- Roadmap_archive.md: archivierte abgeschlossene Punkte, aktuell JA-001 bis JA-025.
+- Roadmap.md: aktiver Punkt JA-027 zum Firmen-Coverage-Audit und priorisierten Importwellen.
+- Roadmap_archive.md: archivierte abgeschlossene Punkte, aktuell JA-001 bis JA-026.

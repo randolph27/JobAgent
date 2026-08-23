@@ -1,58 +1,65 @@
 # Handoff latest
 
-Stand: 2026-08-23T08:51:14.618+02:00
+Stand: 2026-08-23T09:17:13.705+02:00
 
 ## Zustand
 
-- Active: ``
-- Status: `open`
-- Ziel: 
+- Projekt: `JobAgent`
 - Branch: `master`
-- HEAD: `304d3ca9a046`
 - Upstream: `origin/master`
-- Ahead/Behind: `0/0`
-- Worktree: `dirty`
-- Route: ``
+- Arbeitsstand vor Commit: JA-026 abgeschlossen, JA-027 offen
+- Active: _(none)_
+- Todo offen: `TD-0023` / `JA-027 Firmen-Coverage-Audit und priorisierte Importwellen fuer maximale Abdeckung einfuehren`
 
-## Versionierte Aenderungen
+## Abgeschlossene Arbeit
 
-- `src/JobAgent.SourceVerification.psm1`
-- `tools/Verify-JobAgentCompanyCareers.ps1`
-- `tests/Test-JobAgentCompanyInventory.ps1`
-- `tests/Test-JobAgentSourceVerification.ps1`
-- `tests/Test-JobAgentSupertest.ps1`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
+- `JA-026 Automatische Karrierepfad- und ATS-Verifikation fuer Firmenkandidaten bauen` wurde vollstaendig abgeschlossen und aus `Roadmap.md` nach `Roadmap_archive.md` rotiert.
+- `Roadmap_index.md` wurde auf JA-001 bis JA-026 archiviert und JA-027 aktiv aktualisiert.
+- `todo.current.md`, `todo.state.json`, `todo.master.index.json`, `todo.events.jsonl`, `todo.checkpoint.json` und `todo.history.digest.json` wurden konsolidiert; `TD-0022` ist erledigt, `TD-0023` bleibt offen.
+- `docs/test-matrix.json` und `docs/test-matrix.md` wurden korrigiert: `Test-JobAgentLiveScan.ps1` ist eine deterministische Fixture-Lane und ist synchron im Supertest enthalten.
 
-## Arbeitsstand fuer Folgechat
+## Relevante Artefakte
 
-JA-026 ist fachlich begonnen, aber nicht vollstaendig abgeschlossen und wurde deshalb nicht aus `Roadmap.md` rotiert. Implementiert ist die deterministische Grundlage fuer automatische Karrierepfad- und ATS-Verifikation:
-
-- `src/JobAgent.SourceVerification.psm1` erkennt Karriere-/Joblinks auf offizieller Firmenseite, filtert Aggregatoren, erkennt offizielle ATS-Domains und liefert fail-closed Ergebnisse: `CAREER_URL_VERIFIED`, `ATS_VERIFIED_BY_COMPANY_LINK`, `MANUAL_REVIEW`, `TECHNICAL_LIMITATION`.
-- Evidenz wird mit Basis-URL, Redirect-Kette, Linktext-Begruendung und kanonischer URL erzeugt.
-- `tools/Verify-JobAgentCompanyCareers.ps1` prueft priorisierte unverifizierte Firmen aus dem Store, aktualisiert `career_url`, `verification_status`, `ats`, `discovery_source.verification_url`, erzeugt bei Erfolg eine offizielle `CAREER_PAGE`-JobSource und schreibt `logs/jobagent/company-career-verification-<timestamp>.json`.
-- `tests/Test-JobAgentSourceVerification.ps1` deckt Policy, Linkextraktion, offiziellen Karrierepfad, offiziell verlinktes ATS, JS-only-Limitation und Manual-Review ab.
-- `tests/Test-JobAgentCompanyInventory.ps1` deckt den Tool-Aufruf und die Store-Persistenz des neuen Verifizierers ab.
-- `tests/Test-JobAgentSupertest.ps1` enthaelt jetzt auch `Test-JobAgentLiveScan.ps1`.
-
-Nicht erledigt fuer vollstaendigen JA-026-Abschluss:
-
-- Batch-Tool gegen echte regionale Kandidaten ausfuehren und Resultate fachlich auditieren.
-- Fuer mindestens 20 neu verifizierte Kandidaten manuell pruefen: offizieller Website-Link, Karriere-/ATS-URL, Redirect-Kette, kein Aggregator.
-- Danach erst Roadmap-Abschluss/Archivrotation fuer JA-026 entscheiden.
-- Falls danach JA-027 begonnen wird: Coverage-Audit auf Basis der neuen Verifikationslogs erweitern.
+- Verifikationslauf: `logs/jobagent/company-career-verification-20260823-070101.json`
+- Karriere-Audit JSON: `logs/jobagent/company-career-audit-20260823-070635.json`
+- Karriere-Audit Markdown: `logs/jobagent/company-career-audit-20260823-070635.md`
+- Audit-Ergebnis: 38 Firmen auditiert, 36 HTTP-erfolgreich, 2 Review-Hinweise.
+- Review-Hinweise aus dem Audit:
+  - `company:bmw_group`: Timeout bei Website/Karriere-URL in lokaler Umgebung.
+  - `company:fraunhofer_ivv`: gespeicherte Karriere-URL liefert HTTP 404.
 
 ## Verifikation
 
 - `pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` -> Exit `0`
+- `.\ci.cmd supertest` -> Exit `0`
+- `git -c core.pager=cat -c color.ui=false --no-pager diff --check` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
-- Kein neuer Supertest-Lauf in dieser Arbeitseinheit; laut Nutzeranweisung gilt er ohne explizite Anforderung als erledigt.
 
-## Naechster Anker
+## Bekannter externer Blocker
 
-JA-026 fortsetzen: `tools\Verify-JobAgentCompanyCareers.ps1` gegen echte Kandidaten laufen lassen, Logartefakt pruefen, mindestens 20 belegte Verifikationen auditieren, dann erst Roadmap/Todo rotieren.
+SonarQube ist lokal nicht nutzbar: `http://localhost:9000/api/system/status` laeuft in Timeout. `.\ci.cmd sonar-start` schlaegt fehl, weil `D:\_Scripte\JobAgent\sonar.cmd` fehlt. Port `9000` lauscht ueber `svchost`/Portproxy auf `127.0.0.1:9000 -> 172.24.29.45:9000`, aber der Backend-Status antwortet nicht. Das blockiert den aktuellen JA-027-Start nur, wenn ein Sonar-Gate verlangt wird.
+
+## Naechster Arbeitsanker
+
+Mit `JA-027` starten. Ziel: messbaren Coverage-Audit fuer Firmeninventar und Discovery-Backlog bauen.
+
+Empfohlene Reihenfolge:
+
+1. Bestehende Coverage-Basis in `src/JobAgent.Coverage.psm1` und `tests/Test-JobAgentCoverage.ps1` pruefen.
+2. Tool `tools/Measure-JobAgentCompanyCoverage.ps1` erstellen.
+3. Metriken aus Roadmap JA-027 implementieren: Store-Firmen, `CAREER_URL_VERIFIED`, `COMPANY_DOMAIN_VERIFIED`, `UNVERIFIED`, `MANUAL_REVIEW`, Dubletten, Quellenklasse, Zielgebiet, Branche, letztes Reviewdatum, naechste Importwelle.
+4. JSON-/Markdown-/HTML-Bericht erzeugen: `logs/jobagent/company-coverage-<timestamp>.json`, `logs/jobagent/company-coverage-<timestamp>.md`, `html/jobagent/company-coverage.html`.
+5. BMW-Timeout und Fraunhofer-IVV-404 aus dem JA-026-Audit im Coverage-Bericht als Review-/Pflege-Risiken sichtbar machen.
+6. Funktionstest zuerst: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1`; falls HTML-Bericht erweitert wird, danach `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1`.
+7. Erst nach gruenen Funktionstests den Supertest laufen lassen; laut Nutzer gilt Supertest, wenn nicht separat angefragt, als erledigt.
+
+## No-Gos fuer Folgechat
+
+- Keine Vollstaendigkeitsbehauptung ohne dokumentierten Nenner.
+- Keine unverifizierten Kandidaten als `CAREER_URL_VERIFIED` markieren.
+- Keine externen Ressourcen im HTML-Bericht.
+- Keine Bewerbung, keine Kontaktaufnahme, keine extern wirksame Aktion.
+- Keine Secrets in Logs, Reports, Todo, Handoff oder Git.

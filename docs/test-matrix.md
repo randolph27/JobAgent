@@ -7,7 +7,7 @@ Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 ## Testvertrag
 
 - Funktionstests laufen deterministisch mit Fixtures oder isolierten temporären Projektwurzeln.
-- Live-Webrecherche ist kein Bestandteil des Supertests und bleibt als getrennte Lane dokumentiert.
+- Live-Webrecherche ist kein Bestandteil des Supertests; `Test-JobAgentLiveScan.ps1` nutzt deterministische Adapter-/HTTP-Fixtures.
 - `.\ci.cmd supertest` bündelt nur abgeschlossene, einzeln grüne Kernfunktionen.
 - Neue Roadmap-Funktionen erhalten zuerst einen fokussierten Funktionstest; danach wird `docs/test-matrix.json` und zuletzt der Supertest erweitert.
 
@@ -27,9 +27,9 @@ Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 | JA-011 | `tests/Test-JobAgentReport.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` | ja | Reportsektionen, Priorisierung, Filter, Leerzustand |
 | JA-012 | `tests/Test-JobAgentOperations.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1` | ja | Betriebswrapper, Status, Logrotation, Parallelstartschutz |
 | JA-013 | `tests/Test-JobAgentTestMatrix.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentTestMatrix.ps1` | ja | Matrixvollständigkeit, Supertest-Synchronität, Live-Lane-Trennung |
-| JA-014 | `tests/Test-JobAgentLiveScan.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1` | nein | Live-Policy, offizielle Kandidatenfilterung, Detailseitenprüfung, Retry-Protokoll |
+| JA-014 | `tests/Test-JobAgentLiveScan.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1` | ja | Live-Policy, offizielle Kandidatenfilterung, Detailseitenprüfung, Retry-Protokoll |
 | JA-015 | `tests/Test-JobAgentCoverage.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` | ja | Coverage-Metriken, Adapter-Backlog, Scanpriorisierung, Rotationslogik |
 
 ## Live-Lane
 
-JA-014 ergänzt Live-Scans, nimmt sie aber nicht als deterministisches Pflichtgate in `.\ci.cmd supertest` auf. Live-Nachweise werden mit begrenzter Firmenauswahl, Timeouts und separaten Artefakten unter `logs/jobagent/` geführt.
+JA-014 ergänzt Live-Scan-Logik mit deterministischen Fixtures im Supertest. Echte Live-Nachweise bleiben getrennt, laufen mit begrenzter Firmenauswahl und werden unter `logs/jobagent/` geführt.
