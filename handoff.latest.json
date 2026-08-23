@@ -1,1 +1,215 @@
-{"next":"","agent_id":"UTTER-20260817-39f7","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","workspace_root":".","git":{"behind":0,"worktree":"dirty","ahead":0,"head":"81f6337bd156","detached":false,"has_repo":true,"remote":"origin","upstream":"origin/master","branch":"master","tracked_changes":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","Roadmap_archive.md","Roadmap_index.md","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","src/JobAgent.Coverage.psm1","tests/Test-JobAgentCoverage.ps1","tests/Test-JobAgentImportWaves.ps1","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Import-JobAgentCompanyDiscovery.ps1","tools/Measure-JobAgentCompanyCoverage.ps1"]},"route":null,"goal":"Aktive Punkte: JA-030 Laufender Coverage-Betrieb, Drift-Erkennung und Quellen-Freshness fuer Muenchen/Freising etablieren #comment: Tausende Quellen veralten schnell; der Agent braucht einen Betrieb, der neue Firmen findet, alte Hinweise ablaufen laesst und Verifikationen periodisch erneuert.","active_id":"TD-0030","verify_digest":{"log_path":"D:\\_Scripte\\JobAgent\\logs\\verify\\\\verify-20260823-102708.log","ts":"2026-08-23T10:27:10.756+02:00","exit":null,"cmd":".\\gradlew.bat verify --console=plain --no-daemon","status":"running"},"next_steps":[],"capsule":{"project":"JobAgent","route_violations":[],"verified":[{"exit":null,"cmd":".\\gradlew.bat verify --console=plain --no-daemon","status":"running"}],"status":"open","manual_missing":false,"refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"env_inventory_path":null,"workspace_root":".","agent_id":"UTTER-20260817-39f7","goal":"Aktive Punkte: JA-030 Laufender Coverage-Betrieb, Drift-Erkennung und Quellen-Freshness fuer Muenchen/Freising etablieren #comment: Tausende Quellen veralten schnell; der Agent braucht einen Betrieb, der neue Firmen findet, alte Hinweise ablaufen laesst und Verifikationen periodisch erneuert.","changed":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","Roadmap_archive.md","Roadmap_index.md","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","src/JobAgent.Coverage.psm1","tests/Test-JobAgentCoverage.ps1","tests/Test-JobAgentImportWaves.ps1","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Import-JobAgentCompanyDiscovery.ps1","tools/Measure-JobAgentCompanyCoverage.ps1"],"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","env_inventory_used":false,"env_inventory_missing":false,"git":{"behind":0,"worktree":"dirty","ahead":0,"head":"81f6337bd156","detached":false,"has_repo":true,"remote":"origin","upstream":"origin/master","branch":"master","tracked_changes":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","Roadmap_archive.md","Roadmap_index.md","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","src/JobAgent.Coverage.psm1","tests/Test-JobAgentCoverage.ps1","tests/Test-JobAgentImportWaves.ps1","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Import-JobAgentCompanyDiscovery.ps1","tools/Measure-JobAgentCompanyCoverage.ps1"]},"route_ok":null,"next":"","active_id":"TD-0030","ts":"2026-08-23T12:00:57.193+02:00"},"summary":"stp sync","refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"verified":[{"exit":null,"cmd":".\\gradlew.bat verify --console=plain --no-daemon","status":"running"}],"toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"route_violations":[],"project":"JobAgent","status":"open","changed":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","Roadmap_archive.md","Roadmap_index.md","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","src/JobAgent.Coverage.psm1","tests/Test-JobAgentCoverage.ps1","tests/Test-JobAgentImportWaves.ps1","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Import-JobAgentCompanyDiscovery.ps1","tools/Measure-JobAgentCompanyCoverage.ps1"],"route_ok":null,"ts":"2026-08-23T12:00:57.193+02:00"}
+{
+  "ts": "2026-08-23T12:02:30+02:00",
+  "agent_id": "codex",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
+  "active_id": "TD-0030",
+  "status": "open",
+  "goal": "JA-030 Laufender Coverage-Betrieb, Drift-Erkennung und Quellen-Freshness fuer Muenchen/Freising etablieren.",
+  "summary": "JA-029 ist abgeschlossen, archiviert und als Commit bd9ba8f vorhanden. STP fuer Chatwechsel wurde ausgefuehrt; aktueller aktiver Punkt ist JA-030.",
+  "completed": [
+    "JA-029 nach Roadmap_archive.md rotiert",
+    "Importwellen-Gates und Coverage-Wellenmetriken implementiert",
+    "Failure-Evidence-Logs fuer fail-closed Import-Gates implementiert",
+    "Coverage-HTML fuer grosse Listen mit Scroll-Containern, Sticky-Headern und segmentiertem Firmeninventar aktualisiert",
+    "Todo auf TD-0030 / JA-030 umgestellt",
+    "Feature-Commit bd9ba8f erstellt"
+  ],
+  "next_steps": [
+    "In JA-030 Freshness-Felder modellieren: last_imported_at, last_verified_at, expires_at, next_refresh_at, refresh_reason, staleness_status.",
+    "Coverage- und Operations-Reports nach Gebiet, Quelle, Verifikationsstatus, Alter, Review-Queue, Fehlerklasse und naechster Aktion erweitern.",
+    "Daily-Run-Priorisierung in Firmen-Jobscan, Kandidatenverifikation und Quellenrefresh aufteilen; Live-Web nicht in deterministische Supertests aufnehmen.",
+    "Dokumentation docs/company-discovery-operations.md erstellen oder erweitern.",
+    "Funktionstests fokussiert: tests\\Test-JobAgentCoverage.ps1, tests\\Test-JobAgentDailyRun.ps1, tests\\Test-JobAgentOperations.ps1. Supertest erst nach Abschluss von JA-030."
+  ],
+  "guardrails": [
+    "Keine Massenaufnahme unverifizierter Kandidaten.",
+    "Keine stillen Loeschungen abgelaufener Kandidaten oder Firmen.",
+    "Keine Vollstaendigkeitsbehauptung fuer alle Muenchner/Freisinger Firmen ohne definierte Quellenabdeckung.",
+    "Jobboersen bleiben Discovery-Hinweise, keine Primaerbelege.",
+    "Keine extern wirksame Aktion wie Bewerbung, Kontaktformular oder Schreibzugriff ohne ausdrueckliche Bestaetigung.",
+    "Keine Secrets in Logs, Reports, Todo, Handoff oder Git."
+  ],
+  "changed": [
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json"
+  ],
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentImportWaves.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": ".\\ci.cmd supertest",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0,
+      "status": "pass"
+    }
+  ],
+  "not_run": [
+    {
+      "cmd": ".\\gradlew.bat verify --console=plain --no-daemon",
+      "reason": "Nicht lauffaehig in diesem Projekt: kein gradlew/gradlew.bat vorhanden; alter verify.digest meldet running und ist nicht als aktueller Abschlussnachweis zu werten."
+    }
+  ],
+  "route_ok": null,
+  "route_violations": [],
+  "git": {
+    "has_repo": true,
+    "branch": "master",
+    "detached": false,
+    "head": "bd9ba8f9d700",
+    "upstream": "origin/master",
+    "remote": "origin",
+    "ahead": 1,
+    "behind": 0,
+    "worktree": "dirty",
+    "tracked_changes": [
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ]
+  },
+  "next": "Mit TD-0030 / JA-030 starten: Freshness-Modell, Drift-/Betriebsreports und Daily-Run-Priorisierung implementieren.",
+  "refs": [
+    "README.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "env_inventory_path": null,
+  "capsule": {
+    "ts": "2026-08-23T12:02:30+02:00",
+    "agent_id": "codex",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "TD-0030",
+    "status": "open",
+    "goal": "JA-030 Laufender Coverage-Betrieb, Drift-Erkennung und Quellen-Freshness fuer Muenchen/Freising etablieren.",
+    "changed": [
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ],
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentImportWaves.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd supertest",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd self-check",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0,
+        "status": "pass"
+      }
+    ],
+    "route_ok": null,
+    "route_violations": [],
+    "git": {
+      "has_repo": true,
+      "branch": "master",
+      "detached": false,
+      "head": "bd9ba8f9d700",
+      "upstream": "origin/master",
+      "remote": "origin",
+      "ahead": 1,
+      "behind": 0,
+      "worktree": "dirty",
+      "tracked_changes": [
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json"
+      ]
+    },
+    "next": "Mit TD-0030 / JA-030 starten: Freshness-Modell, Drift-/Betriebsreports und Daily-Run-Priorisierung implementieren.",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json",
+      "Roadmap.md",
+      "Roadmap_archive.md"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  }
+}
