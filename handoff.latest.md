@@ -1,61 +1,75 @@
 # Handoff latest
 
-Stand: 2026-08-23T12:30:00+02:00
+Stand: 2026-08-23T12:28:00+02:00
 
 ## Ziel fuer neuen Chat
 
-Es gibt aktuell keinen offenen Roadmap-Punkt. Der neue Chat soll zuerst `Roadmap.md`, `Roadmap_archive.md`, `todo.current.md`, `todo.state.json` und dieses Handoff lesen. Danach entweder neue Roadmap-Punkte fachlich priorisiert anlegen oder einen neuen konkreten Nutzerauftrag ausfuehren.
+Direkt mit TD-0031 / JA-031 starten. Nutzerproblem: `html/jobagent/company-coverage.html` zeigt Statistiken, aber keine ausreichend sichtbaren anklickbaren Links, die direkt zur Anbieter-, Karriere- oder offiziell belegten ATS-Seite fuehren.
 
 ## Aktueller Zustand
 
-- Active: none
-- Todo: keine offenen Items
-- Roadmap: keine aktiven Punkte
+- Active: TD-0031
+- Status: open
 - Branch: master
-- HEAD: 681eff81576a
+- HEAD vor diesem Handoff-Commit: aee605819c33
 - Upstream: origin/master
-- Ahead/Behind vor Push: 1/0
-- Worktree vor abschliessendem STP-Commit: dirty durch STP-/Handoff-Dateien
+- Worktree vor Commit: dirty
+- Roadmap: JA-031, JA-032, JA-033 neu angelegt
+- Todo: TD-0031, TD-0032, TD-0033 offen
 - Devserver: http://localhost:8500 antwortete zuletzt mit HTTP 200
-- SonarQube: http://localhost:9000/api/system/status meldete zuletzt `UP`, Version 26.1.0.118079
+- HTML-Output aus letztem Coverage-Lauf: `html/jobagent/company-coverage.html`
 
-## Abgeschlossen
+## Neue Roadmap-Reihenfolge
 
-JA-030 ist abgeschlossen und nach `Roadmap_archive.md` rotiert. `Roadmap.md` enthaelt nur noch den Abschnitt "Keine aktiven Punkte.".
+1. JA-031 Anbieter-Link-Vertrag fuer Coverage- und Daily-Reports definieren.
+2. JA-032 Coverage-HTML mit anklickbaren Anbieter-, Karriere- und ATS-Links ausgeben.
+3. JA-033 Daily-Run-HTML und Detailberichte mit klickbaren offiziellen Stellen- und Anbieterlinks vereinheitlichen.
 
-Umgesetzt in JA-030:
+Die Reihenfolge ist bewusst so gesetzt: erst zentraler Daten-/Sicherheitsvertrag fuer Links, dann sichtbarer Coverage-HTML-Fix fuer das gemeldete Nutzerproblem, danach Vereinheitlichung der Daily-Run-Berichte.
 
-- Freshness-Modell fuer Firmen, Discovery-Quellen und Kandidaten mit `last_imported_at`, `last_verified_at`, `expires_at`, `next_refresh_at`, `refresh_reason` und `staleness_status`.
-- Coverage-Metriken fuer `company_fresh`, `company_refresh_due`, `candidate_refresh_due`, Quellen-Freshness, Kandidaten-Freshness und Refresh-Gruende.
-- Coverage-Markdown und Coverage-HTML um Freshness-Status, Refresh-Gruende, Kandidaten-Freshness und Firmeninventar-Spalten fuer Freshness erweitert.
-- Daily-Run-Priorisierung erweitert: refresh-faellige Firmen werden vor regulaeren Scanfaellen beruecksichtigt; erfolgreiche und fehlgeschlagene Scans persistieren Freshness-Felder.
-- Betriebsdokumentation `docs/company-discovery-operations.md` erstellt.
-- Todo-/Roadmap-Zustand synchronisiert und STP ausgefuehrt.
+## Wichtig fuer Umsetzung
 
-## Wichtige Dateien
+- Keine Links erfinden.
+- Bevorzugte offizielle Linkquellen: `career_url`, `official_website_url`, offizielle `job_sources.canonical_url`, verifizierte ATS-Evidenz.
+- Jobboersen-/Discovery-Hints duerfen nur als Review-Hinweise erscheinen, nicht als offizielle Anbieterlinks.
+- HTML darf keine externen Skripte oder Stylesheets laden.
+- Links brauchen sichere Attribute wie `rel="noopener noreferrer"` bei neuem Tab.
+- Lange URLs duerfen Tabellen nicht sprengen; `overflow-wrap:anywhere`, Scrollcontainer und Sticky-Header beibehalten.
 
-- `src/JobAgent.Coverage.psm1`: Freshness-Berechnung, Source-/Candidate-Freshness-Reports, Coverage-Metriken.
-- `src/JobAgent.DailyRun.psm1`: Refresh-faellige Firmen in Sortierung und Persistenz von Freshness-Feldern.
-- `tools/Measure-JobAgentCompanyCoverage.ps1`: Markdown-/HTML-Ausgabe fuer Freshness und Kandidaten-Freshness.
-- `tests/Test-JobAgentCoverage.ps1`: Assertions fuer Freshness-Metriken und Report-Ausgabe.
-- `tests/Test-JobAgentDailyRun.ps1`: Assertions fuer Daily-Run-Priorisierung und Persistenz.
-- `docs/company-discovery-operations.md`: Betriebs- und Freshness-Vertrag.
+## Konkreter Startpunkt TD-0031
 
-## Verifikation
+Erwartete erste Umsetzung:
 
-- `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1` -> Exit 0
-- `.\ci.cmd supertest` -> Exit 0
-- `.\ci.cmd self-check` -> Exit 0
-- `.\ci.cmd stp` -> Exit 0
+1. In `src/JobAgent.Coverage.psm1` zentrale Linkauswahl fuer Firmen/Quellen erstellen.
+2. Linkobjekte in Coverage-JSON pro Firma bereitstellen, inklusive Linktyp, Label, URL, Verifikation, Quelle, Clickability und Fail-Closed-Grund.
+3. Tests in `tests/Test-JobAgentCoverage.ps1` und bei Report-Bezug in `tests/Test-JobAgentReport.ps1` fuer Karriere-URL, Website-only, ATS, fehlenden Link und unverified Jobboersen-Hint ergaenzen.
 
-Hinweis: Ein historischer Verify-Digest verweist weiterhin auf `.\gradlew.bat verify --console=plain --no-daemon` mit Status `running`; im Projekt liegt kein Gradle-Wrapper. Fuer diesen Stand sind die oben genannten PowerShell-Funktionstests und der Supertest massgeblich.
+## Verifikation fuer naechsten Chat
 
-## Naechste Aufgaben
+Funktionstests zuerst:
 
-1. Bei neuem Nutzerauftrag direkt ausfuehren.
-2. Wenn neue Roadmap-Arbeit gewuenscht ist, neue Punkte nicht in Eingabereihenfolge, sondern nach Abhaengigkeiten, kritischem Pfad, Wert pro Aufwand, Risiko und Unsicherheit priorisieren.
-3. Keine Massenaufnahme unverifizierter Kandidaten, keine Vollstaendigkeitsbehauptung fuer alle Firmen und keine extern wirksame Aktion ohne ausdrueckliche Bestaetigung.
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1
+pwsh -NoProfile -File tests\Test-JobAgentReport.ps1
+```
 
-CAPSULE:{"ts":"2026-08-23T12:30:00+02:00","agent_id":"codex","workspace_root":"D:\\_Scripte\\JobAgent","project":"JobAgent","active_id":null,"status":"done","goal":"JA-030 abgeschlossen; keine aktive Roadmap-Aufgabe vorhanden.","changed":["handoff.latest.json","handoff.latest.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"verified":[{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1","exit":0,"status":"pass"},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1","exit":0,"status":"pass"},{"cmd":"pwsh -NoProfile -File tests\\Test-JobAgentOperations.ps1","exit":0,"status":"pass"},{"cmd":".\\ci.cmd supertest","exit":0,"status":"pass"},{"cmd":".\\ci.cmd self-check","exit":0,"status":"pass"},{"cmd":".\\ci.cmd stp","exit":0,"status":"pass"}],"route_ok":null,"route_violations":[],"git":{"has_repo":true,"branch":"master","detached":false,"head":"681eff81576a","upstream":"origin/master","remote":"origin","ahead":1,"behind":0,"worktree":"dirty","tracked_changes":["handoff.latest.json","handoff.latest.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"]},"next":"Neuen Nutzerauftrag abwarten oder neue Roadmap-Punkte priorisiert anlegen.","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json","Roadmap.md","Roadmap_archive.md"],"manual_missing":false,"env_inventory_missing":false,"env_inventory_used":false,"env_inventory_path":null}
+Nach JA-032:
+
+```powershell
+pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1
+```
+
+Supertest erst nach abgeschlossenen Roadmap-Punkten oder wenn angefragt:
+
+```powershell
+.\ci.cmd supertest
+```
+
+## Harter Kontext
+
+- Keine Bewerbung, kein Kontaktformular, kein externer Schreibzugriff.
+- Keine Massenaufnahme unverifizierter Kandidaten.
+- Keine Vollstaendigkeitsbehauptung fuer alle Muenchner/Freisinger Firmen.
+- Wenn Supertest nicht explizit angefragt wurde, gilt er fuer reine Roadmap-Erstellung als erledigt/nicht erforderlich.
+
+CAPSULE:{"ts":"2026-08-23T12:28:00+02:00","agent_id":"codex","workspace_root":"D:\\_Scripte\\JobAgent","project":"JobAgent","active_id":"TD-0031","status":"open","goal":"Klickbare Anbieter-, Karriere- und ATS-Links in Coverage- und Daily-Reports planen und umsetzen.","changed":[".ci/pins/immutable.hashes.json",".ci/pins/immutable.snapshot/Roadmap.md","Roadmap.md","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"verified":[{"cmd":".\\ci.cmd stp","exit":0,"status":"pass"},{"cmd":".\\ci.cmd todo-seed","exit":0,"status":"pass"}],"route_ok":null,"route_violations":[],"git":{"has_repo":true,"branch":"master","detached":false,"head":"aee605819c33","upstream":"origin/master","remote":"origin","ahead":0,"behind":0,"worktree":"dirty"},"next":"Mit TD-0031 / JA-031 starten: zentralen Anbieter-Link-Vertrag implementieren.","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json","Roadmap.md","Roadmap_archive.md"],"manual_missing":false,"env_inventory_missing":false,"env_inventory_used":false,"env_inventory_path":null}
