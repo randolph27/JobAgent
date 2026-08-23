@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-23T09:28:13.000+02:00",
+  "ts": "2026-08-23T09:33:05.620+02:00",
   "project": "JobAgent",
   "status": "done",
   "active_id": null,
@@ -7,7 +7,8 @@
   "completed_roadmap_ids": [
     "JA-027"
   ],
-  "next": "Keine aktiven Roadmap-Punkte.",
+  "summary": "JA-027 Firmen-Coverage-Audit und priorisierte Importwellen abgeschlossen; STP ausgefuehrt; keine offenen Roadmap-Punkte.",
+  "next": "Neue Roadmap-Punkte fachlich priorisiert anlegen; naheliegend ist eine Firmenimport- oder Pflegewelle aus dem Coverage-Bericht.",
   "changed": [
     "Roadmap.md",
     "Roadmap_archive.md",
@@ -19,6 +20,7 @@
     "todo.checkpoint.json",
     "todo.current.md",
     "todo.events.jsonl",
+    "todo.history.digest.json",
     "todo.master.index.json",
     "todo.state.json",
     "handoff.latest.md",
@@ -49,6 +51,11 @@
       "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
       "status": "pass",
       "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "status": "pass",
+      "exit": 0
     }
   ],
   "artifacts": [
@@ -56,22 +63,42 @@
     "logs/jobagent/company-coverage-20260823-072556.md",
     "html/jobagent/company-coverage.html"
   ],
-  "audit": {
+  "coverage": {
     "companies_total": 38,
     "career_url_verified": 38,
+    "company_domain_verified": 0,
+    "unverified": 0,
     "duplicate_groups": 0,
+    "discovery_hints_total": 6,
     "unverified_discovery_hints": 6,
     "import_waves": 5,
+    "review_status_counts": {
+      "ACTIVE_ROTATION": 2,
+      "NEVER_SCANNED": 35,
+      "RETRY_REQUIRED": 1
+    },
     "known_risks": [
       "company:bmw_group timeout/retry",
       "company:fraunhofer_ivv career URL HTTP 404 review"
-    ]
+    ],
+    "notice": "Coverage ist eine operative Quote ueber bekannte Quellen und Store-Zustand, keine Markt-Vollstaendigkeitsbehauptung."
+  },
+  "services": {
+    "devserver": {
+      "url": "http://localhost:8500/",
+      "status": "running",
+      "command": ".\\ci.cmd devserver-start"
+    }
   },
   "blocker": {
     "sonarqube": "localhost:9000 timeout; .\\ci.cmd sonar-start fails because D:\\_Scripte\\JobAgent\\sonar.cmd is missing"
   },
-  "services": {
-    "devserver": "http://localhost:8500/ started via .\\ci.cmd devserver-start"
-  },
-  "next_steps": []
+  "refs": [
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "todo.current.md",
+    "todo.state.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ]
 }
