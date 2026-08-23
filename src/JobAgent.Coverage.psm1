@@ -692,6 +692,7 @@ function New-JobAgentCoverageReport {
         [Parameter(Mandatory)][object]$Document,
         [Parameter()][AllowNull()][object]$SourceRegistry = $null,
         [Parameter()][AllowNull()][object]$HintStore = $null,
+        [Parameter()][AllowNull()][object]$CandidateVerificationQueue = $null,
         [Parameter()][datetime]$Now = [datetime]::UtcNow,
         [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 7,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxPriorityItems = 25
@@ -734,6 +735,11 @@ function New-JobAgentCoverageReport {
             candidate_clusters_total = $candidateClusters.clusters_total
             candidate_conflict_clusters = $candidateClusters.conflict_clusters
             candidate_review_queue_total = $candidateClusters.review_queue_total
+            candidate_verification_queue_total = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue).Count }
+            candidate_verification_ready = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -in @('PENDING', 'RETRY_SCHEDULED') }).Count }
+            candidate_verification_verified = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -eq 'VERIFIED' }).Count }
+            candidate_verification_manual_review = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count }
+            candidate_verification_retry_exhausted = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -eq 'RETRY_EXHAUSTED' }).Count }
         }
         dimensions = New-JobAgentCoverageDimensions -CompanyMetrics $metricsArray
         companies = @($metricsArray | Sort-Object company)
@@ -742,6 +748,7 @@ function New-JobAgentCoverageReport {
         scan_priority = @(Get-JobAgentCoverageScanPriority -CompanyMetrics $metricsArray -MaxCompanies $MaxPriorityItems)
         source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
         candidate_clusters = $candidateClusters
+        candidate_verification_queue = if ($null -eq $CandidateVerificationQueue) { $null } else { $CandidateVerificationQueue }
         import_waves = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore
     }
 }

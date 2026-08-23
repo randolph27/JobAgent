@@ -402,6 +402,30 @@ function ConvertTo-JobAgentCandidateCompanyStub {
     }
 }
 
+function Get-JobAgentCandidateDomainMismatchReason {
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][object]$Company
+    )
+
+    $candidateDomain = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('known_company_domain', 'canonical_domain')
+    if ([string]::IsNullOrWhiteSpace($candidateDomain)) {
+        return $null
+    }
+
+    $companyDomain = Get-JobAgentCandidateTextProperty -Object $Company -Names @('canonical_domain')
+    if ([string]::IsNullOrWhiteSpace($companyDomain)) {
+        return $null
+    }
+
+    $normalizedCandidateDomain = $candidateDomain.Trim().ToLowerInvariant() -replace '^www\.', ''
+    $normalizedCompanyDomain = $companyDomain.Trim().ToLowerInvariant() -replace '^www\.', ''
+    if ($normalizedCandidateDomain -ne $normalizedCompanyDomain) {
+        return 'KNOWN_COMPANY_DOMAIN_MISMATCH'
+    }
+    return $null
+}
+
 function ConvertTo-JobAgentCandidateVerificationStatus {
     [CmdletBinding()]
     param(
@@ -503,6 +527,12 @@ function Resolve-JobAgentCompanyCandidateVerification {
     $targetArea = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('target_area_match', 'target_area') -Default 'UNKNOWN'
     if (@('TARGET_AREA_UNCERTAIN', 'UNKNOWN', 'OUT_OF_SCOPE') -contains $targetArea) {
         $reviewReasons.Add('TARGET_AREA_REVIEW_REQUIRED')
+    }
+    if ($null -ne $company) {
+        $domainMismatch = Get-JobAgentCandidateDomainMismatchReason -Candidate $Candidate -Company $company
+        if (-not [string]::IsNullOrWhiteSpace($domainMismatch)) {
+            $reviewReasons.Add($domainMismatch)
+        }
     }
     if ($null -eq $company) {
         $reviewReasons.Add('OFFICIAL_COMPANY_DOMAIN_MISSING')

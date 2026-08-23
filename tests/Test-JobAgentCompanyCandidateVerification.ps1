@@ -136,9 +136,40 @@ $domainVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $c
 Assert-True -Condition ($domainVerification.status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'Erreichbare offizielle Firmendomain wurde nicht als COMPANY_DOMAIN_VERIFIED markiert.'
 Assert-True -Condition ($domainVerification.next_action -eq 'upsert_verified_company_without_job_source') -Message 'Domain-only-Verifikation darf keine JobSource-Folgeaktion haben.'
 
+$wrongDomainCandidate = New-TestCandidate -Id 'hint:wrong-domain' -Name 'Example AG' -KnownCompanyId 'company:example_ag' -KnownDomain 'wrong.example.invalid'
+$wrongDomainVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $wrongDomainCandidate -ExistingCompanies @($company) -Policy $policy -Fetcher $domainOnlyFetcher -ObservedAt $observedAt
+Assert-True -Condition ($wrongDomainVerification.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Abweichende bekannte Kandidatendomain darf nicht automatisch verifiziert werden.'
+Assert-True -Condition (@($wrongDomainVerification.review_reasons | Where-Object { $_ -eq 'KNOWN_COMPANY_DOMAIN_MISMATCH' }).Count -eq 1) -Message 'Domain-Mismatch erzeugt keinen Review-Grund.'
+
 $missingDomain = Resolve-JobAgentCompanyCandidateVerification -Candidate (New-TestCandidate -Id 'hint:no-domain' -Name 'No Domain GmbH') -ExistingCompanies @() -Policy $policy -ObservedAt $observedAt
 Assert-True -Condition ($missingDomain.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Kandidat ohne offiziellen Domainhinweis muss in Manual Review.'
 Assert-True -Condition (@($missingDomain.review_reasons | Where-Object { $_ -eq 'OFFICIAL_COMPANY_DOMAIN_MISSING' }).Count -eq 1) -Message 'Manual-Review-Grund fuer fehlende Domain fehlt.'
+
+$timeoutFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-FetchResult -Url $Url -Ok $false -StatusCode 0
+}
+$timeoutVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($company) -Policy $policy -Fetcher $timeoutFetcher -ObservedAt $observedAt
+Assert-True -Condition ($timeoutVerification.status -eq 'UNVERIFIED') -Message 'Timeout/Fetch-Fehler muss unverifiziert bleiben.'
+Assert-True -Condition ($timeoutVerification.evidence[0].http_status -eq $null) -Message 'Timeout darf keinen erfolgreichen HTTP-Status vortaeuschen.'
+
+$notFoundFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-FetchResult -Url $Url -Ok $false -StatusCode 404
+}
+$notFoundVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($company) -Policy $policy -Fetcher $notFoundFetcher -ObservedAt $observedAt
+Assert-True -Condition ($notFoundVerification.status -eq 'UNVERIFIED') -Message '404-Fall muss unverifiziert bleiben.'
+
+$jsOnlyFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-FetchResult -Url $Url -Ok $true -Content '<html><body><div id="root"></div><script>window.app = true;</script><noscript>JavaScript is required</noscript></body></html>'
+}
+$jsOnlyVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($company) -Policy $policy -Fetcher $jsOnlyFetcher -ObservedAt $observedAt
+Assert-True -Condition ($jsOnlyVerification.status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'JS-only Firmendomain darf nur als Domainbeleg, nicht als Karrierequelle gelten.'
+Assert-True -Condition ($jsOnlyVerification.next_action -eq 'upsert_verified_company_without_job_source') -Message 'JS-only Fall darf keine JobSource erzeugen.'
 
 $aggregatorFetcher = {
     param([string]$Url, [object]$Policy)
@@ -160,11 +191,12 @@ try {
     [pscustomobject]@{
         schema_version = 'jobagent/company-discovery-hints/v1'
         generated_at = '2026-08-23T08:00:00.000Z'
-        hints_total = 2
-        unverified_hints = 2
+        hints_total = 3
+        unverified_hints = 3
         hints = @(
             $candidate,
-            (New-TestCandidate -Id 'hint:hays' -Name 'Hays Professional Solutions GmbH' -TargetArea 'MUNICH' -Staffing $true)
+            (New-TestCandidate -Id 'hint:hays' -Name 'Hays Professional Solutions GmbH' -TargetArea 'MUNICH' -Staffing $true),
+            (New-TestCandidate -Id 'hint:noresponse' -Name 'No Response AG' -KnownDomain 'noresponse.example.invalid')
         )
     } | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath (Join-Path $projectRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
 
@@ -177,14 +209,20 @@ try {
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $projectRoot 'fixture-map.json') -Encoding UTF8
 
-    $scriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' 2>&1)
+    $scriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript ist fehlgeschlagen: " + ($scriptOutput -join "`n"))
     $scriptResult = ($scriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     $scriptStore = Read-JobAgentStore -ProjectRoot $projectRoot
     $scriptCompany = @($scriptStore.companies | Where-Object { $_.company_id -eq 'company:example_ag' })[0]
+    $scriptQueue = Get-Content -Raw -LiteralPath ([string]$scriptResult.queue_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($scriptResult.schema_version -eq 'jobagent/company-candidate-verification/v1') -Message 'Candidate-Verifikationsscript schreibt falsche Schema-Version.'
     Assert-True -Condition (@($scriptResult.verified_candidate_ids | Where-Object { $_ -eq 'hint:example' }).Count -eq 1) -Message 'Candidate-Verifikationsscript meldet verifizierten Kandidaten nicht.'
     Assert-True -Condition (@($scriptResult.manual_review_candidate_ids | Where-Object { $_ -eq 'hint:hays' }).Count -eq 1) -Message 'Candidate-Verifikationsscript laesst Review-Kandidaten nicht fail-closed.'
+    Assert-True -Condition (@($scriptResult.unverified_candidate_ids | Where-Object { $_ -eq 'hint:noresponse' }).Count -eq 1) -Message 'Candidate-Verifikationsscript meldet unverifizierten Retry-Kandidaten nicht.'
+    Assert-True -Condition ($scriptResult.verification_queue.clusters_total -ge 3) -Message 'Candidate-Verifikationsscript erzeugt keine Cluster-Queue.'
+    Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:example' -and $_.status -eq 'VERIFIED' }).Count -eq 1) -Message 'Queue markiert verifizierten Kandidaten nicht.'
+    Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:hays' -and $_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count -eq 1) -Message 'Queue markiert Manual-Review-Kandidaten nicht.'
+    Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.retry_count -eq 1 }).Count -eq 1) -Message 'Queue plant unverifizierten Kandidaten nicht fuer Retry ein.'
     Assert-True -Condition ($scriptCompany.verification_status -eq 'CAREER_URL_VERIFIED') -Message 'Candidate-Verifikationsscript aktualisiert Firmenstatus nicht.'
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Candidate-Verifikationsscript erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'
@@ -201,8 +239,13 @@ finally {
         'candidate_career_url_verified',
         'candidate_official_ats_verified',
         'candidate_company_domain_verified',
+        'candidate_wrong_domain_manual_review',
         'candidate_missing_domain_manual_review',
+        'candidate_timeout_unverified',
+        'candidate_404_unverified',
+        'candidate_js_only_domain_only',
         'aggregator_not_accepted_as_career_source',
-        'candidate_verification_script_upserts_only_verified_sources'
+        'candidate_verification_script_upserts_only_verified_sources',
+        'candidate_verification_cluster_queue_retry_and_review'
     )
 } | ConvertTo-Json -Depth 4

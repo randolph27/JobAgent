@@ -199,7 +199,45 @@ $hintSourceIds = @($hintStore.hints | ForEach-Object { [string]$_.source_id } | 
 $secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -in @('JOB_BOARD_DISCOVERY', 'OPEN_REGISTER_DUMP', 'REGIONAL_DIRECTORY', 'PUBLIC_INSTITUTION_DIRECTORY') -and [string]$_.evidence_level -in @('DISCOVERY_HINT', 'SECONDARY_OFFICIAL_DIRECTORY') } | ForEach-Object { [string]$_.source_id })
 Assert-True -Condition (@($hintSourceIds | Where-Object { $secondarySourceIds -notcontains $_ }).Count -eq 0) -Message 'Discovery-Hints duerfen nur erlaubte Sekundaerquellen referenzieren.'
 
-$coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -Now ([datetime]'2026-08-23T08:30:00Z')
+$candidateVerificationQueue = [pscustomobject]@{
+    schema_version = 'jobagent/company-candidate-verification-queue/v1'
+    generated_at = '2026-08-23T08:30:00.000Z'
+    queue = @(
+        [pscustomobject]@{
+            identity_cluster_id = 'identity-cluster:domain_example_invalid'
+            candidate_id = 'hint:queue-verified'
+            candidate_ids = @('hint:queue-verified')
+            canonical_name = 'Queue Verified AG'
+            source_count = 1
+            priority_score = 90
+            target_area_basis = @('JOB_LOCATION_IN_TARGET')
+            status = 'VERIFIED'
+            review_reason = 'READY_FOR_OFFICIAL_VERIFICATION'
+            retry_count = 0
+            last_attempt_at = '2026-08-23T08:00:00.000Z'
+            next_attempt_at = $null
+            last_status = 'CAREER_URL_VERIFIED'
+            last_reason = 'Karriere-URL liegt auf offizieller Firmendomain.'
+        },
+        [pscustomobject]@{
+            identity_cluster_id = 'identity-cluster:domain_retry_invalid'
+            candidate_id = 'hint:queue-retry'
+            candidate_ids = @('hint:queue-retry')
+            canonical_name = 'Queue Retry AG'
+            source_count = 1
+            priority_score = 80
+            target_area_basis = @('JOB_LOCATION_IN_TARGET')
+            status = 'RETRY_SCHEDULED'
+            review_reason = 'READY_FOR_OFFICIAL_VERIFICATION'
+            retry_count = 1
+            last_attempt_at = '2026-08-23T08:00:00.000Z'
+            next_attempt_at = '2026-08-24T08:00:00.000Z'
+            last_status = 'UNVERIFIED'
+            last_reason = 'Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.'
+        }
+    )
+}
+$coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now ([datetime]'2026-08-23T08:30:00Z')
 Assert-True -Condition ($coverageWithInputs.metrics.discovery_hints_total -eq $hintStore.hints_total) -Message 'Coverage uebernimmt Discovery-Hint-Zaehler falsch.'
 Assert-True -Condition ($coverageWithInputs.source_coverage.sources_total -eq $sourceCoverage.sources_total) -Message 'Coverage bettet Quellen-Coverage nicht ein.'
 Assert-True -Condition ($coverageWithInputs.metrics.candidate_clusters_total -gt 0) -Message 'Coverage erzeugt keine Kandidaten-Cluster-Metrik.'
@@ -207,6 +245,9 @@ Assert-True -Condition ($coverageWithInputs.candidate_clusters.candidates_total 
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.review_queue_total -gt 0) -Message 'Coverage-Dedupe weist keine Review-Queue aus.'
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.dimensions.by_target_area_basis.REGISTER_SEAT_IN_TARGET -ge 1) -Message 'Coverage-Dedupe zaehlt Register-Standortbasis nicht.'
 Assert-True -Condition ($coverageWithInputs.candidate_clusters.dimensions.by_conflict_flag.STAFFING_AGENCY_REVIEW -ge 1) -Message 'Coverage-Dedupe zaehlt Personaldienstleister-Konflikte nicht.'
+Assert-True -Condition ($coverageWithInputs.metrics.candidate_verification_queue_total -eq 2) -Message 'Coverage zaehlt Kandidaten-Verifikationsqueue falsch.'
+Assert-True -Condition ($coverageWithInputs.metrics.candidate_verification_verified -eq 1) -Message 'Coverage zaehlt verifizierte Kandidatenqueue falsch.'
+Assert-True -Condition ($coverageWithInputs.metrics.candidate_verification_ready -eq 1) -Message 'Coverage zaehlt offene Retry-Kandidatenqueue falsch.'
 Assert-True -Condition (@($coverageWithInputs.import_waves.waves).Count -eq 5) -Message 'Coverage erzeugt nicht alle Importwellen.'
 Assert-True -Condition (@($coverageWithInputs.import_waves.waves | Where-Object { $_.wave_id -eq 'D' -and $_.candidates_total -ge 1 }).Count -eq 1) -Message 'Importwelle D enthaelt keine Sekundaerhinweise.'
 Assert-True -Condition ($coverageWithInputs.import_waves.contract -match 'unverifizierte Hints') -Message 'Importwellen muessen Hints fail-closed beschreiben.'
@@ -229,8 +270,10 @@ Assert-True -Condition ($toolJson.metrics.candidate_clusters_total -gt 0) -Messa
 Assert-True -Condition (@($toolJson.candidate_clusters.review_queue).Count -gt 0) -Message 'Coverage-Tool-JSON enthaelt keine Dedupe-Review-Queue.'
 Assert-True -Condition ($toolMarkdown.Contains('## Importwellen')) -Message 'Coverage-Tool-Markdown enthaelt keine Importwellen.'
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Dedupe')) -Message 'Coverage-Tool-Markdown enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
+Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Verifikationsqueue')) -Message 'Coverage-Tool-Markdown enthaelt keine Kandidaten-Verifikationsqueue.'
 Assert-True -Condition ($toolHtml.Contains('<meta name="viewport" content="width=device-width, initial-scale=1">')) -Message 'Coverage-Tool-HTML enthaelt keinen Viewport-Meta-Tag.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Dedupe</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Verifikationsqueue</h2>')) -Message 'Coverage-Tool-HTML enthaelt keine Kandidaten-Verifikationsqueue.'
 Assert-True -Condition ($toolHtml.Contains('.table-wrap { overflow-x: auto; }')) -Message 'Coverage-Tool-HTML enthaelt keinen Tabellen-Overflow-Schutz.'
 Assert-True -Condition (-not ($toolHtml -match '<script\b[^>]*\bsrc=')) -Message 'Coverage-Tool-HTML darf keine externen Skripte laden.'
 Assert-True -Condition (-not ($toolHtml -match '<link\b[^>]*\bhref=')) -Message 'Coverage-Tool-HTML darf keine externen Stylesheets laden.'

@@ -8,6 +8,7 @@ param(
     [Parameter()][string]$HtmlRoot = 'html/jobagent',
     [Parameter()][string]$SourceRegistryPath = 'data/jobagent/company-discovery.sources.json',
     [Parameter()][string]$HintStorePath = 'data/jobagent/company-discovery.hints.json',
+    [Parameter()][string]$CandidateVerificationQueuePath = 'data/jobagent/company-candidate-verification.queue.json',
     [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 7,
     [Parameter()][ValidateRange(1, 1000)][int]$MaxPriorityItems = 25
 )
@@ -82,7 +83,7 @@ function ConvertTo-ToolCoverageMarkdown {
     [void]$lines.Add('## Kernmetriken')
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total')) {
+    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
         [void]$lines.Add(('| {0} | {1} |' -f $metric, $Coverage.metrics.$metric))
     }
     [void]$lines.Add('')
@@ -125,6 +126,20 @@ function ConvertTo-ToolCoverageMarkdown {
         }
     }
     [void]$lines.Add('')
+    [void]$lines.Add('## Kandidaten-Verifikationsqueue')
+    [void]$lines.Add('| Cluster | Kandidat | Firma | Status | Review/Retry-Grund | Naechster Versuch |')
+    [void]$lines.Add('|---|---|---|---|---|---|')
+    $queueEntries = if ($null -eq $Coverage.candidate_verification_queue) { @() } else { @($Coverage.candidate_verification_queue.queue) }
+    foreach ($entry in @($queueEntries | Select-Object -First 25)) {
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
+                (ConvertTo-ToolMarkdownText $entry.identity_cluster_id),
+                (ConvertTo-ToolMarkdownText $entry.candidate_id),
+                (ConvertTo-ToolMarkdownText $entry.canonical_name),
+                (ConvertTo-ToolMarkdownText $entry.status),
+                (ConvertTo-ToolMarkdownText $entry.review_reason),
+                (ConvertTo-ToolMarkdownText $entry.next_attempt_at)))
+    }
+    [void]$lines.Add('')
     [void]$lines.Add('## Backlog')
     [void]$lines.Add('| Score | Typ | Firma | Begruendung | Naechster Schritt |')
     [void]$lines.Add('|---:|---|---|---|---|')
@@ -163,7 +178,7 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; } .wave { border-left: 4px solid var(--accent-alt); } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }')
     [void]$lines.Add('</style></head><body><main>')
     [void]$lines.Add('<section><h1>JobAgent Firmen-Coverage-Audit</h1><p>' + (ConvertTo-ToolHtmlText $Coverage.approximation_notice) + '</p><div class="summary">')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total')) {
+    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
         [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolHtmlText $metric) + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')
@@ -173,6 +188,12 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('<section><h2>Kandidaten-Dedupe</h2><div class="table-wrap"><table><thead><tr><th>Cluster</th><th>Firma</th><th>Grund</th><th>Kandidaten</th></tr></thead><tbody>')
     foreach ($cluster in @($Coverage.candidate_clusters.review_queue | Select-Object -First 25)) {
         [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $cluster.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.review_queue_reason) + '</td><td>' + (ConvertTo-ToolHtmlText @($cluster.candidate_ids).Count) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div></section>')
+    [void]$lines.Add('<section><h2>Kandidaten-Verifikationsqueue</h2><div class="table-wrap"><table><thead><tr><th>Cluster</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Review/Retry-Grund</th><th>Naechster Versuch</th></tr></thead><tbody>')
+    $queueEntries = if ($null -eq $Coverage.candidate_verification_queue) { @() } else { @($Coverage.candidate_verification_queue.queue) }
+    foreach ($entry in @($queueEntries | Select-Object -First 25)) {
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.status) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.review_reason) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_attempt_at) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Importwellen</h2>')
@@ -200,9 +221,15 @@ if (Test-Path -LiteralPath $hintStoreResolved -PathType Leaf) {
     $hintStore = Get-Content -Raw -LiteralPath $hintStoreResolved | ConvertFrom-Json -Depth 100
 }
 
+$candidateVerificationQueue = $null
+$candidateVerificationQueueResolved = Resolve-ToolPath -Root $projectRoot -Path $CandidateVerificationQueuePath
+if (Test-Path -LiteralPath $candidateVerificationQueueResolved -PathType Leaf) {
+    $candidateVerificationQueue = Get-Content -Raw -LiteralPath $candidateVerificationQueueResolved | ConvertFrom-Json -Depth 100
+}
+
 $generatedAt = [datetime]::UtcNow
 $document = Read-JobAgentStore -ProjectRoot $projectRoot -DataRoot $DataRoot
-$coverage = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -Now $generatedAt -StaleAfterDays $StaleAfterDays -MaxPriorityItems $MaxPriorityItems
+$coverage = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now $generatedAt -StaleAfterDays $StaleAfterDays -MaxPriorityItems $MaxPriorityItems
 $stamp = $generatedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture)
 
 $logRootPath = Resolve-ToolPath -Root $projectRoot -Path $LogRoot

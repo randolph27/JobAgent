@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-23T11:19:59.535+02:00",
+  "ts": "2026-08-23T11:30:17.300+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -9,17 +9,25 @@
   "changed": [
     "handoff.latest.json",
     "handoff.latest.md",
-    "src/JobAgent.Persistence.psm1",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.Coverage.psm1",
     "src/JobAgent.SourceVerification.psm1",
     "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+    "tests/Test-JobAgentCoverage.ps1",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
+    "tools/Measure-JobAgentCompanyCoverage.ps1",
     "tools/Verify-JobAgentCompanyCandidates.ps1"
   ],
   "verified": [
     {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -39,7 +47,7 @@
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -47,40 +55,30 @@
       "cmd": ".\\ci.cmd stp",
       "exit": 0,
       "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd self-check",
-      "exit": 1,
-      "status": "fail"
-    },
-    {
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status -TimeoutSec 5",
-      "exit": 1,
-      "status": "timeout"
     }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "0ea28d3602f5",
+    "head": "2297711334a6",
     "upstream": "origin/master",
-    "ahead_behind": "0/0",
+    "ahead_behind": "0/0-before-commit",
     "worktree": "dirty-before-commit"
   },
-  "next": "JA-028 fortsetzen: Candidate-Verification-Queue auf Cluster-/Retry-Ebene erweitern und Coverage-/Review-Report integrieren.",
+  "next": "JA-028 abschliessen: Review-/Reject-Report aus echten Verifikationslaeufen konsistent in Coverage, Logs und Handoff-Evidence verwenden.",
   "refs": [
     "README.md",
     "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
+    "todo.events.jsonl",
     "handoff.latest.md",
     "handoff.latest.json"
   ],
   "notes": [
     "JA-028 ist noch nicht abgeschlossen und wurde nicht rotiert.",
-    "Das automatische STP-Feld next zeigte JA-029, fachlich korrekt ist aber die Fortsetzung von JA-028.",
-    "Supertest wurde fuer diesen Zwischenstand nicht ausgefuehrt; laut Nutzer gilt ein nicht angefragter Supertest als erledigt."
-  ],
-  "blocker": "SonarQube/self-check weiterhin nicht gruen; lokaler sonar.cmd/Portproxy separat klaeren."
+    "STP generierte next=JA-029; fachlich ist TD-0028/JA-028 weiter der aktive Anker.",
+    "Supertest wurde fuer diesen Uebergabestand nicht ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt."
+  ]
 }
