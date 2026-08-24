@@ -682,6 +682,86 @@
         }
       }
     },
+    "coverage_link": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "link_type",
+        "label",
+        "url",
+        "source_id",
+        "source_field",
+        "verification_status",
+        "is_primary",
+        "is_clickable",
+        "review_only",
+        "reason"
+      ],
+      "properties": {
+        "link_type": {
+          "enum": [
+            "career",
+            "website",
+            "ats",
+            "review_hint",
+            "missing"
+          ]
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/uri"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/id"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "source_field": {
+          "enum": [
+            "company.career_url",
+            "company.official_website_url",
+            "company.discovery_source.url",
+            "job_sources.canonical_url",
+            "coverage.fail_closed"
+          ]
+        },
+        "verification_status": {
+          "enum": [
+            "VERIFIED",
+            "UNVERIFIED",
+            "MISSING"
+          ]
+        },
+        "is_primary": {
+          "type": "boolean"
+        },
+        "is_clickable": {
+          "type": "boolean"
+        },
+        "review_only": {
+          "type": "boolean"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
     "verification_evidence": {
       "type": "object",
       "additionalProperties": false,

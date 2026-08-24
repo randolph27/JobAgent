@@ -1,5 +1,25 @@
 # Roadmap Archive
 
+## Archiviert am 2026-08-24
+
+- [x] JA-031 Anbieter-Link-Vertrag fuer Coverage- und Daily-Reports definieren #comment: Coverage-Firmeneintraege enthalten jetzt einen zentralen, fail-closed Linkvertrag fuer offizielle Anbieter-, Karriere- und ATS-Ziele.
+  - [x] Beschreibung: Reports koennen pro Firma eine zentral erzeugte Linkliste ausgeben. Linkfelder werden aus `company.career_url`, `company.official_website_url`, offiziellen `job_sources.canonical_url` oder unverifizierten `discovery_source.url`-Hinweisen gebildet; Jobboersen-Hints werden nicht als offizielle Anbieterlinks uebernommen. Jedes Linkobjekt enthaelt `link_type`, `label`, `url`, `source_id`, `source_field`, `verification_status`, `is_primary`, `is_clickable`, `review_only` und `reason`.
+  - [x] Scope: Geaendert wurden `src/JobAgent.Coverage.psm1`, `schemas/jobagent.schema.json`, `tests/Test-JobAgentCoverage.ps1` und `docs/company-discovery-operations.md`. `src/JobAgent.Report.psm1` wurde regressionsgetestet; sichtbares Rendering bleibt fuer JA-032/JA-033 offen.
+  - [x] Ist-Stand (2026-08-24 00:00): `New-JobAgentCoverageReport` liefert fuer Firmen `links` und `primary_link`; Karriere-, Website-only-, ATS-, Review-Hinweis- und Missing-Faelle sind getestet. Unoffizielle Jobboersenquellen bleiben ausgeschlossen oder review-only.
+  - [x] Abhängigkeiten: JA-030 ist abgeschlossen; vorhandene Store-Felder und offizielle JobSource-Evidenz aus JA-004 bis JA-030 wurden genutzt.
+  - [x] Aufwand/Dauer: Aufwand M; innerhalb der aktuellen Arbeitseinheit abgeschlossen.
+  - [x] Prioritätsscore: 94/100, weil der zentrale Datenvertrag Voraussetzung fuer klickbare HTML-/Markdown-Ausgaben in JA-032 und JA-033 ist.
+  - [x] Ordnungsbegründung: Der Linkvertrag wurde vor dem Renderer-Ausbau umgesetzt, damit HTML- und Daily-Run-Ausgaben keine eigene Linkheuristik duplizieren.
+  - [x] Risiken und Unsicherheiten: Sichtbare Linkspalten im Coverage-HTML und Daily-Run-Reports sind noch offen; lange URL-/Viewport-Audits gehoeren zu JA-032/JA-033.
+  - [x] Schritte:
+    1. `Get-JobAgentCoverageCompanyLinks` in `src/JobAgent.Coverage.psm1` erstellt und in `New-JobAgentCoverageReport` eingebunden.
+    2. Funktionstests fuer Karriere-URL, Website-only, offizielle ATS-Quelle, fehlenden Link und unoffiziellen Jobboersen-Hint ergaenzt.
+    3. `coverage_link` im Schema dokumentiert und den Anbieter-Link-Vertrag in `docs/company-discovery-operations.md` beschrieben.
+  - [x] Evidence: `src/JobAgent.Coverage.psm1`, `schemas/jobagent.schema.json`, `tests/Test-JobAgentCoverage.ps1`, `docs/company-discovery-operations.md`, generiertes Coverage-JSON aus `tests\Test-JobAgentCoverage.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0.
+  - [x] Audit: Fail-closed-Regeln sind per Funktionstest belegt: keine Jobboersen-Links als offizielle Anbieterlinks, Review-Hints nicht produktiv klickbar, fehlende Links mit Grund markiert.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+
 ## Archiviert am 2026-08-17
 
 - [x] JA-022 Lokale App-/Artefaktablage, Devserver-Port und Visual-Audit für HTML-Berichte absichern #comment: Die App laeuft nur lokal; Berichte muessen reproduzierbar abgelegt, geoeffnet und visuell geprueft werden koennen.

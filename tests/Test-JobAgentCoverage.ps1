@@ -79,6 +79,10 @@ $document.scan_attempts = @(
 $document.jobs = @(
     [pscustomobject]@{ job_id = 'job:match'; company_id = 'company:match_ag'; title = 'Head of IT'; status = 'ACTIVE'; priority = 'A'; official_url = 'https://match.example.invalid/jobs/head-it'; location = [pscustomobject]@{ label = 'Muenchen' }; classification = [pscustomobject]@{ result = 'MATCH'; score = 95; reasons = @('IT-Fuehrung') } }
 )
+$document.job_sources = @(
+    [pscustomobject]@{ source_id = 'source:match_ats'; company_id = 'company:match_ag'; source_type = 'OFFICIAL_ATS'; url = 'https://ats.match.example.invalid/jobs'; canonical_url = 'https://ats.match.example.invalid/jobs'; is_official = $true; verified_at = '2026-08-16T08:00:00.000Z'; verification_basis = 'COMPANY_LINKED_ATS'; verification_evidence = @([pscustomobject]@{ status = 'VERIFIED'; evidence_type = 'COMPANY_LINKED_ATS'; url = 'https://ats.match.example.invalid/jobs'; basis_url = 'https://match.example.invalid/careers'; redirect_chain = @(); observed_at = '2026-08-16T08:00:00.000Z'; reason = 'ATS ist von der offiziellen Karriere-Seite verlinkt.' }) }
+    [pscustomobject]@{ source_id = 'source:ignored_jobboard'; company_id = 'company:hint_ag'; source_type = 'CAREER_PAGE'; url = 'https://jobs.example.invalid/hint-ag'; canonical_url = 'https://jobs.example.invalid/hint-ag'; is_official = $false; verified_at = '2026-08-16T08:00:00.000Z'; verification_basis = 'CAREER_URL'; verification_evidence = @([pscustomobject]@{ status = 'UNVERIFIED'; evidence_type = 'UNVERIFIED'; url = 'https://jobs.example.invalid/hint-ag'; basis_url = 'https://directory.example.invalid/hint'; redirect_chain = @(); observed_at = '2026-08-16T08:00:00.000Z'; reason = 'Sekundaerer Jobboersen-Hinweis.' }) }
+)
 $document.scan_runs = @(
     [pscustomobject]@{ scan_run_id = 'scanrun:1'; started_at = '2026-08-16T08:00:00.000Z'; finished_at = '2026-08-16T09:01:00.000Z'; status = 'PARTIAL'; company_ids = @('company:failed_ag', 'company:stale_ag', 'company:recent_ag', 'company:match_ag'); artifact_paths = @(); errors = @('NOT_REACHABLE') }
 )
@@ -114,6 +118,17 @@ Assert-True -Condition (@($priority | Where-Object company_id -eq 'company:unkno
 Assert-True -Condition ((($priority | Where-Object company_id -eq 'company:hint_ag').next_action) -eq 'verify_discovery_hint') -Message 'Discovery-Hinweise muessen eigene Folgeaktion erhalten.'
 Assert-True -Condition (@($priority | Where-Object { $_.company_id -eq 'company:recent_ag' -and (@($_.reasons) -contains 'recent_success_rotation_penalty') }).Count -eq 1) -Message 'Kuerzlich erfolgreiche Firmen muessen Rotationsmalus erhalten.'
 Assert-True -Condition ((@($coverage.companies | Where-Object { $_.company_id -eq 'company:hint_ag' })[0].inventory_state) -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Discovery-Hinweis wurde nicht als manueller Review-Fall markiert.'
+$recentLinks = @((@($coverage.companies | Where-Object { $_.company_id -eq 'company:recent_ag' })[0]).links)
+Assert-True -Condition (@($recentLinks | Where-Object { [string]$_.link_type -eq 'career' -and [bool]$_.is_clickable -and [string]$_.url -eq 'https://recent.example.invalid/careers' }).Count -eq 1) -Message 'Coverage-Linkvertrag gibt Karriere-URL nicht als klickbaren offiziellen Link aus.'
+$unknownLinks = @((@($coverage.companies | Where-Object { $_.company_id -eq 'company:unknown_ag' })[0]).links)
+Assert-True -Condition (@($unknownLinks | Where-Object { [string]$_.link_type -eq 'website' -and [bool]$_.is_clickable -and [string]$_.source_field -eq 'company.official_website_url' }).Count -eq 1) -Message 'Coverage-Linkvertrag nutzt verifizierte Website-only-Firmen nicht als offiziellen Link.'
+$matchLinks = @((@($coverage.companies | Where-Object { $_.company_id -eq 'company:match_ag' })[0]).links)
+Assert-True -Condition (@($matchLinks | Where-Object { [string]$_.link_type -eq 'ats' -and [bool]$_.is_clickable -and [string]$_.source_id -eq 'source:match_ats' }).Count -eq 1) -Message 'Coverage-Linkvertrag uebernimmt offizielle ATS-Quellen nicht.'
+$hintLinks = @((@($coverage.companies | Where-Object { $_.company_id -eq 'company:hint_ag' })[0]).links)
+Assert-True -Condition (@($hintLinks | Where-Object { [string]$_.link_type -eq 'review_hint' -and [bool]$_.review_only -and -not [bool]$_.is_clickable }).Count -eq 1) -Message 'Coverage-Linkvertrag markiert Discovery-Hints nicht als nicht-produktiven Review-Hinweis.'
+Assert-True -Condition (@($hintLinks | Where-Object { [string]$_.url -eq 'https://jobs.example.invalid/hint-ag' }).Count -eq 0) -Message 'Coverage-Linkvertrag darf unoffizielle Jobboersen-Hints nicht als Anbieterlink uebernehmen.'
+$missingLinks = @(Get-JobAgentCoverageCompanyLinks -Company ([pscustomobject]@{ company_id = 'company:missing'; canonical_name = 'Missing AG'; verification_status = 'UNVERIFIED'; career_url = $null; official_website_url = $null; discovery_source = [pscustomobject]@{ type = 'MANUAL_REVIEW'; url = $null; discovery_origin = 'test' } }) -JobSources @())
+Assert-True -Condition (@($missingLinks | Where-Object { [string]$_.link_type -eq 'missing' -and [string]$_.reason -match 'Keine verifizierte' }).Count -eq 1) -Message 'Coverage-Linkvertrag muss fehlende offizielle Links fail-closed ausweisen.'
 
 $duplicateDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
 $duplicateDocument.companies = @(
@@ -344,6 +359,7 @@ Assert-True -Condition (@($enrichedHints.hints | Where-Object { [string]::IsNull
         'coverage_report_has_approximation_notice',
         'coverage_dimensions_by_status_target_industry_and_source',
         'coverage_freshness_metrics_for_companies_sources_and_candidates',
+        'coverage_company_link_contract_for_career_website_ats_review_and_missing',
         'coverage_duplicate_groups_by_domain',
         'coverage_import_wave_plan',
         'daily_report_includes_coverage_and_backlog',

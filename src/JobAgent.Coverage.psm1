@@ -171,6 +171,104 @@ function ConvertTo-JobAgentCoverageCountsObject {
     return [pscustomobject]$ordered
 }
 
+function Test-JobAgentCoverageHttpUrl {
+    param([Parameter()][AllowNull()][object]$Url)
+
+    if ($null -eq $Url -or [string]::IsNullOrWhiteSpace([string]$Url)) {
+        return $false
+    }
+    $uri = $null
+    if (-not [System.Uri]::TryCreate(([string]$Url).Trim(), [System.UriKind]::Absolute, [ref]$uri)) {
+        return $false
+    }
+    return @('http', 'https') -contains $uri.Scheme
+}
+
+function New-JobAgentCoverageLinkObject {
+    param(
+        [Parameter(Mandatory)][string]$LinkType,
+        [Parameter(Mandatory)][string]$Label,
+        [Parameter()][AllowNull()][object]$Url,
+        [Parameter(Mandatory)][string]$SourceField,
+        [Parameter()][AllowEmptyString()][string]$SourceId = '',
+        [Parameter(Mandatory)][string]$VerificationStatus,
+        [Parameter(Mandatory)][bool]$IsPrimary,
+        [Parameter(Mandatory)][bool]$ReviewOnly,
+        [Parameter(Mandatory)][string]$Reason
+    )
+
+    $urlText = if ($null -eq $Url) { '' } else { ([string]$Url).Trim() }
+    $hasValidUrl = Test-JobAgentCoverageHttpUrl -Url $urlText
+    [pscustomobject]@{
+        link_type = $LinkType
+        label = $Label
+        url = if ($hasValidUrl) { $urlText } else { $null }
+        source_id = if ([string]::IsNullOrWhiteSpace($SourceId)) { $null } else { $SourceId }
+        source_field = $SourceField
+        verification_status = $VerificationStatus
+        is_primary = $IsPrimary
+        is_clickable = ($hasValidUrl -and -not $ReviewOnly -and $VerificationStatus -ne 'UNVERIFIED')
+        review_only = $ReviewOnly
+        reason = $Reason
+    }
+}
+
+function Get-JobAgentCoverageCompanyLinks {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][AllowEmptyCollection()][object[]]$JobSources = @()
+    )
+
+    $links = [System.Collections.Generic.List[object]]::new()
+    $companyStatus = [string](Get-JobAgentCoverageProperty -Object $Company -Name 'verification_status' -Default 'UNVERIFIED')
+    $discoverySource = Get-JobAgentCoverageProperty -Object $Company -Name 'discovery_source'
+    $discoveryType = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'type' -Default '')
+    $requiresReview = $companyStatus -eq 'UNVERIFIED' -or @('DISCOVERY_HINT', 'MANUAL_REVIEW') -contains $discoveryType
+    $careerUrl = Get-JobAgentCoverageProperty -Object $Company -Name 'career_url'
+    $websiteUrl = Get-JobAgentCoverageProperty -Object $Company -Name 'official_website_url'
+
+    if (Test-JobAgentCoverageHttpUrl -Url $careerUrl) {
+        $links.Add((New-JobAgentCoverageLinkObject -LinkType 'career' -Label 'Karriere' -Url $careerUrl -SourceField 'company.career_url' -VerificationStatus $(if ($requiresReview) { 'UNVERIFIED' } else { 'VERIFIED' }) -IsPrimary $true -ReviewOnly $requiresReview -Reason $(if ($requiresReview) { 'Karriere-URL ist noch nicht als offizielle Anbieterquelle verifiziert.' } else { 'Karriere-URL aus Firmeninventar.' })))
+    }
+    elseif (Test-JobAgentCoverageHttpUrl -Url $websiteUrl) {
+        $links.Add((New-JobAgentCoverageLinkObject -LinkType 'website' -Label 'Website' -Url $websiteUrl -SourceField 'company.official_website_url' -VerificationStatus $(if ($requiresReview) { 'UNVERIFIED' } else { 'VERIFIED' }) -IsPrimary $true -ReviewOnly $requiresReview -Reason $(if ($requiresReview) { 'Website ist noch nicht als offizielle Anbieterquelle verifiziert.' } else { 'Offizielle Website aus Firmeninventar; Karriere-URL fehlt.' })))
+    }
+
+    foreach ($source in @($JobSources | Where-Object { $null -ne $_ })) {
+        $isOfficial = [bool](Get-JobAgentCoverageProperty -Object $source -Name 'is_official' -Default $false)
+        if (-not $isOfficial) {
+            continue
+        }
+        $sourceType = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_type' -Default '')
+        $basis = [string](Get-JobAgentCoverageProperty -Object $source -Name 'verification_basis' -Default '')
+        $canonicalUrl = Get-JobAgentCoverageProperty -Object $source -Name 'canonical_url'
+        if (-not (Test-JobAgentCoverageHttpUrl -Url $canonicalUrl)) {
+            continue
+        }
+        if ($sourceType -eq 'CAREER_PAGE' -and -not (Test-JobAgentCoverageHttpUrl -Url $careerUrl)) {
+            $links.Add((New-JobAgentCoverageLinkObject -LinkType 'career' -Label 'Karriere' -Url $canonicalUrl -SourceField 'job_sources.canonical_url' -SourceId ([string]$source.source_id) -VerificationStatus 'VERIFIED' -IsPrimary ($links.Count -eq 0) -ReviewOnly $false -Reason 'Offizielle JobSource fuer Karriere-Seite.'))
+            continue
+        }
+        if ($sourceType -eq 'OFFICIAL_ATS' -or $basis -eq 'COMPANY_LINKED_ATS') {
+            $links.Add((New-JobAgentCoverageLinkObject -LinkType 'ats' -Label 'ATS' -Url $canonicalUrl -SourceField 'job_sources.canonical_url' -SourceId ([string]$source.source_id) -VerificationStatus 'VERIFIED' -IsPrimary ($links.Count -eq 0) -ReviewOnly $false -Reason 'Offiziell belegte ATS-Quelle.'))
+        }
+    }
+
+    $discoveryUrl = Get-JobAgentCoverageProperty -Object $discoverySource -Name 'url'
+    if (@('DISCOVERY_HINT', 'MANUAL_REVIEW') -contains $discoveryType -and (Test-JobAgentCoverageHttpUrl -Url $discoveryUrl)) {
+        $links.Add((New-JobAgentCoverageLinkObject -LinkType 'review_hint' -Label 'Review-Hinweis' -Url $discoveryUrl -SourceField 'company.discovery_source.url' -SourceId ([string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'discovery_origin' -Default '')) -VerificationStatus 'UNVERIFIED' -IsPrimary ($links.Count -eq 0) -ReviewOnly $true -Reason 'Unverifizierter Discovery-Hinweis; nicht als offizielle Anbieterquelle verwenden.'))
+    }
+
+    $officialLinks = @($links.ToArray() | Where-Object { [bool]$_.is_clickable })
+    if ($officialLinks.Count -eq 0) {
+        $links.Add((New-JobAgentCoverageLinkObject -LinkType 'missing' -Label 'Kein offizieller Link' -Url $null -SourceField 'coverage.fail_closed' -VerificationStatus 'MISSING' -IsPrimary ($links.Count -eq 0) -ReviewOnly $false -Reason 'Keine verifizierte Karriere-, Website- oder ATS-URL vorhanden.'))
+    }
+
+    $rank = @{ career = 0; website = 1; ats = 2; review_hint = 3; missing = 4 }
+    return @($links.ToArray() | Sort-Object -Property { if ($rank.ContainsKey([string]$_.link_type)) { $rank[[string]$_.link_type] } else { 9 } }, label, url)
+}
+
 function New-JobAgentCoverageCandidateClusterDimensions {
     [CmdletBinding()]
     param(
@@ -306,11 +404,29 @@ function Get-JobAgentCoverageJobsByCompany {
     return $map
 }
 
+function Get-JobAgentCoverageSourcesByCompany {
+    param([Parameter(Mandatory)][object]$Document)
+
+    $map = @{}
+    foreach ($source in @($Document.job_sources)) {
+        $companyId = [string](Get-JobAgentCoverageProperty -Object $source -Name 'company_id' -Default '')
+        if ([string]::IsNullOrWhiteSpace($companyId)) {
+            continue
+        }
+        if (-not $map.ContainsKey($companyId)) {
+            $map[$companyId] = [System.Collections.Generic.List[object]]::new()
+        }
+        $map[$companyId].Add($source)
+    }
+    return $map
+}
+
 function Get-JobAgentCoverageCompanyMetric {
     param(
         [Parameter(Mandatory)][object]$Company,
         [Parameter()][AllowNull()][object]$LatestAttempt,
         [Parameter()][AllowEmptyCollection()][object[]]$Jobs = @(),
+        [Parameter()][AllowEmptyCollection()][object[]]$JobSources = @(),
         [Parameter(Mandatory)][datetime]$Now,
         [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 7
     )
@@ -392,10 +508,14 @@ function Get-JobAgentCoverageCompanyMetric {
         'STALE_SCAN' { 'Firma in die planmaessige Rotationspruefung aufnehmen.' ; break }
         default { 'In der regulaeren Rotation belassen.' }
     }
+    $links = @(Get-JobAgentCoverageCompanyLinks -Company $Company -JobSources $JobSources)
+    $primaryLink = @($links | Where-Object { [bool]$_.is_primary } | Select-Object -First 1)
 
     [pscustomobject]@{
         company_id = $companyId
         company = [string](Get-JobAgentCoverageProperty -Object $Company -Name 'canonical_name' -Default $companyId)
+        links = @($links)
+        primary_link = if ($primaryLink.Count -eq 1) { $primaryLink[0] } else { $null }
         has_career_url = $hasCareerUrl
         was_scanned = $wasScanned
         latest_scan_succeeded = $latestScanSucceeded
@@ -1035,11 +1155,13 @@ function New-JobAgentCoverageReport {
 
     $latestAttempts = Get-JobAgentCoverageLatestAttemptMap -Document $Document
     $jobsByCompany = Get-JobAgentCoverageJobsByCompany -Document $Document
+    $sourcesByCompany = Get-JobAgentCoverageSourcesByCompany -Document $Document
     $metrics = foreach ($company in @($Document.companies)) {
         $companyId = [string]$company.company_id
         $latestAttempt = if ($latestAttempts.ContainsKey($companyId)) { $latestAttempts[$companyId] } else { $null }
         $jobs = if ($jobsByCompany.ContainsKey($companyId)) { @($jobsByCompany[$companyId].ToArray()) } else { @() }
-        Get-JobAgentCoverageCompanyMetric -Company $company -LatestAttempt $latestAttempt -Jobs $jobs -Now $Now -StaleAfterDays $StaleAfterDays
+        $jobSources = if ($sourcesByCompany.ContainsKey($companyId)) { @($sourcesByCompany[$companyId].ToArray()) } else { @() }
+        Get-JobAgentCoverageCompanyMetric -Company $company -LatestAttempt $latestAttempt -Jobs $jobs -JobSources $jobSources -Now $Now -StaleAfterDays $StaleAfterDays
     }
 
     $metricsArray = @($metrics)
@@ -1099,6 +1221,7 @@ function New-JobAgentCoverageReport {
 
 Export-ModuleMember -Function @(
     'Get-JobAgentCoverageBacklog',
+    'Get-JobAgentCoverageCompanyLinks',
     'Get-JobAgentCoverageScanPriority',
     'Get-JobAgentCoverageDuplicateGroups',
     'New-JobAgentCoverageCandidateClusterReport',

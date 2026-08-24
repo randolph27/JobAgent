@@ -27,6 +27,18 @@ Der Daily-Run bevorzugt refresh-faellige Firmen vor regulaeren Scanfaellen. Inne
 
 `tools/Measure-JobAgentCompanyCoverage.ps1` erzeugt JSON, Markdown und HTML. Die Reports enthalten Freshness-Metriken nach Status, Refresh-Grund, Zielgebiet, Quelle, Verifikationsstatus, Kandidaten-Freshness und segmentiertem Firmeninventar. Grosse HTML-Listen bleiben in Scroll-Containern mit Sticky-Headern.
 
+## Anbieter-Link-Vertrag
+
+Coverage-Firmeneintraege enthalten `links` und `primary_link`. Linkobjekte werden zentral aus dem Firmeninventar und offiziellen JobSources gebildet:
+
+- `career`: `company.career_url` oder offizielle `job_sources.canonical_url` mit `source_type=CAREER_PAGE`.
+- `website`: `company.official_website_url`, wenn keine verifizierte Karriere-URL vorhanden ist.
+- `ats`: offizielle `job_sources.canonical_url` mit `source_type=OFFICIAL_ATS` oder `verification_basis=COMPANY_LINKED_ATS`.
+- `review_hint`: unverifizierte `discovery_source.url`; nur Review-Hinweis, nicht produktiv anklickbar.
+- `missing`: Fail-Closed-Platzhalter, wenn keine verifizierte Karriere-, Website- oder ATS-URL vorliegt.
+
+Jeder Link fuehrt `link_type`, `label`, `url`, `source_id`, `source_field`, `verification_status`, `is_primary`, `is_clickable`, `review_only` und `reason`. Jobboersen- oder Discovery-Hints duerfen nicht als offizielle Anbieterlinks ausgegeben werden; sie bleiben `review_only` oder werden verworfen.
+
 ## Grenzen
 
 Sekundaerquellen liefern nur Discovery-Hints. Produktive Firmen- oder JobSource-Aufnahme verlangt offizielle Firmen-, Karriere- oder ATS-Evidenz. Live-Refreshes muessen die Source Registry, Rate-Limits, Robots-/Terms-Hinweise und Fehlerbudgets einhalten.
