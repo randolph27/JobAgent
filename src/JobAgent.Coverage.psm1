@@ -757,6 +757,188 @@ function New-JobAgentDiscoverySourceCoverageReport {
     }
 }
 
+function Get-JobAgentCoverageLatestScanRunId {
+    param([Parameter(Mandatory)][object]$Document)
+
+    $latestRun = @($Document.scan_runs |
+        Where-Object { $null -ne $_ } |
+        Sort-Object -Property {
+            $finishedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $_ -Name 'finished_at')
+            if ($null -ne $finishedAt) {
+                return $finishedAt
+            }
+            $startedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $_ -Name 'started_at')
+            if ($null -ne $startedAt) {
+                return $startedAt
+            }
+            return [datetime]::MinValue
+        } |
+        Select-Object -Last 1)
+    if ($latestRun.Count -eq 0) {
+        return $null
+    }
+    return [string]$latestRun[0].scan_run_id
+}
+
+function New-JobAgentCoverageSourceInventoryRecord {
+    param(
+        [Parameter(Mandatory)][string]$SourceId,
+        [Parameter(Mandatory)][string]$SourceGroup,
+        [Parameter(Mandatory)][string]$SourceType,
+        [Parameter()][AllowEmptyString()][string]$Url = '',
+        [Parameter()][AllowEmptyString()][string]$CompanyId = '',
+        [Parameter()][bool]$IsOfficial = $false,
+        [Parameter()][bool]$IsVerified = $false,
+        [Parameter()][bool]$IsBlocked = $false,
+        [Parameter()][AllowEmptyString()][string]$VerificationStatus = 'UNVERIFIED',
+        [Parameter()][AllowNull()][object]$LatestAttempt = $null,
+        [Parameter()][bool]$IsStale = $true
+    )
+
+    $attemptStatus = [string](Get-JobAgentCoverageProperty -Object $LatestAttempt -Name 'status' -Default 'NEVER_SCANNED')
+    $retryRecommendation = [string](Get-JobAgentCoverageProperty -Object $LatestAttempt -Name 'retry_recommendation' -Default 'NONE')
+    [pscustomobject]@{
+        source_id = $SourceId
+        source_group = $SourceGroup
+        source_type = $SourceType
+        company_id = if ([string]::IsNullOrWhiteSpace($CompanyId)) { $null } else { $CompanyId }
+        url = if ([string]::IsNullOrWhiteSpace($Url)) { $null } else { $Url.Trim() }
+        is_official = $IsOfficial
+        is_verified = $IsVerified
+        is_blocked = $IsBlocked
+        verification_status = $VerificationStatus
+        latest_attempt_status = $attemptStatus
+        retry_recommendation = $retryRecommendation
+        was_attempted_latest_run = $null -ne $LatestAttempt
+        scan_succeeded_latest_run = $attemptStatus -eq 'SUCCESS'
+        scan_failed_latest_run = $attemptStatus -eq 'FAILED'
+        retry_open = $retryRecommendation -in @('RETRY_NEXT_RUN', 'MANUAL_REVIEW') -or $attemptStatus -eq 'FAILED'
+        is_stale = $IsStale
+    }
+}
+
+function New-JobAgentSourceInventoryReport {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter()][AllowNull()][object]$SourceRegistry = $null,
+        [Parameter()][AllowNull()][object]$HintStore = $null,
+        [Parameter()][AllowEmptyString()][string]$LatestScanRunId = '',
+        [Parameter()][datetime]$Now = [datetime]::UtcNow,
+        [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 7
+    )
+
+    $effectiveScanRunId = if ([string]::IsNullOrWhiteSpace($LatestScanRunId)) { Get-JobAgentCoverageLatestScanRunId -Document $Document } else { $LatestScanRunId }
+    $attemptsBySource = @{}
+    foreach ($attempt in @($Document.scan_attempts | Where-Object { [string]::IsNullOrWhiteSpace($effectiveScanRunId) -or [string]$_.scan_run_id -eq $effectiveScanRunId })) {
+        $sourceId = [string](Get-JobAgentCoverageProperty -Object $attempt -Name 'source_id' -Default '')
+        if ([string]::IsNullOrWhiteSpace($sourceId)) {
+            continue
+        }
+        $startedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $attempt -Name 'started_at')
+        $currentStartedAt = if ($attemptsBySource.ContainsKey($sourceId)) { ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $attemptsBySource[$sourceId] -Name 'started_at') } else { $null }
+        if (-not $attemptsBySource.ContainsKey($sourceId) -or $null -eq $currentStartedAt -or ($null -ne $startedAt -and $startedAt -gt $currentStartedAt)) {
+            $attemptsBySource[$sourceId] = $attempt
+        }
+    }
+
+    $records = [System.Collections.Generic.List[object]]::new()
+    foreach ($source in @($Document.job_sources)) {
+        $sourceId = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_id' -Default 'UNKNOWN')
+        $sourceType = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_type' -Default 'UNKNOWN')
+        $verifiedAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $source -Name 'verified_at')
+        $isOfficial = [bool](Get-JobAgentCoverageProperty -Object $source -Name 'is_official' -Default $false)
+        $hasVerifiedEvidence = @((Get-JobAgentCoverageProperty -Object $source -Name 'verification_evidence' -Default @()) | Where-Object {
+                [string](Get-JobAgentCoverageProperty -Object $_ -Name 'status' -Default '') -eq 'VERIFIED'
+            }).Count -gt 0
+        $isVerified = $isOfficial -and $null -ne $verifiedAt -and $hasVerifiedEvidence
+        $latestAttempt = if ($attemptsBySource.ContainsKey($sourceId)) { $attemptsBySource[$sourceId] } else { $null }
+        $lastAttemptAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $latestAttempt -Name 'finished_at')
+        $records.Add((New-JobAgentCoverageSourceInventoryRecord `
+                    -SourceId $sourceId `
+                    -SourceGroup 'job_source' `
+                    -SourceType $sourceType `
+                    -Url ([string](Get-JobAgentCoverageProperty -Object $source -Name 'canonical_url' -Default (Get-JobAgentCoverageProperty -Object $source -Name 'url' -Default ''))) `
+                    -CompanyId ([string](Get-JobAgentCoverageProperty -Object $source -Name 'company_id' -Default '')) `
+                    -IsOfficial $isOfficial `
+                    -IsVerified $isVerified `
+                    -VerificationStatus $(if ($isVerified) { 'VERIFIED' } else { 'UNVERIFIED' }) `
+                    -LatestAttempt $latestAttempt `
+                    -IsStale ($null -eq $lastAttemptAt -or $lastAttemptAt -lt $Now.ToUniversalTime().AddDays(-$StaleAfterDays))))
+    }
+
+    foreach ($source in @(if ($null -eq $SourceRegistry) { @() } else { $SourceRegistry.items })) {
+        $sourceClass = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_class' -Default 'UNKNOWN')
+        $evidenceLevel = [string](Get-JobAgentCoverageProperty -Object $source -Name 'evidence_level' -Default 'UNKNOWN')
+        $sourceId = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_id' -Default 'UNKNOWN')
+        $freshness = New-JobAgentCoverageFreshnessRecord `
+            -Now $Now `
+            -LastImportedAt (Get-JobAgentCoverageProperty -Object $source -Name 'last_imported_at') `
+            -LastVerifiedAt (Get-JobAgentCoverageProperty -Object $source -Name 'last_verified_at') `
+            -NextRefreshAt (Get-JobAgentCoverageProperty -Object $source -Name 'next_refresh_at') `
+            -ExpiresAfterDays (Get-JobAgentCoveragePolicyDays -Kind $sourceClass) `
+            -RefreshReason 'source_registry_refresh'
+        $records.Add((New-JobAgentCoverageSourceInventoryRecord `
+                    -SourceId $sourceId `
+                    -SourceGroup 'source_registry' `
+                    -SourceType $sourceClass `
+                    -Url ([string](Get-JobAgentCoverageProperty -Object $source -Name 'source_url' -Default '')) `
+                    -IsOfficial ($sourceClass -in @('OFFICIAL_COMPANY', 'OFFICIAL_ATS') -and $evidenceLevel -eq 'PRIMARY_OFFICIAL') `
+                    -IsVerified ($evidenceLevel -eq 'PRIMARY_OFFICIAL' -and -not (Test-JobAgentCoverageManualReviewSource -Source $source)) `
+                    -IsBlocked (Test-JobAgentCoverageRejectedSource -Source $source) `
+                    -VerificationStatus $(if ($evidenceLevel -eq 'PRIMARY_OFFICIAL') { 'VERIFIED' } elseif (Test-JobAgentCoverageRejectedSource -Source $source) { 'BLOCKED' } else { 'UNVERIFIED' }) `
+                    -IsStale ([string]$freshness.staleness_status -in @('REFRESH_DUE', 'EXPIRED', 'UNKNOWN'))))
+    }
+
+    foreach ($hint in @(if ($null -eq $HintStore) { @() } else { $HintStore.hints })) {
+        $hintId = [string](Get-JobAgentCoverageProperty -Object $hint -Name 'hint_id' -Default ([string](Get-JobAgentCoverageProperty -Object $hint -Name 'candidate_id' -Default 'UNKNOWN')))
+        $records.Add((New-JobAgentCoverageSourceInventoryRecord `
+                    -SourceId $hintId `
+                    -SourceGroup 'discovery_hint' `
+                    -SourceType ([string](Get-JobAgentCoverageProperty -Object $hint -Name 'candidate_status' -Default 'DISCOVERY_HINT')) `
+                    -Url ([string](Get-JobAgentCoverageProperty -Object $hint -Name 'observed_url' -Default '')) `
+                    -IsOfficial $false `
+                    -IsVerified $false `
+                    -VerificationStatus ([string](Get-JobAgentCoverageProperty -Object $hint -Name 'verification_status' -Default 'UNVERIFIED')) `
+                    -IsStale $true))
+    }
+
+    $items = @($records.ToArray())
+    $urlGroups = @($items | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_.url) } | Group-Object -Property url | Where-Object Count -gt 1)
+    $groupCounts = @{}
+    foreach ($group in @($items | Group-Object source_group)) {
+        $groupCounts[[string]$group.Name] = [int]$group.Count
+    }
+    $typeCounts = @{}
+    foreach ($group in @($items | Group-Object source_type)) {
+        $typeCounts[[string]$group.Name] = [int]$group.Count
+    }
+    [pscustomobject]@{
+        schema_version = 'jobagent/source-inventory/v1'
+        generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        latest_scan_run_id = if ([string]::IsNullOrWhiteSpace($effectiveScanRunId)) { $null } else { $effectiveScanRunId }
+        sources_total = $items.Count
+        official_sources = @($items | Where-Object is_official).Count
+        career_sources = @($items | Where-Object { [string]$_.source_type -in @('CAREER_PAGE', 'OFFICIAL_COMPANY') }).Count
+        ats_sources = @($items | Where-Object { [string]$_.source_type -in @('OFFICIAL_ATS') }).Count
+        discovery_sources = @($items | Where-Object { [string]$_.source_group -in @('source_registry', 'discovery_hint') -and -not [bool]$_.is_official }).Count
+        discovery_hints = @($items | Where-Object { [string]$_.source_group -eq 'discovery_hint' }).Count
+        verified_sources = @($items | Where-Object is_verified).Count
+        unverified_sources = @($items | Where-Object { -not [bool]$_.is_verified -and -not [bool]$_.is_blocked }).Count
+        blocked_sources = @($items | Where-Object is_blocked).Count
+        retry_open_sources = @($items | Where-Object retry_open).Count
+        attempted_latest_run = @($items | Where-Object was_attempted_latest_run).Count
+        scan_succeeded_latest_run = @($items | Where-Object scan_succeeded_latest_run).Count
+        scan_failed_latest_run = @($items | Where-Object scan_failed_latest_run).Count
+        never_scanned_sources = @($items | Where-Object { -not [bool]$_.was_attempted_latest_run -and [string]$_.source_group -eq 'job_source' }).Count
+        stale_sources = @($items | Where-Object is_stale).Count
+        duplicate_url_groups = $urlGroups.Count
+        by_group = ConvertTo-JobAgentCoverageCountsObject -Counts $groupCounts
+        by_type = ConvertTo-JobAgentCoverageCountsObject -Counts $typeCounts
+        items = @($items | Sort-Object source_group, source_type, source_id)
+    }
+}
+
 function New-JobAgentCoverageCandidateFreshnessReport {
     [CmdletBinding()]
     param(
@@ -1351,6 +1533,7 @@ function New-JobAgentCoverageReport {
     $candidateReviewQueue = New-JobAgentCoverageCandidateReviewQueue -HintStore $HintStore -SourceRegistry $SourceRegistry -PreviousQueue $CandidateVerificationQueue -Now $Now -StaleAfterDays $StaleAfterDays -MaxItems $MaxPriorityItems
     $candidateVerificationDecisionReport = New-JobAgentCoverageCandidateVerificationDecisionReport -CandidateVerificationQueue $CandidateVerificationQueue -MaxItems $MaxPriorityItems
     $importWavePlan = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore -WaveConfig $WaveConfig
+    $sourceInventory = New-JobAgentSourceInventoryReport -Document $Document -SourceRegistry $SourceRegistry -HintStore $HintStore -Now $Now -StaleAfterDays $StaleAfterDays
     [pscustomobject]@{
         generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         stale_after_days = $StaleAfterDays
@@ -1385,6 +1568,20 @@ function New-JobAgentCoverageReport {
             candidate_verification_verified = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'VERIFIED' }).Count
             candidate_verification_manual_review = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count
             candidate_verification_retry_exhausted = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'RETRY_EXHAUSTED' }).Count
+            sources_total = $sourceInventory.sources_total
+            official_sources = $sourceInventory.official_sources
+            career_sources = $sourceInventory.career_sources
+            ats_sources = $sourceInventory.ats_sources
+            discovery_sources = $sourceInventory.discovery_sources
+            verified_sources = $sourceInventory.verified_sources
+            unverified_sources = $sourceInventory.unverified_sources
+            blocked_sources = $sourceInventory.blocked_sources
+            retry_open_sources = $sourceInventory.retry_open_sources
+            sources_attempted_latest_run = $sourceInventory.attempted_latest_run
+            sources_succeeded_latest_run = $sourceInventory.scan_succeeded_latest_run
+            sources_failed_latest_run = $sourceInventory.scan_failed_latest_run
+            never_scanned_sources = $sourceInventory.never_scanned_sources
+            stale_sources = $sourceInventory.stale_sources
         }
         dimensions = New-JobAgentCoverageDimensions -CompanyMetrics $metricsArray
         companies = @($metricsArray | Sort-Object company)
@@ -1392,6 +1589,7 @@ function New-JobAgentCoverageReport {
         backlog = @(Get-JobAgentCoverageBacklog -CompanyMetrics $metricsArray)
         scan_priority = @(Get-JobAgentCoverageScanPriority -CompanyMetrics $metricsArray -MaxCompanies $MaxPriorityItems)
         source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
+        source_inventory = $sourceInventory
         candidate_clusters = $candidateClusters
         candidate_freshness = $candidateFreshness
         candidate_verification_queue = $candidateReviewQueue
@@ -1414,5 +1612,6 @@ Export-ModuleMember -Function @(
     'New-JobAgentCoverageDimensions',
     'New-JobAgentCoverageImportWavePlan',
     'New-JobAgentCoverageImportWaveMetrics',
+    'New-JobAgentSourceInventoryReport',
     'New-JobAgentCoverageReport'
 )

@@ -164,6 +164,20 @@ function ConvertTo-JobAgentReportDisplayLabel {
                 'without_matching_jobs' { return 'Ohne passende Stellen' }
                 'with_matching_jobs' { return 'Mit passenden Stellen' }
                 'stale_or_unscanned' { return 'Faellig oder ungescannt' }
+                'sources_total' { return 'Quellen gesamt' }
+                'official_sources' { return 'Offizielle Quellen' }
+                'career_sources' { return 'Karrierequellen' }
+                'ats_sources' { return 'ATS-Quellen' }
+                'discovery_sources' { return 'Discovery-Hinweise' }
+                'verified_sources' { return 'Verifizierte Quellen' }
+                'unverified_sources' { return 'Offene Quellen' }
+                'blocked_sources' { return 'Blockierte Quellen' }
+                'retry_open_sources' { return 'Retry offen' }
+                'sources_attempted_latest_run' { return 'Im letzten Lauf versucht' }
+                'sources_succeeded_latest_run' { return 'Im letzten Lauf gescannt' }
+                'sources_failed_latest_run' { return 'Im letzten Lauf fehlgeschlagen' }
+                'never_scanned_sources' { return 'Nie gescannte Quellen' }
+                'stale_sources' { return 'Faellige Quellen' }
             }
         }
     }
@@ -592,7 +606,9 @@ function New-JobAgentDailyReport {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][object]$Document,
-        [Parameter(Mandatory)][string]$ScanRunId
+        [Parameter(Mandatory)][string]$ScanRunId,
+        [Parameter()][AllowNull()][object]$SourceRegistry = $null,
+        [Parameter()][AllowNull()][object]$HintStore = $null
     )
 
     $scanRun = @($Document.scan_runs | Where-Object { [string]$_.scan_run_id -eq $ScanRunId } | Select-Object -First 1)[0]
@@ -679,6 +695,19 @@ function New-JobAgentDailyReport {
         Sort-Object company_id, source_id |
         ForEach-Object { New-JobAgentReportSourceIssueEntry -Attempt $_ -CompaniesById $companiesById -SourcesById $sourcesById })
 
+    if ($null -eq $SourceRegistry) {
+        $sourceRegistryPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'data\jobagent\company-discovery.sources.json'
+        if (Test-Path -LiteralPath $sourceRegistryPath -PathType Leaf) {
+            $SourceRegistry = Get-Content -Raw -LiteralPath $sourceRegistryPath | ConvertFrom-Json -Depth 100
+        }
+    }
+    if ($null -eq $HintStore) {
+        $hintStorePath = Join-Path (Split-Path -Parent $PSScriptRoot) 'data\jobagent\company-discovery.hints.json'
+        if (Test-Path -LiteralPath $hintStorePath -PathType Leaf) {
+            $HintStore = Get-Content -Raw -LiteralPath $hintStorePath | ConvertFrom-Json -Depth 100
+        }
+    }
+
     [pscustomobject]@{
         scan_run_id = $ScanRunId
         generated_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
@@ -691,7 +720,7 @@ function New-JobAgentDailyReport {
             source_issues = @($sourceIssues)
         }
         statistics = New-JobAgentReportStatistics -Document $Document -ScanRunId $ScanRunId -ActiveEntries $activeEntries -NewCompanies $newCompanies
-        coverage = New-JobAgentCoverageReport -Document $Document -Now $finished -MaxPriorityItems 10
+        coverage = New-JobAgentCoverageReport -Document $Document -SourceRegistry $SourceRegistry -HintStore $HintStore -Now $finished -MaxPriorityItems 10
     }
 }
 
@@ -1009,6 +1038,13 @@ function ConvertTo-JobAgentDailyReportMarkdown {
         [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-JobAgentReportDisplayLabel -Value $metric -Domain 'metric'), $Report.coverage.metrics.$metric))
     }
     [void]$lines.Add('')
+    [void]$lines.Add('### Quellenbestand')
+    [void]$lines.Add('| Metrik | Wert |')
+    [void]$lines.Add('|---|---:|')
+    foreach ($metric in @('sources_total', 'official_sources', 'career_sources', 'ats_sources', 'discovery_sources', 'verified_sources', 'unverified_sources', 'blocked_sources', 'retry_open_sources', 'sources_attempted_latest_run', 'sources_succeeded_latest_run', 'sources_failed_latest_run', 'never_scanned_sources', 'stale_sources')) {
+        [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-JobAgentReportDisplayLabel -Value $metric -Domain 'metric'), $Report.coverage.metrics.$metric))
+    }
+    [void]$lines.Add('')
     [void]$lines.Add('### Naechste Scanprioritaeten')
     if (@($Report.coverage.scan_priority).Count -eq 0) {
         [void]$lines.Add('Keine Scanprioritaeten vorhanden.')
@@ -1137,6 +1173,12 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('<p>' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.approximation_notice) + '</p>')
     [void]$lines.Add('<div class="summary">')
     foreach ($metric in @('companies_total', 'with_career_url', 'without_career_url', 'successfully_scanned', 'failed_scanned', 'never_scanned', 'without_matching_jobs', 'with_matching_jobs', 'stale_or_unscanned')) {
+        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.metrics.$metric) + '</span></div>')
+    }
+    [void]$lines.Add('</div>')
+
+    [void]$lines.Add('<h3>Quellenbestand</h3><div class="summary">')
+    foreach ($metric in @('sources_total', 'official_sources', 'career_sources', 'ats_sources', 'discovery_sources', 'verified_sources', 'unverified_sources', 'blocked_sources', 'retry_open_sources', 'sources_attempted_latest_run', 'sources_succeeded_latest_run', 'sources_failed_latest_run', 'never_scanned_sources', 'stale_sources')) {
         [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div>')

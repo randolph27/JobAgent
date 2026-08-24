@@ -90,6 +90,11 @@ $document.change_events = @()
 
 $coverage = New-JobAgentCoverageReport -Document $document -Now ([datetime]'2026-08-17T12:00:00Z') -StaleAfterDays 7 -MaxPriorityItems 5
 Assert-True -Condition ($coverage.metrics.companies_total -eq 6) -Message 'Coverage zaehlt Firmen falsch.'
+Assert-True -Condition ($coverage.metrics.sources_total -eq 2) -Message 'Coverage zaehlt Quellenbestand aus JobSources falsch.'
+Assert-True -Condition ($coverage.metrics.official_sources -eq 1) -Message 'Coverage zaehlt offizielle Quellen falsch.'
+Assert-True -Condition ($coverage.metrics.ats_sources -eq 1) -Message 'Coverage zaehlt ATS-Quellen falsch.'
+Assert-True -Condition ($coverage.metrics.unverified_sources -eq 1) -Message 'Coverage zaehlt offene Quellen falsch.'
+Assert-True -Condition ($coverage.metrics.never_scanned_sources -eq 2) -Message 'Coverage zaehlt nie gescannte Quellen falsch.'
 Assert-True -Condition ($coverage.metrics.without_career_url -eq 1) -Message 'Coverage zaehlt Firmen ohne Karriere-URL falsch.'
 Assert-True -Condition ($coverage.metrics.failed_scanned -eq 1) -Message 'Coverage zaehlt fehlgeschlagene Portale falsch.'
 Assert-True -Condition ($coverage.metrics.never_scanned -eq 2) -Message 'Coverage zaehlt nie gescannte Firmen falsch.'
@@ -276,6 +281,10 @@ $candidateVerificationQueue = [pscustomobject]@{
 }
 $coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now ([datetime]'2026-08-23T08:30:00Z')
 Assert-True -Condition ($coverageWithInputs.metrics.discovery_hints_total -eq $hintStore.hints_total) -Message 'Coverage uebernimmt Discovery-Hint-Zaehler falsch.'
+Assert-True -Condition ($coverageWithInputs.source_inventory.schema_version -eq 'jobagent/source-inventory/v1') -Message 'Coverage erzeugt keinen Quellenbestand.'
+Assert-True -Condition ($coverageWithInputs.metrics.sources_total -eq (@($document.job_sources).Count + @($sourceRegistry.items).Count + @($hintStore.hints).Count)) -Message 'Quellenbestand muss JobSources, Source Registry und Discovery-Hints zaehlen.'
+Assert-True -Condition ($coverageWithInputs.metrics.discovery_sources -ge @($hintStore.hints).Count) -Message 'Quellenbestand zaehlt Discovery-Hinweise nicht.'
+Assert-True -Condition ($coverageWithInputs.metrics.sources_attempted_latest_run -eq 0) -Message 'Quellenbestand darf ohne passenden letzten ScanRun keine Quellen als versucht markieren.'
 Assert-True -Condition ($coverageWithInputs.source_coverage.sources_total -eq $sourceCoverage.sources_total) -Message 'Coverage bettet Quellen-Coverage nicht ein.'
 Assert-True -Condition ($coverageWithInputs.source_coverage.PSObject.Properties.Name -contains 'refresh_due_sources') -Message 'Quellen-Coverage weist Refresh-Faelligkeit nicht aus.'
 Assert-True -Condition ($coverageWithInputs.candidate_freshness.schema_version -eq 'jobagent/candidate-freshness/v1') -Message 'Coverage erzeugt keinen Kandidaten-Freshness-Report.'
@@ -304,6 +313,8 @@ $sourceCoverage | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $coverageL
 
 $toolOutput = & (Join-Path $root 'tools\Measure-JobAgentCompanyCoverage.ps1') -ProjectRoot $root -MaxPriorityItems 10 | ConvertFrom-Json -Depth 20
 Assert-True -Condition ($toolOutput.status -eq 'ok') -Message 'Coverage-Tool liefert keinen OK-Status.'
+Assert-True -Condition ($toolOutput.sources_total -gt 0) -Message 'Coverage-Tool gibt Quellenanzahl nicht direkt aus.'
+Assert-True -Condition ($toolOutput.official_sources -gt 0) -Message 'Coverage-Tool gibt offizielle Quellen nicht direkt aus.'
 Assert-True -Condition (Test-Path -LiteralPath $toolOutput.json_path -PathType Leaf) -Message 'Coverage-Tool erzeugt kein JSON-Artefakt.'
 Assert-True -Condition (Test-Path -LiteralPath $toolOutput.markdown_path -PathType Leaf) -Message 'Coverage-Tool erzeugt kein Markdown-Artefakt.'
 Assert-True -Condition (Test-Path -LiteralPath $toolOutput.html_path -PathType Leaf) -Message 'Coverage-Tool erzeugt kein HTML-Artefakt.'
@@ -324,6 +335,8 @@ Assert-True -Condition ($toolQueue.queue_type -eq 'review') -Message 'Kandidaten
 Assert-True -Condition (@($toolQueue.queue).Count -eq $toolJson.metrics.candidate_verification_queue_total) -Message 'Kandidaten-Review-Queue und Coverage-Metrik widersprechen sich.'
 Assert-True -Condition (@($toolQueue.queue | Where-Object { [int]$_.priority_score -lt 0 -or [int]$_.priority_score -gt 100 -or [string]::IsNullOrWhiteSpace([string]$_.next_action) -or @($_.reason_codes).Count -lt 1 -or $null -eq $_.source_evidence -or $null -eq $_.dedupe_context }).Count -eq 0) -Message 'Kandidaten-Review-Queue enthaelt unvollstaendige Priorisierungsdaten.'
 Assert-True -Condition ($toolMarkdown.Contains('## Importwellen')) -Message 'Coverage-Tool-Markdown enthaelt keine Importwellen.'
+Assert-True -Condition ($toolMarkdown.Contains('## Quellenbestand')) -Message 'Coverage-Tool-Markdown enthaelt keinen Quellenbestand.'
+Assert-True -Condition ($toolMarkdown.Contains('Quellen gesamt')) -Message 'Coverage-Tool-Markdown enthaelt keine Gesamtzahl der Quellen.'
 Assert-True -Condition ($toolMarkdown.Contains('Annahmequote')) -Message 'Coverage-Tool-Markdown enthaelt keine Wellen-Annahmequote.'
 Assert-True -Condition ($toolMarkdown.Contains('## Firmeninventar')) -Message 'Coverage-Tool-Markdown enthaelt kein segmentiertes Firmeninventar.'
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Dedupe')) -Message 'Coverage-Tool-Markdown enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
@@ -334,6 +347,8 @@ Assert-True -Condition ($toolMarkdown.Contains('| Score | Aktion | Cluster | Kan
 Assert-True -Condition ($toolMarkdown.Contains('## Review-/Reject-Report')) -Message 'Coverage-Tool-Markdown enthaelt keinen Review-/Reject-Report.'
 Assert-True -Condition ($toolHtml.Contains('<meta name="viewport" content="width=device-width, initial-scale=1">')) -Message 'Coverage-Tool-HTML enthaelt keinen Viewport-Meta-Tag.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Dedupe</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Quellenbestand</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Quellenbestand.'
+Assert-True -Condition ($toolHtml.Contains('Offizielle Quellen')) -Message 'Coverage-Tool-HTML weist offizielle Quellen nicht sichtbar aus.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Freshness</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Freshness-Abschnitt.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Freshness-Status</h2>')) -Message 'Coverage-Tool-HTML enthaelt keine Freshness-Status-Tabelle.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Firmeninventar</h2>')) -Message 'Coverage-Tool-HTML enthaelt kein Firmeninventar.'
@@ -374,6 +389,12 @@ Assert-True -Condition ($dedupeToolJson.schema_version -eq 'jobagent/company-can
 Assert-True -Condition ($dedupeToolMarkdown.Contains('## Review-Queue')) -Message 'Kandidaten-Dedupe-Tool-Markdown enthaelt keine Review-Queue.'
 Assert-True -Condition (@($enrichedHints.hints | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.identity_cluster_id) }).Count -eq 0) -Message 'Angereicherte Hints enthalten fehlende Cluster-IDs.'
 
+$sourceToolOutput = & (Join-Path $root 'tools\Measure-JobAgentSourceCoverage.ps1') -ProjectRoot $root | ConvertFrom-Json -Depth 20
+Assert-True -Condition ($sourceToolOutput.status -eq 'ok') -Message 'Quellenbestand-Tool liefert keinen OK-Status.'
+Assert-True -Condition ($sourceToolOutput.sources_total -eq ($sourceToolOutput.by_group.job_source + $sourceToolOutput.by_group.source_registry + $sourceToolOutput.by_group.discovery_hint)) -Message 'Quellenbestand-Tool weist inkonsistente Gesamtzahl aus.'
+$sourceToolMarkdown = & (Join-Path $root 'tools\Measure-JobAgentSourceCoverage.ps1') -ProjectRoot $root -Markdown
+Assert-True -Condition ($sourceToolMarkdown.Contains('Quellen gesamt')) -Message 'Quellenbestand-Tool-Markdown beantwortet die Quellenanzahl nicht.'
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -396,6 +417,8 @@ Assert-True -Condition (@($enrichedHints.hints | Where-Object { [string]::IsNull
         'discovery_source_usage_notes_required',
         'secondary_hint_store_contract',
         'coverage_tool_generates_json_markdown_html_artifacts',
+        'source_inventory_metrics_for_job_sources_registry_and_hints',
+        'source_coverage_tool_outputs_json_and_markdown',
         'coverage_tool_html_has_responsive_guards',
         'coverage_tool_renders_clickable_provider_links',
         'coverage_tool_marks_discovery_hints_review_only',

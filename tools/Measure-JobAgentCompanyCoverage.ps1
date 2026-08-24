@@ -88,6 +88,20 @@ function ConvertTo-ToolDisplayLabel {
                 'candidate_verification_verified' { return 'Verifiziert' }
                 'candidate_verification_manual_review' { return 'Manueller Review' }
                 'candidate_verification_retry_exhausted' { return 'Retry ausgeschoepft' }
+                'sources_total' { return 'Quellen gesamt' }
+                'official_sources' { return 'Offizielle Quellen' }
+                'career_sources' { return 'Karrierequellen' }
+                'ats_sources' { return 'ATS-Quellen' }
+                'discovery_sources' { return 'Discovery-Hinweise' }
+                'verified_sources' { return 'Verifizierte Quellen' }
+                'unverified_sources' { return 'Offene Quellen' }
+                'blocked_sources' { return 'Blockierte Quellen' }
+                'retry_open_sources' { return 'Retry offen' }
+                'sources_attempted_latest_run' { return 'Im letzten Lauf versucht' }
+                'sources_succeeded_latest_run' { return 'Im letzten Lauf gescannt' }
+                'sources_failed_latest_run' { return 'Im letzten Lauf fehlgeschlagen' }
+                'never_scanned_sources' { return 'Nie gescannte Quellen' }
+                'stale_sources' { return 'Faellige Quellen' }
             }
         }
         'kind' {
@@ -322,6 +336,13 @@ function ConvertTo-ToolCoverageMarkdown {
         [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-ToolDisplayLabel -Value $metric -Domain 'metric'), $Coverage.metrics.$metric))
     }
     [void]$lines.Add('')
+    [void]$lines.Add('## Quellenbestand')
+    [void]$lines.Add('| Metrik | Wert |')
+    [void]$lines.Add('|---|---:|')
+    foreach ($metric in @('sources_total', 'official_sources', 'career_sources', 'ats_sources', 'discovery_sources', 'verified_sources', 'unverified_sources', 'blocked_sources', 'retry_open_sources', 'sources_attempted_latest_run', 'sources_succeeded_latest_run', 'sources_failed_latest_run', 'never_scanned_sources', 'stale_sources')) {
+        [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-ToolDisplayLabel -Value $metric -Domain 'metric'), $Coverage.metrics.$metric))
+    }
+    [void]$lines.Add('')
     Add-ToolMarkdownCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state -Domain 'status'
     [void]$lines.Add('')
     Add-ToolMarkdownCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area -Domain 'target_area'
@@ -504,6 +525,11 @@ function ConvertTo-ToolCoverageHtml {
         [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')
+    [void]$lines.Add('<section><h2>Quellenbestand</h2><div class="summary">')
+    foreach ($metric in @('sources_total', 'official_sources', 'career_sources', 'ats_sources', 'discovery_sources', 'verified_sources', 'unverified_sources', 'blocked_sources', 'retry_open_sources', 'sources_attempted_latest_run', 'sources_succeeded_latest_run', 'sources_failed_latest_run', 'never_scanned_sources', 'stale_sources')) {
+        [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
+    }
+    [void]$lines.Add('</div></section>')
     Add-ToolHtmlCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state -Domain 'status'
     Add-ToolHtmlCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area -Domain 'target_area'
     Add-ToolHtmlCounts -Lines $lines -Title 'Branche' -Counts $Coverage.dimensions.by_industry
@@ -652,5 +678,9 @@ if ($null -ne $coverage.candidate_verification_queue) {
     backlog_items = @($coverage.backlog).Count
     duplicate_groups = $coverage.metrics.duplicate_groups
     import_waves = @($coverage.import_waves.waves).Count
+    sources_total = $coverage.metrics.sources_total
+    official_sources = $coverage.metrics.official_sources
+    discovery_sources = $coverage.metrics.discovery_sources
+    sources_attempted_latest_run = $coverage.metrics.sources_attempted_latest_run
     import_wave_metrics = $coverage.import_wave_metrics
 } | ConvertTo-Json -Depth 6

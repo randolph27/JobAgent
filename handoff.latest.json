@@ -1,13 +1,13 @@
 {
-  "ts": "2026-08-24T10:26:23.606+02:00",
+  "ts": "2026-08-24T10:39:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": null,
   "status": "handoff",
-  "goal": "JA-038 abgeschlossen; naechster Anker JA-039",
-  "summary": "JA-038 ist abgeschlossen und archiviert. Daily-Run-JSON, Markdown und HTML enthalten jetzt ein Kurzprofil aus offiziellen Stellenbeschreibungen oder den stabilen Leerwert fuer fehlende offizielle Beschreibung.",
-  "next": "JA-039 umsetzen: Quellenbestand, Quellenanzahl und Scanabdeckung deterministisch aus Store, Source Registry und Laufartefakten berechnen und in Bericht/CLI sichtbar machen.",
+  "goal": "JA-039 abgeschlossen; keine aktiven Roadmap-Punkte",
+  "summary": "Quellenbestand und Scanabdeckung sind deterministisch berechenbar und in CLI, Coverage-Report und Daily-Run-Report sichtbar. Aktuell: 72 Quellen gesamt, 41 offizielle Quellen, 31 Discovery-Hinweise.",
+  "next": "Push des JA-039-Commits oder neue Roadmap-Punkte priorisiert anlegen.",
   "changed": [
     "Roadmap.md",
     "Roadmap_archive.md",
@@ -16,40 +16,20 @@
     "handoff.latest.json",
     "handoff.latest.md",
     "html/jobagent/company-coverage.html",
-    "html/jobagent/ja-022-viewport-audit.html",
-    "output/playwright/ja-022-viewport-1366.png",
-    "output/playwright/ja-022-viewport-1920.png",
-    "output/playwright/ja-022-viewport-800.png",
-    "schemas/jobagent.schema.json",
+    "src/JobAgent.Coverage.psm1",
     "src/JobAgent.Report.psm1",
-    "src/JobAgent.SourceAdapters.psm1",
-    "src/JobAgent.StatusMachine.psm1",
-    "tests/Test-JobAgentDailyRun.ps1",
+    "tests/Test-JobAgentCoverage.ps1",
     "tests/Test-JobAgentReport.ps1",
-    "tests/Test-JobAgentSchema.ps1",
-    "tests/Test-JobAgentSourceAdapters.ps1",
-    "tests/Test-JobAgentStatusMachine.ps1",
-    "tests/fixtures/jobagent/valid.json",
     "todo.checkpoint.json",
-    "todo.current.md",
     "todo.events.jsonl",
-    "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json"
+    "todo.state.json",
+    "tools/Measure-JobAgentCompanyCoverage.ps1",
+    "tools/Measure-JobAgentSourceCoverage.ps1"
   ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -59,17 +39,7 @@
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "cmd": "pwsh -NoProfile -File tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
       "exit": 0,
       "status": "pass"
     },
@@ -79,7 +49,7 @@
       "status": "pass"
     },
     {
-      "cmd": ".\\ci.cmd stp",
+      "cmd": ".\\ci.cmd todo-rebuild",
       "exit": 0,
       "status": "pass"
     }
@@ -88,11 +58,11 @@
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "ef3ae72f31e4",
+    "head": "aktueller JA-039-Commit",
     "upstream": "origin/master",
-    "ahead": 0,
+    "ahead": 1,
     "behind": 0,
-    "worktree": "dirty"
+    "worktree": "clean"
   },
   "refs": [
     "README.md",
@@ -104,103 +74,27 @@
     "todo.events.jsonl",
     "handoff.latest.md",
     "handoff.latest.json",
-    "logs/verify/ja-038-job-description-report.md"
+    "tools/Measure-JobAgentSourceCoverage.ps1",
+    "html/jobagent/company-coverage.html"
   ],
-  "active_roadmap": [
-    {
-      "id": "JA-039",
-      "title": "Quellenbestand, Quellenanzahl und Scanabdeckung im Bericht transparent ausweisen",
-      "priority_score": 94,
-      "milestone": "M6-C",
-      "scope": "src/JobAgent.Coverage.psm1, src/JobAgent.Report.psm1, optional tools/Measure-JobAgentSourceCoverage.ps1, tests/Test-JobAgentCoverage.ps1, tests/Test-JobAgentReport.ps1, optional tests/Test-JobAgentOperations.ps1",
-      "function_tests": [
-        "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
-        "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
-        "pwsh -NoProfile -File tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent"
-      ],
-      "no_go": [
-        "keine Live-Netzwerkabfrage fuer reine Zaehllogik",
-        "keine Bewertung von Jobboersen als offizielle Primaerquelle",
-        "Firmenanzahl und Quellenanzahl nicht vermischen",
-        "keine geschaetzten Quellenzahlen"
-      ]
-    }
-  ],
+  "active_roadmap": [],
   "completed_roadmap": [
-    "JA-038"
+    "JA-039"
   ],
-  "blockers": [
-    "Kein harter Blocker. Der Chat-Screenshot war lokal nicht als Datei verfuegbar; JA-038 wurde ueber Report-, HTML- und Viewport-Tests abgedeckt."
-  ],
-  "capsule": {
-    "ts": "2026-08-24T10:26:23.606+02:00",
-    "agent_id": "UTTER-20260817-39f7",
-    "workspace_root": "D:\\_Scripte\\JobAgent",
-    "project": "JobAgent",
-    "active_id": null,
-    "status": "handoff",
-    "goal": "JA-038 abgeschlossen; naechster Anker JA-039",
-    "changed": [
-      "Roadmap.md",
-      "Roadmap_archive.md",
-      "Roadmap_index.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "html/jobagent/ja-022-viewport-audit.html",
-      "output/playwright/ja-022-viewport-1366.png",
-      "output/playwright/ja-022-viewport-1920.png",
-      "output/playwright/ja-022-viewport-800.png",
-      "schemas/jobagent.schema.json",
-      "src/JobAgent.Report.psm1",
-      "src/JobAgent.SourceAdapters.psm1",
-      "src/JobAgent.StatusMachine.psm1",
-      "tests/Test-JobAgentDailyRun.ps1",
-      "tests/Test-JobAgentReport.ps1",
-      "tests/Test-JobAgentSchema.ps1",
-      "tests/Test-JobAgentSourceAdapters.ps1",
-      "tests/Test-JobAgentStatusMachine.ps1",
-      "tests/fixtures/jobagent/valid.json",
-      "todo.checkpoint.json",
-      "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "verified": [
-      {
-        "cmd": ".\\ci.cmd supertest",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": ".\\ci.cmd stp",
-        "exit": 0,
-        "status": "pass"
-      }
-    ],
-    "route_ok": null,
-    "route_violations": [],
-    "git": {
-      "branch": "master",
-      "head": "ef3ae72f31e4",
-      "upstream": "origin/master",
-      "ahead": 0,
-      "behind": 0,
-      "worktree": "dirty"
-    },
-    "next": "JA-039 umsetzen: Quellenbestand und Scanabdeckung messbar machen.",
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.json"
-    ],
-    "manual_missing": false,
-    "env_inventory_missing": false,
-    "env_inventory_used": false,
-    "env_inventory_path": null
+  "blockers": [],
+  "source_metrics": {
+    "sources_total": 72,
+    "official_sources": 41,
+    "career_sources": 40,
+    "ats_sources": 1,
+    "discovery_sources": 31,
+    "verified_sources": 41,
+    "unverified_sources": 30,
+    "blocked_sources": 1,
+    "attempted_latest_run": 2,
+    "scan_succeeded_latest_run": 2,
+    "scan_failed_latest_run": 0,
+    "never_scanned_sources": 37,
+    "stale_sources": 70
   }
 }

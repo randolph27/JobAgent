@@ -851,4 +851,26 @@
   - [x] Risiken und Unsicherheiten: Live-Quellen liefern Beschreibungen uneinheitlich; bestehende historische Jobs ohne `description` bleiben kompatibel und werden im Report mit dem Leerwert ausgewiesen, bis ein neuer offizieller Scan Beschreibung liefert.
   - [x] Meilenstein: M6-B Stelleninhalt im Bericht pruefbar.
 
+## Archiviert 2026-08-24 - JA-039
+
+- [x] JA-039 Quellenbestand, Quellenanzahl und Scanabdeckung im Bericht transparent ausweisen #comment: Die Frage nach der aktuellen Quellenanzahl muss direkt aus Store und Source Registry beantwortbar und im HTML-Bericht sichtbar sein.
+  - [x] Beschreibung: Der JobAgent weist im Coverage- und Daily-Run-Output klar aus, wie viele Quellen aktuell vorhanden sind, wie viele davon offizielle Firmen-/Karriere-/ATS-Quellen sind, wie viele nur Discovery-Hinweise sind, wie viele im letzten Lauf gescannt wurden und wie viele wegen Retry, Blockade, fehlender Verifikation oder fehlender Karriere-URL offen sind. Die Zahlen werden deterministisch aus `data/jobagent/store.json`, Source Registry, Hint-Store und Laufartefakten berechnet; es gibt keine geschaetzte oder manuell eingetragene Quellenzahl.
+  - [x] Scope: Geaendert wurden `src/JobAgent.Coverage.psm1`, `src/JobAgent.Report.psm1`, `tools/Measure-JobAgentCompanyCoverage.ps1`, `tools/Measure-JobAgentSourceCoverage.ps1`, `tests/Test-JobAgentCoverage.ps1`, `tests/Test-JobAgentReport.ps1`, `html/jobagent/company-coverage.html` und `data/jobagent/company-candidate-verification.queue.json`. No-Go eingehalten: keine Live-Netzwerkabfrage fuer reine Zaehllogik, keine Bewertung von Jobboersen als offizielle Primaerquelle, keine Vermischung von Firmenanzahl und Quellenanzahl.
+  - [x] Ist-Stand (2026-08-24 10:35): `tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` meldet `sources_total=72`, davon `official_sources=41`, `career_sources=40`, `ats_sources=1`, `discovery_sources=31`, `verified_sources=41`, `unverified_sources=30`, `blocked_sources=1`, `attempted_latest_run=2`, `scan_succeeded_latest_run=2`, `scan_failed_latest_run=0`, `never_scanned_sources=37` und `stale_sources=70`.
+  - [x] Screenshot-Referenz: Kein lokaler Chat-Screenshot verfuegbar; bindendes Fehlerbild wurde ueber Report- und Coverage-HTML-Tests gegen fehlende Quellen-Kacheln und technische Primaerlabels abgedeckt.
+  - [x] Schritte:
+    1. Quelleninventar implementiert: `New-JobAgentSourceInventoryReport` zaehlt JobSources, Source Registry und Discovery-Hints getrennt von Firmen, klassifiziert offizielle Karriere-/ATS-Quellen, Discovery-/Review-Hinweise, verifizierte/offene/blockierte Quellen, letzte Scanabdeckung, nie gescannte und faellige Quellen.
+    2. Coverage- und Daily-Run-Report erweitert: Markdown und HTML enthalten `Quellenbestand` mit fachlichen deutschen Labels fuer Gesamtquellen, offizielle Quellen, Discovery-Hinweise, gescannte/offene/faellige Quellen; technische Feldnamen bleiben im JSON und werden nicht als primaere Nutzerlabels gerendert.
+    3. CLI-Pfad bereitgestellt: `tools\Measure-JobAgentSourceCoverage.ps1` beantwortet die aktuelle Quellenzahl als JSON oder Markdown ohne Store-Write; `tools\Measure-JobAgentCompanyCoverage.ps1` gibt die wichtigsten Quellenmetriken ebenfalls direkt aus.
+  - [x] Evidence: CLI-Ausgabe `tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` mit `sources_total=72`; aktualisiertes `html/jobagent/company-coverage.html` mit Quellenbestand; lokale Coverage-Artefakte `logs/jobagent/company-coverage-20260824-083509.json` und `.md`; aktualisierte Funktionstests; kein Diff mit erfundenen Quellen.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit 0.
+  - [x] Audit: HTML-Berichte zeigen `Quellenbestand` oberhalb langer Detailtabellen; sichtbare Labels enthalten `Quellen gesamt`, `Offizielle Quellen`, `Discovery-Hinweise`, `Im letzten Lauf gescannt`, `Offene Quellen` und `Faellige Quellen`. Automatische Report-/Coverage-Tests pruefen, dass interne Feldnamen wie `source_id` nicht als primaere Labels im neuen Quellenbestand verwendet werden.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Abhaengigkeiten: JA-037 und JA-038 sind abgeschlossen; neue Quellenlabels nutzen die bestehende fachliche Labelschicht.
+  - [x] Aufwand: M geplant, umgesetzt in einer fokussierten Arbeitseinheit inklusive Tool, Reportanbindung, Funktionstests und Supertest.
+  - [x] Dauer: Unter 1 Arbeitstag lokal.
+  - [x] Prioritaetsscore: 94.
+  - [x] Ordnungsbegruendung: Die Quellenanzahl ist nun eine direkte Steuerungskennzahl fuer Ausbau und Betrieb; die Umsetzung reduziert Unsicherheit im Daily-Betrieb ohne produktive Daten zu erfinden.
+  - [x] Risiken und Unsicherheiten: Die Definition `Quelle` zaehlt drei Gruppen: offizielle/produktive `job_sources`, Eintraege der Source Registry und Discovery-Hints. Dadurch ist `sources_total` bewusst nicht identisch mit Firmenanzahl oder Adapterversuchen.
+  - [x] Meilenstein: M6-C Quellenbestand messbar und sichtbar.
 

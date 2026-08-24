@@ -1,90 +1,59 @@
 # Handoff latest
 
-Stand: 2026-08-24T10:26:23.606+02:00
+Stand: 2026-08-24T10:39:00.000+02:00
 
 ## Zustand
 
 - Active: ``
 - Status: `handoff`
-- Ziel: JA-038 abgeschlossen; naechster Anker JA-039
+- Ziel: JA-039 abgeschlossen; keine aktiven Roadmap-Punkte
 - Branch: `master`
-- HEAD: `ef3ae72f31e4`
+- HEAD: `aktueller JA-039-Commit`
 - Upstream: `origin/master`
-- Ahead/Behind: `0/0`
-- Worktree: `dirty`, wird in diesem Abschluss gestaged, committed und gepusht
+- Ahead/Behind: `1/0`
+- Worktree: `clean` nach JA-039-Commit
 - Route: ``
 
 ## Abgeschlossener Arbeitsschritt
 
-JA-038 ist abgeschlossen und aus `Roadmap.md` nach `Roadmap_archive.md` rotiert. Daily-Run-JSON, Markdown und HTML zeigen jetzt pro passender Stelle ein `Kurzprofil` aus offiziellen Adapter-/ATS-/Detailseiteninhalten. Fehlende offizielle Beschreibungen werden deterministisch als `Keine Beschreibung aus offizieller Quelle verfuegbar` dargestellt.
+JA-039 ist abgeschlossen und aus `Roadmap.md` nach `Roadmap_archive.md` rotiert. Quellenbestand und Scanabdeckung sind jetzt deterministisch berechenbar und sichtbar.
+
+Aktueller Quellenbestand laut `tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`:
+
+- Quellen gesamt: 72
+- Offizielle Quellen: 41
+- Karrierequellen: 40
+- ATS-Quellen: 1
+- Discovery-Hinweise: 31
+- Verifizierte Quellen: 41
+- Offene Quellen: 30
+- Blockierte Quellen: 1
+- Im letzten Lauf versucht/gescannt/fehlgeschlagen: 2/2/0
+- Nie gescannte Quellen: 37
+- Faellige Quellen: 70
 
 ## Implementierung
 
-- `src/JobAgent.SourceAdapters.psm1`: `New-JobAgentRawJob` normalisiert `summary` als Plaintext, entfernt Markup/Script-/Style-Inhalte, begrenzt auf 1200 Zeichen und fuehrt `description`/`description_source`.
-- `src/JobAgent.StatusMachine.psm1`: Jobs und Snapshots speichern `description`; relevante Beschreibungsaenderungen erzeugen `JOB_UPDATED` mit `changed_fields=description`; historische Jobs ohne Feld bleiben kompatibel.
-- `src/JobAgent.Report.psm1`: Markdown-/HTML-Jobtabellen enthalten `Kurzprofil`; fehlende Beschreibung bekommt einen fachlichen Leerwert; HTML escaped Beschreibungen und nutzt breitere responsive Tabellen.
-- `schemas/jobagent.schema.json` und `tests/fixtures/jobagent/valid.json`: Schema/Fixture kennen Beschreibungsfelder fuer Job, RawJob und Snapshot.
-- `Roadmap.md`, `Roadmap_archive.md`, `Roadmap_index.md`: JA-038 rotiert; nur JA-039 ist aktiv.
-
-## Aktive Roadmap fuer neuen Chat
-
-1. JA-039 Quellenbestand, Quellenanzahl und Scanabdeckung im Bericht transparent ausweisen.
-   - Prioritaetsscore: 94
-   - Meilenstein: M6-C Quellenbestand messbar und sichtbar
-   - Scope: `src/JobAgent.Coverage.psm1`, `src/JobAgent.Report.psm1`, optional `tools/Measure-JobAgentSourceCoverage.ps1`, Tests `tests/Test-JobAgentCoverage.ps1`, `tests/Test-JobAgentReport.ps1`, optional `tests/Test-JobAgentOperations.ps1`
-   - Ziel: Gesamtquellen, offizielle Quellen, Karrierequellen, ATS-Quellen, Discovery-/Review-Quellen, verifizierte/offene/blockierte/retry-faellige Quellen und Scanabdeckung deterministisch aus `data/jobagent/store.json`, Source Registry und Laufartefakten berechnen.
-   - No-Go: keine Live-Netzwerkabfrage fuer reine Zaehllogik; keine Jobboersen als offizielle Primaerquelle; Firmenanzahl und Quellenanzahl nicht vermischen; keine geschaetzten Zahlen.
-   - Funktionstests zuerst: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1`; falls Tool entsteht: `pwsh -NoProfile -File tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`
-   - Supertest erst nach gruenen Funktionstests und Abschluss des Roadmap-Punkts.
-
-## Versionierte Aenderungen
-
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `data/jobagent/company-candidate-verification.queue.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `html/jobagent/company-coverage.html`
-- `html/jobagent/ja-022-viewport-audit.html`
-- `output/playwright/ja-022-viewport-1366.png`
-- `output/playwright/ja-022-viewport-1920.png`
-- `output/playwright/ja-022-viewport-800.png`
-- `schemas/jobagent.schema.json`
-- `src/JobAgent.Report.psm1`
-- `src/JobAgent.SourceAdapters.psm1`
-- `src/JobAgent.StatusMachine.psm1`
-- `tests/Test-JobAgentDailyRun.ps1`
-- `tests/Test-JobAgentReport.ps1`
-- `tests/Test-JobAgentSchema.ps1`
-- `tests/Test-JobAgentSourceAdapters.ps1`
-- `tests/Test-JobAgentStatusMachine.ps1`
-- `tests/fixtures/jobagent/valid.json`
-- `todo.checkpoint.json`
-- `todo.current.md`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `todo.state.json`
+- `src/JobAgent.Coverage.psm1`: `New-JobAgentSourceInventoryReport` zaehlt JobSources, Source Registry und Discovery-Hints getrennt von Firmen und liefert offizielle, Karriere-, ATS-, Discovery-, verifizierte/offene/blockierte, Retry-, Scan- und Freshness-Metriken.
+- `src/JobAgent.Report.psm1`: Daily-Run-Markdown/HTML enthaelt `Quellenbestand` mit deutschen fachlichen Labels.
+- `tools/Measure-JobAgentCompanyCoverage.ps1`: Coverage-Audit gibt Quellenbestand in JSON, Markdown und HTML aus.
+- `tools/Measure-JobAgentSourceCoverage.ps1`: neuer schneller CLI-Pfad fuer Quellenbestand als JSON oder Markdown ohne Store-Write.
+- `tests/Test-JobAgentCoverage.ps1` und `tests/Test-JobAgentReport.ps1`: neue Funktionsabdeckung fuer Quellenmetriken, Toolausgabe und Report-Rendering.
 
 ## Verifikation
 
-- `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit `0`
 - `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`
 - `.\ci.cmd supertest` -> Exit `0`
-- `.\ci.cmd stp` -> Exit `0`
+- `.\ci.cmd todo-rebuild` -> Exit `0`
 
 ## Bekannte Hinweise
 
 - Kein harter Blocker.
-- Der Screenshot aus dem Chat war lokal nicht als Datei verfuegbar; JA-038 wurde ueber Report-, HTML- und Viewport-Tests abgedeckt.
-- `logs/verify/ja-038-job-description-report.md` liegt lokal vor; `logs/verify/` ist nicht im Git-Status sichtbar.
+- Die Definition `Quelle` ist im Archivpunkt festgehalten: produktive `job_sources`, Source-Registry-Eintraege und Discovery-Hints werden als getrennte Gruppen gezaehlt. `sources_total` ist deshalb nicht identisch mit Firmenanzahl oder Adapterversuchen.
+- `todo.master.index.json` wurde per `todo-rebuild` nicht um JA-039 erweitert, weil das bestehende Todo-Master-Schema Roadmap-Done-Events mit `todo_id=JA-*` nicht als neue `TD-*`-Eintraege rekonstruiert. `todo.state.json`, `todo.checkpoint.json` und `todo.events.jsonl` zeigen den JA-039-Abschluss korrekt.
 
 ## Naechster Anker
 
-JA-039 umsetzen. Vor Schreibarbeit zuerst die aktuelle Source-/Coverage-Struktur lesen, dann die reine Quellenmetrikfunktion testen, anschliessend Report/CLI anbinden.
+Keine aktiven Roadmap-Punkte. Naechster Schritt ist Push des JA-039-Commits oder neue Roadmap-Punkte priorisiert anlegen.
