@@ -27,6 +27,9 @@ Assert-True -Condition ([string]$source.source_id -eq 'source-registry:offenereg
 Assert-True -Condition ((Normalize-JobAgentRegisterCity -City 'München') -eq 'Muenchen') -Message 'Umlaut-Ortsnormalisierung fehlt.'
 Assert-True -Condition ((Get-JobAgentRegisterTargetAreaMatch -City 'Munich') -eq 'MUNICH') -Message 'Munich wird nicht als Muenchen erkannt.'
 Assert-True -Condition ((Get-JobAgentRegisterTargetAreaMatch -City 'Garching b. München') -eq 'MUNICH_20KM') -Message 'Randgemeinde wird nicht als 20-km-Zielgebiet erkannt.'
+Assert-True -Condition ((Get-JobAgentRegisterTargetAreaMatch -City 'Planegg' -Latitude 48.1067 -Longitude 11.4248) -eq 'MUNICH_20KM') -Message 'Koordinaten im 20-km-Umkreis werden nicht erkannt.'
+Assert-True -Condition ((Get-JobAgentRegisterTargetAreaMatch -City 'Unbekannt' -Latitude '48,40288' -Longitude '11,74128') -eq 'FREISING') -Message 'Dezimalkomma-Koordinaten fuer Freising werden nicht erkannt.'
+Assert-True -Condition ((Get-JobAgentRegisterTargetAreaMatch -City 'Unbekannt' -Latitude 53.5511 -Longitude 9.9937) -eq 'OUT_OF_SCOPE') -Message 'Koordinaten ausserhalb des Zielgebiets werden nicht ausgeschlossen.'
 Assert-True -Condition ((Get-JobAgentRegisterTargetAreaMatch -City '') -eq 'TARGET_AREA_UNCERTAIN') -Message 'Leerer Ort muss unsicher bleiben.'
 Assert-True -Condition ((Get-JobAgentRegisterTargetAreaMatch -City 'Hamburg') -eq 'OUT_OF_SCOPE') -Message 'Fremder Ort wird nicht ausgeschlossen.'
 
@@ -79,6 +82,49 @@ $csvResult = Import-JobAgentRegisterCandidates `
     -SnapshotDate ([datetime]'2026-08-01T00:00:00Z') `
     -ObservedAt ([datetime]'2026-08-23T08:00:00Z')
 Assert-True -Condition ($csvResult.records_read -eq 3 -and $csvResult.hints_total -eq 2) -Message 'CSV-Import verarbeitet Zielgebiet/Rejects falsch.'
+
+$coordinateFixture = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-register-coordinate-' + [guid]::NewGuid().ToString('N') + '.json')
+try {
+    [pscustomobject]@{
+        items = @(
+            [pscustomobject]@{
+                register_name = 'Coordinate Radius GmbH'
+                register_city = 'Planegg'
+                latitude = 48.1067
+                longitude = 11.4248
+                register_court = 'Amtsgericht Muenchen'
+                register_number = 'HRB 81001'
+                legal_form = 'GmbH'
+                status = 'active'
+            },
+            [pscustomobject]@{
+                register_name = 'Coordinate Outside GmbH'
+                register_city = 'Augsburg'
+                latitude = 48.3705
+                longitude = 10.8978
+                register_court = 'Amtsgericht Augsburg'
+                register_number = 'HRB 81002'
+                legal_form = 'GmbH'
+                status = 'active'
+            }
+        )
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $coordinateFixture -Encoding UTF8
+    $coordinateResult = Import-JobAgentRegisterCandidates `
+        -InputPath $coordinateFixture `
+        -SourceRegistry $registry `
+        -SnapshotId 'offeneregister-coordinate-2026-08' `
+        -SnapshotDate ([datetime]'2026-08-01T00:00:00Z') `
+        -ObservedAt ([datetime]'2026-08-23T08:00:00Z')
+    Assert-True -Condition ($coordinateResult.records_read -eq 2) -Message 'Koordinaten-Fixture liest falsche Record-Anzahl.'
+    Assert-True -Condition ($coordinateResult.hints_total -eq 1) -Message 'Koordinatenbasierter Registerimport filtert Zielgebiet falsch.'
+    Assert-True -Condition (@($coordinateResult.hints | Where-Object { [string]$_.register_name -eq 'Coordinate Radius GmbH' -and [string]$_.target_area_match -eq 'MUNICH_20KM' }).Count -eq 1) -Message 'Koordinatenbasierter Registerimport persistiert 20-km-Kandidat nicht.'
+    Assert-True -Condition ($coordinateResult.reject_counts.out_of_scope -eq 1) -Message 'Koordinatenbasierter Registerimport weist Out-of-scope-Reject nicht aus.'
+}
+finally {
+    if (Test-Path -LiteralPath $coordinateFixture -PathType Leaf) {
+        Remove-Item -LiteralPath $coordinateFixture -Force
+    }
+}
 
 $badRegistry = [pscustomobject]@{
     schema_version = 'jobagent/discovery-source/v2'
@@ -133,6 +179,8 @@ finally {
         'source_registry_fail_closed',
         'jsonl_stream_import',
         'csv_import',
+        'coordinate_target_area_mapping',
+        'coordinate_register_import_filter',
         'target_area_mapping',
         'dedupe_keys',
         'snapshot_hashes',

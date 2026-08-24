@@ -1,111 +1,44 @@
 {
-  "ts": "2026-08-24T11:47:45+02:00",
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.md",
+    "file:handoff.latest.json",
+    "file:logs/verify/verify.digest.json"
+  ],
   "project": "JobAgent",
-  "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
+  "ts": "2026-08-24T11:58:00+02:00",
   "status": "open",
-  "active_id": "",
-  "goal": "JA-025 fortsetzen: Firmeninventar auf mindestens 1000 verifizierte oder pruefbare Zielgebiet-Kandidaten erweitern.",
-  "next": "JA-025 / TD-0039 fortsetzen: reale erlaubte Snapshot-Dateien fuer Register-/Regional-/Jobboard-Discovery vorbereiten oder importieren.",
+  "active_id": null,
+  "branch": "master",
+  "head_before_commit": "8e0c68017efc",
+  "upstream": "origin/master",
   "route_ok": true,
-  "git": {
-    "branch": "master",
-    "head": "9be4ac42e754",
-    "upstream": "origin/master",
-    "ahead": 0,
-    "behind": 0,
-    "worktree": "dirty",
-    "tracked_changes": [
-      "data/jobagent/company-candidate-verification.queue.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "tests/Test-JobAgentCompanyInventory.ps1",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "tools/Import-JobAgentCompanyDiscovery.ps1"
-    ]
-  },
-  "capsule": {
-    "ts": "2026-08-24T11:47:45+02:00",
-    "project": "JobAgent",
-    "agent_id": "UTTER-20260817-39f7",
-    "workspace_root": "D:\\_Scripte\\JobAgent",
-    "active_id": "",
-    "status": "open",
-    "goal": "JA-025 fortsetzen: Firmeninventar auf mindestens 1000 verifizierte oder pruefbare Zielgebiet-Kandidaten erweitern.",
-    "next": "JA-025 / TD-0039 fortsetzen: reale erlaubte Snapshot-Dateien fuer Register-/Regional-/Jobboard-Discovery vorbereiten oder importieren.",
-    "route_ok": true,
-    "changed": [
-      "data/jobagent/company-candidate-verification.queue.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "tests/Test-JobAgentCompanyInventory.ps1",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "tools/Import-JobAgentCompanyDiscovery.ps1"
-    ],
-    "verified": [
-      {
-        "cmd": ".\\ci.cmd stp",
-        "exit": 0,
-        "status": "pass"
-      }
-    ],
-    "git": {
-      "branch": "master",
-      "head": "9be4ac42e754",
-      "upstream": "origin/master",
-      "ahead": 0,
-      "behind": 0,
-      "worktree": "dirty",
-      "tracked_changes": [
-        "data/jobagent/company-candidate-verification.queue.json",
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "html/jobagent/company-coverage.html",
-        "tests/Test-JobAgentCompanyInventory.ps1",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json",
-        "tools/Import-JobAgentCompanyDiscovery.ps1"
-      ]
-    }
-  },
-  "roadmap": {
-    "open": [
-      "JA-025",
-      "JA-027"
-    ],
-    "rotated": [],
-    "rotation_note": "Keine Rotation erfolgt, weil JA-025 und JA-027 fachlich nicht komplett abgeschlossen sind."
-  },
-  "completed_step": {
-    "scope": "JA-025 Teilschritt",
-    "summary": "Snapshot-Lane kann mehrere lokale Eingabedateien pro Manifest-Item ueber inputs[] verarbeiten; Legacy-Format bleibt kompatibel.",
-    "changed": [
-      "tools/Import-JobAgentCompanyDiscovery.ps1",
-      "tests/Test-JobAgentCompanyInventory.ps1",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "html/jobagent/company-coverage.html",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "handoff.latest.json",
-      "handoff.latest.md"
-    ]
-  },
+  "roadmap_rotation": "none; JA-025 und JA-027 sind offen",
+  "completed_step": "JA-025 Teilschritt: Register-Discovery bewertet Zielgebietsbezug jetzt auch ueber Koordinaten.",
+  "changed": [
+    "src/JobAgent.RegisterDiscovery.psm1",
+    "tests/Test-JobAgentRegisterDiscovery.ps1",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "html/jobagent/company-coverage.html",
+    "todo.checkpoint.json",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "handoff.latest.json",
+    "handoff.latest.md"
+  ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyInventory.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegisterDiscovery.ps1",
       "exit": 0,
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegisterDiscovery.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyInventory.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -115,22 +48,7 @@
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyDedupeScale.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
       "cmd": ".\\ci.cmd route-check",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd drift-check",
       "exit": 0,
       "status": "pass"
     },
@@ -140,31 +58,22 @@
       "status": "pass"
     },
     {
+      "cmd": ".\\ci.cmd drift-check",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
       "cmd": ".\\ci.cmd stp",
       "exit": 0,
       "status": "pass"
     }
   ],
-  "supertest_note": "Supertest wurde in diesem Teilschritt nicht neu ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt. Letzter gespeicherter Supertest-Nachweis bleibt Exit 0.",
-  "services": {
-    "sonarqube": {
-      "url": "http://localhost:9000",
-      "status": "UP",
-      "version": "26.1.0.118079"
-    },
-    "devserver": {
-      "url": "http://localhost:8500/",
-      "pid": 38292,
-      "listening": true
-    }
-  },
-  "next_steps": [
-    "JA-025 / TD-0039 fortsetzen: reale erlaubte Snapshot-Dateien fuer Register-/Regional-/Jobboard-Discovery vorbereiten oder importieren.",
-    "data/jobagent/company-discovery.snapshot.json bei Bedarf mit inputs[] pro Quelle erweitern.",
-    "tools/Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane ausfuehren und Digest, merged_hints_total, inputs_total und produktive Store-No-Write-Garantie pruefen.",
-    "tools/Measure-JobAgentCompanyCoverage.ps1 ausfuehren und target_inventory_candidates_total, target_inventory_gap_to_1000, Dedupe-Cluster und Review-Queue auswerten.",
-    "Keine produktiven Store-Upserts aus unverifizierten Hints; nur COMPANY_DOMAIN_VERIFIED, CAREER_URL_VERIFIED oder OFFICIAL_ATS_VERIFIED duerfen in Importwellen produktiv werden.",
-    "Nach JA-025 JA-027 bearbeiten: offizielle Karriere-/ATS-Link-Ermittlung fuer die gewachsene Kandidatenbasis skalieren."
+  "supertest_note": "Nicht neu ausgefuehrt; laut Nutzeranweisung gilt nicht angefragter Supertest als erledigt. Letzter gespeicherter Supertest-Nachweis bleibt Exit 0.",
+  "next": [
+    "JA-025 / TD-0039 fortsetzen: mindestens 1000 eindeutige, belegte Firmen- oder Arbeitgeberkandidaten fuer Muenchen, 20-km-Umkreis und Freising.",
+    "Erlaubte lokale Register-/Regional-/Jobboard-Snapshots vorbereiten und data/jobagent/company-discovery.snapshot.json auf mehrere Inputs erweitern.",
+    "Snapshot-Lane ausfuehren, Hint-Store/Digest pruefen, Coverage messen und danach Verifikationswellen starten.",
+    "JA-027 / TD-0041 danach: offizielle Karriere-/ATS-Link-Ermittlung skalieren und generische Seiten fail-closed ablehnen."
   ],
   "no_gos": [
     "Keine erfundenen Firmen, URLs, Job-IDs, Geodaten oder Verifikationsaussagen.",
@@ -172,17 +81,5 @@
     "Keine produktiven Store-Upserts aus unverifizierten Discovery-Hints.",
     "Keine Roadmap-Rotation fuer JA-025 oder JA-027 ohne fachlich belegten Abschluss.",
     "Kein git reset ohne ausdrueckliche Nutzerfreigabe."
-  ],
-  "refs": [
-    "Roadmap.md",
-    "todo.current.md",
-    "todo.state.json",
-    "handoff.latest.md",
-    "handoff.latest.json",
-    "tools/Import-JobAgentCompanyDiscovery.ps1",
-    "tests/Test-JobAgentCompanyInventory.ps1",
-    "data/jobagent/company-discovery.snapshot.json",
-    "data/jobagent/company-discovery.hints.json",
-    "html/jobagent/company-coverage.html"
   ]
 }

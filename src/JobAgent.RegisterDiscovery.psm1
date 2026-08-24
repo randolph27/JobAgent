@@ -73,9 +73,50 @@ function Normalize-JobAgentRegisterCity {
     }
 }
 
+function ConvertTo-JobAgentRegisterCoordinate {
+    [CmdletBinding()]
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
+        return $null
+    }
+    $numberText = ([string]$Value).Trim().Replace(',', '.')
+    $coordinate = 0.0
+    if (-not [double]::TryParse($numberText, [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$coordinate)) {
+        return $null
+    }
+    return $coordinate
+}
+
+function Get-JobAgentRegisterDistanceKm {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][double]$FromLatitude,
+        [Parameter(Mandatory)][double]$FromLongitude,
+        [Parameter(Mandatory)][double]$ToLatitude,
+        [Parameter(Mandatory)][double]$ToLongitude
+    )
+
+    $earthRadiusKm = 6371.0088
+    $degreeToRadian = [Math]::PI / 180.0
+    $fromLat = $FromLatitude * $degreeToRadian
+    $toLat = $ToLatitude * $degreeToRadian
+    $deltaLat = ($ToLatitude - $FromLatitude) * $degreeToRadian
+    $deltaLon = ($ToLongitude - $FromLongitude) * $degreeToRadian
+    $a = [Math]::Sin($deltaLat / 2.0) * [Math]::Sin($deltaLat / 2.0) +
+        [Math]::Cos($fromLat) * [Math]::Cos($toLat) *
+        [Math]::Sin($deltaLon / 2.0) * [Math]::Sin($deltaLon / 2.0)
+    $c = 2.0 * [Math]::Atan2([Math]::Sqrt($a), [Math]::Sqrt(1.0 - $a))
+    return $earthRadiusKm * $c
+}
+
 function Get-JobAgentRegisterTargetAreaMatch {
     [CmdletBinding()]
-    param([Parameter(Mandatory)][AllowEmptyString()][string]$City)
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$City,
+        [Parameter()][AllowNull()][object]$Latitude = $null,
+        [Parameter()][AllowNull()][object]$Longitude = $null
+    )
 
     $normalized = Normalize-JobAgentRegisterCity -City $City
     switch ($normalized) {
@@ -83,6 +124,18 @@ function Get-JobAgentRegisterTargetAreaMatch {
         'Freising' { return 'FREISING' }
         { @('Garching', 'Unterfoehring', 'Ismaning', 'Neubiberg', 'Taufkirchen', 'Pullach', 'Gruenwald') -contains $_ } { return 'MUNICH_20KM' }
         default {
+            $lat = ConvertTo-JobAgentRegisterCoordinate -Value $Latitude
+            $lon = ConvertTo-JobAgentRegisterCoordinate -Value $Longitude
+            if ($null -ne $lat -and $null -ne $lon) {
+                $distanceToMunich = Get-JobAgentRegisterDistanceKm -FromLatitude $lat -FromLongitude $lon -ToLatitude 48.137154 -ToLongitude 11.576124
+                if ($distanceToMunich -le 20.0) {
+                    return 'MUNICH_20KM'
+                }
+                $distanceToFreising = Get-JobAgentRegisterDistanceKm -FromLatitude $lat -FromLongitude $lon -ToLatitude 48.40288 -ToLongitude 11.74128
+                if ($distanceToFreising -le 5.0) {
+                    return 'FREISING'
+                }
+            }
             if ([string]::IsNullOrWhiteSpace($normalized)) {
                 return 'TARGET_AREA_UNCERTAIN'
             }
@@ -148,12 +201,14 @@ function ConvertTo-JobAgentRegisterRecord {
     $registerNumber = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_number', 'number', 'registration_number') -Default 'UNKNOWN')
     $legalForm = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('legal_form', 'rechtsform') -Default 'UNKNOWN')
     $status = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('status', 'register_status') -Default 'UNKNOWN')
+    $latitude = Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('latitude', 'lat', 'geo_lat', 'y') -Default $null
+    $longitude = Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('longitude', 'lon', 'lng', 'geo_lon', 'x') -Default $null
 
     if ([string]::IsNullOrWhiteSpace($registerName)) {
         throw "Registerdatensatz in Zeile $LineNumber enthaelt keinen Namen."
     }
 
-    $targetArea = Get-JobAgentRegisterTargetAreaMatch -City $registerCity
+    $targetArea = Get-JobAgentRegisterTargetAreaMatch -City $registerCity -Latitude $latitude -Longitude $longitude
     $sourceFreshness = Get-JobAgentRegisterSourceFreshness -SnapshotDate $SnapshotDate -ObservedAt $ObservedAt -StaleAfterDays $StaleAfterDays
     $nameKey = ConvertTo-JobAgentCompanyNameKey -Name $registerName
     $registerKey = if ([string]::IsNullOrWhiteSpace($registerCourt) -or [string]::IsNullOrWhiteSpace($registerNumber) -or $registerNumber -eq 'UNKNOWN') {
