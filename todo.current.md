@@ -2,5 +2,5 @@
 
 Active: _(none)_
 
-- [open] TD-0039 Aktive Punkte: JA-025 Firmeninventar auf mindestens 1000 verifizierte oder prüfbare Zielgebiet-Kandidaten erweitern #comment: Der lokale Store muss statt weniger Dutzend Firmen eine skalierbare, belegte Kandidatenbasis fuer Muenchen, 20-km-Umkreis und Freising enthalten.
-- [open] TD-0041 Aktive Punkte: JA-027 Verifizierte Karriere-/ATS-Link-Ermittlung fuer Firmen- und Jobquellen skalieren #comment: Mehr Firmen allein reichen nicht; der Agent muss offizielle Karriere- und ATS-Links massentauglich finden, pruefen und im Report anklickbar belegen.
+- [open] TD-0039 Aktive Punkte: JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen #comment: Alle erlaubten Quellen sollen Arbeitgebernamen liefern, nicht Stellenanzeigen; produktiv hinzugefuegt wird erst nach offizieller Karriere-/Jobs-Webseitenverifikation.
+- [open] TD-0041 Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.
