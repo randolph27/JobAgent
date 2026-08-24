@@ -157,6 +157,20 @@ $document.scan_runs = @([pscustomobject]@{
         finished_at = '2026-08-17T10:10:00.000Z'
         status = 'PARTIAL'
         company_ids = @('company:alpha_ag', 'company:beta_ag')
+        selection_summary = [pscustomobject]@{
+            companies_total = 5
+            companies_eligible = 4
+            companies_due = 4
+            companies_selected = 2
+            companies_skipped = 2
+            limit = 2
+            selection_reason = 'due_by_next_scan_at_then_priority'
+            explicit_company_ids = $false
+            skipped = @(
+                [pscustomobject]@{ company_id = 'company:gamma_ag'; reason = 'limit_reached' }
+                [pscustomobject]@{ company_id = 'company:delta_ag'; reason = 'not_due' }
+            )
+        }
         artifact_paths = @('logs/jobagent/daily-run-test.json')
         errors = @()
     })
@@ -182,6 +196,12 @@ Assert-True -Condition (@($report.sections.changed_jobs).Count -eq 1) -Message '
 Assert-True -Condition (@($report.sections.closed_or_removed_jobs).Count -eq 1) -Message 'Entfernte passende Stellen fehlen.'
 Assert-True -Condition (@($report.sections.new_companies).Count -eq 1) -Message 'Neue Unternehmen im Lauf werden nicht erkannt.'
 Assert-True -Condition (@($report.sections.source_issues).Count -eq 1) -Message 'Fehler oder unsichere Quellen fehlen im Report.'
+Assert-True -Condition ($report.statistics.companies_total -eq 5) -Message 'Report-Statistik enthaelt Firmen gesamt nicht.'
+Assert-True -Condition ($report.statistics.companies_selected -eq 2) -Message 'Report-Statistik enthaelt Firmen im Lauf nicht.'
+Assert-True -Condition ($report.statistics.companies_due -eq 4) -Message 'Report-Statistik enthaelt faellige Firmen nicht.'
+Assert-True -Condition ($report.statistics.companies_skipped -eq 2) -Message 'Report-Statistik enthaelt uebersprungene Firmen nicht.'
+Assert-True -Condition ($report.statistics.run_limit -eq 2) -Message 'Report-Statistik enthaelt Limit nicht.'
+Assert-True -Condition ($report.statistics.selection_reason -eq 'due_by_next_scan_at_then_priority') -Message 'Report-Statistik enthaelt Auswahlgrund nicht.'
 Assert-True -Condition ($report.statistics.errors -eq 1) -Message 'Recherche-Statistik zaehlt Adapterfehler nicht.'
 Assert-True -Condition ($report.statistics.checked_jobs -eq 2) -Message 'Recherche-Statistik zaehlt gepruefte Stellen falsch.'
 Assert-True -Condition ($report.statistics.active_matching_jobs -eq 1) -Message 'Recherche-Statistik zaehlt aktive passende Stellen falsch.'
@@ -201,7 +221,7 @@ Assert-True -Condition ($report.sections.new_matching_jobs[0].provider_url -eq '
 Assert-True -Condition ($report.sections.changed_jobs[0].provider_url -eq 'https://jobs.alpha_ag.example.invalid/search') -Message 'Provider-Link bevorzugt nicht die offizielle ATS-Quelle der Stelle.'
 
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
-foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '### Quellenbestand', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle |', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.', 'Keine Beschreibung aus offizieller Quelle verfuegbar', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Offizielle Stellen-URL](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere-URL](https://alpha_ag.example.invalid/careers)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
+foreach ($expected in @('Firmen gesamt: 5', 'Firmen im Lauf: 2', 'Faellige Firmen: 4', 'Uebersprungene Firmen: 2', 'Limit: 2', 'Auswahlgrund: Faellig nach next_scan_at, danach Prioritaet', '## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '### Quellenbestand', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle |', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.', 'Keine Beschreibung aus offizieller Quelle verfuegbar', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Offizielle Stellen-URL](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere-URL](https://alpha_ag.example.invalid/careers)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
     Assert-True -Condition ($markdown.Contains($expected)) -Message "Markdown-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $markdown.Contains('Software Engineer')) -Message 'Abgelehnte Stellen duerfen nicht als passende Stellen gerendert werden.'
@@ -212,7 +232,7 @@ foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sourc
 $report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
 $report.sections.new_matching_jobs[0].description = '<img src=x onerror=alert(1)>Beschreibung'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
-foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', '<h3>Quellenbestand</h3>', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', 'JobAgent Daily-Run-Bericht', '<th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th>', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Beschreibung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Offizielle Stellen-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
+foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', '<h3>Quellenbestand</h3>', 'Firmen gesamt', 'Firmen im Lauf', 'Faellige Firmen', 'Uebersprungene Firmen', 'Limit', 'Auswahlgrund', 'Faellig nach next_scan_at, danach Prioritaet', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', 'JobAgent Daily-Run-Bericht', '<th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th>', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Beschreibung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Offizielle Stellen-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
     Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'

@@ -133,6 +133,92 @@ function Get-JobAgentDailyRunCandidateCompanies {
         Select-Object -First $MaxCompanies
 }
 
+function New-JobAgentDailyRunSelection {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter()][datetime]$Now = [datetime]::UtcNow,
+        [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
+        [Parameter()][string[]]$CompanyIds = @()
+    )
+
+    $allowedIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($companyId in @($CompanyIds)) {
+        if (-not [string]::IsNullOrWhiteSpace($companyId)) {
+            [void]$allowedIds.Add($companyId)
+        }
+    }
+
+    $nowUtc = $Now.ToUniversalTime()
+    $eligible = New-Object System.Collections.Generic.List[object]
+    $excluded = New-Object System.Collections.Generic.List[object]
+    foreach ($company in @($Document.companies)) {
+        $companyId = [string]$company.company_id
+        $sources = @(Get-JobAgentDailyRunSources -Document $Document -CompanyId $companyId)
+        if ($allowedIds.Count -gt 0 -and -not $allowedIds.Contains($companyId)) {
+            $excluded.Add([pscustomobject]@{ company_id = $companyId; reason = 'not_requested' })
+            continue
+        }
+        if ($sources.Count -eq 0) {
+            $excluded.Add([pscustomobject]@{ company_id = $companyId; reason = 'no_official_source' })
+            continue
+        }
+        if ($allowedIds.Count -gt 0) {
+            $eligible.Add($company)
+            continue
+        }
+        if ($company.PSObject.Properties.Name -notcontains 'next_scan_at' -or [string]::IsNullOrWhiteSpace([string]$company.next_scan_at)) {
+            $eligible.Add($company)
+            continue
+        }
+        try {
+            if ([datetime]::Parse([string]$company.next_scan_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime() -le $nowUtc) {
+                $eligible.Add($company)
+            }
+            else {
+                $excluded.Add([pscustomobject]@{ company_id = $companyId; reason = 'not_due' })
+            }
+        }
+        catch {
+            $eligible.Add($company)
+        }
+    }
+
+    $sortedEligible = @($eligible.ToArray() | Sort-Object -Property { Get-JobAgentDailyRunSortKey -Company $_ -Now $nowUtc })
+    $selected = @($sortedEligible | Select-Object -First $MaxCompanies)
+    $selectedIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($company in $selected) {
+        [void]$selectedIds.Add([string]$company.company_id)
+    }
+
+    $skipped = New-Object System.Collections.Generic.List[object]
+    foreach ($company in $sortedEligible) {
+        if (-not $selectedIds.Contains([string]$company.company_id)) {
+            $skipped.Add([pscustomobject]@{ company_id = [string]$company.company_id; reason = 'limit_reached' })
+        }
+    }
+    foreach ($item in @($excluded.ToArray())) {
+        if ([string]$item.reason -ne 'not_requested') {
+            $skipped.Add($item)
+        }
+    }
+
+    [pscustomobject]@{
+        companies = @($selected)
+        summary = [pscustomobject]@{
+            companies_total = @($Document.companies).Count
+            companies_eligible = $sortedEligible.Count
+            companies_due = $sortedEligible.Count
+            companies_selected = $selected.Count
+            companies_skipped = @($skipped.ToArray()).Count
+            limit = $MaxCompanies
+            selection_reason = if ($allowedIds.Count -gt 0) { 'explicit_company_ids' } else { 'due_by_next_scan_at_then_priority' }
+            explicit_company_ids = $allowedIds.Count -gt 0
+            skipped = @($skipped.ToArray() | Sort-Object reason, company_id | Select-Object -First 25)
+        }
+    }
+}
+
 function Copy-JobAgentRawJobWithClassification {
     param(
         [Parameter(Mandatory)][object]$RawJob,
@@ -298,7 +384,13 @@ function New-JobAgentDailyRunSummary {
         status = Get-JobAgentDailyRunStatus -AdapterResults $AdapterResults
         report_path = $ReportPath
         statistics = [pscustomobject]@{
+            companies_total = if ($null -ne $reportStatistics) { [int]$reportStatistics.companies_total } else { @($Document.companies).Count }
             companies_scanned = @($AdapterResults | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count
+            companies_selected = if ($null -ne $reportStatistics) { [int]$reportStatistics.companies_selected } else { @($AdapterResults | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count }
+            companies_due = if ($null -ne $reportStatistics) { [int]$reportStatistics.companies_due } else { 0 }
+            companies_skipped = if ($null -ne $reportStatistics) { [int]$reportStatistics.companies_skipped } else { 0 }
+            run_limit = if ($null -ne $reportStatistics) { [int]$reportStatistics.run_limit } else { @($AdapterResults | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count }
+            selection_reason = if ($null -ne $reportStatistics) { [string]$reportStatistics.selection_reason } else { 'UNKNOWN' }
             adapter_attempts = $AdapterResults.Count
             raw_jobs = @($AdapterResults | ForEach-Object { @($_.raw_jobs).Count } | Measure-Object -Sum).Sum
             checked_jobs = if ($null -ne $reportStatistics) { [int]$reportStatistics.checked_jobs } else { $jobsForRun.Count }
@@ -422,7 +514,8 @@ function Invoke-JobAgentDailyRun {
     $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootFull -DataRoot $DataRoot
     try {
         $document = Read-JobAgentStore -ProjectRoot $projectRootFull -DataRoot $DataRoot
-        $companies = @(Get-JobAgentDailyRunCandidateCompanies -Document $document -Now $StartedAt -MaxCompanies $MaxCompanies -CompanyIds $CompanyIds)
+        $selection = New-JobAgentDailyRunSelection -Document $document -Now $StartedAt -MaxCompanies $MaxCompanies -CompanyIds $CompanyIds
+        $companies = @($selection.companies)
         $adapterResults = New-Object System.Collections.Generic.List[object]
 
         foreach ($company in $companies) {
@@ -458,6 +551,7 @@ function Invoke-JobAgentDailyRun {
             finished_at = ConvertTo-JobAgentDailyIso -Value $finishedAt
             status = Get-JobAgentDailyRunStatus -AdapterResults $resultsArray
             company_ids = @($companies | ForEach-Object { [string]$_.company_id })
+            selection_summary = $selection.summary
             artifact_paths = @($reportRelativePath, $markdownReportRelativePath, $htmlReportRelativePath)
             errors = @($resultsArray | Where-Object { [string]$_.status -eq 'FAILED' } | ForEach-Object { $_.error_class })
         }
@@ -492,5 +586,6 @@ function Invoke-JobAgentDailyRun {
 Export-ModuleMember -Function @(
     'Get-JobAgentDailyRunCandidateCompanies',
     'Invoke-JobAgentDailyRun',
+    'New-JobAgentDailyRunSelection',
     'New-JobAgentDailyRunId'
 )

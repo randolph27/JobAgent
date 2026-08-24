@@ -22,7 +22,7 @@ function New-JobAgentLiveScanPolicy {
     param(
         [Parameter()][ValidateRange(1, 600)][int]$TimeoutSeconds = 20,
         [Parameter()][ValidateRange(0, 5)][int]$MaxRetries = 1,
-        [Parameter()][ValidateRange(1, 25)][int]$MaxCompanies = 3,
+        [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
         [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 10,
         [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 5,
         [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+local-pilot; official-career-source-only)',

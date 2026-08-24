@@ -4,7 +4,7 @@
 param(
     [Parameter()][string]$ProjectRoot = ([IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))),
     [Parameter()][string]$DataRoot = 'data/jobagent',
-    [Parameter()][ValidateRange(1, 10)][int]$MaxCompanies = 3,
+    [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
     [Parameter()][ValidateRange(1, 600)][int]$TimeoutSeconds = 20,
     [Parameter()][ValidateRange(0, 5)][int]$MaxRetries = 1,
     [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 10,
@@ -76,6 +76,7 @@ if ($result) {
     store_path = if ($result) { $result.store_path } else { $null }
     report_path = if ($result) { $result.report_path } else { $null }
     markdown_report_path = if ($result) { $result.markdown_report_path } else { $null }
+    html_report_path = if ($result) { $result.html_report_path } else { $null }
     run_log_path = $managed.run_log_path
     status_path = $managed.status_path
     statistics = if ($result) { $result.summary.statistics } else { $null }

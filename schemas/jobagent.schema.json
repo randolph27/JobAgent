@@ -857,6 +857,80 @@
             "$ref": "#/$defs/id"
           }
         },
+        "selection_summary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "companies_total",
+            "companies_eligible",
+            "companies_due",
+            "companies_selected",
+            "companies_skipped",
+            "limit",
+            "selection_reason",
+            "explicit_company_ids",
+            "skipped"
+          ],
+          "properties": {
+            "companies_total": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "companies_eligible": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "companies_due": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "companies_selected": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "companies_skipped": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            },
+            "selection_reason": {
+              "enum": [
+                "due_by_next_scan_at_then_priority",
+                "explicit_company_ids"
+              ]
+            },
+            "explicit_company_ids": {
+              "type": "boolean"
+            },
+            "skipped": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "company_id",
+                  "reason"
+                ],
+                "properties": {
+                  "company_id": {
+                    "$ref": "#/$defs/id"
+                  },
+                  "reason": {
+                    "enum": [
+                      "limit_reached",
+                      "no_official_source",
+                      "not_due"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
         "artifact_paths": {
           "type": "array",
           "items": {

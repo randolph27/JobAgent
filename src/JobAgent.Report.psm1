@@ -125,6 +125,8 @@ function ConvertTo-JobAgentReportDisplayLabel {
         }
         'reason' {
             switch ($key) {
+                'DUE_BY_NEXT_SCAN_AT_THEN_PRIORITY' { return 'Faellig nach next_scan_at, danach Prioritaet' }
+                'EXPLICIT_COMPANY_IDS' { return 'Explizite Firmenauswahl' }
                 'manual_review_discovery_hint' { return 'Discovery-Hinweis braucht manuelle Pruefung' }
                 'missing_career_url' { return 'Karriere-URL fehlt' }
                 'latest_scan_failed' { return 'Letzter Scan ist fehlgeschlagen' }
@@ -145,6 +147,11 @@ function ConvertTo-JobAgentReportDisplayLabel {
         }
         'metric' {
             switch ($text) {
+                'companies_selected' { return 'Firmen im Lauf' }
+                'companies_due' { return 'Faellige Firmen' }
+                'companies_skipped' { return 'Uebersprungene Firmen' }
+                'run_limit' { return 'Limit' }
+                'selection_reason' { return 'Auswahlgrund' }
                 'checked_jobs' { return 'Gepruefte Stellen' }
                 'new_jobs' { return 'Neue Stellen' }
                 'active_matching_jobs' { return 'Aktive passende Stellen' }
@@ -533,10 +540,19 @@ function New-JobAgentReportStatistics {
     $uncertainSourceErrors = @('UNCLEAR_SOURCE', 'BLOCKED', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')
     $unreachableSourceErrors = @('NOT_REACHABLE', 'TIMEOUT')
 
+    $selection = Get-JobAgentReportProperty -Object $scanRun -Name 'selection_summary'
+    $companiesInAttempts = @($attempts | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count
+
     [pscustomobject]@{
         scan_run_id = $ScanRunId
         status = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $scanRun -Name 'status' -Default 'UNKNOWN')
-        companies_scanned = @($attempts | ForEach-Object { [string]$_.company_id } | Select-Object -Unique).Count
+        companies_total = if ($null -ne $selection) { [int](Get-JobAgentReportProperty -Object $selection -Name 'companies_total' -Default @($Document.companies).Count) } else { @($Document.companies).Count }
+        companies_scanned = $companiesInAttempts
+        companies_selected = if ($null -ne $selection) { [int](Get-JobAgentReportProperty -Object $selection -Name 'companies_selected' -Default $companiesInAttempts) } else { $companiesInAttempts }
+        companies_due = if ($null -ne $selection) { [int](Get-JobAgentReportProperty -Object $selection -Name 'companies_due' -Default 0) } else { 0 }
+        companies_skipped = if ($null -ne $selection) { [int](Get-JobAgentReportProperty -Object $selection -Name 'companies_skipped' -Default 0) } else { 0 }
+        run_limit = if ($null -ne $selection) { [int](Get-JobAgentReportProperty -Object $selection -Name 'limit' -Default $companiesInAttempts) } else { $companiesInAttempts }
+        selection_reason = if ($null -ne $selection) { ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $selection -Name 'selection_reason' -Default 'UNKNOWN') } else { 'UNKNOWN' }
         adapter_attempts = $attempts.Count
         checked_jobs = $snapshots.Count
         snapshots = $snapshots.Count
@@ -1005,7 +1021,12 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add('')
     [void]$lines.Add("- ScanRun: $($Report.scan_run_id)")
     [void]$lines.Add("- Status: $(ConvertTo-JobAgentReportDisplayLabel -Value $Report.statistics.status -Domain 'scan_status')")
-    [void]$lines.Add("- Firmen: $($Report.statistics.companies_scanned)")
+    [void]$lines.Add("- Firmen gesamt: $($Report.statistics.companies_total)")
+    [void]$lines.Add("- Firmen im Lauf: $($Report.statistics.companies_selected)")
+    [void]$lines.Add("- Faellige Firmen: $($Report.statistics.companies_due)")
+    [void]$lines.Add("- Uebersprungene Firmen: $($Report.statistics.companies_skipped)")
+    [void]$lines.Add("- Limit: $($Report.statistics.run_limit)")
+    [void]$lines.Add("- Auswahlgrund: $(ConvertTo-JobAgentReportDisplayLabel -Value $Report.statistics.selection_reason -Domain 'reason')")
     [void]$lines.Add("- Adapterversuche: $($Report.statistics.adapter_attempts)")
     [void]$lines.Add("- Snapshots: $($Report.statistics.snapshots)")
     [void]$lines.Add("- Fehler: $($Report.statistics.errors)")
@@ -1135,7 +1156,12 @@ function ConvertTo-JobAgentDailyReportHtml {
     foreach ($item in @(
             @{ Label = 'ScanRun'; Value = $Report.scan_run_id },
             @{ Label = 'Status'; Value = (ConvertTo-JobAgentReportDisplayLabel -Value $Report.statistics.status -Domain 'scan_status') },
-            @{ Label = 'Firmen'; Value = $Report.statistics.companies_scanned },
+            @{ Label = 'Firmen gesamt'; Value = $Report.statistics.companies_total },
+            @{ Label = 'Firmen im Lauf'; Value = $Report.statistics.companies_selected },
+            @{ Label = 'Faellige Firmen'; Value = $Report.statistics.companies_due },
+            @{ Label = 'Uebersprungene Firmen'; Value = $Report.statistics.companies_skipped },
+            @{ Label = 'Limit'; Value = $Report.statistics.run_limit },
+            @{ Label = 'Auswahlgrund'; Value = (ConvertTo-JobAgentReportDisplayLabel -Value $Report.statistics.selection_reason -Domain 'reason') },
             @{ Label = 'Adapterversuche'; Value = $Report.statistics.adapter_attempts },
             @{ Label = 'Snapshots'; Value = $Report.statistics.snapshots },
             @{ Label = 'Fehler'; Value = $Report.statistics.errors }

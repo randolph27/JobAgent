@@ -152,6 +152,12 @@ try {
     Assert-True -Condition (@($first.document.jobs).Count -eq 2) -Message 'Erfolgreiche Firmen haben keine Jobs erzeugt.'
     Assert-True -Condition (@($first.document.jobs | Where-Object { $_.status -eq 'NEW' }).Count -eq 2) -Message 'Erste Treffer sind nicht NEW.'
     Assert-True -Condition (@($first.document.jobs | Where-Object { $_.classification.result -eq 'MATCH' }).Count -eq 2) -Message 'Daily-Run klassifiziert Rohjobs nicht.'
+    Assert-True -Condition ($first.document.scan_runs[0].selection_summary.companies_total -eq 3) -Message 'ScanRun persistiert Firmen gesamt nicht.'
+    Assert-True -Condition ($first.document.scan_runs[0].selection_summary.companies_selected -eq 3) -Message 'ScanRun persistiert Firmen im Lauf nicht.'
+    Assert-True -Condition ($first.document.scan_runs[0].selection_summary.companies_due -eq 3) -Message 'ScanRun persistiert faellige Firmen nicht.'
+    Assert-True -Condition ($first.document.scan_runs[0].selection_summary.companies_skipped -eq 0) -Message 'ScanRun persistiert uebersprungene Firmen falsch.'
+    Assert-True -Condition ($first.document.scan_runs[0].selection_summary.limit -eq 3) -Message 'ScanRun persistiert Scanlimit nicht.'
+    Assert-True -Condition ($first.document.scan_runs[0].selection_summary.selection_reason -eq 'due_by_next_scan_at_then_priority') -Message 'ScanRun persistiert Auswahlgrund nicht.'
     Assert-True -Condition (($first.document.companies | Where-Object company_id -eq 'company:gamma_ag').scan_status -eq 'FAILED') -Message 'Fehlerhafte Firma wurde nicht isoliert als FAILED markiert.'
     Assert-True -Condition (($first.document.companies | Where-Object company_id -eq 'company:alpha_ag').staleness_status -eq 'FRESH') -Message 'Erfolgreicher Daily-Run persistiert Freshness-Status nicht.'
     Assert-True -Condition (-not [string]::IsNullOrWhiteSpace([string](($first.document.companies | Where-Object company_id -eq 'company:alpha_ag').last_verified_at))) -Message 'Erfolgreicher Daily-Run persistiert last_verified_at nicht.'
@@ -167,11 +173,20 @@ try {
 
     $report = Get-Content -LiteralPath $second.report_path -Raw | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($report.statistics.companies_scanned -eq 3) -Message 'Report enthaelt falsche Firmenanzahl.'
+    Assert-True -Condition ($report.statistics.companies_total -eq 3) -Message 'Report enthaelt Firmen gesamt nicht.'
+    Assert-True -Condition ($report.statistics.companies_selected -eq 3) -Message 'Report enthaelt Firmen im Lauf nicht.'
+    Assert-True -Condition ($report.statistics.companies_due -eq 3) -Message 'Report enthaelt faellige Firmen nicht.'
+    Assert-True -Condition ($report.statistics.companies_skipped -eq 0) -Message 'Report enthaelt uebersprungene Firmen falsch.'
+    Assert-True -Condition ($report.statistics.run_limit -eq 25) -Message 'Report enthaelt Limit nicht.'
+    Assert-True -Condition ($report.statistics.selection_reason -eq 'explicit_company_ids') -Message 'Report enthaelt Auswahlgrund fuer CompanyIds nicht.'
     Assert-True -Condition ($report.statistics.checked_jobs -eq 2) -Message 'Report enthaelt falsche Anzahl gepruefter Stellen.'
     Assert-True -Condition ($report.statistics.snapshots -eq 2) -Message 'Report enthaelt falsche Snapshot-Anzahl.'
     Assert-True -Condition ($report.statistics.unreachable_career_pages -eq 1) -Message 'Report enthaelt falsche Anzahl nicht erreichbarer Karriereportale.'
     Assert-True -Condition ($report.html_report_path -eq $second.html_report_path) -Message 'Summary-JSON verliert den HTML-Report-Pfad.'
     $markdownReport = Get-Content -LiteralPath $second.markdown_report_path -Raw
+    foreach ($expected in @('Firmen gesamt: 3', 'Firmen im Lauf: 3', 'Faellige Firmen: 3', 'Uebersprungene Firmen: 0', 'Limit: 25', 'Auswahlgrund: Explizite Firmenauswahl')) {
+        Assert-True -Condition ($markdownReport.Contains($expected)) -Message "Markdown-Report enthaelt Auswahlmetrik nicht: $expected"
+    }
     Assert-True -Condition ($markdownReport.Contains('## Aktive passende Stellen')) -Message 'Markdown-Report enthaelt keine aktiven passenden Stellen.'
     Assert-True -Condition ($markdownReport.Contains('IT-Gesamtverantwortung mit Strategie, Budget und Fuehrung.')) -Message 'Markdown-Report enthaelt keine Stellenbeschreibung.'
     Assert-True -Condition ($markdownReport.Contains('## Fehler und unsichere Quellen')) -Message 'Markdown-Report enthaelt keine Fehler-/Quellen-Sektion.'
@@ -180,6 +195,9 @@ try {
     Assert-True -Condition ($markdownReport.Contains('[Karriere-URL](https://alpha.example.invalid/careers)')) -Message 'Markdown-Report enthaelt keine klickbare Karriere-URL-Spalte.'
     Assert-True -Condition ($markdownReport.Contains('[Karriere](https://alpha.example.invalid/careers)')) -Message 'Markdown-Report enthaelt keinen klickbaren Anbieterlink.'
     $htmlReport = Get-Content -LiteralPath $second.html_report_path -Raw
+    foreach ($expected in @('Firmen gesamt', 'Firmen im Lauf', 'Faellige Firmen', 'Uebersprungene Firmen', 'Limit', 'Auswahlgrund', 'Explizite Firmenauswahl')) {
+        Assert-True -Condition ($htmlReport.Contains($expected)) -Message "HTML-Report enthaelt Auswahlmetrik nicht: $expected"
+    }
     Assert-True -Condition ($htmlReport.Contains('<h2>Aktive passende Stellen</h2>')) -Message 'HTML-Report enthaelt keine aktiven passenden Stellen.'
     Assert-True -Condition ($htmlReport.Contains('IT-Gesamtverantwortung mit Strategie, Budget und Fuehrung.')) -Message 'HTML-Report enthaelt keine Stellenbeschreibung.'
     Assert-True -Condition ($htmlReport.Contains('<h2>Fehler und unsichere Quellen</h2>')) -Message 'HTML-Report enthaelt keine Fehler-/Quellen-Sektion.'
@@ -306,6 +324,11 @@ try {
     Write-JobAgentStore -ProjectRoot $refreshProjectRoot -Document $refreshDocument | Out-Null
     $refreshCandidates = @(Get-JobAgentDailyRunCandidateCompanies -Document (Read-JobAgentStore -ProjectRoot $refreshProjectRoot) -Now ([datetime]'2026-08-17T10:00:00Z') -MaxCompanies 1)
     Assert-True -Condition ($refreshCandidates[0].company_id -eq 'company:gamma_ag') -Message 'Daily-Run priorisiert faellige next_refresh_at-Firmen nicht.'
+    $refreshSelection = New-JobAgentDailyRunSelection -Document (Read-JobAgentStore -ProjectRoot $refreshProjectRoot) -Now ([datetime]'2026-08-17T10:00:00Z') -MaxCompanies 1
+    Assert-True -Condition ($refreshSelection.summary.companies_total -eq 3) -Message 'Selection-Summary zaehlt Firmen gesamt falsch.'
+    Assert-True -Condition ($refreshSelection.summary.companies_selected -eq 1) -Message 'Selection-Summary zaehlt ausgewaehlte Firmen falsch.'
+    Assert-True -Condition ($refreshSelection.summary.companies_skipped -eq 2) -Message 'Selection-Summary zaehlt uebersprungene Firmen falsch.'
+    Assert-True -Condition (@($refreshSelection.summary.skipped | Where-Object reason -eq 'limit_reached').Count -eq 2) -Message 'Selection-Summary dokumentiert Limit-Uebersprungene nicht.'
 
     $liveProjectRoot = New-TestProjectRoot
     $liveDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
@@ -443,8 +466,10 @@ try {
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
             'daily_run_cli_fixture_mode',
-        'daily_run_multi_source_partial_removal',
+            'daily_run_multi_source_partial_removal',
             'daily_run_prioritizes_refresh_due_companies',
+            'daily_run_persists_selection_summary',
+            'daily_run_report_renders_selection_metrics',
             'daily_run_persists_company_freshness_fields',
             'daily_run_live_jsonld_ats_source'
         )

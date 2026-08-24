@@ -1,5 +1,28 @@
 # Roadmap Archive
 
+## Archiviert 2026-08-24 - JA-026
+
+- [x] JA-026 Daily-Run-Scanbreite konfigurierbar machen und Bericht darf nicht nur drei Firmen anzeigen #comment: Der Tageslauf macht die Laufbreite und Auswahlentscheidung jetzt explizit sichtbar.
+  - [x] Beschreibung: Der regulaere Daily-Run und die Live-Pilot-Lane arbeiten nicht mehr mit einer prominenten, unerklaerten Drei-Firmen-Anzeige. `Invoke-JobAgentDailyRun` persistiert pro ScanRun eine `selection_summary` mit `companies_total`, `companies_due`, `companies_selected`, `companies_skipped`, `limit`, `selection_reason`, `explicit_company_ids` und begrenzter Skip-Liste. Markdown- und HTML-Berichte zeigen `Firmen gesamt`, `Firmen im Lauf`, `Faellige Firmen`, `Uebersprungene Firmen`, `Limit` und `Auswahlgrund`; die Coverage-Sektion zeigt weiterhin `Naechste Scanprioritaeten`.
+  - [x] Scope: Geaendert wurden `.ci/ci.config.json`, `schemas/jobagent.schema.json`, `src/JobAgent.DailyRun.psm1`, `src/JobAgent.LiveScan.psm1`, `src/JobAgent.Report.psm1`, `tools/Invoke-JobAgentLivePilot.ps1`, `tests/Test-JobAgentDailyRun.ps1` und `tests/Test-JobAgentReport.ps1`. `.ci/bin/modules/ci-commands-main.ps1` blieb unveraendert, weil der Command CLI-Argumente bereits unveraendert weiterreicht. No-Go eingehalten: keine parallelen Netzwerkstuerme, keine Umgehung von robots/ToS, keine Store-Mutation ausser Daily-Run-ScanRun-Metadaten.
+  - [x] Ist-Stand (2026-08-24 11:35): Live-Pilot-Default und LiveScan-Policy stehen auf `MaxCompanies 25` statt `3`; CLI-Overrides wie `-MaxCompanies`, `-CompanyIds` und `-TimeoutSeconds` bleiben nicht-interaktiv nutzbar. Reports unterscheiden Firmenbestand, Laufauswahl, faellige Firmen, uebersprungene Firmen, Limit und explizite Firmenauswahl.
+  - [x] Screenshot-Referenz: Kein lokaler Chat-Screenshot verfuegbar; bindendes Fehlerbild wurde ueber Daily-Run-, Report- und Viewport-Tests gegen die alte unerklaerte `Firmen 3`-Wirkung abgedeckt.
+  - [x] Abhaengigkeiten: JA-024/JA-037/JA-039 lieferten Report- und Labelgrundlagen; JA-025 bleibt fuer groessere produktive Wirkung erforderlich, ist aber keine technische Blockade fuer die Scanbreiten-Transparenz.
+  - [x] Aufwand/Dauer: Aufwand M; innerhalb der aktuellen Arbeitseinheit abgeschlossen.
+  - [x] Prioritaetsscore: 90/100, weil der Daily-Run-Output ohne sichtbares Limit und Auswahlgrund produktiv missverstaendlich war.
+  - [x] Ordnungsbegruendung: Die Auswahltransparenz wurde vor der massiven Firmenvergroesserung abgeschlossen, damit JA-025-Wellen sofort nachvollziehbare Laufberichte erzeugen.
+  - [x] Risiken und Unsicherheiten: Ein produktiver Live-Lauf mit 25 Firmen kann laenger laufen und externe Quellen staerker belasten; deshalb bleiben Timeout, CompanyIds und MaxCompanies explizit steuerbar. Ohne JA-025 bleibt `companies_total` weiterhin durch den aktuellen Store begrenzt.
+  - [x] Schritte:
+    1. `New-JobAgentDailyRunSelection` ergaenzt und in `Invoke-JobAgentDailyRun` eingebunden, inklusive Limit-, Due-, Skip- und Auswahlgrund-Ermittlung.
+    2. ScanRun-Schema und Daily-Run-Summary um `selection_summary` und sichtbare Statistikfelder erweitert.
+    3. Markdown-/HTML-Reportkopf auf fachliche Auswahlmetriken umgestellt; Live-Pilot-Default und Policy auf 25 Firmen angehoben und HTML-Pfad in der Pilot-CLI ausgegeben.
+    4. Funktionstests fuer `MaxCompanies`, `CompanyIds`, faellige Firmen, Limit-Uebersprungene, Reportmetriken und sichtbare Auswahltexte ergaenzt.
+  - [x] Evidence: `.ci/ci.config.json`, `schemas/jobagent.schema.json`, `src/JobAgent.DailyRun.psm1`, `src/JobAgent.LiveScan.psm1`, `src/JobAgent.Report.psm1`, `tools/Invoke-JobAgentLivePilot.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentReport.ps1`, `html/jobagent/ja-022-viewport-audit.html`, `output/playwright/ja-022-viewport-1920.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-800.png`.
+  - [x] Funktionstest: `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentSchema.ps1` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentOperations.ps1` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit 0.
+  - [x] Audit: `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit 0. HTML bleibt bei 1920/1366/800 Pixel per lokalem Devserver erreichbar; Statistik-Karten nutzen kurze Labels, `overflow-wrap:anywhere` und responsive Grid-Spalten.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Meilenstein: M3 Daily-Run-Operationalisierung abgeschlossen; naechster fachlicher Punkt bleibt JA-025 fuer die eigentliche Firmenbasis-Skalierung.
+
 ## Archiviert 2026-08-24 - JA-024
 
 - [x] JA-024 Daily-Run-HTML-Report mit Jobtitel-Spalten und sicheren klickbaren Primaerlinks #comment: Daily-Run-HTML und Markdown zeigen jetzt die fachliche Stelle, Firma und offiziellen Ziel-Links direkt in den Jobtabellen.
