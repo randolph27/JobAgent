@@ -804,3 +804,28 @@
   - [x] Audit: Produktiver Upsert hat eine offizielle Evidence-URL auf der Firmendomain, `verified_by_url` ist die offizielle Rohde-&-Schwarz-Domain, Jobboersen-URLs bleiben nur Discovery-Hints, und die neun unklaren Kandidaten bleiben ohne Store-Write in Manual Review.
   - [x] Supertest: `.\\ci.cmd supertest` -> Exit 0.
   - [x] Meilenstein: M8.3 Offizielle Verifikationswelle abgeschlossen; es sind keine aktiven Roadmap-Punkte offen.
+
+## Archiviert 2026-08-24 - JA-037
+
+- [x] JA-037 HTML-Berichte auf fachliche Spaltennamen und lesbare Werte umstellen #comment: Der aktuelle Coverage-/Daily-Run-HTML-Output zeigt technische Feldnamen und interne Statuswerte, wodurch die fachliche Nutzung der Tabellen erschwert wird.
+  - [x] Beschreibung: Alle nutzerseitigen HTML-Tabellen fuer Coverage, Daily-Run und Detailberichte verwenden deutschsprachige fachliche Spaltennamen, lesbare Statuslabels und erklaerte Kennzahlen. Technische Namen wie `company`, `NEVER_SCANNED`, `MUNICH_20KM`, `source_id`, `priority_score`, `scan_run_id`, `adapter_attempts` oder rohe Enum-Werte duerfen im sichtbaren Bericht nur noch in einem explizit beschrifteten Diagnoseabschnitt erscheinen. Der Bericht muss weiterhin maschinenlesbare JSON-Artefakte unveraendert erzeugen; nur die HTML-/Markdown-Darstellung wird nutzerorientiert uebersetzt.
+  - [x] Scope: Anpassen `src/JobAgent.Report.psm1`, `src/JobAgent.Coverage.psm1` falls Coverage-HTML dort gerendert wird, betroffene Tool- oder CI-Aufrufe fuer HTML-Artefakte, sowie Tests `tests/Test-JobAgentReport.ps1`, `tests/Test-JobAgentCoverage.ps1`, `tests/Test-JobAgentHtmlAudit.ps1` und bei Layoutaenderung `tests/Test-JobAgentHtmlViewportAudit.ps1`. No-Go: keine Aenderung an Store-Schema, Job-/Company-IDs, Deduplikationslogik, offiziellen URLs, Discovery-Quellen oder Statusmaschine; keine Entfernung technischer Daten aus JSON.
+  - [x] Ist-Stand (2026-08-24 10:10): Nutzer-Screenshot zeigt Coverage-Wellen mit Tabellenkopf `Typ`, `Firma`, `Link`, `Zielgebiet`, `Branche`, `Status`, `Naechster Schritt`; Zeilen enthalten technische Werte wie `company`, `MUNICH`, `MUNICH_20KM`, `NEVER_SCANNED` und `RETRY_REQUIRED`. Daily-Run-HTML verwendet ebenfalls technische Metriknamen wie `checked_jobs`, `active_matching_jobs`, `uncertain_sources` und Tabellenfelder wie `work_model`, `employment_type`, `published_at`.
+  - [x] Screenshot-Referenz: Kein lokaler Chat-Screenshot verfuegbar; bindendes Fehlerbild wurde ueber vorhandene HTML-Artefakte und Tests gegen sichtbare technische Enum-/Feldwerte in Tabellenzellen und Statistik-Karten abgedeckt.
+  - [x] Schritte:
+    1. In `src/JobAgent.Report.psm1` und der Coverage-HTML-Erzeugung eine zentrale, getestete Darstellungszuordnung fuer Spalten, Status, Zielgebiet, Quelltyp, Arbeitsmodell, Fehlertypen und Kennzahlen ergaenzen; jeder interne Wert bekommt entweder ein fachliches deutsches Label oder wird als `Unbekannt` mit Diagnosehinweis dargestellt.
+    2. HTML- und Markdown-Renderer so umbauen, dass Tabellenkoepfe, Statistik-Karten, Wellen-Metadaten und naechste Schritte die neuen Labels verwenden; Rohwerte bleiben optional in `data-*`-Attributen oder JSON, aber nicht als primaerer sichtbarer Text.
+    3. Funktionstests mit Fixtures fuer `NEVER_SCANNED`, `RETRY_REQUIRED`, `MUNICH`, `MUNICH_20KM`, fehlende Werte und unbekannte neue Enum-Werte schreiben; unbekannte Werte muessen deterministisch als `Unbekannt (<Rohwert>)` oder in einem Diagnosefeld erscheinen, ohne HTML zu brechen.
+  - [x] Evidence: Neuer oder aktualisierter HTML-Bericht unter `html/jobagent/` mit fachlichen Labels; Testlog unter `logs/verify/ja-037-report-labels.md`; Screenshot-/Viewport-Artefakte unter `output/playwright/ja-037-*`; keine sichtbaren Roh-Enums in den normalen Berichtstabellen ausser explizitem Diagnosebereich.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1`.
+  - [x] Audit: HTML-Berichte bei 1920, 1366 und 800 Pixel Breite pruefen; Tabellen duerfen horizontal scrollen, aber Kopfzeilen und Zellen duerfen nicht ueberlappen, abgeschnitten werden oder Rohwerte als primaere Nutzerinformation anzeigen. Links muessen weiterhin klickbar bleiben, Touch-Ziele mindestens 44 px Hoehe erreichen und die Tabellen muessen ohne erklaerenden Fliesstext nutzbar sein.
+  - [x] Supertest: `.\ci.cmd supertest` wurde nach gruenen Funktionstests und erfolgreichem HTML-/Viewport-Audit mit Exit 0 ausgefuehrt.
+  - [x] Abhaengigkeiten: Keine fachliche Abhaengigkeit zu JA-038 oder JA-039; profitiert aber von JA-039, falls Quellenkennzahlen im selben Bericht sichtbar gemacht werden.
+  - [x] Aufwand: M, geschaetzt 4-6 Stunden bei 1 Entwickler/Agent inklusive Tests und Viewport-Audit.
+  - [x] Dauer: 1 Arbeitstag lokal, parallelisierbar mit JA-038 nur nach Abstimmung der Report-Komponenten.
+  - [x] Prioritaetsscore: 100.
+  - [x] Ordnungsbegruendung: Sichtbare technische Bezeichnungen verhindern direkte Nutzung des aktuellen Outputs; die Aenderung ist klein bis mittel, risikoarm und verbessert jeden Folgebericht.
+  - [x] Risiken und Unsicherheiten: Coverage-HTML kann in einem anderen Modul als Daily-Run-HTML erzeugt werden; unbekannte Enum-Werte muessen bewusst sichtbar bleiben, damit keine Datenqualitaetsprobleme verdeckt werden.
+  - [x] Meilenstein: M6-A Bericht lesbar und fachlich nutzbar.
+
+

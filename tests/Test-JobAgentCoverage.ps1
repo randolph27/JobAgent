@@ -142,8 +142,11 @@ $report = New-JobAgentDailyReport -Document $document -ScanRunId 'scanrun:1'
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
 Assert-True -Condition ($markdown.Contains('## Coverage und Adapter-Backlog')) -Message 'Markdown-Report enthaelt keinen Coverage-Abschnitt.'
 Assert-True -Condition ($markdown.Contains('Coverage-Werte sind operative Naeherungen')) -Message 'Markdown-Report enthaelt keinen Naeherungshinweis.'
-Assert-True -Condition ($markdown.Contains('ATS_OR_PORTAL_ADAPTER_REVIEW')) -Message 'Markdown-Report enthaelt keinen Adapter-Backlog.'
-Assert-True -Condition ($markdown.Contains('MANUAL_REVIEW_DISCOVERY')) -Message 'Markdown-Report enthaelt keinen Discovery-Review-Backlog.'
+Assert-True -Condition ($markdown.Contains('ATS/Portal-Adapter pruefen')) -Message 'Markdown-Report enthaelt keinen Adapter-Backlog.'
+Assert-True -Condition ($markdown.Contains('Discovery-Hinweis pruefen')) -Message 'Markdown-Report enthaelt keinen Discovery-Review-Backlog.'
+foreach ($rawLabel in @('ATS_OR_PORTAL_ADAPTER_REVIEW', 'MANUAL_REVIEW_DISCOVERY', 'checked_jobs', 'active_matching_jobs')) {
+    Assert-True -Condition (-not $markdown.Contains($rawLabel)) -Message "Markdown-Report darf technische Labels nicht sichtbar ausgeben: $rawLabel"
+}
 
 $sourceRegistryPath = Join-Path $root 'data\jobagent\company-discovery.sources.json'
 $sourceSchemaPath = Join-Path $root 'schemas\jobagent.discovery-source.schema.json'
@@ -349,8 +352,11 @@ Assert-True -Condition ($toolHtml.Contains('<h2>Backlog</h2>')) -Message 'Covera
 Assert-True -Condition ($toolHtml.Contains('<h2>Scanprioritaeten</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Scanprioritaeten-Abschnitt.'
 Assert-True -Condition ($toolHtml -match '<a class="provider-link" href="https://[^"]+" target="_blank" rel="noopener noreferrer">Karriere</a>') -Message 'Coverage-Tool-HTML enthaelt keine sicheren klickbaren Anbieterlinks.'
 Assert-True -Condition ($toolHtml.Contains('<span class="review-link">Review-Hinweis</span>')) -Message 'Coverage-Tool-HTML markiert Discovery-Hints nicht sichtbar als Review-Hinweis.'
-Assert-True -Condition (-not ($toolHtml -match '<td>discovery_hint</td>.*?<a class="provider-link"')) -Message 'Coverage-Tool-HTML darf unverifizierte Discovery-Hints nicht als offiziellen Anbieterlink ausgeben.'
-Assert-True -Condition (-not ($toolMarkdown -match '\| discovery_hint \|[^\r\n]*\[Karriere\]\(')) -Message 'Coverage-Tool-Markdown darf unverifizierte Discovery-Hints nicht als offiziellen Anbieterlink ausgeben.'
+Assert-True -Condition (-not ($toolHtml -match '<td>Discovery-Hinweis</td>.*?<a class="provider-link"')) -Message 'Coverage-Tool-HTML darf unverifizierte Discovery-Hints nicht als offiziellen Anbieterlink ausgeben.'
+Assert-True -Condition (-not ($toolMarkdown -match '\| Discovery-Hinweis \|[^\r\n]*\[Karriere\]\(')) -Message 'Coverage-Tool-Markdown darf unverifizierte Discovery-Hints nicht als offiziellen Anbieterlink ausgeben.'
+foreach ($rawLabel in @('discovery_hint', 'MUNICH_20KM', 'NEVER_SCANNED', 'RETRY_REQUIRED', 'source_id', 'priority_score', 'scan_rotation')) {
+    Assert-True -Condition (-not $toolHtml.Contains($rawLabel)) -Message "Coverage-Tool-HTML darf technische Labels nicht sichtbar ausgeben: $rawLabel"
+}
 
 $dedupeToolOutput = & (Join-Path $root 'tools\Measure-JobAgentCompanyCandidateDedupe.ps1') -ProjectRoot $root -MaxReviewItems 10 | ConvertFrom-Json -Depth 20
 Assert-True -Condition ($dedupeToolOutput.status -eq 'ok') -Message 'Kandidaten-Dedupe-Tool liefert keinen OK-Status.'

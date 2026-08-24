@@ -196,10 +196,13 @@ Assert-True -Condition ($report.sections.new_matching_jobs[0].provider_url -eq '
 Assert-True -Condition ($report.sections.changed_jobs[0].provider_url -eq 'https://jobs.alpha_ag.example.invalid/search') -Message 'Provider-Link bevorzugt nicht die offizielle ATS-Quelle der Stelle.'
 
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
-foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '120000 EUR', 'Budgetverantwortung', 'published_at', '[Quelle](https://beta_ag.example.invalid/careers)', '[Stelle](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
+foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '120000 EUR', 'Budgetverantwortung', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Stelle](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
     Assert-True -Condition ($markdown.Contains($expected)) -Message "Markdown-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $markdown.Contains('Software Engineer')) -Message 'Abgelehnte Stellen duerfen nicht als passende Stellen gerendert werden.'
+foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sources', 'unreachable_career_pages', 'published_at')) {
+    Assert-True -Condition (-not $markdown.Contains($rawLabel)) -Message "Markdown-Report darf technische Metriklabels nicht primaer anzeigen: $rawLabel"
+}
 
 $report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
@@ -208,6 +211,9 @@ foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h
 }
 Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'
 Assert-True -Condition ($html.Contains('&lt;script&gt;alert(1)&lt;/script&gt;')) -Message 'HTML-Report escaped problematische Inhalte nicht.'
+foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sources', 'unreachable_career_pages', 'published_at')) {
+    Assert-True -Condition (-not $html.Contains($rawLabel)) -Message "HTML-Report darf technische Metriklabels nicht primaer anzeigen: $rawLabel"
+}
 
 $document.job_sources += [pscustomobject]@{ source_id = 'source:beta_ag_board'; company_id = 'company:beta_ag'; source_type = 'JOB_BOARD_DISCOVERY'; url = 'https://jobs.example.invalid/beta'; canonical_url = 'https://jobs.example.invalid/beta'; is_official = $false; verified_at = $null; verification_basis = 'DISCOVERY_HINT'; verification_evidence = @() }
 $document.scan_attempts += [pscustomobject]@{ scan_attempt_id = 'scanattempt:beta-board'; scan_run_id = $scanRunId; company_id = 'company:beta_ag'; source_id = 'source:beta_ag_board'; started_at = '2026-08-17T10:00:00.000Z'; finished_at = '2026-08-17T10:00:01.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'TECHNICAL_LIMITATION'; retry_recommendation = 'MANUAL_REVIEW'; http_status = 599 }

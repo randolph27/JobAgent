@@ -33,6 +33,162 @@ function ConvertTo-JobAgentReportHtmlText {
     return [Net.WebUtility]::HtmlEncode((ConvertTo-JobAgentReportText -Value $Value))
 }
 
+function ConvertTo-JobAgentReportDisplayLabel {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
+    )
+
+    $text = ConvertTo-JobAgentReportText -Value $Value
+    if ($text -eq 'UNKNOWN') {
+        return 'Unbekannt'
+    }
+
+    $key = $text.Trim().ToUpperInvariant()
+    switch ($Domain) {
+        'job_status' {
+            switch ($key) {
+                'NEW' { return 'Neu' }
+                'ACTIVE' { return 'Aktiv' }
+                'UPDATED' { return 'Aktualisiert' }
+                'REMOVED' { return 'Entfernt' }
+                'CLOSED' { return 'Geschlossen' }
+            }
+        }
+        'scan_status' {
+            switch ($key) {
+                'SUCCESS' { return 'Erfolgreich' }
+                'PARTIAL' { return 'Teilweise erfolgreich' }
+                'FAILED' { return 'Fehlgeschlagen' }
+                'RUNNING' { return 'Laeuft' }
+            }
+        }
+        'work_model' {
+            switch ($key) {
+                'REMOTE' { return 'Remote' }
+                'HYBRID' { return 'Hybrid' }
+                'ONSITE' { return 'Vor Ort' }
+            }
+        }
+        'employment_type' {
+            switch ($key) {
+                'FULL_TIME' { return 'Vollzeit' }
+                'PART_TIME' { return 'Teilzeit' }
+                'CONTRACT' { return 'Befristet/Vertrag' }
+                'PERMANENT' { return 'Unbefristet' }
+                'INTERNSHIP' { return 'Praktikum' }
+            }
+        }
+        'error_class' {
+            switch ($key) {
+                'NONE' { return 'Keine' }
+                'NOT_REACHABLE' { return 'Nicht erreichbar' }
+                'TIMEOUT' { return 'Zeitueberschreitung' }
+                'UNCLEAR_SOURCE' { return 'Quelle unklar' }
+                'BLOCKED' { return 'Blockiert' }
+                'PARSING_ERROR' { return 'Parsing-Fehler' }
+                'TECHNICAL_LIMITATION' { return 'Technische Grenze' }
+            }
+        }
+        'retry' {
+            switch ($key) {
+                'NONE' { return 'Nicht noetig' }
+                'RETRY_NEXT_RUN' { return 'Im naechsten Lauf erneut pruefen' }
+                'MANUAL_REVIEW' { return 'Manuell pruefen' }
+            }
+        }
+        'age_basis' {
+            switch ($key) {
+                'PUBLISHED_AT' { return 'Veroeffentlicht' }
+                'FIRST_SEEN' { return 'Erstmals erkannt' }
+            }
+        }
+        'verification_status' {
+            switch ($key) {
+                'CAREER_URL_VERIFIED' { return 'Karriere-URL verifiziert' }
+                'COMPANY_DOMAIN_VERIFIED' { return 'Firmendomain verifiziert' }
+                'OFFICIAL_ATS_VERIFIED' { return 'Offizielles ATS verifiziert' }
+                'VERIFIED' { return 'Verifiziert' }
+                'UNVERIFIED' { return 'Nicht verifiziert' }
+                'MISSING' { return 'Fehlt' }
+            }
+        }
+        'action' {
+            switch ($key) {
+                'VERIFY_DISCOVERY_HINT' { return 'Discovery-Hinweis pruefen' }
+                'FIND_CAREER_URL' { return 'Karriere-URL suchen' }
+                'RETRY_SOURCE_SCAN' { return 'Quelle erneut scannen' }
+                'SCAN_OFFICIAL_SOURCE' { return 'Offizielle Quelle scannen' }
+                'ROTATION_RECHECK' { return 'Regulaer erneut pruefen' }
+                'SCAN_ROTATION' { return 'Scan-Rotation' }
+            }
+        }
+        'reason' {
+            switch ($key) {
+                'manual_review_discovery_hint' { return 'Discovery-Hinweis braucht manuelle Pruefung' }
+                'missing_career_url' { return 'Karriere-URL fehlt' }
+                'latest_scan_failed' { return 'Letzter Scan ist fehlgeschlagen' }
+                'never_scanned' { return 'Noch nie gescannt' }
+                'stale_scan' { return 'Scan ist faellig' }
+                'recent_success_rotation_penalty' { return 'Kuerzlich erfolgreich gescannt' }
+            }
+        }
+        'backlog_kind' {
+            switch ($key) {
+                'MANUAL_REVIEW_DISCOVERY' { return 'Discovery-Hinweis pruefen' }
+                'CAREER_URL_DISCOVERY' { return 'Karriere-URL finden' }
+                'ATS_OR_PORTAL_ADAPTER_REVIEW' { return 'ATS/Portal-Adapter pruefen' }
+                'RETRY_LANE_REVIEW' { return 'Retry-Lane pruefen' }
+                'STALE_SCAN_ROTATION' { return 'Faelligen Scan wiederholen' }
+                'NO_MATCH_RECHECK' { return 'Ohne Treffer erneut pruefen' }
+            }
+        }
+        'metric' {
+            switch ($text) {
+                'checked_jobs' { return 'Gepruefte Stellen' }
+                'new_jobs' { return 'Neue Stellen' }
+                'active_matching_jobs' { return 'Aktive passende Stellen' }
+                'updated_jobs' { return 'Aktualisierte Stellen' }
+                'removed_or_closed_jobs' { return 'Entfernte oder geschlossene Stellen' }
+                'invalid_jobs' { return 'Ungueltige Stellen' }
+                'new_companies' { return 'Neue Unternehmen' }
+                'uncertain_sources' { return 'Unsichere Quellen' }
+                'unreachable_career_pages' { return 'Nicht erreichbare Karriereportale' }
+                'errors' { return 'Fehler' }
+                'companies_total' { return 'Unternehmen gesamt' }
+                'with_career_url' { return 'Mit Karriere-URL' }
+                'without_career_url' { return 'Ohne Karriere-URL' }
+                'successfully_scanned' { return 'Erfolgreich gescannt' }
+                'failed_scanned' { return 'Scan fehlgeschlagen' }
+                'never_scanned' { return 'Noch nie gescannt' }
+                'without_matching_jobs' { return 'Ohne passende Stellen' }
+                'with_matching_jobs' { return 'Mit passenden Stellen' }
+                'stale_or_unscanned' { return 'Faellig oder ungescannt' }
+            }
+        }
+    }
+
+    return ('Unbekannt ({0})' -f $text)
+}
+
+function ConvertTo-JobAgentReportDisplayMarkdownText {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
+    )
+
+    return ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDisplayLabel -Value $Value -Domain $Domain)
+}
+
+function ConvertTo-JobAgentReportDisplayHtmlText {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
+    )
+
+    return ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDisplayLabel -Value $Value -Domain $Domain)
+}
+
 function Test-JobAgentReportHttpUrl {
     param([Parameter()][AllowNull()][object]$Url)
 
@@ -224,11 +380,17 @@ function Get-JobAgentReportPriorityExplanation {
 
     $classification = Get-JobAgentReportProperty -Object $Job -Name 'classification'
     $score = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $classification -Name 'score' -Default 'UNKNOWN')
-    $result = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $classification -Name 'result' -Default 'UNKNOWN')
+    $resultRaw = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $classification -Name 'result' -Default 'UNKNOWN')
+    $result = switch ($resultRaw) {
+        'MATCH' { 'Passend' }
+        'POSSIBLE' { 'Moeglich passend' }
+        'REJECTED' { 'Abgelehnt' }
+        default { ConvertTo-JobAgentReportDisplayLabel -Value $resultRaw -Domain 'classification_result' }
+    }
     $reasons = @((Get-JobAgentReportProperty -Object $classification -Name 'reasons' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
     $location = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object (Get-JobAgentReportProperty -Object $Job -Name 'location') -Name 'label' -Default 'UNKNOWN')
-    $workModel = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'work_model' -Default 'UNKNOWN')
-    $employmentType = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'employment_type' -Default 'UNKNOWN')
+    $workModel = ConvertTo-JobAgentReportDisplayLabel -Value (Get-JobAgentReportProperty -Object $Job -Name 'work_model' -Default 'UNKNOWN') -Domain 'work_model'
+    $employmentType = ConvertTo-JobAgentReportDisplayLabel -Value (Get-JobAgentReportProperty -Object $Job -Name 'employment_type' -Default 'UNKNOWN') -Domain 'employment_type'
     $requirements = @((Get-JobAgentReportProperty -Object $Job -Name 'requirements' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
 
     $parts = [System.Collections.Generic.List[string]]::new()
@@ -537,16 +699,16 @@ function Add-JobAgentReportMarkdownTable {
     foreach ($item in $Items) {
         $change = ((@($item.changed_fields) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }) -join ', ')
         if ([string]::IsNullOrWhiteSpace($change)) { $change = $item.change_reason }
-        $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'UNKNOWN' } else { ('{0} ({1})' -f $item.age_days, $item.age_basis) }
+        $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'Unbekannt' } else { ('{0} Tage ({1})' -f $item.age_days, (ConvertTo-JobAgentReportDisplayLabel -Value $item.age_basis -Domain 'age_basis')) }
         if ($IncludeChange) {
             $cells = @(
                     (ConvertTo-JobAgentReportMarkdownText $item.priority),
                     (ConvertTo-JobAgentReportMarkdownText $item.company),
                     (ConvertTo-JobAgentReportMarkdownText $item.title),
-                    (ConvertTo-JobAgentReportMarkdownText $item.status),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.status -Domain 'job_status'),
                     (ConvertTo-JobAgentReportMarkdownText $item.location),
-                    (ConvertTo-JobAgentReportMarkdownText $item.work_model),
-                    (ConvertTo-JobAgentReportMarkdownText $item.employment_type),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.work_model -Domain 'work_model'),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.employment_type -Domain 'employment_type'),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.published_at)),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.first_seen)),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.last_seen)),
@@ -565,10 +727,10 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $item.priority),
                     (ConvertTo-JobAgentReportMarkdownText $item.company),
                     (ConvertTo-JobAgentReportMarkdownText $item.title),
-                    (ConvertTo-JobAgentReportMarkdownText $item.status),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.status -Domain 'job_status'),
                     (ConvertTo-JobAgentReportMarkdownText $item.location),
-                    (ConvertTo-JobAgentReportMarkdownText $item.work_model),
-                    (ConvertTo-JobAgentReportMarkdownText $item.employment_type),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.work_model -Domain 'work_model'),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.employment_type -Domain 'employment_type'),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.published_at)),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.first_seen)),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.last_seen)),
@@ -602,9 +764,9 @@ function Add-JobAgentReportSourceIssueMarkdownTable {
             (ConvertTo-JobAgentReportMarkdownText $item.category),
             (ConvertTo-JobAgentReportMarkdownText $item.company),
             (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.source_link),
-            (ConvertTo-JobAgentReportMarkdownText $item.status),
-            (ConvertTo-JobAgentReportMarkdownText $item.error_class),
-            (ConvertTo-JobAgentReportMarkdownText $item.retry_recommendation),
+            (ConvertTo-JobAgentReportDisplayMarkdownText $item.status -Domain 'scan_status'),
+            (ConvertTo-JobAgentReportDisplayMarkdownText $item.error_class -Domain 'error_class'),
+            (ConvertTo-JobAgentReportDisplayMarkdownText $item.retry_recommendation -Domain 'retry'),
             (ConvertTo-JobAgentReportMarkdownText $item.http_status)
         )
         [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
@@ -628,7 +790,7 @@ function Add-JobAgentReportCompanyMarkdownTable {
                 (ConvertTo-JobAgentReportMarkdownText $item.company),
                 (ConvertTo-JobAgentReportMarkdownText $item.official_website_url),
                 (ConvertTo-JobAgentReportMarkdownText $item.career_url),
-                (ConvertTo-JobAgentReportMarkdownText $item.verification_status)
+                (ConvertTo-JobAgentReportDisplayMarkdownText $item.verification_status -Domain 'verification_status')
         )
         [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
     }
@@ -663,7 +825,7 @@ function Add-JobAgentReportHtmlTable {
         if ([string]::IsNullOrWhiteSpace($change)) {
             $change = $item.change_reason
         }
-        $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'UNKNOWN' } else { ('{0} Tage ({1})' -f $item.age_days, $item.age_basis) }
+        $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'Unbekannt' } else { ('{0} Tage ({1})' -f $item.age_days, (ConvertTo-JobAgentReportDisplayLabel -Value $item.age_basis -Domain 'age_basis')) }
         $urlCell = ConvertTo-JobAgentReportHtmlLink -Url $item.official_url -Label 'Stelle'
         $providerCell = ConvertTo-JobAgentReportProviderHtmlLink -Link $item.provider_link
 
@@ -672,10 +834,10 @@ function Add-JobAgentReportHtmlTable {
                 '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.status -Domain 'job_status') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.work_model) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.employment_type) +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.work_model -Domain 'work_model') +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.employment_type -Domain 'employment_type') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.published_at)) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.first_seen)) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.last_seen)) +
@@ -694,10 +856,10 @@ function Add-JobAgentReportHtmlTable {
                 '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.status -Domain 'job_status') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.work_model) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.employment_type) +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.work_model -Domain 'work_model') +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.employment_type -Domain 'employment_type') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.published_at)) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.first_seen)) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.last_seen)) +
@@ -737,9 +899,9 @@ function Add-JobAgentReportSourceIssueHtmlTable {
             '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.category) +
             '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
             '</td><td>' + $sourceCell +
-            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.status) +
-            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.error_class) +
-            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.retry_recommendation) +
+            '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.status -Domain 'scan_status') +
+            '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.error_class -Domain 'error_class') +
+            '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.retry_recommendation -Domain 'retry') +
             '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.http_status) +
             '</td></tr>'
         )
@@ -771,7 +933,7 @@ function Add-JobAgentReportCompanyHtmlTable {
             '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
             '</td><td>' + $websiteCell +
             '</td><td>' + $careerCell +
-            '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.verification_status) +
+            '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.verification_status -Domain 'verification_status') +
             '</td></tr>'
         )
     }
@@ -788,7 +950,7 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add("# JobAgent Daily-Run-Bericht")
     [void]$lines.Add('')
     [void]$lines.Add("- ScanRun: $($Report.scan_run_id)")
-    [void]$lines.Add("- Status: $($Report.statistics.status)")
+    [void]$lines.Add("- Status: $(ConvertTo-JobAgentReportDisplayLabel -Value $Report.statistics.status -Domain 'scan_status')")
     [void]$lines.Add("- Firmen: $($Report.statistics.companies_scanned)")
     [void]$lines.Add("- Adapterversuche: $($Report.statistics.adapter_attempts)")
     [void]$lines.Add("- Snapshots: $($Report.statistics.snapshots)")
@@ -816,7 +978,7 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
     foreach ($metric in @('checked_jobs', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
-        [void]$lines.Add(('| {0} | {1} |' -f $metric, $Report.statistics.$metric))
+        [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-JobAgentReportDisplayLabel -Value $metric -Domain 'metric'), $Report.statistics.$metric))
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Coverage und Adapter-Backlog')
@@ -825,7 +987,7 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
     foreach ($metric in @('companies_total', 'with_career_url', 'without_career_url', 'successfully_scanned', 'failed_scanned', 'never_scanned', 'without_matching_jobs', 'with_matching_jobs', 'stale_or_unscanned')) {
-        [void]$lines.Add(('| {0} | {1} |' -f $metric, $Report.coverage.metrics.$metric))
+        [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-JobAgentReportDisplayLabel -Value $metric -Domain 'metric'), $Report.coverage.metrics.$metric))
     }
     [void]$lines.Add('')
     [void]$lines.Add('### Naechste Scanprioritaeten')
@@ -839,8 +1001,8 @@ function ConvertTo-JobAgentDailyReportMarkdown {
             $cells = @(
                 (ConvertTo-JobAgentReportMarkdownText $item.priority_score),
                 (ConvertTo-JobAgentReportMarkdownText $item.company),
-                (ConvertTo-JobAgentReportMarkdownText $item.next_action),
-                (ConvertTo-JobAgentReportMarkdownText ((@($item.reasons) -join ', ')))
+                (ConvertTo-JobAgentReportDisplayMarkdownText $item.next_action -Domain 'action'),
+                (ConvertTo-JobAgentReportMarkdownText ((@($item.reasons | ForEach-Object { ConvertTo-JobAgentReportDisplayLabel -Value $_ -Domain 'reason' }) -join ', ')))
             )
             [void]$lines.Add('| ' + ($cells -join ' | ') + ' |')
         }
@@ -856,7 +1018,7 @@ function ConvertTo-JobAgentDailyReportMarkdown {
         foreach ($item in @($Report.coverage.backlog | Select-Object -First 10)) {
             $cells = @(
                 (ConvertTo-JobAgentReportMarkdownText $item.priority_score),
-                (ConvertTo-JobAgentReportMarkdownText $item.kind),
+                (ConvertTo-JobAgentReportDisplayMarkdownText $item.kind -Domain 'backlog_kind'),
                 (ConvertTo-JobAgentReportMarkdownText $item.company),
                 (ConvertTo-JobAgentReportMarkdownText $item.reason),
                 (ConvertTo-JobAgentReportMarkdownText $item.next_step)
@@ -911,7 +1073,7 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('<div class="summary">')
     foreach ($item in @(
             @{ Label = 'ScanRun'; Value = $Report.scan_run_id },
-            @{ Label = 'Status'; Value = $Report.statistics.status },
+            @{ Label = 'Status'; Value = (ConvertTo-JobAgentReportDisplayLabel -Value $Report.statistics.status -Domain 'scan_status') },
             @{ Label = 'Firmen'; Value = $Report.statistics.companies_scanned },
             @{ Label = 'Adapterversuche'; Value = $Report.statistics.adapter_attempts },
             @{ Label = 'Snapshots'; Value = $Report.statistics.snapshots },
@@ -948,7 +1110,7 @@ function ConvertTo-JobAgentDailyReportHtml {
 
     [void]$lines.Add('<section><h2>Recherche-Statistik</h2><div class="summary">')
     foreach ($metric in @('checked_jobs', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
-        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportHtmlText $metric) + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.statistics.$metric) + '</span></div>')
+        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.statistics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')
 
@@ -956,7 +1118,7 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('<p>' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.approximation_notice) + '</p>')
     [void]$lines.Add('<div class="summary">')
     foreach ($metric in @('companies_total', 'with_career_url', 'without_career_url', 'successfully_scanned', 'failed_scanned', 'never_scanned', 'without_matching_jobs', 'with_matching_jobs', 'stale_or_unscanned')) {
-        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportHtmlText $metric) + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.metrics.$metric) + '</span></div>')
+        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div>')
 
@@ -967,7 +1129,7 @@ function ConvertTo-JobAgentDailyReportHtml {
     else {
         [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Score</th><th>Firma</th><th>Aktion</th><th>Gruende</th></tr></thead><tbody>')
         foreach ($item in @($Report.coverage.scan_priority | Select-Object -First 10)) {
-            [void]$lines.Add('<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.next_action) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText ((@($item.reasons) -join ', '))) + '</td></tr>')
+            [void]$lines.Add('<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) + '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.next_action -Domain 'action') + '</td><td>' + (ConvertTo-JobAgentReportHtmlText ((@($item.reasons | ForEach-Object { ConvertTo-JobAgentReportDisplayLabel -Value $_ -Domain 'reason' }) -join ', '))) + '</td></tr>')
         }
         [void]$lines.Add('</tbody></table></div>')
     }
@@ -979,7 +1141,7 @@ function ConvertTo-JobAgentDailyReportHtml {
     else {
         [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Score</th><th>Typ</th><th>Firma</th><th>Begruendung</th><th>Naechster Schritt</th></tr></thead><tbody>')
         foreach ($item in @($Report.coverage.backlog | Select-Object -First 10)) {
-            [void]$lines.Add('<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.kind) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.reason) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.next_step) + '</td></tr>')
+            [void]$lines.Add('<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.kind -Domain 'backlog_kind') + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.reason) + '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.next_step) + '</td></tr>')
         }
         [void]$lines.Add('</tbody></table></div>')
     }

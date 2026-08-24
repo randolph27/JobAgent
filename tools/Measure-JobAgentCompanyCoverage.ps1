@@ -53,6 +53,142 @@ function ConvertTo-ToolMarkdownText {
     return (([string]$Value).Trim() -replace '\|', '\|' -replace "`r?`n", ' ')
 }
 
+function ConvertTo-ToolDisplayLabel {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
+    )
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
+        return 'Unbekannt'
+    }
+    $text = ([string]$Value).Trim()
+    $key = $text.ToUpperInvariant()
+
+    switch ($Domain) {
+        'metric' {
+            switch ($text) {
+                'companies_total' { return 'Unternehmen gesamt' }
+                'career_url_verified' { return 'Karriere-URL verifiziert' }
+                'company_domain_verified' { return 'Firmendomain verifiziert' }
+                'unverified' { return 'Nicht verifiziert' }
+                'manual_review_required' { return 'Manuell zu pruefen' }
+                'retry_required' { return 'Retry erforderlich' }
+                'duplicate_groups' { return 'Dubletten-Gruppen' }
+                'discovery_hints_total' { return 'Discovery-Hinweise gesamt' }
+                'unverified_discovery_hints' { return 'Nicht verifizierte Discovery-Hinweise' }
+                'company_fresh' { return 'Firmen frisch' }
+                'company_refresh_due' { return 'Firmen faellig' }
+                'candidate_refresh_due' { return 'Kandidaten faellig' }
+                'candidate_clusters_total' { return 'Kandidaten-Cluster gesamt' }
+                'candidate_conflict_clusters' { return 'Kandidaten-Cluster mit Konflikt' }
+                'candidate_review_queue_total' { return 'Review-Queue gesamt' }
+                'candidate_verification_queue_total' { return 'Verifikationsqueue gesamt' }
+                'candidate_verification_ready' { return 'Zur Verifikation bereit' }
+                'candidate_verification_verified' { return 'Verifiziert' }
+                'candidate_verification_manual_review' { return 'Manueller Review' }
+                'candidate_verification_retry_exhausted' { return 'Retry ausgeschoepft' }
+            }
+        }
+        'kind' {
+            switch ($key) {
+                'COMPANY' { return 'Unternehmen' }
+                'DISCOVERY_HINT' { return 'Discovery-Hinweis' }
+                'REGIONAL_DISCOVERY_HINT' { return 'Regionaler Discovery-Hinweis' }
+                'REGISTER_DISCOVERY_HINT' { return 'Register-Discovery-Hinweis' }
+                'MANUAL_REVIEW_DISCOVERY' { return 'Discovery-Hinweis pruefen' }
+                'CAREER_URL_DISCOVERY' { return 'Karriere-URL finden' }
+                'ATS_OR_PORTAL_ADAPTER_REVIEW' { return 'ATS/Portal-Adapter pruefen' }
+                'RETRY_LANE_REVIEW' { return 'Retry-Lane pruefen' }
+                'STALE_SCAN_ROTATION' { return 'Faelligen Scan wiederholen' }
+                'NO_MATCH_RECHECK' { return 'Ohne Treffer erneut pruefen' }
+            }
+        }
+        'target_area' {
+            switch ($key) {
+                'MUNICH' { return 'Muenchen' }
+                'MUNICH_20KM' { return 'Muenchen plus 20 km' }
+                'FREISING' { return 'Freising' }
+                'REMOTE_WITH_TARGET_REFERENCE' { return 'Remote mit Zielgebietsbezug' }
+                'OUT_OF_SCOPE' { return 'Ausserhalb Zielgebiet' }
+                'UNKNOWN' { return 'Unbekannt' }
+            }
+        }
+        'status' {
+            switch ($key) {
+                'CAREER_URL_VERIFIED' { return 'Karriere-URL verifiziert' }
+                'COMPANY_DOMAIN_VERIFIED' { return 'Firmendomain verifiziert' }
+                'OFFICIAL_ATS_VERIFIED' { return 'Offizielles ATS verifiziert' }
+                'MANUAL_REVIEW_REQUIRED' { return 'Manuell zu pruefen' }
+                'VERIFIED_WEBSITE_ONLY' { return 'Website verifiziert, Karriere-URL fehlt' }
+                'RETRY_REQUIRED' { return 'Retry erforderlich' }
+                'NEVER_SCANNED' { return 'Noch nie gescannt' }
+                'FRESH' { return 'Aktuell' }
+                'REFRESH_DUE' { return 'Refresh faellig' }
+                'EXPIRED' { return 'Abgelaufen' }
+                'UNKNOWN' { return 'Unbekannt' }
+                'UNVERIFIED' { return 'Nicht verifiziert' }
+                'VERIFIED' { return 'Verifiziert' }
+                'PENDING' { return 'Ausstehend' }
+                'RETRY_SCHEDULED' { return 'Retry geplant' }
+                'RETRY_EXHAUSTED' { return 'Retry ausgeschoepft' }
+            }
+        }
+        'action' {
+            switch ($key) {
+                'VERIFY_OFFICIAL_SITE' { return 'Offizielle Website pruefen' }
+                'CHECK_LOCATION' { return 'Standort pruefen' }
+                'REJECT_DUPLICATE' { return 'Dublette ablehnen' }
+                'MANUAL_DECISION' { return 'Manuell entscheiden' }
+                'VERIFY_DISCOVERY_HINT' { return 'Discovery-Hinweis pruefen' }
+                'FIND_CAREER_URL' { return 'Karriere-URL suchen' }
+                'RETRY_SOURCE_SCAN' { return 'Quelle erneut scannen' }
+                'SCAN_OFFICIAL_SOURCE' { return 'Offizielle Quelle scannen' }
+                'ROTATION_RECHECK' { return 'Regulaer erneut pruefen' }
+                'SCAN_ROTATION' { return 'Scan-Rotation' }
+            }
+        }
+        'bool' {
+            switch ($key) {
+                'TRUE' { return 'Ja' }
+                'FALSE' { return 'Nein' }
+            }
+        }
+        'reason' {
+            switch ($key) {
+                'OFFICIAL_VERIFICATION_REQUIRED' { return 'Offizielle Verifikation erforderlich' }
+                'SCHEDULED_REFRESH' { return 'Geplanter Refresh' }
+                'MANUAL_REVIEW_DISCOVERY_HINT' { return 'Discovery-Hinweis braucht manuelle Pruefung' }
+                'MISSING_CAREER_URL' { return 'Karriere-URL fehlt' }
+                'LATEST_SCAN_FAILED' { return 'Letzter Scan ist fehlgeschlagen' }
+                'NEVER_SCANNED' { return 'Noch nie gescannt' }
+                'STALE_SCAN' { return 'Scan ist faellig' }
+                'RECENT_SUCCESS_ROTATION_PENALTY' { return 'Kuerzlich erfolgreich gescannt' }
+            }
+        }
+    }
+
+    return ('Unbekannt ({0})' -f $text)
+}
+
+function ConvertTo-ToolDisplayMarkdownText {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
+    )
+
+    return ConvertTo-ToolMarkdownText (ConvertTo-ToolDisplayLabel -Value $Value -Domain $Domain)
+}
+
+function ConvertTo-ToolDisplayHtmlText {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
+    )
+
+    return ConvertTo-ToolHtmlText (ConvertTo-ToolDisplayLabel -Value $Value -Domain $Domain)
+}
+
 function ConvertTo-ToolMarkdownLink {
     param([Parameter()][AllowNull()][object]$Link)
 
@@ -153,7 +289,8 @@ function Add-ToolMarkdownCounts {
     param(
         [Parameter(Mandatory)][object]$Lines,
         [Parameter(Mandatory)][string]$Title,
-        [Parameter()][AllowNull()][object]$Counts
+        [Parameter()][AllowNull()][object]$Counts,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
     )
 
     [void]$Lines.Add("### $Title")
@@ -164,7 +301,7 @@ function Add-ToolMarkdownCounts {
         return
     }
     foreach ($property in @($Counts.PSObject.Properties | Sort-Object Name)) {
-        [void]$Lines.Add(('| {0} | {1} |' -f (ConvertTo-ToolMarkdownText $property.Name), $property.Value))
+        [void]$Lines.Add(('| {0} | {1} |' -f (ConvertTo-ToolDisplayMarkdownText $property.Name -Domain $Domain), $property.Value))
     }
 }
 
@@ -182,33 +319,33 @@ function ConvertTo-ToolCoverageMarkdown {
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
     foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
-        [void]$lines.Add(('| {0} | {1} |' -f $metric, $Coverage.metrics.$metric))
+        [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-ToolDisplayLabel -Value $metric -Domain 'metric'), $Coverage.metrics.$metric))
     }
     [void]$lines.Add('')
-    Add-ToolMarkdownCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state
+    Add-ToolMarkdownCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state -Domain 'status'
     [void]$lines.Add('')
-    Add-ToolMarkdownCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area
+    Add-ToolMarkdownCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area -Domain 'target_area'
     [void]$lines.Add('')
     Add-ToolMarkdownCounts -Lines $lines -Title 'Branche' -Counts $Coverage.dimensions.by_industry
     [void]$lines.Add('')
     Add-ToolMarkdownCounts -Lines $lines -Title 'Quellenursprung' -Counts $Coverage.dimensions.by_discovery_origin
     [void]$lines.Add('')
-    Add-ToolMarkdownCounts -Lines $lines -Title 'Freshness-Status' -Counts $Coverage.dimensions.by_staleness_status
+    Add-ToolMarkdownCounts -Lines $lines -Title 'Freshness-Status' -Counts $Coverage.dimensions.by_staleness_status -Domain 'status'
     [void]$lines.Add('')
-    Add-ToolMarkdownCounts -Lines $lines -Title 'Refresh-Gruende' -Counts $Coverage.dimensions.by_refresh_reason
+    Add-ToolMarkdownCounts -Lines $lines -Title 'Refresh-Gruende' -Counts $Coverage.dimensions.by_refresh_reason -Domain 'reason'
     [void]$lines.Add('')
     [void]$lines.Add('## Kandidaten-Freshness')
     [void]$lines.Add('| Status | Kandidat | Firma | Quelle | Ablauf | Naechster Refresh | Grund |')
     [void]$lines.Add('|---|---|---|---|---|---|---|')
     foreach ($item in @($Coverage.candidate_freshness.items | Select-Object -First 25)) {
         [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} |' -f
-                (ConvertTo-ToolMarkdownText $item.staleness_status),
+                (ConvertTo-ToolDisplayMarkdownText $item.staleness_status -Domain 'status'),
                 (ConvertTo-ToolMarkdownText $item.candidate_id),
                 (ConvertTo-ToolMarkdownText $item.company),
                 (ConvertTo-ToolMarkdownText $item.source_id),
                 (ConvertTo-ToolMarkdownText $item.expires_at),
                 (ConvertTo-ToolMarkdownText $item.next_refresh_at),
-                (ConvertTo-ToolMarkdownText $item.refresh_reason)))
+                (ConvertTo-ToolDisplayMarkdownText $item.refresh_reason -Domain 'reason')))
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Kandidaten-Dedupe')
@@ -218,7 +355,7 @@ function ConvertTo-ToolCoverageMarkdown {
         [void]$lines.Add(('| {0} | {1} | {2} | {3} |' -f
                 (ConvertTo-ToolMarkdownText $cluster.identity_cluster_id),
                 (ConvertTo-ToolMarkdownText $cluster.canonical_name),
-                (ConvertTo-ToolMarkdownText $cluster.review_queue_reason),
+                (ConvertTo-ToolDisplayMarkdownText $cluster.review_queue_reason -Domain 'reason'),
                 @($cluster.candidate_ids).Count))
     }
     [void]$lines.Add('')
@@ -252,12 +389,12 @@ function ConvertTo-ToolCoverageMarkdown {
         foreach ($candidate in @($wave.candidates)) {
             $candidateLink = Get-ToolPrimaryCoverageLink -Item $candidate -CompanyLookup $companyLookup
             [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} |' -f
-                    (ConvertTo-ToolMarkdownText $candidate.kind),
+                    (ConvertTo-ToolDisplayMarkdownText $candidate.kind -Domain 'kind'),
                     (ConvertTo-ToolMarkdownText $candidate.company),
                     (ConvertTo-ToolMarkdownLink $candidateLink),
-                    (ConvertTo-ToolMarkdownText $candidate.target_area),
+                    (ConvertTo-ToolDisplayMarkdownText $candidate.target_area -Domain 'target_area'),
                     (ConvertTo-ToolMarkdownText $candidate.industry),
-                    (ConvertTo-ToolMarkdownText $candidate.review_status),
+                    (ConvertTo-ToolDisplayMarkdownText $candidate.review_status -Domain 'status'),
                     (ConvertTo-ToolMarkdownText $candidate.next_step)))
         }
     }
@@ -269,12 +406,12 @@ function ConvertTo-ToolCoverageMarkdown {
     foreach ($entry in @($queueEntries | Select-Object -First 25)) {
         [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} |' -f
                 $entry.priority_score,
-                (ConvertTo-ToolMarkdownText $entry.next_action),
+                (ConvertTo-ToolDisplayMarkdownText $entry.next_action -Domain 'action'),
                 (ConvertTo-ToolMarkdownText $entry.identity_cluster_id),
                 (ConvertTo-ToolMarkdownText $entry.candidate_id),
                 (ConvertTo-ToolMarkdownText $entry.canonical_name),
-                (ConvertTo-ToolMarkdownText $entry.status),
-                (ConvertTo-ToolMarkdownText (@($entry.reason_codes) -join ', ')),
+                (ConvertTo-ToolDisplayMarkdownText $entry.status -Domain 'status'),
+                (ConvertTo-ToolMarkdownText (@($entry.reason_codes | ForEach-Object { ConvertTo-ToolDisplayLabel -Value $_ -Domain 'reason' }) -join ', ')),
                 (ConvertTo-ToolMarkdownText (Get-ToolObjectProperty -Object $entry.source_evidence -Name 'source_id' -Default 'UNKNOWN')),
                 (ConvertTo-ToolMarkdownText (@((Get-ToolObjectProperty -Object $entry.dedupe_context -Name 'conflict_flags' -Default @())) -join ', '))))
     }
@@ -287,7 +424,7 @@ function ConvertTo-ToolCoverageMarkdown {
                 (ConvertTo-ToolMarkdownText $entry.decision),
                 (ConvertTo-ToolMarkdownText $entry.candidate_id),
                 (ConvertTo-ToolMarkdownText $entry.canonical_name),
-                (ConvertTo-ToolMarkdownText $entry.queue_status),
+                (ConvertTo-ToolDisplayMarkdownText $entry.queue_status -Domain 'status'),
                 (ConvertTo-ToolMarkdownText $entry.reason),
                 (ConvertTo-ToolMarkdownText $entry.next_attempt_at)))
     }
@@ -299,7 +436,7 @@ function ConvertTo-ToolCoverageMarkdown {
         $itemLink = Get-ToolPrimaryCoverageLink -Item $item -CompanyLookup $companyLookup
         [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
                 $item.priority_score,
-                (ConvertTo-ToolMarkdownText $item.kind),
+                (ConvertTo-ToolDisplayMarkdownText $item.kind -Domain 'kind'),
                 (ConvertTo-ToolMarkdownText $item.company),
                 (ConvertTo-ToolMarkdownLink $itemLink),
                 (ConvertTo-ToolMarkdownText $item.reason),
@@ -315,8 +452,8 @@ function ConvertTo-ToolCoverageMarkdown {
                 $item.priority_score,
                 (ConvertTo-ToolMarkdownText $item.company),
                 (ConvertTo-ToolMarkdownLink $itemLink),
-                (ConvertTo-ToolMarkdownText $item.next_action),
-                (ConvertTo-ToolMarkdownText (@($item.reasons) -join ', '))))
+                (ConvertTo-ToolDisplayMarkdownText $item.next_action -Domain 'action'),
+                (ConvertTo-ToolMarkdownText (@($item.reasons | ForEach-Object { ConvertTo-ToolDisplayLabel -Value $_ -Domain 'reason' }) -join ', '))))
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Firmeninventar')
@@ -326,12 +463,12 @@ function ConvertTo-ToolCoverageMarkdown {
         [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} |' -f
                 (ConvertTo-ToolMarkdownText $company.company),
                 (ConvertTo-ToolMarkdownLink $company.primary_link),
-                (ConvertTo-ToolMarkdownText $company.target_area),
-                (ConvertTo-ToolMarkdownText $company.verification_status),
-                (ConvertTo-ToolMarkdownText $company.staleness_status),
+                (ConvertTo-ToolDisplayMarkdownText $company.target_area -Domain 'target_area'),
+                (ConvertTo-ToolDisplayMarkdownText $company.verification_status -Domain 'status'),
+                (ConvertTo-ToolDisplayMarkdownText $company.staleness_status -Domain 'status'),
                 (ConvertTo-ToolMarkdownText $company.next_refresh_at),
-                (ConvertTo-ToolMarkdownText $company.inventory_state),
-                (ConvertTo-ToolMarkdownText $company.has_career_url),
+                (ConvertTo-ToolDisplayMarkdownText $company.inventory_state -Domain 'status'),
+                (ConvertTo-ToolDisplayMarkdownText $company.has_career_url -Domain 'bool'),
                 (ConvertTo-ToolMarkdownText $company.next_step)))
     }
     return ($lines.ToArray() -join "`n")
@@ -341,12 +478,13 @@ function Add-ToolHtmlCounts {
     param(
         [Parameter(Mandatory)][object]$Lines,
         [Parameter(Mandatory)][string]$Title,
-        [Parameter()][AllowNull()][object]$Counts
+        [Parameter()][AllowNull()][object]$Counts,
+        [Parameter()][AllowEmptyString()][string]$Domain = 'generic'
     )
 
     [void]$Lines.Add('<section><h2>' + (ConvertTo-ToolHtmlText $Title) + '</h2><div class="table-wrap"><table><thead><tr><th>Wert</th><th>Anzahl</th></tr></thead><tbody>')
     foreach ($property in @($Counts.PSObject.Properties | Sort-Object Name)) {
-        [void]$Lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $property.Name) + '</td><td>' + (ConvertTo-ToolHtmlText $property.Value) + '</td></tr>')
+        [void]$Lines.Add('<tr><td>' + (ConvertTo-ToolDisplayHtmlText $property.Name -Domain $Domain) + '</td><td>' + (ConvertTo-ToolHtmlText $property.Value) + '</td></tr>')
     }
     [void]$Lines.Add('</tbody></table></div></section>')
 }
@@ -363,33 +501,33 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('</style></head><body><main>')
     [void]$lines.Add('<section><h1>JobAgent Firmen-Coverage-Audit</h1><p>' + (ConvertTo-ToolHtmlText $Coverage.approximation_notice) + '</p><div class="summary">')
     foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
-        [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolHtmlText $metric) + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
+        [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')
-    Add-ToolHtmlCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state
-    Add-ToolHtmlCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area
+    Add-ToolHtmlCounts -Lines $lines -Title 'Reviewstatus' -Counts $Coverage.dimensions.by_inventory_state -Domain 'status'
+    Add-ToolHtmlCounts -Lines $lines -Title 'Zielgebiet' -Counts $Coverage.dimensions.by_target_area -Domain 'target_area'
     Add-ToolHtmlCounts -Lines $lines -Title 'Branche' -Counts $Coverage.dimensions.by_industry
-    Add-ToolHtmlCounts -Lines $lines -Title 'Freshness-Status' -Counts $Coverage.dimensions.by_staleness_status
-    Add-ToolHtmlCounts -Lines $lines -Title 'Refresh-Gruende' -Counts $Coverage.dimensions.by_refresh_reason
-    [void]$lines.Add('<section><h2>Kandidaten-Freshness</h2><div class="table-wrap"><table><thead><tr><th>Status</th><th>Kandidat</th><th>Firma</th><th>Quelle</th><th>Ablauf</th><th>Naechster Refresh</th><th>Grund</th></tr></thead><tbody>')
+    Add-ToolHtmlCounts -Lines $lines -Title 'Freshness-Status' -Counts $Coverage.dimensions.by_staleness_status -Domain 'status'
+    Add-ToolHtmlCounts -Lines $lines -Title 'Refresh-Gruende' -Counts $Coverage.dimensions.by_refresh_reason -Domain 'reason'
+    [void]$lines.Add('<section><h2>Kandidaten-Freshness</h2><div class="table-wrap"><table><thead><tr><th>Status</th><th>Kandidat</th><th>Firma</th><th>Quellen-ID (Diagnose)</th><th>Ablauf</th><th>Naechster Refresh</th><th>Grund</th></tr></thead><tbody>')
     foreach ($item in @($Coverage.candidate_freshness.items | Select-Object -First 25)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.staleness_status) + '</td><td>' + (ConvertTo-ToolHtmlText $item.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlText $item.source_id) + '</td><td>' + (ConvertTo-ToolHtmlText $item.expires_at) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_refresh_at) + '</td><td>' + (ConvertTo-ToolHtmlText $item.refresh_reason) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolDisplayHtmlText $item.staleness_status -Domain 'status') + '</td><td>' + (ConvertTo-ToolHtmlText $item.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlText $item.source_id) + '</td><td>' + (ConvertTo-ToolHtmlText $item.expires_at) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_refresh_at) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $item.refresh_reason -Domain 'reason') + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Kandidaten-Dedupe</h2><div class="table-wrap"><table><thead><tr><th>Cluster</th><th>Firma</th><th>Grund</th><th>Kandidaten</th></tr></thead><tbody>')
     foreach ($cluster in @($Coverage.candidate_clusters.review_queue | Select-Object -First 25)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $cluster.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.review_queue_reason) + '</td><td>' + (ConvertTo-ToolHtmlText @($cluster.candidate_ids).Count) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $cluster.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.canonical_name) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $cluster.review_queue_reason -Domain 'reason') + '</td><td>' + (ConvertTo-ToolHtmlText @($cluster.candidate_ids).Count) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Kandidaten-Verifikationsqueue</h2><div class="table-wrap"><table><thead><tr><th>Score</th><th>Aktion</th><th>Cluster</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Gruende</th><th>Quelle</th><th>Dedupe</th></tr></thead><tbody>')
     $queueEntries = if ($null -eq $Coverage.candidate_verification_queue) { @() } else { @($Coverage.candidate_verification_queue.queue) }
     foreach ($entry in @($queueEntries | Select-Object -First 25)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.priority_score) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_action) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.status) + '</td><td>' + (ConvertTo-ToolHtmlText (@($entry.reason_codes) -join ', ')) + '</td><td>' + (ConvertTo-ToolHtmlText (Get-ToolObjectProperty -Object $entry.source_evidence -Name 'source_id' -Default 'UNKNOWN')) + '</td><td>' + (ConvertTo-ToolHtmlText (@((Get-ToolObjectProperty -Object $entry.dedupe_context -Name 'conflict_flags' -Default @())) -join ', ')) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.priority_score) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $entry.next_action -Domain 'action') + '</td><td>' + (ConvertTo-ToolHtmlText $entry.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $entry.status -Domain 'status') + '</td><td>' + (ConvertTo-ToolHtmlText (@($entry.reason_codes | ForEach-Object { ConvertTo-ToolDisplayLabel -Value $_ -Domain 'reason' }) -join ', ')) + '</td><td>' + (ConvertTo-ToolHtmlText (Get-ToolObjectProperty -Object $entry.source_evidence -Name 'source_id' -Default 'UNKNOWN')) + '</td><td>' + (ConvertTo-ToolHtmlText (@((Get-ToolObjectProperty -Object $entry.dedupe_context -Name 'conflict_flags' -Default @())) -join ', ')) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Review-/Reject-Report</h2><div class="table-wrap"><table><thead><tr><th>Entscheidung</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Grund</th><th>Naechster Versuch</th></tr></thead><tbody>')
     foreach ($entry in @($Coverage.candidate_verification_decision_report.items | Select-Object -First 25)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.decision) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.queue_status) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.reason) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_attempt_at) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.decision) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $entry.queue_status -Domain 'status') + '</td><td>' + (ConvertTo-ToolHtmlText $entry.reason) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_attempt_at) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Importwellen</h2>')
@@ -403,23 +541,23 @@ function ConvertTo-ToolCoverageHtml {
         [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Link</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>')
         foreach ($candidate in @($wave.candidates)) {
             $candidateLink = Get-ToolPrimaryCoverageLink -Item $candidate -CompanyLookup $companyLookup
-            [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $candidate.kind) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $candidateLink) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.industry) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.review_status) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.next_step) + '</td></tr>')
+            [void]$lines.Add('<tr><td>' + (ConvertTo-ToolDisplayHtmlText $candidate.kind -Domain 'kind') + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $candidateLink) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $candidate.target_area -Domain 'target_area') + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.industry) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $candidate.review_status -Domain 'status') + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.next_step) + '</td></tr>')
         }
         [void]$lines.Add('</tbody></table></div></div>')
     }
     [void]$lines.Add('</section><section><h2>Backlog</h2><div class="table-wrap"><table><thead><tr><th>Score</th><th>Typ</th><th>Firma</th><th>Link</th><th>Begruendung</th><th>Naechster Schritt</th></tr></thead><tbody>')
     foreach ($item in @($Coverage.backlog | Select-Object -First 25)) {
         $itemLink = Get-ToolPrimaryCoverageLink -Item $item -CompanyLookup $companyLookup
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-ToolHtmlText $item.kind) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $itemLink) + '</td><td>' + (ConvertTo-ToolHtmlText $item.reason) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_step) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $item.kind -Domain 'kind') + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $itemLink) + '</td><td>' + (ConvertTo-ToolHtmlText $item.reason) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_step) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section><section><h2>Scanprioritaeten</h2><div class="table-wrap"><table><thead><tr><th>Score</th><th>Firma</th><th>Link</th><th>Aktion</th><th>Gruende</th></tr></thead><tbody>')
     foreach ($item in @($Coverage.scan_priority | Select-Object -First 25)) {
         $itemLink = Get-ToolPrimaryCoverageLink -Item $item -CompanyLookup $companyLookup
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $itemLink) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_action) + '</td><td>' + (ConvertTo-ToolHtmlText (@($item.reasons) -join ', ')) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $itemLink) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $item.next_action -Domain 'action') + '</td><td>' + (ConvertTo-ToolHtmlText (@($item.reasons | ForEach-Object { ConvertTo-ToolDisplayLabel -Value $_ -Domain 'reason' }) -join ', ')) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section><section><h2>Firmeninventar</h2><p>Segmentierte Anzeige: maximal 250 sortierte Firmen im HTML-Audit; vollstaendige Daten stehen im JSON-Artefakt.</p><div class="table-wrap"><table><thead><tr><th>Firma</th><th>Link</th><th>Zielgebiet</th><th>Verifikation</th><th>Freshness</th><th>Naechster Refresh</th><th>Status</th><th>Scanfaehig</th><th>Naechster Schritt</th></tr></thead><tbody>')
     foreach ($company in @($Coverage.companies | Select-Object -First 250)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $company.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $company.primary_link) + '</td><td>' + (ConvertTo-ToolHtmlText $company.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $company.verification_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.staleness_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_refresh_at) + '</td><td>' + (ConvertTo-ToolHtmlText $company.inventory_state) + '</td><td>' + (ConvertTo-ToolHtmlText $company.has_career_url) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_step) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $company.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $company.primary_link) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $company.target_area -Domain 'target_area') + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $company.verification_status -Domain 'status') + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $company.staleness_status -Domain 'status') + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_refresh_at) + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $company.inventory_state -Domain 'status') + '</td><td>' + (ConvertTo-ToolDisplayHtmlText $company.has_career_url -Domain 'bool') + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_step) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section></main></body></html>')
     return ($lines.ToArray() -join "`n")
