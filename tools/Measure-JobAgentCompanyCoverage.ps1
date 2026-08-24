@@ -263,17 +263,20 @@ function ConvertTo-ToolCoverageMarkdown {
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Kandidaten-Verifikationsqueue')
-    [void]$lines.Add('| Cluster | Kandidat | Firma | Status | Review/Retry-Grund | Naechster Versuch |')
-    [void]$lines.Add('|---|---|---|---|---|---|')
+    [void]$lines.Add('| Score | Aktion | Cluster | Kandidat | Firma | Status | Gruende | Quelle | Dedupe |')
+    [void]$lines.Add('|---:|---|---|---|---|---|---|---|---|')
     $queueEntries = if ($null -eq $Coverage.candidate_verification_queue) { @() } else { @($Coverage.candidate_verification_queue.queue) }
     foreach ($entry in @($queueEntries | Select-Object -First 25)) {
-        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} |' -f
+                $entry.priority_score,
+                (ConvertTo-ToolMarkdownText $entry.next_action),
                 (ConvertTo-ToolMarkdownText $entry.identity_cluster_id),
                 (ConvertTo-ToolMarkdownText $entry.candidate_id),
                 (ConvertTo-ToolMarkdownText $entry.canonical_name),
                 (ConvertTo-ToolMarkdownText $entry.status),
-                (ConvertTo-ToolMarkdownText $entry.review_reason),
-                (ConvertTo-ToolMarkdownText $entry.next_attempt_at)))
+                (ConvertTo-ToolMarkdownText (@($entry.reason_codes) -join ', ')),
+                (ConvertTo-ToolMarkdownText (Get-ToolObjectProperty -Object $entry.source_evidence -Name 'source_id' -Default 'UNKNOWN')),
+                (ConvertTo-ToolMarkdownText (@((Get-ToolObjectProperty -Object $entry.dedupe_context -Name 'conflict_flags' -Default @())) -join ', '))))
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Review-/Reject-Report')
@@ -378,10 +381,10 @@ function ConvertTo-ToolCoverageHtml {
         [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $cluster.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $cluster.review_queue_reason) + '</td><td>' + (ConvertTo-ToolHtmlText @($cluster.candidate_ids).Count) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
-    [void]$lines.Add('<section><h2>Kandidaten-Verifikationsqueue</h2><div class="table-wrap"><table><thead><tr><th>Cluster</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Review/Retry-Grund</th><th>Naechster Versuch</th></tr></thead><tbody>')
+    [void]$lines.Add('<section><h2>Kandidaten-Verifikationsqueue</h2><div class="table-wrap"><table><thead><tr><th>Score</th><th>Aktion</th><th>Cluster</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Gruende</th><th>Quelle</th><th>Dedupe</th></tr></thead><tbody>')
     $queueEntries = if ($null -eq $Coverage.candidate_verification_queue) { @() } else { @($Coverage.candidate_verification_queue.queue) }
     foreach ($entry in @($queueEntries | Select-Object -First 25)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.status) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.review_reason) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_attempt_at) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $entry.priority_score) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.next_action) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.identity_cluster_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.candidate_id) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.canonical_name) + '</td><td>' + (ConvertTo-ToolHtmlText $entry.status) + '</td><td>' + (ConvertTo-ToolHtmlText (@($entry.reason_codes) -join ', ')) + '</td><td>' + (ConvertTo-ToolHtmlText (Get-ToolObjectProperty -Object $entry.source_evidence -Name 'source_id' -Default 'UNKNOWN')) + '</td><td>' + (ConvertTo-ToolHtmlText (@((Get-ToolObjectProperty -Object $entry.dedupe_context -Name 'conflict_flags' -Default @())) -join ', ')) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section>')
     [void]$lines.Add('<section><h2>Review-/Reject-Report</h2><div class="table-wrap"><table><thead><tr><th>Entscheidung</th><th>Kandidat</th><th>Firma</th><th>Status</th><th>Grund</th><th>Naechster Versuch</th></tr></thead><tbody>')
@@ -494,6 +497,11 @@ $htmlPath = Join-Path $htmlRootPath 'company-coverage.html'
 $coverage | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $jsonPath -Encoding UTF8
 ConvertTo-ToolCoverageMarkdown -Coverage $coverage | Set-Content -LiteralPath $markdownPath -Encoding UTF8
 ConvertTo-ToolCoverageHtml -Coverage $coverage | Set-Content -LiteralPath $htmlPath -Encoding UTF8
+if ($null -ne $coverage.candidate_verification_queue) {
+    $queuePath = Resolve-ToolPath -Root $projectRoot -Path $CandidateVerificationQueuePath
+    New-Item -ItemType Directory -Path (Split-Path -Parent $queuePath) -Force | Out-Null
+    $coverage.candidate_verification_queue | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $queuePath -Encoding UTF8
+}
 
 [pscustomobject]@{
     status = 'ok'
@@ -501,6 +509,7 @@ ConvertTo-ToolCoverageHtml -Coverage $coverage | Set-Content -LiteralPath $htmlP
     json_path = $jsonPath
     markdown_path = $markdownPath
     html_path = $htmlPath
+    candidate_verification_queue_path = if ($null -eq $coverage.candidate_verification_queue) { $null } else { (Resolve-ToolPath -Root $projectRoot -Path $CandidateVerificationQueuePath) }
     companies_total = $coverage.metrics.companies_total
     backlog_items = @($coverage.backlog).Count
     duplicate_groups = $coverage.metrics.duplicate_groups

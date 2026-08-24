@@ -920,6 +920,187 @@ function New-JobAgentCoverageDimensions {
     }
 }
 
+function Get-JobAgentCoverageCandidateSourceEvidence {
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter()][AllowNull()][object]$Source = $null
+    )
+
+    $evidenceUrl = foreach ($name in @('observed_url', 'posting_url', 'source_page')) {
+        $value = Get-JobAgentCoverageProperty -Object $Candidate -Name $name
+        if (Test-JobAgentCoverageHttpUrl -Url $value) {
+            [string]$value
+            break
+        }
+    }
+    [pscustomobject]@{
+        source_id = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'source_id' -Default 'UNKNOWN')
+        source_class = if ($null -eq $Source) { [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'source_class' -Default 'UNKNOWN') } else { [string](Get-JobAgentCoverageProperty -Object $Source -Name 'source_class' -Default 'UNKNOWN') }
+        evidence_level = if ($null -eq $Source) { [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'officialness_level' -Default 'DISCOVERY_HINT') } else { [string](Get-JobAgentCoverageProperty -Object $Source -Name 'evidence_level' -Default 'DISCOVERY_HINT') }
+        observed_url = $evidenceUrl
+        observed_at = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'observed_at' -Default $null)
+        record_hash = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'source_record_hash' -Default (Get-JobAgentCoverageProperty -Object (Get-JobAgentCoverageProperty -Object $Candidate -Name 'source_snapshot') -Name 'record_hash' -Default $null))
+        allowed_use = if ($null -eq $Source) { $null } else { [string](Get-JobAgentCoverageProperty -Object $Source -Name 'allowed_use' -Default $null) }
+        rate_limit_policy = if ($null -eq $Source) { $null } else { [string](Get-JobAgentCoverageProperty -Object $Source -Name 'rate_limit_policy' -Default $null) }
+    }
+}
+
+function Get-JobAgentCoverageCandidateReviewAction {
+    param(
+        [Parameter(Mandatory)][object]$Cluster,
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][string[]]$ReasonCodes,
+        [Parameter(Mandatory)][string]$FreshnessStatus
+    )
+
+    if ($ReasonCodes -contains 'DUPLICATE_CLUSTER_REVIEW' -or $ReasonCodes -contains 'NAME_CONFLICT_REVIEW') {
+        return 'REJECT_DUPLICATE'
+    }
+    if ($ReasonCodes -contains 'TARGET_AREA_UNCERTAIN' -or $ReasonCodes -contains 'OUT_OF_SCOPE_HINT') {
+        return 'CHECK_LOCATION'
+    }
+    if ($ReasonCodes -contains 'STAFFING_AGENCY_REVIEW') {
+        return 'MANUAL_DECISION'
+    }
+    if ($FreshnessStatus -in @('EXPIRED', 'REFRESH_DUE')) {
+        return 'WAIT_FOR_REFRESH'
+    }
+    return 'VERIFY_OFFICIAL_SITE'
+}
+
+function New-JobAgentCoverageCandidateReviewQueueEntry {
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][object]$Cluster,
+        [Parameter()][AllowNull()][object]$Source = $null,
+        [Parameter()][AllowNull()][object]$Previous = $null,
+        [Parameter(Mandatory)][datetime]$Now,
+        [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 30
+    )
+
+    $candidateId = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'candidate_id' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'hint_id' -Default 'UNKNOWN'))
+    $sourceClass = if ($null -eq $Source) { [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'source_class' -Default 'DISCOVERY_HINT') } else { [string](Get-JobAgentCoverageProperty -Object $Source -Name 'source_class' -Default 'DISCOVERY_HINT') }
+    $freshness = New-JobAgentCoverageFreshnessRecord -Now $Now -LastImportedAt (Get-JobAgentCoverageProperty -Object $Candidate -Name 'observed_at') -LastVerifiedAt $null -NextRefreshAt $null -ExpiresAfterDays (Get-JobAgentCoveragePolicyDays -Kind $sourceClass -DefaultDays $StaleAfterDays) -RefreshReason 'candidate_source_refresh'
+    $reasonCodes = [System.Collections.Generic.List[string]]::new()
+    foreach ($flag in @($Cluster.conflict_flags)) { if (-not [string]::IsNullOrWhiteSpace([string]$flag)) { $reasonCodes.Add([string]$flag) } }
+    if (@($Cluster.candidate_ids).Count -gt 1) { $reasonCodes.Add('DUPLICATE_CLUSTER_REVIEW') }
+    if ([string]$Cluster.review_queue_reason -eq 'OFFICIAL_VERIFICATION_REQUIRED' -or [string]$Cluster.review_queue_reason -eq 'READY_FOR_OFFICIAL_VERIFICATION') { $reasonCodes.Add('OFFICIAL_VERIFICATION_REQUIRED') }
+    if ([string]$freshness.staleness_status -in @('EXPIRED', 'REFRESH_DUE')) { $reasonCodes.Add('CANDIDATE_REFRESH_DUE') }
+    if ([string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'known_company_id' -Default '') -ne '') { $reasonCodes.Add('KNOWN_COMPANY_HINT') }
+    $reasonArray = @($reasonCodes.ToArray() | Sort-Object -Unique)
+    $nextAction = Get-JobAgentCoverageCandidateReviewAction -Cluster $Cluster -Candidate $Candidate -ReasonCodes $reasonArray -FreshnessStatus ([string]$freshness.staleness_status)
+    $basePriority = [int](Get-JobAgentCoverageProperty -Object $Candidate -Name 'confidence_score' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'priority_score' -Default 50))
+    $areaBonus = if (@($Cluster.target_area_basis) -contains 'JOB_LOCATION_IN_TARGET') { 12 } elseif (@($Cluster.target_area_basis) -contains 'REGISTER_SEAT_IN_TARGET') { 10 } elseif (@($Cluster.target_area_basis) -contains 'BRANCH_HINT_IN_TARGET') { 8 } else { -20 }
+    $sourceBonus = switch ($sourceClass) {
+        'OPEN_REGISTER_DUMP' { 10; break }
+        'REGIONAL_DIRECTORY' { 8; break }
+        'PUBLIC_INSTITUTION_DIRECTORY' { 8; break }
+        'JOB_BOARD_DISCOVERY' { 4; break }
+        default { 0 }
+    }
+    $riskPenalty = if ($reasonArray -contains 'STAFFING_AGENCY_REVIEW') { 25 } elseif ($reasonArray -contains 'TARGET_AREA_UNCERTAIN') { 18 } elseif ($reasonArray -contains 'DUPLICATE_CLUSTER_REVIEW') { 8 } else { 0 }
+    $priority = [Math]::Max(0, [Math]::Min(100, $basePriority + $areaBonus + $sourceBonus + ([int]$Cluster.source_count * 3) - $riskPenalty))
+    $status = if ($nextAction -eq 'VERIFY_OFFICIAL_SITE') { 'PENDING' } elseif ($nextAction -eq 'WAIT_FOR_REFRESH') { 'RETRY_SCHEDULED' } else { 'MANUAL_REVIEW_REQUIRED' }
+    if ($null -ne $Previous -and [string](Get-JobAgentCoverageProperty -Object $Previous -Name 'status' -Default '') -in @('VERIFIED', 'RETRY_EXHAUSTED')) {
+        $status = [string]$Previous.status
+    }
+
+    [pscustomobject]@{
+        identity_cluster_id = [string]$Cluster.identity_cluster_id
+        candidate_id = $candidateId
+        candidate_ids = @($Cluster.candidate_ids)
+        canonical_name = [string]$Cluster.canonical_name
+        source_count = [int]$Cluster.source_count
+        priority_score = $priority
+        next_action = $nextAction
+        reason_codes = $reasonArray
+        target_area_basis = @($Cluster.target_area_basis)
+        status = $status
+        review_reason = if ($reasonArray.Count -gt 0) { $reasonArray -join ',' } else { [string]$Cluster.review_queue_reason }
+        retry_count = if ($null -eq $Previous) { 0 } else { [int](Get-JobAgentCoverageProperty -Object $Previous -Name 'retry_count' -Default 0) }
+        last_attempt_at = if ($null -eq $Previous) { $null } else { Get-JobAgentCoverageProperty -Object $Previous -Name 'last_attempt_at' -Default $null }
+        next_attempt_at = if ($status -eq 'PENDING') { $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture) } else { Get-JobAgentCoverageProperty -Object $Previous -Name 'next_attempt_at' -Default $null }
+        last_status = if ($null -eq $Previous) { $null } else { Get-JobAgentCoverageProperty -Object $Previous -Name 'last_status' -Default $null }
+        last_reason = if ($null -eq $Previous) { $null } else { Get-JobAgentCoverageProperty -Object $Previous -Name 'last_reason' -Default $null }
+        freshness_status = [string]$freshness.staleness_status
+        risk_level = if ($reasonArray -contains 'STAFFING_AGENCY_REVIEW' -or $reasonArray -contains 'TARGET_AREA_UNCERTAIN') { 'HIGH' } elseif ($reasonArray -contains 'DUPLICATE_CLUSTER_REVIEW') { 'MEDIUM' } else { 'LOW' }
+        source_evidence = Get-JobAgentCoverageCandidateSourceEvidence -Candidate $Candidate -Source $Source
+        dedupe_context = [pscustomobject]@{
+            dedupe_keys = @($Cluster.dedupe_keys)
+            conflict_flags = @($Cluster.conflict_flags)
+            cluster_candidate_count = @($Cluster.candidate_ids).Count
+        }
+    }
+}
+
+function New-JobAgentCoverageCandidateReviewQueue {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowNull()][object]$HintStore = $null,
+        [Parameter()][AllowNull()][object]$SourceRegistry = $null,
+        [Parameter()][AllowNull()][object]$PreviousQueue = $null,
+        [Parameter()][datetime]$Now = [datetime]::UtcNow,
+        [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 30,
+        [Parameter()][ValidateRange(1, 1000)][int]$MaxItems = 250
+    )
+
+    if ($null -eq $HintStore) {
+        return [pscustomobject]@{
+            schema_version = 'jobagent/company-candidate-verification-queue/v1'
+            queue_type = 'review'
+            generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+            clusters_total = 0
+            candidates_total = 0
+            ready_total = 0
+            action_counts = [pscustomobject]@{}
+            queue = @()
+        }
+    }
+
+    $sourceById = @{}
+    if ($null -ne $SourceRegistry) {
+        foreach ($source in @($SourceRegistry.items)) {
+            $sourceId = [string](Get-JobAgentCoverageProperty -Object $source -Name 'source_id' -Default '')
+            if (-not [string]::IsNullOrWhiteSpace($sourceId)) { $sourceById[$sourceId] = $source }
+        }
+    }
+    $previousByCandidate = @{}
+    if ($null -ne $PreviousQueue) {
+        foreach ($entry in @($PreviousQueue.queue)) {
+            $candidateId = [string](Get-JobAgentCoverageProperty -Object $entry -Name 'candidate_id' -Default '')
+            if (-not [string]::IsNullOrWhiteSpace($candidateId)) { $previousByCandidate[$candidateId] = $entry }
+        }
+    }
+
+    $clusterReport = Resolve-JobAgentCompanyCandidateClusters -Candidates @($HintStore.hints) -ObservedAt $Now
+    $candidateById = @{}
+    foreach ($candidate in @($HintStore.hints)) {
+        $candidateId = [string](Get-JobAgentCoverageProperty -Object $candidate -Name 'hint_id' -Default (Get-JobAgentCoverageProperty -Object $candidate -Name 'candidate_id' -Default ''))
+        if (-not [string]::IsNullOrWhiteSpace($candidateId)) { $candidateById[$candidateId] = $candidate }
+    }
+    $entries = foreach ($cluster in @($clusterReport.clusters)) {
+        $primaryCandidateId = [string](@($cluster.candidate_ids | Sort-Object)[0])
+        $candidate = if ($candidateById.ContainsKey($primaryCandidateId)) { $candidateById[$primaryCandidateId] } else { $cluster.candidates[0] }
+        $sourceId = [string](Get-JobAgentCoverageProperty -Object $candidate -Name 'source_id' -Default '')
+        $source = if ($sourceById.ContainsKey($sourceId)) { $sourceById[$sourceId] } else { $null }
+        $previous = if ($previousByCandidate.ContainsKey($primaryCandidateId)) { $previousByCandidate[$primaryCandidateId] } else { $null }
+        New-JobAgentCoverageCandidateReviewQueueEntry -Candidate $candidate -Cluster $cluster -Source $source -Previous $previous -Now $Now -StaleAfterDays $StaleAfterDays
+    }
+    $sortedEntries = @($entries | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, next_action, canonical_name, candidate_id | Select-Object -First $MaxItems)
+    $actionCounts = @{}
+    foreach ($entry in $sortedEntries) { Add-JobAgentCoverageCount -Counts $actionCounts -Key $entry.next_action }
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-queue/v1'
+        queue_type = 'review'
+        generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        clusters_total = [int]$clusterReport.clusters_total
+        candidates_total = [int]$clusterReport.candidates_total
+        ready_total = @($sortedEntries | Where-Object { [string]$_.status -eq 'PENDING' }).Count
+        action_counts = ConvertTo-JobAgentCoverageCountsObject -Counts $actionCounts
+        queue = $sortedEntries
+    }
+}
+
 function Test-JobAgentCoverageWaveCompanyMatch {
     param(
         [Parameter(Mandatory)][object]$Metric,
@@ -1167,6 +1348,7 @@ function New-JobAgentCoverageReport {
     $metricsArray = @($metrics)
     $candidateClusters = New-JobAgentCoverageCandidateClusterReport -HintStore $HintStore -Now $Now -MaxReviewItems $MaxPriorityItems
     $candidateFreshness = New-JobAgentCoverageCandidateFreshnessReport -HintStore $HintStore -Now $Now -MaxItems $MaxPriorityItems
+    $candidateReviewQueue = New-JobAgentCoverageCandidateReviewQueue -HintStore $HintStore -SourceRegistry $SourceRegistry -PreviousQueue $CandidateVerificationQueue -Now $Now -StaleAfterDays $StaleAfterDays -MaxItems $MaxPriorityItems
     $candidateVerificationDecisionReport = New-JobAgentCoverageCandidateVerificationDecisionReport -CandidateVerificationQueue $CandidateVerificationQueue -MaxItems $MaxPriorityItems
     $importWavePlan = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore -WaveConfig $WaveConfig
     [pscustomobject]@{
@@ -1198,11 +1380,11 @@ function New-JobAgentCoverageReport {
             candidate_clusters_total = $candidateClusters.clusters_total
             candidate_conflict_clusters = $candidateClusters.conflict_clusters
             candidate_review_queue_total = $candidateClusters.review_queue_total
-            candidate_verification_queue_total = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue).Count }
-            candidate_verification_ready = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -in @('PENDING', 'RETRY_SCHEDULED') }).Count }
-            candidate_verification_verified = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -eq 'VERIFIED' }).Count }
-            candidate_verification_manual_review = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count }
-            candidate_verification_retry_exhausted = if ($null -eq $CandidateVerificationQueue) { 0 } else { @($CandidateVerificationQueue.queue | Where-Object { [string]$_.status -eq 'RETRY_EXHAUSTED' }).Count }
+            candidate_verification_queue_total = @($candidateReviewQueue.queue).Count
+            candidate_verification_ready = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -in @('PENDING', 'RETRY_SCHEDULED') }).Count
+            candidate_verification_verified = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'VERIFIED' }).Count
+            candidate_verification_manual_review = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count
+            candidate_verification_retry_exhausted = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'RETRY_EXHAUSTED' }).Count
         }
         dimensions = New-JobAgentCoverageDimensions -CompanyMetrics $metricsArray
         companies = @($metricsArray | Sort-Object company)
@@ -1212,7 +1394,7 @@ function New-JobAgentCoverageReport {
         source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
         candidate_clusters = $candidateClusters
         candidate_freshness = $candidateFreshness
-        candidate_verification_queue = if ($null -eq $CandidateVerificationQueue) { $null } else { $CandidateVerificationQueue }
+        candidate_verification_queue = $candidateReviewQueue
         candidate_verification_decision_report = $candidateVerificationDecisionReport
         import_waves = $importWavePlan
         import_wave_metrics = New-JobAgentCoverageImportWaveMetrics -ImportWavePlan $importWavePlan -GateHistory $WaveGateHistory
@@ -1226,6 +1408,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCoverageDuplicateGroups',
     'New-JobAgentCoverageCandidateClusterReport',
     'New-JobAgentCoverageCandidateFreshnessReport',
+    'New-JobAgentCoverageCandidateReviewQueue',
     'New-JobAgentCoverageCandidateVerificationDecisionReport',
     'New-JobAgentDiscoverySourceCoverageReport',
     'New-JobAgentCoverageDimensions',

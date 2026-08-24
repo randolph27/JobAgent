@@ -191,7 +191,7 @@ foreach ($expected in @(
 Assert-True -Condition (-not ($html -match '<script\b[^>]*\bsrc=')) -Message 'HTML-Report darf keine externen Skripte einbinden.'
 Assert-True -Condition (-not ($html -match '<link\b[^>]*\bhref=')) -Message 'HTML-Report darf keine externen Stylesheets einbinden.'
 Assert-True -Condition (-not ($html -match '<img\b[^>]*\bsrc=')) -Message 'HTML-Report darf keine externen Bilder einbinden.'
-Assert-True -Condition ($html -match '<a href="https://alpha\.example\.invalid/jobs/head-it">') -Message 'Offizielle Links muessen im HTML-Report erhalten bleiben.'
+Assert-True -Condition ($html -match '<a href="https://alpha\.example\.invalid/jobs/head-it" target="_blank" rel="noopener noreferrer">') -Message 'Offizielle Links muessen im HTML-Report erhalten bleiben.'
 
 [pscustomobject]@{
     status = 'ok'

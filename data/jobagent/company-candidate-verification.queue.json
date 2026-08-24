@@ -1,0 +1,450 @@
+{
+  "schema_version": "jobagent/company-candidate-verification-queue/v1",
+  "queue_type": "review",
+  "generated_at": "2026-08-24T07:27:54.443Z",
+  "clusters_total": 18,
+  "candidates_total": 19,
+  "ready_total": 10,
+  "action_counts": {
+    "VERIFY_OFFICIAL_SITE": 10
+  },
+  "queue": [
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_landkreis_freising_wirtschaft_airport_logistics_gmbh_freising",
+      "candidate_id": "regional-hint:landkreis_freising_wirtschaft_airport_logistics_gmbh_freising",
+      "candidate_ids": [
+        "regional-hint:landkreis_freising_wirtschaft_airport_logistics_gmbh_freising"
+      ],
+      "canonical_name": "Airport Logistics GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:landkreis_freising_wirtschaft",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
+        "observed_at": "08/23/2026 08:00:00",
+        "record_hash": "b2d31e38e9966646ca7c03e27bf13f446b5c46b567faa21d84947052ef84b8a1",
+        "allowed_use": "Regionale Arbeitgeber- und Clusterhinweise fuer Freising erfassen; Website und Karrierepfad je Arbeitgeber separat belegen.",
+        "rate_limit_policy": "Seltene manuelle oder gecachte Aktualisierung; keine tiefe Linkverfolgung ohne Quellenentscheid."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:airport logistics"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_1001",
+      "candidate_id": "register-hint:offeneregister_sample_2026_08_alpha_technik_gmbh_muenchen_1",
+      "candidate_ids": [
+        "register-hint:offeneregister_sample_2026_08_alpha_technik_gmbh_muenchen_1"
+      ],
+      "canonical_name": "Alpha Technik GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "REGISTER_SEAT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "UNKNOWN",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:offeneregister_dump",
+        "source_class": "OPEN_REGISTER_DUMP",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": null,
+        "observed_at": "",
+        "record_hash": "1b64d382c89c5af3cdcebb28ebb3f940f258882ecdc6086cf7d4f2230e7a68b8",
+        "allowed_use": "Nicht-amtlichen Bulk-Snapshot als Kandidatenhinweis fuer Muenchen, 20-km-Umkreis und Freising verarbeiten.",
+        "rate_limit_policy": "Bulk-Snapshot lokal verarbeiten; Downloads selten, versioniert und mit Hash/Evidence dokumentieren."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:alpha technik",
+          "register:amtsgericht_muenchen_hrb_1001"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_1002",
+      "candidate_id": "register-hint:offeneregister_sample_2026_08_beta_analytics_ag_munich_2",
+      "candidate_ids": [
+        "register-hint:offeneregister_sample_2026_08_beta_analytics_ag_munich_2"
+      ],
+      "canonical_name": "Beta Analytics AG",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "REGISTER_SEAT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "UNKNOWN",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:offeneregister_dump",
+        "source_class": "OPEN_REGISTER_DUMP",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": null,
+        "observed_at": "",
+        "record_hash": "38bc24463aaa9fa0c53eb418e8bee9221f845b5300abc7290747c5899d66595c",
+        "allowed_use": "Nicht-amtlichen Bulk-Snapshot als Kandidatenhinweis fuer Muenchen, 20-km-Umkreis und Freising verarbeiten.",
+        "rate_limit_policy": "Bulk-Snapshot lokal verarbeiten; Downloads selten, versioniert und mit Hash/Evidence dokumentieren."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:beta analytics",
+          "register:amtsgericht_muenchen_hrb_1002"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_freising_weihenstephan_bio_campus_gmbh",
+      "candidate_id": "regional-hint:stadt_freising_weihenstephan_bio_campus_gmbh",
+      "candidate_ids": [
+        "regional-hint:stadt_freising_weihenstephan_bio_campus_gmbh"
+      ],
+      "canonical_name": "Bio Campus GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_freising_weihenstephan",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://www.freising.de/wirtschaft/weihenstephan",
+        "observed_at": "08/23/2026 08:00:00",
+        "record_hash": "952ddbb1a187a17eead07ac98eaf68b89b1248e8464156d71e11bad6965fd90b",
+        "allowed_use": "Weihenstephan-, Forschungs- und Biotech-Bezuege als sektorale Kandidatenhinweise nutzen.",
+        "rate_limit_policy": "Nur gezielte Snapshot-Aktualisierung; externe Links separat bewerten."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bio campus"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_9999",
+      "candidate_id": "register-hint:offeneregister_sample_2026_08_epsilon_alt_gmbh_muenchen_6",
+      "candidate_ids": [
+        "register-hint:offeneregister_sample_2026_08_epsilon_alt_gmbh_muenchen_6"
+      ],
+      "canonical_name": "Epsilon Alt GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "REGISTER_SEAT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "UNKNOWN",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:offeneregister_dump",
+        "source_class": "OPEN_REGISTER_DUMP",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": null,
+        "observed_at": "",
+        "record_hash": "72f662d0a27d5d9ce61c67e592a12002a51fcf89bcbae21b475c1f5a6400c1c6",
+        "allowed_use": "Nicht-amtlichen Bulk-Snapshot als Kandidatenhinweis fuer Muenchen, 20-km-Umkreis und Freising verarbeiten.",
+        "rate_limit_policy": "Bulk-Snapshot lokal verarbeiten; Downloads selten, versioniert und mit Hash/Evidence dokumentieren."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:epsilon alt",
+          "register:amtsgericht_muenchen_hrb_9999"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_2001",
+      "candidate_id": "register-hint:offeneregister_sample_2026_08_gamma_logistics_gmbh_freising_3",
+      "candidate_ids": [
+        "register-hint:offeneregister_sample_2026_08_gamma_logistics_gmbh_freising_3"
+      ],
+      "canonical_name": "Gamma Logistics GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "REGISTER_SEAT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "UNKNOWN",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:offeneregister_dump",
+        "source_class": "OPEN_REGISTER_DUMP",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": null,
+        "observed_at": "",
+        "record_hash": "1c703b62538c243fd7aafb33d2a482ad5044ffd1a171dddd535dda31f62dc06c",
+        "allowed_use": "Nicht-amtlichen Bulk-Snapshot als Kandidatenhinweis fuer Muenchen, 20-km-Umkreis und Freising verarbeiten.",
+        "rate_limit_policy": "Bulk-Snapshot lokal verarbeiten; Downloads selten, versioniert und mit Hash/Evidence dokumentieren."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:gamma logistics",
+          "register:amtsgericht_muenchen_hrb_2001"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_landkreis_freising_wirtschaft_weihenstephan_research_gmbh_freising",
+      "candidate_id": "regional-hint:landkreis_freising_wirtschaft_weihenstephan_research_gmbh_freising",
+      "candidate_ids": [
+        "regional-hint:landkreis_freising_wirtschaft_weihenstephan_research_gmbh_freising"
+      ],
+      "canonical_name": "Weihenstephan Research GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:landkreis_freising_wirtschaft",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
+        "observed_at": "08/23/2026 08:00:00",
+        "record_hash": "cb1b90dbdf5464d1496993eddc75031b4f25fac0dedc57cd1ce4ae71665938c1",
+        "allowed_use": "Regionale Arbeitgeber- und Clusterhinweise fuer Freising erfassen; Website und Karrierepfad je Arbeitgeber separat belegen.",
+        "rate_limit_policy": "Seltene manuelle oder gecachte Aktualisierung; keine tiefe Linkverfolgung ohne Quellenentscheid."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:weihenstephan research"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_boersennotierte_unternehmen_alpha_regional_ag_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_boersennotierte_unternehmen_alpha_regional_ag_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_boersennotierte_unternehmen_alpha_regional_ag_muenchen"
+      ],
+      "canonical_name": "Alpha Regional AG",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+        "observed_at": "08/23/2026 08:00:00",
+        "record_hash": "3abe39296ece10b2b0459f0c99527924237daeabc79ace610ba73dc8376e3a68",
+        "allowed_use": "Kuratierte Arbeitgeberkandidaten fuer Muenchen und Region erfassen; offizielle Firmenwebsite danach separat verifizieren.",
+        "rate_limit_policy": "Manuell oder selten mit lokalem Cache abrufen; kein Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:alpha regional"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_3001",
+      "candidate_id": "register-hint:offeneregister_sample_2026_08_delta_research_se_garching_b_muenchen_4",
+      "candidate_ids": [
+        "register-hint:offeneregister_sample_2026_08_delta_research_se_garching_b_muenchen_4"
+      ],
+      "canonical_name": "Delta Research SE",
+      "source_count": 1,
+      "priority_score": 97,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "REGISTER_SEAT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "UNKNOWN",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:offeneregister_dump",
+        "source_class": "OPEN_REGISTER_DUMP",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": null,
+        "observed_at": "",
+        "record_hash": "9130450dc84b23cb48023c55fb0cf62f0def294b92b07604d93b0f4404fb18a2",
+        "allowed_use": "Nicht-amtlichen Bulk-Snapshot als Kandidatenhinweis fuer Muenchen, 20-km-Umkreis und Freising verarbeiten.",
+        "rate_limit_policy": "Bulk-Snapshot lokal verarbeiten; Downloads selten, versioniert und mit Hash/Evidence dokumentieren."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:delta research",
+          "register:amtsgericht_muenchen_hrb_3001"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_rohde_schwarz_com",
+      "candidate_id": "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen",
+      "candidate_ids": [
+        "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen"
+      ],
+      "canonical_name": "Rohde & Schwarz GmbH & Co. KG",
+      "source_count": 1,
+      "priority_score": 89,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "KNOWN_COMPANY_HINT",
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "JOB_LOCATION_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-24T07:27:54.443Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stepstone_muenchen",
+        "source_class": "JOB_BOARD_DISCOVERY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://www.stepstone.de/Details",
+        "observed_at": "08/23/2026 08:00:00",
+        "record_hash": "c1756b477cff8d6024140eeb1ef66bff143688c134c774db522163b6b77ef71b",
+        "allowed_use": "Arbeitgebernamen, Ort und minimale Suchmetadaten nur als volatile Discovery-Hints erfassen, falls Terms/Robots und Rate-Limit dies erlauben.",
+        "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur mit kleinem Seitenlimit, Cache und expliziter Quellenfreigabe."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:rohde-schwarz.com",
+          "name:rohde and schwarz"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    }
+  ]
+}
