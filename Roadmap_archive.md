@@ -1,5 +1,27 @@
 # Roadmap Archive
 
+## Archiviert 2026-08-24 - JA-024
+
+- [x] JA-024 Daily-Run-HTML-Report mit Jobtitel-Spalten und sicheren klickbaren Primaerlinks #comment: Daily-Run-HTML und Markdown zeigen jetzt die fachliche Stelle, Firma und offiziellen Ziel-Links direkt in den Jobtabellen.
+  - [x] Beschreibung: `html/jobagent/daily-run-*.html` und Markdown-Reports rendern Jobtabellen fuer neue, aktive, geaenderte sowie geschlossene/entfernte Treffer mit den expliziten Spalten `Titel`, `Firma`, `Standort`, `Prioritaet`, `Status`, `Offizielle Stellen-URL`, `Karriere-URL` und `Quelle`. HTML-Links sind echte Anker mit `target="_blank"` und `rel="noopener noreferrer"`; fehlende URLs bleiben `UNKNOWN`/nicht klickbar und erzeugen keine erfundenen Ziele.
+  - [x] Scope: Geaendert wurden `src/JobAgent.Report.psm1`, `tests/Test-JobAgentReport.ps1`, `tests/Test-JobAgentHtmlAudit.ps1` und `tests/Test-JobAgentDailyRun.ps1`. Keine Aenderung an Klassifikation, Statusmaschine, Deduplikation, Live-Scan oder externen Netzwerkaufrufen.
+  - [x] Ist-Stand (2026-08-24 11:12): Report-Viewmodel fuehrt `career_url` je Jobentry; Markdown-/HTML-Renderer ordnen die nutzerkritischen Spalten vor nachgelagerten Detailfeldern ein. Firmen-Websites und Karriere-URLs in neuen Unternehmen werden im Markdown ebenfalls klickbar gerendert.
+  - [x] Screenshot-Referenz: Kein lokaler Chat-Screenshot verfuegbar; bindendes Fehlerbild wurde ueber Report-, HTML-Audit- und Viewport-Tests gegen fehlende Tabellenkopfspalten, fehlende sichere Anker und Layoutueberlauf abgedeckt.
+  - [x] Abhaengigkeiten: Bestehender Anbieter-Link-Vertrag aus JA-031 bis JA-033, fachliche Labels aus JA-037, Kurzprofilspalte aus JA-038 und Quellenbestand aus JA-039.
+  - [x] Aufwand/Dauer: Aufwand M; innerhalb der aktuellen Arbeitseinheit abgeschlossen.
+  - [x] Prioritaetsscore: 100/100, weil der wichtigste Daily-Run-Output ohne sichtbare Titel- und Linkspalten nicht direkt nutzbar war.
+  - [x] Ordnungsbegruendung: Der Report-Renderer wurde vor Scanbreiten- und Inventarausbau korrigiert, damit Folgeläufe sofort fachlich verwertbare Tabellen liefern.
+  - [x] Risiken und Unsicherheiten: Historische Jobs ohne Karriere-URL bleiben bewusst `UNKNOWN`; die im Chat erwaehnte Screenshot-Datei konnte nicht lokal gespeichert werden, weil kein Dateianhang im Workspace verfuegbar war.
+  - [x] Schritte:
+    1. `New-JobAgentReportJobEntry` um `career_url` aus dem Firmeninventar erweitert.
+    2. Markdown- und HTML-Jobtabellen auf die sichtbare Pflichtreihenfolge `Titel`, `Firma`, `Standort`, `Prioritaet`, `Status`, `Offizielle Stellen-URL`, `Karriere-URL`, `Quelle` umgestellt.
+    3. Report-, Daily-Run- und HTML-Audit-Tests um exakte Spaltenkopf- und Link-Assertions ergaenzt.
+  - [x] Evidence: `src/JobAgent.Report.psm1`, `tests/Test-JobAgentReport.ps1`, `tests/Test-JobAgentHtmlAudit.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `html/jobagent/ja-022-viewport-audit.html`, `output/playwright/ja-022-viewport-1920.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-800.png`.
+  - [x] Funktionstest: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlAudit.ps1` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit 0.
+  - [x] Audit: HTML enthaelt Viewport-Meta, `overflow-wrap:anywhere`, horizontales Tabellen-Scrolling, keine externen Skripte/Styles/Bilder und sichere Linkattribute; 1920/1366/800-Viewport-Artefakte wurden neu erzeugt.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Meilenstein: M1 Report-Nutzbarkeit abgeschlossen; naechster fachlicher Punkt ist JA-025.
+
 ## Archiviert am 2026-08-24
 
 - [x] JA-032 Coverage-HTML mit anklickbaren Anbieter-, Karriere- und ATS-Links ausgeben #comment: Der lokale HTML-Output enthaelt jetzt sichere Linkspalten fuer offizielle Anbieterquellen und review-only Discovery-Hinweise.
@@ -873,4 +895,3 @@
   - [x] Ordnungsbegruendung: Die Quellenanzahl ist nun eine direkte Steuerungskennzahl fuer Ausbau und Betrieb; die Umsetzung reduziert Unsicherheit im Daily-Betrieb ohne produktive Daten zu erfinden.
   - [x] Risiken und Unsicherheiten: Die Definition `Quelle` zaehlt drei Gruppen: offizielle/produktive `job_sources`, Eintraege der Source Registry und Discovery-Hints. Dadurch ist `sources_total` bewusst nicht identisch mit Firmenanzahl oder Adapterversuchen.
   - [x] Meilenstein: M6-C Quellenbestand messbar und sichtbar.
-

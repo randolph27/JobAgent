@@ -3,6 +3,7 @@ logs/
 backups/
 state/
 .ci/tmp/
+.ci/inbox/
 .ci/run/
 data/jobagent/store.lock
 data/jobagent/backups/

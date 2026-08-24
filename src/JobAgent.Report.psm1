@@ -508,6 +508,7 @@ function New-JobAgentReportJobEntry {
         age_basis = [string]$ageInfo.age_basis
         age_days = [string]$ageInfo.age_days
         official_url = ConvertTo-JobAgentReportText -Value $Job.official_url
+        career_url = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $company -Name 'career_url' -Default 'UNKNOWN')
         provider_link = $providerLink
         provider_label = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $providerLink -Name 'label' -Default 'Kein Link')
         provider_url = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $providerLink -Name 'url' -Default 'UNKNOWN')
@@ -736,8 +737,8 @@ function Add-JobAgentReportMarkdownTable {
         [void]$Lines.Add($EmptyText)
         return
     }
-    $header = if ($IncludeChange) { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Kurzprofil | Aenderung | Stelle | Anbieter | Begruendung |' } else { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Kurzprofil | Stelle | Anbieter | Begruendung |' }
-    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' }
+    $header = if ($IncludeChange) { '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Kurzprofil | Aenderung | Begruendung |' } else { '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Kurzprofil | Begruendung |' }
+    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' }
     [void]$Lines.Add($header)
     [void]$Lines.Add($separator)
     foreach ($item in $Items) {
@@ -746,11 +747,14 @@ function Add-JobAgentReportMarkdownTable {
         $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'Unbekannt' } else { ('{0} Tage ({1})' -f $item.age_days, (ConvertTo-JobAgentReportDisplayLabel -Value $item.age_basis -Domain 'age_basis')) }
         if ($IncludeChange) {
             $cells = @(
-                    (ConvertTo-JobAgentReportMarkdownText $item.priority),
-                    (ConvertTo-JobAgentReportMarkdownText $item.company),
                     (ConvertTo-JobAgentReportMarkdownText $item.title),
-                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.status -Domain 'job_status'),
+                    (ConvertTo-JobAgentReportMarkdownText $item.company),
                     (ConvertTo-JobAgentReportMarkdownText $item.location),
+                    (ConvertTo-JobAgentReportMarkdownText $item.priority),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.status -Domain 'job_status'),
+                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Offizielle Stellen-URL'),
+                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.career_url -Label 'Karriere-URL'),
+                    (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
                     (ConvertTo-JobAgentReportDisplayMarkdownText $item.work_model -Domain 'work_model'),
                     (ConvertTo-JobAgentReportDisplayMarkdownText $item.employment_type -Domain 'employment_type'),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.published_at)),
@@ -761,19 +765,20 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
                     (ConvertTo-JobAgentReportMarkdownText $item.description),
                     (ConvertTo-JobAgentReportMarkdownText $change),
-                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Stelle'),
-                    (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
                     (ConvertTo-JobAgentReportMarkdownText $item.priority_explanation)
             )
             [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
         }
         else {
             $cells = @(
-                    (ConvertTo-JobAgentReportMarkdownText $item.priority),
-                    (ConvertTo-JobAgentReportMarkdownText $item.company),
                     (ConvertTo-JobAgentReportMarkdownText $item.title),
-                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.status -Domain 'job_status'),
+                    (ConvertTo-JobAgentReportMarkdownText $item.company),
                     (ConvertTo-JobAgentReportMarkdownText $item.location),
+                    (ConvertTo-JobAgentReportMarkdownText $item.priority),
+                    (ConvertTo-JobAgentReportDisplayMarkdownText $item.status -Domain 'job_status'),
+                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Offizielle Stellen-URL'),
+                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.career_url -Label 'Karriere-URL'),
+                    (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
                     (ConvertTo-JobAgentReportDisplayMarkdownText $item.work_model -Domain 'work_model'),
                     (ConvertTo-JobAgentReportDisplayMarkdownText $item.employment_type -Domain 'employment_type'),
                     (ConvertTo-JobAgentReportMarkdownText (ConvertTo-JobAgentReportDateText $item.published_at)),
@@ -783,8 +788,6 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $item.salary),
                     (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
                     (ConvertTo-JobAgentReportMarkdownText $item.description),
-                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Stelle'),
-                    (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
                     (ConvertTo-JobAgentReportMarkdownText $item.priority_explanation)
             )
             [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
@@ -834,8 +837,8 @@ function Add-JobAgentReportCompanyMarkdownTable {
     foreach ($item in $Items) {
         $cells = @(
                 (ConvertTo-JobAgentReportMarkdownText $item.company),
-                (ConvertTo-JobAgentReportMarkdownText $item.official_website_url),
-                (ConvertTo-JobAgentReportMarkdownText $item.career_url),
+                (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_website_url -Label 'Website'),
+                (ConvertTo-JobAgentReportMarkdownLink -Url $item.career_url -Label 'Karriere-URL'),
                 (ConvertTo-JobAgentReportDisplayMarkdownText $item.verification_status -Domain 'verification_status')
         )
         [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
@@ -859,10 +862,10 @@ function Add-JobAgentReportHtmlTable {
     [void]$Lines.Add('<table class="job-table">')
     [void]$Lines.Add('<thead>')
     if ($IncludeChange) {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Aenderung</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Aenderung</th><th>Begruendung</th></tr>')
     }
     else {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Begruendung</th></tr>')
     }
     [void]$Lines.Add('</thead>')
     [void]$Lines.Add('<tbody>')
@@ -872,16 +875,20 @@ function Add-JobAgentReportHtmlTable {
             $change = $item.change_reason
         }
         $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'Unbekannt' } else { ('{0} Tage ({1})' -f $item.age_days, (ConvertTo-JobAgentReportDisplayLabel -Value $item.age_basis -Domain 'age_basis')) }
-        $urlCell = ConvertTo-JobAgentReportHtmlLink -Url $item.official_url -Label 'Stelle'
+        $urlCell = ConvertTo-JobAgentReportHtmlLink -Url $item.official_url -Label 'Offizielle Stellen-URL'
+        $careerCell = ConvertTo-JobAgentReportHtmlLink -Url $item.career_url -Label 'Karriere-URL'
         $providerCell = ConvertTo-JobAgentReportProviderHtmlLink -Link $item.provider_link
 
         if ($IncludeChange) {
             [void]$Lines.Add(
-                '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
+                '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
-                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.status -Domain 'job_status') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.status -Domain 'job_status') +
+                '</td><td>' + $urlCell +
+                '</td><td>' + $careerCell +
+                '</td><td>' + $providerCell +
                 '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.work_model -Domain 'work_model') +
                 '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.employment_type -Domain 'employment_type') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.published_at)) +
@@ -892,19 +899,20 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.description) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $change) +
-                '</td><td>' + $urlCell +
-                '</td><td>' + $providerCell +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
                 '</td></tr>'
             )
         }
         else {
             [void]$Lines.Add(
-                '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
+                '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
-                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.title) +
-                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.status -Domain 'job_status') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.location) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority) +
+                '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.status -Domain 'job_status') +
+                '</td><td>' + $urlCell +
+                '</td><td>' + $careerCell +
+                '</td><td>' + $providerCell +
                 '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.work_model -Domain 'work_model') +
                 '</td><td>' + (ConvertTo-JobAgentReportDisplayHtmlText $item.employment_type -Domain 'employment_type') +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText (ConvertTo-JobAgentReportDateText $item.published_at)) +
@@ -914,8 +922,6 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.salary) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.description) +
-                '</td><td>' + $urlCell +
-                '</td><td>' + $providerCell +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
                 '</td></tr>'
             )
