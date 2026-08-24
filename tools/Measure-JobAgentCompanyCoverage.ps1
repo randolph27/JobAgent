@@ -69,6 +69,9 @@ function ConvertTo-ToolDisplayLabel {
         'metric' {
             switch ($text) {
                 'companies_total' { return 'Unternehmen gesamt' }
+                'target_inventory_candidates_total' { return 'Zielgebiet-Kandidaten gesamt' }
+                'target_inventory_gap_to_1000' { return 'Luecke bis 1000 Kandidaten' }
+                'scannable_without_official_source' { return 'Scanfaehig ohne offiziellen Beleg' }
                 'career_url_verified' { return 'Karriere-URL verifiziert' }
                 'company_domain_verified' { return 'Firmendomain verifiziert' }
                 'unverified' { return 'Nicht verifiziert' }
@@ -332,7 +335,7 @@ function ConvertTo-ToolCoverageMarkdown {
     [void]$lines.Add('## Kernmetriken')
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
+    foreach ($metric in @('companies_total', 'target_inventory_candidates_total', 'target_inventory_gap_to_1000', 'scannable_without_official_source', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
         [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-ToolDisplayLabel -Value $metric -Domain 'metric'), $Coverage.metrics.$metric))
     }
     [void]$lines.Add('')
@@ -521,7 +524,7 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } .table-wrap { overflow-y: auto; max-height: 68vh; border: 1px solid var(--line); } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; position: sticky; top: 0; z-index: 1; } .provider-link { color: var(--accent); font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; } .review-link, .link-missing { display: inline-block; color: var(--accent-alt); font-weight: 700; } .link-reason { display: block; max-width: 36ch; color: var(--muted); font-size: .82rem; line-height: 1.35; overflow-wrap: anywhere; } .wave { border-left: 4px solid var(--accent-alt); padding-left: 12px; margin-top: 14px; } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 720px; } }')
     [void]$lines.Add('</style></head><body><main>')
     [void]$lines.Add('<section><h1>JobAgent Firmen-Coverage-Audit</h1><p>' + (ConvertTo-ToolHtmlText $Coverage.approximation_notice) + '</p><div class="summary">')
-    foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
+    foreach ($metric in @('companies_total', 'target_inventory_candidates_total', 'target_inventory_gap_to_1000', 'scannable_without_official_source', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
         [void]$lines.Add('<div class="metric"><span class="label">' + (ConvertTo-ToolDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-ToolHtmlText $Coverage.metrics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')
@@ -677,6 +680,9 @@ if ($null -ne $coverage.candidate_verification_queue) {
     companies_total = $coverage.metrics.companies_total
     backlog_items = @($coverage.backlog).Count
     duplicate_groups = $coverage.metrics.duplicate_groups
+    target_inventory_candidates_total = $coverage.metrics.target_inventory_candidates_total
+    target_inventory_gap_to_1000 = $coverage.metrics.target_inventory_gap_to_1000
+    target_inventory_gate_status = $coverage.target_inventory_gate.status
     import_waves = @($coverage.import_waves.waves).Count
     sources_total = $coverage.metrics.sources_total
     official_sources = $coverage.metrics.official_sources

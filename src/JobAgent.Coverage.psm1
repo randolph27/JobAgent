@@ -1534,12 +1534,39 @@ function New-JobAgentCoverageReport {
     $candidateVerificationDecisionReport = New-JobAgentCoverageCandidateVerificationDecisionReport -CandidateVerificationQueue $CandidateVerificationQueue -MaxItems $MaxPriorityItems
     $importWavePlan = New-JobAgentCoverageImportWavePlan -CompanyMetrics $metricsArray -HintStore $HintStore -WaveConfig $WaveConfig
     $sourceInventory = New-JobAgentSourceInventoryReport -Document $Document -SourceRegistry $SourceRegistry -HintStore $HintStore -Now $Now -StaleAfterDays $StaleAfterDays
+    $duplicateGroups = @(Get-JobAgentCoverageDuplicateGroups -Document $Document)
+    $targetInventoryCandidatesTotal = $metricsArray.Count + [int]$candidateClusters.clusters_total
+    $scannableWithoutOfficialSource = @($metricsArray | Where-Object {
+            [bool]$_.has_career_url -and (
+                [string]$_.verification_status -notin @('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -or
+                [string]$_.inventory_state -eq 'MANUAL_REVIEW_REQUIRED'
+            )
+        }).Count
+    $targetInventoryGate = [pscustomobject]@{
+        schema_version = 'jobagent/company-target-inventory-gate/v1'
+        required_inventory_candidates = 1000
+        inventory_candidates_total = $targetInventoryCandidatesTotal
+        productive_companies_total = $metricsArray.Count
+        candidate_clusters_total = [int]$candidateClusters.clusters_total
+        gap_to_required_inventory = [Math]::Max(0, 1000 - $targetInventoryCandidatesTotal)
+        duplicate_groups = $duplicateGroups.Count
+        scannable_without_official_source = $scannableWithoutOfficialSource
+        status = if ($targetInventoryCandidatesTotal -ge 1000 -and $duplicateGroups.Count -eq 0 -and $scannableWithoutOfficialSource -eq 0) { 'passed' } else { 'failed' }
+        violations = @(
+            if ($targetInventoryCandidatesTotal -lt 1000) { 'INVENTORY_CANDIDATES_BELOW_1000' }
+            if ($duplicateGroups.Count -gt 0) { 'DUPLICATE_GROUPS_PRESENT' }
+            if ($scannableWithoutOfficialSource -gt 0) { 'SCANNABLE_COMPANY_WITHOUT_OFFICIAL_SOURCE' }
+        )
+    }
     [pscustomobject]@{
         generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         stale_after_days = $StaleAfterDays
         approximation_notice = 'Coverage-Werte sind operative Naeherungen aus dem lokalen Firmeninventar und behaupten keine vollstaendige Marktdeckung.'
         metrics = [pscustomobject]@{
             companies_total = $metricsArray.Count
+            target_inventory_candidates_total = $targetInventoryCandidatesTotal
+            target_inventory_gap_to_1000 = [Math]::Max(0, 1000 - $targetInventoryCandidatesTotal)
+            scannable_without_official_source = $scannableWithoutOfficialSource
             with_career_url = @($metricsArray | Where-Object has_career_url).Count
             without_career_url = @($metricsArray | Where-Object { -not [bool]$_.has_career_url }).Count
             successfully_scanned = @($metricsArray | Where-Object latest_scan_succeeded).Count
@@ -1557,7 +1584,7 @@ function New-JobAgentCoverageReport {
             career_url_verified = @($metricsArray | Where-Object { [string]$_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count
             company_domain_verified = @($metricsArray | Where-Object { [string]$_.verification_status -eq 'COMPANY_DOMAIN_VERIFIED' }).Count
             unverified = @($metricsArray | Where-Object { [string]$_.verification_status -eq 'UNVERIFIED' }).Count
-            duplicate_groups = @(Get-JobAgentCoverageDuplicateGroups -Document $Document).Count
+            duplicate_groups = $duplicateGroups.Count
             discovery_hints_total = if ($null -eq $HintStore) { 0 } else { @($HintStore.hints).Count }
             unverified_discovery_hints = if ($null -eq $HintStore) { 0 } else { @($HintStore.hints | Where-Object { [string](Get-JobAgentCoverageProperty -Object $_ -Name 'verification_status' -Default 'UNVERIFIED') -eq 'UNVERIFIED' }).Count }
             candidate_clusters_total = $candidateClusters.clusters_total
@@ -1590,6 +1617,7 @@ function New-JobAgentCoverageReport {
         scan_priority = @(Get-JobAgentCoverageScanPriority -CompanyMetrics $metricsArray -MaxCompanies $MaxPriorityItems)
         source_coverage = if ($null -eq $SourceRegistry) { $null } else { New-JobAgentDiscoverySourceCoverageReport -SourceRegistry $SourceRegistry -Now $Now }
         source_inventory = $sourceInventory
+        target_inventory_gate = $targetInventoryGate
         candidate_clusters = $candidateClusters
         candidate_freshness = $candidateFreshness
         candidate_verification_queue = $candidateReviewQueue

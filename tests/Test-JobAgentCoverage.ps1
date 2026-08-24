@@ -281,6 +281,11 @@ $candidateVerificationQueue = [pscustomobject]@{
 }
 $coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now ([datetime]'2026-08-23T08:30:00Z')
 Assert-True -Condition ($coverageWithInputs.metrics.discovery_hints_total -eq $hintStore.hints_total) -Message 'Coverage uebernimmt Discovery-Hint-Zaehler falsch.'
+Assert-True -Condition ($coverageWithInputs.target_inventory_gate.schema_version -eq 'jobagent/company-target-inventory-gate/v1') -Message 'Coverage erzeugt keinen JA-025-Zielinventar-Gate.'
+Assert-True -Condition ($coverageWithInputs.metrics.target_inventory_candidates_total -eq ($coverageWithInputs.metrics.companies_total + $coverageWithInputs.metrics.candidate_clusters_total)) -Message 'Zielinventar-Gate zaehlt Firmen und Kandidatencluster inkonsistent.'
+Assert-True -Condition ($coverageWithInputs.metrics.target_inventory_gap_to_1000 -eq [Math]::Max(0, 1000 - [int]$coverageWithInputs.metrics.target_inventory_candidates_total)) -Message 'Zielinventar-Gate berechnet die 1000er-Luecke falsch.'
+Assert-True -Condition (@($coverageWithInputs.target_inventory_gate.violations | Where-Object { $_ -eq 'INVENTORY_CANDIDATES_BELOW_1000' }).Count -eq 1) -Message 'Zielinventar-Gate meldet fehlende Kandidatenbasis nicht fail-closed.'
+Assert-True -Condition ($coverageWithInputs.metrics.scannable_without_official_source -ge 1) -Message 'Zielinventar-Gate erkennt scanfaehige Firmen ohne offiziellen Beleg nicht.'
 Assert-True -Condition ($coverageWithInputs.source_inventory.schema_version -eq 'jobagent/source-inventory/v1') -Message 'Coverage erzeugt keinen Quellenbestand.'
 Assert-True -Condition ($coverageWithInputs.metrics.sources_total -eq (@($document.job_sources).Count + @($sourceRegistry.items).Count + @($hintStore.hints).Count)) -Message 'Quellenbestand muss JobSources, Source Registry und Discovery-Hints zaehlen.'
 Assert-True -Condition ($coverageWithInputs.metrics.discovery_sources -ge @($hintStore.hints).Count) -Message 'Quellenbestand zaehlt Discovery-Hinweise nicht.'
@@ -324,6 +329,10 @@ $toolMarkdown = Get-Content -Raw -LiteralPath $toolOutput.markdown_path
 $toolHtml = Get-Content -Raw -LiteralPath $toolOutput.html_path
 $toolQueue = Get-Content -Raw -LiteralPath $toolOutput.candidate_verification_queue_path | ConvertFrom-Json -Depth 100
 Assert-True -Condition ($toolJson.approximation_notice -match 'keine vollstaendige Marktdeckung') -Message 'Coverage-Tool-JSON behauptet Vollstaendigkeit oder Hinweis fehlt.'
+Assert-True -Condition ($toolOutput.target_inventory_candidates_total -eq $toolJson.metrics.target_inventory_candidates_total) -Message 'Coverage-Tool gibt die Zielgebiet-Kandidatenzahl nicht direkt aus.'
+Assert-True -Condition ($toolOutput.target_inventory_gate_status -eq $toolJson.target_inventory_gate.status) -Message 'Coverage-Tool gibt den Zielinventar-Gate-Status inkonsistent aus.'
+Assert-True -Condition ($toolMarkdown.Contains('Zielgebiet-Kandidaten gesamt')) -Message 'Coverage-Tool-Markdown enthaelt keine Zielinventar-Metrik.'
+Assert-True -Condition ($toolHtml.Contains('Luecke bis 1000 Kandidaten')) -Message 'Coverage-Tool-HTML enthaelt keine 1000er-Luecke.'
 Assert-True -Condition (@($toolJson.import_waves.waves).Count -eq 4) -Message 'Coverage-Tool-JSON folgt nicht der produktiven A-D-Wellenkonfiguration.'
 Assert-True -Condition ($toolJson.import_wave_metrics.schema_version -eq 'jobagent/company-import-wave-metrics/v1') -Message 'Coverage-Tool-JSON enthaelt keine Importwellen-Metriken.'
 Assert-True -Condition (@($toolJson.import_wave_metrics.waves | Where-Object { [string]$_.wave_id -eq 'D' -and [int]$_.hint_only_total -ge 1 }).Count -eq 1) -Message 'Importwellen-Metriken weisen Welle-D-Hints nicht aus.'
@@ -424,6 +433,7 @@ Assert-True -Condition ($sourceToolMarkdown.Contains('Quellen gesamt')) -Message
         'coverage_tool_marks_discovery_hints_review_only',
         'coverage_candidate_cluster_metrics',
         'coverage_candidate_verification_decision_report',
+        'coverage_target_inventory_gate',
         'candidate_dedupe_tool_generates_json_markdown_and_enriched_hints'
     )
 } | ConvertTo-Json -Depth 4
