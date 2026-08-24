@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-23T08:42:38.621Z",
+  "generated_at": "2026-08-24T07:14:22.702Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 19,
@@ -156,7 +156,7 @@
       "observed_url": "https://www.stepstone.de/stellenangebote/it-projektleiter-hays-222.html",
       "posting_url": "https://www.stepstone.de/stellenangebote/it-projektleiter-hays-222.html",
       "platform": "StepStone",
-      "observed_at": "2026-08-23T08:00:00Z",
+      "observed_at": "2026-08-23T08:00:00.000Z",
       "search_parameters": {
         "query": "IT",
         "keyword": "IT Operations",
@@ -191,7 +191,7 @@
       "observed_url": "https://www.stepstone.de/Details",
       "posting_url": "https://www.stepstone.de/Details",
       "platform": "StepStone",
-      "observed_at": "2026-08-23T08:00:00Z",
+      "observed_at": "2026-08-23T08:00:00.000Z",
       "search_parameters": {
         "query": "IT",
         "keyword": "IT Operations",
@@ -226,7 +226,7 @@
       "observed_url": "https://www.stepstone.de/stellenangebote/it-operations-lead-siemens-111.html",
       "posting_url": "https://www.stepstone.de/stellenangebote/it-operations-lead-siemens-111.html",
       "platform": "StepStone",
-      "observed_at": "2026-08-23T08:00:00Z",
+      "observed_at": "2026-08-23T08:00:00.000Z",
       "search_parameters": {
         "query": "IT",
         "keyword": "IT Operations",
@@ -369,7 +369,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00Z",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
         "line_number": 1,
         "record_hash": "1b64d382c89c5af3cdcebb28ebb3f940f258882ecdc6086cf7d4f2230e7a68b8"
       },
@@ -396,7 +396,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00Z",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
         "line_number": 2,
         "record_hash": "38bc24463aaa9fa0c53eb418e8bee9221f845b5300abc7290747c5899d66595c"
       },
@@ -423,7 +423,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00Z",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
         "line_number": 4,
         "record_hash": "9130450dc84b23cb48023c55fb0cf62f0def294b92b07604d93b0f4404fb18a2"
       },
@@ -450,7 +450,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00Z",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
         "line_number": 6,
         "record_hash": "72f662d0a27d5d9ce61c67e592a12002a51fcf89bcbae21b475c1f5a6400c1c6"
       },
@@ -477,7 +477,7 @@
       "source_id": "source-registry:offeneregister_dump",
       "source_snapshot": {
         "snapshot_id": "offeneregister-sample-2026-08",
-        "snapshot_date": "2026-08-01T00:00:00Z",
+        "snapshot_date": "2026-08-01T00:00:00.000Z",
         "line_number": 3,
         "record_hash": "1c703b62538c243fd7aafb33d2a482ad5044ffd1a171dddd535dda31f62dc06c"
       },

@@ -293,9 +293,63 @@ finally {
     }
 }
 
+$snapshotProjectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-discovery-snapshot-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $snapshotProjectRoot -Force | Out-Null
+try {
+    New-Item -ItemType Directory -Path (Join-Path $snapshotProjectRoot 'data\jobagent') -Force | Out-Null
+    Copy-Item -LiteralPath (Join-Path $root 'data\jobagent\company-discovery.sources.json') -Destination (Join-Path $snapshotProjectRoot 'data\jobagent\company-discovery.sources.json') -Force
+    $snapshotStore = New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)
+    $snapshotSeeded = Add-JobAgentCompanySeedInventory -Document $snapshotStore -Seeds (Get-JobAgentCompanySeedInventory -CreatedAt (New-TestSeedDate) -NextScanAt (New-TestNextScanDate)) -SeededAt (New-TestSeedDate)
+    Write-JobAgentStore -ProjectRoot $snapshotProjectRoot -Document $snapshotSeeded.document | Out-Null
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-snapshot-manifest/v1'
+        items = @(
+            [pscustomobject]@{
+                kind = 'register'
+                source_id = 'source-registry:offeneregister_dump'
+                input_path = (Join-Path $root 'tests\fixtures\jobagent\register-discovery\offeneregister-sample.jsonl')
+                snapshot_id = 'snapshot-lane-register'
+                snapshot_date = '2026-08-01T00:00:00Z'
+            },
+            [pscustomobject]@{
+                kind = 'regional'
+                source_id = 'source-registry:stadt_muenchen_boersennotierte_unternehmen'
+                input_path = (Join-Path $root 'tests\fixtures\jobagent\regional-discovery\regional-directories-snapshot.json')
+            },
+            [pscustomobject]@{
+                kind = 'jobboard'
+                source_id = 'source-registry:stepstone_muenchen'
+                input_path = (Join-Path $root 'tests\fixtures\jobagent\jobboard-discovery\stepstone-muenchen-snapshot.json')
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $snapshotProjectRoot 'data\jobagent\company-discovery.snapshot.json') -Encoding UTF8
+
+    $preSnapshotStore = Read-JobAgentStore -ProjectRoot $snapshotProjectRoot
+    $snapshotOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Import-JobAgentCompanyDiscovery.ps1') -ProjectRoot $snapshotProjectRoot -SnapshotLane 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Snapshot-Lane ist fehlgeschlagen: " + ($snapshotOutput -join "`n"))
+    $snapshotResult = ($snapshotOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $postSnapshotStore = Read-JobAgentStore -ProjectRoot $snapshotProjectRoot
+    $snapshotHints = Get-Content -LiteralPath ([string]$snapshotResult.merged_hints_path) -Raw | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($snapshotResult.schema_version -eq 'jobagent/company-discovery-snapshot-digest/v1') -Message 'Snapshot-Lane schreibt falsche Digest-Schema-Version.'
+    Assert-True -Condition ($snapshotResult.sources_total -eq 5) -Message 'Snapshot-Lane verarbeitet falsche Quellenanzahl.'
+    Assert-True -Condition ($snapshotResult.new_hints_total -eq 13) -Message 'Snapshot-Lane erzeugt falsche neue Hint-Anzahl.'
+    Assert-True -Condition ($snapshotHints.hints_total -eq 13) -Message 'Snapshot-Lane merged Hints nicht in den Hint-Store.'
+    Assert-True -Condition ($snapshotHints.unverified_hints -eq $snapshotHints.hints_total) -Message 'Snapshot-Lane darf keine verifizierten Hints erzeugen.'
+    Assert-True -Condition ($snapshotResult.productive_store_write -eq $false) -Message 'Snapshot-Lane darf keinen produktiven Store-Write melden.'
+    Assert-True -Condition (@($postSnapshotStore.job_sources).Count -eq @($preSnapshotStore.job_sources).Count) -Message 'Snapshot-Lane darf keine JobSources erzeugen.'
+    Assert-True -Condition (@($snapshotResult.snapshot_logs | Where-Object { [string]$_.input_hash -notmatch '^[a-f0-9]{64}$' -or [string]::IsNullOrWhiteSpace([string]$_.allowed_use) -or [string]::IsNullOrWhiteSpace([string]$_.rate_limit_policy) -or [string]::IsNullOrWhiteSpace([string]$_.robots_or_terms_note) }).Count -eq 0) -Message 'Snapshot-Lane protokolliert Nutzungs-/Hash-Evidenz unvollstaendig.'
+    Assert-True -Condition (@($snapshotResult.snapshot_logs | Where-Object { [bool]$_.official_verification_required -ne $true -or [bool]$_.productive_store_write -ne $false }).Count -eq 0) -Message 'Snapshot-Lane verletzt Review-/No-Store-Vertrag.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$snapshotResult.digest_path) -PathType Leaf) -Message 'Snapshot-Lane schreibt keinen Digest.'
+}
+finally {
+    if (Test-Path -LiteralPath $snapshotProjectRoot) {
+        Remove-Item -LiteralPath $snapshotProjectRoot -Recurse -Force
+    }
+}
+
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script', 'company_career_verification_script')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script', 'company_career_verification_script', 'company_discovery_snapshot_lane')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4
