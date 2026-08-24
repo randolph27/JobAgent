@@ -1,62 +1,82 @@
 # Handoff latest
 
-Stand: 2026-08-24T08:41:21+02:00
+Stand: 2026-08-24T08:58:00+02:00
 
 ## Neuer Chat Einstieg
 
-Direkt mit `TD-0033 / JA-033` weitermachen: Daily-Run-Markdown und Daily-Run-HTML sollen pro relevanter Ergebniszeile getrennte, sichere Links fuer die offizielle Stellen-URL und die offizielle Anbieter-/Karriere-/ATS-Quelle ausgeben.
+Es sind keine aktiven Roadmap-Punkte offen. `TD-0033 / JA-033` ist abgeschlossen, nach `Roadmap_archive.md` rotiert und per Funktionstests, Supertest sowie Self-Check verifiziert.
 
 ## Aktueller Zustand
 
 - Projekt: `JobAgent`
 - Root: `D:\_Scripte\JobAgent`
 - Branch: `master`
-- HEAD: `e37cdf63e6ed`
+- HEAD vor Abschluss-Commit: `61e11983c73d`
 - Upstream: `origin/master`
-- Active: `TD-0033`
-- Offen: `TD-0033 / JA-033`
-- Abgeschlossen und rotiert: `TD-0032 / JA-032`
-- Roadmap: `Roadmap.md` enthaelt nur noch `JA-033`; `JA-032` liegt in `Roadmap_archive.md`
-- Todo: `todo.current.md` zeigt `TD-0033` als Active
-- Worktree: `dirty`
+- Active: none
+- Offen: keine aktiven Roadmap-Punkte
+- Todo: `todo.current.md` zeigt keine aktiven Items
+- Roadmap: `Roadmap.md` zeigt keine aktiven Punkte
+- Archiv: `Roadmap_archive.md` enthaelt JA-001 bis JA-033
+- Worktree zum Handoff-Zeitpunkt: `dirty` wegen Abschlussaenderungen, Staging/Commit/Push folgt im selben Nutzerauftrag
 
-## Was erledigt ist
+## Abgeschlossener Punkt
 
-JA-032 ist fachlich abgeschlossen:
+`TD-0033 / JA-033 Daily-Run-HTML und Detailberichte mit klickbaren offiziellen Stellen- und Anbieterlinks vereinheitlichen`
 
-- `tools/Measure-JobAgentCompanyCoverage.ps1` rendert zentrale Coverage-Linkobjekte in Markdown und HTML.
-- Coverage-HTML enthaelt Linkspalten fuer Importwellen-Kandidaten, Backlog, Scanprioritaeten und Firmeninventar.
-- Coverage-Markdown enthaelt dieselben Linkspalten fuer Importwellen-Kandidaten, Backlog, Scanprioritaeten und Firmeninventar.
-- HTML-Links nutzen `target="_blank"` und `rel="noopener noreferrer"`.
-- Klickbare Links werden nur fuer `is_clickable=true` ausgegeben.
-- Unverifizierte Discovery-Hints werden sichtbar als `Review-Hinweis` ausgegeben und nicht als offizieller Anbieterlink verlinkt.
-- Linkzellen nutzen kurze Labels und behalten den bestehenden Overflow-/Sticky-Header-Schutz.
-- `tests/Test-JobAgentCoverage.ps1` prueft Linkspalten, sichere HTML-Links, Review-Hinweise und den Ausschluss produktiver Discovery-Hint-Links.
+Umgesetzt:
+
+- `src/JobAgent.Report.psm1` reichert Job-Reporteintraege um `provider_link`, `provider_label` und `provider_url` aus `Get-JobAgentCoverageCompanyLinks` an.
+- Provider-Link-Auswahl bevorzugt eine zur Stelle passende offizielle `JobSource`; sonst wird der primaere offizielle Karriere-/Website-/ATS-Link genutzt.
+- Markdown-Reports rendern getrennte kurze Links: `[Stelle]`, `[Karriere]`, `[ATS]`, `[Quelle]`.
+- HTML-Reports validieren Links auf http/https, encodieren `href` und rendern externe Links mit `target="_blank"` sowie `rel="noopener noreferrer"`.
+- Fehler-/Quellen-Sektionen verlinken nur offizielle `JobSource`-Eintraege.
+- Unoffizielle Quellen, z.B. Jobboersen-/Discovery-Hints, bleiben nicht klickbar und zeigen einen Review-Grund.
+
+Geaenderte Fachdateien:
+
+- `src/JobAgent.Report.psm1`
+- `tests/Test-JobAgentReport.ps1`
+- `tests/Test-JobAgentDailyRun.ps1`
+
+Geaenderte Steuerdateien:
+
+- `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `todo.current.md`
+- `todo.state.json`
+- `todo.checkpoint.json`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `handoff.latest.md`
+- `handoff.latest.json`
+- `.ci/pins/immutable.hashes.json`
+- `.ci/pins/immutable.snapshot/Roadmap.md`
 
 ## Verifikation
 
-- `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit `0`
-- `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit `0`
+- `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
 - `.\ci.cmd supertest` -> Exit `0`
-- `.\ci.cmd self-check` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
+- `.\ci.cmd repin-immutables` -> Exit `0`
+- `.\ci.cmd self-check` -> Exit `0`
 
-## Naechste Aufgabe TD-0033 / JA-033
+## Betriebsstatus
 
-Umzusetzen:
+- SonarQube `http://localhost:9000/api/system/status`: `UP`
+- Devserver `http://localhost:8500`: HTTP `200`
 
-1. In `src/JobAgent.Report.psm1` Report-Eintraege fuer Jobs und Quellen-Issues um Anbieterlink-Information aus dem zentralen Linkvertrag erweitern.
-2. In `src/JobAgent.DailyRun.psm1` sicherstellen, dass Daily-Run-Reports die Anbieterlink-Daten aus Store/Company/JobSource-Kontext bekommen.
-3. Markdown-Renderer erweitern: Stellenlink und Anbieterlink getrennt ausgeben; offizielle Stellenlinks nutzen `official_url`, Anbieterlinks nutzen Karriere/Website/ATS aus dem Linkvertrag.
-4. HTML-Renderer erweitern: sichere `href`-Attribute mit `target="_blank"` und `rel="noopener noreferrer"`, kurze Labels, HTML-Encoding, keine externen Ressourcen.
-5. Fehler-/Quellen-Sektionen nur dann klickbar machen, wenn die Quelle als offizielle `JobSource` im Store steht; sonst nicht klickbarer Review-Grund.
-6. Tests in `tests\Test-JobAgentReport.ps1` und `tests\Test-JobAgentDailyRun.ps1` fuer aktive/neue/geaenderte/entfernte Jobs, fehlende Anbieterlinks, Fehlerquellen, URL-Encoding und HTML-Encoding ergaenzen.
+## Naechste Aufgabe
 
-## Wichtige Regeln
+Keine aktive Aufgabe. Neuer Chat soll zuerst `Roadmap.md`, `todo.current.md`, `todo.state.json` und dieses Handoff pruefen. Falls neue Arbeit gewuenscht ist, neue Roadmap-Punkte gemaess Roadmap-Vertrag priorisiert anlegen.
 
-- Keine Bewerbungsaktion, kein Formular-Autofill, keine extern wirksame Aktion.
+## Harte Regeln fuer Folgechat
+
+- Keine Bewerbung, kein Formular-Autofill, keine extern wirksame Aktion ohne ausdrueckliche Bestaetigung.
 - Keine Jobboerse als offizieller Stellen- oder Anbieterlink.
-- Keine Linkausgabe fuer ungesicherte Aggregator-URLs als offizielle Quelle.
-- Keine neue Live-Abhaengigkeit in Tests.
-- Wenn ein Roadmap-Punkt abgeschlossen wird, in `Roadmap_archive.md` rotieren und Todo/Handoff aktualisieren.
-- Laut Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt; fuer JA-032 wurde `.\ci.cmd supertest` trotzdem erfolgreich ausgefuehrt.
+- Keine ungesicherten Aggregator-URLs als offizielle Quelle ausgeben.
+- Keine neue Live-Abhaengigkeit in Funktionstests.
+- Supertest erst nach gruenen Funktionstests; wenn nicht angefragt, gilt er gemaess Nutzeranweisung als erledigt.

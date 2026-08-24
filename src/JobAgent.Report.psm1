@@ -33,6 +33,128 @@ function ConvertTo-JobAgentReportHtmlText {
     return [Net.WebUtility]::HtmlEncode((ConvertTo-JobAgentReportText -Value $Value))
 }
 
+function Test-JobAgentReportHttpUrl {
+    param([Parameter()][AllowNull()][object]$Url)
+
+    if ($null -eq $Url -or [string]::IsNullOrWhiteSpace([string]$Url)) {
+        return $false
+    }
+    $uri = $null
+    if (-not [Uri]::TryCreate(([string]$Url).Trim(), [UriKind]::Absolute, [ref]$uri)) {
+        return $false
+    }
+    return @('http', 'https') -contains $uri.Scheme
+}
+
+function New-JobAgentReportMissingLink {
+    param([Parameter()][AllowEmptyString()][string]$Reason = 'Kein offizieller Link vorhanden.')
+
+    [pscustomobject]@{
+        link_type = 'missing'
+        label = 'Kein Link'
+        url = $null
+        source_id = $null
+        source_field = 'report.fail_closed'
+        verification_status = 'MISSING'
+        is_primary = $true
+        is_clickable = $false
+        review_only = $false
+        reason = $Reason
+    }
+}
+
+function Get-JobAgentReportProviderLink {
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][AllowEmptyCollection()][object[]]$JobSources = @(),
+        [Parameter()][AllowEmptyString()][string]$PreferredSourceId = ''
+    )
+
+    $links = @(Get-JobAgentCoverageCompanyLinks -Company $Company -JobSources $JobSources)
+    if ($links.Count -eq 0) {
+        return New-JobAgentReportMissingLink
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($PreferredSourceId)) {
+        $matchingSourceLink = @($links | Where-Object {
+                [bool]$_.is_clickable -and [string]$_.source_id -eq $PreferredSourceId
+            } | Select-Object -First 1)
+        if ($matchingSourceLink.Count -eq 1) {
+            return $matchingSourceLink[0]
+        }
+    }
+
+    $primaryLink = @($links | Where-Object { [bool]$_.is_clickable -and [bool]$_.is_primary } | Select-Object -First 1)
+    if ($primaryLink.Count -eq 1) {
+        return $primaryLink[0]
+    }
+
+    $clickableLink = @($links | Where-Object { [bool]$_.is_clickable } | Select-Object -First 1)
+    if ($clickableLink.Count -eq 1) {
+        return $clickableLink[0]
+    }
+
+    return $links[0]
+}
+
+function ConvertTo-JobAgentReportMarkdownLink {
+    param(
+        [Parameter()][AllowNull()][object]$Url,
+        [Parameter()][AllowEmptyString()][string]$Label = 'Link',
+        [Parameter()][AllowEmptyString()][string]$Fallback = 'UNKNOWN'
+    )
+
+    if (-not (Test-JobAgentReportHttpUrl -Url $Url)) {
+        return ConvertTo-JobAgentReportMarkdownText $Fallback
+    }
+
+    $safeLabel = ConvertTo-JobAgentReportMarkdownText $Label
+    $safeUrl = ConvertTo-JobAgentReportMarkdownText ([string]$Url)
+    return "[$safeLabel]($safeUrl)"
+}
+
+function ConvertTo-JobAgentReportProviderMarkdownLink {
+    param([Parameter()][AllowNull()][object]$Link)
+
+    if ($null -eq $Link) {
+        return 'Kein offizieller Link'
+    }
+    $url = Get-JobAgentReportProperty -Object $Link -Name 'url'
+    $label = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Link -Name 'label' -Default 'Link')
+    if ([bool](Get-JobAgentReportProperty -Object $Link -Name 'is_clickable' -Default $false) -and (Test-JobAgentReportHttpUrl -Url $url)) {
+        return ConvertTo-JobAgentReportMarkdownLink -Url $url -Label $label
+    }
+    $reason = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Link -Name 'reason' -Default 'Kein offizieller Link')
+    return ConvertTo-JobAgentReportMarkdownText $reason
+}
+
+function ConvertTo-JobAgentReportHtmlLink {
+    param(
+        [Parameter()][AllowNull()][object]$Url,
+        [Parameter()][AllowEmptyString()][string]$Label = 'Link',
+        [Parameter()][AllowEmptyString()][string]$Fallback = 'UNKNOWN'
+    )
+
+    if (-not (Test-JobAgentReportHttpUrl -Url $Url)) {
+        return '<span class="unknown">' + (ConvertTo-JobAgentReportHtmlText $Fallback) + '</span>'
+    }
+    return '<a href="' + ([Net.WebUtility]::HtmlEncode(([string]$Url).Trim())) + '" target="_blank" rel="noopener noreferrer">' + (ConvertTo-JobAgentReportHtmlText $Label) + '</a>'
+}
+
+function ConvertTo-JobAgentReportProviderHtmlLink {
+    param([Parameter()][AllowNull()][object]$Link)
+
+    if ($null -eq $Link) {
+        return '<span class="unknown">Kein offizieller Link</span>'
+    }
+    $url = Get-JobAgentReportProperty -Object $Link -Name 'url'
+    $label = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Link -Name 'label' -Default 'Link')
+    if ([bool](Get-JobAgentReportProperty -Object $Link -Name 'is_clickable' -Default $false) -and (Test-JobAgentReportHttpUrl -Url $url)) {
+        return ConvertTo-JobAgentReportHtmlLink -Url $url -Label $label
+    }
+    return '<span class="unknown">' + (ConvertTo-JobAgentReportHtmlText (Get-JobAgentReportProperty -Object $Link -Name 'reason' -Default 'Kein offizieller Link')) + '</span>'
+}
+
 function ConvertTo-JobAgentReportDateText {
     param([Parameter()][AllowNull()][object]$Value)
 
@@ -161,6 +283,7 @@ function New-JobAgentReportJobEntry {
     param(
         [Parameter(Mandatory)][object]$Job,
         [Parameter(Mandatory)][hashtable]$CompaniesById,
+        [Parameter()][hashtable]$SourcesByCompanyId = @{},
         [Parameter()][AllowNull()][object]$ChangeEvent = $null,
         [Parameter(Mandatory)][datetime]$ReferenceTime
     )
@@ -170,11 +293,15 @@ function New-JobAgentReportJobEntry {
     $lastSeen = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'last_seen' -Default 'UNKNOWN')
     $requirements = @((Get-JobAgentReportProperty -Object $Job -Name 'requirements' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object { [string]$_ })
     $ageInfo = Get-JobAgentReportAgeInfo -PublishedAt $publishedAt -FirstSeen $firstSeen -ReferenceTime $ReferenceTime
+    $companyId = [string]$Job.company_id
+    $company = if ($CompaniesById.ContainsKey($companyId)) { $CompaniesById[$companyId] } else { [pscustomobject]@{ company_id = $companyId; canonical_name = $companyId; verification_status = 'UNVERIFIED' } }
+    $companySources = if ($SourcesByCompanyId.ContainsKey($companyId)) { @($SourcesByCompanyId[$companyId].ToArray()) } else { @() }
+    $providerLink = Get-JobAgentReportProviderLink -Company $company -JobSources $companySources -PreferredSourceId ([string](Get-JobAgentReportProperty -Object $Job -Name 'source_id' -Default ''))
 
     [pscustomobject]@{
         job_id = [string]$Job.job_id
-        company_id = [string]$Job.company_id
-        company = Get-JobAgentReportCompanyName -CompaniesById $CompaniesById -CompanyId ([string]$Job.company_id)
+        company_id = $companyId
+        company = Get-JobAgentReportCompanyName -CompaniesById $CompaniesById -CompanyId $companyId
         title = ConvertTo-JobAgentReportText -Value $Job.title
         priority = ConvertTo-JobAgentReportText -Value $Job.priority
         status = ConvertTo-JobAgentReportText -Value $Job.status
@@ -190,6 +317,9 @@ function New-JobAgentReportJobEntry {
         age_basis = [string]$ageInfo.age_basis
         age_days = [string]$ageInfo.age_days
         official_url = ConvertTo-JobAgentReportText -Value $Job.official_url
+        provider_link = $providerLink
+        provider_label = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $providerLink -Name 'label' -Default 'Kein Link')
+        provider_url = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $providerLink -Name 'url' -Default 'UNKNOWN')
         changed_fields = @((Get-JobAgentReportProperty -Object $ChangeEvent -Name 'changed_fields' -Default @()) | ForEach-Object { [string]$_ })
         change_reason = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $ChangeEvent -Name 'reason' -Default 'UNKNOWN')
         priority_explanation = Get-JobAgentReportPriorityExplanation -Job $Job
@@ -241,6 +371,25 @@ function New-JobAgentReportSourceIssueEntry {
     if ($SourcesById.ContainsKey([string]$Attempt.source_id)) {
         $source = $SourcesById[[string]$Attempt.source_id]
     }
+    $isOfficialSource = [bool](Get-JobAgentReportProperty -Object $source -Name 'is_official' -Default $false)
+    $sourceUrl = Get-JobAgentReportProperty -Object $source -Name 'canonical_url'
+    $sourceLink = if ($isOfficialSource -and (Test-JobAgentReportHttpUrl -Url $sourceUrl)) {
+        [pscustomobject]@{
+            link_type = 'source'
+            label = 'Quelle'
+            url = ([string]$sourceUrl).Trim()
+            source_id = [string]$Attempt.source_id
+            source_field = 'job_sources.canonical_url'
+            verification_status = 'VERIFIED'
+            is_primary = $true
+            is_clickable = $true
+            review_only = $false
+            reason = 'Offizielle JobSource im Store.'
+        }
+    }
+    else {
+        New-JobAgentReportMissingLink -Reason 'Quelle ist nicht als offizielle JobSource im Store verifiziert.'
+    }
     $errorClass = ConvertTo-JobAgentReportText -Value $Attempt.error_class
     $category = switch ($errorClass) {
         { @('UNCLEAR_SOURCE', 'BLOCKED', 'PARSING_ERROR', 'TECHNICAL_LIMITATION') -contains $_ } { 'UNSICHER' ; break }
@@ -251,7 +400,9 @@ function New-JobAgentReportSourceIssueEntry {
     [pscustomobject]@{
         company = Get-JobAgentReportCompanyName -CompaniesById $CompaniesById -CompanyId ([string]$Attempt.company_id)
         source_id = ConvertTo-JobAgentReportText -Value $Attempt.source_id
-        source_url = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $source -Name 'canonical_url' -Default 'UNKNOWN')
+        source_url = ConvertTo-JobAgentReportText -Value $sourceUrl
+        source_link = $sourceLink
+        source_review_reason = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $sourceLink -Name 'reason' -Default 'UNKNOWN')
         status = ConvertTo-JobAgentReportText -Value $Attempt.status
         error_class = $errorClass
         category = $category
@@ -281,8 +432,14 @@ function New-JobAgentDailyReport {
         $jobsById[[string]$job.job_id] = $job
     }
     $sourcesById = @{}
+    $sourcesByCompanyId = @{}
     foreach ($source in @($Document.job_sources)) {
         $sourcesById[[string]$source.source_id] = $source
+        $companyId = [string]$source.company_id
+        if (-not $sourcesByCompanyId.ContainsKey($companyId)) {
+            $sourcesByCompanyId[$companyId] = [System.Collections.Generic.List[object]]::new()
+        }
+        $sourcesByCompanyId[$companyId].Add($source)
     }
     $events = @($Document.change_events | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
     $attempts = @($Document.scan_attempts | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
@@ -301,17 +458,17 @@ function New-JobAgentDailyReport {
         switch ([string]$event.event_type) {
             'JOB_CREATED' {
                 if (Test-JobAgentReportMatch -Job $job) {
-                    $createdEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event -ReferenceTime $finished))
+                    $createdEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -SourcesByCompanyId $sourcesByCompanyId -ChangeEvent $event -ReferenceTime $finished))
                 }
             }
             'JOB_UPDATED' {
                 if (Test-JobAgentReportMatch -Job $job) {
-                    $changedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event -ReferenceTime $finished))
+                    $changedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -SourcesByCompanyId $sourcesByCompanyId -ChangeEvent $event -ReferenceTime $finished))
                 }
             }
             { @('JOB_REMOVED', 'JOB_CLOSED') -contains $_ } {
                 if (Test-JobAgentReportMatch -Job $job) {
-                    $removedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -ChangeEvent $event -ReferenceTime $finished))
+                    $removedEntries.Add((New-JobAgentReportJobEntry -Job $job -CompaniesById $companiesById -SourcesByCompanyId $sourcesByCompanyId -ChangeEvent $event -ReferenceTime $finished))
                 }
             }
         }
@@ -323,7 +480,7 @@ function New-JobAgentDailyReport {
     }
     $activeEntries = @($Document.jobs |
         Where-Object { (@('NEW', 'ACTIVE', 'UPDATED') -contains [string]$_.status) -and (Test-JobAgentReportMatch -Job $_) -and (-not $changedIds.Contains([string]$_.job_id)) } |
-        ForEach-Object { New-JobAgentReportJobEntry -Job $_ -CompaniesById $companiesById -ReferenceTime $finished } |
+        ForEach-Object { New-JobAgentReportJobEntry -Job $_ -CompaniesById $companiesById -SourcesByCompanyId $sourcesByCompanyId -ReferenceTime $finished } |
         Sort-Object priority, company, title)
     $newCompanies = @($Document.companies |
         Where-Object {
@@ -373,8 +530,8 @@ function Add-JobAgentReportMarkdownTable {
         [void]$Lines.Add($EmptyText)
         return
     }
-    $header = if ($IncludeChange) { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Aenderung | Offizielle URL | Begruendung |' } else { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Offizielle URL | Begruendung |' }
-    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' }
+    $header = if ($IncludeChange) { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Aenderung | Stelle | Anbieter | Begruendung |' } else { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Stelle | Anbieter | Begruendung |' }
+    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' }
     [void]$Lines.Add($header)
     [void]$Lines.Add($separator)
     foreach ($item in $Items) {
@@ -397,7 +554,8 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $item.salary),
                     (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
                     (ConvertTo-JobAgentReportMarkdownText $change),
-                    (ConvertTo-JobAgentReportMarkdownText $item.official_url),
+                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Stelle'),
+                    (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
                     (ConvertTo-JobAgentReportMarkdownText $item.priority_explanation)
             )
             [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
@@ -417,7 +575,8 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $ageText),
                     (ConvertTo-JobAgentReportMarkdownText $item.salary),
                     (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
-                    (ConvertTo-JobAgentReportMarkdownText $item.official_url),
+                    (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Stelle'),
+                    (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
                     (ConvertTo-JobAgentReportMarkdownText $item.priority_explanation)
             )
             [void]$Lines.Add('| ' + ($cells -join ' | ') + ' |')
@@ -442,7 +601,7 @@ function Add-JobAgentReportSourceIssueMarkdownTable {
         $cells = @(
             (ConvertTo-JobAgentReportMarkdownText $item.category),
             (ConvertTo-JobAgentReportMarkdownText $item.company),
-            (ConvertTo-JobAgentReportMarkdownText $item.source_url),
+            (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.source_link),
             (ConvertTo-JobAgentReportMarkdownText $item.status),
             (ConvertTo-JobAgentReportMarkdownText $item.error_class),
             (ConvertTo-JobAgentReportMarkdownText $item.retry_recommendation),
@@ -492,10 +651,10 @@ function Add-JobAgentReportHtmlTable {
     [void]$Lines.Add('<table class="job-table">')
     [void]$Lines.Add('<thead>')
     if ($IncludeChange) {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Aenderung</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Aenderung</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
     }
     else {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Offizielle URL</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
     }
     [void]$Lines.Add('</thead>')
     [void]$Lines.Add('<tbody>')
@@ -505,13 +664,8 @@ function Add-JobAgentReportHtmlTable {
             $change = $item.change_reason
         }
         $ageText = if ([string]$item.age_days -eq 'UNKNOWN') { 'UNKNOWN' } else { ('{0} Tage ({1})' -f $item.age_days, $item.age_basis) }
-        $url = ConvertTo-JobAgentReportText -Value $item.official_url
-        $urlCell = if ($url -eq 'UNKNOWN') {
-            '<span class="unknown">UNKNOWN</span>'
-        }
-        else {
-            '<a href="' + ([Net.WebUtility]::HtmlEncode($url)) + '">' + ([Net.WebUtility]::HtmlEncode($url)) + '</a>'
-        }
+        $urlCell = ConvertTo-JobAgentReportHtmlLink -Url $item.official_url -Label 'Stelle'
+        $providerCell = ConvertTo-JobAgentReportProviderHtmlLink -Link $item.provider_link
 
         if ($IncludeChange) {
             [void]$Lines.Add(
@@ -530,6 +684,7 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $change) +
                 '</td><td>' + $urlCell +
+                '</td><td>' + $providerCell +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
                 '</td></tr>'
             )
@@ -550,6 +705,7 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.salary) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
                 '</td><td>' + $urlCell +
+                '</td><td>' + $providerCell +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
                 '</td></tr>'
             )
@@ -576,8 +732,7 @@ function Add-JobAgentReportSourceIssueHtmlTable {
     [void]$Lines.Add('<thead><tr><th>Kategorie</th><th>Firma</th><th>Quelle</th><th>Status</th><th>Fehlerklasse</th><th>Retry</th><th>HTTP</th></tr></thead>')
     [void]$Lines.Add('<tbody>')
     foreach ($item in $Items) {
-        $sourceUrl = ConvertTo-JobAgentReportText -Value $item.source_url
-        $sourceCell = if ($sourceUrl -eq 'UNKNOWN') { '<span class="unknown">UNKNOWN</span>' } else { '<a href="' + ([Net.WebUtility]::HtmlEncode($sourceUrl)) + '">' + ([Net.WebUtility]::HtmlEncode($sourceUrl)) + '</a>' }
+        $sourceCell = ConvertTo-JobAgentReportProviderHtmlLink -Link $item.source_link
         [void]$Lines.Add(
             '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.category) +
             '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
@@ -610,10 +765,8 @@ function Add-JobAgentReportCompanyHtmlTable {
     [void]$Lines.Add('<thead><tr><th>Firma</th><th>Website</th><th>Karriere-URL</th><th>Verifikation</th></tr></thead>')
     [void]$Lines.Add('<tbody>')
     foreach ($item in $Items) {
-        $website = ConvertTo-JobAgentReportText -Value $item.official_website_url
-        $career = ConvertTo-JobAgentReportText -Value $item.career_url
-        $websiteCell = if ($website -eq 'UNKNOWN') { '<span class="unknown">UNKNOWN</span>' } else { '<a href="' + ([Net.WebUtility]::HtmlEncode($website)) + '">' + ([Net.WebUtility]::HtmlEncode($website)) + '</a>' }
-        $careerCell = if ($career -eq 'UNKNOWN') { '<span class="unknown">UNKNOWN</span>' } else { '<a href="' + ([Net.WebUtility]::HtmlEncode($career)) + '">' + ([Net.WebUtility]::HtmlEncode($career)) + '</a>' }
+        $websiteCell = ConvertTo-JobAgentReportHtmlLink -Url $item.official_website_url -Label 'Website'
+        $careerCell = ConvertTo-JobAgentReportHtmlLink -Url $item.career_url -Label 'Karriere'
         [void]$Lines.Add(
             '<tr><td>' + (ConvertTo-JobAgentReportHtmlText $item.company) +
             '</td><td>' + $websiteCell +

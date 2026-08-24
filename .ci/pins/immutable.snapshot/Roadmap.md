@@ -11,20 +11,4 @@
 
 ## Aktive Punkte
 
-- [ ] JA-033 Daily-Run-HTML und Detailberichte mit klickbaren offiziellen Stellen- und Anbieterlinks vereinheitlichen #comment: Nicht nur Coverage, sondern auch Daily-Run-Berichte sollen aus jeder relevanten Ergebniszeile direkt zur offiziellen Quelle fuehren.
-  - [ ] Beschreibung: Daily-Run-Markdown und Daily-Run-HTML sollen fuer neue, aktive, geaenderte und entfernte passende Stellen sowie fuer Fehler-/Quellen-Sektionen klickbare offizielle Links konsistent anzeigen. Stellenlinks nutzen `official_url`; Anbieterlinks nutzen den Linkvertrag aus JA-031. Fehlerhafte oder nicht erreichbare Quellen zeigen anklickbare Quell-URLs nur dann, wenn sie als offizielle JobSource im Store stehen; ansonsten erscheint ein nicht klickbarer Review-Grund.
-  - [ ] Scope: Erweitert werden `src/JobAgent.Report.psm1`, `src/JobAgent.DailyRun.psm1`, `tests/Test-JobAgentReport.ps1`, `tests/Test-JobAgentDailyRun.ps1` und vorhandene HTML-/Markdown-Artefaktpruefungen. No-Go: keine Bewerbungsaktion, kein Formular-Autofill, keine Linkausgabe fuer ungesicherte Aggregator-URLs als offizielle Stelle, keine neue Live-Abhaengigkeit im Test.
-  - [ ] Ist-Stand (2026-08-23 12:30): Daily-Run-Reports enthalten bereits stellenbezogene URLs in Tabellen, aber Anbieter-/Karriere-Links sind nicht als einheitlicher, getesteter Linkvertrag ueber alle Report-Sektionen abgesichert.
-  - [ ] Abhängigkeiten: JA-031 und JA-032 sind abgeschlossen; Daily-Run-Reports sollen denselben Linkvertrag und dieselben Sicherheitsregeln verwenden.
-  - [ ] Aufwand/Dauer: Aufwand M, Dauer 0.5-1.5 PT bei 1 Entwickler/Agent; Report- und DailyRun-Tests muessen beide laufen, weil JSON-/Markdown-/HTML-Artefakte gemeinsam betroffen sind.
-  - [ ] Prioritätsscore: 82/100, weil Coverage-Links zuerst den gemeldeten Mangel beheben, Daily-Run-Links aber fuer den taeglichen Arbeitsfluss denselben Nutzen bringen.
-  - [ ] Ordnungsbegründung: Nach Coverage-HTML folgt die Vereinheitlichung der Daily-Run-Ausgaben, damit neue Treffer und Betriebsberichte dieselben Linkregeln verwenden.
-  - [ ] Risiken und Unsicherheiten: Manche Raw-Jobs liefern Detail-URLs mit Trackingparametern; bestehende Canonicalization muss erhalten bleiben; geschlossene Stellen koennen nicht mehr erreichbar sein und duerfen trotzdem als historische offizielle URL angezeigt werden.
-  - [ ] Schritte:
-    1. Report-Eintraege erweitern: `New-JobAgentReportJobEntry` und Quellen-Issue-Eintraege um Anbieterlink-Objekt oder Linktext/URL aus dem zentralen Vertrag ergaenzen, ohne bestehende Felder zu brechen.
-    2. Renderer vereinheitlichen: Markdown- und HTML-Tabellen sollen Stellenlink und Anbieterlink getrennt anzeigen; HTML muss sichere `href`-Attribute und kurze Labels verwenden, Markdown muss direkt klickbare Links erzeugen.
-    3. Regressionen absichern: Tests fuer aktive Stellen, neue Stellen, fehlerhafte offizielle Quellen, fehlende Anbieterlinks und HTML-Encoding ergaenzen; vorhandene Daily-Run-Fixtures duerfen keine externen Live-Abrufe ausloesen.
-  - [ ] Evidence: Daily-Run-HTML unter `html/jobagent/daily-run-*.html` enthaelt klickbare Stellen- und Anbieterlinks; Markdown-Report enthaelt klickbare Links; Tests decken URL-Encoding, offizielle Quellen und fehlende Links ab.
-  - [ ] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1`; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1`.
-  - [ ] Audit: Beispiel-Daily-Run im Browser pruefen: Linklabels eindeutig, offizielle Stellenlinks anklickbar, Anbieterlinks getrennt, Fehlerquellen transparent, keine Layout-Ueberlaeufe bei langen URLs.
-  - [ ] Supertest: Erst nach gruenen Funktionstests `.\ci.cmd supertest`; Abschluss nur bei Exit 0.
+Keine aktiven Punkte.

@@ -722,3 +722,24 @@
   - [x] Audit: Reports enthalten weiterhin den Naeherungshinweis, loeschen abgelaufene Hinweise nicht, zeigen Freshness sichtbar an und laden keine externen Ressourcen im HTML-Coverage-Audit.
   - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
   - [x] Meilenstein: M6 Laufender Coverage-Betrieb und Freshness-Drift-Gate abgeschlossen.
+
+## Archiviert am 2026-08-24
+
+- [x] JA-033 Daily-Run-HTML und Detailberichte mit klickbaren offiziellen Stellen- und Anbieterlinks vereinheitlichen #comment: Nicht nur Coverage, sondern auch Daily-Run-Berichte sollen aus jeder relevanten Ergebniszeile direkt zur offiziellen Quelle fuehren.
+  - [x] Beschreibung: Daily-Run-Markdown und Daily-Run-HTML zeigen fuer neue, aktive, geaenderte und entfernte passende Stellen getrennte klickbare Links fuer `official_url` und den offiziellen Anbieterlink aus dem JA-031-Linkvertrag. Fehler-/Quellen-Sektionen verlinken Quell-URLs nur bei offiziellen `JobSource`-Eintraegen; ungesicherte Quellen zeigen einen nicht klickbaren Review-Grund.
+  - [x] Scope: Erweitert wurden `src/JobAgent.Report.psm1`, `tests/Test-JobAgentReport.ps1` und `tests/Test-JobAgentDailyRun.ps1`. `src/JobAgent.DailyRun.psm1` blieb kompatibel, weil die Reportdaten ueber `New-JobAgentDailyReport` angereichert werden. No-Go eingehalten: keine Bewerbungsaktion, kein Formular-Autofill, keine Linkausgabe fuer ungesicherte Aggregator-URLs als offizielle Stelle, keine neue Live-Abhaengigkeit im Test.
+  - [x] Ist-Stand (2026-08-24 09:35): Reporteintraege enthalten `provider_link`, `provider_label` und `provider_url`; Markdown rendert `[Stelle]`, `[Karriere]`, `[ATS]` und `[Quelle]`; HTML rendert sichere Links mit `target="_blank"` und `rel="noopener noreferrer"`.
+  - [x] Abhängigkeiten: JA-031 und JA-032 sind abgeschlossen; die Daily-Run-Reports verwenden denselben zentralen Linkvertrag wie Coverage.
+  - [x] Aufwand/Dauer: Aufwand M, umgesetzt in einer fokussierten Arbeitseinheit mit Report- und DailyRun-Funktionstests plus Supertest.
+  - [x] Prioritätsscore: 82/100, weil Daily-Run-Links den taeglichen Arbeitsfluss nach den Coverage-Links konsistent machen.
+  - [x] Ordnungsbegründung: Nach Coverage-HTML wurde die Daily-Run-Ausgabe vereinheitlicht, damit neue Treffer und Betriebsberichte dieselben Linkregeln verwenden.
+  - [x] Risiken und Unsicherheiten: Historische Stellenlinks koennen extern nicht mehr erreichbar sein; die Reports zeigen diese offiziellen URLs weiterhin als Nachweis, ohne Erreichbarkeit zu behaupten.
+  - [x] Schritte:
+    1. Report-Eintraege erweitert: `New-JobAgentReportJobEntry` nutzt `Get-JobAgentCoverageCompanyLinks` und bevorzugt eine zur Stelle passende offizielle Source, sonst den primaeren offiziellen Anbieterlink.
+    2. Renderer vereinheitlicht: Markdown- und HTML-Tabellen zeigen Stellenlink und Anbieterlink getrennt; HTML-Links werden validiert, encodiert und mit sicheren Linkattributen gerendert.
+    3. Quellen-Issues abgesichert: Offizielle JobSources werden klickbar ausgegeben; unoffizielle Quellen bleiben nicht klickbar und enthalten einen Review-Grund.
+  - [x] Evidence: Tests `tests\Test-JobAgentReport.ps1` und `tests\Test-JobAgentDailyRun.ps1`; Supertest-Ausgabe `.\ci.cmd supertest` Exit 0; Daily-Run-HTML nutzt sichere Linklabels statt langer Roh-URLs.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0.
+  - [x] Audit: Automatische Reporttests decken Linklabels, sichere HTML-Attribute, HTML-Encoding und nicht klickbare unoffizielle Quellen ab. HTML-Tabellen behalten bestehende `overflow-x`-/Responsive-Guards.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Meilenstein: M7 Daily-Run-Linkvertrag abgeschlossen; es sind keine aktiven Roadmap-Punkte offen.

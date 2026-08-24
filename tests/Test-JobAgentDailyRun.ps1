@@ -173,13 +173,15 @@ try {
     $markdownReport = Get-Content -LiteralPath $second.markdown_report_path -Raw
     Assert-True -Condition ($markdownReport.Contains('## Aktive passende Stellen')) -Message 'Markdown-Report enthaelt keine aktiven passenden Stellen.'
     Assert-True -Condition ($markdownReport.Contains('## Fehler und unsichere Quellen')) -Message 'Markdown-Report enthaelt keine Fehler-/Quellen-Sektion.'
-    Assert-True -Condition ($markdownReport.Contains('https://gamma.example.invalid/careers')) -Message 'Markdown-Report enthaelt keine fehlerhafte Karriere-Quelle.'
-    Assert-True -Condition ($markdownReport.Contains('https://alpha.example.invalid/careers/head-it-100')) -Message 'Markdown-Report enthaelt keine offizielle URL.'
+    Assert-True -Condition ($markdownReport.Contains('[Quelle](https://gamma.example.invalid/careers)')) -Message 'Markdown-Report enthaelt keine klickbare offizielle Fehlerquelle.'
+    Assert-True -Condition ($markdownReport.Contains('[Stelle](https://alpha.example.invalid/careers/head-it-100)')) -Message 'Markdown-Report enthaelt keinen klickbaren offiziellen Stellenlink.'
+    Assert-True -Condition ($markdownReport.Contains('[Karriere](https://alpha.example.invalid/careers)')) -Message 'Markdown-Report enthaelt keinen klickbaren Anbieterlink.'
     $htmlReport = Get-Content -LiteralPath $second.html_report_path -Raw
     Assert-True -Condition ($htmlReport.Contains('<h2>Aktive passende Stellen</h2>')) -Message 'HTML-Report enthaelt keine aktiven passenden Stellen.'
     Assert-True -Condition ($htmlReport.Contains('<h2>Fehler und unsichere Quellen</h2>')) -Message 'HTML-Report enthaelt keine Fehler-/Quellen-Sektion.'
-    Assert-True -Condition ($htmlReport.Contains('https://gamma.example.invalid/careers')) -Message 'HTML-Report enthaelt keine fehlerhafte Karriere-Quelle.'
-    Assert-True -Condition ($htmlReport.Contains('https://alpha.example.invalid/careers/head-it-100')) -Message 'HTML-Report enthaelt keine offizielle URL.'
+    Assert-True -Condition ($htmlReport.Contains('href="https://gamma.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>')) -Message 'HTML-Report enthaelt keine sichere klickbare Fehlerquelle.'
+    Assert-True -Condition ($htmlReport.Contains('href="https://alpha.example.invalid/careers/head-it-100" target="_blank" rel="noopener noreferrer">Stelle</a>')) -Message 'HTML-Report enthaelt keinen sicheren offiziellen Stellenlink.'
+    Assert-True -Condition ($htmlReport.Contains('href="https://alpha.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>')) -Message 'HTML-Report enthaelt keinen sicheren Anbieterlink.'
     Assert-True -Condition (@($second.document.scan_runs[0].artifact_paths).Count -eq 3) -Message 'ScanRun-Artefakte muessen JSON, Markdown und HTML enthalten.'
 
     $cliProjectRoot = New-TestProjectRoot
@@ -431,6 +433,7 @@ try {
             'daily_run_partial_with_isolated_company_error',
             'daily_run_persists_scan_run_attempts_jobs_and_report',
             'daily_run_writes_markdown_and_html_report',
+            'daily_run_reports_secure_job_provider_and_source_links',
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
             'daily_run_cli_fixture_mode',

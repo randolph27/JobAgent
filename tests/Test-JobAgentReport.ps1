@@ -141,9 +141,11 @@ $document.jobs = @(
 )
 $document.jobs[0].published_at = '2026-08-10T08:00:00.000Z'
 $document.jobs[0].salary = '120000 EUR'
+$document.jobs[2].source_id = 'source:alpha_ag_ats'
 $document.jobs[4].classification = New-TestClassification -Result 'REJECTED' -Priority 'UNRATED' -Score 0 -Reasons @()
 $document.job_sources = @(
     [pscustomobject]@{ source_id = 'source:alpha_ag_career'; company_id = 'company:alpha_ag'; source_type = 'CAREER_PAGE'; url = 'https://alpha_ag.example.invalid/careers'; canonical_url = 'https://alpha_ag.example.invalid/careers'; is_official = $true; verified_at = '2026-08-17T09:00:00.000Z'; verification_basis = 'CAREER_URL'; verification_evidence = @([pscustomobject]@{ status = 'VERIFIED'; evidence_type = 'CAREER_URL'; url = 'https://alpha_ag.example.invalid/careers'; basis_url = 'https://alpha_ag.example.invalid/'; redirect_chain = @(); observed_at = '2026-08-17T09:00:00.000Z'; reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.' }) }
+    [pscustomobject]@{ source_id = 'source:alpha_ag_ats'; company_id = 'company:alpha_ag'; source_type = 'OFFICIAL_ATS'; url = 'https://jobs.alpha_ag.example.invalid/search'; canonical_url = 'https://jobs.alpha_ag.example.invalid/search'; is_official = $true; verified_at = '2026-08-17T09:00:00.000Z'; verification_basis = 'COMPANY_LINKED_ATS'; verification_evidence = @([pscustomobject]@{ status = 'VERIFIED'; evidence_type = 'COMPANY_LINKED_ATS'; url = 'https://jobs.alpha_ag.example.invalid/search'; basis_url = 'https://alpha_ag.example.invalid/careers'; redirect_chain = @(); observed_at = '2026-08-17T09:00:00.000Z'; reason = 'ATS-Quelle wurde ueber Karriere-URL belegt.' }) }
     [pscustomobject]@{ source_id = 'source:beta_ag_career'; company_id = 'company:beta_ag'; source_type = 'CAREER_PAGE'; url = 'https://beta_ag.example.invalid/careers'; canonical_url = 'https://beta_ag.example.invalid/careers'; is_official = $true; verified_at = '2026-08-17T09:00:00.000Z'; verification_basis = 'CAREER_URL'; verification_evidence = @([pscustomobject]@{ status = 'VERIFIED'; evidence_type = 'CAREER_URL'; url = 'https://beta_ag.example.invalid/careers'; basis_url = 'https://beta_ag.example.invalid/'; redirect_chain = @(); observed_at = '2026-08-17T09:00:00.000Z'; reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.' }) }
 )
 $document.scan_runs = @([pscustomobject]@{
@@ -190,20 +192,33 @@ Assert-True -Condition ($report.sections.new_matching_jobs[0].requirements_text 
 Assert-True -Condition ($report.sections.new_matching_jobs[0].age_basis -eq 'published_at') -Message 'Altersbasis fuer aktive Stellen ist falsch.'
 Assert-True -Condition ([int]$report.sections.new_matching_jobs[0].age_days -ge 7) -Message 'Alter der Stelle wird nicht berechnet.'
 Assert-True -Condition ($report.sections.source_issues[0].category -eq 'NICHT_ERREICHBAR') -Message 'Fehlerkategorie fuer nicht erreichbare Karriereportale ist falsch.'
+Assert-True -Condition ($report.sections.new_matching_jobs[0].provider_url -eq 'https://alpha_ag.example.invalid/careers') -Message 'Provider-Link nutzt nicht die offizielle Karrierequelle.'
+Assert-True -Condition ($report.sections.changed_jobs[0].provider_url -eq 'https://jobs.alpha_ag.example.invalid/search') -Message 'Provider-Link bevorzugt nicht die offizielle ATS-Quelle der Stelle.'
 
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
-foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '120000 EUR', 'Budgetverantwortung', 'published_at', 'https://beta_ag.example.invalid/careers', 'https://alpha_ag.example.invalid/jobs/alpha_new')) {
+foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '120000 EUR', 'Budgetverantwortung', 'published_at', '[Quelle](https://beta_ag.example.invalid/careers)', '[Stelle](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
     Assert-True -Condition ($markdown.Contains($expected)) -Message "Markdown-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $markdown.Contains('Software Engineer')) -Message 'Abgelehnte Stellen duerfen nicht als passende Stellen gerendert werden.'
 
 $report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
-foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', 'JobAgent Daily-Run-Bericht', '120000 EUR', 'Budgetverantwortung', 'https://beta_ag.example.invalid/careers', 'https://alpha_ag.example.invalid/jobs/alpha_new')) {
+foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', 'JobAgent Daily-Run-Bericht', '120000 EUR', 'Budgetverantwortung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Stelle</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
     Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'
 Assert-True -Condition ($html.Contains('&lt;script&gt;alert(1)&lt;/script&gt;')) -Message 'HTML-Report escaped problematische Inhalte nicht.'
+
+$document.job_sources += [pscustomobject]@{ source_id = 'source:beta_ag_board'; company_id = 'company:beta_ag'; source_type = 'JOB_BOARD_DISCOVERY'; url = 'https://jobs.example.invalid/beta'; canonical_url = 'https://jobs.example.invalid/beta'; is_official = $false; verified_at = $null; verification_basis = 'DISCOVERY_HINT'; verification_evidence = @() }
+$document.scan_attempts += [pscustomobject]@{ scan_attempt_id = 'scanattempt:beta-board'; scan_run_id = $scanRunId; company_id = 'company:beta_ag'; source_id = 'source:beta_ag_board'; started_at = '2026-08-17T10:00:00.000Z'; finished_at = '2026-08-17T10:00:01.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'TECHNICAL_LIMITATION'; retry_recommendation = 'MANUAL_REVIEW'; http_status = 599 }
+$issueReport = New-JobAgentDailyReport -Document $document -ScanRunId $scanRunId
+$unofficialIssue = @($issueReport.sections.source_issues | Where-Object { [string]$_.source_id -eq 'source:beta_ag_board' })[0]
+Assert-True -Condition (-not [bool]$unofficialIssue.source_link.is_clickable) -Message 'Unoffizielle Quellen-Issues duerfen nicht klickbar sein.'
+Assert-True -Condition ($unofficialIssue.source_review_reason -match 'nicht als offizielle JobSource') -Message 'Unoffizielle Quellen-Issues brauchen einen Review-Grund.'
+$issueMarkdown = ConvertTo-JobAgentDailyReportMarkdown -Report $issueReport
+$issueHtml = ConvertTo-JobAgentDailyReportHtml -Report $issueReport
+Assert-True -Condition (-not $issueMarkdown.Contains('[Quelle](https://jobs.example.invalid/beta)')) -Message 'Markdown darf unoffizielle Quellen nicht verlinken.'
+Assert-True -Condition (-not $issueHtml.Contains('href="https://jobs.example.invalid/beta"')) -Message 'HTML darf unoffizielle Quellen nicht verlinken.'
 
 $empty = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
 $empty.scan_runs = @($document.scan_runs[0])
@@ -221,6 +236,8 @@ Assert-True -Condition ($emptyHtml.Contains('Keine neuen passenden Stellen im La
         'report_explains_a_b_c_priority',
         'report_preserves_unknown_optional_values',
         'report_renders_markdown_and_html',
+        'report_renders_secure_job_provider_and_source_links',
+        'report_blocks_unofficial_source_issue_links',
         'report_escapes_html_content',
         'report_renders_empty_state'
     )
