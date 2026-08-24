@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-24T10:39:00.000+02:00",
+  "ts": "2026-08-24T10:42:30.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -7,7 +7,7 @@
   "status": "handoff",
   "goal": "JA-039 abgeschlossen; keine aktiven Roadmap-Punkte",
   "summary": "Quellenbestand und Scanabdeckung sind deterministisch berechenbar und in CLI, Coverage-Report und Daily-Run-Report sichtbar. Aktuell: 72 Quellen gesamt, 41 offizielle Quellen, 31 Discovery-Hinweise.",
-  "next": "Push des JA-039-Commits oder neue Roadmap-Punkte priorisiert anlegen.",
+  "next": "Neue Roadmap-Punkte priorisiert anlegen oder den Daily-/Coverage-Betrieb fortsetzen.",
   "changed": [
     "Roadmap.md",
     "Roadmap_archive.md",
@@ -22,6 +22,7 @@
     "tests/Test-JobAgentReport.ps1",
     "todo.checkpoint.json",
     "todo.events.jsonl",
+    "todo.history.digest.json",
     "todo.master.index.json",
     "todo.state.json",
     "tools/Measure-JobAgentCompanyCoverage.ps1",
@@ -49,7 +50,7 @@
       "status": "pass"
     },
     {
-      "cmd": ".\\ci.cmd todo-rebuild",
+      "cmd": ".\\ci.cmd stp",
       "exit": 0,
       "status": "pass"
     }
@@ -58,11 +59,8 @@
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "aktueller JA-039-Commit",
     "upstream": "origin/master",
-    "ahead": 1,
-    "behind": 0,
-    "worktree": "clean"
+    "worktree": "STP-Checkpoint wird committed und gepusht"
   },
   "refs": [
     "README.md",
@@ -96,5 +94,10 @@
     "scan_failed_latest_run": 0,
     "never_scanned_sources": 37,
     "stale_sources": 70
-  }
+  },
+  "notes": [
+    "Die Definition Quelle zaehlt produktive job_sources, Source-Registry-Eintraege und Discovery-Hints getrennt von Firmen.",
+    "Roadmap.md enthaelt keine aktiven Punkte.",
+    "Supertest ist mit Exit 0 belegt."
+  ]
 }
