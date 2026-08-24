@@ -131,6 +131,44 @@ function Get-ToolDiscoverySource {
     return $source[0]
 }
 
+function Get-ToolSnapshotItemInputs {
+    param(
+        [Parameter(Mandatory)][object]$Item,
+        [Parameter(Mandatory)][string]$Root
+    )
+
+    $inputs = if ($Item.PSObject.Properties.Name -contains 'inputs' -and @($Item.inputs).Count -gt 0) {
+        @($Item.inputs)
+    }
+    else {
+        @([pscustomobject]@{
+                input_path = Get-ToolObjectProperty -Object $Item -Name 'input_path' -Default ''
+                source_id = Get-ToolObjectProperty -Object $Item -Name 'source_id' -Default ''
+                snapshot_id = Get-ToolObjectProperty -Object $Item -Name 'snapshot_id' -Default $null
+                snapshot_date = Get-ToolObjectProperty -Object $Item -Name 'snapshot_date' -Default $null
+            })
+    }
+
+    $resolvedInputs = [System.Collections.Generic.List[object]]::new()
+    foreach ($input in $inputs) {
+        $inputPathValue = [string](Get-ToolObjectProperty -Object $input -Name 'input_path' -Default '')
+        if ([string]::IsNullOrWhiteSpace($inputPathValue)) {
+            throw 'Snapshot-Manifest-Input enthaelt keinen input_path.'
+        }
+        $resolvedInputPath = Resolve-ToolProjectPath -Root $Root -Path $inputPathValue
+        if (-not (Test-Path -LiteralPath $resolvedInputPath -PathType Leaf)) {
+            throw "Snapshot-Eingabe fehlt: $resolvedInputPath"
+        }
+        $resolvedInputs.Add([pscustomobject]@{
+                input_path = $resolvedInputPath
+                source_id = [string](Get-ToolObjectProperty -Object $input -Name 'source_id' -Default (Get-ToolObjectProperty -Object $Item -Name 'source_id' -Default ''))
+                snapshot_id = Get-ToolObjectProperty -Object $input -Name 'snapshot_id' -Default (Get-ToolObjectProperty -Object $Item -Name 'snapshot_id' -Default ([IO.Path]::GetFileNameWithoutExtension($resolvedInputPath)))
+                snapshot_date = Get-ToolObjectProperty -Object $input -Name 'snapshot_date' -Default (Get-ToolObjectProperty -Object $Item -Name 'snapshot_date' -Default $null)
+            })
+    }
+    return $resolvedInputs.ToArray()
+}
+
 function Assert-ToolSnapshotSource {
     param(
         [Parameter(Mandatory)][object]$Source,
@@ -262,57 +300,64 @@ function Invoke-ToolDiscoverySnapshotLane {
     $snapshotLogs = [System.Collections.Generic.List[object]]::new()
     foreach ($item in @($manifest.items)) {
         $kind = [string](Get-ToolObjectProperty -Object $item -Name 'kind' -Default '')
-        $sourceId = [string](Get-ToolObjectProperty -Object $item -Name 'source_id' -Default '')
-        $inputPath = Resolve-ToolProjectPath -Root $Root -Path ([string](Get-ToolObjectProperty -Object $item -Name 'input_path' -Default ''))
-        if (-not (Test-Path -LiteralPath $inputPath -PathType Leaf)) {
-            throw "Snapshot-Eingabe fehlt: $inputPath"
-        }
-        $source = Get-ToolDiscoverySource -Registry $registry -SourceId $sourceId
-        Assert-ToolSnapshotSource -Source $source -Kind $kind
+        foreach ($input in @(Get-ToolSnapshotItemInputs -Item $item -Root $Root)) {
+            $sourceId = [string]$input.source_id
+            if ([string]::IsNullOrWhiteSpace($sourceId)) {
+                throw 'Snapshot-Manifest-Input enthaelt keine source_id.'
+            }
+            $inputPath = [string]$input.input_path
+            $source = Get-ToolDiscoverySource -Registry $registry -SourceId $sourceId
+            Assert-ToolSnapshotSource -Source $source -Kind $kind
 
-        if ($kind -eq 'register') {
-            $snapshotDate = [datetime]::Parse([string](Get-ToolObjectProperty -Object $item -Name 'snapshot_date' -Default ''), [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
-            $snapshotId = [string](Get-ToolObjectProperty -Object $item -Name 'snapshot_id' -Default ([IO.Path]::GetFileNameWithoutExtension($inputPath)))
-            $result = Import-JobAgentRegisterCandidates -InputPath $inputPath -SourceRegistry $registry -SourceId $sourceId -SnapshotId $snapshotId -SnapshotDate $snapshotDate -ObservedAt $ObservedAt
-        }
-        elseif ($kind -eq 'jobboard') {
-            $result = Import-JobAgentJobBoardEmployers -SnapshotPath $inputPath -SourceRegistry $registry -KnownCompanies @($document.companies)
-        }
-        elseif ($kind -eq 'regional') {
-            $result = Import-JobAgentRegionalDirectories -SnapshotPath $inputPath -SourceRegistry $registry
-        }
-        else {
-            throw "Nicht unterstuetzter Snapshot-Kind: $kind"
-        }
+            if ($kind -eq 'register') {
+                $snapshotDateValue = [string]$input.snapshot_date
+                if ([string]::IsNullOrWhiteSpace($snapshotDateValue)) {
+                    throw "Register-Snapshot $inputPath enthaelt kein snapshot_date."
+                }
+                $snapshotDate = [datetime]::Parse($snapshotDateValue, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
+                $snapshotId = [string]$input.snapshot_id
+                $result = Import-JobAgentRegisterCandidates -InputPath $inputPath -SourceRegistry $registry -SourceId $sourceId -SnapshotId $snapshotId -SnapshotDate $snapshotDate -ObservedAt $ObservedAt
+            }
+            elseif ($kind -eq 'jobboard') {
+                $result = Import-JobAgentJobBoardEmployers -SnapshotPath $inputPath -SourceRegistry $registry -KnownCompanies @($document.companies)
+            }
+            elseif ($kind -eq 'regional') {
+                $result = Import-JobAgentRegionalDirectories -SnapshotPath $inputPath -SourceRegistry $registry
+            }
+            else {
+                throw "Nicht unterstuetzter Snapshot-Kind: $kind"
+            }
 
-        foreach ($hint in @($result.hints)) {
-            $newHints.Add($hint)
-        }
-        $logSources = [System.Collections.Generic.List[object]]::new()
-        if ($kind -eq 'regional' -and $result.PSObject.Properties.Name -contains 'source_counts') {
-            foreach ($property in $result.source_counts.PSObject.Properties) {
-                $regionalSource = Get-ToolDiscoverySource -Registry $registry -SourceId ([string]$property.Name)
-                Assert-ToolSnapshotSource -Source $regionalSource -Kind $kind
+            foreach ($hint in @($result.hints)) {
+                $newHints.Add($hint)
+            }
+            $logSources = [System.Collections.Generic.List[object]]::new()
+            if ($kind -eq 'regional' -and $result.PSObject.Properties.Name -contains 'source_counts') {
+                foreach ($property in $result.source_counts.PSObject.Properties) {
+                    $regionalSource = Get-ToolDiscoverySource -Registry $registry -SourceId ([string]$property.Name)
+                    Assert-ToolSnapshotSource -Source $regionalSource -Kind $kind
+                    $logSources.Add([pscustomobject]@{
+                            source = $regionalSource
+                            hints_total = [int]$property.Value
+                        })
+                }
+            }
+            else {
                 $logSources.Add([pscustomobject]@{
-                        source = $regionalSource
-                        hints_total = [int]$property.Value
+                        source = $source
+                        hints_total = [int](Get-ToolObjectProperty -Object $result -Name 'hints_total' -Default 0)
                     })
             }
-        }
-        else {
-            $logSources.Add([pscustomobject]@{
-                    source = $source
-                    hints_total = [int](Get-ToolObjectProperty -Object $result -Name 'hints_total' -Default 0)
-                })
-        }
 
-        foreach ($logSource in @($logSources.ToArray())) {
-            $snapshotLog = New-ToolDiscoverySnapshotLog -Source $logSource.source -Kind $kind -InputPath $inputPath -Result $result -ObservedAt $ObservedAt
-            $snapshotLog.hints_total = [int]$logSource.hints_total
-            $safeSource = [regex]::Replace(([string]$logSource.source.source_id).Substring(16), '[^a-z0-9._-]+', '_')
-            $snapshotLogPath = Join-Path $logRootPath ('company-discovery-snapshot-' + $safeSource + '-' + $ObservedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
-            Write-ToolAtomicJson -Path $snapshotLogPath -Value $snapshotLog -Depth 30
-            $snapshotLogs.Add(($snapshotLog | Add-Member -NotePropertyName log_path -NotePropertyValue $snapshotLogPath -PassThru))
+            foreach ($logSource in @($logSources.ToArray())) {
+                $snapshotLog = New-ToolDiscoverySnapshotLog -Source $logSource.source -Kind $kind -InputPath $inputPath -Result $result -ObservedAt $ObservedAt
+                $snapshotLog.hints_total = [int]$logSource.hints_total
+                $safeSource = [regex]::Replace(([string]$logSource.source.source_id).Substring(16), '[^a-z0-9._-]+', '_')
+                $safeInput = [regex]::Replace([IO.Path]::GetFileNameWithoutExtension($inputPath), '[^a-z0-9._-]+', '_')
+                $snapshotLogPath = Join-Path $logRootPath ('company-discovery-snapshot-' + $safeSource + '-' + $safeInput + '-' + $ObservedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
+                Write-ToolAtomicJson -Path $snapshotLogPath -Value $snapshotLog -Depth 30
+                $snapshotLogs.Add(($snapshotLog | Add-Member -NotePropertyName log_path -NotePropertyValue $snapshotLogPath -PassThru))
+            }
         }
     }
 
@@ -331,6 +376,7 @@ function Invoke-ToolDiscoverySnapshotLane {
         manifest_path = $resolvedManifest
         merged_hints_path = $hintsPath
         sources_total = @($snapshotLogs.ToArray()).Count
+        inputs_total = @($snapshotLogs.ToArray() | Select-Object -ExpandProperty input_path -Unique).Count
         new_hints_total = @($newHints.ToArray()).Count
         merged_hints_total = [int]$mergedStore.hints_total
         snapshot_logs = @($snapshotLogs.ToArray())
