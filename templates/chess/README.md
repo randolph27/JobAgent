@@ -614,6 +614,7 @@ $pid = (Get-NetTCPConnection -LocalPort 8080 -State Listen -ErrorAction Silently
 if ($pid) { Stop-Process -Id $pid -Force -ErrorAction SilentlyContinue }
 # 3) Cleanup
 Remove-Item .ci/run/devserver.pid.json -ErrorAction SilentlyContinue
+```
 Unix (Start, detached):
 mkdir -p .ci/run logs/devserver
 log="logs/devserver/devserver.log"

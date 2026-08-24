@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-24T11:10:32.084+02:00
+Stand: 2026-08-24T11:18:58.000+02:00
 
 ## Zustand
 
@@ -8,29 +8,20 @@ Stand: 2026-08-24T11:10:32.084+02:00
 - Status: `open`
 - Ziel: 
 - Branch: `master`
-- HEAD: `ff584cfabdc2`
+- HEAD: `3a248ba8cca1`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
-- Route: `False`
+- Route: `True`
 
 ## Versionierte Aenderungen
 
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `data/jobagent/company-candidate-verification.queue.json`
+- `.ci/pins/immutable.hashes.json`
+- `.ci/pins/immutable.snapshot/Roadmap.md`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `html/jobagent/company-coverage.html`
-- `html/jobagent/ja-022-viewport-audit.html`
-- `output/playwright/ja-022-viewport-1366.png`
-- `output/playwright/ja-022-viewport-1920.png`
-- `output/playwright/ja-022-viewport-800.png`
-- `src/JobAgent.Report.psm1`
-- `tests/Test-JobAgentDailyRun.ps1`
-- `tests/Test-JobAgentHtmlAudit.ps1`
-- `tests/Test-JobAgentReport.ps1`
+- `templates/chess/README.md`
+- `templates/ubuntu-web/README.md`
 - `todo.checkpoint.json`
 - `todo.current.md`
 - `todo.events.jsonl`
@@ -41,6 +32,12 @@ Stand: 2026-08-24T11:10:32.084+02:00
 ## Verifikation
 
 - `.\ci.cmd supertest` -> Exit `0`
+- `.\ci.cmd self-check` -> Exit `0`
+- `.\ci.cmd route-check` -> Exit `0`
+- `.\ci.cmd observer-baseline` -> Exit `0`
+- `.\ci.cmd drift-check` -> Exit `0`
+- `.\ci.cmd stp` -> Exit `0`
+- Supertest wurde in diesem Abschlusslauf nicht erneut angefragt; nach Nutzeranweisung gilt er fuer diesen Uebergabeabschluss als erledigt. Letzter belegter Supertest: `2026-08-24T09:29:31.729+02:00`, Exit `0`, `tests_total=19`.
 
 ## Naechster Anker
 
@@ -50,29 +47,29 @@ Aktive Punkte: JA-025 Firmeninventar auf mindestens 1000 verifizierte oder prüf
 
 ### Abgeschlossen
 
-- JA-024 ist fachlich abgeschlossen und nach `Roadmap_archive.md` rotiert.
-- Daily-Run-Reports zeigen in HTML und Markdown nun direkt nutzbare Jobtabellen mit `Titel`, `Firma`, `Standort`, `Prioritaet`, `Status`, `Offizielle Stellen-URL`, `Karriere-URL` und `Quelle`.
-- Offizielle Stellenlinks und Karriere-URLs werden als sichere Links mit `target="_blank"` und `rel="noopener noreferrer"` gerendert.
-- `New-JobAgentReportJobEntry` fuehrt jetzt `career_url` aus dem Firmeninventar ins Report-Viewmodel.
-- Report-, Daily-Run-, HTML-Audit- und Viewport-Tests wurden angepasst; der Supertest lief erfolgreich.
+- `TD-0042 CI: Resolve drift (observer/route/immutables)` ist erledigt.
+- Route-Check-Befund war: ungeschlossene Markdown-Code-Fences in `templates/chess/README.md` und `templates/ubuntu-web/README.md`.
+- Fix: In beiden Template-READMEs wurde der Windows-PowerShell-Codeblock vor dem nachfolgenden Unix-Abschnitt geschlossen.
+- Immutable-Pins wurden mit `.\ci.cmd repin-immutables` aktualisiert; dadurch sind `.ci/pins/immutable.hashes.json` und `.ci/pins/immutable.snapshot/Roadmap.md` geaendert.
+- Observer-Baseline wurde erneuert; `.\ci.cmd drift-check` ist danach gruen.
 
-### Relevante Aenderungen
+### Roadmap-Status
 
-- `src/JobAgent.Report.psm1`: Jobtabellen umsortiert, `career_url` ins Viewmodel aufgenommen, Markdown-Firmenlinks fuer neue Unternehmen klickbar gemacht.
-- `tests/Test-JobAgentReport.ps1`: Assertions auf neue Spaltenreihenfolge und Linklabels aktualisiert.
-- `tests/Test-JobAgentDailyRun.ps1`: Daily-Run-Artefakte pruefen jetzt `Offizielle Stellen-URL` und `Karriere-URL`.
-- `tests/Test-JobAgentHtmlAudit.ps1`: HTML-Audit prueft Pflichtspalten und sichere Karriere-/Stellenlinks.
-- `html/jobagent/ja-022-viewport-audit.html` und `output/playwright/ja-022-viewport-*.png`: Viewport-Audit-Artefakte wurden neu erzeugt.
+- Kein Roadmap-Punkt wurde in diesem Arbeitsschritt vollstaendig abgeschlossen oder rotiert.
+- `Roadmap.md` enthaelt weiterhin drei aktive Punkte: `JA-025`, `JA-026`, `JA-027`.
+- `JA-025` ist der naechste fachliche Startpunkt und blockiert beziehungsweise staerkt die Wirkung von `JA-026` und `JA-027`.
 
 ### Offene Aufgaben
 
-- JA-025: Firmeninventar auf mindestens 1000 verifizierte oder pruefbare Zielgebiet-Kandidaten erweitern. Start mit Quelleninventar, Importwellen, Dedupe und Coverage-Gates. Funktionstests laut Roadmap: `Test-JobAgentCompanyInventory.ps1`, `Test-JobAgentImportWaves.ps1`, `Test-JobAgentCoverage.ps1`, `Test-JobAgentCompanyDedupeScale.ps1`.
-- JA-026: Daily-Run-Scanbreite konfigurierbar machen und im Bericht transparent ausweisen, ob `3` ein Limit oder die Datenbasis ist. Abhaengig von JA-024, fachlich stark von JA-025.
-- JA-027: Karriere-/ATS-Link-Ermittlung skalieren und generische Such-/FAQ-/Landingpages nicht als Jobdetail persistieren.
-- TD-0042: CI-Route/Drift meldet bestehende Markdown-Fence-Verletzungen in `templates/chess/README.md:1027` und `templates/ubuntu-web/README.md:1033`. Das ist aktuell der verbleibende Route-Check-Befund.
+- `TD-0039 / JA-025`: Firmeninventar auf mindestens 1000 verifizierte oder pruefbare Zielgebiet-Kandidaten erweitern. Start mit Quelleninventar, Importwellen, Dedupe und Coverage-Gates. Relevante Tests: `tests/Test-JobAgentCompanyInventory.ps1`, `tests/Test-JobAgentImportWaves.ps1`, `tests/Test-JobAgentCoverage.ps1`, `tests/Test-JobAgentCompanyDedupeScale.ps1`.
+- `TD-0040 / JA-026`: Daily-Run-Scanbreite konfigurierbar machen und Bericht transparent ausweisen lassen, ob `3` ein Testlimit oder Datenbasisumfang ist. Erst sinnvoll voll wirksam nach groesserer Firmenbasis aus `JA-025`.
+- `TD-0041 / JA-027`: Karriere-/ATS-Link-Ermittlung skalieren; generische Such-, FAQ- oder Landingpages duerfen nicht als Jobdetail persistiert werden.
 
-### Betriebsstatus
+### Betriebs- und Arbeitsregeln fuer Folgechat
 
-- SonarQube `http://localhost:9000/api/system/status`: `UP`.
-- Devserver `http://localhost:8500/`: laeuft.
-- Letzter Supertest: `.\ci.cmd supertest` -> Exit `0`.
+- Einstieg: `D:\_Scripte\JobAgent`.
+- Vor Weiterarbeit lesen: `README.md`, `Roadmap.md`, `todo.current.md`, `todo.state.json`, `handoff.latest.md`.
+- Tests nur funktionsbezogen ausfuehren; `.\ci.cmd supertest` erst nach abgeschlossenem Roadmap-Punkt oder ausdruecklicher Anforderung.
+- Devserver und Sonar nur ueber `.\ci.cmd`-Befehle starten; keine Vordergrundserver.
+- Keine erfundenen Firmen, URLs, Job-IDs, Geodaten oder Verifikationsaussagen.
+- Jobboersen nur als Discovery-Hinweise verwenden, nicht als Primaerbeleg.
