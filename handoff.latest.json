@@ -1,1 +1,190 @@
-{"verified":[{"cmd":".\\gradlew.bat verify --console=plain --no-daemon","status":"running","exit":null}],"changed":["Roadmap.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"goal":"","refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","summary":"stp sync","next":"Aktive Punkte: JA-034 Produktive Discovery-Snapshot-Lane fuer Muenchen/Freising aus erlaubten Quellen aufbauen #comment: Nach den technischen Discovery-, Dedupe- und Verifikationsgates muss der Kandidatenbestand reproduzierbar aus realen, erlaubten Quellen wachsen.","active_id":"","git":{"behind":0,"ahead":0,"has_repo":true,"upstream":"origin/master","detached":false,"remote":"origin","branch":"master","head":"8e7f2283d7e1","tracked_changes":["Roadmap.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"worktree":"dirty"},"verify_digest":{"log_path":"D:\\_Scripte\\JobAgent\\logs\\verify\\\\verify-20260823-102708.log","ts":"2026-08-23T10:27:10.756+02:00","exit":null,"cmd":".\\gradlew.bat verify --console=plain --no-daemon","status":"running"},"route_violations":[],"capsule":{"env_inventory_used":false,"env_inventory_missing":false,"status":"open","agent_id":"UTTER-20260817-39f7","ts":"2026-08-24T09:04:17.260+02:00","next":"Aktive Punkte: JA-034 Produktive Discovery-Snapshot-Lane fuer Muenchen/Freising aus erlaubten Quellen aufbauen #comment: Nach den technischen Discovery-, Dedupe- und Verifikationsgates muss der Kandidatenbestand reproduzierbar aus realen, erlaubten Quellen wachsen.","goal":"","manual_missing":false,"verified":[{"cmd":".\\gradlew.bat verify --console=plain --no-daemon","status":"running","exit":null}],"changed":["Roadmap.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"git":{"behind":0,"ahead":0,"has_repo":true,"upstream":"origin/master","detached":false,"remote":"origin","branch":"master","head":"8e7f2283d7e1","tracked_changes":["Roadmap.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"worktree":"dirty"},"env_inventory_path":null,"active_id":"","project":"JobAgent","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"route_violations":[],"route_ok":null,"workspace_root":"."},"status":"open","workspace_root":".","project":"JobAgent","route":null,"ts":"2026-08-24T09:04:17.260+02:00","agent_id":"UTTER-20260817-39f7","next_steps":["Aktive Punkte: JA-034 Produktive Discovery-Snapshot-Lane fuer Muenchen/Freising aus erlaubten Quellen aufbauen #comment: Nach den technischen Discovery-, Dedupe- und Verifikationsgates muss der Kandidatenbestand reproduzierbar aus realen, erlaubten Quellen wachsen."],"toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"route_ok":null}
+{
+  "ts": "2026-08-24T09:05:57+02:00",
+  "agent_id": "codex",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
+  "active_id": null,
+  "status": "open",
+  "goal": "Roadmap ab JA-034 fortsetzen; neuer Chat soll mit TD-0034 starten.",
+  "summary": "JA-034 bis JA-036 sind neu angelegt und als TD-0034 bis TD-0036 offen. Keine Punkte sind komplett erledigt, daher keine Rotation.",
+  "open_items": [
+    {
+      "todo_id": "TD-0034",
+      "roadmap_id": "JA-034",
+      "title": "Produktive Discovery-Snapshot-Lane fuer Muenchen/Freising aus erlaubten Quellen aufbauen",
+      "priority_score": 94,
+      "dependencies": ["JA-023", "JA-024", "JA-025", "JA-026", "JA-027", "JA-028", "JA-029", "JA-030"],
+      "next_action": "Source Registry und Snapshot-Contract pruefen; erlaubte Quellen fuer lokale Kandidaten-Hints fail-closed auswaehlen.",
+      "function_tests": [
+        "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentRegisterDiscovery.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentJobBoardDiscovery.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentRegionalDiscovery.ps1"
+      ]
+    },
+    {
+      "todo_id": "TD-0035",
+      "roadmap_id": "JA-035",
+      "title": "Kandidaten-Review-Queue und Coverage-Arbeitsbericht fuer Muenchen/Freising operationalisieren",
+      "priority_score": 86,
+      "dependencies": ["JA-034"],
+      "next_action": "Nach JA-034 Review-Scoring und Queue-Artefakte fuer Discovery-Hints implementieren.",
+      "function_tests": [
+        "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentCompanyDedupeScale.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1"
+      ]
+    },
+    {
+      "todo_id": "TD-0036",
+      "roadmap_id": "JA-036",
+      "title": "Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausfuehren",
+      "priority_score": 78,
+      "dependencies": ["JA-034", "JA-035"],
+      "next_action": "Nach priorisierter Queue Top-Kandidaten begrenzt und fail-closed gegen offizielle Firmen-, Karriere- oder ATS-Belege pruefen.",
+      "function_tests": [
+        "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1"
+      ]
+    }
+  ],
+  "completed": [
+    "JA-033 ist abgeschlossen, verifiziert und archiviert.",
+    "JA-034 bis JA-036 wurden angelegt und per todo-seed als TD-0034 bis TD-0036 synchronisiert.",
+    "Commit 15461ad Add next roadmap discovery wave wurde bereits nach origin/master gepusht."
+  ],
+  "changed": [
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json"
+  ],
+  "verified": [
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0,
+      "status": "pass",
+      "scope": "handoff sync"
+    },
+    {
+      "cmd": ".\\ci.cmd todo-seed",
+      "exit": 0,
+      "status": "pass",
+      "scope": "previous roadmap sync"
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 0,
+      "status": "pass",
+      "scope": "previous state check"
+    }
+  ],
+  "route_ok": null,
+  "route_violations": [],
+  "git": {
+    "has_repo": true,
+    "branch": "master",
+    "detached": false,
+    "head": "15461ad488c8",
+    "upstream": "origin/master",
+    "remote": "origin",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty",
+    "tracked_changes": [
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ]
+  },
+  "next": "Mit TD-0034 / JA-034 starten: Produktive Discovery-Snapshot-Lane fuer Muenchen/Freising aus erlaubten Quellen aufbauen.",
+  "next_steps": [
+    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md lesen.",
+    "TD-0034 bearbeiten: Source Registry und erlaubte Snapshot-Quellen pruefen.",
+    "Nur funktionsbezogene Tests aus JA-034 ausfuehren; Supertest erst bei Roadmap-Abschluss oder wenn angefragt."
+  ],
+  "refs": [
+    "README.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "env_inventory_path": null,
+  "hard_rules": [
+    "Keine Bewerbung, kein Formular-Autofill, keine extern wirksame Aktion ohne ausdrueckliche Bestaetigung.",
+    "Keine Jobboerse als offizieller Stellen- oder Anbieterlink.",
+    "Keine ungesicherten Aggregator-URLs als offizielle Quelle ausgeben.",
+    "Keine neue Live-Abhaengigkeit in Funktionstests.",
+    "Supertest erst nach gruenen Funktionstests; wenn nicht angefragt, gilt er gemaess Nutzeranweisung als erledigt.",
+    "Devserver auf Port 8500 und SonarQube auf Port 9000 ueber ci.cmd-Befehle verwalten."
+  ],
+  "capsule": {
+    "ts": "2026-08-24T09:05:57+02:00",
+    "agent_id": "codex",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": null,
+    "status": "open",
+    "goal": "Roadmap ab JA-034 fortsetzen; neuer Chat soll mit TD-0034 starten.",
+    "changed": [
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ],
+    "verified": [
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0,
+        "status": "pass"
+      }
+    ],
+    "route_ok": null,
+    "route_violations": [],
+    "git": {
+      "has_repo": true,
+      "branch": "master",
+      "detached": false,
+      "head": "15461ad488c8",
+      "upstream": "origin/master",
+      "remote": "origin",
+      "ahead": 0,
+      "behind": 0,
+      "worktree": "dirty",
+      "tracked_changes": [
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json"
+      ]
+    },
+    "next": "Mit TD-0034 / JA-034 starten: Produktive Discovery-Snapshot-Lane fuer Muenchen/Freising aus erlaubten Quellen aufbauen.",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json",
+      "Roadmap.md",
+      "Roadmap_archive.md"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  }
+}
