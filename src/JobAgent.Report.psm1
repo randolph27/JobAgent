@@ -340,6 +340,16 @@ function ConvertTo-JobAgentReportListText {
     return (($items | Select-Object -First $MaxItems) -join '; ')
 }
 
+function ConvertTo-JobAgentReportDescriptionText {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    $text = ConvertTo-JobAgentReportText -Value $Value
+    if ($text -eq 'UNKNOWN') {
+        return 'Keine Beschreibung aus offizieller Quelle verfuegbar'
+    }
+    return $text
+}
+
 function Get-JobAgentReportProperty {
     param(
         [Parameter()][AllowNull()][object]$Object,
@@ -392,6 +402,7 @@ function Get-JobAgentReportPriorityExplanation {
     $workModel = ConvertTo-JobAgentReportDisplayLabel -Value (Get-JobAgentReportProperty -Object $Job -Name 'work_model' -Default 'UNKNOWN') -Domain 'work_model'
     $employmentType = ConvertTo-JobAgentReportDisplayLabel -Value (Get-JobAgentReportProperty -Object $Job -Name 'employment_type' -Default 'UNKNOWN') -Domain 'employment_type'
     $requirements = @((Get-JobAgentReportProperty -Object $Job -Name 'requirements' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+    $description = ConvertTo-JobAgentReportDescriptionText -Value (Get-JobAgentReportProperty -Object $Job -Name 'description' -Default (Get-JobAgentReportProperty -Object $Job -Name 'summary' -Default 'UNKNOWN'))
 
     $parts = [System.Collections.Generic.List[string]]::new()
     $parts.Add("Prioritaet $($Job.priority), Ergebnis $result, Score $score.")
@@ -408,6 +419,7 @@ function Get-JobAgentReportPriorityExplanation {
     else {
         $parts.Add('Anforderungen: UNKNOWN.')
     }
+    $parts.Add('Kurzprofil: ' + $description + '.')
     return ($parts.ToArray() -join ' ')
 }
 
@@ -454,6 +466,7 @@ function New-JobAgentReportJobEntry {
     $firstSeen = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'first_seen' -Default 'UNKNOWN')
     $lastSeen = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'last_seen' -Default 'UNKNOWN')
     $requirements = @((Get-JobAgentReportProperty -Object $Job -Name 'requirements' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object { [string]$_ })
+    $description = ConvertTo-JobAgentReportDescriptionText -Value (Get-JobAgentReportProperty -Object $Job -Name 'description' -Default (Get-JobAgentReportProperty -Object $Job -Name 'summary' -Default 'UNKNOWN'))
     $ageInfo = Get-JobAgentReportAgeInfo -PublishedAt $publishedAt -FirstSeen $firstSeen -ReferenceTime $ReferenceTime
     $companyId = [string]$Job.company_id
     $company = if ($CompaniesById.ContainsKey($companyId)) { $CompaniesById[$companyId] } else { [pscustomobject]@{ company_id = $companyId; canonical_name = $companyId; verification_status = 'UNVERIFIED' } }
@@ -476,6 +489,8 @@ function New-JobAgentReportJobEntry {
         salary = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'salary' -Default 'UNKNOWN')
         requirements = @($requirements)
         requirements_text = ConvertTo-JobAgentReportListText -Values $requirements -Fallback 'UNKNOWN' -MaxItems 3
+        description = $description
+        description_source = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'description_source' -Default 'NONE')
         age_basis = [string]$ageInfo.age_basis
         age_days = [string]$ageInfo.age_days
         official_url = ConvertTo-JobAgentReportText -Value $Job.official_url
@@ -692,8 +707,8 @@ function Add-JobAgentReportMarkdownTable {
         [void]$Lines.Add($EmptyText)
         return
     }
-    $header = if ($IncludeChange) { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Aenderung | Stelle | Anbieter | Begruendung |' } else { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Stelle | Anbieter | Begruendung |' }
-    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' }
+    $header = if ($IncludeChange) { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Kurzprofil | Aenderung | Stelle | Anbieter | Begruendung |' } else { '| Prioritaet | Firma | Titel | Status | Standort | Arbeitsmodell | Beschaeftigung | Veroeffentlicht | Erkannt | Letztmals gesehen | Alter (Tage/Basis) | Gehalt | Anforderungen | Kurzprofil | Stelle | Anbieter | Begruendung |' }
+    $separator = if ($IncludeChange) { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' } else { '|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|' }
     [void]$Lines.Add($header)
     [void]$Lines.Add($separator)
     foreach ($item in $Items) {
@@ -715,6 +730,7 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $ageText),
                     (ConvertTo-JobAgentReportMarkdownText $item.salary),
                     (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
+                    (ConvertTo-JobAgentReportMarkdownText $item.description),
                     (ConvertTo-JobAgentReportMarkdownText $change),
                     (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Stelle'),
                     (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
@@ -737,6 +753,7 @@ function Add-JobAgentReportMarkdownTable {
                     (ConvertTo-JobAgentReportMarkdownText $ageText),
                     (ConvertTo-JobAgentReportMarkdownText $item.salary),
                     (ConvertTo-JobAgentReportMarkdownText $item.requirements_text),
+                    (ConvertTo-JobAgentReportMarkdownText $item.description),
                     (ConvertTo-JobAgentReportMarkdownLink -Url $item.official_url -Label 'Stelle'),
                     (ConvertTo-JobAgentReportProviderMarkdownLink -Link $item.provider_link),
                     (ConvertTo-JobAgentReportMarkdownText $item.priority_explanation)
@@ -813,10 +830,10 @@ function Add-JobAgentReportHtmlTable {
     [void]$Lines.Add('<table class="job-table">')
     [void]$Lines.Add('<thead>')
     if ($IncludeChange) {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Aenderung</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Aenderung</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
     }
     else {
-        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
+        [void]$Lines.Add('<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>')
     }
     [void]$Lines.Add('</thead>')
     [void]$Lines.Add('<tbody>')
@@ -844,6 +861,7 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $ageText) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.salary) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.description) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $change) +
                 '</td><td>' + $urlCell +
                 '</td><td>' + $providerCell +
@@ -866,6 +884,7 @@ function Add-JobAgentReportHtmlTable {
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $ageText) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.salary) +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.requirements_text) +
+                '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.description) +
                 '</td><td>' + $urlCell +
                 '</td><td>' + $providerCell +
                 '</td><td>' + (ConvertTo-JobAgentReportHtmlText $item.priority_explanation) +
@@ -1057,13 +1076,13 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('.value { display: block; font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }')
     [void]$lines.Add('.table-wrap { overflow-x: auto; }')
     [void]$lines.Add('table { width: 100%; border-collapse: collapse; min-width: 720px; }')
-    [void]$lines.Add('.job-table { min-width: 1320px; }')
+    [void]$lines.Add('.job-table { min-width: 1500px; }')
     [void]$lines.Add('th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }')
     [void]$lines.Add('th { background: #f2e7d4; font-size: 0.92rem; }')
     [void]$lines.Add('tbody tr:nth-child(even) { background: rgba(122, 75, 32, 0.04); }')
     [void]$lines.Add('a { color: var(--accent); }')
     [void]$lines.Add('.unknown { color: var(--muted); font-style: italic; }')
-    [void]$lines.Add('@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1200px; } th, td { padding: 9px 10px; } }')
+    [void]$lines.Add('@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1360px; } th, td { padding: 9px 10px; } }')
     [void]$lines.Add('</style>')
     [void]$lines.Add('</head>')
     [void]$lines.Add('<body>')

@@ -50,6 +50,57 @@ function Get-JobAgentRawValue {
     return $Default
 }
 
+function ConvertTo-JobAgentStatusPlainText {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter()][ValidateRange(1, 4000)][int]$MaxLength = 1200
+    )
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
+        return 'UNKNOWN'
+    }
+    $text = [regex]::Replace([string]$Value, '<(script|style)\b.*?</\1>', ' ', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    $text = [regex]::Replace($text, '<[^>]+>', ' ')
+    $text = [Net.WebUtility]::HtmlDecode($text)
+    $text = [regex]::Replace($text, '\s+', ' ').Trim()
+    if ([string]::IsNullOrWhiteSpace($text)) {
+        return 'UNKNOWN'
+    }
+    if ($text.Length -gt $MaxLength) {
+        return $text.Substring(0, $MaxLength).Trim()
+    }
+    return $text
+}
+
+function Get-JobAgentRawDescription {
+    param([Parameter(Mandatory)][object]$RawJob)
+
+    foreach ($property in @('description', 'summary')) {
+        $value = Get-JobAgentRawValue -RawJob $RawJob -Name $property -Default ''
+        $text = ConvertTo-JobAgentStatusPlainText -Value $value
+        if ($text -ne 'UNKNOWN') {
+            return $text
+        }
+    }
+    return 'UNKNOWN'
+}
+
+function Get-JobAgentRawDescriptionSource {
+    param(
+        [Parameter(Mandatory)][object]$RawJob,
+        [Parameter(Mandatory)][string]$Description
+    )
+
+    if ($Description -eq 'UNKNOWN') {
+        return 'NONE'
+    }
+    $source = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'description_source' -Default 'OFFICIAL_SOURCE')
+    if (@('OFFICIAL_SOURCE', 'NONE') -contains $source) {
+        return $source
+    }
+    return 'OFFICIAL_SOURCE'
+}
+
 function Get-JobAgentRawSourceLifecycleState {
     param([Parameter(Mandatory)][object]$RawJob)
 
@@ -157,7 +208,7 @@ function New-JobAgentSnapshotFromRawJob {
         [Parameter(Mandatory)][string]$CapturedAt
     )
 
-    $summary = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'summary' -Default 'UNKNOWN')
+    $summary = Get-JobAgentRawDescription -RawJob $RawJob
     $hashPayload = @(
         [string]$Job.title,
         [string]$Job.official_url,
@@ -177,6 +228,7 @@ function New-JobAgentSnapshotFromRawJob {
         location = $Job.location
         official_url = $Job.official_url
         summary = $summary
+        description = $summary
     }
 }
 
@@ -190,6 +242,7 @@ function New-JobAgentJobFromRawJob {
     )
 
     $location = New-JobAgentStatusLocation -RawLocation (Get-JobAgentRawValue -RawJob $RawJob -Name 'location' -Default (Get-JobAgentRawValue -RawJob $RawJob -Name 'location_label' -Default 'UNKNOWN'))
+    $description = Get-JobAgentRawDescription -RawJob $RawJob
     [pscustomobject]@{
         job_id = $Decision.job_id
         company_id = $CompanyId
@@ -202,6 +255,8 @@ function New-JobAgentJobFromRawJob {
         location = $location
         work_model = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_model' -Default 'UNKNOWN')
         employment_type = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'employment_type' -Default 'UNKNOWN')
+        description = $description
+        description_source = Get-JobAgentRawDescriptionSource -RawJob $RawJob -Description $description
         status = 'NEW'
         first_seen = $ObservedAt
         last_seen = $ObservedAt
@@ -233,16 +288,24 @@ function Update-JobAgentExistingJobFromRawJob {
     $newUrl = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'detail_url')
     $newExternalId = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'external_job_id')
     $newAtsId = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'ats_job_id')
+    $newDescription = Get-JobAgentRawDescription -RawJob $RawJob
+    $oldDescription = ConvertTo-JobAgentStatusPlainText -Value (Get-JobAgentRawValue -RawJob $job -Name 'description' -Default 'UNKNOWN')
 
     $job.title = $newTitle
     $job.official_url = $newUrl
     $job.external_job_id = $newExternalId
     $job.ats_job_id = $newAtsId
+    $job | Add-Member -NotePropertyName description -NotePropertyValue $newDescription -Force
+    $job | Add-Member -NotePropertyName description_source -NotePropertyValue (Get-JobAgentRawDescriptionSource -RawJob $RawJob -Description $newDescription) -Force
     $job.location = New-JobAgentStatusLocation -RawLocation (Get-JobAgentRawValue -RawJob $RawJob -Name 'location' -Default (Get-JobAgentRawValue -RawJob $RawJob -Name 'location_label' -Default $job.location))
     $job.last_seen = $ObservedAt
     $job.identity_basis = $Decision.identity_basis
 
-    if ($Decision.decision -eq 'UPDATED') {
+    if ($oldDescription -ne $newDescription) {
+        $changedFields.Add('description')
+    }
+
+    if (($Decision.decision -eq 'UPDATED') -or ($oldDescription -ne $newDescription)) {
         $job.status = 'UPDATED'
         $job.changed_at = $ObservedAt
         if (-not $changedFields.Contains('status')) { $changedFields.Add('status') }
@@ -284,12 +347,15 @@ function Close-JobAgentExistingJobFromRawJob {
     $newExternalId = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'external_job_id' -Default $job.external_job_id)
     $newAtsId = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'ats_job_id' -Default $job.ats_job_id)
     $newLocation = New-JobAgentStatusLocation -RawLocation (Get-JobAgentRawValue -RawJob $RawJob -Name 'location' -Default (Get-JobAgentRawValue -RawJob $RawJob -Name 'location_label' -Default $job.location))
+    $newDescription = Get-JobAgentRawDescription -RawJob $RawJob
+    $oldDescription = ConvertTo-JobAgentStatusPlainText -Value (Get-JobAgentRawValue -RawJob $job -Name 'description' -Default 'UNKNOWN')
 
     if ([string]$job.title -ne $newTitle) { $changedFields.Add('title') }
     if ([string]$job.official_url -ne $newUrl) { $changedFields.Add('official_url') }
     if ([string]$job.external_job_id -ne $newExternalId) { $changedFields.Add('external_job_id') }
     if ([string]$job.ats_job_id -ne $newAtsId) { $changedFields.Add('ats_job_id') }
     if (($job.location | ConvertTo-Json -Depth 10 -Compress) -ne ($newLocation | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('location') }
+    if ($oldDescription -ne $newDescription) { $changedFields.Add('description') }
     if ($oldStatus -ne 'CLOSED') { $changedFields.Add('status') }
 
     $job.title = $newTitle
@@ -297,6 +363,8 @@ function Close-JobAgentExistingJobFromRawJob {
     $job.external_job_id = $newExternalId
     $job.ats_job_id = $newAtsId
     $job.location = $newLocation
+    $job | Add-Member -NotePropertyName description -NotePropertyValue $newDescription -Force
+    $job | Add-Member -NotePropertyName description_source -NotePropertyValue (Get-JobAgentRawDescriptionSource -RawJob $RawJob -Description $newDescription) -Force
     $job.status = 'CLOSED'
     $job.last_seen = $ObservedAt
     $job.changed_at = $ObservedAt

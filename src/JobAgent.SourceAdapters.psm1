@@ -40,6 +40,30 @@ function ConvertTo-JobAgentAdapterSlug {
     return $slug
 }
 
+function ConvertTo-JobAgentAdapterPlainText {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowNull()][AllowEmptyString()][string]$Value,
+        [Parameter()][ValidateRange(1, 4000)][int]$MaxLength = 1200
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Value)) {
+        return 'UNKNOWN'
+    }
+
+    $text = [regex]::Replace($Value, '<(script|style)\b.*?</\1>', ' ', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    $text = [regex]::Replace($text, '<[^>]+>', ' ')
+    $text = [Net.WebUtility]::HtmlDecode($text)
+    $text = [regex]::Replace($text, '\s+', ' ').Trim()
+    if ([string]::IsNullOrWhiteSpace($text)) {
+        return 'UNKNOWN'
+    }
+    if ($text.Length -gt $MaxLength) {
+        return $text.Substring(0, $MaxLength).Trim()
+    }
+    return $text
+}
+
 function New-JobAgentScanContext {
     [CmdletBinding()]
     param(
@@ -124,7 +148,9 @@ function New-JobAgentRawJob {
         external_job_id = if ([string]::IsNullOrWhiteSpace($ExternalJobId)) { 'UNKNOWN' } else { $ExternalJobId.Trim() }
         ats_job_id = if ([string]::IsNullOrWhiteSpace($AtsJobId)) { 'UNKNOWN' } else { $AtsJobId.Trim() }
         location_label = if ([string]::IsNullOrWhiteSpace($LocationLabel)) { 'UNKNOWN' } else { $LocationLabel.Trim() }
-        summary = if ([string]::IsNullOrWhiteSpace($Summary)) { 'UNKNOWN' } else { $Summary.Trim() }
+        summary = ConvertTo-JobAgentAdapterPlainText -Value $Summary
+        description = ConvertTo-JobAgentAdapterPlainText -Value $Summary
+        description_source = if ([string]::IsNullOrWhiteSpace($Summary)) { 'NONE' } else { 'OFFICIAL_SOURCE' }
         extraction_confidence = $ExtractionConfidence
         source_status = $SourceStatus
     }
@@ -339,7 +365,7 @@ function Get-JobAgentAdapterContract {
     [pscustomobject]@{
         input_required = @('company', 'source', 'scan_context')
         output_required = @('adapter', 'company_id', 'source_id', 'official_source_url', 'status', 'error_class', 'retry_recommendation', 'raw_jobs', 'scan_attempt', 'artifact_paths')
-        raw_job_optional = @('source_status', 'job_state')
+        raw_job_optional = @('source_status', 'job_state', 'description', 'description_source')
         error_classes = $script:AdapterErrorClasses
         retry_recommendations = $script:RetryRecommendations
         no_go = @('no_login_bypass', 'no_captcha_bypass', 'no_job_board_as_primary_source', 'no_live_lookup_in_function_tests')

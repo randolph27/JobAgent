@@ -1,13 +1,13 @@
 {
-  "ts": "2026-08-24T10:12:31.895+02:00",
+  "ts": "2026-08-24T10:26:23.606+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": null,
   "status": "handoff",
-  "goal": "Neuen Chat/Agenten mit abgeschlossenem JA-037 und naechstem Anker JA-038 starten",
-  "summary": "JA-037 abgeschlossen: HTML-/Markdown-Reports zeigen fachliche deutsche Labels statt technischer Metriken/Enums; Roadmap rotiert JA-037 ins Archiv; aktive Folgepunkte sind JA-038 und JA-039.",
-  "next": "Mit JA-038 fortfahren: offizielle Stellenbeschreibung/Kurzprofil aus Adapter-, LiveScan-, Status- und Reportpfad in Daily-Run-JSON/Markdown/HTML aufnehmen. Danach JA-039 Quellenbestand und Scanabdeckung messbar machen.",
+  "goal": "JA-038 abgeschlossen; naechster Anker JA-039",
+  "summary": "JA-038 ist abgeschlossen und archiviert. Daily-Run-JSON, Markdown und HTML enthalten jetzt ein Kurzprofil aus offiziellen Stellenbeschreibungen oder den stabilen Leerwert fuer fehlende offizielle Beschreibung.",
+  "next": "JA-039 umsetzen: Quellenbestand, Quellenanzahl und Scanabdeckung deterministisch aus Store, Source Registry und Laufartefakten berechnen und in Bericht/CLI sichtbar machen.",
   "changed": [
     "Roadmap.md",
     "Roadmap_archive.md",
@@ -20,22 +20,46 @@
     "output/playwright/ja-022-viewport-1366.png",
     "output/playwright/ja-022-viewport-1920.png",
     "output/playwright/ja-022-viewport-800.png",
+    "schemas/jobagent.schema.json",
     "src/JobAgent.Report.psm1",
-    "tests/Test-JobAgentCoverage.ps1",
+    "src/JobAgent.SourceAdapters.psm1",
+    "src/JobAgent.StatusMachine.psm1",
+    "tests/Test-JobAgentDailyRun.ps1",
     "tests/Test-JobAgentReport.ps1",
+    "tests/Test-JobAgentSchema.ps1",
+    "tests/Test-JobAgentSourceAdapters.ps1",
+    "tests/Test-JobAgentStatusMachine.ps1",
+    "tests/fixtures/jobagent/valid.json",
+    "todo.checkpoint.json",
+    "todo.current.md",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "tools/Measure-JobAgentCompanyCoverage.ps1"
+    "todo.state.json"
   ],
   "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
     {
       "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
       "exit": 0,
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -64,31 +88,11 @@
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "e3949149977a",
+    "head": "ef3ae72f31e4",
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,
-    "worktree": "dirty",
-    "tracked_changes": [
-      "Roadmap.md",
-      "Roadmap_archive.md",
-      "Roadmap_index.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "html/jobagent/ja-022-viewport-audit.html",
-      "output/playwright/ja-022-viewport-1366.png",
-      "output/playwright/ja-022-viewport-1920.png",
-      "output/playwright/ja-022-viewport-800.png",
-      "src/JobAgent.Report.psm1",
-      "tests/Test-JobAgentCoverage.ps1",
-      "tests/Test-JobAgentReport.ps1",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "tools/Measure-JobAgentCompanyCoverage.ps1"
-    ]
+    "worktree": "dirty"
   },
   "refs": [
     "README.md",
@@ -100,40 +104,42 @@
     "todo.events.jsonl",
     "handoff.latest.md",
     "handoff.latest.json",
-    "logs/verify/ja-037-report-labels.md"
+    "logs/verify/ja-038-job-description-report.md"
   ],
   "active_roadmap": [
-    {
-      "id": "JA-038",
-      "title": "Stellenbeschreibung und Kurzprofil in Daily-Run- und HTML-Berichte aufnehmen",
-      "priority_score": 96,
-      "milestone": "M6-B",
-      "scope": "src/JobAgent.SourceAdapters.psm1, src/JobAgent.LiveScan.psm1, src/JobAgent.StatusMachine.psm1, src/JobAgent.Report.psm1, tests/Test-JobAgentSourceAdapters.ps1, tests/Test-JobAgentDailyRun.ps1, tests/Test-JobAgentReport.ps1, tests/Test-JobAgentSchema.ps1",
-      "note": "Keine KI-generierten Jobtexte und keine Aggregator-Snippets als Primaerbeschreibung; fehlende Beschreibung explizit anzeigen."
-    },
     {
       "id": "JA-039",
       "title": "Quellenbestand, Quellenanzahl und Scanabdeckung im Bericht transparent ausweisen",
       "priority_score": 94,
       "milestone": "M6-C",
-      "scope": "src/JobAgent.Coverage.psm1, src/JobAgent.Report.psm1, optional tools/Measure-JobAgentSourceCoverage.ps1, tests/Test-JobAgentCoverage.ps1, tests/Test-JobAgentReport.ps1",
-      "note": "Reine Zaehllogik ohne Live-Netzwerkabfrage; Firmenanzahl und Quellenanzahl nicht vermischen."
+      "scope": "src/JobAgent.Coverage.psm1, src/JobAgent.Report.psm1, optional tools/Measure-JobAgentSourceCoverage.ps1, tests/Test-JobAgentCoverage.ps1, tests/Test-JobAgentReport.ps1, optional tests/Test-JobAgentOperations.ps1",
+      "function_tests": [
+        "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
+        "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+        "pwsh -NoProfile -File tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent"
+      ],
+      "no_go": [
+        "keine Live-Netzwerkabfrage fuer reine Zaehllogik",
+        "keine Bewertung von Jobboersen als offizielle Primaerquelle",
+        "Firmenanzahl und Quellenanzahl nicht vermischen",
+        "keine geschaetzten Quellenzahlen"
+      ]
     }
   ],
   "completed_roadmap": [
-    "JA-037"
+    "JA-038"
   ],
   "blockers": [
-    "Kein harter Blocker. Hinweis: Der Roadmap-Screenshot aus dem Chat war lokal nicht als Datei verfuegbar; JA-037 wurde ueber vorhandene HTML-Artefakte und Tests gegen sichtbare technische Labels abgedeckt."
+    "Kein harter Blocker. Der Chat-Screenshot war lokal nicht als Datei verfuegbar; JA-038 wurde ueber Report-, HTML- und Viewport-Tests abgedeckt."
   ],
   "capsule": {
-    "ts": "2026-08-24T10:12:31.895+02:00",
+    "ts": "2026-08-24T10:26:23.606+02:00",
     "agent_id": "UTTER-20260817-39f7",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
     "active_id": null,
     "status": "handoff",
-    "goal": "Neuen Chat/Agenten mit abgeschlossenem JA-037 und naechstem Anker JA-038 starten",
+    "goal": "JA-038 abgeschlossen; naechster Anker JA-039",
     "changed": [
       "Roadmap.md",
       "Roadmap_archive.md",
@@ -146,35 +152,24 @@
       "output/playwright/ja-022-viewport-1366.png",
       "output/playwright/ja-022-viewport-1920.png",
       "output/playwright/ja-022-viewport-800.png",
+      "schemas/jobagent.schema.json",
       "src/JobAgent.Report.psm1",
-      "tests/Test-JobAgentCoverage.ps1",
+      "src/JobAgent.SourceAdapters.psm1",
+      "src/JobAgent.StatusMachine.psm1",
+      "tests/Test-JobAgentDailyRun.ps1",
       "tests/Test-JobAgentReport.ps1",
+      "tests/Test-JobAgentSchema.ps1",
+      "tests/Test-JobAgentSourceAdapters.ps1",
+      "tests/Test-JobAgentStatusMachine.ps1",
+      "tests/fixtures/jobagent/valid.json",
+      "todo.checkpoint.json",
+      "todo.current.md",
       "todo.events.jsonl",
       "todo.history.digest.json",
       "todo.master.index.json",
-      "tools/Measure-JobAgentCompanyCoverage.ps1"
+      "todo.state.json"
     ],
     "verified": [
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlViewportAudit.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
       {
         "cmd": ".\\ci.cmd supertest",
         "exit": 0,
@@ -190,44 +185,18 @@
     "route_violations": [],
     "git": {
       "branch": "master",
-      "head": "e3949149977a",
+      "head": "ef3ae72f31e4",
       "upstream": "origin/master",
       "ahead": 0,
       "behind": 0,
-      "worktree": "dirty",
-      "tracked_changes": [
-        "Roadmap.md",
-        "Roadmap_archive.md",
-        "Roadmap_index.md",
-        "data/jobagent/company-candidate-verification.queue.json",
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "html/jobagent/company-coverage.html",
-        "html/jobagent/ja-022-viewport-audit.html",
-        "output/playwright/ja-022-viewport-1366.png",
-        "output/playwright/ja-022-viewport-1920.png",
-        "output/playwright/ja-022-viewport-800.png",
-        "src/JobAgent.Report.psm1",
-        "tests/Test-JobAgentCoverage.ps1",
-        "tests/Test-JobAgentReport.ps1",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json",
-        "tools/Measure-JobAgentCompanyCoverage.ps1"
-      ]
+      "worktree": "dirty"
     },
-    "next": "Mit JA-038 fortfahren: offizielle Stellenbeschreibung/Kurzprofil aus Adapter-, LiveScan-, Status- und Reportpfad in Daily-Run-JSON/Markdown/HTML aufnehmen. Danach JA-039 Quellenbestand und Scanabdeckung messbar machen.",
+    "next": "JA-039 umsetzen: Quellenbestand und Scanabdeckung messbar machen.",
     "refs": [
-      "README.md",
-      "Roadmap.md",
-      "Roadmap_archive.md",
-      "Roadmap_index.md",
       "todo.current.md",
       "todo.state.json",
       "todo.events.jsonl",
-      "handoff.latest.md",
-      "handoff.latest.json",
-      "logs/verify/ja-037-report-labels.md"
+      "handoff.latest.json"
     ],
     "manual_missing": false,
     "env_inventory_missing": false,

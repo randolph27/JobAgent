@@ -828,4 +828,27 @@
   - [x] Risiken und Unsicherheiten: Coverage-HTML kann in einem anderen Modul als Daily-Run-HTML erzeugt werden; unbekannte Enum-Werte muessen bewusst sichtbar bleiben, damit keine Datenqualitaetsprobleme verdeckt werden.
   - [x] Meilenstein: M6-A Bericht lesbar und fachlich nutzbar.
 
+## Archiviert 2026-08-24 - JA-038
+
+- [x] JA-038 Stellenbeschreibung und Kurzprofil in Daily-Run- und HTML-Berichte aufnehmen #comment: Der aktuelle Bericht zeigt Titel, Firma und Bewertung, aber keine belastbare Jobbeschreibung oder Aufgaben-/Anforderungszusammenfassung.
+  - [x] Beschreibung: Jeder passende Job im Daily-Run-JSON, Markdown und HTML enthaelt eine fachlich nutzbare Kurzbeschreibung mit Aufgaben, Verantwortungsumfang, Anforderungen und optionalem Originalauszug, sofern diese Informationen aus offizieller Quelle oder offiziell angebundener ATS-Quelle stammen. Wenn keine Beschreibung vorliegt, wird `Keine Beschreibung aus offizieller Quelle verfuegbar` angezeigt; es werden keine Beschreibungen geraten oder aus Sekundaerquellen uebernommen.
+  - [x] Scope: Erweitert wurden `src/JobAgent.SourceAdapters.psm1`, `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.Report.psm1`, `schemas/jobagent.schema.json`, `tests/fixtures/jobagent/valid.json`, `tests/Test-JobAgentSourceAdapters.ps1`, `tests/Test-JobAgentStatusMachine.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentReport.ps1` und `tests/Test-JobAgentSchema.ps1`. `src/JobAgent.LiveScan.psm1` nutzt den bestehenden Summary-Pfad und uebergibt die offiziellen Detailseiteninhalte ueber `New-JobAgentRawJob`; kein LiveScan-Sonderumbau war erforderlich. No-Go eingehalten: keine KI-generierten Jobtexte, keine personenbezogenen Daten, keine Aggregator-Snippets als Primaerbeschreibung, keine Aenderung der Jobidentitaet nur wegen Textkuerzung.
+  - [x] Ist-Stand (2026-08-24 10:45): RawJobs normalisieren offizielle Beschreibungen als Plaintext mit Laengenlimit; Jobs und Snapshots persistieren `description`; Beschreibungsaenderungen erzeugen `JOB_UPDATED` mit `changed_fields=description`; Daily-Run-JSON, Markdown und HTML enthalten `Kurzprofil` oder den Leerwert `Keine Beschreibung aus offizieller Quelle verfuegbar`.
+  - [x] Screenshot-Referenz: Kein lokaler Chat-Screenshot verfuegbar; bindendes Fehlerbild wurde ueber Report- und Viewport-Tests gegen fehlende Kurzprofil-Ausgabe, HTML-Escaping und responsive Tabellenabmessungen abgedeckt.
+  - [x] Schritte:
+    1. Datenfluss auditiert und vereinheitlicht: `summary`/`description` werden aus offiziellen Adapter- und LiveScan-Inhalten als Plaintext normalisiert, HTML bereinigt und maximal 1200 Zeichen gespeichert.
+    2. Adapter-, Status- und Snapshotpfad erweitert: `description` und `description_source` werden an RawJob/Job/Snapshot gefuehrt; relevante Beschreibungswechsel setzen den Jobstatus auf `UPDATED`.
+    3. Report-Renderer erweitert: Markdown- und HTML-Tabellen zeigen eine fachliche Spalte `Kurzprofil`; fehlende Beschreibungen erhalten einen stabilen deutschen Leerwert, und HTML-Ausgabe wird escaped.
+  - [x] Evidence: `schemas/jobagent.schema.json`, `tests/fixtures/jobagent/valid.json`, `src/JobAgent.SourceAdapters.psm1`, `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.Report.psm1`, Viewport-Artefakte `html/jobagent/ja-022-viewport-audit.html` und `output/playwright/ja-022-viewport-*.png`, Supertest-Ausgabe `.\ci.cmd supertest` Exit 0.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentReport.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` -> Exit 0; zusaetzlich `pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1` -> Exit 0.
+  - [x] Audit: `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit 0. HTML nutzt `overflow-wrap:anywhere`, horizontales Tabellen-Scrolling, angepasste `job-table`-Mindestbreiten fuer 1920/1366/800 und escaped unsichere Beschreibungstexte.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+  - [x] Abhaengigkeiten: JA-037 ist abgeschlossen; keine Abhaengigkeit zu JA-039.
+  - [x] Aufwand: L geplant, umgesetzt in einer fokussierten Arbeitseinheit mit Schema-, Adapter-, Status-, Report- und Testanpassungen.
+  - [x] Dauer: Unter 1 Arbeitstag lokal inklusive Funktionstests, HTML-/Viewport-Audit und Supertest.
+  - [x] Prioritaetsscore: 96.
+  - [x] Ordnungsbegruendung: Fehlende Jobbeschreibung war fachlich kritischer als Quellenmetrik-Transparenz, weil die Nutzbarkeit einzelner Treffer davon direkt abhaengt.
+  - [x] Risiken und Unsicherheiten: Live-Quellen liefern Beschreibungen uneinheitlich; bestehende historische Jobs ohne `description` bleiben kompatibel und werden im Report mit dem Leerwert ausgewiesen, bis ein neuer offizieller Scan Beschreibung liefert.
+  - [x] Meilenstein: M6-B Stelleninhalt im Bericht pruefbar.
+
 

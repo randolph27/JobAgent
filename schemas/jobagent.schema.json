@@ -550,6 +550,15 @@
         "employment_type": {
           "$ref": "#/$defs/employment_type"
         },
+        "description": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "description_source": {
+          "enum": [
+            "OFFICIAL_SOURCE",
+            "NONE"
+          ]
+        },
         "status": {
           "$ref": "#/$defs/job_status"
         },
@@ -1021,6 +1030,35 @@
         "summary": {
           "$ref": "#/$defs/unknownable_string"
         },
+        "description": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "description_source": {
+          "enum": [
+            "OFFICIAL_SOURCE",
+            "NONE"
+          ]
+        },
+        "source_status": {
+          "enum": [
+            "ACTIVE",
+            "OPEN",
+            "PUBLISHED",
+            "CLOSED",
+            "EXPIRED",
+            "FILLED"
+          ]
+        },
+        "job_state": {
+          "enum": [
+            "ACTIVE",
+            "OPEN",
+            "PUBLISHED",
+            "CLOSED",
+            "EXPIRED",
+            "FILLED"
+          ]
+        },
         "extraction_confidence": {
           "type": "integer",
           "minimum": 0,
@@ -1095,6 +1133,9 @@
           "$ref": "#/$defs/uri"
         },
         "summary": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "description": {
           "$ref": "#/$defs/unknownable_string"
         }
       }

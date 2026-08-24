@@ -20,13 +20,13 @@ p, li { line-height: 1.5; }
 .value { display: block; font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }
 .table-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; min-width: 720px; }
-.job-table { min-width: 1320px; }
+.job-table { min-width: 1500px; }
 th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
 th { background: #f2e7d4; font-size: 0.92rem; }
 tbody tr:nth-child(even) { background: rgba(122, 75, 32, 0.04); }
 a { color: var(--accent); }
 .unknown { color: var(--muted); font-style: italic; }
-@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1200px; } th, td { padding: 9px 10px; } }
+@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1360px; } th, td { padding: 9px 10px; } }
 </style>
 </head>
 <body>
@@ -46,10 +46,10 @@ a { color: var(--accent); }
 <div class="table-wrap">
 <table class="job-table">
 <thead>
-<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>
+<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>
 </thead>
 <tbody>
-<tr><td>A</td><td>Alpha AG</td><td>Head of IT mit sehr langem Titel fuer responsiven Layouttest und Ueberlaufpruefung</td><td>Neu</td><td>Muenchen</td><td>Hybrid</td><td>Vollzeit</td><td>2026-08-20</td><td>2026-08-23</td><td>2026-08-23</td><td>3 Tage (Veroeffentlicht)</td><td>UNKNOWN</td><td>Budgetverantwortung fuer einen europaweit verteilten IT-Betrieb mit langen Freitexten zur Layoutpruefung; Fuehrung mehrerer Plattformteams und eines Security-Enablement-Streams</td><td><a href="https://alpha.example.invalid/jobs/head-it" target="_blank" rel="noopener noreferrer">Stelle</a></td><td><a href="https://alpha.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a></td><td>Prioritaet A, Ergebnis Passend, Score 97. Standort Muenchen, Arbeitsmodell Hybrid, Beschaeftigung Vollzeit. Gruende: Belegte Gesamtverantwortung fuer IT-Strategie, Betrieb und Budget.; Standort Muenchen liegt im Zielgebiet.. Anforderungen: Budgetverantwortung fuer einen europaweit verteilten IT-Betrieb mit langen Freitexten zur Layoutpruefung; Fuehrung mehrerer Plattformteams und eines Security-Enablement-Streams.</td></tr>
+<tr><td>A</td><td>Alpha AG</td><td>Head of IT mit sehr langem Titel fuer responsiven Layouttest und Ueberlaufpruefung</td><td>Neu</td><td>Muenchen</td><td>Hybrid</td><td>Vollzeit</td><td>2026-08-20</td><td>2026-08-23</td><td>2026-08-23</td><td>3 Tage (Veroeffentlicht)</td><td>UNKNOWN</td><td>Budgetverantwortung fuer einen europaweit verteilten IT-Betrieb mit langen Freitexten zur Layoutpruefung; Fuehrung mehrerer Plattformteams und eines Security-Enablement-Streams</td><td>Keine Beschreibung aus offizieller Quelle verfuegbar</td><td><a href="https://alpha.example.invalid/jobs/head-it" target="_blank" rel="noopener noreferrer">Stelle</a></td><td><a href="https://alpha.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a></td><td>Prioritaet A, Ergebnis Passend, Score 97. Standort Muenchen, Arbeitsmodell Hybrid, Beschaeftigung Vollzeit. Gruende: Belegte Gesamtverantwortung fuer IT-Strategie, Betrieb und Budget.; Standort Muenchen liegt im Zielgebiet.. Anforderungen: Budgetverantwortung fuer einen europaweit verteilten IT-Betrieb mit langen Freitexten zur Layoutpruefung; Fuehrung mehrerer Plattformteams und eines Security-Enablement-Streams. Kurzprofil: Keine Beschreibung aus offizieller Quelle verfuegbar.</td></tr>
 </tbody>
 </table>
 </div>
@@ -58,10 +58,10 @@ a { color: var(--accent); }
 <div class="table-wrap">
 <table class="job-table">
 <thead>
-<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>
+<tr><th>Prioritaet</th><th>Firma</th><th>Titel</th><th>Status</th><th>Standort</th><th>Arbeitsmodell</th><th>Beschaeftigung</th><th>Veroeffentlicht</th><th>Erkannt</th><th>Letztmals gesehen</th><th>Alter</th><th>Gehalt</th><th>Anforderungen</th><th>Kurzprofil</th><th>Stelle</th><th>Anbieter</th><th>Begruendung</th></tr>
 </thead>
 <tbody>
-<tr><td>A</td><td>Alpha AG</td><td>Director Platform Engineering</td><td>Aktiv</td><td>Freising</td><td>Remote</td><td>Vollzeit</td><td>2026-08-18</td><td>2026-08-22</td><td>2026-08-23</td><td>5 Tage (Veroeffentlicht)</td><td>UNKNOWN</td><td>Skalierung von Plattform-, Infrastruktur- und SRE-Prozessen; Stakeholder-Steuerung mit CTO und CIO</td><td><a href="https://alpha.example.invalid/jobs/director-platforms" target="_blank" rel="noopener noreferrer">Stelle</a></td><td><a href="https://alpha.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a></td><td>Prioritaet A, Ergebnis Passend, Score 93. Standort Freising, Arbeitsmodell Remote, Beschaeftigung Vollzeit. Gruende: Fuehrungsverantwortung fuer Plattform- und Infrastrukturteams ist belegt.; Freising liegt im Zielgebiet.. Anforderungen: Skalierung von Plattform-, Infrastruktur- und SRE-Prozessen; Stakeholder-Steuerung mit CTO und CIO.</td></tr>
+<tr><td>A</td><td>Alpha AG</td><td>Director Platform Engineering</td><td>Aktiv</td><td>Freising</td><td>Remote</td><td>Vollzeit</td><td>2026-08-18</td><td>2026-08-22</td><td>2026-08-23</td><td>5 Tage (Veroeffentlicht)</td><td>UNKNOWN</td><td>Skalierung von Plattform-, Infrastruktur- und SRE-Prozessen; Stakeholder-Steuerung mit CTO und CIO</td><td>Keine Beschreibung aus offizieller Quelle verfuegbar</td><td><a href="https://alpha.example.invalid/jobs/director-platforms" target="_blank" rel="noopener noreferrer">Stelle</a></td><td><a href="https://alpha.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a></td><td>Prioritaet A, Ergebnis Passend, Score 93. Standort Freising, Arbeitsmodell Remote, Beschaeftigung Vollzeit. Gruende: Fuehrungsverantwortung fuer Plattform- und Infrastrukturteams ist belegt.; Freising liegt im Zielgebiet.. Anforderungen: Skalierung von Plattform-, Infrastruktur- und SRE-Prozessen; Stakeholder-Steuerung mit CTO und CIO. Kurzprofil: Keine Beschreibung aus offizieller Quelle verfuegbar.</td></tr>
 </tbody>
 </table>
 </div>

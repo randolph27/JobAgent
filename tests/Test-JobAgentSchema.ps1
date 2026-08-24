@@ -80,6 +80,8 @@ function New-ValidJobAgentDocument {
                 location = $location
                 work_model = 'HYBRID'
                 employment_type = 'FULL_TIME'
+                description = 'IT-Fuehrungsrolle mit offizieller Detailseite.'
+                description_source = 'OFFICIAL_SOURCE'
                 status = 'NEW'
                 first_seen = '2026-08-17T10:30:00Z'
                 last_seen = '2026-08-17T10:30:00Z'
@@ -160,6 +162,7 @@ function New-ValidJobAgentDocument {
                 location = $location
                 official_url = 'https://example.invalid/careers/head-it-123'
                 summary = 'IT-Fuehrungsrolle mit offizieller Detailseite.'
+                description = 'IT-Fuehrungsrolle mit offizieller Detailseite.'
             }
         )
         change_events = @(
@@ -229,7 +232,7 @@ function Test-JobAgentDocument {
     }
 
     foreach ($job in @($Document.jobs)) {
-        foreach ($property in @('job_id', 'company_id', 'official_url', 'alternative_official_urls', 'source_id', 'external_job_id', 'ats_job_id', 'title', 'location', 'work_model', 'employment_type', 'status', 'first_seen', 'last_seen', 'changed_at', 'classification', 'priority', 'requirements', 'salary', 'identity_basis')) {
+        foreach ($property in @('job_id', 'company_id', 'official_url', 'alternative_official_urls', 'source_id', 'external_job_id', 'ats_job_id', 'title', 'location', 'work_model', 'employment_type', 'description', 'description_source', 'status', 'first_seen', 'last_seen', 'changed_at', 'classification', 'priority', 'requirements', 'salary', 'identity_basis')) {
             Assert-RequiredProperty -Object $job -Property $property -Context 'job'
         }
         Assert-True -Condition ($job.job_id -match '^job:') -Message 'job_id braucht Prefix job:.'
@@ -240,11 +243,12 @@ function Test-JobAgentDocument {
             }
         }
         Assert-True -Condition (@('NEW', 'ACTIVE', 'UPDATED', 'CLOSED', 'REMOVED', 'INVALID') -contains $job.status) -Message "Ungueltiger Jobstatus $($job.status)."
+        Assert-True -Condition (@('OFFICIAL_SOURCE', 'NONE') -contains $job.description_source) -Message "Ungueltige description_source $($job.description_source)."
         Assert-True -Condition (($job.external_job_id -ne 'UNKNOWN') -or ($job.ats_job_id -ne 'UNKNOWN') -or ($job.identity_basis -eq 'CANONICAL_URL')) -Message 'Job braucht eine stabile Identitaetsgrundlage.'
     }
 
     foreach ($snapshot in @($Document.job_snapshots)) {
-        foreach ($property in @('snapshot_id', 'job_id', 'scan_run_id', 'source_id', 'captured_at', 'content_hash', 'status', 'title', 'location', 'official_url', 'summary')) {
+        foreach ($property in @('snapshot_id', 'job_id', 'scan_run_id', 'source_id', 'captured_at', 'content_hash', 'status', 'title', 'location', 'official_url', 'summary', 'description')) {
             Assert-RequiredProperty -Object $snapshot -Property $property -Context 'job_snapshot'
         }
         Assert-True -Condition ($snapshot.content_hash -match '^[a-f0-9]{64}$') -Message 'Snapshot content_hash muss SHA-256-Format haben.'

@@ -62,6 +62,8 @@
       },
       "work_model": "HYBRID",
       "employment_type": "FULL_TIME",
+      "description": "IT-Fuehrungsrolle mit offizieller Detailseite.",
+      "description_source": "OFFICIAL_SOURCE",
       "status": "NEW",
       "first_seen": "2026-08-17T10:30:00Z",
       "last_seen": "2026-08-17T10:30:00Z",
@@ -157,7 +159,8 @@
         "target_area": "MUNICH"
       },
       "official_url": "https://example.invalid/careers/head-it-123",
-      "summary": "IT-Fuehrungsrolle mit offizieller Detailseite."
+      "summary": "IT-Fuehrungsrolle mit offizieller Detailseite.",
+      "description": "IT-Fuehrungsrolle mit offizieller Detailseite."
     }
   ],
   "change_events": [

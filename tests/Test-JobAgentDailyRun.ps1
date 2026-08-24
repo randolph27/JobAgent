@@ -156,6 +156,7 @@ try {
     Assert-True -Condition (($first.document.companies | Where-Object company_id -eq 'company:alpha_ag').staleness_status -eq 'FRESH') -Message 'Erfolgreicher Daily-Run persistiert Freshness-Status nicht.'
     Assert-True -Condition (-not [string]::IsNullOrWhiteSpace([string](($first.document.companies | Where-Object company_id -eq 'company:alpha_ag').last_verified_at))) -Message 'Erfolgreicher Daily-Run persistiert last_verified_at nicht.'
     Assert-True -Condition (($first.document.companies | Where-Object company_id -eq 'company:gamma_ag').refresh_reason -eq 'last_scan_failed') -Message 'Fehlerhafter Daily-Run persistiert Refresh-Grund nicht.'
+    Assert-True -Condition (($first.document.jobs | Where-Object company_id -eq 'company:alpha_ag').description -match 'IT-Gesamtverantwortung') -Message 'Daily-Run persistiert Stellenbeschreibung nicht am Job.'
 
     $second = Invoke-JobAgentDailyRun -ProjectRoot $projectRoot -AdapterResolver $adapter -StartedAt ([datetime]'2026-08-18T10:00:00Z') -CompanyIds @('company:alpha_ag', 'company:beta_ag', 'company:gamma_ag')
     Assert-True -Condition ($second.status -eq 'PARTIAL') -Message 'Zweiter Lauf mit einem Firmenfehler muss PARTIAL bleiben.'
@@ -172,12 +173,14 @@ try {
     Assert-True -Condition ($report.html_report_path -eq $second.html_report_path) -Message 'Summary-JSON verliert den HTML-Report-Pfad.'
     $markdownReport = Get-Content -LiteralPath $second.markdown_report_path -Raw
     Assert-True -Condition ($markdownReport.Contains('## Aktive passende Stellen')) -Message 'Markdown-Report enthaelt keine aktiven passenden Stellen.'
+    Assert-True -Condition ($markdownReport.Contains('IT-Gesamtverantwortung mit Strategie, Budget und Fuehrung.')) -Message 'Markdown-Report enthaelt keine Stellenbeschreibung.'
     Assert-True -Condition ($markdownReport.Contains('## Fehler und unsichere Quellen')) -Message 'Markdown-Report enthaelt keine Fehler-/Quellen-Sektion.'
     Assert-True -Condition ($markdownReport.Contains('[Quelle](https://gamma.example.invalid/careers)')) -Message 'Markdown-Report enthaelt keine klickbare offizielle Fehlerquelle.'
     Assert-True -Condition ($markdownReport.Contains('[Stelle](https://alpha.example.invalid/careers/head-it-100)')) -Message 'Markdown-Report enthaelt keinen klickbaren offiziellen Stellenlink.'
     Assert-True -Condition ($markdownReport.Contains('[Karriere](https://alpha.example.invalid/careers)')) -Message 'Markdown-Report enthaelt keinen klickbaren Anbieterlink.'
     $htmlReport = Get-Content -LiteralPath $second.html_report_path -Raw
     Assert-True -Condition ($htmlReport.Contains('<h2>Aktive passende Stellen</h2>')) -Message 'HTML-Report enthaelt keine aktiven passenden Stellen.'
+    Assert-True -Condition ($htmlReport.Contains('IT-Gesamtverantwortung mit Strategie, Budget und Fuehrung.')) -Message 'HTML-Report enthaelt keine Stellenbeschreibung.'
     Assert-True -Condition ($htmlReport.Contains('<h2>Fehler und unsichere Quellen</h2>')) -Message 'HTML-Report enthaelt keine Fehler-/Quellen-Sektion.'
     Assert-True -Condition ($htmlReport.Contains('href="https://gamma.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>')) -Message 'HTML-Report enthaelt keine sichere klickbare Fehlerquelle.'
     Assert-True -Condition ($htmlReport.Contains('href="https://alpha.example.invalid/careers/head-it-100" target="_blank" rel="noopener noreferrer">Stelle</a>')) -Message 'HTML-Report enthaelt keinen sicheren offiziellen Stellenlink.'
@@ -426,6 +429,7 @@ try {
     Assert-True -Condition ($liveJob.ats_job_id -eq 'WD-001') -Message 'Live-Daily-Run uebernimmt ATS-ID aus JSON-LD nicht.'
     Assert-True -Condition ($liveJob.location.target_area -eq 'MUNICH') -Message 'Live-Daily-Run uebernimmt JSON-LD-Standort nicht.'
     Assert-True -Condition ($liveJob.employment_type -eq 'FULL_TIME') -Message 'Live-Daily-Run uebernimmt employmentType aus JSON-LD nicht.'
+    Assert-True -Condition ($liveJob.description -match 'Strategische IT-Leitung') -Message 'Live-Daily-Run uebernimmt offizielle Beschreibung nicht.'
 
     [pscustomobject]@{
         status = 'ok'

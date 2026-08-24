@@ -61,7 +61,8 @@ function New-TestJob {
         [Parameter()][string]$Location = 'Muenchen',
         [Parameter()][string]$WorkModel = 'UNKNOWN',
         [Parameter()][string]$EmploymentType = 'UNKNOWN',
-        [Parameter()][string[]]$Requirements = @()
+        [Parameter()][string[]]$Requirements = @(),
+        [Parameter()][string]$Description = 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.'
     )
 
     [pscustomobject]@{
@@ -76,6 +77,8 @@ function New-TestJob {
         location = New-TestLocation -Label $Location
         work_model = $WorkModel
         employment_type = $EmploymentType
+        description = $Description
+        description_source = if ($Description -eq 'UNKNOWN') { 'NONE' } else { 'OFFICIAL_SOURCE' }
         status = $Status
         published_at = 'UNKNOWN'
         first_seen = '2026-08-17T10:00:00.000Z'
@@ -135,7 +138,7 @@ $document.companies = @(
 $document.jobs = @(
     New-TestJob -Id 'job:alpha_new' -CompanyId 'company:alpha_ag' -Title 'Head of IT' -Status 'NEW' -Priority 'A' -Score 91 -WorkModel 'HYBRID' -EmploymentType 'FULL_TIME' -Requirements @('Budgetverantwortung')
     New-TestJob -Id 'job:alpha_active' -CompanyId 'company:alpha_ag' -Title 'IT Director' -Status 'ACTIVE' -Priority 'B' -Score 78
-    New-TestJob -Id 'job:alpha_updated' -CompanyId 'company:alpha_ag' -Title 'Head of Information Technology' -Status 'UPDATED' -Priority 'B' -Score 83 -Location 'UNKNOWN'
+    New-TestJob -Id 'job:alpha_updated' -CompanyId 'company:alpha_ag' -Title 'Head of Information Technology' -Status 'UPDATED' -Priority 'B' -Score 83 -Location 'UNKNOWN' -Description 'UNKNOWN'
     New-TestJob -Id 'job:beta_removed' -CompanyId 'company:beta_ag' -Title 'CIO' -Status 'REMOVED' -Priority 'A' -Score 96
     New-TestJob -Id 'job:beta_rejected' -CompanyId 'company:beta_ag' -Title 'Software Engineer' -Status 'NEW' -Priority 'UNRATED' -Score 0
 )
@@ -189,6 +192,8 @@ Assert-True -Condition ($report.sections.new_matching_jobs[0].priority_explanati
 Assert-True -Condition ($report.sections.new_matching_jobs[0].published_at -eq '2026-08-10T08:00:00.000Z') -Message 'Veroeffentlichungsdatum fehlt im Reporteintrag.'
 Assert-True -Condition ($report.sections.new_matching_jobs[0].salary -eq '120000 EUR') -Message 'Gehalt fehlt im Reporteintrag.'
 Assert-True -Condition ($report.sections.new_matching_jobs[0].requirements_text -match 'Budgetverantwortung') -Message 'Wichtigste Anforderungen fehlen im Reporteintrag.'
+Assert-True -Condition ($report.sections.new_matching_jobs[0].description -match 'Offizielle Kurzbeschreibung') -Message 'Kurzbeschreibung fehlt im Reporteintrag.'
+Assert-True -Condition ($report.sections.changed_jobs[0].description -eq 'Keine Beschreibung aus offizieller Quelle verfuegbar') -Message 'Fehlende Beschreibung braucht stabilen Leerwert.'
 Assert-True -Condition ($report.sections.new_matching_jobs[0].age_basis -eq 'published_at') -Message 'Altersbasis fuer aktive Stellen ist falsch.'
 Assert-True -Condition ([int]$report.sections.new_matching_jobs[0].age_days -ge 7) -Message 'Alter der Stelle wird nicht berechnet.'
 Assert-True -Condition ($report.sections.source_issues[0].category -eq 'NICHT_ERREICHBAR') -Message 'Fehlerkategorie fuer nicht erreichbare Karriereportale ist falsch.'
@@ -196,7 +201,7 @@ Assert-True -Condition ($report.sections.new_matching_jobs[0].provider_url -eq '
 Assert-True -Condition ($report.sections.changed_jobs[0].provider_url -eq 'https://jobs.alpha_ag.example.invalid/search') -Message 'Provider-Link bevorzugt nicht die offizielle ATS-Quelle der Stelle.'
 
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
-foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '120000 EUR', 'Budgetverantwortung', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Stelle](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
+foreach ($expected in @('## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.', 'Keine Beschreibung aus offizieller Quelle verfuegbar', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Stelle](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
     Assert-True -Condition ($markdown.Contains($expected)) -Message "Markdown-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $markdown.Contains('Software Engineer')) -Message 'Abgelehnte Stellen duerfen nicht als passende Stellen gerendert werden.'
@@ -205,12 +210,14 @@ foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sourc
 }
 
 $report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
+$report.sections.new_matching_jobs[0].description = '<img src=x onerror=alert(1)>Beschreibung'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
-foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', 'JobAgent Daily-Run-Bericht', '120000 EUR', 'Budgetverantwortung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Stelle</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
+foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', 'JobAgent Daily-Run-Bericht', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Beschreibung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Stelle</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
     Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'
 Assert-True -Condition ($html.Contains('&lt;script&gt;alert(1)&lt;/script&gt;')) -Message 'HTML-Report escaped problematische Inhalte nicht.'
+Assert-True -Condition (-not $html.Contains('<img src=x onerror=alert(1)>')) -Message 'HTML-Report muss unsanitisiertes Beschreibungs-Markup escapen.'
 foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sources', 'unreachable_career_pages', 'published_at')) {
     Assert-True -Condition (-not $html.Contains($rawLabel)) -Message "HTML-Report darf technische Metriklabels nicht primaer anzeigen: $rawLabel"
 }

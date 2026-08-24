@@ -92,9 +92,11 @@ catch {
     Assert-True -Condition ($_.Exception.Message -match 'nicht-offizielle') -Message "Unerwarteter Fehler fuer nicht-offizielle Quelle: $($_.Exception.Message)"
 }
 
-$rawJob = New-JobAgentRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/job-123' -ExternalJobId '123' -LocationLabel 'Muenchen' -Summary 'Fuehrungsrolle' -ExtractionConfidence 95
+$rawJob = New-JobAgentRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/job-123' -ExternalJobId '123' -LocationLabel 'Muenchen' -Summary '<p>Fuehrungsrolle &amp; Budget</p><script>alert(1)</script>' -ExtractionConfidence 95
 Assert-True -Condition ($rawJob.external_job_id -eq '123') -Message 'RawJob speichert externe Job-ID nicht.'
 Assert-True -Condition ($rawJob.source_status -eq 'ACTIVE') -Message 'RawJob setzt keinen Default fuer source_status.'
+Assert-True -Condition ($rawJob.description -eq 'Fuehrungsrolle & Budget') -Message 'RawJob normalisiert offizielle Beschreibung nicht.'
+Assert-True -Condition ($rawJob.description_source -eq 'OFFICIAL_SOURCE') -Message 'RawJob markiert vorhandene Beschreibung nicht als offizielle Quelle.'
 
 try {
     New-JobAgentRawJob -Title 'Head of IT' -DetailUrl 'not-a-url' | Out-Null
@@ -139,9 +141,10 @@ foreach ($errorClass in @('NONE', 'NOT_REACHABLE', 'TIMEOUT', 'BLOCKED', 'NO_JOB
     Assert-True -Condition (@($contract.error_classes) -contains $errorClass) -Message "Adaptervertrag fehlt Fehlerklasse $errorClass."
 }
 Assert-True -Condition (@($contract.raw_job_optional) -contains 'source_status') -Message 'Adaptervertrag nennt source_status nicht als optionales RawJob-Feld.'
+Assert-True -Condition (@($contract.raw_job_optional) -contains 'description') -Message 'Adaptervertrag nennt description nicht als optionales RawJob-Feld.'
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('scan_context', 'official_source_guard', 'raw_job_validation', 'fixture_success', 'fixture_empty', 'html_success', 'html_no_jobs', 'html_parsing_error', 'contract_errors', 'raw_job_source_status')
+    cases = @('scan_context', 'official_source_guard', 'raw_job_validation', 'raw_job_description_sanitizing', 'fixture_success', 'fixture_empty', 'html_success', 'html_no_jobs', 'html_parsing_error', 'contract_errors', 'raw_job_source_status')
     raw_jobs = @($htmlResult.raw_jobs).Count
 } | ConvertTo-Json -Depth 4

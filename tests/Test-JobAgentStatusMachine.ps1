@@ -100,6 +100,8 @@ $first = Invoke-JobAgentStatusMachine `
     -ObservedAt ([datetime]'2026-08-17T10:00:00Z')
 Assert-True -Condition (@($first.jobs).Count -eq 1) -Message 'Erster Lauf hat keinen Job erzeugt.'
 Assert-True -Condition ($first.jobs[0].status -eq 'NEW') -Message 'Erster Lauf setzt Status nicht auf NEW.'
+Assert-True -Condition ($first.jobs[0].description -eq 'IT-Gesamtverantwortung mit Strategie und Fuehrung.') -Message 'Erster Lauf speichert keine offizielle Beschreibung am Job.'
+Assert-True -Condition ($first.job_snapshots[0].description -eq 'IT-Gesamtverantwortung mit Strategie und Fuehrung.') -Message 'Snapshot speichert keine Beschreibung.'
 Assert-True -Condition (@($first.change_events | Where-Object event_type -eq 'JOB_CREATED').Count -eq 1) -Message 'Erster Lauf erzeugt kein JOB_CREATED-Event.'
 Assert-True -Condition ($first.jobs[0].first_seen -eq $first.jobs[0].last_seen) -Message 'first_seen und last_seen weichen im ersten Lauf ab.'
 
@@ -122,8 +124,18 @@ $third = Invoke-JobAgentStatusMachine `
 Assert-True -Condition ($third.jobs[0].status -eq 'UPDATED') -Message 'Titelwechsel setzt Status nicht auf UPDATED.'
 Assert-True -Condition (@($third.change_events | Where-Object { ($_.event_type -eq 'JOB_UPDATED') -and (@($_.changed_fields) -contains 'title') }).Count -eq 1) -Message 'Titelwechsel erzeugt kein JOB_UPDATED mit changed_fields=title.'
 
-$failed = Invoke-JobAgentStatusMachine `
+$descriptionRaw = New-TestRawJob -Title 'Director Information Technology' -DetailUrl 'https://example.invalid/careers/head-it-123' -ExternalJobId '123' -Summary '<p>IT-Leitung mit Budget, Plattformbetrieb und Lieferantensteuerung.</p>'
+$descriptionUpdated = Invoke-JobAgentStatusMachine `
     -Document $third `
+    -ScanRunId 'scanrun:20260819T120000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260819T120000Z' -RawJobs @($descriptionRaw) -Suffix 'description-updated')) `
+    -ObservedAt ([datetime]'2026-08-19T12:00:00Z')
+Assert-True -Condition ($descriptionUpdated.jobs[0].status -eq 'UPDATED') -Message 'Beschreibungsaenderung setzt Status nicht auf UPDATED.'
+Assert-True -Condition ($descriptionUpdated.jobs[0].description -eq 'IT-Leitung mit Budget, Plattformbetrieb und Lieferantensteuerung.') -Message 'Beschreibungsaenderung wird nicht normalisiert gespeichert.'
+Assert-True -Condition (@($descriptionUpdated.change_events | Where-Object { ($_.event_type -eq 'JOB_UPDATED') -and (@($_.changed_fields) -contains 'description') }).Count -eq 1) -Message 'Beschreibungsaenderung erzeugt kein JOB_UPDATED mit changed_fields=description.'
+
+$failed = Invoke-JobAgentStatusMachine `
+    -Document $descriptionUpdated `
     -ScanRunId 'scanrun:20260820T100000Z' `
     -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260820T100000Z' -RawJobs @() -Status 'FAILED' -ErrorClass 'TIMEOUT' -Suffix 'failed')) `
     -ObservedAt ([datetime]'2026-08-20T10:00:00Z')
@@ -203,6 +215,7 @@ Assert-True -Condition (@($closedSecond.change_events | Where-Object event_type 
         'first_run_new',
         'second_run_active',
         'updated_run_changed_fields',
+        'description_changed_fields',
         'failed_scan_no_removal',
         'successful_empty_scan_removed',
         'invalid_hit_invalidated',
