@@ -53,6 +53,102 @@ function ConvertTo-ToolMarkdownText {
     return (([string]$Value).Trim() -replace '\|', '\|' -replace "`r?`n", ' ')
 }
 
+function ConvertTo-ToolMarkdownLink {
+    param([Parameter()][AllowNull()][object]$Link)
+
+    if ($null -eq $Link) {
+        return 'UNKNOWN'
+    }
+    $label = ConvertTo-ToolMarkdownText (Get-ToolObjectProperty -Object $Link -Name 'label' -Default 'Link')
+    $url = [string](Get-ToolObjectProperty -Object $Link -Name 'url' -Default '')
+    $reason = ConvertTo-ToolMarkdownText (Get-ToolObjectProperty -Object $Link -Name 'reason' -Default '')
+    if ([bool](Get-ToolObjectProperty -Object $Link -Name 'is_clickable' -Default $false) -and -not [string]::IsNullOrWhiteSpace($url)) {
+        $escapedUrl = $url.Replace(')', '%29').Replace(' ', '%20')
+        return ('[{0}]({1})' -f $label, $escapedUrl)
+    }
+    if ([bool](Get-ToolObjectProperty -Object $Link -Name 'review_only' -Default $false)) {
+        return ('Review-Hinweis: {0}' -f $reason)
+    }
+    return $reason
+}
+
+function ConvertTo-ToolHtmlLink {
+    param([Parameter()][AllowNull()][object]$Link)
+
+    if ($null -eq $Link) {
+        return '<span class="link-missing">UNKNOWN</span>'
+    }
+    $label = ConvertTo-ToolHtmlText (Get-ToolObjectProperty -Object $Link -Name 'label' -Default 'Link')
+    $url = [string](Get-ToolObjectProperty -Object $Link -Name 'url' -Default '')
+    $reason = ConvertTo-ToolHtmlText (Get-ToolObjectProperty -Object $Link -Name 'reason' -Default '')
+    if ([bool](Get-ToolObjectProperty -Object $Link -Name 'is_clickable' -Default $false) -and -not [string]::IsNullOrWhiteSpace($url)) {
+        return ('<a class="provider-link" href="{0}" target="_blank" rel="noopener noreferrer">{1}</a>' -f (ConvertTo-ToolHtmlText $url), $label)
+    }
+    if ([bool](Get-ToolObjectProperty -Object $Link -Name 'review_only' -Default $false)) {
+        return ('<span class="review-link">Review-Hinweis</span><span class="link-reason">{0}</span>' -f $reason)
+    }
+    return ('<span class="link-missing">{0}</span>' -f $reason)
+}
+
+function Get-ToolObjectProperty {
+    param(
+        [Parameter()][AllowNull()][object]$Object,
+        [Parameter(Mandatory)][string]$Name,
+        [Parameter()][AllowNull()][object]$Default = $null
+    )
+
+    if ($null -eq $Object -or $Object.PSObject.Properties.Name -notcontains $Name) {
+        return $Default
+    }
+    return $Object.$Name
+}
+
+function New-ToolCompanyLookup {
+    param([Parameter(Mandatory)][object]$Coverage)
+
+    $lookup = @{}
+    foreach ($company in @($Coverage.companies)) {
+        $companyId = [string](Get-ToolObjectProperty -Object $company -Name 'company_id' -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($companyId) -and -not $lookup.ContainsKey($companyId)) {
+            $lookup[$companyId] = $company
+        }
+    }
+    return $lookup
+}
+
+function Get-ToolPrimaryCoverageLink {
+    param(
+        [Parameter()][AllowNull()][object]$Item,
+        [Parameter(Mandatory)][hashtable]$CompanyLookup
+    )
+
+    $kind = [string](Get-ToolObjectProperty -Object $Item -Name 'kind' -Default '')
+    if ($kind -in @('discovery_hint', 'regional_discovery_hint', 'register_discovery_hint')) {
+        return [pscustomobject]@{
+            label = 'Review-Hinweis'
+            url = $null
+            is_clickable = $false
+            review_only = $true
+            reason = 'Unverifizierter Discovery-Hinweis; offizielle Anbieterquelle noch nicht belegt.'
+        }
+    }
+    $link = Get-ToolObjectProperty -Object $Item -Name 'primary_link'
+    if ($null -ne $link) {
+        return $link
+    }
+    $companyId = [string](Get-ToolObjectProperty -Object $Item -Name 'company_id' -Default '')
+    if (-not [string]::IsNullOrWhiteSpace($companyId) -and $CompanyLookup.ContainsKey($companyId)) {
+        return (Get-ToolObjectProperty -Object $CompanyLookup[$companyId] -Name 'primary_link')
+    }
+    return [pscustomobject]@{
+        label = 'Review-Hinweis'
+        url = $null
+        is_clickable = $false
+        review_only = $true
+        reason = 'Unverifizierter Discovery-Hinweis; offizielle Anbieterquelle noch nicht belegt.'
+    }
+}
+
 function Add-ToolMarkdownCounts {
     param(
         [Parameter(Mandatory)][object]$Lines,
@@ -75,6 +171,7 @@ function Add-ToolMarkdownCounts {
 function ConvertTo-ToolCoverageMarkdown {
     param([Parameter(Mandatory)][object]$Coverage)
 
+    $companyLookup = New-ToolCompanyLookup -Coverage $Coverage
     $lines = [System.Collections.Generic.List[string]]::new()
     [void]$lines.Add('# JobAgent Firmen-Coverage-Audit')
     [void]$lines.Add('')
@@ -150,12 +247,14 @@ function ConvertTo-ToolCoverageMarkdown {
         [void]$lines.Add("- Abhaengigkeit: $($wave.dependency)")
         [void]$lines.Add("- Meilenstein: $($wave.milestone)")
         [void]$lines.Add("- Prioritaetsscore: $($wave.priority_score)")
-        [void]$lines.Add('| Typ | Firma | Zielgebiet | Branche | Status | Naechster Schritt |')
-        [void]$lines.Add('|---|---|---|---|---|---|')
+        [void]$lines.Add('| Typ | Firma | Link | Zielgebiet | Branche | Status | Naechster Schritt |')
+        [void]$lines.Add('|---|---|---|---|---|---|---|')
         foreach ($candidate in @($wave.candidates)) {
-            [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
+            $candidateLink = Get-ToolPrimaryCoverageLink -Item $candidate -CompanyLookup $companyLookup
+            [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} |' -f
                     (ConvertTo-ToolMarkdownText $candidate.kind),
                     (ConvertTo-ToolMarkdownText $candidate.company),
+                    (ConvertTo-ToolMarkdownLink $candidateLink),
                     (ConvertTo-ToolMarkdownText $candidate.target_area),
                     (ConvertTo-ToolMarkdownText $candidate.industry),
                     (ConvertTo-ToolMarkdownText $candidate.review_status),
@@ -191,23 +290,39 @@ function ConvertTo-ToolCoverageMarkdown {
     }
     [void]$lines.Add('')
     [void]$lines.Add('## Backlog')
-    [void]$lines.Add('| Score | Typ | Firma | Begruendung | Naechster Schritt |')
-    [void]$lines.Add('|---:|---|---|---|---|')
+    [void]$lines.Add('| Score | Typ | Firma | Link | Begruendung | Naechster Schritt |')
+    [void]$lines.Add('|---:|---|---|---|---|---|')
     foreach ($item in @($Coverage.backlog | Select-Object -First 25)) {
-        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} |' -f
+        $itemLink = Get-ToolPrimaryCoverageLink -Item $item -CompanyLookup $companyLookup
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} |' -f
                 $item.priority_score,
                 (ConvertTo-ToolMarkdownText $item.kind),
                 (ConvertTo-ToolMarkdownText $item.company),
+                (ConvertTo-ToolMarkdownLink $itemLink),
                 (ConvertTo-ToolMarkdownText $item.reason),
                 (ConvertTo-ToolMarkdownText $item.next_step)))
     }
     [void]$lines.Add('')
+    [void]$lines.Add('## Scanprioritaeten')
+    [void]$lines.Add('| Score | Firma | Link | Aktion | Gruende |')
+    [void]$lines.Add('|---:|---|---|---|---|')
+    foreach ($item in @($Coverage.scan_priority | Select-Object -First 25)) {
+        $itemLink = Get-ToolPrimaryCoverageLink -Item $item -CompanyLookup $companyLookup
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} |' -f
+                $item.priority_score,
+                (ConvertTo-ToolMarkdownText $item.company),
+                (ConvertTo-ToolMarkdownLink $itemLink),
+                (ConvertTo-ToolMarkdownText $item.next_action),
+                (ConvertTo-ToolMarkdownText (@($item.reasons) -join ', '))))
+    }
+    [void]$lines.Add('')
     [void]$lines.Add('## Firmeninventar')
-    [void]$lines.Add('| Firma | Zielgebiet | Verifikation | Freshness | Naechster Refresh | Status | Scanfaehig | Naechster Schritt |')
-    [void]$lines.Add('|---|---|---|---|---|---|---|---|')
+    [void]$lines.Add('| Firma | Link | Zielgebiet | Verifikation | Freshness | Naechster Refresh | Status | Scanfaehig | Naechster Schritt |')
+    [void]$lines.Add('|---|---|---|---|---|---|---|---|---|')
     foreach ($company in @($Coverage.companies | Select-Object -First 250)) {
-        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} |' -f
+        [void]$lines.Add(('| {0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} |' -f
                 (ConvertTo-ToolMarkdownText $company.company),
+                (ConvertTo-ToolMarkdownLink $company.primary_link),
                 (ConvertTo-ToolMarkdownText $company.target_area),
                 (ConvertTo-ToolMarkdownText $company.verification_status),
                 (ConvertTo-ToolMarkdownText $company.staleness_status),
@@ -236,11 +351,12 @@ function Add-ToolHtmlCounts {
 function ConvertTo-ToolCoverageHtml {
     param([Parameter(Mandatory)][object]$Coverage)
 
+    $companyLookup = New-ToolCompanyLookup -Coverage $Coverage
     $lines = [System.Collections.Generic.List[string]]::new()
     [void]$lines.Add('<!DOCTYPE html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">')
     [void]$lines.Add('<title>JobAgent Firmen-Coverage-Audit</title><style>')
     [void]$lines.Add(':root { color-scheme: light; --bg: #eef2f5; --surface: #ffffff; --surface-alt: #f6f8fa; --line: #c8d1dc; --text: #17202a; --muted: #52616f; --accent: #0f6b6d; --accent-alt: #8a5a00; }')
-    [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } .table-wrap { overflow-y: auto; max-height: 68vh; border: 1px solid var(--line); } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; position: sticky; top: 0; z-index: 1; } .wave { border-left: 4px solid var(--accent-alt); padding-left: 12px; margin-top: 14px; } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 680px; } }')
+    [void]$lines.Add('* { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: var(--bg); color: var(--text); } main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; } section { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; margin-bottom: 16px; } h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; letter-spacing: 0; } h1 { font-size: 2rem; color: var(--accent); } h2 { font-size: 1.25rem; } p { line-height: 1.5; } .summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; } .metric { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 6px; padding: 10px; min-width: 0; } .label { display: block; color: var(--muted); font-size: .86rem; } .value { display: block; font-weight: 700; overflow-wrap: anywhere; } .table-wrap { overflow-x: auto; } .table-wrap { overflow-y: auto; max-height: 68vh; border: 1px solid var(--line); } table { width: 100%; min-width: 760px; border-collapse: collapse; } th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; } th { background: #e8eef3; position: sticky; top: 0; z-index: 1; } .provider-link { color: var(--accent); font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; } .review-link, .link-missing { display: inline-block; color: var(--accent-alt); font-weight: 700; } .link-reason { display: block; max-width: 36ch; color: var(--muted); font-size: .82rem; line-height: 1.35; overflow-wrap: anywhere; } .wave { border-left: 4px solid var(--accent-alt); padding-left: 12px; margin-top: 14px; } @media (max-width: 800px) { main { padding: 14px 10px 28px; } section { padding: 12px; } table { min-width: 720px; } }')
     [void]$lines.Add('</style></head><body><main>')
     [void]$lines.Add('<section><h1>JobAgent Firmen-Coverage-Audit</h1><p>' + (ConvertTo-ToolHtmlText $Coverage.approximation_notice) + '</p><div class="summary">')
     foreach ($metric in @('companies_total', 'career_url_verified', 'company_domain_verified', 'unverified', 'manual_review_required', 'retry_required', 'duplicate_groups', 'discovery_hints_total', 'unverified_discovery_hints', 'company_fresh', 'company_refresh_due', 'candidate_refresh_due', 'candidate_clusters_total', 'candidate_conflict_clusters', 'candidate_review_queue_total', 'candidate_verification_queue_total', 'candidate_verification_ready', 'candidate_verification_verified', 'candidate_verification_manual_review', 'candidate_verification_retry_exhausted')) {
@@ -281,15 +397,26 @@ function ConvertTo-ToolCoverageHtml {
     [void]$lines.Add('</tbody></table></div>')
     foreach ($wave in @($Coverage.import_waves.waves)) {
         [void]$lines.Add('<div class="wave"><h3>Welle ' + (ConvertTo-ToolHtmlText $wave.wave_id) + ': ' + (ConvertTo-ToolHtmlText $wave.title) + '</h3><p>Abhaengigkeit: ' + (ConvertTo-ToolHtmlText $wave.dependency) + ' | Meilenstein: ' + (ConvertTo-ToolHtmlText $wave.milestone) + ' | Score: ' + (ConvertTo-ToolHtmlText $wave.priority_score) + '</p>')
-        [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>')
+        [void]$lines.Add('<div class="table-wrap"><table><thead><tr><th>Typ</th><th>Firma</th><th>Link</th><th>Zielgebiet</th><th>Branche</th><th>Status</th><th>Naechster Schritt</th></tr></thead><tbody>')
         foreach ($candidate in @($wave.candidates)) {
-            [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $candidate.kind) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.company) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.industry) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.review_status) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.next_step) + '</td></tr>')
+            $candidateLink = Get-ToolPrimaryCoverageLink -Item $candidate -CompanyLookup $companyLookup
+            [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $candidate.kind) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $candidateLink) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.industry) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.review_status) + '</td><td>' + (ConvertTo-ToolHtmlText $candidate.next_step) + '</td></tr>')
         }
         [void]$lines.Add('</tbody></table></div></div>')
     }
-    [void]$lines.Add('</section><section><h2>Firmeninventar</h2><p>Segmentierte Anzeige: maximal 250 sortierte Firmen im HTML-Audit; vollstaendige Daten stehen im JSON-Artefakt.</p><div class="table-wrap"><table><thead><tr><th>Firma</th><th>Zielgebiet</th><th>Verifikation</th><th>Freshness</th><th>Naechster Refresh</th><th>Status</th><th>Scanfaehig</th><th>Naechster Schritt</th></tr></thead><tbody>')
+    [void]$lines.Add('</section><section><h2>Backlog</h2><div class="table-wrap"><table><thead><tr><th>Score</th><th>Typ</th><th>Firma</th><th>Link</th><th>Begruendung</th><th>Naechster Schritt</th></tr></thead><tbody>')
+    foreach ($item in @($Coverage.backlog | Select-Object -First 25)) {
+        $itemLink = Get-ToolPrimaryCoverageLink -Item $item -CompanyLookup $companyLookup
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-ToolHtmlText $item.kind) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $itemLink) + '</td><td>' + (ConvertTo-ToolHtmlText $item.reason) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_step) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div></section><section><h2>Scanprioritaeten</h2><div class="table-wrap"><table><thead><tr><th>Score</th><th>Firma</th><th>Link</th><th>Aktion</th><th>Gruende</th></tr></thead><tbody>')
+    foreach ($item in @($Coverage.scan_priority | Select-Object -First 25)) {
+        $itemLink = Get-ToolPrimaryCoverageLink -Item $item -CompanyLookup $companyLookup
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $item.priority_score) + '</td><td>' + (ConvertTo-ToolHtmlText $item.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $itemLink) + '</td><td>' + (ConvertTo-ToolHtmlText $item.next_action) + '</td><td>' + (ConvertTo-ToolHtmlText (@($item.reasons) -join ', ')) + '</td></tr>')
+    }
+    [void]$lines.Add('</tbody></table></div></section><section><h2>Firmeninventar</h2><p>Segmentierte Anzeige: maximal 250 sortierte Firmen im HTML-Audit; vollstaendige Daten stehen im JSON-Artefakt.</p><div class="table-wrap"><table><thead><tr><th>Firma</th><th>Link</th><th>Zielgebiet</th><th>Verifikation</th><th>Freshness</th><th>Naechster Refresh</th><th>Status</th><th>Scanfaehig</th><th>Naechster Schritt</th></tr></thead><tbody>')
     foreach ($company in @($Coverage.companies | Select-Object -First 250)) {
-        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $company.company) + '</td><td>' + (ConvertTo-ToolHtmlText $company.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $company.verification_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.staleness_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_refresh_at) + '</td><td>' + (ConvertTo-ToolHtmlText $company.inventory_state) + '</td><td>' + (ConvertTo-ToolHtmlText $company.has_career_url) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_step) + '</td></tr>')
+        [void]$lines.Add('<tr><td>' + (ConvertTo-ToolHtmlText $company.company) + '</td><td>' + (ConvertTo-ToolHtmlLink $company.primary_link) + '</td><td>' + (ConvertTo-ToolHtmlText $company.target_area) + '</td><td>' + (ConvertTo-ToolHtmlText $company.verification_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.staleness_status) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_refresh_at) + '</td><td>' + (ConvertTo-ToolHtmlText $company.inventory_state) + '</td><td>' + (ConvertTo-ToolHtmlText $company.has_career_url) + '</td><td>' + (ConvertTo-ToolHtmlText $company.next_step) + '</td></tr>')
     }
     [void]$lines.Add('</tbody></table></div></section></main></body></html>')
     return ($lines.ToArray() -join "`n")

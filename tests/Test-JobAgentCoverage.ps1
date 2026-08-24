@@ -330,6 +330,16 @@ Assert-True -Condition ($toolHtml.Contains('<h2>Review-/Reject-Report</h2>')) -M
 Assert-True -Condition ($toolHtml.Contains('.table-wrap { overflow-x: auto; }')) -Message 'Coverage-Tool-HTML enthaelt keinen Tabellen-Overflow-Schutz.'
 Assert-True -Condition (-not ($toolHtml -match '<script\b[^>]*\bsrc=')) -Message 'Coverage-Tool-HTML darf keine externen Skripte laden.'
 Assert-True -Condition (-not ($toolHtml -match '<link\b[^>]*\bhref=')) -Message 'Coverage-Tool-HTML darf keine externen Stylesheets laden.'
+Assert-True -Condition ($toolMarkdown.Contains('| Firma | Link | Zielgebiet |')) -Message 'Coverage-Tool-Markdown enthaelt keine Linkspalte im Firmeninventar.'
+Assert-True -Condition ($toolMarkdown.Contains('| Score | Firma | Link | Aktion | Gruende |')) -Message 'Coverage-Tool-Markdown enthaelt keine Linkspalte in Scanprioritaeten.'
+Assert-True -Condition ($toolMarkdown.Contains('[Karriere](https://')) -Message 'Coverage-Tool-Markdown enthaelt keine klickbaren Karriere-Links.'
+Assert-True -Condition ($toolMarkdown.Contains('Review-Hinweis: Unverifizierter Discovery-Hinweis')) -Message 'Coverage-Tool-Markdown markiert Discovery-Hints nicht als Review-Hinweis.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Backlog</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Backlog-Abschnitt.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Scanprioritaeten</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Scanprioritaeten-Abschnitt.'
+Assert-True -Condition ($toolHtml -match '<a class="provider-link" href="https://[^"]+" target="_blank" rel="noopener noreferrer">Karriere</a>') -Message 'Coverage-Tool-HTML enthaelt keine sicheren klickbaren Anbieterlinks.'
+Assert-True -Condition ($toolHtml.Contains('<span class="review-link">Review-Hinweis</span>')) -Message 'Coverage-Tool-HTML markiert Discovery-Hints nicht sichtbar als Review-Hinweis.'
+Assert-True -Condition (-not ($toolHtml -match '<td>discovery_hint</td>.*?<a class="provider-link"')) -Message 'Coverage-Tool-HTML darf unverifizierte Discovery-Hints nicht als offiziellen Anbieterlink ausgeben.'
+Assert-True -Condition (-not ($toolMarkdown -match '\| discovery_hint \|[^\r\n]*\[Karriere\]\(')) -Message 'Coverage-Tool-Markdown darf unverifizierte Discovery-Hints nicht als offiziellen Anbieterlink ausgeben.'
 
 $dedupeToolOutput = & (Join-Path $root 'tools\Measure-JobAgentCompanyCandidateDedupe.ps1') -ProjectRoot $root -MaxReviewItems 10 | ConvertFrom-Json -Depth 20
 Assert-True -Condition ($dedupeToolOutput.status -eq 'ok') -Message 'Kandidaten-Dedupe-Tool liefert keinen OK-Status.'
@@ -370,6 +380,8 @@ Assert-True -Condition (@($enrichedHints.hints | Where-Object { [string]::IsNull
         'secondary_hint_store_contract',
         'coverage_tool_generates_json_markdown_html_artifacts',
         'coverage_tool_html_has_responsive_guards',
+        'coverage_tool_renders_clickable_provider_links',
+        'coverage_tool_marks_discovery_hints_review_only',
         'coverage_candidate_cluster_metrics',
         'coverage_candidate_verification_decision_report',
         'candidate_dedupe_tool_generates_json_markdown_and_enriched_hints'

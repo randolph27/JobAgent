@@ -1,30 +1,29 @@
 {
-  "ts": "2026-08-24T08:30:00+02:00",
+  "ts": "2026-08-24T08:41:21+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
-  "active_id": "TD-0032",
+  "active_id": "TD-0033",
   "status": "open",
-  "goal": "JA-032 Coverage-HTML mit anklickbaren Anbieter-, Karriere- und ATS-Links ausgeben.",
-  "summary": "JA-031 ist abgeschlossen und rotiert. Weiter mit JA-032: Coverage-HTML/Markdown aus den zentralen Linkobjekten rendern.",
+  "goal": "JA-033 Daily-Run-HTML und Detailberichte mit klickbaren offiziellen Stellen- und Anbieterlinks vereinheitlichen.",
+  "summary": "JA-032 ist abgeschlossen und rotiert. Coverage-HTML und Coverage-Markdown rendern offizielle Anbieterlinks sowie review-only Discovery-Hinweise.",
   "completed": [
-    "JA-031 Anbieter-Link-Vertrag fuer Coverage- und Daily-Reports definieren"
+    "TD-0032 / JA-032 Coverage-HTML mit anklickbaren Anbieter-, Karriere- und ATS-Links ausgeben"
   ],
   "open_items": [
-    "TD-0032 / JA-032 Coverage-HTML mit anklickbaren Anbieter-, Karriere- und ATS-Links ausgeben",
     "TD-0033 / JA-033 Daily-Run-HTML und Detailberichte mit klickbaren offiziellen Stellen- und Anbieterlinks vereinheitlichen"
   ],
   "next_steps": [
-    "In tools/Measure-JobAgentCompanyCoverage.ps1 Markdown- und HTML-Helfer fuer Coverage-Linkobjekte ergaenzen.",
-    "Firmeninventar, Backlog, Scanprioritaeten und Importwellen-Kandidaten um Linkspalten erweitern.",
-    "HTML-Links mit target=_blank und rel=noopener noreferrer ausgeben; Review-Hints und Missing-Links nicht als offizielle Anbieterlinks darstellen.",
-    "tests/Test-JobAgentCoverage.ps1 um HTML-/Markdown-Linkassertions erweitern; bei Viewport-Aenderung tests/Test-JobAgentHtmlAudit.ps1 laufen lassen."
+    "In src/JobAgent.Report.psm1 Report-Eintraege fuer Jobs und Quellen-Issues um Anbieterlink-Information aus dem zentralen Linkvertrag erweitern.",
+    "In src/JobAgent.DailyRun.psm1 sicherstellen, dass Daily-Run-Reports die Anbieterlink-Daten aus Store/Company/JobSource-Kontext bekommen.",
+    "Markdown- und HTML-Renderer fuer getrennte Stellen- und Anbieterlinks erweitern.",
+    "Tests in tests/Test-JobAgentReport.ps1 und tests/Test-JobAgentDailyRun.ps1 fuer offizielle Stellenlinks, Anbieterlinks, fehlende Links, Fehlerquellen und Encoding ergaenzen."
   ],
   "implementation_notes": [
-    "Get-JobAgentCoverageCompanyLinks existiert in src/JobAgent.Coverage.psm1.",
+    "Coverage-Linkvertrag aus JA-031 ist in src/JobAgent.Coverage.psm1 vorhanden.",
     "Coverage-Firmen enthalten links und primary_link.",
-    "Linktypen sind career, website, ats, review_hint und missing.",
-    "Jobboersen-Hints duerfen nicht als offizielle Anbieterlinks ausgegeben werden."
+    "JA-032 zeigt, wie sichere HTML-Links und review-only Discovery-Hints in tools/Measure-JobAgentCompanyCoverage.ps1 gerendert werden.",
+    "Jobboersen-Hints duerfen nicht als offizielle Anbieter- oder Stellenlinks ausgegeben werden."
   ],
   "changed": [
     ".ci/pins/immutable.hashes.json",
@@ -32,19 +31,17 @@
     "Roadmap.md",
     "Roadmap_archive.md",
     "Roadmap_index.md",
-    "docs/company-discovery-operations.md",
     "handoff.latest.json",
     "handoff.latest.md",
     "html/jobagent/company-coverage.html",
-    "schemas/jobagent.schema.json",
-    "src/JobAgent.Coverage.psm1",
     "tests/Test-JobAgentCoverage.ps1",
     "todo.checkpoint.json",
     "todo.current.md",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json"
+    "todo.state.json",
+    "tools/Measure-JobAgentCompanyCoverage.ps1"
   ],
   "verified": [
     {
@@ -53,7 +50,7 @@
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -63,12 +60,12 @@
       "status": "pass"
     },
     {
-      "cmd": ".\\ci.cmd stp",
+      "cmd": ".\\ci.cmd self-check",
       "exit": 0,
       "status": "pass"
     },
     {
-      "cmd": ".\\ci.cmd self-check",
+      "cmd": ".\\ci.cmd stp",
       "exit": 0,
       "status": "pass"
     }
@@ -79,7 +76,7 @@
     "has_repo": true,
     "branch": "master",
     "detached": false,
-    "head": "3e26b7311c6a",
+    "head": "e37cdf63e6ed",
     "upstream": "origin/master",
     "remote": "origin",
     "ahead": 0,
@@ -91,22 +88,20 @@
       "Roadmap.md",
       "Roadmap_archive.md",
       "Roadmap_index.md",
-      "docs/company-discovery-operations.md",
       "handoff.latest.json",
       "handoff.latest.md",
       "html/jobagent/company-coverage.html",
-      "schemas/jobagent.schema.json",
-      "src/JobAgent.Coverage.psm1",
       "tests/Test-JobAgentCoverage.ps1",
       "todo.checkpoint.json",
       "todo.current.md",
       "todo.events.jsonl",
       "todo.history.digest.json",
       "todo.master.index.json",
-      "todo.state.json"
+      "todo.state.json",
+      "tools/Measure-JobAgentCompanyCoverage.ps1"
     ]
   },
-  "next": "TD-0032 / JA-032: Coverage-HTML und Markdown aus den JA-031-Linkobjekten rendern.",
+  "next": "TD-0033 / JA-033: Daily-Run-Markdown und Daily-Run-HTML mit offiziellen Stellen- und Anbieterlinks vereinheitlichen.",
   "refs": [
     "todo.current.md",
     "todo.state.json",
@@ -120,32 +115,30 @@
   "env_inventory_used": false,
   "env_inventory_path": null,
   "capsule": {
-    "ts": "2026-08-24T08:30:00+02:00",
+    "ts": "2026-08-24T08:41:21+02:00",
     "agent_id": "codex",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
-    "active_id": "TD-0032",
+    "active_id": "TD-0033",
     "status": "open",
-    "goal": "JA-032 Coverage-HTML mit anklickbaren Anbieter-, Karriere- und ATS-Links ausgeben.",
+    "goal": "JA-033 Daily-Run-HTML und Detailberichte mit klickbaren offiziellen Stellen- und Anbieterlinks vereinheitlichen.",
     "changed": [
       ".ci/pins/immutable.hashes.json",
       ".ci/pins/immutable.snapshot/Roadmap.md",
       "Roadmap.md",
       "Roadmap_archive.md",
       "Roadmap_index.md",
-      "docs/company-discovery-operations.md",
       "handoff.latest.json",
       "handoff.latest.md",
       "html/jobagent/company-coverage.html",
-      "schemas/jobagent.schema.json",
-      "src/JobAgent.Coverage.psm1",
       "tests/Test-JobAgentCoverage.ps1",
       "todo.checkpoint.json",
       "todo.current.md",
       "todo.events.jsonl",
       "todo.history.digest.json",
       "todo.master.index.json",
-      "todo.state.json"
+      "todo.state.json",
+      "tools/Measure-JobAgentCompanyCoverage.ps1"
     ],
     "verified": [
       {
@@ -154,7 +147,7 @@
         "status": "pass"
       },
       {
-        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
         "exit": 0,
         "status": "pass"
       },
@@ -164,12 +157,12 @@
         "status": "pass"
       },
       {
-        "cmd": ".\\ci.cmd stp",
+        "cmd": ".\\ci.cmd self-check",
         "exit": 0,
         "status": "pass"
       },
       {
-        "cmd": ".\\ci.cmd self-check",
+        "cmd": ".\\ci.cmd stp",
         "exit": 0,
         "status": "pass"
       }
@@ -180,14 +173,14 @@
       "has_repo": true,
       "branch": "master",
       "detached": false,
-      "head": "3e26b7311c6a",
+      "head": "e37cdf63e6ed",
       "upstream": "origin/master",
       "remote": "origin",
       "ahead": 0,
       "behind": 0,
       "worktree": "dirty"
     },
-    "next": "TD-0032 / JA-032: Coverage-HTML und Markdown aus den JA-031-Linkobjekten rendern.",
+    "next": "TD-0033 / JA-033: Daily-Run-Markdown und Daily-Run-HTML mit offiziellen Stellen- und Anbieterlinks vereinheitlichen.",
     "refs": [
       "todo.current.md",
       "todo.state.json",

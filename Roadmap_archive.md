@@ -2,6 +2,24 @@
 
 ## Archiviert am 2026-08-24
 
+- [x] JA-032 Coverage-HTML mit anklickbaren Anbieter-, Karriere- und ATS-Links ausgeben #comment: Der lokale HTML-Output enthaelt jetzt sichere Linkspalten fuer offizielle Anbieterquellen und review-only Discovery-Hinweise.
+  - [x] Beschreibung: `html/jobagent/company-coverage.html` zeigt im Firmeninventar, Backlog, Scanprioritaeten und Importwellen-Kandidaten Linkspalten. Offizielle Firmenkandidaten nutzen die zentrale `primary_link`-Auswahl aus JA-031; unverifizierte Discovery-Hints werden sichtbar als `Review-Hinweis` ohne produktiven Anbieterlink dargestellt. Markdown-Reports enthalten klickbare Links nur fuer `is_clickable=true`.
+  - [x] Scope: Geaendert wurden `tools/Measure-JobAgentCompanyCoverage.ps1`, `html/jobagent/company-coverage.html` und `tests/Test-JobAgentCoverage.ps1`. `tests/Test-JobAgentHtmlAudit.ps1` wurde wegen HTML-/Layout-Aenderung erneut ausgefuehrt. No-Go blieb eingehalten: kein JavaScript-Zwang, keine externen Stylesheets/Skripte, keine verdeckten Redirects, keine Links in Statistikkarten ohne Kontext.
+  - [x] Ist-Stand (2026-08-24 09:15): Coverage-HTML und neu erzeugtes Coverage-Markdown enthalten Linkspalten fuer Importwellen, Backlog, Scanprioritaeten und Firmeninventar; Discovery-Hints enthalten keine `<a class="provider-link">`-Links.
+  - [x] Abhängigkeiten: JA-031 lieferte den zentralen Linkvertrag; JA-030 lieferte Freshness- und Coverage-Struktur.
+  - [x] Aufwand/Dauer: Aufwand M; innerhalb der aktuellen Arbeitseinheit abgeschlossen.
+  - [x] Prioritätsscore: 90/100, weil dies die direkt sichtbare Nutzeranforderung im lokalen HTML-Artefakt erfuellt.
+  - [x] Ordnungsbegründung: Der Renderer nutzt den bestehenden Linkvertrag, statt eigene Linkheuristik fuer HTML und Markdown zu duplizieren.
+  - [x] Risiken und Unsicherheiten: Viewport-Audit mit echten Screenshots fuer 1920/1366/800 wurde in diesem Schnitt nicht neu erzeugt; der vorhandene HTML-Audit prueft weiterhin Overflow-Schutz und externe Ressourcen automatisiert.
+  - [x] Schritte:
+    1. Link-Renderer fuer Markdown und HTML in `tools/Measure-JobAgentCompanyCoverage.ps1` ergaenzt; HTML-Links nutzen `target="_blank"` und `rel="noopener noreferrer"`.
+    2. Tabellen fuer Importwellen-Kandidaten, Backlog, Scanprioritaeten und Firmeninventar um Linkspalten erweitert; Linklabels bleiben kurz (`Karriere`, `Website`, `ATS`, `Review-Hinweis`).
+    3. Tests um Assertions fuer klickbare Anbieterlinks, Linkspalten, Review-Hinweise und Ausschluss produktiver Discovery-Hint-Links erweitert.
+  - [x] Evidence: `html/jobagent/company-coverage.html`, neu erzeugtes `logs/jobagent/company-coverage-*.md`, `tools/Measure-JobAgentCompanyCoverage.ps1`, `tests/Test-JobAgentCoverage.ps1`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0; `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1` -> Exit 0.
+  - [x] Audit: HTML enthaelt sichere Anbieterlinks mit `rel="noopener noreferrer"`, Review-Hints bleiben ohne produktiven Link, Tabellen behalten `overflow-x`, Sticky-Header und externe Ressourcen bleiben ausgeschlossen.
+  - [x] Supertest: `.\ci.cmd supertest` -> Exit 0.
+
 - [x] JA-031 Anbieter-Link-Vertrag fuer Coverage- und Daily-Reports definieren #comment: Coverage-Firmeneintraege enthalten jetzt einen zentralen, fail-closed Linkvertrag fuer offizielle Anbieter-, Karriere- und ATS-Ziele.
   - [x] Beschreibung: Reports koennen pro Firma eine zentral erzeugte Linkliste ausgeben. Linkfelder werden aus `company.career_url`, `company.official_website_url`, offiziellen `job_sources.canonical_url` oder unverifizierten `discovery_source.url`-Hinweisen gebildet; Jobboersen-Hints werden nicht als offizielle Anbieterlinks uebernommen. Jedes Linkobjekt enthaelt `link_type`, `label`, `url`, `source_id`, `source_field`, `verification_status`, `is_primary`, `is_clickable`, `review_only` und `reason`.
   - [x] Scope: Geaendert wurden `src/JobAgent.Coverage.psm1`, `schemas/jobagent.schema.json`, `tests/Test-JobAgentCoverage.ps1` und `docs/company-discovery-operations.md`. `src/JobAgent.Report.psm1` wurde regressionsgetestet; sichtbares Rendering bleibt fuer JA-032/JA-033 offen.
