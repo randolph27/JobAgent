@@ -83,6 +83,66 @@ $csvResult = Import-JobAgentRegisterCandidates `
     -ObservedAt ([datetime]'2026-08-23T08:00:00Z')
 Assert-True -Condition ($csvResult.records_read -eq 3 -and $csvResult.hints_total -eq 2) -Message 'CSV-Import verarbeitet Zielgebiet/Rejects falsch.'
 
+$openCorporatesFixture = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-register-opencorporates-' + [guid]::NewGuid().ToString('N') + '.jsonl')
+try {
+    @(
+        [pscustomobject]@{
+            all_attributes = [pscustomobject]@{
+                registrar = 'München'
+                _registerArt = 'HRB'
+                _registerNummer = '73315'
+                registered_office = 'München'
+                native_company_number = 'München HRB 73315'
+            }
+            company_number = 'D2601V_HRB73315'
+            current_status = 'currently registered'
+            name = 'Süddeutsche Zeitung GmbH'
+            officers = @(
+                [pscustomobject]@{
+                    name = 'Nicht Persistieren'
+                    type = 'person'
+                    position = 'Geschäftsführer'
+                }
+            )
+            registered_address = 'Hultschiner Straße 8, 81677 München.'
+            retrieved_at = '2017-07-04T00:27:59Z'
+        },
+        [pscustomobject]@{
+            all_attributes = [pscustomobject]@{
+                registrar = 'Charlottenburg'
+                _registerArt = 'HRB'
+                _registerNummer = '150148'
+                registered_office = 'Berlin'
+            }
+            current_status = 'currently registered'
+            name = 'Outside OpenCorporates GmbH'
+        }
+    ) | ForEach-Object {
+        $_ | ConvertTo-Json -Compress -Depth 20
+    } | Set-Content -LiteralPath $openCorporatesFixture -Encoding UTF8
+
+    $openCorporatesResult = Import-JobAgentRegisterCandidates `
+        -InputPath $openCorporatesFixture `
+        -SourceRegistry $registry `
+        -SnapshotId 'offeneregister-opencorporates-2026-08' `
+        -SnapshotDate ([datetime]'2026-08-01T00:00:00Z') `
+        -ObservedAt ([datetime]'2026-08-23T08:00:00Z')
+    $openCorporatesHint = @($openCorporatesResult.hints | Where-Object { [string]$_.register_name -eq 'Süddeutsche Zeitung GmbH' })
+    Assert-True -Condition ($openCorporatesResult.records_read -eq 2) -Message 'OpenCorporates-JSONL liest falsche Record-Anzahl.'
+    Assert-True -Condition ($openCorporatesResult.hints_total -eq 1) -Message 'OpenCorporates-JSONL filtert Zielgebiet falsch.'
+    Assert-True -Condition ($openCorporatesHint.Count -eq 1) -Message 'OpenCorporates-Name wird nicht uebernommen.'
+    Assert-True -Condition ([string]$openCorporatesHint[0].register_city -eq 'Muenchen') -Message 'OpenCorporates registered_office wird nicht als Registerort genutzt.'
+    Assert-True -Condition ([string]$openCorporatesHint[0].register_court -eq 'München') -Message 'OpenCorporates registrar wird nicht als Registergericht genutzt.'
+    Assert-True -Condition ([string]$openCorporatesHint[0].register_number -eq 'HRB 73315') -Message 'OpenCorporates native_company_number wird nicht als Registernummer genutzt.'
+    Assert-True -Condition (@($openCorporatesHint[0].dedupe_keys | Where-Object { [string]$_ -eq 'register:muenchen_hrb_73315' }).Count -eq 1) -Message 'OpenCorporates Register-Dedupe-Key fehlt.'
+    Assert-True -Condition (@($openCorporatesResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'officers' }).Count -eq 0) -Message 'OpenCorporates Officers duerfen nicht persistiert werden.'
+}
+finally {
+    if (Test-Path -LiteralPath $openCorporatesFixture -PathType Leaf) {
+        Remove-Item -LiteralPath $openCorporatesFixture -Force
+    }
+}
+
 $coordinateFixture = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-register-coordinate-' + [guid]::NewGuid().ToString('N') + '.json')
 try {
     [pscustomobject]@{
@@ -181,6 +241,7 @@ finally {
         'csv_import',
         'coordinate_target_area_mapping',
         'coordinate_register_import_filter',
+        'opencorporates_jsonl_nested_fields',
         'target_area_mapping',
         'dedupe_keys',
         'snapshot_hashes',

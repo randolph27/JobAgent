@@ -1,50 +1,51 @@
 {
-  "refs": [
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.md",
-    "file:handoff.latest.json",
-    "file:Roadmap.md"
-  ],
+  "ts": "2026-08-24T12:12:56+02:00",
   "project": "JobAgent",
   "workspace_root": "D:\\_Scripte\\JobAgent",
-  "ts": "2026-08-24T12:00:44+02:00",
   "status": "open",
-  "active_id": "",
-  "branch": "master",
-  "head_before_commit": "842dd97d4d92",
-  "upstream": "origin/master",
-  "route_ok": true,
-  "roadmap_rotation": "none; JA-025 und JA-027 sind fachlich offen",
-  "completed_step": "JA-025 Teilschritt: Regionale Discovery bewertet Zielgebietsbezug jetzt auch ueber Koordinaten.",
+  "active_id": "TD-0039",
+  "goal": "JA-025 Firmeninventar skalieren: OffeneRegister/OpenCorporates-JSONL realformatnah importierbar machen",
+  "roadmap_rotation": {
+    "rotated": false,
+    "reason": "JA-025 und JA-027 sind fachlich offen."
+  },
   "changed": [
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/company-discovery.hints.json",
     "handoff.latest.json",
     "handoff.latest.md",
     "html/jobagent/company-coverage.html",
-    "html/jobagent/ja-022-viewport-audit.html",
-    "src/JobAgent.RegionalDiscovery.psm1",
-    "tests/Test-JobAgentRegionalDiscovery.ps1",
-    "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
+    "src/JobAgent.RegisterDiscovery.psm1",
+    "tests/Test-JobAgentRegisterDiscovery.ps1",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json"
   ],
+  "completed_step": {
+    "roadmap_id": "JA-025",
+    "summary": "Register-Discovery verarbeitet jetzt realformatnahe OffeneRegister/OpenCorporates-JSONL-Datensaetze mit verschachtelten all_attributes-Feldern.",
+    "details": [
+      "all_attributes.registered_office wird als Registerort gelesen.",
+      "all_attributes.registrar wird als Registergericht gelesen.",
+      "native_company_number sowie _registerArt und _registerNummer werden als Registernummern-Basis akzeptiert.",
+      "Doppelte Gerichts-/Orts-Prefixe aus native_company_number werden aus der gespeicherten Registernummer entfernt.",
+      "current_status wird als Statusfeld akzeptiert.",
+      "Personenbezogene officers werden nicht in Hints persistiert."
+    ]
+  },
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegisterDiscovery.ps1",
       "exit": 0,
       "status": "pass"
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -59,12 +60,7 @@
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "cmd": ".\\ci.cmd self-check",
       "exit": 0,
       "status": "pass"
     },
@@ -79,187 +75,64 @@
       "status": "pass"
     },
     {
-      "cmd": ".\\ci.cmd self-check",
+      "cmd": ".\\ci.cmd devserver-status",
       "exit": 0,
       "status": "pass"
     },
     {
-      "cmd": ".\\ci.cmd drift-check",
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
       "exit": 0,
-      "status": "pass"
+      "status": "UP"
     }
   ],
-  "metrics": {
+  "supertest": {
+    "requested": false,
+    "treated_as_done_by_user_instruction": true,
+    "run_this_turn": false
+  },
+  "coverage": {
     "companies_total": 38,
     "target_inventory_candidates_total": 57,
     "target_inventory_gap_to_1000": 943,
     "target_inventory_gate_status": "failed",
-    "merged_hints_total": 20,
-    "candidate_verification_clusters_total": 19,
-    "candidate_verification_candidates_total": 20,
     "duplicate_groups": 0,
     "sources_total": 73,
     "official_sources": 41,
     "discovery_sources": 32
   },
-  "supertest_note": "Nicht neu ausgefuehrt; kein Roadmap-Punkt abgeschlossen und nicht explizit angefragt. Laut Nutzeranweisung gilt er als erledigt.",
-  "next": "JA-025 / TD-0039 fortsetzen: erlaubte lokale Register-/Regional-/Jobboard-Snapshots massiv erweitern, Snapshot-Lane ausfuehren, Coverage auf target_inventory_candidates_total auswerten und erst nach offizieller Verifikation produktive Store-Upserts starten.",
-  "no_gos": [
-    "Keine erfundenen Firmen, URLs, Job-IDs, Geodaten oder Verifikationsaussagen.",
-    "Keine Aggregatorlinks als Primaerbeleg.",
-    "Keine produktiven Store-Upserts aus unverifizierten Discovery-Hints.",
-    "Keine Roadmap-Rotation fuer JA-025 oder JA-027 ohne fachlich belegten Abschluss.",
-    "Kein git reset ohne ausdrueckliche Nutzerfreigabe."
-  ],
   "git": {
-    "has_repo": true,
     "branch": "master",
-    "head": "842dd97d4d92",
-    "head_before_commit": "842dd97d4d92",
-    "upstream": "origin/master",
-    "ahead": 0,
-    "behind": 0,
-    "worktree": "dirty",
-    "tracked_changes": [
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/company-discovery.hints.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "html/jobagent/ja-022-viewport-audit.html",
-      "src/JobAgent.RegionalDiscovery.psm1",
-      "tests/Test-JobAgentRegionalDiscovery.ps1",
-      "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json"
-    ]
+    "head_before_commit": "898ea591d5be",
+    "ahead_behind_before_commit": "0/0",
+    "worktree_before_commit": "dirty"
   },
-  "capsule": {
-    "ts": "2026-08-24T12:00:44+02:00",
-    "agent_id": "UTTER-20260817-39f7",
-    "workspace_root": "D:\\_Scripte\\JobAgent",
-    "project": "JobAgent",
-    "active_id": "",
-    "status": "open",
-    "goal": "JA-025 Firmeninventar auf mindestens 1000 verifizierte oder pruefbare Zielgebiet-Kandidaten erweitern.",
-    "changed": [
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/company-discovery.hints.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "html/jobagent/ja-022-viewport-audit.html",
-      "src/JobAgent.RegionalDiscovery.psm1",
-      "tests/Test-JobAgentRegionalDiscovery.ps1",
-      "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json"
-    ],
-    "verified": [
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": ".\\ci.cmd route-check",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": ".\\ci.cmd stp",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": ".\\ci.cmd self-check",
-        "exit": 0,
-        "status": "pass"
-      },
-      {
-        "cmd": ".\\ci.cmd drift-check",
-        "exit": 0,
-        "status": "pass"
-      }
-    ],
-    "route_ok": true,
-    "route_violations": [],
-    "git": {
-      "has_repo": true,
-      "branch": "master",
-      "head": "842dd97d4d92",
-      "head_before_commit": "842dd97d4d92",
-      "upstream": "origin/master",
-      "ahead": 0,
-      "behind": 0,
-      "worktree": "dirty",
-      "tracked_changes": [
-        "data/jobagent/company-candidate-verification.queue.json",
-        "data/jobagent/company-discovery.hints.json",
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "html/jobagent/company-coverage.html",
-        "html/jobagent/ja-022-viewport-audit.html",
-        "src/JobAgent.RegionalDiscovery.psm1",
-        "tests/Test-JobAgentRegionalDiscovery.ps1",
-        "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json"
-      ]
+  "services": {
+    "sonarqube": {
+      "url": "http://localhost:9000",
+      "status": "UP",
+      "version": "26.1.0.118079"
     },
-    "next": "JA-025 / TD-0039 fortsetzen: erlaubte lokale Register-/Regional-/Jobboard-Snapshots massiv erweitern, Snapshot-Lane ausfuehren, Coverage auf target_inventory_candidates_total auswerten und erst nach offizieller Verifikation produktive Store-Upserts starten.",
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.md",
-      "handoff.latest.json",
-      "Roadmap.md"
-    ],
-    "manual_missing": false,
-    "env_inventory_missing": false,
-    "env_inventory_used": false,
-    "env_inventory_path": null
+    "devserver": {
+      "url": "http://localhost:8500/",
+      "pid": 38292,
+      "listening": true
+    }
   },
-  "goal": "JA-025 Firmeninventar auf mindestens 1000 verifizierte oder pruefbare Zielgebiet-Kandidaten erweitern.",
+  "route_ok": true,
+  "route_violations": [],
   "next_steps": [
-    "JA-025 / TD-0039 fortsetzen: mindestens 1000 eindeutige, belegte Firmen- oder Arbeitgeberkandidaten fuer Muenchen, 20-km-Umkreis und Freising.",
-    "Erlaubte lokale Register-/Regional-/Jobboard-Snapshots auf mehrere hundert bis tausend Kandidaten erweitern und data/jobagent/company-discovery.snapshot.json auf mehrere Inputs setzen.",
-    "Snapshot-Lane ausfuehren, Hint-Store/Digest pruefen, Coverage messen und Zielinventar-Gap auswerten.",
-    "Danach Verifikationswellen starten; keine unverifizierten Discovery-Hints produktiv importieren.",
-    "JA-027 / TD-0041 danach: offizielle Karriere-/ATS-Link-Ermittlung skalieren und generische Seiten fail-closed ablehnen."
+    "Reale erlaubte OffeneRegister-Snapshot-Dateien lokal bereitstellen oder importieren.",
+    "data/jobagent/company-discovery.snapshot.json auf neue lokale Inputs erweitern.",
+    "Snapshot-Lane und Coverage erneut ausfuehren.",
+    "Unverifizierte Registerkandidaten nur als Discovery-Hints fuehren; keine produktiven Store-Upserts.",
+    "Danach JA-027 fuer Karriere-/ATS-Link-Ermittlung angehen."
+  ],
+  "refs": [
+    "Roadmap.md",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.json",
+    "handoff.latest.md"
   ]
 }

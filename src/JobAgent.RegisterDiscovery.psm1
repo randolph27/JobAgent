@@ -22,6 +22,45 @@ function Get-JobAgentRegisterDiscoveryProperty {
     return $Default
 }
 
+function Get-JobAgentRegisterDiscoveryNestedProperty {
+    param(
+        [Parameter()][AllowNull()][object]$Object,
+        [Parameter(Mandatory)][string[]]$Names,
+        [Parameter()][AllowNull()][object]$Default = $null
+    )
+
+    if ($null -eq $Object) {
+        return $Default
+    }
+    foreach ($name in $Names) {
+        if ($Object.PSObject.Properties.Name -contains $name) {
+            return $Object.$name
+        }
+    }
+    return $Default
+}
+
+function Get-JobAgentRegisterNativeNumber {
+    param(
+        [Parameter()][AllowNull()][object]$Attributes,
+        [Parameter()][AllowEmptyString()][string]$Fallback = ''
+    )
+
+    if (-not [string]::IsNullOrWhiteSpace($Fallback)) {
+        return $Fallback
+    }
+    $nativeNumber = [string](Get-JobAgentRegisterDiscoveryNestedProperty -Object $Attributes -Names @('native_company_number') -Default '')
+    if (-not [string]::IsNullOrWhiteSpace($nativeNumber)) {
+        return $nativeNumber
+    }
+    $registerType = [string](Get-JobAgentRegisterDiscoveryNestedProperty -Object $Attributes -Names @('_registerArt', 'register_type') -Default '')
+    $registerNumber = [string](Get-JobAgentRegisterDiscoveryNestedProperty -Object $Attributes -Names @('_registerNummer', 'register_number') -Default '')
+    if (-not [string]::IsNullOrWhiteSpace($registerType) -and -not [string]::IsNullOrWhiteSpace($registerNumber)) {
+        return ($registerType.Trim() + ' ' + $registerNumber.Trim())
+    }
+    return ''
+}
+
 function ConvertTo-JobAgentRegisterHash {
     [CmdletBinding()]
     param([Parameter(Mandatory)][AllowEmptyString()][string]$Value)
@@ -195,12 +234,27 @@ function ConvertTo-JobAgentRegisterRecord {
         [Parameter()][ValidateRange(1, 3650)][int]$StaleAfterDays = 730
     )
 
+    $attributes = Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('all_attributes') -Default $null
     $registerName = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_name', 'name', 'company_name', 'legal_name') -Default '')
-    $registerCity = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_city', 'city', 'registered_city') -Default '')
-    $registerCourt = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_court', 'court') -Default 'UNKNOWN')
-    $registerNumber = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_number', 'number', 'registration_number') -Default 'UNKNOWN')
+    $registerCity = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_city', 'city', 'registered_city', 'registered_office') -Default '')
+    if ([string]::IsNullOrWhiteSpace($registerCity)) {
+        $registerCity = [string](Get-JobAgentRegisterDiscoveryNestedProperty -Object $attributes -Names @('registered_office') -Default '')
+    }
+    $registerCourt = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_court', 'court', 'registrar') -Default '')
+    if ([string]::IsNullOrWhiteSpace($registerCourt)) {
+        $registerCourt = [string](Get-JobAgentRegisterDiscoveryNestedProperty -Object $attributes -Names @('registrar') -Default 'UNKNOWN')
+    }
+    $registerNumber = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('register_number', 'number', 'registration_number', 'native_company_number') -Default '')
+    $registerNumber = Get-JobAgentRegisterNativeNumber -Attributes $attributes -Fallback $registerNumber
+    if (-not [string]::IsNullOrWhiteSpace($registerCourt) -and -not [string]::IsNullOrWhiteSpace($registerNumber)) {
+        $courtPrefix = [regex]::Escape($registerCourt.Trim())
+        $registerNumber = ([regex]::Replace($registerNumber.Trim(), '^' + $courtPrefix + '\s+', '', [Text.RegularExpressions.RegexOptions]::IgnoreCase)).Trim()
+    }
+    if ([string]::IsNullOrWhiteSpace($registerNumber)) {
+        $registerNumber = 'UNKNOWN'
+    }
     $legalForm = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('legal_form', 'rechtsform') -Default 'UNKNOWN')
-    $status = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('status', 'register_status') -Default 'UNKNOWN')
+    $status = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('status', 'register_status', 'current_status') -Default 'UNKNOWN')
     $latitude = Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('latitude', 'lat', 'geo_lat', 'y') -Default $null
     $longitude = Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('longitude', 'lon', 'lng', 'geo_lon', 'x') -Default $null
 
