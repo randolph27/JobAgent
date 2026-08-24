@@ -36,6 +36,13 @@
           "organization_name": "Unknown Place GmbH",
           "sector": "Services",
           "location": ""
+        },
+        {
+          "organization_name": "Coordinate Park GmbH",
+          "sector": "Technology",
+          "location": "Gewerbegebiet",
+          "latitude": 48.134,
+          "longitude": 11.363
         }
       ]
     }

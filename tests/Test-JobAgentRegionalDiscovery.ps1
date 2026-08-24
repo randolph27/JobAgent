@@ -40,17 +40,21 @@ Assert-True -Condition ((Get-JobAgentRegionalTargetArea -Location 'Flughafen Mue
 Assert-True -Condition ((Get-JobAgentRegionalTargetArea -Location 'Garching') -eq 'MUNICH_20KM') -Message '20-km-Zielgebiet fehlt.'
 Assert-True -Condition ((Get-JobAgentRegionalTargetArea -Location '') -eq 'TARGET_AREA_UNCERTAIN') -Message 'Leerer Ort muss unsicher bleiben.'
 Assert-True -Condition ((Get-JobAgentRegionalTargetArea -Location 'Hamburg') -eq 'OUT_OF_SCOPE') -Message 'Fremder Ort wird nicht ausgeschlossen.'
+Assert-True -Condition ((Get-JobAgentRegionalTargetArea -Location 'Gewerbegebiet' -Latitude 48.134 -Longitude 11.363) -eq 'MUNICH_20KM') -Message 'Koordinatenbasierter Muenchen-20-km-Bezug fehlt.'
+Assert-True -Condition ((Get-JobAgentRegionalTargetArea -Location 'Campus' -Latitude '48,401' -Longitude '11,742') -eq 'FREISING') -Message 'Koordinaten mit Dezimalkomma werden nicht fuer Freising erkannt.'
+Assert-True -Condition ((Get-JobAgentRegionalTargetArea -Location 'Gewerbegebiet' -Latitude 48.3705 -Longitude 10.8978) -eq 'OUT_OF_SCOPE') -Message 'Koordinatenbasierter Fremdort wird nicht ausgeschlossen.'
 
 $fixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\regional-directories-snapshot.json'
 $result = Import-JobAgentRegionalDirectories -SnapshotPath $fixture -SourceRegistry $registry
 Assert-True -Condition ($result.schema_version -eq 'jobagent/regional-discovery/v1') -Message 'Regionalimport hat falsche Schema-Version.'
 Assert-True -Condition ($result.sources_read -eq 3) -Message 'Regionalimport liest falsche Quellenanzahl.'
-Assert-True -Condition ($result.hints_total -eq 5) -Message 'Regionalimport erzeugt falsche Hint-Anzahl nach Reject/Dedupe.'
+Assert-True -Condition ($result.hints_total -eq 6) -Message 'Regionalimport erzeugt falsche Hint-Anzahl nach Reject/Dedupe.'
 Assert-True -Condition ($result.reject_counts.out_of_scope -eq 1) -Message 'Out-of-scope-Reject fehlt.'
 Assert-True -Condition ($result.reject_counts.missing_name -eq 1) -Message 'Missing-name-Reject fehlt.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.company_name -eq 'Alpha Regional AG' }).Count -eq 1) -Message 'Dubletten werden nicht dedupliziert.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.target_area -eq 'MUNICH' }).Count -ge 1) -Message 'Muenchen-Hints fehlen.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.target_area -eq 'FREISING' }).Count -ge 3) -Message 'Freising-Hints fehlen.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.company_name -eq 'Coordinate Park GmbH' -and [string]$_.target_area -eq 'MUNICH_20KM' }).Count -eq 1) -Message 'Koordinatenbasierter Regional-Hint fehlt.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.target_area -eq 'TARGET_AREA_UNCERTAIN' }).Count -eq 1) -Message 'Unsicherer Standort muss Review-Hint bleiben.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.candidate_status -ne 'REGIONAL_DISCOVERY_HINT' -or [string]$_.verification_status -ne 'UNVERIFIED' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Regional-Hints muessen unverifiziert bleiben.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_record_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Hash-Evidenz fehlt.'
@@ -92,8 +96,8 @@ try {
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Regional-Import-Script schreibt kein Logartefakt.'
     $written = Get-Content -LiteralPath ([string]$scriptResult.output_path) -Raw | ConvertFrom-Json -Depth 100
     $merged = Get-Content -LiteralPath ([string]$scriptResult.merged_hints_path) -Raw | ConvertFrom-Json -Depth 100
-    Assert-True -Condition ($written.hints_total -eq 5) -Message 'Geschriebene Regional-Hints haben falsche Anzahl.'
-    Assert-True -Condition ($merged.hints_total -eq 5) -Message 'Gemergter Hint-Store uebernimmt Regional-Hints nicht.'
+    Assert-True -Condition ($written.hints_total -eq 6) -Message 'Geschriebene Regional-Hints haben falsche Anzahl.'
+    Assert-True -Condition ($merged.hints_total -eq 6) -Message 'Gemergter Hint-Store uebernimmt Regional-Hints nicht.'
 }
 finally {
     if (Test-Path -LiteralPath $projectRoot) {
@@ -109,6 +113,7 @@ finally {
         'table_html_parser',
         'card_html_parser',
         'json_snapshot_parser',
+        'coordinate_target_area_filter',
         'target_area_filter',
         'dedupe_by_hint_id',
         'minimal_hash_evidence',

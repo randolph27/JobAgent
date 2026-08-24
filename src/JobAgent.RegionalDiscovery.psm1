@@ -61,11 +61,50 @@ function ConvertFrom-JobAgentRegionalHtmlText {
     return ([regex]::Replace($text, '\s+', ' ')).Trim()
 }
 
+function ConvertTo-JobAgentRegionalCoordinate {
+    [CmdletBinding()]
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
+        return $null
+    }
+    $numberText = ([string]$Value).Trim().Replace(',', '.')
+    $coordinate = 0.0
+    if (-not [double]::TryParse($numberText, [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$coordinate)) {
+        return $null
+    }
+    return $coordinate
+}
+
+function Get-JobAgentRegionalDistanceKm {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][double]$FromLatitude,
+        [Parameter(Mandatory)][double]$FromLongitude,
+        [Parameter(Mandatory)][double]$ToLatitude,
+        [Parameter(Mandatory)][double]$ToLongitude
+    )
+
+    $earthRadiusKm = 6371.0088
+    $degreeToRadian = [Math]::PI / 180.0
+    $fromLat = $FromLatitude * $degreeToRadian
+    $toLat = $ToLatitude * $degreeToRadian
+    $deltaLat = ($ToLatitude - $FromLatitude) * $degreeToRadian
+    $deltaLon = ($ToLongitude - $FromLongitude) * $degreeToRadian
+    $a = [Math]::Sin($deltaLat / 2.0) * [Math]::Sin($deltaLat / 2.0) +
+        [Math]::Cos($fromLat) * [Math]::Cos($toLat) *
+        [Math]::Sin($deltaLon / 2.0) * [Math]::Sin($deltaLon / 2.0)
+    $c = 2.0 * [Math]::Atan2([Math]::Sqrt($a), [Math]::Sqrt(1.0 - $a))
+    return $earthRadiusKm * $c
+}
+
 function Get-JobAgentRegionalTargetArea {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][AllowEmptyString()][string]$Location,
-        [Parameter()][AllowEmptyString()][string]$RegionReference = ''
+        [Parameter()][AllowEmptyString()][string]$RegionReference = '',
+        [Parameter()][AllowNull()][object]$Latitude = $null,
+        [Parameter()][AllowNull()][object]$Longitude = $null
     )
 
     $scopeText = if ([string]::IsNullOrWhiteSpace($Location)) { $RegionReference } else { $Location }
@@ -82,6 +121,18 @@ function Get-JobAgentRegionalTargetArea {
     }
     if ($value -match 'garching|unterfoehring|ismaning|neubiberg|taufkirchen|pullach|gruenwald|brunnthal|kirchheim') {
         return 'MUNICH_20KM'
+    }
+    $lat = ConvertTo-JobAgentRegionalCoordinate -Value $Latitude
+    $lon = ConvertTo-JobAgentRegionalCoordinate -Value $Longitude
+    if ($null -ne $lat -and $null -ne $lon) {
+        $distanceToMunich = Get-JobAgentRegionalDistanceKm -FromLatitude $lat -FromLongitude $lon -ToLatitude 48.137154 -ToLongitude 11.576124
+        if ($distanceToMunich -le 20.0) {
+            return 'MUNICH_20KM'
+        }
+        $distanceToFreising = Get-JobAgentRegionalDistanceKm -FromLatitude $lat -FromLongitude $lon -ToLatitude 48.40288 -ToLongitude 11.74128
+        if ($distanceToFreising -le 5.0) {
+            return 'FREISING'
+        }
     }
     if ([string]::IsNullOrWhiteSpace($value)) {
         return 'TARGET_AREA_UNCERTAIN'
@@ -189,9 +240,11 @@ function ConvertTo-JobAgentRegionalHint {
     $sector = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('sector_hint', 'sector', 'industry_hint', 'industry') -Default 'UNKNOWN')
     $location = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('address_or_location_hint', 'location', 'address', 'city') -Default '')
     $region = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('region_reference') -Default $location)
+    $latitude = Get-JobAgentRegionalProperty -Object $Record -Names @('latitude', 'lat', 'geo_lat', 'y') -Default $null
+    $longitude = Get-JobAgentRegionalProperty -Object $Record -Names @('longitude', 'lon', 'lng', 'geo_lon', 'x') -Default $null
     $sourcePage = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('source_page', 'source_url') -Default ([string]$Source.source_url))
     $observedAt = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('observed_at') -Default ([datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)))
-    $targetArea = Get-JobAgentRegionalTargetArea -Location $location -RegionReference $region
+    $targetArea = Get-JobAgentRegionalTargetArea -Location $location -RegionReference $region -Latitude $latitude -Longitude $longitude
     $officialness = if ([string]$Source.evidence_level -eq 'SECONDARY_OFFICIAL_DIRECTORY') { 'SECONDARY_OFFICIAL_DIRECTORY' } else { 'CURATED_DISCOVERY_HINT' }
     $manualReviewReason = switch ($targetArea) {
         'OUT_OF_SCOPE' { 'out_of_scope_location' }
