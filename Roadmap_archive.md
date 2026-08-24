@@ -784,3 +784,23 @@
   - [x] Audit: HTML-Report nutzt Viewport-Meta, horizontales Tabellen-Scrolling, Sticky-Header, `overflow-wrap:anywhere`, keine externen Skripte/Stylesheets und sichere Linkattribute; Queue-Gruende brechen in Tabellenzellen um statt Layout zu sprengen.
   - [x] Supertest: `.\\ci.cmd supertest` -> Exit 0.
   - [x] Meilenstein: M8.2 Review-Queue fuer Kandidatenbetrieb abgeschlossen; naechster Schritt ist JA-036.
+
+- [x] JA-036 Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausfuehren #comment: Der produktive Store darf erst wachsen, wenn Top-Kandidaten ueber offizielle Firmen-, Karriere- oder ATS-Belege fail-closed verifiziert wurden.
+  - [x] Beschreibung: Eine begrenzte Verifikationswelle hat 10 priorisierte Kandidaten aus der JA-035-Queue verarbeitet. Ein Kandidat wurde ueber offizielle Firmen-/Karriere-Evidenz als `CAREER_URL_VERIFIED` produktiv uebernommen; neun Kandidaten ohne offiziellen Domainhinweis bleiben fail-closed in `MANUAL_REVIEW_REQUIRED`. Jobboersenlinks wurden nicht als offizielle Anbieterlinks uebernommen.
+  - [x] Scope: Geaendert wurden `tools/Verify-JobAgentCompanyCandidates.ps1`, `src/JobAgent.Persistence.psm1`, `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/store.json`. No-Go eingehalten: keine Bewerbung, kein Formular-Autofill, kein Login/Captcha, keine globale ATS-Allowlist ohne Firmenbeleg, keine Uebernahme ungesicherter Aggregator-URLs.
+  - [x] Ist-Stand (2026-08-24 09:40): `tools/Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 10 -TimeoutSeconds 8 -MaxRetries 3` wurde ausgefuehrt. Die Queue enthaelt 18 Cluster/19 Kandidaten, davon 1 `VERIFIED`, 9 `MANUAL_REVIEW_REQUIRED` und 9 weiterhin `PENDING`. Rohde & Schwarz wurde mit offizieller Karriere-Evidence aktualisiert.
+  - [x] Abhängigkeiten: JA-034 und JA-035 sind abgeschlossen; die Welle nutzt `data/jobagent/company-discovery.hints.json` und die bestehende Source-Verification-Policy.
+  - [x] Aufwand/Dauer: Aufwand L geplant; umgesetzt in einer fokussierten Arbeitseinheit inklusive Datenlauf, Log-Sanitisierung, Persistenz-Fix und Funktionstests.
+  - [x] Prioritätsscore: 78/100, weil Verifikation hohen Produktwert hat, aber nur nach Snapshot und Review-Queue fachlich sicher ist.
+  - [x] Ordnungsbegründung: Die offizielle Verifikation wurde nach priorisierter Kandidatensteuerung ausgefuehrt und bleibt Gate vor weiteren produktiven Erweiterungen.
+  - [x] Risiken und Unsicherheiten: Neun Kandidaten haben keinen offiziellen Domainhinweis und duerfen ohne manuelle Domainklaerung nicht produktiv importiert werden. Externe Karriere-URLs koennen sich nach dem belegten Abrufzeitpunkt aendern; die Evidence behauptet keine dauerhafte Erreichbarkeit.
+  - [x] Schritte:
+    1. Wellenlimit festgelegt: 10 Kandidaten, Timeout 8 Sekunden, maximal 3 Retries, bestehende fail-closed Source-Verification-Policy.
+    2. Verifikation ausgefuehrt: Kandidaten wurden gegen offizielle Website-/Karrierebelege verarbeitet; Redirects, Statuscodes, Content-Hashes, finale URLs und Gruende wurden protokolliert.
+    3. Produktive Writes abgesichert: Store-Backup wurde vor Write erzeugt; nur Rohde & Schwarz erhielt einen offiziellen Karriere-Source-Upsert und Candidate-Evidence.
+    4. Tests und Audit erweitert: Verifikationslogs enthalten nur Hash/Excerpt statt kompletter HTML-Rohseiten; Persistenz normalisiert Arrayfelder ohne globale Schema-Churn.
+  - [x] Evidence: `logs/jobagent/company-candidate-verification-20260824-074039.json`, `data/jobagent/backups/store-20260824T074042685Z-pre-write.json`, `data/jobagent/company-candidate-verification.queue.json`, Candidate-Evidence und neue JobSource in `data/jobagent/store.json`.
+  - [x] Funktionstest: `pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit 0; `pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1` -> Exit 0; `pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1` -> Exit 0; `pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1` -> Exit 0.
+  - [x] Audit: Produktiver Upsert hat eine offizielle Evidence-URL auf der Firmendomain, `verified_by_url` ist die offizielle Rohde-&-Schwarz-Domain, Jobboersen-URLs bleiben nur Discovery-Hints, und die neun unklaren Kandidaten bleiben ohne Store-Write in Manual Review.
+  - [x] Supertest: `.\\ci.cmd supertest` -> Exit 0.
+  - [x] Meilenstein: M8.3 Offizielle Verifikationswelle abgeschlossen; es sind keine aktiven Roadmap-Punkte offen.

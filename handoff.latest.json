@@ -1,1 +1,268 @@
-{"workspace_root":".","route_violations":[],"verify_digest":{"ts":"2026-08-24T09:29:31.729+02:00","cmd":".\\ci.cmd supertest","exit":0,"status":"pass","log_path":null,"scope":"JobAgent function suite","tests_total":19,"duration_seconds":41.31},"changed":["todo.history.digest.json","todo.master.index.json"],"capsule":{"verified":[{"exit":0,"cmd":".\\ci.cmd supertest","status":"pass"}],"ts":"2026-08-24T09:31:37.213+02:00","project":"JobAgent","changed":["todo.history.digest.json","todo.master.index.json"],"git":{"tracked_changes":["todo.history.digest.json","todo.master.index.json"],"detached":false,"ahead":2,"upstream":"origin/master","behind":0,"head":"c1239cd40ad0","has_repo":true,"worktree":"dirty","remote":"origin","branch":"master"},"route_violations":[],"active_id":"","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"env_inventory_path":null,"agent_id":"UTTER-20260817-39f7","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","workspace_root":".","next":"Aktive Punkte: JA-036 Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausfuehren #comment: Der produktive Store darf erst wachsen, wenn Top-Kandidaten ueber offizielle Firmen-, Karriere- oder ATS-Belege fail-closed verifiziert wurden.","goal":"","env_inventory_missing":false,"status":"open","route_ok":null,"env_inventory_used":false,"manual_missing":false},"goal":"","next_steps":["Aktive Punkte: JA-036 Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausfuehren #comment: Der produktive Store darf erst wachsen, wenn Top-Kandidaten ueber offizielle Firmen-, Karriere- oder ATS-Belege fail-closed verifiziert wurden."],"active_id":"","status":"open","ts":"2026-08-24T09:31:37.213+02:00","route_ok":null,"toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","git":{"tracked_changes":["todo.history.digest.json","todo.master.index.json"],"detached":false,"ahead":2,"upstream":"origin/master","behind":0,"head":"c1239cd40ad0","has_repo":true,"worktree":"dirty","remote":"origin","branch":"master"},"summary":"stp sync","next":"Aktive Punkte: JA-036 Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausfuehren #comment: Der produktive Store darf erst wachsen, wenn Top-Kandidaten ueber offizielle Firmen-, Karriere- oder ATS-Belege fail-closed verifiziert wurden.","refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"verified":[{"exit":0,"cmd":".\\ci.cmd supertest","status":"pass"}],"route":null,"project":"JobAgent","agent_id":"UTTER-20260817-39f7"}
+{
+  "ts": "2026-08-24T09:48:53.225+02:00",
+  "agent_id": "codex",
+  "workspace_root": ".",
+  "project": "JobAgent",
+  "status": "open",
+  "active_id": "",
+  "goal": "Kein aktiver Roadmap-Punkt. JA-036 ist abgeschlossen und archiviert.",
+  "summary": "JA-036 abgeschlossen: begrenzte offizielle Verifikationswelle mit 10 Kandidaten, 1 verifizierter offizieller Rohde-&-Schwarz-Karrierequelle, 9 fail-closed Manual-Review-Kandidaten. Worktree enthaelt die abgeschlossenen Aenderungen bis Commit/Push.",
+  "next": "Neuen Roadmap-Punkt definieren oder aus Backlog priorisieren; aktuell gibt es keine offenen Todo-Eintraege.",
+  "next_steps": [
+    "Nach Push neuen Roadmap-Punkt anlegen oder fachlich naechsten Backlog-Punkt priorisieren.",
+    "Bei weiterer Firmenverifikation neue begrenzte Welle starten und wieder fail-closed nur offizielle Firmen-/Karriere-/ATS-Belege akzeptieren.",
+    "Supertest gilt fuer diesen Stand als erledigt; erneut nur bei neuem abgeschlossenen Roadmap-Punkt oder relevanten Code-/Daten-Aenderungen."
+  ],
+  "changed": [
+    ".ci/pins/immutable.hashes.json",
+    ".ci/pins/immutable.snapshot/Roadmap.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/store.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.Persistence.psm1",
+    "todo.checkpoint.json",
+    "todo.current.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "tools/Verify-JobAgentCompanyCandidates.ps1"
+  ],
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "status": "pass",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
+      "status": "pass",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
+      "status": "pass",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
+      "status": "pass",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd supertest",
+      "status": "pass",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "status": "pass",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "status": "pass",
+      "exit": 0
+    }
+  ],
+  "refs": [
+    "Roadmap_archive.md",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.json",
+    "data/jobagent/store.json",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "logs/jobagent/company-candidate-verification-20260824-074039.json"
+  ],
+  "git": {
+    "has_repo": true,
+    "branch": "master",
+    "head": "002bc4c52107",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty",
+    "tracked_changes": [
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/store.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Persistence.psm1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ]
+  },
+  "route_ok": true,
+  "route_violations": [],
+  "details": {
+    "completed_roadmap": [
+      "JA-036 Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausfuehren"
+    ],
+    "live_run": {
+      "command": "pwsh -NoProfile -File tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 10 -TimeoutSeconds 8 -MaxRetries 3",
+      "processed": 10,
+      "verified": 1,
+      "manual_review": 9,
+      "verified_candidate": "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen",
+      "official_source": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+      "log": "logs/jobagent/company-candidate-verification-20260824-074039.json",
+      "backup": "data/jobagent/backups/store-20260824T074042685Z-pre-write.json"
+    },
+    "code_changes": [
+      "tools/Verify-JobAgentCompanyCandidates.ps1: Fetch-Evidence wird auf Hash und Plaintext-Excerpt begrenzt; keine vollen HTML-Rohseiten im Log/Output.",
+      "tools/Verify-JobAgentCompanyCandidates.ps1: ats, locations, candidate_verification_evidence und verification_evidence werden array-stabil behandelt; null-ATS werden gefiltert.",
+      "src/JobAgent.Persistence.psm1: Repair-JobAgentDocumentShape normalisiert betroffene Felder nur bei Bedarf und vermeidet unnoetigen Store-Churn."
+    ],
+    "data_changes": [
+      "data/jobagent/store.json: Rohde & Schwarz Karriere-URL und offizielle Evidence aktualisiert; neue JobSource source:rohde_and_schwarz_gmbh_and_co_kg_career_url.",
+      "data/jobagent/company-candidate-verification.queue.json: Queue nach Verifikationswelle aktualisiert; 9 Kandidaten bereit/offen, 1 verifiziert, 9 Manual Review.",
+      "html/jobagent/company-coverage.html: Coverage-Ansicht nach Store/Queue-Update neu erzeugt."
+    ],
+    "roadmap_todo_changes": [
+      "Roadmap.md: keine aktiven Punkte.",
+      "Roadmap_archive.md: JA-036 als erledigt archiviert.",
+      "Roadmap_index.md: aktive Liste leer, Archiv bis JA-036.",
+      "todo.current.md und todo.state.json: keine offenen Items.",
+      "todo.events.jsonl/todo.history.digest.json/todo.checkpoint.json: STP/Prune/Checkpoint aktualisiert."
+    ],
+    "next_tasks": [
+      "Nach Push neuen Roadmap-Punkt anlegen oder fachlich naechsten Backlog-Punkt priorisieren.",
+      "Bei weiterer Firmenverifikation neue begrenzte Welle starten und wieder fail-closed nur offizielle Firmen-/Karriere-/ATS-Belege akzeptieren.",
+      "Supertest gilt fuer diesen Stand als erledigt; erneut nur bei neuem abgeschlossenen Roadmap-Punkt oder relevanten Code-/Daten-Aenderungen."
+    ],
+    "assumptions": [
+      "Keine aktiven Roadmap-Punkte vorhanden.",
+      "SonarQube war nicht erneut erforderlich; self-check und supertest sind gruen.",
+      "Logs unter logs/jobagent bleiben unversioniert; relevante Pfade sind im Handoff referenziert."
+    ]
+  },
+  "capsule": {
+    "ts": "2026-08-24T09:48:53.225+02:00",
+    "agent_id": "codex",
+    "workspace_root": ".",
+    "project": "JobAgent",
+    "active_id": "",
+    "status": "open",
+    "goal": "Kein aktiver Roadmap-Punkt. JA-036 ist abgeschlossen und archiviert.",
+    "next": "Neuen Roadmap-Punkt definieren oder aus Backlog priorisieren; aktuell gibt es keine offenen Todo-Eintraege.",
+    "changed": [
+      ".ci/pins/immutable.hashes.json",
+      ".ci/pins/immutable.snapshot/Roadmap.md",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/store.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Persistence.psm1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ],
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+        "status": "pass",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
+        "status": "pass",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
+        "status": "pass",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
+        "status": "pass",
+        "exit": 0
+      },
+      {
+        "cmd": ".\\ci.cmd supertest",
+        "status": "pass",
+        "exit": 0
+      },
+      {
+        "cmd": ".\\ci.cmd self-check",
+        "status": "pass",
+        "exit": 0
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "status": "pass",
+        "exit": 0
+      }
+    ],
+    "route_ok": true,
+    "route_violations": [],
+    "git": {
+      "has_repo": true,
+      "branch": "master",
+      "head": "002bc4c52107",
+      "upstream": "origin/master",
+      "ahead": 0,
+      "behind": 0,
+      "worktree": "dirty",
+      "tracked_changes": [
+        ".ci/pins/immutable.hashes.json",
+        ".ci/pins/immutable.snapshot/Roadmap.md",
+        "Roadmap.md",
+        "Roadmap_archive.md",
+        "Roadmap_index.md",
+        "data/jobagent/company-candidate-verification.queue.json",
+        "data/jobagent/store.json",
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "html/jobagent/company-coverage.html",
+        "src/JobAgent.Persistence.psm1",
+        "todo.checkpoint.json",
+        "todo.current.md",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json",
+        "todo.state.json",
+        "tools/Verify-JobAgentCompanyCandidates.ps1"
+      ]
+    },
+    "refs": [
+      "Roadmap_archive.md",
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json",
+      "data/jobagent/store.json",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "logs/jobagent/company-candidate-verification-20260824-074039.json"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  }
+}

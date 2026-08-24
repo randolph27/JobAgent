@@ -183,7 +183,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 90,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -222,7 +222,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 90,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -243,7 +243,7 @@
       "canonical_name": "Rohde & Schwarz GmbH & Co. KG",
       "canonical_domain": "rohde-schwarz.com",
       "official_website_url": "https://www.rohde-schwarz.com/",
-      "career_url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+      "career_url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
       "aliases": [
         "R&S",
         "Rohde & Schwarz GmbH & Co. KG",
@@ -268,15 +268,33 @@
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
         "observed_at": "2026-08-17T15:52:58.666Z",
-        "verification_url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
+        "verification_url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
         "discovery_origin": "seed.manual",
         "target_area": "MUNICH",
         "industry_hint": "Electronics",
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-08-24T07:40:39.996Z",
+      "last_successful_scan_at": null,
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen",
+          "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+          "canonical_name": "Rohde & Schwarz GmbH & Co. KG",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+          "verified_by_url": "https://rohde-schwarz.com/",
+          "redirect_chain": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "779499759519c88f95614d163b9ce96566db7514b9b0a846a7fa9b509cf5d383",
+          "observed_at": "2026-08-24T07:40:39.996Z",
+          "http_status": 200,
+          "final_url": "https://rohde-schwarz.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-22T07:40:39.996Z"
+        }
+      ]
     },
     {
       "company_id": "company:infineon_technologies_ag",
@@ -380,7 +398,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -500,7 +518,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -539,7 +557,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 85,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -618,7 +636,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 84,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -736,7 +754,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -776,7 +794,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -854,7 +872,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -933,7 +951,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1050,7 +1068,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1170,7 +1188,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1210,7 +1228,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 79,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1249,7 +1267,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 78,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1288,7 +1306,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 78,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1327,7 +1345,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 78,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1366,7 +1384,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 77,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1406,7 +1424,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 77,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1446,7 +1464,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 76,
-      "next_scan_at": "2026-08-18T00:00:00.000Z",
+      "next_scan_at": "2026-08-18T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1486,7 +1504,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 74,
-      "next_scan_at": "2026-08-24T00:00:00.000Z",
+      "next_scan_at": "2026-08-24T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -2343,6 +2361,29 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:rohde_and_schwarz_gmbh_and_co_kg_career_url",
+      "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+      "canonical_url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+      "is_official": true,
+      "verified_at": "2026-08-24T07:40:39.996Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+          "basis_url": "https://rohde-schwarz.com/",
+          "redirect_chain": [
+            "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html"
+          ],
+          "observed_at": "2026-08-24T07:40:39.996Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
     }
   ],
   "scan_runs": [

@@ -51,6 +51,37 @@ function ConvertTo-ToolDateOrNull {
     return [datetime]::Parse([string]$Value, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
 }
 
+function Get-ToolTextSha256 {
+    param(
+        [Parameter()][AllowEmptyString()][string]$Text
+    )
+
+    $bytes = [Text.UTF8Encoding]::new($false).GetBytes($Text)
+    $hash = [Security.Cryptography.SHA256]::Create()
+    try {
+        return ([BitConverter]::ToString($hash.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
+    }
+    finally {
+        $hash.Dispose()
+    }
+}
+
+function ConvertTo-ToolPlainTextExcerpt {
+    param(
+        [Parameter()][AllowEmptyString()][string]$Html,
+        [Parameter()][ValidateRange(1, 400)][int]$MaxLength = 160
+    )
+
+    $text = [regex]::Replace($Html, '<(script|style)\b.*?</\1>', ' ', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    $text = [regex]::Replace($text, '<[^>]+>', ' ')
+    $text = [Net.WebUtility]::HtmlDecode($text)
+    $text = [regex]::Replace($text, '\s+', ' ').Trim()
+    if ($text.Length -gt $MaxLength) {
+        return $text.Substring(0, $MaxLength)
+    }
+    return $text
+}
+
 function Get-ToolCandidateId {
     param([Parameter(Mandatory)][object]$Candidate)
 
@@ -112,8 +143,15 @@ function ConvertTo-ToolCompanyFromCandidateVerification {
     if (@('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$Verification.status) {
         $company.career_url = [string]$Verification.career_url
     }
-    $company.ats = if ($null -ne $Verification.ats) { @($Verification.ats) } else { @($company.ats) }
-    $company.locations = if (@($company.locations).Count -gt 0) { @($company.locations) } else { @(Get-ToolCandidateLocation -Candidate $Candidate) }
+    $atsItems = if ($null -ne $Verification.ats) { @($Verification.ats) } else { @($company.ats) }
+    $atsItems = @($atsItems | Where-Object { $null -ne $_ })
+    $locationItems = if (@($company.locations).Count -gt 0) { @($company.locations) } else { @(Get-ToolCandidateLocation -Candidate $Candidate) }
+    if ($null -ne $Verification.ats -or $company.PSObject.Properties.Name -notcontains 'ats' -or $null -eq $company.ats -or -not ($company.ats -is [array])) {
+        $company | Add-Member -NotePropertyName ats -NotePropertyValue ([object[]]$atsItems) -Force
+    }
+    if ($company.PSObject.Properties.Name -notcontains 'locations' -or $null -eq $company.locations -or -not ($company.locations -is [array]) -or @($company.locations).Count -eq 0) {
+        $company | Add-Member -NotePropertyName locations -NotePropertyValue ([object[]]$locationItems) -Force
+    }
     if ($company.PSObject.Properties.Name -contains 'updated_at') {
         $company.updated_at = ConvertTo-ToolIso -Value $ObservedAt
     }
@@ -136,7 +174,7 @@ function ConvertTo-ToolCompanyFromCandidateVerification {
     else {
         $company.discovery_source.verification_url = $Verification.evidence[0].verification_url
     }
-    $company | Add-Member -NotePropertyName candidate_verification_evidence -NotePropertyValue @($Verification.evidence) -Force
+    $company | Add-Member -NotePropertyName candidate_verification_evidence -NotePropertyValue ([object[]]@($Verification.evidence)) -Force
     return $company
 }
 
@@ -159,7 +197,7 @@ function New-ToolJobSourceFromCandidateVerification {
         is_official = $true
         verified_at = ConvertTo-ToolIso -Value $ObservedAt
         verification_basis = $basis
-        verification_evidence = @($Verification.evidence | ForEach-Object {
+        verification_evidence = [object[]]@($Verification.evidence | ForEach-Object {
                 [pscustomobject]@{
                     status = 'VERIFIED'
                     evidence_type = [string]$_.evidence_type
@@ -206,6 +244,58 @@ function New-ToolFixtureFetcher {
             error = 'fixture missing'
         }
     }.GetNewClosure()
+}
+
+function ConvertTo-ToolFetchEvidence {
+    param(
+        [Parameter()][AllowEmptyCollection()][object[]]$Fetches = @()
+    )
+
+    foreach ($fetch in @($Fetches)) {
+        $content = if (($fetch.PSObject.Properties.Name -contains 'content') -and -not [string]::IsNullOrWhiteSpace([string]$fetch.content)) { [string]$fetch.content } else { '' }
+        [pscustomobject]@{
+            ok = [bool]$fetch.ok
+            url = [string]$fetch.url
+            final_url = if ($fetch.PSObject.Properties.Name -contains 'final_url') { [string]$fetch.final_url } else { [string]$fetch.url }
+            status_code = if ($fetch.PSObject.Properties.Name -contains 'status_code') { $fetch.status_code } else { $null }
+            content_type = if ($fetch.PSObject.Properties.Name -contains 'content_type') { [string]$fetch.content_type } else { '' }
+            content_hash = if ([string]::IsNullOrWhiteSpace($content)) { $null } else { Get-ToolTextSha256 -Text $content }
+            content_excerpt = if ([string]::IsNullOrWhiteSpace($content)) { '' } else { ConvertTo-ToolPlainTextExcerpt -Html $content -MaxLength 160 }
+            error = if ($fetch.PSObject.Properties.Name -contains 'error') { $fetch.error } else { $null }
+        }
+    }
+}
+
+function ConvertTo-ToolVerificationLogResult {
+    param(
+        [Parameter(Mandatory)][object]$Result
+    )
+
+    [pscustomobject]@{
+        candidate_id = [string]$Result.candidate_id
+        company_id = if ($Result.PSObject.Properties.Name -contains 'company_id') { $Result.company_id } else { $null }
+        status = [string]$Result.status
+        priority_score = if ($Result.PSObject.Properties.Name -contains 'priority_score') { $Result.priority_score } else { $null }
+        review_reasons = @($Result.review_reasons)
+        evidence = @($Result.evidence)
+        fetches = [object[]]@(ConvertTo-ToolFetchEvidence -Fetches @($Result.fetches))
+        company = if ($Result.PSObject.Properties.Name -contains 'company') {
+            [pscustomobject]@{
+                company_id = [string]$Result.company.company_id
+                canonical_name = [string]$Result.company.canonical_name
+                canonical_domain = [string]$Result.company.canonical_domain
+                official_website_url = [string]$Result.company.official_website_url
+                career_url = $Result.company.career_url
+                verification_status = [string]$Result.company.verification_status
+            }
+        }
+        else {
+            $null
+        }
+        career_url = if ($Result.PSObject.Properties.Name -contains 'career_url') { $Result.career_url } else { $null }
+        ats = if ($Result.PSObject.Properties.Name -contains 'ats') { $Result.ats } else { $null }
+        next_action = [string]$Result.next_action
+    }
 }
 
 function Read-ToolCandidateVerificationQueue {
@@ -463,6 +553,7 @@ $logRootPath = Resolve-ToolPath -Root $projectRootResolved -Path $LogRoot
 New-Item -ItemType Directory -Path $logRootPath -Force | Out-Null
 $logPath = Join-Path $logRootPath ('company-candidate-verification-' + $startedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
 $resultItems = @($results.ToArray())
+$logResultItems = [object[]]@($resultItems | ForEach-Object { ConvertTo-ToolVerificationLogResult -Result $_ })
 $queueItems = @($queue.queue)
 $checkedCandidateIds = @($resultItems | ForEach-Object { [string]$_.candidate_id })
 $verifiedCandidateIds = @($resultItems | Where-Object { @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$_.status } | ForEach-Object { [string]$_.candidate_id })
@@ -489,7 +580,7 @@ $summary = [pscustomobject]@{
     manual_review_candidate_ids = $manualReviewCandidateIds
     unverified_candidate_ids = $unverifiedCandidateIds
     decision_report = New-ToolCandidateVerificationDecisionReport -Results $resultItems -Queue $queue
-    results = $resultItems
+    results = $logResultItems
 }
 $summary | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $logPath -Encoding UTF8
 $summary | Add-Member -NotePropertyName log_path -NotePropertyValue $logPath -PassThru | ConvertTo-Json -Depth 100

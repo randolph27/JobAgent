@@ -1,85 +1,63 @@
 # Handoff latest
 
-Stand: 2026-08-24T09:31:37+02:00
+Stand: 2026-08-24T09:48:53.225+02:00
 
-## Neuer Chat Einstieg
+## Status fuer neuen Chat
 
-Der neue Chat/Agent soll mit `TD-0036 / JA-036` weitermachen: begrenzte offizielle Verifikationswelle aus der Kandidaten-Review-Queue ausfuehren. `JA-034` und `JA-035` sind abgeschlossen, verifiziert, archiviert und committed. Es gibt aktuell nur noch einen aktiven Roadmap-Punkt.
+- Projekt: JobAgent
+- Branch: master
+- Head: 002bc4c52107
+- Upstream: origin/master
+- Ahead: 0
+- Behind: 0
+- Worktree: dirty
+- Aktiver Todo/Roadmap-Punkt: keiner
+- Status: JA-036 abgeschlossen und archiviert
 
-## Aktueller Zustand
+## Abgeschlossen
 
-- Projekt: `JobAgent`
-- Root: `D:\_Scripte\JobAgent`
-- Branch: `master`
-- HEAD vor diesem Handoff-Commit: `c1239cd40ad0`
-- Upstream: `origin/master`
-- Ahead/Behind vor Push: `2/0`
-- Worktree vor diesem Handoff-Commit: `dirty`
-- Active: none
-- Offenes Todo: `TD-0036`
-- Aktive Roadmap: `JA-036`
-- Archiv: `JA-001` bis `JA-035` abgeschlossen und archiviert
-- SonarQube: `http://localhost:9000/api/system/status` -> `UP`
-- Devserver: `http://localhost:8500/` laeuft
+JA-036: Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausgefuehrt.
 
-## Zuletzt erledigt
+Ergebnis:
+- 10 Kandidaten verarbeitet.
+- 1 Kandidat produktiv verifiziert: jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen.
+- 9 Kandidaten fail-closed in Manual Review wegen OFFICIAL_COMPANY_DOMAIN_MISSING.
+- Offizielle Rohde-&-Schwarz-Karrierequelle gesetzt: https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html.
+- Neue JobSource: source:rohde_and_schwarz_gmbh_and_co_kg_career_url.
+- Lauf-Log: logs/jobagent/company-candidate-verification-20260824-074039.json.
+- Store-Backup vor Write: data/jobagent/backups/store-20260824T074042685Z-pre-write.json.
 
-1. `TD-0034 / JA-034 Produktive Discovery-Snapshot-Lane fuer Muenchen/Freising`
-   - Status: abgeschlossen und nach `Roadmap_archive.md` rotiert.
-   - Output: `data/jobagent/company-discovery.hints.json` mit 19 unverifizierten Hints.
-   - Evidence: `logs/jobagent/company-discovery-snapshot-digest-20260824-071422.json` plus Snapshot-Logs.
+## Geaenderte Bereiche
 
-2. `TD-0035 / JA-035 Kandidaten-Review-Queue und Coverage-Arbeitsbericht`
-   - Status: abgeschlossen und nach `Roadmap_archive.md` rotiert.
-   - Output: `data/jobagent/company-candidate-verification.queue.json`.
-   - Queue-Stand: 18 Cluster aus 19 Kandidaten.
-   - Aktionen: 15 `VERIFY_OFFICIAL_SITE`, 1 `CHECK_LOCATION`, 1 `REJECT_DUPLICATE`, 1 `MANUAL_DECISION`.
-   - Coverage-Artefakte: `logs/jobagent/company-coverage-20260824-072454.json`, `logs/jobagent/company-coverage-20260824-072454.md`, `html/jobagent/company-coverage.html`.
-   - Commit: `c1239cd Add candidate review queue`.
+- tools/Verify-JobAgentCompanyCandidates.ps1: Fetch-Logs enthalten nur noch content_hash und content_excerpt statt vollstaendiger HTML-Rohseiten.
+- tools/Verify-JobAgentCompanyCandidates.ps1: ats, locations, candidate_verification_evidence und verification_evidence bleiben array-stabil; null-ATS werden entfernt.
+- src/JobAgent.Persistence.psm1: Repair-JobAgentDocumentShape normalisiert nur bei noetigem Shape-Repair und vermeidet unnoetigen Store-Churn.
+- data/jobagent/store.json: Rohde & Schwarz mit offizieller Karriere-Evidence und neuer offizieller JobSource aktualisiert.
+- data/jobagent/company-candidate-verification.queue.json: Queue-Status nach Welle aktualisiert.
+- html/jobagent/company-coverage.html: Coverage-Ansicht neu erzeugt.
+- Roadmap.md: keine aktiven Punkte.
+- Roadmap_archive.md: JA-036 erledigt archiviert.
+- Roadmap_index.md: aktive Liste leer, Archiv bis JA-036.
+- todo.current.md / todo.state.json: keine offenen Todo-Eintraege.
 
 ## Verifikation
 
-- `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentRegisterDiscovery.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentJobBoardDiscovery.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentRegionalDiscovery.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit 0
-- `pwsh -NoProfile -File tests\Test-JobAgentHtmlAudit.ps1` -> Exit 0
-- `.\ci.cmd supertest` -> Exit 0
-- `.\ci.cmd self-check` -> Exit 0
-- `.\ci.cmd stp` -> Exit 0
+- pwsh -NoProfile -File tests\Test-JobAgentCompanyCandidateVerification.ps1 -> Exit 0
+- pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1 -> Exit 0
+- pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1 -> Exit 0
+- pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1 -> Exit 0
+- .\ci.cmd supertest -> Exit 0
+- .\ci.cmd self-check -> Exit 0
+- .\ci.cmd stp -> Exit 0
 
-## Naechste Aufgabe
+## Naechste Aufgaben
 
-`TD-0036 / JA-036 Begrenzte offizielle Verifikationswelle aus der Kandidaten-Queue ausfuehren`
+1. Nach Push im neuen Chat neuen Roadmap-Punkt anlegen oder vorhandenen Backlog fachlich priorisieren.
+2. Bei weiterer Firmenverifikation wieder kleine offizielle Welle fahren; nur offizielle Firmen-, Karriere- oder ATS-Belege akzeptieren.
+3. Supertest fuer diesen abgeschlossenen Stand nicht wiederholen, solange keine neue relevante Code-/Daten-Aenderung erfolgt.
 
-Ziel: Priorisierte Top-Kandidaten aus `data/jobagent/company-candidate-verification.queue.json` begrenzt und fail-closed gegen offizielle Firmen-, Karriere- oder ATS-Belege pruefen. Nur belastbare Evidenz darf `CAREER_URL_VERIFIED`, `COMPANY_DOMAIN_VERIFIED` oder `OFFICIAL_ATS_VERIFIED` erzeugen. Unsichere Faelle bleiben in Retry, Manual Review oder Reject.
+## Hinweise
 
-Empfohlener Start:
-
-1. Queue und Top-Kandidaten lesen:
-   - `data/jobagent/company-candidate-verification.queue.json`
-   - Top-Prioritaeten mit `next_action=VERIFY_OFFICIAL_SITE`
-2. Wellenlimit festlegen:
-   - kleiner Lauf, z.B. `MaxCandidates` 3 bis 5
-   - Rate-Limits, Timeout und Retry-Regeln aus Source Registry/Queue beachten
-3. Zuerst fixturebasierte Funktionstests pruefen und bei Bedarf erweitern:
-   - `pwsh -NoProfile -File tests\Test-JobAgentCompanyCandidateVerification.ps1`
-   - `pwsh -NoProfile -File tests\Test-JobAgentSourceVerification.ps1`
-   - `pwsh -NoProfile -File tests\Test-JobAgentLiveScan.ps1`
-4. Danach begrenzte Verifikationswelle ueber `tools/Verify-JobAgentCompanyCandidates.ps1` ausfuehren.
-5. Bei Store-Write zusaetzlich `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` ausfuehren.
-
-## Harte Regeln
-
-- Keine Bewerbung.
-- Kein Formular-Autofill.
-- Kein Login/Captcha.
-- Keine extern wirksame Aktion ohne ausdrueckliche Bestaetigung.
-- Keine Jobboerse als offizieller Stellen- oder Anbieterlink.
-- Keine ungesicherten Aggregator-URLs als offizielle Quelle.
-- Keine globale ATS-Allowlist ohne Firmenbeleg.
-- Unsichere Verifikation fail-closed lassen.
-- Supertest erst nach gruenen Funktionstests; wenn nicht neu angefragt, gilt er gemaess Nutzeranweisung als erledigt.
-- Devserver auf `:8500` und SonarQube auf `:9000` nur ueber `.\ci.cmd` beziehungsweise Sonar-API/Curl verwalten.
+- Aktuell keine offenen Todo-Eintraege.
+- Logs unter logs/jobagent sind unversioniert; relevante Log-Pfade stehen oben.
+- STP wurde ausgefuehrt; Todo-Prune hat den JA-036-Done-Event nach logs/todo/done-events-20260824-094758.jsonl rotiert.

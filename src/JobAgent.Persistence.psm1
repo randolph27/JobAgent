@@ -121,8 +121,22 @@ function Repair-JobAgentDocumentShape {
         [Parameter(Mandatory)][object]$Document
     )
 
+    foreach ($company in @($Document.companies)) {
+        if (($company.PSObject.Properties.Name -contains 'locations') -and $null -ne $company.locations -and -not ($company.locations -is [array])) {
+            $company | Add-Member -NotePropertyName locations -NotePropertyValue ([object[]]@($company.locations)) -Force
+        }
+        if (($company.PSObject.Properties.Name -contains 'ats') -and $null -ne $company.ats -and -not ($company.ats -is [array])) {
+            $company | Add-Member -NotePropertyName ats -NotePropertyValue ([object[]]@($company.ats | Where-Object { $null -ne $_ })) -Force
+        }
+        if (($company.PSObject.Properties.Name -contains 'candidate_verification_evidence') -and $null -ne $company.candidate_verification_evidence -and -not ($company.candidate_verification_evidence -is [array])) {
+            $company | Add-Member -NotePropertyName candidate_verification_evidence -NotePropertyValue ([object[]]@($company.candidate_verification_evidence)) -Force
+        }
+    }
+
     foreach ($source in @($Document.job_sources)) {
-        $source | Add-Member -NotePropertyName verification_evidence -NotePropertyValue (Complete-JobAgentSourceVerificationEvidence -Source $source) -Force
+        if (($source.PSObject.Properties.Name -notcontains 'verification_evidence') -or @($source.verification_evidence).Count -lt 1) {
+            $source | Add-Member -NotePropertyName verification_evidence -NotePropertyValue ([object[]]@(Complete-JobAgentSourceVerificationEvidence -Source $source)) -Force
+        }
     }
 
     return $Document
