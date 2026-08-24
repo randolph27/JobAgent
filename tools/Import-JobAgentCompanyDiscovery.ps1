@@ -152,19 +152,52 @@ function Get-ToolSnapshotItemInputs {
     $resolvedInputs = [System.Collections.Generic.List[object]]::new()
     foreach ($input in $inputs) {
         $inputPathValue = [string](Get-ToolObjectProperty -Object $input -Name 'input_path' -Default '')
-        if ([string]::IsNullOrWhiteSpace($inputPathValue)) {
-            throw 'Snapshot-Manifest-Input enthaelt keinen input_path.'
+        $inputGlobValue = [string](Get-ToolObjectProperty -Object $input -Name 'input_glob' -Default '')
+        $inputDirectoryValue = [string](Get-ToolObjectProperty -Object $input -Name 'input_directory' -Default '')
+        $inputPatternValue = [string](Get-ToolObjectProperty -Object $input -Name 'input_pattern' -Default '')
+        $matchedInputPaths = [System.Collections.Generic.List[string]]::new()
+
+        if (-not [string]::IsNullOrWhiteSpace($inputPathValue)) {
+            $matchedInputPaths.Add((Resolve-ToolProjectPath -Root $Root -Path $inputPathValue))
         }
-        $resolvedInputPath = Resolve-ToolProjectPath -Root $Root -Path $inputPathValue
-        if (-not (Test-Path -LiteralPath $resolvedInputPath -PathType Leaf)) {
-            throw "Snapshot-Eingabe fehlt: $resolvedInputPath"
+        elseif (-not [string]::IsNullOrWhiteSpace($inputGlobValue)) {
+            $resolvedGlobPath = if ([IO.Path]::IsPathRooted($inputGlobValue)) { $inputGlobValue } else { Join-Path $Root $inputGlobValue }
+            foreach ($match in @(Get-ChildItem -Path $resolvedGlobPath -File | Sort-Object FullName)) {
+                $matchedInputPaths.Add($match.FullName)
+            }
         }
-        $resolvedInputs.Add([pscustomobject]@{
-                input_path = $resolvedInputPath
-                source_id = [string](Get-ToolObjectProperty -Object $input -Name 'source_id' -Default (Get-ToolObjectProperty -Object $Item -Name 'source_id' -Default ''))
-                snapshot_id = Get-ToolObjectProperty -Object $input -Name 'snapshot_id' -Default (Get-ToolObjectProperty -Object $Item -Name 'snapshot_id' -Default ([IO.Path]::GetFileNameWithoutExtension($resolvedInputPath)))
-                snapshot_date = Get-ToolObjectProperty -Object $input -Name 'snapshot_date' -Default (Get-ToolObjectProperty -Object $Item -Name 'snapshot_date' -Default $null)
-            })
+        elseif (-not [string]::IsNullOrWhiteSpace($inputDirectoryValue)) {
+            if ([string]::IsNullOrWhiteSpace($inputPatternValue)) {
+                throw 'Snapshot-Manifest-Input mit input_directory benoetigt input_pattern.'
+            }
+            $resolvedInputDirectory = Resolve-ToolProjectPath -Root $Root -Path $inputDirectoryValue
+            if (-not (Test-Path -LiteralPath $resolvedInputDirectory -PathType Container)) {
+                throw "Snapshot-Eingabeverzeichnis fehlt: $resolvedInputDirectory"
+            }
+            foreach ($match in @(Get-ChildItem -LiteralPath $resolvedInputDirectory -Filter $inputPatternValue -File | Sort-Object FullName)) {
+                $matchedInputPaths.Add($match.FullName)
+            }
+        }
+        else {
+            throw 'Snapshot-Manifest-Input enthaelt weder input_path, input_glob noch input_directory/input_pattern.'
+        }
+
+        if ($matchedInputPaths.Count -lt 1) {
+            throw 'Snapshot-Manifest-Input findet keine Eingabedateien.'
+        }
+
+        foreach ($resolvedInputPath in @($matchedInputPaths.ToArray())) {
+            if (-not (Test-Path -LiteralPath $resolvedInputPath -PathType Leaf)) {
+                throw "Snapshot-Eingabe fehlt: $resolvedInputPath"
+            }
+            $defaultSnapshotId = if ($matchedInputPaths.Count -gt 1) { [IO.Path]::GetFileName($resolvedInputPath) } else { [IO.Path]::GetFileNameWithoutExtension($resolvedInputPath) }
+            $resolvedInputs.Add([pscustomobject]@{
+                    input_path = $resolvedInputPath
+                    source_id = [string](Get-ToolObjectProperty -Object $input -Name 'source_id' -Default (Get-ToolObjectProperty -Object $Item -Name 'source_id' -Default ''))
+                    snapshot_id = Get-ToolObjectProperty -Object $input -Name 'snapshot_id' -Default (Get-ToolObjectProperty -Object $Item -Name 'snapshot_id' -Default $defaultSnapshotId)
+                    snapshot_date = Get-ToolObjectProperty -Object $input -Name 'snapshot_date' -Default (Get-ToolObjectProperty -Object $Item -Name 'snapshot_date' -Default $null)
+                })
+        }
     }
     return $resolvedInputs.ToArray()
 }

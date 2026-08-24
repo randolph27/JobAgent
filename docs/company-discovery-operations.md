@@ -53,6 +53,8 @@ Die Lane unterstuetzt drei Snapshot-Arten:
 - `regional`: lokale regionale Verzeichnis-Snapshots ueber `Import-JobAgentRegionalDirectories`.
 - `jobboard`: lokale Jobboersen-Snapshots ueber `Import-JobAgentJobBoardEmployers`.
 
+Manifest-Inputs koennen als einzelne Datei (`input_path`), als Glob (`input_glob`) oder als Verzeichnis plus Filter (`input_directory` und `input_pattern`) angegeben werden. Globs und Verzeichnisfilter muessen mindestens eine Datei finden; leere Matches brechen fail-closed ab. `snapshot_date` bleibt fuer Register-Snapshots Pflicht und kann am Item oder am einzelnen Input stehen.
+
 Jede Quelle schreibt ein Log `logs/jobagent/company-discovery-snapshot-*.json` mit Abrufzeit, Input-Hash, Record-/Hint-Zaehlern, Reject-Gruenden, Nutzungsnotiz, Rate-Limit-Policy und `official_verification_required=true`. Der Digest `logs/jobagent/company-discovery-snapshot-digest-*.json` fasst Quellen, neue Hints und den gemergten Hint-Store zusammen. Die Lane schreibt ausschliesslich `data/jobagent/company-discovery.hints.json` und Snapshot-Logs; `data/jobagent/store.json` und `job_sources` bleiben unveraendert.
 
 Beispiel:

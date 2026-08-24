@@ -309,13 +309,7 @@ try {
                 source_id = 'source-registry:offeneregister_dump'
                 inputs = @(
                     [pscustomobject]@{
-                        input_path = (Join-Path $root 'tests\fixtures\jobagent\register-discovery\offeneregister-sample.jsonl')
-                        snapshot_id = 'snapshot-lane-register-a'
-                        snapshot_date = '2026-08-01T00:00:00Z'
-                    },
-                    [pscustomobject]@{
-                        input_path = (Join-Path $root 'tests\fixtures\jobagent\register-discovery\offeneregister-sample.csv')
-                        snapshot_id = 'snapshot-lane-register-b'
+                        input_glob = (Join-Path $root 'tests\fixtures\jobagent\register-discovery\offeneregister-sample.*')
                         snapshot_date = '2026-08-01T00:00:00Z'
                     }
                 )
@@ -341,9 +335,9 @@ try {
     $snapshotHints = Get-Content -LiteralPath ([string]$snapshotResult.merged_hints_path) -Raw | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($snapshotResult.schema_version -eq 'jobagent/company-discovery-snapshot-digest/v1') -Message 'Snapshot-Lane schreibt falsche Digest-Schema-Version.'
     Assert-True -Condition ($snapshotResult.sources_total -eq 6) -Message 'Snapshot-Lane verarbeitet falsche Quellenanzahl.'
-    Assert-True -Condition ($snapshotResult.inputs_total -eq 4) -Message 'Snapshot-Lane verarbeitet Multi-Input-Manifeste nicht nachvollziehbar.'
-    Assert-True -Condition ($snapshotResult.new_hints_total -eq 15) -Message 'Snapshot-Lane erzeugt falsche neue Hint-Anzahl.'
-    Assert-True -Condition ($snapshotHints.hints_total -eq 15) -Message 'Snapshot-Lane merged Hints nicht in den Hint-Store.'
+    Assert-True -Condition ($snapshotResult.inputs_total -eq 4) -Message 'Snapshot-Lane verarbeitet Multi-Input-/Glob-Manifeste nicht nachvollziehbar.'
+    Assert-True -Condition ($snapshotResult.new_hints_total -eq 16) -Message ('Snapshot-Lane erzeugt falsche neue Hint-Anzahl: ' + [string]$snapshotResult.new_hints_total)
+    Assert-True -Condition ($snapshotHints.hints_total -eq 16) -Message 'Snapshot-Lane merged Hints nicht in den Hint-Store.'
     Assert-True -Condition ($snapshotHints.unverified_hints -eq $snapshotHints.hints_total) -Message 'Snapshot-Lane darf keine verifizierten Hints erzeugen.'
     Assert-True -Condition ($snapshotResult.productive_store_write -eq $false) -Message 'Snapshot-Lane darf keinen produktiven Store-Write melden.'
     Assert-True -Condition (@($postSnapshotStore.job_sources).Count -eq @($preSnapshotStore.job_sources).Count) -Message 'Snapshot-Lane darf keine JobSources erzeugen.'
