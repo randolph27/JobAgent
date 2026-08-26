@@ -1,0 +1,34 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T18:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_klimapakt3_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/klimaschutz-ressourcen/klimapakt3.html",
+      "region_reference": "Muenchen Klimapakt 3",
+      "items": [
+        { "company_name": "Bayerische Motoren Werke AG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Bayerischer Rundfunk", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Deutsche Telekom AG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Deutsche Telekom Technik GmbH", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Europaeisches Patentamt", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Giesecke+Devrient GmbH", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Google Germany GmbH", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Hubert Burda Media Holding", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Knorr-Bremse AG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "MAN Truck and Bus SE", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Microsoft Deutschland GmbH", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "MTU Aero Engines AG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Rohde & Schwarz GmbH & Co. KG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Siemens AG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Telefonica Deutschland Holding AG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "TUEV Sued AG", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Versicherungskammer Bayern", "industry_hint": "Klimapakt 3 participating company", "location": "Muenchen" },
+        { "company_name": "Flughafen Muenchen GmbH", "industry_hint": "Klimapakt 3 cooperation partner", "location": "Flughafen Muenchen / Freising" },
+        { "company_name": "IHK fuer Muenchen und Oberbayern", "industry_hint": "Klimapakt 3 cooperation partner", "location": "Muenchen" },
+        { "company_name": "Stadtwerke Muenchen GmbH", "industry_hint": "Klimapakt 3 cooperation partner", "location": "Muenchen" }
+      ]
+    }
+  ]
+}

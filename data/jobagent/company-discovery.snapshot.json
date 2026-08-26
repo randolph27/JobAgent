@@ -72,6 +72,11 @@
     },
     {
       "kind": "regional",
+      "source_id": "source-registry:munich_business_klimapakt3_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-klimapakt3-snapshot.json"
+    },
+    {
+      "kind": "regional",
       "source_id": "source-registry:stadt_freising_weihenstephan",
       "input_path": "tests/fixtures/jobagent/regional-discovery/stadt-freising-weihenstephan-organizations-snapshot.json"
     },

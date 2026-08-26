@@ -28,6 +28,8 @@ $freisingSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId
 Assert-True -Condition ([string]$freisingSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY') -Message 'Freisinger Institutionsquelle wurde nicht geladen.'
 $techGithubSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:tech_companies_munich_github'
 Assert-True -Condition ([string]$techGithubSource.evidence_level -eq 'DISCOVERY_HINT') -Message 'Tech-Companies-Munich-Quelle darf keine offizielle Evidenz erhalten.'
+$klimapaktSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_business_klimapakt3_companies'
+Assert-True -Condition ([string]$klimapaktSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY' -and [string]$klimapaktSource.evidence_level -eq 'SECONDARY_OFFICIAL_DIRECTORY') -Message 'Klimapakt-3-Quelle wurde nicht als oeffentliche Institutionsquelle geladen.'
 
 try {
     Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:manual_review_list' | Out-Null
@@ -91,6 +93,13 @@ Assert-True -Condition ($freisingEconomyResult.hints_total -eq 5) -Message 'Land
 Assert-True -Condition (@($freisingEconomyResult.hints | Where-Object { [string]$_.company_name -in @('Airport Logistics GmbH', 'Weihenstephan Research GmbH') }).Count -eq 0) -Message 'Produktiver Landkreis-Freising-Snapshot darf keine Testfirmen enthalten.'
 Assert-True -Condition (@($freisingEconomyResult.hints | Where-Object { [string]$_.target_area -ne 'FREISING' }).Count -eq 0) -Message 'Landkreis-Freising-Hints muessen Freising-Bezug behalten.'
 
+$klimapaktFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\munich-business-klimapakt3-snapshot.json'
+$klimapaktResult = Import-JobAgentRegionalDirectories -SnapshotPath $klimapaktFixture -SourceRegistry $registry
+Assert-True -Condition ($klimapaktResult.hints_total -eq 20) -Message 'Klimapakt-3-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition ($klimapaktResult.source_counts.'source-registry:munich_business_klimapakt3_companies' -eq 20) -Message 'Klimapakt-3-Hints werden nicht der neuen Quelle zugeordnet.'
+Assert-True -Condition (@($klimapaktResult.hints | Where-Object { [string]$_.officialness_level -ne 'SECONDARY_OFFICIAL_DIRECTORY' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Klimapakt-3-Hints muessen unverifizierte Sekundaerhinweise bleiben.'
+Assert-True -Condition (@($klimapaktResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH', 'FREISING') }).Count -eq 0) -Message 'Klimapakt-3-Hints muessen Muenchen- oder Freising-Bezug behalten.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 try {
@@ -142,6 +151,7 @@ finally {
         'no_contact_collection',
         'production_stock_listed_snapshot',
         'production_freising_economy_snapshot',
+        'production_klimapakt3_snapshot',
         'script_writes_regional_and_merged_hints'
     )
     hints = $result.hints_total
