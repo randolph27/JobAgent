@@ -1268,7 +1268,7 @@ function New-JobAgentCoverageCandidateReviewQueue {
         $previous = if ($previousByCandidate.ContainsKey($primaryCandidateId)) { $previousByCandidate[$primaryCandidateId] } else { $null }
         New-JobAgentCoverageCandidateReviewQueueEntry -Candidate $candidate -Cluster $cluster -Source $source -Previous $previous -Now $Now -StaleAfterDays $StaleAfterDays
     }
-    $sortedEntries = @($entries | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, next_action, canonical_name, candidate_id | Select-Object -First $MaxItems)
+    $sortedEntries = @($entries | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, next_action, canonical_name, candidate_id)
     $actionCounts = @{}
     foreach ($entry in $sortedEntries) { Add-JobAgentCoverageCount -Counts $actionCounts -Key $entry.next_action }
     [pscustomobject]@{

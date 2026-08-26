@@ -224,6 +224,23 @@
       "legal_risk": "LOW"
     },
     {
+      "source_id": "source-registry:munich_business_commercial_locations",
+      "source_class": "REGIONAL_DIRECTORY",
+      "source_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien.html",
+      "operator": "Landeshauptstadt Muenchen / munich business",
+      "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den Muenchner Arbeitsmarkt, keine Karrierequellenaufnahme allein aus Standortbeschreibungen und keine Uebernahme von Kontakt- oder Personenangaben.",
+      "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
+      "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
+      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+      "freshness_policy": "Quartalsweise oder bei Standort-Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
+      "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "LOW"
+    },
+    {
       "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
       "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
       "source_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",

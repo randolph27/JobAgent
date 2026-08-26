@@ -1,0 +1,49 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T14:10:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:stadt_freising_weihenstephan",
+      "format": "json_items",
+      "source_page": "https://www.freising.de/wirtschaft/weihenstephan",
+      "region_reference": "Freising Weihenstephan",
+      "items": [
+        {
+          "organization_name": "TUM School of Life Sciences",
+          "sector": "Higher education and research",
+          "location": "Freising Weihenstephan"
+        },
+        {
+          "organization_name": "Hochschule Weihenstephan-Triesdorf",
+          "sector": "Higher education and applied sciences",
+          "location": "Freising Weihenstephan"
+        },
+        {
+          "organization_name": "Bayerische Landesanstalt fuer Landwirtschaft",
+          "sector": "Agricultural research and public institution",
+          "location": "Freising Weihenstephan"
+        },
+        {
+          "organization_name": "Bayerische Landesanstalt fuer Wald und Forstwirtschaft",
+          "sector": "Forestry research and public institution",
+          "location": "Freising Weihenstephan"
+        },
+        {
+          "organization_name": "Zentrum Wald-Forst-Holz Weihenstephan",
+          "sector": "Forestry and wood research network",
+          "location": "Freising Weihenstephan"
+        },
+        {
+          "organization_name": "Fraunhofer IVV",
+          "sector": "Applied research",
+          "location": "Freising Weihenstephan"
+        },
+        {
+          "organization_name": "Innovations- und Gruenderzentrum Biotechnologie Weihenstephan",
+          "sector": "Biotechnology startup center",
+          "location": "Freising Weihenstephan"
+        }
+      ]
+    }
+  ]
+}
