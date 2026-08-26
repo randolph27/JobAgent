@@ -1,15 +1,12 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-24T10:20:15.479Z",
-  "clusters_total": 19,
-  "candidates_total": 20,
-  "ready_total": 16,
+  "generated_at": "2026-08-26T04:52:13.203Z",
+  "clusters_total": 20,
+  "candidates_total": 22,
+  "ready_total": 10,
   "action_counts": {
-    "CHECK_LOCATION": 1,
-    "MANUAL_DECISION": 1,
-    "REJECT_DUPLICATE": 1,
-    "VERIFY_OFFICIAL_SITE": 16
+    "VERIFY_OFFICIAL_SITE": 10
   },
   "queue": [
     {
@@ -32,7 +29,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -75,7 +72,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -119,7 +116,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -163,7 +160,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -206,7 +203,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -250,7 +247,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -294,7 +291,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -337,7 +334,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -380,7 +377,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -424,7 +421,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
+      "next_attempt_at": "2026-08-26T04:52:13.203Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -444,413 +441,6 @@
           "name:coordinate park"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_rohde_schwarz_com",
-      "candidate_id": "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen",
-      "candidate_ids": [
-        "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen"
-      ],
-      "canonical_name": "Rohde & Schwarz GmbH & Co. KG",
-      "source_count": 1,
-      "priority_score": 89,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "PENDING",
-      "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stepstone_muenchen",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.stepstone.de/Details",
-        "observed_at": "08/23/2026 08:00:00",
-        "record_hash": "c1756b477cff8d6024140eeb1ef66bff143688c134c774db522163b6b77ef71b",
-        "allowed_use": "Arbeitgebernamen, Ort und minimale Suchmetadaten nur als volatile Discovery-Hints erfassen, falls Terms/Robots und Rate-Limit dies erlauben.",
-        "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur mit kleinem Seitenlimit, Cache und expliziter Quellenfreigabe."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:rohde-schwarz.com",
-          "name:rohde and schwarz"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_bmwgroup_com",
-      "candidate_id": "hint:ba_jobsuche_bmw_group_it_operations_muenchen",
-      "candidate_ids": [
-        "hint:ba_jobsuche_bmw_group_it_operations_muenchen"
-      ],
-      "canonical_name": "BMW Group",
-      "source_count": 1,
-      "priority_score": 69,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "PENDING",
-      "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:ba_jobsuche",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.arbeitsagentur.de/jobsuche/suche?was=IT%20Operations&wo=Muenchen",
-        "observed_at": "08/23/2026 07:58:27",
-        "record_hash": "",
-        "allowed_use": "Suchergebnisse nur als Arbeitgeber-Hints verwenden; offizielle Firmenquelle separat verifizieren.",
-        "rate_limit_policy": "Nur begrenzte reproduzierbare Suchmatrix mit Cache; keine Massenextraktion."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:bmwgroup.com",
-          "name:bmw group"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_cancom_de",
-      "candidate_id": "hint:indeed_de_cancom_director_it_muenchen",
-      "candidate_ids": [
-        "hint:indeed_de_cancom_director_it_muenchen"
-      ],
-      "canonical_name": "CANCOM SE",
-      "source_count": 1,
-      "priority_score": 69,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "PENDING",
-      "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:indeed_de",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://de.indeed.com/jobs?q=Director+IT&l=Muenchen",
-        "observed_at": "08/23/2026 07:58:27",
-        "record_hash": "",
-        "allowed_use": "Nur manuelle oder freigegebene Snapshot-Hinweise fuer Arbeitgebernamen, falls Nutzungsbedingungen dies erlauben.",
-        "rate_limit_policy": "Standardmaessig manual review only; Live-Abruf blockiert, bis Terms/Robots projektspezifisch dokumentiert sind."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:cancom.de",
-          "name:cancom"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_munich_airport_com",
-      "candidate_id": "hint:stepstone_freising_flughafen_muenchen_it_security_freising",
-      "candidate_ids": [
-        "hint:stepstone_freising_flughafen_muenchen_it_security_freising"
-      ],
-      "canonical_name": "Flughafen Muenchen GmbH",
-      "source_count": 1,
-      "priority_score": 69,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "PENDING",
-      "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stepstone_freising",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.stepstone.de/jobs/it-security/in-freising",
-        "observed_at": "08/23/2026 07:58:27",
-        "record_hash": "",
-        "allowed_use": "Freisinger Arbeitgebernamen nur als Discovery-Hints mit Suchparametern und Snapshot-Hash erfassen, falls freigegeben.",
-        "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur begrenzt und dokumentiert."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:munich-airport.com",
-          "name:flughafen muenchen"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_ivv_fraunhofer_de",
-      "candidate_id": "hint:stepstone_freising_fraunhofer_ivv_cio_freising",
-      "candidate_ids": [
-        "hint:stepstone_freising_fraunhofer_ivv_cio_freising"
-      ],
-      "canonical_name": "Fraunhofer IVV",
-      "source_count": 1,
-      "priority_score": 69,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "PENDING",
-      "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stepstone_freising",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.stepstone.de/jobs/cio/in-freising",
-        "observed_at": "08/23/2026 07:58:27",
-        "record_hash": "",
-        "allowed_use": "Freisinger Arbeitgebernamen nur als Discovery-Hints mit Suchparametern und Snapshot-Hash erfassen, falls freigegeben.",
-        "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur begrenzt und dokumentiert."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:ivv.fraunhofer.de",
-          "name:fraunhofer ivv"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_ti_com",
-      "candidate_id": "hint:ba_jobsuche_texas_instruments_deutschland_enterprise_applications_freising",
-      "candidate_ids": [
-        "hint:ba_jobsuche_texas_instruments_deutschland_enterprise_applications_freising"
-      ],
-      "canonical_name": "Texas Instruments Deutschland GmbH",
-      "source_count": 1,
-      "priority_score": 69,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "PENDING",
-      "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-24T10:20:15.479Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:ba_jobsuche",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.arbeitsagentur.de/jobsuche/suche?was=Enterprise%20Applications&wo=Freising",
-        "observed_at": "08/23/2026 07:58:27",
-        "record_hash": "",
-        "allowed_use": "Suchergebnisse nur als Arbeitgeber-Hints verwenden; offizielle Firmenquelle separat verifizieren.",
-        "rate_limit_policy": "Nur begrenzte reproduzierbare Suchmatrix mit Cache; keine Massenextraktion."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:ti.com",
-          "name:texas instruments deutschland"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_siemens_com",
-      "candidate_id": "hint:stepstone_muenchen_siemens_digitalisierung_muenchen",
-      "candidate_ids": [
-        "hint:stepstone_muenchen_siemens_digitalisierung_muenchen",
-        "jobboard-hint:stepstone_muenchen_siemens_it_operations_muenchen"
-      ],
-      "canonical_name": "Siemens AG",
-      "source_count": 1,
-      "priority_score": 61,
-      "next_action": "REJECT_DUPLICATE",
-      "reason_codes": [
-        "DUPLICATE_CLUSTER_REVIEW",
-        "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "DUPLICATE_CLUSTER_REVIEW,KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": null,
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "MEDIUM",
-      "source_evidence": {
-        "source_id": "source-registry:stepstone_muenchen",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.stepstone.de/jobs/digitalisierung/in-muenchen",
-        "observed_at": "08/23/2026 07:58:27",
-        "record_hash": "",
-        "allowed_use": "Arbeitgebernamen, Ort und minimale Suchmetadaten nur als volatile Discovery-Hints erfassen, falls Terms/Robots und Rate-Limit dies erlauben.",
-        "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur mit kleinem Seitenlimit, Cache und expliziter Quellenfreigabe."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:siemens.com",
-          "name:siemens"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 2
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:jobboard_hint_stepstone_muenchen_hays_professional_solutions_it_operations_muenchen",
-      "candidate_id": "jobboard-hint:stepstone_muenchen_hays_professional_solutions_it_operations_muenchen",
-      "candidate_ids": [
-        "jobboard-hint:stepstone_muenchen_hays_professional_solutions_it_operations_muenchen"
-      ],
-      "canonical_name": "Hays Professional Solutions GmbH",
-      "source_count": 1,
-      "priority_score": 39,
-      "next_action": "MANUAL_DECISION",
-      "reason_codes": [
-        "STAFFING_AGENCY_REVIEW"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "STAFFING_AGENCY_REVIEW",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": null,
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "HIGH",
-      "source_evidence": {
-        "source_id": "source-registry:stepstone_muenchen",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.stepstone.de/stellenangebote/it-projektleiter-hays-222.html",
-        "observed_at": "08/23/2026 08:00:00",
-        "record_hash": "ad64987682ad159688fb55a7e329c28a0ff9f80f8b07987e6fd0c8d912531016",
-        "allowed_use": "Arbeitgebernamen, Ort und minimale Suchmetadaten nur als volatile Discovery-Hints erfassen, falls Terms/Robots und Rate-Limit dies erlauben.",
-        "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur mit kleinem Seitenlimit, Cache und expliziter Quellenfreigabe."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:hays professional solutions"
-        ],
-        "conflict_flags": [
-          "STAFFING_AGENCY_REVIEW"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_freising_weihenstephan_unknown_place_gmbh",
-      "candidate_id": "regional-hint:stadt_freising_weihenstephan_unknown_place_gmbh",
-      "candidate_ids": [
-        "regional-hint:stadt_freising_weihenstephan_unknown_place_gmbh"
-      ],
-      "canonical_name": "Unknown Place GmbH",
-      "source_count": 1,
-      "priority_score": 24,
-      "next_action": "CHECK_LOCATION",
-      "reason_codes": [
-        "TARGET_AREA_UNCERTAIN"
-      ],
-      "target_area_basis": [
-        "TARGET_UNCERTAIN"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "TARGET_AREA_UNCERTAIN",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": null,
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "HIGH",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_freising_weihenstephan",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.freising.de/wirtschaft/weihenstephan",
-        "observed_at": "08/23/2026 08:00:00",
-        "record_hash": "8c9d0951ea71b3ef0e89bca7450560c60b66d3ef913ddf53c725f0dc69ff36b2",
-        "allowed_use": "Weihenstephan-, Forschungs- und Biotech-Bezuege als sektorale Kandidatenhinweise nutzen.",
-        "rate_limit_policy": "Nur gezielte Snapshot-Aktualisierung; externe Links separat bewerten."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:unknown place"
-        ],
-        "conflict_flags": [
-          "TARGET_AREA_UNCERTAIN"
-        ],
         "cluster_candidate_count": 1
       }
     }

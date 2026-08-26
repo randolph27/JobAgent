@@ -72,6 +72,16 @@ Assert-True -Condition (@($result.hints | Where-Object { [string]$_.raw_retentio
 Assert-True -Condition (@($result.hints | Where-Object { $_.PSObject.Properties.Name -contains 'description' -or $_.PSObject.Properties.Name -contains 'full_text' -or $_.PSObject.Properties.Name -contains 'recruiter' }).Count -eq 0) -Message 'Unzulaessige Anzeigen-/Personendaten wurden persistiert.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.known_company_id -eq 'company:siemens_ag' }).Count -eq 1) -Message 'Bekannte Firma wird nicht markiert.'
 
+$baFixture = Join-Path $root 'tests\fixtures\jobagent\jobboard-discovery\ba-jobsuche-muenchen-snapshot.json'
+$baResult = Import-JobAgentJobBoardEmployers -SnapshotPath $baFixture -SourceRegistry $registry -KnownCompanies $companies
+Assert-True -Condition ($baResult.source_id -eq 'source-registry:ba_jobsuche') -Message 'BA-Jobsuche-Snapshot wird nicht als eigene Quelle gefuehrt.'
+Assert-True -Condition ($baResult.records_read -eq 2) -Message 'BA-Jobsuche-Import filtert Zielgebiet oder Pflichtfelder falsch.'
+Assert-True -Condition ($baResult.hints_total -eq 2) -Message 'BA-Jobsuche-Import erzeugt falsche Hint-Anzahl.'
+Assert-True -Condition (@($baResult.hints | Where-Object { [string]$_.observed_url -notmatch '^https://www\.arbeitsagentur\.de/jobsuche/jobdetail/' }).Count -eq 0) -Message 'BA-Jobsuche-URLs werden nicht absolut normalisiert.'
+Assert-True -Condition (@($baResult.hints | Where-Object { [string]$_.posting_url -match 'stepstone|indeed' }).Count -eq 0) -Message 'BA-Jobsuche-Hints duerfen keine Jobboersenfremd-URL uebernehmen.'
+Assert-True -Condition (@($baResult.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'BA-Jobsuche-Hints muessen unverifizierte Arbeitgeber-Hinweise bleiben.'
+Assert-True -Condition (@($baResult.hints | Where-Object { [string]$_.known_company_id -eq 'company:stadtwerke_muenchen_gmbh' }).Count -eq 1) -Message 'BA-Jobsuche-Hint markiert bekannte Arbeitgeberfirma nicht.'
+
 $emptyFixture = Join-Path $root 'tests\fixtures\jobagent\jobboard-discovery\stepstone-empty-snapshot.json'
 $emptyResult = Import-JobAgentJobBoardEmployers -SnapshotPath $emptyFixture -SourceRegistry $registry -KnownCompanies $companies
 Assert-True -Condition ($emptyResult.hints_total -eq 0 -and $emptyResult.records_read -eq 0) -Message 'Leere Ergebnisse werden falsch behandelt.'
@@ -136,6 +146,7 @@ finally {
         'dedupe_by_hint_id',
         'target_area_filter',
         'staffing_agency_marking',
+        'ba_jobsuche_snapshot_import',
         'minimal_hash_evidence',
         'empty_results',
         'no_jobsource_side_effect',

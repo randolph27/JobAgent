@@ -1,0 +1,19 @@
+{
+  "source_id": "source-registry:ba_jobsuche",
+  "platform": "Bundesagentur fuer Arbeit Jobsuche",
+  "base_url": "https://www.arbeitsagentur.de/",
+  "fetched_at": "2026-08-23T08:20:00.000Z",
+  "search_parameters": {
+    "query": "IT",
+    "keyword": "IT Operations",
+    "location": "Muenchen",
+    "radius_km": 20,
+    "page_limit": 1
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "html": "<html><body><article data-jobagent-job data-jobagent-employer=\"Stadtwerke Muenchen GmbH\" data-jobagent-title=\"IT Service Manager\" data-jobagent-location=\"Muenchen\" data-jobagent-url=\"/jobsuche/jobdetail/10000-1199999999-S\"><a href=\"/jobsuche/jobdetail/10000-1199999999-S\">IT Service Manager</a></article><article data-jobagent-job data-jobagent-employer=\"Flughafen Muenchen GmbH\" data-jobagent-title=\"Systemadministrator\" data-jobagent-location=\"Freising\" data-jobagent-url=\"/jobsuche/jobdetail/10000-1188888888-S\"><a href=\"/jobsuche/jobdetail/10000-1188888888-S\">Systemadministrator</a></article><article data-jobagent-job data-jobagent-employer=\"Outside BA AG\" data-jobagent-title=\"IT Leitung\" data-jobagent-location=\"Nuernberg\" data-jobagent-url=\"/jobsuche/jobdetail/10000-1177777777-S\"></article></body></html>"
+    }
+  ]
+}
