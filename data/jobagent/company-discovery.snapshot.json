@@ -22,6 +22,11 @@
     },
     {
       "kind": "jobboard",
+      "source_id": "source-registry:stepstone_freising",
+      "input_path": "tests/fixtures/jobagent/jobboard-discovery/stepstone-freising-snapshot.json"
+    },
+    {
+      "kind": "jobboard",
       "source_id": "source-registry:ba_jobsuche",
       "input_path": "tests/fixtures/jobagent/jobboard-discovery/ba-jobsuche-muenchen-snapshot.json"
     }

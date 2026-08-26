@@ -1,0 +1,19 @@
+{
+  "source_id": "source-registry:stepstone_freising",
+  "platform": "StepStone",
+  "base_url": "https://www.stepstone.de/",
+  "fetched_at": "2026-08-24T07:30:00.000Z",
+  "search_parameters": {
+    "query": "IT",
+    "keyword": "IT Operations",
+    "location": "Freising",
+    "radius_km": 20,
+    "page_limit": 1
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "html": "<html><body><article data-jobagent-job data-jobagent-employer=\"Texas Instruments Deutschland GmbH\" data-jobagent-title=\"IT Site Reliability Engineer\" data-jobagent-location=\"Freising\" data-jobagent-url=\"/stellenangebote/it-site-reliability-texas-instruments-555.html\"><a href=\"/stellenangebote/it-site-reliability-texas-instruments-555.html\">IT Site Reliability Engineer</a></article><article data-jobagent-job><span data-jobagent-employer>Fraunhofer IVV</span><span data-jobagent-title>IT Spezialist Forschungsdaten</span><span data-jobagent-location>Freising-Weihenstephan</span><a data-jobagent-url=\"/stellenangebote/it-forschungsdaten-fraunhofer-ivv-666.html\" href=\"/stellenangebote/it-forschungsdaten-fraunhofer-ivv-666.html\">Details</a></article><article data-jobagent-job data-jobagent-employer=\"Out Of Scope Freising Search AG\" data-jobagent-title=\"IT Leitung\" data-jobagent-location=\"Regensburg\" data-jobagent-url=\"/stellenangebote/out-of-scope-regensburg-777.html\"></article></body></html>"
+    }
+  ]
+}
