@@ -1,11 +1,13 @@
 {
-  "ts": "2026-08-26T12:15:56.580+02:00",
+  "ts": "2026-08-26T12:27:15.358+02:00",
   "agent_id": "UTTER-20260817-39f7",
-  "workspace_root": ".",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "",
   "status": "open",
-  "goal": "JA-025 Arbeitgeberkandidatenbasis weiter skalieren; JA-027 danach offizielle Karriereverifikation.",
+  "goal": "JA-025 Arbeitgeberkandidatenbasis durch erlaubte regionale Snapshot-Quellen erweitern.",
+  "roadmap_rotation": "not-run: JA-025 und JA-027 sind offen; JA-025 hat 241 Zielgebietskandidaten bei Zielwert 1000, JA-027 haengt an JA-025.",
+  "supertest": "not-run-this-step: gemaess Nutzeranweisung ohne explizite Anforderung als erledigt behandelt.",
   "changed": [
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/company-discovery.hints.json",
@@ -15,105 +17,76 @@
     "handoff.latest.json",
     "handoff.latest.md",
     "html/jobagent/company-coverage.html",
-    "tests/Test-JobAgentCoverage.ps1",
-    "tests/fixtures/jobagent/regional-discovery/munich-business-japanese-snapshot.json",
-    "tests/fixtures/jobagent/regional-discovery/munich-business-us-snapshot.json",
-    "todo.checkpoint.json",
+    "html/jobagent/ja-022-viewport-audit.html",
+    "tests/fixtures/jobagent/regional-discovery/munich-business-creative-snapshot.json",
+    "tests/fixtures/jobagent/regional-discovery/munich-business-indian-snapshot.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json",
-    "todo.state.json"
+    "todo.master.index.json"
   ],
-  "verified": [
-    {
-      "cmd": "Get-Content ... | ConvertFrom-Json",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyDedupeScale.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyInventory.ps1",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 150",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-      "exit": 0,
-      "status": "UP"
-    },
-    {
-      "cmd": ".\\ci.cmd devserver-status",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0,
-      "status": "pass"
-    }
-  ],
+  "completed_step": {
+    "roadmap_id": "JA-025",
+    "summary": "Regionale Snapshot-Lane um munich-business Indian Companies und Creative Companies erweitert; alle neuen Hinweise bleiben unverifiziert und reviewpflichtig.",
+    "new_sources": [
+      "source-registry:munich_business_indian_companies",
+      "source-registry:munich_business_creative_companies"
+    ],
+    "new_snapshots": [
+      "tests/fixtures/jobagent/regional-discovery/munich-business-indian-snapshot.json",
+      "tests/fixtures/jobagent/regional-discovery/munich-business-creative-snapshot.json"
+    ],
+    "productive_store_write": false,
+    "official_verification_required": true
+  },
   "metrics": {
     "companies_total": 38,
-    "discovery_hints_total": 125,
-    "source_gate_processed_sources_total": 14,
+    "discovery_hints_total": 209,
+    "candidate_verification_queue_clusters_total": 203,
+    "target_inventory_candidates_total": 241,
+    "target_inventory_gap_to_1000": 759,
     "target_inventory_gate_status": "failed",
-    "target_inventory_candidates_total": 157,
     "source_gate_status": "passed",
-    "candidate_verification_queue_clusters_total": 119,
-    "source_gate_expected_sources_total": 14,
-    "target_inventory_gap_to_1000": 843
+    "source_gate_expected_sources_total": 16,
+    "source_gate_processed_sources_total": 16,
+    "source_gate_missing_source_ids": [],
+    "source_gate_violations": []
   },
-  "roadmap": {
-    "open": [
-      "JA-025",
-      "JA-027"
-    ],
-    "rotation_performed": false,
-    "reason": "JA-025 unter Zielwert 1000; JA-027 haengt an JA-025 und produktiver Store-Import ist nicht freigegeben."
-  },
+  "verified": [
+    { "cmd": "Get-Content ... | ConvertFrom-Json fuer Source Registry, Manifest und neue Snapshot-Dateien", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyDedupeScale.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyInventory.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1", "exit": 0 },
+    { "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status", "exit": 0, "status": "UP", "version": "26.1.0.118079" },
+    { "cmd": ".\\ci.cmd devserver-status", "exit": 0, "status": "pid=38292 port=8500 listening=True" },
+    { "cmd": ".\\ci.cmd stp", "exit": 0 }
+  ],
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "ahead_behind_before_commit": "0/0",
+    "head_before_commit": "a3b78bc69153",
     "upstream": "origin/master",
-    "head_before_commit": "72e2f7f0334f",
-    "worktree_before_commit": "dirty"
+    "ahead_behind_before_commit": "0/0"
   },
-  "next": "Weitere erlaubte, snapshot-faehige Arbeitgeberquellen fuer Muenchen, 20-km-Umkreis und Freising suchen; Source Registry, Snapshot, Manifest, Hint-Store, Coverage und Funktionstests aktualisieren.",
-  "refs": [
-    "todo.current.md",
-    "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "Roadmap.md"
+  "next": "Weitere erlaubte, snapshot-faehige Arbeitgeberquellen fuer Muenchen, 20-km-Umkreis und Freising suchen; keine produktive Firma aus Sekundaerquellen importieren.",
+  "open_tasks": [
+    "JA-025 fortsetzen: Kandidatenbasis Richtung 1000 Zielgebietskandidaten skalieren.",
+    "Source Registry, Snapshot, Manifest, Hint-Store, Coverage und Funktionstests fuer jede neue Quelle konsistent aktualisieren.",
+    "JA-027 erst nach ausreichender Kandidatenbasis oder bewusst priorisierter Teilwelle weiterziehen.",
+    "Produktive Store-Aufnahme nur mit offizieller Firmenwebsite-/Karriere-/ATS-Evidenz."
   ],
+  "sources_used": [
+    "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+    "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html"
+  ],
+  "refs": ["todo.current.md", "todo.state.json", "todo.events.jsonl", "handoff.latest.json", "handoff.latest.md", "Roadmap.md"],
   "manual_missing": false,
   "env_inventory_missing": false,
-  "env_inventory_used": false
+  "env_inventory_used": false,
+  "env_inventory_path": null
 }

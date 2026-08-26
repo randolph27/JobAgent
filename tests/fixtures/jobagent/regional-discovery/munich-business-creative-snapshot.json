@@ -1,0 +1,324 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T12:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_creative_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "Behnisch & Partner",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "allmannwappner",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "bogevischs buero",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Burger Rudacs Architekten",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "HENN",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Hild und K",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "N-V-O Nuyken von Oefele Architekten",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "steidle Architekten",
+          "industry_hint": "Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Rainer Schmidt Landschaftsarchitekten",
+          "industry_hint": "Landscape Architecture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Piper Verlag",
+          "industry_hint": "Publishing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "dtv Verlagsgesellschaft",
+          "industry_hint": "Publishing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Penguin Random House Verlagsgruppe",
+          "industry_hint": "Publishing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Droemer Knaur",
+          "industry_hint": "Publishing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Graefe und Unzer",
+          "industry_hint": "Publishing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "C.H.Beck",
+          "industry_hint": "Publishing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Carl Hanser Verlag",
+          "industry_hint": "Publishing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Hugendubel",
+          "industry_hint": "Bookseller",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Factor Product Muenchen",
+          "industry_hint": "Design",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bavaria-Filmstudios",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bayerischer Rundfunk",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "ProSiebenSat.1 Media",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "RTLII",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Kabeleins",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Constantin Film AG",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Paramount Home Entertainment Germany GmbH",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Janus TV",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Tresor TV",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "megaherz",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Production Service GmbH",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "neue deutsche Filmgesellschaft",
+          "industry_hint": "Film and TV",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "GEMA",
+          "industry_hint": "Music",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Music Support Group",
+          "industry_hint": "Music",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Oska",
+          "industry_hint": "Fashion",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Mykke Hofmann",
+          "industry_hint": "Fashion",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Hannibal",
+          "industry_hint": "Fashion",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchner Kammerspiele",
+          "industry_hint": "Performing Arts",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Deutsches Theater",
+          "industry_hint": "Performing Arts",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchner Volkstheater",
+          "industry_hint": "Performing Arts",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Schauburg",
+          "industry_hint": "Performing Arts",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Sueddeutsche Zeitung",
+          "industry_hint": "Press",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchner Merkur",
+          "industry_hint": "Press",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Hubert Burda Media",
+          "industry_hint": "Press",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Conde Nast Digital Germany GmbH",
+          "industry_hint": "Press",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Antenne Bayern",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Radio Gong",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Charivari",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Radio Energy",
+          "industry_hint": "Broadcasting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "BLM - Bayerische Landeszentrale fuer neue Medien",
+          "industry_hint": "Media",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Medien.Bayern GmbH",
+          "industry_hint": "Media",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Take 2 Interactive",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Plaion",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Travian Games",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Kalypso",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "remote control productions",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "FDG Entertainment",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Chimera Entertainment",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Aesir Interactive",
+          "industry_hint": "Software / Games",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Serviceplan Gruppe SE & Co. KG",
+          "industry_hint": "Advertising",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Heye Group",
+          "industry_hint": "Advertising",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Plan.Net",
+          "industry_hint": "Advertising",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Reply - Digital Experience",
+          "industry_hint": "Advertising",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "SinnerSchrader",
+          "industry_hint": "Advertising",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

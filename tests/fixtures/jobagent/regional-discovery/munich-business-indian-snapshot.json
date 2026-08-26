@@ -1,0 +1,124 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T12:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_indian_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "Cipla Deutschland",
+          "industry_hint": "Life Science / Pharma",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Glenmark Arzneimittel GmbH",
+          "industry_hint": "Life Science / Pharma",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Panacea Biotec GmbH",
+          "industry_hint": "Life Science / Pharma",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "PUREN Pharma GmbH & Co. KG",
+          "industry_hint": "Life Science / Pharma",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "HCL Technologies GmbH",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Intelizign Engineering Services GmbH",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Jasmin Infotech GmbH",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "KPIT Technologies GmbH",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "LTM",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "MicroGenesis TechSoft",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Tata Consultancy Services Deutschland GmbH",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Tech Mahindra",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Wipro Limited",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Hepatica Technologies GmbH",
+          "industry_hint": "Engineering & Automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Larsen & Toubro Limited",
+          "industry_hint": "Engineering & Automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Micro Fuzzy",
+          "industry_hint": "Engineering & Automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "PININFARINA Deutschland GmbH",
+          "industry_hint": "Engineering & Automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Samvardhana Motherson Peguform",
+          "industry_hint": "Engineering & Automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "TT Global Engineering GmbH",
+          "industry_hint": "Engineering & Automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Winning BLW GmbH",
+          "industry_hint": "Engineering & Automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "QuEST Global Engineering Services GmbH",
+          "industry_hint": "Engineering Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Infosys Ltd.",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

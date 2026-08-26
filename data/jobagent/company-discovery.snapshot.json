@@ -51,6 +51,16 @@
       "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-japanese-snapshot.json"
     },
     {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_indian_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-indian-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_creative_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-creative-snapshot.json"
+    },
+    {
       "kind": "jobboard",
       "source_id": "source-registry:stepstone_muenchen",
       "input_path": "tests/fixtures/jobagent/jobboard-discovery/stepstone-muenchen-snapshot.json"
