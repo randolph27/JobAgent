@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-26T05:07:55.381Z",
+  "generated_at": "2026-08-26T05:13:57.110Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 26,
@@ -293,8 +293,8 @@
       "target_area": "FREISING",
       "industry_or_keyword": "IT Operations",
       "source_id": "source-registry:stepstone_freising",
-      "observed_url": "https://www.stepstone.de/Details",
-      "posting_url": "https://www.stepstone.de/Details",
+      "observed_url": "https://www.stepstone.de/stellenangebote/it-forschungsdaten-fraunhofer-ivv-666.html",
+      "posting_url": "https://www.stepstone.de/stellenangebote/it-forschungsdaten-fraunhofer-ivv-666.html",
       "platform": "StepStone",
       "observed_at": "2026-08-24T07:30:00.000Z",
       "search_parameters": {
@@ -305,7 +305,7 @@
         "page_limit": 1
       },
       "page_number": 1,
-      "source_record_hash": "755f89847993439562cb1c1ab1e1d366f0f5b68670252e850379c43b8bc43e15",
+      "source_record_hash": "d4da700b166cc3327411d61a290fc551e482ea16cc44986ae3e0c604b7723d99",
       "evidence_snippet_hash": "1b5d5c77cce52186693838fa45ffb97356a0124e2eb57e439b30a9059f6ceac0",
       "confidence_score": 70,
       "raw_retention_policy": "minimal_metadata_only_no_full_posting_content",
@@ -395,11 +395,11 @@
       "job_title": "Enterprise Applications Manager",
       "job_location": "Garching b. Muenchen",
       "location": "Garching b. Muenchen",
-      "target_area": "MUNICH",
+      "target_area": "MUNICH_20KM",
       "industry_or_keyword": "IT Operations",
       "source_id": "source-registry:stepstone_muenchen",
-      "observed_url": "https://www.stepstone.de/Details",
-      "posting_url": "https://www.stepstone.de/Details",
+      "observed_url": "https://www.stepstone.de/stellenangebote/enterprise-applications-rs-333.html",
+      "posting_url": "https://www.stepstone.de/stellenangebote/enterprise-applications-rs-333.html",
       "platform": "StepStone",
       "observed_at": "2026-08-23T08:00:00.000Z",
       "search_parameters": {
@@ -410,7 +410,7 @@
         "page_limit": 2
       },
       "page_number": 2,
-      "source_record_hash": "c1756b477cff8d6024140eeb1ef66bff143688c134c774db522163b6b77ef71b",
+      "source_record_hash": "79bb57162ccbe0775bffaa1cfde10efeb7a291863b06802d6d900d7c3228a72d",
       "evidence_snippet_hash": "00aecf1725c8c3dbe4dce9a8b2e9da1384bfe7b1a5a03d546646bc93c84f30f5",
       "confidence_score": 70,
       "raw_retention_policy": "minimal_metadata_only_no_full_posting_content",

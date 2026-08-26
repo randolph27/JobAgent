@@ -51,7 +51,8 @@ catch {
 
 Assert-True -Condition (Test-JobAgentJobBoardStaffingEmployer -EmployerName 'Hays Professional Solutions GmbH') -Message 'Personaldienstleister wird nicht erkannt.'
 Assert-True -Condition (-not (Test-JobAgentJobBoardStaffingEmployer -EmployerName 'Siemens AG')) -Message 'Normale Arbeitgeber werden faelschlich als Personaldienstleister markiert.'
-Assert-True -Condition ((Get-JobAgentJobBoardTargetArea -Location 'Garching b. Muenchen') -eq 'MUNICH') -Message 'Randgebiet Muenchen wird nicht erkannt.'
+Assert-True -Condition ((Get-JobAgentJobBoardTargetArea -Location 'Muenchen') -eq 'MUNICH') -Message 'Muenchen wird nicht erkannt.'
+Assert-True -Condition ((Get-JobAgentJobBoardTargetArea -Location 'Garching') -eq 'MUNICH_20KM') -Message 'Randgebiet Muenchen wird nicht als 20-km-Zielgebiet markiert.'
 Assert-True -Condition ((Get-JobAgentJobBoardTargetArea -Location 'Freising') -eq 'FREISING') -Message 'Freising wird nicht erkannt.'
 Assert-True -Condition ((Get-JobAgentJobBoardTargetArea -Location 'Hamburg') -eq 'OUT_OF_SCOPE') -Message 'Fremder Ort wird nicht ausgeschlossen.'
 
@@ -64,6 +65,8 @@ Assert-True -Condition ($result.records_read -eq 4) -Message 'Erwartete Records 
 Assert-True -Condition ($result.hints_total -eq 3) -Message 'Dubletten werden nicht verdichtet.'
 Assert-True -Condition ($result.staffing_agency_hints -eq 1) -Message 'Personaldienstleister-Zaehler ist falsch.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.employer_name -eq 'Siemens AG' }).Count -eq 1) -Message 'Siemens-Dublette wurde nicht zusammengefuehrt.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.employer_name -eq 'Rohde & Schwarz GmbH & Co. KG' -and [string]$_.target_area -eq 'MUNICH_20KM' }).Count -eq 1) -Message '20-km-Arbeitgeberhinweis wird nicht korrekt markiert.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.employer_name -eq 'Rohde & Schwarz GmbH & Co. KG' -and [string]$_.observed_url -eq 'https://www.stepstone.de/stellenangebote/enterprise-applications-rs-333.html' }).Count -eq 1) -Message 'data-jobagent-url-Attribute an Linkknoten werden nicht als Posting-URL genutzt.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.employer_name -eq 'Out Of Scope AG' }).Count -eq 0) -Message 'Out-of-scope-Treffer wurde nicht entfernt.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' -or [string]$_.verification_status -ne 'UNVERIFIED' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Jobboersen-Hints muessen unverifiziert bleiben.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.observed_url -notmatch '^https://www\.stepstone\.de/' }).Count -eq 0) -Message 'Posting-URLs werden nicht absolut normalisiert.'

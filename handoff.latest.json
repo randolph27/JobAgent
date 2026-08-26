@@ -1,1 +1,223 @@
-{"workspace_root":".","changed":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.snapshot.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentJobBoardDiscovery.ps1","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"next_steps":["Aktive Punkte: JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen #comment: Alle erlaubten Quellen sollen Arbeitgebernamen liefern, nicht Stellenanzeigen; produktiv hinzugefuegt wird erst nach offizieller Karriere-/Jobs-Webseitenverifikation."],"git":{"upstream":"origin/master","tracked_changes":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.snapshot.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentJobBoardDiscovery.ps1","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"head":"cfc575c53732","detached":false,"has_repo":true,"behind":0,"worktree":"dirty","ahead":0,"remote":"origin","branch":"master"},"verify_digest":{"ts":"2026-08-24T09:29:31.729+02:00","cmd":".\\ci.cmd supertest","exit":0,"status":"pass","log_path":null,"scope":"JobAgent function suite","tests_total":19,"duration_seconds":41.31},"ts":"2026-08-26T07:09:10.141+02:00","agent_id":"UTTER-20260817-39f7","goal":"","route":{"ts":"2026-08-24T12:22:37.53+02:00","route_ok":true,"violations":[],"changed_count":11,"policy":{"forbid_path":[],"forbid_regex":[],"no_touch":[]},"mode":"standard","git":{"diff_log":"logs\\terminal\\route-check-20260824-122236.log","has_repo":true},"changed_files":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","docs/company-discovery-operations.md","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentCompanyInventory.ps1","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","tools/Import-JobAgentCompanyDiscovery.ps1"],"agent_id":"UTTER-20260817-39f7"},"route_violations":[],"summary":"stp sync","next":"Aktive Punkte: JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen #comment: Alle erlaubten Quellen sollen Arbeitgebernamen liefern, nicht Stellenanzeigen; produktiv hinzugefuegt wird erst nach offizieller Karriere-/Jobs-Webseitenverifikation.","verified":[{"cmd":".\\ci.cmd supertest","status":"pass","exit":0}],"toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"project":"JobAgent","route_ok":true,"status":"open","refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"active_id":"","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","capsule":{"project":"JobAgent","goal":"","status":"open","ts":"2026-08-26T07:09:10.141+02:00","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"verified":[{"cmd":".\\ci.cmd supertest","status":"pass","exit":0}],"env_inventory_path":null,"route_violations":[],"route_ok":true,"next":"Aktive Punkte: JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen #comment: Alle erlaubten Quellen sollen Arbeitgebernamen liefern, nicht Stellenanzeigen; produktiv hinzugefuegt wird erst nach offizieller Karriere-/Jobs-Webseitenverifikation.","env_inventory_used":false,"env_inventory_missing":false,"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","git":{"upstream":"origin/master","tracked_changes":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.snapshot.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentJobBoardDiscovery.ps1","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"head":"cfc575c53732","detached":false,"has_repo":true,"behind":0,"worktree":"dirty","ahead":0,"remote":"origin","branch":"master"},"workspace_root":".","changed":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.snapshot.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentJobBoardDiscovery.ps1","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"agent_id":"UTTER-20260817-39f7","active_id":"","manual_missing":false}}
+{
+  "changed": [
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.JobBoardDiscovery.psm1",
+    "tests/Test-JobAgentJobBoardDiscovery.ps1",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json"
+  ],
+  "agent_id": "UTTER-20260817-39f7",
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+  "summary": "Jobboersen-Hints klassifizieren Muenchner Umland als MUNICH_20KM, Freising bleibt vorrangig, data-jobagent-url an Linkknoten wird korrekt als Posting-URL extrahiert. Roadmap bleibt offen; naechster Schritt ist weitere erlaubte Quellen/Suchmatrizen operationalisieren.",
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentJobBoardDiscovery.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyDedupeScale.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0,
+      "status": "pass"
+    }
+  ],
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:logs/verify/verify.digest.json"
+  ],
+  "route_violations": [],
+  "toolchain": {
+    "ts": "2026-08-17T13:53:15.642+02:00",
+    "gradle": {
+      "cmd": "gradle",
+      "mode": "path",
+      "root": "D:\\_Scripte\\JobAgent"
+    }
+  },
+  "git": {
+    "head": "8d9363415989",
+    "branch": "master",
+    "behind": 0,
+    "tracked_changes": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.JobBoardDiscovery.psm1",
+      "tests/Test-JobAgentJobBoardDiscovery.ps1",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ],
+    "has_repo": true,
+    "worktree": "dirty",
+    "remote": "origin",
+    "detached": false,
+    "ahead": 0,
+    "upstream": "origin/master"
+  },
+  "goal": "JA-025 Arbeitgeberkandidatenbasis aus erlaubten Quellen weiter skalieren; letzter Arbeitsschritt war Jobboersen-Zielgebiet und URL-Extraktion.",
+  "status": "open",
+  "ts": "2026-08-26T07:15:30.225+02:00",
+  "project": "JobAgent",
+  "route_ok": true,
+  "verify_digest": {
+    "ts": "2026-08-24T09:29:31.729+02:00",
+    "cmd": ".\\ci.cmd supertest",
+    "exit": 0,
+    "status": "pass",
+    "log_path": null,
+    "scope": "JobAgent function suite",
+    "tests_total": 19,
+    "duration_seconds": 41.31
+  },
+  "next": "Aktive Punkte: JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen #comment: Alle erlaubten Quellen sollen Arbeitgebernamen liefern, nicht Stellenanzeigen; produktiv hinzugefuegt wird erst nach offizieller Karriere-/Jobs-Webseitenverifikation.",
+  "route": {
+    "ts": "2026-08-24T12:22:37.53+02:00",
+    "route_ok": true,
+    "violations": [],
+    "changed_count": 11,
+    "policy": {
+      "forbid_path": [],
+      "forbid_regex": [],
+      "no_touch": []
+    },
+    "mode": "standard",
+    "git": {
+      "diff_log": "logs\\terminal\\route-check-20260824-122236.log",
+      "has_repo": true
+    },
+    "changed_files": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "docs/company-discovery-operations.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "tests/Test-JobAgentCompanyInventory.ps1",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "tools/Import-JobAgentCompanyDiscovery.ps1"
+    ],
+    "agent_id": "UTTER-20260817-39f7"
+  },
+  "capsule": {
+    "goal": "JA-025 Arbeitgeberkandidatenbasis aus erlaubten Quellen weiter skalieren; letzter Arbeitsschritt war Jobboersen-Zielgebiet und URL-Extraktion.",
+    "env_inventory_path": null,
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentJobBoardDiscovery.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyDedupeScale.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0,
+        "status": "pass"
+      }
+    ],
+    "project": "JobAgent",
+    "next": "Aktive Punkte: JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen #comment: Alle erlaubten Quellen sollen Arbeitgebernamen liefern, nicht Stellenanzeigen; produktiv hinzugefuegt wird erst nach offizieller Karriere-/Jobs-Webseitenverifikation.",
+    "status": "open",
+    "changed": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.JobBoardDiscovery.psm1",
+      "tests/Test-JobAgentJobBoardDiscovery.ps1",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ],
+    "workspace_root": ".",
+    "ts": "2026-08-26T07:15:30.225+02:00",
+    "route_ok": true,
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "active_id": "",
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+    "agent_id": "UTTER-20260817-39f7",
+    "route_violations": [],
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "git": {
+      "head": "8d9363415989",
+      "branch": "master",
+      "behind": 0,
+      "tracked_changes": [
+        "data/jobagent/company-candidate-verification.queue.json",
+        "data/jobagent/company-discovery.hints.json",
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "html/jobagent/company-coverage.html",
+        "src/JobAgent.JobBoardDiscovery.psm1",
+        "tests/Test-JobAgentJobBoardDiscovery.ps1",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json"
+      ],
+      "has_repo": true,
+      "worktree": "dirty",
+      "remote": "origin",
+      "detached": false,
+      "ahead": 0,
+      "upstream": "origin/master"
+    },
+    "env_inventory_used": false
+  },
+  "workspace_root": ".",
+  "active_id": "",
+  "next_steps": [
+    "Weitere erlaubte Quellen/Suchmatrizen in data/jobagent/company-discovery.sources.json bewerten.",
+    "Zusaetzliche lokale Fixtures/Snapshots fuer BA/StepStone/Register/Regional anlegen, ohne Terms/Robots zu umgehen.",
+    "data/jobagent/company-discovery.snapshot.json erweitern und Snapshot-Lane ausfuehren.",
+    "Fokussierte Tests Register, JobBoard, Regional, DedupeScale, Coverage ausfuehren.",
+    "Coverage aktualisieren; Roadmap-Rotation erst nach vollstaendiger JA-025-Erfuellung."
+  ]
+}

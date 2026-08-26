@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-08-26T07:09:10.141+02:00
+Stand: 2026-08-26T07:15:30.225+02:00
 
 ## Zustand
 
 - Active: ``
 - Status: `open`
-- Ziel: `JA-025` Arbeitgeberkandidatenbasis aus erlaubten Discovery-Quellen weiter skalieren.
+- Ziel: `JA-025` Arbeitgeberkandidatenbasis aus erlaubten Quellen weiter skalieren; letzter Arbeitsschritt war Jobboersen-Zielgebiet und URL-Extraktion.
 - Branch: `master`
-- HEAD vor Commit: `cfc575c53732`
+- HEAD vor Commit: `8d9363415989`
 - Upstream: `origin/master`
 - Ahead/Behind vor Commit: `0/0`
 - Worktree vor Commit: `dirty`
@@ -20,27 +20,25 @@ Weitergearbeitet wurde an `JA-025 Arbeitgeber aus Handelsregister-, Register-, J
 
 Konkretes Ergebnis:
 
-- BA-Jobsuche Freising wurde als weitere lokale Arbeitgeber-Hint-Quelle operationalisiert.
-- Neue Fixture `tests/fixtures/jobagent/jobboard-discovery/ba-jobsuche-freising-snapshot.json` erzeugt zwei Freising-Arbeitgeber-Hints:
-  - `Texas Instruments Deutschland GmbH`
-  - `Fraunhofer IVV`
-- Ein Out-of-scope-Treffer `Outside BA Freising Search AG` wird vom Importer verworfen.
-- `data/jobagent/company-discovery.snapshot.json` enthaelt jetzt `6` Snapshot-Inputs.
-- Snapshot-Lane erzeugte `8` Quellenlogs, `20` neue Hints und `26` gemergte Hints.
-- `data/jobagent/company-candidate-verification.queue.json` enthaelt aktuell `10` Queue-Eintraege.
-- Produktive Store-Writes: `false`.
-- Offizielle Website-/Karriere-/ATS-Verifikation: weiter erforderlich.
+- `src/JobAgent.JobBoardDiscovery.psm1` klassifiziert Jobboersen-Orte im Muenchner Umland jetzt als `MUNICH_20KM` statt pauschal `MUNICH`.
+- Freising-/Airport-Treffer behalten Vorrang vor Muenchen-Text im Ortslabel, damit `Flughafen Muenchen / Freising` weiterhin `FREISING` bleibt.
+- Der Jobboard-HTML-Parser liest `data-jobagent-url` jetzt auch an Kindknoten, z. B. an `<a data-jobagent-url="...">`.
+- Dadurch wird bei `Rohde & Schwarz GmbH & Co. KG` nicht mehr `https://www.stepstone.de/Details`, sondern `https://www.stepstone.de/stellenangebote/enterprise-applications-rs-333.html` als `observed_url` und `posting_url` persistiert.
+- `tests/Test-JobAgentJobBoardDiscovery.ps1` deckt `MUNICH`, `MUNICH_20KM`, Freising, Out-of-scope, Rohde-&-Schwarz-20-km-Hint und Linkknoten-URL ab.
+- Snapshot-Lane wurde erneut ausgefuehrt: `sources_total=8`, `inputs_total=6`, `new_hints_total=20`, `merged_hints_total=26`, `productive_store_write=false`.
+- Coverage wurde aktualisiert: `companies_total=38`, `target_inventory_candidates_total=58`, `target_inventory_gap_to_1000=942`, `target_inventory_gate_status=failed`, `candidate_verification_queue_path=data/jobagent/company-candidate-verification.queue.json`.
+- Roadmap-Rotation wurde nicht ausgefuehrt, weil `JA-025` und `JA-027` weiterhin offen sind.
+- Supertest wurde nicht erneut ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt, weil nicht separat angefragt und der Roadmap-Punkt noch offen ist.
 
 ## Geaenderte Dateien
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
-- `data/jobagent/company-discovery.snapshot.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
 - `html/jobagent/company-coverage.html`
+- `src/JobAgent.JobBoardDiscovery.psm1`
 - `tests/Test-JobAgentJobBoardDiscovery.ps1`
-- `tests/fixtures/jobagent/jobboard-discovery/ba-jobsuche-freising-snapshot.json`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
@@ -50,24 +48,22 @@ Konkretes Ergebnis:
 - `pwsh -NoProfile -File .\tests\Test-JobAgentJobBoardDiscovery.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentRegionalDiscovery.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
-- Supertest: nicht erneut ausgefuehrt; gemaess Nutzeranweisung als erledigt gewertet.
 
-## Roadmap-Status
+## Offene Roadmap
 
-- `JA-025` bleibt offen. Es wurde eine weitere erlaubte Arbeitgeber-Hint-Quelle operationalisiert, aber die geforderte breite Kandidatenbasis aus allen erlaubten Quellen ist noch nicht vollstaendig erreicht.
-- `JA-027` bleibt offen und haengt fachlich weiter von `JA-025` ab.
-- Keine Roadmap-Rotation ausgefuehrt, weil kein Roadmap-Punkt komplett abgeschlossen ist.
+- `JA-025` bleibt offen. Es sind weiterhin mehr erlaubte Quellen/Suchmatrizen oder groessere erlaubte Snapshots erforderlich, weil die Zielgebiet-Kandidatenbasis erst `58` Kandidaten enthaelt und das Zielinventar-Gate `failed` meldet.
+- `JA-027` bleibt offen und haengt fachlich weiter von `JA-025` ab. Produktive Firmenaufnahme darf erst nach offizieller Website-/Karriere-/ATS-Verifikation erfolgen.
 
 ## Naechster sinnvoller Schritt
 
-1. Fehlende erlaubte Quellen aus `data/jobagent/company-discovery.sources.json` weiter operationalisieren, bevorzugt weitere Regional-/Register-Snapshots oder erlaubte BA-/Jobboersen-Suchmatrizen.
-2. Danach erneut ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane`.
-3. Danach Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1`.
+1. In `data/jobagent/company-discovery.sources.json` die noch nicht operationalisierten oder nur manuell reviewbaren Quellen bewerten, ohne Terms/Robots zu umgehen.
+2. Fuer erlaubte Quellen weitere lokale Fixtures/Snapshots oder Suchmatrizen anlegen, bevorzugt zusaetzliche BA-/StepStone-Suchkombinationen fuer Muenchen, 20-km-Umkreis und Freising sowie weitere erlaubte Register-/Regional-Snapshots.
+3. Snapshot-Manifest `data/jobagent/company-discovery.snapshot.json` erweitern und danach ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane`.
 4. Fokussierte Funktionstests erneut ausfuehren: Register, JobBoard, Regional, DedupeScale, Coverage.
-5. Erst wenn `JA-025` fachlich komplett erledigt ist: Roadmap-Rotation pruefen, dann `JA-027` fortsetzen.
+5. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1`.
+6. Erst bei fachlich kompletter `JA-025`-Erfuellung Roadmap-Rotation pruefen und danach `JA-027` fortsetzen.
 
 ## Naechster Anker
 

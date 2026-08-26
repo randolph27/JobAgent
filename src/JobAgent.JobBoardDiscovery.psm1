@@ -70,11 +70,14 @@ function Get-JobAgentJobBoardTargetArea {
         Replace('ä', 'ae').
         Replace('ö', 'oe').
         Replace('ß', 'ss')
-    if ($value -match 'muenchen|munich|garching|unterfoehring|ismaning|neubiberg|taufkirchen|pullach|gruenwald') {
-        return 'MUNICH'
-    }
     if ($value -match 'freising|airport|flughafen') {
         return 'FREISING'
+    }
+    if ($value -match 'garching|unterfoehring|ismaning|neubiberg|taufkirchen|pullach|gruenwald|brunnthal|kirchheim') {
+        return 'MUNICH_20KM'
+    }
+    if ($value -match 'muenchen|munich') {
+        return 'MUNICH'
     }
     if ([string]::IsNullOrWhiteSpace($value)) {
         return 'TARGET_UNCERTAIN'
@@ -157,9 +160,13 @@ function ConvertFrom-JobAgentJobBoardSnapshot {
         $allAttrs = $match.Groups['attrs'].Value + ' ' + $match.Groups['attrs2'].Value
         $getAttr = {
             param([string]$Name)
-            $attrMatch = [regex]::Match($allAttrs, '\b' + [regex]::Escape($Name) + '\s*=\s*["''](?<value>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+            $attrMatch = [regex]::Match($allAttrs, '\b(?:data-jobagent-)?' + [regex]::Escape($Name) + '\s*=\s*["''](?<value>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
             if ($attrMatch.Success) {
                 return [Net.WebUtility]::HtmlDecode($attrMatch.Groups['value'].Value).Trim()
+            }
+            $nodeAttrMatch = [regex]::Match($body, '<[^>]+\bdata-jobagent-' + [regex]::Escape($Name) + '\s*=\s*["''](?<value>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+            if ($nodeAttrMatch.Success) {
+                return [Net.WebUtility]::HtmlDecode($nodeAttrMatch.Groups['value'].Value).Trim()
             }
             $nodeMatch = [regex]::Match($body, '<[^>]+\bdata-jobagent-' + [regex]::Escape($Name) + '\b[^>]*>(?<value>.*?)</[^>]+>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
             if ($nodeMatch.Success) {
