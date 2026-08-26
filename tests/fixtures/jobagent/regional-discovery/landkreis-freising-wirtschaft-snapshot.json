@@ -1,0 +1,39 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T18:55:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:landkreis_freising_wirtschaft",
+      "format": "json_items",
+      "source_page": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
+      "region_reference": "Landkreis Freising",
+      "items": [
+        {
+          "company_name": "Deutsche Lufthansa AG",
+          "industry_hint": "Aviation",
+          "location": "Flughafen Muenchen / Freising"
+        },
+        {
+          "company_name": "Flughafen Muenchen GmbH",
+          "industry_hint": "Airport operator",
+          "location": "Flughafen Muenchen / Freising"
+        },
+        {
+          "company_name": "Technische Universitaet Muenchen",
+          "industry_hint": "Higher education and research",
+          "location": "Freising Weihenstephan"
+        },
+        {
+          "company_name": "Texas Instruments Deutschland GmbH",
+          "industry_hint": "Semiconductors",
+          "location": "Freising"
+        },
+        {
+          "company_name": "Jungheinrich Moosburg GmbH",
+          "industry_hint": "Industrial trucks and intralogistics",
+          "location": "Moosburg / Landkreis Freising"
+        }
+      ]
+    }
+  ]
+}

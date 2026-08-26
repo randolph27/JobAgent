@@ -1,0 +1,144 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T18:55:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+      "format": "json_items",
+      "source_page": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
+      "region_reference": "Muenchen und Region; Stand der Quellseite: April 2026",
+      "items": [
+        {
+          "company_name": "Allianz SE",
+          "industry_hint": "DAX / insurance",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "BMW AG",
+          "industry_hint": "DAX / automotive",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Infineon Technologies AG",
+          "industry_hint": "DAX / semiconductors",
+          "location": "Neubiberg"
+        },
+        {
+          "company_name": "MTU Aero Engines AG",
+          "industry_hint": "DAX / aerospace",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchner Rueck AG",
+          "industry_hint": "DAX / reinsurance",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Scout24 SE",
+          "industry_hint": "DAX / digital marketplace",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Siemens AG",
+          "industry_hint": "DAX / industrial technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Siemens Energy AG",
+          "industry_hint": "DAX / energy technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "CTS Eventim AG & Co. KGaA",
+          "industry_hint": "MDAX / ticketing and live entertainment",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "HENSOLDT AG",
+          "industry_hint": "MDAX / defence electronics",
+          "location": "Taufkirchen"
+        },
+        {
+          "company_name": "Knorr-Bremse AG",
+          "industry_hint": "MDAX / rail and commercial vehicle systems",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Nemetschek SE",
+          "industry_hint": "MDAX / software",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "TRATON SE",
+          "industry_hint": "MDAX / commercial vehicles",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Wacker Chemie AG",
+          "industry_hint": "MDAX / chemicals",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "ATOSS Software AG",
+          "industry_hint": "SDAX TecDAX / software",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "CANCOM SE",
+          "industry_hint": "SDAX TecDAX / IT services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Dermapharm Holding AG",
+          "industry_hint": "SDAX / pharmaceuticals",
+          "location": "Gruenwald"
+        },
+        {
+          "company_name": "Deutsche Pfandbriefbank AG",
+          "industry_hint": "SDAX / banking",
+          "location": "Garching"
+        },
+        {
+          "company_name": "Mutares SE & Co. KGaA",
+          "industry_hint": "SDAX / investment holding",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Nagarro SE",
+          "industry_hint": "SDAX TecDAX / IT services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "ProSiebenSat.1 Media SE",
+          "industry_hint": "SDAX / media",
+          "location": "Unterfoehring"
+        },
+        {
+          "company_name": "SFC Energy AG",
+          "industry_hint": "SDAX / fuel cells",
+          "location": "Brunnthal"
+        },
+        {
+          "company_name": "Siltronic AG",
+          "industry_hint": "SDAX TecDAX / semiconductor materials",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Sixt SE",
+          "industry_hint": "SDAX / mobility services",
+          "location": "Pullach"
+        },
+        {
+          "company_name": "SUSS MicroTec SE",
+          "industry_hint": "SDAX TecDAX / semiconductor equipment",
+          "location": "Garching"
+        },
+        {
+          "company_name": "Wacker Neuson SE",
+          "industry_hint": "SDAX / construction equipment",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

@@ -307,11 +307,23 @@ function New-ToolMergedHintStore {
         [Parameter()][AllowEmptyCollection()][object[]]$ExistingHints = @(),
         [Parameter()][AllowEmptyCollection()][object[]]$NewHints = @(),
         [Parameter(Mandatory)][datetime]$GeneratedAt,
-        [Parameter()][int]$SearchMatrixCount = 0
+        [Parameter()][int]$SearchMatrixCount = 0,
+        [Parameter()][AllowEmptyCollection()][string[]]$ReplaceSourceIds = @()
     )
 
     $mergedById = [ordered]@{}
-    foreach ($hint in @($ExistingHints) + @($NewHints)) {
+    $replaceSet = [Collections.Generic.HashSet[string]]::new([string[]]@($ReplaceSourceIds | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }), [StringComparer]::Ordinal)
+    foreach ($hint in @($ExistingHints)) {
+        $sourceId = [string](Get-ToolObjectProperty -Object $hint -Name 'source_id' -Default '')
+        if ($replaceSet.Contains($sourceId)) {
+            continue
+        }
+        $hintId = [string](Get-ToolObjectProperty -Object $hint -Name 'hint_id' -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($hintId)) {
+            $mergedById[$hintId] = $hint
+        }
+    }
+    foreach ($hint in @($NewHints)) {
         $hintId = [string](Get-ToolObjectProperty -Object $hint -Name 'hint_id' -Default '')
         if (-not [string]::IsNullOrWhiteSpace($hintId)) {
             $mergedById[$hintId] = $hint
@@ -437,7 +449,8 @@ function Invoke-ToolDiscoverySnapshotLane {
     $existingStore = if (Test-Path -LiteralPath $hintsPath -PathType Leaf) { Get-Content -LiteralPath $hintsPath -Raw | ConvertFrom-Json -Depth 100 } else { $null }
     $existingHints = if ($null -eq $existingStore) { @() } else { @($existingStore.hints) }
     $searchMatrixCount = if ($null -eq $existingStore) { 0 } else { [int](Get-ToolObjectProperty -Object $existingStore -Name 'search_matrix_count' -Default 0) }
-    $mergedStore = New-ToolMergedHintStore -ExistingHints $existingHints -NewHints @($newHints.ToArray()) -GeneratedAt $ObservedAt -SearchMatrixCount $searchMatrixCount
+    $replaceSourceIds = @($processedSourceIds.ToArray() | Sort-Object -Unique)
+    $mergedStore = New-ToolMergedHintStore -ExistingHints $existingHints -NewHints @($newHints.ToArray()) -GeneratedAt $ObservedAt -SearchMatrixCount $searchMatrixCount -ReplaceSourceIds $replaceSourceIds
     Write-ToolAtomicJson -Path $hintsPath -Value $mergedStore -Depth 100
     $sourceGate = New-ToolDiscoverySnapshotSourceGate -Registry $registry -ProcessedSourceIds @($processedSourceIds.ToArray())
 

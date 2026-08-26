@@ -79,6 +79,18 @@ Assert-True -Condition ($techResult.source_counts.'source-registry:tech_companie
 Assert-True -Condition (@($techResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [string]$_.target_area -ne 'MUNICH' }).Count -eq 0) -Message 'Community-Tech-Hints muessen unverifizierte Muenchen-Hints bleiben.'
 Assert-True -Condition (@($techResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'career_hint' -or $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Tech-Companies-Munich-Links duerfen nicht als offizielle Felder persistiert werden.'
 
+$listedFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\stadt-muenchen-boersennotierte-unternehmen-snapshot.json'
+$listedResult = Import-JobAgentRegionalDirectories -SnapshotPath $listedFixture -SourceRegistry $registry
+Assert-True -Condition ($listedResult.hints_total -eq 26) -Message 'Boersennotierte-Muenchen-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition (@($listedResult.hints | Where-Object { [string]$_.company_name -eq 'Alpha Regional AG' }).Count -eq 0) -Message 'Produktiver Boersennotierte-Snapshot darf keine Testfirma enthalten.'
+Assert-True -Condition (@($listedResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH', 'MUNICH_20KM') }).Count -eq 0) -Message 'Boersennotierte-Muenchen-Hints muessen Muenchen- oder 20-km-Bezug behalten.'
+
+$freisingEconomyFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\landkreis-freising-wirtschaft-snapshot.json'
+$freisingEconomyResult = Import-JobAgentRegionalDirectories -SnapshotPath $freisingEconomyFixture -SourceRegistry $registry
+Assert-True -Condition ($freisingEconomyResult.hints_total -eq 5) -Message 'Landkreis-Freising-Wirtschaft-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition (@($freisingEconomyResult.hints | Where-Object { [string]$_.company_name -in @('Airport Logistics GmbH', 'Weihenstephan Research GmbH') }).Count -eq 0) -Message 'Produktiver Landkreis-Freising-Snapshot darf keine Testfirmen enthalten.'
+Assert-True -Condition (@($freisingEconomyResult.hints | Where-Object { [string]$_.target_area -ne 'FREISING' }).Count -eq 0) -Message 'Landkreis-Freising-Hints muessen Freising-Bezug behalten.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 try {
@@ -128,6 +140,8 @@ finally {
         'dedupe_by_hint_id',
         'minimal_hash_evidence',
         'no_contact_collection',
+        'production_stock_listed_snapshot',
+        'production_freising_economy_snapshot',
         'script_writes_regional_and_merged_hints'
     )
     hints = $result.hints_total
