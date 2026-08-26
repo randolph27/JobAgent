@@ -339,6 +339,12 @@ try {
     Assert-True -Condition ($snapshotResult.new_hints_total -eq 16) -Message ('Snapshot-Lane erzeugt falsche neue Hint-Anzahl: ' + [string]$snapshotResult.new_hints_total)
     Assert-True -Condition ($snapshotHints.hints_total -eq 16) -Message 'Snapshot-Lane merged Hints nicht in den Hint-Store.'
     Assert-True -Condition ($snapshotHints.unverified_hints -eq $snapshotHints.hints_total) -Message 'Snapshot-Lane darf keine verifizierten Hints erzeugen.'
+    Assert-True -Condition ($snapshotResult.source_gate.schema_version -eq 'jobagent/company-discovery-snapshot-source-gate/v1') -Message 'Snapshot-Lane schreibt kein Source-Gate.'
+    Assert-True -Condition ($snapshotResult.source_gate.status -eq 'failed') -Message 'Partielles Testmanifest muss fehlende importierbare Quellen sichtbar machen.'
+    Assert-True -Condition ($snapshotResult.source_gate.expected_sources_total -ge 7) -Message 'Source-Gate zaehlt importierbare Quellen unvollstaendig.'
+    Assert-True -Condition ($snapshotResult.source_gate.processed_sources_total -eq 5) -Message 'Source-Gate zaehlt verarbeitete eindeutige Quellen falsch.'
+    Assert-True -Condition (@($snapshotResult.source_gate.missing_source_ids | Where-Object { $_ -eq 'source-registry:ba_jobsuche' }).Count -eq 1) -Message 'Source-Gate weist fehlende BA-Jobsuche nicht aus.'
+    Assert-True -Condition (@($snapshotResult.source_gate.violations | Where-Object { $_ -eq 'SNAPSHOT_IMPORTABLE_SOURCES_MISSING' }).Count -eq 1) -Message 'Source-Gate meldet fehlende Quellen nicht fail-closed.'
     Assert-True -Condition ($snapshotResult.productive_store_write -eq $false) -Message 'Snapshot-Lane darf keinen produktiven Store-Write melden.'
     Assert-True -Condition (@($postSnapshotStore.job_sources).Count -eq @($preSnapshotStore.job_sources).Count) -Message 'Snapshot-Lane darf keine JobSources erzeugen.'
     Assert-True -Condition (@($snapshotResult.snapshot_logs | Where-Object { [string]$_.input_hash -notmatch '^[a-f0-9]{64}$' -or [string]::IsNullOrWhiteSpace([string]$_.allowed_use) -or [string]::IsNullOrWhiteSpace([string]$_.rate_limit_policy) -or [string]::IsNullOrWhiteSpace([string]$_.robots_or_terms_note) }).Count -eq 0) -Message 'Snapshot-Lane protokolliert Nutzungs-/Hash-Evidenz unvollstaendig.'

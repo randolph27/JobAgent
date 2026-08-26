@@ -266,6 +266,42 @@ function New-ToolDiscoverySnapshotLog {
     }
 }
 
+function New-ToolDiscoverySnapshotSourceGate {
+    param(
+        [Parameter(Mandatory)][object]$Registry,
+        [Parameter(Mandatory)][AllowEmptyCollection()][string[]]$ProcessedSourceIds
+    )
+
+    $expectedSourceIds = @($Registry.items |
+        Where-Object {
+            [string]$_.import_mode -in @('BULK_SNAPSHOT', 'FIXTURE_OR_SNAPSHOT_ONLY') -and
+            [string]$_.source_class -in @('OPEN_REGISTER_DUMP', 'REGIONAL_DIRECTORY', 'PUBLIC_INSTITUTION_DIRECTORY', 'JOB_BOARD_DISCOVERY')
+        } |
+        ForEach-Object { [string]$_.source_id } |
+        Sort-Object -Unique)
+    $processedUnique = @($ProcessedSourceIds |
+        Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
+        ForEach-Object { [string]$_ } |
+        Sort-Object -Unique)
+    $expectedSet = [Collections.Generic.HashSet[string]]::new([string[]]$expectedSourceIds, [StringComparer]::Ordinal)
+    $processedSet = [Collections.Generic.HashSet[string]]::new([string[]]$processedUnique, [StringComparer]::Ordinal)
+    $missing = @($expectedSourceIds | Where-Object { -not $processedSet.Contains([string]$_) })
+    $unexpected = @($processedUnique | Where-Object { -not $expectedSet.Contains([string]$_) })
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-snapshot-source-gate/v1'
+        expected_sources_total = $expectedSourceIds.Count
+        processed_sources_total = $processedUnique.Count
+        missing_source_ids = $missing
+        unexpected_source_ids = $unexpected
+        status = if ($missing.Count -eq 0 -and $unexpected.Count -eq 0) { 'passed' } else { 'failed' }
+        violations = @(
+            if ($missing.Count -gt 0) { 'SNAPSHOT_IMPORTABLE_SOURCES_MISSING' }
+            if ($unexpected.Count -gt 0) { 'SNAPSHOT_UNEXPECTED_SOURCES_PROCESSED' }
+        )
+    }
+}
+
 function New-ToolMergedHintStore {
     param(
         [Parameter()][AllowEmptyCollection()][object[]]$ExistingHints = @(),
@@ -331,6 +367,7 @@ function Invoke-ToolDiscoverySnapshotLane {
 
     $newHints = [System.Collections.Generic.List[object]]::new()
     $snapshotLogs = [System.Collections.Generic.List[object]]::new()
+    $processedSourceIds = [System.Collections.Generic.List[string]]::new()
     foreach ($item in @($manifest.items)) {
         $kind = [string](Get-ToolObjectProperty -Object $item -Name 'kind' -Default '')
         foreach ($input in @(Get-ToolSnapshotItemInputs -Item $item -Root $Root)) {
@@ -341,6 +378,7 @@ function Invoke-ToolDiscoverySnapshotLane {
             $inputPath = [string]$input.input_path
             $source = Get-ToolDiscoverySource -Registry $registry -SourceId $sourceId
             Assert-ToolSnapshotSource -Source $source -Kind $kind
+            $processedSourceIds.Add($sourceId)
 
             if ($kind -eq 'register') {
                 $snapshotDateValue = [string]$input.snapshot_date
@@ -369,6 +407,7 @@ function Invoke-ToolDiscoverySnapshotLane {
                 foreach ($property in $result.source_counts.PSObject.Properties) {
                     $regionalSource = Get-ToolDiscoverySource -Registry $registry -SourceId ([string]$property.Name)
                     Assert-ToolSnapshotSource -Source $regionalSource -Kind $kind
+                    $processedSourceIds.Add([string]$regionalSource.source_id)
                     $logSources.Add([pscustomobject]@{
                             source = $regionalSource
                             hints_total = [int]$property.Value
@@ -400,6 +439,7 @@ function Invoke-ToolDiscoverySnapshotLane {
     $searchMatrixCount = if ($null -eq $existingStore) { 0 } else { [int](Get-ToolObjectProperty -Object $existingStore -Name 'search_matrix_count' -Default 0) }
     $mergedStore = New-ToolMergedHintStore -ExistingHints $existingHints -NewHints @($newHints.ToArray()) -GeneratedAt $ObservedAt -SearchMatrixCount $searchMatrixCount
     Write-ToolAtomicJson -Path $hintsPath -Value $mergedStore -Depth 100
+    $sourceGate = New-ToolDiscoverySnapshotSourceGate -Registry $registry -ProcessedSourceIds @($processedSourceIds.ToArray())
 
     $digestPath = Join-Path $logRootPath ('company-discovery-snapshot-digest-' + $ObservedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
     $digest = [pscustomobject]@{
@@ -413,6 +453,7 @@ function Invoke-ToolDiscoverySnapshotLane {
         new_hints_total = @($newHints.ToArray()).Count
         merged_hints_total = [int]$mergedStore.hints_total
         snapshot_logs = @($snapshotLogs.ToArray())
+        source_gate = $sourceGate
         productive_store_write = $false
         official_verification_required = $true
     }
