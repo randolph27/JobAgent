@@ -1,0 +1,174 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T13:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+      "format": "json_items",
+      "source_page": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "Flughafen Muenchen GmbH",
+          "industry_hint": "Transport and aviation",
+          "location": "Muenchen / Flughafen"
+        },
+        {
+          "company_name": "aquabench GmbH",
+          "industry_hint": "Utilities benchmarking",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchner Verkehrs- und Tarifverbund GmbH",
+          "industry_hint": "Transport",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "P+R Park&Ride GmbH",
+          "industry_hint": "Transport infrastructure",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Stadtwerke Muenchen GmbH",
+          "industry_hint": "Utilities and transport",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Behandlungszentrum fuer Multiple Sklerose Kranke",
+          "industry_hint": "Healthcare",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchen Klinik gGmbH",
+          "industry_hint": "Healthcare",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchenstift GmbH Gemeinnuetzige Gesellschaft",
+          "industry_hint": "Social care",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "MGH - Muenchener Gewerbehof- und Technologiegesellschaft",
+          "industry_hint": "Economic development",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchener Arbeit gemeinnuetzige GmbH",
+          "industry_hint": "Employment and qualification",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Messe Muenchen GmbH",
+          "industry_hint": "Trade fair",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "WERK1. Bayern GmbH",
+          "industry_hint": "Startup center",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Deutsches Theater Grund- und Hausbesitz GmbH",
+          "industry_hint": "Real estate",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchener Gesellschaft fuer Stadterneuerung mbH",
+          "industry_hint": "Urban renewal",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchener Wohnen GmbH",
+          "industry_hint": "Housing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "MRG Muenchener Raumentwicklungsgesellschaft mbH",
+          "industry_hint": "Urban development",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchener Gewerbehof Giesing Grundstuecks GmbH",
+          "industry_hint": "Commercial real estate",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Deutsches Theater Muenchen",
+          "industry_hint": "Culture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Internationale Muenchner Filmwochen GmbH",
+          "industry_hint": "Culture and film",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchener Tierpark Hellabrunn AG",
+          "industry_hint": "Leisure and culture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchener Volkstheater GmbH",
+          "industry_hint": "Culture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Gasteig Muenchen GmbH",
+          "industry_hint": "Culture and education",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchen Ticket GmbH",
+          "industry_hint": "Ticketing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchener Volkshochschule GmbH",
+          "industry_hint": "Education",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Pasinger Fabrik Kultur- und Buergerzentrum GmbH",
+          "industry_hint": "Culture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Spielmotor",
+          "industry_hint": "Culture",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "digital@M GmbH",
+          "industry_hint": "Digital services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "LHM Services GmbH",
+          "industry_hint": "Municipal services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Portal Muenchen Betriebs-GmbH & Co. KG",
+          "industry_hint": "Digital portal operation",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Internationale Bauausstellung Metropolregion Muenchen GmbH",
+          "industry_hint": "Urban development",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Olympiapark Muenchen GmbH",
+          "industry_hint": "Sport and event venues",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Stadtsparkasse Muenchen",
+          "industry_hint": "Finance",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

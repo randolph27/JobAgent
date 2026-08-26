@@ -61,6 +61,11 @@
       "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-creative-snapshot.json"
     },
     {
+      "kind": "regional",
+      "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/stadt-muenchen-unternehmensbeteiligungen-snapshot.json"
+    },
+    {
       "kind": "jobboard",
       "source_id": "source-registry:stepstone_muenchen",
       "input_path": "tests/fixtures/jobagent/jobboard-discovery/stepstone-muenchen-snapshot.json"

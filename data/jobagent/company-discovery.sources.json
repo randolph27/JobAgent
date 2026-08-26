@@ -224,6 +224,23 @@
       "legal_risk": "LOW"
     },
     {
+      "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+      "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+      "source_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+      "operator": "Landeshauptstadt Muenchen",
+      "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den Muenchner Arbeitsmarkt, keine produktive Karrierequellenaufnahme allein aus der Beteiligungsliste und keine Uebernahme von Kontakt- oder Personenangaben.",
+      "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
+      "robots_or_terms_note": "Kommunale Nutzungsbedingungen und Robots vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
+      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+      "freshness_policy": "Quartalsweise oder bei kommunaler Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
+      "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "LOW"
+    },
+    {
       "source_id": "source-registry:landkreis_freising_wirtschaft",
       "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
       "source_url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",

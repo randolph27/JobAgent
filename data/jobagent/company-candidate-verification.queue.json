@@ -1,15 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-26T10:24:11.398Z",
-  "clusters_total": 203,
-  "candidates_total": 209,
-  "ready_total": 197,
+  "generated_at": "2026-08-26T10:37:44.354Z",
+  "clusters_total": 235,
+  "candidates_total": 241,
+  "ready_total": 229,
   "action_counts": {
     "CHECK_LOCATION": 1,
     "MANUAL_DECISION": 1,
     "REJECT_DUPLICATE": 4,
-    "VERIFY_OFFICIAL_SITE": 197
+    "VERIFY_OFFICIAL_SITE": 229
   },
   "queue": [
     {
@@ -32,7 +32,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -75,7 +75,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -94,6 +94,92 @@
         "dedupe_keys": [
           "name:alpha technik",
           "register:amtsgericht_muenchen_hrb_1001"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen"
+      ],
+      "canonical_name": "aquabench GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "1d191b9c30c37552698c75892aa0677d4763d6b84c3a73a418e504564324773b",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:aquabench"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen"
+      ],
+      "canonical_name": "Behandlungszentrum fuer Multiple Sklerose Kranke",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "2313cb7b432db71417b5d0b0b86eff3b5cafe9d7bbcb71b7d23317c9f1cf06fe",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:behandlungszentrum fuer multiple sklerose kranke"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -119,7 +205,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -163,7 +249,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -181,6 +267,135 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:bio campus"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen"
+      ],
+      "canonical_name": "Deutsches Theater Grund- und Hausbesitz GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "7131fa2efede620a8e93ecd68db99789a0d9962c05320c2eff2a4de826cd27a0",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deutsches theater grund und hausbesitz"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen"
+      ],
+      "canonical_name": "Deutsches Theater Muenchen",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "ef8a6f71e0ea428de1dd7e77875d1d70bbcbaa1d98a54aab27e7b84a15fe41de",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deutsches theater muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen"
+      ],
+      "canonical_name": "digital@M GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "f9a5e2d1330c9e7dc482cea279ea1b451d7fc0a1158942514a4246b7085cdd17",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:digital m"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -206,7 +421,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -231,6 +446,51 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Flughafen Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "2cea2eb929c61e7cca81a9fa854545782f46aeadb77ccf018cb9a17ea4937e0b",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:flughafen muenchen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_2001",
       "candidate_id": "register-hint:offeneregister_sample_2026_08_gamma_logistics_gmbh_freising_3",
       "candidate_ids": [
@@ -249,10 +509,10 @@
       "status": "PENDING",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
       "freshness_status": "UNKNOWN",
       "risk_level": "LOW",
       "source_evidence": {
@@ -275,6 +535,1083 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Gasteig Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "04a1a25ae439e0cb44cf8fecbc009ed33a0942279b483b461db5cf17c5934320",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:gasteig muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Internationale Bauausstellung Metropolregion Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "c86ed856033e0cc3e94b22e222bef6424d8954cca0f2bbba4156bfefe8de1b56",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:internationale bauausstellung metropolregion muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen"
+      ],
+      "canonical_name": "Internationale Muenchner Filmwochen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "dd7a68b5fa0da0bda747fa49af4ed91b6227ef769a497544a5d0d944b7cc6edf",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:internationale muenchner filmwochen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen"
+      ],
+      "canonical_name": "LHM Services GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "66e997e9a79cfbde1607118dc7df380fe8dc0ef566df42f966c223e3f709e512",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:lhm services"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_messe_muenchen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_messe_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_messe_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Messe Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "9eeb51613980f9109082cfad5dd39991bd474479016296ca3673816ff7d8670c",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:messe muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_mgh_muenchener_gewerbehof_und_technologiegesellschaft_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mgh_muenchener_gewerbehof_und_technologiegesellschaft_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mgh_muenchener_gewerbehof_und_technologiegesellschaft_muenchen"
+      ],
+      "canonical_name": "MGH - Muenchener Gewerbehof- und Technologiegesellschaft",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "5471ec5886c940716a33ddcbaa8fe8df25338434bc2989d9a179e782308764ce",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:mgh muenchener gewerbehof und technologiegesellschaft"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen"
+      ],
+      "canonical_name": "MRG Muenchener Raumentwicklungsgesellschaft mbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "60c4a7349887c0eb7a459b75404e8d177876ed311aa8779710fdcb623d594518",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:mrg muenchener raumentwicklungsgesellschaft mbh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen"
+      ],
+      "canonical_name": "Muenchen Klinik gGmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "a2795eabd4c8f8d973767edfd69313387094735fba9ec6e0ece195713761f4d0",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchen klinik ggmbh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchen Ticket GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "0b4e4fb5bbca2b7c3bb5cf0888877ee398da8ba7f290b3e204ab2817fb9c42b3",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchen ticket"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Arbeit gemeinnuetzige GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "0cab7b54f33a186174a0887927921a4e74089bbe06098fb6db43427a8346a17e",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchener arbeit gemeinnuetzige"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Gesellschaft fuer Stadterneuerung mbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "15afb560817430a5a5067c8737b177e9e8615b7a9d0b6d43a23e1974335db671",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchener gesellschaft fuer stadterneuerung mbh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_gewerbehof_giesing_grundstuecks_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gewerbehof_giesing_grundstuecks_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gewerbehof_giesing_grundstuecks_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Gewerbehof Giesing Grundstuecks GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "ba6638b4d8cafa6281ec02be0ba875f5925fde1e0a813ee9fa13d226694935c6",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchener gewerbehof giesing grundstuecks"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen"
+      ],
+      "canonical_name": "Muenchener Tierpark Hellabrunn AG",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "ad4297b9696f008f09d533f8c33a04ee8566f9c3042fbd75ad2fad87e1264584",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchener tierpark hellabrunn"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Volkshochschule GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "33d82ece40e15833e89b4f282b0afdd950416d41eb03f0d176613918db4bfbe7",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchener volkshochschule"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Volkstheater GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "c9677a43346904fbb60daa9738c37f02ec2cd883c09f18af5c9a864a33908332",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchener volkstheater"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Wohnen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "d39fc22eccf71054ffcdd6c87723e8f0f8605f395c4d4ce832fc96889547abcb",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchener wohnen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen"
+      ],
+      "canonical_name": "Muenchenstift GmbH Gemeinnuetzige Gesellschaft",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "0ba71a59906baf2025e7810efbeb2b544a6e26a850e4654cf68fc7f9a3f9ee6b",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchenstift gemeinnuetzige gesellschaft"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchner Verkehrs- und Tarifverbund GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "c108621787594ae9506c9c0f2dae2ab06ad7b37f13118e3fed3f546c4dc28579",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchner verkehrs und tarifverbund"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Olympiapark Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "6fb8d0035776508c6989bb64dd9f925da3f32e7145e8f81b56ce60297777a0df",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:olympiapark muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen"
+      ],
+      "canonical_name": "P+R Park&Ride GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "3957f3f6885cce3fbaf75b273864afb48eecc713ef79ee649ea4afe91dfd508b",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:p plus r park and ride"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen"
+      ],
+      "canonical_name": "Pasinger Fabrik Kultur- und Buergerzentrum GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "d0f159d9123581d3510cde7da5b38beca485682fe29fc7d82854355103851336",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:pasinger fabrik kultur und buergerzentrum"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen"
+      ],
+      "canonical_name": "Portal Muenchen Betriebs-GmbH & Co. KG",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "887427a504ccf90e7d6825a9ab12a04d87f5636947fad2d9846fc087bbc95fc2",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:portal muenchen betriebs"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen"
+      ],
+      "canonical_name": "Spielmotor",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "24ab927a4c8e1821bc6b3598f449f048dd905e3e24315456e1226043ed570479",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:spielmotor"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen"
+      ],
+      "canonical_name": "Stadtsparkasse Muenchen",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "ccdf9b9ac9c061c49d9169790b1b8c12b5b75aaf441ff2499f90c35cd9efa098",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:stadtsparkasse muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Stadtwerke Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "6fe240630ab6603227e92daed05e12184d7164143ea8c0bb633e86262b07c8c2",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:stadtwerke muenchen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_landkreis_freising_wirtschaft_weihenstephan_research_gmbh_freising",
       "candidate_id": "regional-hint:landkreis_freising_wirtschaft_weihenstephan_research_gmbh_freising",
       "candidate_ids": [
@@ -293,10 +1630,10 @@
       "status": "PENDING",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -312,6 +1649,49 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:weihenstephan research"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen"
+      ],
+      "canonical_name": "WERK1. Bayern GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "6bee2f9e89f54c981620d6aedc677b871abb59d3f713f515ecfce617f258ca47",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:werk1 bayern"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -337,7 +1717,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -380,7 +1760,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -423,7 +1803,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -466,7 +1846,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -509,7 +1889,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -552,7 +1932,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -595,7 +1975,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -638,7 +2018,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -681,7 +2061,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -724,7 +2104,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -769,7 +2149,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -814,7 +2194,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -857,7 +2237,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -900,7 +2280,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -945,7 +2325,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -990,7 +2370,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1033,7 +2413,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1076,7 +2456,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1119,7 +2499,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1162,7 +2542,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1205,7 +2585,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1248,7 +2628,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1291,7 +2671,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1334,7 +2714,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1377,7 +2757,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1420,7 +2800,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1463,7 +2843,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1506,7 +2886,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1549,7 +2929,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1592,7 +2972,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1635,7 +3015,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1678,7 +3058,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1721,7 +3101,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1764,7 +3144,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1807,7 +3187,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1850,7 +3230,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1893,7 +3273,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1936,7 +3316,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -1979,7 +3359,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2022,7 +3402,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2065,7 +3445,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2108,7 +3488,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2151,7 +3531,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2194,7 +3574,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2237,7 +3617,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2280,7 +3660,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2323,7 +3703,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2366,7 +3746,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2409,7 +3789,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2454,7 +3834,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2499,7 +3879,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2542,7 +3922,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2585,7 +3965,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2628,7 +4008,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2671,7 +4051,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2714,7 +4094,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2757,7 +4137,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2800,7 +4180,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2843,7 +4223,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2886,7 +4266,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2929,7 +4309,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -2972,7 +4352,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3015,7 +4395,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3058,7 +4438,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3101,7 +4481,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3144,7 +4524,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3187,7 +4567,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3230,7 +4610,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3273,7 +4653,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3316,7 +4696,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3359,7 +4739,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3402,7 +4782,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3445,7 +4825,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3488,7 +4868,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3531,7 +4911,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3574,7 +4954,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3617,7 +4997,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3660,7 +5040,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3703,7 +5083,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3746,7 +5126,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3789,7 +5169,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3832,7 +5212,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3875,7 +5255,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3918,7 +5298,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -3961,7 +5341,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4004,7 +5384,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4049,7 +5429,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4094,7 +5474,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4137,7 +5517,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4180,7 +5560,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4223,7 +5603,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4266,7 +5646,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4309,7 +5689,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4352,7 +5732,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4395,7 +5775,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4438,7 +5818,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4481,7 +5861,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4524,7 +5904,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4567,7 +5947,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4610,7 +5990,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4653,7 +6033,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4696,7 +6076,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4739,7 +6119,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4782,7 +6162,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4825,7 +6205,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4868,7 +6248,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4911,7 +6291,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4954,7 +6334,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -4997,7 +6377,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5040,7 +6420,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5083,7 +6463,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5126,7 +6506,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5169,7 +6549,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5212,7 +6592,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5255,7 +6635,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5298,7 +6678,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5341,7 +6721,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5384,7 +6764,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5427,7 +6807,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5470,7 +6850,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5513,7 +6893,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5556,7 +6936,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5599,7 +6979,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5642,7 +7022,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5685,7 +7065,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5730,7 +7110,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5775,7 +7155,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5818,7 +7198,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5861,7 +7241,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5904,7 +7284,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5947,7 +7327,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -5990,7 +7370,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6033,7 +7413,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6076,7 +7456,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6119,7 +7499,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6162,7 +7542,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6205,7 +7585,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6248,7 +7628,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6291,7 +7671,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6334,7 +7714,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6377,7 +7757,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6420,7 +7800,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6463,7 +7843,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6506,7 +7886,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6549,7 +7929,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6592,7 +7972,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6635,7 +8015,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6678,7 +8058,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6721,7 +8101,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6764,7 +8144,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6807,7 +8187,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6850,7 +8230,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6893,7 +8273,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6936,7 +8316,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -6979,7 +8359,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7022,7 +8402,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7065,7 +8445,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7108,7 +8488,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7151,7 +8531,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7196,7 +8576,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7239,7 +8619,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7282,7 +8662,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7325,7 +8705,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7370,7 +8750,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7413,7 +8793,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7456,7 +8836,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7499,7 +8879,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7542,7 +8922,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7585,7 +8965,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7628,7 +9008,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7673,7 +9053,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7718,7 +9098,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7761,7 +9141,7 @@
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7806,7 +9186,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7849,7 +9229,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7892,7 +9272,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7935,7 +9315,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -7978,7 +9358,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8021,7 +9401,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8064,7 +9444,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8107,7 +9487,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8150,7 +9530,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8193,7 +9573,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8236,7 +9616,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8279,7 +9659,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "UNKNOWN",
@@ -8323,7 +9703,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8367,7 +9747,7 @@
       "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8412,7 +9792,7 @@
       "review_reason": "KNOWN_COMPANY_HINT,NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8459,7 +9839,7 @@
       "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8504,7 +9884,7 @@
       "review_reason": "KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:24:11.398Z",
+      "next_attempt_at": "2026-08-26T10:37:44.354Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -8542,13 +9922,13 @@
       "reason_codes": [
         "DUPLICATE_CLUSTER_REVIEW",
         "KNOWN_COMPANY_HINT",
-        "OFFICIAL_VERIFICATION_REQUIRED"
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
       ],
       "target_area_basis": [
         "JOB_LOCATION_IN_TARGET"
       ],
       "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "DUPLICATE_CLUSTER_REVIEW,KNOWN_COMPANY_HINT,OFFICIAL_VERIFICATION_REQUIRED",
+      "review_reason": "DUPLICATE_CLUSTER_REVIEW,KNOWN_COMPANY_HINT,NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
       "last_attempt_at": null,
       "next_attempt_at": null,
@@ -8571,7 +9951,9 @@
           "domain:munich-airport.com",
           "name:flughafen muenchen"
         ],
-        "conflict_flags": [],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 2
       }
     },
