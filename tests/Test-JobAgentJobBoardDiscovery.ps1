@@ -82,6 +82,16 @@ Assert-True -Condition (@($baResult.hints | Where-Object { [string]$_.posting_ur
 Assert-True -Condition (@($baResult.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'BA-Jobsuche-Hints muessen unverifizierte Arbeitgeber-Hinweise bleiben.'
 Assert-True -Condition (@($baResult.hints | Where-Object { [string]$_.known_company_id -eq 'company:stadtwerke_muenchen_gmbh' }).Count -eq 1) -Message 'BA-Jobsuche-Hint markiert bekannte Arbeitgeberfirma nicht.'
 
+$baFreisingFixture = Join-Path $root 'tests\fixtures\jobagent\jobboard-discovery\ba-jobsuche-freising-snapshot.json'
+$baFreisingResult = Import-JobAgentJobBoardEmployers -SnapshotPath $baFreisingFixture -SourceRegistry $registry -KnownCompanies $companies
+Assert-True -Condition ($baFreisingResult.source_id -eq 'source-registry:ba_jobsuche') -Message 'BA-Jobsuche-Freising-Snapshot wird nicht als BA-Quelle gefuehrt.'
+Assert-True -Condition ($baFreisingResult.records_read -eq 2) -Message 'BA-Jobsuche-Freising-Import filtert Zielgebiet oder Pflichtfelder falsch.'
+Assert-True -Condition ($baFreisingResult.hints_total -eq 2) -Message 'BA-Jobsuche-Freising-Import erzeugt falsche Hint-Anzahl.'
+Assert-True -Condition (@($baFreisingResult.hints | Where-Object { [string]$_.target_area -ne 'FREISING' }).Count -eq 0) -Message 'BA-Jobsuche-Freising-Hints muessen als Freising-Zielgebiet markiert werden.'
+Assert-True -Condition (@($baFreisingResult.hints | Where-Object { [string]$_.observed_url -notmatch '^https://www\.arbeitsagentur\.de/jobsuche/jobdetail/' }).Count -eq 0) -Message 'BA-Jobsuche-Freising-URLs werden nicht absolut normalisiert.'
+Assert-True -Condition (@($baFreisingResult.hints | Where-Object { [string]$_.employer_name -eq 'Outside BA Freising Search AG' }).Count -eq 0) -Message 'BA-Jobsuche-Freising-Out-of-scope-Treffer wurde nicht entfernt.'
+Assert-True -Condition (@($baFreisingResult.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'BA-Jobsuche-Freising-Hints muessen unverifizierte Arbeitgeber-Hinweise bleiben.'
+
 $freisingFixture = Join-Path $root 'tests\fixtures\jobagent\jobboard-discovery\stepstone-freising-snapshot.json'
 $freisingResult = Import-JobAgentJobBoardEmployers -SnapshotPath $freisingFixture -SourceRegistry $registry -KnownCompanies $companies
 Assert-True -Condition ($freisingResult.source_id -eq 'source-registry:stepstone_freising') -Message 'StepStone-Freising-Snapshot wird nicht als eigene Quelle gefuehrt.'
@@ -157,6 +167,7 @@ finally {
         'target_area_filter',
         'staffing_agency_marking',
         'ba_jobsuche_snapshot_import',
+        'ba_jobsuche_freising_snapshot_import',
         'stepstone_freising_snapshot_import',
         'minimal_hash_evidence',
         'empty_results',

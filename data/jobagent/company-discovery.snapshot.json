@@ -29,6 +29,11 @@
       "kind": "jobboard",
       "source_id": "source-registry:ba_jobsuche",
       "input_path": "tests/fixtures/jobagent/jobboard-discovery/ba-jobsuche-muenchen-snapshot.json"
+    },
+    {
+      "kind": "jobboard",
+      "source_id": "source-registry:ba_jobsuche",
+      "input_path": "tests/fixtures/jobagent/jobboard-discovery/ba-jobsuche-freising-snapshot.json"
     }
   ]
 }

@@ -1,20 +1,37 @@
 # Handoff latest
 
-Stand: 2026-08-26T07:03:27.172+02:00
+Stand: 2026-08-26T07:09:10.141+02:00
 
 ## Zustand
 
 - Active: ``
 - Status: `open`
-- Ziel: `JA-025` Arbeitgeberkandidatenbasis weiter skalieren.
+- Ziel: `JA-025` Arbeitgeberkandidatenbasis aus erlaubten Discovery-Quellen weiter skalieren.
 - Branch: `master`
-- HEAD: `f3c45dc2be83`
+- HEAD vor Commit: `cfc575c53732`
 - Upstream: `origin/master`
-- Ahead/Behind: `0/0`
-- Worktree: `dirty`
+- Ahead/Behind vor Commit: `0/0`
+- Worktree vor Commit: `dirty`
 - Route: `True`
 
-## Versionierte Aenderungen
+## Arbeitsstand fuer neuen Chat
+
+Weitergearbeitet wurde an `JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen`.
+
+Konkretes Ergebnis:
+
+- BA-Jobsuche Freising wurde als weitere lokale Arbeitgeber-Hint-Quelle operationalisiert.
+- Neue Fixture `tests/fixtures/jobagent/jobboard-discovery/ba-jobsuche-freising-snapshot.json` erzeugt zwei Freising-Arbeitgeber-Hints:
+  - `Texas Instruments Deutschland GmbH`
+  - `Fraunhofer IVV`
+- Ein Out-of-scope-Treffer `Outside BA Freising Search AG` wird vom Importer verworfen.
+- `data/jobagent/company-discovery.snapshot.json` enthaelt jetzt `6` Snapshot-Inputs.
+- Snapshot-Lane erzeugte `8` Quellenlogs, `20` neue Hints und `26` gemergte Hints.
+- `data/jobagent/company-candidate-verification.queue.json` enthaelt aktuell `10` Queue-Eintraege.
+- Produktive Store-Writes: `false`.
+- Offizielle Website-/Karriere-/ATS-Verifikation: weiter erforderlich.
+
+## Geaenderte Dateien
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
@@ -23,47 +40,10 @@ Stand: 2026-08-26T07:03:27.172+02:00
 - `handoff.latest.md`
 - `html/jobagent/company-coverage.html`
 - `tests/Test-JobAgentJobBoardDiscovery.ps1`
-- `tests/fixtures/jobagent/jobboard-discovery/stepstone-freising-snapshot.json`
+- `tests/fixtures/jobagent/jobboard-discovery/ba-jobsuche-freising-snapshot.json`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-
-## Arbeitsstand fuer neuen Chat
-
-Weitergearbeitet wurde an `JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen`.
-
-Konkretes Ergebnis:
-
-- `source-registry:stepstone_freising` ist in `data/jobagent/company-discovery.snapshot.json` als lokale Jobboersen-Snapshot-Quelle eingetragen.
-- Neue Fixture `tests/fixtures/jobagent/jobboard-discovery/stepstone-freising-snapshot.json` erzeugt zwei Freising-Arbeitgeber-Hints:
-  - `Texas Instruments Deutschland GmbH`
-  - `Fraunhofer IVV`
-- Ein Out-of-scope-Treffer in der Fixture wird vom Importer verworfen.
-- `tests/Test-JobAgentJobBoardDiscovery.ps1` prueft jetzt StepStone Freising als eigene Quelle, absolute StepStone-URLs, Freising-Zielgebiet, Hint-only-Vertrag, Pflicht zur offiziellen Verifikation und Out-of-scope-Filter.
-- Die Snapshot-Lane wurde ausgefuehrt und hat `data/jobagent/company-discovery.hints.json` aktualisiert.
-- Die Coverage-Lane wurde ausgefuehrt und hat `data/jobagent/company-candidate-verification.queue.json` sowie `html/jobagent/company-coverage.html` aktualisiert.
-
-Aktuelle Messwerte:
-
-- Snapshot-Lane: `5` Inputs, `7` Quellenlogs, `18` neue Hints, `24` gemergte Hints.
-- StepStone Freising: `2` Hints aus `source-registry:stepstone_freising`.
-- Produktive Store-Writes: `false`.
-- Offizielle Website-/Karriereverifikation: weiter erforderlich.
-- SonarQube-Port `9000`: erreichbar.
-
-Roadmap-Status:
-
-- `JA-025` bleibt offen. Es wurden weitere erlaubte Arbeitgeber-Hints operationalisiert, aber die geforderte breite Kandidatenbasis und alle erlaubten Quellen sind noch nicht vollstaendig abgearbeitet.
-- `JA-027` bleibt offen und haengt fachlich weiter von `JA-025` ab.
-- Keine Roadmap-Rotation ausgefuehrt, weil kein Roadmap-Punkt komplett abgeschlossen ist.
-
-Naechster sinnvoller Schritt:
-
-1. Weitere erlaubte Quellen aus `data/jobagent/company-discovery.sources.json` operationalisieren, bevorzugt noch fehlende erlaubte Jobboersen-/Regional-/Register-Snapshots.
-2. Danach erneut `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane`.
-3. Danach `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1`.
-4. Fokussierte Funktionstests erneut ausfuehren: Register, JobBoard, Regional, DedupeScale, Coverage.
-5. Erst wenn `JA-025` fachlich komplett erledigt ist, Roadmap-Rotation pruefen und danach `JA-027` fortsetzen.
 
 ## Verifikation
 
@@ -71,8 +51,23 @@ Naechster sinnvoller Schritt:
 - `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentRegionalDiscovery.ps1` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
-- Supertest: nicht erneut angefragt; gemaess Nutzeranweisung als erledigt gewertet.
+- Supertest: nicht erneut ausgefuehrt; gemaess Nutzeranweisung als erledigt gewertet.
+
+## Roadmap-Status
+
+- `JA-025` bleibt offen. Es wurde eine weitere erlaubte Arbeitgeber-Hint-Quelle operationalisiert, aber die geforderte breite Kandidatenbasis aus allen erlaubten Quellen ist noch nicht vollstaendig erreicht.
+- `JA-027` bleibt offen und haengt fachlich weiter von `JA-025` ab.
+- Keine Roadmap-Rotation ausgefuehrt, weil kein Roadmap-Punkt komplett abgeschlossen ist.
+
+## Naechster sinnvoller Schritt
+
+1. Fehlende erlaubte Quellen aus `data/jobagent/company-discovery.sources.json` weiter operationalisieren, bevorzugt weitere Regional-/Register-Snapshots oder erlaubte BA-/Jobboersen-Suchmatrizen.
+2. Danach erneut ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane`.
+3. Danach Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1`.
+4. Fokussierte Funktionstests erneut ausfuehren: Register, JobBoard, Regional, DedupeScale, Coverage.
+5. Erst wenn `JA-025` fachlich komplett erledigt ist: Roadmap-Rotation pruefen, dann `JA-027` fortsetzen.
 
 ## Naechster Anker
 
