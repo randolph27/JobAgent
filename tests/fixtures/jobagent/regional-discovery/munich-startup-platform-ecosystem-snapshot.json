@@ -1,0 +1,44 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T19:30:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_startup_platform_ecosystem",
+      "format": "json_items",
+      "source_page": "https://www.munich-startup.de/en/startups-and-ecosystem",
+      "region_reference": "Munich Startup Ecosystem",
+      "items": [
+        { "company_name": "Assemblixx", "industry_hint": "App startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/assemblixx" },
+        { "company_name": "Taskiy GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/taskiy-gmbh" },
+        { "company_name": "done.by GmbH", "industry_hint": "B2B startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/done-by-gmbh" },
+        { "company_name": "itsmydata GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/itsmydata-gmbh" },
+        { "company_name": "oles Kaffee", "industry_hint": "Beverages startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/oles-kaffee" },
+        { "company_name": "Traindoo", "industry_hint": "Health startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/traindoo" },
+        { "company_name": "Digisale", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/digisale" },
+        { "company_name": "nebty", "industry_hint": "Cybersecurity startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/nebty" },
+        { "company_name": "HCM4all GmbH", "industry_hint": "Cloud startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/hcm4all-gmbh" },
+        { "company_name": "Shore GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/shore-gmbh" },
+        { "company_name": "DeinFlaschendesign", "industry_hint": "Services startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/deinflaschendesign" },
+        { "company_name": "Huntrees", "industry_hint": "HR startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/huntrees" },
+        { "company_name": "Regiondo GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/regiondo-gmbh" },
+        { "company_name": "Differential Bio", "industry_hint": "BioTech startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/differential-bio" },
+        { "company_name": "Bleenco", "industry_hint": "Artificial Intelligence startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/bleenco" },
+        { "company_name": "Floy GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/floy-gmbh" },
+        { "company_name": "Hyphe", "industry_hint": "Artificial Intelligence startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/hyphe" },
+        { "company_name": "teamstr GmbH", "industry_hint": "Community startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/teamstr-gmbh" },
+        { "company_name": "Holidu GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/holidu-gmbh" },
+        { "company_name": "Meaningful", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/meaningful" },
+        { "company_name": "WMD Capital GmbH", "industry_hint": "FinTech startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/wmd-capital-gmbh" },
+        { "company_name": "Nuclino GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/nuclino-gmbh" },
+        { "company_name": "driveit GmbH", "industry_hint": "Mobility startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/driveit-gmbh" },
+        { "company_name": "swop", "industry_hint": "App startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/swop" },
+        { "company_name": "inGemeinschaft", "industry_hint": "PropTech / Real Estate startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/ingemeinschaft" },
+        { "company_name": "combyne", "industry_hint": "eCommerce startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/combyne" },
+        { "company_name": "Delightex GmbH", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/delightex-gmbh" },
+        { "company_name": "DeutschlandGPT", "industry_hint": "IT/Technology startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/deutschlandgpt" },
+        { "company_name": "KontextMaps", "industry_hint": "Education startup", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/kontextmaps" },
+        { "company_name": "German Accelerator", "industry_hint": "Accelerator / Incubator", "location": "Muenchen", "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem/german-accelerator" }
+      ]
+    }
+  ]
+}

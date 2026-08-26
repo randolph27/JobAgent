@@ -357,6 +357,28 @@
       "legal_risk": "LOW"
     },
     {
+      "source_id": "source-registry:munich_startup_platform_ecosystem",
+      "source_class": "REGIONAL_DIRECTORY",
+      "source_url": "https://www.munich-startup.de/en/startups-and-ecosystem",
+      "operator": "Muenchner Gewerbehof- und Technologiezentrumsgesellschaft mbH / Munich Startup",
+      "allowed_use": "Oeffentlich gelistete Startups und Scaleups aus dem Munich-Startup-Oekosystem als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer das Muenchner Startup-Oekosystem, keine Karrierequellenaufnahme allein aus Profilseiten und keine Uebernahme von Kontakt- oder Personenangaben.",
+      "rate_limit_policy": "Manueller oder seltener lokaler Snapshot einzelner Profilseiten; kein Login, kein Scraping hinter Schutzmechanismen, keine Nutzung der Insights-Login-Daten.",
+      "robots_or_terms_note": "Portalbedingungen, Impressum, Datenschutz und Robots vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
+      "evidence_level": "DISCOVERY_HINT",
+      "freshness_policy": "Quartalsweise oder bei Startup-Verifikationswelle neu pruefen; Profilseitenstand im Evidence-Log dokumentieren.",
+      "retention_policy": "Nur Startup-/Arbeitgebername, Branche, Standortbezug, Profil-URL und Reviewstatus speichern; keine Team-, Kontakt- oder Personendaten.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "MEDIUM"
+    },
+    {
       "source_id": "source-registry:landkreis_freising_wirtschaft",
       "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
       "source_url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",

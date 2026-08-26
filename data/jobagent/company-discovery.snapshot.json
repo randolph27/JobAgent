@@ -77,6 +77,11 @@
     },
     {
       "kind": "regional",
+      "source_id": "source-registry:munich_startup_platform_ecosystem",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-startup-platform-ecosystem-snapshot.json"
+    },
+    {
+      "kind": "regional",
       "source_id": "source-registry:stadt_freising_weihenstephan",
       "input_path": "tests/fixtures/jobagent/regional-discovery/stadt-freising-weihenstephan-organizations-snapshot.json"
     },

@@ -30,6 +30,8 @@ $techGithubSource = Get-JobAgentRegionalSource -SourceRegistry $registry -Source
 Assert-True -Condition ([string]$techGithubSource.evidence_level -eq 'DISCOVERY_HINT') -Message 'Tech-Companies-Munich-Quelle darf keine offizielle Evidenz erhalten.'
 $klimapaktSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_business_klimapakt3_companies'
 Assert-True -Condition ([string]$klimapaktSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY' -and [string]$klimapaktSource.evidence_level -eq 'SECONDARY_OFFICIAL_DIRECTORY') -Message 'Klimapakt-3-Quelle wurde nicht als oeffentliche Institutionsquelle geladen.'
+$startupSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_startup_platform_ecosystem'
+Assert-True -Condition ([string]$startupSource.source_class -eq 'REGIONAL_DIRECTORY' -and [string]$startupSource.evidence_level -eq 'DISCOVERY_HINT') -Message 'Munich-Startup-Quelle wurde nicht als regionale Discovery-Quelle geladen.'
 
 try {
     Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:manual_review_list' | Out-Null
@@ -100,6 +102,13 @@ Assert-True -Condition ($klimapaktResult.source_counts.'source-registry:munich_b
 Assert-True -Condition (@($klimapaktResult.hints | Where-Object { [string]$_.officialness_level -ne 'SECONDARY_OFFICIAL_DIRECTORY' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Klimapakt-3-Hints muessen unverifizierte Sekundaerhinweise bleiben.'
 Assert-True -Condition (@($klimapaktResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH', 'FREISING') }).Count -eq 0) -Message 'Klimapakt-3-Hints muessen Muenchen- oder Freising-Bezug behalten.'
 
+$startupFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\munich-startup-platform-ecosystem-snapshot.json'
+$startupResult = Import-JobAgentRegionalDirectories -SnapshotPath $startupFixture -SourceRegistry $registry
+Assert-True -Condition ($startupResult.hints_total -eq 30) -Message 'Munich-Startup-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition ($startupResult.source_counts.'source-registry:munich_startup_platform_ecosystem' -eq 30) -Message 'Munich-Startup-Hints werden nicht der neuen Quelle zugeordnet.'
+Assert-True -Condition (@($startupResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Munich-Startup-Hints muessen unverifizierte Discovery-Hints bleiben.'
+Assert-True -Condition (@($startupResult.hints | Where-Object { [string]$_.target_area -ne 'MUNICH' }).Count -eq 0) -Message 'Munich-Startup-Hints muessen Muenchen-Bezug behalten.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 try {
@@ -152,6 +161,7 @@ finally {
         'production_stock_listed_snapshot',
         'production_freising_economy_snapshot',
         'production_klimapakt3_snapshot',
+        'production_munich_startup_snapshot',
         'script_writes_regional_and_merged_hints'
     )
     hints = $result.hints_total

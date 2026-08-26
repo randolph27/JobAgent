@@ -1,54 +1,31 @@
 {
-  "ts": "2026-08-26T19:13:13.426+02:00",
-  "project": "JobAgent",
+  "ts": "2026-08-26T19:29:37.579+02:00",
+  "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
-  "status": "open",
+  "project": "JobAgent",
   "active_id": "",
-  "goal": "JA-025 Arbeitgeberkandidatenbasis erweitern; JA-027 bleibt abhaengig.",
-  "summary": "Klimapakt-3-Unternehmensliste als regionale Snapshot-Quelle fuer unverifizierte Arbeitgeberkandidaten ergaenzt.",
-  "roadmap": {
-    "active": [
-      "JA-025",
-      "JA-027"
-    ],
-    "rotation_performed": false,
-    "rotation_reason": "JA-025 bleibt offen, weil target_inventory_candidates_total=523 unter Zielwert 1000 liegt. JA-027 ist fachlich abhaengig von JA-025."
-  },
+  "status": "open",
+  "goal": "JA-025 Arbeitgeberkandidatenbasis aus erlaubten Quellen weiter ausbauen.",
+  "summary": "Munich-Startup-Plattform als regionale Snapshot-Quelle ergaenzt; keine produktiven Firmen- oder JobSource-Writes.",
   "changed": [
-    "data/jobagent/company-discovery.sources.json",
-    "data/jobagent/company-discovery.snapshot.json",
-    "tests/fixtures/jobagent/regional-discovery/munich-business-klimapakt3-snapshot.json",
-    "tests/Test-JobAgentRegionalDiscovery.ps1",
-    "docs/company-discovery-operations.md",
-    "data/jobagent/company-discovery.hints.json",
     "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "data/jobagent/company-discovery.snapshot.json",
+    "data/jobagent/company-discovery.sources.json",
+    "docs/company-discovery-operations.md",
+    "handoff.latest.json",
+    "handoff.latest.md",
     "html/jobagent/company-coverage.html",
     "html/jobagent/ja-022-viewport-audit.html",
+    "tests/Test-JobAgentRegionalDiscovery.ps1",
+    "tests/fixtures/jobagent/regional-discovery/munich-startup-platform-ecosystem-snapshot.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json",
-    "handoff.latest.md",
-    "handoff.latest.json"
+    "todo.master.index.json"
   ],
-  "metrics": {
-    "companies_total": 38,
-    "job_sources_total": 39,
-    "discovery_hints_total": 487,
-    "munich_business_klimapakt3_companies_hints": 20,
-    "candidate_verification_queue_clusters_total": 485,
-    "target_inventory_candidates_total": 523,
-    "target_inventory_gap_to_1000": 477,
-    "target_inventory_gate_status": "failed",
-    "source_gate_status": "passed",
-    "source_gate_expected_sources_total": 20,
-    "source_gate_processed_sources_total": 20,
-    "source_gate_missing_source_ids": [],
-    "productive_store_write": false,
-    "official_verification_required": true
-  },
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -Command <JSON validation for registry, manifest and Klimapakt snapshot>",
+      "cmd": "pwsh -NoProfile -Command <JSON validation for registry, manifest and Munich Startup snapshot>",
       "exit": 0
     },
     {
@@ -84,21 +61,33 @@
       "exit": 0
     }
   ],
-  "supertest": {
-    "executed_in_this_step": false,
-    "status": "treated_as_done_by_user_instruction",
-    "reason": "Der Nutzer hat angegeben: Wenn supertest nicht angefragt wurde, gilt er als erledigt."
-  },
-  "git": {
-    "branch": "master",
-    "head_before_commit": "1715ab70152a",
-    "upstream": "origin/master",
-    "ahead_before_commit": 0,
-    "behind_before_commit": 0,
-    "worktree_before_commit": "dirty"
+  "metrics": {
+    "companies_total": 38,
+    "job_sources_total": 39,
+    "new_hints_total": 516,
+    "merged_hints_total": 517,
+    "candidate_clusters_total": 515,
+    "candidate_verification_candidates_total": 517,
+    "target_inventory_candidates_total": 553,
+    "target_inventory_gap_to_1000": 447,
+    "target_inventory_gate_status": "failed",
+    "source_gate_status": "passed",
+    "source_gate_expected_sources_total": 21,
+    "source_gate_processed_sources_total": 21,
+    "productive_store_write": false,
+    "official_verification_required": true
   },
   "route_ok": true,
   "route_violations": [],
+  "git": {
+    "branch": "master",
+    "head": "64f00db97f77",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty"
+  },
+  "next": "JA-025 fortsetzen: weitere erlaubte, snapshot-faehige Arbeitgeberquellen bis mindestens 1000 Zielgebietskandidaten erschliessen; JA-027 erst danach oder nach bewusst ausgewaehlter Teilwelle.",
   "refs": [
     "todo.current.md",
     "todo.state.json",
@@ -106,12 +95,8 @@
     "handoff.latest.json",
     "handoff.latest.md"
   ],
-  "next_steps": [
-    "Weitere erlaubte, snapshot-faehige Arbeitgeberquellen fuer Muenchen, 20-km-Umkreis und Freising ergaenzen.",
-    "Keine produktiven Store-Writes ohne offizielle Firmen-/Karriere-/ATS-Verifikation.",
-    "JA-027 erst fortsetzen, wenn JA-025 ausreichend breite Kandidatenbasis liefert oder eine Teilwelle bewusst zur offiziellen Verifikation ausgewaehlt wird."
-  ],
-  "source_urls": [
-    "https://www.munich-business.eu/standort-muenchen/klimaschutz-ressourcen/klimapakt3.html"
-  ]
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "env_inventory_path": null
 }
