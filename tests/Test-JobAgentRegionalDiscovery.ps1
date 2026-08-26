@@ -28,6 +28,8 @@ $freisingSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId
 Assert-True -Condition ([string]$freisingSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY') -Message 'Freisinger Institutionsquelle wurde nicht geladen.'
 $techGithubSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:tech_companies_munich_github'
 Assert-True -Condition ([string]$techGithubSource.evidence_level -eq 'DISCOVERY_HINT') -Message 'Tech-Companies-Munich-Quelle darf keine offizielle Evidenz erhalten.'
+$awesomeMlSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:awesome_ml_startups_munich_github'
+Assert-True -Condition ([string]$awesomeMlSource.evidence_level -eq 'DISCOVERY_HINT' -and [string]$awesomeMlSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'Awesome-ML-Startups-Munich-Quelle wurde nicht als unverifizierte regionale Discovery-Quelle geladen.'
 $klimapaktSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_business_klimapakt3_companies'
 Assert-True -Condition ([string]$klimapaktSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY' -and [string]$klimapaktSource.evidence_level -eq 'SECONDARY_OFFICIAL_DIRECTORY') -Message 'Klimapakt-3-Quelle wurde nicht als oeffentliche Institutionsquelle geladen.'
 $startupSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_startup_platform_ecosystem'
@@ -109,6 +111,14 @@ Assert-True -Condition ($startupResult.source_counts.'source-registry:munich_sta
 Assert-True -Condition (@($startupResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Munich-Startup-Hints muessen unverifizierte Discovery-Hints bleiben.'
 Assert-True -Condition (@($startupResult.hints | Where-Object { [string]$_.target_area -ne 'MUNICH' }).Count -eq 0) -Message 'Munich-Startup-Hints muessen Muenchen-Bezug behalten.'
 
+$awesomeMlFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\awesome-ml-startups-munich-github-snapshot.json'
+$awesomeMlResult = Import-JobAgentRegionalDirectories -SnapshotPath $awesomeMlFixture -SourceRegistry $registry
+Assert-True -Condition ($awesomeMlResult.hints_total -eq 89) -Message 'Awesome-ML-Startups-Munich-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition ($awesomeMlResult.source_counts.'source-registry:awesome_ml_startups_munich_github' -eq 89) -Message 'Awesome-ML-Startups-Munich-Hints werden nicht der neuen Quelle zugeordnet.'
+Assert-True -Condition (@($awesomeMlResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Awesome-ML-Startups-Munich-Hints muessen unverifizierte Discovery-Hints bleiben.'
+Assert-True -Condition (@($awesomeMlResult.hints | Where-Object { [string]$_.target_area -ne 'MUNICH' }).Count -eq 0) -Message 'Awesome-ML-Startups-Munich-Hints muessen Muenchen-Bezug behalten.'
+Assert-True -Condition (@($awesomeMlResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'career_hint' -or $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Awesome-ML-Startups-Munich-Links duerfen nicht als offizielle Felder persistiert werden.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 try {
@@ -162,6 +172,7 @@ finally {
         'production_freising_economy_snapshot',
         'production_klimapakt3_snapshot',
         'production_munich_startup_snapshot',
+        'production_awesome_ml_startups_munich_snapshot',
         'script_writes_regional_and_merged_hints'
     )
     hints = $result.hints_total

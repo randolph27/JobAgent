@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-snapshot-manifest/v1",
-  "generated_at": "2026-08-26T17:00:00.000Z",
+  "generated_at": "2026-08-26T20:00:00.000Z",
   "contract": "Lokale Snapshot-Lane fuer erlaubte Discovery-Hints; keine produktiven Firmen- oder JobSource-Writes.",
   "items": [
     {
@@ -114,6 +114,11 @@
       "kind": "regional",
       "source_id": "source-registry:tech_companies_munich_github",
       "input_path": "tests/fixtures/jobagent/regional-discovery/tech-companies-munich-github-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:awesome_ml_startups_munich_github",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/awesome-ml-startups-munich-github-snapshot.json"
     }
   ]
 }

@@ -1,0 +1,637 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T20:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:awesome_ml_startups_munich_github",
+      "format": "json_items",
+      "source_page": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+      "region_reference": "Awesome Machine Learning Startups Munich GitHub list",
+      "items": [
+        {
+          "company_name": "Glanos",
+          "industry_hint": "Natural language processing",
+          "location": "Muenchen",
+          "description_hint": "Free text analysis for businesses",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "KNOWRON",
+          "industry_hint": "Natural language processing",
+          "location": "Muenchen",
+          "description_hint": "AI-based digital assistant for industrial workers",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Pyoneer",
+          "industry_hint": "Natural language processing",
+          "location": "Muenchen",
+          "description_hint": "Customer feedback analytics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "SUMM",
+          "industry_hint": "Natural language processing",
+          "location": "Muenchen",
+          "description_hint": "Translating to easy language",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Bragi",
+          "industry_hint": "Voice and sound",
+          "location": "Muenchen",
+          "description_hint": "Hearable technology innovation",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Voice Line",
+          "industry_hint": "Voice and sound",
+          "location": "Muenchen",
+          "description_hint": "Smart voice messaging",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Blickfeld",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "LiDAR sensors and perception software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Fast AI Movie",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Movie generation",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Isarsoft",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Video analytics solutions",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "NavVis",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Point clouds and digital twins",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Orbem",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "MRI-based imaging technology",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Presize.ai",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Size recommendation for e-commerce",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Recogni",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Realtime object recognition",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Retorio",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Behavior intelligence platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Tawny",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Emotion analytics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Toposens",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "3D ultrasonic echolocation sensor",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "36ZERO Vision",
+          "industry_hint": "Computer vision",
+          "location": "Muenchen",
+          "description_hint": "Visual quality assurance with AI",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Curiosity",
+          "industry_hint": "Search",
+          "location": "Muenchen",
+          "description_hint": "Productivity search app",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Agile Robots",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "AI and robotics systems",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Angsa Robotics",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "Mobile trash cleaning robots",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Franka Emika",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "Robots for research and production",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Intrinsic",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "Software for robotics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Magazino",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "Autonomous supply-chain robotics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Olive Robotics",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "Embedded AI robotics components",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Robominds",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "AI for industrial robotics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Robotise",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "Service automation robotics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "sewts",
+          "industry_hint": "Robotics",
+          "location": "Muenchen",
+          "description_hint": "Robotics and computer vision",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Argo.ai",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "Self-driving vehicle technology",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Fernride",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "Logistics automation",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Konux",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "IoT and machine learning for infrastructure",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Parkdepot",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "Digital parking solution",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Smartlane",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "Transport optimization",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "tiramizoo",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "Urban logistics transport management",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Tensoreye",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "Deep learning for automotive and healthcare",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "TWAICE",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "Predictive battery analytics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "4.screen",
+          "industry_hint": "Transportation and autonomous driving",
+          "location": "Muenchen",
+          "description_hint": "In-car communication and marketing",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "ALFA AI",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "AI fitness coach",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Breathment",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Breathing therapy software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Cognote",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Medical documentation automation",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "deepc",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Radiology AI platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Ebenbuild",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Personalized digital twins",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "hema.to",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Clinical flow decision support",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "ImFusion",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Medical image computing",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Laralab",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Heart valve intervention decision support",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Leevi Health",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Health monitoring for babies",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "m3i",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Clinical data for AI innovations",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "molab.ai",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "In silico property predictions",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "OmicEra Diagnostics",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Proteome analysis",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Ryver.ai",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Synthetic data software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Smart Reporting",
+          "industry_hint": "Healthcare and biotech",
+          "location": "Muenchen",
+          "description_hint": "Medical reporting and documentation",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "dstack.ai",
+          "industry_hint": "MLOps and software",
+          "location": "Muenchen",
+          "description_hint": "AI app build workflows",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "TESTIFI",
+          "industry_hint": "MLOps and software",
+          "location": "Muenchen",
+          "description_hint": "Test automation software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "ZenML",
+          "industry_hint": "MLOps and software",
+          "location": "Muenchen",
+          "description_hint": "ML workflow standardization",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Alexandrya",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Sales lead generation",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Celonis",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Process mining software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Ciara",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Sales conversation intelligence",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Cobrainer",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "AI-powered skill platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "ExB",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Document processing",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Emax Digital",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Amazon analytics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "idnow",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "KYC platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "insaas",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "AI for market research",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Laya",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Hotel SaaS solution",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "metoda",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Amazon advertising support",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "numi",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Supply-chain advisor",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Optiwiser AI",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Demand planning and inventory management",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Picsure",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Asset management for non-financial assets",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Quantumrock",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "AI asset management",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "riskmethods",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Supply chain risk management",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "subcapitals",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "AI asset management",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Tacto",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Industrial procurement software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Zetamatch",
+          "industry_hint": "Business, finance and operations",
+          "location": "Muenchen",
+          "description_hint": "Recruiting software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "HAWK:AI",
+          "industry_hint": "Legal",
+          "location": "Muenchen",
+          "description_hint": "AML surveillance",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "top.legal",
+          "industry_hint": "Legal",
+          "location": "Muenchen",
+          "description_hint": "Contract management software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Autovia",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Data engineering and analytics consulting",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Bleenco",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "No-code AI platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Building Radar",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Revenue engineering platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Celus",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "AI-powered engineering platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Hyperganic",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Algorithmic engineering",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Kinexon",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Real-time locating",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Kreatize",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Manufacturing platform",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Luminovo",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Electronics industry software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Makersite",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Enterprise digital twins",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "nebumind",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Manufacturing quality analytics",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "RNA Digital Solutions",
+          "industry_hint": "Science and engineering",
+          "location": "Muenchen",
+          "description_hint": "Software, AI and simulation",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Fold.ai",
+          "industry_hint": "Environment",
+          "location": "Muenchen",
+          "description_hint": "Forest ecosystem monitoring",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "OCELL",
+          "industry_hint": "Environment",
+          "location": "Muenchen",
+          "description_hint": "Forest management software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "OroraTech",
+          "industry_hint": "Environment",
+          "location": "Muenchen",
+          "description_hint": "Wildfire detection from space",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "UX3D",
+          "industry_hint": "Other",
+          "location": "Muenchen",
+          "description_hint": "3D real-time software",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        },
+        {
+          "company_name": "Brainamics",
+          "industry_hint": "Other",
+          "location": "Muenchen",
+          "description_hint": "Game playtesting",
+          "source_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich"
+        }
+      ]
+    }
+  ]
+}
