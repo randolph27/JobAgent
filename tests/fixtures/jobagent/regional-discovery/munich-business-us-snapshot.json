@@ -1,0 +1,84 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T11:10:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_us_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "General Electric Holding GmbH",
+          "industry_hint": "Industrie und High-Tech",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Intel GmbH",
+          "industry_hint": "Halbleitertechnologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Philip Morris GmbH",
+          "industry_hint": "Konsumgueter",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Texas Instruments Deutschland GmbH",
+          "industry_hint": "Halbleitertechnologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "OpenAI",
+          "industry_hint": "Kuenstliche Intelligenz",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Amazon.de GmbH",
+          "industry_hint": "Dienstleistungen und Technologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bain & Company Germany Inc.",
+          "industry_hint": "Beratung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Deloitte Touche Tohmatsu Limited",
+          "industry_hint": "Beratung und Pruefung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "McKinsey & Company Inc.",
+          "industry_hint": "Beratung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "The Boston Consulting Group GmbH",
+          "industry_hint": "Beratung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Amgen GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Baxter Deutschland GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bio-Rad Laboratories GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bristol-Myers Squibb GmbH & Co. KG",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

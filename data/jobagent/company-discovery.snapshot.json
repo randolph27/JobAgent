@@ -41,6 +41,16 @@
       "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-finance-snapshot.json"
     },
     {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_us_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-us-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_japanese_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-japanese-snapshot.json"
+    },
+    {
       "kind": "jobboard",
       "source_id": "source-registry:stepstone_muenchen",
       "input_path": "tests/fixtures/jobagent/jobboard-discovery/stepstone-muenchen-snapshot.json"

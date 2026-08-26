@@ -1,0 +1,79 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T11:10:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_japanese_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "Astellas Pharma GmbH",
+          "industry_hint": "Pharma",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Daiichi Sankyo Europe GmbH",
+          "industry_hint": "Pharma",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "DMG MORI EMEA Holding GmbH",
+          "industry_hint": "Maschinen- und Anlagenbau",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "NTT Data Deutschland SE",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Fujitsu Germany GmbH",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Mitsubishi Heavy Industries",
+          "industry_hint": "Industrie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "All Nippon Airways",
+          "industry_hint": "Luftfahrt",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Olympus Europa GmbH",
+          "industry_hint": "Medizintechnik",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Panasonic Industry Europe GmbH",
+          "industry_hint": "Elektronik",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "TDK Electronics AG",
+          "industry_hint": "Elektronik",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Resonac Europe GmbH",
+          "industry_hint": "Chemie und Materialien",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Yamaichi Electronics Deutschland GmbH",
+          "industry_hint": "Elektronik",
+          "location": "Raum Muenchen"
+        },
+        {
+          "company_name": "DENSO Automotive Deutschland GmbH",
+          "industry_hint": "Automotive",
+          "location": "Raum Muenchen"
+        }
+      ]
+    }
+  ]
+}

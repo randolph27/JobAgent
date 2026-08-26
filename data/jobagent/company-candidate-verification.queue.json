@@ -1,9 +1,9 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-26T10:02:51.516Z",
-  "clusters_total": 92,
-  "candidates_total": 98,
+  "generated_at": "2026-08-26T10:12:52.479Z",
+  "clusters_total": 119,
+  "candidates_total": 125,
   "ready_total": 10,
   "action_counts": {
     "VERIFY_OFFICIAL_SITE": 10
@@ -29,7 +29,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -72,7 +72,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -116,7 +116,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -160,7 +160,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -203,7 +203,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -247,7 +247,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "UNKNOWN",
@@ -291,7 +291,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": "MANUAL_REVIEW_REQUIRED",
       "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
       "freshness_status": "FRESH",
@@ -334,7 +334,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -352,6 +352,49 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:aenova"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_all_nippon_airways_muenchen",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_all_nippon_airways_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_all_nippon_airways_muenchen"
+      ],
+      "canonical_name": "All Nippon Airways",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "PENDING",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "a4ca8810cfbee6c4dd3678cc4afcfd160fbdd151f2b89b03514f77b9213d7e46",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:all nippon airways"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -377,7 +420,7 @@
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
+      "next_attempt_at": "2026-08-26T10:12:52.479Z",
       "last_status": null,
       "last_reason": null,
       "freshness_status": "FRESH",
@@ -395,49 +438,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:allianz"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_boersennotierte_unternehmen_alpha_regional_ag_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_boersennotierte_unternehmen_alpha_regional_ag_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_boersennotierte_unternehmen_alpha_regional_ag_muenchen"
-      ],
-      "canonical_name": "Alpha Regional AG",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "PENDING",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-24T07:40:39.996Z",
-      "next_attempt_at": "2026-08-26T10:02:51.516Z",
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
-        "observed_at": "08/23/2026 08:00:00",
-        "record_hash": "3abe39296ece10b2b0459f0c99527924237daeabc79ace610ba73dc8376e3a68",
-        "allowed_use": "Kuratierte Arbeitgeberkandidaten fuer Muenchen und Region erfassen; offizielle Firmenwebsite danach separat verifizieren.",
-        "rate_limit_policy": "Manuell oder selten mit lokalem Cache abrufen; kein Massencrawl."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:alpha regional"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
