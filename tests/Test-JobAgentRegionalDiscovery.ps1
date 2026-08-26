@@ -26,6 +26,8 @@ $munichSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId '
 Assert-True -Condition ([string]$munichSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'Muenchner Regionalquelle wurde nicht geladen.'
 $freisingSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:landkreis_freising_wirtschaft'
 Assert-True -Condition ([string]$freisingSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY') -Message 'Freisinger Institutionsquelle wurde nicht geladen.'
+$techGithubSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:tech_companies_munich_github'
+Assert-True -Condition ([string]$techGithubSource.evidence_level -eq 'DISCOVERY_HINT') -Message 'Tech-Companies-Munich-Quelle darf keine offizielle Evidenz erhalten.'
 
 try {
     Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:manual_review_list' | Out-Null
@@ -69,6 +71,13 @@ try {
 catch {
     Assert-True -Condition ([string]$_.Exception.Message -match 'regionale Discovery|Snapshot-Import|Regionale Quelle') -Message 'Blockierte Quelle muss fail-closed melden.'
 }
+
+$techFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\tech-companies-munich-github-snapshot.json'
+$techResult = Import-JobAgentRegionalDirectories -SnapshotPath $techFixture -SourceRegistry $registry
+Assert-True -Condition ($techResult.hints_total -ge 80) -Message 'Tech-Companies-Munich-Snapshot erzeugt zu wenige Arbeitgeberhints.'
+Assert-True -Condition ($techResult.source_counts.'source-registry:tech_companies_munich_github' -eq $techResult.hints_total) -Message 'Tech-Companies-Munich-Hints werden nicht der neuen Quelle zugeordnet.'
+Assert-True -Condition (@($techResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [string]$_.target_area -ne 'MUNICH' }).Count -eq 0) -Message 'Community-Tech-Hints muessen unverifizierte Muenchen-Hints bleiben.'
+Assert-True -Condition (@($techResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'career_hint' -or $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Tech-Companies-Munich-Links duerfen nicht als offizielle Felder persistiert werden.'
 
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
@@ -114,6 +123,7 @@ finally {
         'card_html_parser',
         'json_snapshot_parser',
         'coordinate_target_area_filter',
+        'community_tech_directory_snapshot',
         'target_area_filter',
         'dedupe_by_hint_id',
         'minimal_hash_evidence',

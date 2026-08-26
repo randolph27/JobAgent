@@ -1,0 +1,531 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T17:00:00.000Z",
+  "license": "MIT License; Repository metadata reported license.spdx_id=MIT at snapshot preparation time.",
+  "sources": [
+    {
+      "source_id": "source-registry:tech_companies_munich_github",
+      "format": "json_items",
+      "source_page": "https://github.com/rmellojunior/tech_companies_munich",
+      "region_reference": "Muenchen Tech-Unternehmen",
+      "items": [
+        {
+          "company_name": "BurdaForward",
+          "industry_hint": "AdTech",
+          "location": "Muenchen",
+          "description_hint": "Digital publishing - large number of journalistic offerings"
+        },
+        {
+          "company_name": "trbo",
+          "industry_hint": "AdTech",
+          "location": "Muenchen",
+          "description_hint": "Provider for dynamic onsite personalization, optimization and testing"
+        },
+        {
+          "company_name": "Combine",
+          "industry_hint": "Apps",
+          "location": "Muenchen",
+          "description_hint": "Social space for creating outfits"
+        },
+        {
+          "company_name": "Freeletics",
+          "industry_hint": "Apps",
+          "location": "Muenchen",
+          "description_hint": "Provider of AI-based fitness coaching"
+        },
+        {
+          "company_name": "MING Labs",
+          "industry_hint": "Apps",
+          "location": "Muenchen",
+          "description_hint": "Digital innovation and transformation company making businesses future-ready by design"
+        },
+        {
+          "company_name": "BetterTaxi",
+          "industry_hint": "Automotive",
+          "location": "Muenchen",
+          "description_hint": "Taxi and airport transfer services"
+        },
+        {
+          "company_name": "FAZUA",
+          "industry_hint": "Automotive",
+          "location": "Muenchen",
+          "description_hint": "Pioneering technology and passionate people for #BetterRides"
+        },
+        {
+          "company_name": "Fleetster",
+          "industry_hint": "Automotive",
+          "location": "Muenchen",
+          "description_hint": "Fleet management and Car Sharing software and technology"
+        },
+        {
+          "company_name": "FlixBus",
+          "industry_hint": "Automotive",
+          "location": "Muenchen",
+          "description_hint": "Smart and green mobility for everyone to experience the world"
+        },
+        {
+          "company_name": "ParkHere",
+          "industry_hint": "Automotive",
+          "location": "Muenchen",
+          "description_hint": "Smart High-Tech Solutions for Digital Parking Management"
+        },
+        {
+          "company_name": "SIXT",
+          "industry_hint": "Automotive",
+          "location": "Muenchen",
+          "description_hint": "Provider of high-quality mobility services"
+        },
+        {
+          "company_name": "Adobe",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Digital media and digital marketing solutions"
+        },
+        {
+          "company_name": "BMW",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Manufacturer of automobiles and motorcycles and also provides premium financial and mobility services"
+        },
+        {
+          "company_name": "Cisco",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Cisco hardware, software, and service"
+        },
+        {
+          "company_name": "Google",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Software Development"
+        },
+        {
+          "company_name": "Hubert Burda Media",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Technology and media companies"
+        },
+        {
+          "company_name": "IBM",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Technology and infrastructure, software and consulting"
+        },
+        {
+          "company_name": "mgm technology partners",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Software"
+        },
+        {
+          "company_name": "Microsoft",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Software Development"
+        },
+        {
+          "company_name": "OSRAM",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Appliances, Electrical, and Electronics Manufacturing"
+        },
+        {
+          "company_name": "ProSiebenSat.1",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Broadcast Media Production and Distribution"
+        },
+        {
+          "company_name": "Rohde & Schwarz",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Telecommunications"
+        },
+        {
+          "company_name": "Siemens",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Industry, infrastructure, transport, and healthcare technologies"
+        },
+        {
+          "company_name": "Thoughtworks",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Information Technology & Services"
+        },
+        {
+          "company_name": "Yahoo",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Technology, Information and Internet"
+        },
+        {
+          "company_name": "Amazon",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Software Development"
+        },
+        {
+          "company_name": "NFON",
+          "industry_hint": "BigTech",
+          "location": "Muenchen",
+          "description_hint": "Telecommunications"
+        },
+        {
+          "company_name": "Celonis",
+          "industry_hint": "Data Analysis",
+          "location": "Muenchen",
+          "description_hint": "Helps companies reveal and fix inefficiencies"
+        },
+        {
+          "company_name": "Datarella",
+          "industry_hint": "Data Analysis",
+          "location": "Muenchen",
+          "description_hint": "Big Data and Blockchain solutions provider"
+        },
+        {
+          "company_name": "Building Radar",
+          "industry_hint": "Data Analysis",
+          "location": "Muenchen",
+          "description_hint": "Enable sales teams to win more high-margin projects through Revenue Engineering"
+        },
+        {
+          "company_name": "CHECK24",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Comparison portal"
+        },
+        {
+          "company_name": "commercetools",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Digital commerce"
+        },
+        {
+          "company_name": "CUPONATION",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Online savings platform"
+        },
+        {
+          "company_name": "givve",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Tax free benefits for your employees or B2B incentives for your clients and business partners"
+        },
+        {
+          "company_name": "limango",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Online shop"
+        },
+        {
+          "company_name": "lingoking",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Universal platform for language services"
+        },
+        {
+          "company_name": "Mytheresa",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Technology meets luxury in a space that celebrates both creativity and digital advancement"
+        },
+        {
+          "company_name": "Planet Sports",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "e-commerce company"
+        },
+        {
+          "company_name": "Scout24",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "ImmoScout24, an online platform for residential and commercial real estate"
+        },
+        {
+          "company_name": "VITAFY",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Nutrition products for enthusiastic sports and food lovers"
+        },
+        {
+          "company_name": "Westwing",
+          "industry_hint": "eCommerce",
+          "location": "Muenchen",
+          "description_hint": "Living e-Commerce"
+        },
+        {
+          "company_name": "Aboalarm",
+          "industry_hint": "FinTech",
+          "location": "Muenchen",
+          "description_hint": "Templates for terminating contracts"
+        },
+        {
+          "company_name": "Bilendo",
+          "industry_hint": "FinTech",
+          "location": "Muenchen",
+          "description_hint": "Cloud platform on which companies can centrally map, control and automate all accounts receivable accounting processes"
+        },
+        {
+          "company_name": "Boku",
+          "industry_hint": "FinTech",
+          "location": "Muenchen",
+          "description_hint": "Provider of local mobile-first payments solutions"
+        },
+        {
+          "company_name": "Gini",
+          "industry_hint": "FinTech",
+          "location": "Muenchen",
+          "description_hint": "Turn mobile payment for banking, insurance, and eCommerce into automagic experiences"
+        },
+        {
+          "company_name": "Interhyp",
+          "industry_hint": "FinTech",
+          "location": "Muenchen",
+          "description_hint": "Aimed at finantials end customers and institutional partners"
+        },
+        {
+          "company_name": "PAYBACK",
+          "industry_hint": "FinTech",
+          "location": "Muenchen",
+          "description_hint": "Multipartner loyalty program and multichannel marketing platform"
+        },
+        {
+          "company_name": "MegaZebra",
+          "industry_hint": "Games",
+          "location": "Muenchen",
+          "description_hint": "Mobile gaming"
+        },
+        {
+          "company_name": "Travian Games",
+          "industry_hint": "Games",
+          "location": "Muenchen",
+          "description_hint": "Computer games"
+        },
+        {
+          "company_name": "Cobrainer",
+          "industry_hint": "HR Tech",
+          "location": "Muenchen",
+          "description_hint": "Skills management, recruiting automation, up-skilling, and talent development"
+        },
+        {
+          "company_name": "Personio",
+          "industry_hint": "HR Tech",
+          "location": "Muenchen",
+          "description_hint": "All-in-one HR software"
+        },
+        {
+          "company_name": "Speexx",
+          "industry_hint": "HR Tech",
+          "location": "Muenchen",
+          "description_hint": "Digital language training, business coaching, and skills assessment"
+        },
+        {
+          "company_name": "Bragi",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "The Experience Layer for Audio Devices"
+        },
+        {
+          "company_name": "Cosinuss",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Mobile Vital Signs Company - Enabling anybody to assess and manage health & fitness"
+        },
+        {
+          "company_name": "EGYM DACH",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Global fitness technology providing fitness and health facilities with intelligent workout solutions"
+        },
+        {
+          "company_name": "KINEXON",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Technology solutions that add real-time value in industries, logistics & sports"
+        },
+        {
+          "company_name": "KONUX",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Transform Railway Operations for a Sustainable Future"
+        },
+        {
+          "company_name": "ProGlove",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Industrial wearables to connect the human worker with the Industrial IoT"
+        },
+        {
+          "company_name": "tacterion",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "High-Tech sensors for a tactile world"
+        },
+        {
+          "company_name": "tado°",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Intelligent home climate management"
+        },
+        {
+          "company_name": "3megawatt by Power Factors",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Provider of software, methodology and support for renewable asset management"
+        },
+        {
+          "company_name": "Elgato",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Audio-visual technology"
+        },
+        {
+          "company_name": "innosabi",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Develops software for agile innovation"
+        },
+        {
+          "company_name": "JetBrains",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Software Development"
+        },
+        {
+          "company_name": "Userlane",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Identify and remove digital adoption barriers across all applications"
+        },
+        {
+          "company_name": "SimScale",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "SimScale makes high-fidelity engineering simulation truly accessible. From anywhere. At any scale. In the cloud"
+        },
+        {
+          "company_name": "Testbirds",
+          "industry_hint": "IoT and Software",
+          "location": "Muenchen",
+          "description_hint": "Crowdtesting provider"
+        },
+        {
+          "company_name": "adnymics / ParcelDealz",
+          "industry_hint": "Marketing",
+          "location": "Muenchen",
+          "description_hint": "Intelligent printvertising"
+        },
+        {
+          "company_name": "censhare",
+          "industry_hint": "Marketing",
+          "location": "Muenchen",
+          "description_hint": "omnichannel content platform lets you master your content in any language, locally or globally"
+        },
+        {
+          "company_name": "parcelLab",
+          "industry_hint": "Marketing",
+          "location": "Muenchen",
+          "description_hint": "Post-purchase software provider"
+        },
+        {
+          "company_name": "XAD spoteffects",
+          "industry_hint": "Marketing",
+          "location": "Muenchen",
+          "description_hint": "TV Ad Tech provider on the German-speaking market"
+        },
+        {
+          "company_name": "parcelLab",
+          "industry_hint": "Marketing",
+          "location": "Muenchen",
+          "description_hint": "Post-purchase software provider"
+        },
+        {
+          "company_name": "VEACT",
+          "industry_hint": "Marketing",
+          "location": "Muenchen",
+          "description_hint": "Applications, processes and products to improve sales success in the car trade market using data-based marketing"
+        },
+        {
+          "company_name": "ysura",
+          "industry_hint": "Marketing",
+          "location": "Muenchen",
+          "description_hint": "Pharma Software Innovators and Omnichannel Pioneers"
+        },
+        {
+          "company_name": "Brainlab",
+          "industry_hint": "MedTech",
+          "location": "Muenchen",
+          "description_hint": "Making an impact on patient lives with our medical technologies"
+        },
+        {
+          "company_name": "jameda",
+          "industry_hint": "MedTech",
+          "location": "Muenchen",
+          "description_hint": "Health online portal"
+        },
+        {
+          "company_name": "ottonova",
+          "industry_hint": "MedTech",
+          "location": "Muenchen",
+          "description_hint": "Digital health insurance company"
+        },
+        {
+          "company_name": "IDnow",
+          "industry_hint": "Security",
+          "location": "Muenchen",
+          "description_hint": "Identity verification and document signing solutions"
+        },
+        {
+          "company_name": "riskmethods - Sphera",
+          "industry_hint": "Security",
+          "location": "Muenchen",
+          "description_hint": "Provider of Environmental, Social and Governance (ESG) performance and risk management software, data and consulting services"
+        },
+        {
+          "company_name": "HolidayCheck",
+          "industry_hint": "Travel",
+          "location": "Muenchen",
+          "description_hint": "Travel arrangements"
+        },
+        {
+          "company_name": "Holidu",
+          "industry_hint": "Travel",
+          "location": "Muenchen",
+          "description_hint": "Booking and hosting of holiday homes"
+        },
+        {
+          "company_name": "Regiondo",
+          "industry_hint": "Travel",
+          "location": "Muenchen",
+          "description_hint": "All-in-one booking system made for tours, activities, and destinations"
+        },
+        {
+          "company_name": "ICAROS",
+          "industry_hint": "VR AR",
+          "location": "Muenchen",
+          "description_hint": "Innovator in the field of virtual reality fitness and therapy equipment"
+        },
+        {
+          "company_name": "Inflight VR",
+          "industry_hint": "VR AR",
+          "location": "Muenchen",
+          "description_hint": "Enabling the Metaverse through VR in airplanes and the travel & hospitality industry"
+        },
+        {
+          "company_name": "Innoactive",
+          "industry_hint": "VR AR",
+          "location": "Muenchen",
+          "description_hint": "Enterprise SaaS platform for global XR deployment, training, visualization and digital twin"
+        },
+        {
+          "company_name": "ICAROS",
+          "industry_hint": "VR AR",
+          "location": "Muenchen",
+          "description_hint": "Innovator in the field of virtual reality fitness and therapy equipment"
+        }
+      ]
+    }
+  ]
+}

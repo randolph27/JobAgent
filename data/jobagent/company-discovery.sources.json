@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/discovery-source/v2",
-  "generated_at": "2026-08-23T08:30:00.000Z",
+  "generated_at": "2026-08-26T17:00:00.000Z",
   "items": [
     {
       "source_id": "source-registry:unternehmensregister",
@@ -11,7 +11,12 @@
       "forbidden_use": "Keine automatisierte Massensuche, kein Captcha- oder Schutzmechanismus-Bypass, keine Speicherung personenbezogener Registerrollen und keine Karrierequellenableitung.",
       "rate_limit_policy": "Targeted lookup only; jeder Abruf muss begrenzt, manuell nachvollziehbar und vor Massenbetrieb neu freigegeben sein.",
       "robots_or_terms_note": "Portalbedingungen und technische Schutzmechanismen sind bindend; ohne dokumentierte zulaessige Schnittstelle fail-closed.",
-      "expected_fields": ["legal_name", "registered_address", "register_reference", "source_url"],
+      "expected_fields": [
+        "legal_name",
+        "registered_address",
+        "register_reference",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Vor produktiver Uebernahme im Einzelfall erneut pruefen; kein Bulk-Freshness-Versprechen.",
       "retention_policy": "Nur minimale nicht-personenbezogene Evidenzfelder und Abrufnotiz speichern; keine Rohseiten archivieren.",
@@ -28,7 +33,12 @@
       "forbidden_use": "Keine automatisierte Ergebnislistenextraktion, keine personenbezogenen Registerrollen, keine Bonitaets- oder Compliance-Bewertung.",
       "rate_limit_policy": "Nur gezielte Einzelrecherche; automatisierte Massensuche ist fuer dieses Projekt nicht freigegeben.",
       "robots_or_terms_note": "Portalbedingungen respektieren; Suchdialog ist kein Discovery-Feed.",
-      "expected_fields": ["legal_name", "register_court", "register_number", "source_url"],
+      "expected_fields": [
+        "legal_name",
+        "register_court",
+        "register_number",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Einzelfallbeleg bei Review aktualisieren; keine automatische Aktualitaetsbehauptung.",
       "retention_policy": "Nur minimale Firmenevidenz speichern; keine personenbezogenen Rollen oder Rohdokumente.",
@@ -45,7 +55,14 @@
       "forbidden_use": "Keine Aussage amtlicher Vollstaendigkeit, keine Aktivitaetsbehauptung und keine produktive Firmenaufnahme ohne offizielle Firmen- oder Karriereverifikation.",
       "rate_limit_policy": "Bulk-Snapshot lokal verarbeiten; Downloads selten, versioniert und mit Hash/Evidence dokumentieren.",
       "robots_or_terms_note": "Lizenz, Snapshot-Herkunft und Nutzungsnotiz vor jedem neuen Dump pruefen.",
-      "expected_fields": ["register_name", "register_city", "register_court", "register_number", "legal_form", "source_snapshot"],
+      "expected_fields": [
+        "register_name",
+        "register_city",
+        "register_court",
+        "register_number",
+        "legal_form",
+        "source_snapshot"
+      ],
       "evidence_level": "DISCOVERY_HINT",
       "freshness_policy": "Snapshot-Datum als Freshness-Grenze fuehren; veraltete Dumps sichtbar markieren.",
       "retention_policy": "Nur normalisierte Kandidatenhints und Snapshot-Hash speichern; keine personenbezogenen Rollen persistieren.",
@@ -62,7 +79,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den Muenchner Arbeitsmarkt und keine Karrierequellenaufnahme allein aus der Liste.",
       "rate_limit_policy": "Manuell oder selten mit lokalem Cache abrufen; kein Massencrawl.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen.",
-      "expected_fields": ["company_name", "index_segment", "region_reference", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "index_segment",
+        "region_reference",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei Review neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Segment, Region, Source-URL und Reviewstatus speichern.",
@@ -79,7 +101,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung, keine Karrierequellenaufnahme allein aus der Standortseite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine tiefe externe Linkverfolgung ohne neue Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei internationaler Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -96,7 +123,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer die Muenchner IKT-Branche, keine Karrierequellenaufnahme allein aus der Branchenfokusseite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei IKT-Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -113,7 +145,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer die regionale Life-Sciences-Branche, keine Karrierequellenaufnahme allein aus der Branchenfokusseite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei Life-Sciences-Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -130,7 +167,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer die regionale Automotive- und Mobilitaetsbranche, keine Karrierequellenaufnahme allein aus der Branchenfokusseite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei Automotive-/Mobilitaets-Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -147,7 +189,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den regionalen Finanzsektor, keine Karrierequellenaufnahme allein aus der Branchenfokusseite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei Finanzwirtschafts-Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -164,7 +211,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer U.S.-Unternehmen in der Region, keine Karrierequellenaufnahme allein aus der Community-Seite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei internationaler Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -181,7 +233,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer japanische Unternehmen im Grossraum Muenchen, keine Karrierequellenaufnahme allein aus der Community-Seite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei internationaler Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -198,7 +255,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer indische Unternehmen in der Region, keine Karrierequellenaufnahme allein aus der Community-Seite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei internationaler Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -215,7 +277,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer die Muenchner Kreativwirtschaft, keine Karrierequellenaufnahme allein aus der Branchenfokusseite und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei Kreativwirtschafts-Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -232,7 +299,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den Muenchner Arbeitsmarkt, keine Karrierequellenaufnahme allein aus Standortbeschreibungen und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei Standort-Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -249,7 +321,12 @@
       "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den Muenchner Arbeitsmarkt, keine produktive Karrierequellenaufnahme allein aus der Beteiligungsliste und keine Uebernahme von Kontakt- oder Personenangaben.",
       "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
       "robots_or_terms_note": "Kommunale Nutzungsbedingungen und Robots vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Quartalsweise oder bei kommunaler Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
       "retention_policy": "Nur Kandidatenname, Standortbezug, Source-URL und Reviewstatus speichern; keine Kontakt- oder Personendaten.",
@@ -266,7 +343,12 @@
       "forbidden_use": "Keine Kontakt- oder E-Mail-Sammlung und keine produktive Karrierequelle ohne Firmenbeleg.",
       "rate_limit_policy": "Seltene manuelle oder gecachte Aktualisierung; keine tiefe Linkverfolgung ohne Quellenentscheid.",
       "robots_or_terms_note": "Kommunale Nutzungsbedingungen und Robots vor automatisiertem Abruf pruefen.",
-      "expected_fields": ["company_name", "region_reference", "industry_hint", "source_url"],
+      "expected_fields": [
+        "company_name",
+        "region_reference",
+        "industry_hint",
+        "source_url"
+      ],
       "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
       "freshness_policy": "Halbjaehrlich pruefen oder bei konkreter Verifikationswelle aktualisieren.",
       "retention_policy": "Nur Kandidaten- und Gebietsmetadaten speichern; keine Kontaktdaten sammeln.",
@@ -283,7 +365,12 @@
       "forbidden_use": "Kein produktiver Firmenimport und keine offizielle Karrierequelle ohne getrennte Unternehmensverifikation.",
       "rate_limit_policy": "Nur gezielte Snapshot-Aktualisierung; externe Links separat bewerten.",
       "robots_or_terms_note": "Robots und kommunale Nutzungsbedingungen vor automatisiertem Abruf pruefen.",
-      "expected_fields": ["organization_name", "sector", "website_url", "source_url"],
+      "expected_fields": [
+        "organization_name",
+        "sector",
+        "website_url",
+        "source_url"
+      ],
       "evidence_level": "DISCOVERY_HINT",
       "freshness_policy": "Bei regionaler Verifikationswelle neu pruefen; unklare Aktualitaet als Review-Grund ausweisen.",
       "retention_policy": "Nur Organisations-, Sektor- und Quellenhinweise speichern.",
@@ -300,7 +387,14 @@
       "forbidden_use": "Keine vollstaendige Anzeigenkopie, kein Login/Captcha-Bypass, keine Nutzung als Primaerbeleg und keine Bewerbungslink-Uebernahme.",
       "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur mit kleinem Seitenlimit, Cache und expliziter Quellenfreigabe.",
       "robots_or_terms_note": "Nutzungsbedingungen und Robots muessen vor Live-Abruf geprueft werden; bei Unklarheit blockiert.",
-      "expected_fields": ["employer_name", "job_title", "job_location", "posting_url", "search_parameters", "observed_at"],
+      "expected_fields": [
+        "employer_name",
+        "job_title",
+        "job_location",
+        "posting_url",
+        "search_parameters",
+        "observed_at"
+      ],
       "evidence_level": "DISCOVERY_HINT",
       "freshness_policy": "Jobboersen-Hints laufen schnell ab; Abrufdatum und Suchparameter sind Pflicht.",
       "retention_policy": "Nur minimale Evidenzsnippet-Hashes und Metadaten speichern; keine vollstaendigen Anzeigeninhalte.",
@@ -317,7 +411,14 @@
       "forbidden_use": "Keine Primaerquelle, keine Anzeigenvolltexte, keine automatisierte Massenerfassung und kein Bewerbungslinkimport.",
       "rate_limit_policy": "Fixture- oder manuelle Snapshots bevorzugen; Live-Abruf nur begrenzt und dokumentiert.",
       "robots_or_terms_note": "Nutzungsbedingungen und Robots vor Live-Abruf pruefen; bei Unklarheit fail-closed.",
-      "expected_fields": ["employer_name", "job_title", "job_location", "posting_url", "search_parameters", "observed_at"],
+      "expected_fields": [
+        "employer_name",
+        "job_title",
+        "job_location",
+        "posting_url",
+        "search_parameters",
+        "observed_at"
+      ],
       "evidence_level": "DISCOVERY_HINT",
       "freshness_policy": "Jobboersen-Hints laufen schnell ab; Abrufdatum ist Review-Pflichtfeld.",
       "retention_policy": "Nur minimale Hint-Metadaten speichern.",
@@ -334,7 +435,13 @@
       "forbidden_use": "Keine inoffizielle API als stabilen Vertrag voraussetzen, keine Bewerbungslinks als Primaerbeleg und keine personenbezogenen Recruiter-Daten.",
       "rate_limit_policy": "Nur begrenzte reproduzierbare Suchmatrix mit Cache; keine Massenextraktion.",
       "robots_or_terms_note": "Web-UI und Nutzungsbedingungen respektieren; keine Schutzumgehung.",
-      "expected_fields": ["employer_name", "job_title", "location", "search_parameters", "observed_url"],
+      "expected_fields": [
+        "employer_name",
+        "job_title",
+        "location",
+        "search_parameters",
+        "observed_url"
+      ],
       "evidence_level": "DISCOVERY_HINT",
       "freshness_policy": "Hinweise altern schnell und muessen bei Verifikation neu bewertet werden.",
       "retention_policy": "Nur Arbeitgebername, Suchparameter, Fund-URL und Hash speichern.",
@@ -351,7 +458,12 @@
       "forbidden_use": "Kein automatisierter Abruf ohne ausdrueckliche Quellenfreigabe, kein Login/Captcha-Bypass und keine Nutzung als offizielle Quelle.",
       "rate_limit_policy": "Standardmaessig manual review only; Live-Abruf blockiert, bis Terms/Robots projektspezifisch dokumentiert sind.",
       "robots_or_terms_note": "Bei unklarer Zugriffslage blockieren und nur manuelle Review-Hinweise fuehren.",
-      "expected_fields": ["employer_name", "job_title", "location", "observed_url"],
+      "expected_fields": [
+        "employer_name",
+        "job_title",
+        "location",
+        "observed_url"
+      ],
       "evidence_level": "DISCOVERY_HINT",
       "freshness_policy": "Volatile Hinweise; ohne aktuellen Snapshot nicht fuer Priorisierung verwenden.",
       "retention_policy": "Keine Anzeigenvolltexte; nur minimale Hint-Metadaten.",
@@ -368,7 +480,12 @@
       "forbidden_use": "Keine Ableitung anderer Firmen im Flughafen-Umfeld ohne separate offizielle Quelle.",
       "rate_limit_policy": "Gezielte Einzelpruefung im normalen Scanbudget.",
       "robots_or_terms_note": "Robots und Seitennutzung respektieren; keine Formulare oder Bewerbungsaktionen ausloesen.",
-      "expected_fields": ["company_name", "career_url", "job_links", "observed_at"],
+      "expected_fields": [
+        "company_name",
+        "career_url",
+        "job_links",
+        "observed_at"
+      ],
       "evidence_level": "PRIMARY_OFFICIAL",
       "freshness_policy": "Im regulaeren Jobscan-Turnus aktualisieren.",
       "retention_policy": "Nur offizielle URL, Redirect-Kette, Status und Job-Metadaten speichern.",
@@ -385,7 +502,12 @@
       "forbidden_use": "Keine globale ATS-Allowlist ohne Firmenbeleg und keine Uebernahme fremder Mandantenlinks.",
       "rate_limit_policy": "Nur gezielte Mandantenpruefung mit Firmenbeleg; keine globale Suche.",
       "robots_or_terms_note": "ATS-Nutzungsbedingungen und robots beachten; bei JavaScript-only oder Schutzmechanismus fail-closed.",
-      "expected_fields": ["tenant_url", "verified_by_url", "redirect_chain", "job_links"],
+      "expected_fields": [
+        "tenant_url",
+        "verified_by_url",
+        "redirect_chain",
+        "job_links"
+      ],
       "evidence_level": "PRIMARY_OFFICIAL",
       "freshness_policy": "ATS-Bindung bei jeder Firmenverifikation erneuern.",
       "retention_policy": "Nur Mandanten-URL, Beleg-URL, Redirects und Job-Metadaten speichern.",
@@ -402,7 +524,12 @@
       "forbidden_use": "Keine produktive Aufnahme ohne offizielle Firmen- oder Karrierequelle.",
       "rate_limit_policy": "Keine externen Abrufe; Review-Eintraege muessen Quelle und Bearbeiternotiz nennen.",
       "robots_or_terms_note": "Nicht fuer Webabruf bestimmt.",
-      "expected_fields": ["candidate_name", "source_note", "review_reason", "created_at"],
+      "expected_fields": [
+        "candidate_name",
+        "source_note",
+        "review_reason",
+        "created_at"
+      ],
       "evidence_level": "MANUAL_REVIEW_ONLY",
       "freshness_policy": "Review-Eintraege nach 90 Tagen als stale markieren.",
       "retention_policy": "Nur nicht-personenbezogene Kandidaten- und Reviewgruende speichern.",
@@ -419,13 +546,38 @@
       "forbidden_use": "Kein Login-, Scraping-, API- oder Captcha-Bypass und keine automatisierte Uebernahme.",
       "rate_limit_policy": "Automatisierter Abruf ist blockiert.",
       "robots_or_terms_note": "Login-/Schutzmechanismen und Plattformbedingungen verhindern Nutzung als lokale Importquelle.",
-      "expected_fields": ["employer_name"],
+      "expected_fields": [
+        "employer_name"
+      ],
       "evidence_level": "NOT_IMPORTABLE",
       "freshness_policy": "Nicht importieren.",
       "retention_policy": "Nur Ablehnungsentscheidung in der Source Registry speichern.",
       "import_mode": "REJECT",
       "review_required": true,
       "legal_risk": "BLOCKED"
+    },
+    {
+      "source_id": "source-registry:tech_companies_munich_github",
+      "source_class": "REGIONAL_DIRECTORY",
+      "source_url": "https://github.com/rmellojunior/tech_companies_munich",
+      "operator": "rmellojunior / GitHub community-maintained MIT-licensed directory",
+      "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung, keine Nutzung der Karriere-Links als Primaerbeleg, kein automatisiertes Bewerben und keine Uebernahme ohne offizielle Firmen-/Karriereverifikation.",
+      "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks.",
+      "robots_or_terms_note": "GitHub-Nutzungsbedingungen, Repository-Lizenz und Raw-Abrufgrenzen beachten; ohne MIT-Lizenznachweis oder bei Rate-Limit fail-closed.",
+      "expected_fields": [
+        "company_name",
+        "industry_hint",
+        "location",
+        "description_hint",
+        "source_url"
+      ],
+      "evidence_level": "DISCOVERY_HINT",
+      "freshness_policy": "Snapshot bei regionaler Tech-Arbeitgeberwelle neu ziehen; GitHub-Stand und Lizenzstatus im Evidence-Log dokumentieren.",
+      "retention_policy": "Nur Arbeitgebername, Kategorie, Muenchen-Bezug, Beschreibungshinweis und Source-URL speichern; Karriere-Links nicht als offizielle Quelle persistieren.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "MEDIUM"
     }
   ]
 }
