@@ -279,7 +279,7 @@ $candidateVerificationQueue = [pscustomobject]@{
         }
     )
 }
-$coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now ([datetime]'2026-08-23T08:30:00Z')
+$coverageWithInputs = New-JobAgentCoverageReport -Document $document -SourceRegistry $sourceRegistry -HintStore $hintStore -CandidateVerificationQueue $candidateVerificationQueue -Now ([datetime]'2026-08-23T08:30:00Z') -MaxPriorityItems 100
 Assert-True -Condition ($coverageWithInputs.metrics.discovery_hints_total -eq $hintStore.hints_total) -Message 'Coverage uebernimmt Discovery-Hint-Zaehler falsch.'
 Assert-True -Condition ($coverageWithInputs.target_inventory_gate.schema_version -eq 'jobagent/company-target-inventory-gate/v1') -Message 'Coverage erzeugt keinen JA-025-Zielinventar-Gate.'
 Assert-True -Condition ($coverageWithInputs.metrics.target_inventory_candidates_total -eq ($coverageWithInputs.metrics.companies_total + $coverageWithInputs.metrics.candidate_clusters_total)) -Message 'Zielinventar-Gate zaehlt Firmen und Kandidatencluster inkonsistent.'

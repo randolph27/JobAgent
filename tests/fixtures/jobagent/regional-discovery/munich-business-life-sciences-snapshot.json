@@ -1,0 +1,79 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T08:35:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_life_sciences_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
+      "region_reference": "Muenchen und Region",
+      "items": [
+        {
+          "company_name": "Amgen GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Aenova",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "Astellas Pharma",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bavarian Nordic GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "bene-Arzneimittel GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Biogen GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bristol-Myers Squibb (BMS)",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Hexal",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "Moderna",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "MorphoSys",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "MSD Deutschland",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Neovii Biotech GmbH",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "Roche Diagnostics",
+          "industry_hint": "Life Sciences",
+          "location": "Muenchen und Region"
+        }
+      ]
+    }
+  ]
+}

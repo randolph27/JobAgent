@@ -1,0 +1,49 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T08:00:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_international_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/international.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "Microsoft Deutschland",
+          "industry_hint": "Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Telefonica Germany",
+          "industry_hint": "Telecommunications",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Apple",
+          "industry_hint": "Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Capgemini",
+          "industry_hint": "IT Consulting",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "NTT Data Deutschland",
+          "industry_hint": "IT Services",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "GlaxoSmithKline",
+          "industry_hint": "Pharma",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Daiichi Sankyo Europe",
+          "industry_hint": "Pharma",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-snapshot-manifest/v1",
-  "generated_at": "2026-08-24T09:20:00.000Z",
+  "generated_at": "2026-08-26T08:00:00.000Z",
   "contract": "Lokale Snapshot-Lane fuer erlaubte Discovery-Hints; keine produktiven Firmen- oder JobSource-Writes.",
   "items": [
     {
@@ -14,6 +14,21 @@
       "kind": "regional",
       "source_id": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
       "input_path": "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_international_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-international-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_ikt_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-ikt-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_life_sciences_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-life-sciences-snapshot.json"
     },
     {
       "kind": "jobboard",

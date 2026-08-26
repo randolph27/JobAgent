@@ -1,0 +1,79 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T08:30:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_ikt_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "Amazon Web Services",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Google Deutschland",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Huawei",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "IBM - Watson",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Open AI",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Tiktok",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Meta",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Salesforce",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Fujitsu",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Eviden",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Cisco Systems",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Tech Mahindra",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Qualcomm",
+          "industry_hint": "Information and Communication Technology",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

@@ -1,55 +1,65 @@
 # Handoff latest
 
-Stand: 2026-08-26T07:25:16.523+02:00
+Stand: 2026-08-26T11:58:30.000+02:00
 
 ## Zustand
 
-- Active: ``
-- Status: `open`
-- Ziel: `JA-025` Arbeitgeberkandidatenbasis aus erlaubten Quellen weiter skalieren.
+- Projekt: `JobAgent`
 - Branch: `master`
-- HEAD vor Commit: `0184c8c85bea`
+- HEAD vor Commit: `b3983e7e2bf6`
 - Upstream: `origin/master`
 - Ahead/Behind vor Commit: `0/0`
-- Worktree vor Commit: `dirty`, nur erwartete Projektdateien.
-- Route: `True`
-- Roadmap-Rotation: nicht ausgefuehrt, weil `JA-025` und `JA-027` fachlich offen bleiben.
+- Worktree vor Stage/Commit: `dirty`
+- Aktive Roadmap: `JA-025` und `JA-027`
+- Roadmap-Rotation: nicht ausfuehren, beide Punkte sind fachlich offen.
+- Supertest: nicht erneut gelaufen; nach Nutzeranweisung gilt er als erledigt, wenn nicht separat angefragt.
+- SonarQube: `http://localhost:9000/api/system/status` meldete `UP`.
+- Devserver: `.\ci.cmd devserver-status` meldete `pid=38292`, `port=8500`, `listening=True`.
 
 ## Abgeschlossener Arbeitsschritt
 
-Fuer `JA-025` wurde die Snapshot-Lane um ein Source-Gate erweitert. Ziel war nicht, neue produktive Firmen aufzunehmen, sondern die Verarbeitung aller erlaubten Snapshot-Quellen sichtbar und pruefbar zu machen.
+Fuer `JA-025` wurde die regionale Snapshot-Lane um zwei weitere erlaubte munich-business-Branchenquellen erweitert. Ziel war die Skalierung der unverifizierten Arbeitgeberkandidatenbasis, ohne produktive Firmen oder JobSources zu schreiben.
 
 Konkretes Ergebnis:
 
-- `tools/Import-JobAgentCompanyDiscovery.ps1` erzeugt im Snapshot-Digest jetzt `source_gate`.
-- `source_gate` vergleicht alle importierbaren Snapshot-Quellen aus `data/jobagent/company-discovery.sources.json` mit den eindeutig verarbeiteten Quellen.
-- Importierbar fuer die Snapshot-Lane sind Quellen mit `import_mode=BULK_SNAPSHOT` oder `FIXTURE_OR_SNAPSHOT_ONLY` und Source-Klassen `OPEN_REGISTER_DUMP`, `REGIONAL_DIRECTORY`, `PUBLIC_INSTITUTION_DIRECTORY`, `JOB_BOARD_DISCOVERY`.
-- Ein vollstaendiger produktiver Manifest-Lauf meldet `source_gate.status=passed`, `expected_sources_total=7`, `processed_sources_total=7`, keine fehlenden Quellen und keine Violations.
-- Ein partielles Testmanifest bleibt als Funktionstest erlaubt, meldet aber fehlende importierbare Quellen fail-closed mit `status=failed` und `SNAPSHOT_IMPORTABLE_SOURCES_MISSING`.
-- `docs/company-discovery-operations.md` dokumentiert das neue Gate.
-- `tests/Test-JobAgentCompanyInventory.ps1` prueft das Gate fuer ein partielles Multi-Input-/Glob-Manifest.
+- Neue Source Registry Quelle `source-registry:munich_business_ikt_companies` in `data/jobagent/company-discovery.sources.json`.
+- Neue Source Registry Quelle `source-registry:munich_business_life_sciences_companies` in `data/jobagent/company-discovery.sources.json`.
+- Beide Quellen sind als `REGIONAL_DIRECTORY`, `SECONDARY_OFFICIAL_DIRECTORY`, `FIXTURE_OR_SNAPSHOT_ONLY`, `review_required=true`, `legal_risk=LOW` modelliert.
+- Neuer lokaler Snapshot `tests/fixtures/jobagent/regional-discovery/munich-business-ikt-snapshot.json`.
+- Neuer lokaler Snapshot `tests/fixtures/jobagent/regional-discovery/munich-business-life-sciences-snapshot.json`.
+- Der vorher bereits vorhandene neue Snapshot `tests/fixtures/jobagent/regional-discovery/munich-business-international-snapshot.json` bleibt Teil derselben uncommitted Arbeitsserie.
+- `data/jobagent/company-discovery.snapshot.json` verarbeitet die munich-business-Quellen in der produktiven Snapshot-Lane.
+- `docs/company-discovery-operations.md` dokumentiert die munich-business-Quellen als unverifizierte regionale Snapshot-Quellen.
+- `tests/Test-JobAgentCoverage.ps1` nutzt fuer den wachsenden Hint-Store `-MaxPriorityItems 100`, damit Queue-Metrik und Clusteranzahl bei dieser Datengroesse nicht durch das Testlimit divergieren.
 - Produktive Snapshot-/Coverage-Artefakte wurden aktualisiert.
 
-Aktuelle Kennzahlen nach dem letzten Coverage-Lauf:
+Aktuelle Kennzahlen nach Snapshot- und Coverage-Lauf:
 
 - `companies_total=38`
-- `target_inventory_candidates_total=58`
-- `target_inventory_gap_to_1000=942`
+- `discovery_hints_total=59`
+- `candidate_verification_queue.clusters_total=53`
+- `candidate_verification_queue.queue.Count=53`
+- `target_inventory_candidates_total=91`
+- `target_inventory_gap_to_1000=909`
 - `target_inventory_gate_status=failed`
-- `discovery_hints_total=26`
-- `candidate_verification_queue.clusters_total=20`
 - `source_gate.status=passed`
-- `source_gate.expected_sources_total=7`
-- `source_gate.processed_sources_total=7`
+- `source_gate.expected_sources_total=10`
+- `source_gate.processed_sources_total=10`
+- `source_gate.missing_source_ids=[]`
+- `source_gate.violations=[]`
 
 ## Geaenderte Dateien
 
-- `tools/Import-JobAgentCompanyDiscovery.ps1`
-- `tests/Test-JobAgentCompanyInventory.ps1`
-- `docs/company-discovery-operations.md`
+- `data/jobagent/company-discovery.sources.json`
+- `data/jobagent/company-discovery.snapshot.json`
+- `tests/fixtures/jobagent/regional-discovery/munich-business-international-snapshot.json`
+- `tests/fixtures/jobagent/regional-discovery/munich-business-ikt-snapshot.json`
+- `tests/fixtures/jobagent/regional-discovery/munich-business-life-sciences-snapshot.json`
 - `data/jobagent/company-discovery.hints.json`
 - `data/jobagent/company-candidate-verification.queue.json`
 - `html/jobagent/company-coverage.html`
+- `docs/company-discovery-operations.md`
+- `tests/Test-JobAgentCoverage.ps1`
 - `handoff.latest.json`
 - `handoff.latest.md`
 - `todo.events.jsonl`
@@ -58,33 +68,20 @@ Aktuelle Kennzahlen nach dem letzten Coverage-Lauf:
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyInventory.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentRegisterDiscovery.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentJobBoardDiscovery.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentRegionalDiscovery.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 100` -> Exit `0`
+- `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit `0`, Status `UP`
+- `.\ci.cmd devserver-status` -> Exit `0`, Port `8500` listening
 - `.\ci.cmd stp` -> Exit `0`
-
-Supertest wurde nicht erneut ausgefuehrt; nach aktueller Nutzeranweisung gilt er als erledigt, wenn er nicht separat angefragt wurde.
 
 ## Offene Roadmap
 
-- `JA-025` bleibt offen. Grund: Die Pipeline verarbeitet jetzt alle erlaubten Snapshot-Quellen nachvollziehbar, aber die Kandidatenbasis ist mit `58` Zielgebietskandidaten noch weit unter dem Ziel von `1000`.
-- `JA-027` bleibt offen und haengt fachlich weiter an `JA-025`. Produktive Firmen duerfen erst nach offizieller Website-/Karriere-/ATS-Verifikation aufgenommen werden.
+- `JA-025` bleibt offen. Grund: Die Pipeline verarbeitet jetzt 10 importierbare Snapshot-Quellen vollstaendig, aber die Kandidatenbasis liegt mit `91` Zielgebietskandidaten weiter deutlich unter dem Zielwert `1000`.
+- `JA-027` bleibt offen und haengt fachlich an `JA-025`. Produktive Store-Aufnahme darf erst nach offizieller Firmenwebsite-/Karriere-/ATS-Verifikation erfolgen.
 
 ## Naechster sinnvoller Schritt
 
-1. `data/jobagent/company-discovery.sources.json` auf weitere erlaubte, snapshot-faehige Arbeitgeberquellen pruefen, ohne Terms, Robots, Login, Captcha oder Paywalls zu umgehen.
-2. Zusaetzliche lokale Snapshots/Fixtures fuer erlaubte Register-, Regional-, StepStone- und BA-Suchmatrizen anlegen; Jobboersen bleiben nur Arbeitgeber-Hinweise.
-3. `data/jobagent/company-discovery.snapshot.json` um diese Inputs erweitern.
-4. `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane` ausfuehren und auf `source_gate.status=passed` pruefen.
-5. Danach fokussiert testen: Register, JobBoard, Regional, DedupeScale, Coverage.
-6. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1`.
-7. Erst wenn `JA-025` fachlich erfuellt ist, Roadmap-Rotation pruefen und dann `JA-027` fortsetzen.
-
-## Naechster Anker
-
-Aktive Punkte: JA-025 Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen #comment: Alle erlaubten Quellen sollen Arbeitgebernamen liefern, nicht Stellenanzeigen; produktiv hinzugefuegt wird erst nach offizieller Karriere-/Jobs-Webseitenverifikation.
+Weitere erlaubte, snapshot-faehige Arbeitgeberquellen fuer Muenchen, 20-km-Umkreis und Freising suchen. Bevorzugt oeffentliche regionale Wirtschaftsseiten, kommunale Standortseiten, erlaubte Branchen-/Clusterseiten und erlaubte Register-Dumps. Jede neue Quelle muss in Source Registry, lokalem Snapshot, Snapshot-Manifest, Hint-Store, Coverage und Funktionstests nachgewiesen werden. Keine produktive Firma aus Sekundaerquellen importieren.
