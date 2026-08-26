@@ -1,21 +1,19 @@
 {
-  "ts": "2026-08-26T11:58:30.000+02:00",
+  "ts": "2026-08-26T12:05:00.000+02:00",
   "project": "JobAgent",
   "status": "open",
   "active_id": "",
   "goal": "JA-025 Arbeitgeberkandidatenbasis mit erlaubten regionalen Snapshot-Quellen skalieren.",
-  "summary": "Zwei munich-business-Branchenquellen fuer IKT und Life Sciences als unverifizierte regionale Snapshot-Quellen aufgenommen; Snapshot- und Coverage-Artefakte aktualisiert.",
+  "summary": "Zwei weitere munich-business-Branchenquellen fuer Automotive/Mobilitaet und Finanzwirtschaft als unverifizierte regionale Snapshot-Quellen aufgenommen; Snapshot- und Coverage-Artefakte aktualisiert.",
   "changed": [
     "data/jobagent/company-discovery.sources.json",
     "data/jobagent/company-discovery.snapshot.json",
-    "tests/fixtures/jobagent/regional-discovery/munich-business-international-snapshot.json",
-    "tests/fixtures/jobagent/regional-discovery/munich-business-ikt-snapshot.json",
-    "tests/fixtures/jobagent/regional-discovery/munich-business-life-sciences-snapshot.json",
+    "tests/fixtures/jobagent/regional-discovery/munich-business-automotive-mobility-snapshot.json",
+    "tests/fixtures/jobagent/regional-discovery/munich-business-finance-snapshot.json",
     "data/jobagent/company-discovery.hints.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "html/jobagent/company-coverage.html",
     "docs/company-discovery-operations.md",
-    "tests/Test-JobAgentCoverage.ps1",
     "handoff.latest.json",
     "handoff.latest.md",
     "todo.events.jsonl",
@@ -23,6 +21,10 @@
     "todo.master.index.json"
   ],
   "verified": [
+    {
+      "cmd": "Get-Content ... | ConvertFrom-Json fuer Source Registry, Manifest und neue Snapshot-Dateien",
+      "exit": 0
+    },
     {
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1",
       "exit": 0
@@ -40,7 +42,7 @@
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 100",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 150",
       "exit": 0
     },
     {
@@ -61,25 +63,24 @@
   ],
   "metrics": {
     "companies_total": 38,
-    "discovery_hints_total": 59,
-    "candidate_verification_queue_clusters_total": 53,
-    "candidate_verification_queue_items": 53,
-    "target_inventory_candidates_total": 91,
-    "target_inventory_gap_to_1000": 909,
+    "discovery_hints_total": 98,
+    "candidate_verification_queue_clusters_total": 92,
+    "target_inventory_candidates_total": 130,
+    "target_inventory_gap_to_1000": 870,
     "target_inventory_gate_status": "failed",
     "source_gate_status": "passed",
-    "source_gate_expected_sources_total": 10,
-    "source_gate_processed_sources_total": 10,
+    "source_gate_expected_sources_total": 12,
+    "source_gate_processed_sources_total": 12,
     "source_gate_missing_source_ids": [],
     "source_gate_violations": []
   },
   "git": {
     "branch": "master",
-    "head_before_commit": "b3983e7e2bf6",
+    "head": "a2401820fd5f",
     "upstream": "origin/master",
-    "ahead_before_commit": 0,
-    "behind_before_commit": 0,
-    "worktree_before_commit": "dirty"
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty"
   },
   "route_ok": true,
   "route_violations": [],

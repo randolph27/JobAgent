@@ -1,0 +1,109 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T10:20:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_finance_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/brachenfokus/finanzwirtschaft.html",
+      "region_reference": "Muenchen",
+      "items": [
+        {
+          "company_name": "Allianz",
+          "industry_hint": "Versicherung und Finanzwirtschaft",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Munich RE",
+          "industry_hint": "Rueckversicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bayerische Versicherungskammer",
+          "industry_hint": "Versicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "D.A.S.",
+          "industry_hint": "Versicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Generali Deutschland",
+          "industry_hint": "Versicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Swiss Re",
+          "industry_hint": "Rueckversicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "HypoVereinsbank",
+          "industry_hint": "Bank",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "UniCredit",
+          "industry_hint": "Bank",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bayern LB",
+          "industry_hint": "Bank",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "LfA-Foerderbank Bayern",
+          "industry_hint": "Foerderbank",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bayerische Landesbodenkreditanstalt",
+          "industry_hint": "Foerderinstitut",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bayerische Versorgungskammer",
+          "industry_hint": "Versorgung und Versicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "VKB",
+          "industry_hint": "Versicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "LV1871",
+          "industry_hint": "Versicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Provinzial",
+          "industry_hint": "Versicherung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "SAP Fioneer",
+          "industry_hint": "Finanztechnologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "KGAL",
+          "industry_hint": "Leasing und Investment",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "LHI Leasing",
+          "industry_hint": "Leasing",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Hannover Leasing",
+          "industry_hint": "Leasing",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

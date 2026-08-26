@@ -1,0 +1,114 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-26T10:15:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:munich_business_automotive_mobility_companies",
+      "format": "json_items",
+      "source_page": "https://www.munich-business.eu/standort-muenchen/brachenfokus/automotive-mobilitaet.html",
+      "region_reference": "Muenchen und Region",
+      "items": [
+        {
+          "company_name": "BMW",
+          "industry_hint": "Automotive und Mobilitaet",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "MAN",
+          "industry_hint": "Automotive und Mobilitaet",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Siemens Mobility",
+          "industry_hint": "Automotive und Mobilitaet",
+          "location": "Muenchen-Allach"
+        },
+        {
+          "company_name": "Sixt",
+          "industry_hint": "Mobilitaetsdienstleistungen",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "FlixMobility",
+          "industry_hint": "Mobilitaetsdienstleistungen",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Muenchner Verkehrsgesellschaft",
+          "industry_hint": "Oeffentlicher Verkehr",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Stadtwerke Muenchen",
+          "industry_hint": "Oeffentlicher Verkehr und Energie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Knorr-Bremse",
+          "industry_hint": "Automotive und Mobilitaet",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Bertrandt",
+          "industry_hint": "Automotive Engineering",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "iwis Ketten",
+          "industry_hint": "Automotive Komponenten",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Webasto",
+          "industry_hint": "Automotive Komponenten",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "Infineon",
+          "industry_hint": "Automotive Halbleiter",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "ESG",
+          "industry_hint": "Mobilitaetsbezogene Technologie",
+          "location": "Muenchen und Region"
+        },
+        {
+          "company_name": "Blickfeld",
+          "industry_hint": "Mobilitaetsbezogene Technologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Mobileye",
+          "industry_hint": "Mobilitaetsbezogene Technologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Intel",
+          "industry_hint": "Mobilitaetsbezogene Technologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Alphabet",
+          "industry_hint": "Mobilitaetsbezogene IT",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "Siemens",
+          "industry_hint": "Mobilitaetsbezogene Technologie",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "BMW Forschung und Technik GmbH",
+          "industry_hint": "Automotive Forschung und Entwicklung",
+          "location": "Muenchen"
+        },
+        {
+          "company_name": "BMW Car IT",
+          "industry_hint": "Automotive Software",
+          "location": "Muenchen"
+        }
+      ]
+    }
+  ]
+}

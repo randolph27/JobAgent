@@ -31,6 +31,16 @@
       "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-life-sciences-snapshot.json"
     },
     {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_automotive_mobility_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-automotive-mobility-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:munich_business_finance_companies",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/munich-business-finance-snapshot.json"
+    },
+    {
       "kind": "jobboard",
       "source_id": "source-registry:stepstone_muenchen",
       "input_path": "tests/fixtures/jobagent/jobboard-discovery/stepstone-muenchen-snapshot.json"
