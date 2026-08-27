@@ -1591,6 +1591,60 @@
       "created_at": "2026-08-23T06:20:01.451Z",
       "updated_at": "2026-08-23T06:20:56.355Z",
       "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:aquabench_gmbh",
+      "canonical_name": "aquabench GmbH",
+      "canonical_domain": "aquabench.de",
+      "official_website_url": "https://aquabench.de/",
+      "career_url": "https://aquabench.de/karriere.html",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T10:17:13.750Z",
+      "created_at": "2026-08-27T10:17:13.750Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T10:17:13.750Z",
+        "verification_url": "https://aquabench.de/karriere.html",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen",
+          "company_id": "company:aquabench_gmbh",
+          "canonical_name": "aquabench GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://aquabench.de/karriere.html",
+          "verified_by_url": "https://aquabench.de/",
+          "redirect_chain": "https://aquabench.de/karriere.html",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "21de2d2e9490c9f46c4bec9c4db2b5a3439a9d1b7acd06527c149f2cbdee7deb",
+          "observed_at": "2026-08-27T10:17:13.750Z",
+          "http_status": 200,
+          "final_url": "https://aquabench.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T10:17:13.750Z"
+        }
+      ]
     }
   ],
   "jobs": [
@@ -2545,6 +2599,29 @@
             "https://karriere.cancom.de/"
           ],
           "observed_at": "2026-08-27T05:08:12.805Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:aquabench_gmbh_career_url",
+      "company_id": "company:aquabench_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://aquabench.de/karriere.html",
+      "canonical_url": "https://aquabench.de/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-27T10:17:13.750Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://aquabench.de/karriere.html",
+          "basis_url": "https://aquabench.de/",
+          "redirect_chain": [
+            "https://aquabench.de/karriere.html"
+          ],
+          "observed_at": "2026-08-27T10:17:13.750Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

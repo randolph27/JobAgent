@@ -1,37 +1,153 @@
 {
-  "ts": "2026-08-27T12:05:00+02:00",
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
   "project": "JobAgent",
-  "workspace_root": "D:\\_Scripte\\JobAgent",
-  "agent_id": "UTTER-20260817-39f7",
   "status": "open",
-  "active_id": null,
-  "todo_id": "TD-0041",
-  "roadmap_id": "JA-027",
-  "goal": "Jede Arbeitgeberfirma erst nach offizieller Website-/Karriere-/ATS-Evidenz produktiv aufnehmen.",
-  "roadmap_rotated": false,
-  "roadmap_rotation_reason": "JA-027 ist fachlich noch nicht komplett abgeschlossen.",
-  "summary": "Queue-Gating wurde fail-closed korrigiert: nur PENDING + VERIFY_OFFICIAL_SITE wird live verifiziert; Kandidaten ohne Domain/Website wechseln zu DISCOVER_OFFICIAL_WEBSITE, Kandidaten mit unbelegter Website zu VERIFY_OFFICIAL_WEBSITE_EVIDENCE.",
-  "changed": [
-    "data/jobagent/company-candidate-verification.queue.json",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
-    "src/JobAgent.Coverage.psm1",
-    "tests/Test-JobAgentCompanyCandidateVerification.ps1",
-    "tests/Test-JobAgentCoverage.ps1",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "tools/Verify-JobAgentCompanyCandidates.ps1"
+  "route_ok": true,
+  "capsule": {
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "workspace_root": ".",
+    "active_id": "TD-0041",
+    "git": {
+      "branch": "master",
+      "worktree": "dirty",
+      "detached": false,
+      "upstream": "origin/master",
+      "has_repo": true,
+      "behind": 0,
+      "remote": "origin",
+      "head": "8167bfded44a",
+      "tracked_changes": [
+        "data/jobagent/company-candidate-verification.queue.json",
+        "data/jobagent/company-discovery.hints.json",
+        "data/jobagent/store.json",
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "html/jobagent/company-coverage.html",
+        "src/JobAgent.SourceVerification.psm1",
+        "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json"
+      ],
+      "ahead": 0
+    },
+    "env_inventory_path": null,
+    "env_inventory_missing": false,
+    "status": "open",
+    "project": "JobAgent",
+    "next": "Weitere DISCOVER_OFFICIAL_WEBSITE-Kandidaten ueber strukturierte offizielle Verzeichnis-/Detailseiten nach VERIFY_OFFICIAL_SITE ueberfuehren.",
+    "ts": "2026-08-27T12:20:57+02:00",
+    "route_ok": true,
+    "agent_id": "UTTER-20260817-39f7",
+    "goal": "JA-027 Website-Ermittlung und offizielle Karriereverifikation weiterfuehren",
+    "env_inventory_used": false,
+    "route_violations": [],
+    "manual_missing": false,
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 5 -TimeoutSeconds 2",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 5 -TimeoutSeconds 8 -MaxRetries 3",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0,
+        "status": "pass"
+      }
+    ],
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+    "changed": [
+      "Roadmap.md",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "data/jobagent/store.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.SourceVerification.psm1",
+      "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "tools/Discover-JobAgentCompanyCandidateWebsites.ps1"
+    ]
+  },
+  "git": {
+    "branch": "master",
+    "worktree": "dirty",
+    "detached": false,
+    "upstream": "origin/master",
+    "has_repo": true,
+    "behind": 0,
+    "remote": "origin",
+    "head": "8167bfded44a",
+    "tracked_changes": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "data/jobagent/store.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.SourceVerification.psm1",
+      "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ],
+    "ahead": 0
+  },
+  "goal": "JA-027 Website-Ermittlung und offizielle Karriereverifikation weiterfuehren",
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:logs/verify/verify.digest.json"
   ],
+  "next_steps": [
+    "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde."
+  ],
+  "summary": "Website-Ermittlung implementiert; aquabench GmbH offiziell verifiziert und produktiv uebernommen; JA-027 bleibt offen.",
+  "next": "Weitere DISCOVER_OFFICIAL_WEBSITE-Kandidaten ueber strukturierte offizielle Verzeichnis-/Detailseiten nach VERIFY_OFFICIAL_SITE ueberfuehren.",
+  "ts": "2026-08-27T12:20:57+02:00",
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
       "exit": 0,
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
       "exit": 0,
       "status": "pass"
     },
@@ -41,7 +157,12 @@
       "status": "pass"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 10 -TimeoutSeconds 8 -MaxRetries 3",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 5 -TimeoutSeconds 2",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 5 -TimeoutSeconds 8 -MaxRetries 3",
       "exit": 0,
       "status": "pass"
     },
@@ -54,55 +175,73 @@
       "cmd": ".\\ci.cmd stp",
       "exit": 0,
       "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd supertest",
-      "exit": 0,
-      "status": "assumed-pass-per-user-instruction-not-run-this-wave"
     }
   ],
-  "queue": {
-    "clusters_total": 1788,
-    "candidates_total": 1790,
-    "ready_total": 0,
-    "status_counts": {
-      "MANUAL_REVIEW_REQUIRED": 1783,
-      "VERIFIED": 5
-    },
-    "action_counts": {
-      "DISCOVER_OFFICIAL_WEBSITE": 1780,
-      "MANUAL_DECISION": 1,
-      "REJECT_DUPLICATE": 2,
-      "VERIFY_OFFICIAL_SITE": 5
-    }
-  },
-  "evidence": {
-    "candidate_verification_log": "logs/jobagent/company-candidate-verification-20260827-100236.json",
-    "coverage_json": "logs/jobagent/company-coverage-20260827-100236.json",
-    "coverage_markdown": "logs/jobagent/company-coverage-20260827-100236.md",
-    "coverage_html": "html/jobagent/company-coverage.html"
-  },
-  "next_steps": [
-    "Offizielle Website-Ermittlung fuer DISCOVER_OFFICIAL_WEBSITE implementieren.",
-    "Website-Evidenzmodell fuer Kandidaten festziehen und nur VERIFIED/COMPANY_DOMAIN_VERIFIED/OFFICIAL_WEBSITE_VERIFIED weiterverarbeiten.",
-    "Fixture-Tests fuer belegte Website, unbelegte Website, Aggregator, Namenskonflikt und unsicheren Standort ergaenzen.",
-    "Nach ueberfuehrten Kandidaten kleine Verifikationswelle mit MaxCandidates 10 starten.",
-    "Coverage aktualisieren und JA-027 erst bei vollstaendiger Akzeptanz rotieren."
-  ],
-  "git": {
-    "branch": "master",
-    "head_before_commit": "4939fbe0246a",
-    "upstream": "origin/master",
-    "ahead": 0,
-    "behind": 0
-  },
-  "route_ok": true,
-  "route_violations": [],
-  "refs": [
-    "README.md",
+  "changed": [
     "Roadmap.md",
-    "todo.current.md",
-    "todo.state.json",
-    "handoff.latest.md"
-  ]
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "data/jobagent/store.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.SourceVerification.psm1",
+    "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "tools/Discover-JobAgentCompanyCandidateWebsites.ps1"
+  ],
+  "agent_id": "UTTER-20260817-39f7",
+  "verify_digest": {
+    "ts": "2026-08-24T09:29:31.729+02:00",
+    "cmd": ".\\ci.cmd supertest",
+    "exit": 0,
+    "status": "pass",
+    "log_path": null,
+    "scope": "JobAgent function suite",
+    "tests_total": 19,
+    "duration_seconds": 41.31
+  },
+  "active_id": "TD-0041",
+  "route_violations": [],
+  "route": {
+    "ts": "2026-08-24T12:22:37.53+02:00",
+    "route_ok": true,
+    "violations": [],
+    "changed_count": 11,
+    "policy": {
+      "forbid_path": [],
+      "forbid_regex": [],
+      "no_touch": []
+    },
+    "mode": "standard",
+    "git": {
+      "diff_log": "logs\\terminal\\route-check-20260824-122236.log",
+      "has_repo": true
+    },
+    "changed_files": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "docs/company-discovery-operations.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "tests/Test-JobAgentCompanyInventory.ps1",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "tools/Import-JobAgentCompanyDiscovery.ps1"
+    ],
+    "agent_id": "UTTER-20260817-39f7"
+  },
+  "workspace_root": ".",
+  "toolchain": {
+    "ts": "2026-08-17T13:53:15.642+02:00",
+    "gradle": {
+      "cmd": "gradle",
+      "mode": "path",
+      "root": "D:\\_Scripte\\JobAgent"
+    }
+  }
 }

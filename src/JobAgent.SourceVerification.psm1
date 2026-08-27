@@ -101,6 +101,27 @@ function Get-JobAgentUrlHost {
     return ([Uri]$Url).Host.ToLowerInvariant() -replace '^www\.', ''
 }
 
+function ConvertTo-JobAgentCanonicalUrlSafe {
+    param(
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    try {
+        return ConvertTo-JobAgentCanonicalUrl -Url $Url
+    }
+    catch {
+        if (-not [Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
+            throw
+        }
+        $uri = [Uri]$Url
+        $builder = [UriBuilder]::new($uri)
+        $builder.Scheme = $uri.Scheme.ToLowerInvariant()
+        $builder.Host = $uri.Host.ToLowerInvariant() -replace '^www\.', ''
+        $builder.Fragment = ''
+        return $builder.Uri.AbsoluteUri
+    }
+}
+
 function Test-JobAgentDomainMatch {
     [CmdletBinding()]
     param(
@@ -301,7 +322,12 @@ function Get-JobAgentCompanyCareerCandidateLinks {
         if (-not (Test-JobAgentCompanyCareerLinkText -Value ($text + ' ' + $absolute))) {
             continue
         }
-        $canonical = ConvertTo-JobAgentCanonicalUrl -Url $absolute
+        try {
+            $canonical = ConvertTo-JobAgentCanonicalUrlSafe -Url $absolute
+        }
+        catch {
+            continue
+        }
         if (Test-JobAgentAggregatorUrl -Url $canonical) {
             continue
         }
@@ -410,6 +436,223 @@ function Test-JobAgentCandidateOfficialWebsiteEvidence {
     }
 
     return $false
+}
+
+function ConvertTo-JobAgentCandidateWebsiteDiscoveryNameTokens {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Name
+    )
+
+    $normalized = $Name.ToLowerInvariant().
+        Replace('ä', 'ae').
+        Replace('ö', 'oe').
+        Replace('ü', 'ue').
+        Replace('ß', 'ss').
+        Replace('&', ' and ').
+        Replace('+', ' plus ')
+    $normalized = [regex]::Replace($normalized, '\b(gmbh\s+and\s+co\.?\s+kg|gmbh\s+und\s+co\.?\s+kg|gmbh|ag|se|kg|kgaa|ev|e\.v\.|mbh|holding|group|deutschland|munich|muenchen|freising)\b', ' ')
+    $normalized = [regex]::Replace($normalized, '[^a-z0-9]+', ' ').Trim()
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return @()
+    }
+    return @($normalized -split '\s+' | Where-Object { $_.Length -ge 3 } | Sort-Object -Unique)
+}
+
+function Test-JobAgentCandidateWebsiteDiscoveryNameMatch {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][AllowEmptyString()][string]$EvidenceText
+    )
+
+    $candidateName = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('employer_name', 'company_name', 'register_name', 'canonical_name') -Default ''
+    $tokens = @(ConvertTo-JobAgentCandidateWebsiteDiscoveryNameTokens -Name $candidateName)
+    if ($tokens.Count -eq 0) {
+        return $false
+    }
+
+    $normalizedEvidence = ($EvidenceText.ToLowerInvariant().
+            Replace('ä', 'ae').
+            Replace('ö', 'oe').
+            Replace('ü', 'ue').
+            Replace('ß', 'ss'))
+    $matched = @($tokens | Where-Object { $normalizedEvidence -match ('(^|[^a-z0-9])' + [regex]::Escape($_) + '([^a-z0-9]|$)') })
+    if ($tokens.Count -eq 1) {
+        return $matched.Count -eq 1
+    }
+    return $matched.Count -ge [Math]::Min(2, $tokens.Count)
+}
+
+function Test-JobAgentCandidateOfficialWebsiteDiscoverySource {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowNull()][object]$SourceEvidence = $null
+    )
+
+    $sourceClass = Get-JobAgentCandidateTextProperty -Object $SourceEvidence -Names @('source_class') -Default ''
+    $evidenceLevel = Get-JobAgentCandidateTextProperty -Object $SourceEvidence -Names @('evidence_level') -Default ''
+    if (@('JOB_BOARD_DISCOVERY', 'DISCOVERY_HINT') -contains $sourceClass) {
+        return $false
+    }
+    if ($sourceClass -in @('PUBLIC_INSTITUTION_DIRECTORY', 'REGIONAL_DIRECTORY', 'OFFICIAL_REGISTER')) {
+        return $true
+    }
+    return $evidenceLevel -in @('SECONDARY_OFFICIAL_DIRECTORY', 'PRIMARY_OFFICIAL')
+}
+
+function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter()][ValidateRange(1, 50)][int]$MaxCandidates = 10
+    )
+
+    $baseUri = [Uri]$BaseUrl
+    $baseHost = Get-JobAgentUrlHost -Url $BaseUrl
+    $links = New-Object System.Collections.Generic.List[object]
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $matches = [regex]::Matches($Html, '<a\b(?<attrs>[^>]*)>(?<text>.*?)</a>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    foreach ($match in $matches) {
+        if ($links.Count -ge $MaxCandidates) {
+            break
+        }
+        $hrefMatch = [regex]::Match($match.Groups['attrs'].Value, 'href\s*=\s*["''](?<href>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if (-not $hrefMatch.Success) {
+            continue
+        }
+        $href = [Net.WebUtility]::HtmlDecode($hrefMatch.Groups['href'].Value)
+        if ($href -match '^(mailto:|tel:|javascript:|#)') {
+            continue
+        }
+        $absolute = [Uri]::new($baseUri, $href).AbsoluteUri
+        try {
+            $canonical = ConvertTo-JobAgentCanonicalUrlSafe -Url $absolute
+        }
+        catch {
+            continue
+        }
+        if (Test-JobAgentAggregatorUrl -Url $canonical) {
+            continue
+        }
+        $host = Get-JobAgentUrlHost -Url $canonical
+        if (Test-JobAgentDomainMatch -Host $host -Domain $baseHost) {
+            continue
+        }
+        $linkText = ConvertTo-JobAgentCompanyVerificationPlainText -Html $match.Groups['text'].Value -MaxLength 220
+        if (-not (Test-JobAgentCandidateWebsiteDiscoveryNameMatch -Candidate $Candidate -EvidenceText ($linkText + ' ' + $canonical))) {
+            continue
+        }
+        if ($seen.Add($canonical)) {
+            $links.Add([pscustomobject]@{
+                    url = $canonical
+                    host = $host
+                    link_text = $linkText
+                    source_url = ConvertTo-JobAgentCanonicalUrlSafe -Url $BaseUrl
+                })
+        }
+    }
+    return $links.ToArray()
+}
+
+function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][object]$SourceEvidence,
+        [Parameter()][object]$Policy = (New-JobAgentCompanyCareerVerificationPolicy),
+        [Parameter()][scriptblock]$Fetcher,
+        [Parameter()][datetime]$ObservedAt = [datetime]::UtcNow
+    )
+
+    $candidateId = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('hint_id', 'candidate_id') -Default 'UNKNOWN'
+    $sourceUrl = Get-JobAgentCandidateTextProperty -Object $SourceEvidence -Names @('observed_url', 'source_url', 'url')
+    if ([string]::IsNullOrWhiteSpace($sourceUrl) -or -not [Uri]::IsWellFormedUriString($sourceUrl, [UriKind]::Absolute)) {
+        return [pscustomobject]@{
+            candidate_id = $candidateId
+            status = 'MANUAL_REVIEW_REQUIRED'
+            official_website_url = $null
+            official_website_domain = $null
+            evidence = @()
+            fetches = @()
+            reason = 'Keine absolute zulaessige Quell-URL fuer Website-Ermittlung vorhanden.'
+            next_action = 'manual_review_official_website_source'
+        }
+    }
+    if (-not (Test-JobAgentCandidateOfficialWebsiteDiscoverySource -SourceEvidence $SourceEvidence)) {
+        return [pscustomobject]@{
+            candidate_id = $candidateId
+            status = 'MANUAL_REVIEW_REQUIRED'
+            official_website_url = $null
+            official_website_domain = $null
+            evidence = @()
+            fetches = @()
+            reason = 'Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.'
+            next_action = 'manual_review_official_website_source'
+        }
+    }
+
+    $canonicalSourceUrl = ConvertTo-JobAgentCanonicalUrlSafe -Url $sourceUrl
+    $fetch = if ($Fetcher) { & $Fetcher $canonicalSourceUrl $Policy } else { Invoke-JobAgentCompanyVerificationHttpRequest -Url $canonicalSourceUrl -Policy $Policy }
+    if ($fetch.ok -ne $true) {
+        return [pscustomobject]@{
+            candidate_id = $candidateId
+            status = 'UNVERIFIED'
+            official_website_url = $null
+            official_website_domain = $null
+            evidence = @()
+            fetches = @($fetch)
+            reason = 'Quellseite fuer Website-Ermittlung konnte nicht abgerufen werden.'
+            next_action = 'retry_official_website_discovery'
+        }
+    }
+
+    $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$fetch.final_url)) { $canonicalSourceUrl } else { [string]$fetch.final_url }
+    $links = @(Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks -Html ([string]$fetch.content) -BaseUrl $finalUrl -Candidate $Candidate -MaxCandidates ([int]$Policy.max_candidates_per_company))
+    if ($links.Count -ne 1) {
+        return [pscustomobject]@{
+            candidate_id = $candidateId
+            status = 'MANUAL_REVIEW_REQUIRED'
+            official_website_url = $null
+            official_website_domain = $null
+            evidence = @()
+            fetches = @($fetch)
+            candidates = @($links)
+            reason = if ($links.Count -eq 0) { 'Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.' } else { 'Mehrere moegliche Firmenwebsites gefunden; automatische Auswahl ist fail-closed.' }
+            next_action = 'manual_review_official_website_candidates'
+        }
+    }
+
+    $link = $links[0]
+    $plainText = ConvertTo-JobAgentCompanyVerificationPlainText -Html ([string]$fetch.content) -MaxLength 400
+    $evidence = [pscustomobject]@{
+        candidate_id = $candidateId
+        status = 'OFFICIAL_WEBSITE_VERIFIED'
+        evidence_type = 'OFFICIAL_WEBSITE'
+        verification_url = [string]$link.url
+        verified_by_url = [string]$link.source_url
+        source_class = Get-JobAgentCandidateTextProperty -Object $SourceEvidence -Names @('source_class') -Default 'UNKNOWN'
+        evidence_level = Get-JobAgentCandidateTextProperty -Object $SourceEvidence -Names @('evidence_level') -Default 'UNKNOWN'
+        link_text = [string]$link.link_text
+        evidence_text_hash = Get-JobAgentVerificationEvidenceTextHash -Text $plainText
+        observed_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        http_status = if ($fetch.PSObject.Properties.Name -contains 'status_code') { $fetch.status_code } else { $null }
+        final_url = if ([string]::IsNullOrWhiteSpace([string]$fetch.final_url)) { $null } else { ConvertTo-JobAgentCanonicalUrl -Url ([string]$fetch.final_url) }
+        reason = 'Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite.'
+    }
+    return [pscustomobject]@{
+        candidate_id = $candidateId
+        status = 'OFFICIAL_WEBSITE_VERIFIED'
+        official_website_url = [string]$link.url
+        official_website_domain = [string]$link.host
+        evidence = @($evidence)
+        fetches = @($fetch)
+        candidates = @($links)
+        reason = 'Offizielle Website wurde ueber eine zulaessige Quellseite belegt.'
+        next_action = 'verify_official_site'
+    }
 }
 
 function Get-JobAgentCandidateOfficialWebsiteUrl {
@@ -765,7 +1008,7 @@ function New-JobAgentVerificationEvidence {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][ValidateSet('VERIFIED', 'UNVERIFIED', 'REJECTED')][string]$Status,
-        [Parameter(Mandatory)][ValidateSet('COMPANY_DOMAIN', 'CAREER_URL', 'ATS_VERIFIED_BY_URL', 'COMPANY_LINKED_ATS', 'AGGREGATOR_REJECTED', 'UNVERIFIED')][string]$EvidenceType,
+        [Parameter(Mandatory)][ValidateSet('COMPANY_DOMAIN', 'CAREER_URL', 'ATS_VERIFIED_BY_URL', 'COMPANY_LINKED_ATS', 'OFFICIAL_WEBSITE', 'AGGREGATOR_REJECTED', 'UNVERIFIED')][string]$EvidenceType,
         [Parameter(Mandatory)][string]$Url,
         [Parameter()][AllowNull()][string]$BasisUrl,
         [Parameter()][string[]]$RedirectChain = @(),
@@ -1083,8 +1326,10 @@ Export-ModuleMember -Function @(
     'Get-JobAgentAtsBindingForUrl',
     'Get-JobAgentOfficialSourceEvaluation',
     'Get-JobAgentCompanyCareerCandidateLinks',
+    'Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks',
     'New-JobAgentVerifiedJobSource',
     'New-JobAgentCompanyCareerVerificationPolicy',
+    'Resolve-JobAgentCandidateOfficialWebsiteDiscovery',
     'Resolve-JobAgentCompanyCandidateVerification',
     'Resolve-JobAgentOfficialJobUrl',
     'Resolve-JobAgentCompanyCareerVerification',
