@@ -1998,7 +1998,7 @@
       ],
       "updated_at": "2026-08-27T15:25:53.945Z",
       "created_at": "2026-08-27T15:25:53.945Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
