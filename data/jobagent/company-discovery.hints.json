@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-27T16:34:34.465Z",
+  "generated_at": "2026-08-27T16:41:40.706Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 1790,
@@ -8553,6 +8553,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "0667f8477b9c1c0f395444d7e04779bee4985cea3357db4c3a8976aa41c36437",
+      "official_website_url": "https://daiichi-sankyo.de/",
+      "verified_official_website_url": "https://daiichi-sankyo.de/",
+      "canonical_domain": "daiichi-sankyo.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://daiichi-sankyo.de/",
+          "verified_by_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "source_class": "REGIONAL_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Daiichi Sankyo Europe GmbH",
+          "evidence_text_hash": "ba77949431544cdfa49c2186096afd7db11d79323389cb9c642cc5c8591d32fa",
+          "observed_at": "2026-08-27T16:41:40.706Z",
+          "http_status": 200,
+          "final_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -8575,6 +8597,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "99654fded0b13aea847f6ae8e82bfd12f11ea865fec679cb709277865ff09b53",
+      "official_website_url": "https://denso.com/",
+      "verified_official_website_url": "https://denso.com/",
+      "canonical_domain": "denso.com",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://denso.com/de/de",
+          "verified_by_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "source_class": "REGIONAL_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "DENSO Automotive Deutschland GmbH",
+          "evidence_text_hash": "ba77949431544cdfa49c2186096afd7db11d79323389cb9c642cc5c8591d32fa",
+          "observed_at": "2026-08-27T16:41:40.706Z",
+          "http_status": 200,
+          "final_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -8597,6 +8641,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "5e80def915deef1d7a0ea1f68160750524c5381ab43f28572a2da3c7b06aa244",
+      "official_website_url": "https://de.dmgmori.com/",
+      "verified_official_website_url": "https://de.dmgmori.com/",
+      "canonical_domain": "de.dmgmori.com",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://de.dmgmori.com/",
+          "verified_by_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "source_class": "REGIONAL_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "DMG MORI EMEA Holding GmbH",
+          "evidence_text_hash": "ba77949431544cdfa49c2186096afd7db11d79323389cb9c642cc5c8591d32fa",
+          "observed_at": "2026-08-27T16:41:40.706Z",
+          "http_status": 200,
+          "final_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {

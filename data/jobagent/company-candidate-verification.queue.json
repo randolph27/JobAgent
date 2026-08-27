@@ -1,15 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T16:35:42.531Z",
+  "generated_at": "2026-08-27T16:43:00.071Z",
   "clusters_total": 1786,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "DISCOVER_OFFICIAL_WEBSITE": 1747,
+    "DISCOVER_OFFICIAL_WEBSITE": 1744,
     "MANUAL_DECISION": 1,
     "REJECT_DUPLICATE": 4,
-    "VERIFY_OFFICIAL_SITE": 34
+    "VERIFY_OFFICIAL_SITE": 37
   },
   "queue": [
     {
@@ -8284,10 +8284,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8327,10 +8327,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8370,10 +8370,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8413,10 +8413,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8428,51 +8428,6 @@
         "record_hash": "a7f42b8168a1858013ced31952c856bf4ae11a937cc1ee7791c7cbabe0e620f7",
         "allowed_use": "Oeffentlich genannte internationale Unternehmensniederlassungen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
         "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine tiefe externe Linkverfolgung ohne neue Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:daiichi sankyo europe"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen"
-      ],
-      "canonical_name": "Daiichi Sankyo Europe GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "0667f8477b9c1c0f395444d7e04779bee4985cea3357db4c3a8976aa41c36437",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
       },
       "dedupe_context": {
         "dedupe_keys": [
@@ -8503,10 +8458,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8546,10 +8501,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8589,10 +8544,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8632,10 +8587,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8675,10 +8630,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8718,10 +8673,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8761,10 +8716,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8780,49 +8735,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:deloitte touche tohmatsu limited"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen"
-      ],
-      "canonical_name": "DENSO Automotive Deutschland GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "99654fded0b13aea847f6ae8e82bfd12f11ea865fec679cb709277865ff09b53",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:denso automotive deutschland"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -8847,10 +8759,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8890,10 +8802,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8933,10 +8845,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -8976,10 +8888,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -9019,10 +8931,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -9038,49 +8950,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:digisale"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen"
-      ],
-      "canonical_name": "DMG MORI EMEA Holding GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "5e80def915deef1d7a0ea1f68160750524c5381ab43f28572a2da3c7b06aa244",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:dmg mori emea holding"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -9105,10 +8974,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -9148,10 +9017,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -9191,10 +9060,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -9234,10 +9103,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -9277,10 +9146,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -9322,10 +9191,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -27352,6 +27221,140 @@
         "dedupe_keys": [
           "domain:cipla.com",
           "name:cipla deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_daiichi_sankyo_de",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen"
+      ],
+      "canonical_name": "Daiichi Sankyo Europe GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:42:02.02Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "0667f8477b9c1c0f395444d7e04779bee4985cea3357db4c3a8976aa41c36437",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:daiichi-sankyo.de",
+          "name:daiichi sankyo europe"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_denso_com",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen"
+      ],
+      "canonical_name": "DENSO Automotive Deutschland GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "RETRY_SCHEDULED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-27T16:42:02.02Z",
+      "next_attempt_at": "2026-08-28T16:42:02.02Z",
+      "last_status": "UNVERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "99654fded0b13aea847f6ae8e82bfd12f11ea865fec679cb709277865ff09b53",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:denso.com",
+          "name:denso automotive deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_de_dmgmori_com",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen"
+      ],
+      "canonical_name": "DMG MORI EMEA Holding GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:42:02.02Z",
+      "next_attempt_at": null,
+      "last_status": "COMPANY_DOMAIN_VERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "5e80def915deef1d7a0ea1f68160750524c5381ab43f28572a2da3c7b06aa244",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:de.dmgmori.com",
+          "name:dmg mori emea holding"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
