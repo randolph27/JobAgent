@@ -1944,7 +1944,7 @@
       ],
       "updated_at": "2026-08-27T15:19:42.349Z",
       "created_at": "2026-08-27T15:19:42.349Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -1972,6 +1972,60 @@
           "final_url": "https://lhm-services.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-25T15:19:42.349Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:messe_muenchen_gmbh",
+      "canonical_name": "Messe Muenchen GmbH",
+      "canonical_domain": "messe-muenchen.de",
+      "official_website_url": "https://messe-muenchen.de/",
+      "career_url": "https://messe-muenchen.de/de/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:25:53.945Z",
+      "created_at": "2026-08-27T15:25:53.945Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:25:53.945Z",
+        "verification_url": "https://messe-muenchen.de/de/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_messe_muenchen_gmbh_muenchen",
+          "company_id": "company:messe_muenchen_gmbh",
+          "canonical_name": "Messe Muenchen GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://messe-muenchen.de/de/karriere",
+          "verified_by_url": "https://messe-muenchen.de/",
+          "redirect_chain": "https://messe-muenchen.de/de/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "f498ee9399d93771f2fc4d765b00147667dd99e955c2ce8e7c2d6ee6a69f48a1",
+          "observed_at": "2026-08-27T15:25:53.945Z",
+          "http_status": 200,
+          "final_url": "https://messe-muenchen.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:25:53.945Z"
         }
       ]
     }
@@ -3043,6 +3097,29 @@
             "https://lhm-services.de/jobs-karriere"
           ],
           "observed_at": "2026-08-27T15:19:42.349Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:messe_muenchen_gmbh_career_url",
+      "company_id": "company:messe_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://messe-muenchen.de/de/karriere",
+      "canonical_url": "https://messe-muenchen.de/de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:25:53.945Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://messe-muenchen.de/de/karriere",
+          "basis_url": "https://messe-muenchen.de/",
+          "redirect_chain": [
+            "https://messe-muenchen.de/de/karriere"
+          ],
+          "observed_at": "2026-08-27T15:25:53.945Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
