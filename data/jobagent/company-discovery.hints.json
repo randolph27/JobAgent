@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-27T10:27:08.524Z",
+  "generated_at": "2026-08-27T15:19:10.348Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 1790,
@@ -37197,6 +37197,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "c86ed856033e0cc3e94b22e222bef6424d8954cca0f2bbba4156bfefe8de1b56",
+      "official_website_url": "https://iba-m.de/",
+      "verified_official_website_url": "https://iba-m.de/",
+      "canonical_domain": "iba-m.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://iba-m.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Internationale Bauausstellung Metropolregion",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T11:52:10.767Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37219,6 +37241,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "dd7a68b5fa0da0bda747fa49af4ed91b6227ef769a497544a5d0d944b7cc6edf",
+      "official_website_url": "https://filmfest-muenchen.de/",
+      "verified_official_website_url": "https://filmfest-muenchen.de/",
+      "canonical_domain": "filmfest-muenchen.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://filmfest-muenchen.de/de",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Internationale Münchner Filmwochen GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T11:52:10.767Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37241,6 +37285,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "66e997e9a79cfbde1607118dc7df380fe8dc0ef566df42f966c223e3f709e512",
+      "official_website_url": "https://lhm-services.de/",
+      "verified_official_website_url": "https://lhm-services.de/",
+      "canonical_domain": "lhm-services.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://lhm-services.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "LHM Services GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:19:10.348Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {

@@ -1808,6 +1808,172 @@
           "expires_at": "2026-11-25T10:27:32.164Z"
         }
       ]
+    },
+    {
+      "company_id": "company:internationale_bauausstellung_metropolregion_muenchen_gmbh",
+      "canonical_name": "Internationale Bauausstellung Metropolregion Muenchen GmbH",
+      "canonical_domain": "iba-m.de",
+      "official_website_url": "https://iba-m.de/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T11:53:24.154Z",
+      "created_at": "2026-08-27T11:53:24.154Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T11:53:24.154Z",
+        "verification_url": "https://iba-m.de/",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
+          "company_id": "company:internationale_bauausstellung_metropolregion_muenchen_gmbh",
+          "canonical_name": "Internationale Bauausstellung Metropolregion Muenchen GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://iba-m.de/",
+          "verified_by_url": "https://iba-m.de/",
+          "redirect_chain": [
+            "https://iba-m.de/",
+            "https://iba-m.de/sitemap.xml",
+            "https://iba-m.de/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "4c83c6b174c6a42222a55d4fb0e3197c9c34f7fadd350b12f434eb113294191f",
+          "observed_at": "2026-08-27T11:53:24.154Z",
+          "http_status": 200,
+          "final_url": "https://iba-m.de/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-11-25T11:53:24.154Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:internationale_muenchner_filmwochen_gmbh",
+      "canonical_name": "Internationale Muenchner Filmwochen GmbH",
+      "canonical_domain": "filmfest-muenchen.de",
+      "official_website_url": "https://filmfest-muenchen.de/",
+      "career_url": "https://filmfest-muenchen.de/de/meta/jobs",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T11:53:24.154Z",
+      "created_at": "2026-08-27T11:53:24.154Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T11:53:24.154Z",
+        "verification_url": "https://filmfest-muenchen.de/de/meta/jobs",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
+          "company_id": "company:internationale_muenchner_filmwochen_gmbh",
+          "canonical_name": "Internationale Muenchner Filmwochen GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://filmfest-muenchen.de/de/meta/jobs",
+          "verified_by_url": "https://filmfest-muenchen.de/",
+          "redirect_chain": "https://filmfest-muenchen.de/de/meta/jobs",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "d2c9ef1d252d2048203b1007784f8e61a80d3c465c9046fe5fb14be3792641a4",
+          "observed_at": "2026-08-27T11:53:24.154Z",
+          "http_status": 200,
+          "final_url": "https://filmfest-muenchen.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T11:53:24.154Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:lhm_services_gmbh",
+      "canonical_name": "LHM Services GmbH",
+      "canonical_domain": "lhm-services.de",
+      "official_website_url": "https://lhm-services.de/",
+      "career_url": "https://lhm-services.de/jobs-karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:19:42.349Z",
+      "created_at": "2026-08-27T15:19:42.349Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:19:42.349Z",
+        "verification_url": "https://lhm-services.de/jobs-karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
+          "company_id": "company:lhm_services_gmbh",
+          "canonical_name": "LHM Services GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://lhm-services.de/jobs-karriere",
+          "verified_by_url": "https://lhm-services.de/",
+          "redirect_chain": "https://lhm-services.de/jobs-karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "970e47f23fd6caaaa5691d468efa16e749b36c3164ae5d9d8027b8e514911fa6",
+          "observed_at": "2026-08-27T15:19:42.349Z",
+          "http_status": 200,
+          "final_url": "https://lhm-services.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:19:42.349Z"
+        }
+      ]
     }
   ],
   "jobs": [
@@ -2831,6 +2997,52 @@
             "https://gasteig.de/karriere"
           ],
           "observed_at": "2026-08-27T10:27:32.164Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:internationale_muenchner_filmwochen_gmbh_career_url",
+      "company_id": "company:internationale_muenchner_filmwochen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://filmfest-muenchen.de/de/meta/jobs",
+      "canonical_url": "https://filmfest-muenchen.de/de/meta/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-27T11:53:24.154Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://filmfest-muenchen.de/de/meta/jobs",
+          "basis_url": "https://filmfest-muenchen.de/",
+          "redirect_chain": [
+            "https://filmfest-muenchen.de/de/meta/jobs"
+          ],
+          "observed_at": "2026-08-27T11:53:24.154Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:lhm_services_gmbh_career_url",
+      "company_id": "company:lhm_services_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://lhm-services.de/jobs-karriere",
+      "canonical_url": "https://lhm-services.de/jobs-karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:19:42.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://lhm-services.de/jobs-karriere",
+          "basis_url": "https://lhm-services.de/",
+          "redirect_chain": [
+            "https://lhm-services.de/jobs-karriere"
+          ],
+          "observed_at": "2026-08-27T15:19:42.349Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

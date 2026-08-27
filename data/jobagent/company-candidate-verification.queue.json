@@ -1,15 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T10:28:04.157Z",
+  "generated_at": "2026-08-27T15:20:01.345Z",
   "clusters_total": 1787,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "DISCOVER_OFFICIAL_WEBSITE": 1773,
+    "DISCOVER_OFFICIAL_WEBSITE": 1770,
     "MANUAL_DECISION": 1,
     "REJECT_DUPLICATE": 3,
-    "VERIFY_OFFICIAL_SITE": 10
+    "VERIFY_OFFICIAL_SITE": 13
   },
   "queue": [
     {
@@ -930,92 +930,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen"
-      ],
-      "canonical_name": "Internationale Bauausstellung Metropolregion Muenchen GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "c86ed856033e0cc3e94b22e222bef6424d8954cca0f2bbba4156bfefe8de1b56",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:internationale bauausstellung metropolregion muenchen"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen"
-      ],
-      "canonical_name": "Internationale Muenchner Filmwochen GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "dd7a68b5fa0da0bda747fa49af4ed91b6227ef769a497544a5d0d944b7cc6edf",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:internationale muenchner filmwochen"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_landkreis_freising_wirtschaft_jungheinrich_moosburg_gmbh_landkreis_freising",
       "candidate_id": "regional-hint:landkreis_freising_wirtschaft_jungheinrich_moosburg_gmbh_landkreis_freising",
       "candidate_ids": [
@@ -1100,49 +1014,6 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen"
-      ],
-      "canonical_name": "LHM Services GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "66e997e9a79cfbde1607118dc7df380fe8dc0ef566df42f966c223e3f709e512",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:lhm services"
-        ],
-        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -2894,6 +2765,138 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_iba_m_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Internationale Bauausstellung Metropolregion Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T11:53:24.154Z",
+      "next_attempt_at": null,
+      "last_status": "COMPANY_DOMAIN_VERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "c86ed856033e0cc3e94b22e222bef6424d8954cca0f2bbba4156bfefe8de1b56",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:iba-m.de",
+          "name:internationale bauausstellung metropolregion muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_filmfest_muenchen_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen"
+      ],
+      "canonical_name": "Internationale Muenchner Filmwochen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T11:53:24.154Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "dd7a68b5fa0da0bda747fa49af4ed91b6227ef769a497544a5d0d944b7cc6edf",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:filmfest-muenchen.de",
+          "name:internationale muenchner filmwochen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_lhm_services_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen"
+      ],
+      "canonical_name": "LHM Services GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:19:42.349Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "66e997e9a79cfbde1607118dc7df380fe8dc0ef566df42f966c223e3f709e512",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:lhm-services.de",
+          "name:lhm services"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
