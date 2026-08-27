@@ -1,0 +1,71 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-27T12:00:00.000Z",
+  "license": "MIT License; Repository metadata reported license.spdx_id=MIT at snapshot preparation time.",
+  "sources": [
+    {
+      "source_id": "source-registry:remote_jobs_germany_github",
+      "format": "json_items",
+      "source_page": "https://github.com/danielbayerlein/remote-jobs-germany",
+      "region_reference": "Remote Jobs Germany GitHub list entries with Munich area fields",
+      "items": [
+        {
+          "description_hint": "Remote-friendly German tech employer with Munich city field",
+          "location": "Muenchen",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech",
+          "company_name": "Actyx"
+        },
+        {
+          "description_hint": "Remote-friendly German employer with Munich city field",
+          "location": "Muenchen",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech / Media",
+          "company_name": "Bayerischer Rundfunk"
+        },
+        {
+          "description_hint": "Remote-friendly German employer with on-site Unterfoehring field",
+          "location": "Unterfoehring",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech / Cloud",
+          "company_name": "Hetzner Cloud GmbH"
+        },
+        {
+          "description_hint": "Remote-friendly German employer with Munich office field",
+          "location": "Muenchen",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech / Commerce",
+          "company_name": "porta-Unternehmensgruppe"
+        },
+        {
+          "description_hint": "Remote-friendly German employer with Munich on-site field",
+          "location": "Muenchen",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech / IT Services",
+          "company_name": "siticom"
+        },
+        {
+          "description_hint": "Remote-friendly German employer with Munich city field",
+          "location": "Muenchen",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech / Media",
+          "company_name": "SocialSweethearts"
+        },
+        {
+          "description_hint": "Remote-friendly German employer with Ismaning Munich field",
+          "location": "Ismaning (Muenchen)",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech / Media",
+          "company_name": "SPORT1"
+        },
+        {
+          "description_hint": "Remote-friendly employer with Munich office field",
+          "location": "Muenchen",
+          "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+          "industry_hint": "Remote-friendly Tech / Delivery",
+          "company_name": "Wolt"
+        }
+      ]
+    }
+  ]
+}

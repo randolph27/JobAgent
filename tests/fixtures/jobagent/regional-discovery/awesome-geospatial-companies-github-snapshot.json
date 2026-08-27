@@ -1,0 +1,113 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-08-27T12:00:00.000Z",
+  "license": "MIT License; Repository metadata reported license.spdx_id=MIT at snapshot preparation time.",
+  "sources": [
+    {
+      "source_id": "source-registry:awesome_geospatial_companies_github",
+      "format": "json_items",
+      "source_page": "https://github.com/chrieke/awesome-geospatial-companies",
+      "region_reference": "Awesome Geospatial Companies GitHub list Munich area entries",
+      "items": [
+        {
+          "description_hint": "EO for forest carbon, biodiversity, renewables and infrastructure",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Earth Observation",
+          "company_name": "CosmosIndex GmbH"
+        },
+        {
+          "description_hint": "EO data reseller",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Earth Observation",
+          "company_name": "European Space Imaging"
+        },
+        {
+          "description_hint": "EO all-purpose provider with Munich headquarters entry",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Earth Observation",
+          "company_name": "GAF AG"
+        },
+        {
+          "description_hint": "Biodiversity impact detection, monitoring and reporting",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Biodiversity",
+          "company_name": "Hula"
+        },
+        {
+          "description_hint": "GIS and EO all-purpose employer in Munich area",
+          "location": "Taufkirchen bei Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / GIS and EO",
+          "company_name": "IABG"
+        },
+        {
+          "description_hint": "Finance platform for nature restoration and preservation",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Nature finance",
+          "company_name": "Landbanking Group"
+        },
+        {
+          "description_hint": "Mobile LiDAR mapping systems and digital twin solutions",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Mobile LiDAR",
+          "company_name": "NavVis"
+        },
+        {
+          "description_hint": "Forest climate projects platform",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Climate Tech / Forestry",
+          "company_name": "Ocell"
+        },
+        {
+          "description_hint": "Thermal infrared satellite constellation for wildfires",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Satellite wildfire detection",
+          "company_name": "OroraTech"
+        },
+        {
+          "description_hint": "Forest carbon certification digitalization",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Climate Tech / Forest carbon",
+          "company_name": "Pina Earth"
+        },
+        {
+          "description_hint": "Earth observation services for developers",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Earth Observation",
+          "company_name": "Riscognition GmbH"
+        },
+        {
+          "description_hint": "eCognition software branch entry",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Earth Observation Software",
+          "company_name": "Trimble"
+        },
+        {
+          "description_hint": "EO all-purpose provider",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Earth Observation",
+          "company_name": "VISTA Remote Sensing"
+        },
+        {
+          "description_hint": "Infrastructure location risk reporting",
+          "location": "Muenchen",
+          "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+          "industry_hint": "Geospatial / Infrastructure risk",
+          "company_name": "Vida"
+        }
+      ]
+    }
+  ]
+}

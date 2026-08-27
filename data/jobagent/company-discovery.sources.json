@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/discovery-source/v2",
-  "generated_at": "2026-08-26T20:00:00.000Z",
+  "generated_at": "2026-08-27T12:00:00.000Z",
   "items": [
     {
       "source_id": "source-registry:unternehmensregister",
@@ -642,6 +642,52 @@
       "evidence_level": "DISCOVERY_HINT",
       "freshness_policy": "Snapshot bei regionaler AI-/ML-Arbeitgeberwelle neu ziehen; GitHub-Stand und Quellenstatus im Evidence-Log dokumentieren.",
       "retention_policy": "Nur Arbeitgebername, Kategorie, Muenchen-Bezug, Beschreibungshinweis und Repository-URL speichern; externe Firmenlinks nicht als offizielle Quellen persistieren.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "MEDIUM"
+    },
+    {
+      "source_id": "source-registry:remote_jobs_germany_github",
+      "source_class": "REGIONAL_DIRECTORY",
+      "source_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+      "operator": "danielbayerlein / GitHub community-maintained MIT-licensed directory",
+      "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer remote-freundliche deutsche Tech-Arbeitgeber mit Muenchen-, Unterfoehring-, Ismaning- oder Freising-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung, keine Nutzung verlinkter Websites oder Karriereziele als Primaerbeleg, kein automatisiertes Bewerben und keine produktive Aufnahme ohne offizielle Firmen-/Karriereverifikation.",
+      "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks.",
+      "robots_or_terms_note": "GitHub-Nutzungsbedingungen, Repository-Lizenz und Raw-Abrufgrenzen beachten; ohne MIT-Lizenznachweis oder bei Rate-Limit fail-closed.",
+      "expected_fields": [
+        "company_name",
+        "industry_hint",
+        "location",
+        "description_hint",
+        "source_url"
+      ],
+      "evidence_level": "DISCOVERY_HINT",
+      "freshness_policy": "Snapshot bei regionaler Remote-Tech-Arbeitgeberwelle neu ziehen; GitHub-Stand und Lizenzstatus im Evidence-Log dokumentieren.",
+      "retention_policy": "Nur Arbeitgebername, Standortbezug, Beschreibungshinweis und Repository-URL speichern; externe Firmenlinks nicht als offizielle Quellen persistieren.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "MEDIUM"
+    },
+    {
+      "source_id": "source-registry:awesome_geospatial_companies_github",
+      "source_class": "REGIONAL_DIRECTORY",
+      "source_url": "https://github.com/chrieke/awesome-geospatial-companies",
+      "operator": "chrieke / GitHub community-maintained MIT-licensed directory",
+      "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Geo-, GIS-, Earth-Observation- und Climate-Tech-Arbeitgeberhinweise mit Muenchen- oder 20-km-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den regionalen Geospatial-Markt, keine Nutzung verlinkter Websites oder Karten als Primaerbeleg, keine Uebernahme von Kontaktdaten und keine produktive Aufnahme ohne offizielle Firmen-/Karriereverifikation.",
+      "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit, keine Google-Map- oder Spreadsheet-Automation und kein Massencrawl externer Firmenlinks.",
+      "robots_or_terms_note": "GitHub-Nutzungsbedingungen, Repository-Lizenz und Raw-Abrufgrenzen beachten; externe Karten-/Sheet-Links werden nicht automatisiert abgerufen.",
+      "expected_fields": [
+        "company_name",
+        "industry_hint",
+        "location",
+        "description_hint",
+        "source_url"
+      ],
+      "evidence_level": "DISCOVERY_HINT",
+      "freshness_policy": "Snapshot bei regionaler Geo-/Climate-Tech-Arbeitgeberwelle neu ziehen; GitHub-Stand und Lizenzstatus im Evidence-Log dokumentieren.",
+      "retention_policy": "Nur Arbeitgebername, Standortbezug, Sektorhinweis und Repository-URL speichern; externe Firmen-, Karten- und Sheet-Links nicht als offizielle Quellen persistieren.",
       "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
       "review_required": true,
       "legal_risk": "MEDIUM"

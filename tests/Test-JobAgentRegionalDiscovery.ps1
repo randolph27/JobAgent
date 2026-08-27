@@ -30,6 +30,10 @@ $techGithubSource = Get-JobAgentRegionalSource -SourceRegistry $registry -Source
 Assert-True -Condition ([string]$techGithubSource.evidence_level -eq 'DISCOVERY_HINT') -Message 'Tech-Companies-Munich-Quelle darf keine offizielle Evidenz erhalten.'
 $awesomeMlSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:awesome_ml_startups_munich_github'
 Assert-True -Condition ([string]$awesomeMlSource.evidence_level -eq 'DISCOVERY_HINT' -and [string]$awesomeMlSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'Awesome-ML-Startups-Munich-Quelle wurde nicht als unverifizierte regionale Discovery-Quelle geladen.'
+$remoteJobsSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:remote_jobs_germany_github'
+Assert-True -Condition ([string]$remoteJobsSource.evidence_level -eq 'DISCOVERY_HINT' -and [string]$remoteJobsSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'Remote-Jobs-Germany-Quelle wurde nicht als unverifizierte regionale Discovery-Quelle geladen.'
+$geospatialSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:awesome_geospatial_companies_github'
+Assert-True -Condition ([string]$geospatialSource.evidence_level -eq 'DISCOVERY_HINT' -and [string]$geospatialSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'Awesome-Geospatial-Companies-Quelle wurde nicht als unverifizierte regionale Discovery-Quelle geladen.'
 $klimapaktSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_business_klimapakt3_companies'
 Assert-True -Condition ([string]$klimapaktSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY' -and [string]$klimapaktSource.evidence_level -eq 'SECONDARY_OFFICIAL_DIRECTORY') -Message 'Klimapakt-3-Quelle wurde nicht als oeffentliche Institutionsquelle geladen.'
 $startupSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_startup_platform_ecosystem'
@@ -119,6 +123,22 @@ Assert-True -Condition (@($awesomeMlResult.hints | Where-Object { [string]$_.off
 Assert-True -Condition (@($awesomeMlResult.hints | Where-Object { [string]$_.target_area -ne 'MUNICH' }).Count -eq 0) -Message 'Awesome-ML-Startups-Munich-Hints muessen Muenchen-Bezug behalten.'
 Assert-True -Condition (@($awesomeMlResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'career_hint' -or $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Awesome-ML-Startups-Munich-Links duerfen nicht als offizielle Felder persistiert werden.'
 
+$remoteJobsFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\remote-jobs-germany-github-snapshot.json'
+$remoteJobsResult = Import-JobAgentRegionalDirectories -SnapshotPath $remoteJobsFixture -SourceRegistry $registry
+Assert-True -Condition ($remoteJobsResult.hints_total -eq 8) -Message 'Remote-Jobs-Germany-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition ($remoteJobsResult.source_counts.'source-registry:remote_jobs_germany_github' -eq 8) -Message 'Remote-Jobs-Germany-Hints werden nicht der neuen Quelle zugeordnet.'
+Assert-True -Condition (@($remoteJobsResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Remote-Jobs-Germany-Hints muessen unverifizierte Discovery-Hints bleiben.'
+Assert-True -Condition (@($remoteJobsResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH', 'MUNICH_20KM') }).Count -eq 0) -Message 'Remote-Jobs-Germany-Hints muessen Muenchen- oder 20-km-Bezug behalten.'
+Assert-True -Condition (@($remoteJobsResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'career_hint' -or $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Remote-Jobs-Germany-Links duerfen nicht als offizielle Felder persistiert werden.'
+
+$geospatialFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\awesome-geospatial-companies-github-snapshot.json'
+$geospatialResult = Import-JobAgentRegionalDirectories -SnapshotPath $geospatialFixture -SourceRegistry $registry
+Assert-True -Condition ($geospatialResult.hints_total -eq 14) -Message 'Awesome-Geospatial-Companies-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition ($geospatialResult.source_counts.'source-registry:awesome_geospatial_companies_github' -eq 14) -Message 'Awesome-Geospatial-Companies-Hints werden nicht der neuen Quelle zugeordnet.'
+Assert-True -Condition (@($geospatialResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Awesome-Geospatial-Companies-Hints muessen unverifizierte Discovery-Hints bleiben.'
+Assert-True -Condition (@($geospatialResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH', 'MUNICH_20KM') }).Count -eq 0) -Message 'Awesome-Geospatial-Companies-Hints muessen Muenchen- oder 20-km-Bezug behalten.'
+Assert-True -Condition (@($geospatialResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'career_hint' -or $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Awesome-Geospatial-Companies-Links duerfen nicht als offizielle Felder persistiert werden.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 try {
@@ -173,6 +193,8 @@ finally {
         'production_klimapakt3_snapshot',
         'production_munich_startup_snapshot',
         'production_awesome_ml_startups_munich_snapshot',
+        'production_remote_jobs_germany_snapshot',
+        'production_awesome_geospatial_companies_snapshot',
         'script_writes_regional_and_merged_hints'
     )
     hints = $result.hints_total
