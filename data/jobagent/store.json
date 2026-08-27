@@ -3306,7 +3306,7 @@
       ],
       "updated_at": "2026-08-27T17:27:13.367Z",
       "created_at": "2026-08-27T17:27:13.367Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3364,7 +3364,7 @@
       ],
       "updated_at": "2026-08-27T17:27:13.367Z",
       "created_at": "2026-08-27T17:27:13.367Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3392,6 +3392,114 @@
           "final_url": "https://jasmin-infotech.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-25T17:27:13.367Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:kpit_technologies_gmbh",
+      "canonical_name": "KPIT Technologies GmbH",
+      "canonical_domain": "kpit.com",
+      "official_website_url": "https://kpit.com/",
+      "career_url": "https://kpit.com/careers-overview",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T17:41:16.488Z",
+      "created_at": "2026-08-27T17:41:16.488Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-27T17:41:16.488Z",
+        "verification_url": "https://kpit.com/careers-overview",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_kpit_technologies_gmbh_muenchen",
+          "company_id": "company:kpit_technologies_gmbh",
+          "canonical_name": "KPIT Technologies GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://kpit.com/careers-overview",
+          "verified_by_url": "https://kpit.com/",
+          "redirect_chain": "https://kpit.com/careers-overview",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "0f9886e9bc8ded499a540758fd477cc939964468d88ef95c53769cce902ed391",
+          "observed_at": "2026-08-27T17:41:16.488Z",
+          "http_status": 200,
+          "final_url": "https://kpit.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T17:41:16.488Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:larsen_and_toubro_limited",
+      "canonical_name": "Larsen & Toubro Limited",
+      "canonical_domain": "larsentoubro.com",
+      "official_website_url": "https://larsentoubro.com/",
+      "career_url": "https://larsentoubro.com/careers",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T17:41:16.488Z",
+      "created_at": "2026-08-27T17:41:16.488Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-27T17:41:16.488Z",
+        "verification_url": "https://larsentoubro.com/careers",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_larsen_and_toubro_limited_muenchen",
+          "company_id": "company:larsen_and_toubro_limited",
+          "canonical_name": "Larsen & Toubro Limited",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://larsentoubro.com/careers",
+          "verified_by_url": "https://larsentoubro.com/",
+          "redirect_chain": "https://larsentoubro.com/careers",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "7de6ddc873089af993f94b688e1d859546439cdca7368750867d177eeba3fbcb",
+          "observed_at": "2026-08-27T17:41:16.488Z",
+          "http_status": 200,
+          "final_url": "https://larsentoubro.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T17:41:16.488Z"
         }
       ]
     }
@@ -4969,6 +5077,52 @@
             "https://jasmin-infotech.com/careers"
           ],
           "observed_at": "2026-08-27T17:27:13.367Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:kpit_technologies_gmbh_career_url",
+      "company_id": "company:kpit_technologies_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://kpit.com/careers-overview",
+      "canonical_url": "https://kpit.com/careers-overview",
+      "is_official": true,
+      "verified_at": "2026-08-27T17:41:16.488Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://kpit.com/careers-overview",
+          "basis_url": "https://kpit.com/",
+          "redirect_chain": [
+            "https://kpit.com/careers-overview"
+          ],
+          "observed_at": "2026-08-27T17:41:16.488Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:larsen_and_toubro_limited_career_url",
+      "company_id": "company:larsen_and_toubro_limited",
+      "source_type": "CAREER_PAGE",
+      "url": "https://larsentoubro.com/careers",
+      "canonical_url": "https://larsentoubro.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-27T17:41:16.488Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://larsentoubro.com/careers",
+          "basis_url": "https://larsentoubro.com/",
+          "redirect_chain": [
+            "https://larsentoubro.com/careers"
+          ],
+          "observed_at": "2026-08-27T17:41:16.488Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

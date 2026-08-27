@@ -1,15 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T17:28:00.118Z",
+  "generated_at": "2026-08-27T17:42:24.184Z",
   "clusters_total": 1786,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "DISCOVER_OFFICIAL_WEBSITE": 1738,
+    "DISCOVER_OFFICIAL_WEBSITE": 1735,
     "MANUAL_DECISION": 1,
     "REJECT_DUPLICATE": 4,
-    "VERIFY_OFFICIAL_SITE": 43
+    "VERIFY_OFFICIAL_SITE": 46
   },
   "queue": [
     {
@@ -14417,10 +14417,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14460,10 +14460,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14503,10 +14503,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14548,10 +14548,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14575,49 +14575,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_kpit_technologies_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_indian_companies_kpit_technologies_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_kpit_technologies_gmbh_muenchen"
-      ],
-      "canonical_name": "KPIT Technologies GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "8fc6aa94b5be5665c3dfd1fa2b93d9fb61f58563072d0518dcd394204cb74d5a",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:kpit technologies"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_kpmg_muenchen_ost",
       "candidate_id": "regional-hint:munich_business_commercial_locations_kpmg_muenchen_ost",
       "candidate_ids": [
@@ -14636,10 +14593,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14679,10 +14636,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14722,10 +14679,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14765,10 +14722,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14808,10 +14765,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14851,10 +14808,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14894,10 +14851,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -14913,49 +14870,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:laralab"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_larsen_and_toubro_limited_muenchen",
-      "candidate_id": "regional-hint:munich_business_indian_companies_larsen_and_toubro_limited_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_larsen_and_toubro_limited_muenchen"
-      ],
-      "canonical_name": "Larsen & Toubro Limited",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "0c2e3690805b84fc9464244df685c8a9f51037b5691ccb8380e418adac201ac6",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:larsen and toubro limited"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -14980,10 +14894,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15023,10 +14937,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15066,10 +14980,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15109,10 +15023,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15152,10 +15066,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15195,10 +15109,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15240,10 +15154,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15283,10 +15197,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15302,49 +15216,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:livanova"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_ltm_muenchen",
-      "candidate_id": "regional-hint:munich_business_indian_companies_ltm_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_ltm_muenchen"
-      ],
-      "canonical_name": "LTM",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "497fde058dc92b91f7d5acf28be36b71557e9060dd668bf2e40ce7d1f66f5e8e",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:ltm"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -15369,10 +15240,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15412,10 +15283,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -15455,10 +15326,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -27361,6 +27232,138 @@
         "dedupe_keys": [
           "domain:jasmin-infotech.com",
           "name:jasmin infotech"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_kpit_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_kpit_technologies_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_kpit_technologies_gmbh_muenchen"
+      ],
+      "canonical_name": "KPIT Technologies GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:41:16.488Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "8fc6aa94b5be5665c3dfd1fa2b93d9fb61f58563072d0518dcd394204cb74d5a",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:kpit.com",
+          "name:kpit technologies"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_larsentoubro_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_larsen_and_toubro_limited_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_larsen_and_toubro_limited_muenchen"
+      ],
+      "canonical_name": "Larsen & Toubro Limited",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:41:16.488Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "0c2e3690805b84fc9464244df685c8a9f51037b5691ccb8380e418adac201ac6",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:larsentoubro.com",
+          "name:larsen and toubro limited"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_ltm_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_ltm_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_ltm_muenchen"
+      ],
+      "canonical_name": "LTM",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "RETRY_SCHEDULED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-27T17:41:16.488Z",
+      "next_attempt_at": "2026-08-28T17:41:16.488Z",
+      "last_status": "UNVERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "497fde058dc92b91f7d5acf28be36b71557e9060dd668bf2e40ce7d1f66f5e8e",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:ltm.com",
+          "name:ltm"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
