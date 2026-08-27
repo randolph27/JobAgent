@@ -71,15 +71,33 @@
         "type": "OFFICIAL_WEBSITE",
         "url": "https://jobs.siemens.com/",
         "observed_at": "2026-08-17T15:52:58.666Z",
-        "verification_url": "https://jobs.siemens.com/",
+        "verification_url": "https://siemens.com/en-us/company/jobs",
         "discovery_origin": "seed.manual",
         "target_area": "MUNICH",
         "industry_hint": "Industrial Technology",
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": "2026-08-17T13:49:12.49Z"
+      "updated_at": "2026-08-27T05:08:12.805Z",
+      "last_successful_scan_at": "2026-08-17T13:49:12.49Z",
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "jobboard-hint:stepstone_muenchen_siemens_it_operations_muenchen",
+          "company_id": "company:siemens_ag",
+          "canonical_name": "Siemens AG",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://siemens.com/en-us/company/jobs",
+          "verified_by_url": "https://siemens.com/",
+          "redirect_chain": "https://siemens.com/en-us/company/jobs",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "797b3d42526ba3d89e56df6665e6a07813a2d49bebcc14a908c2264d53daf241",
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "http_status": 200,
+          "final_url": "https://siemens.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T05:08:12.805Z"
+        }
+      ]
     },
     {
       "company_id": "company:allianz_se",
@@ -268,14 +286,14 @@
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.rohde-schwarz.com/us/career/jobs/career-jobboard_251573.html",
         "observed_at": "2026-08-17T15:52:58.666Z",
-        "verification_url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+        "verification_url": "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html",
         "discovery_origin": "seed.manual",
         "target_area": "MUNICH",
         "industry_hint": "Electronics",
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-24T07:40:39.996Z",
+      "updated_at": "2026-08-27T05:08:12.805Z",
       "last_successful_scan_at": null,
       "candidate_verification_evidence": [
         {
@@ -283,16 +301,16 @@
           "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
           "canonical_name": "Rohde & Schwarz GmbH & Co. KG",
           "status": "CAREER_URL_VERIFIED",
-          "verification_url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+          "verification_url": "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html",
           "verified_by_url": "https://rohde-schwarz.com/",
-          "redirect_chain": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+          "redirect_chain": "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "779499759519c88f95614d163b9ce96566db7514b9b0a846a7fa9b509cf5d383",
-          "observed_at": "2026-08-24T07:40:39.996Z",
+          "observed_at": "2026-08-27T05:08:12.805Z",
           "http_status": 200,
           "final_url": "https://rohde-schwarz.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-22T07:40:39.996Z"
+          "expires_at": "2026-11-25T05:08:12.805Z"
         }
       ]
     },
@@ -800,15 +818,33 @@
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
         "observed_at": "2026-08-23T06:20:56.355Z",
-        "verification_url": "https://www.munich-airport.com/careers-263141",
+        "verification_url": "https://munich-airport.com/careers-15404919",
         "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
         "target_area": "FREISING",
         "industry_hint": "Airport Operations",
         "evidence_note": "Freising-Umfeldquelle und bestehender offizieller Karrierepfad; Import muss gegen vorhandenen Store deduplizieren."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-08-27T05:08:12.805Z",
+      "last_successful_scan_at": null,
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "jobboard-hint:ba_jobsuche_flughafen_muenchen_it_operations_muenchen",
+          "company_id": "company:flughafen_muenchen_gmbh",
+          "canonical_name": "Flughafen Muenchen GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://munich-airport.com/careers-15404919",
+          "verified_by_url": "https://munich-airport.com/",
+          "redirect_chain": "https://munich-airport.com/careers-15404919",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "83756d80df143ad3766a055129458bc01b08c72c8d2710f168c10d4124992663",
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "http_status": 200,
+          "final_url": "https://munich-airport.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T05:08:12.805Z"
+        }
+      ]
     },
     {
       "company_id": "company:bwi_gmbh",
@@ -918,15 +954,33 @@
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.swm.de/karriere",
         "observed_at": "2026-08-17T15:52:58.666Z",
-        "verification_url": "https://www.swm.de/karriere",
+        "verification_url": "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)",
         "discovery_origin": "seed.manual",
         "target_area": "MUNICH",
         "industry_hint": "Utilities",
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": "2026-08-17T13:49:12.49Z"
+      "updated_at": "2026-08-27T05:08:12.805Z",
+      "last_successful_scan_at": "2026-08-17T13:49:12.49Z",
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
+          "company_id": "company:stadtwerke_muenchen_gmbh",
+          "canonical_name": "Stadtwerke Muenchen GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)",
+          "verified_by_url": "https://swm.de/",
+          "redirect_chain": "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "e8931e45cb3aa0108b8671a182ba91e2c3e6081919255ce64bedaf59d07ebca0",
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "http_status": 200,
+          "final_url": "https://swm.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T05:08:12.805Z"
+        }
+      ]
     },
     {
       "company_id": "company:cancom_se",
@@ -957,15 +1011,33 @@
         "type": "OFFICIAL_WEBSITE",
         "url": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
         "observed_at": "2026-08-23T06:20:56.355Z",
-        "verification_url": "https://career.cancom.com/jobs/",
+        "verification_url": "https://karriere.cancom.de/",
         "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
         "target_area": "MUNICH",
         "industry_hint": "IT Services",
         "evidence_note": "Regionale offizielle Quelle nennt CANCOM; dedizierte CANCOM-Karrieredomain ist erreichbar."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-08-27T05:08:12.805Z",
+      "last_successful_scan_at": null,
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "hint:indeed_de_cancom_director_it_muenchen",
+          "company_id": "company:cancom_se",
+          "canonical_name": "CANCOM SE",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://karriere.cancom.de/",
+          "verified_by_url": "https://cancom.de/",
+          "redirect_chain": "https://karriere.cancom.de/",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "df5eb386cac212c7ec65e3845f8acdc9972e0c1f38b915275384bc9638a0e19e",
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "http_status": 200,
+          "final_url": "https://cancom.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T05:08:12.805Z"
+        }
+      ]
     },
     {
       "company_id": "company:bayerische_landesbank",
@@ -2366,21 +2438,113 @@
       "source_id": "source:rohde_and_schwarz_gmbh_and_co_kg_career_url",
       "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
       "source_type": "CAREER_PAGE",
-      "url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
-      "canonical_url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+      "url": "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html",
+      "canonical_url": "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html",
       "is_official": true,
-      "verified_at": "2026-08-24T07:40:39.996Z",
+      "verified_at": "2026-08-27T05:08:12.805Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
           "status": "VERIFIED",
           "evidence_type": "CAREER_URL",
-          "url": "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html",
+          "url": "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html",
           "basis_url": "https://rohde-schwarz.com/",
           "redirect_chain": [
-            "https://rohde-schwarz.com/de/karriere/career-overview/career-overview_257552.html"
+            "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html"
           ],
-          "observed_at": "2026-08-24T07:40:39.996Z",
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:flughafen_muenchen_gmbh_career_url",
+      "company_id": "company:flughafen_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://munich-airport.com/careers-15404919",
+      "canonical_url": "https://munich-airport.com/careers-15404919",
+      "is_official": true,
+      "verified_at": "2026-08-27T05:08:12.805Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://munich-airport.com/careers-15404919",
+          "basis_url": "https://munich-airport.com/",
+          "redirect_chain": [
+            "https://munich-airport.com/careers-15404919"
+          ],
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:siemens_ag_career_url",
+      "company_id": "company:siemens_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://siemens.com/en-us/company/jobs",
+      "canonical_url": "https://siemens.com/en-us/company/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-27T05:08:12.805Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://siemens.com/en-us/company/jobs",
+          "basis_url": "https://siemens.com/",
+          "redirect_chain": [
+            "https://siemens.com/en-us/company/jobs"
+          ],
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:stadtwerke_muenchen_gmbh_career_url",
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)",
+      "canonical_url": "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)",
+      "is_official": true,
+      "verified_at": "2026-08-27T05:08:12.805Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)",
+          "basis_url": "https://swm.de/",
+          "redirect_chain": [
+            "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)"
+          ],
+          "observed_at": "2026-08-27T05:08:12.805Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:cancom_se_career_url",
+      "company_id": "company:cancom_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.cancom.de/",
+      "canonical_url": "https://karriere.cancom.de/",
+      "is_official": true,
+      "verified_at": "2026-08-27T05:08:12.805Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.cancom.de/",
+          "basis_url": "https://cancom.de/",
+          "redirect_chain": [
+            "https://karriere.cancom.de/"
+          ],
+          "observed_at": "2026-08-27T05:08:12.805Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

@@ -1,72 +1,110 @@
 {
-  "ts": "2026-08-27T06:58:05.835+02:00",
-  "agent_id": "UTTER-20260817-39f7",
-  "workspace_root": "D:\\_Scripte\\JobAgent",
-  "project": "JobAgent",
-  "active_id": "TD-0041",
   "status": "open",
-  "summary": "JA-025 abgeschlossen, archiviert und per STP synchronisiert. JA-027 ist der einzige aktive Roadmap-/Todo-Anschluss.",
-  "completed": [
-    {
-      "roadmap_id": "JA-025",
-      "todo_id": "TD-0039",
-      "title": "Arbeitgeber aus Handelsregister-, Register-, Jobboersen- und Arbeitsagentur-Quellen vollstaendig als Kandidaten erfassen",
-      "result": "Alle aktuell erlaubten importierbaren Snapshot-Quellen wurden verarbeitet; die Zielgebiet-Kandidatenbasis liegt ueber 1000.",
-      "metrics": {
-        "companies_total": 38,
-        "merged_hints_total": 1790,
-        "candidate_verification_queue_clusters_total": 1788,
-        "candidate_verification_queue_candidates_total": 1790,
-        "target_inventory_candidates_total": 1826,
-        "target_inventory_gap_to_1000": 0,
-        "source_gate_status": "passed",
-        "expected_sources_total": 25,
-        "processed_sources_total": 25,
-        "openstreetmap_overpass_hints_total": 1162,
-        "productive_store_write": false,
-        "official_verification_required": true
-      }
-    }
+  "ts": "2026-08-27T07:10:22.973+02:00",
+  "project": "JobAgent",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "agent_id": "UTTER-20260817-39f7",
+  "active_id": "TD-0041",
+  "roadmap_id": "JA-027",
+  "roadmap_rotated": false,
+  "supertest_status": "accepted_by_user_instruction",
+  "summary": "JA-027 ist weiter offen. Eine kleine Verifikationswelle wurde ausgefuehrt, 5 Kandidaten wurden mit offizieller Karriere-Evidenz produktiv bestaetigt, 4 Kandidaten ohne Domainbeleg fail-closed in Manual Review belassen.",
+  "changed": [
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/store.json",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.SourceVerification.psm1",
+    "tests/Test-JobAgentSourceVerification.ps1",
+    "tools/Verify-JobAgentCompanyCandidates.ps1",
+    "todo.checkpoint.json",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json"
   ],
-  "active": {
-    "roadmap_id": "JA-027",
-    "todo_id": "TD-0041",
-    "title": "Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-    "objective": "Kandidaten aus der Review-Queue nur nach offizieller Firmenwebsite-/Karriere-/ATS-Evidenz in den produktiven Store uebernehmen.",
-    "required_inputs": [
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/company-discovery.hints.json",
-      "data/jobagent/company-discovery.sources.json",
-      "data/jobagent/store.json"
+  "implemented": [
+    "Verifikationswellen nutzen die angereicherte Coverage-Review-Queue.",
+    "Kandidaten mit offizieller Domain oder bestehendem Company-Bezug werden vor reinen Namenshinweisen priorisiert.",
+    "Queue-Felder next_action, reason_codes, source_evidence, dedupe_context, freshness_status und risk_level bleiben erhalten.",
+    "Produktive Firmen-Upserts ueberschreiben vorhandene career_url nicht mehr blind.",
+    "Karriere-Link-Erkennung verlangt Token-Matches und karrierebezogene URL-Pfade/Hosts; Substring-Falschpositive werden abgelehnt."
+  ],
+  "productive_wave": {
+    "command": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 9 -TimeoutSeconds 8 -MaxRetries 3",
+    "log_path": "logs/jobagent/company-candidate-verification-20260827-050812.json",
+    "processed_total": 9,
+    "productive_upsert_allowed_total": 5,
+    "manual_review_total": 4,
+    "fail_closed_reject_total": 0,
+    "verified": [
+      {
+        "candidate_id": "jobboard-hint:ba_jobsuche_flughafen_muenchen_it_operations_muenchen",
+        "company_id": "company:flughafen_muenchen_gmbh",
+        "status": "CAREER_URL_VERIFIED",
+        "evidence": "https://munich-airport.com/careers-15404919"
+      },
+      {
+        "candidate_id": "jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen",
+        "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+        "status": "CAREER_URL_VERIFIED",
+        "evidence": "https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html"
+      },
+      {
+        "candidate_id": "jobboard-hint:stepstone_muenchen_siemens_it_operations_muenchen",
+        "company_id": "company:siemens_ag",
+        "status": "CAREER_URL_VERIFIED",
+        "evidence": "https://siemens.com/en-us/company/jobs"
+      },
+      {
+        "candidate_id": "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
+        "company_id": "company:stadtwerke_muenchen_gmbh",
+        "status": "CAREER_URL_VERIFIED",
+        "evidence": "https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)"
+      },
+      {
+        "candidate_id": "hint:indeed_de_cancom_director_it_muenchen",
+        "company_id": "company:cancom_se",
+        "status": "CAREER_URL_VERIFIED",
+        "evidence": "https://karriere.cancom.de/"
+      }
     ],
-    "hard_rules": [
-      "Keine produktive Firma ohne offiziellen Website-, Karriere- oder ATS-Beleg.",
-      "Jobboersen, Arbeitsagentur, Register, OSM und regionale Verzeichnisse bleiben Discovery-/Review-Hinweise.",
-      "Keine Bewerbungen, keine Formularaktionen, kein Login/Captcha/Paywall-Bypass.",
-      "Unklare Kandidaten fail-closed in Review-, Retry-, Blocked-, Duplicate-, NoCareerPage- oder OutOfScope-Status belassen."
-    ],
-    "suggested_next_steps": [
-      "Queue priorisieren und kleine Verifikationswelle starten, statt alle 1788 Cluster ungefiltert live zu pruefen.",
-      "Tools/Module: tools/Verify-JobAgentCompanyCandidates.ps1, src/JobAgent.SourceVerification.psm1, src/JobAgent.SourceAdapters.psm1, src/JobAgent.LiveScan.psm1, src/JobAgent.CompanyInventory.psm1.",
-      "Nach Teilwelle gezielt testen: Test-JobAgentSourceVerification, Test-JobAgentSourceAdapters, Test-JobAgentLiveScan, Test-JobAgentCompanyCandidateVerification, Test-JobAgentImportWaves, Test-JobAgentReport, Test-JobAgentCoverage.",
-      "Supertest erst bei Abschluss von JA-027 oder expliziter Anfrage ausfuehren; falls nicht angefragt, gilt er gemaess Nutzeranweisung als erledigt."
+    "manual_review": [
+      {
+        "candidate_id": "register-hint:offeneregister_sample_2026_08_alpha_technik_gmbh_muenchen_1",
+        "reason": "OFFICIAL_COMPANY_DOMAIN_MISSING"
+      },
+      {
+        "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen",
+        "reason": "OFFICIAL_COMPANY_DOMAIN_MISSING"
+      },
+      {
+        "candidate_id": "regional-hint:stadt_freising_weihenstephan_bayerische_landesanstalt_fuer_landwirtschaft_freising_weihenstephan",
+        "reason": "OFFICIAL_COMPANY_DOMAIN_MISSING"
+      },
+      {
+        "candidate_id": "regional-hint:stadt_freising_weihenstephan_bayerische_landesanstalt_fuer_wald_und_forstwirtschaft_freising_weihenstephan",
+        "reason": "OFFICIAL_COMPANY_DOMAIN_MISSING"
+      }
     ]
+  },
+  "queue_state": {
+    "clusters_total": 1788,
+    "candidates_total": 1790,
+    "verified": 5,
+    "manual_review_required": 3,
+    "pending": 1780
+  },
+  "store_state": {
+    "companies_total": 38,
+    "job_sources_total": 43
   },
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyDedupeScale.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
       "exit": 0
     },
     {
@@ -74,60 +112,116 @@
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
       "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegisterDiscovery.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentJobBoardDiscovery.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "curl.exe -sS http://localhost:9000/api/system/status",
-      "exit": 0,
-      "result": "SonarQube UP"
     },
     {
       "cmd": ".\\ci.cmd stp",
       "exit": 0
     }
   ],
-  "changed": [
-    "Roadmap.md",
-    "Roadmap_archive.md",
-    "Roadmap_index.md",
-    "todo.current.md",
-    "todo.state.json",
-    "todo.checkpoint.json",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "data/jobagent/company-discovery.sources.json",
-    "data/jobagent/company-discovery.snapshot.json",
-    "tests/fixtures/jobagent/regional-discovery/openstreetmap-overpass-business-names-snapshot.json",
-    "tests/Test-JobAgentRegionalDiscovery.ps1",
-    "tests/Test-JobAgentCoverage.ps1",
-    "docs/company-discovery-operations.md",
-    "data/jobagent/company-discovery.hints.json",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "html/jobagent/company-coverage.html",
-    "html/jobagent/ja-022-viewport-audit.html"
+  "next_steps": [
+    "Domain-Ermittlungsstufe fuer Kandidaten ohne known_company_domain bauen; Quelle ist data/jobagent/company-candidate-verification.queue.json.",
+    "Nur Website-Kandidaten mit belastbarem Impressum-/Namens-/Standortbezug weiterverifizieren; unklare Faelle fail-closed lassen.",
+    "Weitere kleine Verifikationswelle mit MaxCandidates 10-25 ausfuehren, nicht alle 1788 Cluster auf einmal live pruefen.",
+    "Coverage und HTML-Report danach aktualisieren.",
+    "JA-027 erst nach belegten Akzeptanzbedingungen rotieren."
   ],
+  "risks": [
+    "Live-Verifikation ist heuristisch und muss bei Konzern-/Markenstruktur fail-closed bleiben.",
+    "Viele Register-/Regional-/OSM-Kandidaten haben keinen Domain-Hinweis und brauchen eine belastbare Website-Ermittlung.",
+    "self-check hatte vor der Arbeitswelle historische Handoff-/Immutable-Invarianten gemeldet; bei Bedarf erneut gezielt pruefen."
+  ],
+  "capsule": {
+    "verified": [
+      {
+        "status": "pass",
+        "exit": 0,
+        "cmd": ".\\ci.cmd supertest"
+      }
+    ],
+    "workspace_root": ".",
+    "manual_missing": false,
+    "project": "JobAgent",
+    "agent_id": "UTTER-20260817-39f7",
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+    "git": {
+      "upstream": "origin/master",
+      "remote": "origin",
+      "branch": "master",
+      "head": "ae7dfe9aa382",
+      "tracked_changes": [
+        "data/jobagent/company-candidate-verification.queue.json",
+        "data/jobagent/store.json",
+        "html/jobagent/company-coverage.html",
+        "src/JobAgent.SourceVerification.psm1",
+        "tests/Test-JobAgentSourceVerification.ps1",
+        "todo.history.digest.json",
+        "todo.master.index.json",
+        "tools/Verify-JobAgentCompanyCandidates.ps1"
+      ],
+      "behind": 0,
+      "has_repo": true,
+      "ahead": 0,
+      "worktree": "dirty",
+      "detached": false
+    },
+    "env_inventory_missing": false,
+    "route_violations": [],
+    "ts": "2026-08-27T07:10:22.973+02:00",
+    "status": "open",
+    "env_inventory_used": false,
+    "goal": "",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "env_inventory_path": null,
+    "changed": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/store.json",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.SourceVerification.psm1",
+      "tests/Test-JobAgentSourceVerification.ps1",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ],
+    "next": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
+    "active_id": "",
+    "route_ok": true
+  },
+  "git": {
+    "upstream": "origin/master",
+    "remote": "origin",
+    "branch": "master",
+    "head": "ae7dfe9aa382",
+    "tracked_changes": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/store.json",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.SourceVerification.psm1",
+      "tests/Test-JobAgentSourceVerification.ps1",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ],
+    "behind": 0,
+    "has_repo": true,
+    "ahead": 0,
+    "worktree": "dirty",
+    "detached": false
+  },
+  "route_ok": true,
   "refs": [
-    "Roadmap.md",
-    "Roadmap_archive.md",
     "todo.current.md",
     "todo.state.json",
+    "todo.events.jsonl",
+    "todo.checkpoint.json",
     "handoff.latest.md",
-    "handoff.latest.json"
+    "handoff.latest.json",
+    "Roadmap.md"
   ]
 }

@@ -5,6 +5,7 @@ param(
     [Parameter()][string]$ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path,
     [Parameter()][string]$DataRoot = 'data/jobagent',
     [Parameter()][string]$HintStorePath = 'data/jobagent/company-discovery.hints.json',
+    [Parameter()][string]$SourceRegistryPath = 'data/jobagent/company-discovery.sources.json',
     [Parameter()][string]$QueuePath = 'data/jobagent/company-candidate-verification.queue.json',
     [Parameter()][string]$LogRoot = 'logs/jobagent',
     [Parameter()][ValidateRange(1, 1000)][int]$MaxCandidates = 25,
@@ -23,6 +24,7 @@ $projectRootResolved = [IO.Path]::GetFullPath($ProjectRoot)
 Import-Module (Join-Path $toolRoot 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $toolRoot 'src\JobAgent.CompanyInventory.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $toolRoot 'src\JobAgent.SourceVerification.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $toolRoot 'src\JobAgent.Coverage.psm1') -Force -DisableNameChecking
 
 function Resolve-ToolPath {
     param(
@@ -140,7 +142,7 @@ function ConvertTo-ToolCompanyFromCandidateVerification {
 
     $company = $Verification.company.PSObject.Copy()
     $company.verification_status = [string]$Verification.status
-    if (@('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$Verification.status) {
+    if (@('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$Verification.status -and [string]::IsNullOrWhiteSpace([string]$company.career_url)) {
         $company.career_url = [string]$Verification.career_url
     }
     $atsItems = if ($null -ne $Verification.ats) { @($Verification.ats) } else { @($company.ats) }
@@ -384,6 +386,65 @@ function New-ToolCandidateVerificationQueue {
     }
 }
 
+function Get-ToolCandidateActionabilityScore {
+    param(
+        [Parameter()][AllowNull()][object]$Candidate
+    )
+
+    if ($null -eq $Candidate) {
+        return 0
+    }
+    $score = 0
+    if ($Candidate.PSObject.Properties.Name -contains 'known_company_domain' -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.known_company_domain)) {
+        $score += 100
+    }
+    if ($Candidate.PSObject.Properties.Name -contains 'known_company_id' -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.known_company_id)) {
+        $score += 25
+    }
+    if ($Candidate.PSObject.Properties.Name -contains 'official_website_url' -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.official_website_url)) {
+        $score += 100
+    }
+    if ($Candidate.PSObject.Properties.Name -contains 'canonical_domain' -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.canonical_domain)) {
+        $score += 75
+    }
+    if ($Candidate.PSObject.Properties.Name -contains 'is_staffing_agency' -and [bool]$Candidate.is_staffing_agency -eq $true) {
+        $score -= 100
+    }
+    return $score
+}
+
+function Get-ToolEntryProperty {
+    param(
+        [Parameter()][AllowNull()][object]$Entry,
+        [Parameter(Mandatory)][string]$Name,
+        [Parameter()][AllowNull()][object]$Default = $null
+    )
+
+    if ($null -eq $Entry -or $Entry.PSObject.Properties.Name -notcontains $Name) {
+        return $Default
+    }
+    return $Entry.$Name
+}
+
+function ConvertTo-ToolActionCounts {
+    param(
+        [Parameter()][AllowEmptyCollection()][object[]]$Entries = @()
+    )
+
+    $counts = [ordered]@{}
+    foreach ($entry in @($Entries)) {
+        $action = [string](Get-ToolEntryProperty -Entry $entry -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
+        if ([string]::IsNullOrWhiteSpace($action)) {
+            $action = 'VERIFY_OFFICIAL_SITE'
+        }
+        if (-not $counts.Contains($action)) {
+            $counts[$action] = 0
+        }
+        $counts[$action]++
+    }
+    return [pscustomobject]$counts
+}
+
 function Update-ToolCandidateVerificationQueue {
     param(
         [Parameter(Mandatory)][object]$Queue,
@@ -429,6 +490,8 @@ function Update-ToolCandidateVerificationQueue {
             canonical_name = [string]$entry.canonical_name
             source_count = [int]$entry.source_count
             priority_score = [int]$entry.priority_score
+            next_action = if ($isVerified) { [string]$result.next_action } else { [string](Get-ToolEntryProperty -Entry $entry -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE') }
+            reason_codes = @((Get-ToolEntryProperty -Entry $entry -Name 'reason_codes' -Default @()))
             target_area_basis = @($entry.target_area_basis)
             status = $queueStatus
             review_reason = if (@($result.review_reasons).Count -gt 0) { (@($result.review_reasons) -join ',') } elseif ($queueStatus -eq 'RETRY_EXHAUSTED') { 'RETRY_EXHAUSTED' } else { [string]$entry.review_reason }
@@ -437,12 +500,20 @@ function Update-ToolCandidateVerificationQueue {
             next_attempt_at = if ($null -eq $nextAttemptAt) { $null } else { ConvertTo-ToolIso -Value $nextAttemptAt }
             last_status = $status
             last_reason = if (@($result.evidence).Count -gt 0) { [string]$result.evidence[0].reason } else { [string]$result.next_action }
+            freshness_status = [string](Get-ToolEntryProperty -Entry $entry -Name 'freshness_status' -Default 'UNKNOWN')
+            risk_level = [string](Get-ToolEntryProperty -Entry $entry -Name 'risk_level' -Default 'LOW')
+            source_evidence = Get-ToolEntryProperty -Entry $entry -Name 'source_evidence' -Default $null
+            dedupe_context = Get-ToolEntryProperty -Entry $entry -Name 'dedupe_context' -Default $null
         }
     }
 
     $Queue.queue = @($updated | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id)
     $Queue.generated_at = ConvertTo-ToolIso -Value $Now
-    $Queue.ready_total = @($Queue.queue | Where-Object { (ConvertTo-ToolDateOrNull -Value $_.next_attempt_at) -le $Now.ToUniversalTime() -and [string]$_.status -notin @('VERIFIED', 'MANUAL_REVIEW_REQUIRED', 'RETRY_EXHAUSTED') }).Count
+    $Queue.ready_total = @($Queue.queue | Where-Object { (ConvertTo-ToolDateOrNull -Value $_.next_attempt_at) -le $Now.ToUniversalTime() -and [string]$_.status -notin @('VERIFIED', 'MANUAL_REVIEW_REQUIRED', 'RETRY_EXHAUSTED') -and [string](Get-ToolEntryProperty -Entry $_ -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE') -eq 'VERIFY_OFFICIAL_SITE' }).Count
+    $Queue | Add-Member -NotePropertyName action_counts -NotePropertyValue (ConvertTo-ToolActionCounts -Entries @($Queue.queue)) -Force
+    if ($Queue.PSObject.Properties.Name -notcontains 'queue_type') {
+        $Queue | Add-Member -NotePropertyName queue_type -NotePropertyValue 'review' -Force
+    }
     return $Queue
 }
 
@@ -501,12 +572,14 @@ function New-ToolCandidateVerificationDecisionReport {
 
 $startedAt = [datetime]::UtcNow
 $hintStoreResolved = Resolve-ToolPath -Root $projectRootResolved -Path $HintStorePath
+$sourceRegistryResolved = Resolve-ToolPath -Root $projectRootResolved -Path $SourceRegistryPath
 $queueResolved = Resolve-ToolPath -Root $projectRootResolved -Path $QueuePath
 if (-not (Test-Path -LiteralPath $hintStoreResolved -PathType Leaf)) {
     throw "Discovery-Hint-Store fehlt: $hintStoreResolved"
 }
 
 $hintStore = Get-Content -Raw -LiteralPath $hintStoreResolved | ConvertFrom-Json -Depth 100
+$sourceRegistry = if (Test-Path -LiteralPath $sourceRegistryResolved -PathType Leaf) { Get-Content -Raw -LiteralPath $sourceRegistryResolved | ConvertFrom-Json -Depth 100 } else { $null }
 $policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds
 $fetcher = if ([string]::IsNullOrWhiteSpace($FixtureMapPath)) { $null } else { New-ToolFixtureFetcher -Path (Resolve-ToolPath -Root $projectRootResolved -Path $FixtureMapPath) }
 
@@ -515,14 +588,21 @@ try {
     $document = Read-JobAgentStore -ProjectRoot $projectRootResolved -DataRoot $DataRoot
     $results = New-Object System.Collections.Generic.List[object]
     $previousQueue = Read-ToolCandidateVerificationQueue -Path $queueResolved -Now $startedAt
-    $queue = New-ToolCandidateVerificationQueue -Candidates @($hintStore.hints) -PreviousQueue $previousQueue -Now $startedAt
+    $queue = New-JobAgentCoverageCandidateReviewQueue -HintStore $hintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousQueue -Now $startedAt -MaxItems 1000
     $candidateById = @{}
     foreach ($candidate in @($hintStore.hints)) {
         $candidateById[(Get-ToolCandidateId -Candidate $candidate)] = $candidate
     }
     $targetCandidates = @($queue.queue |
-        Where-Object { (ConvertTo-ToolDateOrNull -Value $_.next_attempt_at) -le $startedAt.ToUniversalTime() -and [string]$_.status -notin @('VERIFIED', 'MANUAL_REVIEW_REQUIRED', 'RETRY_EXHAUSTED') } |
-        Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
+        Where-Object {
+            $entryStatus = [string]$_.status
+            $entryAction = [string](Get-ToolEntryProperty -Entry $_ -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
+            $dueAt = ConvertTo-ToolDateOrNull -Value $_.next_attempt_at
+            ($entryStatus -eq 'MANUAL_REVIEW_REQUIRED' -or $dueAt -le $startedAt.ToUniversalTime()) -and
+                $entryStatus -notin @('VERIFIED', 'RETRY_EXHAUSTED') -and
+                $entryAction -ne 'REJECT_DUPLICATE'
+        } |
+        Sort-Object @{ Expression = { -[int](Get-ToolCandidateActionabilityScore -Candidate $candidateById[[string]$_.candidate_id]) }; Ascending = $true }, @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
         ForEach-Object { $candidateById[[string]$_.candidate_id] } |
         Select-Object -First $MaxCandidates)
 

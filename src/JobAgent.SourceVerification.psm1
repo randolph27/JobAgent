@@ -247,7 +247,24 @@ function Test-JobAgentCompanyCareerLinkText {
 
     $normalized = $Value.ToLowerInvariant()
     foreach ($pattern in $script:CareerLinkPatterns) {
-        if ($normalized.Contains($pattern)) {
+        $escapedPattern = [regex]::Escape($pattern)
+        if ($normalized -match ('(^|[^a-z0-9])' + $escapedPattern + '([^a-z0-9]|$)')) {
+            return $true
+        }
+    }
+    return $false
+}
+
+function Test-JobAgentCompanyCareerUrl {
+    param(
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    $uri = [Uri](ConvertTo-JobAgentCanonicalUrl -Url $Url)
+    $value = ($uri.Host + ' ' + $uri.AbsolutePath).ToLowerInvariant()
+    foreach ($pattern in $script:CareerLinkPatterns) {
+        $escapedPattern = [regex]::Escape($pattern)
+        if ($value -match ('(^|[^a-z0-9])' + $escapedPattern + '([^a-z0-9]|$)')) {
             return $true
         }
     }
@@ -292,6 +309,9 @@ function Get-JobAgentCompanyCareerCandidateLinks {
         $atsBinding = Get-JobAgentAtsBindingForUrl -Url $canonical
         $isCompanyDomain = $evaluation.is_official -eq $true
         $isAts = $null -ne $atsBinding
+        if ($isCompanyDomain -and -not (Test-JobAgentCompanyCareerUrl -Url $canonical)) {
+            continue
+        }
         if ((-not $isCompanyDomain) -and (-not $isAts)) {
             continue
         }
