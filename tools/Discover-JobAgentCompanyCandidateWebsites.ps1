@@ -128,6 +128,58 @@ function Update-ToolHintWithWebsiteDiscovery {
     Add-ToolProperty -Object $Hint -Name 'next_action' -Value 'verify_official_company_website_or_career_url'
 }
 
+function Update-ToolQueueWithWebsiteDiscoveryResults {
+    param(
+        [Parameter(Mandatory)][object]$Queue,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Results,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $resultByCandidate = @{}
+    foreach ($result in @($Results)) {
+        $resultByCandidate[[string]$result.candidate_id] = $result
+    }
+
+    $observedAtText = ConvertTo-ToolIso -Value $ObservedAt
+    $updatedEntries = foreach ($entry in @($Queue.queue)) {
+        $candidateId = [string]$entry.candidate_id
+        if (-not $resultByCandidate.ContainsKey($candidateId)) {
+            $entry
+            continue
+        }
+
+        $result = $resultByCandidate[$candidateId]
+        $verified = [string]$result.status -eq 'OFFICIAL_WEBSITE_VERIFIED'
+        [pscustomobject]@{
+            identity_cluster_id = [string]$entry.identity_cluster_id
+            candidate_id = $candidateId
+            candidate_ids = @($entry.candidate_ids)
+            canonical_name = [string]$entry.canonical_name
+            source_count = [int]$entry.source_count
+            priority_score = [int]$entry.priority_score
+            next_action = if ($verified) { 'VERIFY_OFFICIAL_SITE' } else { [string]$entry.next_action }
+            reason_codes = @($entry.reason_codes)
+            target_area_basis = @($entry.target_area_basis)
+            status = if ($verified) { 'PENDING' } else { 'MANUAL_REVIEW_REQUIRED' }
+            review_reason = if ($verified) { [string]$entry.review_reason } else { [string]$result.reason }
+            retry_count = [int]$entry.retry_count
+            last_attempt_at = $observedAtText
+            next_attempt_at = if ($verified) { $observedAtText } else { $null }
+            last_status = [string]$result.status
+            last_reason = [string]$result.reason
+            freshness_status = if ($entry.PSObject.Properties.Name -contains 'freshness_status') { [string]$entry.freshness_status } else { 'UNKNOWN' }
+            risk_level = if ($entry.PSObject.Properties.Name -contains 'risk_level') { [string]$entry.risk_level } else { 'LOW' }
+            source_evidence = if ($entry.PSObject.Properties.Name -contains 'source_evidence') { $entry.source_evidence } else { $null }
+            dedupe_context = if ($entry.PSObject.Properties.Name -contains 'dedupe_context') { $entry.dedupe_context } else { $null }
+        }
+    }
+
+    $Queue.queue = @($updatedEntries | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, next_action, canonical_name, candidate_id)
+    $Queue.generated_at = ConvertTo-ToolIso -Value $ObservedAt
+    $Queue.ready_total = @($Queue.queue | Where-Object { [string]$_.status -eq 'PENDING' }).Count
+    return $Queue
+}
+
 function ConvertTo-ToolTextHash {
     param([Parameter()][AllowEmptyString()][string]$Text)
 
@@ -209,7 +261,11 @@ foreach ($candidate in @($hintStore.hints)) {
 }
 
 $targets = @($queue.queue |
-    Where-Object { [string]$_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $candidateById.ContainsKey([string]$_.candidate_id) } |
+    Where-Object {
+        [string]$_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and
+            $candidateById.ContainsKey([string]$_.candidate_id) -and
+            [string]::IsNullOrWhiteSpace([string]$_.last_attempt_at)
+    } |
     Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
     Select-Object -First $MaxCandidates)
 $results = New-Object System.Collections.Generic.List[object]
@@ -227,6 +283,7 @@ New-Item -ItemType Directory -Path (Split-Path -Parent $hintStoreResolved) -Forc
 $hintStore.generated_at = ConvertTo-ToolIso -Value $startedAt
 $hintStore | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $hintStoreResolved -Encoding UTF8
 $updatedQueue = New-JobAgentCoverageCandidateReviewQueue -HintStore $hintStore -SourceRegistry $sourceRegistry -PreviousQueue $queue -Now $startedAt -MaxItems 1000
+$updatedQueue = Update-ToolQueueWithWebsiteDiscoveryResults -Queue $updatedQueue -Results @($results.ToArray()) -ObservedAt $startedAt
 New-Item -ItemType Directory -Path (Split-Path -Parent $queueResolved) -Force | Out-Null
 $updatedQueue | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $queueResolved -Encoding UTF8
 

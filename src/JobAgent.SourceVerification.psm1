@@ -495,7 +495,7 @@ function Test-JobAgentCandidateOfficialWebsiteDiscoverySource {
     if (@('JOB_BOARD_DISCOVERY', 'DISCOVERY_HINT') -contains $sourceClass) {
         return $false
     }
-    if ($sourceClass -in @('PUBLIC_INSTITUTION_DIRECTORY', 'REGIONAL_DIRECTORY', 'OFFICIAL_REGISTER')) {
+    if ($sourceClass -in @('PUBLIC_INSTITUTION_DIRECTORY', 'REGIONAL_DIRECTORY', 'OFFICIAL_REGISTER') -and $evidenceLevel -in @('SECONDARY_OFFICIAL_DIRECTORY', 'PRIMARY_OFFICIAL')) {
         return $true
     }
     return $evidenceLevel -in @('SECONDARY_OFFICIAL_DIRECTORY', 'PRIMARY_OFFICIAL')

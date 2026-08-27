@@ -1,15 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T15:43:25.969Z",
-  "clusters_total": 1787,
+  "generated_at": "2026-08-27T15:56:48.461Z",
+  "clusters_total": 1786,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "DISCOVER_OFFICIAL_WEBSITE": 1769,
+    "DISCOVER_OFFICIAL_WEBSITE": 1750,
     "MANUAL_DECISION": 1,
-    "REJECT_DUPLICATE": 3,
-    "VERIFY_OFFICIAL_SITE": 14
+    "REJECT_DUPLICATE": 4,
+    "VERIFY_OFFICIAL_SITE": 31
   },
   "queue": [
     {
@@ -379,10 +379,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -422,10 +422,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine absolute zulaessige Quell-URL fuer Website-Ermittlung vorhanden.",
       "freshness_status": "UNKNOWN",
       "risk_level": "LOW",
       "source_evidence": {
@@ -466,10 +466,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -509,10 +509,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -554,10 +554,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -599,10 +599,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -644,10 +644,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine absolute zulaessige Quell-URL fuer Website-Ermittlung vorhanden.",
       "freshness_status": "UNKNOWN",
       "risk_level": "LOW",
       "source_evidence": {
@@ -688,10 +688,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -731,10 +731,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -774,10 +774,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -817,10 +817,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -862,10 +862,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -905,10 +905,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -948,10 +948,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -991,10 +991,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1036,10 +1036,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1081,10 +1081,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Mehrere moegliche Firmenwebsites gefunden; automatische Auswahl ist fail-closed.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1124,10 +1124,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1151,49 +1151,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen"
-      ],
-      "canonical_name": "MRG Muenchener Raumentwicklungsgesellschaft mbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "60c4a7349887c0eb7a459b75404e8d177876ed311aa8779710fdcb623d594518",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:mrg muenchener raumentwicklungsgesellschaft mbh"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_klimapakt3_companies_mtu_aero_engines_ag_muenchen_klimapakt_3",
       "candidate_id": "regional-hint:munich_business_klimapakt3_companies_mtu_aero_engines_ag_muenchen_klimapakt_3",
       "candidate_ids": [
@@ -1212,10 +1169,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1239,180 +1196,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen"
-      ],
-      "canonical_name": "Muenchen Klinik gGmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "a2795eabd4c8f8d973767edfd69313387094735fba9ec6e0ece195713761f4d0",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchen klinik ggmbh"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen"
-      ],
-      "canonical_name": "Muenchen Ticket GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "0b4e4fb5bbca2b7c3bb5cf0888877ee398da8ba7f290b3e204ab2817fb9c42b3",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchen ticket"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen"
-      ],
-      "canonical_name": "Muenchener Arbeit gemeinnuetzige GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "0cab7b54f33a186174a0887927921a4e74089bbe06098fb6db43427a8346a17e",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchener arbeit gemeinnuetzige"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen"
-      ],
-      "canonical_name": "Muenchener Gesellschaft fuer Stadterneuerung mbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "15afb560817430a5a5067c8737b177e9e8615b7a9d0b6d43a23e1974335db671",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchener gesellschaft fuer stadterneuerung mbh"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_gewerbehof_giesing_grundstuecks_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gewerbehof_giesing_grundstuecks_gmbh_muenchen",
       "candidate_ids": [
@@ -1431,10 +1214,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Mehrere moegliche Firmenwebsites gefunden; automatische Auswahl ist fail-closed.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1450,436 +1233,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:muenchener gewerbehof giesing grundstuecks"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen"
-      ],
-      "canonical_name": "Muenchener Tierpark Hellabrunn AG",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "ad4297b9696f008f09d533f8c33a04ee8566f9c3042fbd75ad2fad87e1264584",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchener tierpark hellabrunn"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen"
-      ],
-      "canonical_name": "Muenchener Volkshochschule GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "33d82ece40e15833e89b4f282b0afdd950416d41eb03f0d176613918db4bfbe7",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchener volkshochschule"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen"
-      ],
-      "canonical_name": "Muenchener Volkstheater GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "c9677a43346904fbb60daa9738c37f02ec2cd883c09f18af5c9a864a33908332",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchener volkstheater"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen"
-      ],
-      "canonical_name": "Muenchener Wohnen GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "d39fc22eccf71054ffcdd6c87723e8f0f8605f395c4d4ce832fc96889547abcb",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchener wohnen"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen"
-      ],
-      "canonical_name": "Muenchenstift GmbH Gemeinnuetzige Gesellschaft",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "0ba71a59906baf2025e7810efbeb2b544a6e26a850e4654cf68fc7f9a3f9ee6b",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchenstift gemeinnuetzige gesellschaft"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen"
-      ],
-      "canonical_name": "Muenchner Verkehrs- und Tarifverbund GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "c108621787594ae9506c9c0f2dae2ab06ad7b37f13118e3fed3f546c4dc28579",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:muenchner verkehrs und tarifverbund"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen"
-      ],
-      "canonical_name": "Olympiapark Muenchen GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "6fb8d0035776508c6989bb64dd9f925da3f32e7145e8f81b56ce60297777a0df",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:olympiapark muenchen"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen"
-      ],
-      "canonical_name": "P+R Park&Ride GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "3957f3f6885cce3fbaf75b273864afb48eecc713ef79ee649ea4afe91dfd508b",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:p plus r park and ride"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen"
-      ],
-      "canonical_name": "Pasinger Fabrik Kultur- und Buergerzentrum GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "d0f159d9123581d3510cde7da5b38beca485682fe29fc7d82854355103851336",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:pasinger fabrik kultur und buergerzentrum"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen"
-      ],
-      "canonical_name": "Portal Muenchen Betriebs-GmbH & Co. KG",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "887427a504ccf90e7d6825a9ab12a04d87f5636947fad2d9846fc087bbc95fc2",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:portal muenchen betriebs"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -1904,10 +1257,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1949,10 +1302,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -1976,92 +1329,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen"
-      ],
-      "canonical_name": "Spielmotor",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "24ab927a4c8e1821bc6b3598f449f048dd905e3e24315456e1226043ed570479",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:spielmotor"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen"
-      ],
-      "canonical_name": "Stadtsparkasse Muenchen",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "ccdf9b9ac9c061c49d9169790b1b8c12b5b75aaf441ff2499f90c35cd9efa098",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:stadtsparkasse muenchen"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_klimapakt3_companies_stadtwerke_muenchen_gmbh_muenchen_klimapakt_3",
       "candidate_id": "regional-hint:munich_business_klimapakt3_companies_stadtwerke_muenchen_gmbh_muenchen_klimapakt_3",
       "candidate_ids": [
@@ -2080,10 +1347,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2095,51 +1362,6 @@
         "record_hash": "278ead84f2cccc8e6100dd70ad011bcc54e73a3aa9c8c96c75a0f82b7a41ecf7",
         "allowed_use": "Oeffentlich gelistete teilnehmende Muenchner Grossunternehmen und Kooperationspartner des Klimapakt 3 als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
         "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Klimapakt-3-Unternehmensliste; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:stadtwerke muenchen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen"
-      ],
-      "canonical_name": "Stadtwerke Muenchen GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "6fe240630ab6603227e92daed05e12184d7164143ea8c0bb633e86262b07c8c2",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
       },
       "dedupe_context": {
         "dedupe_keys": [
@@ -2170,10 +1392,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2213,10 +1435,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2256,10 +1478,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2301,10 +1523,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2346,10 +1568,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2389,10 +1611,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2408,49 +1630,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:versicherungskammer bayern"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen"
-      ],
-      "canonical_name": "WERK1. Bayern GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "6bee2f9e89f54c981620d6aedc677b871abb59d3f713f515ecfce617f258ca47",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:werk1 bayern"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -2475,10 +1654,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:55:08.505Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -2902,6 +2081,800 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:domain_mrg_gmbh_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen"
+      ],
+      "canonical_name": "MRG Muenchener Raumentwicklungsgesellschaft mbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:53:37.241Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "60c4a7349887c0eb7a459b75404e8d177876ed311aa8779710fdcb623d594518",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:mrg-gmbh.de",
+          "name:mrg muenchener raumentwicklungsgesellschaft mbh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_muenchen_klinik_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen"
+      ],
+      "canonical_name": "Muenchen Klinik gGmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:53:37.241Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "a2795eabd4c8f8d973767edfd69313387094735fba9ec6e0ece195713761f4d0",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:muenchen-klinik.de",
+          "name:muenchen klinik ggmbh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_muenchenticket_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchen Ticket GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:53:37.241Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "0b4e4fb5bbca2b7c3bb5cf0888877ee398da8ba7f290b3e204ab2817fb9c42b3",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:muenchenticket.de",
+          "name:muenchen ticket"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_muenchner_arbeit_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Arbeit gemeinnuetzige GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:53:37.241Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "0cab7b54f33a186174a0887927921a4e74089bbe06098fb6db43427a8346a17e",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:muenchner-arbeit.de",
+          "name:muenchener arbeit gemeinnuetzige"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_mgs_muenchen_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Gesellschaft fuer Stadterneuerung mbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:53:37.241Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "15afb560817430a5a5067c8737b177e9e8615b7a9d0b6d43a23e1974335db671",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:mgs-muenchen.de",
+          "name:muenchener gesellschaft fuer stadterneuerung mbh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_hellabrunn_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen"
+      ],
+      "canonical_name": "Muenchener Tierpark Hellabrunn AG",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "ad4297b9696f008f09d533f8c33a04ee8566f9c3042fbd75ad2fad87e1264584",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:hellabrunn.de",
+          "name:muenchener tierpark hellabrunn"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_mvhs_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Volkshochschule GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "33d82ece40e15833e89b4f282b0afdd950416d41eb03f0d176613918db4bfbe7",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:mvhs.de",
+          "name:muenchener volkshochschule"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_muenchner_volkstheater_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Volkstheater GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "c9677a43346904fbb60daa9738c37f02ec2cd883c09f18af5c9a864a33908332",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:muenchner-volkstheater.de",
+          "name:muenchener volkstheater"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_muenchner_wohnen_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchener Wohnen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "d39fc22eccf71054ffcdd6c87723e8f0f8605f395c4d4ce832fc96889547abcb",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:muenchner-wohnen.de",
+          "name:muenchener wohnen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_muenchenstift_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen"
+      ],
+      "canonical_name": "Muenchenstift GmbH Gemeinnuetzige Gesellschaft",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "0ba71a59906baf2025e7810efbeb2b544a6e26a850e4654cf68fc7f9a3f9ee6b",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:muenchenstift.de",
+          "name:muenchenstift gemeinnuetzige gesellschaft"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_mvv_muenchen_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen"
+      ],
+      "canonical_name": "Muenchner Verkehrs- und Tarifverbund GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "c108621787594ae9506c9c0f2dae2ab06ad7b37f13118e3fed3f546c4dc28579",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:mvv-muenchen.de",
+          "name:muenchner verkehrs und tarifverbund"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_olympiapark_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Olympiapark Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "6fb8d0035776508c6989bb64dd9f925da3f32e7145e8f81b56ce60297777a0df",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:olympiapark.de",
+          "name:olympiapark muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_parkundride_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen"
+      ],
+      "canonical_name": "P+R Park&Ride GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "3957f3f6885cce3fbaf75b273864afb48eecc713ef79ee649ea4afe91dfd508b",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:parkundride.de",
+          "name:p plus r park and ride"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_pasinger_fabrik_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen"
+      ],
+      "canonical_name": "Pasinger Fabrik Kultur- und Buergerzentrum GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "d0f159d9123581d3510cde7da5b38beca485682fe29fc7d82854355103851336",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:pasinger-fabrik.de",
+          "name:pasinger fabrik kultur und buergerzentrum"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_muenchen_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen"
+      ],
+      "canonical_name": "Portal Muenchen Betriebs-GmbH & Co. KG",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "887427a504ccf90e7d6825a9ab12a04d87f5636947fad2d9846fc087bbc95fc2",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:muenchen.de",
+          "name:portal muenchen betriebs"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_spielmotor_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen"
+      ],
+      "canonical_name": "Spielmotor",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "COMPANY_DOMAIN_VERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "24ab927a4c8e1821bc6b3598f449f048dd905e3e24315456e1226043ed570479",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:spielmotor.de",
+          "name:spielmotor"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_sparkasse_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen"
+      ],
+      "canonical_name": "Stadtsparkasse Muenchen",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "ccdf9b9ac9c061c49d9169790b1b8c12b5b75aaf441ff2499f90c35cd9efa098",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:sparkasse.de",
+          "name:stadtsparkasse muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_werk1_com",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen"
+      ],
+      "canonical_name": "WERK1. Bayern GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:56:20.96Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "6bee2f9e89f54c981620d6aedc677b871abb59d3f713f515ecfce617f258ca47",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:werk1.com",
+          "name:werk1 bayern"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_36zero_vision_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_36zero_vision_awesome_machine_learning_startups_munich_github_list",
       "candidate_ids": [
@@ -2920,10 +2893,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T15:56:15.47Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Discovery-Hinweis ohne offiziellen Evidenzlevel darf keine Firmenwebsite verifizieren.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -77159,53 +77132,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_swm_de",
-      "candidate_id": "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
-      "candidate_ids": [
-        "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen"
-      ],
-      "canonical_name": "Stadtwerke Muenchen GmbH",
-      "source_count": 1,
-      "priority_score": 89,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "KNOWN_COMPANY_HINT",
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "VERIFIED",
-      "review_reason": "KNOWN_COMPANY_HINT,NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T05:08:12.805Z",
-      "next_attempt_at": null,
-      "last_status": "CAREER_URL_VERIFIED",
-      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:ba_jobsuche",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1199999999-S",
-        "observed_at": "08/23/2026 08:20:00",
-        "record_hash": "4082a325b51aacfcfe6740e660eb689af508c4e0cd79e9978107613c485a64dd",
-        "allowed_use": "Suchergebnisse nur als Arbeitgeber-Hints verwenden; offizielle Firmenquelle separat verifizieren.",
-        "rate_limit_policy": "Nur begrenzte reproduzierbare Suchmatrix mit Cache; keine Massenextraktion."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:swm.de",
-          "name:stadtwerke muenchen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:domain_ivv_fraunhofer_de",
       "candidate_id": "jobboard-hint:ba_jobsuche_fraunhofer_ivv_it_operations_freising",
       "candidate_ids": [
@@ -77247,6 +77173,56 @@
         "dedupe_keys": [
           "domain:ivv.fraunhofer.de",
           "name:fraunhofer ivv"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 2
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_swm_de",
+      "candidate_id": "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
+      "candidate_ids": [
+        "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Stadtwerke Muenchen GmbH",
+      "source_count": 2,
+      "priority_score": 84,
+      "next_action": "REJECT_DUPLICATE",
+      "reason_codes": [
+        "DUPLICATE_CLUSTER_REVIEW",
+        "KNOWN_COMPANY_HINT",
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET",
+        "JOB_LOCATION_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "DUPLICATE_CLUSTER_REVIEW,KNOWN_COMPANY_HINT,NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T05:08:12.805Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "MEDIUM",
+      "source_evidence": {
+        "source_id": "source-registry:ba_jobsuche",
+        "source_class": "JOB_BOARD_DISCOVERY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1199999999-S",
+        "observed_at": "08/23/2026 08:20:00",
+        "record_hash": "4082a325b51aacfcfe6740e660eb689af508c4e0cd79e9978107613c485a64dd",
+        "allowed_use": "Suchergebnisse nur als Arbeitgeber-Hints verwenden; offizielle Firmenquelle separat verifizieren.",
+        "rate_limit_policy": "Nur begrenzte reproduzierbare Suchmatrix mit Cache; keine Massenextraktion."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:swm.de",
+          "name:stadtwerke muenchen"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"

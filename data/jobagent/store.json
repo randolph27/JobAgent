@@ -2028,6 +2028,982 @@
           "expires_at": "2026-11-25T15:25:53.945Z"
         }
       ]
+    },
+    {
+      "company_id": "company:mrg_muenchener_raumentwicklungsgesellschaft_mbh",
+      "canonical_name": "MRG Muenchener Raumentwicklungsgesellschaft mbH",
+      "canonical_domain": "mrg-gmbh.de",
+      "official_website_url": "https://mrg-gmbh.de/",
+      "career_url": "https://mrg-gmbh.de/unternehmen/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:53:37.241Z",
+      "created_at": "2026-08-27T15:53:37.241Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:53:37.241Z",
+        "verification_url": "https://mrg-gmbh.de/unternehmen/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
+          "company_id": "company:mrg_muenchener_raumentwicklungsgesellschaft_mbh",
+          "canonical_name": "MRG Muenchener Raumentwicklungsgesellschaft mbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://mrg-gmbh.de/unternehmen/karriere",
+          "verified_by_url": "https://mrg-gmbh.de/",
+          "redirect_chain": "https://mrg-gmbh.de/unternehmen/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "8c0c24f691404cceb59917a89559a6e1a5c541cb621cbbeec004e99b201f1b7c",
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "http_status": 200,
+          "final_url": "https://mrg-gmbh.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:53:37.241Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchen_klinik_ggmbh",
+      "canonical_name": "Muenchen Klinik gGmbH",
+      "canonical_domain": "muenchen-klinik.de",
+      "official_website_url": "https://muenchen-klinik.de/",
+      "career_url": "https://muenchen-klinik.de/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:53:37.241Z",
+      "created_at": "2026-08-27T15:53:37.241Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:53:37.241Z",
+        "verification_url": "https://muenchen-klinik.de/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
+          "company_id": "company:muenchen_klinik_ggmbh",
+          "canonical_name": "Muenchen Klinik gGmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://muenchen-klinik.de/karriere",
+          "verified_by_url": "https://muenchen-klinik.de/",
+          "redirect_chain": "https://muenchen-klinik.de/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "66223fe2132765affe7c345651faf0adb2562b8e787489e88b773cc2332154e9",
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "http_status": 200,
+          "final_url": "https://muenchen-klinik.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:53:37.241Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchen_ticket_gmbh",
+      "canonical_name": "Muenchen Ticket GmbH",
+      "canonical_domain": "muenchenticket.de",
+      "official_website_url": "https://muenchenticket.de/",
+      "career_url": "https://muenchenticket.de/ueber-uns/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:53:37.241Z",
+      "created_at": "2026-08-27T15:53:37.241Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:53:37.241Z",
+        "verification_url": "https://muenchenticket.de/ueber-uns/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
+          "company_id": "company:muenchen_ticket_gmbh",
+          "canonical_name": "Muenchen Ticket GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://muenchenticket.de/ueber-uns/karriere",
+          "verified_by_url": "https://muenchenticket.de/",
+          "redirect_chain": "https://muenchenticket.de/ueber-uns/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "ac991f8d1eb0bc05a7875a44a3f2e34200097b96e1c8b01f47f2004aa66a68af",
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "http_status": 200,
+          "final_url": "https://muenchenticket.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:53:37.241Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchener_arbeit_gemeinnuetzige_gmbh",
+      "canonical_name": "Muenchener Arbeit gemeinnuetzige GmbH",
+      "canonical_domain": "muenchner-arbeit.de",
+      "official_website_url": "https://muenchner-arbeit.de/",
+      "career_url": "https://muenchner-arbeit.de/stellenangebote-fachpersonal",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:53:37.241Z",
+      "created_at": "2026-08-27T15:53:37.241Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:53:37.241Z",
+        "verification_url": "https://muenchner-arbeit.de/stellenangebote-fachpersonal",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
+          "company_id": "company:muenchener_arbeit_gemeinnuetzige_gmbh",
+          "canonical_name": "Muenchener Arbeit gemeinnuetzige GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://muenchner-arbeit.de/stellenangebote-fachpersonal",
+          "verified_by_url": "https://muenchner-arbeit.de/",
+          "redirect_chain": "https://muenchner-arbeit.de/stellenangebote-fachpersonal",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "6ee61816e44705c049b8a0c68ec38135c63f7d44288146ee46c40e2babea60d9",
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "http_status": 200,
+          "final_url": "https://muenchner-arbeit.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:53:37.241Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchener_gesellschaft_fuer_stadterneuerung_mbh",
+      "canonical_name": "Muenchener Gesellschaft fuer Stadterneuerung mbH",
+      "canonical_domain": "mgs-muenchen.de",
+      "official_website_url": "https://mgs-muenchen.de/",
+      "career_url": "https://mgs-muenchen.de/uber-uns/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:53:37.241Z",
+      "created_at": "2026-08-27T15:53:37.241Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:53:37.241Z",
+        "verification_url": "https://mgs-muenchen.de/uber-uns/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
+          "company_id": "company:muenchener_gesellschaft_fuer_stadterneuerung_mbh",
+          "canonical_name": "Muenchener Gesellschaft fuer Stadterneuerung mbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://mgs-muenchen.de/uber-uns/karriere",
+          "verified_by_url": "https://mgs-muenchen.de/",
+          "redirect_chain": "https://mgs-muenchen.de/uber-uns/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "23ac93417a5b0ce662acc3283972f311297b729cf0f39636c23665bb1cffcddd",
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "http_status": 200,
+          "final_url": "https://mgs-muenchen.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:53:37.241Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchener_tierpark_hellabrunn_ag",
+      "canonical_name": "Muenchener Tierpark Hellabrunn AG",
+      "canonical_domain": "hellabrunn.de",
+      "official_website_url": "https://hellabrunn.de/",
+      "career_url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
+          "company_id": "company:muenchener_tierpark_hellabrunn_ag",
+          "canonical_name": "Muenchener Tierpark Hellabrunn AG",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
+          "verified_by_url": "https://hellabrunn.de/",
+          "redirect_chain": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "36e6b9e7e6ab2a3ff5796d85679cd51950763f62488242ad1fc8f3d0adb44a1c",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://hellabrunn.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchener_volkshochschule_gmbh",
+      "canonical_name": "Muenchener Volkshochschule GmbH",
+      "canonical_domain": "mvhs.de",
+      "official_website_url": "https://mvhs.de/",
+      "career_url": "https://mvhs.de/ueber-uns/stellenangebote",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://mvhs.de/ueber-uns/stellenangebote",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
+          "company_id": "company:muenchener_volkshochschule_gmbh",
+          "canonical_name": "Muenchener Volkshochschule GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://mvhs.de/ueber-uns/stellenangebote",
+          "verified_by_url": "https://mvhs.de/",
+          "redirect_chain": "https://mvhs.de/ueber-uns/stellenangebote",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "c4773bd8867a378c2d8de6a6682ee7f12a6c34689f531d7d2d8c0e33c921f862",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://mvhs.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchener_volkstheater_gmbh",
+      "canonical_name": "Muenchener Volkstheater GmbH",
+      "canonical_domain": "muenchner-volkstheater.de",
+      "official_website_url": "https://muenchner-volkstheater.de/",
+      "career_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
+          "company_id": "company:muenchener_volkstheater_gmbh",
+          "canonical_name": "Muenchener Volkstheater GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
+          "verified_by_url": "https://muenchner-volkstheater.de/",
+          "redirect_chain": "https://muenchner-volkstheater.de/service/jobs-praktika",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "6019b1b8bd74362010f52bcaf27d07b3d44879f9c6617118faf2f19adba917b6",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://muenchner-volkstheater.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchener_wohnen_gmbh",
+      "canonical_name": "Muenchener Wohnen GmbH",
+      "canonical_domain": "muenchner-wohnen.de",
+      "official_website_url": "https://muenchner-wohnen.de/",
+      "career_url": "https://muenchner-wohnen.de/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://muenchner-wohnen.de/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
+          "company_id": "company:muenchener_wohnen_gmbh",
+          "canonical_name": "Muenchener Wohnen GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://muenchner-wohnen.de/karriere",
+          "verified_by_url": "https://muenchner-wohnen.de/",
+          "redirect_chain": "https://muenchner-wohnen.de/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "8e25cea1a112d311bed49147106d8d652f48469de35f866a38bd437140201076",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://muenchner-wohnen.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchenstift_gmbh_gemeinnuetzige_gesellschaft",
+      "canonical_name": "Muenchenstift GmbH Gemeinnuetzige Gesellschaft",
+      "canonical_domain": "muenchenstift.de",
+      "official_website_url": "https://muenchenstift.de/",
+      "career_url": "https://muenchenstift.de/de/karriere.html",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://muenchenstift.de/de/karriere.html",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
+          "company_id": "company:muenchenstift_gmbh_gemeinnuetzige_gesellschaft",
+          "canonical_name": "Muenchenstift GmbH Gemeinnuetzige Gesellschaft",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://muenchenstift.de/de/karriere.html",
+          "verified_by_url": "https://muenchenstift.de/",
+          "redirect_chain": "https://muenchenstift.de/de/karriere.html",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "668b5a0bacb12d58f65494479b9aa76abe3e95f4342c4081849796dcf6b1b54d",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://muenchenstift.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:muenchner_verkehrs_und_tarifverbund_gmbh",
+      "canonical_name": "Muenchner Verkehrs- und Tarifverbund GmbH",
+      "canonical_domain": "mvv-muenchen.de",
+      "official_website_url": "https://mvv-muenchen.de/",
+      "career_url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
+          "company_id": "company:muenchner_verkehrs_und_tarifverbund_gmbh",
+          "canonical_name": "Muenchner Verkehrs- und Tarifverbund GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
+          "verified_by_url": "https://mvv-muenchen.de/",
+          "redirect_chain": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "f9c9dca36e17cd785686acba66ecdb5d0ac45dc0cdf630217558bcd47f3e24ca",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://mvv-muenchen.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:olympiapark_muenchen_gmbh",
+      "canonical_name": "Olympiapark Muenchen GmbH",
+      "canonical_domain": "olympiapark.de",
+      "official_website_url": "https://olympiapark.de/",
+      "career_url": "https://olympiapark.de/de/der-olympiapark/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://olympiapark.de/de/der-olympiapark/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
+          "company_id": "company:olympiapark_muenchen_gmbh",
+          "canonical_name": "Olympiapark Muenchen GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://olympiapark.de/de/der-olympiapark/karriere",
+          "verified_by_url": "https://olympiapark.de/",
+          "redirect_chain": "https://olympiapark.de/de/der-olympiapark/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "2133a9e955220e7581c1a3f2739ae87b91219558a3d17e467f0d2a6e7e32f2a2",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://olympiapark.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:p_plus_r_park_and_ride_gmbh",
+      "canonical_name": "P+R Park&Ride GmbH",
+      "canonical_domain": "parkundride.de",
+      "official_website_url": "https://parkundride.de/",
+      "career_url": "https://parkundride.de/unternehmen/stellenangebote",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://parkundride.de/unternehmen/stellenangebote",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
+          "company_id": "company:p_plus_r_park_and_ride_gmbh",
+          "canonical_name": "P+R Park&Ride GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://parkundride.de/unternehmen/stellenangebote",
+          "verified_by_url": "https://parkundride.de/",
+          "redirect_chain": "https://parkundride.de/unternehmen/stellenangebote",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "ab58a6c185863a5f740e0894200b86a9dfbccb419aa21dd952dfc6503d73e09a",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://parkundride.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:pasinger_fabrik_kultur_und_buergerzentrum_gmbh",
+      "canonical_name": "Pasinger Fabrik Kultur- und Buergerzentrum GmbH",
+      "canonical_domain": "pasinger-fabrik.de",
+      "official_website_url": "https://pasinger-fabrik.de/",
+      "career_url": "https://pasinger-fabrik.de/services/freie-stellen",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://pasinger-fabrik.de/services/freie-stellen",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
+          "company_id": "company:pasinger_fabrik_kultur_und_buergerzentrum_gmbh",
+          "canonical_name": "Pasinger Fabrik Kultur- und Buergerzentrum GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://pasinger-fabrik.de/services/freie-stellen",
+          "verified_by_url": "https://pasinger-fabrik.de/",
+          "redirect_chain": "https://pasinger-fabrik.de/services/freie-stellen",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "cf175b2f786ecbfc19daa004f9ddc4b870ae27e6f8a44a9cc4ae588e2b3cae8a",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://pasinger-fabrik.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:portal_muenchen_betriebs_gmbh_and_co_kg",
+      "canonical_name": "Portal Muenchen Betriebs-GmbH & Co. KG",
+      "canonical_domain": "muenchen.de",
+      "official_website_url": "https://muenchen.de/",
+      "career_url": "https://stadt.muenchen.de/rathaus/karriere.html",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://stadt.muenchen.de/rathaus/karriere.html",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
+          "company_id": "company:portal_muenchen_betriebs_gmbh_and_co_kg",
+          "canonical_name": "Portal Muenchen Betriebs-GmbH & Co. KG",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://stadt.muenchen.de/rathaus/karriere.html",
+          "verified_by_url": "https://muenchen.de/",
+          "redirect_chain": "https://stadt.muenchen.de/rathaus/karriere.html",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "bd18ea01eea55c13239422188b58d512cfa492ed9689fd640207b8812b192109",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://muenchen.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:spielmotor",
+      "canonical_name": "Spielmotor",
+      "canonical_domain": "spielmotor.de",
+      "official_website_url": "https://spielmotor.de/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://spielmotor.de/",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
+          "company_id": "company:spielmotor",
+          "canonical_name": "Spielmotor",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://spielmotor.de/",
+          "verified_by_url": "https://spielmotor.de/",
+          "redirect_chain": [
+            "https://spielmotor.de/",
+            "https://spielmotor.de/sitemap.xml",
+            "https://spielmotor.de/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "4e5c5d911fa3f02783e14c9137da6a0b8ac0d65fca89a34647d9d70a9a92ec93",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://spielmotor.de/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:stadtsparkasse_muenchen",
+      "canonical_name": "Stadtsparkasse Muenchen",
+      "canonical_domain": "sparkasse.de",
+      "official_website_url": "https://sparkasse.de/",
+      "career_url": "https://sparkasse.de/karriere.html",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://sparkasse.de/karriere.html",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
+          "company_id": "company:stadtsparkasse_muenchen",
+          "canonical_name": "Stadtsparkasse Muenchen",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://sparkasse.de/karriere.html",
+          "verified_by_url": "https://sparkasse.de/",
+          "redirect_chain": "https://sparkasse.de/karriere.html",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "0b82c5a37d2fd5dd53d8af06be121351f7e5fdde027cbda6e40b1f5a05e7f35b",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://sparkasse.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:werk1_bayern_gmbh",
+      "canonical_name": "WERK1. Bayern GmbH",
+      "canonical_domain": "werk1.com",
+      "official_website_url": "https://werk1.com/",
+      "career_url": "https://werk1.com/das-werk1/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T15:56:20.960Z",
+      "created_at": "2026-08-27T15:56:20.960Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T15:56:20.960Z",
+        "verification_url": "https://werk1.com/das-werk1/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
+          "company_id": "company:werk1_bayern_gmbh",
+          "canonical_name": "WERK1. Bayern GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://werk1.com/das-werk1/karriere",
+          "verified_by_url": "https://werk1.com/",
+          "redirect_chain": "https://werk1.com/das-werk1/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "8ed7b4682f01a27eba2ba41541d388be3c3daf15a7766506c86352348f0b1ad1",
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "http_status": 200,
+          "final_url": "https://werk1.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.960Z"
+        }
+      ]
     }
   ],
   "jobs": [
@@ -3120,6 +4096,397 @@
             "https://messe-muenchen.de/de/karriere"
           ],
           "observed_at": "2026-08-27T15:25:53.945Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:mrg_muenchener_raumentwicklungsgesellschaft_mbh_career_url",
+      "company_id": "company:mrg_muenchener_raumentwicklungsgesellschaft_mbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://mrg-gmbh.de/unternehmen/karriere",
+      "canonical_url": "https://mrg-gmbh.de/unternehmen/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:53:37.241Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://mrg-gmbh.de/unternehmen/karriere",
+          "basis_url": "https://mrg-gmbh.de/",
+          "redirect_chain": [
+            "https://mrg-gmbh.de/unternehmen/karriere"
+          ],
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchen_klinik_ggmbh_career_url",
+      "company_id": "company:muenchen_klinik_ggmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://muenchen-klinik.de/karriere",
+      "canonical_url": "https://muenchen-klinik.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:53:37.241Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://muenchen-klinik.de/karriere",
+          "basis_url": "https://muenchen-klinik.de/",
+          "redirect_chain": [
+            "https://muenchen-klinik.de/karriere"
+          ],
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchen_ticket_gmbh_career_url",
+      "company_id": "company:muenchen_ticket_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://muenchenticket.de/ueber-uns/karriere",
+      "canonical_url": "https://muenchenticket.de/ueber-uns/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:53:37.241Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://muenchenticket.de/ueber-uns/karriere",
+          "basis_url": "https://muenchenticket.de/",
+          "redirect_chain": [
+            "https://muenchenticket.de/ueber-uns/karriere"
+          ],
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchener_arbeit_gemeinnuetzige_gmbh_career_url",
+      "company_id": "company:muenchener_arbeit_gemeinnuetzige_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://muenchner-arbeit.de/stellenangebote-fachpersonal",
+      "canonical_url": "https://muenchner-arbeit.de/stellenangebote-fachpersonal",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:53:37.241Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://muenchner-arbeit.de/stellenangebote-fachpersonal",
+          "basis_url": "https://muenchner-arbeit.de/",
+          "redirect_chain": [
+            "https://muenchner-arbeit.de/stellenangebote-fachpersonal"
+          ],
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchener_gesellschaft_fuer_stadterneuerung_mbh_career_url",
+      "company_id": "company:muenchener_gesellschaft_fuer_stadterneuerung_mbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://mgs-muenchen.de/uber-uns/karriere",
+      "canonical_url": "https://mgs-muenchen.de/uber-uns/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:53:37.241Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://mgs-muenchen.de/uber-uns/karriere",
+          "basis_url": "https://mgs-muenchen.de/",
+          "redirect_chain": [
+            "https://mgs-muenchen.de/uber-uns/karriere"
+          ],
+          "observed_at": "2026-08-27T15:53:37.241Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchener_tierpark_hellabrunn_ag_career_url",
+      "company_id": "company:muenchener_tierpark_hellabrunn_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
+      "canonical_url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
+          "basis_url": "https://hellabrunn.de/",
+          "redirect_chain": [
+            "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchener_volkshochschule_gmbh_career_url",
+      "company_id": "company:muenchener_volkshochschule_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://mvhs.de/ueber-uns/stellenangebote",
+      "canonical_url": "https://mvhs.de/ueber-uns/stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://mvhs.de/ueber-uns/stellenangebote",
+          "basis_url": "https://mvhs.de/",
+          "redirect_chain": [
+            "https://mvhs.de/ueber-uns/stellenangebote"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchener_volkstheater_gmbh_career_url",
+      "company_id": "company:muenchener_volkstheater_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://muenchner-volkstheater.de/service/jobs-praktika",
+      "canonical_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://muenchner-volkstheater.de/service/jobs-praktika",
+          "basis_url": "https://muenchner-volkstheater.de/",
+          "redirect_chain": [
+            "https://muenchner-volkstheater.de/service/jobs-praktika"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchener_wohnen_gmbh_career_url",
+      "company_id": "company:muenchener_wohnen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://muenchner-wohnen.de/karriere",
+      "canonical_url": "https://muenchner-wohnen.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://muenchner-wohnen.de/karriere",
+          "basis_url": "https://muenchner-wohnen.de/",
+          "redirect_chain": [
+            "https://muenchner-wohnen.de/karriere"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchenstift_gmbh_gemeinnuetzige_gesellschaft_career_url",
+      "company_id": "company:muenchenstift_gmbh_gemeinnuetzige_gesellschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://muenchenstift.de/de/karriere.html",
+      "canonical_url": "https://muenchenstift.de/de/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://muenchenstift.de/de/karriere.html",
+          "basis_url": "https://muenchenstift.de/",
+          "redirect_chain": [
+            "https://muenchenstift.de/de/karriere.html"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:muenchner_verkehrs_und_tarifverbund_gmbh_career_url",
+      "company_id": "company:muenchner_verkehrs_und_tarifverbund_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
+      "canonical_url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
+          "basis_url": "https://mvv-muenchen.de/",
+          "redirect_chain": [
+            "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:olympiapark_muenchen_gmbh_career_url",
+      "company_id": "company:olympiapark_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://olympiapark.de/de/der-olympiapark/karriere",
+      "canonical_url": "https://olympiapark.de/de/der-olympiapark/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://olympiapark.de/de/der-olympiapark/karriere",
+          "basis_url": "https://olympiapark.de/",
+          "redirect_chain": [
+            "https://olympiapark.de/de/der-olympiapark/karriere"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:p_plus_r_park_and_ride_gmbh_career_url",
+      "company_id": "company:p_plus_r_park_and_ride_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://parkundride.de/unternehmen/stellenangebote",
+      "canonical_url": "https://parkundride.de/unternehmen/stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://parkundride.de/unternehmen/stellenangebote",
+          "basis_url": "https://parkundride.de/",
+          "redirect_chain": [
+            "https://parkundride.de/unternehmen/stellenangebote"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:pasinger_fabrik_kultur_und_buergerzentrum_gmbh_career_url",
+      "company_id": "company:pasinger_fabrik_kultur_und_buergerzentrum_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://pasinger-fabrik.de/services/freie-stellen",
+      "canonical_url": "https://pasinger-fabrik.de/services/freie-stellen",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://pasinger-fabrik.de/services/freie-stellen",
+          "basis_url": "https://pasinger-fabrik.de/",
+          "redirect_chain": [
+            "https://pasinger-fabrik.de/services/freie-stellen"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:portal_muenchen_betriebs_gmbh_and_co_kg_career_url",
+      "company_id": "company:portal_muenchen_betriebs_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://stadt.muenchen.de/rathaus/karriere.html",
+      "canonical_url": "https://stadt.muenchen.de/rathaus/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://stadt.muenchen.de/rathaus/karriere.html",
+          "basis_url": "https://muenchen.de/",
+          "redirect_chain": [
+            "https://stadt.muenchen.de/rathaus/karriere.html"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:stadtsparkasse_muenchen_career_url",
+      "company_id": "company:stadtsparkasse_muenchen",
+      "source_type": "CAREER_PAGE",
+      "url": "https://sparkasse.de/karriere.html",
+      "canonical_url": "https://sparkasse.de/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://sparkasse.de/karriere.html",
+          "basis_url": "https://sparkasse.de/",
+          "redirect_chain": [
+            "https://sparkasse.de/karriere.html"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:werk1_bayern_gmbh_career_url",
+      "company_id": "company:werk1_bayern_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://werk1.com/das-werk1/karriere",
+      "canonical_url": "https://werk1.com/das-werk1/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://werk1.com/das-werk1/karriere",
+          "basis_url": "https://werk1.com/",
+          "redirect_chain": [
+            "https://werk1.com/das-werk1/karriere"
+          ],
+          "observed_at": "2026-08-27T15:56:20.960Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

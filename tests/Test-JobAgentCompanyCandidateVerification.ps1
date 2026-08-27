@@ -270,6 +270,16 @@ $jobBoardSourceEvidence = [pscustomobject]@{
 $jobBoardWebsiteDiscovery = Resolve-JobAgentCandidateOfficialWebsiteDiscovery -Candidate (New-TestCandidate -Id 'hint:website-jobboard' -Name 'Example AG') -SourceEvidence $jobBoardSourceEvidence -Policy $policy -Fetcher $websiteDiscoveryFetcher -ObservedAt $observedAt
 Assert-True -Condition ($jobBoardWebsiteDiscovery.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Jobboerse darf nicht als offizieller Website-Ermittlungsbeleg dienen.'
 
+$regionalDiscoveryHintEvidence = [pscustomobject]@{
+    source_id = 'source-registry:test_github_directory'
+    source_class = 'REGIONAL_DIRECTORY'
+    evidence_level = 'DISCOVERY_HINT'
+    observed_url = 'https://github.com/example/awesome-munich'
+    observed_at = '2026-08-23T08:00:00.000Z'
+}
+$regionalDiscoveryHintResult = Resolve-JobAgentCandidateOfficialWebsiteDiscovery -Candidate (New-TestCandidate -Id 'hint:website-regional-discovery' -Name 'Example AG') -SourceEvidence $regionalDiscoveryHintEvidence -Policy $policy -Fetcher $websiteDiscoveryFetcher -ObservedAt $observedAt
+Assert-True -Condition ($regionalDiscoveryHintResult.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Regionale Discovery-Hints ohne offiziellen Evidenzlevel duerfen keine Firmenwebsite verifizieren.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-candidate-verify-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path (Join-Path $projectRoot 'data\jobagent') -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $projectRoot 'logs\jobagent') -Force | Out-Null
@@ -353,8 +363,8 @@ try {
     [pscustomobject]@{
         schema_version = 'jobagent/company-discovery-hints/v1'
         generated_at = '2026-08-23T08:00:00.000Z'
-        hints_total = 1
-        unverified_hints = 1
+        hints_total = 2
+        unverified_hints = 2
         hints = @(
             [pscustomobject]@{
                 hint_id = 'hint:website-tool'
@@ -364,6 +374,21 @@ try {
                 target_area = 'MUNICH'
                 source_id = 'source-registry:test_official_directory'
                 observed_url = 'https://directory.example.invalid/companies'
+                observed_at = '2026-08-23T08:00:00.000Z'
+                verification_status = 'UNVERIFIED'
+                candidate_status = 'REGIONAL_DISCOVERY_HINT'
+                confidence_score = 80
+                official_verification_required = $true
+                next_action = 'verify_official_company_website_or_career_url'
+            },
+            [pscustomobject]@{
+                hint_id = 'hint:website-missing-source'
+                employer_name = 'Missing Source AG'
+                normalized_name = 'missing source'
+                location = 'Muenchen'
+                target_area = 'MUNICH'
+                source_id = 'source-registry:missing_directory'
+                observed_url = ''
                 observed_at = '2026-08-23T08:00:00.000Z'
                 verification_status = 'UNVERIFIED'
                 candidate_status = 'REGIONAL_DISCOVERY_HINT'
@@ -380,17 +405,24 @@ try {
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $websiteRoot 'fixture-map.json') -Encoding UTF8
 
-    $websiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' 2>&1)
+    $websiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript ist fehlgeschlagen: " + ($websiteScriptOutput -join "`n"))
     $websiteScriptResult = ($websiteScriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     $updatedHints = Get-Content -Raw -LiteralPath (Join-Path $websiteRoot 'data\jobagent\company-discovery.hints.json') | ConvertFrom-Json -Depth 100
     $updatedQueue = Get-Content -Raw -LiteralPath ([string]$websiteScriptResult.queue_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($websiteScriptResult.verified_total -eq 1) -Message 'Website-Ermittlungsscript meldet verifizierte Website nicht.'
+    Assert-True -Condition ($websiteScriptResult.manual_review_total -eq 1) -Message 'Website-Ermittlungsscript meldet fail-closed Manual-Review nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_url -eq 'https://example.invalid/') -Message 'Website-Ermittlungsscript persistiert offizielle Website nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_evidence[0].verified_by_url -eq 'https://directory.example.invalid/companies/example-ag') -Message 'Website-Ermittlungsscript persistiert Detailseitenbeleg nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_verification_status -eq 'OFFICIAL_WEBSITE_VERIFIED') -Message 'Website-Ermittlungsscript persistiert Verifikationsstatus nicht.'
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-tool' -and $_.next_action -eq 'VERIFY_OFFICIAL_SITE' -and $_.status -eq 'PENDING' }).Count -eq 1) -Message 'Website-Ermittlung ueberfuehrt Queue nicht in offizielle Site-Verifikation.'
+    Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-missing-source' -and $_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $_.status -eq 'MANUAL_REVIEW_REQUIRED' -and $_.last_status -eq 'MANUAL_REVIEW_REQUIRED' -and -not [string]::IsNullOrWhiteSpace([string]$_.last_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung persistiert fail-closed Manual-Review-Ergebnis nicht in der Queue.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$websiteScriptResult.log_path) -PathType Leaf) -Message 'Website-Ermittlungsscript schreibt kein Logartefakt.'
+
+    $secondWebsiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Zweitlauf ist fehlgeschlagen: " + ($secondWebsiteScriptOutput -join "`n"))
+    $secondWebsiteScriptResult = ($secondWebsiteScriptOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($secondWebsiteScriptResult.processed_total -eq 0) -Message 'Website-Ermittlung darf bereits fail-closed gepruefte Kandidaten nicht sofort wiederholen.'
 }
 finally {
     if (Test-Path -LiteralPath $websiteRoot) {
@@ -418,6 +450,7 @@ finally {
         'aggregator_rejected_for_website_discovery',
         'name_conflict_rejected_for_website_discovery',
         'jobboard_rejected_for_website_discovery',
+        'regional_discovery_hint_rejected_for_website_discovery',
         'website_discovery_script_updates_hint_and_queue',
         'candidate_verification_script_upserts_only_verified_sources',
         'candidate_verification_cluster_queue_retry_and_review',

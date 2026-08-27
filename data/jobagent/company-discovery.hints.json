@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-27T15:42:49.044Z",
+  "generated_at": "2026-08-27T15:55:08.505Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 1790,
@@ -37395,6 +37395,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "60c4a7349887c0eb7a459b75404e8d177876ed311aa8779710fdcb623d594518",
+      "official_website_url": "https://mrg-gmbh.de/",
+      "verified_official_website_url": "https://mrg-gmbh.de/",
+      "canonical_domain": "mrg-gmbh.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://mrg-gmbh.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "MRG Münchener Raumentwicklungsgesellschaft mbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:53:14.331Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37417,6 +37439,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "a2795eabd4c8f8d973767edfd69313387094735fba9ec6e0ece195713761f4d0",
+      "official_website_url": "https://muenchen-klinik.de/",
+      "verified_official_website_url": "https://muenchen-klinik.de/",
+      "canonical_domain": "muenchen-klinik.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://muenchen-klinik.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "München Klinik gGmbh",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:53:14.331Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37439,6 +37483,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "0b4e4fb5bbca2b7c3bb5cf0888877ee398da8ba7f290b3e204ab2817fb9c42b3",
+      "official_website_url": "https://muenchenticket.de/",
+      "verified_official_website_url": "https://muenchenticket.de/",
+      "canonical_domain": "muenchenticket.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://muenchenticket.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "München Ticket GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:53:14.331Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37461,6 +37527,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "0cab7b54f33a186174a0887927921a4e74089bbe06098fb6db43427a8346a17e",
+      "official_website_url": "https://muenchner-arbeit.de/",
+      "verified_official_website_url": "https://muenchner-arbeit.de/",
+      "canonical_domain": "muenchner-arbeit.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://muenchner-arbeit.de/ueber-uns",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchener Arbeit gemeinnützige GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:53:14.331Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37483,6 +37571,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "15afb560817430a5a5067c8737b177e9e8615b7a9d0b6d43a23e1974335db671",
+      "official_website_url": "https://mgs-muenchen.de/",
+      "verified_official_website_url": "https://mgs-muenchen.de/",
+      "canonical_domain": "mgs-muenchen.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://mgs-muenchen.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchener Gesellschaft für Stadterneuerung mbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:53:14.331Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37527,6 +37637,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "ad4297b9696f008f09d533f8c33a04ee8566f9c3042fbd75ad2fad87e1264584",
+      "official_website_url": "https://hellabrunn.de/",
+      "verified_official_website_url": "https://hellabrunn.de/",
+      "canonical_domain": "hellabrunn.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://hellabrunn.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchener Tierpark Hellabrunn AG",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37549,6 +37681,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "33d82ece40e15833e89b4f282b0afdd950416d41eb03f0d176613918db4bfbe7",
+      "official_website_url": "https://mvhs.de/",
+      "verified_official_website_url": "https://mvhs.de/",
+      "canonical_domain": "mvhs.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://mvhs.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchener Volkshochschule GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37571,6 +37725,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "c9677a43346904fbb60daa9738c37f02ec2cd883c09f18af5c9a864a33908332",
+      "official_website_url": "https://muenchner-volkstheater.de/",
+      "verified_official_website_url": "https://muenchner-volkstheater.de/",
+      "canonical_domain": "muenchner-volkstheater.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://muenchner-volkstheater.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchener Volkstheater GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37593,6 +37769,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "d39fc22eccf71054ffcdd6c87723e8f0f8605f395c4d4ce832fc96889547abcb",
+      "official_website_url": "https://muenchner-wohnen.de/",
+      "verified_official_website_url": "https://muenchner-wohnen.de/",
+      "canonical_domain": "muenchner-wohnen.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://muenchner-wohnen.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchener Wohnen GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37615,6 +37813,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "0ba71a59906baf2025e7810efbeb2b544a6e26a850e4654cf68fc7f9a3f9ee6b",
+      "official_website_url": "https://muenchenstift.de/",
+      "verified_official_website_url": "https://muenchenstift.de/",
+      "canonical_domain": "muenchenstift.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://muenchenstift.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchenstift GmbH Gemeinnützige Gesellschaft",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37637,6 +37857,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "c108621787594ae9506c9c0f2dae2ab06ad7b37f13118e3fed3f546c4dc28579",
+      "official_website_url": "https://mvv-muenchen.de/",
+      "verified_official_website_url": "https://mvv-muenchen.de/",
+      "canonical_domain": "mvv-muenchen.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://mvv-muenchen.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Münchner Verkehrs- und Tarifverbund GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37659,6 +37901,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "6fb8d0035776508c6989bb64dd9f925da3f32e7145e8f81b56ce60297777a0df",
+      "official_website_url": "https://olympiapark.de/",
+      "verified_official_website_url": "https://olympiapark.de/",
+      "canonical_domain": "olympiapark.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://olympiapark.de/de",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Olympiapark München GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37681,6 +37945,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "3957f3f6885cce3fbaf75b273864afb48eecc713ef79ee649ea4afe91dfd508b",
+      "official_website_url": "https://parkundride.de/",
+      "verified_official_website_url": "https://parkundride.de/",
+      "canonical_domain": "parkundride.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://parkundride.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "P+R Park&Ride GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37703,6 +37989,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "d0f159d9123581d3510cde7da5b38beca485682fe29fc7d82854355103851336",
+      "official_website_url": "https://pasinger-fabrik.de/",
+      "verified_official_website_url": "https://pasinger-fabrik.de/",
+      "canonical_domain": "pasinger-fabrik.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://pasinger-fabrik.de/die-fabrik",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Pasinger Fabrik Kultur- und Bürgerzentrum GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37725,6 +38033,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "887427a504ccf90e7d6825a9ab12a04d87f5636947fad2d9846fc087bbc95fc2",
+      "official_website_url": "https://muenchen.de/",
+      "verified_official_website_url": "https://muenchen.de/",
+      "canonical_domain": "muenchen.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://muenchen.de/meta/portalgesellschaft-info",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Portal München Betriebs- GmbH & Co. KG",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37747,6 +38077,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "24ab927a4c8e1821bc6b3598f449f048dd905e3e24315456e1226043ed570479",
+      "official_website_url": "https://spielmotor.de/",
+      "verified_official_website_url": "https://spielmotor.de/",
+      "canonical_domain": "spielmotor.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://spielmotor.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Spielmotor",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37769,6 +38121,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "ccdf9b9ac9c061c49d9169790b1b8c12b5b75aaf441ff2499f90c35cd9efa098",
+      "official_website_url": "https://sparkasse.de/",
+      "verified_official_website_url": "https://sparkasse.de/",
+      "canonical_domain": "sparkasse.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://sparkasse.de/standorte/filialen/bayern/muenchen",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Stadtsparkasse München",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37791,6 +38165,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "6fe240630ab6603227e92daed05e12184d7164143ea8c0bb633e86262b07c8c2",
+      "official_website_url": "https://swm.de/",
+      "verified_official_website_url": "https://swm.de/",
+      "canonical_domain": "swm.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://swm.de/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Stadtwerke München GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -37813,6 +38209,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "6bee2f9e89f54c981620d6aedc677b871abb59d3f713f515ecfce617f258ca47",
+      "official_website_url": "https://werk1.com/",
+      "verified_official_website_url": "https://werk1.com/",
+      "canonical_domain": "werk1.com",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://werk1.com/",
+          "verified_by_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "WERK1. Bayern GmbH",
+          "evidence_text_hash": "25a24f05166f368d34b5e93e56193d088fb154e0b544beb4a255cc66a30020cf",
+          "observed_at": "2026-08-27T15:55:08.505Z",
+          "http_status": 200,
+          "final_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
