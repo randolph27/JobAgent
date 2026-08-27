@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-27T17:40:55.452Z",
+  "generated_at": "2026-08-27T17:48:55.788Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 1790,
@@ -4747,6 +4747,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "18264e08debe8b1b6fdc999e39e45cfbba01fac1320c60189473f59b89574268",
+      "official_website_url": "https://munich-urban-colab.de/",
+      "verified_official_website_url": "https://munich-urban-colab.de/",
+      "canonical_domain": "munich-urban-colab.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_commercial_locations_munich_urban_colab_muenchen_mitte",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://munich-urban-colab.de/",
+          "verified_by_url": "https://munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-mitte.html",
+          "source_class": "REGIONAL_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "",
+          "evidence_text_hash": "23edba62af49c3752b01e3b32f23697e4b86b2a18fdfc5930b51eef84bfc2bc1",
+          "observed_at": "2026-08-27T17:48:55.788Z",
+          "http_status": 200,
+          "final_url": "https://munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-mitte.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -8886,6 +8908,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "cfe9702f61c249b70dbe7547d546f34d286b5e7ecbfa6b69fd2184ef91c0dcfe",
+      "official_website_url": "https://mhi.com/",
+      "verified_official_website_url": "https://mhi.com/",
+      "canonical_domain": "mhi.com",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_japanese_companies_mitsubishi_heavy_industries_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://mhi.com/network/area/europe.html",
+          "verified_by_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "source_class": "REGIONAL_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Mitsubishi Heavy Industries",
+          "evidence_text_hash": "ba77949431544cdfa49c2186096afd7db11d79323389cb9c642cc5c8591d32fa",
+          "observed_at": "2026-08-27T17:47:12.557Z",
+          "http_status": 200,
+          "final_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
