@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-27T16:48:18.111Z",
+  "generated_at": "2026-08-27T16:57:44.303Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 1790,
@@ -7607,7 +7607,10 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "00eb6d10f07e1381d79672eecf57846dec30c02a3d20d932746c343dadf8f8be",
-      "next_action": "verify_official_company_website_or_career_url"
+      "verified_official_website_url": "https://google.de/",
+      "canonical_domain": "google.de",
+      "next_action": "manual_review_official_website_candidates",
+      "review_reason": "Suchmaschinen-Redirect wurde als offizieller Website-Beleg verworfen."
     },
     {
       "hint_id": "regional-hint:munich_business_ikt_companies_huawei_muenchen",
@@ -7849,6 +7852,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "579d887324ba0f23134126ff25370c4431d0d44729c9c2da1c83edd016f04143",
+      "official_website_url": "https://glenmark.de/",
+      "verified_official_website_url": "https://glenmark.de/",
+      "canonical_domain": "glenmark.de",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_glenmark_arzneimittel_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://glenmark.de/startseite",
+          "verified_by_url": "https://munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+          "source_class": "REGIONAL_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Glenmark Arzneimittel GmbH",
+          "evidence_text_hash": "0f91954e81c55c0015711460c08f12e554ffe07dca9a16961f7b3b82705a6111",
+          "observed_at": "2026-08-27T16:57:44.303Z",
+          "http_status": 200,
+          "final_url": "https://munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {
@@ -8685,6 +8710,28 @@
       "official_verification_required": true,
       "raw_retention_policy": "minimal_regional_metadata_only_no_contact_collection",
       "source_record_hash": "cbaa12500ab54fe4b328fa102d116b0980fbb2ea1c0a74c6c85c76986daebcce",
+      "official_website_url": "https://global.fujitsu/",
+      "verified_official_website_url": "https://global.fujitsu/",
+      "canonical_domain": "global.fujitsu",
+      "official_website_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "company_domain_verification_status": "OFFICIAL_WEBSITE_VERIFIED",
+      "official_website_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_japanese_companies_fujitsu_germany_gmbh_muenchen",
+          "status": "OFFICIAL_WEBSITE_VERIFIED",
+          "evidence_type": "OFFICIAL_WEBSITE",
+          "verification_url": "https://global.fujitsu/de-de/local/about",
+          "verified_by_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "source_class": "REGIONAL_DIRECTORY",
+          "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+          "link_text": "Fujitsu Germany GmbH",
+          "evidence_text_hash": "ba77949431544cdfa49c2186096afd7db11d79323389cb9c642cc5c8591d32fa",
+          "observed_at": "2026-08-27T16:57:44.303Z",
+          "http_status": 200,
+          "final_url": "https://munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+          "reason": "Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite."
+        }
+      ],
       "next_action": "verify_official_company_website_or_career_url"
     },
     {

@@ -3084,14 +3084,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T16:42:02.020Z",
-      "created_at": "2026-08-27T16:42:02.020Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T16:42:02.02Z",
+      "created_at": "2026-08-27T16:42:02.02Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "2026-08-27T16:42:02.020Z",
+        "observed_at": "2026-08-27T16:42:02.02Z",
         "verification_url": "https://daiichi-sankyo.de/karriere",
         "discovery_origin": "source-registry:munich_business_japanese_companies",
         "target_area": "MUNICH",
@@ -3109,11 +3109,11 @@
           "redirect_chain": "https://daiichi-sankyo.de/karriere",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "89f3e30567982ae5e5394b9af061b3f61fd4474eb3778a0aef4ca920247ac2e2",
-          "observed_at": "2026-08-27T16:42:02.020Z",
+          "observed_at": "2026-08-27T16:42:02.02Z",
           "http_status": 200,
           "final_url": "https://daiichi-sankyo.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T16:42:02.020Z"
+          "expires_at": "2026-11-25T16:42:02.02Z"
         }
       ]
     },
@@ -3138,14 +3138,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T16:42:02.020Z",
-      "created_at": "2026-08-27T16:42:02.020Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T16:42:02.02Z",
+      "created_at": "2026-08-27T16:42:02.02Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "2026-08-27T16:42:02.020Z",
+        "observed_at": "2026-08-27T16:42:02.02Z",
         "verification_url": "https://de.dmgmori.com/",
         "discovery_origin": "source-registry:munich_business_japanese_companies",
         "target_area": "MUNICH",
@@ -3167,11 +3167,65 @@
           ],
           "evidence_type": "COMPANY_DOMAIN",
           "evidence_text_hash": "d0e396db4fbdc390efee0a6934a929b14877cbc0c838573b72ede022c650054f",
-          "observed_at": "2026-08-27T16:42:02.020Z",
+          "observed_at": "2026-08-27T16:42:02.02Z",
           "http_status": 200,
           "final_url": "https://de.dmgmori.com/",
           "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-          "expires_at": "2026-11-25T16:42:02.020Z"
+          "expires_at": "2026-11-25T16:42:02.02Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:glenmark_arzneimittel_gmbh",
+      "canonical_name": "Glenmark Arzneimittel GmbH",
+      "canonical_domain": "glenmark.de",
+      "official_website_url": "https://glenmark.de/",
+      "career_url": "https://glenmark.de/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T16:58:06.627Z",
+      "created_at": "2026-08-27T16:58:06.627Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-27T16:58:06.627Z",
+        "verification_url": "https://glenmark.de/karriere",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_glenmark_arzneimittel_gmbh_muenchen",
+          "company_id": "company:glenmark_arzneimittel_gmbh",
+          "canonical_name": "Glenmark Arzneimittel GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://glenmark.de/karriere",
+          "verified_by_url": "https://glenmark.de/",
+          "redirect_chain": "https://glenmark.de/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "9ae8162e0b8c0971cf42bc2767d9918b0a6fb87824765da76934b535873c7933",
+          "observed_at": "2026-08-27T16:58:06.627Z",
+          "http_status": 200,
+          "final_url": "https://glenmark.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T16:58:06.627Z"
         }
       ]
     }
@@ -4668,7 +4722,7 @@
       "url": "https://daiichi-sankyo.de/karriere",
       "canonical_url": "https://daiichi-sankyo.de/karriere",
       "is_official": true,
-      "verified_at": "2026-08-27T16:42:02.020Z",
+      "verified_at": "2026-08-27T16:42:02.02Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4679,7 +4733,30 @@
           "redirect_chain": [
             "https://daiichi-sankyo.de/karriere"
           ],
-          "observed_at": "2026-08-27T16:42:02.020Z",
+          "observed_at": "2026-08-27T16:42:02.02Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:glenmark_arzneimittel_gmbh_career_url",
+      "company_id": "company:glenmark_arzneimittel_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://glenmark.de/karriere",
+      "canonical_url": "https://glenmark.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T16:58:06.627Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://glenmark.de/karriere",
+          "basis_url": "https://glenmark.de/",
+          "redirect_chain": [
+            "https://glenmark.de/karriere"
+          ],
+          "observed_at": "2026-08-27T16:58:06.627Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

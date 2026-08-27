@@ -69,6 +69,13 @@ $script:AtsDomainBindings = @(
     @{ system = 'Join'; domain = 'join.com' }
 )
 
+$script:WebsiteDiscoveryRedirectorRules = @(
+    @{ domain = 'google.com'; path = '^/url$' },
+    @{ domain = 'google.de'; path = '^/url$' },
+    @{ domain = 'bing.com'; path = '^/ck/a$' },
+    @{ domain = 'duckduckgo.com'; path = '^/l/$' }
+)
+
 function ConvertTo-JobAgentSourceSlug {
     [CmdletBinding()]
     param(
@@ -147,6 +154,33 @@ function Test-JobAgentAggregatorUrl {
         }
     }
     return $false
+}
+
+function Test-JobAgentWebsiteDiscoveryRedirectorUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    $canonical = ConvertTo-JobAgentCanonicalUrlSafe -Url $Url
+    $uri = [Uri]$canonical
+    $host = $uri.Host.ToLowerInvariant() -replace '^www\.', ''
+    foreach ($rule in $script:WebsiteDiscoveryRedirectorRules) {
+        if ((Test-JobAgentDomainMatch -Host $host -Domain ([string]$rule.domain)) -and ($uri.AbsolutePath -match [string]$rule.path)) {
+            return $true
+        }
+    }
+    return $false
+}
+
+function Test-JobAgentWebsiteDiscoveryDocumentUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    $uri = [Uri](ConvertTo-JobAgentCanonicalUrlSafe -Url $Url)
+    return $uri.AbsolutePath -match '\.(pdf|doc|docx|xls|xlsx|ppt|pptx|zip|rar|7z)$'
 }
 
 function Get-JobAgentAtsBindingForUrl {
@@ -537,6 +571,9 @@ function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinksByScope {
             continue
         }
         if (Test-JobAgentAggregatorUrl -Url $canonical) {
+            continue
+        }
+        if ((Test-JobAgentWebsiteDiscoveryRedirectorUrl -Url $canonical) -or (Test-JobAgentWebsiteDiscoveryDocumentUrl -Url $canonical)) {
             continue
         }
         $host = Get-JobAgentUrlHost -Url $canonical

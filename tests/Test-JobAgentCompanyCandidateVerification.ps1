@@ -252,6 +252,14 @@ $aggregatorWebsiteFetcher = {
 $aggregatorWebsiteDiscovery = Resolve-JobAgentCandidateOfficialWebsiteDiscovery -Candidate (New-TestCandidate -Id 'hint:website-aggregator' -Name 'Example AG') -SourceEvidence $officialDirectoryEvidence -Policy $policy -Fetcher $aggregatorWebsiteFetcher -ObservedAt $observedAt
 Assert-True -Condition ($aggregatorWebsiteDiscovery.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Aggregator-Link darf nicht als offizielle Website-Ermittlung gelten.'
 
+$searchRedirectWebsiteFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-FetchResult -Url $Url -Ok $true -Content '<html><a href="https://google.de/url?q=https%3A%2F%2Fexample.invalid%2Freport.pdf">Example AG Studie</a></html>'
+}
+$searchRedirectWebsiteDiscovery = Resolve-JobAgentCandidateOfficialWebsiteDiscovery -Candidate (New-TestCandidate -Id 'hint:website-search-redirect' -Name 'Example AG') -SourceEvidence $officialDirectoryEvidence -Policy $policy -Fetcher $searchRedirectWebsiteFetcher -ObservedAt $observedAt
+Assert-True -Condition ($searchRedirectWebsiteDiscovery.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Suchmaschinen-Redirects duerfen keine Firmenwebsite verifizieren.'
+
 $wrongNameWebsiteFetcher = {
     param([string]$Url, [object]$Policy)
 
@@ -453,6 +461,7 @@ finally {
         'official_directory_website_discovery',
         'official_directory_detail_page_website_discovery',
         'aggregator_rejected_for_website_discovery',
+        'search_redirect_rejected_for_website_discovery',
         'name_conflict_rejected_for_website_discovery',
         'jobboard_rejected_for_website_discovery',
         'regional_discovery_hint_rejected_for_website_discovery',
