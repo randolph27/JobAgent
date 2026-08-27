@@ -1,1 +1,83 @@
-{"workspace_root":"D:\\_Scripte\\JobAgent","capsule":{},"agent_id":"UTTER-20260817-39f7","ts":"2026-08-27T19:05:39.765+02:00"}
+{
+  "active_id": "TD-0041",
+  "agent_id": "UTTER-20260817-39f7",
+  "changed": [
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "data/jobagent/store.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json"
+  ],
+  "git": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "master",
+    "has_repo": true,
+    "head_before_commit": "42b9a39913a3",
+    "remote": "origin",
+    "upstream": "origin/master",
+    "worktree": "dirty"
+  },
+  "goal": "JA-027: offizielle Website-/Karriere-Verifikation fuer Arbeitgeberkandidaten fortsetzen.",
+  "next": "Weitere Website-Discovery-Welle ausfuehren, verifizierte Treffer pruefen, Coverage aktualisieren und fokussierte Funktionstests laufen lassen.",
+  "project": "JobAgent",
+  "refs": [
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.json",
+    "handoff.latest.md"
+  ],
+  "route_ok": true,
+  "route_violations": [],
+  "status": "open",
+  "summary": "25 Kandidaten per Website-Discovery verarbeitet, 1 offizieller Website-Treffer verifiziert und Hepatica Technologies GmbH produktiv mit offizieller Karrierequelle aufgenommen.",
+  "ts": "2026-08-27T19:12:22.651+02:00",
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": ".\\ci.cmd route-check",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": "Get-Content -Raw handoff.latest.json | ConvertFrom-Json",
+      "exit": 0,
+      "status": "pass"
+    }
+  ],
+  "workspace_root": "D:\\_Scripte\\JobAgent"
+}
