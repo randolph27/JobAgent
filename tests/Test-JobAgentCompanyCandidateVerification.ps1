@@ -229,6 +229,21 @@ Assert-True -Condition ($websiteDiscovery.status -eq 'OFFICIAL_WEBSITE_VERIFIED'
 Assert-True -Condition ($websiteDiscovery.official_website_url -eq 'https://example.invalid/') -Message 'Website-Ermittlung normalisiert offizielle Website falsch.'
 Assert-True -Condition ($websiteDiscovery.evidence[0].verified_by_url -eq 'https://directory.example.invalid/companies') -Message 'Website-Ermittlung speichert keinen Quellseitenbeleg.'
 
+$detailWebsiteDiscoveryFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    switch ($Url) {
+        'https://directory.example.invalid/companies' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/companies/example-ag">Example AG</a></html>'; break }
+        'https://directory.example.invalid/companies/example-ag' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="https://www.example.invalid/">Website Example AG</a></html>'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404; break }
+    }
+}
+$detailWebsiteDiscovery = Resolve-JobAgentCandidateOfficialWebsiteDiscovery -Candidate (New-TestCandidate -Id 'hint:website-detail-discovery' -Name 'Example AG') -SourceEvidence $officialDirectoryEvidence -Policy $policy -Fetcher $detailWebsiteDiscoveryFetcher -ObservedAt $observedAt
+Assert-True -Condition ($detailWebsiteDiscovery.status -eq 'OFFICIAL_WEBSITE_VERIFIED') -Message 'Offizielle Verzeichnisdetailseite verifiziert Firmenwebsite nicht.'
+Assert-True -Condition ($detailWebsiteDiscovery.official_website_url -eq 'https://example.invalid/') -Message 'Detailseiten-Ermittlung normalisiert offizielle Website falsch.'
+Assert-True -Condition ($detailWebsiteDiscovery.evidence[0].verified_by_url -eq 'https://directory.example.invalid/companies/example-ag') -Message 'Detailseiten-Ermittlung speichert keinen Detailseitenbeleg.'
+Assert-True -Condition (@($detailWebsiteDiscovery.fetches).Count -eq 2) -Message 'Detailseiten-Ermittlung protokolliert Quell- und Detailabruf nicht.'
+
 $aggregatorWebsiteFetcher = {
     param([string]$Url, [object]$Policy)
 
@@ -360,7 +375,8 @@ try {
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $websiteRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
     [pscustomobject]@{
         responses = @(
-            [pscustomobject]@{ url = 'https://directory.example.invalid/companies'; ok = $true; status_code = 200; final_url = 'https://directory.example.invalid/companies'; content = '<html><a href="https://www.example.invalid/">Example AG</a></html>' }
+            [pscustomobject]@{ url = 'https://directory.example.invalid/companies'; ok = $true; status_code = 200; final_url = 'https://directory.example.invalid/companies'; content = '<html><a href="/companies/example-ag">Example AG</a></html>' },
+            [pscustomobject]@{ url = 'https://directory.example.invalid/companies/example-ag'; ok = $true; status_code = 200; final_url = 'https://directory.example.invalid/companies/example-ag'; content = '<html><a href="https://www.example.invalid/">Website Example AG</a></html>' }
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $websiteRoot 'fixture-map.json') -Encoding UTF8
 
@@ -371,6 +387,7 @@ try {
     $updatedQueue = Get-Content -Raw -LiteralPath ([string]$websiteScriptResult.queue_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($websiteScriptResult.verified_total -eq 1) -Message 'Website-Ermittlungsscript meldet verifizierte Website nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_url -eq 'https://example.invalid/') -Message 'Website-Ermittlungsscript persistiert offizielle Website nicht.'
+    Assert-True -Condition ($updatedHints.hints[0].official_website_evidence[0].verified_by_url -eq 'https://directory.example.invalid/companies/example-ag') -Message 'Website-Ermittlungsscript persistiert Detailseitenbeleg nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_verification_status -eq 'OFFICIAL_WEBSITE_VERIFIED') -Message 'Website-Ermittlungsscript persistiert Verifikationsstatus nicht.'
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-tool' -and $_.next_action -eq 'VERIFY_OFFICIAL_SITE' -and $_.status -eq 'PENDING' }).Count -eq 1) -Message 'Website-Ermittlung ueberfuehrt Queue nicht in offizielle Site-Verifikation.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$websiteScriptResult.log_path) -PathType Leaf) -Message 'Website-Ermittlungsscript schreibt kein Logartefakt.'
@@ -397,6 +414,7 @@ finally {
         'candidate_js_only_domain_only',
         'aggregator_not_accepted_as_career_source',
         'official_directory_website_discovery',
+        'official_directory_detail_page_website_discovery',
         'aggregator_rejected_for_website_discovery',
         'name_conflict_rejected_for_website_discovery',
         'jobboard_rejected_for_website_discovery',

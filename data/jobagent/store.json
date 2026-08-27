@@ -791,58 +791,54 @@
     {
       "company_id": "company:flughafen_muenchen_gmbh",
       "canonical_name": "Flughafen Muenchen GmbH",
-      "canonical_domain": "munich-airport.com",
-      "official_website_url": "https://www.munich-airport.com/",
-      "career_url": "https://www.munich-airport.com/careers-263141",
-      "aliases": [
-        "Flughafen Muenchen GmbH",
-        "FMG",
-        "Munich Airport"
-      ],
+      "canonical_domain": "munich-airport.de",
+      "official_website_url": "https://munich-airport.de/",
+      "career_url": "https://munich-airport.de/karriere-7833198",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
       "locations": [
         {
-          "label": "Flughafen Muenchen / Freising",
-          "city": "Freising",
+          "label": "Muenchen / Flughafen",
+          "city": "Muenchen",
           "region": "Bayern",
           "country": "DE",
           "target_area": "FREISING"
         }
       ],
-      "industry": "Airport Operations",
-      "ats": [],
-      "scan_status": "PENDING",
-      "scan_priority": 83,
-      "next_scan_at": "2026-08-18T00:00:00Z",
-      "verification_status": "CAREER_URL_VERIFIED",
-      "discovery_source": {
-        "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.kreis-freising.de/buergerservice/abteilungen-und-sachgebiete/wirtschaftliche-und-digitale-entwicklung.html",
-        "observed_at": "2026-08-23T06:20:56.355Z",
-        "verification_url": "https://munich-airport.com/careers-15404919",
-        "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
-        "target_area": "FREISING",
-        "industry_hint": "Airport Operations",
-        "evidence_note": "Freising-Umfeldquelle und bestehender offizieller Karrierepfad; Import muss gegen vorhandenen Store deduplizieren."
-      },
-      "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-27T05:08:12.805Z",
+      "updated_at": "2026-08-27T10:27:32.164Z",
+      "created_at": "2026-08-27T10:27:32.164Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T10:27:32.164Z",
+        "verification_url": "https://munich-airport.de/karriere-7833198",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "FREISING",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
       "candidate_verification_evidence": [
         {
-          "candidate_id": "jobboard-hint:ba_jobsuche_flughafen_muenchen_it_operations_muenchen",
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
           "company_id": "company:flughafen_muenchen_gmbh",
           "canonical_name": "Flughafen Muenchen GmbH",
           "status": "CAREER_URL_VERIFIED",
-          "verification_url": "https://munich-airport.com/careers-15404919",
-          "verified_by_url": "https://munich-airport.com/",
-          "redirect_chain": "https://munich-airport.com/careers-15404919",
+          "verification_url": "https://munich-airport.de/karriere-7833198",
+          "verified_by_url": "https://munich-airport.de/",
+          "redirect_chain": "https://munich-airport.de/karriere-7833198",
           "evidence_type": "CAREER_URL",
-          "evidence_text_hash": "83756d80df143ad3766a055129458bc01b08c72c8d2710f168c10d4124992663",
-          "observed_at": "2026-08-27T05:08:12.805Z",
+          "evidence_text_hash": "6ff977d01841d9b9909f327759017f10c24abb93bcf77b6aec15967f047c4145",
+          "observed_at": "2026-08-27T10:27:32.164Z",
           "http_status": 200,
-          "final_url": "https://munich-airport.com/",
+          "final_url": "https://munich-airport.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T05:08:12.805Z"
+          "expires_at": "2026-11-25T10:27:32.164Z"
         }
       ]
     },
@@ -1613,14 +1609,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T10:17:13.750Z",
-      "created_at": "2026-08-27T10:17:13.750Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T10:17:13.75Z",
+      "created_at": "2026-08-27T10:17:13.75Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T10:17:13.750Z",
+        "observed_at": "2026-08-27T10:17:13.75Z",
         "verification_url": "https://aquabench.de/karriere.html",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -1638,11 +1634,178 @@
           "redirect_chain": "https://aquabench.de/karriere.html",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "21de2d2e9490c9f46c4bec9c4db2b5a3439a9d1b7acd06527c149f2cbdee7deb",
-          "observed_at": "2026-08-27T10:17:13.750Z",
+          "observed_at": "2026-08-27T10:17:13.75Z",
           "http_status": 200,
           "final_url": "https://aquabench.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T10:17:13.750Z"
+          "expires_at": "2026-11-25T10:17:13.75Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:behandlungszentrum_fuer_multiple_sklerose_kranke",
+      "canonical_name": "Behandlungszentrum fuer Multiple Sklerose Kranke",
+      "canonical_domain": "ms-klinik.de",
+      "official_website_url": "https://ms-klinik.de/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T10:26:25.127Z",
+      "created_at": "2026-08-27T10:26:25.127Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T10:26:25.127Z",
+        "verification_url": "https://ms-klinik.de/",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
+          "company_id": "company:behandlungszentrum_fuer_multiple_sklerose_kranke",
+          "canonical_name": "Behandlungszentrum fuer Multiple Sklerose Kranke",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://ms-klinik.de/",
+          "verified_by_url": "https://ms-klinik.de/",
+          "redirect_chain": [
+            "https://ms-klinik.de/",
+            "https://ms-klinik.de/karriere",
+            "https://ms-klinik.de/sitemap.xml",
+            "https://ms-klinik.de/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "ce9765454184c96295e0d5f75c7cf630be5a769ff7bd30a0496d15e49501cc06",
+          "observed_at": "2026-08-27T10:26:25.127Z",
+          "http_status": 200,
+          "final_url": "https://ms-klinik.de/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-11-25T10:26:25.127Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:digital_m_gmbh",
+      "canonical_name": "digital@M GmbH",
+      "canonical_domain": "digital-at-m.de",
+      "official_website_url": "https://digital-at-m.de/",
+      "career_url": "https://digital-at-m.de/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T10:27:32.164Z",
+      "created_at": "2026-08-27T10:27:32.164Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T10:27:32.164Z",
+        "verification_url": "https://digital-at-m.de/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
+          "company_id": "company:digital_m_gmbh",
+          "canonical_name": "digital@M GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://digital-at-m.de/karriere",
+          "verified_by_url": "https://digital-at-m.de/",
+          "redirect_chain": "https://digital-at-m.de/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "f8c5583c91452e8870934d2a7cc9d5fa1aeb6d3b21ca8b4c35a99b0c1e59de80",
+          "observed_at": "2026-08-27T10:27:32.164Z",
+          "http_status": 200,
+          "final_url": "https://digital-at-m.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T10:27:32.164Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:gasteig_muenchen_gmbh",
+      "canonical_name": "Gasteig Muenchen GmbH",
+      "canonical_domain": "gasteig.de",
+      "official_website_url": "https://gasteig.de/",
+      "career_url": "https://gasteig.de/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T10:27:32.164Z",
+      "created_at": "2026-08-27T10:27:32.164Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "2026-08-27T10:27:32.164Z",
+        "verification_url": "https://gasteig.de/karriere",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
+          "company_id": "company:gasteig_muenchen_gmbh",
+          "canonical_name": "Gasteig Muenchen GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://gasteig.de/karriere",
+          "verified_by_url": "https://gasteig.de/",
+          "redirect_chain": "https://gasteig.de/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "d87c6ff1d64b2a98e9737e167f2dcc5404eaf0ad38a6c6a07eea78d96d5afce8",
+          "observed_at": "2026-08-27T10:27:32.164Z",
+          "http_status": 200,
+          "final_url": "https://gasteig.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T10:27:32.164Z"
         }
       ]
     }
@@ -2515,21 +2678,21 @@
       "source_id": "source:flughafen_muenchen_gmbh_career_url",
       "company_id": "company:flughafen_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
-      "url": "https://munich-airport.com/careers-15404919",
-      "canonical_url": "https://munich-airport.com/careers-15404919",
+      "url": "https://munich-airport.de/karriere-7833198",
+      "canonical_url": "https://munich-airport.de/karriere-7833198",
       "is_official": true,
-      "verified_at": "2026-08-27T05:08:12.805Z",
+      "verified_at": "2026-08-27T10:27:32.164Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
           "status": "VERIFIED",
           "evidence_type": "CAREER_URL",
-          "url": "https://munich-airport.com/careers-15404919",
-          "basis_url": "https://munich-airport.com/",
+          "url": "https://munich-airport.de/karriere-7833198",
+          "basis_url": "https://munich-airport.de/",
           "redirect_chain": [
-            "https://munich-airport.com/careers-15404919"
+            "https://munich-airport.de/karriere-7833198"
           ],
-          "observed_at": "2026-08-27T05:08:12.805Z",
+          "observed_at": "2026-08-27T10:27:32.164Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -2610,7 +2773,7 @@
       "url": "https://aquabench.de/karriere.html",
       "canonical_url": "https://aquabench.de/karriere.html",
       "is_official": true,
-      "verified_at": "2026-08-27T10:17:13.750Z",
+      "verified_at": "2026-08-27T10:17:13.75Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -2621,7 +2784,53 @@
           "redirect_chain": [
             "https://aquabench.de/karriere.html"
           ],
-          "observed_at": "2026-08-27T10:17:13.750Z",
+          "observed_at": "2026-08-27T10:17:13.75Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:digital_m_gmbh_career_url",
+      "company_id": "company:digital_m_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://digital-at-m.de/karriere",
+      "canonical_url": "https://digital-at-m.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T10:27:32.164Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://digital-at-m.de/karriere",
+          "basis_url": "https://digital-at-m.de/",
+          "redirect_chain": [
+            "https://digital-at-m.de/karriere"
+          ],
+          "observed_at": "2026-08-27T10:27:32.164Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:gasteig_muenchen_gmbh_career_url",
+      "company_id": "company:gasteig_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://gasteig.de/karriere",
+      "canonical_url": "https://gasteig.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T10:27:32.164Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://gasteig.de/karriere",
+          "basis_url": "https://gasteig.de/",
+          "redirect_chain": [
+            "https://gasteig.de/karriere"
+          ],
+          "observed_at": "2026-08-27T10:27:32.164Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

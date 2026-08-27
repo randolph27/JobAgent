@@ -1,15 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T10:18:34.470Z",
-  "clusters_total": 1788,
+  "generated_at": "2026-08-27T10:28:04.157Z",
+  "clusters_total": 1787,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "DISCOVER_OFFICIAL_WEBSITE": 1779,
+    "DISCOVER_OFFICIAL_WEBSITE": 1773,
     "MANUAL_DECISION": 1,
-    "REJECT_DUPLICATE": 2,
-    "VERIFY_OFFICIAL_SITE": 6
+    "REJECT_DUPLICATE": 3,
+    "VERIFY_OFFICIAL_SITE": 10
   },
   "queue": [
     {
@@ -231,49 +231,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen"
-      ],
-      "canonical_name": "Behandlungszentrum fuer Multiple Sklerose Kranke",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T05:24:48.65Z",
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "2313cb7b432db71417b5d0b0b86eff3b5cafe9d7bbcb71b7d23317c9f1cf06fe",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:behandlungszentrum fuer multiple sklerose kranke"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_1002",
       "candidate_id": "register-hint:offeneregister_sample_2026_08_beta_analytics_ag_munich_2",
       "candidate_ids": [
@@ -441,135 +398,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:deutsche telekom technik"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen"
-      ],
-      "canonical_name": "Deutsches Theater Grund- und Hausbesitz GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "7131fa2efede620a8e93ecd68db99789a0d9962c05320c2eff2a4de826cd27a0",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:deutsches theater grund und hausbesitz"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen"
-      ],
-      "canonical_name": "Deutsches Theater Muenchen",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "ef8a6f71e0ea428de1dd7e77875d1d70bbcbaa1d98a54aab27e7b84a15fe41de",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:deutsches theater muenchen"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen"
-      ],
-      "canonical_name": "digital@M GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "f9a5e2d1330c9e7dc482cea279ea1b451d7fc0a1158942514a4246b7085cdd17",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:digital m"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -753,51 +581,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen"
-      ],
-      "canonical_name": "Flughafen Muenchen GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "2cea2eb929c61e7cca81a9fa854545782f46aeadb77ccf018cb9a17ea4937e0b",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:flughafen muenchen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_stadt_freising_weihenstephan_fraunhofer_ivv_freising_weihenstephan",
       "candidate_id": "regional-hint:stadt_freising_weihenstephan_fraunhofer_ivv_freising_weihenstephan",
       "candidate_ids": [
@@ -883,51 +666,6 @@
           "register:amtsgericht_muenchen_hrb_2001"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen"
-      ],
-      "canonical_name": "Gasteig Muenchen GmbH",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "04a1a25ae439e0cb44cf8fecbc009ed33a0942279b483b461db5cf17c5934320",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:gasteig muenchen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -2976,6 +2714,186 @@
           "name:aquabench"
         ],
         "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_ms_klinik_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen"
+      ],
+      "canonical_name": "Behandlungszentrum fuer Multiple Sklerose Kranke",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T10:26:25.127Z",
+      "next_attempt_at": null,
+      "last_status": "COMPANY_DOMAIN_VERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "2313cb7b432db71417b5d0b0b86eff3b5cafe9d7bbcb71b7d23317c9f1cf06fe",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:ms-klinik.de",
+          "name:behandlungszentrum fuer multiple sklerose kranke"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_digital_at_m_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen"
+      ],
+      "canonical_name": "digital@M GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T10:27:32.164Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "f9a5e2d1330c9e7dc482cea279ea1b451d7fc0a1158942514a4246b7085cdd17",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:digital-at-m.de",
+          "name:digital m"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_munich_airport_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Flughafen Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T10:27:32.164Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "2cea2eb929c61e7cca81a9fa854545782f46aeadb77ccf018cb9a17ea4937e0b",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:munich-airport.de",
+          "name:flughafen muenchen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_gasteig_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Gasteig Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T10:27:32.164Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "04a1a25ae439e0cb44cf8fecbc009ed33a0942279b483b461db5cf17c5934320",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:gasteig.de",
+          "name:gasteig muenchen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 1
       }
     },
@@ -27501,6 +27419,53 @@
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_deutsches_theater_de",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen"
+      ],
+      "canonical_name": "Deutsches Theater Grund- und Hausbesitz GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "REJECT_DUPLICATE",
+      "reason_codes": [
+        "DUPLICATE_CLUSTER_REVIEW",
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "DUPLICATE_CLUSTER_REVIEW,OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-27T05:25:33.701Z",
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "MEDIUM",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "7131fa2efede620a8e93ecd68db99789a0d9962c05320c2eff2a4de826cd27a0",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:deutsches-theater.de",
+          "name:deutsches theater grund und hausbesitz",
+          "name:deutsches theater muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 2
       }
     },
     {

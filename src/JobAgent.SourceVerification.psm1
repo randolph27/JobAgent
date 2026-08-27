@@ -501,17 +501,19 @@ function Test-JobAgentCandidateOfficialWebsiteDiscoverySource {
     return $evidenceLevel -in @('SECONDARY_OFFICIAL_DIRECTORY', 'PRIMARY_OFFICIAL')
 }
 
-function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks {
+function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinksByScope {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)][string]$Html,
         [Parameter(Mandatory)][string]$BaseUrl,
         [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][ValidateSet('ExternalWebsite', 'DirectoryDetail')][string]$Scope,
         [Parameter()][ValidateRange(1, 50)][int]$MaxCandidates = 10
     )
 
     $baseUri = [Uri]$BaseUrl
     $baseHost = Get-JobAgentUrlHost -Url $BaseUrl
+    $canonicalBaseUrl = ConvertTo-JobAgentCanonicalUrlSafe -Url $BaseUrl
     $links = New-Object System.Collections.Generic.List[object]
     $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     $matches = [regex]::Matches($Html, '<a\b(?<attrs>[^>]*)>(?<text>.*?)</a>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
@@ -538,7 +540,11 @@ function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks {
             continue
         }
         $host = Get-JobAgentUrlHost -Url $canonical
-        if (Test-JobAgentDomainMatch -Host $host -Domain $baseHost) {
+        $sameDomain = Test-JobAgentDomainMatch -Host $host -Domain $baseHost
+        if ($Scope -eq 'ExternalWebsite' -and $sameDomain) {
+            continue
+        }
+        if ($Scope -eq 'DirectoryDetail' -and (-not $sameDomain -or $canonical -eq $canonicalBaseUrl)) {
             continue
         }
         $linkText = ConvertTo-JobAgentCompanyVerificationPlainText -Html $match.Groups['text'].Value -MaxLength 220
@@ -555,6 +561,44 @@ function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks {
         }
     }
     return $links.ToArray()
+}
+
+function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter()][ValidateRange(1, 50)][int]$MaxCandidates = 10
+    )
+
+    return Get-JobAgentCandidateOfficialWebsiteDiscoveryLinksByScope -Html $Html -BaseUrl $BaseUrl -Candidate $Candidate -Scope 'ExternalWebsite' -MaxCandidates $MaxCandidates
+}
+
+function ConvertTo-JobAgentOfficialWebsiteRootUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    $uri = [Uri](ConvertTo-JobAgentCanonicalUrlSafe -Url $Url)
+    $builder = [UriBuilder]::new($uri)
+    $builder.Path = '/'
+    $builder.Query = ''
+    $builder.Fragment = ''
+    return $builder.Uri.AbsoluteUri
+}
+
+function Get-JobAgentCandidateOfficialWebsiteDiscoveryDetailLinks {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter()][ValidateRange(1, 50)][int]$MaxCandidates = 10
+    )
+
+    return Get-JobAgentCandidateOfficialWebsiteDiscoveryLinksByScope -Html $Html -BaseUrl $BaseUrl -Candidate $Candidate -Scope 'DirectoryDetail' -MaxCandidates $MaxCandidates
 }
 
 function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
@@ -611,6 +655,19 @@ function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
 
     $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$fetch.final_url)) { $canonicalSourceUrl } else { [string]$fetch.final_url }
     $links = @(Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks -Html ([string]$fetch.content) -BaseUrl $finalUrl -Candidate $Candidate -MaxCandidates ([int]$Policy.max_candidates_per_company))
+    $fetches = New-Object System.Collections.Generic.List[object]
+    $fetches.Add($fetch)
+    if ($links.Count -eq 0) {
+        $detailLinks = @(Get-JobAgentCandidateOfficialWebsiteDiscoveryDetailLinks -Html ([string]$fetch.content) -BaseUrl $finalUrl -Candidate $Candidate -MaxCandidates ([int]$Policy.max_candidates_per_company))
+        if ($detailLinks.Count -eq 1 -and $fetches.Count -lt [int]$Policy.max_fetches_per_company) {
+            $detailFetch = if ($Fetcher) { & $Fetcher ([string]$detailLinks[0].url) $Policy } else { Invoke-JobAgentCompanyVerificationHttpRequest -Url ([string]$detailLinks[0].url) -Policy $Policy }
+            $fetches.Add($detailFetch)
+            if ($detailFetch.ok -eq $true) {
+                $detailFinalUrl = if ([string]::IsNullOrWhiteSpace([string]$detailFetch.final_url)) { [string]$detailLinks[0].url } else { [string]$detailFetch.final_url }
+                $links = @(Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks -Html ([string]$detailFetch.content) -BaseUrl $detailFinalUrl -Candidate $Candidate -MaxCandidates ([int]$Policy.max_candidates_per_company))
+            }
+        }
+    }
     if ($links.Count -ne 1) {
         return [pscustomobject]@{
             candidate_id = $candidateId
@@ -618,7 +675,7 @@ function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
             official_website_url = $null
             official_website_domain = $null
             evidence = @()
-            fetches = @($fetch)
+            fetches = @($fetches.ToArray())
             candidates = @($links)
             reason = if ($links.Count -eq 0) { 'Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.' } else { 'Mehrere moegliche Firmenwebsites gefunden; automatische Auswahl ist fail-closed.' }
             next_action = 'manual_review_official_website_candidates'
@@ -626,7 +683,13 @@ function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
     }
 
     $link = $links[0]
-    $plainText = ConvertTo-JobAgentCompanyVerificationPlainText -Html ([string]$fetch.content) -MaxLength 400
+    $officialWebsiteUrl = ConvertTo-JobAgentOfficialWebsiteRootUrl -Url ([string]$link.url)
+    $evidenceFetch = @($fetches.ToArray() | Where-Object {
+            $fetchFinalUrl = if ([string]::IsNullOrWhiteSpace([string]$_.final_url)) { [string]$_.url } else { [string]$_.final_url }
+            (ConvertTo-JobAgentCanonicalUrlSafe -Url $fetchFinalUrl) -eq [string]$link.source_url
+        } | Select-Object -First 1)
+    $basisFetch = if ($evidenceFetch.Count -eq 1) { $evidenceFetch[0] } else { $fetch }
+    $plainText = ConvertTo-JobAgentCompanyVerificationPlainText -Html ([string]$basisFetch.content) -MaxLength 400
     $evidence = [pscustomobject]@{
         candidate_id = $candidateId
         status = 'OFFICIAL_WEBSITE_VERIFIED'
@@ -638,17 +701,17 @@ function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
         link_text = [string]$link.link_text
         evidence_text_hash = Get-JobAgentVerificationEvidenceTextHash -Text $plainText
         observed_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
-        http_status = if ($fetch.PSObject.Properties.Name -contains 'status_code') { $fetch.status_code } else { $null }
-        final_url = if ([string]::IsNullOrWhiteSpace([string]$fetch.final_url)) { $null } else { ConvertTo-JobAgentCanonicalUrl -Url ([string]$fetch.final_url) }
+        http_status = if ($basisFetch.PSObject.Properties.Name -contains 'status_code') { $basisFetch.status_code } else { $null }
+        final_url = if ([string]::IsNullOrWhiteSpace([string]$basisFetch.final_url)) { $null } else { ConvertTo-JobAgentCanonicalUrl -Url ([string]$basisFetch.final_url) }
         reason = 'Offizielle Quellseite verlinkt genau eine namenspassende Firmenwebsite.'
     }
     return [pscustomobject]@{
         candidate_id = $candidateId
         status = 'OFFICIAL_WEBSITE_VERIFIED'
-        official_website_url = [string]$link.url
+        official_website_url = $officialWebsiteUrl
         official_website_domain = [string]$link.host
         evidence = @($evidence)
-        fetches = @($fetch)
+        fetches = @($fetches.ToArray())
         candidates = @($links)
         reason = 'Offizielle Website wurde ueber eine zulaessige Quellseite belegt.'
         next_action = 'verify_official_site'
@@ -1326,6 +1389,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentAtsBindingForUrl',
     'Get-JobAgentOfficialSourceEvaluation',
     'Get-JobAgentCompanyCareerCandidateLinks',
+    'Get-JobAgentCandidateOfficialWebsiteDiscoveryDetailLinks',
     'Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks',
     'New-JobAgentVerifiedJobSource',
     'New-JobAgentCompanyCareerVerificationPolicy',
