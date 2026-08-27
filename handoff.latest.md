@@ -1,15 +1,15 @@
 # Handoff latest
 
-Stand: 2026-08-27T17:39:49.224+02:00
+Stand: 2026-08-27T17:46:41.009+02:00
 
 ## Neuer-Chat-Start
 
 - Projektpfad: `D:\_Scripte\JobAgent`
 - Branch: `master`
-- HEAD vor Commit: `24332307b712`
+- HEAD vor Commit: `80952d156465`
 - Upstream: `origin/master`
 - Ahead/Behind vor Commit: `0/0`
-- Worktree vor Commit: `dirty`, nur JA-027-Daten-/Handoff-Aenderungen
+- Worktree vor Commit: `dirty`, ausschliesslich JA-027-Daten-/Todo-/Handoff-Aenderungen aus der letzten Discovery-Welle
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `todo.state.json.active_id` ist `null`
 - Roadmap-Rotation: nicht ausgefuehrt, weil JA-027 fachlich weiter offen ist.
@@ -24,7 +24,7 @@ Stand: 2026-08-27T17:39:49.224+02:00
 - Alle 25 verarbeiteten Kandidaten wurden fail-closed in `MANUAL_REVIEW_REQUIRED` belassen.
 - Kandidatenverifikation anschliessend ausgefuehrt; es gab keine `ready_total`-Kandidaten, daher wurden 0 Kandidaten produktiv importiert.
 - Coverage-JSON, Coverage-Markdown und `html/jobagent/company-coverage.html` wurden aktualisiert.
-- `./ci.cmd route-check` und `./ci.cmd stp` wurden ausgefuehrt.
+- `.\ci.cmd route-check` und `.\ci.cmd stp` wurden ausgefuehrt.
 
 ## Datenstand nach der Welle
 
@@ -38,31 +38,30 @@ Stand: 2026-08-27T17:39:49.224+02:00
 - Verifizierte Queue-Eintraege: `14`
 - Manual-Review-Queue-Eintraege: `1773`
 - Verification-ready Queue-Eintraege: `0`
-- Kandidaten-Review-Queue gesamt laut Coverage: `1775`
 - Quellen gesamt: `1871`
 - Offizielle Quellen: `51`
 - Discovery-Quellen: `1820`
 
 ## Wichtige fachliche Beobachtung
 
-- Die zuletzt verarbeiteten Kandidaten hatten entweder keine zulaessige absolute Quell-URL fuer automatische Website-Ermittlung oder keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite.
-- Ein Beispiel mit mehreren moeglichen Websites (`MGH - Muenchener Gewerbehof- und Technologiegesellschaft`) wurde korrekt nicht automatisch entschieden, sondern fail-closed in Review belassen.
-- `Verify-JobAgentCompanyCandidates.ps1` fand keine verifikationsbereiten Kandidaten; der naechste Agent sollte daher zuerst weitere Website-Discovery laufen lassen oder die Manual-Review-Faelle fachlich verbessern.
+- Die verarbeiteten Kandidaten hatten entweder keine zulaessige absolute Quell-URL fuer automatische Website-Ermittlung oder keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite.
+- Wiederholtes Muster: regionale oder oeffentliche Uebersichtsseiten nennen grosse Arbeitgeber, enthalten aber keinen eindeutig automatisierbaren Firmenwebsite-Beleg nach aktuellem Fail-Closed-Policy-Vertrag.
+- Beispiel `stadt_muenchen_unternehmensbeteiligungen_mgh_muenchener_gewerbehof_und_technologiegesellschaft_muenchen`: Es wurden mehrere moegliche URLs auf `mgh-muc.de` erkannt; automatische Auswahl blieb korrekt fail-closed, weil mehrere Treffer nicht eindeutig genug sind.
+- `Verify-JobAgentCompanyCandidates.ps1` fand weiterhin keine verifikationsbereiten Kandidaten; der naechste Agent sollte daher zuerst weitere Website-Discovery laufen lassen oder gezielt die Manual-Review-Faelle fachlich verbessern.
 
 ## Artefakte
 
-- `logs/jobagent/company-candidate-website-discovery-20260827-153804.json`
-- `logs/jobagent/company-candidate-verification-20260827-153832.json`
-- `logs/jobagent/company-coverage-20260827-153832.json`
-- `logs/jobagent/company-coverage-20260827-153832.md`
+- `logs/jobagent/company-candidate-website-discovery-20260827-154249.json`
+- `logs/jobagent/company-candidate-verification-20260827-154314.json`
+- `logs/jobagent/company-coverage-20260827-154325.json`
+- `logs/jobagent/company-coverage-20260827-154325.md`
 - `html/jobagent/company-coverage.html`
-- `logs/terminal/route-check-20260827-173936.log`
+- `logs/terminal/route-check-20260827-174634.log`
 
 ## Geaenderte Dateien fuer Commit
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
-- `data/jobagent/store.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
 - `todo.events.jsonl`

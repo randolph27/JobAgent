@@ -1,7 +1,7 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T15:38:32.414Z",
+  "generated_at": "2026-08-27T15:43:25.969Z",
   "clusters_total": 1787,
   "candidates_total": 1790,
   "ready_total": 0,
