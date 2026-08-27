@@ -1,71 +1,61 @@
 # Handoff latest
 
-Stand: 2026-08-27T06:40:38.240+02:00
+Stand: 2026-08-27T06:58:05.835+02:00
 
-## Abgeschlossener Arbeitsschritt
+## Abgeschlossen
 
-JA-025 wurde um zwei erlaubte regionale GitHub-Snapshot-Quellen erweitert:
+JA-025 / TD-0039 ist abgeschlossen, per ./ci.cmd stp synchronisiert und nach Roadmap_archive.md rotiert.
 
-- `source-registry:remote_jobs_germany_github` mit `8` unverifizierten Arbeitgeberhinweisen.
-- `source-registry:awesome_geospatial_companies_github` mit `14` unverifizierten Arbeitgeberhinweisen.
+Ergebnis:
+- Alle aktuell erlaubten importierbaren Snapshot-Quellen wurden verarbeitet: source_gate.status=passed, xpected_sources_total=25, processed_sources_total=25.
+- Neue Quelle: source-registry:openstreetmap_overpass_business_names.
+- Neuer Snapshot: 	ests/fixtures/jobagent/regional-discovery/openstreetmap-overpass-business-names-snapshot.json.
+- OSM-/Overpass-Hints: 1162 unverifizierte Arbeitgeberhinweise aus namentlich erfassten office=company-Elementen im Muenchen-/Freising-Zielgebiet.
+- Kandidatenbasis: 	arget_inventory_candidates_total=1826, 	arget_inventory_gap_to_1000=0.
+- Hint-/Queue-Stand: merged_hints_total=1790, candidate_verification_queue.clusters_total=1788, candidate_verification_queue.candidates_total=1790.
+- Keine produktiven Store- oder JobSource-Writes aus Sekundaerquellen.
 
-Es gab keine produktiven Store- oder JobSource-Writes. Alle neuen Eintraege bleiben Discovery-Hints mit Pflicht zur offiziellen Firmenwebsite-/Karriere-/ATS-Verifikation.
+## Aktiver Anschluss
 
-## Konkrete Aenderungen
+JA-027 / TD-0041 ist der einzige offene Roadmap-/Todo-Punkt.
 
-- `data/jobagent/company-discovery.sources.json`: zwei neue Source-Registry-Eintraege mit `allowed_use`, `forbidden_use`, `rate_limit_policy`, `robots_or_terms_note`, `retention_policy`, `import_mode=FIXTURE_OR_SNAPSHOT_ONLY`, `review_required=true`, `legal_risk=MEDIUM`.
-- `data/jobagent/company-discovery.snapshot.json`: Manifest um beide regionale Snapshot-Inputs erweitert.
-- `tests/fixtures/jobagent/regional-discovery/remote-jobs-germany-github-snapshot.json`: lokaler Snapshot aus der MIT-lizenzierten GitHub-Liste `danielbayerlein/remote-jobs-germany`; beruecksichtigt nur Eintraege mit Muenchen-/Unterfoehring-/Ismaning-Bezug.
-- `tests/fixtures/jobagent/regional-discovery/awesome-geospatial-companies-github-snapshot.json`: lokaler Snapshot aus der MIT-lizenzierten GitHub-Liste `chrieke/awesome-geospatial-companies`; beruecksichtigt nur Eintraege mit Muenchen- oder 20-km-Bezug.
-- `tests/Test-JobAgentRegionalDiscovery.ps1`: Funktionstests `production_remote_jobs_germany_snapshot` und `production_awesome_geospatial_companies_snapshot` hinzugefuegt; prueft Quelle, Hint-Anzahl, Zuordnung, unverifizierten Status, Zielgebiet und Verbot offizieller Linkpersistenz.
-- `docs/company-discovery-operations.md`: Snapshot-Lane-Dokumentation um beide Quellen ergaenzt.
-- `data/jobagent/company-discovery.hints.json`, `data/jobagent/company-candidate-verification.queue.json`, `html/jobagent/company-coverage.html`, `html/jobagent/ja-022-viewport-audit.html`: aus Snapshot-/Coverage-/HTML-Audit-Lane neu generiert.
-- `todo.events.jsonl`, `todo.history.digest.json`, `todo.master.index.json`, `handoff.latest.json`, `handoff.latest.md`: STP-/Handoff-Artefakte synchronisiert.
+Ziel: Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen.
 
-## Aktuelle Kennzahlen
+Pflichtregeln:
+- Keine produktive Firma ohne offiziellen Website-, Karriere- oder ATS-Beleg.
+- Jobboersen, Arbeitsagentur, Register, OSM und regionale Verzeichnisse bleiben Discovery-/Review-Hinweise.
+- Keine Bewerbungen, keine Formularaktionen, kein Login/Captcha/Paywall-Bypass.
+- Unklare Kandidaten fail-closed in MANUAL_REVIEW_REQUIRED, NO_CAREER_PAGE_FOUND, RETRY_REQUIRED, BLOCKED, DUPLICATE oder OUT_OF_SCOPE belassen.
 
-- `companies_total=38`
-- `merged_hints_total=628`
-- `candidate_verification_queue.clusters_total=626`
-- `candidate_verification_queue.candidates_total=628`
-- `target_inventory_candidates_total=664`
-- `target_inventory_gap_to_1000=336`
-- `target_inventory_gate_status=failed`
-- `source_gate.status=passed`
-- `source_gate.expected_sources_total=24`
-- `source_gate.processed_sources_total=24`
-- `productive_store_write=false`
-- `official_verification_required=true`
+Naechste Arbeitsschritte:
+1. data/jobagent/company-candidate-verification.queue.json priorisieren; nicht direkt aus company-discovery.hints.json in den Store schreiben.
+2. Kleine Verifikationswelle starten, statt alle 1788 Cluster ungefiltert live zu pruefen.
+3. Pro Kandidat offizielle Website, Domain-/Impressumsbezug, Karrierepfad oder offiziell verlinkten ATS-Mandanten pruefen.
+4. Nur COMPANY_DOMAIN_VERIFIED, CAREER_URL_VERIFIED oder OFFICIAL_ATS_VERIFIED duerfen produktiv in data/jobagent/store.json/JobSources uebernommen werden.
+5. Report und Coverage nach jeder Teilwelle aktualisieren, inklusive nicht uebernommener Kandidaten und Reject-/Review-Gruenden.
 
-## Roadmap-Status
-
-- `JA-025` bleibt offen. Der Zielwert `1000` Zielgebietskandidaten ist mit `664` nicht erreicht; es fehlen `336`.
-- `JA-027` bleibt offen und fachlich nachgelagert. Offizielle Firmenwebsite-/Karriere-/ATS-Verifikation darf erst nach ausreichend breiter Kandidatenbasis oder explizit priorisierter Teilwelle weitergezogen werden.
-- Keine Roadmap-Rotation ausgefuehrt, weil kein aktiver Roadmap-Punkt komplett erledigt ist.
-- Supertest wurde nicht neu ausgefuehrt; gemaess aktueller Nutzeranweisung gilt der nicht angefragte Supertest fuer diesen Abschluss als erledigt.
+Relevante Module/Tools:
+- 	ools/Verify-JobAgentCompanyCandidates.ps1
+- 	ools/Import-JobAgentCompanyDiscovery.ps1
+- 	ools/Measure-JobAgentCompanyCoverage.ps1
+- src/JobAgent.SourceVerification.psm1
+- src/JobAgent.SourceAdapters.psm1
+- src/JobAgent.LiveScan.psm1
+- src/JobAgent.CompanyInventory.psm1
+- src/JobAgent.Coverage.psm1
 
 ## Verifikation
 
-- `pwsh -NoProfile -Command <JSON validation for registry, manifest and new snapshots>` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentRegionalDiscovery.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlAudit.ps1` -> Exit `0`
-- `.\ci.cmd stp` -> Exit `0`
+- pwsh -NoProfile -File .\tests\Test-JobAgentRegionalDiscovery.ps1 -> Exit 0
+- pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane -> Exit 0
+- pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1 -> Exit 0
+- pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250 -> Exit 0
+- pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1 -> Exit 0
+- pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1 -> Exit 0
+- pwsh -NoProfile -File .\tests\Test-JobAgentHtmlAudit.ps1 -> Exit 0
+- pwsh -NoProfile -File .\tests\Test-JobAgentRegisterDiscovery.ps1 -> Exit 0
+- pwsh -NoProfile -File .\tests\Test-JobAgentJobBoardDiscovery.ps1 -> Exit 0
+- curl.exe -sS http://localhost:9000/api/system/status -> Exit 0, SonarQube UP
+- .\ci.cmd stp -> Exit 0
 
-## Naechster Anker
-
-1. `JA-025` fortsetzen: weitere erlaubte, snapshot-faehige Arbeitgeberquellen fuer Muenchen, 20-km-Umkreis und Freising suchen und fail-closed in Source Registry, lokalem Snapshot, Manifest, Hint-Store, Coverage und Funktionstests nachweisen.
-2. Ziel fuer `JA-025`: Kandidatenbasis von `664` auf mindestens `1000` Zielgebietskandidaten bringen; aktuelle Luecke `336`.
-3. Keine produktive Firma aus Sekundaerquellen importieren. Produktiver Store und JobSources duerfen erst nach offizieller Firmenwebsite-/Karriere-/ATS-Verifikation beschrieben werden.
-4. Jede neue Quelle braucht vollstaendige Registry-Felder: `allowed_use`, `forbidden_use`, `rate_limit_policy`, `robots_or_terms_note`, `retention_policy`, `evidence_level`, `import_mode`, `review_required`, `legal_risk`.
-5. Fuer jede weitere Quelle: erst Source Registry/Manifest/Snapshot, dann passender Funktionstest, danach Snapshot-Lane, Dedupe, Coverage und HTML-Audit.
-6. `JA-027` erst bearbeiten, wenn `JA-025` genug Kandidaten liefert oder der User eine konkrete Teilwelle zur offiziellen Verifikation priorisiert.
-
-## Quellen dieses Arbeitsschritts
-
-- `https://github.com/danielbayerlein/remote-jobs-germany`
-- `https://github.com/chrieke/awesome-geospatial-companies`
+Supertest wurde nicht erneut ausgefuehrt; gemaess aktueller Nutzeranweisung gilt der nicht separat angefragte Supertest fuer diesen Abschluss als erledigt.

@@ -129,6 +129,11 @@
       "kind": "regional",
       "source_id": "source-registry:awesome_geospatial_companies_github",
       "input_path": "tests/fixtures/jobagent/regional-discovery/awesome-geospatial-companies-github-snapshot.json"
+    },
+    {
+      "kind": "regional",
+      "source_id": "source-registry:openstreetmap_overpass_business_names",
+      "input_path": "tests/fixtures/jobagent/regional-discovery/openstreetmap-overpass-business-names-snapshot.json"
     }
   ]
 }

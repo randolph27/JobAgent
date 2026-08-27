@@ -34,6 +34,8 @@ $remoteJobsSource = Get-JobAgentRegionalSource -SourceRegistry $registry -Source
 Assert-True -Condition ([string]$remoteJobsSource.evidence_level -eq 'DISCOVERY_HINT' -and [string]$remoteJobsSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'Remote-Jobs-Germany-Quelle wurde nicht als unverifizierte regionale Discovery-Quelle geladen.'
 $geospatialSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:awesome_geospatial_companies_github'
 Assert-True -Condition ([string]$geospatialSource.evidence_level -eq 'DISCOVERY_HINT' -and [string]$geospatialSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'Awesome-Geospatial-Companies-Quelle wurde nicht als unverifizierte regionale Discovery-Quelle geladen.'
+$osmSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:openstreetmap_overpass_business_names'
+Assert-True -Condition ([string]$osmSource.evidence_level -eq 'DISCOVERY_HINT' -and [string]$osmSource.source_class -eq 'REGIONAL_DIRECTORY') -Message 'OpenStreetMap-Overpass-Quelle wurde nicht als unverifizierte regionale Discovery-Quelle geladen.'
 $klimapaktSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_business_klimapakt3_companies'
 Assert-True -Condition ([string]$klimapaktSource.source_class -eq 'PUBLIC_INSTITUTION_DIRECTORY' -and [string]$klimapaktSource.evidence_level -eq 'SECONDARY_OFFICIAL_DIRECTORY') -Message 'Klimapakt-3-Quelle wurde nicht als oeffentliche Institutionsquelle geladen.'
 $startupSource = Get-JobAgentRegionalSource -SourceRegistry $registry -SourceId 'source-registry:munich_startup_platform_ecosystem'
@@ -139,6 +141,14 @@ Assert-True -Condition (@($geospatialResult.hints | Where-Object { [string]$_.of
 Assert-True -Condition (@($geospatialResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH', 'MUNICH_20KM') }).Count -eq 0) -Message 'Awesome-Geospatial-Companies-Hints muessen Muenchen- oder 20-km-Bezug behalten.'
 Assert-True -Condition (@($geospatialResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'career_hint' -or $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Awesome-Geospatial-Companies-Links duerfen nicht als offizielle Felder persistiert werden.'
 
+$osmFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\openstreetmap-overpass-business-names-snapshot.json'
+$osmResult = Import-JobAgentRegionalDirectories -SnapshotPath $osmFixture -SourceRegistry $registry
+Assert-True -Condition ($osmResult.hints_total -eq 1162) -Message 'OpenStreetMap-Overpass-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition ($osmResult.source_counts.'source-registry:openstreetmap_overpass_business_names' -eq 1162) -Message 'OpenStreetMap-Overpass-Hints werden nicht der neuen Quelle zugeordnet.'
+Assert-True -Condition (@($osmResult.hints | Where-Object { [string]$_.officialness_level -ne 'CURATED_DISCOVERY_HINT' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'OpenStreetMap-Overpass-Hints muessen unverifizierte Discovery-Hints bleiben.'
+Assert-True -Condition (@($osmResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH_20KM', 'FREISING') }).Count -eq 0) -Message 'OpenStreetMap-Overpass-Hints muessen per Koordinate im Zielgebiet bleiben.'
+Assert-True -Condition (@($osmResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'phone' -or $_.PSObject.Properties.Name -contains 'email' -or $_.PSObject.Properties.Name -contains 'website_hint' -or $_.PSObject.Properties.Name -contains 'career_hint' }).Count -eq 0) -Message 'OpenStreetMap-Overpass-Hints duerfen keine Kontakt- oder offiziellen Linkfelder persistieren.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 try {
@@ -195,6 +205,7 @@ finally {
         'production_awesome_ml_startups_munich_snapshot',
         'production_remote_jobs_germany_snapshot',
         'production_awesome_geospatial_companies_snapshot',
+        'production_openstreetmap_overpass_business_names_snapshot',
         'script_writes_regional_and_merged_hints'
     )
     hints = $result.hints_total

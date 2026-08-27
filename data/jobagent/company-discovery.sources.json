@@ -691,6 +691,31 @@
       "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
       "review_required": true,
       "legal_risk": "MEDIUM"
+    },
+    {
+      "source_id": "source-registry:openstreetmap_overpass_business_names",
+      "source_class": "REGIONAL_DIRECTORY",
+      "source_url": "https://www.openstreetmap.org/copyright",
+      "operator": "OpenStreetMap contributors via public Overpass API snapshot",
+      "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung, keine Nutzung von OSM als offizielle Firmen- oder Karrierequelle, keine Kontakt- oder Personenfeldsammlung, keine tiefen Folgeabrufe und keine produktive Aufnahme ohne offizielle Firmen-/Karriereverifikation.",
+      "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed.",
+      "robots_or_terms_note": "OpenStreetMap-Daten stehen unter ODbL mit Attributionspflicht; freie Overpass-Instanzen sind fuer kleine Projekte gedacht und muessen schonend genutzt werden.",
+      "expected_fields": [
+        "company_name",
+        "industry_hint",
+        "location",
+        "latitude",
+        "longitude",
+        "description_hint",
+        "source_url"
+      ],
+      "evidence_level": "DISCOVERY_HINT",
+      "freshness_policy": "Snapshot bei regionaler Flaechen-/OSM-Arbeitgeberwelle neu ziehen; OSM-Basiszeit und Overpass-Abruf im Evidence-Log dokumentieren.",
+      "retention_policy": "Nur Arbeitgebername, OSM-Sektorhinweis, Koordinaten fuer Zielgebietsfilter, nicht-personenbezogene Elementnotiz und Attribution speichern; keine Telefonnummern, E-Mails oder OSM-Rohobjekte persistieren.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "MEDIUM"
     }
   ]
 }
