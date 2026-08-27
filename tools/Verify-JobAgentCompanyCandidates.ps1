@@ -598,9 +598,10 @@ try {
             $entryStatus = [string]$_.status
             $entryAction = [string](Get-ToolEntryProperty -Entry $_ -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
             $dueAt = ConvertTo-ToolDateOrNull -Value $_.next_attempt_at
-            ($entryStatus -eq 'MANUAL_REVIEW_REQUIRED' -or $dueAt -le $startedAt.ToUniversalTime()) -and
-                $entryStatus -notin @('VERIFIED', 'RETRY_EXHAUSTED') -and
-                $entryAction -ne 'REJECT_DUPLICATE'
+            $entryAction -eq 'VERIFY_OFFICIAL_SITE' -and
+                $entryStatus -eq 'PENDING' -and
+                $dueAt -le $startedAt.ToUniversalTime() -and
+                $entryStatus -notin @('VERIFIED', 'RETRY_EXHAUSTED')
         } |
         Sort-Object @{ Expression = { -[int](Get-ToolCandidateActionabilityScore -Candidate $candidateById[[string]$_.candidate_id]) }; Ascending = $true }, @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
         ForEach-Object { $candidateById[[string]$_.candidate_id] } |

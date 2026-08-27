@@ -1135,6 +1135,9 @@ function Get-JobAgentCoverageCandidateReviewAction {
         [Parameter(Mandatory)][string]$FreshnessStatus
     )
 
+    $knownDomain = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'known_company_domain' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'canonical_domain' -Default ''))
+    $websiteUrl = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'official_website_url' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'verified_official_website_url' -Default ''))
+
     if ($ReasonCodes -contains 'DUPLICATE_CLUSTER_REVIEW' -or $ReasonCodes -contains 'NAME_CONFLICT_REVIEW') {
         return 'REJECT_DUPLICATE'
     }
@@ -1146,6 +1149,12 @@ function Get-JobAgentCoverageCandidateReviewAction {
     }
     if ($FreshnessStatus -in @('EXPIRED', 'REFRESH_DUE')) {
         return 'WAIT_FOR_REFRESH'
+    }
+    if ([string]::IsNullOrWhiteSpace($knownDomain) -and [string]::IsNullOrWhiteSpace($websiteUrl)) {
+        return 'DISCOVER_OFFICIAL_WEBSITE'
+    }
+    if ([string]::IsNullOrWhiteSpace($knownDomain) -and $ReasonCodes -contains 'OFFICIAL_WEBSITE_EVIDENCE_REQUIRED') {
+        return 'VERIFY_OFFICIAL_WEBSITE_EVIDENCE'
     }
     return 'VERIFY_OFFICIAL_SITE'
 }
@@ -1169,6 +1178,12 @@ function New-JobAgentCoverageCandidateReviewQueueEntry {
     if ([string]$Cluster.review_queue_reason -eq 'OFFICIAL_VERIFICATION_REQUIRED' -or [string]$Cluster.review_queue_reason -eq 'READY_FOR_OFFICIAL_VERIFICATION') { $reasonCodes.Add('OFFICIAL_VERIFICATION_REQUIRED') }
     if ([string]$freshness.staleness_status -in @('EXPIRED', 'REFRESH_DUE')) { $reasonCodes.Add('CANDIDATE_REFRESH_DUE') }
     if ([string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'known_company_id' -Default '') -ne '') { $reasonCodes.Add('KNOWN_COMPANY_HINT') }
+    $knownDomain = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'known_company_domain' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'canonical_domain' -Default ''))
+    $websiteUrl = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'official_website_url' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'verified_official_website_url' -Default ''))
+    $websiteStatus = [string](Get-JobAgentCoverageProperty -Object $Candidate -Name 'official_website_verification_status' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'company_domain_verification_status' -Default ''))
+    if ([string]::IsNullOrWhiteSpace($knownDomain) -and -not [string]::IsNullOrWhiteSpace($websiteUrl) -and @('VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_WEBSITE_VERIFIED') -notcontains $websiteStatus) {
+        $reasonCodes.Add('OFFICIAL_WEBSITE_EVIDENCE_REQUIRED')
+    }
     $reasonArray = @($reasonCodes.ToArray() | Sort-Object -Unique)
     $nextAction = Get-JobAgentCoverageCandidateReviewAction -Cluster $Cluster -Candidate $Candidate -ReasonCodes $reasonArray -FreshnessStatus ([string]$freshness.staleness_status)
     $basePriority = [int](Get-JobAgentCoverageProperty -Object $Candidate -Name 'confidence_score' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'priority_score' -Default 50))

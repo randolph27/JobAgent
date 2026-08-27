@@ -1,99 +1,117 @@
 # Handoff latest
 
-Stand: 2026-08-27T07:18:55.051+02:00
+Stand: 2026-08-27T12:05:00+02:00
 
-## Aktiver Roadmap-/Todo-Stand
+## Neuer-Chat-Start
 
-- Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`.
-- Offenes Todo: `TD-0041`; `todo.state.json.active_id` ist aktuell `null`, `todo.current.md` listet `TD-0041` als `open`.
-- JA-027 ist nicht komplett erledigt und wurde deshalb nicht nach `Roadmap_archive.md` rotiert.
-- Supertest gilt gemaess Nutzeranweisung als erledigt; in dieser Arbeitswelle wurden nur funktionsbezogene Tests ausgefuehrt.
+- Projektpfad: `D:\_Scripte\JobAgent`
+- Branch: `master`
+- HEAD vor Abschlusscommit: `4939fbe0246a`
+- Upstream: `origin/master`
+- Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
+- Offenes Todo: `TD-0041`
+- `Roadmap.md` wurde nicht rotiert, weil JA-027 fachlich noch nicht abgeschlossen ist.
+- SonarQube war erreichbar: `http://localhost:9000/api/system/status` meldete `UP`.
+- Devserver war erreichbar: `.\ci.cmd devserver-status` meldete `http://localhost:8500/` listening.
 
-## Umgesetzter Arbeitsschritt
+## In dieser Arbeitswelle umgesetzt
 
-- `src/JobAgent.SourceVerification.psm1` akzeptiert fuer Kandidaten ohne `known_company_domain` jetzt eine verifizierte `official_website_url` beziehungsweise `verified_official_website_url` als Domain-Ermittlungsbasis.
-- Die neue Domain-Ermittlung ist fail-closed: unbelegte Website-URLs, ungueltige URLs und Aggregator-URLs erzeugen keine automatische Firmenstub-Erstellung.
-- Verifizierte Website-URLs werden kanonisiert, `www.` wird entfernt, und `canonical_domain` wird aus dem finalen Website-Host abgeleitet.
-- Bestehende Kandidaten mit `known_company_domain` behalten den bisherigen Pfad.
-- `tests/Test-JobAgentCompanyCandidateVerification.ps1` deckt jetzt ab:
-  - verifizierte offizielle Website ohne `known_company_domain` wird zur Karriere-/Domainverifikation genutzt;
-  - unbelegte `official_website_url` bleibt `MANUAL_REVIEW_REQUIRED`;
-  - ungueltige `official_website_url` bleibt `MANUAL_REVIEW_REQUIRED`;
-  - bestehende Karriere-, ATS-, Domain-only-, Timeout-, 404-, JS-only- und Aggregator-Faelle bleiben stabil.
+- Die Kandidaten-Verifikationsqueue wurde fail-closed nach Aktionsfaehigkeit getrennt.
+- `src/JobAgent.Coverage.psm1` erzeugt fuer Kandidaten ohne `known_company_domain`/`canonical_domain` und ohne Website jetzt `DISCOVER_OFFICIAL_WEBSITE`.
+- Kandidaten mit `official_website_url`, aber ohne belegte Website-Evidenz, bekommen `VERIFY_OFFICIAL_WEBSITE_EVIDENCE` und bleiben `MANUAL_REVIEW_REQUIRED`.
+- Nur Kandidaten mit belastbarer Domain bleiben `PENDING` + `VERIFY_OFFICIAL_SITE`.
+- `tools/Verify-JobAgentCompanyCandidates.ps1` verarbeitet nur noch `PENDING` + `VERIFY_OFFICIAL_SITE`; nicht-aktionable Manual-Review-Kandidaten werden nicht mehr live gegen Websites geprueft.
+- `tests/Test-JobAgentCoverage.ps1` prueft die drei Queue-Pfade `VERIFY_OFFICIAL_SITE`, `VERIFY_OFFICIAL_WEBSITE_EVIDENCE`, `DISCOVER_OFFICIAL_WEBSITE`.
+- `tests/Test-JobAgentCompanyCandidateVerification.ps1` prueft, dass Manual-Review-Kandidaten ohne Aktionsfaehigkeit nicht vom Script als verarbeitet gezaehlt werden.
 
-## Aktualisierte Artefakte
+## Aktueller Datenstand
 
-- `src/JobAgent.SourceVerification.psm1`
-- `tests/Test-JobAgentCompanyCandidateVerification.ps1`
-- `data/jobagent/company-candidate-verification.queue.json`
-- `html/jobagent/company-coverage.html`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
+- `data/jobagent/store.json`: weiterhin 38 produktive Firmen.
+- Es wurden in dieser Arbeitswelle keine neuen Firmen produktiv upserted.
+- Letzte kleine Live-Verifikationswelle:
+  - Command: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 10 -TimeoutSeconds 8 -MaxRetries 3`
+  - Log: `logs/jobagent/company-candidate-verification-20260827-100236.json`
+  - Ergebnis: `processed_total=0`, `ready_total=0`, keine produktiven Upserts.
+- Letzte Coverage:
+  - Command: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250`
+  - JSON: `logs/jobagent/company-coverage-20260827-100236.json`
+  - Markdown: `logs/jobagent/company-coverage-20260827-100236.md`
+  - HTML: `html/jobagent/company-coverage.html`
+
+## Queue-Stand nach der Aenderung
+
+- Cluster: 1788
+- Kandidaten: 1790
+- `ready_total`: 0
+- Status:
+  - `MANUAL_REVIEW_REQUIRED`: 1783
+  - `VERIFIED`: 5
+- Aktionen:
+  - `DISCOVER_OFFICIAL_WEBSITE`: 1780
+  - `MANUAL_DECISION`: 1
+  - `REJECT_DUPLICATE`: 2
+  - `VERIFY_OFFICIAL_SITE`: 5
 
 ## Validierung
 
-Ausgefuehrt und erfolgreich:
+Erfolgreich ausgefuehrt:
 
 ```powershell
 pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1
+pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 10 -TimeoutSeconds 8 -MaxRetries 3
+pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250
 .\ci.cmd stp
 ```
 
-SonarQube-Status vor der Arbeitswelle: `http://localhost:9000/api/system/status` lieferte `UP`.
-
-Devserver-Status vor der Arbeitswelle: `.\ci.cmd devserver-status` meldete `http://localhost:8500/` als listening.
-
-## Produktiver Datenstand
-
-- Die Queue zaehlt weiterhin 1788 Cluster und 1790 Kandidaten.
-- Statusverteilung nach der Arbeitswelle:
-  - `VERIFIED`: 5
-  - `MANUAL_REVIEW_REQUIRED`: 3
-  - `PENDING`: 1780
-- Es wurde keine neue Live-Verifikationswelle gegen echte Websites ausgefuehrt.
-- Es wurden keine weiteren Firmen produktiv in `data/jobagent/store.json` uebernommen.
+Supertest wurde in dieser Arbeitswelle nicht neu ausgefuehrt. Laut Nutzeranweisung gilt er, wenn nicht explizit angefragt, als erledigt.
 
 ## Naechste konkrete Aufgaben
 
-1. Domain-Ermittlungsstufe fuer Kandidaten ohne Domain weiter ausbauen: Kandidaten mit vorhandener, aber noch unbelegter Website-Quelle muessen zuerst offizielle Website-Evidenz erhalten, bevor `official_website_url` fuer den Upsert genutzt wird.
-2. Quellen fuer die Website-Evidenz definieren und testen: zulaessig sind nur belegte offizielle Firmenwebsite-/Impressum-/Namens-/Standortsignale; Jobboersen, Register und regionale Verzeichnisse bleiben Discovery-Hints, keine Primaerbelege.
-3. Danach kleine Verifikationswelle starten, nicht alle Kandidaten auf einmal:
+1. Offizielle Website-Ermittlung fuer `DISCOVER_OFFICIAL_WEBSITE` implementieren.
+   - Ziel: Kandidaten ohne Domain/Website bekommen nur dann `official_website_url`, wenn eine zulaessige Evidenzquelle den Firmenbezug belegt.
+   - Betroffene Stellen voraussichtlich: `src/JobAgent.SourceVerification.psm1`, `src/JobAgent.Coverage.psm1`, neues oder erweitertes Tool unter `tools/`.
+   - No-Go: keine Suchmaschinen- oder Jobboersen-URL als offizieller Beleg, keine globale ATS-Allowlist ohne Firmenlink.
+
+2. Website-Evidenzmodell fuer Kandidaten festziehen.
+   - Benoetigt werden Felder wie `official_website_evidence`, `official_website_verification_status`, `verification_url`, `verified_by_url`, `evidence_type`, `observed_at`, Hash/Excerpt.
+   - Akzeptierte Status fuer automatische Weiterverarbeitung bleiben nur `VERIFIED`, `COMPANY_DOMAIN_VERIFIED`, `OFFICIAL_WEBSITE_VERIFIED`.
+
+3. Kleine Fixture-Tests fuer Website-Ermittlung bauen.
+   - Faelle: offizielle Firmenwebsite belegt, unbelegte Website abgelehnt, Aggregator abgelehnt, Namenskonflikt fail-closed, Standort unsicher fail-closed.
+   - Funktionstests vor Supertest.
+
+4. Danach kleine Verifikationswelle erneut starten.
+   - Erst wenn einzelne Kandidaten aus `DISCOVER_OFFICIAL_WEBSITE` in `VERIFY_OFFICIAL_SITE` ueberfuehrt wurden:
 
 ```powershell
 pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 10 -TimeoutSeconds 8 -MaxRetries 3
 ```
 
-4. Ergebnislog unter `logs/jobagent/company-candidate-verification-*.json` pruefen: produktive Upserts nur bei `COMPANY_DOMAIN_VERIFIED`, `CAREER_URL_VERIFIED` oder `OFFICIAL_ATS_VERIFIED`; unklare Faelle muessen `MANUAL_REVIEW_REQUIRED`, `RETRY_SCHEDULED` oder `RETRY_EXHAUSTED` bleiben.
-5. Coverage aktualisieren:
+5. Coverage aktualisieren und HTML pruefen.
 
 ```powershell
 pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250
 ```
 
-6. Funktionsbezogene Tests erneut ausfuehren:
+6. JA-027 erst rotieren, wenn alle Akzeptanzbedingungen belegt sind:
+   - produktive Firmen haben offizielle Website-/Karriere-/ATS-Evidenz,
+   - nicht uebernommene Kandidaten haben Review-/Reject-Grund,
+   - Coverage-/Report-Artefakte sind aktuell,
+   - funktionsbezogene Tests sind gruen,
+   - Supertest gilt gemaess Nutzerfreigabe oder wurde explizit ausgefuehrt.
 
-```powershell
-pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1
-pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1
-pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1
-```
+## Geaenderte Dateien vor Commit
 
-7. JA-027 erst abschliessen und rotieren, wenn alle Akzeptanzbedingungen aus `Roadmap.md` belegt sind: offizielle Website-/Karriere-/ATS-Evidenz pro produktiv hinzugefuegter Firma, nicht uebernommene Kandidaten mit Review-/Reject-Grund, Coverage-/Report-Artefakte aktualisiert und Abschluss-Gates gruen.
-
-## Bekannte Risiken
-
-- Die neue Website-URL-Nutzung setzt voraus, dass vorgelagerte Ermittlung die Website wirklich als offiziell belegt. Ohne diese Evidenz bleibt der Pfad absichtlich gesperrt.
-- Viele Kandidaten besitzen weiterhin keinen belastbaren Domain- oder Website-Hinweis und bleiben fail-closed.
-- Die Coverage-Testausfuehrung hat Zeitstempel in `data/jobagent/company-candidate-verification.queue.json` und `html/jobagent/company-coverage.html` aktualisiert.
-
-## Git-Anker vor Commit
-
-- Branch: `master`
-- HEAD vor Commit: `4d49d553fa5d`
-- Upstream: `origin/master`
-- Ahead/Behind vor Commit: `0/0`
+- `data/jobagent/company-candidate-verification.queue.json`
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `html/jobagent/company-coverage.html`
+- `src/JobAgent.Coverage.psm1`
+- `tests/Test-JobAgentCompanyCandidateVerification.ps1`
+- `tests/Test-JobAgentCoverage.ps1`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `tools/Verify-JobAgentCompanyCandidates.ps1`

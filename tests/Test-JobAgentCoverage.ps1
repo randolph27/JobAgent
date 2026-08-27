@@ -225,6 +225,68 @@ $hintSourceIds = @($hintStore.hints | ForEach-Object { [string]$_.source_id } | 
 $secondarySourceIds = @($sourceRegistry.items | Where-Object { [string]$_.source_class -in @('JOB_BOARD_DISCOVERY', 'OPEN_REGISTER_DUMP', 'REGIONAL_DIRECTORY', 'PUBLIC_INSTITUTION_DIRECTORY') -and [string]$_.evidence_level -in @('DISCOVERY_HINT', 'SECONDARY_OFFICIAL_DIRECTORY') } | ForEach-Object { [string]$_.source_id })
 Assert-True -Condition (@($hintSourceIds | Where-Object { $secondarySourceIds -notcontains $_ }).Count -eq 0) -Message 'Discovery-Hints duerfen nur erlaubte Sekundaerquellen referenzieren.'
 
+$queueHintStore = [pscustomobject]@{
+    schema_version = 'jobagent/company-discovery-hints/v1'
+    generated_at = '2026-08-23T08:30:00.000Z'
+    hints_total = 3
+    hints = @(
+        [pscustomobject]@{
+            hint_id = 'hint:queue-known-domain'
+            employer_name = 'Queue Domain AG'
+            normalized_name = 'queue domain'
+            location = 'Muenchen'
+            target_area = 'MUNICH'
+            source_id = 'source-registry:stepstone_muenchen'
+            observed_url = 'https://www.stepstone.de/jobs/in-muenchen'
+            observed_at = '2026-08-23T08:00:00.000Z'
+            verification_status = 'UNVERIFIED'
+            candidate_status = 'DISCOVERY_HINT'
+            known_company_domain = 'queue-domain.example.invalid'
+            confidence_score = 70
+            official_verification_required = $true
+        },
+        [pscustomobject]@{
+            hint_id = 'hint:queue-unverified-website'
+            employer_name = 'Queue Website AG'
+            normalized_name = 'queue website'
+            location = 'Muenchen'
+            target_area = 'MUNICH'
+            source_id = 'source-registry:stepstone_muenchen'
+            observed_url = 'https://www.stepstone.de/jobs/in-muenchen'
+            observed_at = '2026-08-23T08:00:00.000Z'
+            verification_status = 'UNVERIFIED'
+            candidate_status = 'DISCOVERY_HINT'
+            official_website_url = 'https://queue-website.example.invalid/'
+            official_website_verification_status = 'UNVERIFIED'
+            confidence_score = 70
+            official_verification_required = $true
+        },
+        [pscustomobject]@{
+            hint_id = 'hint:queue-missing-website'
+            employer_name = 'Queue Missing AG'
+            normalized_name = 'queue missing'
+            location = 'Muenchen'
+            target_area = 'MUNICH'
+            source_id = 'source-registry:stepstone_muenchen'
+            observed_url = 'https://www.stepstone.de/jobs/in-muenchen'
+            observed_at = '2026-08-23T08:00:00.000Z'
+            verification_status = 'UNVERIFIED'
+            candidate_status = 'DISCOVERY_HINT'
+            confidence_score = 70
+            official_verification_required = $true
+        }
+    )
+}
+$actionQueue = New-JobAgentCoverageCandidateReviewQueue -HintStore $queueHintStore -SourceRegistry $sourceRegistry -Now ([datetime]'2026-08-23T08:30:00Z') -MaxItems 10
+$knownDomainQueueItem = @($actionQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:queue-known-domain' })[0]
+$unverifiedWebsiteQueueItem = @($actionQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:queue-unverified-website' })[0]
+$missingWebsiteQueueItem = @($actionQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:queue-missing-website' })[0]
+Assert-True -Condition ($knownDomainQueueItem.next_action -eq 'VERIFY_OFFICIAL_SITE' -and $knownDomainQueueItem.status -eq 'PENDING') -Message 'Kandidat mit belastbarer Domain muss verifizierbar bleiben.'
+Assert-True -Condition ($unverifiedWebsiteQueueItem.next_action -eq 'VERIFY_OFFICIAL_WEBSITE_EVIDENCE' -and $unverifiedWebsiteQueueItem.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Unbelegte Website-URL darf nicht direkt in die Karriereverifikation laufen.'
+Assert-True -Condition (@($unverifiedWebsiteQueueItem.reason_codes | Where-Object { $_ -eq 'OFFICIAL_WEBSITE_EVIDENCE_REQUIRED' }).Count -eq 1) -Message 'Unbelegte Website-URL muss einen eigenen Evidenzgrund tragen.'
+Assert-True -Condition ($missingWebsiteQueueItem.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $missingWebsiteQueueItem.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Kandidat ohne Domain und Website braucht zuerst Website-Ermittlung.'
+Assert-True -Condition ($actionQueue.ready_total -eq 1) -Message 'Nur Kandidaten mit verifizierbarer Domain duerfen als bereit zaehlen.'
+
 $candidateVerificationQueue = [pscustomobject]@{
     schema_version = 'jobagent/company-candidate-verification-queue/v1'
     generated_at = '2026-08-23T08:30:00.000Z'
