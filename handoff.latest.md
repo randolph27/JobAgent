@@ -1,17 +1,17 @@
 # Handoff latest
 
-Stand: 2026-08-27T19:23:37.476+02:00
+Stand: 2026-08-27T19:29:25.413+02:00
 
 ## Neuer-Chat-Start
 
 - Projektpfad: `D:\_Scripte\JobAgent`
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
-- HEAD vor Abschluss-Commit: `2c5ac935c63a`
+- HEAD vor Commit: `761939a48578`
 - Upstream: `origin/master`
-- Ahead/Behind vor Abschluss-Commit: `0/0`
+- Ahead/Behind vor Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
-- Offenes Todo: `TD-0041`, Status `open`
+- Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausgefuehrt, weil JA-027 nicht komplett erledigt ist.
 - Supertest: laut Nutzeranweisung als erledigt behandelt; nicht neu ausgefuehrt.
 - Devserver: `http://localhost:8500/`, PID `23568`, listening `True`
@@ -20,44 +20,56 @@ Stand: 2026-08-27T19:23:37.476+02:00
 ## Letzter abgeschlossener Arbeitsschritt
 
 - Weitere Website-Discovery-Welle fuer JA-027 verarbeitet: `25` Kandidaten.
-- Ergebnis der Discovery-Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
-- Keine Kandidatenverifikation ausgefuehrt, weil `verified_total=0`.
-- Produktiv hinzugefuegt: `0` Firmen.
-- Coverage aktualisiert: `companies_total=69`, `job_sources_total=69`, `duplicate_groups=0`, `target_inventory_gate_status=failed`.
+- Ergebnis der Discovery-Welle: `2` offizielle Website-Treffer, `23` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
+- Kandidatenverifikation ausgefuehrt, weil `verified_total=2`.
+- Produktiv hinzugefuegt: `2` Firmen.
+- Neu in `data/jobagent/store.json`:
+  - `Intelizign Engineering Services GmbH`, `company:intelizign_engineering_services_gmbh`, offizielle Website `https://intelizign.com/`, Status `COMPANY_DOMAIN_VERIFIED`, keine belegte Karriere-URL gefunden.
+  - `Jasmin Infotech GmbH`, `company:jasmin_infotech_gmbh`, offizielle Website `https://jasmin-infotech.com/`, Karriere-URL `https://jasmin-infotech.com/careers`, Status `CAREER_URL_VERIFIED`, JobSource `source:jasmin_infotech_gmbh_career_url`.
+- Coverage aktualisiert: `companies_total=71`, `job_sources_total=70` laut Store-Diff/Quelle, `sources_total=1892`, `official_sources=72`, `discovery_sources=1820`, `duplicate_groups=0`, `target_inventory_gate_status=failed`.
 - STP ausgefuehrt: Todo-/Handoff-Artefakte synchronisiert.
 
 ## Datenstand
 
-- Produktive Firmen: `69`
-- JobSources: `69`
+- Produktive Firmen: `71`
 - Kandidatenqueue: `1786` Cluster, `1790` Kandidaten
 - Queue ready: `0`
-- Queue-Aktionen: `1740` DISCOVER_OFFICIAL_WEBSITE, `41` VERIFY_OFFICIAL_SITE, `4` REJECT_DUPLICATE, `1` MANUAL_DECISION
-- Source Inventory: `1891` Quellen, davon `71` offizielle Quellen und `1820` Discovery-Quellen
+- Queue verarbeitet in letzter Verifikation: `2`
+- Queue verified total: `39`
+- Queue retry scheduled total: `4`
+- Queue manual review total: `1743`
+- Source Inventory: `1892` Quellen, davon `72` offizielle Quellen und `1820` Discovery-Quellen
 - Target-Inventory-Gate: `failed`
 
 ## Geaenderte Dateien fuer Commit
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
+- `data/jobagent/store.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
+- `html/jobagent/company-coverage.html`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
 ## Artefakte
 
-- `logs/jobagent/company-candidate-website-discovery-20260827-172054.json`
-- `logs/jobagent/company-coverage-20260827-172118.json`
-- `logs/jobagent/company-coverage-20260827-172118.md`
+- `logs/jobagent/company-candidate-website-discovery-20260827-172649.json`
+- `logs/jobagent/company-candidate-verification-20260827-172713.json`
+- `logs/jobagent/company-coverage-20260827-172732.json`
+- `logs/jobagent/company-coverage-20260827-172732.md`
+- `logs/jobagent/company-coverage-20260827-172800.json`
+- `logs/jobagent/company-candidate-dedupe-20260827-172815.json`
+- `logs/jobagent/company-discovery-hints-clustered-20260827-172815.json`
 - `html/jobagent/company-coverage.html`
-- `logs/terminal/route-check-20260827-192214.log`
+- `logs/terminal/route-check-20260827-192833.log`
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 0 offizielle Website-Treffer; 25 Manual Review
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=69; sources_total=1891; target_inventory_gate_status=failed
+- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 2 offizielle Website-Treffer; 23 Manual Review
+- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`; 2 Kandidaten verarbeitet; 2 produktive Upserts erlaubt; 0 Manual Review in dieser Verifikation
+- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=71; sources_total=1892; target_inventory_gate_status=failed
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`; 24 Faelle bestanden
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`; 28 Faelle bestanden
 - `.\ci.cmd route-check` -> Exit `0`; route_ok=True

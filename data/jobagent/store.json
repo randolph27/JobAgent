@@ -3252,7 +3252,7 @@
       ],
       "updated_at": "2026-08-27T17:08:36.662Z",
       "created_at": "2026-08-27T17:08:36.662Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3280,6 +3280,118 @@
           "final_url": "https://hepaticatech.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-25T17:08:36.662Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:intelizign_engineering_services_gmbh",
+      "canonical_name": "Intelizign Engineering Services GmbH",
+      "canonical_domain": "intelizign.com",
+      "official_website_url": "https://intelizign.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T17:27:13.367Z",
+      "created_at": "2026-08-27T17:27:13.367Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-27T17:27:13.367Z",
+        "verification_url": "https://intelizign.com/",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
+          "company_id": "company:intelizign_engineering_services_gmbh",
+          "canonical_name": "Intelizign Engineering Services GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://intelizign.com/",
+          "verified_by_url": "https://intelizign.com/",
+          "redirect_chain": [
+            "https://intelizign.com/",
+            "https://intelizign.com/sitemap.xml",
+            "https://intelizign.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "63598251e3bbc9d220a8b2f9fecdb9ba418aea010c35eb81a413e350bd62433a",
+          "observed_at": "2026-08-27T17:27:13.367Z",
+          "http_status": 200,
+          "final_url": "https://intelizign.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-11-25T17:27:13.367Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:jasmin_infotech_gmbh",
+      "canonical_name": "Jasmin Infotech GmbH",
+      "canonical_domain": "jasmin-infotech.com",
+      "official_website_url": "https://jasmin-infotech.com/",
+      "career_url": "https://jasmin-infotech.com/careers",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T17:27:13.367Z",
+      "created_at": "2026-08-27T17:27:13.367Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-27T17:27:13.367Z",
+        "verification_url": "https://jasmin-infotech.com/careers",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_jasmin_infotech_gmbh_muenchen",
+          "company_id": "company:jasmin_infotech_gmbh",
+          "canonical_name": "Jasmin Infotech GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://jasmin-infotech.com/careers",
+          "verified_by_url": "https://jasmin-infotech.com/",
+          "redirect_chain": "https://jasmin-infotech.com/careers",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "7ec4f87ae99ca2d054b61213e6fc59add511a27ba62c3688723c9b57ab0b81fb",
+          "observed_at": "2026-08-27T17:27:13.367Z",
+          "http_status": 200,
+          "final_url": "https://jasmin-infotech.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T17:27:13.367Z"
         }
       ]
     }
@@ -4834,6 +4946,29 @@
             "https://hepaticatech.com/careers"
           ],
           "observed_at": "2026-08-27T17:08:36.662Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:jasmin_infotech_gmbh_career_url",
+      "company_id": "company:jasmin_infotech_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jasmin-infotech.com/careers",
+      "canonical_url": "https://jasmin-infotech.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-27T17:27:13.367Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jasmin-infotech.com/careers",
+          "basis_url": "https://jasmin-infotech.com/",
+          "redirect_chain": [
+            "https://jasmin-infotech.com/careers"
+          ],
+          "observed_at": "2026-08-27T17:27:13.367Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
