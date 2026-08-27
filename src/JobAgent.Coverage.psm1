@@ -1198,8 +1198,15 @@ function New-JobAgentCoverageCandidateReviewQueueEntry {
     $riskPenalty = if ($reasonArray -contains 'STAFFING_AGENCY_REVIEW') { 25 } elseif ($reasonArray -contains 'TARGET_AREA_UNCERTAIN') { 18 } elseif ($reasonArray -contains 'DUPLICATE_CLUSTER_REVIEW') { 8 } else { 0 }
     $priority = [Math]::Max(0, [Math]::Min(100, $basePriority + $areaBonus + $sourceBonus + ([int]$Cluster.source_count * 3) - $riskPenalty))
     $status = if ($nextAction -eq 'VERIFY_OFFICIAL_SITE') { 'PENDING' } elseif ($nextAction -eq 'WAIT_FOR_REFRESH') { 'RETRY_SCHEDULED' } else { 'MANUAL_REVIEW_REQUIRED' }
-    if ($null -ne $Previous -and [string](Get-JobAgentCoverageProperty -Object $Previous -Name 'status' -Default '') -in @('VERIFIED', 'RETRY_EXHAUSTED')) {
-        $status = [string]$Previous.status
+    if ($null -ne $Previous) {
+        $previousStatus = [string](Get-JobAgentCoverageProperty -Object $Previous -Name 'status' -Default '')
+        $previousNextAttemptAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Previous -Name 'next_attempt_at' -Default $null)
+        if ($previousStatus -in @('VERIFIED', 'RETRY_EXHAUSTED', 'MANUAL_REVIEW_REQUIRED')) {
+            $status = $previousStatus
+        }
+        elseif ($previousStatus -eq 'RETRY_SCHEDULED' -and ($null -eq $previousNextAttemptAt -or $previousNextAttemptAt -gt $Now.ToUniversalTime())) {
+            $status = 'RETRY_SCHEDULED'
+        }
     }
 
     [pscustomobject]@{

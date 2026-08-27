@@ -2320,14 +2320,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2345,11 +2345,11 @@
           "redirect_chain": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "36e6b9e7e6ab2a3ff5796d85679cd51950763f62488242ad1fc8f3d0adb44a1c",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://hellabrunn.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2374,14 +2374,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://mvhs.de/ueber-uns/stellenangebote",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2399,11 +2399,11 @@
           "redirect_chain": "https://mvhs.de/ueber-uns/stellenangebote",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "c4773bd8867a378c2d8de6a6682ee7f12a6c34689f531d7d2d8c0e33c921f862",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://mvhs.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2428,14 +2428,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2453,11 +2453,11 @@
           "redirect_chain": "https://muenchner-volkstheater.de/service/jobs-praktika",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "6019b1b8bd74362010f52bcaf27d07b3d44879f9c6617118faf2f19adba917b6",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://muenchner-volkstheater.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2482,14 +2482,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://muenchner-wohnen.de/karriere",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2507,11 +2507,11 @@
           "redirect_chain": "https://muenchner-wohnen.de/karriere",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "8e25cea1a112d311bed49147106d8d652f48469de35f866a38bd437140201076",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://muenchner-wohnen.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2536,14 +2536,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://muenchenstift.de/de/karriere.html",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2561,11 +2561,11 @@
           "redirect_chain": "https://muenchenstift.de/de/karriere.html",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "668b5a0bacb12d58f65494479b9aa76abe3e95f4342c4081849796dcf6b1b54d",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://muenchenstift.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2590,14 +2590,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2615,11 +2615,11 @@
           "redirect_chain": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "f9c9dca36e17cd785686acba66ecdb5d0ac45dc0cdf630217558bcd47f3e24ca",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://mvv-muenchen.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2644,14 +2644,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://olympiapark.de/de/der-olympiapark/karriere",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2669,11 +2669,11 @@
           "redirect_chain": "https://olympiapark.de/de/der-olympiapark/karriere",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "2133a9e955220e7581c1a3f2739ae87b91219558a3d17e467f0d2a6e7e32f2a2",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://olympiapark.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2698,14 +2698,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://parkundride.de/unternehmen/stellenangebote",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2723,11 +2723,11 @@
           "redirect_chain": "https://parkundride.de/unternehmen/stellenangebote",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "ab58a6c185863a5f740e0894200b86a9dfbccb419aa21dd952dfc6503d73e09a",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://parkundride.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2752,14 +2752,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://pasinger-fabrik.de/services/freie-stellen",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2777,11 +2777,11 @@
           "redirect_chain": "https://pasinger-fabrik.de/services/freie-stellen",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "cf175b2f786ecbfc19daa004f9ddc4b870ae27e6f8a44a9cc4ae588e2b3cae8a",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://pasinger-fabrik.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2806,14 +2806,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://stadt.muenchen.de/rathaus/karriere.html",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2831,11 +2831,11 @@
           "redirect_chain": "https://stadt.muenchen.de/rathaus/karriere.html",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "bd18ea01eea55c13239422188b58d512cfa492ed9689fd640207b8812b192109",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://muenchen.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2860,14 +2860,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://spielmotor.de/",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2889,11 +2889,11 @@
           ],
           "evidence_type": "COMPANY_DOMAIN",
           "evidence_text_hash": "4e5c5d911fa3f02783e14c9137da6a0b8ac0d65fca89a34647d9d70a9a92ec93",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://spielmotor.de/",
           "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2918,14 +2918,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://sparkasse.de/karriere.html",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2943,11 +2943,11 @@
           "redirect_chain": "https://sparkasse.de/karriere.html",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "0b82c5a37d2fd5dd53d8af06be121351f7e5fdde027cbda6e40b1f5a05e7f35b",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://sparkasse.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     },
@@ -2972,14 +2972,14 @@
           "target_area": "MUNICH"
         }
       ],
-      "updated_at": "2026-08-27T15:56:20.960Z",
-      "created_at": "2026-08-27T15:56:20.960Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "updated_at": "2026-08-27T15:56:20.96Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
         "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.960Z",
+        "observed_at": "2026-08-27T15:56:20.96Z",
         "verification_url": "https://werk1.com/das-werk1/karriere",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
@@ -2997,11 +2997,11 @@
           "redirect_chain": "https://werk1.com/das-werk1/karriere",
           "evidence_type": "CAREER_URL",
           "evidence_text_hash": "8ed7b4682f01a27eba2ba41541d388be3c3daf15a7766506c86352348f0b1ad1",
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://werk1.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.960Z"
+          "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
     }
@@ -4222,7 +4222,7 @@
       "url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
       "canonical_url": "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4233,7 +4233,7 @@
           "redirect_chain": [
             "https://hellabrunn.de/der-tierpark/muenchener-tierpark-hellabrunn-ag/karriere"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4245,7 +4245,7 @@
       "url": "https://mvhs.de/ueber-uns/stellenangebote",
       "canonical_url": "https://mvhs.de/ueber-uns/stellenangebote",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4256,7 +4256,7 @@
           "redirect_chain": [
             "https://mvhs.de/ueber-uns/stellenangebote"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4268,7 +4268,7 @@
       "url": "https://muenchner-volkstheater.de/service/jobs-praktika",
       "canonical_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4279,7 +4279,7 @@
           "redirect_chain": [
             "https://muenchner-volkstheater.de/service/jobs-praktika"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4291,7 +4291,7 @@
       "url": "https://muenchner-wohnen.de/karriere",
       "canonical_url": "https://muenchner-wohnen.de/karriere",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4302,7 +4302,7 @@
           "redirect_chain": [
             "https://muenchner-wohnen.de/karriere"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4314,7 +4314,7 @@
       "url": "https://muenchenstift.de/de/karriere.html",
       "canonical_url": "https://muenchenstift.de/de/karriere.html",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4325,7 +4325,7 @@
           "redirect_chain": [
             "https://muenchenstift.de/de/karriere.html"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4337,7 +4337,7 @@
       "url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
       "canonical_url": "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4348,7 +4348,7 @@
           "redirect_chain": [
             "https://mvv-muenchen.de/mvv-im-ueberblick/die-gesellschaft/karriere"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4360,7 +4360,7 @@
       "url": "https://olympiapark.de/de/der-olympiapark/karriere",
       "canonical_url": "https://olympiapark.de/de/der-olympiapark/karriere",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4371,7 +4371,7 @@
           "redirect_chain": [
             "https://olympiapark.de/de/der-olympiapark/karriere"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4383,7 +4383,7 @@
       "url": "https://parkundride.de/unternehmen/stellenangebote",
       "canonical_url": "https://parkundride.de/unternehmen/stellenangebote",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4394,7 +4394,7 @@
           "redirect_chain": [
             "https://parkundride.de/unternehmen/stellenangebote"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4406,7 +4406,7 @@
       "url": "https://pasinger-fabrik.de/services/freie-stellen",
       "canonical_url": "https://pasinger-fabrik.de/services/freie-stellen",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4417,7 +4417,7 @@
           "redirect_chain": [
             "https://pasinger-fabrik.de/services/freie-stellen"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4429,7 +4429,7 @@
       "url": "https://stadt.muenchen.de/rathaus/karriere.html",
       "canonical_url": "https://stadt.muenchen.de/rathaus/karriere.html",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4440,7 +4440,7 @@
           "redirect_chain": [
             "https://stadt.muenchen.de/rathaus/karriere.html"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4452,7 +4452,7 @@
       "url": "https://sparkasse.de/karriere.html",
       "canonical_url": "https://sparkasse.de/karriere.html",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4463,7 +4463,7 @@
           "redirect_chain": [
             "https://sparkasse.de/karriere.html"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
@@ -4475,7 +4475,7 @@
       "url": "https://werk1.com/das-werk1/karriere",
       "canonical_url": "https://werk1.com/das-werk1/karriere",
       "is_official": true,
-      "verified_at": "2026-08-27T15:56:20.960Z",
+      "verified_at": "2026-08-27T15:56:20.96Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -4486,7 +4486,7 @@
           "redirect_chain": [
             "https://werk1.com/das-werk1/karriere"
           ],
-          "observed_at": "2026-08-27T15:56:20.960Z",
+          "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

@@ -331,6 +331,11 @@ try {
     Assert-True -Condition ($scriptCompany.verification_status -eq 'CAREER_URL_VERIFIED') -Message 'Candidate-Verifikationsscript aktualisiert Firmenstatus nicht.'
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Candidate-Verifikationsscript erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'
+
+    $secondScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript-Zweitlauf ist fehlgeschlagen: " + ($secondScriptOutput -join "`n"))
+    $secondScriptResult = ($secondScriptOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($secondScriptResult.verification_queue.processed_total -eq 0) -Message 'Candidate-Verifikationsscript darf Retry-Kandidaten vor next_attempt_at nicht erneut verarbeiten.'
 }
 finally {
     if (Test-Path -LiteralPath $projectRoot) {
@@ -454,6 +459,7 @@ finally {
         'website_discovery_script_updates_hint_and_queue',
         'candidate_verification_script_upserts_only_verified_sources',
         'candidate_verification_cluster_queue_retry_and_review',
+        'candidate_verification_retry_schedule_skip_until_due',
         'candidate_verification_decision_report_review_and_reject'
     )
 } | ConvertTo-Json -Depth 4
