@@ -1,83 +1,92 @@
 {
+  "project": "JobAgent",
+  "ts": "2026-08-27T19:23:37.476+02:00",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "repo": "https://github.com/randolph27/JobAgent",
+  "branch": "master",
+  "head_before_commit": "2c5ac935c63a",
+  "upstream": "origin/master",
+  "ahead_behind_before_commit": "0/0",
+  "status": "open",
   "active_id": "TD-0041",
-  "agent_id": "UTTER-20260817-39f7",
+  "roadmap_active_id": "JA-027",
+  "roadmap_rotation": "not-run: JA-027 nicht komplett erledigt",
+  "summary": "JA-027 Website-Discovery-Welle abgeschlossen: 25 Kandidaten verarbeitet, 0 offizielle Website-Treffer, 25 fail-closed in MANUAL_REVIEW_REQUIRED.",
+  "data": {
+    "companies_total": 69,
+    "job_sources_total": 69,
+    "queue_clusters_total": 1786,
+    "queue_candidates_total": 1790,
+    "queue_ready_total": 0,
+    "queue_action_counts": {
+      "DISCOVER_OFFICIAL_WEBSITE": 1740,
+      "VERIFY_OFFICIAL_SITE": 41,
+      "REJECT_DUPLICATE": 4,
+      "MANUAL_DECISION": 1
+    },
+    "sources_total": 1891,
+    "official_sources": 71,
+    "discovery_sources": 1820,
+    "target_inventory_gate_status": "failed"
+  },
   "changed": [
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/company-discovery.hints.json",
-    "data/jobagent/store.json",
     "handoff.latest.json",
     "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json"
   ],
-  "git": {
-    "ahead": 0,
-    "behind": 0,
-    "branch": "master",
-    "has_repo": true,
-    "head_before_commit": "42b9a39913a3",
-    "remote": "origin",
-    "upstream": "origin/master",
-    "worktree": "dirty"
-  },
-  "goal": "JA-027: offizielle Website-/Karriere-Verifikation fuer Arbeitgeberkandidaten fortsetzen.",
-  "next": "Weitere Website-Discovery-Welle ausfuehren, verifizierte Treffer pruefen, Coverage aktualisieren und fokussierte Funktionstests laufen lassen.",
-  "project": "JobAgent",
-  "refs": [
-    "todo.current.md",
-    "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.json",
-    "handoff.latest.md"
+  "artifacts": [
+    "logs/jobagent/company-candidate-website-discovery-20260827-172054.json",
+    "logs/jobagent/company-coverage-20260827-172118.json",
+    "logs/jobagent/company-coverage-20260827-172118.md",
+    "html/jobagent/company-coverage.html",
+    "logs/terminal/route-check-20260827-192214.log"
   ],
-  "route_ok": true,
-  "route_violations": [],
-  "status": "open",
-  "summary": "25 Kandidaten per Website-Discovery verarbeitet, 1 offizieller Website-Treffer verifiziert und Hepatica Technologies GmbH produktiv mit offizieller Karrierequelle aufgenommen.",
-  "ts": "2026-08-27T19:12:22.651+02:00",
   "verified": [
     {
       "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
       "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
-      "exit": 0,
-      "status": "pass"
+      "result": "processed_total=25; verified_total=0; manual_review_total=25"
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
       "exit": 0,
-      "status": "pass"
+      "result": "companies_total=69; sources_total=1891; target_inventory_gate_status=failed"
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
       "exit": 0,
-      "status": "pass"
+      "result": "24 cases passed"
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
       "exit": 0,
-      "status": "pass"
+      "result": "28 cases passed"
     },
     {
       "cmd": ".\\ci.cmd route-check",
       "exit": 0,
-      "status": "pass"
+      "result": "route_ok=True"
     },
     {
       "cmd": ".\\ci.cmd stp",
       "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": "Get-Content -Raw handoff.latest.json | ConvertFrom-Json",
-      "exit": 0,
-      "status": "pass"
+      "result": "Todo/Handoff synchronisiert"
     }
   ],
-  "workspace_root": "D:\\_Scripte\\JobAgent"
+  "next_steps": [
+    "Weitere Website-Discovery-Welle starten: pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
+    "Wenn verified_total > 0: pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
+    "Danach Coverage aktualisieren: pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+    "Danach fokussierte Funktionstests ausfuehren: Test-JobAgentCompanyCandidateVerification.ps1 und Test-JobAgentCoverage.ps1",
+    "JA-027 erst rotieren, wenn alle Kandidaten verarbeitet sind oder jeder offene Rest belastbar begruendet ist."
+  ],
+  "guardrails": [
+    "Offizielle Quellen sind zwingend; Discovery-Hints ersetzen keine primaere Karrierequelle.",
+    "Unsichere Kandidaten bleiben fail-closed in Review/Retry.",
+    "Keine automatische Bewerbung, keine extern wirksame Aktion, keine erfundenen Firmen, URLs oder Job-IDs."
+  ]
 }
