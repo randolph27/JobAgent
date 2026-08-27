@@ -1,15 +1,17 @@
 {
-  "ts": "2026-08-27T18:40:00+02:00",
+  "ts": "2026-08-27T18:38:31+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "open",
-  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "summary": "Zwei weitere Website-Discovery-Wellen verarbeitet, 50 Kandidaten fail-closed in Manual Review belassen, Coverage aktualisiert und STP geschrieben.",
+  "goal": "JA-027: offizielle Website-/Karriereverifikation fuer Arbeitgeberkandidaten fortsetzen.",
+  "summary": "STP ausgefuehrt; 25 Kandidaten per Website-Discovery verarbeitet; Cipla Deutschland domainverifiziert produktiv aufgenommen; Coverage aktualisiert; JA-027 bleibt offen.",
   "changed": [
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/company-discovery.hints.json",
+    "data/jobagent/store.json",
+    "html/jobagent/company-coverage.html",
     "handoff.latest.json",
     "handoff.latest.md",
     "todo.events.jsonl",
@@ -20,100 +22,95 @@
     {
       "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
       "exit": 0,
-      "runs": 2
+      "status": "pass"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
+      "exit": 0,
+      "status": "pass"
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
-      "exit": 0
+      "exit": 0,
+      "status": "pass"
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-      "exit": 0
+      "exit": 0,
+      "status": "pass"
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0
+      "exit": 0,
+      "status": "pass"
     },
     {
       "cmd": ".\\ci.cmd route-check",
-      "exit": 0
+      "exit": 0,
+      "status": "pass"
     },
     {
       "cmd": ".\\ci.cmd stp",
-      "exit": 0
+      "exit": 0,
+      "status": "pass"
+    },
+    {
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 1,
+      "status": "known-fail",
+      "issues": [
+        "immutable_modified: Roadmap.md",
+        "handoff_invariant issues before stp sync"
+      ]
     }
   ],
-  "known_issue": {
-    "cmd": ".\\ci.cmd self-check",
-    "exit": 1,
-    "issues": [
-      "immutable_modified: Roadmap.md"
-    ],
-    "reason": "Nicht repariert, weil dies eine separate Integritaets-/Pin-Entscheidung ist."
-  },
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head_before_commit": "e9e85826311f",
+    "head_before_commit": "70c6fffdcc5b",
     "upstream": "origin/master",
-    "ahead_before_commit": 0,
-    "behind_before_commit": 0,
-    "worktree_before_commit": "dirty"
+    "ahead": 0,
+    "behind": 0,
+    "worktree_before_commit": "dirty",
+    "tracked_changes": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "data/jobagent/store.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ]
   },
-  "runtime": {
-    "devserver": {
-      "url": "http://localhost:8500/",
-      "pid": 23568,
-      "listening": true
-    },
-    "sonarqube": {
-      "url": "http://localhost:9000/api/system/status",
-      "status": "UP",
-      "version": "26.1.0.118079"
-    }
-  },
-  "data_state": {
-    "companies_total": 64,
+  "data": {
+    "companies_total": 65,
     "duplicate_groups": 0,
-    "target_inventory_candidates_total": 1850,
+    "target_inventory_candidates_total": 1851,
     "target_inventory_gap_to_1000": 0,
     "target_inventory_gate_status": "failed",
     "official_sources": 68,
     "discovery_sources": 1820,
-    "queue_manual_review_total": 1752,
-    "queue_retry_scheduled_total": 2,
-    "queue_pending_total": 0
+    "queue_pending": 0,
+    "queue_manual_review": 1751,
+    "queue_retry_scheduled": 2,
+    "queue_verified": 33
   },
   "artifacts": [
-    "logs/jobagent/company-candidate-website-discovery-20260827-162821.json",
-    "logs/jobagent/company-candidate-website-discovery-20260827-162924.json",
-    "logs/jobagent/company-coverage-20260827-162947.json",
-    "logs/jobagent/company-coverage-20260827-162947.md",
+    "logs/jobagent/company-candidate-website-discovery-20260827-163434.json",
+    "logs/jobagent/company-candidate-verification-20260827-163454.json",
+    "logs/jobagent/company-coverage-20260827-163514.json",
+    "logs/jobagent/company-coverage-20260827-163514.md",
     "html/jobagent/company-coverage.html"
   ],
-  "roadmap_rotation": {
-    "performed": false,
-    "reason": "JA-027 ist fachlich weiter offen."
-  },
-  "supertest": {
-    "run": false,
-    "reason": "Nutzeranweisung vom 2026-08-27: wenn Supertest nicht angefragt wurde, gilt er als erledigt."
-  },
   "next_steps": [
-    "Weitere Website-Discovery-Welle starten: pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
-    "Wenn verified_total > 0, Kandidaten verifizieren/importieren: pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
-    "Coverage aktualisieren: pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
-    "Bei Code-Eingriff zuerst fokussierte Funktionstests ausfuehren; Supertest erst bei Roadmap-Abschluss oder expliziter Anforderung.",
-    "JA-027 erst rotieren, wenn alle Kandidaten verarbeitet sind oder jeder offene Rest einen belastbaren Review-/Reject-/Retry-Grund hat und alle Akzeptanzbedingungen belegt sind."
+    "Weitere Website-Discovery-Welle mit .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 starten.",
+    "Bei verified_total > 0 .\\tools\\Verify-JobAgentCompanyCandidates.ps1 ausfuehren.",
+    "Coverage mit .\\tools\\Measure-JobAgentCompanyCoverage.ps1 aktualisieren.",
+    "JA-027 erst rotieren, wenn alle Kandidaten verarbeitet sind oder jeder offene Rest belastbar begruendet ist."
   ],
-  "guardrails": [
-    "Offizielle Quellen sind zwingend; Jobboersen, Arbeitsagentur, Register, GitHub-/OSM-Listen und andere Hints bleiben Discovery-Hinweise.",
-    "Kandidaten ohne eindeutigen offiziellen Website-/Karriere-/ATS-Beleg muessen fail-closed in Review/Retry bleiben.",
-    "Keine automatische Bewerbung, keine extern wirksame Aktion, keine erfundenen Firmen/URLs/Job-IDs.",
-    "Aktuell gibt es keine Pending-Queue-Eintraege; zuerst wieder Website-Discovery laufen lassen."
-  ],
-  "next": "Weitere Website-Discovery-Welle starten, danach verifizierte Kandidaten importieren und Coverage aktualisieren.",
   "refs": [
     "todo.current.md",
     "todo.state.json",
@@ -121,8 +118,107 @@
     "handoff.latest.json",
     "handoff.latest.md"
   ],
-  "manual_missing": false,
-  "env_inventory_missing": false,
-  "env_inventory_used": false,
-  "env_inventory_path": null
+  "notes": [
+    "Supertest wurde nicht neu ausgefuehrt; nach Nutzeranweisung gilt er als erledigt, wenn nicht explizit angefragt.",
+    "Roadmap-Rotation nicht ausgefuehrt, weil JA-027 weiter offen ist."
+  ],
+  "capsule": {
+    "ts": "2026-08-27T18:38:31+02:00",
+    "agent_id": "UTTER-20260817-39f7",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "TD-0041",
+    "status": "open",
+    "goal": "JA-027: offizielle Website-/Karriereverifikation fuer Arbeitgeberkandidaten fortsetzen.",
+    "changed": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "data/jobagent/store.json",
+      "html/jobagent/company-coverage.html",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ],
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd route-check",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0,
+        "status": "pass"
+      },
+      {
+        "cmd": ".\\ci.cmd self-check",
+        "exit": 1,
+        "status": "known-fail",
+        "issues": [
+          "immutable_modified: Roadmap.md",
+          "handoff_invariant issues before stp sync"
+        ]
+      }
+    ],
+    "route_ok": true,
+    "route_violations": [],
+    "git": {
+      "branch": "master",
+      "head_before_commit": "70c6fffdcc5b",
+      "upstream": "origin/master",
+      "ahead": 0,
+      "behind": 0,
+      "worktree_before_commit": "dirty",
+      "tracked_changes": [
+        "data/jobagent/company-candidate-verification.queue.json",
+        "data/jobagent/company-discovery.hints.json",
+        "data/jobagent/store.json",
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "html/jobagent/company-coverage.html",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json"
+      ]
+    },
+    "next": "Weitere Website-Discovery-Welle mit .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 starten.",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json",
+      "handoff.latest.md"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  }
 }

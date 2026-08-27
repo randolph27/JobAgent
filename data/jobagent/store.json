@@ -3004,6 +3004,64 @@
           "expires_at": "2026-11-25T15:56:20.96Z"
         }
       ]
+    },
+    {
+      "company_id": "company:cipla_deutschland",
+      "canonical_name": "Cipla Deutschland",
+      "canonical_domain": "cipla.com",
+      "official_website_url": "https://cipla.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T16:34:54.964Z",
+      "created_at": "2026-08-27T16:34:54.964Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-27T16:34:54.964Z",
+        "verification_url": "https://cipla.com/",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_cipla_deutschland_muenchen",
+          "company_id": "company:cipla_deutschland",
+          "canonical_name": "Cipla Deutschland",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://cipla.com/",
+          "verified_by_url": "https://cipla.com/",
+          "redirect_chain": [
+            "https://cipla.com/",
+            "https://cipla.com/sitemap.xml",
+            "https://cipla.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "observed_at": "2026-08-27T16:34:54.964Z",
+          "http_status": 200,
+          "final_url": "https://cipla.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-11-25T16:34:54.964Z"
+        }
+      ]
     }
   ],
   "jobs": [

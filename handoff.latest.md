@@ -1,46 +1,51 @@
 # Handoff latest
 
-Stand: 2026-08-27T18:40:00+02:00
+Stand: 2026-08-27T18:38:31+02:00
 
 ## Neuer-Chat-Start
 
 - Projektpfad: `D:\_Scripte\JobAgent`
 - Branch: `master`
-- HEAD vor Abschlusscommit: `e9e85826311f`
+- HEAD vor Abschlusscommit: `70c6fffdcc5b`
 - Upstream: `origin/master`
 - Ahead/Behind vor Abschlusscommit: `0/0`
-- Worktree vor Abschlusscommit: `dirty`, nur JA-027-Daten-/Todo-/Handoff-Aenderungen
+- Worktree vor Abschlusscommit: `dirty`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`
-- Roadmap-Rotation: nicht ausgefuehrt, weil JA-027 fachlich weiter offen ist.
-- Supertest: nicht neu ausgefuehrt; Nutzeranweisung vom 2026-08-27: wenn Supertest nicht angefragt wurde, gilt er als erledigt.
-- Devserver: zuletzt geprueft `http://localhost:8500/`, PID `23568`, listening `True`
-- SonarQube: zuletzt geprueft `http://localhost:9000/api/system/status`, Status `UP`, Version `26.1.0.118079`
+- Roadmap-Rotation: nicht ausgefuehrt, weil JA-027 nicht komplett erledigt ist.
+- Supertest: nicht neu ausgefuehrt; nach Nutzeranweisung vom 2026-08-27 gilt Supertest als erledigt, wenn er nicht explizit angefragt wurde.
+- Devserver: `http://localhost:8500/`, PID `23568`, listening `True`
+- SonarQube: `http://localhost:9000/api/system/status`, Status `UP`, Version `26.1.0.118079`
 
 ## Abgeschlossener Arbeitsschritt
 
-- Zwei weitere Website-Discovery-Wellen verarbeitet: `50` Kandidaten.
-- Ergebnis der Wellen: `0` offizielle Websites verifiziert, `50` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
-- Keine produktiven Firmen in `data/jobagent/store.json` importiert.
-- Keine Roadmap-Rotation, weil JA-027 weiterhin offene Review-/Verifikationsarbeit enthaelt.
+- `.\ci.cmd stp` ausgefuehrt.
+- Eine Website-Discovery-Welle verarbeitet: `25` Kandidaten.
+- Ergebnis der Welle: `1` offizielle Website verifiziert, `24` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
+- Verifizierter Kandidat: `regional-hint:munich_business_indian_companies_cipla_deutschland_muenchen`
+- Produktiver Store-Upsert: `company:cipla_deutschland`
+- Verifikationsstatus: `COMPANY_DOMAIN_VERIFIED`
+- Offizielle Website: `https://cipla.com/`
+- Karriere-/ATS-Quelle: keine belegt; Firma wurde ohne JobSource aufgenommen.
 - Coverage erneut erzeugt und `html/jobagent/company-coverage.html` aktualisiert.
-- `.\ci.cmd stp` wurde ausgefuehrt.
 
 ## Datenstand
 
-- Produktive Firmen: `64`
+- Produktive Firmen: `65`
 - Dublettengruppen: `0`
-- `target_inventory_candidates_total`: `1850`
+- `target_inventory_candidates_total`: `1851`
 - `target_inventory_gap_to_1000`: `0`
 - `target_inventory_gate_status`: `failed`, weil JA-027 weiter offene Review-/Verifikationsarbeit enthaelt.
 - Offizielle Quellen: `68`
 - Discovery-Quellen: `1820`
-- Queue: `0` Pending, `1752` Manual Review, `2` Retry geplant.
+- Queue: `0` Pending, `1751` Manual Review, `2` Retry geplant, `33` Verified.
 
 ## Geaenderte Dateien fuer Commit
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
+- `data/jobagent/store.json`
+- `html/jobagent/company-coverage.html`
 - `handoff.latest.json`
 - `handoff.latest.md`
 - `todo.events.jsonl`
@@ -49,21 +54,22 @@ Stand: 2026-08-27T18:40:00+02:00
 
 ## Artefakte
 
-- `logs/jobagent/company-candidate-website-discovery-20260827-162821.json`
-- `logs/jobagent/company-candidate-website-discovery-20260827-162924.json`
-- `logs/jobagent/company-coverage-20260827-162947.json`
-- `logs/jobagent/company-coverage-20260827-162947.md`
+- `logs/jobagent/company-candidate-website-discovery-20260827-163434.json`
+- `logs/jobagent/company-candidate-verification-20260827-163454.json`
+- `logs/jobagent/company-coverage-20260827-163514.json`
+- `logs/jobagent/company-coverage-20260827-163514.md`
 - `html/jobagent/company-coverage.html`
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0` (2 Laeufe)
+- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
 - `.\ci.cmd route-check` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
-- `.\ci.cmd self-check` -> Exit `1`, einzig verbleibende Issue: `immutable_modified: Roadmap.md`. Das wurde nicht repariert, weil es eine separate Integritaets-/Pin-Entscheidung ist.
+- `.\ci.cmd self-check` -> Exit `1`, Issues: `immutable_modified: Roadmap.md` plus Handoff-Invarianten vor STP-Sync. Nicht repariert, weil das eine separate Integritaets-/Pin-Entscheidung ist.
 
 ## Naechste Aufgaben
 
