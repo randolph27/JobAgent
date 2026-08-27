@@ -27,6 +27,8 @@ function New-TestCandidate {
         [Parameter(Mandatory)][string]$Name,
         [Parameter()][AllowNull()][string]$KnownCompanyId = $null,
         [Parameter()][AllowNull()][string]$KnownDomain = $null,
+        [Parameter()][AllowNull()][string]$OfficialWebsiteUrl = $null,
+        [Parameter()][bool]$OfficialWebsiteVerified = $false,
         [Parameter()][string]$TargetArea = 'MUNICH',
         [Parameter()][bool]$Staffing = $false
     )
@@ -48,6 +50,8 @@ function New-TestCandidate {
         is_staffing_agency = $Staffing
         official_verification_required = $true
         next_action = 'verify_official_company_website_or_career_url'
+        official_website_url = $OfficialWebsiteUrl
+        official_website_verification_status = if ($OfficialWebsiteVerified) { 'COMPANY_DOMAIN_VERIFIED' } else { 'UNVERIFIED' }
     }
 }
 
@@ -144,6 +148,31 @@ Assert-True -Condition (@($wrongDomainVerification.review_reasons | Where-Object
 $missingDomain = Resolve-JobAgentCompanyCandidateVerification -Candidate (New-TestCandidate -Id 'hint:no-domain' -Name 'No Domain GmbH') -ExistingCompanies @() -Policy $policy -ObservedAt $observedAt
 Assert-True -Condition ($missingDomain.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Kandidat ohne offiziellen Domainhinweis muss in Manual Review.'
 Assert-True -Condition (@($missingDomain.review_reasons | Where-Object { $_ -eq 'OFFICIAL_COMPANY_DOMAIN_MISSING' }).Count -eq 1) -Message 'Manual-Review-Grund fuer fehlende Domain fehlt.'
+
+$verifiedWebsiteCandidate = New-TestCandidate -Id 'hint:verified-website' -Name 'Verified Website AG' -OfficialWebsiteUrl 'https://www.verified.example.invalid/' -OfficialWebsiteVerified $true
+$verifiedWebsiteFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    switch ($Url) {
+        'https://verified.example.invalid/' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/jobs">Jobs</a></html>'; break }
+        'https://verified.example.invalid/sitemap.xml' { New-FetchResult -Url $Url -Ok $true -Content '<urlset></urlset>'; break }
+        'https://verified.example.invalid/sitemap_index.xml' { New-FetchResult -Url $Url -Ok $true -Content '<sitemapindex></sitemapindex>'; break }
+        'https://verified.example.invalid/jobs' { New-FetchResult -Url $Url -Ok $true -Content '<main>Offene Stellen</main>'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404; break }
+    }
+}
+$verifiedWebsiteResult = Resolve-JobAgentCompanyCandidateVerification -Candidate $verifiedWebsiteCandidate -ExistingCompanies @() -Policy $policy -Fetcher $verifiedWebsiteFetcher -ObservedAt $observedAt
+Assert-True -Condition ($verifiedWebsiteResult.status -eq 'CAREER_URL_VERIFIED') -Message 'Verifizierte offizielle Website-URL ohne known_company_domain wird nicht genutzt.'
+Assert-True -Condition ($verifiedWebsiteResult.company.canonical_domain -eq 'verified.example.invalid') -Message 'Domain-Ermittlung normalisiert die verifizierte Website falsch.'
+
+$unverifiedWebsiteCandidate = New-TestCandidate -Id 'hint:unverified-website' -Name 'Unverified Website AG' -OfficialWebsiteUrl 'https://www.unverified.example.invalid/' -OfficialWebsiteVerified $false
+$unverifiedWebsiteResult = Resolve-JobAgentCompanyCandidateVerification -Candidate $unverifiedWebsiteCandidate -ExistingCompanies @() -Policy $policy -Fetcher $verifiedWebsiteFetcher -ObservedAt $observedAt
+Assert-True -Condition ($unverifiedWebsiteResult.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Unbelegte official_website_url darf keine automatische Domain-Ermittlung ausloesen.'
+Assert-True -Condition (@($unverifiedWebsiteResult.review_reasons | Where-Object { $_ -eq 'OFFICIAL_COMPANY_DOMAIN_MISSING' }).Count -eq 1) -Message 'Unbelegte official_website_url muss fail-closed bleiben.'
+
+$invalidWebsiteCandidate = New-TestCandidate -Id 'hint:invalid-website' -Name 'Invalid Website AG' -OfficialWebsiteUrl 'not-a-url' -OfficialWebsiteVerified $true
+$invalidWebsiteResult = Resolve-JobAgentCompanyCandidateVerification -Candidate $invalidWebsiteCandidate -ExistingCompanies @() -Policy $policy -Fetcher $verifiedWebsiteFetcher -ObservedAt $observedAt
+Assert-True -Condition ($invalidWebsiteResult.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Ungueltige official_website_url muss fail-closed bleiben.'
 
 $timeoutFetcher = {
     param([string]$Url, [object]$Policy)
@@ -246,6 +275,9 @@ finally {
         'candidate_company_domain_verified',
         'candidate_wrong_domain_manual_review',
         'candidate_missing_domain_manual_review',
+        'candidate_verified_official_website_url_domain_discovery',
+        'candidate_unverified_official_website_url_rejected',
+        'candidate_invalid_official_website_url_rejected',
         'candidate_timeout_unverified',
         'candidate_404_unverified',
         'candidate_js_only_domain_only',

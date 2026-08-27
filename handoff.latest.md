@@ -1,82 +1,37 @@
 # Handoff latest
 
-Stand: 2026-08-27T07:10:22.973+02:00
+Stand: 2026-08-27T07:18:55.051+02:00
 
 ## Aktiver Roadmap-/Todo-Stand
 
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`.
-- Offenes Todo: `TD-0041`.
-- Der Roadmap-Punkt ist nicht komplett erledigt und wurde deshalb nicht nach `Roadmap_archive.md` rotiert.
-- Supertest gilt gemaess Nutzeranweisung als erledigt, auch wenn in dieser Arbeitswelle nur funktionsbezogene Tests ausgefuehrt wurden.
+- Offenes Todo: `TD-0041`; `todo.state.json.active_id` ist aktuell `null`, `todo.current.md` listet `TD-0041` als `open`.
+- JA-027 ist nicht komplett erledigt und wurde deshalb nicht nach `Roadmap_archive.md` rotiert.
+- Supertest gilt gemaess Nutzeranweisung als erledigt; in dieser Arbeitswelle wurden nur funktionsbezogene Tests ausgefuehrt.
 
 ## Umgesetzter Arbeitsschritt
 
-- `tools/Verify-JobAgentCompanyCandidates.ps1` nutzt fuer Verifikationswellen jetzt die angereicherte Coverage-Review-Queue aus `New-JobAgentCoverageCandidateReviewQueue`.
-- Die Verifikationswelle priorisiert Kandidaten mit verwertbarer offizieller Domain bzw. bestehendem Company-Bezug vor reinen Namenshinweisen.
-- Queue-Felder wie `next_action`, `reason_codes`, `source_evidence`, `dedupe_context`, `freshness_status` und `risk_level` bleiben beim Update erhalten.
-- Produktive Firmen-Upserts ueberschreiben vorhandene `career_url` nicht mehr blind, wenn bereits eine gepflegte Karriere-URL vorhanden ist.
-- `src/JobAgent.SourceVerification.psm1` prueft Karriere-Link-Treffer strenger: Suchmuster muessen als Token statt als beliebiger Substring passen, und offizielle Firmenlinks werden nur als Karriere-Kandidaten akzeptiert, wenn auch Host/Pfad einen Karrierebezug enthaelt.
-- `tests/Test-JobAgentSourceVerification.ps1` enthaelt neue Assertions fuer diese False-Positive-Faelle.
-
-## Produktiver Datenstand nach der Welle
-
-- Kandidatenqueue: `data/jobagent/company-candidate-verification.queue.json`
-  - `clusters_total`: 1788
-  - `candidates_total`: 1790
-  - `VERIFIED`: 5
-  - `MANUAL_REVIEW_REQUIRED`: 3
-  - `PENDING`: 1780
-- Store: `data/jobagent/store.json`
-  - Firmen gesamt: 38
-  - JobSources gesamt: 43
-  - Keine ungeprueften Register-/Regional-/OSM-Hints wurden produktiv in Firmen oder JobSources uebernommen.
-
-## Live-Verifikationswelle
-
-Command:
-
-```powershell
-pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 9 -TimeoutSeconds 8 -MaxRetries 3
-```
-
-Ergebnis:
-
-- `processed_total`: 9
-- `productive_upsert_allowed_total`: 5
-- `manual_review_total`: 4
-- `fail_closed_reject_total`: 0
-- Log: `logs/jobagent/company-candidate-verification-20260827-050812.json`
-
-Produktiv verifiziert:
-
-- `jobboard-hint:ba_jobsuche_flughafen_muenchen_it_operations_muenchen` -> `company:flughafen_muenchen_gmbh`, `CAREER_URL_VERIFIED`, Beleg `https://munich-airport.com/careers-15404919`
-- `jobboard-hint:stepstone_muenchen_rohde_and_schwarz_it_operations_muenchen` -> `company:rohde_and_schwarz_gmbh_and_co_kg`, `CAREER_URL_VERIFIED`, Beleg `https://rohde-schwarz.com/de/karriere/stellenangebote/karriere-stellenangebote_251573.html`
-- `jobboard-hint:stepstone_muenchen_siemens_it_operations_muenchen` -> `company:siemens_ag`, `CAREER_URL_VERIFIED`, Beleg `https://siemens.com/en-us/company/jobs`
-- `jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen` -> `company:stadtwerke_muenchen_gmbh`, `CAREER_URL_VERIFIED`, Beleg `https://swm.de/karriere/jobboerse?id=31526&stellenanzeige=Ingenieur*in-fuer-die-E/MSR-und-Leittechnik-fuer-Anlagen-der-Tiefen-Geothermie-(m/w/d)`
-- `hint:indeed_de_cancom_director_it_muenchen` -> `company:cancom_se`, `CAREER_URL_VERIFIED`, Beleg `https://karriere.cancom.de/`
-
-Fail-closed in Manual Review:
-
-- `register-hint:offeneregister_sample_2026_08_alpha_technik_gmbh_muenchen_1`
-- `regional-hint:stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen`
-- `regional-hint:stadt_freising_weihenstephan_bayerische_landesanstalt_fuer_landwirtschaft_freising_weihenstephan`
-- `regional-hint:stadt_freising_weihenstephan_bayerische_landesanstalt_fuer_wald_und_forstwirtschaft_freising_weihenstephan`
-
-Grund jeweils: `OFFICIAL_COMPANY_DOMAIN_MISSING`.
+- `src/JobAgent.SourceVerification.psm1` akzeptiert fuer Kandidaten ohne `known_company_domain` jetzt eine verifizierte `official_website_url` beziehungsweise `verified_official_website_url` als Domain-Ermittlungsbasis.
+- Die neue Domain-Ermittlung ist fail-closed: unbelegte Website-URLs, ungueltige URLs und Aggregator-URLs erzeugen keine automatische Firmenstub-Erstellung.
+- Verifizierte Website-URLs werden kanonisiert, `www.` wird entfernt, und `canonical_domain` wird aus dem finalen Website-Host abgeleitet.
+- Bestehende Kandidaten mit `known_company_domain` behalten den bisherigen Pfad.
+- `tests/Test-JobAgentCompanyCandidateVerification.ps1` deckt jetzt ab:
+  - verifizierte offizielle Website ohne `known_company_domain` wird zur Karriere-/Domainverifikation genutzt;
+  - unbelegte `official_website_url` bleibt `MANUAL_REVIEW_REQUIRED`;
+  - ungueltige `official_website_url` bleibt `MANUAL_REVIEW_REQUIRED`;
+  - bestehende Karriere-, ATS-, Domain-only-, Timeout-, 404-, JS-only- und Aggregator-Faelle bleiben stabil.
 
 ## Aktualisierte Artefakte
 
-- `data/jobagent/store.json`
+- `src/JobAgent.SourceVerification.psm1`
+- `tests/Test-JobAgentCompanyCandidateVerification.ps1`
 - `data/jobagent/company-candidate-verification.queue.json`
 - `html/jobagent/company-coverage.html`
-- `logs/jobagent/company-candidate-verification-20260827-050812.json`
-- `logs/jobagent/company-coverage-20260827-050834.json`
-- `logs/jobagent/company-coverage-20260827-050834.md`
-- `todo.checkpoint.json`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
+- `handoff.latest.json`
+- `handoff.latest.md`
 
 ## Validierung
 
@@ -86,31 +41,59 @@ Ausgefuehrt und erfolgreich:
 pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1
-pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250
 .\ci.cmd stp
 ```
 
-SonarQube: `curl.exe -sS http://localhost:9000/api/system/status` war erfolgreich, Status `UP`.
+SonarQube-Status vor der Arbeitswelle: `http://localhost:9000/api/system/status` lieferte `UP`.
 
-Devserver: `.\ci.cmd devserver-status` war erfolgreich, URL `http://localhost:8500/`.
+Devserver-Status vor der Arbeitswelle: `.\ci.cmd devserver-status` meldete `http://localhost:8500/` als listening.
 
-## Bekannte Risiken
+## Produktiver Datenstand
 
-- Die Live-Verifikationslogik ist heuristisch. Sie prueft offizielle Domain, Linkbezug und HTTP-Erreichbarkeit, ersetzt aber keine menschliche Fachpruefung bei unklarer Marken-/Konzernstruktur.
-- Viele Kandidaten aus Register-, Regional- und OSM-Quellen haben aktuell keinen offiziellen Domain-Hinweis und muessen fail-closed bleiben, bis eine belastbare Website-Ermittlung implementiert ist.
-- `self-check` meldete vor dieser Arbeitswelle noch historische Handoff-/Immutable-Invarianten; `stp` wurde erfolgreich ausgefuehrt, aber ein neuer Agent sollte bei Bedarf `.\ci.cmd self-check` erneut ausfuehren und die verbleibenden Invarianten gezielt pruefen.
+- Die Queue zaehlt weiterhin 1788 Cluster und 1790 Kandidaten.
+- Statusverteilung nach der Arbeitswelle:
+  - `VERIFIED`: 5
+  - `MANUAL_REVIEW_REQUIRED`: 3
+  - `PENDING`: 1780
+- Es wurde keine neue Live-Verifikationswelle gegen echte Websites ausgefuehrt.
+- Es wurden keine weiteren Firmen produktiv in `data/jobagent/store.json` uebernommen.
 
 ## Naechste konkrete Aufgaben
 
-1. Fuer JA-027 eine Domain-Ermittlungsstufe fuer Kandidaten ohne `known_company_domain` bauen: Quelle `data/jobagent/company-candidate-verification.queue.json`; Ziel offizielle Website-Kandidaten mit Impressum-/Namens-/Standortbezug; fail-closed kein produktiver Upsert ohne offiziellen Beleg.
-2. Danach eine weitere kleine Verifikationswelle ausfuehren: Start mit `MaxCandidates 10-25`, nicht direkt alle 1788 Cluster live pruefen; Ergebnisse in `logs/jobagent/company-candidate-verification-*.json` pruefen.
-3. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250`; `html/jobagent/company-coverage.html` auf sichtbare Review-/Verified-Zahlen pruefen.
-4. Funktionstests ausfuehren: `pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1`.
-5. JA-027 erst abschliessen und rotieren, wenn alle Akzeptanzbedingungen aus `Roadmap.md` belegt sind: offizielle Website-/Karriere-/ATS-Evidenz pro produktiv hinzugefuegter Firma, nicht uebernommene Kandidaten mit Review-/Reject-Grund, Coverage-/Report-Artefakte aktualisiert, Funktions- und Abschluss-Gates gruen.
+1. Domain-Ermittlungsstufe fuer Kandidaten ohne Domain weiter ausbauen: Kandidaten mit vorhandener, aber noch unbelegter Website-Quelle muessen zuerst offizielle Website-Evidenz erhalten, bevor `official_website_url` fuer den Upsert genutzt wird.
+2. Quellen fuer die Website-Evidenz definieren und testen: zulaessig sind nur belegte offizielle Firmenwebsite-/Impressum-/Namens-/Standortsignale; Jobboersen, Register und regionale Verzeichnisse bleiben Discovery-Hints, keine Primaerbelege.
+3. Danach kleine Verifikationswelle starten, nicht alle Kandidaten auf einmal:
+
+```powershell
+pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 10 -TimeoutSeconds 8 -MaxRetries 3
+```
+
+4. Ergebnislog unter `logs/jobagent/company-candidate-verification-*.json` pruefen: produktive Upserts nur bei `COMPANY_DOMAIN_VERIFIED`, `CAREER_URL_VERIFIED` oder `OFFICIAL_ATS_VERIFIED`; unklare Faelle muessen `MANUAL_REVIEW_REQUIRED`, `RETRY_SCHEDULED` oder `RETRY_EXHAUSTED` bleiben.
+5. Coverage aktualisieren:
+
+```powershell
+pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250
+```
+
+6. Funktionsbezogene Tests erneut ausfuehren:
+
+```powershell
+pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1
+```
+
+7. JA-027 erst abschliessen und rotieren, wenn alle Akzeptanzbedingungen aus `Roadmap.md` belegt sind: offizielle Website-/Karriere-/ATS-Evidenz pro produktiv hinzugefuegter Firma, nicht uebernommene Kandidaten mit Review-/Reject-Grund, Coverage-/Report-Artefakte aktualisiert und Abschluss-Gates gruen.
+
+## Bekannte Risiken
+
+- Die neue Website-URL-Nutzung setzt voraus, dass vorgelagerte Ermittlung die Website wirklich als offiziell belegt. Ohne diese Evidenz bleibt der Pfad absichtlich gesperrt.
+- Viele Kandidaten besitzen weiterhin keinen belastbaren Domain- oder Website-Hinweis und bleiben fail-closed.
+- Die Coverage-Testausfuehrung hat Zeitstempel in `data/jobagent/company-candidate-verification.queue.json` und `html/jobagent/company-coverage.html` aktualisiert.
 
 ## Git-Anker vor Commit
 
 - Branch: `master`
-- HEAD vor Commit: `ae7dfe9aa382`
+- HEAD vor Commit: `4d49d553fa5d`
 - Upstream: `origin/master`
 - Ahead/Behind vor Commit: `0/0`

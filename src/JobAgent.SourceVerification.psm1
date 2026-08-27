@@ -384,6 +384,63 @@ function Get-JobAgentCandidateTextProperty {
     return $Default
 }
 
+function Test-JobAgentCandidateOfficialWebsiteEvidence {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate
+    )
+
+    foreach ($property in @('official_website_verification_status', 'company_domain_verification_status')) {
+        $status = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @($property)
+        if (@('VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_WEBSITE_VERIFIED') -contains $status) {
+            return $true
+        }
+    }
+
+    $evidenceItems = if ($Candidate.PSObject.Properties.Name -contains 'official_website_evidence') { @($Candidate.official_website_evidence) } else { @() }
+    foreach ($evidence in $evidenceItems) {
+        if ($null -eq $evidence) {
+            continue
+        }
+        $status = Get-JobAgentCandidateTextProperty -Object $evidence -Names @('status', 'verification_status')
+        $type = Get-JobAgentCandidateTextProperty -Object $evidence -Names @('evidence_type', 'type')
+        if (@('VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_WEBSITE_VERIFIED') -contains $status -and @('OFFICIAL_WEBSITE', 'COMPANY_DOMAIN', 'IMPRESSUM_DOMAIN_MATCH') -contains $type) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
+function Get-JobAgentCandidateOfficialWebsiteUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Candidate
+    )
+
+    $domain = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('known_company_domain', 'canonical_domain')
+    if (-not [string]::IsNullOrWhiteSpace($domain)) {
+        $canonicalDomain = $domain.Trim().ToLowerInvariant() -replace '^www\.', ''
+        return 'https://' + $canonicalDomain + '/'
+    }
+
+    $websiteUrl = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('official_website_url', 'verified_official_website_url')
+    if ([string]::IsNullOrWhiteSpace($websiteUrl)) {
+        return $null
+    }
+    if (-not [Uri]::IsWellFormedUriString($websiteUrl, [UriKind]::Absolute)) {
+        return $null
+    }
+    if (-not (Test-JobAgentCandidateOfficialWebsiteEvidence -Candidate $Candidate)) {
+        return $null
+    }
+    if (Test-JobAgentAggregatorUrl -Url $websiteUrl) {
+        return $null
+    }
+
+    return ConvertTo-JobAgentCanonicalUrl -Url $websiteUrl
+}
+
 function ConvertTo-JobAgentCandidateCompanyStub {
     [CmdletBinding()]
     param(
@@ -399,18 +456,18 @@ function ConvertTo-JobAgentCandidateCompanyStub {
         }
     }
 
-    $domain = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('known_company_domain', 'canonical_domain')
-    if ([string]::IsNullOrWhiteSpace($domain)) {
+    $officialWebsiteUrl = Get-JobAgentCandidateOfficialWebsiteUrl -Candidate $Candidate
+    if ([string]::IsNullOrWhiteSpace($officialWebsiteUrl)) {
         return $null
     }
 
-    $name = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('employer_name', 'company_name', 'register_name', 'canonical_name') -Default $domain
-    $canonicalDomain = $domain.ToLowerInvariant() -replace '^www\.', ''
+    $name = Get-JobAgentCandidateTextProperty -Object $Candidate -Names @('employer_name', 'company_name', 'register_name', 'canonical_name') -Default (Get-JobAgentUrlHost -Url $officialWebsiteUrl)
+    $canonicalDomain = Get-JobAgentUrlHost -Url $officialWebsiteUrl
     [pscustomobject]@{
         company_id = if ([string]::IsNullOrWhiteSpace($knownCompanyId)) { 'company:' + (ConvertTo-JobAgentSourceSlug -Value $name) } else { $knownCompanyId }
         canonical_name = $name
         canonical_domain = $canonicalDomain
-        official_website_url = 'https://' + $canonicalDomain + '/'
+        official_website_url = $officialWebsiteUrl
         career_url = $null
         aliases = @()
         locations = @()
