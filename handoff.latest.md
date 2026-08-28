@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T07:47:11.322+02:00
+Stand: 2026-08-28T07:52:20.891+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,7 +8,7 @@ Stand: 2026-08-28T07:47:11.322+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit: `a023ace513b5`
+- HEAD vor Commit: `5a4468f9a398`
 - Ahead/Behind vor Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
@@ -20,12 +20,11 @@ Stand: 2026-08-28T07:47:11.322+02:00
 ## Letzter abgeschlossener Arbeitsschritt
 
 - Eine weitere Website-Discovery-Welle fuer JA-027 verarbeitet: `25` Kandidaten.
-- Ergebnis der Discovery-Welle: `1` offizieller Website-Treffer, `24` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
-- Website-verifizierter Kandidat:
-  - `regional-hint:munich_business_japanese_companies_yamaichi_electronics_deutschland_gmbh_muenchen` -> offizielle Website `https://yamaichi.de/`
-- Kandidatenverifikation danach ausgefuehrt: `1` Kandidat.
-- Produktiv hinzugefuegte Firma in diesem Schritt: `Yamaichi Electronics Deutschland GmbH`, `company:yamaichi_electronics_deutschland_gmbh`, Karriere-URL `https://yamaichi.de/career`, Status `CAREER_URL_VERIFIED`.
-- Store wurde aktualisiert und Coverage neu erzeugt.
+- Ergebnis der Discovery-Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
+- Grund fuer alle 25 Kandidaten dieser Welle: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
+- Es wurde kein Kandidat produktiv in `data/jobagent/store.json` uebernommen.
+- Store blieb fachlich unveraendert; Queue und Hint-Status wurden aktualisiert.
+- Coverage wurde neu erzeugt.
 - `.\ci.cmd stp` wurde ausgefuehrt; Todo/Handoff sind synchronisiert.
 
 ## Datenstand nach Coverage
@@ -35,11 +34,6 @@ Stand: 2026-08-28T07:47:11.322+02:00
 - Candidate-Hints: `1790`
 - Kandidatenqueue: `1785` Cluster
 - Queue ready: `0`
-- Queue processed in letzter Verifikation: `1`
-- Queue verified total: `53`
-- Queue manual review total: `1724`
-- Queue retry scheduled: `8`
-- Queue retry exhausted: `0`
 - Target-Inventory-Kandidaten: `1870`
 - Source Inventory: `1904` Quellen, davon `84` offizielle Quellen und `1820` Discovery-Quellen
 - Target-Inventory-Gate: `failed`
@@ -50,29 +44,25 @@ Stand: 2026-08-28T07:47:11.322+02:00
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
-- `data/jobagent/store.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `html/jobagent/company-coverage.html`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
 ## Artefakte
 
-- `logs/jobagent/company-candidate-website-discovery-20260828-054315.json`
-- `logs/jobagent/company-candidate-verification-20260828-054333.json`
-- `logs/jobagent/company-coverage-20260828-054346.json`
-- `logs/jobagent/company-coverage-20260828-054346.md`
+- `logs/jobagent/company-candidate-website-discovery-20260828-055028.json`
+- `logs/jobagent/company-coverage-20260828-055048.json`
+- `logs/jobagent/company-coverage-20260828-055048.md`
 - `html/jobagent/company-coverage.html`
-- `logs/terminal/route-check-20260828-074459.log`
+- `logs/terminal/route-check-20260828-075139.log`
 
 ## Verifikation
 
 - `curl.exe -s http://localhost:9000/api/system/status` -> Exit `0`; Status `UP`
 - `.\ci.cmd devserver-status` -> Exit `0`; Port `8500` listening `True`
-- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 1 offizieller Website-Treffer; 24 Manual Review
-- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`; 1 Kandidat verarbeitet; 1 produktiver Upsert erlaubt
+- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 0 offizielle Website-Treffer; 25 Manual Review
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=85; target_inventory_gate_status=failed
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`; 24 Faelle bestanden
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`; 28 Faelle bestanden
