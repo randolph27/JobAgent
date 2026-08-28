@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T07:21:22.632+02:00
+Stand: 2026-08-28T07:41:38.654+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,11 +8,12 @@ Stand: 2026-08-28T07:21:22.632+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit: `b659118b775c`
+- HEAD vor Commit: `6aa35bdf31cf`
+- Ahead/Behind vor Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausfuehren; JA-027 ist noch nicht komplett erledigt.
-- Supertest: nicht neu angefragt; gemaess Nutzeranweisung gilt er als erledigt.
+- Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
 - Devserver: `http://localhost:8500/`, zuletzt `listening=True`
 - SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
 
@@ -21,25 +22,26 @@ Stand: 2026-08-28T07:21:22.632+02:00
 - Eine weitere Website-Discovery-Welle fuer JA-027 verarbeitet: `25` Kandidaten.
 - Ergebnis der Discovery-Welle: `1` offizieller Website-Treffer, `24` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
 - Website-verifizierter Kandidat:
-  - `regional-hint:munich_business_indian_companies_tech_mahindra_muenchen` -> offizielle Website `https://techmahindra.com/`
+  - `regional-hint:munich_business_indian_companies_wipro_limited_muenchen` -> offizielle Website `https://wipro.com/`
 - Kandidatenverifikation danach ausgefuehrt: `1` Kandidat.
-- Produktiv hinzugefuegte Firma in diesem Schritt: `Tech Mahindra`, `company:tech_mahindra`, Karriere-URL `https://techmahindra.com/careers`, Status `CAREER_URL_VERIFIED`.
-- Store wurde aktualisiert und mit Backup geschrieben.
+- Produktiv hinzugefuegte Firma in diesem Schritt: `Wipro Limited`, `company:wipro_limited`, Karriere-URL `https://careers.wipro.com/`, Status `CAREER_URL_VERIFIED`.
+- Store wurde aktualisiert und Coverage neu erzeugt.
+- `.\ci.cmd stp` wurde ausgefuehrt; Todo/Handoff sind synchronisiert.
 
 ## Datenstand nach Coverage
 
-- Produktive Firmen: `83`
-- Backlog-Items: `83`
+- Produktive Firmen: `84`
+- Backlog-Items: `84`
 - Candidate-Hints: `1790`
 - Kandidatenqueue: `1785` Cluster
 - Queue ready: `0`
 - Queue processed in letzter Verifikation: `1`
-- Queue verified total: `51`
-- Queue manual review total: `1726`
+- Queue verified total: `52`
+- Queue manual review total: `1725`
 - Queue retry scheduled: `8`
 - Queue retry exhausted: `0`
-- Target-Inventory-Kandidaten: `1868`
-- Source Inventory: `1902` Quellen, davon `82` offizielle Quellen und `1820` Discovery-Quellen
+- Target-Inventory-Kandidaten: `1869`
+- Source Inventory: `1903` Quellen, davon `83` offizielle Quellen und `1820` Discovery-Quellen
 - Target-Inventory-Gate: `failed`
 - Duplicate Groups: `0`
 - Import Waves: `4`
@@ -58,12 +60,12 @@ Stand: 2026-08-28T07:21:22.632+02:00
 
 ## Artefakte
 
-- `logs/jobagent/company-candidate-website-discovery-20260828-051854.json`
-- `logs/jobagent/company-candidate-verification-20260828-051917.json`
-- `logs/jobagent/company-coverage-20260828-051933.json`
-- `logs/jobagent/company-coverage-20260828-051933.md`
+- `logs/jobagent/company-candidate-website-discovery-20260828-053752.json`
+- `logs/jobagent/company-candidate-verification-20260828-053815.json`
+- `logs/jobagent/company-coverage-20260828-053830.json`
+- `logs/jobagent/company-coverage-20260828-053830.md`
 - `html/jobagent/company-coverage.html`
-- `logs/terminal/route-check-20260828-072048.log`
+- `logs/terminal/route-check-20260828-074112.log`
 
 ## Verifikation
 
@@ -71,7 +73,7 @@ Stand: 2026-08-28T07:21:22.632+02:00
 - `.\ci.cmd devserver-status` -> Exit `0`; Port `8500` listening `True`
 - `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 1 offizieller Website-Treffer; 24 Manual Review
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`; 1 Kandidat verarbeitet; 1 produktiver Upsert erlaubt
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=83; target_inventory_gate_status=failed
+- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=84; target_inventory_gate_status=failed
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`; 24 Faelle bestanden
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`; 28 Faelle bestanden
 - `.\ci.cmd route-check` -> Exit `0`; route_ok=True

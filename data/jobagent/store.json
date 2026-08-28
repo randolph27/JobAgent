@@ -4020,7 +4020,7 @@
       ],
       "updated_at": "2026-08-28T05:19:17.814Z",
       "created_at": "2026-08-28T05:19:17.814Z",
-      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "next_scan_at": "2026-08-29T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -4048,6 +4048,60 @@
           "final_url": "https://techmahindra.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-26T05:19:17.814Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:wipro_limited",
+      "canonical_name": "Wipro Limited",
+      "canonical_domain": "wipro.com",
+      "official_website_url": "https://wipro.com/",
+      "career_url": "https://careers.wipro.com/",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-28T05:38:15.911Z",
+      "created_at": "2026-08-28T05:38:15.911Z",
+      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-28T05:38:15.911Z",
+        "verification_url": "https://careers.wipro.com/",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_wipro_limited_muenchen",
+          "company_id": "company:wipro_limited",
+          "canonical_name": "Wipro Limited",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://careers.wipro.com/",
+          "verified_by_url": "https://wipro.com/",
+          "redirect_chain": "https://careers.wipro.com/",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "1177e8846f5b170d301c1b1a9091bc3d4ac4ecf2422d6b8b03d4cf6d193c4482",
+          "observed_at": "2026-08-28T05:38:15.911Z",
+          "http_status": 200,
+          "final_url": "https://wipro.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-26T05:38:15.911Z"
         }
       ]
     }
@@ -5855,6 +5909,29 @@
             "https://techmahindra.com/careers"
           ],
           "observed_at": "2026-08-28T05:19:17.814Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:wipro_limited_career_url",
+      "company_id": "company:wipro_limited",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.wipro.com/",
+      "canonical_url": "https://careers.wipro.com/",
+      "is_official": true,
+      "verified_at": "2026-08-28T05:38:15.911Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.wipro.com/",
+          "basis_url": "https://wipro.com/",
+          "redirect_chain": [
+            "https://careers.wipro.com/"
+          ],
+          "observed_at": "2026-08-28T05:38:15.911Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
