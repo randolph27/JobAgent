@@ -593,14 +593,16 @@
     },
     {
       "company_id": "company:man_truck_and_bus_se",
-      "canonical_name": "MAN Truck & Bus SE",
+      "canonical_name": "MAN Truck and Bus SE",
       "canonical_domain": "man.eu",
       "official_website_url": "https://www.man.eu/",
-      "career_url": "https://jobs.man.eu/",
+      "career_url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
       "aliases": [
         "MAN",
+        "MAN Truck & Bus",
         "MAN Truck & Bus SE",
-        "MAN Truck and Bus"
+        "MAN Truck and Bus",
+        "MAN Truck and Bus SE"
       ],
       "locations": [
         {
@@ -619,16 +621,16 @@
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://jobs.man.eu/",
-        "observed_at": "2026-08-17T16:02:19.059Z",
-        "verification_url": "https://jobs.man.eu/",
-        "discovery_origin": "official.manual.2026-08-17",
+        "url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
         "target_area": "MUNICH",
         "industry_hint": "Automotive",
-        "evidence_note": "Offizielle MAN-Jobboerse als Primaerquelle gepflegt."
+        "evidence_note": "Klimapakt-3-Hinweis nennt MAN Truck and Bus; die offizielle MAN-Domain enthaelt die Karriereseite."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-17T16:02:19.059Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
       "last_successful_scan_at": null
     },
     {
@@ -947,7 +949,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "next_scan_at": "2026-08-29T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1042,7 +1044,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "next_scan_at": "2026-08-29T00:00:00Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1095,6 +1097,45 @@
       },
       "created_at": "2026-08-17T16:01:23.149Z",
       "updated_at": "2026-08-17T16:02:19.059Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bayerische_landesanstalt_fuer_landwirtschaft",
+      "canonical_name": "Bayerische Landesanstalt fuer Landwirtschaft",
+      "canonical_domain": "lfl.bayern.de",
+      "official_website_url": "https://www.lfl.bayern.de/",
+      "career_url": "https://www.lfl.bayern.de/stellenausschreibungen",
+      "aliases": [
+        "Bavarian State Research Center for Agriculture",
+        "LfL"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan / Muenchen",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Public Research",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 82,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.lfl.bayern.de/stellenausschreibungen",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.lfl.bayern.de/stellenausschreibungen",
+        "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+        "target_area": "FREISING",
+        "industry_hint": "Public Research",
+        "evidence_note": "Weihenstephan-Hinweis nennt die LfL; die offizielle LfL-Domain enthaelt eine Stellenangebote-Seite."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
       "last_successful_scan_at": null
     },
     {
@@ -1159,7 +1200,7 @@
       "ats": [],
       "scan_status": "PENDING",
       "scan_priority": 81,
-      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "next_scan_at": "2026-08-29T00:00:00Z",
       "verification_status": "COMPANY_DOMAIN_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1173,6 +1214,44 @@
       },
       "created_at": "2026-08-28T15:53:28.788Z",
       "updated_at": "2026-08-28T15:53:28.788Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft",
+      "canonical_name": "Bayerische Landesanstalt fuer Wald und Forstwirtschaft",
+      "canonical_domain": "lwf.bayern.de",
+      "official_website_url": "https://www.lwf.bayern.de/",
+      "career_url": "https://www.lwf.bayern.de/service/stellenangebote/",
+      "aliases": [
+        "LWF"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Public Research",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 81,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.lwf.bayern.de/service/stellenangebote/",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.lwf.bayern.de/service/stellenangebote/",
+        "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+        "target_area": "FREISING",
+        "industry_hint": "Public Research",
+        "evidence_note": "Weihenstephan-Hinweis nennt die LWF; die offizielle LWF-Domain enthaelt aktuelle Stellenangebote."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
       "last_successful_scan_at": null
     },
     {
@@ -1295,6 +1374,83 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:jungheinrich_moosburg_gmbh",
+      "canonical_name": "Jungheinrich Moosburg GmbH",
+      "canonical_domain": "jungheinrich.com",
+      "official_website_url": "https://www.jungheinrich.com/",
+      "career_url": "https://www.jungheinrich.com/karriere/jobs",
+      "aliases": [
+        "Jungheinrich"
+      ],
+      "locations": [
+        {
+          "label": "Moosburg / Landkreis Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Intralogistics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.jungheinrich.com/karriere/karriere-sued",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.jungheinrich.com/karriere/jobs",
+        "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
+        "target_area": "FREISING",
+        "industry_hint": "Intralogistics",
+        "evidence_note": "Freising-Regionalhinweis nennt Jungheinrich Moosburg; die offizielle Jungheinrich-Domain enthaelt Karriere- und Jobseiten."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hubert_burda_media_holding",
+      "canonical_name": "Hubert Burda Media Holding",
+      "canonical_domain": "burda.com",
+      "official_website_url": "https://www.burda.com/",
+      "career_url": "https://www.burda.com/en/career/",
+      "aliases": [
+        "Burda",
+        "Hubert Burda Media"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.burda.com/en/career/",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.burda.com/en/career/",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media",
+        "evidence_note": "Klimapakt-3-Hinweis nennt Hubert Burda Media; die offizielle Burda-Domain enthaelt Karriere- und Jobangebote."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:deutsche_pfandbriefbank_ag",
       "canonical_name": "Deutsche Pfandbriefbank AG",
       "canonical_domain": "pfandbriefbank.com",
@@ -1335,6 +1491,84 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:tuev_sued_ag",
+      "canonical_name": "TUEV Sued AG",
+      "canonical_domain": "tuev-sued.de",
+      "official_website_url": "https://www.tuev-sued.de/",
+      "career_url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+      "aliases": [
+        "TUEV SUED",
+        "TUV SUD"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Testing and Certification",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Testing and Certification",
+        "evidence_note": "Klimapakt-3-Hinweis nennt TUEV Sued; die offizielle TUEV-Sued-Domain enthaelt Jobs und Karriere."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:telefonica_deutschland_holding_ag",
+      "canonical_name": "Telefonica Deutschland Holding AG",
+      "canonical_domain": "telefonica.de",
+      "official_website_url": "https://www.telefonica.de/",
+      "career_url": "https://www.telefonica.de/karriere.html",
+      "aliases": [
+        "o2 Telefonica",
+        "Telefonica Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Telecommunications",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.telefonica.de/karriere.html",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.telefonica.de/karriere.html",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Telecommunications",
+        "evidence_note": "Klimapakt-3-Hinweis nennt Telefonica Deutschland; die offizielle Telefonica-Domain enthaelt die Karriereseite."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:prosiebensat_1_media_se",
       "canonical_name": "ProSiebenSat.1 Media SE",
       "canonical_domain": "prosiebensat1.com",
@@ -1372,6 +1606,84 @@
       },
       "created_at": "2026-08-23T06:20:01.451Z",
       "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ihk_fuer_muenchen_und_oberbayern",
+      "canonical_name": "IHK fuer Muenchen und Oberbayern",
+      "canonical_domain": "ihk-muenchen.de",
+      "official_website_url": "https://www.ihk-muenchen.de/",
+      "career_url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+      "aliases": [
+        "IHK fuer Muenchen und Oberbayern",
+        "IHK Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Chamber of Commerce",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Chamber of Commerce",
+        "evidence_note": "Klimapakt-3-Hinweis nennt die IHK; die offizielle IHK-Domain enthaelt eine Karriereseite."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:technische_universitaet_muenchen",
+      "canonical_name": "Technische Universitaet Muenchen",
+      "canonical_domain": "tum.de",
+      "official_website_url": "https://www.tum.de/",
+      "career_url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+      "aliases": [
+        "Technical University of Munich",
+        "TUM"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Freising-Weihenstephan",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Higher Education",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+        "observed_at": "2026-08-28T16:05:10.163Z",
+        "verification_url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+        "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
+        "target_area": "MUNICH",
+        "industry_hint": "Higher Education",
+        "evidence_note": "Freising-Regionalhinweis nennt die TUM; die offizielle TUM-Domain enthaelt Karriere- und Stellenangebote."
+      },
+      "created_at": "2026-08-28T16:05:10.163Z",
+      "updated_at": "2026-08-28T16:05:10.163Z",
       "last_successful_scan_at": null
     },
     {
@@ -4457,6 +4769,48 @@
       }
     },
     {
+      "source_id": "source:bayerische_landesanstalt_fuer_landwirtschaft_career",
+      "company_id": "company:bayerische_landesanstalt_fuer_landwirtschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.lfl.bayern.de/stellenausschreibungen",
+      "canonical_url": "https://www.lfl.bayern.de/stellenausschreibungen",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.lfl.bayern.de/stellenausschreibungen",
+          "basis_url": "https://www.lfl.bayern.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft_career",
+      "company_id": "company:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.lwf.bayern.de/service/stellenangebote/",
+      "canonical_url": "https://www.lwf.bayern.de/service/stellenangebote/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.lwf.bayern.de/service/stellenangebote/",
+          "basis_url": "https://www.lwf.bayern.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bayerische_landesbank_career",
       "company_id": "company:bayerische_landesbank",
       "source_type": "CAREER_PAGE",
@@ -4869,6 +5223,48 @@
       ]
     },
     {
+      "source_id": "source:hubert_burda_media_holding_career",
+      "company_id": "company:hubert_burda_media_holding",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.burda.com/en/career/",
+      "canonical_url": "https://www.burda.com/en/career/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.burda.com/en/career/",
+          "basis_url": "https://www.burda.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:ihk_fuer_muenchen_und_oberbayern_career",
+      "company_id": "company:ihk_fuer_muenchen_und_oberbayern",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+      "canonical_url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+          "basis_url": "https://www.ihk-muenchen.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:infineon_technologies_ag_career",
       "company_id": "company:infineon_technologies_ag",
       "source_type": "CAREER_PAGE",
@@ -4930,6 +5326,27 @@
           ],
           "observed_at": "2026-08-27T17:27:13.367Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:jungheinrich_moosburg_gmbh_career",
+      "company_id": "company:jungheinrich_moosburg_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.jungheinrich.com/karriere/jobs",
+      "canonical_url": "https://www.jungheinrich.com/karriere/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.jungheinrich.com/karriere/jobs",
+          "basis_url": "https://www.jungheinrich.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -5044,20 +5461,22 @@
       "source_id": "source:man_truck_and_bus_se_career",
       "company_id": "company:man_truck_and_bus_se",
       "source_type": "CAREER_PAGE",
-      "url": "https://jobs.man.eu/",
-      "canonical_url": "https://jobs.man.eu/",
+      "url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+      "canonical_url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
       "is_official": true,
-      "verified_at": "2026-08-17T16:02:19.059Z",
+      "verified_at": "2026-08-28T16:05:10.163Z",
       "verification_basis": "CAREER_URL",
-      "verification_evidence": {
-        "status": "VERIFIED",
-        "evidence_type": "CAREER_URL",
-        "url": "https://jobs.man.eu/",
-        "basis_url": "https://www.man.eu/",
-        "redirect_chain": [],
-        "observed_at": "2026-08-17T16:02:19.059Z",
-        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
-      }
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+          "basis_url": "https://www.man.eu/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:messe_muenchen_gmbh_career_url",
@@ -6008,6 +6427,48 @@
       ]
     },
     {
+      "source_id": "source:technische_universitaet_muenchen_career",
+      "company_id": "company:technische_universitaet_muenchen",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+      "canonical_url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+          "basis_url": "https://www.tum.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:telefonica_deutschland_holding_ag_career",
+      "company_id": "company:telefonica_deutschland_holding_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.telefonica.de/karriere.html",
+      "canonical_url": "https://www.telefonica.de/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.telefonica.de/karriere.html",
+          "basis_url": "https://www.telefonica.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:texas_instruments_deutschland_gmbh_career",
       "company_id": "company:texas_instruments_deutschland_gmbh",
       "source_type": "CAREER_PAGE",
@@ -6044,6 +6505,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:tuev_sued_ag_career",
+      "company_id": "company:tuev_sued_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+      "canonical_url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:05:10.163Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+          "basis_url": "https://www.tuev-sued.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:versicherungskammer_bayern_career",

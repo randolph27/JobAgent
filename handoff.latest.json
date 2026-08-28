@@ -1,1 +1,248 @@
-{"verify_digest":{"ts":"2026-08-24T09:29:31.729+02:00","cmd":".\\ci.cmd supertest","exit":0,"status":"pass","log_path":null,"scope":"JobAgent function suite","tests_total":19,"duration_seconds":41.31},"changed":["todo.history.digest.json","todo.master.index.json"],"route":{"mode":"standard","changed_files":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.official.json","data/jobagent/store.json","html/jobagent/company-coverage.html","tests/Test-JobAgentCompanyCandidateVerification.ps1","tools/Discover-JobAgentCompanyCandidateWebsites.ps1"],"git":{"diff_log":"logs\\terminal\\route-check-20260828-175436.log","has_repo":true},"changed_count":7,"ts":"2026-08-28T17:54:38.605+02:00","policy":{"no_touch":[],"forbid_path":[],"forbid_regex":[]},"violations":[],"agent_id":"UTTER-20260817-39f7","route_ok":true},"toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"route_ok":true,"refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"workspace_root":".","verified":[{"exit":0,"status":"pass","cmd":".\\ci.cmd supertest"}],"ts":"2026-08-28T17:55:41.900+02:00","summary":"stp sync","git":{"behind":0,"has_repo":true,"branch":"master","tracked_changes":["todo.history.digest.json","todo.master.index.json"],"remote":"origin","head":"40f1a105f828","detached":false,"ahead":0,"upstream":"origin/master","worktree":"dirty"},"next_steps":["Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde."],"next":"Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.","chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","active_id":"","agent_id":"UTTER-20260817-39f7","project":"JobAgent","route_violations":[],"goal":"","capsule":{"changed":["todo.history.digest.json","todo.master.index.json"],"refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"env_inventory_missing":false,"route_ok":true,"env_inventory_path":null,"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","status":"open","route_violations":[],"ts":"2026-08-28T17:55:41.900+02:00","project":"JobAgent","env_inventory_used":false,"goal":"","agent_id":"UTTER-20260817-39f7","manual_missing":false,"git":{"behind":0,"has_repo":true,"branch":"master","tracked_changes":["todo.history.digest.json","todo.master.index.json"],"remote":"origin","head":"40f1a105f828","detached":false,"ahead":0,"upstream":"origin/master","worktree":"dirty"},"active_id":"","verified":[{"exit":0,"status":"pass","cmd":".\\ci.cmd supertest"}],"next":"Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.","workspace_root":"."},"status":"open"}
+{
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:logs/jobagent/company-discovery-import-20260828-160510.json",
+    "file:logs/jobagent/company-candidate-verification-20260828-160845.json",
+    "file:logs/jobagent/company-coverage-20260828-160911.json",
+    "file:html/jobagent/company-coverage.html"
+  ],
+  "ts": "2026-08-28T18:15:19.328+02:00",
+  "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen",
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-c-20260828.json -WaveId B",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd route-check",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    }
+  ],
+  "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmen-/Karrierequelle belegen oder fail-closed in Review lassen. Primaere Kandidaten: BMW Group, Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, TUM School of Life Sciences und weitere hoch priorisierte Regional-/Register-Hints.",
+  "active_id": "TD-0041",
+  "status": "in-progress",
+  "capsule": {
+    "workspace_root": ".",
+    "ts": "2026-08-28T18:15:19.328+02:00",
+    "route_violations": [],
+    "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmen-/Karrierequelle belegen oder fail-closed in Review lassen. Primaere Kandidaten: BMW Group, Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, TUM School of Life Sciences und weitere hoch priorisierte Regional-/Register-Hints.",
+    "env_inventory_path": null,
+    "agent_id": "UTTER-20260817-39f7",
+    "status": "in-progress",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "route_ok": true,
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-c-20260828.json -WaveId B",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": ".\\ci.cmd route-check",
+        "exit": 0
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0
+      }
+    ],
+    "git": {
+      "ahead": 0,
+      "has_repo": true,
+      "head": "1a6116fac392",
+      "upstream": "origin/master",
+      "branch": "master",
+      "tracked_changes": [
+        "Roadmap.md",
+        "data/jobagent/company-candidate-verification.queue.json",
+        "data/jobagent/company-discovery.official.wave-c-20260828.json",
+        "data/jobagent/store.json",
+        "handoff.latest.json",
+        "handoff.latest.md",
+        "html/jobagent/company-coverage.html",
+        "src/JobAgent.Coverage.psm1",
+        "tests/Test-JobAgentCoverage.ps1",
+        "todo.checkpoint.json",
+        "todo.current.md",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json",
+        "todo.state.json",
+        "tools/Verify-JobAgentCompanyCandidates.ps1"
+      ],
+      "behind": 0,
+      "detached": false,
+      "worktree": "dirty"
+    },
+    "manual_missing": false,
+    "project": "JobAgent",
+    "env_inventory_used": false,
+    "active_id": "TD-0041",
+    "changed": [
+      "Roadmap.md",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.official.wave-c-20260828.json",
+      "data/jobagent/store.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Coverage.psm1",
+      "tests/Test-JobAgentCoverage.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ],
+    "env_inventory_missing": false,
+    "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen"
+  },
+  "next_steps": [
+    "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmen-/Karrierequelle belegen oder fail-closed in Review lassen. Primaere Kandidaten: BMW Group, Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, TUM School of Life Sciences und weitere hoch priorisierte Regional-/Register-Hints."
+  ],
+  "agent_id": "UTTER-20260817-39f7",
+  "route_ok": true,
+  "route_violations": [],
+  "workspace_root": ".",
+  "git": {
+    "ahead": 0,
+    "has_repo": true,
+    "head": "1a6116fac392",
+    "upstream": "origin/master",
+    "branch": "master",
+    "tracked_changes": [
+      "Roadmap.md",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.official.wave-c-20260828.json",
+      "data/jobagent/store.json",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/company-coverage.html",
+      "src/JobAgent.Coverage.psm1",
+      "tests/Test-JobAgentCoverage.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Verify-JobAgentCompanyCandidates.ps1"
+    ],
+    "behind": 0,
+    "detached": false,
+    "worktree": "dirty"
+  },
+  "summary": "JA-027 Fortschritt: verifizierte Welle mit 8 neuen Firmen plus 1 Update importiert; Candidate-Queue store-aware gemacht; STP ausgefuehrt.",
+  "changed": [
+    "Roadmap.md",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.official.wave-c-20260828.json",
+    "data/jobagent/store.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "src/JobAgent.Coverage.psm1",
+    "tests/Test-JobAgentCoverage.ps1",
+    "todo.checkpoint.json",
+    "todo.current.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "tools/Verify-JobAgentCompanyCandidates.ps1"
+  ],
+  "project": "JobAgent"
+}

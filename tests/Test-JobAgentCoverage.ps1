@@ -287,6 +287,27 @@ Assert-True -Condition (@($unverifiedWebsiteQueueItem.reason_codes | Where-Objec
 Assert-True -Condition ($missingWebsiteQueueItem.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $missingWebsiteQueueItem.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Kandidat ohne Domain und Website braucht zuerst Website-Ermittlung.'
 Assert-True -Condition ($actionQueue.ready_total -eq 1) -Message 'Nur Kandidaten mit verifizierbarer Domain duerfen als bereit zaehlen.'
 
+$storeAwareQueue = New-JobAgentCoverageCandidateReviewQueue `
+    -HintStore $queueHintStore `
+    -SourceRegistry $sourceRegistry `
+    -ExistingCompanies @(
+        [pscustomobject]@{
+            company_id = 'company:queue_missing_ag'
+            canonical_name = 'Queue Missing AG'
+            canonical_domain = 'queue-missing.example.invalid'
+            official_website_url = 'https://queue-missing.example.invalid/'
+            career_url = 'https://queue-missing.example.invalid/jobs'
+            aliases = @()
+            verification_status = 'CAREER_URL_VERIFIED'
+        }
+    ) `
+    -Now ([datetime]'2026-08-23T08:30:00Z') `
+    -MaxItems 10
+$storeVerifiedQueueItem = @($storeAwareQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:queue-missing-website' })[0]
+Assert-True -Condition ($storeVerifiedQueueItem.next_action -eq 'ALREADY_VERIFIED_IN_STORE' -and $storeVerifiedQueueItem.status -eq 'VERIFIED') -Message 'Bereits produktiv verifizierte Firmen duerfen nicht weiter in der Kandidatenqueue blockieren.'
+Assert-True -Condition ($storeVerifiedQueueItem.company_id -eq 'company:queue_missing_ag') -Message 'Store-aware Queue speichert die produktive Firmen-ID nicht.'
+Assert-True -Condition ($storeAwareQueue.ready_total -eq 1) -Message 'Store-aware Queue darf bereits verifizierte Store-Firmen nicht als bereit zaehlen.'
+
 $candidateVerificationQueue = [pscustomobject]@{
     schema_version = 'jobagent/company-candidate-verification-queue/v1'
     generated_at = '2026-08-23T08:30:00.000Z'

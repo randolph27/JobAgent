@@ -588,7 +588,7 @@ try {
     $document = Read-JobAgentStore -ProjectRoot $projectRootResolved -DataRoot $DataRoot
     $results = New-Object System.Collections.Generic.List[object]
     $previousQueue = Read-ToolCandidateVerificationQueue -Path $queueResolved -Now $startedAt
-    $queue = New-JobAgentCoverageCandidateReviewQueue -HintStore $hintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousQueue -Now $startedAt -MaxItems 1000
+    $queue = New-JobAgentCoverageCandidateReviewQueue -HintStore $hintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousQueue -ExistingCompanies @($document.companies) -Now $startedAt -MaxItems 1000
     $candidateById = @{}
     foreach ($candidate in @($hintStore.hints)) {
         $candidateById[(Get-ToolCandidateId -Candidate $candidate)] = $candidate

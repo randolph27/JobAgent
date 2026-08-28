@@ -1,0 +1,221 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-28T16:20:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Bayerische Landesanstalt fuer Landwirtschaft",
+      "official_website_url": "https://www.lfl.bayern.de/",
+      "career_url": "https://www.lfl.bayern.de/stellenausschreibungen",
+      "aliases": [
+        "LfL",
+        "Bavarian State Research Center for Agriculture"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan / Muenchen",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Public Research",
+      "scan_priority": 82,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lfl.bayern.de/stellenausschreibungen",
+      "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+      "evidence_note": "Weihenstephan-Hinweis nennt die LfL; die offizielle LfL-Domain enthaelt eine Stellenangebote-Seite."
+    },
+    {
+      "canonical_name": "Bayerische Landesanstalt fuer Wald und Forstwirtschaft",
+      "official_website_url": "https://www.lwf.bayern.de/",
+      "career_url": "https://www.lwf.bayern.de/service/stellenangebote/",
+      "aliases": [
+        "LWF"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Public Research",
+      "scan_priority": 81,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lwf.bayern.de/service/stellenangebote/",
+      "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+      "evidence_note": "Weihenstephan-Hinweis nennt die LWF; die offizielle LWF-Domain enthaelt aktuelle Stellenangebote."
+    },
+    {
+      "canonical_name": "MAN Truck and Bus SE",
+      "official_website_url": "https://www.man.eu/",
+      "career_url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+      "aliases": [
+        "MAN Truck & Bus",
+        "MAN"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive",
+      "scan_priority": 82,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Klimapakt-3-Hinweis nennt MAN Truck and Bus; die offizielle MAN-Domain enthaelt die Karriereseite."
+    },
+    {
+      "canonical_name": "Jungheinrich Moosburg GmbH",
+      "official_website_url": "https://www.jungheinrich.com/",
+      "career_url": "https://www.jungheinrich.com/karriere/jobs",
+      "aliases": [
+        "Jungheinrich"
+      ],
+      "locations": [
+        {
+          "label": "Moosburg / Landkreis Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Intralogistics",
+      "scan_priority": 80,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.jungheinrich.com/karriere/karriere-sued",
+      "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
+      "evidence_note": "Freising-Regionalhinweis nennt Jungheinrich Moosburg; die offizielle Jungheinrich-Domain enthaelt Karriere- und Jobseiten."
+    },
+    {
+      "canonical_name": "Hubert Burda Media Holding",
+      "official_website_url": "https://www.burda.com/",
+      "career_url": "https://www.burda.com/en/career/",
+      "aliases": [
+        "Hubert Burda Media",
+        "Burda"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media",
+      "scan_priority": 80,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.burda.com/en/career/",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Klimapakt-3-Hinweis nennt Hubert Burda Media; die offizielle Burda-Domain enthaelt Karriere- und Jobangebote."
+    },
+    {
+      "canonical_name": "IHK fuer Muenchen und Oberbayern",
+      "official_website_url": "https://www.ihk-muenchen.de/",
+      "career_url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+      "aliases": [
+        "IHK Muenchen",
+        "IHK fuer Muenchen und Oberbayern"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Chamber of Commerce",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ihk-muenchen.de/ueber-uns/karriere/",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Klimapakt-3-Hinweis nennt die IHK; die offizielle IHK-Domain enthaelt eine Karriereseite."
+    },
+    {
+      "canonical_name": "Telefonica Deutschland Holding AG",
+      "official_website_url": "https://www.telefonica.de/",
+      "career_url": "https://www.telefonica.de/karriere.html",
+      "aliases": [
+        "Telefonica Deutschland",
+        "o2 Telefonica"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Telecommunications",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.telefonica.de/karriere.html",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Klimapakt-3-Hinweis nennt Telefonica Deutschland; die offizielle Telefonica-Domain enthaelt die Karriereseite."
+    },
+    {
+      "canonical_name": "TUEV Sued AG",
+      "official_website_url": "https://www.tuev-sued.de/",
+      "career_url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+      "aliases": [
+        "TUV SUD",
+        "TUEV SUED",
+        "TUEV Sued"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Testing and Certification",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tuev-sued.de/tuev_sued_konzern/karriere",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Klimapakt-3-Hinweis nennt TUEV Sued; die offizielle TUEV-Sued-Domain enthaelt Jobs und Karriere."
+    },
+    {
+      "canonical_name": "Technische Universitaet Muenchen",
+      "official_website_url": "https://www.tum.de/",
+      "career_url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+      "aliases": [
+        "TUM",
+        "Technical University of Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Freising-Weihenstephan",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Higher Education",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tum.de/ueber-die-tum/karriere-und-jobs/stellenangebote",
+      "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
+      "evidence_note": "Freising-Regionalhinweis nennt die TUM; die offizielle TUM-Domain enthaelt Karriere- und Stellenangebote."
+    }
+  ]
+}
