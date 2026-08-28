@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T08:06:09.436+02:00
+Stand: 2026-08-28T08:15:58.754+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,11 +8,11 @@ Stand: 2026-08-28T08:06:09.436+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `491b80507439`
+- HEAD vor Abschluss-Commit: `01f8acef48e5`
 - Ahead/Behind vor Abschluss-Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
-- Roadmap-Rotation: nicht ausfuehren; JA-027 ist noch nicht komplett erledigt.
+- Roadmap-Rotation: nicht ausgefuehrt; JA-027 ist fachlich noch nicht komplett erledigt.
 - Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
 - Devserver: `http://localhost:8500/`, zuletzt `listening=True`
 - SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
@@ -22,32 +22,58 @@ Stand: 2026-08-28T08:06:09.436+02:00
 - Eine weitere Website-Discovery-Welle fuer JA-027 verarbeitet: `25` Kandidaten.
 - Ergebnis der Discovery-Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
 - Grund fuer alle 25 Kandidaten dieser Welle: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
-- Betroffene Kandidaten dieser Welle waren u. a. `Airbus Defence and Space`, `Airtexx Gassysteme and Equipment`, `Aiworx`, `AK Kommunikationstechnik`, `Aekbv`, `Aktion Muenchner Fahrgaeste`, `Alanod`, `Alegria`, `Allgeier Engineering`, `Alpeneuro`, `Alpgeotech GmbH`, `AlphaPet Ventures`, `Alps Biketours GmbH`, `Alt & Kelber Immobiliengruppe`, `Altop Verlags- und Vertriebsgesellschaft mbH`, `Amgen`, `Amgen GmbH`, `Amicus Therapeutics`, `Ammer Entsorgung`, `Analog Devices GmbH`, `Analytisch Biologisches Forschungslabor GmbH`, `andrena objects ag`, `Angela Proels G'wandmacherei`, `Anna Krolicki Krankenpflege`, `Antenne Bayern`.
 - Es wurde kein Kandidat produktiv in `data/jobagent/store.json` uebernommen.
-- Store blieb fachlich unveraendert; Queue und Hint-Status wurden aktualisiert.
-- Coverage wurde neu erzeugt.
-- `.\ci.cmd stp` wurde ausgefuehrt; Todo/Handoff sind synchronisiert.
+- Store blieb fachlich unveraendert.
+- Queue und Hint-Status wurden aktualisiert:
+  - `data/jobagent/company-candidate-verification.queue.json`
+  - `data/jobagent/company-discovery.hints.json`
+- Coverage wurde neu erzeugt:
+  - `logs/jobagent/company-coverage-20260828-061317.json`
+  - `logs/jobagent/company-coverage-20260828-061317.md`
+  - `html/jobagent/company-coverage.html`
+- STP wurde ausgefuehrt; Todo-/Checkpoint-/Handoff-Dateien sind synchronisiert.
+
+## Betroffene Kandidaten der letzten Welle
+
+- `Anzenberger Spedition Logistik GmbH`
+- `apetito`
+- `apominga.de`
+- `Apppex GmbH`
+- `Aquabell`
+- `Arcadis Germany B.V. & Co. KG`
+- `ArianeGroup`
+- `Arksolutions`
+- `Arthrex GmbH`
+- `artwww.de Walther Huynh`
+- `AS Dentaltechnik`
+- `AS-Waegetechnik GmbH`
+- `Ascend Gene & Cell Therapies`
+- `ASE Hausmeisterservice`
+- `astelco Systems GmbH`
+- `Astera LED Technology GmbH`
+- `Astyx Communications & Sensors`
+- `audemo systems GmbH`
+- `Audi Business Innovation GmbH`
+- `August Reiners`
+- `Auren Treuhand GmbH`
+- `Aurigium Patentanwaelte`
+- `auticon GmbH`
+- `Autobus Oberbayern`
+- `Autodesk GmbH`
 
 ## Datenstand nach Coverage
 
 - Produktive Firmen: `85`
-- Kandidatenqueue: `1785` Cluster
-- Queue ready: `0`
-- Source Inventory: `1904` Quellen, davon `84` offizielle Quellen und `1820` Discovery-Quellen
+- Target-Inventory-Kandidaten: `1870`
+- Target-Inventory-Gap zu 1000: `0`
 - Target-Inventory-Gate: `failed`
+- Backlog Items: `85`
+- Duplicate Groups: `0`
+- Source Inventory: `1904` Quellen
+- Offizielle Quellen: `84`
+- Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-060444.json`
-- Letzte Coverage-Artefakte: `logs/jobagent/company-coverage-20260828-060505.json`, `logs/jobagent/company-coverage-20260828-060505.md`, `html/jobagent/company-coverage.html`
-
-## Geaenderte Dateien fuer Abschluss-Commit
-
-- `data/jobagent/company-candidate-verification.queue.json`
-- `data/jobagent/company-discovery.hints.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-061257.json`
 
 ## Verifikation
 
@@ -60,6 +86,18 @@ Stand: 2026-08-28T08:06:09.436+02:00
 - `.\ci.cmd route-check` -> Exit `0`; route_ok=True
 - `.\ci.cmd stp` -> Exit `0`; Todo/Handoff synchronisiert
 - `.\ci.cmd supertest` wurde nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
+
+## Geaenderte Dateien fuer Abschluss-Commit
+
+- `data/jobagent/company-candidate-verification.queue.json`
+- `data/jobagent/company-discovery.hints.json`
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `todo.checkpoint.json`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
 
 ## Naechste Aufgaben
 
@@ -80,3 +118,4 @@ Stand: 2026-08-28T08:06:09.436+02:00
 - Offizielle Quellen sind zwingend. Jobboersen, Arbeitsagentur, Register, GitHub-/OSM-Listen und andere Hints bleiben Discovery-Hinweise und duerfen keine primaere Karrierequelle ersetzen.
 - Kandidaten ohne eindeutigen offiziellen Website-/Karriere-/ATS-Beleg muessen fail-closed in Review/Retry bleiben.
 - Keine automatische Bewerbung, keine extern wirksame Aktion, keine erfundenen Firmen, URLs oder Job-IDs.
+
