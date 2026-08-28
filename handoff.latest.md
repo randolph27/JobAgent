@@ -1,13 +1,13 @@
 # Handoff latest
 
-Stand: 2026-08-28T13:24:57.110+02:00
+Stand: 2026-08-28T13:33:54.676+02:00
 
 ## Neuer-Chat-Start
 
 - Projektpfad: `D:\_Scripte\JobAgent`
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
-- HEAD vor Abschluss-Commit: `67df7deddef0`
+- HEAD vor Abschluss-Commit: `14f7f375d453`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht abgeschlossen.
@@ -20,45 +20,45 @@ Stand: 2026-08-28T13:24:57.110+02:00
 - Fuer `JA-027` wurde eine weitere Website-Discovery-Welle verarbeitet.
 - Verarbeitet wurden `25` Kandidaten.
 - Ergebnis der Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`, `0` produktive Store-Upserts.
-- Hauptgrund bei allen 25 Kandidaten: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
-- `data/jobagent/store.json` wurde fachlich nicht geaendert.
+- Hauptgrund bei fast allen Kandidaten: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
+- Ein Kandidat mit offizieller Quellseite (`HENSOLDT AG` auf der Muenchner Boersennotierte-Unternehmen-Seite) blieb ebenfalls fail-closed, weil keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden wurde.
+- `data/jobagent/store.json` wurde nicht geaendert.
 - Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
-- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-112217.json`, `logs/jobagent/company-coverage-20260828-112217.md`, `html/jobagent/company-coverage.html`.
-- STP wurde am `2026-08-28T13:24:57+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-113320.json`, `logs/jobagent/company-coverage-20260828-113320.md`, `html/jobagent/company-coverage.html`.
+- STP wurde am `2026-08-28T13:33:54+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `goyellow GmbH`
-- `Graf Dichtungen GmbH`
-- `Graphik Buero Andrea Schmidt`
-- `GRAPHISOFT`
-- `Grauberger Massivbau GmbH`
-- `Green City e.V.`
-- `Green City Projekt GmbH`
-- `Greenyard`
-- `GRIN Verlag GmbH`
-- `GRUMA`
-- `Grunwald Kommunikation und Marketingdienstleistungen GmbH & Co. KG`
-- `GRV Versorgungstechnik`
-- `GWG Muenchen Hausverwaltung Berg am Laim Ramersdorf`
-- `H. Gautzsch Muenchen F. Piotrowski GmbH & Co. KG`
-- `H&D Unternehmensberatung`
-- `H&Z Unternehmensberatung AG`
-- `HAGA Bauvision`
-- `Hallo Verlag GmbH & Co. KG`
-- `Hand- und Fusspflege Studio mit O.P.I`
-- `Hannover Leasing GmbH & Co. KG`
-- `Hans Brandl`
-- `Hansmann PR Brunnthaler & Geisler GmbH`
-- `Happy People GmbH`
-- `Harry Kuhn Installationshaustechnik`
-- `Hase und Igel Verlag`
+- `Haslberger.net HR Consultants Hans Haslberger`
+- `Hassan Nutzfahrzeuge`
+- `Hat-Tec`
+- `Hausmeisterservice Reinhold Ender`
+- `Hausverwaltung der Parkstadt Bogenhausen`
+- `Hausverwaltung Hempler`
+- `Hawe GmbH`
+- `HAWE Hydraulik SE`
+- `Heavy Rescue Germany`
+- `Heim & Haus`
+- `Heimbau Bayern Aussenstelle Berg am Laim`
+- `Hellerich GmbH`
+- `Helmut Arnim GmbH`
+- `HemAtris GmbH`
+- `Hennott GbR`
+- `HENSOLDT AG`
+- `HERE Ismaning`
+- `Hermes Arzneimittel`
+- `Hermle Machinenbau GmbH`
+- `Herrwerth + Partner Marketing`
+- `HETEC`
+- `Hetzner Cloud GmbH`
+- `Hetzner Cloud GmbH` aus `remote_jobs_germany_github`
+- `HGH Gebaeudedienstleistungen GmbH`
+- `HGV Hanseatische Gesellschaft fuer Verlagsservice`
 
 ## Datenstand nach Coverage und Queue
 
 - Produktive Firmen: `85`
 - Target-Inventory-Kandidaten: `1870`
-- Target-Inventory-Gap zu 1000: `0`
 - Target-Inventory-Gate: `failed`
 - Backlog Items: `85`
 - Duplicate Groups: `0`
@@ -66,7 +66,14 @@ Stand: 2026-08-28T13:24:57.110+02:00
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-112158.json`
+- Queue-Cluster: `1785`
+- Queue-Kandidaten: `1790`
+- Queue `ready_total`: `0`
+- Queue `DISCOVER_OFFICIAL_WEBSITE`: `1719`
+- Queue `VERIFY_OFFICIAL_SITE`: `60`
+- Queue `REJECT_DUPLICATE`: `5`
+- Queue `MANUAL_DECISION`: `1`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-113214.json`
 
 ## Verifikation
 
