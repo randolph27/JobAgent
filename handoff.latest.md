@@ -1,14 +1,13 @@
 # Handoff latest
 
-Stand: 2026-08-28T13:02:23+02:00
+Stand: 2026-08-28T13:13:58+02:00
 
 ## Neuer-Chat-Start
 
 - Projektpfad: `D:\_Scripte\JobAgent`
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
-- Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `5f4c5cf2f53c`
+- HEAD vor Abschluss-Commit: `60224e2c92ed`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht abgeschlossen.
@@ -24,36 +23,36 @@ Stand: 2026-08-28T13:02:23+02:00
 - Hauptgrund bei allen 25 Kandidaten: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
 - `data/jobagent/store.json` wurde fachlich nicht geaendert.
 - Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
-- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-110039.json`, `logs/jobagent/company-coverage-20260828-110039.md`, `html/jobagent/company-coverage.html`.
-- STP wurde am `2026-08-28T13:02:23+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-111129.json`, `logs/jobagent/company-coverage-20260828-111129.md`, `html/jobagent/company-coverage.html`.
+- STP wurde am `2026-08-28T13:13:58+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `Frédérique Desvaux`
-- `Freeline`
-- `FreeTech`
-- `Freudenberg Chemical Specialities`
-- `Frey Baumaschinen`
-- `Friedhofsgärtnerei Griebl`
-- `FriendsFactory AG`
-- `FS-BauTec GmbH & Co. KG`
-- `Fujitsu Technology Solutions`
-- `Funtainment`
-- `Fux`
-- `G-Zell.de Eventverleih`
-- `G. Henle Verlag`
-- `G.R.A.L.`
-- `G+H Building Services`
-- `GAF Geospatial GmbH`
-- `Gahrens + Battermann`
-- `Gahrens + Battermann GmbH & Co. KG Messebüro München`
-- `Garmin Deutschland GmbH`
-- `Gartner Deutschland`
-- `Gasteig München GmbH`
-- `GE HealthCare`
-- `Gehavau`
-- `GEMA Gebäudemanagement GmbH & Co. KG`
-- `Gemeinsames Kommunalunternehmen für Abfallwirtschaft`
+- `Generali`
+- `Genesys`
+- `Gepe Gebaeudedienste Peterhoff Niederlassung Muenchen`
+- `Gerber Technology`
+- `Gerhard Reimann Praezisionsmaschinen Vertriebs GmbH`
+- `Gerlicher Oele und Fette`
+- `get green event technology sued GmbH`
+- `Get Juicy`
+- `Getraenke City XXL Verwaltung`
+- `gevas software`
+- `GEWOFAG Wohnen GmbH`
+- `Geyer Electronic e.K.`
+- `GFA Gesellschaft fuer Anlagenbau mbH`
+- `GfKS`
+- `GHM`
+- `Gienger Muenchen KG`
+- `Giesinger Biermanufaktur und Spezialitaetenbraugesellschaft mbH`
+- `ginlo`
+- `GKL Gemeinsame Klassenlotterie der Laender`
+- `GKM Gesellschaft fuer Therapieforschung mbH`
+- `GME`
+- `GNS mbH`
+- `Goehler GmbH & Co. KG Anlagentechnik`
+- `golocal GmbH & Co. KG`
+- `Goerz`
 
 ## Datenstand nach Coverage und Queue
 
@@ -67,7 +66,7 @@ Stand: 2026-08-28T13:02:23+02:00
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-110015.json`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-111108.json`
 
 ## Verifikation
 

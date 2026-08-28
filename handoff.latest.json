@@ -1,1 +1,142 @@
-{"schema_version":"jobagent/handoff/v2","project":"JobAgent","workspace_root":"D:\\_Scripte\\JobAgent","repo":"https://github.com/randolph27/JobAgent","branch":"master","upstream":"origin/master","ts":"2026-08-28T13:02:23+02:00","status":"open","active_id":null,"open_todo_id":"TD-0041","open_roadmap_id":"JA-027","roadmap_rotation":"not-run; JA-027 ist fachlich nicht abgeschlossen","supertest":"not-run-this-turn; gemaess Nutzeranweisung gilt er als erledigt","services":{"devserver":{"url":"http://localhost:8500/","listening":true,"pid":23568},"sonarqube":{"url":"http://localhost:9000/api/system/status","status":"UP","version":"26.1.0.118079"}},"last_work_step":{"title":"JA-027 Website-Discovery-Welle","processed_total":25,"verified_total":0,"manual_review_total":25,"productive_store_upserts":0,"primary_reason":"Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.","store_changed":false,"discovery_log":"logs/jobagent/company-candidate-website-discovery-20260828-110015.json","coverage_json":"logs/jobagent/company-coverage-20260828-110039.json","coverage_markdown":"logs/jobagent/company-coverage-20260828-110039.md","coverage_html":"html/jobagent/company-coverage.html"},"processed_candidates":["Frédérique Desvaux","Freeline","FreeTech","Freudenberg Chemical Specialities","Frey Baumaschinen","Friedhofsgärtnerei Griebl","FriendsFactory AG","FS-BauTec GmbH & Co. KG","Fujitsu Technology Solutions","Funtainment","Fux","G-Zell.de Eventverleih","G. Henle Verlag","G.R.A.L.","G+H Building Services","GAF Geospatial GmbH","Gahrens + Battermann","Gahrens + Battermann GmbH & Co. KG Messebüro München","Garmin Deutschland GmbH","Gartner Deutschland","Gasteig München GmbH","GE HealthCare","Gehavau","GEMA Gebäudemanagement GmbH & Co. KG","Gemeinsames Kommunalunternehmen für Abfallwirtschaft"],"coverage_state":{"companies_total":85,"target_inventory_candidates_total":1870,"target_inventory_gap_to_1000":0,"target_inventory_gate_status":"failed","backlog_items":85,"duplicate_groups":0,"sources_total":1904,"official_sources":84,"discovery_sources":1820,"import_waves":4},"changed":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","handoff.latest.json","handoff.latest.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"verified":[{"cmd":".\\ci.cmd devserver-status","exit":0,"result":"Port 8500 listening True"},{"cmd":"curl.exe -s http://localhost:9000/api/system/status","exit":0,"result":"UP 26.1.0.118079"},{"cmd":"pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8","exit":0,"result":"25 processed, 0 verified, 25 manual review"},{"cmd":"pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250","exit":0,"result":"coverage generated, target_inventory_gate_status failed"},{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1","exit":0,"result":"24 cases"},{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1","exit":0,"result":"28 cases"},{"cmd":".\\ci.cmd route-check","exit":0,"result":"route_ok True"},{"cmd":".\\ci.cmd stp","exit":0,"result":"Todo/Handoff synchronisiert"}],"next_steps":["Naechste Website-Discovery-Welle starten: pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8","Wenn verified_total > 0: pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3","Coverage aktualisieren: pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250","Funktionstests ausfuehren: pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1 und pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1","Danach .\\ci.cmd route-check und .\\ci.cmd stp ausfuehren","JA-027 erst rotieren, wenn alle Kandidaten verarbeitet sind oder jeder offene Rest einen belastbaren Review-/Reject-/Retry-Grund hat und alle Akzeptanzbedingungen belegt sind"],"guardrails":["Offizielle Quellen sind zwingend; Jobboersen, Arbeitsagentur, Register, OSM-Listen und andere Hints bleiben Discovery-Hinweise.","Kandidaten ohne eindeutigen offiziellen Website-/Karriere-/ATS-Beleg bleiben fail-closed in Review/Retry.","Keine automatische Bewerbung, keine extern wirksame Aktion, keine erfundenen Firmen, URLs oder Job-IDs."]}
+{
+  "summary": "JA-027 website discovery wave completed; 25 candidates processed, 0 verified, 25 manual review, 0 store upserts.",
+  "ts": "2026-08-28T13:13:58+02:00",
+  "project": "JobAgent",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "branch": "master",
+  "head_before_commit": "60224e2c92ed",
+  "active_roadmap": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
+  "todo_id": "TD-0041",
+  "todo_status": "open",
+  "active_id": null,
+  "roadmap_rotation": "not-run: JA-027 fachlich nicht abgeschlossen",
+  "supertest": "not-run in this turn; per user instruction treated as done",
+  "services": {
+    "devserver": {
+      "url": "http://localhost:8500/",
+      "status": "listening",
+      "pid": 23568
+    },
+    "sonarqube": {
+      "url": "http://localhost:9000/api/system/status",
+      "status": "UP",
+      "version": "26.1.0.118079"
+    }
+  },
+  "last_work_step": {
+    "roadmap_id": "JA-027",
+    "processed_total": 25,
+    "verified_total": 0,
+    "manual_review_total": 25,
+    "unverified_total": 0,
+    "store_upserts": 0,
+    "common_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
+    "discovery_log": "logs/jobagent/company-candidate-website-discovery-20260828-111108.json",
+    "coverage_json": "logs/jobagent/company-coverage-20260828-111129.json",
+    "coverage_markdown": "logs/jobagent/company-coverage-20260828-111129.md",
+    "coverage_html": "html/jobagent/company-coverage.html",
+    "candidates": [
+      "Generali",
+      "Genesys",
+      "Gepe Gebaeudedienste Peterhoff Niederlassung Muenchen",
+      "Gerber Technology",
+      "Gerhard Reimann Praezisionsmaschinen Vertriebs GmbH",
+      "Gerlicher Oele und Fette",
+      "get green event technology sued GmbH",
+      "Get Juicy",
+      "Getraenke City XXL Verwaltung",
+      "gevas software",
+      "GEWOFAG Wohnen GmbH",
+      "Geyer Electronic e.K.",
+      "GFA Gesellschaft fuer Anlagenbau mbH",
+      "GfKS",
+      "GHM",
+      "Gienger Muenchen KG",
+      "Giesinger Biermanufaktur und Spezialitaetenbraugesellschaft mbH",
+      "ginlo",
+      "GKL Gemeinsame Klassenlotterie der Laender",
+      "GKM Gesellschaft fuer Therapieforschung mbH",
+      "GME",
+      "GNS mbH",
+      "Goehler GmbH & Co. KG Anlagentechnik",
+      "golocal GmbH & Co. KG",
+      "Goerz"
+    ]
+  },
+  "coverage": {
+    "companies_total": 85,
+    "target_inventory_candidates_total": 1870,
+    "target_inventory_gap_to_1000": 0,
+    "target_inventory_gate_status": "failed",
+    "backlog_items": 85,
+    "duplicate_groups": 0,
+    "sources_total": 1904,
+    "official_sources": 84,
+    "discovery_sources": 1820,
+    "import_waves": 4
+  },
+  "changed": [
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json"
+  ],
+  "verified": [
+    {
+      "cmd": ".\\ci.cmd devserver-status",
+      "exit": 0,
+      "result": "Port 8500 listening True"
+    },
+    {
+      "cmd": "curl.exe -s http://localhost:9000/api/system/status",
+      "exit": 0,
+      "result": "SonarQube UP 26.1.0.118079"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
+      "exit": 0,
+      "result": "processed=25 verified=0 manual_review=25"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+      "exit": 0,
+      "result": "coverage refreshed; target_inventory_gate_status=failed"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0,
+      "result": "24 cases"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0,
+      "result": "28 cases"
+    },
+    {
+      "cmd": ".\\ci.cmd route-check",
+      "exit": 0,
+      "result": "route_ok=True"
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0,
+      "result": "Todo/Handoff synchronized"
+    }
+  ],
+  "next_steps": [
+    "Run next JA-027 website discovery wave with pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8.",
+    "If verified_total > 0, run pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3.",
+    "Refresh coverage with pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250.",
+    "Run focused tests Test-JobAgentCompanyCandidateVerification.ps1 and Test-JobAgentCoverage.ps1.",
+    "Run .\\ci.cmd route-check and .\\ci.cmd stp.",
+    "Rotate JA-027 only after all candidates are processed or every remaining item has a documented review/reject/retry reason and acceptance evidence."
+  ],
+  "guardrails": [
+    "Official sources are mandatory. Discovery hints are not primary career sources.",
+    "Fail closed when official website/career/ATS evidence is unclear.",
+    "No applications, no externally effective actions, no invented companies, URLs, or job IDs."
+  ]
+}
