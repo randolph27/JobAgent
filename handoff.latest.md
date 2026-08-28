@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T08:43:25.239+02:00
+Stand: 2026-08-28T08:52:37.208+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,7 +8,7 @@ Stand: 2026-08-28T08:43:25.239+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `d7ece7a21d80`
+- HEAD vor Abschluss-Commit: `36e5c88a984b`
 - Ahead/Behind vor Abschluss-Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
@@ -28,38 +28,38 @@ Stand: 2026-08-28T08:43:25.239+02:00
   - `data/jobagent/company-candidate-verification.queue.json`
   - `data/jobagent/company-discovery.hints.json`
 - Coverage wurde neu erzeugt:
-  - `logs/jobagent/company-coverage-20260828-064220.json`
-  - `logs/jobagent/company-coverage-20260828-064220.md`
+  - `logs/jobagent/company-coverage-20260828-064920.json`
+  - `logs/jobagent/company-coverage-20260828-064920.md`
   - `html/jobagent/company-coverage.html`
 - STP wurde ausgefuehrt; Todo-/Checkpoint-/Handoff-Dateien sind synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `Automaten Seitz Vertrieb und Kundendienst GmbH`
-- `automatic Systeme GmbH`
-- `Avedo`
-- `Aviva Munich`
-- `AWA`
-- `AXA Versicherung`
-- `Axcorn`
-- `Axxiome`
-- `B.I.G. and STEALEX GmbH`
-- `B.L.F. Verlagsgesellschaft mbH`
-- `B2X Care Solutions`
-- `Bain and Company`
-- `Balsan Cosmetic`
-- `Baobab Social Business GmbH`
-- `Barrelbrothers`
-- `basismedia`
-- `Basycon Unternehmensberatung GmbH`
-- `Bauer and Kusterer`
-- `Bauer Media Group`
-- `Baugeschaeft Fendt and Behringer`
-- `Bausch and Lomb`
-- `Bavaria Entertainment GmbH`
-- `Bavaria Film GmbH`
-- `Bavaria Group`
-- `Bavaria Petrol`
+- `Bavaria Staffcrew`
+- `Bavaria Studios`
+- `Bavarian Nordic`
+- `Bay Wa AG`
+- `Bayerische Gewerbebau AG`
+- `bayerischerautoankauf.de`
+- `Bayern Card Services`
+- `Bayrol Deutschland GmbH`
+- `BayWa AG`
+- `BayWa r.e. AG`
+- `BayWa Technik`
+- `BCS Bus`
+- `BDO`
+- `BE Clean Waescherei Reinigung`
+- `Beatrice Voigt Kunst und Kulturprojekte`
+- `Beckhoff Automation GmbH`
+- `Berger Beton SE`
+- `Bertrandt Ingenieurbuero GmbH`
+- `Berylls Strategy`
+- `Beschattungen Muenchen`
+- `BESD Team GmbH`
+- `Better Orange IR and HV AG`
+- `Betz Tools`
+- `Betz Chrom`
+- `bfw Werner Voelk GmbH`
 
 ## Datenstand nach Coverage
 
@@ -73,7 +73,7 @@ Stand: 2026-08-28T08:43:25.239+02:00
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-064157.json`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-064901.json`
 
 ## Verifikation
 
