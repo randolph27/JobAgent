@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T12:05:43+02:00
+Stand: 2026-08-28T12:29:43+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,13 +8,13 @@ Stand: 2026-08-28T12:05:43+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `94272a950772`
+- HEAD vor Abschluss-Commit: `cdbbbd072a78`
 - Ahead/Behind vor Abschluss-Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht abgeschlossen.
-- Supertest: nicht neu angefragt; gemaess Nutzeranweisung gilt er als erledigt.
-- Devserver: `http://localhost:8500/`, zuletzt `listening=True`
+- Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
+- Devserver: `http://localhost:8500/`, zuletzt `listening=True`, PID `23568`
 - SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
 
 ## Letzter abgeschlossener Arbeitsschritt
@@ -25,36 +25,36 @@ Stand: 2026-08-28T12:05:43+02:00
 - Hauptgrund: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
 - `data/jobagent/store.json` wurde fachlich nicht geaendert.
 - Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
-- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-100334.json`, `logs/jobagent/company-coverage-20260828-100334.md`, `html/jobagent/company-coverage.html`.
-- STP wurde am `2026-08-28T12:04:55+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-102727.json`, `logs/jobagent/company-coverage-20260828-102727.md`, `html/jobagent/company-coverage.html`.
+- STP wurde am `2026-08-28T12:29:43+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `DiaShop`
-- `die herzbrille`
-- `dieAgenten Medienberatung GmbH`
-- `Dietrich's AG`
-- `Diva-e Digital Value Excellence GmbH`
-- `diva-e NEXT GmbH Muenchen`
-- `DMC Datenverarbeitungs- und Management-Consulting`
-- `DMS`
-- `DocuWare`
-- `Doelker &`
-- `Dolby Germany GmbH`
-- `DPS Business Solutions Hauptsitz Muenchen`
-- `Dr. Gerhard Bock Asset Management GmbH`
-- `Dr. Hoenle AG`
-- `Dr. Lang & Schoeffel GbR`
-- `Dr. Schenk GmbH`
-- `Dr. Schenk GmbH Industriemesstechnik`
-- `Dr. Schnell`
-- `Dr. Sennewald Medizintechnik GmbH`
-- `Dr.-Ing. Pecher und Partner`
-- `DrDish Television GmbH`
-- `Dreier Verwaltungs GmbH`
-- `Druckhaus Dessauerstrasse`
-- `dtv Verlagsgesellschaft`
-- `Du Diederichs`
+- `Dube Visuelle Kommunikation`
+- `Dynarep`
+- `dynaware Systemberatung GmbH`
+- `E.ON Digital Technology GmbH`
+- `E.ON Energy Projects GmbH`
+- `Easylan GmbH`
+- `Eazee`
+- `EAZF`
+- `Eckhaus im Werksviertel`
+- `Eco Clean Gebaeudereinigung`
+- `Econ Referenten Agentur`
+- `ECOUNT GmbH`
+- `EDAG Engineering AG`
+- `EDAG Testing Solutions GmbH`
+- `Eder Stapler`
+- `edilon)(sedra`
+- `EDL Rethschulte GmbH`
+- `eeEat`
+- `EEP Energieconsulting GmbH`
+- `EGYM SE`
+- `EHT Breit`
+- `Eigenheimerverband`
+- `Eisbach Studios`
+- `EKM`
+- `Elektro Kastrati`
 
 ## Datenstand nach Coverage und Queue
 
@@ -70,9 +70,10 @@ Stand: 2026-08-28T12:05:43+02:00
 - Import Waves: `4`
 - Kandidaten-Verification-Queue: `1785` Cluster
 - Queue-Status: `53 VERIFIED`, `1724 MANUAL_REVIEW_REQUIRED`, `8 RETRY_SCHEDULED`
-- Queue-Aktionen laut letztem Handoff: `1719 DISCOVER_OFFICIAL_WEBSITE`, `60 VERIFY_OFFICIAL_SITE`, `5 REJECT_DUPLICATE`, `1 MANUAL_DECISION`
 - Bereit laut aktueller Coverage-Metrik: `8`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-100316.json`
+- Candidate Review Queue: `1732`
+- Candidate Conflict Cluster: `252`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-102709.json`
 
 ## Verifikation
 
