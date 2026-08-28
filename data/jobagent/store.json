@@ -791,6 +791,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:europaeisches_patentamt",
+      "canonical_name": "Europaeisches Patentamt",
+      "canonical_domain": "epo.org",
+      "official_website_url": "https://www.epo.org/",
+      "career_url": "https://jobs.epo.org/",
+      "aliases": [
+        "EPA",
+        "EPO",
+        "European Patent Office"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Institution",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 83,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.epo.org/",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://jobs.epo.org/",
+        "discovery_origin": "source-registry:stadt_muenchen_international_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Public Institution",
+        "evidence_note": "Der priorisierte Kandidat Europaeisches Patentamt wurde ueber die offizielle EPO-Domain und das EPO-Karriereportal jobs.epo.org belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bwi_gmbh",
       "canonical_name": "BWI GmbH",
       "canonical_domain": "bwi.de",
@@ -927,6 +967,45 @@
       ]
     },
     {
+      "company_id": "company:hochschule_weihenstephan_triesdorf",
+      "canonical_name": "Hochschule Weihenstephan-Triesdorf",
+      "canonical_domain": "hswt.de",
+      "official_website_url": "https://www.hswt.de/",
+      "career_url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+      "aliases": [
+        "Hochschule Weihenstephan Triesdorf",
+        "HSWT"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Higher Education",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 82,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+        "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+        "target_area": "FREISING",
+        "industry_hint": "Higher Education",
+        "evidence_note": "Der Weihenstephan-Kandidat HSWT wurde ueber die offizielle Hochschuldomain und die dortige Stellenangebote-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:deutsche_telekom_ag",
       "canonical_name": "Deutsche Telekom AG",
       "canonical_domain": "telekom.com",
@@ -1023,6 +1102,46 @@
       ]
     },
     {
+      "company_id": "company:bayerische_landesbank",
+      "canonical_name": "BayernLB",
+      "canonical_domain": "bayernlb.de",
+      "official_website_url": "https://www.bayernlb.de/",
+      "career_url": "https://jobs.bayernlb.de/",
+      "aliases": [
+        "Bayerische Landesbank",
+        "Bayern LB",
+        "BayernLB"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Banking",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 82,
+      "next_scan_at": "2026-08-18T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.bayernlb.de/",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://jobs.bayernlb.de/",
+        "discovery_origin": "source-registry:munich_business_finance",
+        "target_area": "MUNICH",
+        "industry_hint": "Banking",
+        "evidence_note": "Der BayernLB-Kandidat wurde ueber die offizielle BayernLB-Domain und das Karriereportal jobs.bayernlb.de belegt."
+      },
+      "created_at": "2026-08-17T16:01:23.149Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bayerischer_rundfunk",
       "canonical_name": "Bayerischer Rundfunk",
       "canonical_domain": "br.de",
@@ -1058,45 +1177,6 @@
       },
       "created_at": "2026-08-28T15:53:28.788Z",
       "updated_at": "2026-08-28T15:53:28.788Z",
-      "last_successful_scan_at": null
-    },
-    {
-      "company_id": "company:bayerische_landesbank",
-      "canonical_name": "Bayerische Landesbank",
-      "canonical_domain": "bayernlb.de",
-      "official_website_url": "https://www.bayernlb.de/",
-      "career_url": "https://jobs.bayernlb.de/",
-      "aliases": [
-        "Bayerische Landesbank",
-        "BayernLB"
-      ],
-      "locations": [
-        {
-          "label": "Muenchen",
-          "city": "Muenchen",
-          "region": "Bayern",
-          "country": "DE",
-          "target_area": "MUNICH"
-        }
-      ],
-      "industry": "Banking",
-      "ats": [],
-      "scan_status": "PENDING",
-      "scan_priority": 82,
-      "next_scan_at": "2026-08-18T00:00:00Z",
-      "verification_status": "CAREER_URL_VERIFIED",
-      "discovery_source": {
-        "type": "OFFICIAL_WEBSITE",
-        "url": "https://jobs.bayernlb.de/",
-        "observed_at": "2026-08-17T16:02:19.059Z",
-        "verification_url": "https://jobs.bayernlb.de/",
-        "discovery_origin": "official.manual.2026-08-17",
-        "target_area": "MUNICH",
-        "industry_hint": "Banking",
-        "evidence_note": "Offizielles BayernLB-Stellenportal als Primaerquelle gepflegt."
-      },
-      "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-17T16:02:19.059Z",
       "last_successful_scan_at": null
     },
     {
@@ -1252,6 +1332,45 @@
       },
       "created_at": "2026-08-28T16:05:10.163Z",
       "updated_at": "2026-08-28T16:05:10.163Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:adac",
+      "canonical_name": "ADAC",
+      "canonical_domain": "adac.de",
+      "official_website_url": "https://www.adac.de/",
+      "career_url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+      "aliases": [
+        "ADAC e.V.",
+        "Allgemeiner Deutscher Automobil-Club"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 81,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Mobility Services",
+        "evidence_note": "Der ADAC-Kandidat wurde ueber die offizielle ADAC-Website und das ADAC-Karriereportal mit Stellenanzeigen belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
       "last_successful_scan_at": null
     },
     {
@@ -1491,6 +1610,84 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:adobe",
+      "canonical_name": "Adobe",
+      "canonical_domain": "adobe.com",
+      "official_website_url": "https://www.adobe.com/",
+      "career_url": "https://careers.adobe.com/",
+      "aliases": [
+        "Adobe Munich",
+        "Adobe Systems"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.adobe.com/",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://careers.adobe.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Software",
+        "evidence_note": "Der Adobe-Kandidat wurde ueber die offizielle Adobe-Domain und das Adobe-Karriereportal careers.adobe.com belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:accenture",
+      "canonical_name": "Accenture",
+      "canonical_domain": "accenture.com",
+      "official_website_url": "https://www.accenture.com/de-de",
+      "career_url": "https://www.accenture.com/de-de/careers/jobsearch",
+      "aliases": [
+        "Accenture Deutschland",
+        "Accenture GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consulting and Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.accenture.com/de-de/careers/jobsearch",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://www.accenture.com/de-de/careers/jobsearch",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Consulting and Technology",
+        "evidence_note": "Der Accenture-Kandidat wurde ueber die offizielle Accenture-Domain und die deutsche Jobsuche mit Standortfilter Muenchen belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:tuev_sued_ag",
       "canonical_name": "TUEV Sued AG",
       "canonical_domain": "tuev-sued.de",
@@ -1645,6 +1842,84 @@
       },
       "created_at": "2026-08-28T16:05:10.163Z",
       "updated_at": "2026-08-28T16:05:10.163Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:agile_robots_se",
+      "canonical_name": "Agile Robots SE",
+      "canonical_domain": "agile-robots.com",
+      "official_website_url": "https://www.agile-robots.com/en/",
+      "career_url": "https://www.agile-robots.com/en/careers/",
+      "aliases": [
+        "Agile Robots",
+        "Agile Robots AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.agile-robots.com/en/careers/",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://www.agile-robots.com/en/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Robotics",
+        "evidence_note": "Der Agile-Robots-Kandidat wurde ueber die offizielle Agile-Robots-Domain und die dortige offene-Stellen-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:aenova_group",
+      "canonical_name": "Aenova Group",
+      "canonical_domain": "aenova-group.com",
+      "official_website_url": "https://www.aenova-group.com/",
+      "career_url": "https://www.aenova-group.com/en/career/job-portal",
+      "aliases": [
+        "Aenova",
+        "Aenova Holding GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Starnberg",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Pharmaceutical Manufacturing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.aenova-group.com/en/career/job-portal",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://www.aenova-group.com/en/career/job-portal",
+        "discovery_origin": "source-registry:munich_business_life_sciences",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Pharmaceutical Manufacturing",
+        "evidence_note": "Der Aenova-Kandidat wurde ueber die offizielle Aenova-Domain und das dortige Job-Portal belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
       "last_successful_scan_at": null
     },
     {
@@ -1804,6 +2079,123 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:baywa_ag",
+      "canonical_name": "BayWa AG",
+      "canonical_domain": "baywa.com",
+      "official_website_url": "https://www.baywa.com/",
+      "career_url": "https://www.baywa.com/jobs",
+      "aliases": [
+        "BayWa"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Agriculture and Energy",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.baywa.com/jobs",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://www.baywa.com/jobs",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Agriculture and Energy",
+        "evidence_note": "Der BayWa-Kandidat wurde ueber die offizielle BayWa-Domain und die Konzern-Stellenangebote-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:arri",
+      "canonical_name": "ARRI",
+      "canonical_domain": "arri.com",
+      "official_website_url": "https://www.arri.com/",
+      "career_url": "https://www.arri.com/en/company/careers/current-vacancies",
+      "aliases": [
+        "Arnold & Richter Cine Technik",
+        "ARRI Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Film Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.arri.com/en/company/careers/current-vacancies",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://www.arri.com/en/company/careers/current-vacancies",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Film Technology",
+        "evidence_note": "Der ARRI-Kandidat wurde ueber die offizielle ARRI-Domain und deren Current-Vacancies-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ams_osram",
+      "canonical_name": "ams OSRAM",
+      "canonical_domain": "ams-osram.com",
+      "official_website_url": "https://ams-osram.com/",
+      "career_url": "https://jobs.ams-osram.com/en",
+      "aliases": [
+        "ams OSRAM AG",
+        "ASM Osram",
+        "OSRAM"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Semiconductors and Photonics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.ams-osram.com/en",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://jobs.ams-osram.com/en",
+        "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Semiconductors and Photonics",
+        "evidence_note": "Der ams-OSRAM-Kandidat wurde ueber die offizielle ams-OSRAM-Domain und die offizielle Job-Suche jobs.ams-osram.com belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:wacker_neuson_se",
       "canonical_name": "Wacker Neuson SE",
       "canonical_domain": "wackerneusongroup.com",
@@ -1880,6 +2272,45 @@
       },
       "created_at": "2026-08-23T06:20:01.451Z",
       "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bayerische_versorgungskammer",
+      "canonical_name": "Bayerische Versorgungskammer",
+      "canonical_domain": "versorgungskammer.de",
+      "official_website_url": "https://www.versorgungskammer.de/",
+      "career_url": "https://karriere.versorgungskammer.de/",
+      "aliases": [
+        "BVK",
+        "Versorgungskammer"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Pension Administration",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere.versorgungskammer.de/",
+        "observed_at": "2026-08-28T16:22:41.522Z",
+        "verification_url": "https://karriere.versorgungskammer.de/",
+        "discovery_origin": "source-registry:munich_business_finance",
+        "target_area": "MUNICH",
+        "industry_hint": "Public Pension Administration",
+        "evidence_note": "Der BVK-Kandidat wurde ueber die offizielle Versorgungskammer-Domain und das Karriereportal karriere.versorgungskammer.de belegt."
+      },
+      "created_at": "2026-08-28T16:22:41.522Z",
+      "updated_at": "2026-08-28T16:22:41.522Z",
       "last_successful_scan_at": null
     },
     {
@@ -4708,6 +5139,111 @@
   ],
   "job_sources": [
     {
+      "source_id": "source:accenture_career",
+      "company_id": "company:accenture",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.accenture.com/de-de/careers/jobsearch",
+      "canonical_url": "https://www.accenture.com/de-de/careers/jobsearch",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.accenture.com/de-de/careers/jobsearch",
+          "basis_url": "https://www.accenture.com/de-de",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:adac_career",
+      "company_id": "company:adac",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+      "canonical_url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+          "basis_url": "https://www.adac.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:adobe_career",
+      "company_id": "company:adobe",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.adobe.com/",
+      "canonical_url": "https://careers.adobe.com/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.adobe.com/",
+          "basis_url": "https://www.adobe.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:aenova_group_career",
+      "company_id": "company:aenova_group",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.aenova-group.com/en/career/job-portal",
+      "canonical_url": "https://www.aenova-group.com/en/career/job-portal",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.aenova-group.com/en/career/job-portal",
+          "basis_url": "https://www.aenova-group.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:agile_robots_se_career",
+      "company_id": "company:agile_robots_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.agile-robots.com/en/careers/",
+      "canonical_url": "https://www.agile-robots.com/en/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.agile-robots.com/en/careers/",
+          "basis_url": "https://www.agile-robots.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:allianz_se_career",
       "company_id": "company:allianz_se",
       "source_type": "CAREER_PAGE",
@@ -4725,6 +5261,27 @@
         "observed_at": "2026-08-17T15:52:58.666Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:ams_osram_career",
+      "company_id": "company:ams_osram",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.ams-osram.com/en",
+      "canonical_url": "https://jobs.ams-osram.com/en",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.ams-osram.com/en",
+          "basis_url": "https://ams-osram.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:aquabench_gmbh_career_url",
@@ -4746,6 +5303,27 @@
           ],
           "observed_at": "2026-08-27T10:17:13.75Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:arri_career",
+      "company_id": "company:arri",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.arri.com/en/company/careers/current-vacancies",
+      "canonical_url": "https://www.arri.com/en/company/careers/current-vacancies",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.arri.com/en/company/careers/current-vacancies",
+          "basis_url": "https://www.arri.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -4817,17 +5395,40 @@
       "url": "https://jobs.bayernlb.de/",
       "canonical_url": "https://jobs.bayernlb.de/",
       "is_official": true,
-      "verified_at": "2026-08-17T16:02:19.059Z",
+      "verified_at": "2026-08-28T16:22:41.522Z",
       "verification_basis": "CAREER_URL",
-      "verification_evidence": {
-        "status": "VERIFIED",
-        "evidence_type": "CAREER_URL",
-        "url": "https://jobs.bayernlb.de/",
-        "basis_url": "https://www.bayernlb.de/",
-        "redirect_chain": [],
-        "observed_at": "2026-08-17T16:02:19.059Z",
-        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
-      }
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.bayernlb.de/",
+          "basis_url": "https://www.bayernlb.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bayerische_versorgungskammer_career",
+      "company_id": "company:bayerische_versorgungskammer",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.versorgungskammer.de/",
+      "canonical_url": "https://karriere.versorgungskammer.de/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.versorgungskammer.de/",
+          "basis_url": "https://www.versorgungskammer.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:bayerischer_rundfunk_career",
@@ -4846,6 +5447,27 @@
           "basis_url": "https://www.br.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T15:53:28.788Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:baywa_ag_career",
+      "company_id": "company:baywa_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.baywa.com/jobs",
+      "canonical_url": "https://www.baywa.com/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.baywa.com/jobs",
+          "basis_url": "https://www.baywa.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -5036,6 +5658,27 @@
       ]
     },
     {
+      "source_id": "source:europaeisches_patentamt_career",
+      "company_id": "company:europaeisches_patentamt",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.epo.org/",
+      "canonical_url": "https://jobs.epo.org/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.epo.org/",
+          "basis_url": "https://www.epo.org/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:flughafen_muenchen_gmbh_career",
       "company_id": "company:flughafen_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -5219,6 +5862,27 @@
           ],
           "observed_at": "2026-08-27T17:08:36.662Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hochschule_weihenstephan_triesdorf_career",
+      "company_id": "company:hochschule_weihenstephan_triesdorf",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+      "canonical_url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:22:41.522Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+          "basis_url": "https://www.hswt.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },

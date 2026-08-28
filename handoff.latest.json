@@ -1,19 +1,79 @@
 {
+  "route_ok": true,
+  "toolchain": {
+    "ts": "2026-08-17T13:53:15.642+02:00",
+    "gradle": {
+      "cmd": "gradle",
+      "mode": "path",
+      "root": "D:\\_Scripte\\JobAgent"
+    }
+  },
+  "next_steps": [
+    "Naechste JA-027-Welle: weitere store-ferne Kandidaten priorisiert belegen; Astellas Pharma GmbH erst nach belastbarem offiziellen Karriere-/ATS-Beleg erneut verifizieren."
+  ],
+  "verify_digest": {
+    "ts": "2026-08-24T09:29:31.729+02:00",
+    "cmd": ".\\ci.cmd supertest",
+    "exit": 0,
+    "status": "pass",
+    "log_path": null,
+    "scope": "JobAgent function suite",
+    "tests_total": 19,
+    "duration_seconds": 41.31
+  },
+  "active_id": "TD-0041",
+  "changed": [
+    "Roadmap.md",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "data/jobagent/company-discovery.official.wave-d-20260828.json",
+    "data/jobagent/store.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json"
+  ],
+  "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten priorisiert belegen; Astellas Pharma GmbH erst nach belastbarem offiziellen Karriere-/ATS-Beleg erneut verifizieren.",
+  "summary": "JA-027 Fortschritt: Welle D/B mit 12 offiziell belegten Arbeitgebern importiert, 11 neue Firmen und 1 dedupliziertes Update; ein Astellas-Kandidat fail-closed fuer Retry geplant.",
+  "git": {
+    "detached": false,
+    "branch": "master",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "remote": "origin",
+    "behind": 0,
+    "tracked_changes": [
+      "Roadmap.md",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/company-discovery.hints.json",
+      "data/jobagent/store.json",
+      "html/jobagent/company-coverage.html",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json"
+    ],
+    "has_repo": true,
+    "worktree": "dirty",
+    "head": "36eb462ae616"
+  },
+  "route_violations": [],
   "refs": [
     "file:todo.current.md",
     "file:todo.state.json",
     "file:todo.events.jsonl",
     "file:handoff.latest.json",
-    "file:logs/jobagent/company-discovery-import-20260828-160510.json",
-    "file:logs/jobagent/company-candidate-verification-20260828-160845.json",
-    "file:logs/jobagent/company-coverage-20260828-160911.json",
+    "file:data/jobagent/company-discovery.official.wave-d-20260828.json",
+    "file:logs/jobagent/company-discovery-import-20260828-162241.json",
+    "file:logs/jobagent/company-candidate-verification-20260828-162246.json",
+    "file:logs/jobagent/company-coverage-20260828-162317.json",
     "file:html/jobagent/company-coverage.html"
   ],
-  "ts": "2026-08-28T18:15:19.328+02:00",
-  "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen",
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-c-20260828.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-d-20260828.json -WaveId B",
       "exit": 0
     },
     {
@@ -65,27 +125,38 @@
       "exit": 0
     }
   ],
-  "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmen-/Karrierequelle belegen oder fail-closed in Review lassen. Primaere Kandidaten: BMW Group, Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, TUM School of Life Sciences und weitere hoch priorisierte Regional-/Register-Hints.",
-  "active_id": "TD-0041",
-  "status": "in-progress",
-  "capsule": {
-    "workspace_root": ".",
-    "ts": "2026-08-28T18:15:19.328+02:00",
-    "route_violations": [],
-    "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmen-/Karrierequelle belegen oder fail-closed in Review lassen. Primaere Kandidaten: BMW Group, Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, TUM School of Life Sciences und weitere hoch priorisierte Regional-/Register-Hints.",
-    "env_inventory_path": null,
-    "agent_id": "UTTER-20260817-39f7",
-    "status": "in-progress",
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.json"
-    ],
+  "workspace_root": ".",
+  "route": {
     "route_ok": true,
+    "violations": [],
+    "ts": "2026-08-28T18:26:35.066+02:00",
+    "agent_id": "UTTER-20260817-39f7",
+    "git": {
+      "has_repo": true,
+      "diff_log": "logs\\terminal\\route-check-20260828-182632.log"
+    },
+    "changed_count": 5,
+    "policy": {
+      "forbid_path": [],
+      "no_touch": [],
+      "forbid_regex": []
+    },
+    "changed_files": [
+      "Roadmap.md",
+      "data/jobagent/company-discovery.hints.json",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/store.json",
+      "html/jobagent/company-coverage.html"
+    ],
+    "mode": "standard"
+  },
+  "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
+  "capsule": {
+    "manual_missing": false,
+    "env_inventory_missing": false,
     "verified": [
       {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-c-20260828.json -WaveId B",
+        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-d-20260828.json -WaveId B",
         "exit": 0
       },
       {
@@ -137,112 +208,64 @@
         "exit": 0
       }
     ],
-    "git": {
-      "ahead": 0,
-      "has_repo": true,
-      "head": "1a6116fac392",
-      "upstream": "origin/master",
-      "branch": "master",
-      "tracked_changes": [
-        "Roadmap.md",
-        "data/jobagent/company-candidate-verification.queue.json",
-        "data/jobagent/company-discovery.official.wave-c-20260828.json",
-        "data/jobagent/store.json",
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "html/jobagent/company-coverage.html",
-        "src/JobAgent.Coverage.psm1",
-        "tests/Test-JobAgentCoverage.ps1",
-        "todo.checkpoint.json",
-        "todo.current.md",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json",
-        "todo.state.json",
-        "tools/Verify-JobAgentCompanyCandidates.ps1"
-      ],
-      "behind": 0,
-      "detached": false,
-      "worktree": "dirty"
-    },
-    "manual_missing": false,
+    "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten priorisiert belegen; Astellas Pharma GmbH erst nach belastbarem offiziellen Karriere-/ATS-Beleg erneut verifizieren.",
+    "ts": "2026-08-28T18:27:36.324+02:00",
     "project": "JobAgent",
+    "agent_id": "UTTER-20260817-39f7",
+    "route_violations": [],
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
     "env_inventory_used": false,
-    "active_id": "TD-0041",
     "changed": [
       "Roadmap.md",
       "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/company-discovery.official.wave-c-20260828.json",
+      "data/jobagent/company-discovery.hints.json",
+      "data/jobagent/company-discovery.official.wave-d-20260828.json",
       "data/jobagent/store.json",
       "handoff.latest.json",
       "handoff.latest.md",
       "html/jobagent/company-coverage.html",
-      "src/JobAgent.Coverage.psm1",
-      "tests/Test-JobAgentCoverage.ps1",
-      "todo.checkpoint.json",
-      "todo.current.md",
       "todo.events.jsonl",
       "todo.history.digest.json",
       "todo.master.index.json",
-      "todo.state.json",
-      "tools/Verify-JobAgentCompanyCandidates.ps1"
+      "todo.state.json"
     ],
-    "env_inventory_missing": false,
-    "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen"
+    "git": {
+      "detached": false,
+      "branch": "master",
+      "upstream": "origin/master",
+      "ahead": 0,
+      "remote": "origin",
+      "behind": 0,
+      "tracked_changes": [
+        "Roadmap.md",
+        "data/jobagent/company-candidate-verification.queue.json",
+        "data/jobagent/company-discovery.hints.json",
+        "data/jobagent/store.json",
+        "html/jobagent/company-coverage.html",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json"
+      ],
+      "has_repo": true,
+      "worktree": "dirty",
+      "head": "36eb462ae616"
+    },
+    "active_id": "TD-0041",
+    "status": "in-progress",
+    "route_ok": true,
+    "workspace_root": ".",
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+    "env_inventory_path": null
   },
-  "next_steps": [
-    "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmen-/Karrierequelle belegen oder fail-closed in Review lassen. Primaere Kandidaten: BMW Group, Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, TUM School of Life Sciences und weitere hoch priorisierte Regional-/Register-Hints."
-  ],
+  "project": "JobAgent",
   "agent_id": "UTTER-20260817-39f7",
-  "route_ok": true,
-  "route_violations": [],
-  "workspace_root": ".",
-  "git": {
-    "ahead": 0,
-    "has_repo": true,
-    "head": "1a6116fac392",
-    "upstream": "origin/master",
-    "branch": "master",
-    "tracked_changes": [
-      "Roadmap.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/company-discovery.official.wave-c-20260828.json",
-      "data/jobagent/store.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "src/JobAgent.Coverage.psm1",
-      "tests/Test-JobAgentCoverage.ps1",
-      "todo.checkpoint.json",
-      "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json",
-      "tools/Verify-JobAgentCompanyCandidates.ps1"
-    ],
-    "behind": 0,
-    "detached": false,
-    "worktree": "dirty"
-  },
-  "summary": "JA-027 Fortschritt: verifizierte Welle mit 8 neuen Firmen plus 1 Update importiert; Candidate-Queue store-aware gemacht; STP ausgefuehrt.",
-  "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/company-discovery.official.wave-c-20260828.json",
-    "data/jobagent/store.json",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
-    "src/JobAgent.Coverage.psm1",
-    "tests/Test-JobAgentCoverage.ps1",
-    "todo.checkpoint.json",
-    "todo.current.md",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "todo.state.json",
-    "tools/Verify-JobAgentCompanyCandidates.ps1"
-  ],
-  "project": "JobAgent"
+  "status": "in-progress",
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+  "ts": "2026-08-28T18:27:36.324+02:00"
 }

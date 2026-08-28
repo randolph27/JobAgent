@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T18:15:19.328+02:00
+Stand: 2026-08-28T18:27:36.324+02:00
 
 ## Zustand
 
@@ -8,48 +8,44 @@ Stand: 2026-08-28T18:15:19.328+02:00
 - Status: `in-progress`
 - Ziel: JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen
 - Branch: `master`
-- HEAD vor Commit: `1a6116fac392`
+- HEAD: `36eb462ae616`
 - Upstream: `origin/master`
-- Ahead/Behind vor Commit: `0/0`
-- Worktree vor Commit: `dirty`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
 - Route: `True`
 
 ## Ergebnis
 
-- JA-027 bleibt aktiv; kein Roadmap-Rausrotieren, weil die Gesamtanforderung noch nicht komplett erledigt ist.
-- Welle C/B: 9 offiziell belegte Arbeitgeber verarbeitet, 8 neue Firmen, 1 Update.
-- Neu importiert: Bayerische Landesanstalt fuer Landwirtschaft, Bayerische Landesanstalt fuer Wald und Forstwirtschaft, Jungheinrich Moosburg GmbH, Hubert Burda Media Holding, IHK fuer Muenchen und Oberbayern, Telefonica Deutschland Holding AG, TUEV Sued AG, Technische Universitaet Muenchen.
-- Aktualisiert: MAN Truck and Bus SE.
-- Store: 96 Firmen, 92 JobSources.
-- Source Coverage: 1914 Quellen gesamt, 94 offizielle Quellen, 93 Karrierequellen.
-- Kandidatenqueue: Store-verifizierte Treffer werden als `ALREADY_VERIFIED_IN_STORE`/`VERIFIED` gefuehrt; erneute Website-Ermittlung wird dadurch nicht blockiert.
+- Welle D/B: 12 offiziell belegte Arbeitgeber verarbeitet, 11 neue Firmen, 1 dedupliziertes Update.
+- Neu importiert: Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, ADAC, Accenture, Adobe, Aenova Group, Agile Robots SE, ARRI, ams OSRAM, BayWa AG, Bayerische Versorgungskammer.
+- Aktualisiert/dedupliziert: BayernLB auf bestehende Bayerische Landesbank.
+- Store: 107 Firmen, 103 JobSources.
+- Source Coverage: 1925 Quellen gesamt, 105 offizielle Quellen, 104 Karrierequellen.
+- Astellas Pharma GmbH blieb fail-closed in `RETRY_SCHEDULED`; kein offizieller Karriere-/ATS-Link wurde belegt.
 
 ## Naechste Aufgabe
 
-Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmen-/Karrierequelle belegen oder fail-closed in Review lassen. Primaere Kandidaten: BMW Group, Europaeisches Patentamt, Hochschule Weihenstephan-Triesdorf, TUM School of Life Sciences und weitere hoch priorisierte Regional-/Register-Hints.
+Naechste JA-027-Welle: weitere store-ferne Kandidaten priorisiert belegen; Astellas Pharma GmbH erst nach belastbarem offiziellen Karriere-/ATS-Beleg erneut verifizieren.
 
 ## Versionierte Aenderungen
 
+
 - `Roadmap.md`
 - `data/jobagent/company-candidate-verification.queue.json`
-- `data/jobagent/company-discovery.official.wave-c-20260828.json`
+- `data/jobagent/company-discovery.hints.json`
+- `data/jobagent/company-discovery.official.wave-d-20260828.json`
 - `data/jobagent/store.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
 - `html/jobagent/company-coverage.html`
-- `src/JobAgent.Coverage.psm1`
-- `tests/Test-JobAgentCoverage.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 - `todo.state.json`
-- `tools/Verify-JobAgentCompanyCandidates.ps1`
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-c-20260828.json -WaveId B` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-d-20260828.json -WaveId B` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`

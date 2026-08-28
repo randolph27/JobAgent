@@ -1,0 +1,295 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-28T16:35:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Europaeisches Patentamt",
+      "official_website_url": "https://www.epo.org/",
+      "career_url": "https://jobs.epo.org/",
+      "aliases": [
+        "European Patent Office",
+        "EPA",
+        "EPO"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Institution",
+      "scan_priority": 83,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.epo.org/",
+      "discovery_origin": "source-registry:stadt_muenchen_international_companies",
+      "evidence_note": "Der priorisierte Kandidat Europaeisches Patentamt wurde ueber die offizielle EPO-Domain und das EPO-Karriereportal jobs.epo.org belegt."
+    },
+    {
+      "canonical_name": "Hochschule Weihenstephan-Triesdorf",
+      "official_website_url": "https://www.hswt.de/",
+      "career_url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+      "aliases": [
+        "HSWT",
+        "Hochschule Weihenstephan Triesdorf"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Higher Education",
+      "scan_priority": 82,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hswt.de/arbeiten-an-der-hswt/stellenangebote",
+      "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+      "evidence_note": "Der Weihenstephan-Kandidat HSWT wurde ueber die offizielle Hochschuldomain und die dortige Stellenangebote-Seite belegt."
+    },
+    {
+      "canonical_name": "ADAC",
+      "official_website_url": "https://www.adac.de/",
+      "career_url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+      "aliases": [
+        "ADAC e.V.",
+        "Allgemeiner Deutscher Automobil-Club"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility Services",
+      "scan_priority": 81,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://karriere.adac.de/jobangebote-stellenanzeigen.html",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Der ADAC-Kandidat wurde ueber die offizielle ADAC-Website und das ADAC-Karriereportal mit Stellenanzeigen belegt."
+    },
+    {
+      "canonical_name": "Accenture",
+      "official_website_url": "https://www.accenture.com/de-de",
+      "career_url": "https://www.accenture.com/de-de/careers/jobsearch",
+      "aliases": [
+        "Accenture GmbH",
+        "Accenture Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consulting and Technology",
+      "scan_priority": 80,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.accenture.com/de-de/careers/jobsearch",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Accenture-Kandidat wurde ueber die offizielle Accenture-Domain und die deutsche Jobsuche mit Standortfilter Muenchen belegt."
+    },
+    {
+      "canonical_name": "Adobe",
+      "official_website_url": "https://www.adobe.com/",
+      "career_url": "https://careers.adobe.com/",
+      "aliases": [
+        "Adobe Systems",
+        "Adobe Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software",
+      "scan_priority": 80,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.adobe.com/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Adobe-Kandidat wurde ueber die offizielle Adobe-Domain und das Adobe-Karriereportal careers.adobe.com belegt."
+    },
+    {
+      "canonical_name": "Aenova Group",
+      "official_website_url": "https://www.aenova-group.com/",
+      "career_url": "https://www.aenova-group.com/en/career/job-portal",
+      "aliases": [
+        "Aenova",
+        "Aenova Holding GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Starnberg",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Pharmaceutical Manufacturing",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.aenova-group.com/en/career/job-portal",
+      "discovery_origin": "source-registry:munich_business_life_sciences",
+      "evidence_note": "Der Aenova-Kandidat wurde ueber die offizielle Aenova-Domain und das dortige Job-Portal belegt."
+    },
+    {
+      "canonical_name": "Agile Robots SE",
+      "official_website_url": "https://www.agile-robots.com/en/",
+      "career_url": "https://www.agile-robots.com/en/careers/",
+      "aliases": [
+        "Agile Robots",
+        "Agile Robots AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.agile-robots.com/en/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Agile-Robots-Kandidat wurde ueber die offizielle Agile-Robots-Domain und die dortige offene-Stellen-Seite belegt."
+    },
+    {
+      "canonical_name": "ARRI",
+      "official_website_url": "https://www.arri.com/",
+      "career_url": "https://www.arri.com/en/company/careers/current-vacancies",
+      "aliases": [
+        "Arnold & Richter Cine Technik",
+        "ARRI Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Film Technology",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.arri.com/en/company/careers/current-vacancies",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der ARRI-Kandidat wurde ueber die offizielle ARRI-Domain und deren Current-Vacancies-Seite belegt."
+    },
+    {
+      "canonical_name": "ams OSRAM",
+      "official_website_url": "https://ams-osram.com/",
+      "career_url": "https://jobs.ams-osram.com/en",
+      "aliases": [
+        "ASM Osram",
+        "OSRAM",
+        "ams OSRAM AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Semiconductors and Photonics",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.ams-osram.com/en",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Der ams-OSRAM-Kandidat wurde ueber die offizielle ams-OSRAM-Domain und die offizielle Job-Suche jobs.ams-osram.com belegt."
+    },
+    {
+      "canonical_name": "BayWa AG",
+      "official_website_url": "https://www.baywa.com/",
+      "career_url": "https://www.baywa.com/jobs",
+      "aliases": [
+        "BayWa"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Agriculture and Energy",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.baywa.com/jobs",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Der BayWa-Kandidat wurde ueber die offizielle BayWa-Domain und die Konzern-Stellenangebote-Seite belegt."
+    },
+    {
+      "canonical_name": "Bayerische Versorgungskammer",
+      "official_website_url": "https://www.versorgungskammer.de/",
+      "career_url": "https://karriere.versorgungskammer.de/",
+      "aliases": [
+        "BVK",
+        "Versorgungskammer"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Pension Administration",
+      "scan_priority": 77,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://karriere.versorgungskammer.de/",
+      "discovery_origin": "source-registry:munich_business_finance",
+      "evidence_note": "Der BVK-Kandidat wurde ueber die offizielle Versorgungskammer-Domain und das Karriereportal karriere.versorgungskammer.de belegt."
+    },
+    {
+      "canonical_name": "BayernLB",
+      "official_website_url": "https://www.bayernlb.de/",
+      "career_url": "https://jobs.bayernlb.de/",
+      "aliases": [
+        "Bayerische Landesbank",
+        "Bayern LB"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Banking",
+      "scan_priority": 77,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.bayernlb.de/",
+      "discovery_origin": "source-registry:munich_business_finance",
+      "evidence_note": "Der BayernLB-Kandidat wurde ueber die offizielle BayernLB-Domain und das Karriereportal jobs.bayernlb.de belegt."
+    }
+  ]
+}
