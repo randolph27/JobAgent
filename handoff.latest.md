@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T07:52:20.891+02:00
+Stand: 2026-08-28T08:06:09.436+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,8 +8,8 @@ Stand: 2026-08-28T07:52:20.891+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit: `5a4468f9a398`
-- Ahead/Behind vor Commit: `0/0`
+- HEAD vor Abschluss-Commit: `491b80507439`
+- Ahead/Behind vor Abschluss-Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausfuehren; JA-027 ist noch nicht komplett erledigt.
@@ -22,6 +22,7 @@ Stand: 2026-08-28T07:52:20.891+02:00
 - Eine weitere Website-Discovery-Welle fuer JA-027 verarbeitet: `25` Kandidaten.
 - Ergebnis der Discovery-Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
 - Grund fuer alle 25 Kandidaten dieser Welle: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
+- Betroffene Kandidaten dieser Welle waren u. a. `Airbus Defence and Space`, `Airtexx Gassysteme and Equipment`, `Aiworx`, `AK Kommunikationstechnik`, `Aekbv`, `Aktion Muenchner Fahrgaeste`, `Alanod`, `Alegria`, `Allgeier Engineering`, `Alpeneuro`, `Alpgeotech GmbH`, `AlphaPet Ventures`, `Alps Biketours GmbH`, `Alt & Kelber Immobiliengruppe`, `Altop Verlags- und Vertriebsgesellschaft mbH`, `Amgen`, `Amgen GmbH`, `Amicus Therapeutics`, `Ammer Entsorgung`, `Analog Devices GmbH`, `Analytisch Biologisches Forschungslabor GmbH`, `andrena objects ag`, `Angela Proels G'wandmacherei`, `Anna Krolicki Krankenpflege`, `Antenne Bayern`.
 - Es wurde kein Kandidat produktiv in `data/jobagent/store.json` uebernommen.
 - Store blieb fachlich unveraendert; Queue und Hint-Status wurden aktualisiert.
 - Coverage wurde neu erzeugt.
@@ -30,17 +31,15 @@ Stand: 2026-08-28T07:52:20.891+02:00
 ## Datenstand nach Coverage
 
 - Produktive Firmen: `85`
-- Backlog-Items: `85`
-- Candidate-Hints: `1790`
 - Kandidatenqueue: `1785` Cluster
 - Queue ready: `0`
-- Target-Inventory-Kandidaten: `1870`
 - Source Inventory: `1904` Quellen, davon `84` offizielle Quellen und `1820` Discovery-Quellen
 - Target-Inventory-Gate: `failed`
-- Duplicate Groups: `0`
 - Import Waves: `4`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-060444.json`
+- Letzte Coverage-Artefakte: `logs/jobagent/company-coverage-20260828-060505.json`, `logs/jobagent/company-coverage-20260828-060505.md`, `html/jobagent/company-coverage.html`
 
-## Geaenderte Dateien fuer Commit
+## Geaenderte Dateien fuer Abschluss-Commit
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
@@ -50,20 +49,12 @@ Stand: 2026-08-28T07:52:20.891+02:00
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
-## Artefakte
-
-- `logs/jobagent/company-candidate-website-discovery-20260828-055028.json`
-- `logs/jobagent/company-coverage-20260828-055048.json`
-- `logs/jobagent/company-coverage-20260828-055048.md`
-- `html/jobagent/company-coverage.html`
-- `logs/terminal/route-check-20260828-075139.log`
-
 ## Verifikation
 
-- `curl.exe -s http://localhost:9000/api/system/status` -> Exit `0`; Status `UP`
+- `curl.exe -s http://localhost:9000/api/system/status` -> Exit `0`; Status `UP`; Version `26.1.0.118079`
 - `.\ci.cmd devserver-status` -> Exit `0`; Port `8500` listening `True`
 - `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 0 offizielle Website-Treffer; 25 Manual Review
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=85; target_inventory_gate_status=failed
+- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; Coverage aktualisiert; target_inventory_gate_status=`failed`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`; 24 Faelle bestanden
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`; 28 Faelle bestanden
 - `.\ci.cmd route-check` -> Exit `0`; route_ok=True
