@@ -3696,7 +3696,7 @@
       ],
       "updated_at": "2026-08-27T17:57:52.983Z",
       "created_at": "2026-08-27T17:57:52.983Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3750,7 +3750,7 @@
       ],
       "updated_at": "2026-08-27T17:57:52.983Z",
       "created_at": "2026-08-27T17:57:52.983Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3804,7 +3804,7 @@
       ],
       "updated_at": "2026-08-27T17:57:52.983Z",
       "created_at": "2026-08-27T17:57:52.983Z",
-      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3832,6 +3832,60 @@
           "final_url": "https://pininfarina.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-25T17:57:52.983Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:puren_pharma_gmbh_and_co_kg",
+      "canonical_name": "PUREN Pharma GmbH & Co. KG",
+      "canonical_domain": "puren-pharma.de",
+      "official_website_url": "https://puren-pharma.de/",
+      "career_url": "https://puren-pharma.de/karriere",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-27T18:01:51.849Z",
+      "created_at": "2026-08-27T18:01:51.849Z",
+      "next_scan_at": "2026-08-28T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-27T18:01:51.849Z",
+        "verification_url": "https://puren-pharma.de/karriere",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen",
+          "company_id": "company:puren_pharma_gmbh_and_co_kg",
+          "canonical_name": "PUREN Pharma GmbH & Co. KG",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://puren-pharma.de/karriere",
+          "verified_by_url": "https://puren-pharma.de/",
+          "redirect_chain": "https://puren-pharma.de/karriere",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "245b95971197f3e2b5190a91375460d0ce8efdeca8dfded9396fab9ad89ba64e",
+          "observed_at": "2026-08-27T18:01:51.849Z",
+          "http_status": 200,
+          "final_url": "https://puren-pharma.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T18:01:51.849Z"
         }
       ]
     }
@@ -5547,6 +5601,29 @@
             "https://pininfarina.de/careers"
           ],
           "observed_at": "2026-08-27T17:57:52.983Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:puren_pharma_gmbh_and_co_kg_career_url",
+      "company_id": "company:puren_pharma_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://puren-pharma.de/karriere",
+      "canonical_url": "https://puren-pharma.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-27T18:01:51.849Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://puren-pharma.de/karriere",
+          "basis_url": "https://puren-pharma.de/",
+          "redirect_chain": [
+            "https://puren-pharma.de/karriere"
+          ],
+          "observed_at": "2026-08-27T18:01:51.849Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]

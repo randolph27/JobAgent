@@ -1,14 +1,14 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T17:58:37.417Z",
-  "clusters_total": 1786,
+  "generated_at": "2026-08-27T18:02:36.661Z",
+  "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "DISCOVER_OFFICIAL_WEBSITE": 1728,
+    "DISCOVER_OFFICIAL_WEBSITE": 1726,
     "MANUAL_DECISION": 1,
-    "REJECT_DUPLICATE": 4,
+    "REJECT_DUPLICATE": 5,
     "VERIFY_OFFICIAL_SITE": 53
   },
   "queue": [
@@ -19414,10 +19414,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19457,10 +19457,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19502,10 +19502,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19545,10 +19545,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19588,10 +19588,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19631,10 +19631,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19674,10 +19674,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19717,10 +19717,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19760,10 +19760,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19803,10 +19803,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19846,10 +19846,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19891,10 +19891,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -19910,49 +19910,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:provinzial"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen",
-      "candidate_id": "regional-hint:munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen"
-      ],
-      "canonical_name": "PUREN Pharma GmbH & Co. KG",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "1f2258930ea17f36b34dadd0ca23ce8355bdbfe962e7fe00fa60b7fe62695e34",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:puren pharma"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -19977,10 +19934,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20020,10 +19977,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20063,10 +20020,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20106,10 +20063,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20149,10 +20106,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20168,49 +20125,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:quantumrock"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen"
-      ],
-      "canonical_name": "QuEST Global Engineering Services GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "41245cc365d8828230bb26e3b3221ad40abe8cb96e8b07223cd8014224bdc102",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:quest global engineering services"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -20235,10 +20149,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20278,10 +20192,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20321,10 +20235,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20364,10 +20278,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20407,10 +20321,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20450,10 +20364,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -26845,50 +26759,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_intelizign_com",
-      "candidate_id": "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen"
-      ],
-      "canonical_name": "Intelizign Engineering Services GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "VERIFIED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:27:13.367Z",
-      "next_attempt_at": null,
-      "last_status": "COMPANY_DOMAIN_VERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "0f4dff69e3e97d130eb61227de530bbfcd14e659993296164bc1cc279784f20d",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:intelizign.com",
-          "name:intelizign engineering services"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:domain_jasmin_infotech_com",
       "candidate_id": "regional-hint:munich_business_indian_companies_jasmin_infotech_gmbh_muenchen",
       "candidate_ids": [
@@ -27373,6 +27243,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_puren_pharma_de",
+      "candidate_id": "regional-hint:munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen"
+      ],
+      "canonical_name": "PUREN Pharma GmbH & Co. KG",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T18:01:51.849Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "1f2258930ea17f36b34dadd0ca23ce8355bdbfe962e7fe00fa60b7fe62695e34",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:puren-pharma.de",
+          "name:puren pharma"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -77010,6 +76924,53 @@
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_intelizign_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
+        "regional-hint:munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen"
+      ],
+      "canonical_name": "Intelizign Engineering Services GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "REJECT_DUPLICATE",
+      "reason_codes": [
+        "DUPLICATE_CLUSTER_REVIEW",
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "DUPLICATE_CLUSTER_REVIEW,OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:27:13.367Z",
+      "next_attempt_at": null,
+      "last_status": "COMPANY_DOMAIN_VERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "MEDIUM",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "0f4dff69e3e97d130eb61227de530bbfcd14e659993296164bc1cc279784f20d",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:intelizign.com",
+          "name:intelizign engineering services",
+          "name:quest global engineering services"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 2
       }
     },
     {
