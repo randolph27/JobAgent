@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T07:16:42.864+02:00
+Stand: 2026-08-28T07:21:22.632+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,39 +8,38 @@ Stand: 2026-08-28T07:16:42.864+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit: `b8cbf09daea5`
+- HEAD vor Commit: `b659118b775c`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausfuehren; JA-027 ist noch nicht komplett erledigt.
-- Supertest: nicht neu angefragt; gemaess Nutzeranweisung gilt er fuer diesen Abschluss als erledigt.
+- Supertest: nicht neu angefragt; gemaess Nutzeranweisung gilt er als erledigt.
 - Devserver: `http://localhost:8500/`, zuletzt `listening=True`
 - SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
 
 ## Letzter abgeschlossener Arbeitsschritt
 
 - Eine weitere Website-Discovery-Welle fuer JA-027 verarbeitet: `25` Kandidaten.
-- Ergebnis der Discovery-Welle: `2` offizielle Website-Treffer, `23` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
-- Website-verifizierte Kandidaten:
-  - `regional-hint:munich_business_indian_companies_tata_consultancy_services_deutschland_gmbh_muenchen` -> offizielle Website `https://tcs.com/`
-  - `regional-hint:munich_business_japanese_companies_tdk_electronics_ag_muenchen` -> offizielle Website `https://tdk-electronics.tdk.com/`
-- Kandidatenverifikation danach ausgefuehrt: `2` Kandidaten.
-- Produktiv hinzugefuegte Firma in diesem Schritt: `TDK Electronics AG`, `company:tdk_electronics_ag`, Karriere-URL `https://tdk-electronics.tdk.com/en/2302050/careers`, Status `CAREER_URL_VERIFIED`.
-- Nicht produktiv hinzugefuegt: `Tata Consultancy Services Deutschland GmbH`; offizielle Website antwortete beim Karriere-/Sitemap-Check mit `403`, daher fail-closed `UNVERIFIED` und `RETRY_SCHEDULED` fuer `2026-08-29T05:13:11.337Z`.
+- Ergebnis der Discovery-Welle: `1` offizieller Website-Treffer, `24` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
+- Website-verifizierter Kandidat:
+  - `regional-hint:munich_business_indian_companies_tech_mahindra_muenchen` -> offizielle Website `https://techmahindra.com/`
+- Kandidatenverifikation danach ausgefuehrt: `1` Kandidat.
+- Produktiv hinzugefuegte Firma in diesem Schritt: `Tech Mahindra`, `company:tech_mahindra`, Karriere-URL `https://techmahindra.com/careers`, Status `CAREER_URL_VERIFIED`.
 - Store wurde aktualisiert und mit Backup geschrieben.
 
 ## Datenstand nach Coverage
 
-- Produktive Firmen: `82`
-- Backlog-Items: `82`
+- Produktive Firmen: `83`
+- Backlog-Items: `83`
 - Candidate-Hints: `1790`
 - Kandidatenqueue: `1785` Cluster
-- Queue ready: `8`
-- Queue verified total: `50`
-- Queue manual review total: `1727`
-- Queue retry scheduled: `1`
+- Queue ready: `0`
+- Queue processed in letzter Verifikation: `1`
+- Queue verified total: `51`
+- Queue manual review total: `1726`
+- Queue retry scheduled: `8`
 - Queue retry exhausted: `0`
-- Target-Inventory-Kandidaten: `1867`
-- Source Inventory: `1901` Quellen, davon `81` offizielle Quellen und `1820` Discovery-Quellen
+- Target-Inventory-Kandidaten: `1868`
+- Source Inventory: `1902` Quellen, davon `82` offizielle Quellen und `1820` Discovery-Quellen
 - Target-Inventory-Gate: `failed`
 - Duplicate Groups: `0`
 - Import Waves: `4`
@@ -59,20 +58,20 @@ Stand: 2026-08-28T07:16:42.864+02:00
 
 ## Artefakte
 
-- `logs/jobagent/company-candidate-website-discovery-20260828-051250.json`
-- `logs/jobagent/company-candidate-verification-20260828-051311.json`
-- `logs/jobagent/company-coverage-20260828-051344.json`
-- `logs/jobagent/company-coverage-20260828-051344.md`
+- `logs/jobagent/company-candidate-website-discovery-20260828-051854.json`
+- `logs/jobagent/company-candidate-verification-20260828-051917.json`
+- `logs/jobagent/company-coverage-20260828-051933.json`
+- `logs/jobagent/company-coverage-20260828-051933.md`
 - `html/jobagent/company-coverage.html`
-- `logs/terminal/route-check-20260828-071449.log`
+- `logs/terminal/route-check-20260828-072048.log`
 
 ## Verifikation
 
 - `curl.exe -s http://localhost:9000/api/system/status` -> Exit `0`; Status `UP`
 - `.\ci.cmd devserver-status` -> Exit `0`; Port `8500` listening `True`
-- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 2 offizielle Website-Treffer; 23 Manual Review
-- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`; 2 Kandidaten verarbeitet; 1 produktiver Upsert erlaubt; 1 Retry deferred
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=82; target_inventory_gate_status=failed
+- `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 1 offizieller Website-Treffer; 24 Manual Review
+- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`; 1 Kandidat verarbeitet; 1 produktiver Upsert erlaubt
+- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=83; target_inventory_gate_status=failed
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`; 24 Faelle bestanden
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`; 28 Faelle bestanden
 - `.\ci.cmd route-check` -> Exit `0`; route_ok=True

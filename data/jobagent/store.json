@@ -3966,7 +3966,7 @@
       ],
       "updated_at": "2026-08-28T05:13:11.337Z",
       "created_at": "2026-08-28T05:13:11.337Z",
-      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "next_scan_at": "2026-08-29T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3994,6 +3994,60 @@
           "final_url": "https://tdk-electronics.tdk.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-26T05:13:11.337Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:tech_mahindra",
+      "canonical_name": "Tech Mahindra",
+      "canonical_domain": "techmahindra.com",
+      "official_website_url": "https://techmahindra.com/",
+      "career_url": "https://techmahindra.com/careers",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-28T05:19:17.814Z",
+      "created_at": "2026-08-28T05:19:17.814Z",
+      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "2026-08-28T05:19:17.814Z",
+        "verification_url": "https://techmahindra.com/careers",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_indian_companies_tech_mahindra_muenchen",
+          "company_id": "company:tech_mahindra",
+          "canonical_name": "Tech Mahindra",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://techmahindra.com/careers",
+          "verified_by_url": "https://techmahindra.com/",
+          "redirect_chain": "https://techmahindra.com/careers",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "59b2adbd8ca4a8c441de5394028503009d33e0f68761f21dd9acfb79b6324ab1",
+          "observed_at": "2026-08-28T05:19:17.814Z",
+          "http_status": 200,
+          "final_url": "https://techmahindra.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-26T05:19:17.814Z"
         }
       ]
     }
@@ -5778,6 +5832,29 @@
             "https://tdk-electronics.tdk.com/en/2302050/careers"
           ],
           "observed_at": "2026-08-28T05:13:11.337Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:tech_mahindra_career_url",
+      "company_id": "company:tech_mahindra",
+      "source_type": "CAREER_PAGE",
+      "url": "https://techmahindra.com/careers",
+      "canonical_url": "https://techmahindra.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-28T05:19:17.814Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://techmahindra.com/careers",
+          "basis_url": "https://techmahindra.com/",
+          "redirect_chain": [
+            "https://techmahindra.com/careers"
+          ],
+          "observed_at": "2026-08-28T05:19:17.814Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
