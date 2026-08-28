@@ -4074,7 +4074,7 @@
       ],
       "updated_at": "2026-08-28T05:38:15.911Z",
       "created_at": "2026-08-28T05:38:15.911Z",
-      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "next_scan_at": "2026-08-29T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -4102,6 +4102,60 @@
           "final_url": "https://wipro.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-26T05:38:15.911Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:yamaichi_electronics_deutschland_gmbh",
+      "canonical_name": "Yamaichi Electronics Deutschland GmbH",
+      "canonical_domain": "yamaichi.de",
+      "official_website_url": "https://yamaichi.de/",
+      "career_url": "https://yamaichi.de/career",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Raum Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-28T05:43:33.975Z",
+      "created_at": "2026-08-28T05:43:33.975Z",
+      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "2026-08-28T05:43:33.975Z",
+        "verification_url": "https://yamaichi.de/career",
+        "discovery_origin": "source-registry:munich_business_japanese_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_japanese_companies_yamaichi_electronics_deutschland_gmbh_muenchen",
+          "company_id": "company:yamaichi_electronics_deutschland_gmbh",
+          "canonical_name": "Yamaichi Electronics Deutschland GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://yamaichi.de/career",
+          "verified_by_url": "https://yamaichi.de/",
+          "redirect_chain": "https://yamaichi.de/career",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "8602fabb8ce1d11e854496d4980a65eb45ee4cecda8ddbe5efb987eefccefb95",
+          "observed_at": "2026-08-28T05:43:33.975Z",
+          "http_status": 200,
+          "final_url": "https://yamaichi.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-26T05:43:33.975Z"
         }
       ]
     }
@@ -5932,6 +5986,29 @@
             "https://careers.wipro.com/"
           ],
           "observed_at": "2026-08-28T05:38:15.911Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:yamaichi_electronics_deutschland_gmbh_career_url",
+      "company_id": "company:yamaichi_electronics_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://yamaichi.de/career",
+      "canonical_url": "https://yamaichi.de/career",
+      "is_official": true,
+      "verified_at": "2026-08-28T05:43:33.975Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://yamaichi.de/career",
+          "basis_url": "https://yamaichi.de/",
+          "redirect_chain": [
+            "https://yamaichi.de/career"
+          ],
+          "observed_at": "2026-08-28T05:43:33.975Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
