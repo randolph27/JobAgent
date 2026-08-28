@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T11:56:36+02:00
+Stand: 2026-08-28T12:05:43+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,7 +8,7 @@ Stand: 2026-08-28T11:56:36+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `de98526c7fa9`
+- HEAD vor Abschluss-Commit: `94272a950772`
 - Ahead/Behind vor Abschluss-Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
@@ -23,40 +23,38 @@ Stand: 2026-08-28T11:56:36+02:00
 - Verarbeitet wurden `25` Kandidaten.
 - Ergebnis der Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`, `0` produktive Store-Upserts.
 - Hauptgrund: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
-- Zwei Kandidaten aus der offiziellen Muenchen-Boersenseite wurden live geholt, aber ohne eindeutig namenspassende Firmenwebsite fail-closed in Review gelassen.
 - `data/jobagent/store.json` wurde fachlich nicht geaendert.
 - Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
-- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-095428.json`, `logs/jobagent/company-coverage-20260828-095428.md`, `html/jobagent/company-coverage.html`.
-- Durch den Coverage-Funktionstest wurde zusaetzlich `logs/jobagent/company-coverage-20260828-095512.json` erzeugt.
-- STP wurde am `2026-08-28T11:56:36+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-100334.json`, `logs/jobagent/company-coverage-20260828-100334.md`, `html/jobagent/company-coverage.html`.
+- STP wurde am `2026-08-28T12:04:55+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `DB Kommunikationstechnik`
-- `DB Regio AG S-Bahn Muenchen`
-- `DB Services GmbH`
-- `Decorello Werbetechnik`
-- `Degussa Goldhandel GmbH`
-- `Deim Electronic Production`
-- `Dein Neues Automobil`
-- `Dell`
-- `Delta Tor Technik`
-- `Delvotec`
-- `Demdental Zahntechnisches Meisterlabor`
-- `Dentalimpex`
-- `Dentaltechnik Reinhard Hempel`
-- `Dentaltechnik Wehr`
-- `Dermapharm Holding AG`
-- `Descor`
-- `Designerei fuer Kommunikation`
-- `Designfunction`
-- `Designworks`
-- `Deutsche Gesetzliche Unfallversicherung DGUV`
-- `Deutsche Kinder- und Jugendstiftung`
-- `Deutsche Pfandbriefbank AG`
-- `Deutscher Landwirtschaftsverlag`
-- `Developer Akademie GmbH`
-- `Device Insight GmbH`
+- `DiaShop`
+- `die herzbrille`
+- `dieAgenten Medienberatung GmbH`
+- `Dietrich's AG`
+- `Diva-e Digital Value Excellence GmbH`
+- `diva-e NEXT GmbH Muenchen`
+- `DMC Datenverarbeitungs- und Management-Consulting`
+- `DMS`
+- `DocuWare`
+- `Doelker &`
+- `Dolby Germany GmbH`
+- `DPS Business Solutions Hauptsitz Muenchen`
+- `Dr. Gerhard Bock Asset Management GmbH`
+- `Dr. Hoenle AG`
+- `Dr. Lang & Schoeffel GbR`
+- `Dr. Schenk GmbH`
+- `Dr. Schenk GmbH Industriemesstechnik`
+- `Dr. Schnell`
+- `Dr. Sennewald Medizintechnik GmbH`
+- `Dr.-Ing. Pecher und Partner`
+- `DrDish Television GmbH`
+- `Dreier Verwaltungs GmbH`
+- `Druckhaus Dessauerstrasse`
+- `dtv Verlagsgesellschaft`
+- `Du Diederichs`
 
 ## Datenstand nach Coverage und Queue
 
@@ -70,11 +68,11 @@ Stand: 2026-08-28T11:56:36+02:00
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Kandidaten-Verification-Queue: `1785` Cluster / `1790` Kandidaten
+- Kandidaten-Verification-Queue: `1785` Cluster
 - Queue-Status: `53 VERIFIED`, `1724 MANUAL_REVIEW_REQUIRED`, `8 RETRY_SCHEDULED`
-- Queue-Aktionen: `1719 DISCOVER_OFFICIAL_WEBSITE`, `60 VERIFY_OFFICIAL_SITE`, `5 REJECT_DUPLICATE`, `1 MANUAL_DECISION`
-- Bereit laut Queue-Metrik: `0`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-095406.json`
+- Queue-Aktionen laut letztem Handoff: `1719 DISCOVER_OFFICIAL_WEBSITE`, `60 VERIFY_OFFICIAL_SITE`, `5 REJECT_DUPLICATE`, `1 MANUAL_DECISION`
+- Bereit laut aktueller Coverage-Metrik: `8`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-100316.json`
 
 ## Verifikation
 
