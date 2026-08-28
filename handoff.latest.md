@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T12:41:06+02:00
+Stand: 2026-08-28T12:48:51+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,7 +8,7 @@ Stand: 2026-08-28T12:41:06+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `473f1923d285b22b6dd80769ac0578cb52471d09`
+- HEAD vor Abschluss-Commit: `7b1c40aab4ab95aefa9a76ed86242e04487a9882`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht abgeschlossen.
@@ -21,39 +21,39 @@ Stand: 2026-08-28T12:41:06+02:00
 - Fuer `JA-027` wurde eine weitere Website-Discovery-Welle verarbeitet.
 - Verarbeitet wurden `25` Kandidaten.
 - Ergebnis der Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`, `0` produktive Store-Upserts.
-- Hauptgrund: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
+- Hauptgrund bei allen 25 Kandidaten: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
 - `data/jobagent/store.json` wurde fachlich nicht geaendert.
 - Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
-- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-104035.json`, `logs/jobagent/company-coverage-20260828-104035.md`, `html/jobagent/company-coverage.html`.
-- STP wurde am `2026-08-28T12:41:06+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-104716.json`, `logs/jobagent/company-coverage-20260828-104716.md`, `html/jobagent/company-coverage.html`.
+- STP wurde am `2026-08-28T12:48:51+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `Elektro Rieger GmbH`
-- `Elektro Schattenkirchner`
-- `Elektrobit Automotive`
-- `Elektrotechnik Becker & Fux`
-- `Elgena`
-- `Elido GmbH`
-- `EMH Partners`
-- `EMS Taxi GmbH`
-- `ENC`
-- `endorsec GmbH`
-- `Energie Suedbayern GmbH`
-- `Energienetze Bayern`
-- `Engity GmbH`
-- `Entel Containerdienst GmbH`
-- `eo ipso Marke & Erlebnis GmbH`
-- `EPLAN`
-- `Epson Europe Electronics GmbH`
-- `Erdwerk GmbH`
-- `Ergosurg GmbH`
-- `ERS electronic`
-- `Erzbischoefliches Ordinariat`
-- `ESB Waerme GmbH`
-- `Eugen Zenger & Co. OHG`
-- `Eulenspiegel`
-- `Euvia Travel GmbH`
+- `EVA Fahrzeugtechnik GmbH`
+- `Eventlocation Schlosspalais No. 1`
+- `evia`
+- `evolutionID GmbH`
+- `ewo`
+- `EXTEDO`
+- `Exterior Design`
+- `EXXETA AG`
+- `F&S Gastro Technischer Service`
+- `F. Zenz GmbH & Co. Bautraeger KG`
+- `F5 Networks`
+- `Fabry & Hofmann`
+- `Fachverband Sanitaer-, Heizungs- und Klimatechnik Bayern`
+- `Fackler GmbH Kieswerk & Recycling`
+- `Fairkauf Handelskontor eG`
+- `Falcon GmbH`
+- `familylab.de - Die Familienwerkstatt`
+- `fasedo`
+- `FAU Muenchen`
+- `favoritbuero`
+- `FAZUA GmbH`
+- `FCS Financial Consulting & Services GmbH`
+- `Feldenkraismethode Susanne Spitzer`
+- `FEV Europe GmbH`
+- `FGR Reinigungsdienst`
 
 ## Datenstand nach Coverage und Queue
 
@@ -66,15 +66,15 @@ Stand: 2026-08-28T12:41:06+02:00
 - Source Inventory: `1904` Quellen
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
-- Kandidaten-Verification-Queue: `1785` Cluster
-- Queue-Status: `53 VERIFIED`, `1724 MANUAL_REVIEW_REQUIRED`, `8 READY`
-- Candidate Review Queue: `1732`
-- Candidate Conflict Cluster: `252`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-103933.json`
+- Kandidaten-Verification-Queue: `1785` Cluster, `1790` Kandidaten
+- Queue-Status: `53 VERIFIED`, `1724 MANUAL_REVIEW_REQUIRED`, `8 RETRY_SCHEDULED`
+- Queue-Aktionen: `1719 DISCOVER_OFFICIAL_WEBSITE`, `60 VERIFY_OFFICIAL_SITE`, `5 REJECT_DUPLICATE`, `1 MANUAL_DECISION`
+- Ready Total: `0`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-104655.json`
 
 ## Verifikation
 
-- `git -c core.pager=cat -c color.ui=false --no-pager status --short --branch` -> Exit `0`; Branch `master`, vor Commit mit versionierten Aenderungen
+- `git -c core.pager=cat -c color.ui=false --no-pager status --short --branch` -> Exit `0`; Branch `master`, vor Abschluss-Commit mit versionierten Aenderungen
 - `.\ci.cmd devserver-status` -> Exit `0`; Port `8500` listening `True`
 - `curl.exe -s http://localhost:9000/api/system/status` -> Exit `0`; Status `UP`; Version `26.1.0.118079`
 - `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 0 offizielle Website-Treffer; 25 Manual Review
