@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T00:00:00+02:00
+Stand: 2026-08-28T07:04:51.899+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,44 +8,46 @@ Stand: 2026-08-28T00:00:00+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
+- HEAD vor Commit: `3814e6cab6a8`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
-- Roadmap-Rotation: nicht ausgefuehrt, weil JA-027 nicht komplett erledigt ist.
+- Roadmap-Rotation: nicht ausgefuehrt, weil JA-027 noch nicht komplett erledigt ist.
 - Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er fuer diesen Abschluss als erledigt.
-- Devserver: `http://localhost:8500/`, zuletzt `listening=True`
-- SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
+- Devserver: `http://localhost:8500/`, Status vor Arbeitsschritt `listening=True`
+- SonarQube: `http://localhost:9000/api/system/status`, Status vor Arbeitsschritt `UP`, Version `26.1.0.118079`
 
 ## Letzter abgeschlossener Arbeitsschritt
 
 - Eine weitere Website-Discovery-Welle fuer JA-027 verarbeitet: `25` Kandidaten.
 - Ergebnis der Discovery-Welle: `2` offizielle Website-Treffer, `23` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
 - Kandidatenverifikation ausgefuehrt, weil `verified_total > 0`.
-- Verifikationsergebnis: `1` Kandidat verarbeitet, `1` produktiver Upsert erlaubt, `0` Manual-Review-Entscheidungen, `0` Rejects.
-- Produktiv hinzugefuegt: `PUREN Pharma GmbH & Co. KG`.
-- Zweiter Website-Treffer `Intelizign Engineering Services GmbH` / ehemaliger Quest-Global-Hinweis wurde in der Queue als bereits verifizierter Duplicate-/Website-Cluster gefuehrt und nicht erneut produktiv upserted.
+- Verifikationsergebnis: `2` Kandidaten verarbeitet, `1` produktiver Upsert erlaubt, `0` Manual-Review-Entscheidungen, `1` Retry/Reject ohne produktiven Import.
+- Produktiv hinzugefuegt: `Resonac Europe GmbH`.
+- Nicht produktiv hinzugefuegt: `Samvardhana Motherson Peguform`; Status `RETRY_SCHEDULED`, Grund: kein offiziell belegter Karriere- oder ATS-Link gefunden.
 
 ## Neu in `data/jobagent/store.json`
 
-- `PUREN Pharma GmbH & Co. KG`, `company:puren_pharma_gmbh_and_co_kg`
-  - Offizielle Website: `https://puren-pharma.de/`
-  - Karriere-URL: `https://puren-pharma.de/karriere`
+- `Resonac Europe GmbH`, `company:resonac_europe_gmbh`
+  - Offizielle Website: `https://eu.resonac.com/`
+  - Karriere-URL: `https://eu.resonac.com/careers`
   - Status: `CAREER_URL_VERIFIED`
-  - Beleg: offizielle Firmendomain, Karrierepfad per HTTP/Link belegt.
+  - Beleg: Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.
 
-## Datenstand
+## Datenstand nach Coverage
 
-- Produktive Firmen: `80`
+- Produktive Firmen: `81`
+- Backlog-Items: `81`
 - Candidate-Hints: `1790`
-- Kandidatenqueue laut aktuellem Coverage-Artefakt: `1785` Cluster
-- Queue ready laut Coverage: `6`
-- Queue verified total laut Coverage: `48`
-- Queue manual review total laut Coverage: `1731`
-- Queue retry scheduled total laut letzter Verifikation: `6`
-- Target-Inventory-Kandidaten: `1865`
-- Source Inventory: `1899` Quellen, davon `79` offizielle Quellen und `1820` Discovery-Quellen
+- Kandidatenqueue: `1785` Cluster
+- Queue ready: `0`
+- Queue verified total: `49`
+- Queue manual review total: `1729`
+- Queue retry scheduled total: `7`
+- Target-Inventory-Kandidaten: `1866`
+- Source Inventory: `1900` Quellen, davon `80` offizielle Quellen und `1820` Discovery-Quellen
 - Target-Inventory-Gate: `failed`
 - Duplicate Groups: `0`
-- Store-Status nach Coverage: `72` Firmen `CAREER_URL_VERIFIED`, `8` Firmen `COMPANY_DOMAIN_VERIFIED`, `0` `UNVERIFIED`
+- Import Waves: `4`
 
 ## Geaenderte Dateien fuer Commit
 
@@ -61,21 +63,19 @@ Stand: 2026-08-28T00:00:00+02:00
 
 ## Artefakte
 
-- `logs/jobagent/company-candidate-website-discovery-20260827-180130.json`
-- `logs/jobagent/company-candidate-verification-20260827-180151.json`
-- `logs/jobagent/company-coverage-20260827-180210.json`
-- `logs/jobagent/company-coverage-20260827-180210.md`
-- `logs/jobagent/company-coverage-20260827-180236.json`
-- `logs/jobagent/company-coverage-20260827-180236.md`
-- `logs/terminal/route-check-20260827-200303.log`
+- `logs/jobagent/company-candidate-website-discovery-20260828-050315.json`
+- `logs/jobagent/company-candidate-verification-20260828-050336.json`
+- `logs/jobagent/company-coverage-20260828-050353.json`
+- `logs/jobagent/company-coverage-20260828-050353.md`
+- `logs/terminal/route-check-20260828-070447.log`
 
 ## Verifikation
 
 - `curl.exe -s http://localhost:9000/api/system/status` -> Exit `0`; Status `UP`
 - `.\ci.cmd devserver-status` -> Exit `0`; Port `8500` listening `True`
 - `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 2 offizielle Website-Treffer; 23 Manual Review
-- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`; 1 Kandidat verarbeitet; 1 produktiver Upsert erlaubt
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=80; target_inventory_gate_status=failed
+- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3` -> Exit `0`; 2 Kandidaten verarbeitet; 1 produktiver Upsert erlaubt; 1 Retry/Reject
+- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; companies_total=81; target_inventory_gate_status=failed
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`; 24 Faelle bestanden
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`; 28 Faelle bestanden
 - `.\ci.cmd route-check` -> Exit `0`; route_ok=True

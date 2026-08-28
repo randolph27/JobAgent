@@ -1,15 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-27T18:02:36.661Z",
+  "generated_at": "2026-08-28T05:04:19.904Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "DISCOVER_OFFICIAL_WEBSITE": 1726,
+    "DISCOVER_OFFICIAL_WEBSITE": 1724,
     "MANUAL_DECISION": 1,
     "REJECT_DUPLICATE": 5,
-    "VERIFY_OFFICIAL_SITE": 53
+    "VERIFY_OFFICIAL_SITE": 55
   },
   "queue": [
     {
@@ -20407,10 +20407,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20452,10 +20452,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20497,10 +20497,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20540,10 +20540,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20559,49 +20559,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:reply digital experience"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_resonac_europe_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_resonac_europe_gmbh_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_resonac_europe_gmbh_muenchen"
-      ],
-      "canonical_name": "Resonac Europe GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "9fad499472de22440366cb5f8f68324df01f84b4ba208d8f69c10f9a67d405aa",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:resonac europe"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -20626,10 +20583,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20669,10 +20626,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20712,10 +20669,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20755,10 +20712,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20798,10 +20755,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20841,10 +20798,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20884,10 +20841,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20927,10 +20884,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -20970,10 +20927,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21015,10 +20972,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21060,10 +21017,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21103,10 +21060,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21146,10 +21103,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21191,10 +21148,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21236,10 +21193,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21255,49 +21212,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:samsung semiconductors europe"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_samvardhana_motherson_peguform_muenchen",
-      "candidate_id": "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen"
-      ],
-      "canonical_name": "Samvardhana Motherson Peguform",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "60af0825c19e82b5e5dc3c0734f7304e6a1238161993de41f287ff70143b9a11",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:samvardhana motherson peguform"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -21322,10 +21236,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21365,10 +21279,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21408,10 +21322,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -21451,10 +21365,10 @@
       "status": "MANUAL_REVIEW_REQUIRED",
       "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
       "retry_count": 0,
-      "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
       "freshness_status": "FRESH",
       "risk_level": "LOW",
       "source_evidence": {
@@ -27285,6 +27199,94 @@
         "dedupe_keys": [
           "domain:puren-pharma.de",
           "name:puren pharma"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_eu_resonac_com",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_resonac_europe_gmbh_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_resonac_europe_gmbh_muenchen"
+      ],
+      "canonical_name": "Resonac Europe GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:03:36.959Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "9fad499472de22440366cb5f8f68324df01f84b4ba208d8f69c10f9a67d405aa",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:eu.resonac.com",
+          "name:resonac europe"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_smp_automotive_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen"
+      ],
+      "canonical_name": "Samvardhana Motherson Peguform",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "RETRY_SCHEDULED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-28T05:03:36.959Z",
+      "next_attempt_at": "2026-08-29T05:03:36.959Z",
+      "last_status": "UNVERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "60af0825c19e82b5e5dc3c0734f7304e6a1238161993de41f287ff70143b9a11",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:smp-automotive.com",
+          "name:samvardhana motherson peguform"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
