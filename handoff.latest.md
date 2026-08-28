@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T08:57:02.588+02:00
+Stand: 2026-08-28T09:25:57.877+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,7 +8,7 @@ Stand: 2026-08-28T08:57:02.588+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `9ac4d335d43d`
+- HEAD vor Abschluss-Commit: `61ff32de81b7`
 - Ahead/Behind vor Abschluss-Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
@@ -28,38 +28,38 @@ Stand: 2026-08-28T08:57:02.588+02:00
   - `data/jobagent/company-candidate-verification.queue.json`
   - `data/jobagent/company-discovery.hints.json`
 - Coverage wurde neu erzeugt:
-  - `logs/jobagent/company-coverage-20260828-065559.json`
-  - `logs/jobagent/company-coverage-20260828-065559.md`
+  - `logs/jobagent/company-coverage-20260828-072438.json`
+  - `logs/jobagent/company-coverage-20260828-072438.md`
   - `html/jobagent/company-coverage.html`
-- STP wurde ausgefuehrt; Todo-/Checkpoint-/Handoff-Dateien sind synchronisiert.
+- Danach wurden fokussierte Funktionstests, Route-Check und STP ausgefuehrt.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `Bienenfleiss Gebaeudereinigung GmbH`
-- `Bildungswelt Fehringapark`
-- `Binastar GmbH`
-- `Biogen`
-- `Biomax Informatics`
-- `BioNTech Small Molecules GmbH`
-- `Birkle + Thomer + Partner GmbH`
-- `Bittner + Krull Softwaresysteme`
-- `Blauberg Ventilatoren`
-- `Blickfeld GmbH`
-- `Blum Druck GmbH`
-- `BMW 01.21.001.0`
-- `BMW 01.21.002.0`
-- `BMW Ausweisstelle Werk 01.10`
-- `BMW Car IT GmbH`
-- `BMW FIZ Ausweisstelle`
-- `BMW Group`
-- `Boerger Tankservice GmbH`
-- `Boeker & Partner Management u Business Consulting GmbH`
-- `Bosch`
-- `Bosch Automotive`
-- `Bosch Building Automation GmbH`
-- `Bosch Hausgeraete GmbH`
-- `Botanischer Garten`
-- `BPS International GmbH`
+- `Brainlab SE`
+- `Brainymotion Muenchen GmbH`
+- `Brandinteriors.de`
+- `Brandschutz Breit`
+- `Braeuer Oberflaechentechnik GmbH`
+- `Brauerei Hopfenhaecker`
+- `Bridge to Europe`
+- `Bristol Myers Squibb`
+- `Broadcom`
+- `Brunata Metrona`
+- `Brunel`
+- `BS Hausmeisterservice`
+- `BT Facility`
+- `Buderus Heiztechnik`
+- `Buerger Energie Unterhaching eG`
+- `Buero- und Buchhaltungsservice M. A. Kaiser`
+- `Buerogemeinschaft`
+- `Bueroplan`
+- `Bueroservice Lukic`
+- `Buster Surfboards`
+- `C4B`
+- `C4B Com For Business AG`
+- `Cadami GmbH`
+- `Caddy Geomatics`
+- `Caffe Pol GmbH`
 
 ## Datenstand nach Coverage
 
@@ -73,7 +73,7 @@ Stand: 2026-08-28T08:57:02.588+02:00
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-065537.json`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-072419.json`
 
 ## Verifikation
 
