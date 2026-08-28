@@ -1,1 +1,145 @@
-{"toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"active_id":"","verified":[{"cmd":".\\ci.cmd supertest","exit":0,"status":"pass"}],"route":{"ts":"2026-08-28T12:48:10.772+02:00","policy":{"forbid_path":[],"forbid_regex":[],"no_touch":[]},"violations":[],"route_ok":true,"agent_id":"UTTER-20260817-39f7","changed_files":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json"],"changed_count":2,"git":{"has_repo":true,"diff_log":"logs\\terminal\\route-check-20260828-124809.log"},"mode":"standard"},"status":"open","project":"JobAgent","next_steps":["Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde."],"refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"workspace_root":".","changed":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","handoff.latest.json","handoff.latest.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"route_violations":[],"verify_digest":{"ts":"2026-08-24T09:29:31.729+02:00","cmd":".\\ci.cmd supertest","exit":0,"status":"pass","log_path":null,"scope":"JobAgent function suite","tests_total":19,"duration_seconds":41.31},"agent_id":"UTTER-20260817-39f7","summary":"stp sync","ts":"2026-08-28T12:48:51.401+02:00","capsule":{"env_inventory_missing":false,"git":{"remote":"origin","upstream":"origin/master","ahead":0,"branch":"master","worktree":"dirty","head":"7b1c40aab4ab","tracked_changes":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","handoff.latest.json","handoff.latest.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"behind":0,"detached":false,"has_repo":true},"ts":"2026-08-28T12:48:51.401+02:00","env_inventory_path":null,"refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"status":"open","route_ok":true,"active_id":"","verified":[{"cmd":".\\ci.cmd supertest","exit":0,"status":"pass"}],"agent_id":"UTTER-20260817-39f7","next":"Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.","goal":"","route_violations":[],"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","env_inventory_used":false,"project":"JobAgent","workspace_root":".","changed":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","handoff.latest.json","handoff.latest.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"manual_missing":false},"route_ok":true,"git":{"remote":"origin","upstream":"origin/master","ahead":0,"branch":"master","worktree":"dirty","head":"7b1c40aab4ab","tracked_changes":["data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","handoff.latest.json","handoff.latest.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json"],"behind":0,"detached":false,"has_repo":true},"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","next":"Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.","goal":""}
+{
+  "schema_version": "jobagent/handoff/v1",
+  "ts": "2026-08-28T12:54:32+02:00",
+  "project": "JobAgent",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "repo": "https://github.com/randolph27/JobAgent",
+  "branch": "master",
+  "upstream": "origin/master",
+  "head_before_commit": "a59ccb54318744ec021134ce089a1c47e9c88190",
+  "active_roadmap": {
+    "id": "JA-027",
+    "title": "Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
+    "status": "open",
+    "rotated": false,
+    "reason": "Nicht abgeschlossen: Queue enthaelt weiter offene Kandidaten und Target-Inventory-Gate ist failed."
+  },
+  "active_todo": {
+    "todo_id": "TD-0041",
+    "status": "open",
+    "active_id": null
+  },
+  "services": {
+    "devserver": {
+      "url": "http://localhost:8500/",
+      "pid": 23568,
+      "listening": true
+    },
+    "sonarqube": {
+      "url": "http://localhost:9000/api/system/status",
+      "status": "UP",
+      "version": "26.1.0.118079"
+    }
+  },
+  "latest_work": {
+    "description": "Weitere JA-027 Website-Discovery-Welle verarbeitet.",
+    "processed_total": 25,
+    "verified_total": 0,
+    "manual_review_total": 25,
+    "productive_store_upserts": 0,
+    "fail_closed_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
+    "store_changed": false,
+    "discovery_log": "logs/jobagent/company-candidate-website-discovery-20260828-105155.json",
+    "coverage_outputs": [
+      "logs/jobagent/company-coverage-20260828-105213.json",
+      "logs/jobagent/company-coverage-20260828-105213.md",
+      "html/jobagent/company-coverage.html",
+      "logs/jobagent/company-coverage-20260828-105259.json"
+    ]
+  },
+  "queue_state": {
+    "productive_companies": 85,
+    "target_inventory_candidates_total": 1870,
+    "target_inventory_gap_to_1000": 0,
+    "target_inventory_gate_status": "failed",
+    "backlog_items": 85,
+    "duplicate_groups": 0,
+    "sources_total": 1904,
+    "official_sources": 84,
+    "discovery_sources": 1820,
+    "candidate_clusters_total": 1785,
+    "candidate_candidates_total": 1790,
+    "status_counts": {
+      "VERIFIED": 53,
+      "MANUAL_REVIEW_REQUIRED": 1724,
+      "RETRY_SCHEDULED": 8
+    },
+    "action_counts": {
+      "DISCOVER_OFFICIAL_WEBSITE": 1719,
+      "VERIFY_OFFICIAL_SITE": 60,
+      "REJECT_DUPLICATE": 5,
+      "MANUAL_DECISION": 1
+    },
+    "ready_total": 0
+  },
+  "verified": [
+    {
+      "cmd": ".\\ci.cmd devserver-status",
+      "exit": 0,
+      "result": "port 8500 listening True"
+    },
+    {
+      "cmd": "curl.exe -s http://localhost:9000/api/system/status",
+      "exit": 0,
+      "result": "UP 26.1.0.118079"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
+      "exit": 0,
+      "result": "25 processed, 0 verified, 25 manual review"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+      "exit": 0,
+      "result": "coverage updated, target_inventory_gate_status failed"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0,
+      "result": "24 cases passed"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0,
+      "result": "28 cases passed"
+    },
+    {
+      "cmd": ".\\ci.cmd route-check",
+      "exit": 0,
+      "result": "route_ok True"
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0,
+      "result": "sync checkpoint written"
+    },
+    {
+      "cmd": ".\\ci.cmd supertest",
+      "exit": 0,
+      "result": "not rerun; user instruction says unrequested supertest counts as erledigt"
+    }
+  ],
+  "changed": [
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json"
+  ],
+  "next_steps": [
+    "Run next JA-027 discovery wave: pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
+    "If verified_total > 0, run candidate verification: pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
+    "Refresh coverage: pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+    "Run focused tests: pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1; pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+    "Run .\\ci.cmd route-check and .\\ci.cmd stp",
+    "Rotate JA-027 only when all candidates are processed or every remaining candidate has a defensible review/reject/retry reason and all acceptance criteria are evidenced."
+  ],
+  "guardrails": [
+    "Official company/career/ATS evidence is mandatory.",
+    "Job boards, Arbeitsagentur, registers, OSM and other hints remain discovery-only.",
+    "Fail closed for ambiguous candidates.",
+    "No automatic application, no external write action, no invented companies, URLs or job IDs."
+  ]
+}
