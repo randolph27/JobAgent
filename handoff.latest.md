@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T09:25:57.877+02:00
+Stand: 2026-08-28T09:55:00+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,58 +8,61 @@ Stand: 2026-08-28T09:25:57.877+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `61ff32de81b7`
+- HEAD vor Abschluss-Commit: `8bf0eeac5141`
 - Ahead/Behind vor Abschluss-Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
-- Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich noch nicht komplett erledigt.
+- Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht komplett erledigt.
 - Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt, sofern nicht explizit angefragt.
 - Devserver: `http://localhost:8500/`, zuletzt `listening=True`
 - SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
 
 ## Letzter abgeschlossener Arbeitsschritt
 
-- Eine weitere Website-Discovery-Welle fuer `JA-027` verarbeitet: `25` Kandidaten.
-- Ergebnis der Discovery-Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`.
-- Grund fuer alle 25 Kandidaten dieser Welle: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
-- Es wurde kein Kandidat produktiv in `data/jobagent/store.json` uebernommen.
-- Store blieb fachlich unveraendert.
-- Queue und Hint-Status wurden aktualisiert:
+- Fuer `JA-027` wurde eine weitere Website-Discovery-Welle verarbeitet.
+- Verarbeitet wurden `25` Kandidaten.
+- Ergebnis der Welle:
+  - `0` offizielle Website-Treffer
+  - `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`
+  - `0` produktive Store-Upserts
+- Grund fuer alle 25 Kandidaten: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
+- `data/jobagent/store.json` wurde fachlich nicht geaendert.
+- Aktualisiert wurden:
   - `data/jobagent/company-candidate-verification.queue.json`
   - `data/jobagent/company-discovery.hints.json`
 - Coverage wurde neu erzeugt:
-  - `logs/jobagent/company-coverage-20260828-072438.json`
-  - `logs/jobagent/company-coverage-20260828-072438.md`
+  - `logs/jobagent/company-coverage-20260828-074729.json`
+  - `logs/jobagent/company-coverage-20260828-074729.md`
   - `html/jobagent/company-coverage.html`
-- Danach wurden fokussierte Funktionstests, Route-Check und STP ausgefuehrt.
+- STP wurde ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `Brainlab SE`
-- `Brainymotion Muenchen GmbH`
-- `Brandinteriors.de`
-- `Brandschutz Breit`
-- `Braeuer Oberflaechentechnik GmbH`
-- `Brauerei Hopfenhaecker`
-- `Bridge to Europe`
-- `Bristol Myers Squibb`
-- `Broadcom`
-- `Brunata Metrona`
-- `Brunel`
-- `BS Hausmeisterservice`
-- `BT Facility`
-- `Buderus Heiztechnik`
-- `Buerger Energie Unterhaching eG`
-- `Buero- und Buchhaltungsservice M. A. Kaiser`
-- `Buerogemeinschaft`
-- `Bueroplan`
-- `Bueroservice Lukic`
-- `Buster Surfboards`
-- `C4B`
-- `C4B Com For Business AG`
-- `Cadami GmbH`
-- `Caddy Geomatics`
-- `Caffe Pol GmbH`
+- `CAIQ GmbH`
+- `Campana & Schott`
+- `Campus 365`
+- `CANCOM SE`
+- `Capgemini Engineering`
+- `Car for Friends`
+- `CARIAD SE`
+- `Caritas`
+- `Carl Berberich GmbH`
+- `Carl Hanser Verlag`
+- `Carl Zeiss Microscopy`
+- `cartv GmbH`
+- `Caverion`
+- `CBRE`
+- `Celgene`
+- `Celonis`
+- `Cembre`
+- `Center for Digital Technology and Management`
+- `Cerovac Gebaeudeservice GmbH`
+- `Certified Coolness Limited`
+- `CGI Deutschland`
+- `CH Marketing & Medien GmbH & Co. KG`
+- `Change LT`
+- `CHECK24`
+- `Checkmk`
 
 ## Datenstand nach Coverage
 
@@ -73,7 +76,7 @@ Stand: 2026-08-28T09:25:57.877+02:00
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-072419.json`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-074708.json`
 
 ## Verifikation
 
@@ -114,6 +117,6 @@ Stand: 2026-08-28T09:25:57.877+02:00
 
 ## Guardrails
 
-- Offizielle Quellen sind zwingend. Jobboersen, Arbeitsagentur, Register, GitHub-/OSM-Listen und andere Hints bleiben Discovery-Hinweise und duerfen keine primaere Karrierequelle ersetzen.
+- Offizielle Quellen sind zwingend. Jobboersen, Arbeitsagentur, Register, OSM-Listen und andere Hints bleiben Discovery-Hinweise und duerfen keine primaere Karrierequelle ersetzen.
 - Kandidaten ohne eindeutigen offiziellen Website-/Karriere-/ATS-Beleg muessen fail-closed in Review/Retry bleiben.
 - Keine automatische Bewerbung, keine extern wirksame Aktion, keine erfundenen Firmen, URLs oder Job-IDs.
