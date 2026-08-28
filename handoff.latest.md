@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T12:29:43+02:00
+Stand: 2026-08-28T12:41:06+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,12 +8,11 @@ Stand: 2026-08-28T12:29:43+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `cdbbbd072a78`
-- Ahead/Behind vor Abschluss-Commit: `0/0`
+- HEAD vor Abschluss-Commit: `473f1923d285b22b6dd80769ac0578cb52471d09`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht abgeschlossen.
-- Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
+- Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt, weil nicht angefragt.
 - Devserver: `http://localhost:8500/`, zuletzt `listening=True`, PID `23568`
 - SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
 
@@ -25,36 +24,36 @@ Stand: 2026-08-28T12:29:43+02:00
 - Hauptgrund: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
 - `data/jobagent/store.json` wurde fachlich nicht geaendert.
 - Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
-- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-102727.json`, `logs/jobagent/company-coverage-20260828-102727.md`, `html/jobagent/company-coverage.html`.
-- STP wurde am `2026-08-28T12:29:43+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-104035.json`, `logs/jobagent/company-coverage-20260828-104035.md`, `html/jobagent/company-coverage.html`.
+- STP wurde am `2026-08-28T12:41:06+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `Dube Visuelle Kommunikation`
-- `Dynarep`
-- `dynaware Systemberatung GmbH`
-- `E.ON Digital Technology GmbH`
-- `E.ON Energy Projects GmbH`
-- `Easylan GmbH`
-- `Eazee`
-- `EAZF`
-- `Eckhaus im Werksviertel`
-- `Eco Clean Gebaeudereinigung`
-- `Econ Referenten Agentur`
-- `ECOUNT GmbH`
-- `EDAG Engineering AG`
-- `EDAG Testing Solutions GmbH`
-- `Eder Stapler`
-- `edilon)(sedra`
-- `EDL Rethschulte GmbH`
-- `eeEat`
-- `EEP Energieconsulting GmbH`
-- `EGYM SE`
-- `EHT Breit`
-- `Eigenheimerverband`
-- `Eisbach Studios`
-- `EKM`
-- `Elektro Kastrati`
+- `Elektro Rieger GmbH`
+- `Elektro Schattenkirchner`
+- `Elektrobit Automotive`
+- `Elektrotechnik Becker & Fux`
+- `Elgena`
+- `Elido GmbH`
+- `EMH Partners`
+- `EMS Taxi GmbH`
+- `ENC`
+- `endorsec GmbH`
+- `Energie Suedbayern GmbH`
+- `Energienetze Bayern`
+- `Engity GmbH`
+- `Entel Containerdienst GmbH`
+- `eo ipso Marke & Erlebnis GmbH`
+- `EPLAN`
+- `Epson Europe Electronics GmbH`
+- `Erdwerk GmbH`
+- `Ergosurg GmbH`
+- `ERS electronic`
+- `Erzbischoefliches Ordinariat`
+- `ESB Waerme GmbH`
+- `Eugen Zenger & Co. OHG`
+- `Eulenspiegel`
+- `Euvia Travel GmbH`
 
 ## Datenstand nach Coverage und Queue
 
@@ -67,17 +66,15 @@ Stand: 2026-08-28T12:29:43+02:00
 - Source Inventory: `1904` Quellen
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
-- Import Waves: `4`
 - Kandidaten-Verification-Queue: `1785` Cluster
-- Queue-Status: `53 VERIFIED`, `1724 MANUAL_REVIEW_REQUIRED`, `8 RETRY_SCHEDULED`
-- Bereit laut aktueller Coverage-Metrik: `8`
+- Queue-Status: `53 VERIFIED`, `1724 MANUAL_REVIEW_REQUIRED`, `8 READY`
 - Candidate Review Queue: `1732`
 - Candidate Conflict Cluster: `252`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-102709.json`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-103933.json`
 
 ## Verifikation
 
-- `git -c core.pager=cat -c color.ui=false --no-pager status --short --branch` -> Exit `0`; Branch `master`, Ahead/Behind `0/0` vor Commit
+- `git -c core.pager=cat -c color.ui=false --no-pager status --short --branch` -> Exit `0`; Branch `master`, vor Commit mit versionierten Aenderungen
 - `.\ci.cmd devserver-status` -> Exit `0`; Port `8500` listening `True`
 - `curl.exe -s http://localhost:9000/api/system/status` -> Exit `0`; Status `UP`; Version `26.1.0.118079`
 - `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8` -> Exit `0`; 25 Kandidaten verarbeitet; 0 offizielle Website-Treffer; 25 Manual Review

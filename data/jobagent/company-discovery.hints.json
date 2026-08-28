@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/company-discovery-hints/v1",
-  "generated_at": "2026-08-28T10:27:09.410Z",
+  "generated_at": "2026-08-28T10:39:33.963Z",
   "contract": "Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.",
   "search_matrix_count": 72,
   "hints_total": 1790,
