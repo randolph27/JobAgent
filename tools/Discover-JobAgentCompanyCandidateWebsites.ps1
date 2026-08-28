@@ -240,6 +240,25 @@ function ConvertTo-ToolWebsiteDiscoveryLogResult {
     }
 }
 
+function Test-ToolWebsiteDiscoveryQueueEntryDue {
+    param(
+        [Parameter(Mandatory)][object]$Entry
+    )
+
+    $lastAttemptAt = if ($Entry.PSObject.Properties.Name -contains 'last_attempt_at') { [string]$Entry.last_attempt_at } else { '' }
+    if ([string]::IsNullOrWhiteSpace($lastAttemptAt)) {
+        return $true
+    }
+
+    $lastReason = if ($Entry.PSObject.Properties.Name -contains 'last_reason') { [string]$Entry.last_reason } else { '' }
+    $sourceEvidence = if ($Entry.PSObject.Properties.Name -contains 'source_evidence') { $Entry.source_evidence } else { $null }
+    $sourceClass = if ($null -ne $sourceEvidence -and $sourceEvidence.PSObject.Properties.Name -contains 'source_class') { [string]$sourceEvidence.source_class } else { '' }
+    $evidenceLevel = if ($null -ne $sourceEvidence -and $sourceEvidence.PSObject.Properties.Name -contains 'evidence_level') { [string]$sourceEvidence.evidence_level } else { '' }
+    $hasOfficialDirectoryEvidence = $sourceClass -in @('PUBLIC_INSTITUTION_DIRECTORY', 'REGIONAL_DIRECTORY', 'OFFICIAL_REGISTER') -and $evidenceLevel -in @('SECONDARY_OFFICIAL_DIRECTORY', 'PRIMARY_OFFICIAL')
+
+    return $hasOfficialDirectoryEvidence -and $lastReason -eq 'Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.'
+}
+
 $startedAt = [datetime]::UtcNow
 $hintStoreResolved = Resolve-ToolPath -Root $projectRootResolved -Path $HintStorePath
 $sourceRegistryResolved = Resolve-ToolPath -Root $projectRootResolved -Path $SourceRegistryPath
@@ -264,7 +283,7 @@ $targets = @($queue.queue |
     Where-Object {
         [string]$_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and
             $candidateById.ContainsKey([string]$_.candidate_id) -and
-            [string]::IsNullOrWhiteSpace([string]$_.last_attempt_at)
+            (Test-ToolWebsiteDiscoveryQueueEntryDue -Entry $_)
     } |
     Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
     Select-Object -First $MaxCandidates)

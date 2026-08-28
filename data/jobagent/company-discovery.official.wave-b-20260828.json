@@ -1,0 +1,77 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-28T15:53:24.908Z",
+  "items": [
+    {
+      "canonical_name": "Bayerischer Rundfunk",
+      "official_website_url": "https://www.br.de/",
+      "career_url": "https://jobs.br.de/Jobs/All",
+      "aliases": [
+        "BR"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Media",
+      "scan_priority": 82,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.br.de/extra/karriere/index.html",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Klimapakt-3-Hinweis nennt Bayerischer Rundfunk; offizielle BR-Karriereseite verlinkt auf das BR-Stellenportal."
+    },
+    {
+      "canonical_name": "Deutsche Telekom AG",
+      "official_website_url": "https://www.telekom.com/",
+      "career_url": "https://careers.telekom.com/de",
+      "aliases": [
+        "Telekom",
+        "Deutsche Telekom"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Telecommunications",
+      "scan_priority": 82,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.telekom.com/de/karriere",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Klimapakt-3-Hinweis nennt Deutsche Telekom; offizielle Telekom-Karriereseite verweist auf careers.telekom.com."
+    },
+    {
+      "canonical_name": "Deutsche Lufthansa AG",
+      "official_website_url": "https://www.lufthansagroup.com/",
+      "career_url": null,
+      "aliases": [
+        "Lufthansa",
+        "Lufthansa Group"
+      ],
+      "locations": [
+        {
+          "label": "Landkreis Freising / Flughafen Muenchen",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Aviation",
+      "scan_priority": 81,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lufthansagroup.com/",
+      "discovery_origin": "source-registry:landkreis_freising_wirtschaft",
+      "evidence_note": "Freising-Regionalhinweis nennt Deutsche Lufthansa; offizielle Lufthansa-Group-Website verlinkt Karriere extern, daher nur Firmendomain-Verifikation ohne JobSource."
+    }
+  ]
+}

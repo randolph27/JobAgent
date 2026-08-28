@@ -443,6 +443,117 @@ finally {
     }
 }
 
+$requeueWebsiteRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-website-discovery-requeue-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path (Join-Path $requeueWebsiteRoot 'data\jobagent') -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $requeueWebsiteRoot 'logs\jobagent') -Force | Out-Null
+try {
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-sources/v1'
+        generated_at = '2026-08-23T08:00:00.000Z'
+        items = @(
+            [pscustomobject]@{
+                source_id = 'source-registry:test_official_directory'
+                source_class = 'PUBLIC_INSTITUTION_DIRECTORY'
+                evidence_level = 'SECONDARY_OFFICIAL_DIRECTORY'
+                import_mode = 'TARGETED_LOOKUP_ONLY'
+                review_required = $true
+                allowed_use = 'Fixture'
+                forbidden_use = 'Fixture'
+                rate_limit_policy = 'Fixture'
+                robots_or_terms_note = 'Fixture'
+                url = 'https://directory.example.invalid/companies'
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $requeueWebsiteRoot 'data\jobagent\company-discovery.sources.json') -Encoding UTF8
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-hints/v1'
+        generated_at = '2026-08-23T08:00:00.000Z'
+        hints_total = 1
+        unverified_hints = 1
+        hints = @(
+            [pscustomobject]@{
+                hint_id = 'hint:website-requeue'
+                employer_name = 'Example AG'
+                normalized_name = 'example'
+                location = 'Muenchen'
+                target_area = 'MUNICH'
+                source_id = 'source-registry:test_official_directory'
+                observed_url = 'https://directory.example.invalid/companies'
+                observed_at = '2026-08-23T08:00:00.000Z'
+                verification_status = 'UNVERIFIED'
+                candidate_status = 'REGIONAL_DISCOVERY_HINT'
+                confidence_score = 80
+                official_verification_required = $true
+                next_action = 'verify_official_company_website_or_career_url'
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $requeueWebsiteRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-queue/v1'
+        queue_type = 'review'
+        generated_at = '2026-08-23T09:00:00.000Z'
+        clusters_total = 1
+        candidates_total = 1
+        ready_total = 0
+        action_counts = [pscustomobject]@{ DISCOVER_OFFICIAL_WEBSITE = 1 }
+        queue = @(
+            [pscustomobject]@{
+                identity_cluster_id = 'identity-cluster:hint_website_requeue'
+                candidate_id = 'hint:website-requeue'
+                candidate_ids = @('hint:website-requeue')
+                canonical_name = 'Example AG'
+                source_count = 1
+                priority_score = 96
+                next_action = 'DISCOVER_OFFICIAL_WEBSITE'
+                reason_codes = @('OFFICIAL_VERIFICATION_REQUIRED')
+                target_area_basis = @('BRANCH_HINT_IN_TARGET')
+                status = 'MANUAL_REVIEW_REQUIRED'
+                review_reason = 'OFFICIAL_VERIFICATION_REQUIRED'
+                retry_count = 0
+                last_attempt_at = '2026-08-23T09:00:00.000Z'
+                next_attempt_at = $null
+                last_status = 'MANUAL_REVIEW_REQUIRED'
+                last_reason = 'Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.'
+                freshness_status = 'CURRENT'
+                risk_level = 'LOW'
+                source_evidence = [pscustomobject]@{
+                    source_id = 'source-registry:test_official_directory'
+                    source_class = 'PUBLIC_INSTITUTION_DIRECTORY'
+                    evidence_level = 'SECONDARY_OFFICIAL_DIRECTORY'
+                    observed_url = 'https://directory.example.invalid/companies'
+                    observed_at = '2026-08-23T08:00:00.000Z'
+                    record_hash = 'fixture'
+                    allowed_use = 'Fixture'
+                    rate_limit_policy = 'Fixture'
+                }
+                dedupe_context = [pscustomobject]@{
+                    dedupe_keys = @('name:example')
+                    conflict_flags = @()
+                    cluster_candidate_count = 1
+                }
+            }
+        )
+    } | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath (Join-Path $requeueWebsiteRoot 'data\jobagent\company-candidate-verification.queue.json') -Encoding UTF8
+    [pscustomobject]@{
+        responses = @(
+            [pscustomobject]@{ url = 'https://directory.example.invalid/companies'; ok = $true; status_code = 200; final_url = 'https://directory.example.invalid/companies'; content = '<html><a href="https://www.example.invalid/">Example AG</a></html>' }
+        )
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $requeueWebsiteRoot 'fixture-map.json') -Encoding UTF8
+
+    $requeueOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $requeueWebsiteRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Requeue ist fehlgeschlagen: " + ($requeueOutput -join "`n"))
+    $requeueResult = ($requeueOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $requeueQueue = Get-Content -Raw -LiteralPath ([string]$requeueResult.queue_path) | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($requeueResult.processed_total -eq 1) -Message 'Website-Ermittlung verarbeitet keinen frueheren Domain-Missing-Review mit offizieller Source-Evidence.'
+    Assert-True -Condition ($requeueResult.verified_total -eq 1) -Message 'Website-Ermittlung requeued offiziellen Source-Beleg nicht.'
+    Assert-True -Condition (@($requeueQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-requeue' -and $_.status -eq 'PENDING' -and $_.next_action -eq 'VERIFY_OFFICIAL_SITE' }).Count -eq 1) -Message 'Website-Ermittlung setzt requeued Kandidaten nicht auf offizielle Site-Verifikation.'
+}
+finally {
+    if (Test-Path -LiteralPath $requeueWebsiteRoot) {
+        Remove-Item -LiteralPath $requeueWebsiteRoot -Recurse -Force
+    }
+}
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -469,6 +580,7 @@ finally {
         'candidate_verification_script_upserts_only_verified_sources',
         'candidate_verification_cluster_queue_retry_and_review',
         'candidate_verification_retry_schedule_skip_until_due',
-        'candidate_verification_decision_report_review_and_reject'
+        'candidate_verification_decision_report_review_and_reject',
+        'website_discovery_requeues_domain_missing_reviews_with_official_source_evidence'
     )
 } | ConvertTo-Json -Depth 4
