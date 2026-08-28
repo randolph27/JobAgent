@@ -1,146 +1,115 @@
 {
-  "active_id": null,
-  "agent_id": "UTTER-20260817-39f7",
-  "changed": [
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/company-discovery.hints.json",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "todo.checkpoint.json",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "todo.state.json"
-  ],
-  "coverage": {
-    "backlog_items": 85,
-    "companies_total": 85,
-    "discovery_sources": 1820,
-    "duplicate_groups": 0,
-    "html_path": "html/jobagent/company-coverage.html",
-    "import_waves": 4,
-    "json_path": "logs/jobagent/company-coverage-20260828-061317.json",
-    "markdown_path": "logs/jobagent/company-coverage-20260828-061317.md",
-    "official_sources": 84,
-    "sources_total": 1904,
-    "target_inventory_candidates_total": 1870,
-    "target_inventory_gap_to_1000": 0,
-    "target_inventory_gate_status": "failed"
-  },
-  "discovery": {
-    "candidate_names": [
-      "Anzenberger Spedition Logistik GmbH",
-      "apetito",
-      "apominga.de",
-      "Apppex GmbH",
-      "Aquabell",
-      "Arcadis Germany B.V. & Co. KG",
-      "ArianeGroup",
-      "Arksolutions",
-      "Arthrex GmbH",
-      "artwww.de Walther Huynh",
-      "AS Dentaltechnik",
-      "AS-Waegetechnik GmbH",
-      "Ascend Gene & Cell Therapies",
-      "ASE Hausmeisterservice",
-      "astelco Systems GmbH",
-      "Astera LED Technology GmbH",
-      "Astyx Communications & Sensors",
-      "audemo systems GmbH",
-      "Audi Business Innovation GmbH",
-      "August Reiners",
-      "Auren Treuhand GmbH",
-      "Aurigium Patentanwaelte",
-      "auticon GmbH",
-      "Autobus Oberbayern",
-      "Autodesk GmbH"
-    ],
-    "log_path": "logs/jobagent/company-candidate-website-discovery-20260828-061257.json",
-    "manual_review_total": 25,
-    "processed_total": 25,
-    "reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-    "verified_total": 0
-  },
-  "git": {
-    "ahead": 0,
-    "behind": 0,
-    "branch": "master",
-    "head_before_commit": "01f8acef48e5",
-    "remote": "origin",
-    "upstream": "origin/master",
-    "worktree": "dirty"
-  },
-  "guardrails": [
-    "Offizielle Quellen sind zwingend; Jobboersen, Arbeitsagentur, Register und OSM-Hinweise bleiben Discovery-Hinweise.",
-    "Kandidaten ohne eindeutigen offiziellen Website-/Karriere-/ATS-Beleg bleiben fail-closed in Review/Retry.",
-    "Keine automatische Bewerbung, keine extern wirksame Aktion, keine erfundenen Firmen, URLs oder Job-IDs."
-  ],
-  "next_steps": [
-    "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
-    "Wenn verified_total > 0: pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
-    "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
-    "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-    "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-    ".\\ci.cmd route-check",
-    ".\\ci.cmd stp"
-  ],
+  "ts": "2026-08-28T08:43:25.239+02:00",
   "project": "JobAgent",
-  "refs": [
-    "Roadmap.md",
-    "todo.current.md",
-    "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.json",
-    "handoff.latest.md"
-  ],
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "agent_id": "UTTER-20260817-39f7",
+  "status": "open",
   "roadmap": {
     "active_id": "JA-027",
-    "rotation": "not-run",
-    "rotation_reason": "JA-027 ist noch nicht komplett erledigt.",
-    "status": "open"
+    "rotation_done": false,
+    "rotation_reason": "JA-027 ist fachlich noch nicht komplett erledigt."
   },
-  "route_ok": true,
-  "route_violations": [],
-  "status": "open",
-  "summary": "JA-027 Website-Discovery-Welle verarbeitet; keine offiziellen Website-Treffer; Queue, Hints, Coverage und STP aktualisiert.",
-  "supertest": "considered_done_per_user_instruction_not_rerun",
   "todo": {
-    "active_id": null,
+    "open_id": "TD-0041",
     "status": "open",
-    "todo_id": "TD-0041"
+    "active_id": null
   },
-  "ts": "2026-08-28T08:15:58.754+02:00",
-  "verified": [
-    {
-      "cmd": "curl.exe -s http://localhost:9000/api/system/status",
-      "exit": 0,
+  "git": {
+    "branch": "master",
+    "remote": "origin",
+    "upstream": "origin/master",
+    "head_before_commit": "d7ece7a21d80",
+    "ahead": 0,
+    "behind": 0,
+    "worktree_before_commit": "dirty"
+  },
+  "services": {
+    "devserver": {
+      "url": "http://localhost:8500/",
+      "port": 8500,
+      "listening": true
+    },
+    "sonarqube": {
+      "url": "http://localhost:9000/api/system/status",
       "status": "UP",
       "version": "26.1.0.118079"
+    }
+  },
+  "discovery": {
+    "log_path": "logs/jobagent/company-candidate-website-discovery-20260828-064157.json",
+    "processed_total": 25,
+    "verified_total": 0,
+    "manual_review_total": 25,
+    "reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
+    "candidate_names": [
+      "Automaten Seitz Vertrieb und Kundendienst GmbH",
+      "automatic Systeme GmbH",
+      "Avedo",
+      "Aviva Munich",
+      "AWA",
+      "AXA Versicherung",
+      "Axcorn",
+      "Axxiome",
+      "B.I.G. and STEALEX GmbH",
+      "B.L.F. Verlagsgesellschaft mbH",
+      "B2X Care Solutions",
+      "Bain and Company",
+      "Balsan Cosmetic",
+      "Baobab Social Business GmbH",
+      "Barrelbrothers",
+      "basismedia",
+      "Basycon Unternehmensberatung GmbH",
+      "Bauer and Kusterer",
+      "Bauer Media Group",
+      "Baugeschaeft Fendt and Behringer",
+      "Bausch and Lomb",
+      "Bavaria Entertainment GmbH",
+      "Bavaria Film GmbH",
+      "Bavaria Group",
+      "Bavaria Petrol"
+    ]
+  },
+  "coverage": {
+    "json_path": "logs/jobagent/company-coverage-20260828-064220.json",
+    "markdown_path": "logs/jobagent/company-coverage-20260828-064220.md",
+    "html_path": "html/jobagent/company-coverage.html",
+    "companies_total": 85,
+    "target_inventory_candidates_total": 1870,
+    "target_inventory_gap_to_1000": 0,
+    "target_inventory_gate_status": "failed",
+    "backlog_items": 85,
+    "duplicate_groups": 0,
+    "sources_total": 1904,
+    "official_sources": 84,
+    "discovery_sources": 1820,
+    "import_waves": 4
+  },
+  "verified": [
+    {
+      "cmd": "git -c core.pager=cat -c color.ui=false --no-pager status --short --branch",
+      "exit": 0
     },
     {
       "cmd": ".\\ci.cmd devserver-status",
-      "exit": 0,
-      "listening": true,
-      "port": 8500
+      "exit": 0
+    },
+    {
+      "cmd": "curl.exe -s http://localhost:9000/api/system/status",
+      "exit": 0
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
-      "exit": 0,
-      "manual_review_total": 25,
-      "processed_total": 25,
-      "verified_total": 0
+      "exit": 0
     },
     {
       "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
       "exit": 0
     },
     {
-      "cases": 24,
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
       "exit": 0
     },
     {
-      "cases": 28,
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
       "exit": 0
     },
@@ -153,5 +122,32 @@
       "exit": 0
     }
   ],
-  "workspace_root": "D:\\_Scripte\\JobAgent"
+  "supertest": {
+    "explicitly_requested": false,
+    "rerun": false,
+    "status": "treated_done_per_user_instruction"
+  },
+  "changed": [
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.hints.json",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json"
+  ],
+  "next_steps": [
+    "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8",
+    "Wenn verified_total > 0: pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3",
+    "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250",
+    "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+    "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+    ".\\ci.cmd route-check",
+    ".\\ci.cmd stp"
+  ],
+  "guardrails": [
+    "Offizielle Quellen sind zwingend; Jobboersen, Arbeitsagentur, Register und OSM-Hinweise bleiben Discovery-Hinweise.",
+    "Kandidaten ohne eindeutigen offiziellen Website-/Karriere-/ATS-Beleg bleiben fail-closed in Review/Retry.",
+    "Keine automatische Bewerbung, keine extern wirksame Aktion, keine erfundenen Firmen, URLs oder Job-IDs."
+  ]
 }
