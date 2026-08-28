@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T12:54:32+02:00
+Stand: 2026-08-28T13:02:23+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,13 +8,13 @@ Stand: 2026-08-28T12:54:32+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `a59ccb54318744ec021134ce089a1c47e9c88190`
+- HEAD vor Abschluss-Commit: `5f4c5cf2f53c`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
 - Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht abgeschlossen.
 - Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
-- Devserver: `http://localhost:8500/`, zuletzt `listening=True`, PID `23568`
-- SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
+- Devserver: `http://localhost:8500/`, Status zuletzt `listening=True`, PID `23568`
+- SonarQube: `http://localhost:9000/api/system/status`, Status zuletzt `UP`, Version `26.1.0.118079`
 
 ## Letzter abgeschlossener Arbeitsschritt
 
@@ -24,37 +24,36 @@ Stand: 2026-08-28T12:54:32+02:00
 - Hauptgrund bei allen 25 Kandidaten: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
 - `data/jobagent/store.json` wurde fachlich nicht geaendert.
 - Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
-- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-105213.json`, `logs/jobagent/company-coverage-20260828-105213.md`, `html/jobagent/company-coverage.html`.
-- Die Funktionstests haben anschliessend eine weitere Test-Coverage-Datei erzeugt: `logs/jobagent/company-coverage-20260828-105259.json`.
-- STP wurde am `2026-08-28T12:54:32+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-110039.json`, `logs/jobagent/company-coverage-20260828-110039.md`, `html/jobagent/company-coverage.html`.
+- STP wurde am `2026-08-28T13:02:23+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `FGV Schmidle GmbH`
-- `FIBU-MED GmbH`
-- `FID`
-- `Fidelity Information Services GmbH`
-- `Filmproduktion Artjom Baranov`
-- `financial.com`
-- `Fink Dachtechnik GmbH`
-- `Fink Gebaeudetechnik GmbH & Co. KG`
-- `Fiori Chiari`
-- `Fireball Labs`
-- `Fischer Vroni Karl Winter OHG`
-- `FlixBus`
-- `Florian Wackerbauer Heizung Sanitaer Solar Service`
-- `FlowCAD`
-- `Fluppisoft GmbH`
-- `Foerder- und Lernzentrum Aubing`
-- `Forever Living Productions`
-- `Formycon`
-- `Forschungsgesellschaft fuer Energiewirtschaft mbH`
-- `Forschungsstelle fuer Energiewirtschaft e.V.`
-- `FQP`
-- `FRAMOS GmbH`
-- `Franka Emika GmbH`
-- `Franz Augustin Bauunternehmung`
-- `Franz Rudolf Borsch Berater und Gruendercoach`
+- `Frédérique Desvaux`
+- `Freeline`
+- `FreeTech`
+- `Freudenberg Chemical Specialities`
+- `Frey Baumaschinen`
+- `Friedhofsgärtnerei Griebl`
+- `FriendsFactory AG`
+- `FS-BauTec GmbH & Co. KG`
+- `Fujitsu Technology Solutions`
+- `Funtainment`
+- `Fux`
+- `G-Zell.de Eventverleih`
+- `G. Henle Verlag`
+- `G.R.A.L.`
+- `G+H Building Services`
+- `GAF Geospatial GmbH`
+- `Gahrens + Battermann`
+- `Gahrens + Battermann GmbH & Co. KG Messebüro München`
+- `Garmin Deutschland GmbH`
+- `Gartner Deutschland`
+- `Gasteig München GmbH`
+- `GE HealthCare`
+- `Gehavau`
+- `GEMA Gebäudemanagement GmbH & Co. KG`
+- `Gemeinsames Kommunalunternehmen für Abfallwirtschaft`
 
 ## Datenstand nach Coverage und Queue
 
@@ -67,11 +66,8 @@ Stand: 2026-08-28T12:54:32+02:00
 - Source Inventory: `1904` Quellen
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
-- Kandidaten-Verification-Queue: `1785` Cluster, `1790` Kandidaten
-- Queue-Status: `53 VERIFIED`, `1724 MANUAL_REVIEW_REQUIRED`, `8 RETRY_SCHEDULED`
-- Queue-Aktionen: `1719 DISCOVER_OFFICIAL_WEBSITE`, `60 VERIFY_OFFICIAL_SITE`, `5 REJECT_DUPLICATE`, `1 MANUAL_DECISION`
-- Ready Total: `0`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-105155.json`
+- Import Waves: `4`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-110015.json`
 
 ## Verifikation
 
@@ -81,7 +77,7 @@ Stand: 2026-08-28T12:54:32+02:00
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250` -> Exit `0`; Coverage aktualisiert; target_inventory_gate_status=`failed`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`; 24 Faelle bestanden
 - `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`; 28 Faelle bestanden
-- `.\ci.cmd route-check` -> Exit `0`; route_ok=True
+- `.\ci.cmd route-check` -> Exit `0`; route_ok=`True`
 - `.\ci.cmd stp` -> Exit `0`; Todo/Handoff synchronisiert
 - `.\ci.cmd supertest` wurde nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
 
