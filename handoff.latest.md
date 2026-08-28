@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-28T09:55:00+02:00
+Stand: 2026-08-28T09:55:23+02:00
 
 ## Neuer-Chat-Start
 
@@ -8,12 +8,12 @@ Stand: 2026-08-28T09:55:00+02:00
 - Repo: `https://github.com/randolph27/JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschluss-Commit: `8bf0eeac5141`
-- Ahead/Behind vor Abschluss-Commit: `0/0`
+- HEAD vor Commit: `7db99dd9be2b`
+- Ahead/Behind vor Commit: `0/0`
 - Offener Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Offenes Todo: `TD-0041`, Status `open`, `active_id=null`
-- Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht komplett erledigt.
-- Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt, sofern nicht explizit angefragt.
+- Roadmap-Rotation: nicht ausgefuehrt; `JA-027` ist fachlich nicht abgeschlossen.
+- Supertest: nicht neu angefragt; gemaess Nutzeranweisung gilt er als erledigt.
 - Devserver: `http://localhost:8500/`, zuletzt `listening=True`
 - SonarQube: `http://localhost:9000/api/system/status`, zuletzt `UP`, Version `26.1.0.118079`
 
@@ -21,48 +21,41 @@ Stand: 2026-08-28T09:55:00+02:00
 
 - Fuer `JA-027` wurde eine weitere Website-Discovery-Welle verarbeitet.
 - Verarbeitet wurden `25` Kandidaten.
-- Ergebnis der Welle:
-  - `0` offizielle Website-Treffer
-  - `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`
-  - `0` produktive Store-Upserts
+- Ergebnis der Welle: `0` offizielle Website-Treffer, `25` Kandidaten fail-closed in `MANUAL_REVIEW_REQUIRED`, `0` produktive Store-Upserts.
 - Grund fuer alle 25 Kandidaten: `Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.`
 - `data/jobagent/store.json` wurde fachlich nicht geaendert.
-- Aktualisiert wurden:
-  - `data/jobagent/company-candidate-verification.queue.json`
-  - `data/jobagent/company-discovery.hints.json`
-- Coverage wurde neu erzeugt:
-  - `logs/jobagent/company-coverage-20260828-074729.json`
-  - `logs/jobagent/company-coverage-20260828-074729.md`
-  - `html/jobagent/company-coverage.html`
-- STP wurde ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
+- Aktualisiert wurden `data/jobagent/company-candidate-verification.queue.json` und `data/jobagent/company-discovery.hints.json`.
+- Coverage wurde neu erzeugt: `logs/jobagent/company-coverage-20260828-075213.json`, `logs/jobagent/company-coverage-20260828-075213.md`, `html/jobagent/company-coverage.html`.
+- Durch den Coverage-Funktionstest wurde zusaetzlich `logs/jobagent/company-coverage-20260828-075240.json` erzeugt.
+- STP wurde am `2026-08-28T09:55:23+02:00` ausgefuehrt und Todo-/Handoff-Artefakte wurden synchronisiert.
 
 ## Betroffene Kandidaten der letzten Welle
 
-- `CAIQ GmbH`
-- `Campana & Schott`
-- `Campus 365`
-- `CANCOM SE`
-- `Capgemini Engineering`
-- `Car for Friends`
-- `CARIAD SE`
-- `Caritas`
-- `Carl Berberich GmbH`
-- `Carl Hanser Verlag`
-- `Carl Zeiss Microscopy`
-- `cartv GmbH`
-- `Caverion`
-- `CBRE`
-- `Celgene`
-- `Celonis`
-- `Cembre`
-- `Center for Digital Technology and Management`
-- `Cerovac Gebaeudeservice GmbH`
-- `Certified Coolness Limited`
-- `CGI Deutschland`
-- `CH Marketing & Medien GmbH & Co. KG`
-- `Change LT`
-- `CHECK24`
-- `Checkmk`
+- `CHF Meridian`
+- `Chinese Visa Application Service Center`
+- `Christian Weise Verlag`
+- `CIB`
+- `CIBTvisas / VisumCentrale`
+- `Cine-Maids`
+- `Cine-Mobil`
+- `ClimatePartner`
+- `Cliqz GmbH`
+- `CMS Hasche Sigle`
+- `Coaching Barbara Volkwein`
+- `Coaching meets Art`
+- `codecentric`
+- `Coezbay GmbH`
+- `comeo Branding Communications Event`
+- `commercetools GmbH`
+- `Compinia GmbH & Co. KG`
+- `CompuRAM GmbH`
+- `Concave Collage`
+- `Conmoto Strategie und Realisierung`
+- `CONTENSYS`
+- `Controlware GmbH Muenchen`
+- `Coriolis Pharma`
+- `Cornu GmbH`
+- `Cortech GmbH`
 
 ## Datenstand nach Coverage
 
@@ -70,13 +63,18 @@ Stand: 2026-08-28T09:55:00+02:00
 - Target-Inventory-Kandidaten: `1870`
 - Target-Inventory-Gap zu 1000: `0`
 - Target-Inventory-Gate: `failed`
+- Scannable ohne offizielle Quelle: `40`
+- Kandidaten-Verification-Queue: `1785`
+- Kandidaten bereit fuer Verification: `8`
+- Kandidaten verifiziert: `53`
+- Kandidaten in Manual Review: `1724`
 - Backlog Items: `85`
 - Duplicate Groups: `0`
 - Source Inventory: `1904` Quellen
 - Offizielle Quellen: `84`
 - Discovery-Quellen: `1820`
 - Import Waves: `4`
-- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-074708.json`
+- Letzter Discovery-Run: `logs/jobagent/company-candidate-website-discovery-20260828-075150.json`
 
 ## Verifikation
 
@@ -91,7 +89,7 @@ Stand: 2026-08-28T09:55:00+02:00
 - `.\ci.cmd stp` -> Exit `0`; Todo/Handoff synchronisiert
 - `.\ci.cmd supertest` wurde nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt.
 
-## Geaenderte Dateien fuer Abschluss-Commit
+## Geaenderte Dateien fuer Commit
 
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.hints.json`
@@ -103,15 +101,10 @@ Stand: 2026-08-28T09:55:00+02:00
 
 ## Naechste Aufgaben
 
-1. Weiter mit `JA-027`: naechste Website-Discovery-Welle starten:
-   `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8`
-2. Wenn `verified_total > 0`, Kandidatenverifikation starten:
-   `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3`
-3. Danach Coverage aktualisieren:
-   `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250`
-4. Danach fokussierte Funktionstests ausfuehren:
-   `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1`
-   `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1`
+1. Weiter mit `JA-027`: naechste Website-Discovery-Welle starten: `pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -MaxCandidates 25 -TimeoutSeconds 8`
+2. Wenn `verified_total > 0`, Kandidatenverifikation starten: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -MaxCandidates 20 -TimeoutSeconds 8 -MaxRetries 3`
+3. Danach Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250`
+4. Danach fokussierte Funktionstests ausfuehren: `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1`
 5. Danach `.\ci.cmd route-check` und `.\ci.cmd stp` ausfuehren.
 6. `JA-027` erst rotieren, wenn alle Kandidaten verarbeitet sind oder jeder offene Rest einen belastbaren Review-/Reject-/Retry-Grund hat und alle Akzeptanzbedingungen belegt sind.
 
