@@ -3912,7 +3912,7 @@
       ],
       "updated_at": "2026-08-28T05:03:36.959Z",
       "created_at": "2026-08-28T05:03:36.959Z",
-      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "next_scan_at": "2026-08-29T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -3940,6 +3940,60 @@
           "final_url": "https://eu.resonac.com/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-26T05:03:36.959Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:tdk_electronics_ag",
+      "canonical_name": "TDK Electronics AG",
+      "canonical_domain": "tdk-electronics.tdk.com",
+      "official_website_url": "https://tdk-electronics.tdk.com/",
+      "career_url": "https://tdk-electronics.tdk.com/en/2302050/careers",
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-28T05:13:11.337Z",
+      "created_at": "2026-08-28T05:13:11.337Z",
+      "next_scan_at": "2026-08-29T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "2026-08-28T05:13:11.337Z",
+        "verification_url": "https://tdk-electronics.tdk.com/en/2302050/careers",
+        "discovery_origin": "source-registry:munich_business_japanese_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:munich_business_japanese_companies_tdk_electronics_ag_muenchen",
+          "company_id": "company:tdk_electronics_ag",
+          "canonical_name": "TDK Electronics AG",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://tdk-electronics.tdk.com/en/2302050/careers",
+          "verified_by_url": "https://tdk-electronics.tdk.com/",
+          "redirect_chain": "https://tdk-electronics.tdk.com/en/2302050/careers",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "5f2c9a07eb7d43b6994beacaf2cc006a0f3b77f6b225e325432155eb03dcf30d",
+          "observed_at": "2026-08-28T05:13:11.337Z",
+          "http_status": 200,
+          "final_url": "https://tdk-electronics.tdk.com/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-26T05:13:11.337Z"
         }
       ]
     }
@@ -5701,6 +5755,29 @@
             "https://eu.resonac.com/careers"
           ],
           "observed_at": "2026-08-28T05:03:36.959Z",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:tdk_electronics_ag_career_url",
+      "company_id": "company:tdk_electronics_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://tdk-electronics.tdk.com/en/2302050/careers",
+      "canonical_url": "https://tdk-electronics.tdk.com/en/2302050/careers",
+      "is_official": true,
+      "verified_at": "2026-08-28T05:13:11.337Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://tdk-electronics.tdk.com/en/2302050/careers",
+          "basis_url": "https://tdk-electronics.tdk.com/",
+          "redirect_chain": [
+            "https://tdk-electronics.tdk.com/en/2302050/careers"
+          ],
+          "observed_at": "2026-08-28T05:13:11.337Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
         }
       ]
