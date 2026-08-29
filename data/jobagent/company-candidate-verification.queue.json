@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-29T11:02:20.329Z",
+  "generated_at": "2026-08-29T11:16:30.189Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 263,
-    "DISCOVER_OFFICIAL_WEBSITE": 1519,
+    "ALREADY_VERIFIED_IN_STORE": 273,
+    "DISCOVER_OFFICIAL_WEBSITE": 1509,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -3882,6 +3882,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:angsa_robotics_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "Angsa Robotics",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "a45f0d956b1d48b24776560422da61800bd2af7cfe24ff6249ff354bae2b3ccb",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:angsa robotics"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_antenne_bayern_muenchen",
       "candidate_id": "regional-hint:munich_business_creative_companies_antenne_bayern_muenchen",
       "company_id": "company:antenne_bayern_gmbh_and_co_kg",
@@ -4287,6 +4331,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_augustiner_braeu_logistik_muenchen_west",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_augustiner_braeu_logistik_muenchen_west",
+      "company_id": "company:augustiner_braeu_wagner_kg",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_augustiner_braeu_logistik_muenchen_west"
+      ],
+      "canonical_name": "Augustiner Braeu Logistik",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "f01b5b3850d037fc5fc465af2869bef5a09610c0a7c324f18cf46aa7be724200",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:augustiner braeu logistik"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_bain_and_company_germany_inc_muenchen",
       "candidate_id": "regional-hint:munich_business_us_companies_bain_and_company_germany_inc_muenchen",
       "company_id": "company:bain_and_company_germany_inc",
@@ -4459,6 +4547,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:baxter deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen",
+      "candidate_id": "regional-hint:munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen",
+      "company_id": "company:bayerische_landesbodenkreditanstalt",
+      "candidate_ids": [
+        "regional-hint:munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen"
+      ],
+      "canonical_name": "Bayerische Landesbodenkreditanstalt",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_finance_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/finanzwirtschaft.html",
+        "observed_at": "08/26/2026 10:20:00",
+        "record_hash": "d6178a0c8356298fa76aefaecfb52abb25809470d8134c86b36b6dce3f91576e",
+        "allowed_use": "Oeffentlich genannte Banken, Versicherungen, Leasing-, Venture-Capital- und FinTech-/InsurTech-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bayerische landesbodenkreditanstalt"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -5962,6 +6094,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_dachser_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_dachser_muenchen_ost",
+      "company_id": "company:dachser_se",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_dachser_muenchen_ost"
+      ],
+      "canonical_name": "Dachser",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "945bd3e856d56fe46a5bef42f9cc02074f2354157ab8bef28fa4c436fda9e43d",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:dachser"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_international_companies_daiichi_sankyo_europe_muenchen",
       "candidate_id": "regional-hint:munich_business_international_companies_daiichi_sankyo_europe_muenchen",
       "company_id": "company:daiichi_sankyo_europe_gmbh",
@@ -6051,6 +6227,182 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_dassault_systemes_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_dassault_systemes_muenchen_ost",
+      "company_id": "company:dassault_systemes_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_dassault_systemes_muenchen_ost"
+      ],
+      "canonical_name": "Dassault Systemes",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "3baf61c0e138c8d929a7d715d5df97d3a1f9f02218d79e42111550c86d162144",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:dassault systemes"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_deepc_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_deepc_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:deepc_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_deepc_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "deepc",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "6dfa00774500892c3d1b12bafae203ed87dba7dfb4962cd6ca97a8e649acf9ed",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deepc"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_deloitte_digital_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_deloitte_digital_muenchen_ost",
+      "company_id": "company:deloitte_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_deloitte_digital_muenchen_ost"
+      ],
+      "canonical_name": "Deloitte Digital",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "844d080b50dbc9750c8eb77abae582fdbd00457ca6132f0c01d754fce46ef2ee",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deloitte digital"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_deloitte_touche_tohmatsu_limited_muenchen",
+      "candidate_id": "regional-hint:munich_business_us_companies_deloitte_touche_tohmatsu_limited_muenchen",
+      "company_id": "company:deloitte_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_us_companies_deloitte_touche_tohmatsu_limited_muenchen"
+      ],
+      "canonical_name": "Deloitte Touche Tohmatsu Limited",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_us_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "dd1271424fc4a9a7168d7085f547c1d7dbd22bb5e56a76879d8d9a579ec324fc",
+        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deloitte touche tohmatsu limited"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -6183,6 +6535,50 @@
         "dedupe_keys": [
           "domain:de.dmgmori.com",
           "name:dmg mori emea holding"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_droemer_knaur_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_droemer_knaur_muenchen",
+      "company_id": "company:droemer_knaur_gmbh_and_co_kg",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_droemer_knaur_muenchen"
+      ],
+      "canonical_name": "Droemer Knaur",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "b84088e68331a64739378a19dc757ed083dfb250b99ce2698a78f2e30bb9cc88",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:droemer knaur"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -10311,50 +10707,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "Angsa Robotics",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "a45f0d956b1d48b24776560422da61800bd2af7cfe24ff6249ff354bae2b3ccb",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:angsa robotics"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_argo_ai_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_argo_ai_awesome_machine_learning_startups_munich_github_list",
       "company_id": null,
@@ -10437,50 +10789,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:assemblixx"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_augustiner_braeu_logistik_muenchen_west",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_augustiner_braeu_logistik_muenchen_west",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_augustiner_braeu_logistik_muenchen_west"
-      ],
-      "canonical_name": "Augustiner Braeu Logistik",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "f01b5b3850d037fc5fc465af2869bef5a09610c0a7c324f18cf46aa7be724200",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:augustiner braeu logistik"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -10613,50 +10921,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:b ing"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen",
-      "candidate_id": "regional-hint:munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen"
-      ],
-      "canonical_name": "Bayerische Landesbodenkreditanstalt",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_finance_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/finanzwirtschaft.html",
-        "observed_at": "08/26/2026 10:20:00",
-        "record_hash": "d6178a0c8356298fa76aefaecfb52abb25809470d8134c86b36b6dce3f91576e",
-        "allowed_use": "Oeffentlich genannte Banken, Versicherungen, Leasing-, Venture-Capital- und FinTech-/InsurTech-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bayerische landesbodenkreditanstalt"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -12719,94 +12983,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_dachser_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_dachser_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_dachser_muenchen_ost"
-      ],
-      "canonical_name": "Dachser",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:41:40.706Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "945bd3e856d56fe46a5bef42f9cc02074f2354157ab8bef28fa4c436fda9e43d",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:dachser"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_dassault_systemes_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_dassault_systemes_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_dassault_systemes_muenchen_ost"
-      ],
-      "canonical_name": "Dassault Systemes",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:41:40.706Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "3baf61c0e138c8d929a7d715d5df97d3a1f9f02218d79e42111550c86d162144",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:dassault systemes"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_datarella_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_datarella_muenchen_tech_unternehmen",
       "company_id": null,
@@ -12845,50 +13021,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:datarella"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_deepc_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_deepc_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_deepc_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "deepc",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:41:40.706Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "6dfa00774500892c3d1b12bafae203ed87dba7dfb4962cd6ca97a8e649acf9ed",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:deepc"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -12977,94 +13109,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:delightex"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_deloitte_digital_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_deloitte_digital_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_deloitte_digital_muenchen_ost"
-      ],
-      "canonical_name": "Deloitte Digital",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:41:40.706Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "844d080b50dbc9750c8eb77abae582fdbd00457ca6132f0c01d754fce46ef2ee",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:deloitte digital"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_deloitte_touche_tohmatsu_limited_muenchen",
-      "candidate_id": "regional-hint:munich_business_us_companies_deloitte_touche_tohmatsu_limited_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_us_companies_deloitte_touche_tohmatsu_limited_muenchen"
-      ],
-      "canonical_name": "Deloitte Touche Tohmatsu Limited",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:41:40.706Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_us_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "dd1271424fc4a9a7168d7085f547c1d7dbd22bb5e56a76879d8d9a579ec324fc",
-        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:deloitte touche tohmatsu limited"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -13329,50 +13373,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:driveit"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_droemer_knaur_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_droemer_knaur_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_droemer_knaur_muenchen"
-      ],
-      "canonical_name": "Droemer Knaur",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:41:40.706Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "b84088e68331a64739378a19dc757ed083dfb250b99ce2698a78f2e30bb9cc88",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:droemer knaur"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -28886,6 +28886,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:dassault_systemes_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Dassault Systemes Deutschland GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T08:07:08.316Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "ec0af38b26f1f8476059534d5193abe7d0d49896075c41043d98e6b0a78f3812",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:dassault systemes deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_boersennotierte_unternehmen_deutsche_pfandbriefbank_ag_muenchen_und_region_stand_der_quellseite_april_2026",
       "candidate_id": "regional-hint:stadt_muenchen_boersennotierte_unternehmen_deutsche_pfandbriefbank_ag_muenchen_und_region_stand_der_quellseite_april_2026",
       "company_id": "company:deutsche_pfandbriefbank_ag",
@@ -40140,50 +40184,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:daschuwi"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Dassault Systemes Deutschland GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T08:07:08.316Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "ec0af38b26f1f8476059534d5193abe7d0d49896075c41043d98e6b0a78f3812",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:dassault systemes deutschland"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1

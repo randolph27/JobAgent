@@ -1,0 +1,201 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-29T12:05:00.000Z",
+  "items": [
+    {
+      "canonical_name": "ANGSA Robotics GmbH",
+      "official_website_url": "https://angsa-robotics.com/",
+      "career_url": "https://angsa-robotics.com/en/career/",
+      "aliases": [
+        "Angsa Robotics",
+        "ANGSA Robotics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "scan_priority": 63,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://angsa-robotics.com/en/career/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Angsa-Robotics-Kandidat wurde ueber die offizielle Angsa-Robotics-Domain und deren offizielle Karriere-Seite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "deepc GmbH",
+      "official_website_url": "https://www.deepc.ai/",
+      "career_url": "https://www.deepc.ai/company/careers",
+      "aliases": [
+        "deepc",
+        "deepc AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Clinical AI Infrastructure",
+      "scan_priority": 62,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.deepc.ai/company/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der deepc-Kandidat wurde ueber die offizielle deepc-Domain und deren offizielle Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "DACHSER SE",
+      "official_website_url": "https://www.dachser.com/",
+      "career_url": "https://careers.dachser.com/",
+      "aliases": [
+        "Dachser",
+        "DACHSER"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Logistics",
+      "scan_priority": 61,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.dachser.com/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Dachser-Kandidat wurde ueber die offizielle DACHSER-Domain und das offizielle DACHSER-Karriereportal belegt."
+    },
+    {
+      "canonical_name": "Augustiner-Braeu Wagner KG",
+      "official_website_url": "https://www.augustiner-braeu.de/",
+      "career_url": "https://www.augustiner-braeu.de/unsere-stellenangebote/",
+      "aliases": [
+        "Augustiner Braeu Logistik",
+        "Augustiner-Braeu",
+        "Augustiner Braeu"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Freiham",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Brewery and Logistics",
+      "scan_priority": 60,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.augustiner-braeu.de/wir-stellen-ein/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Augustiner-Kandidat wurde ueber die offizielle Augustiner-Braeu-Domain, deren Arbeitgeberseite und die offizielle Stellenangebotsseite belegt."
+    },
+    {
+      "canonical_name": "Droemer Knaur GmbH & Co. KG",
+      "official_website_url": "https://www.droemer-knaur.de/",
+      "career_url": "https://www.droemer-knaur.de/verlag/jobs",
+      "aliases": [
+        "Droemer Knaur",
+        "Verlagsgruppe Droemer Knaur"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "scan_priority": 59,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.droemer-knaur.de/verlag/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Droemer-Knaur-Kandidat wurde ueber die offizielle Droemer-Knaur-Domain und deren offizielle Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Dassault Systemes Deutschland GmbH",
+      "official_website_url": "https://www.3ds.com/",
+      "career_url": "https://www.3ds.com/careers/jobs",
+      "aliases": [
+        "Dassault Systemes",
+        "Dassault Systèmes",
+        "3DS"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "3D Software",
+      "scan_priority": 58,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.3ds.com/about/company/office-locations/germany/munich-st-martin-strasse",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Dassault-Systemes-Kandidat wurde ueber die offizielle 3DS-Domain, den offiziellen Muenchner Standort und die offizielle Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Bayerische Landesbodenkreditanstalt",
+      "official_website_url": "https://bayernlabo.de/",
+      "career_url": "https://bayernlabo.de/karriere",
+      "aliases": [
+        "BayernLabo",
+        "Bayerische Landesbodenkreditanstalt"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Development Banking",
+      "scan_priority": 57,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://bayernlabo.de/karriere",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der BayernLabo-Kandidat wurde ueber die offizielle BayernLabo-Domain und deren Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "Deloitte GmbH",
+      "official_website_url": "https://www.deloitte.com/de/de.html",
+      "career_url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+      "aliases": [
+        "Deloitte",
+        "Deloitte Digital",
+        "Deloitte Touche Tohmatsu Limited"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consulting and Professional Services",
+      "scan_priority": 56,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+      "discovery_origin": "source-registry:munich_business_us_companies",
+      "evidence_note": "Der Deloitte-Kandidat wurde ueber die offizielle Deloitte-Domain und die offizielle Deloitte-Deutschland-Jobsuche fuer Muenchen belegt."
+    }
+  ]
+}

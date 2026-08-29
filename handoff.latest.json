@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-29T13:09:30.000+02:00",
+  "ts": "2026-08-29T13:24:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -7,39 +7,113 @@
   "status": "in-progress",
   "goal": "JA-027: offizielle Karriere-/Jobs-/ATS-Verifikation und produktiver Import weiterer Arbeitgeber",
   "changed": [
-    "todo.checkpoint.json",
+    "Roadmap.md",
+    "data/jobagent/company-discovery.official.wave-l-20260829.json",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/store.json",
+    "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json",
     "handoff.latest.json",
     "handoff.latest.md"
   ],
   "verified": [
     {
       "exit": 0,
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-l-20260829.json | ConvertFrom-Json -Depth 100"
+    },
+    {
+      "exit": 0,
+      "cmd": "Invoke-WebRequest -Method Head fuer alle official_website_url/career_url/discovery_url aus Welle L"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-l-20260829.json -WaveId B"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1"
+    },
+    {
+      "exit": 0,
+      "cmd": ".\\ci.cmd route-check"
+    },
+    {
+      "exit": 0,
       "cmd": ".\\ci.cmd stp"
     },
     {
       "exit": 0,
-      "cmd": "git -c core.pager=cat -c color.ui=false --no-pager commit --amend --no-edit"
-    },
-    {
-      "exit": 0,
-      "cmd": "git -c core.pager=cat -c color.ui=false --no-pager push origin master"
+      "cmd": ".\\ci.cmd supertest",
+      "status": "accepted-by-user-without-run"
     }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "siehe git log -1 --oneline",
+    "head": "ecf08c6fdaac",
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,
-    "worktree": "clean nach Push"
+    "worktree": "dirty"
   },
-  "next": "Weitere priorisierte DISCOVER_OFFICIAL_WEBSITE-Kandidaten fail-closed pruefen und nur mit offizieller Karriere-/ATS-Evidenz in Welle L importieren.",
+  "metrics": {
+    "companies_total": 171,
+    "job_sources_total": 167,
+    "official_sources": 169,
+    "career_sources": 168,
+    "verified_or_store_aware_candidates": 273,
+    "discover_official_website_candidates": 1509,
+    "verify_official_site_candidates": 2,
+    "manual_decision_candidates": 1
+  },
+  "next": "Weitere priorisierte DISCOVER_OFFICIAL_WEBSITE-/VERIFY_OFFICIAL_SITE-Kandidaten fail-closed pruefen und nur mit offizieller Karriere-/ATS-Evidenz in Welle M importieren.",
   "refs": [
     "Roadmap.md",
     "todo.current.md",
@@ -52,5 +126,5 @@
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "summary": "JA-027 Welle K/B abgeschlossen und per STP fuer neuen Chat synchronisiert; JA-027 bleibt offen."
+  "summary": "JA-027 Welle L/B abgeschlossen und per STP fuer neuen Chat synchronisiert; JA-027 bleibt offen."
 }

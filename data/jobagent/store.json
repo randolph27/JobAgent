@@ -4478,6 +4478,83 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:angsa_robotics_gmbh",
+      "canonical_name": "ANGSA Robotics GmbH",
+      "canonical_domain": "angsa-robotics.com",
+      "official_website_url": "https://angsa-robotics.com/",
+      "career_url": "https://angsa-robotics.com/en/career/",
+      "aliases": [
+        "Angsa Robotics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 63,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://angsa-robotics.com/en/career/",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://angsa-robotics.com/en/career/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Robotics",
+        "evidence_note": "Der Angsa-Robotics-Kandidat wurde ueber die offizielle Angsa-Robotics-Domain und deren offizielle Karriere-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:deepc_gmbh",
+      "canonical_name": "deepc GmbH",
+      "canonical_domain": "deepc.ai",
+      "official_website_url": "https://www.deepc.ai/",
+      "career_url": "https://www.deepc.ai/company/careers",
+      "aliases": [
+        "deepc",
+        "deepc AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Clinical AI Infrastructure",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 62,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.deepc.ai/company/careers",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://www.deepc.ai/company/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Clinical AI Infrastructure",
+        "evidence_note": "Der deepc-Kandidat wurde ueber die offizielle deepc-Domain und deren offizielle Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:biogen_gmbh",
       "canonical_name": "Biogen GmbH",
       "canonical_domain": "biogen.com",
@@ -4514,6 +4591,44 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:dachser_se",
+      "canonical_name": "DACHSER SE",
+      "canonical_domain": "dachser.com",
+      "official_website_url": "https://www.dachser.com/",
+      "career_url": "https://careers.dachser.com/",
+      "aliases": [
+        "Dachser"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Logistics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 61,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.dachser.com/",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://careers.dachser.com/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Logistics",
+        "evidence_note": "Der Dachser-Kandidat wurde ueber die offizielle DACHSER-Domain und das offizielle DACHSER-Karriereportal belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
       "last_successful_scan_at": null
     },
     {
@@ -4591,6 +4706,204 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:augustiner_braeu_wagner_kg",
+      "canonical_name": "Augustiner-Braeu Wagner KG",
+      "canonical_domain": "augustiner-braeu.de",
+      "official_website_url": "https://www.augustiner-braeu.de/",
+      "career_url": "https://www.augustiner-braeu.de/unsere-stellenangebote/",
+      "aliases": [
+        "Augustiner Braeu",
+        "Augustiner Braeu Logistik",
+        "Augustiner-Braeu"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Freiham",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Brewery and Logistics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 60,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.augustiner-braeu.de/wir-stellen-ein/",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://www.augustiner-braeu.de/unsere-stellenangebote/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Brewery and Logistics",
+        "evidence_note": "Der Augustiner-Kandidat wurde ueber die offizielle Augustiner-Braeu-Domain, deren Arbeitgeberseite und die offizielle Stellenangebotsseite belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:droemer_knaur_gmbh_and_co_kg",
+      "canonical_name": "Droemer Knaur GmbH & Co. KG",
+      "canonical_domain": "droemer-knaur.de",
+      "official_website_url": "https://www.droemer-knaur.de/",
+      "career_url": "https://www.droemer-knaur.de/verlag/jobs",
+      "aliases": [
+        "Droemer Knaur",
+        "Verlagsgruppe Droemer Knaur"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 59,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.droemer-knaur.de/verlag/jobs",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://www.droemer-knaur.de/verlag/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing",
+        "evidence_note": "Der Droemer-Knaur-Kandidat wurde ueber die offizielle Droemer-Knaur-Domain und deren offizielle Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:dassault_systemes_deutschland_gmbh",
+      "canonical_name": "Dassault Systemes Deutschland GmbH",
+      "canonical_domain": "3ds.com",
+      "official_website_url": "https://www.3ds.com/",
+      "career_url": "https://www.3ds.com/careers/jobs",
+      "aliases": [
+        "3DS",
+        "Dassault Systemes",
+        "Dassault Systèmes"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "3D Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 58,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.3ds.com/about/company/office-locations/germany/munich-st-martin-strasse",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://www.3ds.com/careers/jobs",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "3D Software",
+        "evidence_note": "Der Dassault-Systemes-Kandidat wurde ueber die offizielle 3DS-Domain, den offiziellen Muenchner Standort und die offizielle Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bayerische_landesbodenkreditanstalt",
+      "canonical_name": "Bayerische Landesbodenkreditanstalt",
+      "canonical_domain": "bayernlabo.de",
+      "official_website_url": "https://bayernlabo.de/",
+      "career_url": "https://bayernlabo.de/karriere",
+      "aliases": [
+        "Bayerische Landesbodenkreditanstalt",
+        "BayernLabo"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Development Banking",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 57,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://bayernlabo.de/karriere",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://bayernlabo.de/karriere",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Public Development Banking",
+        "evidence_note": "Der BayernLabo-Kandidat wurde ueber die offizielle BayernLabo-Domain und deren Karrierebereich belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:deloitte_gmbh",
+      "canonical_name": "Deloitte GmbH",
+      "canonical_domain": "deloitte.com",
+      "official_website_url": "https://www.deloitte.com/de/de.html",
+      "career_url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+      "aliases": [
+        "Deloitte",
+        "Deloitte Digital",
+        "Deloitte Touche Tohmatsu Limited"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consulting and Professional Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 56,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+        "observed_at": "2026-08-29T11:14:53.775Z",
+        "verification_url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+        "discovery_origin": "source-registry:munich_business_us_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Consulting and Professional Services",
+        "evidence_note": "Der Deloitte-Kandidat wurde ueber die offizielle Deloitte-Domain und die offizielle Deloitte-Deutschland-Jobsuche fuer Muenchen belegt."
+      },
+      "created_at": "2026-08-29T11:14:53.775Z",
+      "updated_at": "2026-08-29T11:14:53.775Z",
       "last_successful_scan_at": null
     },
     {
@@ -7673,6 +7986,27 @@
       ]
     },
     {
+      "source_id": "source:angsa_robotics_gmbh_career",
+      "company_id": "company:angsa_robotics_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://angsa-robotics.com/en/career/",
+      "canonical_url": "https://angsa-robotics.com/en/career/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://angsa-robotics.com/en/career/",
+          "basis_url": "https://angsa-robotics.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:antenne_bayern_gmbh_and_co_kg_career",
       "company_id": "company:antenne_bayern_gmbh_and_co_kg",
       "source_type": "CAREER_PAGE",
@@ -7841,6 +8175,27 @@
       }
     },
     {
+      "source_id": "source:augustiner_braeu_wagner_kg_career",
+      "company_id": "company:augustiner_braeu_wagner_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.augustiner-braeu.de/unsere-stellenangebote/",
+      "canonical_url": "https://www.augustiner-braeu.de/unsere-stellenangebote/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.augustiner-braeu.de/unsere-stellenangebote/",
+          "basis_url": "https://www.augustiner-braeu.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bain_and_company_germany_inc_career",
       "company_id": "company:bain_and_company_germany_inc",
       "source_type": "CAREER_PAGE",
@@ -7983,6 +8338,27 @@
           "basis_url": "https://www.bayernlb.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bayerische_landesbodenkreditanstalt_career",
+      "company_id": "company:bayerische_landesbodenkreditanstalt",
+      "source_type": "CAREER_PAGE",
+      "url": "https://bayernlabo.de/karriere",
+      "canonical_url": "https://bayernlabo.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://bayernlabo.de/karriere",
+          "basis_url": "https://bayernlabo.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -8423,6 +8799,27 @@
       }
     },
     {
+      "source_id": "source:dachser_se_career",
+      "company_id": "company:dachser_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.dachser.com/",
+      "canonical_url": "https://careers.dachser.com/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.dachser.com/",
+          "basis_url": "https://www.dachser.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:daiichi_sankyo_europe_gmbh_career_url",
       "company_id": "company:daiichi_sankyo_europe_gmbh",
       "source_type": "CAREER_PAGE",
@@ -8442,6 +8839,69 @@
           ],
           "observed_at": "2026-08-27T16:42:02.02Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:dassault_systemes_deutschland_gmbh_career",
+      "company_id": "company:dassault_systemes_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.3ds.com/careers/jobs",
+      "canonical_url": "https://www.3ds.com/careers/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.3ds.com/careers/jobs",
+          "basis_url": "https://www.3ds.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:deepc_gmbh_career",
+      "company_id": "company:deepc_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.deepc.ai/company/careers",
+      "canonical_url": "https://www.deepc.ai/company/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.deepc.ai/company/careers",
+          "basis_url": "https://www.deepc.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:deloitte_gmbh_career",
+      "company_id": "company:deloitte_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+      "canonical_url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://job.deloitte.com/jobs-in-muenchen-_c12",
+          "basis_url": "https://www.deloitte.com/de/de.html",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -8547,6 +9007,27 @@
           ],
           "observed_at": "2026-08-27T10:27:32.164Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:droemer_knaur_gmbh_and_co_kg_career",
+      "company_id": "company:droemer_knaur_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.droemer-knaur.de/verlag/jobs",
+      "canonical_url": "https://www.droemer-knaur.de/verlag/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:14:53.775Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.droemer-knaur.de/verlag/jobs",
+          "basis_url": "https://www.droemer-knaur.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
