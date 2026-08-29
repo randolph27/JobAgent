@@ -1007,12 +1007,16 @@
     },
     {
       "company_id": "company:deutsche_telekom_ag",
-      "canonical_name": "Deutsche Telekom AG",
+      "canonical_name": "Deutsche Telekom Technik GmbH",
       "canonical_domain": "telekom.com",
       "official_website_url": "https://www.telekom.com/",
       "career_url": "https://careers.telekom.com/de",
       "aliases": [
         "Deutsche Telekom",
+        "Deutsche Telekom AG",
+        "Deutsche Telekom Technik",
+        "Deutsche Telekom Technik GmbH",
+        "DT Technik",
         "Telekom"
       ],
       "locations": [
@@ -1033,15 +1037,15 @@
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.telekom.com/de/karriere",
-        "observed_at": "2026-08-28T15:53:28.788Z",
+        "observed_at": "2026-08-29T05:59:42.748Z",
         "verification_url": "https://careers.telekom.com/de",
         "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
         "target_area": "MUNICH",
-        "industry_hint": "Telecommunications",
-        "evidence_note": "Klimapakt-3-Hinweis nennt Deutsche Telekom; offizielle Telekom-Karriereseite verweist auf careers.telekom.com."
+        "industry_hint": "Telecommunications Infrastructure",
+        "evidence_note": "Der Deutsche-Telekom-Technik-Kandidat wurde ueber die offizielle Telekom-Konzernwebsite und die dort verlinkte globale Karriere-Website belegt."
       },
       "created_at": "2026-08-28T15:53:28.788Z",
-      "updated_at": "2026-08-28T15:53:28.788Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
       "last_successful_scan_at": null
     },
     {
@@ -1845,6 +1849,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:mgh_muenchener_gewerbehof_und_technologiegesellschaft",
+      "canonical_name": "MGH - Muenchener Gewerbehof- und Technologiegesellschaft",
+      "canonical_domain": "mgh-muc.de",
+      "official_website_url": "https://www.mgh-muc.de/",
+      "career_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+      "aliases": [
+        "MGH",
+        "Muenchener Gewerbehof- und Technologiezentrumsgesellschaft",
+        "Muenchner Gewerbehoefe"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Real Estate and Technology Centers",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+        "observed_at": "2026-08-29T05:59:42.748Z",
+        "verification_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "Real Estate and Technology Centers",
+        "evidence_note": "Der MGH-Kandidat wurde ueber die offizielle MGH-Domain und die dortige Stellenangebotsseite belegt."
+      },
+      "created_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:ihk_fuer_muenchen_und_oberbayern",
       "canonical_name": "IHK fuer Muenchen und Oberbayern",
       "canonical_domain": "ihk-muenchen.de",
@@ -1998,6 +2042,45 @@
       },
       "created_at": "2026-08-28T16:22:41.522Z",
       "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tum_school_of_life_sciences",
+      "canonical_name": "TUM School of Life Sciences",
+      "canonical_domain": "ls.tum.de",
+      "official_website_url": "https://www.ls.tum.de/",
+      "career_url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+      "aliases": [
+        "School of Life Sciences der TUM",
+        "TUM Life Sciences"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Higher Education and Research",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+        "observed_at": "2026-08-29T05:59:42.748Z",
+        "verification_url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+        "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+        "target_area": "FREISING",
+        "industry_hint": "Higher Education and Research",
+        "evidence_note": "Der TUM-School-of-Life-Sciences-Kandidat wurde ueber die offizielle TUM-School-Domain und deren Jobs-and-Career-Seite belegt."
+      },
+      "created_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
       "last_successful_scan_at": null
     },
     {
@@ -2347,6 +2430,45 @@
       },
       "created_at": "2026-08-28T16:22:41.522Z",
       "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:zentrum_wald_forst_holz_weihenstephan",
+      "canonical_name": "Zentrum Wald-Forst-Holz Weihenstephan",
+      "canonical_domain": "forstzentrum.de",
+      "official_website_url": "https://www.forstzentrum.de/",
+      "career_url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+      "aliases": [
+        "Forstzentrum Weihenstephan",
+        "ZWFH"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Forestry Research and Education",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+        "observed_at": "2026-08-29T05:59:42.748Z",
+        "verification_url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+        "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+        "target_area": "FREISING",
+        "industry_hint": "Forestry Research and Education",
+        "evidence_note": "Der Zentrum-Wald-Forst-Holz-Kandidat wurde ueber die offizielle Forstzentrum-Domain und die dortige Stellenangebote-Linkseite belegt."
+      },
+      "created_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
       "last_successful_scan_at": null
     },
     {
@@ -2783,6 +2905,50 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:36zero_vision_gmbh",
+      "canonical_name": "36ZERO Vision GmbH",
+      "canonical_domain": "36zerovision.com",
+      "official_website_url": "https://36zerovision.com/",
+      "career_url": "https://36zerovision.jobs.personio.com/",
+      "aliases": [
+        "36ZERO Vision"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial AI and Computer Vision",
+      "ats": [
+        {
+          "system": "Personio",
+          "official_domain": "jobs.personio.de",
+          "verified_by_url": "https://36zerovision.com/en/"
+        }
+      ],
+      "scan_status": "PENDING",
+      "scan_priority": 76,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://36zerovision.com/en/",
+        "observed_at": "2026-08-29T05:59:42.748Z",
+        "verification_url": "https://36zerovision.jobs.personio.com/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial AI and Computer Vision",
+        "evidence_note": "Der 36ZERO-Vision-Kandidat wurde ueber die offizielle 36ZERO-Vision-Domain und den dort verlinkten Personio-Vacancies-Pfad belegt."
+      },
+      "created_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:olympus_europa_se_and_co_kg",
       "canonical_name": "Olympus Europa SE & Co. KG",
       "canonical_domain": "olympus-europa.com",
@@ -2898,6 +3064,45 @@
       },
       "created_at": "2026-08-29T05:47:57.429Z",
       "updated_at": "2026-08-29T05:47:57.429Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:4_screen_gmbh",
+      "canonical_name": "4.screen GmbH",
+      "canonical_domain": "4screen.com",
+      "official_website_url": "https://4screen.com/",
+      "career_url": "https://4screen.com/careers/",
+      "aliases": [
+        "4.screen",
+        "4screen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Connected Mobility and Marketing Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 75,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://4screen.com/careers/",
+        "observed_at": "2026-08-29T05:59:42.748Z",
+        "verification_url": "https://4screen.com/careers/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Connected Mobility and Marketing Technology",
+        "evidence_note": "Der 4.screen-Kandidat wurde ueber die offizielle 4screen-Domain und die Careers-Seite mit Standortfilter Muenchen belegt."
+      },
+      "created_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
       "last_successful_scan_at": null
     },
     {
@@ -3056,6 +3261,89 @@
       },
       "created_at": "2026-08-29T05:47:57.429Z",
       "updated_at": "2026-08-29T05:47:57.429Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+      "canonical_name": "AES Aerospace Embedded Solutions GmbH",
+      "canonical_domain": "aes.gmbh",
+      "official_website_url": "https://www.aes.gmbh/",
+      "career_url": "https://careers.aes.gmbh/",
+      "aliases": [
+        "AES",
+        "AES Aerospace Embedded Solutions"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace Embedded Systems",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 74,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.aes.gmbh/",
+        "observed_at": "2026-08-29T05:59:42.748Z",
+        "verification_url": "https://careers.aes.gmbh/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Aerospace Embedded Systems",
+        "evidence_note": "Der AES-Kandidat wurde ueber die offizielle AES-Domain und den dort verlinkten Careers-Auftritt belegt."
+      },
+      "created_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:aesir_interactive_gmbh",
+      "canonical_name": "Aesir Interactive GmbH",
+      "canonical_domain": "aesir-interactive.com",
+      "official_website_url": "https://aesir-interactive.com/",
+      "career_url": "https://aesir.jobs.personio.de/?language=en",
+      "aliases": [
+        "Aesir Interactive"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Ottobrunn",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Game Development",
+      "ats": [
+        {
+          "system": "Personio",
+          "official_domain": "jobs.personio.de",
+          "verified_by_url": "https://aesir-interactive.com/"
+        }
+      ],
+      "scan_status": "PENDING",
+      "scan_priority": 73,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://aesir.jobs.personio.de/?language=en",
+        "observed_at": "2026-08-29T05:59:42.748Z",
+        "verification_url": "https://aesir.jobs.personio.de/?language=en",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Game Development",
+        "evidence_note": "Der Aesir-Interactive-Kandidat wurde ueber die offizielle Aesir-Domain und das Aesir-Personio-Jobportal mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-08-29T05:59:42.748Z",
       "last_successful_scan_at": null
     },
     {
@@ -5804,6 +6092,48 @@
   ],
   "job_sources": [
     {
+      "source_id": "source:36zero_vision_gmbh_career",
+      "company_id": "company:36zero_vision_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://36zerovision.jobs.personio.com/",
+      "canonical_url": "https://36zerovision.jobs.personio.com/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://36zerovision.jobs.personio.com/",
+          "basis_url": "https://36zerovision.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:4_screen_gmbh_career",
+      "company_id": "company:4_screen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://4screen.com/careers/",
+      "canonical_url": "https://4screen.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://4screen.com/careers/",
+          "basis_url": "https://4screen.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:accenture_career",
       "company_id": "company:accenture",
       "source_type": "CAREER_PAGE",
@@ -5883,6 +6213,48 @@
           "basis_url": "https://www.aenova-group.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:aes_aerospace_embedded_solutions_gmbh_career",
+      "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.aes.gmbh/",
+      "canonical_url": "https://careers.aes.gmbh/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.aes.gmbh/",
+          "basis_url": "https://www.aes.gmbh/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:aesir_interactive_gmbh_career",
+      "company_id": "company:aesir_interactive_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://aesir.jobs.personio.de/?language=en",
+      "canonical_url": "https://aesir.jobs.personio.de/?language=en",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://aesir.jobs.personio.de/?language=en",
+          "basis_url": "https://aesir-interactive.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:59:42.748Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -6495,7 +6867,7 @@
       "url": "https://careers.telekom.com/de",
       "canonical_url": "https://careers.telekom.com/de",
       "is_official": true,
-      "verified_at": "2026-08-28T15:53:28.788Z",
+      "verified_at": "2026-08-29T05:59:42.748Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -6504,7 +6876,7 @@
           "url": "https://careers.telekom.com/de",
           "basis_url": "https://www.telekom.com/",
           "redirect_chain": [],
-          "observed_at": "2026-08-28T15:53:28.788Z",
+          "observed_at": "2026-08-29T05:59:42.748Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -7121,6 +7493,27 @@
           ],
           "observed_at": "2026-08-27T15:25:53.945Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:mgh_muenchener_gewerbehof_und_technologiegesellschaft_career",
+      "company_id": "company:mgh_muenchener_gewerbehof_und_technologiegesellschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+      "canonical_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+          "basis_url": "https://www.mgh-muc.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -8214,6 +8607,27 @@
       ]
     },
     {
+      "source_id": "source:tum_school_of_life_sciences_career",
+      "company_id": "company:tum_school_of_life_sciences",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+      "canonical_url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+          "basis_url": "https://www.ls.tum.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:versicherungskammer_bayern_career",
       "company_id": "company:versicherungskammer_bayern",
       "source_type": "CAREER_PAGE",
@@ -8336,6 +8750,27 @@
           ],
           "observed_at": "2026-08-28T05:43:33.975Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:zentrum_wald_forst_holz_weihenstephan_career",
+      "company_id": "company:zentrum_wald_forst_holz_weihenstephan",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+      "canonical_url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+          "basis_url": "https://www.forstzentrum.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     }

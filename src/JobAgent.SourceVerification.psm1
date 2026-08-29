@@ -63,6 +63,7 @@ $script:AtsDomainBindings = @(
     @{ system = 'Personio'; domain = 'jobs.personio.de' },
     @{ system = 'Personio'; domain = 'personio.de' },
     @{ system = 'Recruitee'; domain = 'recruitee.com' },
+    @{ system = 'Workable'; domain = 'apply.workable.com' },
     @{ system = 'Lever'; domain = 'jobs.lever.co' },
     @{ system = 'Softgarden'; domain = 'softgarden.io' },
     @{ system = 'Ashby'; domain = 'ashbyhq.com' },

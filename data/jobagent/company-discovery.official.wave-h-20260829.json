@@ -1,0 +1,212 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-29T07:25:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Deutsche Telekom Technik GmbH",
+      "official_website_url": "https://www.telekom.com/",
+      "career_url": "https://careers.telekom.com/de",
+      "aliases": [
+        "Deutsche Telekom Technik",
+        "DT Technik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Telecommunications Infrastructure",
+      "scan_priority": 80,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.telekom.com/de/karriere",
+      "discovery_origin": "source-registry:munich_business_klimapakt3_companies",
+      "evidence_note": "Der Deutsche-Telekom-Technik-Kandidat wurde ueber die offizielle Telekom-Konzernwebsite und die dort verlinkte globale Karriere-Website belegt."
+    },
+    {
+      "canonical_name": "MGH - Muenchener Gewerbehof- und Technologiegesellschaft",
+      "official_website_url": "https://www.mgh-muc.de/",
+      "career_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+      "aliases": [
+        "MGH",
+        "Muenchner Gewerbehoefe",
+        "Muenchener Gewerbehof- und Technologiezentrumsgesellschaft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Real Estate and Technology Centers",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+      "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+      "evidence_note": "Der MGH-Kandidat wurde ueber die offizielle MGH-Domain und die dortige Stellenangebotsseite belegt."
+    },
+    {
+      "canonical_name": "TUM School of Life Sciences",
+      "official_website_url": "https://www.ls.tum.de/",
+      "career_url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+      "aliases": [
+        "TUM Life Sciences",
+        "School of Life Sciences der TUM"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Higher Education and Research",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ls.tum.de/en/ls/jobs-and-career/",
+      "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+      "evidence_note": "Der TUM-School-of-Life-Sciences-Kandidat wurde ueber die offizielle TUM-School-Domain und deren Jobs-and-Career-Seite belegt."
+    },
+    {
+      "canonical_name": "Zentrum Wald-Forst-Holz Weihenstephan",
+      "official_website_url": "https://www.forstzentrum.de/",
+      "career_url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+      "aliases": [
+        "Forstzentrum Weihenstephan",
+        "ZWFH"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Forestry Research and Education",
+      "scan_priority": 77,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.forstzentrum.de/index.php/de/component/weblinks/category/14-stellenangebote",
+      "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+      "evidence_note": "Der Zentrum-Wald-Forst-Holz-Kandidat wurde ueber die offizielle Forstzentrum-Domain und die dortige Stellenangebote-Linkseite belegt."
+    },
+    {
+      "canonical_name": "36ZERO Vision GmbH",
+      "official_website_url": "https://36zerovision.com/",
+      "career_url": "https://36zerovision.jobs.personio.com/",
+      "aliases": [
+        "36ZERO Vision",
+        "36ZERO VISION"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial AI and Computer Vision",
+      "scan_priority": 76,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://36zerovision.com/en/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der 36ZERO-Vision-Kandidat wurde ueber die offizielle 36ZERO-Vision-Domain und den dort verlinkten Personio-Vacancies-Pfad belegt.",
+      "ats": [
+        {
+          "system": "Personio",
+          "official_domain": "jobs.personio.de",
+          "verified_by_url": "https://36zerovision.com/en/"
+        }
+      ]
+    },
+    {
+      "canonical_name": "4.screen GmbH",
+      "official_website_url": "https://4screen.com/",
+      "career_url": "https://4screen.com/careers/",
+      "aliases": [
+        "4.screen",
+        "4screen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Connected Mobility and Marketing Technology",
+      "scan_priority": 75,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://4screen.com/careers/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der 4.screen-Kandidat wurde ueber die offizielle 4screen-Domain und die Careers-Seite mit Standortfilter Muenchen belegt."
+    },
+    {
+      "canonical_name": "AES Aerospace Embedded Solutions GmbH",
+      "official_website_url": "https://www.aes.gmbh/",
+      "career_url": "https://careers.aes.gmbh/",
+      "aliases": [
+        "AES Aerospace Embedded Solutions",
+        "AES"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace Embedded Systems",
+      "scan_priority": 74,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.aes.gmbh/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der AES-Kandidat wurde ueber die offizielle AES-Domain und den dort verlinkten Careers-Auftritt belegt."
+    },
+    {
+      "canonical_name": "Aesir Interactive GmbH",
+      "official_website_url": "https://aesir-interactive.com/",
+      "career_url": "https://aesir.jobs.personio.de/?language=en",
+      "aliases": [
+        "Aesir Interactive"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Ottobrunn",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Game Development",
+      "scan_priority": 73,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://aesir.jobs.personio.de/?language=en",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Aesir-Interactive-Kandidat wurde ueber die offizielle Aesir-Domain und das Aesir-Personio-Jobportal mit Muenchen-Bezug belegt.",
+      "ats": [
+        {
+          "system": "Personio",
+          "official_domain": "jobs.personio.de",
+          "verified_by_url": "https://aesir-interactive.com/"
+        }
+      ]
+    }
+  ]
+}

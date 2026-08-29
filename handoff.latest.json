@@ -1,114 +1,67 @@
 {
-  "ts": "2026-08-29T07:55:00.000+02:00",
+  "ts": "2026-08-29T08:05:39.569+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen",
-  "summary": "Welle G/B importierte 9 offiziell belegte Arbeitgeber; Store 124 Firmen, 120 JobSources; Source Coverage 122 offizielle Quellen, 121 Karrierequellen. JA-027 bleibt offen.",
+  "summary": "Welle H/B importierte 8 offiziell belegte Arbeitgeber: 7 neue produktive Firmen und 1 dedupliziertes Telekom-Update; Store 131 Firmen, 127 JobSources; Source Coverage 129 offizielle Quellen, 128 Karrierequellen. Workable wurde als offiziell verlinkte ATS-Bindung ergaenzt. JA-027 bleibt offen.",
   "changed": [
     "Roadmap.md",
     "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/company-discovery.official.wave-g-20260829.json",
+    "data/jobagent/company-discovery.official.wave-h-20260829.json",
     "data/jobagent/store.json",
     "handoff.latest.json",
     "handoff.latest.md",
     "html/jobagent/company-coverage.html",
+    "logs/jobagent/ja-023-source-coverage.json",
+    "src/JobAgent.SourceVerification.psm1",
+    "tests/Test-JobAgentSourceVerification.ps1",
     "todo.checkpoint.json",
+    "todo.current.md",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
     "todo.state.json"
   ],
   "verified": [
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-g-20260829.json -WaveId B",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "Invoke-WebRequest http://localhost:9000/api/system/status",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd devserver-status",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd route-check",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0
-    }
+    { "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-h-20260829.json -WaveId B", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1", "exit": 0 },
+    { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1", "exit": 0 },
+    { "cmd": "Invoke-WebRequest http://localhost:9000/api/system/status", "exit": 0 },
+    { "cmd": ".\\ci.cmd devserver-status", "exit": 0 },
+    { "cmd": ".\\ci.cmd route-check", "exit": 0 },
+    { "cmd": ".\\ci.cmd stp", "exit": 0 }
   ],
   "metrics": {
-    "companies": 124,
-    "job_sources": 120,
-    "sources_total": 1942,
-    "official_sources": 122,
-    "career_sources": 121,
-    "verified_queue": 207,
-    "manual_review_queue": 1577,
+    "companies": 131,
+    "job_sources": 127,
+    "sources_total": 1949,
+    "official_sources": 129,
+    "career_sources": 128,
+    "verified_queue": 216,
+    "manual_review_queue": 1568,
     "wave_gate": "passed",
-    "coverage_delta": 9,
-    "duplicate_rate": 0.0,
+    "coverage_delta": 7,
+    "duplicate_rate": 0.125,
     "manual_review_rate": 0.0,
     "sonar_status": "UP",
     "devserver_port": 8500
   },
   "git": {
     "branch": "master",
-    "head_before_commit": "43af5aaa0997",
+    "head_before_commit": "6da8c131e9ac",
     "upstream": "origin/master",
     "ahead_before_commit": 0,
     "behind_before_commit": 0,
@@ -123,24 +76,26 @@
     "todo.events.jsonl",
     "handoff.latest.json",
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-g-20260829.json",
-    "logs/jobagent/company-discovery-import-20260829-054757.json",
-    "logs/jobagent/company-candidate-verification-20260829-054805.json",
-    "logs/jobagent/company-coverage-20260829-054805.json",
-    "logs/jobagent/company-coverage-20260829-054805.md",
+    "data/jobagent/company-discovery.official.wave-h-20260829.json",
+    "logs/jobagent/company-discovery-import-20260829-055942.json",
+    "logs/jobagent/company-candidate-verification-20260829-055950.json",
+    "logs/jobagent/company-coverage-20260829-055951.json",
+    "logs/jobagent/company-coverage-20260829-055951.md",
+    "logs/jobagent/ja-023-source-coverage.json",
     "html/jobagent/company-coverage.html"
   ],
   "next_steps": [
     "In data/jobagent/company-candidate-verification.queue.json die hoechstpriorisierten DISCOVER_OFFICIAL_WEBSITE-Kandidaten weiter abarbeiten.",
-    "Nur offizielle Firmen-/Karriere-/ATS-Belege als neuen Wave-Feed nach Muster data/jobagent/company-discovery.official.wave-<letter>-<date>.json erfassen.",
+    "Synthetische Register-Sample-Namen nur bei belastbarer offizieller Website-Evidenz aufnehmen; sonst fail-closed in Review belassen.",
+    "Nur offizielle Firmen-/Karriere-/ATS-Belege als neuen Wave-Feed erfassen.",
     "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 und -WaveId B ausfuehren.",
-    "Queue, Coverage, Source Coverage und funktionsbezogene JA-027-Tests erneut ausfuehren.",
-    "Roadmap.md, Todo und Handoff synchronisieren; JA-027 erst bei Gesamtabschluss rotieren."
+    "Queue, Coverage, Source Coverage und funktionsbezogene JA-027-Tests erneut ausfuehren."
   ],
   "risks": [
     "Viele restliche Kandidaten sind nur regionale Hints ohne belastbare Firmenwebsite.",
     "Jobboersen, Arbeitsagentur, Register und regionale Verzeichnisse duerfen keine produktiven Karrierebelege sein.",
-    "Externe ATS-Portale sind nur gueltig, wenn sie von der offiziellen Firmenwebsite belegbar sind."
+    "Externe ATS-Portale sind nur gueltig, wenn sie von der offiziellen Firmenwebsite belegbar sind.",
+    "Deutsche Telekom Technik GmbH wurde aufgrund gleicher Telekom-Domain mit Deutsche Telekom AG dedupliziert."
   ],
-  "note": "Kein frischer Supertest in diesem Slice; gemaess Nutzeranweisung gilt nicht angefragter Supertest als erledigt."
+  "note": "Kein frischer Supertest in diesem Slice; JA-027 bleibt insgesamt offen."
 }

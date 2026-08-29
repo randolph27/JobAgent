@@ -208,6 +208,41 @@ Assert-True -Condition ($atsVerification.status -eq 'ATS_VERIFIED_BY_COMPANY_LIN
 Assert-True -Condition ($atsVerification.ats.official_domain -eq 'myworkdayjobs.com') -Message 'ATS-Domain wurde nicht erkannt.'
 Assert-True -Condition ($atsVerification.verification_evidence[0].evidence_type -eq 'COMPANY_LINKED_ATS') -Message 'ATS-Verifikation erzeugt falschen Evidenztyp.'
 
+$workableCompany = New-TestCompany
+$workableCompany.career_url = $null
+$workableCompany.ats = @(
+    [pscustomobject]@{
+        system = 'Workable'
+        official_domain = 'apply.workable.com'
+        verified_by_url = 'https://example.invalid/jobs'
+    }
+)
+$workableFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    switch ($Url) {
+        'https://example.invalid/' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<html><a href="https://apply.workable.com/example/">Jobs</a></html>'
+            break
+        }
+        'https://example.invalid/sitemap.xml' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<urlset></urlset>'
+            break
+        }
+        'https://example.invalid/sitemap_index.xml' {
+            New-CareerFetchResult -Url $Url -Ok $true -Content '<sitemapindex></sitemapindex>'
+            break
+        }
+        default {
+            New-CareerFetchResult -Url $Url -Ok $false -StatusCode 404
+            break
+        }
+    }
+}
+$workableVerification = Resolve-JobAgentCompanyCareerVerification -Company $workableCompany -Policy $careerPolicy -Fetcher $workableFetcher
+Assert-True -Condition ($workableVerification.status -eq 'ATS_VERIFIED_BY_COMPANY_LINK') -Message 'Offiziell verlinkte Workable-ATS-URL wurde nicht verifiziert.'
+Assert-True -Condition ($workableVerification.ats.official_domain -eq 'apply.workable.com') -Message 'Workable-ATS-Domain wurde nicht erkannt.'
+
 $dynamicFetcher = {
     param([string]$Url, [object]$Policy)
 
@@ -226,5 +261,5 @@ Assert-True -Condition ($manualVerification.status -eq 'MANUAL_REVIEW') -Message
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
+    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
 } | ConvertTo-Json -Depth 4
