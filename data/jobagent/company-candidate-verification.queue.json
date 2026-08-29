@@ -1,16 +1,15 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-28T16:24:26.689Z",
+  "generated_at": "2026-08-29T05:35:59.770Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 177,
-    "DISCOVER_OFFICIAL_WEBSITE": 1597,
+    "ALREADY_VERIFIED_IN_STORE": 189,
+    "DISCOVER_OFFICIAL_WEBSITE": 1593,
     "MANUAL_DECISION": 1,
-    "REJECT_DUPLICATE": 1,
-    "VERIFY_OFFICIAL_SITE": 9
+    "VERIFY_OFFICIAL_SITE": 2
   },
   "queue": [
     {
@@ -3389,6 +3388,99 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_astellas_pharma_muenchen_und_region",
+      "candidate_id": "regional-hint:munich_business_life_sciences_companies_astellas_pharma_muenchen_und_region",
+      "company_id": "company:astellas_pharma_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_life_sciences_companies_astellas_pharma_muenchen_und_region"
+      ],
+      "canonical_name": "Astellas Pharma",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_life_sciences_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
+        "observed_at": "08/26/2026 08:35:00",
+        "record_hash": "81fc96c66384905f43f3f93be20b0aa5f567f3bd3ba12a419c1b04c5c6cd484b",
+        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:astellas pharma"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_astellas_com",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_astellas_pharma_gmbh_muenchen",
+      "company_id": "company:astellas_pharma_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_astellas_pharma_gmbh_muenchen"
+      ],
+      "canonical_name": "Astellas Pharma GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 2,
+      "last_attempt_at": "2026-08-28T16:22:46.255Z",
+      "next_attempt_at": "2026-08-30T16:22:46.255Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "ce9fae43f707b4e7380123e8963cbc5aa1eb9acd7aabd589d85bcce984942d0f",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:astellas.com",
+          "name:astellas pharma"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_boersennotierte_unternehmen_atoss_software_ag_muenchen_und_region_stand_der_quellseite_april_2026",
       "candidate_id": "regional-hint:stadt_muenchen_boersennotierte_unternehmen_atoss_software_ag_muenchen_und_region_stand_der_quellseite_april_2026",
       "company_id": "company:atoss_software_se",
@@ -4165,6 +4257,95 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:domain_denso_com",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
+      "company_id": "company:denso_automotive_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen"
+      ],
+      "canonical_name": "DENSO Automotive Deutschland GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-27T16:42:02.02Z",
+      "next_attempt_at": "2026-08-28T16:42:02.02Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "99654fded0b13aea847f6ae8e82bfd12f11ea865fec679cb709277865ff09b53",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:denso.com",
+          "name:denso automotive deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_deutsches_theater_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_deutsches_theater_muenchen",
+      "company_id": "company:deutsches_theater_muenchen_betriebs_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_deutsches_theater_muenchen"
+      ],
+      "canonical_name": "Deutsches Theater",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:41:40.706Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "4bfe8f6993bc5755e9881ce3d2c4f74415e1b9b8e3761e63168a08c8c2cf1edc",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deutsches theater"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:domain_de_dmgmori_com",
       "candidate_id": "regional-hint:munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen",
       "company_id": "company:dmg_mori_emea_holding_gmbh",
@@ -4204,6 +4385,143 @@
         "dedupe_keys": [
           "domain:de.dmgmori.com",
           "name:dmg mori emea holding"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_fujitsu_muenchen_nord",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_fujitsu_muenchen_nord",
+      "company_id": "company:fujitsu_germany_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_fujitsu_muenchen_nord"
+      ],
+      "canonical_name": "Fujitsu",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "eeb857720ac06d9f3255201e1ad9a0a416ef644bb0a932f803c73eb520b303f0",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:fujitsu"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_fujitsu_muenchen",
+      "candidate_id": "regional-hint:munich_business_ikt_companies_fujitsu_muenchen",
+      "company_id": "company:fujitsu_germany_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_ikt_companies_fujitsu_muenchen"
+      ],
+      "canonical_name": "Fujitsu",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_ikt_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
+        "observed_at": "08/26/2026 08:30:00",
+        "record_hash": "874ae5b5ffaf201d7b2b599ae048b471a8d6a85f16e5f6ef129545840fad9493",
+        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:fujitsu"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_global_fujitsu",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_fujitsu_germany_gmbh_muenchen",
+      "company_id": "company:fujitsu_germany_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_fujitsu_germany_gmbh_muenchen"
+      ],
+      "canonical_name": "Fujitsu Germany GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-27T16:58:06.627Z",
+      "next_attempt_at": "2026-08-28T16:58:06.627Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "cbaa12500ab54fe4b328fa102d116b0980fbb2ea1c0a74c6c85c76986daebcce",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:global.fujitsu",
+          "name:fujitsu germany"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -4841,6 +5159,51 @@
         "dedupe_keys": [
           "domain:larsentoubro.com",
           "name:larsen and toubro limited"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_ltm_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_ltm_muenchen",
+      "company_id": "company:ltimindtree_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_ltm_muenchen"
+      ],
+      "canonical_name": "LTM",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-27T17:41:16.488Z",
+      "next_attempt_at": "2026-08-28T17:41:16.488Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "497fde058dc92b91f7d5acf28be36b71557e9060dd668bf2e40ce7d1f66f5e8e",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:ltm.com",
+          "name:ltm"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -5486,6 +5849,51 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:domain_olympus_de",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_olympus_europa_gmbh_muenchen",
+      "company_id": "company:olympus_europa_se_and_co_kg",
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_olympus_europa_gmbh_muenchen"
+      ],
+      "canonical_name": "Olympus Europa GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-27T17:56:18.17Z",
+      "next_attempt_at": "2026-08-28T17:56:18.17Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "c4f7bdddec2abb27406af4321ec76c11d61200126e60bc2e6b838b8b9647477e",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:olympus.de",
+          "name:olympus europa"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_osram_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_osram_muenchen_tech_unternehmen",
       "company_id": "company:ams_osram",
@@ -5935,6 +6343,51 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_smp_automotive_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen",
+      "company_id": "company:samvardhana_motherson_peguform_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen"
+      ],
+      "canonical_name": "Samvardhana Motherson Peguform",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-28T05:03:36.959Z",
+      "next_attempt_at": "2026-08-29T05:03:36.959Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "60af0825c19e82b5e5dc3c0734f7304e6a1238161993de41f287ff70143b9a11",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:smp-automotive.com",
+          "name:samvardhana motherson peguform"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -6485,6 +6938,51 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:domain_tcs_com",
+      "candidate_id": "regional-hint:munich_business_indian_companies_tata_consultancy_services_deutschland_gmbh_muenchen",
+      "company_id": "company:tata_consultancy_services_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_tata_consultancy_services_deutschland_gmbh_muenchen"
+      ],
+      "canonical_name": "Tata Consultancy Services Deutschland GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 1,
+      "last_attempt_at": "2026-08-28T05:13:11.337Z",
+      "next_attempt_at": "2026-08-29T05:13:11.337Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "8f3bc00c4556bc7e7fb9b9fe9f110acb2b874c2c8655c59ced2917b4f771e9ec",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:tcs.com",
+          "name:tata consultancy services deutschland"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -8189,52 +8687,6 @@
           "name:assemblixx"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_astellas_pharma_muenchen_und_region",
-      "candidate_id": "regional-hint:munich_business_life_sciences_companies_astellas_pharma_muenchen_und_region",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_life_sciences_companies_astellas_pharma_muenchen_und_region"
-      ],
-      "canonical_name": "Astellas Pharma",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_life_sciences_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
-        "observed_at": "08/26/2026 08:35:00",
-        "record_hash": "81fc96c66384905f43f3f93be20b0aa5f567f3bd3ba12a419c1b04c5c6cd484b",
-        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:astellas pharma"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -11947,50 +12399,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_deutsches_theater_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_deutsches_theater_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_deutsches_theater_muenchen"
-      ],
-      "canonical_name": "Deutsches Theater",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:41:40.706Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "4bfe8f6993bc5755e9881ce3d2c4f74415e1b9b8e3761e63168a08c8c2cf1edc",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:deutsches theater"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_startup_platform_ecosystem_deutschlandgpt_munich_startup_ecosystem",
       "candidate_id": "regional-hint:munich_startup_platform_ecosystem_deutschlandgpt_munich_startup_ecosystem",
       "company_id": null,
@@ -13759,98 +14167,6 @@
           "name:freeletics"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_fujitsu_muenchen_nord",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_fujitsu_muenchen_nord",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_fujitsu_muenchen_nord"
-      ],
-      "canonical_name": "Fujitsu",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "eeb857720ac06d9f3255201e1ad9a0a416ef644bb0a932f803c73eb520b303f0",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:fujitsu"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_fujitsu_muenchen",
-      "candidate_id": "regional-hint:munich_business_ikt_companies_fujitsu_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_ikt_companies_fujitsu_muenchen"
-      ],
-      "canonical_name": "Fujitsu",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_ikt_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
-        "observed_at": "08/26/2026 08:30:00",
-        "record_hash": "874ae5b5ffaf201d7b2b599ae048b471a8d6a85f16e5f6ef129545840fad9493",
-        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:fujitsu"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -27562,143 +27878,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_astellas_com",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_astellas_pharma_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_astellas_pharma_gmbh_muenchen"
-      ],
-      "canonical_name": "Astellas Pharma GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_SCHEDULED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 2,
-      "last_attempt_at": "2026-08-28T16:22:46.255Z",
-      "next_attempt_at": "2026-08-30T16:22:46.255Z",
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "ce9fae43f707b4e7380123e8963cbc5aa1eb9acd7aabd589d85bcce984942d0f",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:astellas.com",
-          "name:astellas pharma"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_denso_com",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen"
-      ],
-      "canonical_name": "DENSO Automotive Deutschland GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_SCHEDULED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 1,
-      "last_attempt_at": "2026-08-27T16:42:02.02Z",
-      "next_attempt_at": "2026-08-28T16:42:02.02Z",
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "99654fded0b13aea847f6ae8e82bfd12f11ea865fec679cb709277865ff09b53",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:denso.com",
-          "name:denso automotive deutschland"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_global_fujitsu",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_fujitsu_germany_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_fujitsu_germany_gmbh_muenchen"
-      ],
-      "canonical_name": "Fujitsu Germany GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_SCHEDULED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 1,
-      "last_attempt_at": "2026-08-27T16:58:06.627Z",
-      "next_attempt_at": "2026-08-28T16:58:06.627Z",
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "cbaa12500ab54fe4b328fa102d116b0980fbb2ea1c0a74c6c85c76986daebcce",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:global.fujitsu",
-          "name:fujitsu germany"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:domain_google_de",
       "candidate_id": "regional-hint:munich_business_ikt_companies_google_deutschland_muenchen",
       "company_id": null,
@@ -27738,186 +27917,6 @@
         "dedupe_keys": [
           "domain:google.de",
           "name:google deutschland"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_ltm_com",
-      "candidate_id": "regional-hint:munich_business_indian_companies_ltm_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_ltm_muenchen"
-      ],
-      "canonical_name": "LTM",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_SCHEDULED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 1,
-      "last_attempt_at": "2026-08-27T17:41:16.488Z",
-      "next_attempt_at": "2026-08-28T17:41:16.488Z",
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "497fde058dc92b91f7d5acf28be36b71557e9060dd668bf2e40ce7d1f66f5e8e",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:ltm.com",
-          "name:ltm"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_olympus_de",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_olympus_europa_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_olympus_europa_gmbh_muenchen"
-      ],
-      "canonical_name": "Olympus Europa GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_SCHEDULED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 1,
-      "last_attempt_at": "2026-08-27T17:56:18.17Z",
-      "next_attempt_at": "2026-08-28T17:56:18.17Z",
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "c4f7bdddec2abb27406af4321ec76c11d61200126e60bc2e6b838b8b9647477e",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:olympus.de",
-          "name:olympus europa"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_smp_automotive_com",
-      "candidate_id": "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen"
-      ],
-      "canonical_name": "Samvardhana Motherson Peguform",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_SCHEDULED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 1,
-      "last_attempt_at": "2026-08-28T05:03:36.959Z",
-      "next_attempt_at": "2026-08-29T05:03:36.959Z",
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "60af0825c19e82b5e5dc3c0734f7304e6a1238161993de41f287ff70143b9a11",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:smp-automotive.com",
-          "name:samvardhana motherson peguform"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_tcs_com",
-      "candidate_id": "regional-hint:munich_business_indian_companies_tata_consultancy_services_deutschland_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_tata_consultancy_services_deutschland_gmbh_muenchen"
-      ],
-      "canonical_name": "Tata Consultancy Services Deutschland GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_SCHEDULED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 1,
-      "last_attempt_at": "2026-08-28T05:13:11.337Z",
-      "next_attempt_at": "2026-08-29T05:13:11.337Z",
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "8f3bc00c4556bc7e7fb9b9fe9f110acb2b874c2c8655c59ced2917b4f771e9ec",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:tcs.com",
-          "name:tata consultancy services deutschland"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -27971,7 +27970,7 @@
     {
       "identity_cluster_id": "identity-cluster:domain_deutsches_theater_de",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
-      "company_id": null,
+      "company_id": "company:deutsches_theater_muenchen_betriebs_gmbh",
       "candidate_ids": [
         "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
         "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen"
@@ -27979,7 +27978,7 @@
       "canonical_name": "Deutsches Theater Grund- und Hausbesitz GmbH",
       "source_count": 1,
       "priority_score": 95,
-      "next_action": "REJECT_DUPLICATE",
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
         "DUPLICATE_CLUSTER_REVIEW",
         "OFFICIAL_VERIFICATION_REQUIRED"
@@ -27987,13 +27986,13 @@
       "target_area_basis": [
         "BRANCH_HINT_IN_TARGET"
       ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "DUPLICATE_CLUSTER_REVIEW,OFFICIAL_VERIFICATION_REQUIRED",
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
       "retry_count": 0,
       "last_attempt_at": null,
       "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": null,
-      "last_reason": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
       "freshness_status": "FRESH",
       "risk_level": "MEDIUM",
       "source_evidence": {

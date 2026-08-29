@@ -1,79 +1,31 @@
 {
-  "route_ok": true,
-  "toolchain": {
-    "ts": "2026-08-17T13:53:15.642+02:00",
-    "gradle": {
-      "cmd": "gradle",
-      "mode": "path",
-      "root": "D:\\_Scripte\\JobAgent"
-    }
-  },
-  "next_steps": [
-    "Naechste JA-027-Welle: weitere store-ferne Kandidaten priorisiert belegen; Astellas Pharma GmbH erst nach belastbarem offiziellen Karriere-/ATS-Beleg erneut verifizieren."
-  ],
-  "verify_digest": {
-    "ts": "2026-08-24T09:29:31.729+02:00",
-    "cmd": ".\\ci.cmd supertest",
-    "exit": 0,
-    "status": "pass",
-    "log_path": null,
-    "scope": "JobAgent function suite",
-    "tests_total": 19,
-    "duration_seconds": 41.31
-  },
+  "ts": "2026-08-29T07:38:01.296+02:00",
+  "agent_id": "UTTER-20260817-39f7",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
   "active_id": "TD-0041",
+  "status": "in-progress",
+  "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen",
+  "summary": "Welle F/B importierte 2 offiziell belegte Arbeitgeber; Store 115 Firmen, 111 JobSources; Source Coverage 113 offizielle Quellen, 112 Karrierequellen.",
   "changed": [
     "Roadmap.md",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/company-discovery.hints.json",
-    "data/jobagent/company-discovery.official.wave-d-20260828.json",
+    "data/jobagent/company-discovery.official.wave-e-20260828.json",
+    "data/jobagent/company-discovery.official.wave-f-20260829.json",
     "data/jobagent/store.json",
     "handoff.latest.json",
     "handoff.latest.md",
     "html/jobagent/company-coverage.html",
+    "todo.checkpoint.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
     "todo.state.json"
   ],
-  "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten priorisiert belegen; Astellas Pharma GmbH erst nach belastbarem offiziellen Karriere-/ATS-Beleg erneut verifizieren.",
-  "summary": "JA-027 Fortschritt: Welle D/B mit 12 offiziell belegten Arbeitgebern importiert, 11 neue Firmen und 1 dedupliziertes Update; ein Astellas-Kandidat fail-closed fuer Retry geplant.",
-  "git": {
-    "detached": false,
-    "branch": "master",
-    "upstream": "origin/master",
-    "ahead": 0,
-    "remote": "origin",
-    "behind": 0,
-    "tracked_changes": [
-      "Roadmap.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/company-discovery.hints.json",
-      "data/jobagent/store.json",
-      "html/jobagent/company-coverage.html",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json"
-    ],
-    "has_repo": true,
-    "worktree": "dirty",
-    "head": "36eb462ae616"
-  },
-  "route_violations": [],
-  "refs": [
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.json",
-    "file:data/jobagent/company-discovery.official.wave-d-20260828.json",
-    "file:logs/jobagent/company-discovery-import-20260828-162241.json",
-    "file:logs/jobagent/company-candidate-verification-20260828-162246.json",
-    "file:logs/jobagent/company-coverage-20260828-162317.json",
-    "file:html/jobagent/company-coverage.html"
-  ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-d-20260828.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-f-20260829.json -WaveId B",
       "exit": 0
     },
     {
@@ -125,147 +77,35 @@
       "exit": 0
     }
   ],
-  "workspace_root": ".",
-  "route": {
-    "route_ok": true,
-    "violations": [],
-    "ts": "2026-08-28T18:26:35.066+02:00",
-    "agent_id": "UTTER-20260817-39f7",
-    "git": {
-      "has_repo": true,
-      "diff_log": "logs\\terminal\\route-check-20260828-182632.log"
-    },
-    "changed_count": 5,
-    "policy": {
-      "forbid_path": [],
-      "no_touch": [],
-      "forbid_regex": []
-    },
-    "changed_files": [
-      "Roadmap.md",
-      "data/jobagent/company-discovery.hints.json",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/store.json",
-      "html/jobagent/company-coverage.html"
-    ],
-    "mode": "standard"
+  "metrics": {
+    "companies": 115,
+    "job_sources": 111,
+    "sources_total": 1933,
+    "official_sources": 113,
+    "career_sources": 112,
+    "verified_queue": 189,
+    "manual_review_queue": 1595,
+    "wave_gate": "passed",
+    "coverage_delta": 2,
+    "duplicate_rate": 0.0,
+    "manual_review_rate": 0.0
   },
-  "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
-  "capsule": {
-    "manual_missing": false,
-    "env_inventory_missing": false,
-    "verified": [
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-d-20260828.json -WaveId B",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": ".\\ci.cmd route-check",
-        "exit": 0
-      },
-      {
-        "cmd": ".\\ci.cmd stp",
-        "exit": 0
-      }
-    ],
-    "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten priorisiert belegen; Astellas Pharma GmbH erst nach belastbarem offiziellen Karriere-/ATS-Beleg erneut verifizieren.",
-    "ts": "2026-08-28T18:27:36.324+02:00",
-    "project": "JobAgent",
-    "agent_id": "UTTER-20260817-39f7",
-    "route_violations": [],
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.json"
-    ],
-    "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
-    "env_inventory_used": false,
-    "changed": [
-      "Roadmap.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/company-discovery.hints.json",
-      "data/jobagent/company-discovery.official.wave-d-20260828.json",
-      "data/jobagent/store.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "git": {
-      "detached": false,
-      "branch": "master",
-      "upstream": "origin/master",
-      "ahead": 0,
-      "remote": "origin",
-      "behind": 0,
-      "tracked_changes": [
-        "Roadmap.md",
-        "data/jobagent/company-candidate-verification.queue.json",
-        "data/jobagent/company-discovery.hints.json",
-        "data/jobagent/store.json",
-        "html/jobagent/company-coverage.html",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json"
-      ],
-      "has_repo": true,
-      "worktree": "dirty",
-      "head": "36eb462ae616"
-    },
-    "active_id": "TD-0041",
-    "status": "in-progress",
-    "route_ok": true,
-    "workspace_root": ".",
-    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-    "env_inventory_path": null
+  "git": {
+    "branch": "master",
+    "head": "efd555c46fda",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty"
   },
-  "project": "JobAgent",
-  "agent_id": "UTTER-20260817-39f7",
-  "status": "in-progress",
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-  "ts": "2026-08-28T18:27:36.324+02:00"
+  "route_ok": true,
+  "route_violations": [],
+  "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmenwebsite plus Karriere-/Jobs-/ATS-Beleg aufnehmen.",
+  "refs": [
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.json",
+    "Roadmap.md"
+  ]
 }

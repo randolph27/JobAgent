@@ -2235,6 +2235,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:tata_consultancy_services_deutschland_gmbh",
+      "canonical_name": "Tata Consultancy Services Deutschland GmbH",
+      "canonical_domain": "tcs.com",
+      "official_website_url": "https://www.tcs.com/de-de",
+      "career_url": "https://www.tcs.com/de-de/karriere/jobs",
+      "aliases": [
+        "Tata Consultancy Services",
+        "TCS",
+        "TCS Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tcs.com/de-de/karriere/jobs",
+        "observed_at": "2026-08-28T16:33:21.197Z",
+        "verification_url": "https://www.tcs.com/de-de/karriere/jobs",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services and Consulting",
+        "evidence_note": "Der Kandidat TCS Deutschland wurde ueber die offizielle TCS-Deutschland-Domain und die dortige Karriere-/Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:33:21.197Z",
+      "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:suss_microtec_se",
       "canonical_name": "SUSS MicroTec SE",
       "canonical_domain": "suss.com",
@@ -2354,6 +2394,243 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:fujitsu_germany_gmbh",
+      "canonical_name": "Fujitsu Germany GmbH",
+      "canonical_domain": "fujitsu.com",
+      "official_website_url": "https://www.fujitsu.com/de/",
+      "career_url": "https://www.fujitsu.com/de/about/",
+      "aliases": [
+        "Fujitsu",
+        "Fujitsu Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 76,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.fujitsu.com/de/about/",
+        "observed_at": "2026-08-28T16:33:21.197Z",
+        "verification_url": "https://www.fujitsu.com/de/about/",
+        "discovery_origin": "source-registry:munich_business_japanese_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services and Technology",
+        "evidence_note": "Der Fujitsu-Kandidat wurde ueber die offizielle Fujitsu-Deutschland-Domain und die dortige Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:33:21.197Z",
+      "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:denso_automotive_deutschland_gmbh",
+      "canonical_name": "DENSO Automotive Deutschland GmbH",
+      "canonical_domain": "denso.com",
+      "official_website_url": "https://www.denso.com/de/de/",
+      "career_url": "https://www.denso.com/de/de/careers/",
+      "aliases": [
+        "DENSO",
+        "DENSO Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 76,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.denso.com/de/de/careers/",
+        "observed_at": "2026-08-28T16:33:21.197Z",
+        "verification_url": "https://www.denso.com/de/de/careers/",
+        "discovery_origin": "source-registry:munich_business_japanese_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Technology",
+        "evidence_note": "Der DENSO-Kandidat wurde ueber die offizielle DENSO-Deutschland-Domain und die dortige Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:33:21.197Z",
+      "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:astellas_pharma_gmbh",
+      "canonical_name": "Astellas Pharma GmbH",
+      "canonical_domain": "astellas.com",
+      "official_website_url": "https://www.astellas.com/de/",
+      "career_url": "https://www.astellas.com/en/careers",
+      "aliases": [
+        "Astellas",
+        "Astellas Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 76,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.astellas.com/en/careers",
+        "observed_at": "2026-08-29T05:34:39.534Z",
+        "verification_url": "https://www.astellas.com/en/careers",
+        "discovery_origin": "source-registry:munich_business_japanese_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Pharmaceuticals",
+        "evidence_note": "Der Astellas-Kandidat wurde ueber die offizielle Astellas-Domain und die globale Astellas-Careers-Seite belegt."
+      },
+      "created_at": "2026-08-29T05:34:39.534Z",
+      "updated_at": "2026-08-29T05:34:39.534Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:olympus_europa_se_and_co_kg",
+      "canonical_name": "Olympus Europa SE & Co. KG",
+      "canonical_domain": "olympus-europa.com",
+      "official_website_url": "https://www.olympus-europa.com/",
+      "career_url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+      "aliases": [
+        "Olympus",
+        "Olympus Europa",
+        "Olympus Europe"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 75,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+        "observed_at": "2026-08-28T16:33:21.197Z",
+        "verification_url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+        "discovery_origin": "source-registry:munich_business_japanese_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Medical Technology",
+        "evidence_note": "Der Olympus-Kandidat wurde ueber die offizielle Olympus-Europa-Domain und die dortige Job-Vacancies-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:33:21.197Z",
+      "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ltimindtree_gmbh",
+      "canonical_name": "LTIMindtree GmbH",
+      "canonical_domain": "ltimindtree.com",
+      "official_website_url": "https://www.ltimindtree.com/",
+      "career_url": "https://careers.ltimindtree.com/",
+      "aliases": [
+        "LTI Mindtree",
+        "LTIMindtree",
+        "LTM"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 75,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.ltimindtree.com/",
+        "observed_at": "2026-08-29T05:34:39.534Z",
+        "verification_url": "https://careers.ltimindtree.com/",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services and Consulting",
+        "evidence_note": "Der LTM-/LTIMindtree-Kandidat wurde ueber die offizielle LTIMindtree-Domain und das dort verlinkte Karriereportal belegt."
+      },
+      "created_at": "2026-08-29T05:34:39.534Z",
+      "updated_at": "2026-08-29T05:34:39.534Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:samvardhana_motherson_peguform_gmbh",
+      "canonical_name": "Samvardhana Motherson Peguform GmbH",
+      "canonical_domain": "smp-automotive.com",
+      "official_website_url": "https://www.smp-automotive.com/de",
+      "career_url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+      "aliases": [
+        "Motherson Peguform",
+        "Samvardhana Motherson Peguform",
+        "SMP Automotive"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Bayern",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Automotive Supplier",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 74,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+        "observed_at": "2026-08-28T16:33:21.197Z",
+        "verification_url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Automotive Supplier",
+        "evidence_note": "Der SMP-Kandidat wurde ueber die offizielle SMP-Domain und die dortige Karriere-/Stellenangebote-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:33:21.197Z",
+      "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:fraunhofer_ivv",
       "canonical_name": "Fraunhofer IVV",
       "canonical_domain": "ivv.fraunhofer.de",
@@ -2391,6 +2668,45 @@
       },
       "created_at": "2026-08-23T06:20:01.451Z",
       "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:deutsches_theater_muenchen_betriebs_gmbh",
+      "canonical_name": "Deutsches Theater Muenchen Betriebs-GmbH",
+      "canonical_domain": "deutsches-theater.de",
+      "official_website_url": "https://www.deutsches-theater.de/",
+      "career_url": "https://www.deutsches-theater.de/jobs/",
+      "aliases": [
+        "Deutsches Theater",
+        "Deutsches Theater Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Culture and Theatre",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 74,
+      "next_scan_at": "2026-08-29T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.deutsches-theater.de/jobs/",
+        "observed_at": "2026-08-28T16:33:21.197Z",
+        "verification_url": "https://www.deutsches-theater.de/jobs/",
+        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "target_area": "MUNICH",
+        "industry_hint": "Culture and Theatre",
+        "evidence_note": "Der Beteiligungs-Kandidat Deutsches Theater wurde ueber die offizielle Theater-Domain und die dortige Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-28T16:33:21.197Z",
+      "updated_at": "2026-08-28T16:33:21.197Z",
       "last_successful_scan_at": null
     },
     {
@@ -5328,6 +5644,27 @@
       ]
     },
     {
+      "source_id": "source:astellas_pharma_gmbh_career",
+      "company_id": "company:astellas_pharma_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.astellas.com/en/careers",
+      "canonical_url": "https://www.astellas.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:34:39.534Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.astellas.com/en/careers",
+          "basis_url": "https://www.astellas.com/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:34:39.534Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:atoss_software_se_career",
       "company_id": "company:atoss_software_se",
       "source_type": "CAREER_PAGE",
@@ -5595,6 +5932,27 @@
       ]
     },
     {
+      "source_id": "source:denso_automotive_deutschland_gmbh_career",
+      "company_id": "company:denso_automotive_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.denso.com/de/de/careers/",
+      "canonical_url": "https://www.denso.com/de/de/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:33:21.197Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.denso.com/de/de/careers/",
+          "basis_url": "https://www.denso.com/de/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:deutsche_pfandbriefbank_ag_career",
       "company_id": "company:deutsche_pfandbriefbank_ag",
       "source_type": "CAREER_PAGE",
@@ -5630,6 +5988,27 @@
           "basis_url": "https://www.telekom.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T15:53:28.788Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:deutsches_theater_muenchen_betriebs_gmbh_career",
+      "company_id": "company:deutsches_theater_muenchen_betriebs_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.deutsches-theater.de/jobs/",
+      "canonical_url": "https://www.deutsches-theater.de/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:33:21.197Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.deutsches-theater.de/jobs/",
+          "basis_url": "https://www.deutsches-theater.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:33:21.197Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -5738,6 +6117,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:fujitsu_germany_gmbh_career",
+      "company_id": "company:fujitsu_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.fujitsu.com/de/about/",
+      "canonical_url": "https://www.fujitsu.com/de/about/",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:33:21.197Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.fujitsu.com/de/about/",
+          "basis_url": "https://www.fujitsu.com/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:gasteig_muenchen_gmbh_career_url",
@@ -6118,6 +6518,27 @@
           ],
           "observed_at": "2026-08-27T15:19:42.349Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:ltimindtree_gmbh_career",
+      "company_id": "company:ltimindtree_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.ltimindtree.com/",
+      "canonical_url": "https://careers.ltimindtree.com/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:34:39.534Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.ltimindtree.com/",
+          "basis_url": "https://www.ltimindtree.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:34:39.534Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -6579,6 +7000,27 @@
       ]
     },
     {
+      "source_id": "source:olympus_europa_se_and_co_kg_career",
+      "company_id": "company:olympus_europa_se_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+      "canonical_url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:33:21.197Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+          "basis_url": "https://www.olympus-europa.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:p_plus_r_park_and_ride_gmbh_career_url",
       "company_id": "company:p_plus_r_park_and_ride_gmbh",
       "source_type": "CAREER_PAGE",
@@ -6824,6 +7266,27 @@
       ]
     },
     {
+      "source_id": "source:samvardhana_motherson_peguform_gmbh_career",
+      "company_id": "company:samvardhana_motherson_peguform_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+      "canonical_url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:33:21.197Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+          "basis_url": "https://www.smp-automotive.com/de",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:scout24_se_career",
       "company_id": "company:scout24_se",
       "source_type": "CAREER_PAGE",
@@ -7043,6 +7506,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:tata_consultancy_services_deutschland_gmbh_career",
+      "company_id": "company:tata_consultancy_services_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.tcs.com/de-de/karriere/jobs",
+      "canonical_url": "https://www.tcs.com/de-de/karriere/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-28T16:33:21.197Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.tcs.com/de-de/karriere/jobs",
+          "basis_url": "https://www.tcs.com/de-de",
+          "redirect_chain": [],
+          "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:tdk_electronics_ag_career_url",

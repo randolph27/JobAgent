@@ -1,0 +1,153 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-28T16:45:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Tata Consultancy Services Deutschland GmbH",
+      "official_website_url": "https://www.tcs.com/de-de",
+      "career_url": "https://www.tcs.com/de-de/karriere/jobs",
+      "aliases": [
+        "TCS Deutschland",
+        "Tata Consultancy Services",
+        "TCS"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Consulting",
+      "scan_priority": 77,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tcs.com/de-de/karriere/jobs",
+      "discovery_origin": "source-registry:munich_business_indian_companies",
+      "evidence_note": "Der Kandidat TCS Deutschland wurde ueber die offizielle TCS-Deutschland-Domain und die dortige Karriere-/Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "DENSO Automotive Deutschland GmbH",
+      "official_website_url": "https://www.denso.com/de/de/",
+      "career_url": "https://www.denso.com/de/de/careers/",
+      "aliases": [
+        "DENSO Deutschland",
+        "DENSO"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Technology",
+      "scan_priority": 76,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.denso.com/de/de/careers/",
+      "discovery_origin": "source-registry:munich_business_japanese_companies",
+      "evidence_note": "Der DENSO-Kandidat wurde ueber die offizielle DENSO-Deutschland-Domain und die dortige Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Fujitsu Germany GmbH",
+      "official_website_url": "https://www.fujitsu.com/de/",
+      "career_url": "https://www.fujitsu.com/de/about/",
+      "aliases": [
+        "Fujitsu Deutschland",
+        "Fujitsu"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Technology",
+      "scan_priority": 76,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.fujitsu.com/de/about/",
+      "discovery_origin": "source-registry:munich_business_japanese_companies",
+      "evidence_note": "Der Fujitsu-Kandidat wurde ueber die offizielle Fujitsu-Deutschland-Domain und die dortige Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Olympus Europa SE & Co. KG",
+      "official_website_url": "https://www.olympus-europa.com/",
+      "career_url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+      "aliases": [
+        "Olympus Europe",
+        "Olympus Europa",
+        "Olympus"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "scan_priority": 75,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.olympus-europa.com/company/en/careers/jobs/index.html",
+      "discovery_origin": "source-registry:munich_business_japanese_companies",
+      "evidence_note": "Der Olympus-Kandidat wurde ueber die offizielle Olympus-Europa-Domain und die dortige Job-Vacancies-Seite belegt."
+    },
+    {
+      "canonical_name": "Deutsches Theater Muenchen Betriebs-GmbH",
+      "official_website_url": "https://www.deutsches-theater.de/",
+      "career_url": "https://www.deutsches-theater.de/jobs/",
+      "aliases": [
+        "Deutsches Theater Muenchen",
+        "Deutsches Theater"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Culture and Theatre",
+      "scan_priority": 74,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.deutsches-theater.de/jobs/",
+      "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+      "evidence_note": "Der Beteiligungs-Kandidat Deutsches Theater wurde ueber die offizielle Theater-Domain und die dortige Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Samvardhana Motherson Peguform GmbH",
+      "official_website_url": "https://www.smp-automotive.com/de",
+      "career_url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+      "aliases": [
+        "SMP Automotive",
+        "Samvardhana Motherson Peguform",
+        "Motherson Peguform"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Bayern",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Automotive Supplier",
+      "scan_priority": 74,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.smp-automotive.com/de/Karriere/Stellenangebote",
+      "discovery_origin": "source-registry:munich_business_indian_companies",
+      "evidence_note": "Der SMP-Kandidat wurde ueber die offizielle SMP-Domain und die dortige Karriere-/Stellenangebote-Seite belegt."
+    }
+  ]
+}
