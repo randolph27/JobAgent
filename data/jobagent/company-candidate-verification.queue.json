@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-29T05:35:59.770Z",
+  "generated_at": "2026-08-29T05:49:18.362Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 189,
-    "DISCOVER_OFFICIAL_WEBSITE": 1593,
+    "ALREADY_VERIFIED_IN_STORE": 207,
+    "DISCOVER_OFFICIAL_WEBSITE": 1575,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -906,6 +906,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:ihk fuer muenchen und oberbayern"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_freising_weihenstephan_innovations_und_gruenderzentrum_biotechnologie_weihenstephan_freising_weihenstephan",
+      "candidate_id": "regional-hint:stadt_freising_weihenstephan_innovations_und_gruenderzentrum_biotechnologie_weihenstephan_freising_weihenstephan",
+      "company_id": "company:innovations_und_gruenderzentrum_biotechnologie_weihenstephan",
+      "candidate_ids": [
+        "regional-hint:stadt_freising_weihenstephan_innovations_und_gruenderzentrum_biotechnologie_weihenstephan_freising_weihenstephan"
+      ],
+      "canonical_name": "Innovations- und Gruenderzentrum Biotechnologie Weihenstephan",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T15:53:14.331Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_freising_weihenstephan",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://www.freising.de/wirtschaft/weihenstephan",
+        "observed_at": "08/26/2026 14:10:00",
+        "record_hash": "8221cdbd50370442f38672250c84432b5ce3be3f9ce836e13470af1b7ff9b1ed",
+        "allowed_use": "Weihenstephan-, Forschungs- und Biotech-Bezuege als sektorale Kandidatenhinweise nutzen.",
+        "rate_limit_policy": "Nur gezielte Snapshot-Aktualisierung; externe Links separat bewerten."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:innovations und gruenderzentrum biotechnologie weihenstephan"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -2720,50 +2764,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_stadt_freising_weihenstephan_innovations_und_gruenderzentrum_biotechnologie_weihenstephan_freising_weihenstephan",
-      "candidate_id": "regional-hint:stadt_freising_weihenstephan_innovations_und_gruenderzentrum_biotechnologie_weihenstephan_freising_weihenstephan",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:stadt_freising_weihenstephan_innovations_und_gruenderzentrum_biotechnologie_weihenstephan_freising_weihenstephan"
-      ],
-      "canonical_name": "Innovations- und Gruenderzentrum Biotechnologie Weihenstephan",
-      "source_count": 1,
-      "priority_score": 100,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T15:53:14.331Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:stadt_freising_weihenstephan",
-        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.freising.de/wirtschaft/weihenstephan",
-        "observed_at": "08/26/2026 14:10:00",
-        "record_hash": "8221cdbd50370442f38672250c84432b5ce3be3f9ce836e13470af1b7ff9b1ed",
-        "allowed_use": "Weihenstephan-, Forschungs- und Biotech-Bezuege als sektorale Kandidatenhinweise nutzen.",
-        "rate_limit_policy": "Nur gezielte Snapshot-Aktualisierung; externe Links separat bewerten."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:innovations und gruenderzentrum biotechnologie weihenstephan"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_mgh_muenchener_gewerbehof_und_technologiegesellschaft_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mgh_muenchener_gewerbehof_und_technologiegesellschaft_muenchen",
       "company_id": null,
@@ -3300,6 +3300,98 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region",
+      "candidate_id": "regional-hint:munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region",
+      "company_id": "company:amgen_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region"
+      ],
+      "canonical_name": "Amgen GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_life_sciences_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
+        "observed_at": "08/26/2026 08:35:00",
+        "record_hash": "2909be2778bb451aba74d7b2a1184183dc3d44079e0fc4f1ec2acc3eb010d8ea",
+        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amgen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_amgen_gmbh_muenchen",
+      "candidate_id": "regional-hint:munich_business_us_companies_amgen_gmbh_muenchen",
+      "company_id": "company:amgen_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_us_companies_amgen_gmbh_muenchen"
+      ],
+      "canonical_name": "Amgen GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_us_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "3484697c291b2aa13e38f8e7b0cdc4e510b5ec6c7c6bf53a48ff88ff430bc854",
+        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amgen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_arri_muenchen_nord",
       "candidate_id": "regional-hint:munich_business_commercial_locations_arri_muenchen_nord",
       "company_id": "company:arri",
@@ -3340,6 +3432,52 @@
           "name:arri"
         ],
         "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_arthrex_gmbh_muenchen_west",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_arthrex_gmbh_muenchen_west",
+      "company_id": "company:arthrex_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_arthrex_gmbh_muenchen_west"
+      ],
+      "canonical_name": "Arthrex GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "44e4b683153209c3361c627516e3bb30123398bec61e231b11ce728b935e7772",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:arthrex"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 1
       }
     },
@@ -3519,6 +3657,96 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:atoss software"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_bavarian_nordic_gmbh_muenchen_und_region",
+      "candidate_id": "regional-hint:munich_business_life_sciences_companies_bavarian_nordic_gmbh_muenchen_und_region",
+      "company_id": "company:bavarian_nordic_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_life_sciences_companies_bavarian_nordic_gmbh_muenchen_und_region"
+      ],
+      "canonical_name": "Bavarian Nordic GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_life_sciences_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
+        "observed_at": "08/26/2026 08:35:00",
+        "record_hash": "39e6d51a54cb50d04dfe9baa4fca78cb5ed095ee067c95539ccffef84457c650",
+        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bavarian nordic"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_baxter_deutschland_gmbh_muenchen",
+      "candidate_id": "regional-hint:munich_business_us_companies_baxter_deutschland_gmbh_muenchen",
+      "company_id": "company:baxter_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_us_companies_baxter_deutschland_gmbh_muenchen"
+      ],
+      "canonical_name": "Baxter Deutschland GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_us_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "92074fe76c3967b27185f403d26bd4f4c63e4c484fb27f41edfde5933cbe4ee7",
+        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:baxter deutschland"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -3799,6 +4027,94 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_bene_arzneimittel_gmbh_muenchen_und_region",
+      "candidate_id": "regional-hint:munich_business_life_sciences_companies_bene_arzneimittel_gmbh_muenchen_und_region",
+      "company_id": "company:bene_arzneimittel_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_life_sciences_companies_bene_arzneimittel_gmbh_muenchen_und_region"
+      ],
+      "canonical_name": "bene-Arzneimittel GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:28:21.322Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_life_sciences_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
+        "observed_at": "08/26/2026 08:35:00",
+        "record_hash": "c89985c5b5fa80c9212f152f786f99405327d37f94e6d0d94eb9672edd7f5059",
+        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bene arzneimittel"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_bio_rad_laboratories_gmbh_muenchen",
+      "candidate_id": "regional-hint:munich_business_us_companies_bio_rad_laboratories_gmbh_muenchen",
+      "company_id": "company:bio_rad_laboratories_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_us_companies_bio_rad_laboratories_gmbh_muenchen"
+      ],
+      "canonical_name": "Bio-Rad Laboratories GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:28:21.322Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_us_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "37b80aaae3462850cbfccc6707f2b8d947c8757a917ad63cbd09a8d7fdadc2d0",
+        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bio rad laboratories"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_automotive_mobility_companies_bmw_muenchen_und_region",
       "candidate_id": "regional-hint:munich_business_automotive_mobility_companies_bmw_muenchen_und_region",
       "company_id": "company:bmw_group",
@@ -3975,6 +4291,190 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:bmw group"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_brainlab_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_brainlab_muenchen_tech_unternehmen",
+      "company_id": "company:brainlab_ag",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_brainlab_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "Brainlab",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "c7d613cd729a1193c0dc61de89428209295fa0d2d0ae1f24028259517046493e",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:brainlab"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_brainlab_ag_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_brainlab_ag_muenchen_ost",
+      "company_id": "company:brainlab_ag",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_brainlab_ag_muenchen_ost"
+      ],
+      "canonical_name": "Brainlab AG",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "3dc2cf601a757c429fd8c7ca66041bf337bc5fd2759b0debb3e9b7512fb29362",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:brainlab"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_bristol_myers_squibb_muenchen_mitte",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_bristol_myers_squibb_muenchen_mitte",
+      "company_id": "company:bristol_myers_squibb_gmbh_and_co_kgaa",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_bristol_myers_squibb_muenchen_mitte"
+      ],
+      "canonical_name": "Bristol-Myers Squibb",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-mitte.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "07413a684027722b525c2bde0872296165fbfca9ba0405d65a72911136bb8310",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bristol myers squibb"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_bristol_myers_squibb_gmbh_and_co_kg_muenchen",
+      "candidate_id": "regional-hint:munich_business_us_companies_bristol_myers_squibb_gmbh_and_co_kg_muenchen",
+      "company_id": "company:bristol_myers_squibb_gmbh_and_co_kgaa",
+      "candidate_ids": [
+        "regional-hint:munich_business_us_companies_bristol_myers_squibb_gmbh_and_co_kg_muenchen"
+      ],
+      "canonical_name": "Bristol-Myers Squibb GmbH & Co. KG",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_us_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "765d8223cd8bcbc4dea407dbc9f45327d25d45ac8f08bfb6a45dedff5e97c3f4",
+        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bristol myers squibb"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -8331,98 +8831,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region",
-      "candidate_id": "regional-hint:munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region"
-      ],
-      "canonical_name": "Amgen GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_life_sciences_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
-        "observed_at": "08/26/2026 08:35:00",
-        "record_hash": "2909be2778bb451aba74d7b2a1184183dc3d44079e0fc4f1ec2acc3eb010d8ea",
-        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:amgen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_amgen_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_us_companies_amgen_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_us_companies_amgen_gmbh_muenchen"
-      ],
-      "canonical_name": "Amgen GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_us_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "3484697c291b2aa13e38f8e7b0cdc4e510b5ec6c7c6bf53a48ff88ff430bc854",
-        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:amgen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_angsa_robotics_awesome_machine_learning_startups_munich_github_list",
       "company_id": null,
@@ -8597,52 +9005,6 @@
           "name:argo ai"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_arthrex_gmbh_muenchen_west",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_arthrex_gmbh_muenchen_west",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_arthrex_gmbh_muenchen_west"
-      ],
-      "canonical_name": "Arthrex GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "44e4b683153209c3361c627516e3bb30123398bec61e231b11ce728b935e7772",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:arthrex"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -8999,96 +9361,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_bavarian_nordic_gmbh_muenchen_und_region",
-      "candidate_id": "regional-hint:munich_business_life_sciences_companies_bavarian_nordic_gmbh_muenchen_und_region",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_life_sciences_companies_bavarian_nordic_gmbh_muenchen_und_region"
-      ],
-      "canonical_name": "Bavarian Nordic GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_life_sciences_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
-        "observed_at": "08/26/2026 08:35:00",
-        "record_hash": "39e6d51a54cb50d04dfe9baa4fca78cb5ed095ee067c95539ccffef84457c650",
-        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bavarian nordic"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_baxter_deutschland_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_us_companies_baxter_deutschland_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_us_companies_baxter_deutschland_gmbh_muenchen"
-      ],
-      "canonical_name": "Baxter Deutschland GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_us_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "92074fe76c3967b27185f403d26bd4f4c63e4c484fb27f41edfde5933cbe4ee7",
-        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:baxter deutschland"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen",
       "candidate_id": "regional-hint:munich_business_finance_companies_bayerische_landesbodenkreditanstalt_muenchen",
       "company_id": null,
@@ -9265,50 +9537,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_bene_arzneimittel_gmbh_muenchen_und_region",
-      "candidate_id": "regional-hint:munich_business_life_sciences_companies_bene_arzneimittel_gmbh_muenchen_und_region",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_life_sciences_companies_bene_arzneimittel_gmbh_muenchen_und_region"
-      ],
-      "canonical_name": "bene-Arzneimittel GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:28:21.322Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_life_sciences_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-life-sciences.html",
-        "observed_at": "08/26/2026 08:35:00",
-        "record_hash": "c89985c5b5fa80c9212f152f786f99405327d37f94e6d0d94eb9672edd7f5059",
-        "allowed_use": "Oeffentlich genannte Life-Sciences-, Biotech- und Pharma-Unternehmen in Muenchen oder der Region als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bene arzneimittel"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_automotive_mobility_companies_bertrandt_muenchen_und_region",
       "candidate_id": "regional-hint:munich_business_automotive_mobility_companies_bertrandt_muenchen_und_region",
       "company_id": null,
@@ -9435,50 +9663,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:bilendo"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_bio_rad_laboratories_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_us_companies_bio_rad_laboratories_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_us_companies_bio_rad_laboratories_gmbh_muenchen"
-      ],
-      "canonical_name": "Bio-Rad Laboratories GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:28:21.322Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_us_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "37b80aaae3462850cbfccc6707f2b8d947c8757a917ad63cbd09a8d7fdadc2d0",
-        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bio rad laboratories"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -10167,98 +10351,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_brainlab_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_brainlab_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_brainlab_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "Brainlab",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "c7d613cd729a1193c0dc61de89428209295fa0d2d0ae1f24028259517046493e",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:brainlab"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_brainlab_ag_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_brainlab_ag_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_brainlab_ag_muenchen_ost"
-      ],
-      "canonical_name": "Brainlab AG",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "3dc2cf601a757c429fd8c7ca66041bf337bc5fd2759b0debb3e9b7512fb29362",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:brainlab"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_breathment_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_breathment_awesome_machine_learning_startups_munich_github_list",
       "company_id": null,
@@ -10303,52 +10395,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_bristol_myers_squibb_muenchen_mitte",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_bristol_myers_squibb_muenchen_mitte",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_bristol_myers_squibb_muenchen_mitte"
-      ],
-      "canonical_name": "Bristol-Myers Squibb",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-mitte.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "07413a684027722b525c2bde0872296165fbfca9ba0405d65a72911136bb8310",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bristol myers squibb"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_bristol_myers_squibb_bms_muenchen_und_region",
       "candidate_id": "regional-hint:munich_business_life_sciences_companies_bristol_myers_squibb_bms_muenchen_und_region",
       "company_id": null,
@@ -10389,52 +10435,6 @@
           "name:bristol myers squibb bms"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_bristol_myers_squibb_gmbh_and_co_kg_muenchen",
-      "candidate_id": "regional-hint:munich_business_us_companies_bristol_myers_squibb_gmbh_and_co_kg_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_us_companies_bristol_myers_squibb_gmbh_and_co_kg_muenchen"
-      ],
-      "canonical_name": "Bristol-Myers Squibb GmbH & Co. KG",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_us_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "765d8223cd8bcbc4dea407dbc9f45327d25d45ac8f08bfb6a45dedff5e97c3f4",
-        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bristol myers squibb"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -28154,6 +28154,190 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_amgen_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_amgen_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:amgen_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_amgen_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Amgen",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:04:44.668Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "2725d2119566242f6ee23127630e70068c6bdd5bb6f65b3caf30f0c8c8daf7eb",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amgen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_amgen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_amgen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:amgen_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_amgen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "AMGEN GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:04:44.668Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "eddd1a0acf33a75e7fb548eb4ab33b1e219c77c66caa71b82b2acaa2c5d836ea",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amgen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:arthrex_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Arthrex GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:12:57.732Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "131ce7ca9fedf60c15a0ee60b2cc14539c04ebb61c610f49aaaaf003aa8e8829",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:arthrex"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bavarian_nordic_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bavarian_nordic_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:bavarian_nordic_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_bavarian_nordic_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Bavarian Nordic",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:49:01.975Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "7b5d9a06f90bfd3a43c0cca0057fc3044ea059cf3b3da308d42e7095e640b4f7",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bavarian nordic"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_baywa_ag_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_baywa_ag_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": "company:baywa_ag",
@@ -28238,6 +28422,98 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:bmw group"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_brainlab_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_brainlab_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:brainlab_ag",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_brainlab_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Brainlab SE",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T07:24:19.459Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "cb5b142e0c5aad3935430a917c2dbdd999bab83fb5b46b6d118e432d749cb26a",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:brainlab"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bristol_myers_squibb_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bristol_myers_squibb_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:bristol_myers_squibb_gmbh_and_co_kgaa",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_bristol_myers_squibb_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Bristol-Myers Squibb",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T07:24:19.459Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "01a5787c63947582a01f25b0545b04b9e533219e9f12d88f113cec6d3e4b6d09",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bristol myers squibb"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -31314,98 +31590,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_amgen_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_amgen_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_amgen_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Amgen",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:04:44.668Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "2725d2119566242f6ee23127630e70068c6bdd5bb6f65b3caf30f0c8c8daf7eb",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:amgen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_amgen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_amgen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_amgen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "AMGEN GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:04:44.668Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "eddd1a0acf33a75e7fb548eb4ab33b1e219c77c66caa71b82b2acaa2c5d836ea",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:amgen"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_amicus_therapeutics_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_amicus_therapeutics_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -32108,52 +32292,6 @@
           "name:arksolutions"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Arthrex GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:12:57.732Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "131ce7ca9fedf60c15a0ee60b2cc14539c04ebb61c610f49aaaaf003aa8e8829",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:arthrex"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -34046,52 +34184,6 @@
           "name:bavaria studios"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bavarian_nordic_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bavarian_nordic_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_bavarian_nordic_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Bavarian Nordic",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:49:01.975Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "7b5d9a06f90bfd3a43c0cca0057fc3044ea059cf3b3da308d42e7095e640b4f7",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bavarian nordic"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -36082,52 +36174,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_brainlab_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_brainlab_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_brainlab_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Brainlab SE",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T07:24:19.459Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "cb5b142e0c5aad3935430a917c2dbdd999bab83fb5b46b6d118e432d749cb26a",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:brainlab"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_brainymotion_muenchen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_brainymotion_muenchen_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -36388,52 +36434,6 @@
           "name:bridge to europe"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bristol_myers_squibb_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bristol_myers_squibb_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_bristol_myers_squibb_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Bristol-Myers Squibb",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T07:24:19.459Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "01a5787c63947582a01f25b0545b04b9e533219e9f12d88f113cec6d3e4b6d09",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bristol myers squibb"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },

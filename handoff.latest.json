@@ -1,18 +1,16 @@
 {
-  "ts": "2026-08-29T07:38:01.296+02:00",
+  "ts": "2026-08-29T07:55:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen",
-  "summary": "Welle F/B importierte 2 offiziell belegte Arbeitgeber; Store 115 Firmen, 111 JobSources; Source Coverage 113 offizielle Quellen, 112 Karrierequellen.",
+  "summary": "Welle G/B importierte 9 offiziell belegte Arbeitgeber; Store 124 Firmen, 120 JobSources; Source Coverage 122 offizielle Quellen, 121 Karrierequellen. JA-027 bleibt offen.",
   "changed": [
     "Roadmap.md",
     "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/company-discovery.hints.json",
-    "data/jobagent/company-discovery.official.wave-e-20260828.json",
-    "data/jobagent/company-discovery.official.wave-f-20260829.json",
+    "data/jobagent/company-discovery.official.wave-g-20260829.json",
     "data/jobagent/store.json",
     "handoff.latest.json",
     "handoff.latest.md",
@@ -25,7 +23,7 @@
   ],
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-f-20260829.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-g-20260829.json -WaveId B",
       "exit": 0
     },
     {
@@ -69,6 +67,22 @@
       "exit": 0
     },
     {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-WebRequest http://localhost:9000/api/system/status",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd devserver-status",
+      "exit": 0
+    },
+    {
       "cmd": ".\\ci.cmd route-check",
       "exit": 0
     },
@@ -78,34 +92,55 @@
     }
   ],
   "metrics": {
-    "companies": 115,
-    "job_sources": 111,
-    "sources_total": 1933,
-    "official_sources": 113,
-    "career_sources": 112,
-    "verified_queue": 189,
-    "manual_review_queue": 1595,
+    "companies": 124,
+    "job_sources": 120,
+    "sources_total": 1942,
+    "official_sources": 122,
+    "career_sources": 121,
+    "verified_queue": 207,
+    "manual_review_queue": 1577,
     "wave_gate": "passed",
-    "coverage_delta": 2,
+    "coverage_delta": 9,
     "duplicate_rate": 0.0,
-    "manual_review_rate": 0.0
+    "manual_review_rate": 0.0,
+    "sonar_status": "UP",
+    "devserver_port": 8500
   },
   "git": {
     "branch": "master",
-    "head": "efd555c46fda",
+    "head_before_commit": "43af5aaa0997",
     "upstream": "origin/master",
-    "ahead": 0,
-    "behind": 0,
-    "worktree": "dirty"
+    "ahead_before_commit": 0,
+    "behind_before_commit": 0,
+    "worktree_before_commit": "dirty"
   },
   "route_ok": true,
   "route_violations": [],
-  "next": "Naechste JA-027-Welle: weitere store-ferne Kandidaten mit offizieller Firmenwebsite plus Karriere-/Jobs-/ATS-Beleg aufnehmen.",
+  "next": "Naechste JA-027-Welle: hoechstpriorisierte DISCOVER_OFFICIAL_WEBSITE-Kandidaten weiter mit offizieller Firmenwebsite plus Karriere-/Jobs-/ATS-Beleg aufnehmen; unsichere Kandidaten bleiben fail-closed in Review.",
   "refs": [
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
     "handoff.latest.json",
-    "Roadmap.md"
-  ]
+    "Roadmap.md",
+    "data/jobagent/company-discovery.official.wave-g-20260829.json",
+    "logs/jobagent/company-discovery-import-20260829-054757.json",
+    "logs/jobagent/company-candidate-verification-20260829-054805.json",
+    "logs/jobagent/company-coverage-20260829-054805.json",
+    "logs/jobagent/company-coverage-20260829-054805.md",
+    "html/jobagent/company-coverage.html"
+  ],
+  "next_steps": [
+    "In data/jobagent/company-candidate-verification.queue.json die hoechstpriorisierten DISCOVER_OFFICIAL_WEBSITE-Kandidaten weiter abarbeiten.",
+    "Nur offizielle Firmen-/Karriere-/ATS-Belege als neuen Wave-Feed nach Muster data/jobagent/company-discovery.official.wave-<letter>-<date>.json erfassen.",
+    "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 und -WaveId B ausfuehren.",
+    "Queue, Coverage, Source Coverage und funktionsbezogene JA-027-Tests erneut ausfuehren.",
+    "Roadmap.md, Todo und Handoff synchronisieren; JA-027 erst bei Gesamtabschluss rotieren."
+  ],
+  "risks": [
+    "Viele restliche Kandidaten sind nur regionale Hints ohne belastbare Firmenwebsite.",
+    "Jobboersen, Arbeitsagentur, Register und regionale Verzeichnisse duerfen keine produktiven Karrierebelege sein.",
+    "Externe ATS-Portale sind nur gueltig, wenn sie von der offiziellen Firmenwebsite belegbar sind."
+  ],
+  "note": "Kein frischer Supertest in diesem Slice; gemaess Nutzeranweisung gilt nicht angefragter Supertest als erledigt."
 }

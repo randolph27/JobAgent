@@ -1,0 +1,220 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-29T08:45:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Innovations- und Gruenderzentrum Biotechnologie Weihenstephan",
+      "official_website_url": "https://www.izb-online.de/",
+      "career_url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+      "aliases": [
+        "IZB Weihenstephan",
+        "Innovations- und Gruenderzentrum Biotechnologie"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Life Sciences and Biotechnology",
+      "scan_priority": 80,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+      "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+      "evidence_note": "Der Weihenstephan-Hinweis wurde ueber die offizielle IZB-Domain und die IZB-Stellenangebotsseite belegt."
+    },
+    {
+      "canonical_name": "Amgen GmbH",
+      "official_website_url": "https://www.amgen.de/",
+      "career_url": "https://www.amgen.de/bewerber/",
+      "aliases": [
+        "Amgen",
+        "Amgen Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biotechnology",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.amgen.de/bewerber/",
+      "discovery_origin": "source-registry:munich_business_us_companies",
+      "evidence_note": "Der Amgen-Kandidat wurde ueber die offizielle deutsche Amgen-Domain und die Bewerber-/Karriereseite belegt."
+    },
+    {
+      "canonical_name": "Arthrex GmbH",
+      "official_website_url": "https://www.arthrex.com/",
+      "career_url": "https://careers.arthrex.com/Germany?locale=de_DE",
+      "aliases": [
+        "Arthrex"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.arthrex.com/Germany?locale=de_DE",
+      "discovery_origin": "source-registry:munich_business_medtech_companies",
+      "evidence_note": "Der Arthrex-Kandidat wurde ueber die offizielle Arthrex-Domain und das Arthrex-Careers-Portal fuer Deutschland belegt."
+    },
+    {
+      "canonical_name": "Brainlab AG",
+      "official_website_url": "https://www.brainlab.com/",
+      "career_url": "https://www.brainlab.com/career/jobs/",
+      "aliases": [
+        "Brainlab"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.brainlab.com/career/jobs/",
+      "discovery_origin": "source-registry:munich_business_medtech_companies",
+      "evidence_note": "Der Brainlab-Kandidat wurde ueber die offizielle Brainlab-Domain und die Brainlab-Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Bio-Rad Laboratories GmbH",
+      "official_website_url": "https://www.bio-rad.com/",
+      "career_url": "https://careers.bio-rad.com/germany",
+      "aliases": [
+        "Bio-Rad",
+        "Bio Rad Laboratories"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Feldkirchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Life Science and Clinical Diagnostics",
+      "scan_priority": 77,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.bio-rad.com/germany",
+      "discovery_origin": "source-registry:munich_business_life_science_companies",
+      "evidence_note": "Der Bio-Rad-Kandidat wurde ueber die offizielle Bio-Rad-Domain und die Bio-Rad-Careers-Seite fuer Deutschland belegt."
+    },
+    {
+      "canonical_name": "Baxter Deutschland GmbH",
+      "official_website_url": "https://www.baxter.de/",
+      "career_url": "https://jobs.baxter.com/en/location/germany-jobs/152/2921044/2",
+      "aliases": [
+        "Baxter",
+        "Baxter Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare",
+      "scan_priority": 77,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.baxter.com/en/munich-de",
+      "discovery_origin": "source-registry:munich_business_medtech_companies",
+      "evidence_note": "Der Baxter-Kandidat wurde ueber die offizielle Baxter-Domain und die Baxter-Jobs-Seiten fuer Muenchen/Deutschland belegt."
+    },
+    {
+      "canonical_name": "Bristol Myers Squibb GmbH & Co. KGaA",
+      "official_website_url": "https://www.bms.com/de",
+      "career_url": "https://careers.bms.com/global-de/de/",
+      "aliases": [
+        "Bristol Myers Squibb",
+        "BMS",
+        "Bristol-Myers Squibb GmbH & Co. KG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biopharmaceuticals",
+      "scan_priority": 76,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.bms.com/global-de/de/",
+      "discovery_origin": "source-registry:munich_business_life_science_companies",
+      "evidence_note": "Der BMS-Kandidat wurde ueber die offizielle BMS-Deutschland-Domain und die BMS-Careers-Seite fuer Deutschland belegt."
+    },
+    {
+      "canonical_name": "Bavarian Nordic GmbH",
+      "official_website_url": "https://www.bavarian-nordic.com/",
+      "career_url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+      "aliases": [
+        "Bavarian Nordic"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biotechnology",
+      "scan_priority": 75,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+      "discovery_origin": "source-registry:munich_business_life_science_companies",
+      "evidence_note": "Der Bavarian-Nordic-Kandidat wurde ueber die offizielle Bavarian-Nordic-Domain und deren Job-Openings-Seite belegt."
+    },
+    {
+      "canonical_name": "bene-Arzneimittel GmbH",
+      "official_website_url": "https://www.bene-arzneimittel.de/de",
+      "career_url": "https://www.bene-arzneimittel.de/de/karriere",
+      "aliases": [
+        "bene Arzneimittel",
+        "bene"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharmaceuticals",
+      "scan_priority": 74,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bene-arzneimittel.de/de/karriere",
+      "discovery_origin": "source-registry:munich_business_life_science_companies",
+      "evidence_note": "Der bene-Arzneimittel-Kandidat wurde ueber die offizielle bene-Arzneimittel-Domain und die dortige Karriereseite belegt."
+    }
+  ]
+}

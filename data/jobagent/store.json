@@ -1531,6 +1531,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:innovations_und_gruenderzentrum_biotechnologie_weihenstephan",
+      "canonical_name": "Innovations- und Gruenderzentrum Biotechnologie Weihenstephan",
+      "canonical_domain": "izb-online.de",
+      "official_website_url": "https://www.izb-online.de/",
+      "career_url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+      "aliases": [
+        "Innovations- und Gruenderzentrum Biotechnologie",
+        "IZB Weihenstephan"
+      ],
+      "locations": [
+        {
+          "label": "Freising-Weihenstephan",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Life Sciences and Biotechnology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 80,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+        "discovery_origin": "source-registry:stadt_freising_weihenstephan",
+        "target_area": "FREISING",
+        "industry_hint": "Life Sciences and Biotechnology",
+        "evidence_note": "Der Weihenstephan-Hinweis wurde ueber die offizielle IZB-Domain und die IZB-Stellenangebotsseite belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hubert_burda_media_holding",
       "canonical_name": "Hubert Burda Media Holding",
       "canonical_domain": "burda.com",
@@ -1845,6 +1884,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:amgen_gmbh",
+      "canonical_name": "Amgen GmbH",
+      "canonical_domain": "amgen.de",
+      "official_website_url": "https://www.amgen.de/",
+      "career_url": "https://www.amgen.de/bewerber/",
+      "aliases": [
+        "Amgen",
+        "Amgen Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biotechnology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.amgen.de/bewerber/",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://www.amgen.de/bewerber/",
+        "discovery_origin": "source-registry:munich_business_us_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Biotechnology",
+        "evidence_note": "Der Amgen-Kandidat wurde ueber die offizielle deutsche Amgen-Domain und die Bewerber-/Karriereseite belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:agile_robots_se",
       "canonical_name": "Agile Robots SE",
       "canonical_domain": "agile-robots.com",
@@ -2079,6 +2157,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:brainlab_ag",
+      "canonical_name": "Brainlab AG",
+      "canonical_domain": "brainlab.com",
+      "official_website_url": "https://www.brainlab.com/",
+      "career_url": "https://www.brainlab.com/career/jobs/",
+      "aliases": [
+        "Brainlab"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.brainlab.com/career/jobs/",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://www.brainlab.com/career/jobs/",
+        "discovery_origin": "source-registry:munich_business_medtech_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Medical Technology",
+        "evidence_note": "Der Brainlab-Kandidat wurde ueber die offizielle Brainlab-Domain und die Brainlab-Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:baywa_ag",
       "canonical_name": "BayWa AG",
       "canonical_domain": "baywa.com",
@@ -2114,6 +2230,44 @@
       },
       "created_at": "2026-08-28T16:22:41.522Z",
       "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:arthrex_gmbh",
+      "canonical_name": "Arthrex GmbH",
+      "canonical_domain": "arthrex.com",
+      "official_website_url": "https://www.arthrex.com/",
+      "career_url": "https://careers.arthrex.com/Germany?locale=de_DE",
+      "aliases": [
+        "Arthrex"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.arthrex.com/Germany?locale=de_DE",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://careers.arthrex.com/Germany?locale=de_DE",
+        "discovery_origin": "source-registry:munich_business_medtech_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Medical Technology",
+        "evidence_note": "Der Arthrex-Kandidat wurde ueber die offizielle Arthrex-Domain und das Arthrex-Careers-Portal fuer Deutschland belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
       "last_successful_scan_at": null
     },
     {
@@ -2315,6 +2469,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:bio_rad_laboratories_gmbh",
+      "canonical_name": "Bio-Rad Laboratories GmbH",
+      "canonical_domain": "bio-rad.com",
+      "official_website_url": "https://www.bio-rad.com/",
+      "career_url": "https://careers.bio-rad.com/germany",
+      "aliases": [
+        "Bio Rad Laboratories",
+        "Bio-Rad"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Feldkirchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Life Science and Clinical Diagnostics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.bio-rad.com/germany",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://careers.bio-rad.com/germany",
+        "discovery_origin": "source-registry:munich_business_life_science_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Life Science and Clinical Diagnostics",
+        "evidence_note": "Der Bio-Rad-Kandidat wurde ueber die offizielle Bio-Rad-Domain und die Bio-Rad-Careers-Seite fuer Deutschland belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bayerische_versorgungskammer",
       "canonical_name": "Bayerische Versorgungskammer",
       "canonical_domain": "versorgungskammer.de",
@@ -2351,6 +2544,45 @@
       },
       "created_at": "2026-08-28T16:22:41.522Z",
       "updated_at": "2026-08-28T16:22:41.522Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:baxter_deutschland_gmbh",
+      "canonical_name": "Baxter Deutschland GmbH",
+      "canonical_domain": "baxter.de",
+      "official_website_url": "https://www.baxter.de/",
+      "career_url": "https://jobs.baxter.com/en/location/germany-jobs/152/2921044/2",
+      "aliases": [
+        "Baxter",
+        "Baxter Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.baxter.com/en/munich-de",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://jobs.baxter.com/en/location/germany-jobs/152/2921044/2",
+        "discovery_origin": "source-registry:munich_business_medtech_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Healthcare",
+        "evidence_note": "Der Baxter-Kandidat wurde ueber die offizielle Baxter-Domain und die Baxter-Jobs-Seiten fuer Muenchen/Deutschland belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
       "last_successful_scan_at": null
     },
     {
@@ -2469,6 +2701,46 @@
       },
       "created_at": "2026-08-28T16:33:21.197Z",
       "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bristol_myers_squibb_gmbh_and_co_kgaa",
+      "canonical_name": "Bristol Myers Squibb GmbH & Co. KGaA",
+      "canonical_domain": "bms.com",
+      "official_website_url": "https://www.bms.com/de",
+      "career_url": "https://careers.bms.com/global-de/de/",
+      "aliases": [
+        "BMS",
+        "Bristol Myers Squibb",
+        "Bristol-Myers Squibb GmbH & Co. KG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biopharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 76,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.bms.com/global-de/de/",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://careers.bms.com/global-de/de/",
+        "discovery_origin": "source-registry:munich_business_life_science_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Biopharmaceuticals",
+        "evidence_note": "Der BMS-Kandidat wurde ueber die offizielle BMS-Deutschland-Domain und die BMS-Careers-Seite fuer Deutschland belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
       "last_successful_scan_at": null
     },
     {
@@ -2591,6 +2863,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:bavarian_nordic_gmbh",
+      "canonical_name": "Bavarian Nordic GmbH",
+      "canonical_domain": "bavarian-nordic.com",
+      "official_website_url": "https://www.bavarian-nordic.com/",
+      "career_url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+      "aliases": [
+        "Bavarian Nordic"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biotechnology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 75,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+        "discovery_origin": "source-registry:munich_business_life_science_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Biotechnology",
+        "evidence_note": "Der Bavarian-Nordic-Kandidat wurde ueber die offizielle Bavarian-Nordic-Domain und deren Job-Openings-Seite belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:samvardhana_motherson_peguform_gmbh",
       "canonical_name": "Samvardhana Motherson Peguform GmbH",
       "canonical_domain": "smp-automotive.com",
@@ -2707,6 +3017,45 @@
       },
       "created_at": "2026-08-28T16:33:21.197Z",
       "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bene_arzneimittel_gmbh",
+      "canonical_name": "bene-Arzneimittel GmbH",
+      "canonical_domain": "bene-arzneimittel.de",
+      "official_website_url": "https://www.bene-arzneimittel.de/de",
+      "career_url": "https://www.bene-arzneimittel.de/de/karriere",
+      "aliases": [
+        "bene",
+        "bene Arzneimittel"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 74,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bene-arzneimittel.de/de/karriere",
+        "observed_at": "2026-08-29T05:47:57.429Z",
+        "verification_url": "https://www.bene-arzneimittel.de/de/karriere",
+        "discovery_origin": "source-registry:munich_business_life_science_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Pharmaceuticals",
+        "evidence_note": "Der bene-Arzneimittel-Kandidat wurde ueber die offizielle bene-Arzneimittel-Domain und die dortige Karriereseite belegt."
+      },
+      "created_at": "2026-08-29T05:47:57.429Z",
+      "updated_at": "2026-08-29T05:47:57.429Z",
       "last_successful_scan_at": null
     },
     {
@@ -5579,6 +5928,27 @@
       }
     },
     {
+      "source_id": "source:amgen_gmbh_career",
+      "company_id": "company:amgen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.amgen.de/bewerber/",
+      "canonical_url": "https://www.amgen.de/bewerber/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.amgen.de/bewerber/",
+          "basis_url": "https://www.amgen.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:ams_osram_career",
       "company_id": "company:ams_osram",
       "source_type": "CAREER_PAGE",
@@ -5644,6 +6014,27 @@
       ]
     },
     {
+      "source_id": "source:arthrex_gmbh_career",
+      "company_id": "company:arthrex_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.arthrex.com/Germany?locale=de_DE",
+      "canonical_url": "https://careers.arthrex.com/Germany?locale=de_DE",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.arthrex.com/Germany?locale=de_DE",
+          "basis_url": "https://www.arthrex.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:astellas_pharma_gmbh_career",
       "company_id": "company:astellas_pharma_gmbh",
       "source_type": "CAREER_PAGE",
@@ -5682,6 +6073,48 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:bavarian_nordic_gmbh_career",
+      "company_id": "company:bavarian_nordic_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+      "canonical_url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bavarian-nordic.com/careers/jobs.aspx",
+          "basis_url": "https://www.bavarian-nordic.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:baxter_deutschland_gmbh_career",
+      "company_id": "company:baxter_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.baxter.com/en/location/germany-jobs/152/2921044/2",
+      "canonical_url": "https://jobs.baxter.com/en/location/germany-jobs/152/2921044/2",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.baxter.com/en/location/germany-jobs/152/2921044/2",
+          "basis_url": "https://www.baxter.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:bayerische_landesanstalt_fuer_landwirtschaft_career",
@@ -5810,6 +6243,48 @@
       ]
     },
     {
+      "source_id": "source:bene_arzneimittel_gmbh_career",
+      "company_id": "company:bene_arzneimittel_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bene-arzneimittel.de/de/karriere",
+      "canonical_url": "https://www.bene-arzneimittel.de/de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bene-arzneimittel.de/de/karriere",
+          "basis_url": "https://www.bene-arzneimittel.de/de",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bio_rad_laboratories_gmbh_career",
+      "company_id": "company:bio_rad_laboratories_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.bio-rad.com/germany",
+      "canonical_url": "https://careers.bio-rad.com/germany",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.bio-rad.com/germany",
+          "basis_url": "https://www.bio-rad.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bmw_group_career",
       "company_id": "company:bmw_group",
       "source_type": "CAREER_PAGE",
@@ -5827,6 +6302,48 @@
         "observed_at": "2026-08-17T15:52:58.666Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:brainlab_ag_career",
+      "company_id": "company:brainlab_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.brainlab.com/career/jobs/",
+      "canonical_url": "https://www.brainlab.com/career/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.brainlab.com/career/jobs/",
+          "basis_url": "https://www.brainlab.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bristol_myers_squibb_gmbh_and_co_kgaa_career",
+      "company_id": "company:bristol_myers_squibb_gmbh_and_co_kgaa",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.bms.com/global-de/de/",
+      "canonical_url": "https://careers.bms.com/global-de/de/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.bms.com/global-de/de/",
+          "basis_url": "https://www.bms.com/de",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:bwi_gmbh_career",
@@ -6346,6 +6863,27 @@
         "observed_at": "2026-08-17T15:52:58.666Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:innovations_und_gruenderzentrum_biotechnologie_weihenstephan_career",
+      "company_id": "company:innovations_und_gruenderzentrum_biotechnologie_weihenstephan",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+      "canonical_url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+      "is_official": true,
+      "verified_at": "2026-08-29T05:47:57.429Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.izb-online.de/hotspot-for-life-sciences/career/",
+          "basis_url": "https://www.izb-online.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:internationale_muenchner_filmwochen_gmbh_career_url",
