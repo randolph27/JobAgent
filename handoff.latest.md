@@ -1,25 +1,27 @@
 # Handoff latest
 
-Stand: 2026-08-29T08:05:39.569+02:00
+Stand: 2026-08-29T08:08:02.127+02:00
 
 ## Zustand fuer neuen Chat
 
 - Active: `TD-0041`
-- Roadmap: `JA-027` bleibt offen, weil die Kandidatenbasis noch nicht vollstaendig abgearbeitet ist.
+- Roadmap: `JA-027` bleibt offen; kein Roadmap-Punkt wurde rotiert, weil die Kandidatenbasis noch nicht vollstaendig abgearbeitet ist.
 - Ziel: Weitere Arbeitgeber aus der Review-/Discovery-Queue duerfen erst produktiv in `data/jobagent/store.json`, wenn offizielle Firmenwebsite plus Karriere-/Jobs-/ATS-Beleg fail-closed verifiziert ist.
 - Branch: `master`
-- HEAD vor Abschlusscommit: `6da8c131e9ac`
+- HEAD vor STP-Sync-Commit: `db1894574c83`
 - Upstream: `origin/master`
-- Ahead/Behind vor Commit: `0/0`
+- Ahead/Behind vor STP-Sync-Commit: `1/0`
 - Route: `True`
 - SonarQube: `UP` auf `http://localhost:9000`
 - Devserver: laeuft auf `http://localhost:8500/`
 
-## Abgeschlossener Slice
+## Abgeschlossener Arbeitsschritt
 
-Welle H/B wurde als produktive Importwelle abgeschlossen. Verarbeitet wurden 8 offiziell belegte Arbeitgeber.
+Welle H/B wurde umgesetzt, per Funktionstests verifiziert und mit STP synchronisiert. Der Code-Commit dazu ist `db18945 JA-027 import wave H verified employers`.
 
-Neu aufgenommen wurden 7 Arbeitgeber:
+Verarbeitet wurden 8 offiziell belegte Arbeitgeber.
+
+Neu produktiv aufgenommen wurden 7 Arbeitgeber:
 
 - MGH - Muenchener Gewerbehof- und Technologiegesellschaft
 - TUM School of Life Sciences
@@ -31,14 +33,14 @@ Neu aufgenommen wurden 7 Arbeitgeber:
 
 Dedupliziertes Update:
 
-- Deutsche Telekom Technik GmbH wurde wegen `domain:telekom.com` als Update zu Deutsche Telekom AG zusammengefuehrt.
+- Deutsche Telekom Technik GmbH wurde wegen `domain:telekom.com` als Update zu Deutsche Telekom AG zusammengefuehrt. Im Store existiert damit aktuell kein separater Telekom-Technik-Datensatz.
 
 Ergaenzte Implementierung:
 
 - `src/JobAgent.SourceVerification.psm1` erkennt jetzt offiziell verlinkte Workable-Portale als ATS-Bindung.
-- `tests/Test-JobAgentSourceVerification.ps1` deckt den Workable-ATS-Fall mit offizieller Firmenlink-Evidenz ab.
+- `tests/Test-JobAgentSourceVerification.ps1` enthaelt einen Workable-ATS-Funktionstest mit offizieller Firmenlink-Evidenz.
 
-Kennzahlen nach Welle H/B:
+## Kennzahlen
 
 - Store: `131` Firmen, `127` JobSources
 - Source Coverage: `1949` Quellen gesamt, `129` offizielle Quellen, `128` Karrierequellen
@@ -78,20 +80,26 @@ Kennzahlen nach Welle H/B:
 - `.\ci.cmd route-check` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
 
-Supertest wurde fuer diesen Slice nicht frisch ausgefuehrt, weil JA-027 insgesamt offen bleibt.
+Supertest wurde nicht frisch ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt, wenn er nicht explizit angefragt wurde. `.\ci.cmd stp` verweist weiterhin auf den letzten erfolgreichen Supertest-Digest.
 
 ## Naechste Aufgabe
 
 1. In `data/jobagent/company-candidate-verification.queue.json` die hoechstpriorisierten `DISCOVER_OFFICIAL_WEBSITE`-Kandidaten weiter abarbeiten.
 2. Synthetische Register-Sample-Namen wie `Alpha Technik GmbH`, `Beta Analytics AG`, `Gamma Logistics GmbH` und `Epsilon Alt GmbH` nur bei belastbarer offizieller Website-Evidenz aufnehmen; sonst fail-closed in Review belassen.
-3. Nur offizielle Firmen-/Karriere-/ATS-Belege als neuen Wave-Feed nach Muster `data/jobagent/company-discovery.official.wave-<letter>-<date>.json` erfassen.
-4. Danach Import mit `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
-5. Anschliessend Queue, Coverage, Source Coverage und die funktionsbezogenen Tests aus JA-027 ausfuehren.
-6. `Roadmap.md`, Todo und Handoff synchronisieren; JA-027 erst rotieren, wenn die definierte Verifikations-/Importwellen-Anforderung insgesamt abgeschlossen ist.
+3. Weitere regionale/Tech-Kandidaten priorisieren, aber nur mit offizieller Firmenwebsite plus Karriere-/Jobs- oder offiziell verlinktem ATS-Beleg in eine neue Welle uebernehmen.
+4. Neuen Wave-Feed nach Muster `data/jobagent/company-discovery.official.wave-<letter>-<date>.json` erstellen.
+5. Import ausfuehren:
+
+```powershell
+pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B
+```
+
+6. Danach Queue, Coverage, Source Coverage und die funktionsbezogenen JA-027-Tests erneut ausfuehren.
+7. `Roadmap.md`, Todo und Handoff synchronisieren; JA-027 erst rotieren, wenn die definierte Verifikations-/Importwellen-Anforderung insgesamt abgeschlossen ist.
 
 ## Risiken und Annahmen
 
 - Viele restliche Kandidaten sind nur regionale Hints ohne belastbare Firmenwebsite; fail-closed in Review lassen.
 - Jobboersen, Arbeitsagentur, Register und regionale Verzeichnisse bleiben Discovery-Hints, nicht produktive Karrierebelege.
 - Externe ATS-Portale nur akzeptieren, wenn sie von der offiziellen Firmenwebsite belegbar sind.
-- Deutsche Telekom Technik GmbH ist im Store derzeit kein separater Arbeitgeberdatensatz, sondern ueber die bestehende Telekom-Domain mit Deutsche Telekom AG zusammengefuehrt.
+- Dedupe ueber Domains kann Tochter-/Konzernfirmen zusammenfuehren; bei fachlich notwendiger Trennung muss vorher die Dedupe-Strategie angepasst und getestet werden.

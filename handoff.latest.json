@@ -1,12 +1,12 @@
 {
-  "ts": "2026-08-29T08:05:39.569+02:00",
+  "ts": "2026-08-29T08:08:02.127+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027: offizielle Arbeitgeber-/Karriereverifikation und produktive Importwellen fortsetzen",
-  "summary": "Welle H/B importierte 8 offiziell belegte Arbeitgeber: 7 neue produktive Firmen und 1 dedupliziertes Telekom-Update; Store 131 Firmen, 127 JobSources; Source Coverage 129 offizielle Quellen, 128 Karrierequellen. Workable wurde als offiziell verlinkte ATS-Bindung ergaenzt. JA-027 bleibt offen.",
+  "summary": "Welle H/B ist abgeschlossen und per STP synchronisiert: 8 offiziell belegte Arbeitgeber verarbeitet, 7 neue produktive Firmen, 1 dedupliziertes Telekom-Update. Store 131 Firmen, 127 JobSources; Source Coverage 129 offizielle Quellen, 128 Karrierequellen; Queue 216 verifiziert/store-aware und 1568 manuelle Reviewfaelle. Workable wurde als offiziell verlinkte ATS-Bindung ergaenzt. JA-027 bleibt offen.",
   "changed": [
     "Roadmap.md",
     "data/jobagent/company-candidate-verification.queue.json",
@@ -61,21 +61,22 @@
   },
   "git": {
     "branch": "master",
-    "head_before_commit": "6da8c131e9ac",
+    "head_before_stp_sync_commit": "db1894574c83",
     "upstream": "origin/master",
-    "ahead_before_commit": 0,
-    "behind_before_commit": 0,
-    "worktree_before_commit": "dirty"
+    "ahead_before_stp_sync_commit": 1,
+    "behind_before_stp_sync_commit": 0,
+    "worktree_before_stp_sync_commit": "dirty"
   },
   "route_ok": true,
   "route_violations": [],
   "next": "Naechste JA-027-Welle: hoechstpriorisierte DISCOVER_OFFICIAL_WEBSITE-Kandidaten weiter mit offizieller Firmenwebsite plus Karriere-/Jobs-/ATS-Beleg aufnehmen; unsichere Kandidaten bleiben fail-closed in Review.",
   "refs": [
+    "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
+    "handoff.latest.md",
     "handoff.latest.json",
-    "Roadmap.md",
     "data/jobagent/company-discovery.official.wave-h-20260829.json",
     "logs/jobagent/company-discovery-import-20260829-055942.json",
     "logs/jobagent/company-candidate-verification-20260829-055950.json",
@@ -86,16 +87,18 @@
   ],
   "next_steps": [
     "In data/jobagent/company-candidate-verification.queue.json die hoechstpriorisierten DISCOVER_OFFICIAL_WEBSITE-Kandidaten weiter abarbeiten.",
-    "Synthetische Register-Sample-Namen nur bei belastbarer offizieller Website-Evidenz aufnehmen; sonst fail-closed in Review belassen.",
-    "Nur offizielle Firmen-/Karriere-/ATS-Belege als neuen Wave-Feed erfassen.",
+    "Synthetische Register-Sample-Namen wie Alpha Technik GmbH, Beta Analytics AG, Gamma Logistics GmbH und Epsilon Alt GmbH nur bei belastbarer offizieller Website-Evidenz aufnehmen; sonst fail-closed in Review belassen.",
+    "Weitere regionale/Tech-Kandidaten priorisieren, aber nur mit offizieller Firmenwebsite plus Karriere-/Jobs- oder offiziell verlinktem ATS-Beleg in eine neue Welle uebernehmen.",
+    "Neuen Wave-Feed nach Muster data/jobagent/company-discovery.official.wave-<letter>-<date>.json erstellen.",
     "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 und -WaveId B ausfuehren.",
-    "Queue, Coverage, Source Coverage und funktionsbezogene JA-027-Tests erneut ausfuehren."
+    "Queue, Coverage, Source Coverage und funktionsbezogene JA-027-Tests erneut ausfuehren.",
+    "Roadmap.md, Todo und Handoff synchronisieren; JA-027 erst bei Gesamtabschluss rotieren."
   ],
   "risks": [
     "Viele restliche Kandidaten sind nur regionale Hints ohne belastbare Firmenwebsite.",
     "Jobboersen, Arbeitsagentur, Register und regionale Verzeichnisse duerfen keine produktiven Karrierebelege sein.",
     "Externe ATS-Portale sind nur gueltig, wenn sie von der offiziellen Firmenwebsite belegbar sind.",
-    "Deutsche Telekom Technik GmbH wurde aufgrund gleicher Telekom-Domain mit Deutsche Telekom AG dedupliziert."
+    "Dedupe ueber Domains kann Tochter-/Konzernfirmen zusammenfuehren; bei fachlich notwendiger Trennung muss vorher die Dedupe-Strategie angepasst und getestet werden."
   ],
-  "note": "Kein frischer Supertest in diesem Slice; JA-027 bleibt insgesamt offen."
+  "note": "Kein frischer Supertest in diesem Slice; gemaess Nutzeranweisung gilt nicht angefragter Supertest als erledigt."
 }
