@@ -8,9 +8,9 @@ Stand: 2026-08-29T12:54:37.378+02:00
 - Roadmap: `JA-027` bleibt offen; Welle J/B ist abgeschlossen, die Gesamtanforderung zur vollstaendigen Kandidatenabarbeitung aber noch nicht.
 - Ziel: Weitere Arbeitgeber aus der Review-/Discovery-Queue duerfen erst produktiv in `data/jobagent/store.json`, wenn offizielle Firmenwebsite plus Karriere-/Jobs-/ATS-Beleg fail-closed verifiziert ist.
 - Branch: `master`
-- HEAD vor neuem Abschluss-Commit: `1ce2b4a99059`
+- Feature-/Handoff-Commit: `7bd728d JA-027 import wave J verified employers`
 - Upstream: `origin/master`
-- Ahead/Behind vor Push: `1/0`
+- Push-Stand nach Abschluss: `origin/master` enthaelt `7bd728d`; Worktree soll clean sein
 - Route: `True`
 - SonarQube: `UP` auf `http://localhost:9000`
 - Devserver: laeuft auf `http://localhost:8500/`
@@ -91,3 +91,4 @@ Supertest wurde nicht frisch ausgefuehrt; laut Nutzeranweisung gilt er als erled
 - Jobboersen, Arbeitsagentur, Register und regionale Verzeichnisse bleiben Discovery-Hints, nicht produktive Karrierebelege.
 - Externe ATS-Portale nur akzeptieren, wenn sie von der offiziellen Firmenwebsite belegbar sind.
 - Dedupe ueber Domains kann Tochter-/Konzernfirmen zusammenfuehren; bei fachlich notwendiger Trennung muss vorher die Dedupe-Strategie angepasst und getestet werden.
+
