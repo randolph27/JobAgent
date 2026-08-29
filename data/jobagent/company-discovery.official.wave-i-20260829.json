@@ -1,0 +1,197 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-29T06:45:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Amazon.de GmbH",
+      "official_website_url": "https://www.amazon.jobs/",
+      "career_url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+      "aliases": [
+        "Amazon",
+        "Amazon Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce and Cloud Technology",
+      "scan_priority": 79,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Amazon-Kandidat wurde ueber die offizielle Amazon-Jobs-Domain und deren Muenchen-Standortseite belegt."
+    },
+    {
+      "canonical_name": "Capgemini Deutschland GmbH",
+      "official_website_url": "https://www.capgemini.com/de-de/",
+      "career_url": "https://www.capgemini.com/de-de/karriere/jobs/",
+      "aliases": [
+        "Capgemini",
+        "Capgemini Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Consulting and Digital Transformation",
+      "scan_priority": 78,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.capgemini.com/de-de/karriere/jobs/",
+      "discovery_origin": "source-registry:munich_business_international_companies",
+      "evidence_note": "Der Capgemini-Kandidat wurde ueber die offizielle Capgemini-Deutschland-Domain und die dortige Jobsuche belegt."
+    },
+    {
+      "canonical_name": "CHECK24 Vergleichsportal GmbH",
+      "official_website_url": "https://www.check24.de/",
+      "career_url": "https://jobs.check24.de/de/standorte/muenchen/",
+      "aliases": [
+        "CHECK24",
+        "Check24 Vergleichsportal"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Consumer Services",
+      "scan_priority": 77,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.check24.de/de/standorte/muenchen/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der CHECK24-Kandidat wurde ueber die offizielle CHECK24-Domain und die CHECK24-Karriereseite fuer den Standort Muenchen belegt."
+    },
+    {
+      "canonical_name": "Cisco Systems GmbH",
+      "official_website_url": "https://www.cisco.com/",
+      "career_url": "https://careers.cisco.com/",
+      "aliases": [
+        "Cisco",
+        "Cisco Systems"
+      ],
+      "locations": [
+        {
+          "label": "Garching / Muenchen",
+          "city": "Garching",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Networking and Security Technology",
+      "scan_priority": 76,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.cisco.com/",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der Cisco-Kandidat wurde ueber die offizielle Cisco-Domain und die Cisco-Careers-Subdomain belegt."
+    },
+    {
+      "canonical_name": "Cloudflight Germany GmbH",
+      "official_website_url": "https://www.cloudflight.io/en/",
+      "career_url": "https://www.cloudflight.io/en/career/",
+      "aliases": [
+        "Cloudflight"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software Engineering and Digital Services",
+      "scan_priority": 75,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.cloudflight.io/en/location/munich-2/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Cloudflight-Kandidat wurde ueber die offizielle Cloudflight-Domain, die Career-Seite und die Muenchen-Office-Seite belegt."
+    },
+    {
+      "canonical_name": "ANTENNE BAYERN GmbH & Co. KG",
+      "official_website_url": "https://www.antenne.de/",
+      "career_url": "https://www.antenne.de/infos/jobs",
+      "aliases": [
+        "Antenne Bayern",
+        "ANTENNE BAYERN GROUP"
+      ],
+      "locations": [
+        {
+          "label": "Ismaning / Muenchen",
+          "city": "Ismaning",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "scan_priority": 74,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.antenne.de/infos/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Antenne-Bayern-Kandidat wurde ueber die offizielle Antenne-Domain und die dortige Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Verlag C.H.BECK oHG",
+      "official_website_url": "https://www.beck.de/",
+      "career_url": "https://karriere.chbeck.de/",
+      "aliases": [
+        "C.H.Beck",
+        "Verlag C.H.BECK",
+        "C.H.BECK"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing and Legal Media",
+      "scan_priority": 73,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://karriere.chbeck.de/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der C.H.BECK-Kandidat wurde ueber die offizielle Beck-Domain und das offizielle C.H.BECK-Karriereportal belegt."
+    },
+    {
+      "canonical_name": "Chimera Entertainment GmbH",
+      "official_website_url": "https://chimera-entertainment.com/",
+      "career_url": "https://chimera-entertainment.com/career/",
+      "aliases": [
+        "Chimera Entertainment"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Game Development",
+      "scan_priority": 72,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://chimera-entertainment.com/career/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Chimera-Entertainment-Kandidat wurde ueber die offizielle Chimera-Domain und die dortige Career-Seite mit Muenchen-Bezug belegt."
+    }
+  ]
+}

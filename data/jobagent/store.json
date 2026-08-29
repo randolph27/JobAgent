@@ -1967,6 +1967,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:amazon_de_gmbh",
+      "canonical_name": "Amazon.de GmbH",
+      "canonical_domain": "amazon.jobs",
+      "official_website_url": "https://www.amazon.jobs/",
+      "career_url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+      "aliases": [
+        "Amazon",
+        "Amazon Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce and Cloud Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 79,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "E-Commerce and Cloud Technology",
+        "evidence_note": "Der Amazon-Kandidat wurde ueber die offizielle Amazon-Jobs-Domain und deren Muenchen-Standortseite belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:agile_robots_se",
       "canonical_name": "Agile Robots SE",
       "canonical_domain": "agile-robots.com",
@@ -2237,6 +2276,45 @@
       },
       "created_at": "2026-08-23T06:20:01.451Z",
       "updated_at": "2026-08-23T06:20:56.355Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:capgemini_deutschland_gmbh",
+      "canonical_name": "Capgemini Deutschland GmbH",
+      "canonical_domain": "capgemini.com",
+      "official_website_url": "https://www.capgemini.com/de-de/",
+      "career_url": "https://www.capgemini.com/de-de/karriere/jobs/",
+      "aliases": [
+        "Capgemini",
+        "Capgemini Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Consulting and Digital Transformation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 78,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.capgemini.com/de-de/karriere/jobs/",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://www.capgemini.com/de-de/karriere/jobs/",
+        "discovery_origin": "source-registry:munich_business_international_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Consulting and Digital Transformation",
+        "evidence_note": "Der Capgemini-Kandidat wurde ueber die offizielle Capgemini-Deutschland-Domain und die dortige Jobsuche belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
       "last_successful_scan_at": null
     },
     {
@@ -2591,6 +2669,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:check24_vergleichsportal_gmbh",
+      "canonical_name": "CHECK24 Vergleichsportal GmbH",
+      "canonical_domain": "check24.de",
+      "official_website_url": "https://www.check24.de/",
+      "career_url": "https://jobs.check24.de/de/standorte/muenchen/",
+      "aliases": [
+        "CHECK24",
+        "Check24 Vergleichsportal"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Consumer Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 77,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.check24.de/de/standorte/muenchen/",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://jobs.check24.de/de/standorte/muenchen/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Consumer Services",
+        "evidence_note": "Der CHECK24-Kandidat wurde ueber die offizielle CHECK24-Domain und die CHECK24-Karriereseite fuer den Standort Muenchen belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bio_rad_laboratories_gmbh",
       "canonical_name": "Bio-Rad Laboratories GmbH",
       "canonical_domain": "bio-rad.com",
@@ -2826,6 +2943,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:cisco_systems_gmbh",
+      "canonical_name": "Cisco Systems GmbH",
+      "canonical_domain": "cisco.com",
+      "official_website_url": "https://www.cisco.com/",
+      "career_url": "https://careers.cisco.com/",
+      "aliases": [
+        "Cisco",
+        "Cisco Systems"
+      ],
+      "locations": [
+        {
+          "label": "Garching / Muenchen",
+          "city": "Garching",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Networking and Security Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 76,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.cisco.com/",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://careers.cisco.com/",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Networking and Security Technology",
+        "evidence_note": "Der Cisco-Kandidat wurde ueber die offizielle Cisco-Domain und die Cisco-Careers-Subdomain belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bristol_myers_squibb_gmbh_and_co_kgaa",
       "canonical_name": "Bristol Myers Squibb GmbH & Co. KGaA",
       "canonical_domain": "bms.com",
@@ -3026,6 +3182,44 @@
       },
       "created_at": "2026-08-29T05:34:39.534Z",
       "updated_at": "2026-08-29T05:34:39.534Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:cloudflight_germany_gmbh",
+      "canonical_name": "Cloudflight Germany GmbH",
+      "canonical_domain": "cloudflight.io",
+      "official_website_url": "https://www.cloudflight.io/en/",
+      "career_url": "https://www.cloudflight.io/en/career/",
+      "aliases": [
+        "Cloudflight"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software Engineering and Digital Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 75,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.cloudflight.io/en/location/munich-2/",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://www.cloudflight.io/en/career/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Software Engineering and Digital Services",
+        "evidence_note": "Der Cloudflight-Kandidat wurde ueber die offizielle Cloudflight-Domain, die Career-Seite und die Muenchen-Office-Seite belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
       "last_successful_scan_at": null
     },
     {
@@ -3264,6 +3458,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:antenne_bayern_gmbh_and_co_kg",
+      "canonical_name": "ANTENNE BAYERN GmbH & Co. KG",
+      "canonical_domain": "antenne.de",
+      "official_website_url": "https://www.antenne.de/",
+      "career_url": "https://www.antenne.de/infos/jobs",
+      "aliases": [
+        "Antenne Bayern",
+        "ANTENNE BAYERN GROUP"
+      ],
+      "locations": [
+        {
+          "label": "Ismaning / Muenchen",
+          "city": "Ismaning",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 74,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.antenne.de/infos/jobs",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://www.antenne.de/infos/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Media and Broadcasting",
+        "evidence_note": "Der Antenne-Bayern-Kandidat wurde ueber die offizielle Antenne-Domain und die dortige Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
       "canonical_name": "AES Aerospace Embedded Solutions GmbH",
       "canonical_domain": "aes.gmbh",
@@ -3300,6 +3533,45 @@
       },
       "created_at": "2026-08-29T05:59:42.748Z",
       "updated_at": "2026-08-29T05:59:42.748Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:verlag_c_h_beck_ohg",
+      "canonical_name": "Verlag C.H.BECK oHG",
+      "canonical_domain": "beck.de",
+      "official_website_url": "https://www.beck.de/",
+      "career_url": "https://karriere.chbeck.de/",
+      "aliases": [
+        "C.H.Beck",
+        "Verlag C.H.BECK"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing and Legal Media",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 73,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere.chbeck.de/",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://karriere.chbeck.de/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing and Legal Media",
+        "evidence_note": "Der C.H.BECK-Kandidat wurde ueber die offizielle Beck-Domain und das offizielle C.H.BECK-Karriereportal belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
       "last_successful_scan_at": null
     },
     {
@@ -3344,6 +3616,44 @@
       },
       "created_at": "2026-08-29T05:59:42.748Z",
       "updated_at": "2026-08-29T05:59:42.748Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:chimera_entertainment_gmbh",
+      "canonical_name": "Chimera Entertainment GmbH",
+      "canonical_domain": "chimera-entertainment.com",
+      "official_website_url": "https://chimera-entertainment.com/",
+      "career_url": "https://chimera-entertainment.com/career/",
+      "aliases": [
+        "Chimera Entertainment"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Game Development",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 72,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://chimera-entertainment.com/career/",
+        "observed_at": "2026-08-29T06:13:34.983Z",
+        "verification_url": "https://chimera-entertainment.com/career/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Game Development",
+        "evidence_note": "Der Chimera-Entertainment-Kandidat wurde ueber die offizielle Chimera-Domain und die dortige Career-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-08-29T06:13:34.983Z",
       "last_successful_scan_at": null
     },
     {
@@ -6300,6 +6610,27 @@
       }
     },
     {
+      "source_id": "source:amazon_de_gmbh_career",
+      "company_id": "company:amazon_de_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+      "canonical_url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.amazon.jobs/content/de/locations/germany/munich",
+          "basis_url": "https://www.amazon.jobs/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:amgen_gmbh_career",
       "company_id": "company:amgen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -6337,6 +6668,27 @@
           "basis_url": "https://ams-osram.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:antenne_bayern_gmbh_and_co_kg_career",
+      "company_id": "company:antenne_bayern_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.antenne.de/infos/jobs",
+      "canonical_url": "https://www.antenne.de/infos/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.antenne.de/infos/jobs",
+          "basis_url": "https://www.antenne.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -6775,6 +7127,111 @@
           ],
           "observed_at": "2026-08-27T05:08:12.805Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:capgemini_deutschland_gmbh_career",
+      "company_id": "company:capgemini_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.capgemini.com/de-de/karriere/jobs/",
+      "canonical_url": "https://www.capgemini.com/de-de/karriere/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.capgemini.com/de-de/karriere/jobs/",
+          "basis_url": "https://www.capgemini.com/de-de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:check24_vergleichsportal_gmbh_career",
+      "company_id": "company:check24_vergleichsportal_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.check24.de/de/standorte/muenchen/",
+      "canonical_url": "https://jobs.check24.de/de/standorte/muenchen/",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.check24.de/de/standorte/muenchen/",
+          "basis_url": "https://www.check24.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:chimera_entertainment_gmbh_career",
+      "company_id": "company:chimera_entertainment_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://chimera-entertainment.com/career/",
+      "canonical_url": "https://chimera-entertainment.com/career/",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://chimera-entertainment.com/career/",
+          "basis_url": "https://chimera-entertainment.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:cisco_systems_gmbh_career",
+      "company_id": "company:cisco_systems_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.cisco.com/",
+      "canonical_url": "https://careers.cisco.com/",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.cisco.com/",
+          "basis_url": "https://www.cisco.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:cloudflight_germany_gmbh_career",
+      "company_id": "company:cloudflight_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.cloudflight.io/en/career/",
+      "canonical_url": "https://www.cloudflight.io/en/career/",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.cloudflight.io/en/career/",
+          "basis_url": "https://www.cloudflight.io/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -8623,6 +9080,27 @@
           "basis_url": "https://www.ls.tum.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:verlag_c_h_beck_ohg_career",
+      "company_id": "company:verlag_c_h_beck_ohg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.chbeck.de/",
+      "canonical_url": "https://karriere.chbeck.de/",
+      "is_official": true,
+      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.chbeck.de/",
+          "basis_url": "https://www.beck.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T06:13:34.983Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

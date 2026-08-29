@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-29T06:01:03.983Z",
+  "generated_at": "2026-08-29T06:15:02.746Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 216,
-    "DISCOVER_OFFICIAL_WEBSITE": 1566,
+    "ALREADY_VERIFIED_IN_STORE": 230,
+    "DISCOVER_OFFICIAL_WEBSITE": 1552,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -3478,6 +3478,142 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_amazon_muenchen_nord",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_amazon_muenchen_nord",
+      "company_id": "company:amazon_de_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_amazon_muenchen_nord"
+      ],
+      "canonical_name": "Amazon",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:16:18.469Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "c4e41904c3ea13747928e3818481819e100909f023998230e7e7c006d3acf4ad",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amazon"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_amazon_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_amazon_muenchen_tech_unternehmen",
+      "company_id": "company:amazon_de_gmbh",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_amazon_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "Amazon",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:16:18.469Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "a83d10ff69f61b2892cb2206768a03630116db0acb08e23ee11f783bf1d984d6",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amazon"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_amazon_de_gmbh_muenchen",
+      "candidate_id": "regional-hint:munich_business_us_companies_amazon_de_gmbh_muenchen",
+      "company_id": "company:amazon_de_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_us_companies_amazon_de_gmbh_muenchen"
+      ],
+      "canonical_name": "Amazon.de GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:16:18.469Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_us_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "8ab3373d1866d0189e8734356df657d05aa230d74c44a9dd05e7f07c1ef90ac7",
+        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amazon de"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region",
       "candidate_id": "regional-hint:munich_business_life_sciences_companies_amgen_gmbh_muenchen_und_region",
       "company_id": "company:amgen_gmbh",
@@ -3562,6 +3698,52 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:amgen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_antenne_bayern_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_antenne_bayern_muenchen",
+      "company_id": "company:antenne_bayern_gmbh_and_co_kg",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_antenne_bayern_muenchen"
+      ],
+      "canonical_name": "Antenne Bayern",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:17:14.647Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "0928fd81c0e1891caa827677e73564ded1fa94ea1a0035f2db2e1806ba3508ef",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:antenne bayern"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -4661,6 +4843,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_c_h_beck_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_c_h_beck_muenchen",
+      "company_id": "company:verlag_c_h_beck_ohg",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_c_h_beck_muenchen"
+      ],
+      "canonical_name": "C.H.Beck",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "3c59668a29b1bc862aeb3831427dc7df610facacdb872337ce747116d6d38299",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:c h beck"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_cancom_muenchen_mitte",
       "candidate_id": "regional-hint:munich_business_commercial_locations_cancom_muenchen_mitte",
       "company_id": "company:cancom_se",
@@ -4753,6 +4979,188 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_capgemini_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_capgemini_muenchen_ost",
+      "company_id": "company:capgemini_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_capgemini_muenchen_ost"
+      ],
+      "canonical_name": "Capgemini",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "41af627ebf1d0d9f0e69825086daa48895033e640fd9ceed285307b726f6ec69",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:capgemini"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_international_companies_capgemini_muenchen",
+      "candidate_id": "regional-hint:munich_business_international_companies_capgemini_muenchen",
+      "company_id": "company:capgemini_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_international_companies_capgemini_muenchen"
+      ],
+      "canonical_name": "Capgemini",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_international_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international.html",
+        "observed_at": "08/26/2026 08:00:00",
+        "record_hash": "e33225e57df263d0cb842f160791f12566476f81e2f8e6b89fb1791b3e2b1ceb",
+        "allowed_use": "Oeffentlich genannte internationale Unternehmensniederlassungen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine tiefe externe Linkverfolgung ohne neue Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:capgemini"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_check24_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_check24_muenchen_tech_unternehmen",
+      "company_id": "company:check24_vergleichsportal_gmbh",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_check24_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "CHECK24",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:34:34.465Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "ef8e0b465b9d6fb08b54cdfd0a0796e532db4fbcba992ac3221b9a1ad5cc0f4f",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:check24"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_chimera_entertainment_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_chimera_entertainment_muenchen",
+      "company_id": "company:chimera_entertainment_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_chimera_entertainment_muenchen"
+      ],
+      "canonical_name": "Chimera Entertainment",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:34:34.465Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "2e4459377e6c51381d653b3aae2d399942e9b00dde7466a00e8dcd347b8d9185",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:chimera entertainment"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:domain_cipla_com",
       "candidate_id": "regional-hint:munich_business_indian_companies_cipla_deutschland_muenchen",
       "company_id": "company:cipla_deutschland",
@@ -4792,6 +5200,138 @@
         "dedupe_keys": [
           "domain:cipla.com",
           "name:cipla deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_cisco_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_cisco_muenchen_tech_unternehmen",
+      "company_id": "company:cisco_systems_gmbh",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_cisco_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "Cisco",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:34:34.465Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "29d77e8c658a7143e8b24f83d94994c5a3a9754b1f641658a5fa78ab55db6a0b",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:cisco"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_cisco_systems_muenchen",
+      "candidate_id": "regional-hint:munich_business_ikt_companies_cisco_systems_muenchen",
+      "company_id": "company:cisco_systems_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_ikt_companies_cisco_systems_muenchen"
+      ],
+      "canonical_name": "Cisco Systems",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:34:34.465Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_ikt_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
+        "observed_at": "08/26/2026 08:30:00",
+        "record_hash": "0e2257a220289f1a8c434f59dbbcf5515d0a03b7424352d655ce372d2b4e42ad",
+        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:cisco systems"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_cloudflight_muenchen_west",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_cloudflight_muenchen_west",
+      "company_id": "company:cloudflight_germany_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_cloudflight_muenchen_west"
+      ],
+      "canonical_name": "Cloudflight",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:34:34.465Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "bb099da24b4b866788f517d4b77f6348b51c0611c20c9019962d91158d49dba4",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:cloudflight"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -8651,98 +9191,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_amazon_muenchen_nord",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_amazon_muenchen_nord",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_amazon_muenchen_nord"
-      ],
-      "canonical_name": "Amazon",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:16:18.469Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "c4e41904c3ea13747928e3818481819e100909f023998230e7e7c006d3acf4ad",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:amazon"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_amazon_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_amazon_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_amazon_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "Amazon",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:16:18.469Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "a83d10ff69f61b2892cb2206768a03630116db0acb08e23ee11f783bf1d984d6",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:amazon"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_amazon_web_services_muenchen",
       "candidate_id": "regional-hint:munich_business_ikt_companies_amazon_web_services_muenchen",
       "company_id": null,
@@ -8781,50 +9229,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:amazon web services"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_us_companies_amazon_de_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_us_companies_amazon_de_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_us_companies_amazon_de_gmbh_muenchen"
-      ],
-      "canonical_name": "Amazon.de GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:16:18.469Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_us_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/US-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "8ab3373d1866d0189e8734356df657d05aa230d74c44a9dd05e7f07c1ef90ac7",
-        "allowed_use": "Oeffentlich genannte U.S.-amerikanische Unternehmen mit Muenchen-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:amazon de"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -8871,52 +9275,6 @@
           "name:angsa robotics"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_antenne_bayern_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_antenne_bayern_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_antenne_bayern_muenchen"
-      ],
-      "canonical_name": "Antenne Bayern",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:17:14.647Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "0928fd81c0e1891caa827677e73564ded1fa94ea1a0035f2db2e1806ba3508ef",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:antenne bayern"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -10709,142 +11067,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_c_h_beck_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_c_h_beck_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_c_h_beck_muenchen"
-      ],
-      "canonical_name": "C.H.Beck",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "3c59668a29b1bc862aeb3831427dc7df610facacdb872337ce747116d6d38299",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:c h beck"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_capgemini_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_capgemini_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_capgemini_muenchen_ost"
-      ],
-      "canonical_name": "Capgemini",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "41af627ebf1d0d9f0e69825086daa48895033e640fd9ceed285307b726f6ec69",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:capgemini"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_international_companies_capgemini_muenchen",
-      "candidate_id": "regional-hint:munich_business_international_companies_capgemini_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_international_companies_capgemini_muenchen"
-      ],
-      "canonical_name": "Capgemini",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_international_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international.html",
-        "observed_at": "08/26/2026 08:00:00",
-        "record_hash": "e33225e57df263d0cb842f160791f12566476f81e2f8e6b89fb1791b3e2b1ceb",
-        "allowed_use": "Oeffentlich genannte internationale Unternehmensniederlassungen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine tiefe externe Linkverfolgung ohne neue Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:capgemini"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_carl_hanser_verlag_muenchen",
       "candidate_id": "regional-hint:munich_business_creative_companies_carl_hanser_verlag_muenchen",
       "company_id": null,
@@ -11115,96 +11337,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_check24_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_check24_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_check24_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "CHECK24",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:34:34.465Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "ef8e0b465b9d6fb08b54cdfd0a0796e532db4fbcba992ac3221b9a1ad5cc0f4f",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:check24"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_chimera_entertainment_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_chimera_entertainment_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_chimera_entertainment_muenchen"
-      ],
-      "canonical_name": "Chimera Entertainment",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:34:34.465Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "2e4459377e6c51381d653b3aae2d399942e9b00dde7466a00e8dcd347b8d9185",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:chimera entertainment"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_ciara_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_ciara_awesome_machine_learning_startups_munich_github_list",
       "company_id": null,
@@ -11243,138 +11375,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:ciara"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_cisco_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_cisco_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_cisco_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "Cisco",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:34:34.465Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "29d77e8c658a7143e8b24f83d94994c5a3a9754b1f641658a5fa78ab55db6a0b",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:cisco"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_cisco_systems_muenchen",
-      "candidate_id": "regional-hint:munich_business_ikt_companies_cisco_systems_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_ikt_companies_cisco_systems_muenchen"
-      ],
-      "canonical_name": "Cisco Systems",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:34:34.465Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_ikt_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
-        "observed_at": "08/26/2026 08:30:00",
-        "record_hash": "0e2257a220289f1a8c434f59dbbcf5515d0a03b7424352d655ce372d2b4e42ad",
-        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:cisco systems"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_cloudflight_muenchen_west",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_cloudflight_muenchen_west",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_cloudflight_muenchen_west"
-      ],
-      "canonical_name": "Cloudflight",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:34:34.465Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "bb099da24b4b866788f517d4b77f6348b51c0611c20c9019962d91158d49dba4",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:cloudflight"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -28292,6 +28292,52 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_antenne_bayern_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_antenne_bayern_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:antenne_bayern_gmbh_and_co_kg",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_antenne_bayern_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Antenne Bayern",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:04:44.668Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "48e5ddf93dd3fb3fc465b84dad9b8316032291b6b80e207ddbb9843b5c916210",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:antenne bayern"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_arthrex_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": "company:arthrex_gmbh",
@@ -28606,6 +28652,52 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:cancom"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_check24_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_check24_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:check24_vergleichsportal_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_check24_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Check24",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T07:47:08.536Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "2ad42e66514b48f042583842090a90c7bd9466241c29eafa2414b5df1d8b46f9",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:check24"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -31894,52 +31986,6 @@
           "name:anna krolicki krankenpflege"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_antenne_bayern_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_antenne_bayern_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_antenne_bayern_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Antenne Bayern",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:04:44.668Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "48e5ddf93dd3fb3fc465b84dad9b8316032291b6b80e207ddbb9843b5c916210",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:antenne bayern"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -38156,52 +38202,6 @@
           "name:change lt"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_check24_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_check24_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_check24_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Check24",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T07:47:08.536Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "2ad42e66514b48f042583842090a90c7bd9466241c29eafa2414b5df1d8b46f9",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:check24"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
