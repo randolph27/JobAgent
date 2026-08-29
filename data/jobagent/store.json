@@ -3657,6 +3657,474 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:power_factors_gmbh",
+      "canonical_name": "Power Factors GmbH",
+      "canonical_domain": "powerfactors.com",
+      "official_website_url": "https://www.powerfactors.com/",
+      "career_url": "https://www.powerfactors.com/careers",
+      "aliases": [
+        "3megawatt",
+        "3megawatt by Power Factors",
+        "Power Factors"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Renewable Energy Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 71,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.powerfactors.com/about",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.powerfactors.com/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Renewable Energy Software",
+        "evidence_note": "Der 3megawatt-Kandidat wurde ueber die offizielle Power-Factors-Domain, die Power-Factors-Karriereseite und den offiziellen Hinweis auf die 3megawatt-Integration mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:aboalarm_gmbh",
+      "canonical_name": "Aboalarm GmbH",
+      "canonical_domain": "aboalarm.de",
+      "official_website_url": "https://www.aboalarm.de/",
+      "career_url": "https://www.aboalarm.de/alle-jobs",
+      "aliases": [
+        "Aboalarm",
+        "Volders GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Consumer Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 70,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.aboalarm.de/alle-jobs",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.aboalarm.de/alle-jobs",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Consumer Services",
+        "evidence_note": "Der Aboalarm-Kandidat wurde ueber die offizielle Aboalarm-Domain und deren Jobs-Seite belegt; die Seite weist Aboalarm als Teil der Volders GmbH aus."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:actyx_ag",
+      "canonical_name": "Actyx AG",
+      "canonical_domain": "actyx.com",
+      "official_website_url": "https://www.actyx.com/",
+      "career_url": "https://www.actyx.com/jobs",
+      "aliases": [
+        "Actyx"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Remote Deutschland",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "REMOTE_WITH_TARGET_REFERENCE"
+        }
+      ],
+      "industry": "Industrial Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 69,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.actyx.com/",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.actyx.com/jobs",
+        "discovery_origin": "source-registry:remote_jobs_germany_github",
+        "target_area": "REMOTE_WITH_TARGET_REFERENCE",
+        "industry_hint": "Industrial Software",
+        "evidence_note": "Der Actyx-Kandidat wurde ueber die offizielle Actyx-Domain und den dort verlinkten Jobs-Bereich belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:allmannwappner_gmbh",
+      "canonical_name": "allmannwappner gmbh",
+      "canonical_domain": "allmannwappner.com",
+      "official_website_url": "https://www.allmannwappner.com/",
+      "career_url": "https://www.allmannwappner.com/de/",
+      "aliases": [
+        "allmannwappner",
+        "allmannwappner gmbh"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture and Design",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 68,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.allmannwappner.com/de/buero",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.allmannwappner.com/de/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture and Design",
+        "evidence_note": "Der allmannwappner-Kandidat wurde ueber die offizielle Domain, die Bueroseite mit Muenchner Adresse und die dort sichtbaren Stellen-/Bewerbungsinformationen belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:apple_gmbh",
+      "canonical_name": "Apple GmbH",
+      "canonical_domain": "apple.com",
+      "official_website_url": "https://www.apple.com/",
+      "career_url": "https://jobs.apple.com/de-de/search?location=munich-MUN",
+      "aliases": [
+        "Apple",
+        "Apple Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Electronics and Silicon Engineering",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 67,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.apple.com/careers/us/work-at-apple/locations/munich.html",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://jobs.apple.com/de-de/search?location=munich-MUN",
+        "discovery_origin": "source-registry:munich_business_international_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Consumer Electronics and Silicon Engineering",
+        "evidence_note": "Der Apple-Kandidat wurde ueber die offizielle Apple-Domain, die Apple-Muenchen-Standortseite und die offizielle Apple-Jobsuche fuer Muenchen belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:atos_information_technology_gmbh",
+      "canonical_name": "Atos Information Technology GmbH",
+      "canonical_domain": "atos.net",
+      "official_website_url": "https://atos.net/",
+      "career_url": "https://jobs.atos.net/go/Jobs-in-M%C3%BCnchen/3679201/",
+      "aliases": [
+        "Atos",
+        "Atos Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Digital Transformation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 66,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.atos.net/",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://jobs.atos.net/go/Jobs-in-M%C3%BCnchen/3679201/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services and Digital Transformation",
+        "evidence_note": "Der Atos-Kandidat wurde ueber die offizielle Atos-Domain, die Atos-Careers-Domain und die Jobs-in-Muenchen-Seite belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bain_and_company_germany_inc",
+      "canonical_name": "Bain & Company Germany Inc.",
+      "canonical_domain": "bain.com",
+      "official_website_url": "https://www.bain.com/",
+      "career_url": "https://www.bain.com/careers/",
+      "aliases": [
+        "Bain & Company",
+        "Bain Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Management Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 65,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bain.com/offices/munich/",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.bain.com/careers/",
+        "discovery_origin": "source-registry:munich_business_us_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Management Consulting",
+        "evidence_note": "Der Bain-Kandidat wurde ueber die offizielle Bain-Domain, das Muenchner Office und die offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bavaria_film_gmbh",
+      "canonical_name": "Bavaria Film GmbH",
+      "canonical_domain": "bavaria-film.de",
+      "official_website_url": "https://www.bavaria-film.de/",
+      "career_url": "https://www.bavaria-film.de/jobportal",
+      "aliases": [
+        "Bavaria Film",
+        "Bavaria Film Gruppe",
+        "Bavaria-Filmstudios"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Geiselgasteig",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Film and Media Production",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 64,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bavaria-film.de/karriere",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.bavaria-film.de/jobportal",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Film and Media Production",
+        "evidence_note": "Der Bavaria-Film-Kandidat wurde ueber die offizielle Bavaria-Film-Domain, den Karrierebereich und das Jobportal belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bertrandt_technology_consulting_gmbh",
+      "canonical_name": "Bertrandt Technology Consulting GmbH",
+      "canonical_domain": "bertrandt.com",
+      "official_website_url": "https://www.bertrandt.com/",
+      "career_url": "https://www.bertrandt.com/karriere",
+      "aliases": [
+        "Bertrandt",
+        "Bertrandt Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen und Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Engineering Services and Mobility Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 63,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bertrandt.com/karriere",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.bertrandt.com/karriere",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Engineering Services and Mobility Technology",
+        "evidence_note": "Der Bertrandt-Kandidat wurde ueber die offizielle Bertrandt-Domain und die offizielle Karriereseite belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:biogen_gmbh",
+      "canonical_name": "Biogen GmbH",
+      "canonical_domain": "biogen.com",
+      "official_website_url": "https://www.biogen.com/",
+      "career_url": "https://www.biogen.com/careers.html",
+      "aliases": [
+        "Biogen",
+        "Biogen Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen und Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Biotechnology and Pharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 62,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.biogen.com/careers.html",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.biogen.com/careers.html",
+        "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Biotechnology and Pharmaceuticals",
+        "evidence_note": "Der Biogen-Kandidat wurde ueber die offizielle Biogen-Domain und die dortige Careers-/Search-Jobs-Navigation belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:blickfeld_gmbh",
+      "canonical_name": "Blickfeld GmbH",
+      "canonical_domain": "blickfeld.com",
+      "official_website_url": "https://www.blickfeld.com/",
+      "career_url": "https://www.blickfeld.com/careers/",
+      "aliases": [
+        "Blickfeld"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "LiDAR and Sensing Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 61,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.blickfeld.com/careers/",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.blickfeld.com/careers/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "LiDAR and Sensing Technology",
+        "evidence_note": "Der Blickfeld-Kandidat wurde ueber die offizielle Blickfeld-Domain und die dortige Careers-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bayerische_landeszentrale_fuer_neue_medien",
+      "canonical_name": "Bayerische Landeszentrale fuer neue Medien",
+      "canonical_domain": "blm.de",
+      "official_website_url": "https://www.blm.de/",
+      "career_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+      "aliases": [
+        "Bayerische Landeszentrale fuer neue Medien",
+        "BLM"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Regulation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 60,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+        "observed_at": "2026-08-29T10:47:34.834Z",
+        "verification_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media Regulation",
+        "evidence_note": "Der BLM-Kandidat wurde ueber die offizielle BLM-Domain, die Muenchner Kontaktadresse und die BLM-Stellenangeboteseite belegt."
+      },
+      "created_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:yamaichi_electronics_deutschland_gmbh",
       "canonical_name": "Yamaichi Electronics Deutschland GmbH",
       "canonical_domain": "yamaichi.de",
@@ -6444,6 +6912,27 @@
       ]
     },
     {
+      "source_id": "source:aboalarm_gmbh_career",
+      "company_id": "company:aboalarm_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.aboalarm.de/alle-jobs",
+      "canonical_url": "https://www.aboalarm.de/alle-jobs",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.aboalarm.de/alle-jobs",
+          "basis_url": "https://www.aboalarm.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:accenture_career",
       "company_id": "company:accenture",
       "source_type": "CAREER_PAGE",
@@ -6460,6 +6949,27 @@
           "basis_url": "https://www.accenture.com/de-de",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:actyx_ag_career",
+      "company_id": "company:actyx_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.actyx.com/jobs",
+      "canonical_url": "https://www.actyx.com/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.actyx.com/jobs",
+          "basis_url": "https://www.actyx.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -6610,6 +7120,27 @@
       }
     },
     {
+      "source_id": "source:allmannwappner_gmbh_career",
+      "company_id": "company:allmannwappner_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.allmannwappner.com/de/",
+      "canonical_url": "https://www.allmannwappner.com/de/",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.allmannwappner.com/de/",
+          "basis_url": "https://www.allmannwappner.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:amazon_de_gmbh_career",
       "company_id": "company:amazon_de_gmbh",
       "source_type": "CAREER_PAGE",
@@ -6689,6 +7220,27 @@
           "basis_url": "https://www.antenne.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:apple_gmbh_career",
+      "company_id": "company:apple_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.apple.com/de-de/search?location=munich-MUN",
+      "canonical_url": "https://jobs.apple.com/de-de/search?location=munich-MUN",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.apple.com/de-de/search?location=munich-MUN",
+          "basis_url": "https://www.apple.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -6780,6 +7332,27 @@
       ]
     },
     {
+      "source_id": "source:atos_information_technology_gmbh_career",
+      "company_id": "company:atos_information_technology_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.atos.net/go/Jobs-in-M%C3%BCnchen/3679201/",
+      "canonical_url": "https://jobs.atos.net/go/Jobs-in-M%C3%BCnchen/3679201/",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.atos.net/go/Jobs-in-M%C3%BCnchen/3679201/",
+          "basis_url": "https://atos.net/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:atoss_software_se_career",
       "company_id": "company:atoss_software_se",
       "source_type": "CAREER_PAGE",
@@ -6797,6 +7370,48 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:bain_and_company_germany_inc_career",
+      "company_id": "company:bain_and_company_germany_inc",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bain.com/careers/",
+      "canonical_url": "https://www.bain.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bain.com/careers/",
+          "basis_url": "https://www.bain.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bavaria_film_gmbh_career",
+      "company_id": "company:bavaria_film_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bavaria-film.de/jobportal",
+      "canonical_url": "https://www.bavaria-film.de/jobportal",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bavaria-film.de/jobportal",
+          "basis_url": "https://www.bavaria-film.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:bavarian_nordic_gmbh_career",
@@ -6904,6 +7519,27 @@
       ]
     },
     {
+      "source_id": "source:bayerische_landeszentrale_fuer_neue_medien_career",
+      "company_id": "company:bayerische_landeszentrale_fuer_neue_medien",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+      "canonical_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+          "basis_url": "https://www.blm.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bayerische_versorgungskammer_career",
       "company_id": "company:bayerische_versorgungskammer",
       "source_type": "CAREER_PAGE",
@@ -6988,6 +7624,27 @@
       ]
     },
     {
+      "source_id": "source:bertrandt_technology_consulting_gmbh_career",
+      "company_id": "company:bertrandt_technology_consulting_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bertrandt.com/karriere",
+      "canonical_url": "https://www.bertrandt.com/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bertrandt.com/karriere",
+          "basis_url": "https://www.bertrandt.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bio_rad_laboratories_gmbh_career",
       "company_id": "company:bio_rad_laboratories_gmbh",
       "source_type": "CAREER_PAGE",
@@ -7004,6 +7661,48 @@
           "basis_url": "https://www.bio-rad.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:biogen_gmbh_career",
+      "company_id": "company:biogen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.biogen.com/careers.html",
+      "canonical_url": "https://www.biogen.com/careers.html",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.biogen.com/careers.html",
+          "basis_url": "https://www.biogen.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:blickfeld_gmbh_career",
+      "company_id": "company:blickfeld_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.blickfeld.com/careers/",
+      "canonical_url": "https://www.blickfeld.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.blickfeld.com/careers/",
+          "basis_url": "https://www.blickfeld.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -8543,6 +9242,27 @@
           ],
           "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:power_factors_gmbh_career",
+      "company_id": "company:power_factors_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.powerfactors.com/careers",
+      "canonical_url": "https://www.powerfactors.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.powerfactors.com/careers",
+          "basis_url": "https://www.powerfactors.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },

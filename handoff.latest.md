@@ -1,58 +1,62 @@
 # Handoff latest
 
-Stand: 2026-08-29T08:17:39.044+02:00
+Stand: 2026-08-29T12:54:37.378+02:00
 
 ## Zustand fuer neuen Chat
 
 - Active: `TD-0041`
-- Roadmap: `JA-027` bleibt offen; Welle I/B ist abgeschlossen, die Gesamtanforderung zur vollstaendigen Kandidatenabarbeitung aber noch nicht.
+- Roadmap: `JA-027` bleibt offen; Welle J/B ist abgeschlossen, die Gesamtanforderung zur vollstaendigen Kandidatenabarbeitung aber noch nicht.
 - Ziel: Weitere Arbeitgeber aus der Review-/Discovery-Queue duerfen erst produktiv in `data/jobagent/store.json`, wenn offizielle Firmenwebsite plus Karriere-/Jobs-/ATS-Beleg fail-closed verifiziert ist.
 - Branch: `master`
-- HEAD: siehe `git log -1 --oneline`
+- HEAD vor neuem Abschluss-Commit: `1ce2b4a99059`
 - Upstream: `origin/master`
-- Ahead/Behind: `1/0`
+- Ahead/Behind vor Push: `1/0`
 - Route: `True`
 - SonarQube: `UP` auf `http://localhost:9000`
 - Devserver: laeuft auf `http://localhost:8500/`
 
 ## Abgeschlossener Arbeitsschritt
 
-Welle I/B wurde umgesetzt, per Funktionstests verifiziert, per STP synchronisiert und committed mit der Message `JA-027 import wave I verified employers`.
+Welle J/B wurde umgesetzt, per Funktionstests verifiziert und per STP synchronisiert.
 
-Neu produktiv aufgenommen wurden 8 Arbeitgeber:
+Neu produktiv aufgenommen wurden 12 Arbeitgeber:
 
-- Amazon.de GmbH
-- Capgemini Deutschland GmbH
-- CHECK24 Vergleichsportal GmbH
-- Cisco Systems GmbH
-- Cloudflight Germany GmbH
-- ANTENNE BAYERN GmbH & Co. KG
-- Verlag C.H.BECK oHG
-- Chimera Entertainment GmbH
+- Power Factors GmbH
+- Aboalarm GmbH
+- Actyx AG
+- allmannwappner gmbh
+- Apple GmbH
+- Atos Information Technology GmbH
+- Bain & Company Germany Inc.
+- Bavaria Film GmbH
+- Bertrandt Technology Consulting GmbH
+- Biogen GmbH
+- Blickfeld GmbH
+- Bayerische Landeszentrale fuer neue Medien
 
-## Kennzahlen
+## Kennzahlen nach Welle J/B
 
-- Store: `139` Firmen, `135` JobSources
-- Source Coverage: `1957` Quellen gesamt, `137` offizielle Quellen, `136` Karrierequellen
-- Kandidatenqueue: `230` verifizierte/store-aware Kandidaten, `1554` manuelle Reviewfaelle
+- Store: `151` Firmen, `147` JobSources
+- Source Coverage: `1969` Quellen gesamt, `149` offizielle Quellen, `148` Karrierequellen
+- Kandidatenqueue: `247` verifizierte/store-aware Kandidaten, `1537` manuelle Reviewfaelle, `1` Retry
 - Importwellen-Gate B: `passed`
-- Gate-Metriken: `coverage_delta=8`, `duplicate_rate=0.0`, `manual_review_rate=0.0`
-- Store-Backup: `data/jobagent/backups/store-20260829T061335389Z-pre-wave-import.json`
+- Gate-Metriken: `coverage_delta=12`, `duplicate_rate=0.0`, `manual_review_rate=0.0`
+- Store-Backup: `data/jobagent/backups/store-20260829T104735336Z-pre-wave-import.json`
 
 ## Wichtige Artefakte
 
-- Feed: `data/jobagent/company-discovery.official.wave-i-20260829.json`
-- Importlog: `logs/jobagent/company-discovery-import-20260829-061334.json`
-- Queue-Log: `logs/jobagent/company-candidate-verification-20260829-061342.json`
-- Coverage JSON: `logs/jobagent/company-coverage-20260829-061342.json`
-- Coverage Markdown: `logs/jobagent/company-coverage-20260829-061342.md`
+- Feed: `data/jobagent/company-discovery.official.wave-j-20260829.json`
+- Importlog: `logs/jobagent/company-discovery-import-20260829-104734.json`
+- Queue-Log: `logs/jobagent/company-candidate-verification-20260829-104742.json`
+- Coverage JSON: `logs/jobagent/company-coverage-20260829-104743.json`
+- Coverage Markdown: `logs/jobagent/company-coverage-20260829-104743.md`
 - Source Coverage: `logs/jobagent/ja-023-source-coverage.json`
 - HTML Coverage: `html/jobagent/company-coverage.html`
 - Viewport-Audit: `logs/jobagent/ja-022-viewport-audit.md`
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-i-20260829.json -WaveId B` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-j-20260829.json -WaveId B` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`
@@ -70,7 +74,7 @@ Neu produktiv aufgenommen wurden 8 Arbeitgeber:
 - `.\ci.cmd route-check` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
 
-Supertest wurde nicht frisch ausgefuehrt, weil JA-027 insgesamt offen bleibt und funktionsbezogene Tests fuer diese Welle gruen sind.
+Supertest wurde nicht frisch ausgefuehrt; laut Nutzeranweisung gilt er als erledigt, wenn er nicht angefragt wurde.
 
 ## Naechste Aufgabe
 

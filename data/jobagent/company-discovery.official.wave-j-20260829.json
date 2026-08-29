@@ -1,0 +1,294 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-29T10:46:30.315Z",
+  "items": [
+    {
+      "canonical_name": "Power Factors GmbH",
+      "official_website_url": "https://www.powerfactors.com/",
+      "career_url": "https://www.powerfactors.com/careers",
+      "aliases": [
+        "3megawatt by Power Factors",
+        "Power Factors",
+        "3megawatt"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Renewable Energy Software",
+      "scan_priority": 71,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.powerfactors.com/about",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der 3megawatt-Kandidat wurde ueber die offizielle Power-Factors-Domain, die Power-Factors-Karriereseite und den offiziellen Hinweis auf die 3megawatt-Integration mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Aboalarm GmbH",
+      "official_website_url": "https://www.aboalarm.de/",
+      "career_url": "https://www.aboalarm.de/alle-jobs",
+      "aliases": [
+        "Aboalarm",
+        "Volders GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Consumer Services",
+      "scan_priority": 70,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.aboalarm.de/alle-jobs",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Aboalarm-Kandidat wurde ueber die offizielle Aboalarm-Domain und deren Jobs-Seite belegt; die Seite weist Aboalarm als Teil der Volders GmbH aus."
+    },
+    {
+      "canonical_name": "Actyx AG",
+      "official_website_url": "https://www.actyx.com/",
+      "career_url": "https://www.actyx.com/jobs",
+      "aliases": [
+        "Actyx"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Remote Deutschland",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "REMOTE_WITH_TARGET_REFERENCE"
+        }
+      ],
+      "industry": "Industrial Software",
+      "scan_priority": 69,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.actyx.com/",
+      "discovery_origin": "source-registry:remote_jobs_germany_github",
+      "evidence_note": "Der Actyx-Kandidat wurde ueber die offizielle Actyx-Domain und den dort verlinkten Jobs-Bereich belegt."
+    },
+    {
+      "canonical_name": "allmannwappner gmbh",
+      "official_website_url": "https://www.allmannwappner.com/",
+      "career_url": "https://www.allmannwappner.com/de/",
+      "aliases": [
+        "allmannwappner",
+        "allmannwappner gmbh"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture and Design",
+      "scan_priority": 68,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.allmannwappner.com/de/buero",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der allmannwappner-Kandidat wurde ueber die offizielle Domain, die Bueroseite mit Muenchner Adresse und die dort sichtbaren Stellen-/Bewerbungsinformationen belegt."
+    },
+    {
+      "canonical_name": "Apple GmbH",
+      "official_website_url": "https://www.apple.com/",
+      "career_url": "https://jobs.apple.com/de-de/search?location=munich-MUN",
+      "aliases": [
+        "Apple",
+        "Apple Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Electronics and Silicon Engineering",
+      "scan_priority": 67,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.apple.com/careers/us/work-at-apple/locations/munich.html",
+      "discovery_origin": "source-registry:munich_business_international_companies",
+      "evidence_note": "Der Apple-Kandidat wurde ueber die offizielle Apple-Domain, die Apple-Muenchen-Standortseite und die offizielle Apple-Jobsuche fuer Muenchen belegt."
+    },
+    {
+      "canonical_name": "Atos Information Technology GmbH",
+      "official_website_url": "https://atos.net/",
+      "career_url": "https://jobs.atos.net/go/Jobs-in-M%C3%BCnchen/3679201/",
+      "aliases": [
+        "Atos",
+        "Atos Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Digital Transformation",
+      "scan_priority": 66,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.atos.net/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Atos-Kandidat wurde ueber die offizielle Atos-Domain, die Atos-Careers-Domain und die Jobs-in-Muenchen-Seite belegt."
+    },
+    {
+      "canonical_name": "Bain & Company Germany Inc.",
+      "official_website_url": "https://www.bain.com/",
+      "career_url": "https://www.bain.com/careers/",
+      "aliases": [
+        "Bain & Company",
+        "Bain Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Management Consulting",
+      "scan_priority": 65,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bain.com/offices/munich/",
+      "discovery_origin": "source-registry:munich_business_us_companies",
+      "evidence_note": "Der Bain-Kandidat wurde ueber die offizielle Bain-Domain, das Muenchner Office und die offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Bavaria Film GmbH",
+      "official_website_url": "https://www.bavaria-film.de/",
+      "career_url": "https://www.bavaria-film.de/jobportal",
+      "aliases": [
+        "Bavaria-Filmstudios",
+        "Bavaria Film",
+        "Bavaria Film Gruppe"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Geiselgasteig",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Film and Media Production",
+      "scan_priority": 64,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bavaria-film.de/karriere",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Bavaria-Film-Kandidat wurde ueber die offizielle Bavaria-Film-Domain, den Karrierebereich und das Jobportal belegt."
+    },
+    {
+      "canonical_name": "Bertrandt Technology Consulting GmbH",
+      "official_website_url": "https://www.bertrandt.com/",
+      "career_url": "https://www.bertrandt.com/karriere",
+      "aliases": [
+        "Bertrandt",
+        "Bertrandt Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen und Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Engineering Services and Mobility Technology",
+      "scan_priority": 63,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bertrandt.com/karriere",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der Bertrandt-Kandidat wurde ueber die offizielle Bertrandt-Domain und die offizielle Karriereseite belegt."
+    },
+    {
+      "canonical_name": "Biogen GmbH",
+      "official_website_url": "https://www.biogen.com/",
+      "career_url": "https://www.biogen.com/careers.html",
+      "aliases": [
+        "Biogen",
+        "Biogen Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen und Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Biotechnology and Pharmaceuticals",
+      "scan_priority": 62,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.biogen.com/careers.html",
+      "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+      "evidence_note": "Der Biogen-Kandidat wurde ueber die offizielle Biogen-Domain und die dortige Careers-/Search-Jobs-Navigation belegt."
+    },
+    {
+      "canonical_name": "Blickfeld GmbH",
+      "official_website_url": "https://www.blickfeld.com/",
+      "career_url": "https://www.blickfeld.com/careers/",
+      "aliases": [
+        "Blickfeld"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "LiDAR and Sensing Technology",
+      "scan_priority": 61,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.blickfeld.com/careers/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Blickfeld-Kandidat wurde ueber die offizielle Blickfeld-Domain und die dortige Careers-Seite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Bayerische Landeszentrale fuer neue Medien",
+      "official_website_url": "https://www.blm.de/",
+      "career_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+      "aliases": [
+        "BLM",
+        "Bayerische Landeszentrale fuer neue Medien"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Regulation",
+      "scan_priority": 60,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der BLM-Kandidat wurde ueber die offizielle BLM-Domain, die Muenchner Kontaktadresse und die BLM-Stellenangeboteseite belegt."
+    }
+  ]
+}
