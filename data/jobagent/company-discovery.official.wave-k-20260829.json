@@ -1,0 +1,296 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-29T11:45:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Personio SE & Co. KG",
+      "official_website_url": "https://www.personio.com/",
+      "career_url": "https://www.personio.com/about-personio/careers/locations/munich/",
+      "aliases": [
+        "Personio",
+        "Personio GmbH",
+        "Personio SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "HR Software",
+      "scan_priority": 75,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.personio.com/about-personio/careers/locations/munich/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Personio-Kandidat wurde ueber die offizielle Personio-Domain und die offizielle Karriere-Standortseite fuer Muenchen belegt."
+    },
+    {
+      "canonical_name": "PAYBACK GmbH",
+      "official_website_url": "https://www.payback.group/",
+      "career_url": "https://www.payback.group/en/career",
+      "aliases": [
+        "PAYBACK",
+        "PAYBACK Group",
+        "Loyalty Partner"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Loyalty and Data Marketing",
+      "scan_priority": 74,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.payback.group/en/career",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der PAYBACK-Kandidat wurde ueber die offizielle PAYBACK-Group-Domain und deren Karrierebereich mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "ParkDepot GmbH",
+      "official_website_url": "https://www.park-depot.com/",
+      "career_url": "https://parkdepot.jobs.personio.de/",
+      "aliases": [
+        "ParkDepot",
+        "Parkdepot"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Parking Technology",
+      "scan_priority": 73,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.park-depot.com/blog/we-want-you-to-succeed",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der ParkDepot-Kandidat wurde ueber die offizielle ParkDepot-Domain belegt; der offizielle Blog verweist fuer offene Stellen auf das ParkDepot-Personio-Portal."
+    },
+    {
+      "canonical_name": "parcelLab GmbH",
+      "official_website_url": "https://parcellab.com/",
+      "career_url": "https://parcellab.com/careers/",
+      "aliases": [
+        "parcelLab",
+        "parcelLab GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Remote Deutschland",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "REMOTE_WITH_TARGET_REFERENCE"
+        }
+      ],
+      "industry": "Post-Purchase Customer Experience Software",
+      "scan_priority": 72,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://parcellab.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der parcelLab-Kandidat wurde ueber die offizielle parcelLab-Domain und deren Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "OroraTech GmbH",
+      "official_website_url": "https://ororatech.com/",
+      "career_url": "https://ororatech.com/company/careers",
+      "aliases": [
+        "OroraTech",
+        "Orora Technologies"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Space Technology and Wildfire Intelligence",
+      "scan_priority": 71,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://ororatech.com/company/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der OroraTech-Kandidat wurde ueber die offizielle OroraTech-Domain und den offiziellen Karrierebereich mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Orbem GmbH",
+      "official_website_url": "https://www.orbem.ai/",
+      "career_url": "https://www.orbem.ai/careers",
+      "aliases": [
+        "Orbem",
+        "Orbem AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI and MRI Technology",
+      "scan_priority": 70,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.orbem.ai/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Orbem-Kandidat wurde ueber die offizielle Orbem-Domain und deren Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "ottonova Holding AG",
+      "official_website_url": "https://www.ottonova.de/",
+      "career_url": "https://www.ottonova.de/en/company/jobs",
+      "aliases": [
+        "ottonova",
+        "ottonova services GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Health Insurance",
+      "scan_priority": 69,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ottonova.de/en/company/jobs",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der ottonova-Kandidat wurde ueber die offizielle ottonova-Domain und die dortige Jobs-Seite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Workaround GmbH",
+      "official_website_url": "https://proglove.com/",
+      "career_url": "https://proglove.com/careers/",
+      "aliases": [
+        "ProGlove",
+        "Workaround GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial Wearables",
+      "scan_priority": 68,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://proglove.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der ProGlove-Kandidat wurde ueber die offizielle ProGlove-Domain und den offiziellen Karrierebereich mit Muenchner Stellen belegt."
+    },
+    {
+      "canonical_name": "Qualcomm Germany GmbH",
+      "official_website_url": "https://www.qualcomm.com/",
+      "career_url": "https://www.qualcomm.com/company/careers",
+      "aliases": [
+        "Qualcomm",
+        "Qualcomm Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Semiconductors and Wireless Technology",
+      "scan_priority": 67,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.qualcomm.com/company/locations/germany",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der Qualcomm-Kandidat wurde ueber die offizielle Qualcomm-Domain, die Deutschland-Standortseite und den offiziellen Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "PPRO Financial Ltd.",
+      "official_website_url": "https://www.ppro.com/",
+      "career_url": "https://www.ppro.com/about-us/careers/",
+      "aliases": [
+        "PPRO",
+        "PPRO Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Payments",
+      "scan_priority": 66,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ppro.com/about-us/careers/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der PPRO-Kandidat wurde ueber die offizielle PPRO-Domain und deren Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "Regiondo GmbH",
+      "official_website_url": "https://pro.regiondo.com/",
+      "career_url": "https://regiondogmbh.applytojob.com/",
+      "aliases": [
+        "Regiondo",
+        "Regiondo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Tourism Booking Software",
+      "scan_priority": 65,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://pro.regiondo.com/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Regiondo-Kandidat wurde ueber die offizielle Regiondo-Domain und das verlinkte offizielle Bewerbungsportal belegt."
+    },
+    {
+      "canonical_name": "mgm technology partners GmbH",
+      "official_website_url": "https://www.mgm-tp.com/",
+      "career_url": "https://jobs.mgm-tp.com/",
+      "aliases": [
+        "mgm technology partners",
+        "mgm tp"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Enterprise Software Engineering",
+      "scan_priority": 64,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.mgm-tp.com/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der mgm-technology-partners-Kandidat wurde ueber die offizielle mgm-tp-Domain, den Muenchner Standort und das offizielle mgm-Jobs-Portal belegt."
+    }
+  ]
+}

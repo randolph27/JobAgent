@@ -3105,6 +3105,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:personio_se_and_co_kg",
+      "canonical_name": "Personio SE & Co. KG",
+      "canonical_domain": "personio.com",
+      "official_website_url": "https://www.personio.com/",
+      "career_url": "https://www.personio.com/about-personio/careers/locations/munich/",
+      "aliases": [
+        "Personio",
+        "Personio GmbH",
+        "Personio SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "HR Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 75,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.personio.com/about-personio/careers/locations/munich/",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://www.personio.com/about-personio/careers/locations/munich/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "HR Software",
+        "evidence_note": "Der Personio-Kandidat wurde ueber die offizielle Personio-Domain und die offizielle Karriere-Standortseite fuer Muenchen belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:olympus_europa_se_and_co_kg",
       "canonical_name": "Olympus Europa SE & Co. KG",
       "canonical_domain": "olympus-europa.com",
@@ -3337,6 +3377,46 @@
       },
       "created_at": "2026-08-28T16:33:21.197Z",
       "updated_at": "2026-08-28T16:33:21.197Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:payback_gmbh",
+      "canonical_name": "PAYBACK GmbH",
+      "canonical_domain": "payback.group",
+      "official_website_url": "https://www.payback.group/",
+      "career_url": "https://www.payback.group/en/career",
+      "aliases": [
+        "Loyalty Partner",
+        "PAYBACK",
+        "PAYBACK Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Loyalty and Data Marketing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 74,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.payback.group/en/career",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://www.payback.group/en/career",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Loyalty and Data Marketing",
+        "evidence_note": "Der PAYBACK-Kandidat wurde ueber die offizielle PAYBACK-Group-Domain und deren Karrierebereich mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
       "last_successful_scan_at": null
     },
     {
@@ -3575,6 +3655,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:parkdepot_gmbh",
+      "canonical_name": "ParkDepot GmbH",
+      "canonical_domain": "park-depot.com",
+      "official_website_url": "https://www.park-depot.com/",
+      "career_url": "https://parkdepot.jobs.personio.de/",
+      "aliases": [
+        "ParkDepot"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Parking Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 73,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.park-depot.com/blog/we-want-you-to-succeed",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://parkdepot.jobs.personio.de/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Parking Technology",
+        "evidence_note": "Der ParkDepot-Kandidat wurde ueber die offizielle ParkDepot-Domain belegt; der offizielle Blog verweist fuer offene Stellen auf das ParkDepot-Personio-Portal."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:aesir_interactive_gmbh",
       "canonical_name": "Aesir Interactive GmbH",
       "canonical_domain": "aesir-interactive.com",
@@ -3616,6 +3734,45 @@
       },
       "created_at": "2026-08-29T05:59:42.748Z",
       "updated_at": "2026-08-29T05:59:42.748Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:parcellab_gmbh",
+      "canonical_name": "parcelLab GmbH",
+      "canonical_domain": "parcellab.com",
+      "official_website_url": "https://parcellab.com/",
+      "career_url": "https://parcellab.com/careers/",
+      "aliases": [
+        "parcelLab",
+        "parcelLab GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Remote Deutschland",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "REMOTE_WITH_TARGET_REFERENCE"
+        }
+      ],
+      "industry": "Post-Purchase Customer Experience Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 72,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://parcellab.com/careers/",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://parcellab.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "REMOTE_WITH_TARGET_REFERENCE",
+        "industry_hint": "Post-Purchase Customer Experience Software",
+        "evidence_note": "Der parcelLab-Kandidat wurde ueber die offizielle parcelLab-Domain und deren Karrierebereich belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
       "last_successful_scan_at": null
     },
     {
@@ -3697,6 +3854,84 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:ororatech_gmbh",
+      "canonical_name": "OroraTech GmbH",
+      "canonical_domain": "ororatech.com",
+      "official_website_url": "https://ororatech.com/",
+      "career_url": "https://ororatech.com/company/careers",
+      "aliases": [
+        "Orora Technologies",
+        "OroraTech"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Space Technology and Wildfire Intelligence",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 71,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://ororatech.com/company/careers",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://ororatech.com/company/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Space Technology and Wildfire Intelligence",
+        "evidence_note": "Der OroraTech-Kandidat wurde ueber die offizielle OroraTech-Domain und den offiziellen Karrierebereich mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:orbem_gmbh",
+      "canonical_name": "Orbem GmbH",
+      "canonical_domain": "orbem.ai",
+      "official_website_url": "https://www.orbem.ai/",
+      "career_url": "https://www.orbem.ai/careers",
+      "aliases": [
+        "Orbem",
+        "Orbem AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI and MRI Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 70,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.orbem.ai/careers",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://www.orbem.ai/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI and MRI Technology",
+        "evidence_note": "Der Orbem-Kandidat wurde ueber die offizielle Orbem-Domain und deren Karrierebereich belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:aboalarm_gmbh",
       "canonical_name": "Aboalarm GmbH",
       "canonical_domain": "aboalarm.de",
@@ -3736,6 +3971,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:ottonova_holding_ag",
+      "canonical_name": "ottonova Holding AG",
+      "canonical_domain": "ottonova.de",
+      "official_website_url": "https://www.ottonova.de/",
+      "career_url": "https://www.ottonova.de/en/company/jobs",
+      "aliases": [
+        "ottonova",
+        "ottonova services GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Health Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 69,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ottonova.de/en/company/jobs",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://www.ottonova.de/en/company/jobs",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Health Insurance",
+        "evidence_note": "Der ottonova-Kandidat wurde ueber die offizielle ottonova-Domain und die dortige Jobs-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:actyx_ag",
       "canonical_name": "Actyx AG",
       "canonical_domain": "actyx.com",
@@ -3771,6 +4045,45 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:workaround_gmbh",
+      "canonical_name": "Workaround GmbH",
+      "canonical_domain": "proglove.com",
+      "official_website_url": "https://proglove.com/",
+      "career_url": "https://proglove.com/careers/",
+      "aliases": [
+        "ProGlove",
+        "Workaround GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial Wearables",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 68,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://proglove.com/careers/",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://proglove.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial Wearables",
+        "evidence_note": "Der ProGlove-Kandidat wurde ueber die offizielle ProGlove-Domain und den offiziellen Karrierebereich mit Muenchner Stellen belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
       "last_successful_scan_at": null
     },
     {
@@ -3813,6 +4126,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:qualcomm_germany_gmbh",
+      "canonical_name": "Qualcomm Germany GmbH",
+      "canonical_domain": "qualcomm.com",
+      "official_website_url": "https://www.qualcomm.com/",
+      "career_url": "https://www.qualcomm.com/company/careers",
+      "aliases": [
+        "Qualcomm",
+        "Qualcomm Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Semiconductors and Wireless Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 67,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.qualcomm.com/company/locations/germany",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://www.qualcomm.com/company/careers",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Semiconductors and Wireless Technology",
+        "evidence_note": "Der Qualcomm-Kandidat wurde ueber die offizielle Qualcomm-Domain, die Deutschland-Standortseite und den offiziellen Karrierebereich belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:apple_gmbh",
       "canonical_name": "Apple GmbH",
       "canonical_domain": "apple.com",
@@ -3849,6 +4201,45 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ppro_financial_ltd",
+      "canonical_name": "PPRO Financial Ltd.",
+      "canonical_domain": "ppro.com",
+      "official_website_url": "https://www.ppro.com/",
+      "career_url": "https://www.ppro.com/about-us/careers/",
+      "aliases": [
+        "PPRO",
+        "PPRO Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Payments",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 66,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ppro.com/about-us/careers/",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://www.ppro.com/about-us/careers/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Payments",
+        "evidence_note": "Der PPRO-Kandidat wurde ueber die offizielle PPRO-Domain und deren Karrierebereich belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
       "last_successful_scan_at": null
     },
     {
@@ -3891,6 +4282,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:regiondo_gmbh",
+      "canonical_name": "Regiondo GmbH",
+      "canonical_domain": "pro.regiondo.com",
+      "official_website_url": "https://pro.regiondo.com/",
+      "career_url": "https://regiondogmbh.applytojob.com/",
+      "aliases": [
+        "Regiondo",
+        "Regiondo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Tourism Booking Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 65,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://pro.regiondo.com/",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://regiondogmbh.applytojob.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Tourism Booking Software",
+        "evidence_note": "Der Regiondo-Kandidat wurde ueber die offizielle Regiondo-Domain und das verlinkte offizielle Bewerbungsportal belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bain_and_company_germany_inc",
       "canonical_name": "Bain & Company Germany Inc.",
       "canonical_domain": "bain.com",
@@ -3927,6 +4357,45 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:mgm_technology_partners_gmbh",
+      "canonical_name": "mgm technology partners GmbH",
+      "canonical_domain": "mgm-tp.com",
+      "official_website_url": "https://www.mgm-tp.com/",
+      "career_url": "https://jobs.mgm-tp.com/",
+      "aliases": [
+        "mgm technology partners",
+        "mgm tp"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Enterprise Software Engineering",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 64,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.mgm-tp.com/",
+        "observed_at": "2026-08-29T11:00:11.947Z",
+        "verification_url": "https://jobs.mgm-tp.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Enterprise Software Engineering",
+        "evidence_note": "Der mgm-technology-partners-Kandidat wurde ueber die offizielle mgm-tp-Domain, den Muenchner Standort und das offizielle mgm-Jobs-Portal belegt."
+      },
+      "created_at": "2026-08-29T11:00:11.947Z",
+      "updated_at": "2026-08-29T11:00:11.947Z",
       "last_successful_scan_at": null
     },
     {
@@ -8674,6 +9143,27 @@
       ]
     },
     {
+      "source_id": "source:mgm_technology_partners_gmbh_career",
+      "company_id": "company:mgm_technology_partners_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.mgm-tp.com/",
+      "canonical_url": "https://jobs.mgm-tp.com/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.mgm-tp.com/",
+          "basis_url": "https://www.mgm-tp.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:microsoft_deutschland_gmbh_career",
       "company_id": "company:microsoft_deutschland_gmbh",
       "source_type": "CAREER_PAGE",
@@ -9108,6 +9598,69 @@
       ]
     },
     {
+      "source_id": "source:orbem_gmbh_career",
+      "company_id": "company:orbem_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.orbem.ai/careers",
+      "canonical_url": "https://www.orbem.ai/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.orbem.ai/careers",
+          "basis_url": "https://www.orbem.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:ororatech_gmbh_career",
+      "company_id": "company:ororatech_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://ororatech.com/company/careers",
+      "canonical_url": "https://ororatech.com/company/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://ororatech.com/company/careers",
+          "basis_url": "https://ororatech.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:ottonova_holding_ag_career",
+      "company_id": "company:ottonova_holding_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ottonova.de/en/company/jobs",
+      "canonical_url": "https://www.ottonova.de/en/company/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ottonova.de/en/company/jobs",
+          "basis_url": "https://www.ottonova.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:p_plus_r_park_and_ride_gmbh_career_url",
       "company_id": "company:p_plus_r_park_and_ride_gmbh",
       "source_type": "CAREER_PAGE",
@@ -9177,6 +9730,48 @@
       ]
     },
     {
+      "source_id": "source:parcellab_gmbh_career",
+      "company_id": "company:parcellab_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://parcellab.com/careers/",
+      "canonical_url": "https://parcellab.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://parcellab.com/careers/",
+          "basis_url": "https://parcellab.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:parkdepot_gmbh_career",
+      "company_id": "company:parkdepot_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://parkdepot.jobs.personio.de/",
+      "canonical_url": "https://parkdepot.jobs.personio.de/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://parkdepot.jobs.personio.de/",
+          "basis_url": "https://www.park-depot.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:pasinger_fabrik_kultur_und_buergerzentrum_gmbh_career_url",
       "company_id": "company:pasinger_fabrik_kultur_und_buergerzentrum_gmbh",
       "source_type": "CAREER_PAGE",
@@ -9196,6 +9791,48 @@
           ],
           "observed_at": "2026-08-27T15:56:20.96Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:payback_gmbh_career",
+      "company_id": "company:payback_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.payback.group/en/career",
+      "canonical_url": "https://www.payback.group/en/career",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.payback.group/en/career",
+          "basis_url": "https://www.payback.group/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:personio_se_and_co_kg_career",
+      "company_id": "company:personio_se_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.personio.com/about-personio/careers/locations/munich/",
+      "canonical_url": "https://www.personio.com/about-personio/careers/locations/munich/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.personio.com/about-personio/careers/locations/munich/",
+          "basis_url": "https://www.personio.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -9267,6 +9904,27 @@
       ]
     },
     {
+      "source_id": "source:ppro_financial_ltd_career",
+      "company_id": "company:ppro_financial_ltd",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ppro.com/about-us/careers/",
+      "canonical_url": "https://www.ppro.com/about-us/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ppro.com/about-us/careers/",
+          "basis_url": "https://www.ppro.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:prosiebensat_1_media_se_career",
       "company_id": "company:prosiebensat_1_media_se",
       "source_type": "CAREER_PAGE",
@@ -9305,6 +9963,48 @@
           ],
           "observed_at": "2026-08-27T18:01:51.849Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:qualcomm_germany_gmbh_career",
+      "company_id": "company:qualcomm_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.qualcomm.com/company/careers",
+      "canonical_url": "https://www.qualcomm.com/company/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.qualcomm.com/company/careers",
+          "basis_url": "https://www.qualcomm.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:regiondo_gmbh_career",
+      "company_id": "company:regiondo_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://regiondogmbh.applytojob.com/",
+      "canonical_url": "https://regiondogmbh.applytojob.com/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://regiondogmbh.applytojob.com/",
+          "basis_url": "https://pro.regiondo.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -9925,6 +10625,27 @@
           ],
           "observed_at": "2026-08-28T05:38:15.911Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:workaround_gmbh_career",
+      "company_id": "company:workaround_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://proglove.com/careers/",
+      "canonical_url": "https://proglove.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:00:11.947Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://proglove.com/careers/",
+          "basis_url": "https://proglove.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
