@@ -1,0 +1,296 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-30T12:20:00.000Z",
+  "items": [
+    {
+      "canonical_name": "EY",
+      "official_website_url": "https://www.ey.com/",
+      "career_url": "https://careers.ey.com/",
+      "aliases": [
+        "EY",
+        "Ernst & Young",
+        "Ernst & Young GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Professional Services",
+      "scan_priority": 40,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.ey.com/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der EY-Kandidat wurde ueber die offizielle EY-Domain und das offizielle EY-Careers-Portal belegt."
+    },
+    {
+      "canonical_name": "GEMA",
+      "official_website_url": "https://www.gema.de/",
+      "career_url": "https://www.gema.de/de/die-gema/karriere",
+      "aliases": [
+        "GEMA",
+        "Gesellschaft fuer musikalische Auffuehrungs- und mechanische Vervielfaeltigungsrechte"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Music Rights",
+      "scan_priority": 39,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.gema.de/de/die-gema/karriere",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der GEMA-Kandidat wurde ueber die offizielle GEMA-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "HCL Technologies GmbH",
+      "official_website_url": "https://www.hcltech.com/",
+      "career_url": "https://careers.hcltech.com/go/Germany/9556555/",
+      "aliases": [
+        "HCL Technologies",
+        "HCLTech",
+        "HCLTech Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services",
+      "scan_priority": 38,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.hcltech.com/go/Germany/9556555/",
+      "discovery_origin": "source-registry:munich_business_indian_companies",
+      "evidence_note": "Der HCLTech-Kandidat wurde ueber die offizielle HCLTech-Domain und das offizielle HCLTech-Careers-Portal fuer Deutschland belegt."
+    },
+    {
+      "canonical_name": "HAWE Hydraulik SE",
+      "official_website_url": "https://www.hawe.com/",
+      "career_url": "https://www.hawe.com/en-us/company/career/",
+      "aliases": [
+        "HAWE",
+        "HAWE Hydraulik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Hydraulics",
+      "scan_priority": 37,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hawe.com/en-us/company/career/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der HAWE-Kandidat wurde ueber die offizielle HAWE-Domain und deren Career-Seite mit Stellenbereich belegt."
+    },
+    {
+      "canonical_name": "HDI Global SE",
+      "official_website_url": "https://www.hdi.global/",
+      "career_url": "https://www.hdi.global/about-us/career-at-hdi/",
+      "aliases": [
+        "HDI Global",
+        "HDI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "scan_priority": 36,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hdi.global/about-us/career-at-hdi/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der HDI-Global-Kandidat wurde ueber die offizielle HDI-Global-Domain und deren Career-at-HDI-Seite belegt."
+    },
+    {
+      "canonical_name": "Heidelberg Materials",
+      "official_website_url": "https://www.heidelbergmaterials.com/",
+      "career_url": "https://career.heidelbergmaterials.com/",
+      "aliases": [
+        "Heidelberg Materials",
+        "HeidelbergCement"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Building Materials",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://career.heidelbergmaterials.com/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Heidelberg-Materials-Kandidat wurde ueber die offizielle Heidelberg-Materials-Domain und das offizielle Karriereportal belegt."
+    },
+    {
+      "canonical_name": "FNZ Bank",
+      "official_website_url": "https://fnz.de/",
+      "career_url": "https://fnz.de/karriere/stellenangebote/",
+      "aliases": [
+        "FNZ Bank",
+        "FNZ"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Technology",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://fnz.de/karriere/stellenangebote/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der FNZ-Bank-Kandidat wurde ueber die offizielle deutsche FNZ-Domain und deren Stellenangebote-Seite belegt."
+    },
+    {
+      "canonical_name": "GE HealthCare",
+      "official_website_url": "https://www.gehealthcare.com/",
+      "career_url": "https://careers.gehealthcare.com/",
+      "aliases": [
+        "GE HealthCare",
+        "GE Healthcare"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.gehealthcare.com/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der GE-HealthCare-Kandidat wurde ueber die offizielle GE-HealthCare-Domain und das offizielle GE-HealthCare-Careers-Portal belegt."
+    },
+    {
+      "canonical_name": "GKN Aerospace",
+      "official_website_url": "https://joinus.gknaerospace.com/",
+      "career_url": "https://joinus.gknaerospace.com/locations/germany/",
+      "aliases": [
+        "GKN Aerospace",
+        "GKN Aerospace Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://joinus.gknaerospace.com/locations/germany/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der GKN-Aerospace-Kandidat wurde ueber das offizielle GKN-Aerospace-Karriereportal und dessen Deutschland-/Muenchen-Standortseite belegt."
+    },
+    {
+      "canonical_name": "FDG Entertainment GmbH & Co. KG",
+      "official_website_url": "https://www.fdg-entertainment.com/",
+      "career_url": "https://www.fdg-entertainment.com/jobs/",
+      "aliases": [
+        "FDG Entertainment",
+        "FDG Entertainment GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.fdg-entertainment.com/jobs/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der FDG-Entertainment-Kandidat wurde ueber die offizielle FDG-Domain und deren Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "givve",
+      "official_website_url": "https://givve.com/",
+      "career_url": "https://givve.com/de/karriere",
+      "aliases": [
+        "givve",
+        "Up givve"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Technology",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://givve.com/de/karriere",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der givve-Kandidat wurde ueber die offizielle givve-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Gini GmbH",
+      "official_website_url": "https://gini.net/",
+      "career_url": "https://gini.net/en/hiring/",
+      "aliases": [
+        "Gini",
+        "Gini GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Technology",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://gini.net/en/hiring/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Gini-Kandidat wurde ueber die offizielle Gini-Domain und deren Hiring-/Recruiting-Seite belegt."
+    }
+  ]
+}

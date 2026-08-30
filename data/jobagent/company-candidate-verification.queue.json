@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-30T06:43:47.118Z",
+  "generated_at": "2026-08-30T12:05:18.242Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 339,
-    "DISCOVER_OFFICIAL_WEBSITE": 1443,
+    "ALREADY_VERIFIED_IN_STORE": 354,
+    "DISCOVER_OFFICIAL_WEBSITE": 1428,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -8231,6 +8231,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_ey_muenchen_mitte",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_ey_muenchen_mitte",
+      "company_id": "company:ey",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_ey_muenchen_mitte"
+      ],
+      "canonical_name": "EY",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:48:18.111Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-mitte.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "5c0a2f032380480fde39d84e2d1b2cbdf79140b9b064cd6a1cf81dbc5d70a9de",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:ey"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_faktor_zehn_muenchen_west",
       "candidate_id": "regional-hint:munich_business_commercial_locations_faktor_zehn_muenchen_west",
       "company_id": "company:faktor_zehn",
@@ -8269,6 +8313,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:faktor zehn"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_fdg_entertainment_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_fdg_entertainment_muenchen",
+      "company_id": "company:fdg_entertainment_gmbh_and_co_kg",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_fdg_entertainment_muenchen"
+      ],
+      "canonical_name": "FDG Entertainment",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:48:18.111Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "41e28d6f1d0b27c5f1390af6bde4028f0ea8cdabc474e991c64d0c5fc94350b6",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:fdg entertainment"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -8587,6 +8675,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_fnz_bank_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_fnz_bank_muenchen_ost",
+      "company_id": "company:fnz_bank",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_fnz_bank_muenchen_ost"
+      ],
+      "canonical_name": "FNZ Bank",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "0707aa21c9ef19c83b52dfbfe111e5873486c25dc15abbf809781003ed5c9bca",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:fnz bank"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_franka_emika_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_franka_emika_awesome_machine_learning_startups_munich_github_list",
       "company_id": "company:franka_robotics_gmbh",
@@ -8858,6 +8990,228 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_ge_healthcare_muenchen_nord",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_ge_healthcare_muenchen_nord",
+      "company_id": "company:ge_healthcare",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_ge_healthcare_muenchen_nord"
+      ],
+      "canonical_name": "GE Healthcare",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "65fe2b163b33deb7211d10955c46c2d533ac715e3db07ce3d605af905489138c",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:ge healthcare"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_gema_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_gema_muenchen",
+      "company_id": "company:gema",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_gema_muenchen"
+      ],
+      "canonical_name": "GEMA",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "a37e8af4dac832697a01dfbab0e7dba9130884f29101c08b1d56d9a864e72023",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:gema"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_gini_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_gini_muenchen_tech_unternehmen",
+      "company_id": "company:gini_gmbh",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_gini_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "Gini",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "ea351571141954ff65218e689abdce0a4010e045e48509796f4f74e0b3c407a8",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:gini"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_givve_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_givve_muenchen_tech_unternehmen",
+      "company_id": "company:givve",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_givve_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "givve",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "8a7e748ab69f03f8e91f1bd599ec70ec0f7794efdc30df550976c3e2076a5df7",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:givve"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_gkn_aerospace_muenchen_west",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_gkn_aerospace_muenchen_west",
+      "company_id": "company:gkn_aerospace",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_gkn_aerospace_muenchen_west"
+      ],
+      "canonical_name": "GKN Aerospace",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:57:44.303Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "9b04d5fc2ccfc5544ea20d9cb1163b84e657f07f2274eb1e274dc15b336555c9",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:gkn aerospace"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:domain_glenmark_de",
       "candidate_id": "regional-hint:munich_business_indian_companies_glenmark_arzneimittel_gmbh_muenchen",
       "company_id": "company:glenmark_arzneimittel_gmbh",
@@ -8991,6 +9345,184 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_hawe_hydraulik_se_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_hawe_hydraulik_se_muenchen_ost",
+      "company_id": "company:hawe_hydraulik_se",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_hawe_hydraulik_se_muenchen_ost"
+      ],
+      "canonical_name": "HAWE Hydraulik SE",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:08:14.108Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "75589112aaa2a17edee06b1b9384eccee48f1c66d669b49a24367e1621f93b89",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:hawe hydraulik"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_hcl_technologies_gmbh_muenchen",
+      "candidate_id": "regional-hint:munich_business_indian_companies_hcl_technologies_gmbh_muenchen",
+      "company_id": "company:hcl_technologies_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_hcl_technologies_gmbh_muenchen"
+      ],
+      "canonical_name": "HCL Technologies GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:08:14.108Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "389f7b39f778d9594b4e0e7b83edbd338b0529d02fbb74892cd20a4ce5f5a02a",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:hcl technologies"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_hdi_global_muenchen_west",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_hdi_global_muenchen_west",
+      "company_id": "company:hdi_global_se",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_hdi_global_muenchen_west"
+      ],
+      "canonical_name": "HDI Global",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:08:14.108Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "5cb699b286b9a004765f5ef46752140496e025060319a231e915498016ca4e65",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:hdi global"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_heidelberg_materials_muenchen_ost",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_heidelberg_materials_muenchen_ost",
+      "company_id": "company:heidelberg_materials",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_heidelberg_materials_muenchen_ost"
+      ],
+      "canonical_name": "Heidelberg Materials",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:08:14.108Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "468303187108a302be8d8f04b52c0e8b9642b85e1fdd5db05b436d6267b67499",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:heidelberg materials"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -14809,50 +15341,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_ey_muenchen_mitte",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_ey_muenchen_mitte",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_ey_muenchen_mitte"
-      ],
-      "canonical_name": "EY",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:48:18.111Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-mitte.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "5c0a2f032380480fde39d84e2d1b2cbdf79140b9b064cd6a1cf81dbc5d70a9de",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:ey"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_factor_product_muenchen_muenchen",
       "candidate_id": "regional-hint:munich_business_creative_companies_factor_product_muenchen_muenchen",
       "company_id": null,
@@ -14987,50 +15475,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_fdg_entertainment_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_fdg_entertainment_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_fdg_entertainment_muenchen"
-      ],
-      "canonical_name": "FDG Entertainment",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:48:18.111Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "41e28d6f1d0b27c5f1390af6bde4028f0ea8cdabc474e991c64d0c5fc94350b6",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:fdg entertainment"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_fixit_tm_holding_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_fixit_tm_holding_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -15069,50 +15513,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:fixit tm holding"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_fnz_bank_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_fnz_bank_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_fnz_bank_muenchen_ost"
-      ],
-      "canonical_name": "FNZ Bank",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "0707aa21c9ef19c83b52dfbfe111e5873486c25dc15abbf809781003ed5c9bca",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:fnz bank"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -15201,96 +15601,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:fraunhofer institut"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_ge_healthcare_muenchen_nord",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_ge_healthcare_muenchen_nord",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_ge_healthcare_muenchen_nord"
-      ],
-      "canonical_name": "GE Healthcare",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "65fe2b163b33deb7211d10955c46c2d533ac715e3db07ce3d605af905489138c",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:ge healthcare"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_gema_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_gema_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_gema_muenchen"
-      ],
-      "canonical_name": "GEMA",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "a37e8af4dac832697a01dfbab0e7dba9130884f29101c08b1d56d9a864e72023",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:gema"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -15423,138 +15733,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:german accelerator"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_gini_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_gini_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_gini_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "Gini",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "ea351571141954ff65218e689abdce0a4010e045e48509796f4f74e0b3c407a8",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:gini"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_givve_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_givve_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_givve_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "givve",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "8a7e748ab69f03f8e91f1bd599ec70ec0f7794efdc30df550976c3e2076a5df7",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:givve"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_gkn_aerospace_muenchen_west",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_gkn_aerospace_muenchen_west",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_gkn_aerospace_muenchen_west"
-      ],
-      "canonical_name": "GKN Aerospace",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:57:44.303Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "9b04d5fc2ccfc5544ea20d9cb1163b84e657f07f2274eb1e274dc15b336555c9",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:gkn aerospace"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -15871,52 +16049,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_hawe_hydraulik_se_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_hawe_hydraulik_se_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_hawe_hydraulik_se_muenchen_ost"
-      ],
-      "canonical_name": "HAWE Hydraulik SE",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:08:14.108Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "75589112aaa2a17edee06b1b9384eccee48f1c66d669b49a24367e1621f93b89",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:hawe hydraulik"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_hawk_ai_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_hawk_ai_awesome_machine_learning_startups_munich_github_list",
       "company_id": null,
@@ -15961,50 +16093,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_hcl_technologies_gmbh_muenchen",
-      "candidate_id": "regional-hint:munich_business_indian_companies_hcl_technologies_gmbh_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_hcl_technologies_gmbh_muenchen"
-      ],
-      "canonical_name": "HCL Technologies GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:08:14.108Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "389f7b39f778d9594b4e0e7b83edbd338b0529d02fbb74892cd20a4ce5f5a02a",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:hcl technologies"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_startup_platform_ecosystem_hcm4all_gmbh_munich_startup_ecosystem",
       "candidate_id": "regional-hint:munich_startup_platform_ecosystem_hcm4all_gmbh_munich_startup_ecosystem",
       "company_id": null,
@@ -16043,94 +16131,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:hcm4all"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_hdi_global_muenchen_west",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_hdi_global_muenchen_west",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_hdi_global_muenchen_west"
-      ],
-      "canonical_name": "HDI Global",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:08:14.108Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "5cb699b286b9a004765f5ef46752140496e025060319a231e915498016ca4e65",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:hdi global"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_heidelberg_materials_muenchen_ost",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_heidelberg_materials_muenchen_ost",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_heidelberg_materials_muenchen_ost"
-      ],
-      "canonical_name": "Heidelberg Materials",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:08:14.108Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-ost.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "468303187108a302be8d8f04b52c0e8b9642b85e1fdd5db05b436d6267b67499",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:heidelberg materials"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -29466,6 +29466,142 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:gasteig muenchen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_ge_healthcare_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_ge_healthcare_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:ge_healthcare",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_ge_healthcare_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "GE Healthcare",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T11:00:15.864Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "f2ad4e8d640e8585a1e458c55171d16b23caf55ea90efe5c3af1343c1c178a22",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:ge healthcare"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_hawe_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_hawe_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:hawe_hydraulik_se",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_hawe_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Hawe GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T11:32:14.355Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "d2d373dec933fcd1f1370d7e6d68cf774a0b8c159028e3dd0049f3c7920355ac",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:hawe"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_hawe_hydraulik_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_hawe_hydraulik_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:hawe_hydraulik_se",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_hawe_hydraulik_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "HAWE Hydraulik SE",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T11:32:14.355Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "c99d28d7f655c229255dc10a3fa0b41b2a0a6c5cf049cb2dc6ad988b97d23f79",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:hawe hydraulik"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -47990,52 +48126,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_ge_healthcare_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_ge_healthcare_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_ge_healthcare_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "GE Healthcare",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T11:00:15.864Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "f2ad4e8d640e8585a1e458c55171d16b23caf55ea90efe5c3af1343c1c178a22",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:ge healthcare"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_gehavau_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_gehavau_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -50630,96 +50720,6 @@
           "name:hausverwaltung hempler"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_hawe_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_hawe_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_hawe_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Hawe GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T11:32:14.355Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "d2d373dec933fcd1f1370d7e6d68cf774a0b8c159028e3dd0049f3c7920355ac",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:hawe"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_hawe_hydraulik_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_hawe_hydraulik_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_hawe_hydraulik_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "HAWE Hydraulik SE",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T11:32:14.355Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "c99d28d7f655c229255dc10a3fa0b41b2a0a6c5cf049cb2dc6ad988b97d23f79",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:hawe hydraulik"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -78769,6 +78769,7 @@
       "priority_score": 89,
       "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
+        "CANDIDATE_REFRESH_DUE",
         "KNOWN_COMPANY_HINT",
         "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
       ],
@@ -78782,7 +78783,7 @@
       "next_attempt_at": null,
       "last_status": "CAREER_URL_VERIFIED",
       "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
-      "freshness_status": "FRESH",
+      "freshness_status": "EXPIRED",
       "risk_level": "LOW",
       "source_evidence": {
         "source_id": "source-registry:ba_jobsuche",
@@ -78817,6 +78818,7 @@
       "priority_score": 89,
       "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
+        "CANDIDATE_REFRESH_DUE",
         "KNOWN_COMPANY_HINT",
         "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
       ],
@@ -78830,7 +78832,7 @@
       "next_attempt_at": null,
       "last_status": "CAREER_URL_VERIFIED",
       "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
-      "freshness_status": "FRESH",
+      "freshness_status": "EXPIRED",
       "risk_level": "LOW",
       "source_evidence": {
         "source_id": "source-registry:stepstone_muenchen",
@@ -78865,6 +78867,7 @@
       "priority_score": 89,
       "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
+        "CANDIDATE_REFRESH_DUE",
         "KNOWN_COMPANY_HINT",
         "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
       ],
@@ -78878,7 +78881,7 @@
       "next_attempt_at": null,
       "last_status": "CAREER_URL_VERIFIED",
       "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
-      "freshness_status": "FRESH",
+      "freshness_status": "EXPIRED",
       "risk_level": "LOW",
       "source_evidence": {
         "source_id": "source-registry:stepstone_muenchen",
@@ -78964,6 +78967,7 @@
       "priority_score": 84,
       "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
+        "CANDIDATE_REFRESH_DUE",
         "DUPLICATE_CLUSTER_REVIEW",
         "KNOWN_COMPANY_HINT",
         "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -78979,7 +78983,7 @@
       "next_attempt_at": null,
       "last_status": "CAREER_URL_VERIFIED",
       "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
-      "freshness_status": "FRESH",
+      "freshness_status": "EXPIRED",
       "risk_level": "MEDIUM",
       "source_evidence": {
         "source_id": "source-registry:ba_jobsuche",
@@ -79064,6 +79068,7 @@
       "priority_score": 69,
       "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
+        "CANDIDATE_REFRESH_DUE",
         "KNOWN_COMPANY_HINT",
         "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
       ],
@@ -79077,7 +79082,7 @@
       "next_attempt_at": null,
       "last_status": "CAREER_URL_VERIFIED",
       "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
-      "freshness_status": "FRESH",
+      "freshness_status": "EXPIRED",
       "risk_level": "LOW",
       "source_evidence": {
         "source_id": "source-registry:indeed_de",
@@ -79112,19 +79117,20 @@
       "priority_score": 39,
       "next_action": "MANUAL_DECISION",
       "reason_codes": [
+        "CANDIDATE_REFRESH_DUE",
         "STAFFING_AGENCY_REVIEW"
       ],
       "target_area_basis": [
         "JOB_LOCATION_IN_TARGET"
       ],
       "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "STAFFING_AGENCY_REVIEW",
+      "review_reason": "CANDIDATE_REFRESH_DUE,STAFFING_AGENCY_REVIEW",
       "retry_count": 0,
       "last_attempt_at": null,
       "next_attempt_at": null,
       "last_status": null,
       "last_reason": null,
-      "freshness_status": "FRESH",
+      "freshness_status": "EXPIRED",
       "risk_level": "HIGH",
       "source_evidence": {
         "source_id": "source-registry:stepstone_muenchen",

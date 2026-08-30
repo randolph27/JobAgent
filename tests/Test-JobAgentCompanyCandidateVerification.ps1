@@ -30,7 +30,8 @@ function New-TestCandidate {
         [Parameter()][AllowNull()][string]$OfficialWebsiteUrl = $null,
         [Parameter()][bool]$OfficialWebsiteVerified = $false,
         [Parameter()][string]$TargetArea = 'MUNICH',
-        [Parameter()][bool]$Staffing = $false
+        [Parameter()][bool]$Staffing = $false,
+        [Parameter()][datetime]$CandidateObservedAt = [datetime]::UtcNow
     )
 
     [pscustomobject]@{
@@ -41,7 +42,7 @@ function New-TestCandidate {
         target_area = $TargetArea
         source_id = 'source-registry:stepstone_muenchen'
         observed_url = 'https://www.stepstone.de/jobs/it/in-muenchen'
-        observed_at = '2026-08-23T08:00:00.000Z'
+        observed_at = $CandidateObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         verification_status = 'UNVERIFIED'
         candidate_status = 'DISCOVERY_HINT'
         known_company_id = $KnownCompanyId
@@ -317,7 +318,7 @@ try {
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $projectRoot 'fixture-map.json') -Encoding UTF8
 
-    $scriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 2>&1)
+    $scriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 -ExpiresAfterDays 730 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript ist fehlgeschlagen: " + ($scriptOutput -join "`n"))
     $scriptResult = ($scriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     $scriptStore = Read-JobAgentStore -ProjectRoot $projectRoot
@@ -340,7 +341,7 @@ try {
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Candidate-Verifikationsscript erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'
 
-    $secondScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 2>&1)
+    $secondScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 -ExpiresAfterDays 730 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript-Zweitlauf ist fehlgeschlagen: " + ($secondScriptOutput -join "`n"))
     $secondScriptResult = ($secondScriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($secondScriptResult.verification_queue.processed_total -eq 0) -Message 'Candidate-Verifikationsscript darf Retry-Kandidaten vor next_attempt_at nicht erneut verarbeiten.'
@@ -355,6 +356,7 @@ $websiteRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-website-discovery
 New-Item -ItemType Directory -Path (Join-Path $websiteRoot 'data\jobagent') -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $websiteRoot 'logs\jobagent') -Force | Out-Null
 try {
+    $freshObservedAt = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
     [pscustomobject]@{
         schema_version = 'jobagent/company-discovery-sources/v1'
         generated_at = '2026-08-23T08:00:00.000Z'
@@ -387,7 +389,7 @@ try {
                 target_area = 'MUNICH'
                 source_id = 'source-registry:test_official_directory'
                 observed_url = 'https://directory.example.invalid/companies'
-                observed_at = '2026-08-23T08:00:00.000Z'
+                observed_at = $freshObservedAt
                 verification_status = 'UNVERIFIED'
                 candidate_status = 'REGIONAL_DISCOVERY_HINT'
                 confidence_score = 80
@@ -402,7 +404,7 @@ try {
                 target_area = 'MUNICH'
                 source_id = 'source-registry:missing_directory'
                 observed_url = ''
-                observed_at = '2026-08-23T08:00:00.000Z'
+                observed_at = $freshObservedAt
                 verification_status = 'UNVERIFIED'
                 candidate_status = 'REGIONAL_DISCOVERY_HINT'
                 confidence_score = 80

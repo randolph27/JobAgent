@@ -9381,6 +9381,475 @@
       "created_at": "2026-08-30T06:41:25.349Z",
       "updated_at": "2026-08-30T06:41:25.349Z",
       "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ey",
+      "canonical_name": "EY",
+      "canonical_domain": "ey.com",
+      "official_website_url": "https://www.ey.com/",
+      "career_url": "https://careers.ey.com/",
+      "aliases": [
+        "Ernst & Young",
+        "Ernst & Young GmbH",
+        "EY"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Professional Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 40,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.ey.com/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://careers.ey.com/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Professional Services",
+        "evidence_note": "Der EY-Kandidat wurde ueber die offizielle EY-Domain und das offizielle EY-Careers-Portal belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:gema",
+      "canonical_name": "GEMA",
+      "canonical_domain": "gema.de",
+      "official_website_url": "https://www.gema.de/",
+      "career_url": "https://www.gema.de/de/die-gema/karriere",
+      "aliases": [
+        "GEMA",
+        "Gesellschaft fuer musikalische Auffuehrungs- und mechanische Vervielfaeltigungsrechte"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Music Rights",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 39,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.gema.de/de/die-gema/karriere",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://www.gema.de/de/die-gema/karriere",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Music Rights",
+        "evidence_note": "Der GEMA-Kandidat wurde ueber die offizielle GEMA-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hcl_technologies_gmbh",
+      "canonical_name": "HCL Technologies GmbH",
+      "canonical_domain": "hcltech.com",
+      "official_website_url": "https://www.hcltech.com/",
+      "career_url": "https://careers.hcltech.com/go/Germany/9556555/",
+      "aliases": [
+        "HCL Technologies",
+        "HCLTech",
+        "HCLTech Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 38,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.hcltech.com/go/Germany/9556555/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://careers.hcltech.com/go/Germany/9556555/",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services",
+        "evidence_note": "Der HCLTech-Kandidat wurde ueber die offizielle HCLTech-Domain und das offizielle HCLTech-Careers-Portal fuer Deutschland belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hawe_hydraulik_se",
+      "canonical_name": "HAWE Hydraulik SE",
+      "canonical_domain": "hawe.com",
+      "official_website_url": "https://www.hawe.com/",
+      "career_url": "https://www.hawe.com/en-us/company/career/",
+      "aliases": [
+        "HAWE",
+        "HAWE Hydraulik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Hydraulics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 37,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hawe.com/en-us/company/career/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://www.hawe.com/en-us/company/career/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Hydraulics",
+        "evidence_note": "Der HAWE-Kandidat wurde ueber die offizielle HAWE-Domain und deren Career-Seite mit Stellenbereich belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hdi_global_se",
+      "canonical_name": "HDI Global SE",
+      "canonical_domain": "hdi.global",
+      "official_website_url": "https://www.hdi.global/",
+      "career_url": "https://www.hdi.global/about-us/career-at-hdi/",
+      "aliases": [
+        "HDI",
+        "HDI Global"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 36,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hdi.global/about-us/career-at-hdi/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://www.hdi.global/about-us/career-at-hdi/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Der HDI-Global-Kandidat wurde ueber die offizielle HDI-Global-Domain und deren Career-at-HDI-Seite belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:heidelberg_materials",
+      "canonical_name": "Heidelberg Materials",
+      "canonical_domain": "heidelbergmaterials.com",
+      "official_website_url": "https://www.heidelbergmaterials.com/",
+      "career_url": "https://career.heidelbergmaterials.com/",
+      "aliases": [
+        "Heidelberg Materials",
+        "HeidelbergCement"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Building Materials",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://career.heidelbergmaterials.com/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://career.heidelbergmaterials.com/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Building Materials",
+        "evidence_note": "Der Heidelberg-Materials-Kandidat wurde ueber die offizielle Heidelberg-Materials-Domain und das offizielle Karriereportal belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:fnz_bank",
+      "canonical_name": "FNZ Bank",
+      "canonical_domain": "fnz.de",
+      "official_website_url": "https://fnz.de/",
+      "career_url": "https://fnz.de/karriere/stellenangebote/",
+      "aliases": [
+        "FNZ",
+        "FNZ Bank"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://fnz.de/karriere/stellenangebote/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://fnz.de/karriere/stellenangebote/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Financial Technology",
+        "evidence_note": "Der FNZ-Bank-Kandidat wurde ueber die offizielle deutsche FNZ-Domain und deren Stellenangebote-Seite belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ge_healthcare",
+      "canonical_name": "GE HealthCare",
+      "canonical_domain": "gehealthcare.com",
+      "official_website_url": "https://www.gehealthcare.com/",
+      "career_url": "https://careers.gehealthcare.com/",
+      "aliases": [
+        "GE HealthCare"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.gehealthcare.com/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://careers.gehealthcare.com/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Medical Technology",
+        "evidence_note": "Der GE-HealthCare-Kandidat wurde ueber die offizielle GE-HealthCare-Domain und das offizielle GE-HealthCare-Careers-Portal belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:gkn_aerospace",
+      "canonical_name": "GKN Aerospace",
+      "canonical_domain": "joinus.gknaerospace.com",
+      "official_website_url": "https://joinus.gknaerospace.com/",
+      "career_url": "https://joinus.gknaerospace.com/locations/germany/",
+      "aliases": [
+        "GKN Aerospace",
+        "GKN Aerospace Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://joinus.gknaerospace.com/locations/germany/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://joinus.gknaerospace.com/locations/germany/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Aerospace",
+        "evidence_note": "Der GKN-Aerospace-Kandidat wurde ueber das offizielle GKN-Aerospace-Karriereportal und dessen Deutschland-/Muenchen-Standortseite belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:fdg_entertainment_gmbh_and_co_kg",
+      "canonical_name": "FDG Entertainment GmbH & Co. KG",
+      "canonical_domain": "fdg-entertainment.com",
+      "official_website_url": "https://www.fdg-entertainment.com/",
+      "career_url": "https://www.fdg-entertainment.com/jobs/",
+      "aliases": [
+        "FDG Entertainment",
+        "FDG Entertainment GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.fdg-entertainment.com/jobs/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://www.fdg-entertainment.com/jobs/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Games",
+        "evidence_note": "Der FDG-Entertainment-Kandidat wurde ueber die offizielle FDG-Domain und deren Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:givve",
+      "canonical_name": "givve",
+      "canonical_domain": "givve.com",
+      "official_website_url": "https://givve.com/",
+      "career_url": "https://givve.com/de/karriere",
+      "aliases": [
+        "givve",
+        "Up givve"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://givve.com/de/karriere",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://givve.com/de/karriere",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Financial Technology",
+        "evidence_note": "Der givve-Kandidat wurde ueber die offizielle givve-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:gini_gmbh",
+      "canonical_name": "Gini GmbH",
+      "canonical_domain": "gini.net",
+      "official_website_url": "https://gini.net/",
+      "career_url": "https://gini.net/en/hiring/",
+      "aliases": [
+        "Gini",
+        "Gini GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://gini.net/en/hiring/",
+        "observed_at": "2026-08-30T11:59:14.67Z",
+        "verification_url": "https://gini.net/en/hiring/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Financial Technology",
+        "evidence_note": "Der Gini-Kandidat wurde ueber die offizielle Gini-Domain und deren Hiring-/Recruiting-Seite belegt."
+      },
+      "created_at": "2026-08-30T11:59:14.67Z",
+      "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
     }
   ],
   "jobs": [
@@ -11639,6 +12108,27 @@
       ]
     },
     {
+      "source_id": "source:ey_career",
+      "company_id": "company:ey",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.ey.com/",
+      "canonical_url": "https://careers.ey.com/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.ey.com/",
+          "basis_url": "https://www.ey.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:faktor_zehn_career",
       "company_id": "company:faktor_zehn",
       "source_type": "CAREER_PAGE",
@@ -11655,6 +12145,27 @@
           "basis_url": "https://www.faktorzehn.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:fdg_entertainment_gmbh_and_co_kg_career",
+      "company_id": "company:fdg_entertainment_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.fdg-entertainment.com/jobs/",
+      "canonical_url": "https://www.fdg-entertainment.com/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.fdg-entertainment.com/jobs/",
+          "basis_url": "https://www.fdg-entertainment.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -11786,6 +12297,27 @@
       ]
     },
     {
+      "source_id": "source:fnz_bank_career",
+      "company_id": "company:fnz_bank",
+      "source_type": "CAREER_PAGE",
+      "url": "https://fnz.de/karriere/stellenangebote/",
+      "canonical_url": "https://fnz.de/karriere/stellenangebote/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://fnz.de/karriere/stellenangebote/",
+          "basis_url": "https://fnz.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:franka_robotics_gmbh_career",
       "company_id": "company:franka_robotics_gmbh",
       "source_type": "CAREER_PAGE",
@@ -11912,6 +12444,48 @@
       ]
     },
     {
+      "source_id": "source:ge_healthcare_career",
+      "company_id": "company:ge_healthcare",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.gehealthcare.com/",
+      "canonical_url": "https://careers.gehealthcare.com/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.gehealthcare.com/",
+          "basis_url": "https://www.gehealthcare.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:gema_career",
+      "company_id": "company:gema",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.gema.de/de/die-gema/karriere",
+      "canonical_url": "https://www.gema.de/de/die-gema/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.gema.de/de/die-gema/karriere",
+          "basis_url": "https://www.gema.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:giesecke_plus_devrient_gmbh_career",
       "company_id": "company:giesecke_plus_devrient_gmbh",
       "source_type": "CAREER_PAGE",
@@ -11929,6 +12503,69 @@
         "observed_at": "2026-08-17T15:52:58.666Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:gini_gmbh_career",
+      "company_id": "company:gini_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://gini.net/en/hiring/",
+      "canonical_url": "https://gini.net/en/hiring/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://gini.net/en/hiring/",
+          "basis_url": "https://gini.net/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:givve_career",
+      "company_id": "company:givve",
+      "source_type": "CAREER_PAGE",
+      "url": "https://givve.com/de/karriere",
+      "canonical_url": "https://givve.com/de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://givve.com/de/karriere",
+          "basis_url": "https://givve.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:gkn_aerospace_career",
+      "company_id": "company:gkn_aerospace",
+      "source_type": "CAREER_PAGE",
+      "url": "https://joinus.gknaerospace.com/locations/germany/",
+      "canonical_url": "https://joinus.gknaerospace.com/locations/germany/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://joinus.gknaerospace.com/locations/germany/",
+          "basis_url": "https://joinus.gknaerospace.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:glenmark_arzneimittel_gmbh_career_url",
@@ -11971,6 +12608,90 @@
         "observed_at": "2026-08-17T16:02:19.059Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:hawe_hydraulik_se_career",
+      "company_id": "company:hawe_hydraulik_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hawe.com/en-us/company/career/",
+      "canonical_url": "https://www.hawe.com/en-us/company/career/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hawe.com/en-us/company/career/",
+          "basis_url": "https://www.hawe.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hcl_technologies_gmbh_career",
+      "company_id": "company:hcl_technologies_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.hcltech.com/go/Germany/9556555/",
+      "canonical_url": "https://careers.hcltech.com/go/Germany/9556555/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.hcltech.com/go/Germany/9556555/",
+          "basis_url": "https://www.hcltech.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hdi_global_se_career",
+      "company_id": "company:hdi_global_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hdi.global/about-us/career-at-hdi/",
+      "canonical_url": "https://www.hdi.global/about-us/career-at-hdi/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hdi.global/about-us/career-at-hdi/",
+          "basis_url": "https://www.hdi.global/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:heidelberg_materials_career",
+      "company_id": "company:heidelberg_materials",
+      "source_type": "CAREER_PAGE",
+      "url": "https://career.heidelbergmaterials.com/",
+      "canonical_url": "https://career.heidelbergmaterials.com/",
+      "is_official": true,
+      "verified_at": "2026-08-30T11:59:14.67Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://career.heidelbergmaterials.com/",
+          "basis_url": "https://www.heidelbergmaterials.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:hensoldt_ag_career",
