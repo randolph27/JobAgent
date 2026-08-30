@@ -415,7 +415,7 @@ Assert-True -Condition ($toolJson.approximation_notice -match 'keine vollstaendi
 Assert-True -Condition ($toolOutput.target_inventory_candidates_total -eq $toolJson.metrics.target_inventory_candidates_total) -Message 'Coverage-Tool gibt die Zielgebiet-Kandidatenzahl nicht direkt aus.'
 Assert-True -Condition ($toolOutput.target_inventory_gate_status -eq $toolJson.target_inventory_gate.status) -Message 'Coverage-Tool gibt den Zielinventar-Gate-Status inkonsistent aus.'
 Assert-True -Condition ($toolMarkdown.Contains('Zielgebiet-Kandidaten gesamt')) -Message 'Coverage-Tool-Markdown enthaelt keine Zielinventar-Metrik.'
-Assert-True -Condition ($toolHtml.Contains('Luecke bis 1000 Kandidaten')) -Message 'Coverage-Tool-HTML enthaelt keine 1000er-Luecke.'
+Assert-True -Condition (-not $toolHtml.Contains('Luecke bis 1000 Kandidaten')) -Message 'Coverage-Tool-HTML soll operative Detailstatistiken nicht im ersten Sichtbereich zeigen.'
 Assert-True -Condition (@($toolJson.import_waves.waves).Count -eq 4) -Message 'Coverage-Tool-JSON folgt nicht der produktiven A-D-Wellenkonfiguration.'
 Assert-True -Condition ($toolJson.import_wave_metrics.schema_version -eq 'jobagent/company-import-wave-metrics/v1') -Message 'Coverage-Tool-JSON enthaelt keine Importwellen-Metriken.'
 Assert-True -Condition (@($toolJson.import_wave_metrics.waves | Where-Object { [string]$_.wave_id -eq 'D' -and [int]$_.hint_only_total -ge 1 }).Count -eq 1) -Message 'Importwellen-Metriken weisen Welle-D-Hints nicht aus.'
@@ -435,7 +435,7 @@ Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Dedupe')) -Message
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Freshness')) -Message 'Coverage-Tool-Markdown enthaelt keinen Kandidaten-Freshness-Abschnitt.'
 Assert-True -Condition ($toolMarkdown.Contains('### Freshness-Status')) -Message 'Coverage-Tool-Markdown enthaelt keine Freshness-Dimension.'
 Assert-True -Condition ($toolMarkdown.Contains('## Kandidaten-Verifikationsqueue')) -Message 'Coverage-Tool-Markdown enthaelt keine Kandidaten-Verifikationsqueue.'
-Assert-True -Condition ($toolMarkdown.Contains('| Score | Aktion | Cluster | Kandidat | Firma | Status | Gruende | Quelle | Dedupe |')) -Message 'Coverage-Tool-Markdown enthaelt keine priorisierte Queue-Tabelle.'
+Assert-True -Condition ($toolMarkdown.Contains('| Prioritaet | Aktion | Firma | Status | Gruende | Quelle |')) -Message 'Coverage-Tool-Markdown enthaelt keine menschenlesbare Queue-Tabelle.'
 Assert-True -Condition ($toolMarkdown.Contains('## Review-/Reject-Report')) -Message 'Coverage-Tool-Markdown enthaelt keinen Review-/Reject-Report.'
 Assert-True -Condition ($toolHtml.Contains('<meta name="viewport" content="width=device-width, initial-scale=1">')) -Message 'Coverage-Tool-HTML enthaelt keinen Viewport-Meta-Tag.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Dedupe</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Kandidaten-Dedupe-Abschnitt.'
@@ -448,7 +448,16 @@ Assert-True -Condition ($toolHtml.Contains('position: sticky')) -Message 'Covera
 Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Verifikationsqueue</h2>')) -Message 'Coverage-Tool-HTML enthaelt keine Kandidaten-Verifikationsqueue.'
 Assert-True -Condition ($toolHtml.Contains('<th>Aktion</th>')) -Message 'Coverage-Tool-HTML enthaelt keine Aktionsspalte fuer die Queue.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Review-/Reject-Report</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Review-/Reject-Report.'
-Assert-True -Condition ($toolHtml.Contains('.table-wrap { overflow-x: auto; }')) -Message 'Coverage-Tool-HTML enthaelt keinen Tabellen-Overflow-Schutz.'
+Assert-True -Condition ($toolHtml.Contains('<h1>Arbeitgeber mit offizieller Karriereseite</h1>')) -Message 'Coverage-Tool-HTML nutzt keine menschenlesbare Ergebnisansicht.'
+Assert-True -Condition ($toolHtml.Contains('<h2>Firmen in Muenchen und Freising</h2>')) -Message 'Coverage-Tool-HTML zeigt die Firmenliste nicht als Hauptansicht.'
+Assert-True -Condition ($toolHtml.Contains('class="job-card"')) -Message 'Coverage-Tool-HTML rendert Firmen nicht als Kartenliste.'
+foreach ($rawUiValue in @('FAIL_CLOSED_REVIEW_OR_REJECT', 'ALREADY_VERIFIED_IN_STORE', 'identity-cluster:', 'source-registry:', 'Unbekannt (ALREADY_VERIFIED_IN_STORE)', 'Quellen-ID (Diagnose)')) {
+    Assert-True -Condition (-not $toolHtml.Contains($rawUiValue)) -Message "Coverage-Tool-HTML darf technische Werte nicht sichtbar ausgeben: $rawUiValue"
+    Assert-True -Condition (-not $toolMarkdown.Contains($rawUiValue)) -Message "Coverage-Tool-Markdown darf technische Werte nicht sichtbar ausgeben: $rawUiValue"
+}
+Assert-True -Condition (-not ($toolHtml -match 'Unbekannt \([A-Z0-9_:-]+\)')) -Message 'Coverage-Tool-HTML darf keine maschinellen Fallback-Labels sichtbar ausgeben.'
+Assert-True -Condition (-not ($toolMarkdown -match 'Unbekannt \([A-Z0-9_:-]+\)')) -Message 'Coverage-Tool-Markdown darf keine maschinellen Fallback-Labels sichtbar ausgeben.'
+Assert-True -Condition ($toolHtml.Contains('overflow-x: auto;')) -Message 'Coverage-Tool-HTML enthaelt keinen Tabellen-Overflow-Schutz.'
 Assert-True -Condition (-not ($toolHtml -match '<script\b[^>]*\bsrc=')) -Message 'Coverage-Tool-HTML darf keine externen Skripte laden.'
 Assert-True -Condition (-not ($toolHtml -match '<link\b[^>]*\bhref=')) -Message 'Coverage-Tool-HTML darf keine externen Stylesheets laden.'
 Assert-True -Condition ($toolMarkdown.Contains('| Firma | Link | Zielgebiet |')) -Message 'Coverage-Tool-Markdown enthaelt keine Linkspalte im Firmeninventar.'
