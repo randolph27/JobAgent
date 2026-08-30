@@ -1,0 +1,297 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-30T12:55:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Holidu GmbH",
+      "official_website_url": "https://www.holidu.com/",
+      "career_url": "https://www.holidu.com/careers",
+      "aliases": [
+        "Holidu",
+        "Holidu GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Travel Technology",
+      "scan_priority": 40,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.holidu.com/careers",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Holidu-Kandidat wurde ueber die offizielle Holidu-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "IBM Deutschland GmbH",
+      "official_website_url": "https://www.ibm.com/de-de",
+      "career_url": "https://www.ibm.com/de-de/careers",
+      "aliases": [
+        "IBM",
+        "IBM Deutschland",
+        "IBM Deutschland GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Information Technology",
+      "scan_priority": 39,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ibm.com/de-de/careers",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der IBM-Kandidat wurde ueber die offizielle IBM-Deutschland-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Interhyp AG",
+      "official_website_url": "https://www.interhyp.de/",
+      "career_url": "https://www.interhyp-gruppe.de/karriere/",
+      "aliases": [
+        "Interhyp",
+        "Interhyp Gruppe"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Services",
+      "scan_priority": 38,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.interhyp-gruppe.de/karriere/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Interhyp-Kandidat wurde ueber die offizielle Interhyp-Domain und die offizielle Karriere-Seite der Interhyp Gruppe belegt."
+    },
+    {
+      "canonical_name": "iteratec GmbH",
+      "official_website_url": "https://www.iteratec.com/",
+      "career_url": "https://www.iteratec.com/de/karriere/",
+      "aliases": [
+        "iteratec",
+        "iteratec GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software Consulting",
+      "scan_priority": 37,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.iteratec.com/de/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der iteratec-Kandidat wurde ueber die offizielle iteratec-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "jambit GmbH",
+      "official_website_url": "https://www.jambit.com/",
+      "career_url": "https://www.jambit.com/karriere/",
+      "aliases": [
+        "jambit",
+        "jambit GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software Development",
+      "scan_priority": 36,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.jambit.com/karriere/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der jambit-Kandidat wurde ueber die offizielle jambit-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "JetBrains GmbH",
+      "official_website_url": "https://www.jetbrains.com/",
+      "career_url": "https://www.jetbrains.com/careers/",
+      "aliases": [
+        "JetBrains",
+        "JetBrains GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Developer Tools",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.jetbrains.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der JetBrains-Kandidat wurde ueber die offizielle JetBrains-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Helbling Technik GmbH",
+      "official_website_url": "https://www.helbling.de/",
+      "career_url": "https://www.helbling.de/karriere/",
+      "aliases": [
+        "Helbling",
+        "Helbling Technik",
+        "Helbling Technik GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering Consulting",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.helbling.de/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Helbling-Kandidat wurde ueber die offizielle Helbling-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "HELDELE GmbH",
+      "official_website_url": "https://www.heldele.de/",
+      "career_url": "https://www.heldele.de/karriere/",
+      "aliases": [
+        "HELDELE",
+        "Heldele GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Building Technology",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.heldele.de/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der HELDELE-Kandidat wurde ueber die offizielle HELDELE-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Hugendubel Digital GmbH & Co. KG",
+      "official_website_url": "https://www.hugendubel.de/",
+      "career_url": "https://www.hugendubel.de/de/category/karriere-22571/",
+      "aliases": [
+        "Hugendubel",
+        "Hugendubel Digital",
+        "Hugendubel Digital GmbH & Co. KG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Retail",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hugendubel.de/de/category/karriere-22571/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Hugendubel-Kandidat wurde ueber die offizielle Hugendubel-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "IABG Industrieanlagen-Betriebsgesellschaft mbH",
+      "official_website_url": "https://www.iabg.de/",
+      "career_url": "https://www.iabg.de/karriere",
+      "aliases": [
+        "IABG",
+        "Industrieanlagen-Betriebsgesellschaft mbH"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Aerospace and Defence",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.iabg.de/karriere",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der IABG-Kandidat wurde ueber die offizielle IABG-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "ImFusion GmbH",
+      "official_website_url": "https://www.imfusion.com/",
+      "career_url": "https://www.imfusion.com/careers/",
+      "aliases": [
+        "ImFusion",
+        "ImFusion GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Imaging Software",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.imfusion.com/careers/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der ImFusion-Kandidat wurde ueber die offizielle ImFusion-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "KGAL GmbH & Co. KG",
+      "official_website_url": "https://www.kgal.de/",
+      "career_url": "https://www.kgal.de/karriere/",
+      "aliases": [
+        "KGAL",
+        "KGAL GmbH & Co. KG"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Investment Management",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.kgal.de/karriere/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der KGAL-Kandidat wurde ueber die offizielle KGAL-Domain und deren Karriere-Seite belegt."
+    }
+  ]
+}

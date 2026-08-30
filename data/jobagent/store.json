@@ -9383,6 +9383,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:holidu_gmbh",
+      "canonical_name": "Holidu GmbH",
+      "canonical_domain": "holidu.com",
+      "official_website_url": "https://www.holidu.com/",
+      "career_url": "https://www.holidu.com/careers",
+      "aliases": [
+        "Holidu",
+        "Holidu GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Travel Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 40,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.holidu.com/careers",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.holidu.com/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Travel Technology",
+        "evidence_note": "Der Holidu-Kandidat wurde ueber die offizielle Holidu-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:ey",
       "canonical_name": "EY",
       "canonical_domain": "ey.com",
@@ -9423,6 +9462,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:ibm_deutschland_gmbh",
+      "canonical_name": "IBM Deutschland GmbH",
+      "canonical_domain": "ibm.com",
+      "official_website_url": "https://www.ibm.com/de-de",
+      "career_url": "https://www.ibm.com/de-de/careers",
+      "aliases": [
+        "IBM",
+        "IBM Deutschland",
+        "IBM Deutschland GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Information Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 39,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ibm.com/de-de/careers",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.ibm.com/de-de/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Information Technology",
+        "evidence_note": "Der IBM-Kandidat wurde ueber die offizielle IBM-Deutschland-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:gema",
       "canonical_name": "GEMA",
       "canonical_domain": "gema.de",
@@ -9459,6 +9538,45 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:interhyp_ag",
+      "canonical_name": "Interhyp AG",
+      "canonical_domain": "interhyp.de",
+      "official_website_url": "https://www.interhyp.de/",
+      "career_url": "https://www.interhyp-gruppe.de/karriere/",
+      "aliases": [
+        "Interhyp",
+        "Interhyp Gruppe"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 38,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.interhyp-gruppe.de/karriere/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.interhyp-gruppe.de/karriere/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Financial Services",
+        "evidence_note": "Der Interhyp-Kandidat wurde ueber die offizielle Interhyp-Domain und die offizielle Karriere-Seite der Interhyp Gruppe belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
       "last_successful_scan_at": null
     },
     {
@@ -9502,6 +9620,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:iteratec_gmbh",
+      "canonical_name": "iteratec GmbH",
+      "canonical_domain": "iteratec.com",
+      "official_website_url": "https://www.iteratec.com/",
+      "career_url": "https://www.iteratec.com/de/karriere/",
+      "aliases": [
+        "iteratec",
+        "iteratec GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 37,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.iteratec.com/de/karriere/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.iteratec.com/de/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Software Consulting",
+        "evidence_note": "Der iteratec-Kandidat wurde ueber die offizielle iteratec-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hawe_hydraulik_se",
       "canonical_name": "HAWE Hydraulik SE",
       "canonical_domain": "hawe.com",
@@ -9538,6 +9695,45 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:jambit_gmbh",
+      "canonical_name": "jambit GmbH",
+      "canonical_domain": "jambit.com",
+      "official_website_url": "https://www.jambit.com/",
+      "career_url": "https://www.jambit.com/karriere/",
+      "aliases": [
+        "jambit",
+        "jambit GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software Development",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 36,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.jambit.com/karriere/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.jambit.com/karriere/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Software Development",
+        "evidence_note": "Der jambit-Kandidat wurde ueber die offizielle jambit-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
       "last_successful_scan_at": null
     },
     {
@@ -9580,6 +9776,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:jetbrains_gmbh",
+      "canonical_name": "JetBrains GmbH",
+      "canonical_domain": "jetbrains.com",
+      "official_website_url": "https://www.jetbrains.com/",
+      "career_url": "https://www.jetbrains.com/careers/",
+      "aliases": [
+        "JetBrains",
+        "JetBrains GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Developer Tools",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.jetbrains.com/careers/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.jetbrains.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Developer Tools",
+        "evidence_note": "Der JetBrains-Kandidat wurde ueber die offizielle JetBrains-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:heidelberg_materials",
       "canonical_name": "Heidelberg Materials",
       "canonical_domain": "heidelbergmaterials.com",
@@ -9616,6 +9851,46 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:helbling_technik_gmbh",
+      "canonical_name": "Helbling Technik GmbH",
+      "canonical_domain": "helbling.de",
+      "official_website_url": "https://www.helbling.de/",
+      "career_url": "https://www.helbling.de/karriere/",
+      "aliases": [
+        "Helbling",
+        "Helbling Technik",
+        "Helbling Technik GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.helbling.de/karriere/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.helbling.de/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Engineering Consulting",
+        "evidence_note": "Der Helbling-Kandidat wurde ueber die offizielle Helbling-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
       "last_successful_scan_at": null
     },
     {
@@ -9658,6 +9933,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:heldele_gmbh",
+      "canonical_name": "HELDELE GmbH",
+      "canonical_domain": "heldele.de",
+      "official_website_url": "https://www.heldele.de/",
+      "career_url": "https://www.heldele.de/karriere/",
+      "aliases": [
+        "HELDELE",
+        "Heldele GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Building Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.heldele.de/karriere/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.heldele.de/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Building Technology",
+        "evidence_note": "Der HELDELE-Kandidat wurde ueber die offizielle HELDELE-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:ge_healthcare",
       "canonical_name": "GE HealthCare",
       "canonical_domain": "gehealthcare.com",
@@ -9693,6 +10007,46 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hugendubel_digital_gmbh_and_co_kg",
+      "canonical_name": "Hugendubel Digital GmbH & Co. KG",
+      "canonical_domain": "hugendubel.de",
+      "official_website_url": "https://www.hugendubel.de/",
+      "career_url": "https://www.hugendubel.de/de/category/karriere-22571/",
+      "aliases": [
+        "Hugendubel",
+        "Hugendubel Digital",
+        "Hugendubel Digital GmbH & Co. KG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Retail",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hugendubel.de/de/category/karriere-22571/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.hugendubel.de/de/category/karriere-22571/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Retail",
+        "evidence_note": "Der Hugendubel-Kandidat wurde ueber die offizielle Hugendubel-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
       "last_successful_scan_at": null
     },
     {
@@ -9735,6 +10089,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:iabg_industrieanlagen_betriebsgesellschaft_mbh",
+      "canonical_name": "IABG Industrieanlagen-Betriebsgesellschaft mbH",
+      "canonical_domain": "iabg.de",
+      "official_website_url": "https://www.iabg.de/",
+      "career_url": "https://www.iabg.de/karriere",
+      "aliases": [
+        "IABG",
+        "Industrieanlagen-Betriebsgesellschaft mbH"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Aerospace and Defence",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.iabg.de/karriere",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.iabg.de/karriere",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Aerospace and Defence",
+        "evidence_note": "Der IABG-Kandidat wurde ueber die offizielle IABG-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:fdg_entertainment_gmbh_and_co_kg",
       "canonical_name": "FDG Entertainment GmbH & Co. KG",
       "canonical_domain": "fdg-entertainment.com",
@@ -9774,6 +10167,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:imfusion_gmbh",
+      "canonical_name": "ImFusion GmbH",
+      "canonical_domain": "imfusion.com",
+      "official_website_url": "https://www.imfusion.com/",
+      "career_url": "https://www.imfusion.com/careers/",
+      "aliases": [
+        "ImFusion",
+        "ImFusion GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Imaging Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.imfusion.com/careers/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.imfusion.com/careers/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Medical Imaging Software",
+        "evidence_note": "Der ImFusion-Kandidat wurde ueber die offizielle ImFusion-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:givve",
       "canonical_name": "givve",
       "canonical_domain": "givve.com",
@@ -9810,6 +10242,45 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:kgal_gmbh_and_co_kg",
+      "canonical_name": "KGAL GmbH & Co. KG",
+      "canonical_domain": "kgal.de",
+      "official_website_url": "https://www.kgal.de/",
+      "career_url": "https://www.kgal.de/karriere/",
+      "aliases": [
+        "KGAL",
+        "KGAL GmbH & Co. KG"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Investment Management",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.kgal.de/karriere/",
+        "observed_at": "2026-08-30T12:20:57.68Z",
+        "verification_url": "https://www.kgal.de/karriere/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Investment Management",
+        "evidence_note": "Der KGAL-Kandidat wurde ueber die offizielle KGAL-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-08-30T12:20:57.68Z",
       "last_successful_scan_at": null
     },
     {
@@ -12694,6 +13165,48 @@
       ]
     },
     {
+      "source_id": "source:helbling_technik_gmbh_career",
+      "company_id": "company:helbling_technik_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.helbling.de/karriere/",
+      "canonical_url": "https://www.helbling.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.helbling.de/karriere/",
+          "basis_url": "https://www.helbling.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:heldele_gmbh_career",
+      "company_id": "company:heldele_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.heldele.de/karriere/",
+      "canonical_url": "https://www.heldele.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.heldele.de/karriere/",
+          "basis_url": "https://www.heldele.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hensoldt_ag_career",
       "company_id": "company:hensoldt_ag",
       "source_type": "CAREER_PAGE",
@@ -12757,6 +13270,27 @@
       ]
     },
     {
+      "source_id": "source:holidu_gmbh_career",
+      "company_id": "company:holidu_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.holidu.com/careers",
+      "canonical_url": "https://www.holidu.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.holidu.com/careers",
+          "basis_url": "https://www.holidu.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hubert_burda_media_holding_career",
       "company_id": "company:hubert_burda_media_holding",
       "source_type": "CAREER_PAGE",
@@ -12773,6 +13307,69 @@
           "basis_url": "https://www.burda.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hugendubel_digital_gmbh_and_co_kg_career",
+      "company_id": "company:hugendubel_digital_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hugendubel.de/de/category/karriere-22571/",
+      "canonical_url": "https://www.hugendubel.de/de/category/karriere-22571/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hugendubel.de/de/category/karriere-22571/",
+          "basis_url": "https://www.hugendubel.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:iabg_industrieanlagen_betriebsgesellschaft_mbh_career",
+      "company_id": "company:iabg_industrieanlagen_betriebsgesellschaft_mbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.iabg.de/karriere",
+      "canonical_url": "https://www.iabg.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.iabg.de/karriere",
+          "basis_url": "https://www.iabg.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:ibm_deutschland_gmbh_career",
+      "company_id": "company:ibm_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ibm.com/de-de/careers",
+      "canonical_url": "https://www.ibm.com/de-de/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ibm.com/de-de/careers",
+          "basis_url": "https://www.ibm.com/de-de",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -12820,6 +13417,27 @@
       ]
     },
     {
+      "source_id": "source:imfusion_gmbh_career",
+      "company_id": "company:imfusion_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.imfusion.com/careers/",
+      "canonical_url": "https://www.imfusion.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.imfusion.com/careers/",
+          "basis_url": "https://www.imfusion.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:infineon_technologies_ag_career",
       "company_id": "company:infineon_technologies_ag",
       "source_type": "CAREER_PAGE",
@@ -12860,6 +13478,27 @@
       ]
     },
     {
+      "source_id": "source:interhyp_ag_career",
+      "company_id": "company:interhyp_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.interhyp-gruppe.de/karriere/",
+      "canonical_url": "https://www.interhyp-gruppe.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.interhyp-gruppe.de/karriere/",
+          "basis_url": "https://www.interhyp.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:internationale_muenchner_filmwochen_gmbh_career_url",
       "company_id": "company:internationale_muenchner_filmwochen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -12879,6 +13518,48 @@
           ],
           "observed_at": "2026-08-27T11:53:24.154Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:iteratec_gmbh_career",
+      "company_id": "company:iteratec_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.iteratec.com/de/karriere/",
+      "canonical_url": "https://www.iteratec.com/de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.iteratec.com/de/karriere/",
+          "basis_url": "https://www.iteratec.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:jambit_gmbh_career",
+      "company_id": "company:jambit_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.jambit.com/karriere/",
+      "canonical_url": "https://www.jambit.com/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.jambit.com/karriere/",
+          "basis_url": "https://www.jambit.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -12906,6 +13587,27 @@
       ]
     },
     {
+      "source_id": "source:jetbrains_gmbh_career",
+      "company_id": "company:jetbrains_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.jetbrains.com/careers/",
+      "canonical_url": "https://www.jetbrains.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.jetbrains.com/careers/",
+          "basis_url": "https://www.jetbrains.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:jungheinrich_moosburg_gmbh_career",
       "company_id": "company:jungheinrich_moosburg_gmbh",
       "source_type": "CAREER_PAGE",
@@ -12922,6 +13624,27 @@
           "basis_url": "https://www.jungheinrich.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:kgal_gmbh_and_co_kg_career",
+      "company_id": "company:kgal_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.kgal.de/karriere/",
+      "canonical_url": "https://www.kgal.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.kgal.de/karriere/",
+          "basis_url": "https://www.kgal.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T12:20:57.68Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
