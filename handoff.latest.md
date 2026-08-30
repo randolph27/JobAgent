@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-30T08:55:00.000+02:00
+Stand: 2026-08-30T13:51:30.000+02:00
 
 ## Neuer-Chat-Status
 
@@ -8,7 +8,7 @@ Stand: 2026-08-30T08:55:00.000+02:00
 - Root: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD: `7d3a334`
+- HEAD: siehe `git rev-parse --short HEAD` nach Pull/Pull-Check
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027`
 - Status: `in-progress`
@@ -115,3 +115,4 @@ Invoke-RestMethod -Uri http://localhost:9000/api/system/status -TimeoutSec 5
 - Keine Nutzung von Jobboersen-, Arbeitsagentur- oder Register-URLs als offizielle Karrierequelle.
 - PowerShell-HTTP-Checks koennen bei einzelnen offiziellen Karriereseiten blockiert werden; in solchen Faellen nur mit belastbarer offizieller Linkkette weiterarbeiten, sonst fail-closed in Review lassen.
 - Dedupe ueber Domains kann Tochter-/Konzernfirmen zusammenfuehren; bei notwendiger fachlicher Trennung zuerst Dedupe-Strategie anpassen und testen.
+
