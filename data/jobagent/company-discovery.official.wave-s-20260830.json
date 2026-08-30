@@ -1,0 +1,340 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-30T18:05:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Generali Deutschland AG",
+      "official_website_url": "https://www.generali.de/",
+      "career_url": "https://www.generali.de/karriere",
+      "aliases": [
+        "Generali Deutschland",
+        "Generali"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.generali.de/karriere",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der Generali-Kandidat wurde ueber die offizielle Generali-Deutschland-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "HENN GmbH",
+      "official_website_url": "https://www.henn.com/",
+      "career_url": "https://www.henn.com/en/careers",
+      "aliases": [
+        "HENN",
+        "HENN Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.henn.com/en/careers",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der HENN-Kandidat wurde ueber die offizielle HENN-Domain und deren Careers-Seite mit Muenchner Stellenbezug belegt."
+    },
+    {
+      "canonical_name": "HAWK:AI GmbH",
+      "official_website_url": "https://www.hawk.ai/",
+      "career_url": "https://www.hawk.ai/careers",
+      "aliases": [
+        "HAWK:AI",
+        "HAWK AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Crime Technology",
+      "scan_priority": 26,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hawk.ai/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der HAWK:AI-Kandidat wurde ueber die offizielle HAWK:AI-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "HCM4all GmbH",
+      "official_website_url": "https://hcm4all.com/",
+      "career_url": "https://jobs.hcm4all.de/list",
+      "aliases": [
+        "HCM4all"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "HR Software",
+      "scan_priority": 25,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.hcm4all.de/list",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der HCM4all-Kandidat wurde ueber die offizielle HCM4all-Domain und deren Jobs-Subdomain belegt."
+    },
+    {
+      "canonical_name": "Graefe und Unzer Verlag GmbH",
+      "official_website_url": "https://gu.de/",
+      "career_url": "https://gu.de/pages/karriere-kontakt",
+      "aliases": [
+        "Graefe und Unzer",
+        "GU Verlag",
+        "GRÄFE UND UNZER"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "scan_priority": 24,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://gu.de/pages/karriere-kontakt",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Graefe-und-Unzer-Kandidat wurde ueber die offizielle GU-Domain und deren Karriere-/Kontaktseite belegt."
+    },
+    {
+      "canonical_name": "HORNBACH Baumarkt AG",
+      "official_website_url": "https://www.hornbach.de/",
+      "career_url": "https://www.hornbach.de/jobs-karriere/",
+      "aliases": [
+        "Hornbach",
+        "HORNBACH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen West",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Retail",
+      "scan_priority": 23,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hornbach.de/jobs-karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Hornbach-Kandidat wurde ueber die offizielle HORNBACH-Domain und deren Jobs-/Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "CosmosIndex GmbH",
+      "official_website_url": "https://www.cosmosindex.com/",
+      "career_url": "https://www.cosmosindex.com/career/",
+      "aliases": [
+        "CosmosIndex"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Technology",
+      "scan_priority": 22,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.cosmosindex.com/career/",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der CosmosIndex-Kandidat wurde ueber die offizielle CosmosIndex-Domain und deren Career-Seite belegt."
+    },
+    {
+      "canonical_name": "Bleenco GmbH",
+      "official_website_url": "https://www.bleenco.com/",
+      "career_url": "https://www.bleenco.com/careers/",
+      "aliases": [
+        "Bleenco"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Software",
+      "scan_priority": 21,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bleenco.com/careers/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Bleenco-Kandidat wurde ueber die offizielle Bleenco-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Hamberger Grossmarkt GmbH",
+      "official_website_url": "https://www.hamberger-cc.de/",
+      "career_url": "https://jobs.hamberger-cc.de/",
+      "aliases": [
+        "Hamberger Grossmarkt",
+        "Hamberger"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen Ost",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Wholesale",
+      "scan_priority": 20,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.hamberger-cc.de/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Hamberger-Kandidat wurde ueber die offizielle Hamberger-Domain und deren Jobs-Subdomain belegt."
+    },
+    {
+      "canonical_name": "factor product GmbH",
+      "official_website_url": "https://www.factor-product.com/",
+      "career_url": "https://www.factor-product.com/en/",
+      "aliases": [
+        "Factor Product Muenchen",
+        "factor product"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Product Design",
+      "scan_priority": 19,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.factor-product.com/en/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Factor-Product-Kandidat wurde ueber die offizielle factor-product-Domain und deren sichtbaren Job-Hinweis belegt."
+    },
+    {
+      "canonical_name": "Huawei Technologies Deutschland GmbH",
+      "official_website_url": "https://www.huawei.com/de/",
+      "career_url": "https://career.huawei.com/en",
+      "aliases": [
+        "Huawei",
+        "Huawei Technologies"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Information and Communications Technology",
+      "scan_priority": 18,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://career.huawei.com/en",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der Huawei-Kandidat wurde ueber die offizielle Huawei-Deutschland-Domain und das offizielle Huawei-Career-Portal belegt."
+    },
+    {
+      "canonical_name": "Porsche eBike Performance GmbH",
+      "official_website_url": "https://www.fazua.com/en/",
+      "career_url": "https://www.fazua.com/en/company/jobs/",
+      "aliases": [
+        "FAZUA",
+        "Porsche eBike Performance"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "E-Mobility",
+      "scan_priority": 17,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.fazua.com/en/company/jobs/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der FAZUA-Kandidat wurde ueber die offizielle FAZUA-Domain und deren Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "GlaxoSmithKline GmbH & Co. KG",
+      "official_website_url": "https://de.gsk.com/de-de/",
+      "career_url": "https://de.gsk.com/de-de/karriere/",
+      "aliases": [
+        "GlaxoSmithKline",
+        "GSK"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Life Sciences",
+      "scan_priority": 16,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://de.gsk.com/de-de/karriere/",
+      "discovery_origin": "source-registry:munich_business_international_companies",
+      "evidence_note": "Der GlaxoSmithKline-Kandidat wurde ueber die offizielle GSK-Deutschland-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Hexal AG",
+      "official_website_url": "https://www.hexal.de/",
+      "career_url": "https://www.sandoz.com/de-de/karriere/",
+      "aliases": [
+        "Hexal",
+        "Sandoz Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Holzkirchen/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Life Sciences",
+      "scan_priority": 15,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.sandoz.com/de-de/karriere/",
+      "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+      "evidence_note": "Der Hexal-Kandidat wurde ueber die offizielle Hexal-Domain und die offizielle Sandoz-Karriere-Seite belegt."
+    }
+  ]
+}

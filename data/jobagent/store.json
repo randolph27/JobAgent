@@ -10321,6 +10321,549 @@
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
       "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:generali_deutschland_ag",
+      "canonical_name": "Generali Deutschland AG",
+      "canonical_domain": "generali.de",
+      "official_website_url": "https://www.generali.de/",
+      "career_url": "https://www.generali.de/karriere",
+      "aliases": [
+        "Generali",
+        "Generali Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.generali.de/karriere",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.generali.de/karriere",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Der Generali-Kandidat wurde ueber die offizielle Generali-Deutschland-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:henn_gmbh",
+      "canonical_name": "HENN GmbH",
+      "canonical_domain": "henn.com",
+      "official_website_url": "https://www.henn.com/",
+      "career_url": "https://www.henn.com/en/careers",
+      "aliases": [
+        "HENN",
+        "HENN Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 27,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.henn.com/en/careers",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.henn.com/en/careers",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture",
+        "evidence_note": "Der HENN-Kandidat wurde ueber die offizielle HENN-Domain und deren Careers-Seite mit Muenchner Stellenbezug belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hawk_ai_gmbh",
+      "canonical_name": "HAWK:AI GmbH",
+      "canonical_domain": "hawk.ai",
+      "official_website_url": "https://www.hawk.ai/",
+      "career_url": "https://www.hawk.ai/careers",
+      "aliases": [
+        "HAWK AI",
+        "HAWK:AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Crime Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 26,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hawk.ai/careers",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.hawk.ai/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Financial Crime Technology",
+        "evidence_note": "Der HAWK:AI-Kandidat wurde ueber die offizielle HAWK:AI-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hcm4all_gmbh",
+      "canonical_name": "HCM4all GmbH",
+      "canonical_domain": "hcm4all.com",
+      "official_website_url": "https://hcm4all.com/",
+      "career_url": "https://jobs.hcm4all.de/list",
+      "aliases": [
+        "HCM4all"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "HR Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 25,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.hcm4all.de/list",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://jobs.hcm4all.de/list",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "HR Software",
+        "evidence_note": "Der HCM4all-Kandidat wurde ueber die offizielle HCM4all-Domain und deren Jobs-Subdomain belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:graefe_und_unzer_verlag_gmbh",
+      "canonical_name": "Graefe und Unzer Verlag GmbH",
+      "canonical_domain": "gu.de",
+      "official_website_url": "https://gu.de/",
+      "career_url": "https://gu.de/pages/karriere-kontakt",
+      "aliases": [
+        "Graefe und Unzer",
+        "GRÄFE UND UNZER",
+        "GU Verlag"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 24,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://gu.de/pages/karriere-kontakt",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://gu.de/pages/karriere-kontakt",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing",
+        "evidence_note": "Der Graefe-und-Unzer-Kandidat wurde ueber die offizielle GU-Domain und deren Karriere-/Kontaktseite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hornbach_baumarkt_ag",
+      "canonical_name": "HORNBACH Baumarkt AG",
+      "canonical_domain": "hornbach.de",
+      "official_website_url": "https://www.hornbach.de/",
+      "career_url": "https://www.hornbach.de/jobs-karriere/",
+      "aliases": [
+        "Hornbach"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen West",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Retail",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 23,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hornbach.de/jobs-karriere/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.hornbach.de/jobs-karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Retail",
+        "evidence_note": "Der Hornbach-Kandidat wurde ueber die offizielle HORNBACH-Domain und deren Jobs-/Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:cosmosindex_gmbh",
+      "canonical_name": "CosmosIndex GmbH",
+      "canonical_domain": "cosmosindex.com",
+      "official_website_url": "https://www.cosmosindex.com/",
+      "career_url": "https://www.cosmosindex.com/career/",
+      "aliases": [
+        "CosmosIndex"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 22,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.cosmosindex.com/career/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.cosmosindex.com/career/",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Geospatial Technology",
+        "evidence_note": "Der CosmosIndex-Kandidat wurde ueber die offizielle CosmosIndex-Domain und deren Career-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bleenco_gmbh",
+      "canonical_name": "Bleenco GmbH",
+      "canonical_domain": "bleenco.com",
+      "official_website_url": "https://www.bleenco.com/",
+      "career_url": "https://www.bleenco.com/careers/",
+      "aliases": [
+        "Bleenco"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 21,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bleenco.com/careers/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.bleenco.com/careers/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Software",
+        "evidence_note": "Der Bleenco-Kandidat wurde ueber die offizielle Bleenco-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hamberger_grossmarkt_gmbh",
+      "canonical_name": "Hamberger Grossmarkt GmbH",
+      "canonical_domain": "hamberger-cc.de",
+      "official_website_url": "https://www.hamberger-cc.de/",
+      "career_url": "https://jobs.hamberger-cc.de/",
+      "aliases": [
+        "Hamberger",
+        "Hamberger Grossmarkt"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen Ost",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Wholesale",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 20,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.hamberger-cc.de/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://jobs.hamberger-cc.de/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Wholesale",
+        "evidence_note": "Der Hamberger-Kandidat wurde ueber die offizielle Hamberger-Domain und deren Jobs-Subdomain belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:factor_product_gmbh",
+      "canonical_name": "factor product GmbH",
+      "canonical_domain": "factor-product.com",
+      "official_website_url": "https://www.factor-product.com/",
+      "career_url": "https://www.factor-product.com/en/",
+      "aliases": [
+        "factor product",
+        "Factor Product Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Product Design",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 19,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.factor-product.com/en/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.factor-product.com/en/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Product Design",
+        "evidence_note": "Der Factor-Product-Kandidat wurde ueber die offizielle factor-product-Domain und deren sichtbaren Job-Hinweis belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:huawei_technologies_deutschland_gmbh",
+      "canonical_name": "Huawei Technologies Deutschland GmbH",
+      "canonical_domain": "huawei.com",
+      "official_website_url": "https://www.huawei.com/de/",
+      "career_url": "https://career.huawei.com/en",
+      "aliases": [
+        "Huawei",
+        "Huawei Technologies"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Information and Communications Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 18,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://career.huawei.com/en",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://career.huawei.com/en",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Information and Communications Technology",
+        "evidence_note": "Der Huawei-Kandidat wurde ueber die offizielle Huawei-Deutschland-Domain und das offizielle Huawei-Career-Portal belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:porsche_ebike_performance_gmbh",
+      "canonical_name": "Porsche eBike Performance GmbH",
+      "canonical_domain": "fazua.com",
+      "official_website_url": "https://www.fazua.com/en/",
+      "career_url": "https://www.fazua.com/en/company/jobs/",
+      "aliases": [
+        "FAZUA",
+        "Porsche eBike Performance"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "E-Mobility",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 17,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.fazua.com/en/company/jobs/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.fazua.com/en/company/jobs/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "E-Mobility",
+        "evidence_note": "Der FAZUA-Kandidat wurde ueber die offizielle FAZUA-Domain und deren Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:glaxosmithkline_gmbh_and_co_kg",
+      "canonical_name": "GlaxoSmithKline GmbH & Co. KG",
+      "canonical_domain": "de.gsk.com",
+      "official_website_url": "https://de.gsk.com/de-de/",
+      "career_url": "https://de.gsk.com/de-de/karriere/",
+      "aliases": [
+        "GlaxoSmithKline",
+        "GSK"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Life Sciences",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 16,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://de.gsk.com/de-de/karriere/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://de.gsk.com/de-de/karriere/",
+        "discovery_origin": "source-registry:munich_business_international_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Life Sciences",
+        "evidence_note": "Der GlaxoSmithKline-Kandidat wurde ueber die offizielle GSK-Deutschland-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hexal_ag",
+      "canonical_name": "Hexal AG",
+      "canonical_domain": "hexal.de",
+      "official_website_url": "https://www.hexal.de/",
+      "career_url": "https://www.sandoz.com/de-de/karriere/",
+      "aliases": [
+        "Hexal",
+        "Sandoz Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Holzkirchen/Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Life Sciences",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 15,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.sandoz.com/de-de/karriere/",
+        "observed_at": "2026-08-30T17:39:14.102Z",
+        "verification_url": "https://www.sandoz.com/de-de/karriere/",
+        "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Life Sciences",
+        "evidence_note": "Der Hexal-Kandidat wurde ueber die offizielle Hexal-Domain und die offizielle Sandoz-Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:39:14.102Z",
+      "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
     }
   ],
   "jobs": [
@@ -11449,6 +11992,27 @@
       ]
     },
     {
+      "source_id": "source:bleenco_gmbh_career",
+      "company_id": "company:bleenco_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bleenco.com/careers/",
+      "canonical_url": "https://www.bleenco.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bleenco.com/careers/",
+          "basis_url": "https://www.bleenco.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:blickfeld_gmbh_career",
       "company_id": "company:blickfeld_gmbh",
       "source_type": "CAREER_PAGE",
@@ -12007,6 +12571,27 @@
           "basis_url": "https://www.cosinuss.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:cosmosindex_gmbh_career",
+      "company_id": "company:cosmosindex_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.cosmosindex.com/career/",
+      "canonical_url": "https://www.cosmosindex.com/career/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.cosmosindex.com/career/",
+          "basis_url": "https://www.cosmosindex.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -12600,6 +13185,27 @@
       ]
     },
     {
+      "source_id": "source:factor_product_gmbh_career",
+      "company_id": "company:factor_product_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.factor-product.com/en/",
+      "canonical_url": "https://www.factor-product.com/en/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.factor-product.com/en/",
+          "basis_url": "https://www.factor-product.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:faktor_zehn_career",
       "company_id": "company:faktor_zehn",
       "source_type": "CAREER_PAGE",
@@ -12957,6 +13563,27 @@
       ]
     },
     {
+      "source_id": "source:generali_deutschland_ag_career",
+      "company_id": "company:generali_deutschland_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.generali.de/karriere",
+      "canonical_url": "https://www.generali.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.generali.de/karriere",
+          "basis_url": "https://www.generali.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:giesecke_plus_devrient_gmbh_career",
       "company_id": "company:giesecke_plus_devrient_gmbh",
       "source_type": "CAREER_PAGE",
@@ -13039,6 +13666,27 @@
       ]
     },
     {
+      "source_id": "source:glaxosmithkline_gmbh_and_co_kg_career",
+      "company_id": "company:glaxosmithkline_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://de.gsk.com/de-de/karriere/",
+      "canonical_url": "https://de.gsk.com/de-de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://de.gsk.com/de-de/karriere/",
+          "basis_url": "https://de.gsk.com/de-de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:glenmark_arzneimittel_gmbh_career_url",
       "company_id": "company:glenmark_arzneimittel_gmbh",
       "source_type": "CAREER_PAGE",
@@ -13081,6 +13729,48 @@
       }
     },
     {
+      "source_id": "source:graefe_und_unzer_verlag_gmbh_career",
+      "company_id": "company:graefe_und_unzer_verlag_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://gu.de/pages/karriere-kontakt",
+      "canonical_url": "https://gu.de/pages/karriere-kontakt",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://gu.de/pages/karriere-kontakt",
+          "basis_url": "https://gu.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hamberger_grossmarkt_gmbh_career",
+      "company_id": "company:hamberger_grossmarkt_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.hamberger-cc.de/",
+      "canonical_url": "https://jobs.hamberger-cc.de/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.hamberger-cc.de/",
+          "basis_url": "https://www.hamberger-cc.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hawe_hydraulik_se_career",
       "company_id": "company:hawe_hydraulik_se",
       "source_type": "CAREER_PAGE",
@@ -13102,6 +13792,27 @@
       ]
     },
     {
+      "source_id": "source:hawk_ai_gmbh_career",
+      "company_id": "company:hawk_ai_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hawk.ai/careers",
+      "canonical_url": "https://www.hawk.ai/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hawk.ai/careers",
+          "basis_url": "https://www.hawk.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hcl_technologies_gmbh_career",
       "company_id": "company:hcl_technologies_gmbh",
       "source_type": "CAREER_PAGE",
@@ -13118,6 +13829,27 @@
           "basis_url": "https://www.hcltech.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hcm4all_gmbh_career",
+      "company_id": "company:hcm4all_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.hcm4all.de/list",
+      "canonical_url": "https://jobs.hcm4all.de/list",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.hcm4all.de/list",
+          "basis_url": "https://hcm4all.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -13207,6 +13939,27 @@
       ]
     },
     {
+      "source_id": "source:henn_gmbh_career",
+      "company_id": "company:henn_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.henn.com/en/careers",
+      "canonical_url": "https://www.henn.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.henn.com/en/careers",
+          "basis_url": "https://www.henn.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hensoldt_ag_career",
       "company_id": "company:hensoldt_ag",
       "source_type": "CAREER_PAGE",
@@ -13249,6 +14002,27 @@
       ]
     },
     {
+      "source_id": "source:hexal_ag_career",
+      "company_id": "company:hexal_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.sandoz.com/de-de/karriere/",
+      "canonical_url": "https://www.sandoz.com/de-de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.sandoz.com/de-de/karriere/",
+          "basis_url": "https://www.hexal.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hochschule_weihenstephan_triesdorf_career",
       "company_id": "company:hochschule_weihenstephan_triesdorf",
       "source_type": "CAREER_PAGE",
@@ -13286,6 +14060,48 @@
           "basis_url": "https://www.holidu.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hornbach_baumarkt_ag_career",
+      "company_id": "company:hornbach_baumarkt_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hornbach.de/jobs-karriere/",
+      "canonical_url": "https://www.hornbach.de/jobs-karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hornbach.de/jobs-karriere/",
+          "basis_url": "https://www.hornbach.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:huawei_technologies_deutschland_gmbh_career",
+      "company_id": "company:huawei_technologies_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://career.huawei.com/en",
+      "canonical_url": "https://career.huawei.com/en",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://career.huawei.com/en",
+          "basis_url": "https://www.huawei.com/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -14598,6 +15414,27 @@
           ],
           "observed_at": "2026-08-27T17:57:52.983Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:porsche_ebike_performance_gmbh_career",
+      "company_id": "company:porsche_ebike_performance_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.fazua.com/en/company/jobs/",
+      "canonical_url": "https://www.fazua.com/en/company/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:39:14.102Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.fazua.com/en/company/jobs/",
+          "basis_url": "https://www.fazua.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
