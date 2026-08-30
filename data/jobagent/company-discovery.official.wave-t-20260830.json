@@ -1,0 +1,290 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-30T18:35:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Luminovo GmbH",
+      "official_website_url": "https://luminovo.com/",
+      "career_url": "https://luminovo.com/careers",
+      "aliases": [
+        "Luminovo"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Electronics Supply Chain Software",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://luminovo.com/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Luminovo-Kandidat wurde ueber die offizielle Luminovo-Domain und deren Careers-Seite mit Muenchner Standortbezug belegt."
+    },
+    {
+      "canonical_name": "Magazino GmbH",
+      "official_website_url": "https://www.magazino.eu/en/",
+      "career_url": "https://www.magazino.eu/en/apply-now/",
+      "aliases": [
+        "Magazino",
+        "Magazino - a Jungheinrich company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.magazino.eu/en/apply-now/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Magazino-Kandidat wurde ueber die offizielle Magazino-Domain und deren Jobs-/Bewerbungsseite belegt."
+    },
+    {
+      "canonical_name": "Makersite GmbH",
+      "official_website_url": "https://makersite.io/",
+      "career_url": "https://makersite.io/careers/",
+      "aliases": [
+        "Makersite"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Product Lifecycle Intelligence",
+      "scan_priority": 26,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://makersite.io/careers/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Makersite-Kandidat wurde ueber die offizielle Makersite-Domain und deren Careers-/Open-Vacancies-Seite belegt."
+    },
+    {
+      "canonical_name": "Lanes & Planes GmbH",
+      "official_website_url": "https://www.lanes-planes.com/en/",
+      "career_url": "https://www.lanes-planes.com/en/vacancies/",
+      "aliases": [
+        "Lanes & Planes",
+        "Lanes and Planes"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Travel Software",
+      "scan_priority": 25,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lanes-planes.com/en/vacancies/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Lanes-&-Planes-Kandidat wurde ueber die offizielle Lanes-&-Planes-Domain und deren Vacancies-Seite belegt."
+    },
+    {
+      "canonical_name": "KINEXON GmbH",
+      "official_website_url": "https://kinexon.com/",
+      "career_url": "https://kinexon.com/jobs",
+      "aliases": [
+        "KINEXON",
+        "Kinexon"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial IoT",
+      "scan_priority": 24,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://kinexon.com/jobs",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der KINEXON-Kandidat wurde ueber die offizielle KINEXON-Domain und deren Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Lebensversicherung von 1871 a. G. Muenchen",
+      "official_website_url": "https://www.lv1871.de/",
+      "career_url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+      "aliases": [
+        "LV 1871",
+        "LV1871"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "scan_priority": 23,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der LV-1871-Kandidat wurde ueber die offizielle LV-1871-Domain und deren Karriereportal belegt."
+    },
+    {
+      "canonical_name": "KPMG AG Wirtschaftspruefungsgesellschaft",
+      "official_website_url": "https://www.kpmg.de/",
+      "career_url": "https://jobs.kpmg.de/",
+      "aliases": [
+        "KPMG",
+        "KPMG Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Professional Services",
+      "scan_priority": 22,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.kpmg.de/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der KPMG-Kandidat wurde ueber die offizielle KPMG-Deutschland-Domain und das offizielle KPMG-Jobs-Portal belegt."
+    },
+    {
+      "canonical_name": "Isarsoft GmbH",
+      "official_website_url": "https://www.isarsoft.com/",
+      "career_url": "https://www.isarsoft.com/about-us",
+      "aliases": [
+        "Isarsoft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Video Analytics",
+      "scan_priority": 21,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.isarsoft.com/about-us",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Isarsoft-Kandidat wurde ueber die offizielle Isarsoft-Domain und den dort sichtbaren Open-Positions-/Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "lingoking GmbH",
+      "official_website_url": "https://www.lingoking.com/en",
+      "career_url": "https://www.lingoking.com/en/career.html",
+      "aliases": [
+        "lingoking"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Language Services",
+      "scan_priority": 20,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lingoking.com/en/career.html",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der lingoking-Kandidat wurde ueber die offizielle lingoking-Domain und deren Career-Seite belegt."
+    },
+    {
+      "canonical_name": "Klueber Lubrication Muenchen SE & Co. KG",
+      "official_website_url": "https://www.klueber.com/",
+      "career_url": "https://www.klueber.com/de/en/company/career/",
+      "aliases": [
+        "Klueber Lubrication",
+        "Kluber Lubrication",
+        "Klueber Lubrication GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Specialty Lubricants",
+      "scan_priority": 19,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.klueber.com/de/en/company/career/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Klueber-Kandidat wurde ueber die offizielle Klueber-Domain und deren Career-Seite belegt."
+    },
+    {
+      "canonical_name": "Westwing Group SE",
+      "official_website_url": "https://www.westwing.com/",
+      "career_url": "https://www.westwing.com/careers/",
+      "aliases": [
+        "Westwing"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce",
+      "scan_priority": 18,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.westwing.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Westwing-Kandidat wurde ueber die offizielle Westwing-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "zooplus SE",
+      "official_website_url": "https://corporate.zooplus.com/en/",
+      "career_url": "https://careers.zooplus.com/",
+      "aliases": [
+        "zooplus",
+        "zooplus AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce",
+      "scan_priority": 17,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.zooplus.com/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der zooplus-Kandidat wurde ueber die offizielle zooplus-Corporate-Domain und deren Careers-Portal belegt."
+    }
+  ]
+}

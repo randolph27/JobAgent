@@ -10323,6 +10323,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:luminovo_gmbh",
+      "canonical_name": "Luminovo GmbH",
+      "canonical_domain": "luminovo.com",
+      "official_website_url": "https://luminovo.com/",
+      "career_url": "https://luminovo.com/careers",
+      "aliases": [
+        "Luminovo"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Electronics Supply Chain Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://luminovo.com/careers",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://luminovo.com/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Electronics Supply Chain Software",
+        "evidence_note": "Der Luminovo-Kandidat wurde ueber die offizielle Luminovo-Domain und deren Careers-Seite mit Muenchner Standortbezug belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:generali_deutschland_ag",
       "canonical_name": "Generali Deutschland AG",
       "canonical_domain": "generali.de",
@@ -10359,6 +10397,45 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:magazino_gmbh",
+      "canonical_name": "Magazino GmbH",
+      "canonical_domain": "magazino.eu",
+      "official_website_url": "https://www.magazino.eu/en/",
+      "career_url": "https://www.magazino.eu/en/apply-now/",
+      "aliases": [
+        "Magazino",
+        "Magazino - a Jungheinrich company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 27,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.magazino.eu/en/apply-now/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://www.magazino.eu/en/apply-now/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Robotics",
+        "evidence_note": "Der Magazino-Kandidat wurde ueber die offizielle Magazino-Domain und deren Jobs-/Bewerbungsseite belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
       "last_successful_scan_at": null
     },
     {
@@ -10401,6 +10478,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:makersite_gmbh",
+      "canonical_name": "Makersite GmbH",
+      "canonical_domain": "makersite.io",
+      "official_website_url": "https://makersite.io/",
+      "career_url": "https://makersite.io/careers/",
+      "aliases": [
+        "Makersite"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Product Lifecycle Intelligence",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 26,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://makersite.io/careers/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://makersite.io/careers/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Product Lifecycle Intelligence",
+        "evidence_note": "Der Makersite-Kandidat wurde ueber die offizielle Makersite-Domain und deren Careers-/Open-Vacancies-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hawk_ai_gmbh",
       "canonical_name": "HAWK:AI GmbH",
       "canonical_domain": "hawk.ai",
@@ -10440,6 +10555,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:lanes_and_planes_gmbh",
+      "canonical_name": "Lanes & Planes GmbH",
+      "canonical_domain": "lanes-planes.com",
+      "official_website_url": "https://www.lanes-planes.com/en/",
+      "career_url": "https://www.lanes-planes.com/en/vacancies/",
+      "aliases": [
+        "Lanes & Planes",
+        "Lanes and Planes"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Travel Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 25,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.lanes-planes.com/en/vacancies/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://www.lanes-planes.com/en/vacancies/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Business Travel Software",
+        "evidence_note": "Der Lanes-&-Planes-Kandidat wurde ueber die offizielle Lanes-&-Planes-Domain und deren Vacancies-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hcm4all_gmbh",
       "canonical_name": "HCM4all GmbH",
       "canonical_domain": "hcm4all.com",
@@ -10475,6 +10629,44 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:kinexon_gmbh",
+      "canonical_name": "KINEXON GmbH",
+      "canonical_domain": "kinexon.com",
+      "official_website_url": "https://kinexon.com/",
+      "career_url": "https://kinexon.com/jobs",
+      "aliases": [
+        "KINEXON"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial IoT",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 24,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://kinexon.com/jobs",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://kinexon.com/jobs",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial IoT",
+        "evidence_note": "Der KINEXON-Kandidat wurde ueber die offizielle KINEXON-Domain und deren Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
       "last_successful_scan_at": null
     },
     {
@@ -10518,6 +10710,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:lebensversicherung_von_1871_a_g_muenchen",
+      "canonical_name": "Lebensversicherung von 1871 a. G. Muenchen",
+      "canonical_domain": "lv1871.de",
+      "official_website_url": "https://www.lv1871.de/",
+      "career_url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+      "aliases": [
+        "LV 1871",
+        "LV1871"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 23,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Der LV-1871-Kandidat wurde ueber die offizielle LV-1871-Domain und deren Karriereportal belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hornbach_baumarkt_ag",
       "canonical_name": "HORNBACH Baumarkt AG",
       "canonical_domain": "hornbach.de",
@@ -10553,6 +10784,45 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:kpmg_ag_wirtschaftspruefungsgesellschaft",
+      "canonical_name": "KPMG AG Wirtschaftspruefungsgesellschaft",
+      "canonical_domain": "kpmg.de",
+      "official_website_url": "https://www.kpmg.de/",
+      "career_url": "https://jobs.kpmg.de/",
+      "aliases": [
+        "KPMG",
+        "KPMG Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Professional Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 22,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.kpmg.de/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://jobs.kpmg.de/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Professional Services",
+        "evidence_note": "Der KPMG-Kandidat wurde ueber die offizielle KPMG-Deutschland-Domain und das offizielle KPMG-Jobs-Portal belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
       "last_successful_scan_at": null
     },
     {
@@ -10594,6 +10864,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:isarsoft_gmbh",
+      "canonical_name": "Isarsoft GmbH",
+      "canonical_domain": "isarsoft.com",
+      "official_website_url": "https://www.isarsoft.com/",
+      "career_url": "https://www.isarsoft.com/about-us",
+      "aliases": [
+        "Isarsoft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Video Analytics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 21,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.isarsoft.com/about-us",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://www.isarsoft.com/about-us",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Video Analytics",
+        "evidence_note": "Der Isarsoft-Kandidat wurde ueber die offizielle Isarsoft-Domain und den dort sichtbaren Open-Positions-/Karrierebereich belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bleenco_gmbh",
       "canonical_name": "Bleenco GmbH",
       "canonical_domain": "bleenco.com",
@@ -10629,6 +10937,44 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:lingoking_gmbh",
+      "canonical_name": "lingoking GmbH",
+      "canonical_domain": "lingoking.com",
+      "official_website_url": "https://www.lingoking.com/en",
+      "career_url": "https://www.lingoking.com/en/career.html",
+      "aliases": [
+        "lingoking"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Language Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 20,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.lingoking.com/en/career.html",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://www.lingoking.com/en/career.html",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Language Services",
+        "evidence_note": "Der lingoking-Kandidat wurde ueber die offizielle lingoking-Domain und deren Career-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
       "last_successful_scan_at": null
     },
     {
@@ -10671,6 +11017,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:klueber_lubrication_muenchen_se_and_co_kg",
+      "canonical_name": "Klueber Lubrication Muenchen SE & Co. KG",
+      "canonical_domain": "klueber.com",
+      "official_website_url": "https://www.klueber.com/",
+      "career_url": "https://www.klueber.com/de/en/company/career/",
+      "aliases": [
+        "Kluber Lubrication",
+        "Klueber Lubrication",
+        "Klueber Lubrication GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Specialty Lubricants",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 19,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.klueber.com/de/en/company/career/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://www.klueber.com/de/en/company/career/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Specialty Lubricants",
+        "evidence_note": "Der Klueber-Kandidat wurde ueber die offizielle Klueber-Domain und deren Career-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:factor_product_gmbh",
       "canonical_name": "factor product GmbH",
       "canonical_domain": "factor-product.com",
@@ -10710,6 +11096,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:westwing_group_se",
+      "canonical_name": "Westwing Group SE",
+      "canonical_domain": "westwing.com",
+      "official_website_url": "https://www.westwing.com/",
+      "career_url": "https://www.westwing.com/careers/",
+      "aliases": [
+        "Westwing"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 18,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.westwing.com/careers/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://www.westwing.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "E-Commerce",
+        "evidence_note": "Der Westwing-Kandidat wurde ueber die offizielle Westwing-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:huawei_technologies_deutschland_gmbh",
       "canonical_name": "Huawei Technologies Deutschland GmbH",
       "canonical_domain": "huawei.com",
@@ -10746,6 +11170,45 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:zooplus_se",
+      "canonical_name": "zooplus SE",
+      "canonical_domain": "corporate.zooplus.com",
+      "official_website_url": "https://corporate.zooplus.com/en/",
+      "career_url": "https://careers.zooplus.com/",
+      "aliases": [
+        "zooplus",
+        "zooplus AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 17,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.zooplus.com/",
+        "observed_at": "2026-08-30T17:56:02.051Z",
+        "verification_url": "https://careers.zooplus.com/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "E-Commerce",
+        "evidence_note": "Der zooplus-Kandidat wurde ueber die offizielle zooplus-Corporate-Domain und deren Careers-Portal belegt."
+      },
+      "created_at": "2026-08-30T17:56:02.051Z",
+      "updated_at": "2026-08-30T17:56:02.051Z",
       "last_successful_scan_at": null
     },
     {
@@ -14338,6 +14801,27 @@
       ]
     },
     {
+      "source_id": "source:isarsoft_gmbh_career",
+      "company_id": "company:isarsoft_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.isarsoft.com/about-us",
+      "canonical_url": "https://www.isarsoft.com/about-us",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.isarsoft.com/about-us",
+          "basis_url": "https://www.isarsoft.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:iteratec_gmbh_career",
       "company_id": "company:iteratec_gmbh",
       "source_type": "CAREER_PAGE",
@@ -14466,6 +14950,48 @@
       ]
     },
     {
+      "source_id": "source:kinexon_gmbh_career",
+      "company_id": "company:kinexon_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://kinexon.com/jobs",
+      "canonical_url": "https://kinexon.com/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://kinexon.com/jobs",
+          "basis_url": "https://kinexon.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:klueber_lubrication_muenchen_se_and_co_kg_career",
+      "company_id": "company:klueber_lubrication_muenchen_se_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.klueber.com/de/en/company/career/",
+      "canonical_url": "https://www.klueber.com/de/en/company/career/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.klueber.com/de/en/company/career/",
+          "basis_url": "https://www.klueber.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:knorr_bremse_ag_career",
       "company_id": "company:knorr_bremse_ag",
       "source_type": "CAREER_PAGE",
@@ -14529,6 +15055,27 @@
       ]
     },
     {
+      "source_id": "source:kpmg_ag_wirtschaftspruefungsgesellschaft_career",
+      "company_id": "company:kpmg_ag_wirtschaftspruefungsgesellschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.kpmg.de/",
+      "canonical_url": "https://jobs.kpmg.de/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.kpmg.de/",
+          "basis_url": "https://www.kpmg.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:landeshauptstadt_muenchen_career",
       "company_id": "company:landeshauptstadt_muenchen",
       "source_type": "CAREER_PAGE",
@@ -14546,6 +15093,27 @@
         "observed_at": "2026-08-17T15:52:58.666Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:lanes_and_planes_gmbh_career",
+      "company_id": "company:lanes_and_planes_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.lanes-planes.com/en/vacancies/",
+      "canonical_url": "https://www.lanes-planes.com/en/vacancies/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.lanes-planes.com/en/vacancies/",
+          "basis_url": "https://www.lanes-planes.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:larsen_and_toubro_limited_career_url",
@@ -14567,6 +15135,27 @@
           ],
           "observed_at": "2026-08-27T17:41:16.488Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:lebensversicherung_von_1871_a_g_muenchen_career",
+      "company_id": "company:lebensversicherung_von_1871_a_g_muenchen",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+      "canonical_url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.lv1871.de/unternehmen/karriereportal/karriere/",
+          "basis_url": "https://www.lv1871.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -14594,6 +15183,27 @@
       ]
     },
     {
+      "source_id": "source:lingoking_gmbh_career",
+      "company_id": "company:lingoking_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.lingoking.com/en/career.html",
+      "canonical_url": "https://www.lingoking.com/en/career.html",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.lingoking.com/en/career.html",
+          "basis_url": "https://www.lingoking.com/en",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:ltimindtree_gmbh_career",
       "company_id": "company:ltimindtree_gmbh",
       "source_type": "CAREER_PAGE",
@@ -14610,6 +15220,69 @@
           "basis_url": "https://www.ltimindtree.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T05:34:39.534Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:luminovo_gmbh_career",
+      "company_id": "company:luminovo_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://luminovo.com/careers",
+      "canonical_url": "https://luminovo.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://luminovo.com/careers",
+          "basis_url": "https://luminovo.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:magazino_gmbh_career",
+      "company_id": "company:magazino_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.magazino.eu/en/apply-now/",
+      "canonical_url": "https://www.magazino.eu/en/apply-now/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.magazino.eu/en/apply-now/",
+          "basis_url": "https://www.magazino.eu/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:makersite_gmbh_career",
+      "company_id": "company:makersite_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://makersite.io/careers/",
+      "canonical_url": "https://makersite.io/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://makersite.io/careers/",
+          "basis_url": "https://makersite.io/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -16208,6 +16881,27 @@
       ]
     },
     {
+      "source_id": "source:westwing_group_se_career",
+      "company_id": "company:westwing_group_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.westwing.com/careers/",
+      "canonical_url": "https://www.westwing.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.westwing.com/careers/",
+          "basis_url": "https://www.westwing.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:wipro_limited_career_url",
       "company_id": "company:wipro_limited",
       "source_type": "CAREER_PAGE",
@@ -16291,6 +16985,27 @@
           "basis_url": "https://www.forstzentrum.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T05:59:42.748Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:zooplus_se_career",
+      "company_id": "company:zooplus_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.zooplus.com/",
+      "canonical_url": "https://careers.zooplus.com/",
+      "is_official": true,
+      "verified_at": "2026-08-30T17:56:02.051Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.zooplus.com/",
+          "basis_url": "https://corporate.zooplus.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T17:56:02.051Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
