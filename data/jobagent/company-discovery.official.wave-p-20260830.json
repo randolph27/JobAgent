@@ -1,0 +1,310 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-30T12:50:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Delightex GmbH",
+      "official_website_url": "https://www.company.delightex.com/",
+      "career_url": "https://www.company.delightex.com/",
+      "aliases": [
+        "Delightex",
+        "Delightex GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Education Technology",
+      "scan_priority": 52,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.company.delightex.com/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Delightex-Kandidat wurde ueber die offizielle Delightex-Unternehmensseite mit Join-us-Abschnitt und Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Ebenbuild",
+      "official_website_url": "https://www.ebenbuild.com/",
+      "career_url": "https://www.ebenbuild.com/",
+      "aliases": [
+        "Ebenbuild",
+        "Ebenbuild GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Health Technology",
+      "scan_priority": 51,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ebenbuild.com/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Ebenbuild-Kandidat wurde ueber die offizielle Ebenbuild-Domain mit Jobs-Link und Muenchen-Impressumsbezug belegt."
+    },
+    {
+      "canonical_name": "Emax Digital",
+      "official_website_url": "https://www.emax-digital.com/en/home",
+      "career_url": "https://www.emax-digital.com/companyjobs",
+      "aliases": [
+        "Emax Digital",
+        "emax digital",
+        "emax digital GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce Analytics",
+      "scan_priority": 50,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.emax-digital.com/companyjobs",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Emax-Digital-Kandidat wurde ueber die offizielle emax-digital-Domain und deren offizielle Jobs-Seite mit Muenchen-Stellen belegt."
+    },
+    {
+      "canonical_name": "E.ON",
+      "official_website_url": "https://careers.eon.com/",
+      "career_url": "https://jobs.eon.com/de",
+      "aliases": [
+        "E.ON",
+        "E.ON SE",
+        "E.ON Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Energy",
+      "scan_priority": 49,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.eon.com/de",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der E.ON-Kandidat wurde ueber das offizielle E.ON-Careers-Portal und das offizielle jobs.eon.com-Karriereportal mit Muenchen-Stellen belegt."
+    },
+    {
+      "canonical_name": "DHL Delivery",
+      "official_website_url": "https://careers.dhl.com/",
+      "career_url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+      "aliases": [
+        "DHL Delivery",
+        "DHL",
+        "DHL Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Logistics",
+      "scan_priority": 48,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der DHL-Delivery-Kandidat wurde ueber das offizielle DHL-Careers-Portal mit Muenchen-Filter belegt."
+    },
+    {
+      "canonical_name": "Continental Automotive",
+      "official_website_url": "https://www.continental.com/en/",
+      "career_url": "https://jobs.continental.com/en/",
+      "aliases": [
+        "Continental Automotive",
+        "Continental",
+        "Continental AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Technology",
+      "scan_priority": 47,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.continental.com/en/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Continental-Automotive-Kandidat wurde ueber die offizielle Continental-Domain und das offizielle Continental-Jobportal belegt."
+    },
+    {
+      "canonical_name": "Alphabet",
+      "official_website_url": "https://www.alphabet.com/de-de.html",
+      "career_url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+      "aliases": [
+        "Alphabet",
+        "Alphabet Fuhrparkmanagement",
+        "Alphabet International"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Mobility",
+      "scan_priority": 46,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der Alphabet-Kandidat wurde ueber die offizielle Alphabet-Domain und deren Karriere-Seite mit BMW-Group-Bewerbungsbezug belegt."
+    },
+    {
+      "canonical_name": "Amazon Web Services",
+      "official_website_url": "https://aws.amazon.com/",
+      "career_url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+      "aliases": [
+        "Amazon Web Services",
+        "AWS",
+        "Amazon Web Services Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Cloud Computing",
+      "scan_priority": 45,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der AWS-Kandidat wurde ueber die offizielle AWS-Domain und die offizielle Amazon-Jobs-Standortseite fuer Muenchen belegt."
+    },
+    {
+      "canonical_name": "Bayerische Versicherungskammer",
+      "official_website_url": "https://www.vkb.de/",
+      "career_url": "https://stellenangebote.vkb.de/",
+      "aliases": [
+        "Bayerische Versicherungskammer",
+        "Versicherungskammer Bayern",
+        "VKB"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "scan_priority": 44,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://stellenangebote.vkb.de/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der Versicherungskammer-Kandidat wurde ueber die offizielle VKB-Domain und das offizielle Stellenangebote-Portal belegt."
+    },
+    {
+      "canonical_name": "Bayerische Versicherungsgesellschaft",
+      "official_website_url": "https://www.diebayerische.de/",
+      "career_url": "https://www.diebayerische.de/360-grad/karriere/",
+      "aliases": [
+        "Bayerische Versicherungsgesellschaft",
+        "die Bayerische",
+        "Bayerische Versicherung"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "scan_priority": 43,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.diebayerische.de/360-grad/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Kandidat Bayerische Versicherungsgesellschaft wurde ueber die offizielle die-Bayerische-Domain und deren offizielle Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "BMW Car IT",
+      "official_website_url": "https://jobs.bmwgroup.com/",
+      "career_url": "https://jobs.bmwgroup.com/",
+      "aliases": [
+        "BMW Car IT",
+        "BMW Car IT GmbH",
+        "BMW Group Car IT"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Software",
+      "scan_priority": 42,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.bmwgroup.com/",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der BMW-Car-IT-Kandidat wurde ueber das offizielle BMW-Group-Jobs-Portal belegt; BMW Car IT wird dort als BMW-Group-Einheit gefuehrt."
+    },
+    {
+      "canonical_name": "Differential Bio",
+      "official_website_url": "https://www.differential.bio/",
+      "career_url": "https://www.differential.bio/about",
+      "aliases": [
+        "Differential Bio",
+        "Differential Bio GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen/Freising",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        },
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Biotechnology",
+      "scan_priority": 41,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.differential.bio/about",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Differential-Bio-Kandidat wurde ueber die offizielle Differential-Bio-Domain und den offiziellen About/Careers-Bereich mit Muenchen- und Freising-Bezug belegt."
+    }
+  ]
+}

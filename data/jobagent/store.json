@@ -1223,45 +1223,6 @@
       "last_successful_scan_at": null
     },
     {
-      "company_id": "company:versicherungskammer_bayern",
-      "canonical_name": "Versicherungskammer Bayern",
-      "canonical_domain": "versicherungskammer-bayern.de",
-      "official_website_url": "https://www.versicherungskammer-bayern.de/",
-      "career_url": "https://www.versicherungskammer-bayern.de/karriere",
-      "aliases": [
-        "Versicherungskammer Bayern",
-        "VKB"
-      ],
-      "locations": [
-        {
-          "label": "Muenchen",
-          "city": "Muenchen",
-          "region": "Bayern",
-          "country": "DE",
-          "target_area": "MUNICH"
-        }
-      ],
-      "industry": "Insurance",
-      "ats": [],
-      "scan_status": "PENDING",
-      "scan_priority": 81,
-      "next_scan_at": "2026-08-18T00:00:00Z",
-      "verification_status": "CAREER_URL_VERIFIED",
-      "discovery_source": {
-        "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.versicherungskammer-bayern.de/karriere",
-        "observed_at": "2026-08-17T16:02:19.059Z",
-        "verification_url": "https://www.versicherungskammer-bayern.de/karriere",
-        "discovery_origin": "official.manual.2026-08-17",
-        "target_area": "MUNICH",
-        "industry_hint": "Insurance",
-        "evidence_note": "Offizielle Karriere-Seite der Versicherungskammer Bayern als Primaerquelle gepflegt."
-      },
-      "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-17T16:02:19.059Z",
-      "last_successful_scan_at": null
-    },
-    {
       "company_id": "company:deutsche_lufthansa_ag",
       "canonical_name": "Deutsche Lufthansa AG",
       "canonical_domain": "lufthansagroup.com",
@@ -1298,6 +1259,46 @@
       },
       "created_at": "2026-08-28T15:53:28.788Z",
       "updated_at": "2026-08-28T15:53:28.788Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:versicherungskammer_bayern",
+      "canonical_name": "Bayerische Versicherungskammer",
+      "canonical_domain": "vkb.de",
+      "official_website_url": "https://www.vkb.de/",
+      "career_url": "https://stellenangebote.vkb.de/",
+      "aliases": [
+        "Bayerische Versicherungskammer",
+        "Versicherungskammer Bayern",
+        "VKB"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 81,
+      "next_scan_at": "2026-08-18T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://stellenangebote.vkb.de/",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://stellenangebote.vkb.de/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Der Versicherungskammer-Kandidat wurde ueber die offizielle VKB-Domain und das offizielle Stellenangebote-Portal belegt."
+      },
+      "created_at": "2026-08-17T16:01:23.149Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
       "last_successful_scan_at": null
     },
     {
@@ -6314,6 +6315,84 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:delightex_gmbh",
+      "canonical_name": "Delightex GmbH",
+      "canonical_domain": "company.delightex.com",
+      "official_website_url": "https://www.company.delightex.com/",
+      "career_url": "https://www.company.delightex.com/",
+      "aliases": [
+        "Delightex",
+        "Delightex GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Education Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 52,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.company.delightex.com/",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://www.company.delightex.com/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Education Technology",
+        "evidence_note": "Der Delightex-Kandidat wurde ueber die offizielle Delightex-Unternehmensseite mit Join-us-Abschnitt und Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ebenbuild",
+      "canonical_name": "Ebenbuild",
+      "canonical_domain": "ebenbuild.com",
+      "official_website_url": "https://www.ebenbuild.com/",
+      "career_url": "https://www.ebenbuild.com/",
+      "aliases": [
+        "Ebenbuild",
+        "Ebenbuild GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Health Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 51,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ebenbuild.com/",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://www.ebenbuild.com/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Health Technology",
+        "evidence_note": "Der Ebenbuild-Kandidat wurde ueber die offizielle Ebenbuild-Domain mit Jobs-Link und Muenchen-Impressumsbezug belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:yamaichi_electronics_deutschland_gmbh",
       "canonical_name": "Yamaichi Electronics Deutschland GmbH",
       "canonical_domain": "yamaichi.de",
@@ -8602,6 +8681,45 @@
       ]
     },
     {
+      "company_id": "company:emax_digital",
+      "canonical_name": "Emax Digital",
+      "canonical_domain": "emax-digital.com",
+      "official_website_url": "https://www.emax-digital.com/en/home",
+      "career_url": "https://www.emax-digital.com/companyjobs",
+      "aliases": [
+        "Emax Digital",
+        "emax digital GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce Analytics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.emax-digital.com/companyjobs",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://www.emax-digital.com/companyjobs",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "E-Commerce Analytics",
+        "evidence_note": "Der Emax-Digital-Kandidat wurde ueber die offizielle emax-digital-Domain und deren offizielle Jobs-Seite mit Muenchen-Stellen belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:dmg_mori_emea_holding_gmbh",
       "canonical_name": "DMG MORI EMEA Holding GmbH",
       "canonical_domain": "de.dmgmori.com",
@@ -8937,6 +9055,332 @@
           "expires_at": "2026-11-25T10:17:13.75Z"
         }
       ]
+    },
+    {
+      "company_id": "company:e_on",
+      "canonical_name": "E.ON",
+      "canonical_domain": "careers.eon.com",
+      "official_website_url": "https://careers.eon.com/",
+      "career_url": "https://jobs.eon.com/de",
+      "aliases": [
+        "E.ON",
+        "E.ON Group",
+        "E.ON SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Energy",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 49,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.eon.com/de",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://jobs.eon.com/de",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Energy",
+        "evidence_note": "Der E.ON-Kandidat wurde ueber das offizielle E.ON-Careers-Portal und das offizielle jobs.eon.com-Karriereportal mit Muenchen-Stellen belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:dhl_delivery",
+      "canonical_name": "DHL Delivery",
+      "canonical_domain": "careers.dhl.com",
+      "official_website_url": "https://careers.dhl.com/",
+      "career_url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+      "aliases": [
+        "DHL",
+        "DHL Delivery",
+        "DHL Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Logistics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 48,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Logistics",
+        "evidence_note": "Der DHL-Delivery-Kandidat wurde ueber das offizielle DHL-Careers-Portal mit Muenchen-Filter belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:continental_automotive",
+      "canonical_name": "Continental Automotive",
+      "canonical_domain": "continental.com",
+      "official_website_url": "https://www.continental.com/en/",
+      "career_url": "https://jobs.continental.com/en/",
+      "aliases": [
+        "Continental",
+        "Continental AG",
+        "Continental Automotive"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 47,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.continental.com/en/",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://jobs.continental.com/en/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Technology",
+        "evidence_note": "Der Continental-Automotive-Kandidat wurde ueber die offizielle Continental-Domain und das offizielle Continental-Jobportal belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:alphabet",
+      "canonical_name": "Alphabet",
+      "canonical_domain": "alphabet.com",
+      "official_website_url": "https://www.alphabet.com/de-de.html",
+      "career_url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+      "aliases": [
+        "Alphabet",
+        "Alphabet Fuhrparkmanagement",
+        "Alphabet International"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Mobility",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 46,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Business Mobility",
+        "evidence_note": "Der Alphabet-Kandidat wurde ueber die offizielle Alphabet-Domain und deren Karriere-Seite mit BMW-Group-Bewerbungsbezug belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:amazon_web_services",
+      "canonical_name": "Amazon Web Services",
+      "canonical_domain": "aws.amazon.com",
+      "official_website_url": "https://aws.amazon.com/",
+      "career_url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+      "aliases": [
+        "Amazon Web Services",
+        "Amazon Web Services Germany",
+        "AWS"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Cloud Computing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 45,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Cloud Computing",
+        "evidence_note": "Der AWS-Kandidat wurde ueber die offizielle AWS-Domain und die offizielle Amazon-Jobs-Standortseite fuer Muenchen belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bayerische_versicherungsgesellschaft",
+      "canonical_name": "Bayerische Versicherungsgesellschaft",
+      "canonical_domain": "diebayerische.de",
+      "official_website_url": "https://www.diebayerische.de/",
+      "career_url": "https://www.diebayerische.de/360-grad/karriere/",
+      "aliases": [
+        "Bayerische Versicherung",
+        "Bayerische Versicherungsgesellschaft",
+        "die Bayerische"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 43,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.diebayerische.de/360-grad/karriere/",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://www.diebayerische.de/360-grad/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Der Kandidat Bayerische Versicherungsgesellschaft wurde ueber die offizielle die-Bayerische-Domain und deren offizielle Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bmw_car_it",
+      "canonical_name": "BMW Car IT",
+      "canonical_domain": "jobs.bmwgroup.com",
+      "official_website_url": "https://jobs.bmwgroup.com/",
+      "career_url": "https://jobs.bmwgroup.com/",
+      "aliases": [
+        "BMW Car IT",
+        "BMW Car IT GmbH",
+        "BMW Group Car IT"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 42,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.bmwgroup.com/",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://jobs.bmwgroup.com/",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Software",
+        "evidence_note": "Der BMW-Car-IT-Kandidat wurde ueber das offizielle BMW-Group-Jobs-Portal belegt; BMW Car IT wird dort als BMW-Group-Einheit gefuehrt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:differential_bio",
+      "canonical_name": "Differential Bio",
+      "canonical_domain": "differential.bio",
+      "official_website_url": "https://www.differential.bio/",
+      "career_url": "https://www.differential.bio/about",
+      "aliases": [
+        "Differential Bio",
+        "Differential Bio GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen/Freising",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        },
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Biotechnology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 41,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.differential.bio/about",
+        "observed_at": "2026-08-30T06:41:25.349Z",
+        "verification_url": "https://www.differential.bio/about",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Biotechnology",
+        "evidence_note": "Der Differential-Bio-Kandidat wurde ueber die offizielle Differential-Bio-Domain und den offiziellen About/Careers-Bereich mit Muenchen- und Freising-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-30T06:41:25.349Z",
+      "last_successful_scan_at": null
     }
   ],
   "jobs": [
@@ -9330,6 +9774,27 @@
       ]
     },
     {
+      "source_id": "source:alphabet_career",
+      "company_id": "company:alphabet",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+      "canonical_url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.alphabet.com/de-de/ueber-alphabet/karriere.html",
+          "basis_url": "https://www.alphabet.com/de-de.html",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:amazon_de_gmbh_career",
       "company_id": "company:amazon_de_gmbh",
       "source_type": "CAREER_PAGE",
@@ -9346,6 +9811,27 @@
           "basis_url": "https://www.amazon.jobs/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:amazon_web_services_career",
+      "company_id": "company:amazon_web_services",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+      "canonical_url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.amazon.jobs/content/en/locations/germany/munich",
+          "basis_url": "https://aws.amazon.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -9792,6 +10278,27 @@
       ]
     },
     {
+      "source_id": "source:bayerische_versicherungsgesellschaft_career",
+      "company_id": "company:bayerische_versicherungsgesellschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.diebayerische.de/360-grad/karriere/",
+      "canonical_url": "https://www.diebayerische.de/360-grad/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.diebayerische.de/360-grad/karriere/",
+          "basis_url": "https://www.diebayerische.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bayerische_versorgungskammer_career",
       "company_id": "company:bayerische_versorgungskammer",
       "source_type": "CAREER_PAGE",
@@ -10018,6 +10525,27 @@
           "basis_url": "https://www.blickfeld.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bmw_car_it_career",
+      "company_id": "company:bmw_car_it",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.bmwgroup.com/",
+      "canonical_url": "https://jobs.bmwgroup.com/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.bmwgroup.com/",
+          "basis_url": "https://jobs.bmwgroup.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -10502,6 +11030,27 @@
       ]
     },
     {
+      "source_id": "source:continental_automotive_career",
+      "company_id": "company:continental_automotive",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.continental.com/en/",
+      "canonical_url": "https://jobs.continental.com/en/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.continental.com/en/",
+          "basis_url": "https://www.continental.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:cosinuss_gmbh_career",
       "company_id": "company:cosinuss_gmbh",
       "source_type": "CAREER_PAGE",
@@ -10670,6 +11219,27 @@
       ]
     },
     {
+      "source_id": "source:delightex_gmbh_career",
+      "company_id": "company:delightex_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.company.delightex.com/",
+      "canonical_url": "https://www.company.delightex.com/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.company.delightex.com/",
+          "basis_url": "https://www.company.delightex.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:deloitte_gmbh_career",
       "company_id": "company:deloitte_gmbh",
       "source_type": "CAREER_PAGE",
@@ -10773,6 +11343,48 @@
       ]
     },
     {
+      "source_id": "source:dhl_delivery_career",
+      "company_id": "company:dhl_delivery",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+      "canonical_url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.dhl.com/eu/de/jobs-in-muenchen",
+          "basis_url": "https://careers.dhl.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:differential_bio_career",
+      "company_id": "company:differential_bio",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.differential.bio/about",
+      "canonical_url": "https://www.differential.bio/about",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.differential.bio/about",
+          "basis_url": "https://www.differential.bio/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:digital_m_gmbh_career_url",
       "company_id": "company:digital_m_gmbh",
       "source_type": "CAREER_PAGE",
@@ -10859,6 +11471,48 @@
       ]
     },
     {
+      "source_id": "source:e_on_career",
+      "company_id": "company:e_on",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.eon.com/de",
+      "canonical_url": "https://jobs.eon.com/de",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.eon.com/de",
+          "basis_url": "https://careers.eon.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:ebenbuild_career",
+      "company_id": "company:ebenbuild",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ebenbuild.com/",
+      "canonical_url": "https://www.ebenbuild.com/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ebenbuild.com/",
+          "basis_url": "https://www.ebenbuild.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:egym_dach_career",
       "company_id": "company:egym_dach",
       "source_type": "CAREER_PAGE",
@@ -10896,6 +11550,27 @@
           "basis_url": "https://www.elgato.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:emax_digital_career",
+      "company_id": "company:emax_digital",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.emax-digital.com/companyjobs",
+      "canonical_url": "https://www.emax-digital.com/companyjobs",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.emax-digital.com/companyjobs",
+          "basis_url": "https://www.emax-digital.com/en/home",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -13173,20 +13848,22 @@
       "source_id": "source:versicherungskammer_bayern_career",
       "company_id": "company:versicherungskammer_bayern",
       "source_type": "CAREER_PAGE",
-      "url": "https://www.versicherungskammer-bayern.de/karriere",
-      "canonical_url": "https://www.versicherungskammer-bayern.de/karriere",
+      "url": "https://stellenangebote.vkb.de/",
+      "canonical_url": "https://stellenangebote.vkb.de/",
       "is_official": true,
-      "verified_at": "2026-08-17T16:02:19.059Z",
+      "verified_at": "2026-08-30T06:41:25.349Z",
       "verification_basis": "CAREER_URL",
-      "verification_evidence": {
-        "status": "VERIFIED",
-        "evidence_type": "CAREER_URL",
-        "url": "https://www.versicherungskammer-bayern.de/karriere",
-        "basis_url": "https://www.versicherungskammer-bayern.de/",
-        "redirect_chain": [],
-        "observed_at": "2026-08-17T16:02:19.059Z",
-        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
-      }
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://stellenangebote.vkb.de/",
+          "basis_url": "https://www.vkb.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:wacker_chemie_ag_career",
