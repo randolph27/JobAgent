@@ -4477,6 +4477,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:celus",
+      "canonical_name": "CELUS",
+      "canonical_domain": "celus.io",
+      "official_website_url": "https://www.celus.io/",
+      "career_url": "https://lifeatcelus.io/",
+      "aliases": [
+        "CELUS",
+        "CELUS GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Electronics Design Automation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 64,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://lifeatcelus.io/",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://lifeatcelus.io/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Electronics Design Automation",
+        "evidence_note": "Der CELUS-Kandidat wurde ueber die offizielle CELUS-Domain und die dort verlinkte Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bavaria_film_gmbh",
       "canonical_name": "Bavaria Film GmbH",
       "canonical_domain": "bavaria-film.de",
@@ -4514,6 +4553,45 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:freeletics",
+      "canonical_name": "Freeletics",
+      "canonical_domain": "freeletics.com",
+      "official_website_url": "https://www.freeletics.com/en/",
+      "career_url": "https://www.freeletics.com/en/corporate/jobs/",
+      "aliases": [
+        "Freeletics",
+        "Freeletics GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fitness Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 63,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.freeletics.com/en/corporate/jobs/",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://www.freeletics.com/en/corporate/jobs/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Fitness Technology",
+        "evidence_note": "Der Freeletics-Kandidat wurde ueber die offizielle Freeletics-Domain und deren offiziellen Corporate-Jobs-Bereich belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
       "last_successful_scan_at": null
     },
     {
@@ -4669,6 +4747,45 @@
       },
       "created_at": "2026-08-29T11:14:53.775Z",
       "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:floy_gmbh",
+      "canonical_name": "Floy GmbH",
+      "canonical_domain": "floy.com",
+      "official_website_url": "https://www.floy.com/en",
+      "career_url": "https://floy.jobs.personio.com/?language=en",
+      "aliases": [
+        "Floy",
+        "Floy GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Health Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 62,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://floy.jobs.personio.com/?language=en",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://floy.jobs.personio.com/?language=en",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Health Technology",
+        "evidence_note": "Der Floy-Kandidat wurde ueber die offizielle Floy-Domain und das dort belegte Personio-Karriereportal verifiziert."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
       "last_successful_scan_at": null
     },
     {
@@ -4828,6 +4945,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:gaf_geospatial_gmbh",
+      "canonical_name": "GAF Geospatial GmbH",
+      "canonical_domain": "gaf.de",
+      "official_website_url": "https://www.gaf.de/",
+      "career_url": "https://www.gaf.de/careers/",
+      "aliases": [
+        "GAF",
+        "GAF AG",
+        "GAF Geospatial GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 61,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.gaf.de/careers/",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://www.gaf.de/careers/",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Geospatial Technology",
+        "evidence_note": "Der GAF-Kandidat wurde ueber die offizielle GAF-Domain und deren offiziellen Careers-Bereich belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:european_space_imaging",
       "canonical_name": "European Space Imaging",
       "canonical_domain": "euspaceimaging.com",
@@ -4979,6 +5136,47 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:flix",
+      "canonical_name": "Flix",
+      "canonical_domain": "flix.com",
+      "official_website_url": "https://www.flix.com/",
+      "career_url": "https://flix.careers/locations/munich/",
+      "aliases": [
+        "Flix",
+        "FlixBus",
+        "FlixMobility",
+        "FlixTrain"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 60,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://flix.careers/locations/munich/",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://flix.careers/locations/munich/",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Mobility",
+        "evidence_note": "Der Flix-Kandidat wurde ueber die offizielle Flix-Domain und das offiziell genutzte Karriereportal mit Muenchen-Standort belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
       "last_successful_scan_at": null
     },
     {
@@ -5139,6 +5337,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:eviden",
+      "canonical_name": "Eviden",
+      "canonical_domain": "eviden.com",
+      "official_website_url": "https://eviden.com/",
+      "career_url": "https://eviden.com/careers/",
+      "aliases": [
+        "Eviden",
+        "Eviden Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Information Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 59,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://eviden.com/careers/",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://eviden.com/careers/",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Information Technology",
+        "evidence_note": "Der Eviden-Kandidat wurde ueber die offizielle Eviden-Domain und deren offiziellen Careers-Bereich belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:droemer_knaur_gmbh_and_co_kg",
       "canonical_name": "Droemer Knaur GmbH & Co. KG",
       "canonical_domain": "droemer-knaur.de",
@@ -5253,6 +5490,46 @@
       },
       "created_at": "2026-08-29T11:36:07.133Z",
       "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:franka_robotics_gmbh",
+      "canonical_name": "Franka Robotics GmbH",
+      "canonical_domain": "franka.de",
+      "official_website_url": "https://franka.de/",
+      "career_url": "https://franka.de/careers",
+      "aliases": [
+        "Franka Emika",
+        "FRANKA EMIKA GmbH",
+        "Franka Robotics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 58,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://franka.de/careers",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://franka.de/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Robotics",
+        "evidence_note": "Der Franka-Kandidat wurde ueber die offizielle Franka-Domain und deren offizielle Careers-Seite mit Muenchen-Impressumsbezug belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
       "last_successful_scan_at": null
     },
     {
@@ -5374,6 +5651,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:konux",
+      "canonical_name": "KONUX",
+      "canonical_domain": "konux.com",
+      "official_website_url": "https://konux.com/",
+      "career_url": "https://konux.com/careers-page/",
+      "aliases": [
+        "Konux",
+        "Konux GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Railway Predictive Maintenance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 57,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://konux.com/careers-page/",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://konux.com/careers-page/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Railway Predictive Maintenance",
+        "evidence_note": "Der KONUX-Kandidat wurde ueber die offizielle KONUX-Domain und deren offiziellen Careers-Bereich belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:fernride",
       "canonical_name": "Fernride",
       "canonical_domain": "fernride.com",
@@ -5487,6 +5803,46 @@
       },
       "created_at": "2026-08-29T11:14:53.775Z",
       "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tado_gmbh",
+      "canonical_name": "tado GmbH",
+      "canonical_domain": "tado.com",
+      "official_website_url": "https://www.tado.com/en-gb",
+      "career_url": "https://tado.jobs.personio.de/?language=en",
+      "aliases": [
+        "tado",
+        "tado GmbH",
+        "tado°"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Smart Home Energy",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 56,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://tado.jobs.personio.de/?language=en",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://tado.jobs.personio.de/?language=en",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Smart Home Energy",
+        "evidence_note": "Der tado-Kandidat wurde ueber die offizielle tado-Domain und das offiziell genutzte Personio-Karriereportal belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
       "last_successful_scan_at": null
     },
     {
@@ -5608,6 +5964,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:idnow",
+      "canonical_name": "IDnow",
+      "canonical_domain": "idnow.io",
+      "official_website_url": "https://idnow.io/",
+      "career_url": "https://idnow.io/careers/",
+      "aliases": [
+        "IDnow",
+        "IDnow GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Identity",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 55,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://idnow.io/careers/",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://idnow.io/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Identity",
+        "evidence_note": "Der IDnow-Kandidat wurde ueber die offizielle IDnow-Domain und deren offiziellen Careers-Bereich mit Muenchen-Stellen belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bragi_gmbh",
       "canonical_name": "Bragi GmbH",
       "canonical_domain": "bragi.com",
@@ -5683,6 +6078,45 @@
       },
       "created_at": "2026-08-30T06:11:36.779Z",
       "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:navvis",
+      "canonical_name": "NavVis",
+      "canonical_domain": "navvis.com",
+      "official_website_url": "https://www.navvis.com/",
+      "career_url": "https://www.navvis.com/company/careers",
+      "aliases": [
+        "NavVis",
+        "NavVis GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Twin Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 54,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.navvis.com/company/careers",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://www.navvis.com/company/careers",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Twin Technology",
+        "evidence_note": "Der NavVis-Kandidat wurde ueber die offizielle NavVis-Domain und deren offiziellen Careers-Bereich belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
       "last_successful_scan_at": null
     },
     {
@@ -5799,6 +6233,45 @@
       },
       "created_at": "2026-08-30T06:11:36.779Z",
       "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:data_modul",
+      "canonical_name": "DATA MODUL",
+      "canonical_domain": "data-modul.com",
+      "official_website_url": "https://www.data-modul.com/",
+      "career_url": "https://career.data-modul.com/eng",
+      "aliases": [
+        "DATA MODUL",
+        "DATA MODUL AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Display Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 53,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://career.data-modul.com/eng",
+        "observed_at": "2026-08-30T06:22:15.182Z",
+        "verification_url": "https://career.data-modul.com/eng",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Display Technology",
+        "evidence_note": "Der DATA-MODUL-Kandidat wurde ueber die offizielle DATA-MODUL-Domain und das offizielle Karriereportal mit Muenchen-Stellen belegt."
+      },
+      "created_at": "2026-08-30T06:22:15.182Z",
+      "updated_at": "2026-08-30T06:22:15.182Z",
       "last_successful_scan_at": null
     },
     {
@@ -9840,6 +10313,27 @@
       ]
     },
     {
+      "source_id": "source:celus_career",
+      "company_id": "company:celus",
+      "source_type": "CAREER_PAGE",
+      "url": "https://lifeatcelus.io/",
+      "canonical_url": "https://lifeatcelus.io/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://lifeatcelus.io/",
+          "basis_url": "https://www.celus.io/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:censhare_gmbh_career",
       "company_id": "company:censhare_gmbh",
       "source_type": "CAREER_PAGE",
@@ -10129,6 +10623,27 @@
           "basis_url": "https://www.3ds.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:data_modul_career",
+      "company_id": "company:data_modul",
+      "source_type": "CAREER_PAGE",
+      "url": "https://career.data-modul.com/eng",
+      "canonical_url": "https://career.data-modul.com/eng",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://career.data-modul.com/eng",
+          "basis_url": "https://www.data-modul.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -10428,6 +10943,27 @@
       ]
     },
     {
+      "source_id": "source:eviden_career",
+      "company_id": "company:eviden",
+      "source_type": "CAREER_PAGE",
+      "url": "https://eviden.com/careers/",
+      "canonical_url": "https://eviden.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://eviden.com/careers/",
+          "basis_url": "https://eviden.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:faktor_zehn_career",
       "company_id": "company:faktor_zehn",
       "source_type": "CAREER_PAGE",
@@ -10491,6 +11027,48 @@
       ]
     },
     {
+      "source_id": "source:flix_career",
+      "company_id": "company:flix",
+      "source_type": "CAREER_PAGE",
+      "url": "https://flix.careers/locations/munich/",
+      "canonical_url": "https://flix.careers/locations/munich/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://flix.careers/locations/munich/",
+          "basis_url": "https://www.flix.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:floy_gmbh_career",
+      "company_id": "company:floy_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://floy.jobs.personio.com/?language=en",
+      "canonical_url": "https://floy.jobs.personio.com/?language=en",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://floy.jobs.personio.com/?language=en",
+          "basis_url": "https://www.floy.com/en",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:flughafen_muenchen_gmbh_career",
       "company_id": "company:flughafen_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -10533,6 +11111,27 @@
       ]
     },
     {
+      "source_id": "source:franka_robotics_gmbh_career",
+      "company_id": "company:franka_robotics_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://franka.de/careers",
+      "canonical_url": "https://franka.de/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://franka.de/careers",
+          "basis_url": "https://franka.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:fraunhofer_ivv_career",
       "company_id": "company:fraunhofer_ivv",
       "source_type": "CAREER_PAGE",
@@ -10552,6 +11151,27 @@
       }
     },
     {
+      "source_id": "source:freeletics_career",
+      "company_id": "company:freeletics",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.freeletics.com/en/corporate/jobs/",
+      "canonical_url": "https://www.freeletics.com/en/corporate/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.freeletics.com/en/corporate/jobs/",
+          "basis_url": "https://www.freeletics.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:fujitsu_germany_gmbh_career",
       "company_id": "company:fujitsu_germany_gmbh",
       "source_type": "CAREER_PAGE",
@@ -10568,6 +11188,27 @@
           "basis_url": "https://www.fujitsu.com/de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:gaf_geospatial_gmbh_career",
+      "company_id": "company:gaf_geospatial_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.gaf.de/careers/",
+      "canonical_url": "https://www.gaf.de/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.gaf.de/careers/",
+          "basis_url": "https://www.gaf.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -10741,6 +11382,27 @@
       ]
     },
     {
+      "source_id": "source:idnow_career",
+      "company_id": "company:idnow",
+      "source_type": "CAREER_PAGE",
+      "url": "https://idnow.io/careers/",
+      "canonical_url": "https://idnow.io/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://idnow.io/careers/",
+          "basis_url": "https://idnow.io/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:ihk_fuer_muenchen_und_oberbayern_career",
       "company_id": "company:ihk_fuer_muenchen_und_oberbayern",
       "source_type": "CAREER_PAGE",
@@ -10886,6 +11548,27 @@
         "observed_at": "2026-08-17T16:02:19.059Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:konux_career",
+      "company_id": "company:konux",
+      "source_type": "CAREER_PAGE",
+      "url": "https://konux.com/careers-page/",
+      "canonical_url": "https://konux.com/careers-page/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://konux.com/careers-page/",
+          "basis_url": "https://konux.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:kpit_technologies_gmbh_career_url",
@@ -11429,6 +12112,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:navvis_career",
+      "company_id": "company:navvis",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.navvis.com/company/careers",
+      "canonical_url": "https://www.navvis.com/company/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.navvis.com/company/careers",
+          "basis_url": "https://www.navvis.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:nemetschek_se_career",
@@ -12233,6 +12937,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:tado_gmbh_career",
+      "company_id": "company:tado_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://tado.jobs.personio.de/?language=en",
+      "canonical_url": "https://tado.jobs.personio.de/?language=en",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:22:15.182Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://tado.jobs.personio.de/?language=en",
+          "basis_url": "https://www.tado.com/en-gb",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:tata_consultancy_services_deutschland_gmbh_career",

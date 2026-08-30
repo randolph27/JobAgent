@@ -1,0 +1,302 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-30T11:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "CELUS",
+      "official_website_url": "https://www.celus.io/",
+      "career_url": "https://lifeatcelus.io/",
+      "aliases": [
+        "CELUS",
+        "Celus",
+        "CELUS GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Electronics Design Automation",
+      "scan_priority": 64,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://lifeatcelus.io/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der CELUS-Kandidat wurde ueber die offizielle CELUS-Domain und die dort verlinkte Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Freeletics",
+      "official_website_url": "https://www.freeletics.com/en/",
+      "career_url": "https://www.freeletics.com/en/corporate/jobs/",
+      "aliases": [
+        "Freeletics",
+        "Freeletics GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fitness Technology",
+      "scan_priority": 63,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.freeletics.com/en/corporate/jobs/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Freeletics-Kandidat wurde ueber die offizielle Freeletics-Domain und deren offiziellen Corporate-Jobs-Bereich belegt."
+    },
+    {
+      "canonical_name": "Floy GmbH",
+      "official_website_url": "https://www.floy.com/en",
+      "career_url": "https://floy.jobs.personio.com/?language=en",
+      "aliases": [
+        "Floy",
+        "Floy GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Health Technology",
+      "scan_priority": 62,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://floy.jobs.personio.com/?language=en",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Floy-Kandidat wurde ueber die offizielle Floy-Domain und das dort belegte Personio-Karriereportal verifiziert."
+    },
+    {
+      "canonical_name": "GAF Geospatial GmbH",
+      "official_website_url": "https://www.gaf.de/",
+      "career_url": "https://www.gaf.de/careers/",
+      "aliases": [
+        "GAF AG",
+        "GAF Geospatial GmbH",
+        "GAF"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Technology",
+      "scan_priority": 61,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.gaf.de/careers/",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der GAF-Kandidat wurde ueber die offizielle GAF-Domain und deren offiziellen Careers-Bereich belegt."
+    },
+    {
+      "canonical_name": "Flix",
+      "official_website_url": "https://www.flix.com/",
+      "career_url": "https://flix.careers/locations/munich/",
+      "aliases": [
+        "Flix",
+        "FlixBus",
+        "FlixMobility",
+        "FlixTrain"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility",
+      "scan_priority": 60,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://flix.careers/locations/munich/",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der Flix-Kandidat wurde ueber die offizielle Flix-Domain und das offiziell genutzte Karriereportal mit Muenchen-Standort belegt."
+    },
+    {
+      "canonical_name": "Eviden",
+      "official_website_url": "https://eviden.com/",
+      "career_url": "https://eviden.com/careers/",
+      "aliases": [
+        "Eviden",
+        "Eviden Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Information Technology",
+      "scan_priority": 59,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://eviden.com/careers/",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der Eviden-Kandidat wurde ueber die offizielle Eviden-Domain und deren offiziellen Careers-Bereich belegt."
+    },
+    {
+      "canonical_name": "Franka Robotics GmbH",
+      "official_website_url": "https://franka.de/",
+      "career_url": "https://franka.de/careers",
+      "aliases": [
+        "Franka Emika",
+        "FRANKA EMIKA GmbH",
+        "Franka Robotics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "scan_priority": 58,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://franka.de/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Franka-Kandidat wurde ueber die offizielle Franka-Domain und deren offizielle Careers-Seite mit Muenchen-Impressumsbezug belegt."
+    },
+    {
+      "canonical_name": "KONUX",
+      "official_website_url": "https://konux.com/",
+      "career_url": "https://konux.com/careers-page/",
+      "aliases": [
+        "Konux",
+        "KONUX",
+        "Konux GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Railway Predictive Maintenance",
+      "scan_priority": 57,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://konux.com/careers-page/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der KONUX-Kandidat wurde ueber die offizielle KONUX-Domain und deren offiziellen Careers-Bereich belegt."
+    },
+    {
+      "canonical_name": "tado GmbH",
+      "official_website_url": "https://www.tado.com/en-gb",
+      "career_url": "https://tado.jobs.personio.de/?language=en",
+      "aliases": [
+        "tado",
+        "tado°",
+        "tado GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Smart Home Energy",
+      "scan_priority": 56,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://tado.jobs.personio.de/?language=en",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der tado-Kandidat wurde ueber die offizielle tado-Domain und das offiziell genutzte Personio-Karriereportal belegt."
+    },
+    {
+      "canonical_name": "IDnow",
+      "official_website_url": "https://idnow.io/",
+      "career_url": "https://idnow.io/careers/",
+      "aliases": [
+        "IDnow",
+        "idnow",
+        "IDnow GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Identity",
+      "scan_priority": 55,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://idnow.io/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der IDnow-Kandidat wurde ueber die offizielle IDnow-Domain und deren offiziellen Careers-Bereich mit Muenchen-Stellen belegt."
+    },
+    {
+      "canonical_name": "NavVis",
+      "official_website_url": "https://www.navvis.com/",
+      "career_url": "https://www.navvis.com/company/careers",
+      "aliases": [
+        "NavVis",
+        "NavVis GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Twin Technology",
+      "scan_priority": 54,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.navvis.com/company/careers",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der NavVis-Kandidat wurde ueber die offizielle NavVis-Domain und deren offiziellen Careers-Bereich belegt."
+    },
+    {
+      "canonical_name": "DATA MODUL",
+      "official_website_url": "https://www.data-modul.com/",
+      "career_url": "https://career.data-modul.com/eng",
+      "aliases": [
+        "DATA MODUL",
+        "DATA MODUL AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Display Technology",
+      "scan_priority": 53,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://career.data-modul.com/eng",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der DATA-MODUL-Kandidat wurde ueber die offizielle DATA-MODUL-Domain und das offizielle Karriereportal mit Muenchen-Stellen belegt."
+    }
+  ]
+}
