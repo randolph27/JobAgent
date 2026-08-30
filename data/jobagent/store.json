@@ -4399,6 +4399,84 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:egym_dach",
+      "canonical_name": "EGYM DACH",
+      "canonical_domain": "egym.com",
+      "official_website_url": "https://egym.com/",
+      "career_url": "https://uk.egym.com/en-gb/careers",
+      "aliases": [
+        "EGYM",
+        "EGYM DACH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fitness Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 64,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://uk.egym.com/en-gb/careers",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://uk.egym.com/en-gb/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Fitness Technology",
+        "evidence_note": "Der EGYM-Kandidat wurde ueber die offizielle EGYM-Domain und den dort offiziell verlinkten Karrierebereich belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:commercetools_gmbh",
+      "canonical_name": "commercetools GmbH",
+      "canonical_domain": "commercetools.com",
+      "official_website_url": "https://commercetools.com/",
+      "career_url": "https://commercetools.com/careers",
+      "aliases": [
+        "commercetools",
+        "commercetools GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Commerce Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 64,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://commercetools.com/careers",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://commercetools.com/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Commerce Software",
+        "evidence_note": "Der commercetools-Kandidat wurde ueber die offizielle commercetools-Domain, deren Muenchner Standortangabe und die offizielle Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:bavaria_film_gmbh",
       "canonical_name": "Bavaria Film GmbH",
       "canonical_domain": "bavaria-film.de",
@@ -4436,6 +4514,84 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:elgato",
+      "canonical_name": "Elgato",
+      "canonical_domain": "elgato.com",
+      "official_website_url": "https://www.elgato.com/",
+      "career_url": "https://www.elgato.com/careers",
+      "aliases": [
+        "Elgato",
+        "Elgato Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 63,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.elgato.com/careers",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.elgato.com/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Consumer Technology",
+        "evidence_note": "Der Elgato-Kandidat wurde ueber die offizielle Elgato-Domain und deren offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:censhare_gmbh",
+      "canonical_name": "censhare GmbH",
+      "canonical_domain": "censhare.com",
+      "official_website_url": "https://www.censhare.com/",
+      "career_url": "https://www.censhare.com/en/careers",
+      "aliases": [
+        "censhare",
+        "censhare GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Content Management Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 63,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.censhare.com/en/careers",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://www.censhare.com/en/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Content Management Software",
+        "evidence_note": "Der censhare-Kandidat wurde ueber die offizielle censhare-Domain und deren offizielle Karriere-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
       "last_successful_scan_at": null
     },
     {
@@ -4516,6 +4672,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:dynamic_biosensors_gmbh",
+      "canonical_name": "Dynamic Biosensors GmbH",
+      "canonical_domain": "dynamic-biosensors.com",
+      "official_website_url": "https://www.dynamic-biosensors.com/",
+      "career_url": "https://www.dynamic-biosensors.com/career/",
+      "aliases": [
+        "Dynamic Biosensors",
+        "Dynamic Biosensors GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Life Sciences Instrumentation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 62,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.dynamic-biosensors.com/career/",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.dynamic-biosensors.com/career/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Life Sciences Instrumentation",
+        "evidence_note": "Der Dynamic-Biosensors-Kandidat wurde ueber die offizielle Unternehmensdomain und deren offiziellen Karrierebereich belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:deepc_gmbh",
       "canonical_name": "deepc GmbH",
       "canonical_domain": "deepc.ai",
@@ -4552,6 +4747,45 @@
       },
       "created_at": "2026-08-29T11:14:53.775Z",
       "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:carl_hanser_verlag_gmbh_and_co_kg",
+      "canonical_name": "Carl Hanser Verlag GmbH & Co. KG",
+      "canonical_domain": "hanser.de",
+      "official_website_url": "https://www.hanser.de/",
+      "career_url": "https://karriere.hanser.de/",
+      "aliases": [
+        "Carl Hanser Verlag",
+        "Hanser Verlag"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 62,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere.hanser.de/",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://karriere.hanser.de/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing",
+        "evidence_note": "Der Hanser-Kandidat wurde ueber die offizielle Hanser-Domain und das offizielle Hanser-Karriereportal mit Muenchner Verlagsadresse belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
       "last_successful_scan_at": null
     },
     {
@@ -4594,6 +4828,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:european_space_imaging",
+      "canonical_name": "European Space Imaging",
+      "canonical_domain": "euspaceimaging.com",
+      "official_website_url": "https://www.euspaceimaging.com/",
+      "career_url": "https://www.euspaceimaging.com/company/careers/",
+      "aliases": [
+        "European Space Imaging",
+        "EUSI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Data",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 61,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.euspaceimaging.com/company/careers/",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.euspaceimaging.com/company/careers/",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Geospatial Data",
+        "evidence_note": "Der European-Space-Imaging-Kandidat wurde ueber die offizielle EUSI-Domain und deren offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:dachser_se",
       "canonical_name": "DACHSER SE",
       "canonical_domain": "dachser.com",
@@ -4632,6 +4905,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:burdaforward_gmbh",
+      "canonical_name": "BurdaForward GmbH",
+      "canonical_domain": "burda-forward.de",
+      "official_website_url": "https://www.burda-forward.de/",
+      "career_url": "https://www.burda-forward.de/en/career",
+      "aliases": [
+        "Burda Forward",
+        "BurdaForward"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Media",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 61,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.burda-forward.de/en/career",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://www.burda-forward.de/en/career",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Media",
+        "evidence_note": "Der BurdaForward-Kandidat wurde ueber die offizielle BurdaForward-Domain und deren offizielle Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:blickfeld_gmbh",
       "canonical_name": "Blickfeld GmbH",
       "canonical_domain": "blickfeld.com",
@@ -4667,6 +4979,84 @@
       },
       "created_at": "2026-08-29T10:47:34.834Z",
       "updated_at": "2026-08-29T10:47:34.834Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:building_radar_gmbh",
+      "canonical_name": "Building Radar GmbH",
+      "canonical_domain": "buildingradar.com",
+      "official_website_url": "https://buildingradar.com/",
+      "career_url": "https://buildingradar.com/career",
+      "aliases": [
+        "Building Radar",
+        "Building Radar GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Construction Sales Intelligence",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 60,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://buildingradar.com/career",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://buildingradar.com/career",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Construction Sales Intelligence",
+        "evidence_note": "Der Building-Radar-Kandidat wurde ueber die offizielle Building-Radar-Domain und deren offizielle Karriere-Seite mit Muenchner Adresse belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:boku",
+      "canonical_name": "Boku",
+      "canonical_domain": "boku.com",
+      "official_website_url": "https://www.boku.com/",
+      "career_url": "https://www.boku.com/careers/",
+      "aliases": [
+        "Boku",
+        "Boku Network Services"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Payments",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 60,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.boku.com/careers/",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.boku.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Payments",
+        "evidence_note": "Der Boku-Kandidat wurde ueber die offizielle Boku-Domain und deren offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
       "last_successful_scan_at": null
     },
     {
@@ -4788,6 +5178,123 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:cuponation",
+      "canonical_name": "CUPONATION",
+      "canonical_domain": "cuponation.com",
+      "official_website_url": "https://www.cuponation.com/",
+      "career_url": "https://www.cuponation.com/careers/",
+      "aliases": [
+        "Cup Nation",
+        "CUPONATION"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Online Marketing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 59,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.cuponation.com/careers/",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.cuponation.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Online Marketing",
+        "evidence_note": "Der CUPONATION-Kandidat wurde ueber die offizielle CUPONATION-Domain und deren offizielle Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:brunata_metrona_gmbh_and_co_kg",
+      "canonical_name": "BRUNATA-METRONA GmbH & Co. KG",
+      "canonical_domain": "brunata-metrona.de",
+      "official_website_url": "https://www.brunata-metrona.de/",
+      "career_url": "https://www.brunata-metrona.de/unternehmen/karriere/",
+      "aliases": [
+        "Brunata-Metrona",
+        "BRUNATA-METRONA Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Metering and Building Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 59,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.brunata-metrona.de/unternehmen/karriere/brunata-metrona-muenchen/",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://www.brunata-metrona.de/unternehmen/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Metering and Building Services",
+        "evidence_note": "Der BRUNATA-METRONA-Kandidat wurde ueber die offizielle Unternehmensdomain und den offiziellen Karrierebereich fuer BRUNATA-METRONA Muenchen belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:faktor_zehn",
+      "canonical_name": "Faktor Zehn",
+      "canonical_domain": "faktorzehn.de",
+      "official_website_url": "https://www.faktorzehn.de/",
+      "career_url": "https://www.faktorzehn.de/karriere/",
+      "aliases": [
+        "Faktor Zehn",
+        "Faktor Zehn GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 58,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.faktorzehn.de/karriere/",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.faktorzehn.de/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance Software",
+        "evidence_note": "Der Faktor-Zehn-Kandidat wurde ueber die offizielle Faktor-Zehn-Domain und deren offiziellen Karrierebereich mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:dassault_systemes_deutschland_gmbh",
       "canonical_name": "Dassault Systemes Deutschland GmbH",
       "canonical_domain": "3ds.com",
@@ -4825,6 +5332,122 @@
       },
       "created_at": "2026-08-29T11:14:53.775Z",
       "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:constantin_film_ag",
+      "canonical_name": "Constantin Film AG",
+      "canonical_domain": "constantin.film",
+      "official_website_url": "https://constantin.film/",
+      "career_url": "https://constantin.film/unternehmen/karriere/jobs/",
+      "aliases": [
+        "Constantin Film",
+        "Constantin Film AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Film Production and Distribution",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 58,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://constantin.film/unternehmen/karriere/jobs/",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://constantin.film/unternehmen/karriere/jobs/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Film Production and Distribution",
+        "evidence_note": "Der Constantin-Film-Kandidat wurde ueber die offizielle Constantin-Film-Domain und deren offizielles Karriere-Jobportal belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:fernride",
+      "canonical_name": "Fernride",
+      "canonical_domain": "fernride.com",
+      "official_website_url": "https://www.fernride.com/",
+      "career_url": "https://www.fernride.com/open-positions",
+      "aliases": [
+        "Fernride"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Autonomous Logistics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 57,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.fernride.com/open-positions",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.fernride.com/open-positions",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Autonomous Logistics",
+        "evidence_note": "Der Fernride-Kandidat wurde ueber die offizielle Fernride-Domain und die dort verlinkte Open-Positions-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bettertec_gmbh",
+      "canonical_name": "BetterTec GmbH",
+      "canonical_domain": "bettertaxi.com",
+      "official_website_url": "https://www.bettertaxi.com/",
+      "career_url": "https://www.bettertaxi.com/jobs/",
+      "aliases": [
+        "BetterTaxi",
+        "BetterTec GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility Platform",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 57,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bettertaxi.com/jobs/",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://www.bettertaxi.com/jobs/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Mobility Platform",
+        "evidence_note": "Der BetterTaxi-Kandidat wurde ueber die offizielle BetterTaxi-Domain und deren offizielle Jobs-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
       "last_successful_scan_at": null
     },
     {
@@ -4904,6 +5527,317 @@
       },
       "created_at": "2026-08-29T11:14:53.775Z",
       "updated_at": "2026-08-29T11:14:53.775Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bilendo_gmbh",
+      "canonical_name": "Bilendo GmbH",
+      "canonical_domain": "bilendo.de",
+      "official_website_url": "https://www.bilendo.de/",
+      "career_url": "https://www.bilendo.de/en/company/careers",
+      "aliases": [
+        "Bilendo",
+        "Bilendo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "FinTech Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 56,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bilendo.de/en/company/careers",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://www.bilendo.de/en/company/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "FinTech Software",
+        "evidence_note": "Der Bilendo-Kandidat wurde ueber die offizielle Bilendo-Domain und deren offizielle Karriere-Seite mit Muenchner Stellen belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:behnisch_architekten",
+      "canonical_name": "Behnisch Architekten",
+      "canonical_domain": "behnisch.com",
+      "official_website_url": "https://behnisch.com/",
+      "career_url": "https://behnisch.com/jobs",
+      "aliases": [
+        "Behnisch & Partner",
+        "Behnisch Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 56,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://behnisch.com/jobs",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://behnisch.com/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture",
+        "evidence_note": "Der Behnisch-Kandidat wurde ueber die offizielle Behnisch-Domain und deren offizielle Jobs-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bragi_gmbh",
+      "canonical_name": "Bragi GmbH",
+      "canonical_domain": "bragi.com",
+      "official_website_url": "https://www.bragi.com/",
+      "career_url": "https://www.bragi.com/careers",
+      "aliases": [
+        "Bragi",
+        "Bragi GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Audio AI Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 55,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bragi.com/careers",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://www.bragi.com/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Audio AI Software",
+        "evidence_note": "Der Bragi-Kandidat wurde ueber die offizielle Bragi-Domain und deren offizielle Karriere-Seite mit Muenchner Positionen belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bogevischs_buero",
+      "canonical_name": "bogevischs buero",
+      "canonical_domain": "bogevisch.de",
+      "official_website_url": "https://www.bogevisch.de/",
+      "career_url": "https://www.bogevisch.de/buero/jobs",
+      "aliases": [
+        "bogevischs buero",
+        "bogevischs buero architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 55,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bogevisch.de/buero/jobs",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.bogevisch.de/buero/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture",
+        "evidence_note": "Der bogevischs-buero-Kandidat wurde ueber die offizielle Unternehmensdomain und deren offizielle Jobs-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:dtv_verlagsgesellschaft",
+      "canonical_name": "dtv Verlagsgesellschaft",
+      "canonical_domain": "dtv.de",
+      "official_website_url": "https://www.dtv.de/",
+      "career_url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere",
+      "aliases": [
+        "dtv",
+        "dtv Verlagsgesellschaft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 54,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere/stellenangebote",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing",
+        "evidence_note": "Der dtv-Kandidat wurde ueber die offizielle dtv-Domain und den offiziellen Jobs-/Karrierebereich mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:cosinuss_gmbh",
+      "canonical_name": "cosinuss GmbH",
+      "canonical_domain": "cosinuss.com",
+      "official_website_url": "https://www.cosinuss.com/",
+      "career_url": "https://www.cosinuss.com/en/jobs/",
+      "aliases": [
+        "Cosinuss",
+        "cosinuss GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 54,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.cosinuss.com/en/jobs/",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://www.cosinuss.com/en/jobs/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Medical Technology",
+        "evidence_note": "Der cosinuss-Kandidat wurde ueber die offizielle cosinuss-Domain und deren offizielle Jobs-Seite mit Muenchner Firmenadresse belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:fleetster",
+      "canonical_name": "Fleetster",
+      "canonical_domain": "fleetster.de",
+      "official_website_url": "https://www.fleetster.de/",
+      "career_url": "https://www.fleetster.de/fleetster-team",
+      "aliases": [
+        "Fleetster"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fleet Management Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 53,
+      "next_scan_at": "2026-08-31T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.fleetster.de/fleetster-team",
+        "observed_at": "2026-08-30T06:11:36.779Z",
+        "verification_url": "https://www.fleetster.de/fleetster-team",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Fleet Management Software",
+        "evidence_note": "Der Fleetster-Kandidat wurde ueber die offizielle Fleetster-Domain und die dort verlinkte Team-/Karriereseite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-30T06:11:36.779Z",
+      "updated_at": "2026-08-30T06:11:36.779Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:combine_consulting_gmbh",
+      "canonical_name": "combine Consulting GmbH",
+      "canonical_domain": "combine-consulting.com",
+      "official_website_url": "https://www.combine-consulting.com/",
+      "career_url": "https://karriere.combine-consulting.com/",
+      "aliases": [
+        "Combine",
+        "combine Consulting"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Workplace and Real Estate Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 53,
+      "next_scan_at": "2026-08-30T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere.combine-consulting.com/",
+        "observed_at": "2026-08-29T11:36:07.133Z",
+        "verification_url": "https://karriere.combine-consulting.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Workplace and Real Estate Consulting",
+        "evidence_note": "Der combine-Kandidat wurde ueber die offizielle combine-Consulting-Domain und das offizielle Karriereportal mit Muenchner Standort belegt."
+      },
+      "created_at": "2026-08-29T11:36:07.133Z",
+      "updated_at": "2026-08-29T11:36:07.133Z",
       "last_successful_scan_at": null
     },
     {
@@ -8448,6 +9382,27 @@
       ]
     },
     {
+      "source_id": "source:behnisch_architekten_career",
+      "company_id": "company:behnisch_architekten",
+      "source_type": "CAREER_PAGE",
+      "url": "https://behnisch.com/jobs",
+      "canonical_url": "https://behnisch.com/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://behnisch.com/jobs",
+          "basis_url": "https://behnisch.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bene_arzneimittel_gmbh_career",
       "company_id": "company:bene_arzneimittel_gmbh",
       "source_type": "CAREER_PAGE",
@@ -8485,6 +9440,48 @@
           "basis_url": "https://www.bertrandt.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bettertec_gmbh_career",
+      "company_id": "company:bettertec_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bettertaxi.com/jobs/",
+      "canonical_url": "https://www.bettertaxi.com/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bettertaxi.com/jobs/",
+          "basis_url": "https://www.bettertaxi.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bilendo_gmbh_career",
+      "company_id": "company:bilendo_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bilendo.de/en/company/careers",
+      "canonical_url": "https://www.bilendo.de/en/company/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bilendo.de/en/company/careers",
+          "basis_url": "https://www.bilendo.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -8572,6 +9569,69 @@
       }
     },
     {
+      "source_id": "source:bogevischs_buero_career",
+      "company_id": "company:bogevischs_buero",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bogevisch.de/buero/jobs",
+      "canonical_url": "https://www.bogevisch.de/buero/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bogevisch.de/buero/jobs",
+          "basis_url": "https://www.bogevisch.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:boku_career",
+      "company_id": "company:boku",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.boku.com/careers/",
+      "canonical_url": "https://www.boku.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.boku.com/careers/",
+          "basis_url": "https://www.boku.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bragi_gmbh_career",
+      "company_id": "company:bragi_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bragi.com/careers",
+      "canonical_url": "https://www.bragi.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bragi.com/careers",
+          "basis_url": "https://www.bragi.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:brainlab_ag_career",
       "company_id": "company:brainlab_ag",
       "source_type": "CAREER_PAGE",
@@ -8609,6 +9669,69 @@
           "basis_url": "https://www.bms.com/de",
           "redirect_chain": [],
           "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:brunata_metrona_gmbh_and_co_kg_career",
+      "company_id": "company:brunata_metrona_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.brunata-metrona.de/unternehmen/karriere/",
+      "canonical_url": "https://www.brunata-metrona.de/unternehmen/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.brunata-metrona.de/unternehmen/karriere/",
+          "basis_url": "https://www.brunata-metrona.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:building_radar_gmbh_career",
+      "company_id": "company:building_radar_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://buildingradar.com/career",
+      "canonical_url": "https://buildingradar.com/career",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://buildingradar.com/career",
+          "basis_url": "https://buildingradar.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:burdaforward_gmbh_career",
+      "company_id": "company:burdaforward_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.burda-forward.de/en/career",
+      "canonical_url": "https://www.burda-forward.de/en/career",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.burda-forward.de/en/career",
+          "basis_url": "https://www.burda-forward.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -8691,6 +9814,48 @@
           "basis_url": "https://www.capgemini.com/de-de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:carl_hanser_verlag_gmbh_and_co_kg_career",
+      "company_id": "company:carl_hanser_verlag_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.hanser.de/",
+      "canonical_url": "https://karriere.hanser.de/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.hanser.de/",
+          "basis_url": "https://www.hanser.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:censhare_gmbh_career",
+      "company_id": "company:censhare_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.censhare.com/en/careers",
+      "canonical_url": "https://www.censhare.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.censhare.com/en/careers",
+          "basis_url": "https://www.censhare.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -8780,6 +9945,90 @@
       ]
     },
     {
+      "source_id": "source:combine_consulting_gmbh_career",
+      "company_id": "company:combine_consulting_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.combine-consulting.com/",
+      "canonical_url": "https://karriere.combine-consulting.com/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.combine-consulting.com/",
+          "basis_url": "https://www.combine-consulting.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:commercetools_gmbh_career",
+      "company_id": "company:commercetools_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://commercetools.com/careers",
+      "canonical_url": "https://commercetools.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://commercetools.com/careers",
+          "basis_url": "https://commercetools.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:constantin_film_ag_career",
+      "company_id": "company:constantin_film_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://constantin.film/unternehmen/karriere/jobs/",
+      "canonical_url": "https://constantin.film/unternehmen/karriere/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://constantin.film/unternehmen/karriere/jobs/",
+          "basis_url": "https://constantin.film/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:cosinuss_gmbh_career",
+      "company_id": "company:cosinuss_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.cosinuss.com/en/jobs/",
+      "canonical_url": "https://www.cosinuss.com/en/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-29T11:36:07.133Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.cosinuss.com/en/jobs/",
+          "basis_url": "https://www.cosinuss.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:cts_eventim_ag_and_co_kgaa_career",
       "company_id": "company:cts_eventim_ag_and_co_kgaa",
       "source_type": "CAREER_PAGE",
@@ -8797,6 +10046,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:cuponation_career",
+      "company_id": "company:cuponation",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.cuponation.com/careers/",
+      "canonical_url": "https://www.cuponation.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.cuponation.com/careers/",
+          "basis_url": "https://www.cuponation.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:dachser_se_career",
@@ -9032,6 +10302,90 @@
       ]
     },
     {
+      "source_id": "source:dtv_verlagsgesellschaft_career",
+      "company_id": "company:dtv_verlagsgesellschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere",
+      "canonical_url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere",
+          "basis_url": "https://www.dtv.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:dynamic_biosensors_gmbh_career",
+      "company_id": "company:dynamic_biosensors_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.dynamic-biosensors.com/career/",
+      "canonical_url": "https://www.dynamic-biosensors.com/career/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.dynamic-biosensors.com/career/",
+          "basis_url": "https://www.dynamic-biosensors.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:egym_dach_career",
+      "company_id": "company:egym_dach",
+      "source_type": "CAREER_PAGE",
+      "url": "https://uk.egym.com/en-gb/careers",
+      "canonical_url": "https://uk.egym.com/en-gb/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://uk.egym.com/en-gb/careers",
+          "basis_url": "https://egym.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:elgato_career",
+      "company_id": "company:elgato",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.elgato.com/careers",
+      "canonical_url": "https://www.elgato.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.elgato.com/careers",
+          "basis_url": "https://www.elgato.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:europaeisches_patentamt_career",
       "company_id": "company:europaeisches_patentamt",
       "source_type": "CAREER_PAGE",
@@ -9048,6 +10402,90 @@
           "basis_url": "https://www.epo.org/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:european_space_imaging_career",
+      "company_id": "company:european_space_imaging",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.euspaceimaging.com/company/careers/",
+      "canonical_url": "https://www.euspaceimaging.com/company/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.euspaceimaging.com/company/careers/",
+          "basis_url": "https://www.euspaceimaging.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:faktor_zehn_career",
+      "company_id": "company:faktor_zehn",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.faktorzehn.de/karriere/",
+      "canonical_url": "https://www.faktorzehn.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.faktorzehn.de/karriere/",
+          "basis_url": "https://www.faktorzehn.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:fernride_career",
+      "company_id": "company:fernride",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.fernride.com/open-positions",
+      "canonical_url": "https://www.fernride.com/open-positions",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.fernride.com/open-positions",
+          "basis_url": "https://www.fernride.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:fleetster_career",
+      "company_id": "company:fleetster",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.fleetster.de/fleetster-team",
+      "canonical_url": "https://www.fleetster.de/fleetster-team",
+      "is_official": true,
+      "verified_at": "2026-08-30T06:11:36.779Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.fleetster.de/fleetster-team",
+          "basis_url": "https://www.fleetster.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-30T06:11:36.779Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

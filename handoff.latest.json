@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-29T13:24:00.000+02:00",
+  "ts": "2026-08-30T08:16:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -8,28 +8,32 @@
   "goal": "JA-027: offizielle Karriere-/Jobs-/ATS-Verifikation und produktiver Import weiterer Arbeitgeber",
   "changed": [
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-l-20260829.json",
+    "data/jobagent/company-discovery.official.wave-n-20260830.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
     "html/jobagent/company-coverage.html",
+    "html/jobagent/ja-022-viewport-audit.html",
+    "logs/jobagent/ja-022-viewport-audit.md",
+    "todo.checkpoint.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
+    "todo.state.json",
     "handoff.latest.json",
     "handoff.latest.md"
   ],
   "verified": [
     {
       "exit": 0,
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-l-20260829.json | ConvertFrom-Json -Depth 100"
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-n-20260830.json | ConvertFrom-Json -Depth 100"
     },
     {
       "exit": 0,
-      "cmd": "Invoke-WebRequest -Method Head fuer alle official_website_url/career_url/discovery_url aus Welle L"
+      "cmd": "Invoke-WebRequest -Method Get fuer alle official_website_url/career_url/discovery_url aus Welle N"
     },
     {
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-l-20260829.json -WaveId B"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-n-20260830.json -WaveId B"
     },
     {
       "exit": 0,
@@ -89,31 +93,48 @@
     },
     {
       "exit": 0,
-      "cmd": ".\\ci.cmd supertest",
-      "status": "accepted-by-user-without-run"
+      "cmd": ".\\ci.cmd devserver-status"
+    },
+    {
+      "exit": 0,
+      "cmd": "Invoke-RestMethod -Uri http://localhost:9000/api/system/status -TimeoutSec 5"
     }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "ecf08c6fdaac",
+    "head": "bbf5fe901f00",
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,
     "worktree": "dirty"
   },
   "metrics": {
-    "companies_total": 171,
-    "job_sources_total": 167,
-    "official_sources": 169,
-    "career_sources": 168,
-    "verified_or_store_aware_candidates": 273,
-    "discover_official_website_candidates": 1509,
+    "companies_total": 195,
+    "job_sources_total": 191,
+    "official_sources": 193,
+    "career_sources": 192,
+    "verified_or_store_aware_candidates": 304,
+    "discover_official_website_candidates": 1478,
     "verify_official_site_candidates": 2,
     "manual_decision_candidates": 1
   },
-  "next": "Weitere priorisierte DISCOVER_OFFICIAL_WEBSITE-/VERIFY_OFFICIAL_SITE-Kandidaten fail-closed pruefen und nur mit offizieller Karriere-/ATS-Evidenz in Welle M importieren.",
+  "wave": {
+    "id": "N",
+    "import_wave_id": "B",
+    "gate_status": "passed",
+    "coverage_delta": 12,
+    "duplicate_rate": 0.0,
+    "manual_review_rate": 0.0,
+    "feed_path": "data/jobagent/company-discovery.official.wave-n-20260830.json",
+    "import_log": "logs/jobagent/company-discovery-import-20260830-061136.json",
+    "queue_log": "logs/jobagent/company-candidate-verification-20260830-061145.json",
+    "coverage_json": "logs/jobagent/company-coverage-20260830-061146.json",
+    "coverage_markdown": "logs/jobagent/company-coverage-20260830-061146.md",
+    "backup_path": "data/jobagent/backups/store-20260830T061137339Z-pre-wave-import.json"
+  },
+  "next": "Weitere priorisierte DISCOVER_OFFICIAL_WEBSITE-/VERIFY_OFFICIAL_SITE-Kandidaten fail-closed pruefen und nur mit offizieller Karriere-/ATS-Evidenz in Welle O importieren.",
   "refs": [
     "Roadmap.md",
     "todo.current.md",
@@ -126,5 +147,5 @@
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "summary": "JA-027 Welle L/B abgeschlossen und per STP fuer neuen Chat synchronisiert; JA-027 bleibt offen."
+  "summary": "JA-027 Welle N/B abgeschlossen und per STP synchronisiert; JA-027 bleibt offen. Supertest wurde nicht ausgefuehrt, weil JA-027 insgesamt offen bleibt."
 }

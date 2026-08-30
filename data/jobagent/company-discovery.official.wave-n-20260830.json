@@ -1,0 +1,294 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-30T08:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "EGYM DACH",
+      "official_website_url": "https://egym.com/",
+      "career_url": "https://uk.egym.com/en-gb/careers",
+      "aliases": [
+        "EGYM",
+        "EGYM DACH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fitness Technology",
+      "scan_priority": 64,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://uk.egym.com/en-gb/careers",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der EGYM-Kandidat wurde ueber die offizielle EGYM-Domain und den dort offiziell verlinkten Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "Elgato",
+      "official_website_url": "https://www.elgato.com/",
+      "career_url": "https://www.elgato.com/careers",
+      "aliases": [
+        "Elgato",
+        "Elgato Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Technology",
+      "scan_priority": 63,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.elgato.com/careers",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Elgato-Kandidat wurde ueber die offizielle Elgato-Domain und deren offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Dynamic Biosensors GmbH",
+      "official_website_url": "https://www.dynamic-biosensors.com/",
+      "career_url": "https://www.dynamic-biosensors.com/career/",
+      "aliases": [
+        "Dynamic Biosensors",
+        "Dynamic Biosensors GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Life Sciences Instrumentation",
+      "scan_priority": 62,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.dynamic-biosensors.com/career/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Dynamic-Biosensors-Kandidat wurde ueber die offizielle Unternehmensdomain und deren offiziellen Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "European Space Imaging",
+      "official_website_url": "https://www.euspaceimaging.com/",
+      "career_url": "https://www.euspaceimaging.com/company/careers/",
+      "aliases": [
+        "European Space Imaging",
+        "EUSI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Data",
+      "scan_priority": 61,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.euspaceimaging.com/company/careers/",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der European-Space-Imaging-Kandidat wurde ueber die offizielle EUSI-Domain und deren offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Boku",
+      "official_website_url": "https://www.boku.com/",
+      "career_url": "https://www.boku.com/careers/",
+      "aliases": [
+        "Boku",
+        "Boku Network Services"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Payments",
+      "scan_priority": 60,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.boku.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Boku-Kandidat wurde ueber die offizielle Boku-Domain und deren offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "CUPONATION",
+      "official_website_url": "https://www.cuponation.com/",
+      "career_url": "https://www.cuponation.com/careers/",
+      "aliases": [
+        "CUPONATION",
+        "Cup Nation"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Online Marketing",
+      "scan_priority": 59,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.cuponation.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der CUPONATION-Kandidat wurde ueber die offizielle CUPONATION-Domain und deren offizielle Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Faktor Zehn",
+      "official_website_url": "https://www.faktorzehn.de/",
+      "career_url": "https://www.faktorzehn.de/karriere/",
+      "aliases": [
+        "Faktor Zehn",
+        "Faktor Zehn GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance Software",
+      "scan_priority": 58,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.faktorzehn.de/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Faktor-Zehn-Kandidat wurde ueber die offizielle Faktor-Zehn-Domain und deren offiziellen Karrierebereich mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Fernride",
+      "official_website_url": "https://www.fernride.com/",
+      "career_url": "https://www.fernride.com/open-positions",
+      "aliases": [
+        "Fernride",
+        "FERNRIDE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Autonomous Logistics",
+      "scan_priority": 57,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.fernride.com/open-positions",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Fernride-Kandidat wurde ueber die offizielle Fernride-Domain und die dort verlinkte Open-Positions-Seite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Behnisch Architekten",
+      "official_website_url": "https://behnisch.com/",
+      "career_url": "https://behnisch.com/jobs",
+      "aliases": [
+        "Behnisch & Partner",
+        "Behnisch Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "scan_priority": 56,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://behnisch.com/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Behnisch-Kandidat wurde ueber die offizielle Behnisch-Domain und deren offizielle Jobs-Seite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "bogevischs buero",
+      "official_website_url": "https://www.bogevisch.de/",
+      "career_url": "https://www.bogevisch.de/buero/jobs",
+      "aliases": [
+        "bogevischs buero",
+        "bogevischs buero architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "scan_priority": 55,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bogevisch.de/buero/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der bogevischs-buero-Kandidat wurde ueber die offizielle Unternehmensdomain und deren offizielle Jobs-Seite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "dtv Verlagsgesellschaft",
+      "official_website_url": "https://www.dtv.de/",
+      "career_url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere",
+      "aliases": [
+        "dtv",
+        "dtv Verlagsgesellschaft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "scan_priority": 54,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.dtv.de/verlag/ueber-dtv/jobs-karriere/stellenangebote",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der dtv-Kandidat wurde ueber die offizielle dtv-Domain und den offiziellen Jobs-/Karrierebereich mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Fleetster",
+      "official_website_url": "https://www.fleetster.de/",
+      "career_url": "https://www.fleetster.de/fleetster-team",
+      "aliases": [
+        "Fleetster",
+        "fleetster"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fleet Management Software",
+      "scan_priority": 53,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.fleetster.de/fleetster-team",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Fleetster-Kandidat wurde ueber die offizielle Fleetster-Domain und die dort verlinkte Team-/Karriereseite mit Muenchen-Bezug belegt."
+    }
+  ]
+}
