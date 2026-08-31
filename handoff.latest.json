@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-31T14:04:00.000+02:00",
+  "ts": "2026-08-31T19:38:00.000+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -11,7 +11,7 @@
     "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen"
   ],
   "roadmap_rotation": "not-run-no-active-roadmap-point-complete",
-  "supertest": "not_newly_requested_treated_done_by_user_instruction_function_tests_green",
+  "supertest": "not_newly_requested_treated_done_by_user_instruction",
   "last_completed_slice": {
     "roadmap_id": "JA-027",
     "slice": "Welle Z/B-Import",
@@ -60,7 +60,7 @@
     "output/playwright/ja-022-viewport-800.png",
     "output/playwright/ja-022-viewport-1366.png",
     "output/playwright/ja-022-viewport-1920.png",
-    "logs/todo/done-events-20260831-135708.jsonl"
+    "logs/todo/done-events-20260831-193606.jsonl"
   ],
   "verified": [
     {
@@ -133,19 +133,20 @@
     }
   ],
   "environment": {
-    "sonarqube": "UP on http://localhost:9000 at previous check",
-    "devserver": "running on configured port 8500 at previous check",
+    "sonarqube": "UP on http://localhost:9000 at last documented check",
+    "devserver": "running on configured port 8500 at last documented check",
     "note": "User text mentions 8090, project config .ci/ci.config.json currently uses 8500."
   },
   "git": {
     "branch": "master",
     "upstream": "origin/master",
-    "head_before_handoff_commit": "cc935ed54402",
+    "head_before_handoff_commit": "985c208e7d35",
     "ahead": 0,
     "behind": 0
   },
   "next": "Continue JA-027 with wave AA; import only candidates with verified official website plus official career/jobs/ATS evidence; then run function tests, sync, commit and push.",
   "refs": [
+    "README.md",
     "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
