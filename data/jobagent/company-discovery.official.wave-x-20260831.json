@@ -1,0 +1,197 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T11:15:00.000Z",
+  "items": [
+    {
+      "canonical_name": "ExB Labs GmbH",
+      "official_website_url": "https://exb.de/",
+      "career_url": "https://exb.de/karriere/",
+      "aliases": [
+        "ExB",
+        "ExB Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Document Processing",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://exb.de/karriere/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der ExB-Kandidat wurde ueber die offizielle ExB-Domain, die offizielle Karriere-Seite und die Standortangabe ExB Labs GmbH Muenchen belegt."
+    },
+    {
+      "canonical_name": "FIXIT TM Holding GmbH",
+      "official_website_url": "https://www.fixit-gruppe.com/karriere",
+      "career_url": "https://www.fixit-gruppe.com/karriere",
+      "aliases": [
+        "FIXIT GRUPPE",
+        "Fixit TM Holding"
+      ],
+      "locations": [
+        {
+          "label": "Freising bei Muenchen",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Building Materials",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.fixit-gruppe.com/karriere",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der FIXIT-TM-Holding-Kandidat wurde ueber die offizielle FIXIT-GRUPPE-Karriere-Seite mit Stellenangabe fuer Fixit TM Holding in Freising bei Muenchen belegt."
+    },
+    {
+      "canonical_name": "KNOWRON GmbH",
+      "official_website_url": "https://www.knowron.com/",
+      "career_url": "https://www.knowron.com/careers",
+      "aliases": [
+        "KNOWRON",
+        "Knowron"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial AI",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.knowron.com/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der KNOWRON-Kandidat wurde ueber die offizielle KNOWRON-Domain und die offizielle Careers-Seite mit Muenchen-/Hybrid-Stellen belegt."
+    },
+    {
+      "canonical_name": "SAP Fioneer GmbH",
+      "official_website_url": "https://www.sapfioneer.com/",
+      "career_url": "https://www.sapfioneer.com/careers/",
+      "aliases": [
+        "SAP Fioneer"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Services Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.sapfioneer.com/careers/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der SAP-Fioneer-Kandidat wurde ueber die offizielle SAP-Fioneer-Domain und die offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Siemens EDA",
+      "official_website_url": "https://jobs.sw.siemens.com/",
+      "career_url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+      "aliases": [
+        "Siemens Electronic Design Automation",
+        "Siemens Digital Industries Software EDA"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Electronic Design Automation",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Siemens-EDA-Kandidat wurde ueber das offizielle Siemens-Digital-Industries-Software-Karriereportal und die offizielle EDA-Stellenuebersicht belegt."
+    },
+    {
+      "canonical_name": "MHP Management- und IT-Beratung GmbH",
+      "official_website_url": "https://www.mhp.com/en/",
+      "career_url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+      "aliases": [
+        "MHP",
+        "MHP - A Porsche Company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Consulting",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der MHP-Kandidat wurde ueber die offizielle MHP-Domain und das offizielle MHP-Karriereportal mit Standortfilter Muenchen belegt."
+    },
+    {
+      "canonical_name": "Dolby Germany GmbH",
+      "official_website_url": "https://www.dolby.com/careers/",
+      "career_url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+      "aliases": [
+        "Dolby",
+        "Dolby Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Nuernberg Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Audio and Media Technology",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Dolby-Germany-Kandidat wurde ueber die offizielle Dolby-Careers-Seite und die offizielle Deutschland-Stellenuebersicht belegt."
+    },
+    {
+      "canonical_name": "NVIDIA GmbH",
+      "official_website_url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+      "career_url": "https://jobs.nvidia.com/careers",
+      "aliases": [
+        "NVIDIA",
+        "Nvidia Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "GPU and AI Computing",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.nvidia.com/careers",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der NVIDIA-GmbH-Kandidat wurde ueber die offizielle NVIDIA-Careers-Seite und das offizielle NVIDIA-Jobportal belegt."
+    }
+  ]
+}

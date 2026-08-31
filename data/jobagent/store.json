@@ -9860,6 +9860,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:exb_labs_gmbh",
+      "canonical_name": "ExB Labs GmbH",
+      "canonical_domain": "exb.de",
+      "official_website_url": "https://exb.de/",
+      "career_url": "https://exb.de/karriere/",
+      "aliases": [
+        "ExB",
+        "ExB Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Document Processing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://exb.de/karriere/",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://exb.de/karriere/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Document Processing",
+        "evidence_note": "Der ExB-Kandidat wurde ueber die offizielle ExB-Domain, die offizielle Karriere-Seite und die Standortangabe ExB Labs GmbH Muenchen belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:helbling_technik_gmbh",
       "canonical_name": "Helbling Technik GmbH",
       "canonical_domain": "helbling.de",
@@ -9936,6 +9975,83 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:fixit_tm_holding_gmbh",
+      "canonical_name": "FIXIT TM Holding GmbH",
+      "canonical_domain": "fixit-gruppe.com",
+      "official_website_url": "https://www.fixit-gruppe.com/karriere",
+      "career_url": "https://www.fixit-gruppe.com/karriere",
+      "aliases": [
+        "FIXIT GRUPPE",
+        "Fixit TM Holding"
+      ],
+      "locations": [
+        {
+          "label": "Freising bei Muenchen",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Building Materials",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.fixit-gruppe.com/karriere",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://www.fixit-gruppe.com/karriere",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "FREISING",
+        "industry_hint": "Building Materials",
+        "evidence_note": "Der FIXIT-TM-Holding-Kandidat wurde ueber die offizielle FIXIT-GRUPPE-Karriere-Seite mit Stellenangabe fuer Fixit TM Holding in Freising bei Muenchen belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:knowron_gmbh",
+      "canonical_name": "KNOWRON GmbH",
+      "canonical_domain": "knowron.com",
+      "official_website_url": "https://www.knowron.com/",
+      "career_url": "https://www.knowron.com/careers",
+      "aliases": [
+        "KNOWRON"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial AI",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.knowron.com/careers",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://www.knowron.com/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial AI",
+        "evidence_note": "Der KNOWRON-Kandidat wurde ueber die offizielle KNOWRON-Domain und die offizielle Careers-Seite mit Muenchen-/Hybrid-Stellen belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
       "last_successful_scan_at": null
     },
     {
@@ -10016,6 +10132,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:salesforce_germany_gmbh",
+      "canonical_name": "Salesforce Germany GmbH",
+      "canonical_domain": "salesforce.com",
+      "official_website_url": "https://www.salesforce.com/de/",
+      "career_url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+      "aliases": [
+        "Salesforce",
+        "Salesforce Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Enterprise Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+        "observed_at": "2026-08-31T06:27:36.232Z",
+        "verification_url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Enterprise Software",
+        "evidence_note": "Der Salesforce-Kandidat wurde ueber die offizielle Salesforce-Deutschland-Domain und die offizielle Salesforce-Careers-Seite fuer Deutschland mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-31T06:27:36.232Z",
+      "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hugendubel_digital_gmbh_and_co_kg",
       "canonical_name": "Hugendubel Digital GmbH & Co. KG",
       "canonical_domain": "hugendubel.de",
@@ -10092,6 +10247,82 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:synopsys_gmbh",
+      "canonical_name": "Synopsys GmbH",
+      "canonical_domain": "synopsys.com",
+      "official_website_url": "https://www.synopsys.com/",
+      "career_url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+      "aliases": [
+        "Synopsys"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "EDA and Semiconductor IP",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+        "observed_at": "2026-08-31T06:27:36.232Z",
+        "verification_url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "EDA and Semiconductor IP",
+        "evidence_note": "Der Synopsys-Kandidat wurde ueber die offizielle Synopsys-Domain und die offizielle Synopsys-Careers-Standortseite fuer Munich belegt."
+      },
+      "created_at": "2026-08-31T06:27:36.232Z",
+      "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:sap_fioneer_gmbh",
+      "canonical_name": "SAP Fioneer GmbH",
+      "canonical_domain": "sapfioneer.com",
+      "official_website_url": "https://www.sapfioneer.com/",
+      "career_url": "https://www.sapfioneer.com/careers/",
+      "aliases": [
+        "SAP Fioneer"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Financial Services Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.sapfioneer.com/careers/",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://www.sapfioneer.com/careers/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Financial Services Software",
+        "evidence_note": "Der SAP-Fioneer-Kandidat wurde ueber die offizielle SAP-Fioneer-Domain und die offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
       "last_successful_scan_at": null
     },
     {
@@ -10212,6 +10443,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:webasto_se",
+      "canonical_name": "Webasto SE",
+      "canonical_domain": "webasto.com",
+      "official_website_url": "https://www.webasto.com/en-int/career.html",
+      "career_url": "https://jobs.webasto.com/",
+      "aliases": [
+        "Webasto",
+        "Webasto Group"
+      ],
+      "locations": [
+        {
+          "label": "Stockdorf / Greater Munich",
+          "city": "Stockdorf",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Automotive Supplier",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.webasto.com/",
+        "observed_at": "2026-08-31T06:27:36.232Z",
+        "verification_url": "https://jobs.webasto.com/",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Automotive Supplier",
+        "evidence_note": "Der Webasto-Kandidat wurde ueber die offizielle Webasto-Career-Seite und das offizielle Webasto-Jobportal belegt."
+      },
+      "created_at": "2026-08-31T06:27:36.232Z",
+      "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:simscale_gmbh",
       "canonical_name": "SimScale GmbH",
       "canonical_domain": "simscale.com",
@@ -10247,6 +10517,45 @@
       },
       "created_at": "2026-08-31T06:04:40.636Z",
       "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:siemens_eda",
+      "canonical_name": "Siemens EDA",
+      "canonical_domain": "jobs.sw.siemens.com",
+      "official_website_url": "https://jobs.sw.siemens.com/",
+      "career_url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+      "aliases": [
+        "Siemens Digital Industries Software EDA",
+        "Siemens Electronic Design Automation"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Electronic Design Automation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Electronic Design Automation",
+        "evidence_note": "Der Siemens-EDA-Kandidat wurde ueber das offizielle Siemens-Digital-Industries-Software-Karriereportal und die offizielle EDA-Stellenuebersicht belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
       "last_successful_scan_at": null
     },
     {
@@ -10368,6 +10677,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:testbirds_gmbh",
+      "canonical_name": "Testbirds GmbH",
+      "canonical_domain": "testbirds.com",
+      "official_website_url": "https://www.testbirds.com/en/",
+      "career_url": "https://www.testbirds.com/en/careers/jobs/",
+      "aliases": [
+        "Testbirds"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Crowdtesting and QA",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.testbirds.com/en/careers/jobs/",
+        "observed_at": "2026-08-31T06:27:36.232Z",
+        "verification_url": "https://www.testbirds.com/en/careers/jobs/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Crowdtesting and QA",
+        "evidence_note": "Der Testbirds-Kandidat wurde ueber die offizielle Testbirds-Domain und die offizielle Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:27:36.232Z",
+      "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:nfon_ag",
       "canonical_name": "NFON AG",
       "canonical_domain": "corporate.nfon.com",
@@ -10403,6 +10750,45 @@
       },
       "created_at": "2026-08-31T06:04:40.636Z",
       "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:mhp_management_und_it_beratung_gmbh",
+      "canonical_name": "MHP Management- und IT-Beratung GmbH",
+      "canonical_domain": "mhp.com",
+      "official_website_url": "https://www.mhp.com/en/",
+      "career_url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+      "aliases": [
+        "MHP",
+        "MHP - A Porsche Company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Consulting",
+        "evidence_note": "Der MHP-Kandidat wurde ueber die offizielle MHP-Domain und das offizielle MHP-Karriereportal mit Standortfilter Muenchen belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
       "last_successful_scan_at": null
     },
     {
@@ -10639,6 +11025,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hannover_leasing_gmbh_and_co_kg",
+      "canonical_name": "Hannover Leasing GmbH & Co. KG",
+      "canonical_domain": "hannover-leasing.de",
+      "official_website_url": "https://www.hannover-leasing.de/en/",
+      "career_url": "https://www.hannover-leasing.de/en/karriere/",
+      "aliases": [
+        "Hannover Leasing"
+      ],
+      "locations": [
+        {
+          "label": "Pullach / Greater Munich",
+          "city": "Pullach im Isartal",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Real Asset Investment Management",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hannover-leasing.de/en/karriere/",
+        "observed_at": "2026-08-31T06:27:36.232Z",
+        "verification_url": "https://www.hannover-leasing.de/en/karriere/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Real Asset Investment Management",
+        "evidence_note": "Der Hannover-Leasing-Kandidat wurde ueber die offizielle Hannover-Leasing-Domain und deren offizielle Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:27:36.232Z",
+      "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:generali_deutschland_ag",
       "canonical_name": "Generali Deutschland AG",
       "canonical_domain": "generali.de",
@@ -10675,6 +11099,84 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:dolby_germany_gmbh",
+      "canonical_name": "Dolby Germany GmbH",
+      "canonical_domain": "dolby.com",
+      "official_website_url": "https://www.dolby.com/careers/",
+      "career_url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+      "aliases": [
+        "Dolby",
+        "Dolby Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Nuernberg Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Audio and Media Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Audio and Media Technology",
+        "evidence_note": "Der Dolby-Germany-Kandidat wurde ueber die offizielle Dolby-Careers-Seite und die offizielle Deutschland-Stellenuebersicht belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:nvidia_gmbh",
+      "canonical_name": "NVIDIA GmbH",
+      "canonical_domain": "nvidia.com",
+      "official_website_url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+      "career_url": "https://jobs.nvidia.com/careers",
+      "aliases": [
+        "NVIDIA",
+        "Nvidia Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "GPU and AI Computing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 27,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.nvidia.com/careers",
+        "observed_at": "2026-08-31T11:01:43.474Z",
+        "verification_url": "https://jobs.nvidia.com/careers",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "GPU and AI Computing",
+        "evidence_note": "Der NVIDIA-GmbH-Kandidat wurde ueber die offizielle NVIDIA-Careers-Seite und das offizielle NVIDIA-Jobportal belegt."
+      },
+      "created_at": "2026-08-31T11:01:43.474Z",
+      "updated_at": "2026-08-31T11:01:43.474Z",
       "last_successful_scan_at": null
     },
     {
@@ -10791,6 +11293,47 @@
       },
       "created_at": "2026-08-31T05:39:43.239Z",
       "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hoeffner_moebelgesellschaft_gmbh_and_co_kg",
+      "canonical_name": "Höffner Möbelgesellschaft GmbH & Co. KG",
+      "canonical_domain": "hoeffner.de",
+      "official_website_url": "https://www.hoeffner.de/",
+      "career_url": "https://job-hoeffner.career.softgarden.de/",
+      "aliases": [
+        "Hoeffner",
+        "Höffner",
+        "Möbel Höffner",
+        "Moebel Hoeffner"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen-Freiham",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Furniture Retail",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 27,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://job-hoeffner.career.softgarden.de/",
+        "observed_at": "2026-08-31T06:27:36.232Z",
+        "verification_url": "https://job-hoeffner.career.softgarden.de/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Furniture Retail",
+        "evidence_note": "Der Hoeffner-Kandidat wurde ueber die offizielle Hoeffner-Domain und das offizielle Softgarden-Karriereportal von Moebel Hoeffner belegt."
+      },
+      "created_at": "2026-08-31T06:27:36.232Z",
+      "updated_at": "2026-08-31T06:27:36.232Z",
       "last_successful_scan_at": null
     },
     {
@@ -14451,6 +14994,27 @@
       ]
     },
     {
+      "source_id": "source:dolby_germany_gmbh_career",
+      "company_id": "company:dolby_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+      "canonical_url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.dolby.com/go/Jobs-in-Germany/8803800/",
+          "basis_url": "https://www.dolby.com/careers/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:droemer_knaur_gmbh_and_co_kg_career",
       "company_id": "company:droemer_knaur_gmbh_and_co_kg",
       "source_type": "CAREER_PAGE",
@@ -14703,6 +15267,27 @@
       ]
     },
     {
+      "source_id": "source:exb_labs_gmbh_career",
+      "company_id": "company:exb_labs_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://exb.de/karriere/",
+      "canonical_url": "https://exb.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://exb.de/karriere/",
+          "basis_url": "https://exb.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:ey_career",
       "company_id": "company:ey",
       "source_type": "CAREER_PAGE",
@@ -14803,6 +15388,27 @@
           "basis_url": "https://www.fernride.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:fixit_tm_holding_gmbh_career",
+      "company_id": "company:fixit_tm_holding_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.fixit-gruppe.com/karriere",
+      "canonical_url": "https://www.fixit-gruppe.com/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.fixit-gruppe.com/karriere",
+          "basis_url": "https://www.fixit-gruppe.com/karriere",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -15310,6 +15916,27 @@
       ]
     },
     {
+      "source_id": "source:hannover_leasing_gmbh_and_co_kg_career",
+      "company_id": "company:hannover_leasing_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hannover-leasing.de/en/karriere/",
+      "canonical_url": "https://www.hannover-leasing.de/en/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:27:36.232Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hannover-leasing.de/en/karriere/",
+          "basis_url": "https://www.hannover-leasing.de/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:27:36.232Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hasit_trockenmoertel_gmbh_career",
       "company_id": "company:hasit_trockenmoertel_gmbh",
       "source_type": "CAREER_PAGE",
@@ -15599,6 +16226,27 @@
           "basis_url": "https://www.hswt.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hoeffner_moebelgesellschaft_gmbh_and_co_kg_career",
+      "company_id": "company:hoeffner_moebelgesellschaft_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://job-hoeffner.career.softgarden.de/",
+      "canonical_url": "https://job-hoeffner.career.softgarden.de/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:27:36.232Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://job-hoeffner.career.softgarden.de/",
+          "basis_url": "https://www.hoeffner.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:27:36.232Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -16234,6 +16882,27 @@
       }
     },
     {
+      "source_id": "source:knowron_gmbh_career",
+      "company_id": "company:knowron_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.knowron.com/careers",
+      "canonical_url": "https://www.knowron.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.knowron.com/careers",
+          "basis_url": "https://www.knowron.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:konux_career",
       "company_id": "company:konux",
       "source_type": "CAREER_PAGE",
@@ -16676,6 +17345,27 @@
           "basis_url": "https://www.mgm-tp.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:mhp_management_und_it_beratung_gmbh_career",
+      "company_id": "company:mhp_management_und_it_beratung_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+      "canonical_url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.mhp.com/index.php?ac=search_result&language=2&restoreLastSearch=1&search_criterion_physical_location%5B0%5D=141",
+          "basis_url": "https://www.mhp.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -17277,6 +17967,27 @@
           ],
           "observed_at": "2026-08-27T17:56:18.17Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:nvidia_gmbh_career",
+      "company_id": "company:nvidia_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.nvidia.com/careers",
+      "canonical_url": "https://jobs.nvidia.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.nvidia.com/careers",
+          "basis_url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -17927,6 +18638,27 @@
       ]
     },
     {
+      "source_id": "source:salesforce_germany_gmbh_career",
+      "company_id": "company:salesforce_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+      "canonical_url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:27:36.232Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+          "basis_url": "https://www.salesforce.com/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:27:36.232Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:samvardhana_motherson_peguform_gmbh_career",
       "company_id": "company:samvardhana_motherson_peguform_gmbh",
       "source_type": "CAREER_PAGE",
@@ -17943,6 +18675,27 @@
           "basis_url": "https://www.smp-automotive.com/de",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:sap_fioneer_gmbh_career",
+      "company_id": "company:sap_fioneer_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.sapfioneer.com/careers/",
+      "canonical_url": "https://www.sapfioneer.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.sapfioneer.com/careers/",
+          "basis_url": "https://www.sapfioneer.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -18045,6 +18798,27 @@
           ],
           "observed_at": "2026-08-27T05:08:12.805Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:siemens_eda_career",
+      "company_id": "company:siemens_eda",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+      "canonical_url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:01:43.474Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.sw.siemens.com/business-structure/electronic-design-automation-eda/jobs/",
+          "basis_url": "https://jobs.sw.siemens.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -18211,6 +18985,27 @@
       }
     },
     {
+      "source_id": "source:synopsys_gmbh_career",
+      "company_id": "company:synopsys_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+      "canonical_url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:27:36.232Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+          "basis_url": "https://www.synopsys.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:27:36.232Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:tado_gmbh_career",
       "company_id": "company:tado_gmbh",
       "source_type": "CAREER_PAGE",
@@ -18336,6 +19131,27 @@
           "basis_url": "https://www.telefonica.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:testbirds_gmbh_career",
+      "company_id": "company:testbirds_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.testbirds.com/en/careers/jobs/",
+      "canonical_url": "https://www.testbirds.com/en/careers/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:27:36.232Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.testbirds.com/en/careers/jobs/",
+          "basis_url": "https://www.testbirds.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:27:36.232Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -18499,6 +19315,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:webasto_se_career",
+      "company_id": "company:webasto_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.webasto.com/",
+      "canonical_url": "https://jobs.webasto.com/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:27:36.232Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.webasto.com/",
+          "basis_url": "https://www.webasto.com/en-int/career.html",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:27:36.232Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:werk1_bayern_gmbh_career_url",

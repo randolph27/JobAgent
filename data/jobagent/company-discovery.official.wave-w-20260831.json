@@ -1,0 +1,149 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T08:45:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Salesforce Germany GmbH",
+      "official_website_url": "https://www.salesforce.com/de/",
+      "career_url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+      "aliases": [
+        "Salesforce",
+        "Salesforce Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Enterprise Software",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.salesforce.com/company/careers/locations/emea/germany/",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der Salesforce-Kandidat wurde ueber die offizielle Salesforce-Deutschland-Domain und die offizielle Salesforce-Careers-Seite fuer Deutschland mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Synopsys GmbH",
+      "official_website_url": "https://www.synopsys.com/",
+      "career_url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+      "aliases": [
+        "Synopsys"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "EDA and Semiconductor IP",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.synopsys.com/location/munich-bavaria-germany-jobs/44408/2921044-2951839-2867714/4",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Synopsys-Kandidat wurde ueber die offizielle Synopsys-Domain und die offizielle Synopsys-Careers-Standortseite fuer Munich belegt."
+    },
+    {
+      "canonical_name": "Webasto SE",
+      "official_website_url": "https://www.webasto.com/en-int/career.html",
+      "career_url": "https://jobs.webasto.com/",
+      "aliases": [
+        "Webasto",
+        "Webasto Group"
+      ],
+      "locations": [
+        {
+          "label": "Stockdorf / Greater Munich",
+          "city": "Stockdorf",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Automotive Supplier",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.webasto.com/",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der Webasto-Kandidat wurde ueber die offizielle Webasto-Career-Seite und das offizielle Webasto-Jobportal belegt."
+    },
+    {
+      "canonical_name": "Testbirds GmbH",
+      "official_website_url": "https://www.testbirds.com/en/",
+      "career_url": "https://www.testbirds.com/en/careers/jobs/",
+      "aliases": [
+        "Testbirds"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Crowdtesting and QA",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.testbirds.com/en/careers/jobs/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Testbirds-Kandidat wurde ueber die offizielle Testbirds-Domain und die offizielle Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Hannover Leasing GmbH & Co. KG",
+      "official_website_url": "https://www.hannover-leasing.de/en/",
+      "career_url": "https://www.hannover-leasing.de/en/karriere/",
+      "aliases": [
+        "Hannover Leasing"
+      ],
+      "locations": [
+        {
+          "label": "Pullach / Greater Munich",
+          "city": "Pullach im Isartal",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Real Asset Investment Management",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hannover-leasing.de/en/karriere/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der Hannover-Leasing-Kandidat wurde ueber die offizielle Hannover-Leasing-Domain und deren offizielle Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Höffner Möbelgesellschaft GmbH & Co. KG",
+      "official_website_url": "https://www.hoeffner.de/",
+      "career_url": "https://job-hoeffner.career.softgarden.de/",
+      "aliases": [
+        "Hoeffner",
+        "Höffner",
+        "Moebel Hoeffner",
+        "Möbel Höffner"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen-Freiham",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Furniture Retail",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://job-hoeffner.career.softgarden.de/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Hoeffner-Kandidat wurde ueber die offizielle Hoeffner-Domain und das offizielle Softgarden-Karriereportal von Moebel Hoeffner belegt."
+    }
+  ]
+}
