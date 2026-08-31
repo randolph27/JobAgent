@@ -1,5 +1,5 @@
 {
-  "ts": "2026-08-31T21:01:00.000+02:00",
+  "ts": "2026-08-31T21:03:01.323+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -7,19 +7,87 @@
   "status": "in-progress",
   "goal": "JA-027 fortsetzen: offiziell belegte Arbeitgeber produktiv aufnehmen, unsichere Kandidaten fail-closed lassen.",
   "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-ab-20260831.json",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/store.json",
-    "html/jobagent/company-coverage.html",
     "handoff.latest.md",
     "handoff.latest.json",
-    "todo.state.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json"
+    "todo.master.index.json",
+    "todo.state.json"
   ],
   "verified": [
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    }
+  ],
+  "route_ok": true,
+  "route_violations": [],
+  "git": {
+    "branch": "master",
+    "head": "4c2554718c03",
+    "upstream": "origin/master",
+    "ahead_behind": "0/0",
+    "worktree": "dirty"
+  },
+  "last_functional_commit": "4c25547 Add verified company import wave AB",
+  "roadmap_rotation": {
+    "performed": false,
+    "reason": "Kein Roadmap-Punkt ist komplett erledigt; JA-027 und UI-001 bleiben aktiv."
+  },
+  "supertest": {
+    "requested": false,
+    "run": false,
+    "status": "treated_done_per_user_instruction"
+  },
+  "current_state": {
+    "active_roadmap_id": "JA-027",
+    "also_open": [
+      "UI-001"
+    ],
+    "latest_wave": "AB",
+    "wave_ab": {
+      "processed": 6,
+      "added": 5,
+      "updated": 1,
+      "added_companies": [
+        "metoda",
+        "KREATIZE GmbH",
+        "Intrinsic",
+        "combyne",
+        "DAIKIN Airconditioning Germany GmbH"
+      ],
+      "deduplicated_update": "E.ON Energy Projects GmbH -> E.ON",
+      "wave_gate": {
+        "status": "passed",
+        "manual_review_rate": 0.0,
+        "duplicate_rate": 0.1667,
+        "coverage_delta": 5
+      }
+    },
+    "metrics": {
+      "store_companies": 339,
+      "job_sources": 336,
+      "official_sources": 338,
+      "career_sources": 337,
+      "queue_verified": 499,
+      "queue_manual_review": 1285
+    }
+  },
+  "evidence": [
+    "data/jobagent/company-discovery.official.wave-ab-20260831.json",
+    "logs/jobagent/company-discovery-import-20260831-185301.json",
+    "logs/jobagent/company-candidate-verification-20260831-185307.json",
+    "logs/jobagent/company-coverage-20260831-185405.json",
+    "logs/jobagent/company-coverage-20260831-185405.md",
+    "logs/jobagent/ja-023-source-coverage.json",
+    "data/jobagent/backups/store-20260831T185302431Z-pre-wave-import.json",
+    "html/jobagent/company-coverage.html",
+    "output/playwright/ja-022-viewport-800.png",
+    "output/playwright/ja-022-viewport-1366.png",
+    "output/playwright/ja-022-viewport-1920.png",
+    "logs/todo/done-events-20260831-210301.jsonl"
+  ],
+  "functional_verification_from_wave_ab": [
     {
       "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ab-20260831.json | ConvertFrom-Json -Depth 100",
       "exit": 0
@@ -91,49 +159,31 @@
     {
       "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
       "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0
     }
   ],
-  "route_ok": true,
-  "route_violations": [],
-  "git": {
-    "branch": "master",
-    "head": "8214d068b631",
-    "upstream": "origin/master",
-    "ahead_behind": "0/0",
-    "worktree": "dirty"
-  },
-  "next": "JA-027 mit Welle AC fortsetzen: weitere DISCOVER_OFFICIAL_WEBSITE-Kandidaten nur mit erreichbarer offizieller Website plus Karriere-/ATS-Beleg importieren.",
+  "next": "JA-027 mit Welle AC fortsetzen: weitere DISCOVER_OFFICIAL_WEBSITE-Kandidaten mit erreichbarer offizieller Website plus Karriere-/ATS-Beleg in data/jobagent/company-discovery.official.wave-ac-YYYYMMDD.json aufnehmen, importieren, Coverage aktualisieren, funktionsbezogen testen, Handoff/STP/Commit/Push abschliessen.",
+  "next_steps": [
+    "Aktiven Punkt JA-027 fortsetzen; UI-001 nicht parallel bearbeiten.",
+    "In data/jobagent/company-candidate-verification.queue.json Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE, hohem priority_score und Muenchen-/Freising-Bezug priorisieren.",
+    "Nur offizielle Firmenwebsites plus offizielle Karriere- oder ATS-Belege verwenden.",
+    "Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.",
+    "Naechste Feed-Datei data/jobagent/company-discovery.official.wave-ac-YYYYMMDD.json erstellen.",
+    "Alle official_website_url/career_url/discovery_url per Invoke-WebRequest pruefen.",
+    "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 -WaveId B ausfuehren.",
+    "Queue, Coverage, Source-Coverage und HTML-Report aktualisieren.",
+    "Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von JA-027.",
+    "Roadmap, Todo, Handoff und STP synchronisieren; dann stage, commit, push."
+  ],
   "refs": [
+    "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
-    "handoff.latest.json",
-    "Roadmap.md"
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "env_inventory_path": null,
-  "summary": {
-    "wave": "AB",
-    "processed": 6,
-    "added": 5,
-    "updated": 1,
-    "store_companies": 339,
-    "job_sources": 336,
-    "official_sources": 338,
-    "career_sources": 337,
-    "queue_verified": 499,
-    "queue_manual_review": 1285,
-    "wave_gate": {
-      "status": "passed",
-      "manual_review_rate": 0.0,
-      "duplicate_rate": 0.1667,
-      "coverage_delta": 5
-    }
-  }
+  "env_inventory_path": null
 }
