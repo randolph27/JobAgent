@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-31T20:25:00.000+02:00
+Stand: 2026-08-31T20:29:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,17 +8,18 @@ Stand: 2026-08-31T20:25:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschlusscommit: `ce82601aeda9`
+- Letzter fachlicher Fortschrittscommit: `7f93ff8 Add verified company import wave AA`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
-- Roadmap-Rotation: nicht erfolgt; `JA-027` und `UI-001` bleiben offen.
-- Supertest: gemaess Nutzeranweisung nicht ausgefuehrt, weil `JA-027` insgesamt offen bleibt.
-- STP: ausgefuehrt am `2026-08-31T20:24:56.426+02:00`; Todo-Compact/Prune/Rotate liefen erfolgreich.
+- Roadmap-Rotation: nicht erfolgt; kein Roadmap-Punkt ist komplett erledigt. `JA-027` und `UI-001` bleiben aktiv.
+- Supertest: nicht neu ausgefuehrt; gemaess aktueller Nutzeranweisung gilt er fuer diesen Uebergabeabschluss als erledigt.
+- STP: ausgefuehrt am `2026-08-31T20:28:32.335+02:00`; Todo-Compact/Prune/Rotate liefen erfolgreich.
+- Worktree-Ziel: nach diesem Handoff committen und nach `origin/master` pushen.
 
 ## Aktueller Fachstand
 
-JA-027 Welle AA/B-Import ist abgeschlossen. Welle AA hat 7 offiziell belegte Arbeitgeber produktiv in den Store aufgenommen:
+JA-027 Welle AA/B-Import ist abgeschlossen und verifiziert. Welle AA hat 7 offiziell belegte Arbeitgeber produktiv aufgenommen:
 
 - Cobrainer
 - adnymics / ParcelDealz
@@ -39,17 +40,17 @@ Kennzahlen nach Welle AA:
 - Importwellen-Gate B: `passed`
 - Gate-Metriken: `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=7`
 
-## Wichtige Dateien und Artefakte
+## Relevante Dateien
 
-- `data/jobagent/company-discovery.official.wave-aa-20260831.json`
-- `data/jobagent/store.json`
-- `data/jobagent/company-candidate-verification.queue.json`
-- `html/jobagent/company-coverage.html`
-- `Roadmap.md`
-- `todo.state.json`
-- `todo.events.jsonl`
-- `handoff.latest.md`
-- `handoff.latest.json`
+- `Roadmap.md`: JA-027 enthaelt Fortschritt Welle AA; UI-001 bleibt offen.
+- `todo.current.md`: aktiver Eintrag `TD-0041`.
+- `todo.state.json`: `active_id=TD-0041`, `checkpoint_event_id=EV-20260831-202500-wave-aa`.
+- `todo.events.jsonl`, `todo.history.digest.json`, `todo.master.index.json`: durch STP aktualisiert.
+- `handoff.latest.md` und `handoff.latest.json`: dieser Uebergabestand.
+- `data/jobagent/company-discovery.official.wave-aa-20260831.json`: offizieller Feed fuer Welle AA.
+- `data/jobagent/company-candidate-verification.queue.json`: nach Welle AA aktualisierte Queue.
+- `data/jobagent/store.json`: produktiver Store nach Welle AA.
+- `html/jobagent/company-coverage.html`: aktualisierter Coverage-Report.
 
 Evidence aus Welle AA:
 
@@ -60,7 +61,7 @@ Evidence aus Welle AA:
 - `logs/jobagent/ja-023-source-coverage.json`
 - Store-Backup: `data/jobagent/backups/store-20260831T181832252Z-pre-wave-import.json`
 - Viewport-Screenshots: `output/playwright/ja-022-viewport-800.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-1920.png`
-- STP-Rotation: `logs/todo/done-events-20260831-202456.jsonl`
+- STP-Rotation: `logs/todo/done-events-20260831-202832.jsonl`
 
 ## Verifikation
 
@@ -88,7 +89,13 @@ Welle-AA-Funktionstests waren gruen:
 
 ## Naechste Aufgabe fuer neuen Agenten
 
-1. Aktiven Punkt `JA-027` fortsetzen; `UI-001` bleibt offen, aber nicht parallel bearbeiten.
-2. In `data/jobagent/company-candidate-verification.queue.json` weiter nach `next_action == "DISCOVER_OFFICIAL_WEBSITE"`, hohem `priority_score` und belastbarem Muenchen-/Freising-Bezug priorisieren.
-3. Nur Kandidaten mit erreichbarer offizieller Website und offizieller Jobs-/Karriere- oder ATS-Quelle in die naechste Welle aufnehmen.
-4. Naechste Feed-Datei im Stil `data/jobagent/company-discovery.official.wave-ab-YYYYMMDD.json` anlegen, vor Import alle URLs per HTTP pruefen, danach Import, Queue, Coverage, Source-Coverage, Funktionstests, Roadmap/Todo/Handoff/STP und Commit/Push ausfuehren.
+1. Aktiven Punkt `JA-027` fortsetzen; `UI-001` bleibt offen und soll nicht parallel bearbeitet werden, solange JA-027 der Hotspot ist.
+2. In `data/jobagent/company-candidate-verification.queue.json` nach `next_action == "DISCOVER_OFFICIAL_WEBSITE"`, hohem `priority_score` und belastbarem Muenchen-/Freising-Bezug priorisieren.
+3. Nur Kandidaten aufnehmen, deren `official_website_url` und `career_url` oder offiziell belegte ATS-Quelle per HTTP erreichbar sind.
+4. Keine Jobboersen-, Arbeitsagentur-, Register- oder Aggregator-URL als offizielle Karrierequelle verwenden.
+5. Naechste Feed-Datei im Stil `data/jobagent/company-discovery.official.wave-ab-YYYYMMDD.json` anlegen.
+6. Vor Import alle `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
+7. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <wave-feed> -WaveId B`.
+8. Danach Queue, Coverage und Source-Coverage aktualisieren.
+9. Funktionsbezogene Tests ausfuehren; Supertest erst, wenn JA-027 komplett abgeschlossen oder explizit angefragt ist.
+10. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
