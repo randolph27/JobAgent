@@ -9064,14 +9064,17 @@
     },
     {
       "company_id": "company:e_on",
-      "canonical_name": "E.ON",
+      "canonical_name": "E.ON Energy Projects GmbH",
       "canonical_domain": "careers.eon.com",
-      "official_website_url": "https://careers.eon.com/",
-      "career_url": "https://jobs.eon.com/de",
+      "official_website_url": "https://careers.eon.com/deutschland/",
+      "career_url": "https://careers.eon.com/deutschland/go/Germany-Careers/3727101/",
       "aliases": [
         "E.ON",
+        "E.ON Energy Projects",
+        "E.ON Energy Projects GmbH",
         "E.ON Group",
-        "E.ON SE"
+        "E.ON SE",
+        "EON Energy Projects"
       ],
       "locations": [
         {
@@ -9090,16 +9093,16 @@
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://jobs.eon.com/de",
-        "observed_at": "2026-08-30T06:41:25.349Z",
-        "verification_url": "https://jobs.eon.com/de",
+        "url": "https://jobs.eon.com/job/Batteries-Sub-Station-Delivery-Project-Manager-and-Portfolio-Expert-f_m_d-Munich/246062",
+        "observed_at": "2026-08-31T18:53:01.819Z",
+        "verification_url": "https://careers.eon.com/deutschland/go/Germany-Careers/3727101/",
         "discovery_origin": "source-registry:munich_business_commercial_locations",
         "target_area": "MUNICH",
-        "industry_hint": "Energy",
-        "evidence_note": "Der E.ON-Kandidat wurde ueber das offizielle E.ON-Careers-Portal und das offizielle jobs.eon.com-Karriereportal mit Muenchen-Stellen belegt."
+        "industry_hint": "Energy Infrastructure",
+        "evidence_note": "Der E.ON-Energy-Projects-Kandidat wurde ueber den offiziellen E.ON-Karriereauftritt und einen dort erreichbaren Muenchen-Stellenpfad fuer E.ON Energy Projects belegt."
       },
       "created_at": "2026-08-30T06:41:25.349Z",
-      "updated_at": "2026-08-30T06:41:25.349Z",
+      "updated_at": "2026-08-31T18:53:01.819Z",
       "last_successful_scan_at": null
     },
     {
@@ -9821,6 +9824,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:metoda",
+      "canonical_name": "metoda",
+      "canonical_domain": "metoda.com",
+      "official_website_url": "https://www.metoda.com/de",
+      "career_url": "https://www.metoda.com/de/karriere",
+      "aliases": [
+        "metoda GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce Analytics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.metoda.com/de/karriere",
+        "observed_at": "2026-08-31T18:53:01.819Z",
+        "verification_url": "https://www.metoda.com/de/karriere",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "E-Commerce Analytics",
+        "evidence_note": "Der metoda-Kandidat wurde ueber die offizielle metoda-Domain und die offizielle Karriere-Seite mit offenem Bewerbungsprozess belegt."
+      },
+      "created_at": "2026-08-31T18:53:01.819Z",
+      "updated_at": "2026-08-31T18:53:01.819Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:mckinsey_and_company_inc",
       "canonical_name": "McKinsey & Company Inc.",
       "canonical_domain": "karriere.mckinsey.de",
@@ -10090,6 +10131,44 @@
       },
       "created_at": "2026-08-31T11:28:28.112Z",
       "updated_at": "2026-08-31T11:28:28.112Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:kreatize_gmbh",
+      "canonical_name": "KREATIZE GmbH",
+      "canonical_domain": "kreatize.com",
+      "official_website_url": "https://www.kreatize.com/",
+      "career_url": "https://www.kreatize.com/about#careers",
+      "aliases": [
+        "Kreatize"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Manufacturing Procurement Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.kreatize.com/about#careers",
+        "observed_at": "2026-08-31T18:53:01.819Z",
+        "verification_url": "https://www.kreatize.com/about#careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Manufacturing Procurement Technology",
+        "evidence_note": "Der KREATIZE-Kandidat wurde ueber die offizielle KREATIZE-Domain und den offiziellen About-/Careers-Abschnitt belegt."
+      },
+      "created_at": "2026-08-31T18:53:01.819Z",
+      "updated_at": "2026-08-31T18:53:01.819Z",
       "last_successful_scan_at": null
     },
     {
@@ -10363,6 +10442,45 @@
       },
       "created_at": "2026-08-31T11:01:43.474Z",
       "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:intrinsic",
+      "canonical_name": "Intrinsic",
+      "canonical_domain": "intrinsic.ai",
+      "official_website_url": "https://www.intrinsic.ai/",
+      "career_url": "https://www.intrinsic.ai/careers",
+      "aliases": [
+        "Intrinsic AI",
+        "Intrinsic Innovation GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.intrinsic.ai/careers",
+        "observed_at": "2026-08-31T18:53:01.819Z",
+        "verification_url": "https://www.intrinsic.ai/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Robotics Software",
+        "evidence_note": "Der Intrinsic-Kandidat wurde ueber die offizielle Intrinsic-Domain und die offizielle Careers-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-31T18:53:01.819Z",
+      "updated_at": "2026-08-31T18:53:01.819Z",
       "last_successful_scan_at": null
     },
     {
@@ -10718,6 +10836,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:combyne",
+      "canonical_name": "combyne",
+      "canonical_domain": "app.combyne.com",
+      "official_website_url": "https://app.combyne.com/",
+      "career_url": "https://join.com/companies/combyne",
+      "aliases": [
+        "combyne GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Internet",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://app.combyne.com/combynehelp",
+        "observed_at": "2026-08-31T18:53:01.819Z",
+        "verification_url": "https://join.com/companies/combyne",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Consumer Internet",
+        "evidence_note": "Der combyne-Kandidat wurde ueber die offizielle combyne-App-Domain und den dort benannten Karrierepfad zum offiziellen JOIN-Auftritt belegt."
+      },
+      "created_at": "2026-08-31T18:53:01.819Z",
+      "updated_at": "2026-08-31T18:53:01.819Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:synopsys_gmbh",
       "canonical_name": "Synopsys GmbH",
       "canonical_domain": "synopsys.com",
@@ -11026,6 +11182,45 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:daikin_airconditioning_germany_gmbh",
+      "canonical_name": "DAIKIN Airconditioning Germany GmbH",
+      "canonical_domain": "daikin.de",
+      "official_website_url": "https://www.daikin.de/",
+      "career_url": "https://www.daikin.de/de_de/karriere.html",
+      "aliases": [
+        "Daikin",
+        "Daikin Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Heating Ventilation Air Conditioning",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.daikin.de/de_de/karriere.html",
+        "observed_at": "2026-08-31T18:53:01.819Z",
+        "verification_url": "https://www.daikin.de/de_de/karriere.html",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Heating Ventilation Air Conditioning",
+        "evidence_note": "Der DAIKIN-Kandidat wurde ueber die offizielle deutsche Daikin-Domain und die offizielle Daikin-Germany-Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-31T18:53:01.819Z",
+      "updated_at": "2026-08-31T18:53:01.819Z",
       "last_successful_scan_at": null
     },
     {
@@ -15615,6 +15810,27 @@
       ]
     },
     {
+      "source_id": "source:combyne_career",
+      "company_id": "company:combyne",
+      "source_type": "CAREER_PAGE",
+      "url": "https://join.com/companies/combyne",
+      "canonical_url": "https://join.com/companies/combyne",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:53:01.819Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://join.com/companies/combyne",
+          "basis_url": "https://app.combyne.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:53:01.819Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:commercetools_gmbh_career",
       "company_id": "company:commercetools_gmbh",
       "source_type": "CAREER_PAGE",
@@ -15800,6 +16016,27 @@
           ],
           "observed_at": "2026-08-27T16:42:02.02Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:daikin_airconditioning_germany_gmbh_career",
+      "company_id": "company:daikin_airconditioning_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.daikin.de/de_de/karriere.html",
+      "canonical_url": "https://www.daikin.de/de_de/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:53:01.819Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.daikin.de/de_de/karriere.html",
+          "basis_url": "https://www.daikin.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:53:01.819Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -16143,19 +16380,19 @@
       "source_id": "source:e_on_career",
       "company_id": "company:e_on",
       "source_type": "CAREER_PAGE",
-      "url": "https://jobs.eon.com/de",
-      "canonical_url": "https://jobs.eon.com/de",
+      "url": "https://careers.eon.com/deutschland/go/Germany-Careers/3727101/",
+      "canonical_url": "https://careers.eon.com/deutschland/go/Germany-Careers/3727101/",
       "is_official": true,
-      "verified_at": "2026-08-30T06:41:25.349Z",
+      "verified_at": "2026-08-31T18:53:01.819Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
           "status": "VERIFIED",
           "evidence_type": "CAREER_URL",
-          "url": "https://jobs.eon.com/de",
-          "basis_url": "https://careers.eon.com/",
+          "url": "https://careers.eon.com/deutschland/go/Germany-Careers/3727101/",
+          "basis_url": "https://careers.eon.com/deutschland/",
           "redirect_chain": [],
-          "observed_at": "2026-08-30T06:41:25.349Z",
+          "observed_at": "2026-08-31T18:53:01.819Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -17734,6 +17971,27 @@
       ]
     },
     {
+      "source_id": "source:intrinsic_career",
+      "company_id": "company:intrinsic",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.intrinsic.ai/careers",
+      "canonical_url": "https://www.intrinsic.ai/careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:53:01.819Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.intrinsic.ai/careers",
+          "basis_url": "https://www.intrinsic.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:53:01.819Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:isarsoft_gmbh_career",
       "company_id": "company:isarsoft_gmbh",
       "source_type": "CAREER_PAGE",
@@ -18088,6 +18346,27 @@
           "basis_url": "https://www.kpmg.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:kreatize_gmbh_career",
+      "company_id": "company:kreatize_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.kreatize.com/about#careers",
+      "canonical_url": "https://www.kreatize.com/about#careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:53:01.819Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.kreatize.com/about#careers",
+          "basis_url": "https://www.kreatize.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:53:01.819Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -18533,6 +18812,27 @@
           "basis_url": "https://www.metacareers.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:metoda_career",
+      "company_id": "company:metoda",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.metoda.com/de/karriere",
+      "canonical_url": "https://www.metoda.com/de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:53:01.819Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.metoda.com/de/karriere",
+          "basis_url": "https://www.metoda.com/de",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:53:01.819Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

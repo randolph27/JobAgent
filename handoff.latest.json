@@ -1,72 +1,139 @@
 {
-  "ts": "2026-08-31T20:29:00.000+02:00",
+  "ts": "2026-08-31T21:01:00.000+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
-  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "roadmap_rotation": "not-run: kein Roadmap-Punkt ist komplett erledigt",
-  "supertest": "done-by-user-instruction: nicht neu ausgefuehrt, da nicht angefragt",
+  "goal": "JA-027 fortsetzen: offiziell belegte Arbeitgeber produktiv aufnehmen, unsichere Kandidaten fail-closed lassen.",
   "changed": [
+    "Roadmap.md",
+    "data/jobagent/company-discovery.official.wave-ab-20260831.json",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/store.json",
+    "html/jobagent/company-coverage.html",
     "handoff.latest.md",
     "handoff.latest.json",
+    "todo.state.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json",
-    "todo.state.json"
+    "todo.master.index.json"
   ],
   "verified": [
     {
-      "cmd": ".\\ci.cmd stp",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ab-20260831.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "vorherige Welle-AA-Funktionstests siehe handoff.latest.md",
+      "cmd": "Invoke-WebRequest fuer alle official_website_url/career_url/discovery_url aus Welle AB",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ab-20260831.json -WaveId B",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\\\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
+      "exit": 1
+    },
+    {
+      "cmd": ".\\ci.cmd devserver-status",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
       "exit": 0
     }
   ],
-  "last_progress_commit": "7f93ff8 Add verified company import wave AA",
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
+    "head": "8214d068b631",
     "upstream": "origin/master",
-    "head_before_handoff_commit": "7f93ff88a6b2",
-    "ahead_behind_before_handoff_commit": "0/0"
+    "ahead_behind": "0/0",
+    "worktree": "dirty"
   },
-  "current_metrics": {
-    "companies": 334,
-    "job_sources": 331,
-    "official_sources": 333,
-    "career_sources": 332,
-    "verified_queue_items": 492,
-    "manual_review_queue_items": 1292
-  },
-  "next": "JA-027 mit naechster verifizierter Importwelle AB fortsetzen.",
-  "next_steps": [
-    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md lesen.",
-    "JA-027 fortsetzen; UI-001 offen lassen und nicht parallel bearbeiten.",
-    "Queue nach DISCOVER_OFFICIAL_WEBSITE, hohem priority_score und belastbarem Muenchen-/Freising-Bezug priorisieren.",
-    "Nur offiziell belegte und per HTTP erreichbare Website-/Karriere-/ATS-Quellen in die naechste Feed-Datei aufnehmen.",
-    "Feed data/jobagent/company-discovery.official.wave-ab-YYYYMMDD.json erstellen.",
-    "Import mit WaveId B ausfuehren, danach Queue, Coverage und Source-Coverage aktualisieren.",
-    "Funktionsbezogene Tests laufen lassen; Supertest erst bei Abschluss von JA-027 oder expliziter Anfrage.",
-    "Roadmap, Todo, Handoff, STP, Commit und Push synchronisieren."
-  ],
+  "next": "JA-027 mit Welle AC fortsetzen: weitere DISCOVER_OFFICIAL_WEBSITE-Kandidaten nur mit erreichbarer offizieller Website plus Karriere-/ATS-Beleg importieren.",
   "refs": [
-    "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
-    "handoff.latest.md",
     "handoff.latest.json",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/store.json",
-    "html/jobagent/company-coverage.html"
+    "Roadmap.md"
   ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "env_inventory_path": null
+  "env_inventory_path": null,
+  "summary": {
+    "wave": "AB",
+    "processed": 6,
+    "added": 5,
+    "updated": 1,
+    "store_companies": 339,
+    "job_sources": 336,
+    "official_sources": 338,
+    "career_sources": 337,
+    "queue_verified": 499,
+    "queue_manual_review": 1285,
+    "wave_gate": {
+      "status": "passed",
+      "manual_review_rate": 0.0,
+      "duplicate_rate": 0.1667,
+      "coverage_delta": 5
+    }
+  }
 }

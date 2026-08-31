@@ -1,0 +1,147 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T18:52:00.000Z",
+  "items": [
+    {
+      "canonical_name": "metoda",
+      "official_website_url": "https://www.metoda.com/de",
+      "career_url": "https://www.metoda.com/de/karriere",
+      "aliases": [
+        "metoda GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce Analytics",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.metoda.com/de/karriere",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der metoda-Kandidat wurde ueber die offizielle metoda-Domain und die offizielle Karriere-Seite mit offenem Bewerbungsprozess belegt."
+    },
+    {
+      "canonical_name": "KREATIZE GmbH",
+      "official_website_url": "https://www.kreatize.com/",
+      "career_url": "https://www.kreatize.com/about#careers",
+      "aliases": [
+        "Kreatize"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Manufacturing Procurement Technology",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.kreatize.com/about#careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der KREATIZE-Kandidat wurde ueber die offizielle KREATIZE-Domain und den offiziellen About-/Careers-Abschnitt belegt."
+    },
+    {
+      "canonical_name": "Intrinsic",
+      "official_website_url": "https://www.intrinsic.ai/",
+      "career_url": "https://www.intrinsic.ai/careers",
+      "aliases": [
+        "Intrinsic AI",
+        "Intrinsic Innovation GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.intrinsic.ai/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Intrinsic-Kandidat wurde ueber die offizielle Intrinsic-Domain und die offizielle Careers-Seite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "combyne",
+      "official_website_url": "https://app.combyne.com/",
+      "career_url": "https://join.com/companies/combyne",
+      "aliases": [
+        "combyne GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Internet",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://app.combyne.com/combynehelp",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der combyne-Kandidat wurde ueber die offizielle combyne-App-Domain und den dort benannten Karrierepfad zum offiziellen JOIN-Auftritt belegt."
+    },
+    {
+      "canonical_name": "DAIKIN Airconditioning Germany GmbH",
+      "official_website_url": "https://www.daikin.de/",
+      "career_url": "https://www.daikin.de/de_de/karriere.html",
+      "aliases": [
+        "Daikin Germany",
+        "Daikin"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Heating Ventilation Air Conditioning",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.daikin.de/de_de/karriere.html",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der DAIKIN-Kandidat wurde ueber die offizielle deutsche Daikin-Domain und die offizielle Daikin-Germany-Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "E.ON Energy Projects GmbH",
+      "official_website_url": "https://careers.eon.com/deutschland/",
+      "career_url": "https://careers.eon.com/deutschland/go/Germany-Careers/3727101/",
+      "aliases": [
+        "E.ON Energy Projects",
+        "EON Energy Projects"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Energy Infrastructure",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.eon.com/job/Batteries-Sub-Station-Delivery-Project-Manager-and-Portfolio-Expert-f_m_d-Munich/246062",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der E.ON-Energy-Projects-Kandidat wurde ueber den offiziellen E.ON-Karriereauftritt und einen dort erreichbaren Muenchen-Stellenpfad fuer E.ON Energy Projects belegt."
+    }
+  ]
+}

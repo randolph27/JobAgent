@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-08-31T18:21:22.133Z",
+  "generated_at": "2026-08-31T18:55:48.340Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 492,
-    "DISCOVER_OFFICIAL_WEBSITE": 1290,
+    "ALREADY_VERIFIED_IN_STORE": 499,
+    "DISCOVER_OFFICIAL_WEBSITE": 1283,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -7304,6 +7304,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_startup_platform_ecosystem_combyne_munich_startup_ecosystem",
+      "candidate_id": "regional-hint:munich_startup_platform_ecosystem_combyne_munich_startup_ecosystem",
+      "company_id": "company:combyne",
+      "candidate_ids": [
+        "regional-hint:munich_startup_platform_ecosystem_combyne_munich_startup_ecosystem"
+      ],
+      "canonical_name": "combyne",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:34:34.465Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_startup_platform_ecosystem",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://www.munich-startup.de/en/startups-and-ecosystem",
+        "observed_at": "08/26/2026 19:30:00",
+        "record_hash": "e472d97e12468eb3c724a5b775b4d4ebe40807699bbb244a3d24c17835be261e",
+        "allowed_use": "Oeffentlich gelistete Startups und Scaleups aus dem Munich-Startup-Oekosystem als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot einzelner Profilseiten; kein Login, kein Scraping hinter Schutzmechanismen, keine Nutzung der Insights-Login-Daten."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:combyne"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_commercetools_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_commercetools_muenchen_tech_unternehmen",
       "company_id": "company:commercetools_gmbh",
@@ -8367,6 +8411,52 @@
           "name:e on"
         ],
         "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_e_on_energy_projects_muenchen_nord",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_e_on_energy_projects_muenchen_nord",
+      "company_id": "company:e_on",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_e_on_energy_projects_muenchen_nord"
+      ],
+      "canonical_name": "E.ON Energy Projects",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:48:18.111Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "5371ff4d6111eafece492398e1f9da54dbf1ecc8970e5183903d7f9da11c9a93",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:e on energy projects"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 1
       }
     },
@@ -11716,6 +11806,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_intrinsic_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_intrinsic_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:intrinsic",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_intrinsic_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "Intrinsic",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:26:49.882Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "222f48dbf5f9c70701ccd6d7959a6fde4abcfad3fe63c4e5aab37ee5dc33a9d6",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:intrinsic"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_isarsoft_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_isarsoft_awesome_machine_learning_startups_munich_github_list",
       "company_id": "company:isarsoft_gmbh",
@@ -12612,6 +12746,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:krauss maffei wegmann"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_kreatize_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_kreatize_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:kreatize_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_kreatize_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "Kreatize",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:40:55.452Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "5b02d44d10adb0370e98813d091ca8575c95f01f81b627102c193dfd9d516f29",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:kreatize"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -13544,6 +13722,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:meta"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_metoda_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_metoda_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:metoda",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_metoda_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "metoda",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:47:12.557Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "b541e8b07c77dd7c70757782b671f4bc48fda5b32cce50d4bf428aa83e433c64",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:metoda"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -19125,50 +19347,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_startup_platform_ecosystem_combyne_munich_startup_ecosystem",
-      "candidate_id": "regional-hint:munich_startup_platform_ecosystem_combyne_munich_startup_ecosystem",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_startup_platform_ecosystem_combyne_munich_startup_ecosystem"
-      ],
-      "canonical_name": "combyne",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:34:34.465Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_startup_platform_ecosystem",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.munich-startup.de/en/startups-and-ecosystem",
-        "observed_at": "08/26/2026 19:30:00",
-        "record_hash": "e472d97e12468eb3c724a5b775b4d4ebe40807699bbb244a3d24c17835be261e",
-        "allowed_use": "Oeffentlich gelistete Startups und Scaleups aus dem Munich-Startup-Oekosystem als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot einzelner Profilseiten; kein Login, kein Scraping hinter Schutzmechanismen, keine Nutzung der Insights-Login-Daten."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:combyne"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_conde_nast_digital_germany_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_creative_companies_conde_nast_digital_germany_gmbh_muenchen",
       "company_id": null,
@@ -19649,52 +19827,6 @@
           "name:dstack ai"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_e_on_energy_projects_muenchen_nord",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_e_on_energy_projects_muenchen_nord",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_e_on_energy_projects_muenchen_nord"
-      ],
-      "canonical_name": "E.ON Energy Projects",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:48:18.111Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-nord.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "5371ff4d6111eafece492398e1f9da54dbf1ecc8970e5183903d7f9da11c9a93",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:e on energy projects"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -20847,50 +20979,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_intrinsic_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_intrinsic_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_intrinsic_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "Intrinsic",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:26:49.882Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "222f48dbf5f9c70701ccd6d7959a6fde4abcfad3fe63c4e5aab37ee5dc33a9d6",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:intrinsic"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_startup_platform_ecosystem_itsmydata_gmbh_munich_startup_ecosystem",
       "candidate_id": "regional-hint:munich_startup_platform_ecosystem_itsmydata_gmbh_munich_startup_ecosystem",
       "company_id": null,
@@ -21151,50 +21239,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:karevo"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_kreatize_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_kreatize_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_kreatize_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "Kreatize",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:40:55.452Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "5b02d44d10adb0370e98813d091ca8575c95f01f81b627102c193dfd9d516f29",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:kreatize"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -21547,50 +21591,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:meaningful"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_metoda_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_metoda_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_metoda_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "metoda",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:47:12.557Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "b541e8b07c77dd7c70757782b671f4bc48fda5b32cce50d4bf428aa83e433c64",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:metoda"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -29070,6 +29070,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_daikin_airconditioning_germany_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_daikin_airconditioning_germany_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:daikin_airconditioning_germany_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_daikin_airconditioning_germany_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "DAIKIN Airconditioning Germany GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T08:07:08.316Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "807d71fa4e65792a344b082614bda5e2949bbafb9674e5675dd67b29ecf8892d",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:daikin airconditioning germany"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_dassault_systemes_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": "company:dassault_systemes_deutschland_gmbh",
@@ -29284,6 +29328,52 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:dtv verlagsgesellschaft"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_e_on_energy_projects_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_e_on_energy_projects_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:e_on",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_e_on_energy_projects_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "E.ON Energy Projects GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T10:27:09.41Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "3ea38d4b5d9c46406d12e62d9be6c0c120e5df1f50d9762ebe6e9bc23cc28d36",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:e on energy projects"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -41642,50 +41732,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_daikin_airconditioning_germany_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_daikin_airconditioning_germany_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_daikin_airconditioning_germany_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "DAIKIN Airconditioning Germany GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T08:07:08.316Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "807d71fa4e65792a344b082614bda5e2949bbafb9674e5675dd67b29ecf8892d",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:daikin airconditioning germany"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_dale_carnegie_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_dale_carnegie_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -44410,52 +44456,6 @@
           "name:e on digital technology"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_e_on_energy_projects_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_e_on_energy_projects_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_e_on_energy_projects_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "E.ON Energy Projects GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T10:27:09.41Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "3ea38d4b5d9c46406d12e62d9be6c0c120e5df1f50d9762ebe6e9bc23cc28d36",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:e on energy projects"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
