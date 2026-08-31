@@ -8,9 +8,9 @@ Stand: 2026-08-31T08:10:54.939+02:00
 - Status: `in-progress`
 - Ziel: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Branch: `master`
-- HEAD: `8bdbda247731`
+- HEAD vor Handoff-Commit: `ff8fa6a`
 - Upstream: `origin/master`
-- Worktree: `dirty`
+- Worktree-Ziel: nach Handoff-Commit sauber
 - Route: `true`
 - STP: `.\ci.cmd stp` am 2026-08-31T08:10:54+02:00 mit Exit `0`
 - Supertest: nicht ausgefuehrt; JA-027 ist weiter offen, deshalb bleiben funktionsbezogene Tests massgeblich.
@@ -80,3 +80,4 @@ Stand: 2026-08-31T08:10:54.939+02:00
 ## Naechster Einstieg
 
 `JA-027` mit der naechsten verifizierten Importwelle aus der Kandidatenqueue fortsetzen. Supertest erst bei komplettem Roadmap-Abschluss oder ausdruecklicher Nutzeranforderung.
+
