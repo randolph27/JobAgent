@@ -119,9 +119,9 @@
     "branch": "master",
     "head": "see-git-log-1-after-commit",
     "upstream": "origin/master",
-    "ahead": 1,
+    "ahead": 0,
     "behind": 0,
-    "worktree": "clean-after-commit"
+    "worktree": "clean-after-push"
   },
   "metrics": {
     "companies_total": 280,

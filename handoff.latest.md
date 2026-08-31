@@ -10,7 +10,7 @@ Stand: 2026-08-31T07:47:30+02:00
 - Branch: `master`
 - HEAD: `siehe git log -1 nach Commit`
 - Upstream: `origin/master`
-- Worktree-Ziel: nach Amend/Commit sauber
+- Worktree-Ziel: nach Commit/Push sauber
 - Route: `true`
 - STP: `.\ci.cmd stp` Exit `0`; anschliessend wurde der Welle-U-Fortschritt manuell in Todo/Handoff ergaenzt, weil `todo-rebuild` wegen altem Checkpoint-Schema blockiert.
 - Supertest-Regel: Kein `.\ci.cmd supertest`, weil JA-027 weiter offen ist und der Nutzer funktionsbezogene Tests priorisiert.
@@ -95,5 +95,6 @@ Naechster Agent soll bei `JA-027` weitermachen:
 4. Vor Import alle `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen; unsichere oder nur sekundaer belegte Kandidaten fail-closed in Review belassen.
 5. Import, Queue-Refresh, Coverage/Source-Coverage und die funktionsbezogenen Tests ausfuehren.
 6. Roadmap/Todo/Handoff syncen; `supertest` erst bei Abschluss von JA-027 oder expliziter Anforderung.
+
 
 
