@@ -9940,6 +9940,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:infinera",
+      "canonical_name": "Infinera",
+      "canonical_domain": "infinera.com",
+      "official_website_url": "https://www.infinera.com/",
+      "career_url": "https://www.infinera.com/careers/",
+      "aliases": [
+        "Infinera Corporation"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Optical Networking",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.infinera.com/careers/",
+        "observed_at": "2026-08-31T22:37:31.023Z",
+        "verification_url": "https://www.infinera.com/careers/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Optical Networking",
+        "evidence_note": "Der Infinera-Kandidat wurde ueber die offizielle Infinera-Domain und die dort erreichbare offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T22:37:31.023Z",
+      "updated_at": "2026-08-31T22:37:31.023Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:heidelberg_materials",
       "canonical_name": "Heidelberg Materials",
       "canonical_domain": "heidelbergmaterials.com",
@@ -10169,6 +10207,45 @@
       },
       "created_at": "2026-08-31T18:53:01.819Z",
       "updated_at": "2026-08-31T18:53:01.819Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:innoactive",
+      "canonical_name": "Innoactive",
+      "canonical_domain": "innoactivegroup.com",
+      "official_website_url": "https://www.innoactivegroup.com/",
+      "career_url": "https://www.innoactivegroup.com/careers",
+      "aliases": [
+        "Innoactive GmbH",
+        "Innoactive Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "XR Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.innoactivegroup.com/careers",
+        "observed_at": "2026-08-31T22:37:31.023Z",
+        "verification_url": "https://www.innoactivegroup.com/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "XR Software",
+        "evidence_note": "Der Innoactive-Kandidat wurde ueber die offizielle Innoactive-Group-Domain und die offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T22:37:31.023Z",
+      "updated_at": "2026-08-31T22:37:31.023Z",
       "last_successful_scan_at": null
     },
     {
@@ -10600,6 +10677,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:convercus",
+      "canonical_name": "Convercus",
+      "canonical_domain": "convercus.com",
+      "official_website_url": "https://www.convercus.com/",
+      "career_url": "https://www.convercus.com/karriere",
+      "aliases": [
+        "Convercus GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Loyalty SaaS",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.convercus.com/karriere",
+        "observed_at": "2026-08-31T22:37:31.023Z",
+        "verification_url": "https://www.convercus.com/karriere",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Loyalty SaaS",
+        "evidence_note": "Der Convercus-Kandidat wurde ueber die offizielle Convercus-Domain und die offizielle Karriere-Seite derselben Domain belegt."
+      },
+      "created_at": "2026-08-31T22:37:31.023Z",
+      "updated_at": "2026-08-31T22:37:31.023Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:the_landbanking_group",
       "canonical_name": "The Landbanking Group",
       "canonical_domain": "thelandbankinggroup.com",
@@ -10836,6 +10951,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:coriolis_pharma",
+      "canonical_name": "Coriolis Pharma",
+      "canonical_domain": "coriolis-pharma.com",
+      "official_website_url": "https://www.coriolis-pharma.com/",
+      "career_url": "https://www.coriolis-pharma.com/careers/",
+      "aliases": [
+        "Coriolis Pharma Research GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharmaceutical Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.coriolis-pharma.com/careers/",
+        "observed_at": "2026-08-31T22:37:31.023Z",
+        "verification_url": "https://www.coriolis-pharma.com/careers/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Pharmaceutical Services",
+        "evidence_note": "Der Coriolis-Pharma-Kandidat wurde ueber die offizielle Coriolis-Pharma-Domain und die offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T22:37:31.023Z",
+      "updated_at": "2026-08-31T22:37:31.023Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:combyne",
       "canonical_name": "combyne",
       "canonical_domain": "app.combyne.com",
@@ -10909,6 +11062,45 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:steelcase",
+      "canonical_name": "Steelcase",
+      "canonical_domain": "steelcase.com",
+      "official_website_url": "https://www.steelcase.com/eu-en/discover/steelcase/munich/",
+      "career_url": "https://careers.steelcase.com/",
+      "aliases": [
+        "Steelcase GmbH",
+        "Steelcase Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Workplace Furniture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.steelcase.com/eu-en/discover/steelcase/munich/",
+        "observed_at": "2026-08-31T22:37:31.023Z",
+        "verification_url": "https://careers.steelcase.com/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Workplace Furniture",
+        "evidence_note": "Der Steelcase-Kandidat wurde ueber die offizielle Steelcase-Muenchen-Seite und den von dort belegbaren offiziellen Karriereauftritt belegt."
+      },
+      "created_at": "2026-08-31T22:37:31.023Z",
+      "updated_at": "2026-08-31T22:37:31.023Z",
       "last_successful_scan_at": null
     },
     {
@@ -11532,6 +11724,45 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:garmin_deutschland_gmbh",
+      "canonical_name": "Garmin Deutschland GmbH",
+      "canonical_domain": "garmin.com",
+      "official_website_url": "https://www.garmin.com/de-DE/",
+      "career_url": "https://careers.garmin.com/",
+      "aliases": [
+        "Garmin",
+        "Garmin Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Electronics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.garmin.com/",
+        "observed_at": "2026-08-31T22:37:31.023Z",
+        "verification_url": "https://careers.garmin.com/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Consumer Electronics",
+        "evidence_note": "Der Garmin-Kandidat wurde ueber die offizielle Garmin-Domain und den offiziellen Garmin-Careers-Auftritt belegt."
+      },
+      "created_at": "2026-08-31T22:37:31.023Z",
+      "updated_at": "2026-08-31T22:37:31.023Z",
       "last_successful_scan_at": null
     },
     {
@@ -15894,6 +16125,48 @@
       ]
     },
     {
+      "source_id": "source:convercus_career",
+      "company_id": "company:convercus",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.convercus.com/karriere",
+      "canonical_url": "https://www.convercus.com/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-31T22:37:31.023Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.convercus.com/karriere",
+          "basis_url": "https://www.convercus.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T22:37:31.023Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:coriolis_pharma_career",
+      "company_id": "company:coriolis_pharma",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.coriolis-pharma.com/careers/",
+      "canonical_url": "https://www.coriolis-pharma.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-31T22:37:31.023Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.coriolis-pharma.com/careers/",
+          "basis_url": "https://www.coriolis-pharma.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T22:37:31.023Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:cosinuss_gmbh_career",
       "company_id": "company:cosinuss_gmbh",
       "source_type": "CAREER_PAGE",
@@ -16963,6 +17236,27 @@
       ]
     },
     {
+      "source_id": "source:garmin_deutschland_gmbh_career",
+      "company_id": "company:garmin_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.garmin.com/",
+      "canonical_url": "https://careers.garmin.com/",
+      "is_official": true,
+      "verified_at": "2026-08-31T22:37:31.023Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.garmin.com/",
+          "basis_url": "https://www.garmin.com/de-DE/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T22:37:31.023Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:gasteig_muenchen_gmbh_career_url",
       "company_id": "company:gasteig_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -17862,6 +18156,48 @@
         "observed_at": "2026-08-17T15:52:58.666Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:infinera_career",
+      "company_id": "company:infinera",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.infinera.com/careers/",
+      "canonical_url": "https://www.infinera.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-31T22:37:31.023Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.infinera.com/careers/",
+          "basis_url": "https://www.infinera.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T22:37:31.023Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:innoactive_career",
+      "company_id": "company:innoactive",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.innoactivegroup.com/careers",
+      "canonical_url": "https://www.innoactivegroup.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T22:37:31.023Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.innoactivegroup.com/careers",
+          "basis_url": "https://www.innoactivegroup.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T22:37:31.023Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:innosabi_gmbh_career",
@@ -20639,6 +20975,27 @@
           ],
           "observed_at": "2026-08-27T05:08:12.805Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:steelcase_career",
+      "company_id": "company:steelcase",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.steelcase.com/",
+      "canonical_url": "https://careers.steelcase.com/",
+      "is_official": true,
+      "verified_at": "2026-08-31T22:37:31.023Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.steelcase.com/",
+          "basis_url": "https://www.steelcase.com/eu-en/discover/steelcase/munich/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T22:37:31.023Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },

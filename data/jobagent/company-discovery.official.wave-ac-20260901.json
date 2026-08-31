@@ -1,0 +1,147 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-01T07:20:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Infinera",
+      "official_website_url": "https://www.infinera.com/",
+      "career_url": "https://www.infinera.com/careers/",
+      "aliases": [
+        "Infinera Corporation"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Optical Networking",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.infinera.com/careers/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Infinera-Kandidat wurde ueber die offizielle Infinera-Domain und die dort erreichbare offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Innoactive",
+      "official_website_url": "https://www.innoactivegroup.com/",
+      "career_url": "https://www.innoactivegroup.com/careers",
+      "aliases": [
+        "Innoactive Group",
+        "Innoactive GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "XR Software",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.innoactivegroup.com/careers",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Innoactive-Kandidat wurde ueber die offizielle Innoactive-Group-Domain und die offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Convercus",
+      "official_website_url": "https://www.convercus.com/",
+      "career_url": "https://www.convercus.com/karriere",
+      "aliases": [
+        "Convercus GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Loyalty SaaS",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.convercus.com/karriere",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Convercus-Kandidat wurde ueber die offizielle Convercus-Domain und die offizielle Karriere-Seite derselben Domain belegt."
+    },
+    {
+      "canonical_name": "Coriolis Pharma",
+      "official_website_url": "https://www.coriolis-pharma.com/",
+      "career_url": "https://www.coriolis-pharma.com/careers/",
+      "aliases": [
+        "Coriolis Pharma Research GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharmaceutical Services",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.coriolis-pharma.com/careers/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Coriolis-Pharma-Kandidat wurde ueber die offizielle Coriolis-Pharma-Domain und die offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Steelcase",
+      "official_website_url": "https://www.steelcase.com/eu-en/discover/steelcase/munich/",
+      "career_url": "https://careers.steelcase.com/",
+      "aliases": [
+        "Steelcase Munich",
+        "Steelcase GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Workplace Furniture",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.steelcase.com/eu-en/discover/steelcase/munich/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Steelcase-Kandidat wurde ueber die offizielle Steelcase-Muenchen-Seite und den von dort belegbaren offiziellen Karriereauftritt belegt."
+    },
+    {
+      "canonical_name": "Garmin Deutschland GmbH",
+      "official_website_url": "https://www.garmin.com/de-DE/",
+      "career_url": "https://careers.garmin.com/",
+      "aliases": [
+        "Garmin Deutschland",
+        "Garmin"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Electronics",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.garmin.com/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Garmin-Kandidat wurde ueber die offizielle Garmin-Domain und den offiziellen Garmin-Careers-Auftritt belegt."
+    }
+  ]
+}
