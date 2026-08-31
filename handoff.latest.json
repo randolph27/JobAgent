@@ -1,12 +1,61 @@
 {
-  "ts": "2026-08-31T07:47:30+02:00",
+  "ts": "2026-08-31T07:55:00+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": ".",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "summary": "JA-027 Welle U/B abgeschlossen; 13 offiziell belegte Arbeitgeber verarbeitet, 12 neu produktiv aufgenommen und 1 bestehende Firma aktualisiert; JA-027 bleibt offen.",
+  "summary": "Handoff fuer neuen Chat nach STP: JA-027 Welle U/B ist abgeschlossen und gepusht; aktive Arbeit bleibt JA-027 mit naechster Importwelle V. Keine Roadmap-Rotation, weil JA-027 und UI-001 offen sind.",
+  "roadmap_rotation": {
+    "performed": false,
+    "reason": "Kein aktiver Roadmap-Punkt ist vollstaendig abgeschlossen.",
+    "open_items": [
+      "UI-001",
+      "JA-027"
+    ]
+  },
+  "last_completed_slice": {
+    "roadmap_id": "JA-027",
+    "wave": "U",
+    "wave_id": "B",
+    "feed_path": "data/jobagent/company-discovery.official.wave-u-20260831.json",
+    "processed": 13,
+    "added": 12,
+    "updated": 1,
+    "new_companies": [
+      "HypoVereinsbank",
+      "Instrument Systems GmbH",
+      "KNDS Deutschland GmbH & Co. KG",
+      "LfA Foerderbank Bayern",
+      "LHI Leasing GmbH",
+      "Meta Platforms Ireland Limited",
+      "Mobileye Germany GmbH",
+      "ESG Elektroniksystem- und Logistik-GmbH",
+      "HASIT Trockenmoertel GmbH",
+      "MegaZebra GmbH",
+      "innosabi GmbH",
+      "iwis SE & Co. KG"
+    ],
+    "updated_companies": [
+      "Bayerische Landeszentrale fuer neue Medien"
+    ],
+    "gate": {
+      "status": "passed",
+      "manual_review_rate": 0.0,
+      "duplicate_rate": 0.0769,
+      "coverage_delta": 12
+    }
+  },
+  "metrics_after_wave_u": {
+    "companies_total": 280,
+    "job_sources_total": 276,
+    "official_sources": 278,
+    "career_sources": 277,
+    "candidate_verified_total": 419,
+    "candidate_manual_review_total": 1365,
+    "candidate_retry_exhausted_total": 1
+  },
   "changed": [
     "Roadmap.md",
     "data/jobagent/company-discovery.official.wave-u-20260831.json",
@@ -19,6 +68,17 @@
     "todo.master.index.json",
     "handoff.latest.md",
     "handoff.latest.json"
+  ],
+  "evidence": [
+    "data/jobagent/company-discovery.official.wave-u-20260831.json",
+    "logs/jobagent/company-discovery-import-20260831-053943.json",
+    "logs/jobagent/company-candidate-verification-20260831-053950.json",
+    "logs/jobagent/company-coverage-20260831-054043.json",
+    "logs/jobagent/company-coverage-20260831-054043.md",
+    "logs/jobagent/ja-023-source-coverage.json",
+    "html/jobagent/company-coverage.html",
+    "data/jobagent/backups/store-20260831T053943989Z-pre-wave-import.json",
+    "logs/todo/done-events-20260831-075119.jsonl"
   ],
   "verified": [
     {
@@ -105,50 +165,60 @@
       "cmd": ".\\ci.cmd stp",
       "exit": 0,
       "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd todo-rebuild",
-      "exit": 1,
-      "status": "known-tooling-blocker",
-      "reason": "todo-rebuild: unsupported checkpoint schema"
     }
   ],
+  "supertest": {
+    "requested": false,
+    "status": "treated-as-done-per-user-instruction",
+    "note": "Nicht erneut ausgefuehrt, weil JA-027 offen ist und kein Supertest angefragt wurde."
+  },
+  "known_tooling_issue": {
+    "cmd": ".\\ci.cmd todo-rebuild",
+    "exit": 1,
+    "message": "todo-rebuild: unsupported checkpoint schema",
+    "impact": "Kein fachlicher Blocker fuer JA-027; Todo-State/Handoff wurden manuell konsistent gehalten."
+  },
+  "environment": {
+    "devserver": {
+      "status": "running",
+      "pid": 23568,
+      "port": 8500,
+      "url": "http://localhost:8500/"
+    },
+    "sonarqube": {
+      "url": "http://localhost:9000/api/system/status",
+      "status": "UP",
+      "version": "26.1.0.118079"
+    }
+  },
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "see-git-log-1-after-commit",
+    "head_before_handoff_commit": "5edb3f0644eb",
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,
-    "worktree": "clean-after-push"
+    "worktree_target": "clean-after-stage-commit-push"
   },
-  "metrics": {
-    "companies_total": 280,
-    "job_sources_total": 276,
-    "official_sources": 278,
-    "career_sources": 277,
-    "candidate_verified_total": 419,
-    "candidate_manual_review_total": 1365,
-    "candidate_retry_exhausted_total": 1
-  },
-  "evidence": [
-    "data/jobagent/company-discovery.official.wave-u-20260831.json",
-    "logs/jobagent/company-discovery-import-20260831-053943.json",
-    "logs/jobagent/company-candidate-verification-20260831-053950.json",
-    "logs/jobagent/company-coverage-20260831-054043.json",
-    "logs/jobagent/company-coverage-20260831-054043.md",
-    "logs/jobagent/ja-023-source-coverage.json",
-    "html/jobagent/company-coverage.html",
-    "data/jobagent/backups/store-20260831T053943989Z-pre-wave-import.json"
-  ],
   "refs": [
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
-    "handoff.latest.json"
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "Roadmap.md"
   ],
   "next": "JA-027 mit Welle V fortsetzen: naechste priorisierte Queue-Kandidaten nur mit offizieller Firmenwebsite plus offizieller Karriere-/Jobs-/ATS-Evidenz importieren.",
+  "next_steps": [
+    "Arbeitsbaum und Dienste pruefen: git status --short, .\\ci.cmd devserver-status, Sonar API auf :9000.",
+    "Aus data/jobagent/company-candidate-verification.queue.json die naechsten priorisierten Kandidaten mit DISCOVER_OFFICIAL_WEBSITE, VERIFY_OFFICIAL_SITE oder MANUAL_DECISION ermitteln.",
+    "Nur offiziell belegte Kandidaten in data/jobagent/company-discovery.official.wave-v-YYYYMMDD.json aufnehmen.",
+    "Alle official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
+    "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 und WaveId B ausfuehren.",
+    "Queue-Refresh, Coverage, Source-Coverage und funktionsbezogene Tests ausfuehren.",
+    "Roadmap/Todo/Handoff syncen; supertest nur bei komplettem Roadmap-Abschluss oder expliziter Anforderung."
+  ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
