@@ -1,6 +1,6 @@
 {
-  "ts": "2026-08-31T13:55:00.000+02:00",
-  "agent_id": "UTTER-20260817-39f7",
+  "ts": "2026-08-31T14:00:00.000+02:00",
+  "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
@@ -11,41 +11,43 @@
     "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen"
   ],
   "roadmap_rotation": "not-run-no-active-roadmap-point-complete",
-  "supertest": "not_newly_requested_treated_done_by_user_instruction_function_tests_green",
-  "last_pushed_work_commit": "1256a45 Add verified company import wave Y",
+  "supertest": "not_run_ja_027_open_function_tests_green",
   "last_completed_slice": {
     "roadmap_id": "JA-027",
-    "slice": "Welle Y/B-Import",
+    "slice": "Welle Z/B-Import",
     "status": "done",
     "added_companies": [
-      "McKinsey & Company Inc.",
-      "limango GmbH",
-      "F. X. MEILLER Fahrzeug- und Maschinenfabrik GmbH & Co. KG",
-      "Medien.Bayern GmbH",
-      "Moderna",
-      "LivaNova Deutschland GmbH",
-      "megaherz GmbH",
-      "MING Labs"
+      "UnternehmerTUM",
+      "Speexx",
+      "Userlane",
+      "SPORT1",
+      "Plaion",
+      "Robominds",
+      "Willy Bogner",
+      "Vinzenzmurr Vertriebs GmbH",
+      "Valtech",
+      "Samsung Semiconductors Europe"
     ],
     "metrics": {
-      "companies_total": 317,
-      "job_sources_total": 314,
-      "official_sources": 316,
-      "career_sources": 315,
-      "candidate_queue_verified": 470,
-      "candidate_queue_manual_review": 1314,
+      "companies_total": 327,
+      "job_sources_total": 324,
+      "official_sources": 326,
+      "career_sources": 325,
+      "candidate_queue_verified": 484,
+      "candidate_queue_manual_review": 1300,
       "wave_gate_status": "passed",
       "manual_review_rate": 0.0,
       "duplicate_rate": 0.0,
-      "coverage_delta": 8
+      "coverage_delta": 10
     }
   },
   "changed": [
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-y-20260831.json",
+    "data/jobagent/company-discovery.official.wave-z-20260831.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
     "html/jobagent/company-coverage.html",
+    "todo.checkpoint.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
@@ -54,30 +56,30 @@
     "handoff.latest.json"
   ],
   "evidence": [
-    "data/jobagent/company-discovery.official.wave-y-20260831.json",
-    "logs/jobagent/company-discovery-import-20260831-112828.json",
-    "logs/jobagent/company-candidate-verification-20260831-112836.json",
-    "logs/jobagent/company-coverage-20260831-112836.json",
-    "logs/jobagent/company-coverage-20260831-112836.md",
+    "data/jobagent/company-discovery.official.wave-z-20260831.json",
+    "logs/jobagent/company-discovery-import-20260831-114708.json",
+    "logs/jobagent/company-candidate-verification-20260831-114715.json",
+    "logs/jobagent/company-coverage-20260831-114811.json",
+    "logs/jobagent/company-coverage-20260831-114811.md",
     "logs/jobagent/ja-023-source-coverage.json",
     "html/jobagent/company-coverage.html",
-    "data/jobagent/backups/store-20260831T112828747Z-pre-wave-import.json",
+    "data/jobagent/backups/store-20260831T114708954Z-pre-wave-import.json",
     "output/playwright/ja-022-viewport-800.png",
     "output/playwright/ja-022-viewport-1366.png",
     "output/playwright/ja-022-viewport-1920.png",
-    "logs/todo/done-events-20260831-133946.jsonl"
+    "logs/todo/done-events-20260831-135458.jsonl"
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-y-20260831.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-z-20260831.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "Invoke-WebRequest fuer alle official_website_url/career_url/discovery_url aus Welle Y",
+      "cmd": "Invoke-WebRequest fuer alle official_website_url/career_url/discovery_url aus Welle Z",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-y-20260831.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-z-20260831.json -WaveId B",
       "exit": 0
     },
     {
@@ -89,7 +91,7 @@
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1",
       "exit": 0
     },
     {
@@ -133,7 +135,7 @@
       "exit": 1
     },
     {
-      "cmd": ".\\ci.cmd stp",
+      "cmd": "./ci.cmd stp",
       "exit": 0
     }
   ],
@@ -142,14 +144,7 @@
     "devserver": "running on configured port 8500",
     "note": "User text mentions 8090, project config .ci/ci.config.json currently uses 8500."
   },
-  "git": {
-    "upstream": "origin/master",
-    "branch": "master",
-    "head_at_handoff_start": "1256a45861f5",
-    "ahead": 0,
-    "behind": 0
-  },
-  "next": "Continue JA-027 with the next official import wave. Prioritize DISCOVER_OFFICIAL_WEBSITE candidates with high priority_score and Munich/Freising evidence; only import candidates with verified official website plus official career/jobs/ATS evidence; then run function tests, sync Roadmap/Todo/Handoff/STP, commit and push.",
+  "next": "Continue JA-027 with wave AA; import only candidates with verified official website plus official career/jobs/ATS evidence; then run function tests, sync, commit and push.",
   "refs": [
     "Roadmap.md",
     "todo.current.md",

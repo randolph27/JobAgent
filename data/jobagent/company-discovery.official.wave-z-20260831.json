@@ -1,0 +1,250 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T12:20:00.000Z",
+  "items": [
+    {
+      "canonical_name": "UnternehmerTUM",
+      "official_website_url": "https://www.unternehmertum.de/",
+      "career_url": "https://www.unternehmertum.de/en/jobs",
+      "aliases": [
+        "UnternehmerTUM GmbH",
+        "UnternehmerTUM gGmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Innovation and Entrepreneurship",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.unternehmertum.de/en/jobs",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der UnternehmerTUM-Kandidat wurde ueber die offizielle UnternehmerTUM-Domain und die offizielle Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Speexx",
+      "official_website_url": "https://www.speexx.com/",
+      "career_url": "https://www.speexx.com/all-jobs/",
+      "aliases": [
+        "Speexx GmbH",
+        "digital publishing AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "EdTech",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.speexx.com/all-jobs/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Speexx-Kandidat wurde ueber die offizielle Speexx-Domain und die offizielle Speexx-Stellenseite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Userlane",
+      "official_website_url": "https://www.userlane.com/",
+      "career_url": "https://www.userlane.com/careers/",
+      "aliases": [
+        "Userlane GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.userlane.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Userlane-Kandidat wurde ueber die offizielle Userlane-Domain und die offizielle Careers-Seite mit Muenchen-Stellen belegt."
+    },
+    {
+      "canonical_name": "SPORT1",
+      "official_website_url": "https://www.sport1.de/",
+      "career_url": "https://www.sport1.de/karriere",
+      "aliases": [
+        "Sport1",
+        "Sport1 GmbH",
+        "SPORT1 Medien"
+      ],
+      "locations": [
+        {
+          "label": "Ismaning bei Muenchen",
+          "city": "Ismaning",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.sport1.de/karriere",
+      "discovery_origin": "source-registry:remote_jobs_germany_github",
+      "evidence_note": "Der SPORT1-Kandidat wurde ueber die offizielle SPORT1-Domain und die offizielle Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Plaion",
+      "official_website_url": "https://plaion.com/",
+      "career_url": "https://jobs.plaion.com/eng",
+      "aliases": [
+        "PLAION",
+        "PLAION GmbH",
+        "PLAION Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games and Entertainment",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.plaion.com/eng",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der PLAION-Kandidat wurde ueber die offizielle PLAION-Domain und das offizielle PLAION-Jobportal mit Muenchen-Filter belegt."
+    },
+    {
+      "canonical_name": "Robominds",
+      "official_website_url": "https://www.robominds.de/en/start-en",
+      "career_url": "https://www.robominds.de/en/robominds-en/career",
+      "aliases": [
+        "robominds",
+        "robominds GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.robominds.de/en/robominds-en/career",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Robominds-Kandidat wurde ueber die offizielle robominds-Domain und die offizielle Karriere-Seite mit Muenchen-Stellen belegt."
+    },
+    {
+      "canonical_name": "Willy Bogner",
+      "official_website_url": "https://www.bogner.com/en-int/",
+      "career_url": "https://www.bogner.com/en-int/s/career/104.html",
+      "aliases": [
+        "BOGNER",
+        "Willy Bogner GmbH",
+        "Willy Bogner GmbH & Co. KGaA"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fashion",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bogner.com/en-int/s/career/104.html",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Bogner-Kandidat wurde ueber die offizielle BOGNER-Domain und die offizielle BOGNER-Karriereseite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "Vinzenzmurr Vertriebs GmbH",
+      "official_website_url": "https://vinzenzmurr.de/",
+      "career_url": "https://vinzenzmurr.de/karriere/",
+      "aliases": [
+        "Vinzenzmurr",
+        "Vinzenz Murr",
+        "Vinzenz Murr Vertriebs GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Food Retail",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://vinzenzmurr.de/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Vinzenzmurr-Kandidat wurde ueber die offizielle Vinzenzmurr-Domain und die offizielle Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Valtech",
+      "official_website_url": "https://www.valtech.com/",
+      "career_url": "https://www.valtech.com/career/jobs/",
+      "aliases": [
+        "Valtech GmbH",
+        "Valtech Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Agency",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.valtech.com/career/jobs/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Valtech-Kandidat wurde ueber die offizielle Valtech-Domain und die offizielle Valtech-Stellenseite belegt."
+    },
+    {
+      "canonical_name": "Samsung Semiconductors Europe",
+      "official_website_url": "https://semiconductor.samsung.com/emea/",
+      "career_url": "https://semiconductor.samsung.com/about-us/careers/emea/",
+      "aliases": [
+        "Samsung Semiconductor Europe",
+        "Samsung Semiconductor Europe GmbH",
+        "Samsung Semiconductors"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Semiconductors",
+      "scan_priority": 26,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://semiconductor.samsung.com/about-us/careers/emea/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Samsung-Semiconductor-Europe-Kandidat wurde ueber die offizielle Samsung-Semiconductor-Domain und die offizielle EMEA-Careers-Seite mit Muenchen-Bezug belegt."
+    }
+  ]
+}
