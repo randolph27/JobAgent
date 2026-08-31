@@ -1,13 +1,17 @@
 {
-  "ts": "2026-08-31T13:10:00.000+02:00",
+  "ts": "2026-08-31T13:18:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
+  "last_pushed_work_commit": "8b2c11df80ce",
+  "roadmap_rotation": "not-run-no-active-roadmap-point-complete",
+  "supertest": "treated_done_by_user_instruction_not_run_for_open_JA-027",
   "changed": [
     "Roadmap.md",
+    "data/jobagent/company-discovery.official.wave-w-20260831.json",
     "data/jobagent/company-discovery.official.wave-x-20260831.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
@@ -21,89 +25,31 @@
   ],
   "verified": [
     {
-      "exit": 0,
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-x-20260831.json | ConvertFrom-Json -Depth 100"
+      "cmd": "function-specific tests listed in handoff.latest.md",
+      "exit": 0
     },
     {
-      "exit": 0,
-      "cmd": "Invoke-WebRequest fuer alle official_website_url/career_url/discovery_url aus Welle X"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-x-20260831.json -WaveId B"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1"
-    },
-    {
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1"
-    },
-    {
-      "exit": 1,
-      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html"
-    },
-    {
-      "exit": 0,
-      "cmd": ".\\ci.cmd stp"
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
     }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
-    "behind": 0,
-    "ahead": 0,
-    "branch": "master",
-    "worktree": "dirty",
     "upstream": "origin/master",
-    "head": "31e63755e5fe"
+    "branch": "master",
+    "worktree": "clean-before-final-handoff-commit",
+    "head": "8b2c11df80ce",
+    "ahead": 0,
+    "behind": 0
   },
-  "next": "JA-027 mit Welle Y fortsetzen; Supertest erst bei komplettem Roadmap-Abschluss oder expliziter Anforderung.",
+  "next": "JA-027 mit Welle Y fortsetzen; nur offiziell belegte Karriere-/Jobs-/ATS-Quellen importieren.",
   "refs": [
+    "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
+    "handoff.latest.md",
     "handoff.latest.json"
   ]
 }
