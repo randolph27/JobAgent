@@ -1,14 +1,45 @@
 {
-  "ts": "2026-08-31T13:50:00.000+02:00",
+  "ts": "2026-08-31T13:55:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "last_pushed_work_commit": "HEAD Add verified company import wave Y",
+  "open_roadmap_points": [
+    "UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen",
+    "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen"
+  ],
   "roadmap_rotation": "not-run-no-active-roadmap-point-complete",
-  "supertest": "not_run_open_JA-027_function_tests_green",
+  "supertest": "not_newly_requested_treated_done_by_user_instruction_function_tests_green",
+  "last_pushed_work_commit": "1256a45 Add verified company import wave Y",
+  "last_completed_slice": {
+    "roadmap_id": "JA-027",
+    "slice": "Welle Y/B-Import",
+    "status": "done",
+    "added_companies": [
+      "McKinsey & Company Inc.",
+      "limango GmbH",
+      "F. X. MEILLER Fahrzeug- und Maschinenfabrik GmbH & Co. KG",
+      "Medien.Bayern GmbH",
+      "Moderna",
+      "LivaNova Deutschland GmbH",
+      "megaherz GmbH",
+      "MING Labs"
+    ],
+    "metrics": {
+      "companies_total": 317,
+      "job_sources_total": 314,
+      "official_sources": 316,
+      "career_sources": 315,
+      "candidate_queue_verified": 470,
+      "candidate_queue_manual_review": 1314,
+      "wave_gate_status": "passed",
+      "manual_review_rate": 0.0,
+      "duplicate_rate": 0.0,
+      "coverage_delta": 8
+    }
+  },
   "changed": [
     "Roadmap.md",
     "data/jobagent/company-discovery.official.wave-y-20260831.json",
@@ -21,6 +52,20 @@
     "todo.state.json",
     "handoff.latest.md",
     "handoff.latest.json"
+  ],
+  "evidence": [
+    "data/jobagent/company-discovery.official.wave-y-20260831.json",
+    "logs/jobagent/company-discovery-import-20260831-112828.json",
+    "logs/jobagent/company-candidate-verification-20260831-112836.json",
+    "logs/jobagent/company-coverage-20260831-112836.json",
+    "logs/jobagent/company-coverage-20260831-112836.md",
+    "logs/jobagent/ja-023-source-coverage.json",
+    "html/jobagent/company-coverage.html",
+    "data/jobagent/backups/store-20260831T112828747Z-pre-wave-import.json",
+    "output/playwright/ja-022-viewport-800.png",
+    "output/playwright/ja-022-viewport-1366.png",
+    "output/playwright/ja-022-viewport-1920.png",
+    "logs/todo/done-events-20260831-133946.jsonl"
   ],
   "verified": [
     {
@@ -90,27 +135,21 @@
     {
       "cmd": ".\\ci.cmd stp",
       "exit": 0
-    },
-    {
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd devserver-status",
-      "exit": 0
     }
   ],
-  "route_ok": true,
-  "route_violations": [],
+  "environment": {
+    "sonarqube": "UP on http://localhost:9000",
+    "devserver": "running on configured port 8500",
+    "note": "User text mentions 8090, project config .ci/ci.config.json currently uses 8500."
+  },
   "git": {
     "upstream": "origin/master",
     "branch": "master",
-    "worktree": "clean-after-wave-y-commit",
-    "head": "HEAD after Add verified company import wave Y",
+    "head_at_handoff_start": "1256a45861f5",
     "ahead": 0,
     "behind": 0
   },
-  "next": "JA-027 mit naechster offizieller Importwelle fortsetzen; nur offiziell belegte Karriere-/Jobs-/ATS-Quellen importieren.",
+  "next": "Continue JA-027 with the next official import wave. Prioritize DISCOVER_OFFICIAL_WEBSITE candidates with high priority_score and Munich/Freising evidence; only import candidates with verified official website plus official career/jobs/ATS evidence; then run function tests, sync Roadmap/Todo/Handoff/STP, commit and push.",
   "refs": [
     "Roadmap.md",
     "todo.current.md",
