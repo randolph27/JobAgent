@@ -1,0 +1,319 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T08:10:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Bayerische Landeszentrale fuer neue Medien",
+      "official_website_url": "https://www.blm.de/",
+      "career_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+      "aliases": [
+        "BLM",
+        "BLM - Bayerische Landeszentrale fuer neue Medien",
+        "Bayerische Landeszentrale fuer neue Medien (BLM)"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Regulation",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der BLM-Kandidat wurde ueber die offizielle BLM-Domain und deren Stellenangebote-Seite mit Muenchner Kontakt belegt."
+    },
+    {
+      "canonical_name": "HypoVereinsbank",
+      "official_website_url": "https://www.hypovereinsbank.de/",
+      "career_url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+      "aliases": [
+        "HVB",
+        "UniCredit Bank GmbH",
+        "HypoVereinsbank (HVB)"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Banking",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der HypoVereinsbank-Kandidat wurde ueber die offizielle HVB-Domain und deren Jobs-und-Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Instrument Systems GmbH",
+      "official_website_url": "https://www.instrumentsystems.com/",
+      "career_url": "https://www.instrumentsystems.com/en/careers",
+      "aliases": [
+        "Instrument Systems"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Light Measurement Technology",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.instrumentsystems.com/en/careers",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Instrument-Systems-Kandidat wurde ueber die offizielle Instrument-Systems-Domain und deren Careers-Seite mit Muenchner Stellenbezug belegt."
+    },
+    {
+      "canonical_name": "KNDS Deutschland GmbH & Co. KG",
+      "official_website_url": "https://www.knds.de/",
+      "career_url": "https://jobs.knds.de/",
+      "aliases": [
+        "Krauss-Maffei Wegmann",
+        "KMW",
+        "KNDS Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Defense Technology",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.knds.de/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Krauss-Maffei-Wegmann-Kandidat wurde fail-closed als KNDS Deutschland gefuehrt und ueber die offizielle KNDS-Domain sowie das offizielle KNDS-Jobsportal belegt."
+    },
+    {
+      "canonical_name": "LfA Foerderbank Bayern",
+      "official_website_url": "https://www.lfa.de/website/de/",
+      "career_url": "https://www.lfa.de/website/de/karriere/index.php",
+      "aliases": [
+        "LfA-Foerderbank Bayern",
+        "LfA Förderbank Bayern"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Development Banking",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lfa.de/website/de/karriere/index.php",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der LfA-Kandidat wurde ueber die offizielle LfA-Domain und deren Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "LHI Leasing GmbH",
+      "official_website_url": "https://www.lhi.de/",
+      "career_url": "https://www.lhi.de/en/lhi-group/career/",
+      "aliases": [
+        "LHI Leasing",
+        "LHI Gruppe"
+      ],
+      "locations": [
+        {
+          "label": "Pullach bei Muenchen",
+          "city": "Pullach",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Leasing and Asset Management",
+      "scan_priority": 26,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.lhi.de/en/lhi-group/career/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der LHI-Kandidat wurde ueber die offizielle LHI-Domain und deren Career-Seite belegt."
+    },
+    {
+      "canonical_name": "Meta Platforms Ireland Limited",
+      "official_website_url": "https://www.metacareers.com/",
+      "career_url": "https://www.metacareers.com/locations/munich/",
+      "aliases": [
+        "Meta",
+        "Meta Careers",
+        "Facebook"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Technology",
+      "scan_priority": 25,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.metacareers.com/locations/munich/",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der Meta-Kandidat wurde ueber die offizielle Meta-Careers-Domain und deren Muenchen-Standortseite belegt."
+    },
+    {
+      "canonical_name": "Mobileye Germany GmbH",
+      "official_website_url": "https://www.mobileye.com/",
+      "career_url": "https://www.mobileye.com/careers/",
+      "aliases": [
+        "Mobileye"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Technology",
+      "scan_priority": 24,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.mobileye.com/careers/",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der Mobileye-Kandidat wurde ueber die offizielle Mobileye-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "ESG Elektroniksystem- und Logistik-GmbH",
+      "official_website_url": "https://esg.de/",
+      "career_url": "https://jobs.esg.de/",
+      "aliases": [
+        "ESG",
+        "ESG Elektroniksystem- und Logistik GmbH",
+        "HENSOLDT ESG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen und Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Defense and Security Technology",
+      "scan_priority": 23,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.esg.de/",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der ESG-Kandidat wurde ueber die offizielle ESG/HENSOLDT-Domain und das offizielle ESG-Jobsportal belegt."
+    },
+    {
+      "canonical_name": "HASIT Trockenmoertel GmbH",
+      "official_website_url": "https://www.hasit.de/",
+      "career_url": "https://www.hasit.de/karriere",
+      "aliases": [
+        "HASIT Trockenmörtel GmbH",
+        "HASIT"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Building Materials",
+      "scan_priority": 22,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hasit.de/karriere",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der HASIT-Kandidat wurde ueber die offizielle HASIT-Domain und deren Karriere-Seite mit Freisinger Standortbezug belegt."
+    },
+    {
+      "canonical_name": "MegaZebra GmbH",
+      "official_website_url": "https://www.megazebra.com/",
+      "career_url": "https://www.megazebra.com/careers/",
+      "aliases": [
+        "MegaZebra"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games",
+      "scan_priority": 21,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.megazebra.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der MegaZebra-Kandidat wurde ueber die offizielle MegaZebra-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "innosabi GmbH",
+      "official_website_url": "https://innosabi.com/",
+      "career_url": "https://innosabi.com/career/",
+      "aliases": [
+        "innosabi"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Innovation Management Software",
+      "scan_priority": 20,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://innosabi.com/career/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der innosabi-Kandidat wurde ueber die offizielle innosabi-Domain und deren Career-Seite belegt."
+    },
+    {
+      "canonical_name": "iwis SE & Co. KG",
+      "official_website_url": "https://www.iwis.com/",
+      "career_url": "https://www.iwis.com/de-de/karriere",
+      "aliases": [
+        "iwis Ketten",
+        "iwis"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial Chain Systems",
+      "scan_priority": 19,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.iwis.com/de-de/karriere",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der iwis-Kandidat wurde ueber die offizielle iwis-Domain und deren Karriere-Seite belegt."
+    }
+  ]
+}

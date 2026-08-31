@@ -5266,7 +5266,9 @@
       "career_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
       "aliases": [
         "Bayerische Landeszentrale fuer neue Medien",
-        "BLM"
+        "Bayerische Landeszentrale fuer neue Medien (BLM)",
+        "BLM",
+        "BLM - Bayerische Landeszentrale fuer neue Medien"
       ],
       "locations": [
         {
@@ -5286,15 +5288,15 @@
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
-        "observed_at": "2026-08-29T10:47:34.834Z",
+        "observed_at": "2026-08-31T05:39:43.239Z",
         "verification_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
         "discovery_origin": "source-registry:munich_business_creative_companies",
         "target_area": "MUNICH",
         "industry_hint": "Media Regulation",
-        "evidence_note": "Der BLM-Kandidat wurde ueber die offizielle BLM-Domain, die Muenchner Kontaktadresse und die BLM-Stellenangeboteseite belegt."
+        "evidence_note": "Der BLM-Kandidat wurde ueber die offizielle BLM-Domain und deren Stellenangebote-Seite mit Muenchner Kontakt belegt."
       },
       "created_at": "2026-08-29T10:47:34.834Z",
-      "updated_at": "2026-08-29T10:47:34.834Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
       "last_successful_scan_at": null
     },
     {
@@ -10206,6 +10208,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hypovereinsbank",
+      "canonical_name": "HypoVereinsbank",
+      "canonical_domain": "hypovereinsbank.de",
+      "official_website_url": "https://www.hypovereinsbank.de/",
+      "career_url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+      "aliases": [
+        "HVB",
+        "HypoVereinsbank (HVB)",
+        "UniCredit Bank GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Banking",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Banking",
+        "evidence_note": "Der HypoVereinsbank-Kandidat wurde ueber die offizielle HVB-Domain und deren Jobs-und-Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:givve",
       "canonical_name": "givve",
       "canonical_domain": "givve.com",
@@ -10284,6 +10326,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:instrument_systems_gmbh",
+      "canonical_name": "Instrument Systems GmbH",
+      "canonical_domain": "instrumentsystems.com",
+      "official_website_url": "https://www.instrumentsystems.com/",
+      "career_url": "https://www.instrumentsystems.com/en/careers",
+      "aliases": [
+        "Instrument Systems"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Light Measurement Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.instrumentsystems.com/en/careers",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.instrumentsystems.com/en/careers",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Light Measurement Technology",
+        "evidence_note": "Der Instrument-Systems-Kandidat wurde ueber die offizielle Instrument-Systems-Domain und deren Careers-Seite mit Muenchner Stellenbezug belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:gini_gmbh",
       "canonical_name": "Gini GmbH",
       "canonical_domain": "gini.net",
@@ -10358,6 +10438,46 @@
       },
       "created_at": "2026-08-30T17:56:02.051Z",
       "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:knds_deutschland_gmbh_and_co_kg",
+      "canonical_name": "KNDS Deutschland GmbH & Co. KG",
+      "canonical_domain": "knds.de",
+      "official_website_url": "https://www.knds.de/",
+      "career_url": "https://jobs.knds.de/",
+      "aliases": [
+        "KMW",
+        "KNDS Deutschland",
+        "Krauss-Maffei Wegmann"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Defense Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.knds.de/",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://jobs.knds.de/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Defense Technology",
+        "evidence_note": "Der Krauss-Maffei-Wegmann-Kandidat wurde fail-closed als KNDS Deutschland gefuehrt und ueber die offizielle KNDS-Domain sowie das offizielle KNDS-Jobsportal belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
       "last_successful_scan_at": null
     },
     {
@@ -10439,6 +10559,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:lfa_foerderbank_bayern",
+      "canonical_name": "LfA Foerderbank Bayern",
+      "canonical_domain": "lfa.de",
+      "official_website_url": "https://www.lfa.de/website/de/",
+      "career_url": "https://www.lfa.de/website/de/karriere/index.php",
+      "aliases": [
+        "LfA Förderbank Bayern",
+        "LfA-Foerderbank Bayern"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Development Banking",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 27,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.lfa.de/website/de/karriere/index.php",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.lfa.de/website/de/karriere/index.php",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Development Banking",
+        "evidence_note": "Der LfA-Kandidat wurde ueber die offizielle LfA-Domain und deren Karrierebereich belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:henn_gmbh",
       "canonical_name": "HENN GmbH",
       "canonical_domain": "henn.com",
@@ -10516,6 +10675,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:lhi_leasing_gmbh",
+      "canonical_name": "LHI Leasing GmbH",
+      "canonical_domain": "lhi.de",
+      "official_website_url": "https://www.lhi.de/",
+      "career_url": "https://www.lhi.de/en/lhi-group/career/",
+      "aliases": [
+        "LHI Gruppe",
+        "LHI Leasing"
+      ],
+      "locations": [
+        {
+          "label": "Pullach bei Muenchen",
+          "city": "Pullach",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Leasing and Asset Management",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 26,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.lhi.de/en/lhi-group/career/",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.lhi.de/en/lhi-group/career/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Leasing and Asset Management",
+        "evidence_note": "Der LHI-Kandidat wurde ueber die offizielle LHI-Domain und deren Career-Seite belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hawk_ai_gmbh",
       "canonical_name": "HAWK:AI GmbH",
       "canonical_domain": "hawk.ai",
@@ -10552,6 +10750,46 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:meta_platforms_ireland_limited",
+      "canonical_name": "Meta Platforms Ireland Limited",
+      "canonical_domain": "metacareers.com",
+      "official_website_url": "https://www.metacareers.com/",
+      "career_url": "https://www.metacareers.com/locations/munich/",
+      "aliases": [
+        "Facebook",
+        "Meta",
+        "Meta Careers"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 25,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.metacareers.com/locations/munich/",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.metacareers.com/locations/munich/",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Technology",
+        "evidence_note": "Der Meta-Kandidat wurde ueber die offizielle Meta-Careers-Domain und deren Muenchen-Standortseite belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
       "last_successful_scan_at": null
     },
     {
@@ -10629,6 +10867,44 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:mobileye_germany_gmbh",
+      "canonical_name": "Mobileye Germany GmbH",
+      "canonical_domain": "mobileye.com",
+      "official_website_url": "https://www.mobileye.com/",
+      "career_url": "https://www.mobileye.com/careers/",
+      "aliases": [
+        "Mobileye"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 24,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.mobileye.com/careers/",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.mobileye.com/careers/",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Technology",
+        "evidence_note": "Der Mobileye-Kandidat wurde ueber die offizielle Mobileye-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
       "last_successful_scan_at": null
     },
     {
@@ -10787,6 +11063,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:esg_elektroniksystem_und_logistik_gmbh",
+      "canonical_name": "ESG Elektroniksystem- und Logistik-GmbH",
+      "canonical_domain": "esg.de",
+      "official_website_url": "https://esg.de/",
+      "career_url": "https://jobs.esg.de/",
+      "aliases": [
+        "ESG",
+        "ESG Elektroniksystem- und Logistik GmbH",
+        "HENSOLDT ESG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen und Region",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Defense and Security Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 23,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.esg.de/",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://jobs.esg.de/",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Defense and Security Technology",
+        "evidence_note": "Der ESG-Kandidat wurde ueber die offizielle ESG/HENSOLDT-Domain und das offizielle ESG-Jobsportal belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:kpmg_ag_wirtschaftspruefungsgesellschaft",
       "canonical_name": "KPMG AG Wirtschaftspruefungsgesellschaft",
       "canonical_domain": "kpmg.de",
@@ -10826,6 +11142,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hasit_trockenmoertel_gmbh",
+      "canonical_name": "HASIT Trockenmoertel GmbH",
+      "canonical_domain": "hasit.de",
+      "official_website_url": "https://www.hasit.de/",
+      "career_url": "https://www.hasit.de/karriere",
+      "aliases": [
+        "HASIT",
+        "HASIT Trockenmörtel GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Building Materials",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 22,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hasit.de/karriere",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.hasit.de/karriere",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "FREISING",
+        "industry_hint": "Building Materials",
+        "evidence_note": "Der HASIT-Kandidat wurde ueber die offizielle HASIT-Domain und deren Karriere-Seite mit Freisinger Standortbezug belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:cosmosindex_gmbh",
       "canonical_name": "CosmosIndex GmbH",
       "canonical_domain": "cosmosindex.com",
@@ -10861,6 +11216,44 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:megazebra_gmbh",
+      "canonical_name": "MegaZebra GmbH",
+      "canonical_domain": "megazebra.com",
+      "official_website_url": "https://www.megazebra.com/",
+      "career_url": "https://www.megazebra.com/careers/",
+      "aliases": [
+        "MegaZebra"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 21,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.megazebra.com/careers/",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.megazebra.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Games",
+        "evidence_note": "Der MegaZebra-Kandidat wurde ueber die offizielle MegaZebra-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
       "last_successful_scan_at": null
     },
     {
@@ -10978,6 +11371,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:innosabi_gmbh",
+      "canonical_name": "innosabi GmbH",
+      "canonical_domain": "innosabi.com",
+      "official_website_url": "https://innosabi.com/",
+      "career_url": "https://innosabi.com/career/",
+      "aliases": [
+        "innosabi"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Innovation Management Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 20,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://innosabi.com/career/",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://innosabi.com/career/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Innovation Management Software",
+        "evidence_note": "Der innosabi-Kandidat wurde ueber die offizielle innosabi-Domain und deren Career-Seite belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hamberger_grossmarkt_gmbh",
       "canonical_name": "Hamberger Grossmarkt GmbH",
       "canonical_domain": "hamberger-cc.de",
@@ -11054,6 +11485,45 @@
       },
       "created_at": "2026-08-30T17:56:02.051Z",
       "updated_at": "2026-08-30T17:56:02.051Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:iwis_se_and_co_kg",
+      "canonical_name": "iwis SE & Co. KG",
+      "canonical_domain": "iwis.com",
+      "official_website_url": "https://www.iwis.com/",
+      "career_url": "https://www.iwis.com/de-de/karriere",
+      "aliases": [
+        "iwis",
+        "iwis Ketten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial Chain Systems",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 19,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.iwis.com/de-de/karriere",
+        "observed_at": "2026-08-31T05:39:43.239Z",
+        "verification_url": "https://www.iwis.com/de-de/karriere",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial Chain Systems",
+        "evidence_note": "Der iwis-Kandidat wurde ueber die offizielle iwis-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-31T05:39:43.239Z",
+      "updated_at": "2026-08-31T05:39:43.239Z",
       "last_successful_scan_at": null
     },
     {
@@ -12209,7 +12679,7 @@
       "url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
       "canonical_url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
       "is_official": true,
-      "verified_at": "2026-08-29T10:47:34.834Z",
+      "verified_at": "2026-08-31T05:39:43.239Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
@@ -12218,7 +12688,7 @@
           "url": "https://www.blm.de/de/wer-wir-sind/stellenangebote-blm.cfm",
           "basis_url": "https://www.blm.de/",
           "redirect_chain": [],
-          "observed_at": "2026-08-29T10:47:34.834Z",
+          "observed_at": "2026-08-31T05:39:43.239Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -13564,6 +14034,27 @@
       ]
     },
     {
+      "source_id": "source:esg_elektroniksystem_und_logistik_gmbh_career",
+      "company_id": "company:esg_elektroniksystem_und_logistik_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.esg.de/",
+      "canonical_url": "https://jobs.esg.de/",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.esg.de/",
+          "basis_url": "https://esg.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:europaeisches_patentamt_career",
       "company_id": "company:europaeisches_patentamt",
       "source_type": "CAREER_PAGE",
@@ -14234,6 +14725,27 @@
       ]
     },
     {
+      "source_id": "source:hasit_trockenmoertel_gmbh_career",
+      "company_id": "company:hasit_trockenmoertel_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hasit.de/karriere",
+      "canonical_url": "https://www.hasit.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hasit.de/karriere",
+          "basis_url": "https://www.hasit.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hawe_hydraulik_se_career",
       "company_id": "company:hawe_hydraulik_se",
       "source_type": "CAREER_PAGE",
@@ -14612,6 +15124,27 @@
       ]
     },
     {
+      "source_id": "source:hypovereinsbank_career",
+      "company_id": "company:hypovereinsbank",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+      "canonical_url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hypovereinsbank.de/hvb/ueber-uns/jobs-karriere",
+          "basis_url": "https://www.hypovereinsbank.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:iabg_industrieanlagen_betriebsgesellschaft_mbh_career",
       "company_id": "company:iabg_industrieanlagen_betriebsgesellschaft_mbh",
       "source_type": "CAREER_PAGE",
@@ -14736,6 +15269,27 @@
       }
     },
     {
+      "source_id": "source:innosabi_gmbh_career",
+      "company_id": "company:innosabi_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://innosabi.com/career/",
+      "canonical_url": "https://innosabi.com/career/",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://innosabi.com/career/",
+          "basis_url": "https://innosabi.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:innovations_und_gruenderzentrum_biotechnologie_weihenstephan_career",
       "company_id": "company:innovations_und_gruenderzentrum_biotechnologie_weihenstephan",
       "source_type": "CAREER_PAGE",
@@ -14752,6 +15306,27 @@
           "basis_url": "https://www.izb-online.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T05:47:57.429Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:instrument_systems_gmbh_career",
+      "company_id": "company:instrument_systems_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.instrumentsystems.com/en/careers",
+      "canonical_url": "https://www.instrumentsystems.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.instrumentsystems.com/en/careers",
+          "basis_url": "https://www.instrumentsystems.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -14838,6 +15413,27 @@
           "basis_url": "https://www.iteratec.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T12:20:57.68Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:iwis_se_and_co_kg_career",
+      "company_id": "company:iwis_se_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.iwis.com/de-de/karriere",
+      "canonical_url": "https://www.iwis.com/de-de/karriere",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.iwis.com/de-de/karriere",
+          "basis_url": "https://www.iwis.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -14987,6 +15583,27 @@
           "basis_url": "https://www.klueber.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:knds_deutschland_gmbh_and_co_kg_career",
+      "company_id": "company:knds_deutschland_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.knds.de/",
+      "canonical_url": "https://jobs.knds.de/",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.knds.de/",
+          "basis_url": "https://www.knds.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -15160,6 +15777,48 @@
       ]
     },
     {
+      "source_id": "source:lfa_foerderbank_bayern_career",
+      "company_id": "company:lfa_foerderbank_bayern",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.lfa.de/website/de/karriere/index.php",
+      "canonical_url": "https://www.lfa.de/website/de/karriere/index.php",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.lfa.de/website/de/karriere/index.php",
+          "basis_url": "https://www.lfa.de/website/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:lhi_leasing_gmbh_career",
+      "company_id": "company:lhi_leasing_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.lhi.de/en/lhi-group/career/",
+      "canonical_url": "https://www.lhi.de/en/lhi-group/career/",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.lhi.de/en/lhi-group/career/",
+          "basis_url": "https://www.lhi.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:lhm_services_gmbh_career_url",
       "company_id": "company:lhm_services_gmbh",
       "source_type": "CAREER_PAGE",
@@ -15309,6 +15968,27 @@
       ]
     },
     {
+      "source_id": "source:megazebra_gmbh_career",
+      "company_id": "company:megazebra_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.megazebra.com/careers/",
+      "canonical_url": "https://www.megazebra.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.megazebra.com/careers/",
+          "basis_url": "https://www.megazebra.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:messe_muenchen_gmbh_career_url",
       "company_id": "company:messe_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -15328,6 +16008,27 @@
           ],
           "observed_at": "2026-08-27T15:25:53.945Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:meta_platforms_ireland_limited_career",
+      "company_id": "company:meta_platforms_ireland_limited",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.metacareers.com/locations/munich/",
+      "canonical_url": "https://www.metacareers.com/locations/munich/",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.metacareers.com/locations/munich/",
+          "basis_url": "https://www.metacareers.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -15391,6 +16092,27 @@
         "observed_at": "2026-08-17T16:02:19.059Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:mobileye_germany_gmbh_career",
+      "company_id": "company:mobileye_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.mobileye.com/careers/",
+      "canonical_url": "https://www.mobileye.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-31T05:39:43.239Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.mobileye.com/careers/",
+          "basis_url": "https://www.mobileye.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:mrg_muenchener_raumentwicklungsgesellschaft_mbh_career_url",
