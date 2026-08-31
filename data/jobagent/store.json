@@ -7375,6 +7375,64 @@
       ]
     },
     {
+      "company_id": "company:muenchener_volkstheater_gmbh",
+      "canonical_name": "Muenchner Volkstheater",
+      "canonical_domain": "muenchner-volkstheater.de",
+      "official_website_url": "https://www.muenchner-volkstheater.de/",
+      "career_url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+      "aliases": [
+        "Muenchener Volkstheater GmbH",
+        "Muenchner Volkstheater",
+        "Münchner Volkstheater"
+      ],
+      "industry": "Theater",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "CAREER_URL_VERIFIED",
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "created_at": "2026-08-27T15:56:20.96Z",
+      "next_scan_at": "2026-08-28T00:00:00Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Theater",
+        "evidence_note": "Der Volkstheater-Kandidat wurde ueber die offizielle Muenchner-Volkstheater-Domain und deren Jobs-und-Praktika-Seite belegt."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
+          "company_id": "company:muenchener_volkstheater_gmbh",
+          "canonical_name": "Muenchener Volkstheater GmbH",
+          "status": "CAREER_URL_VERIFIED",
+          "verification_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
+          "verified_by_url": "https://muenchner-volkstheater.de/",
+          "redirect_chain": "https://muenchner-volkstheater.de/service/jobs-praktika",
+          "evidence_type": "CAREER_URL",
+          "evidence_text_hash": "6019b1b8bd74362010f52bcaf27d07b3d44879f9c6617118faf2f19adba917b6",
+          "observed_at": "2026-08-27T15:56:20.96Z",
+          "http_status": 200,
+          "final_url": "https://muenchner-volkstheater.de/",
+          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
+          "expires_at": "2026-11-25T15:56:20.96Z"
+        }
+      ]
+    },
+    {
       "company_id": "company:muenchner_verkehrs_und_tarifverbund_gmbh",
       "canonical_name": "Muenchner Verkehrs- und Tarifverbund GmbH",
       "canonical_domain": "mvv-muenchen.de",
@@ -7531,60 +7589,6 @@
           "observed_at": "2026-08-27T15:56:20.96Z",
           "http_status": 200,
           "final_url": "https://muenchner-wohnen.de/",
-          "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
-          "expires_at": "2026-11-25T15:56:20.96Z"
-        }
-      ]
-    },
-    {
-      "company_id": "company:muenchener_volkstheater_gmbh",
-      "canonical_name": "Muenchener Volkstheater GmbH",
-      "canonical_domain": "muenchner-volkstheater.de",
-      "official_website_url": "https://muenchner-volkstheater.de/",
-      "career_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
-      "aliases": [],
-      "industry": "UNKNOWN",
-      "ats": [],
-      "scan_status": "PENDING",
-      "scan_priority": 50,
-      "verification_status": "CAREER_URL_VERIFIED",
-      "locations": [
-        {
-          "label": "Muenchen",
-          "city": "Muenchen",
-          "region": "Bayern",
-          "country": "DE",
-          "target_area": "MUNICH"
-        }
-      ],
-      "updated_at": "2026-08-27T15:56:20.96Z",
-      "created_at": "2026-08-27T15:56:20.96Z",
-      "next_scan_at": "2026-08-28T00:00:00Z",
-      "last_successful_scan_at": null,
-      "discovery_source": {
-        "type": "DISCOVERY_HINT",
-        "url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "2026-08-27T15:56:20.96Z",
-        "verification_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
-        "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
-        "target_area": "MUNICH",
-        "industry_hint": "UNKNOWN",
-        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
-      },
-      "candidate_verification_evidence": [
-        {
-          "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
-          "company_id": "company:muenchener_volkstheater_gmbh",
-          "canonical_name": "Muenchener Volkstheater GmbH",
-          "status": "CAREER_URL_VERIFIED",
-          "verification_url": "https://muenchner-volkstheater.de/service/jobs-praktika",
-          "verified_by_url": "https://muenchner-volkstheater.de/",
-          "redirect_chain": "https://muenchner-volkstheater.de/service/jobs-praktika",
-          "evidence_type": "CAREER_URL",
-          "evidence_text_hash": "6019b1b8bd74362010f52bcaf27d07b3d44879f9c6617118faf2f19adba917b6",
-          "observed_at": "2026-08-27T15:56:20.96Z",
-          "http_status": 200,
-          "final_url": "https://muenchner-volkstheater.de/",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-25T15:56:20.96Z"
         }
@@ -10091,6 +10095,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:mvtec_software_gmbh",
+      "canonical_name": "MVTec Software GmbH",
+      "canonical_domain": "mvtec.com",
+      "official_website_url": "https://www.mvtec.com/",
+      "career_url": "https://jobs.mvtec.com/",
+      "aliases": [
+        "MVTec",
+        "MVTec Software"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Machine Vision Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.mvtec.com/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://jobs.mvtec.com/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Machine Vision Software",
+        "evidence_note": "Der MVTec-Kandidat wurde ueber die offizielle MVTec-Domain und das offiziell als MVTec Software GmbH ausgewiesene Jobportal belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:iabg_industrieanlagen_betriebsgesellschaft_mbh",
       "canonical_name": "IABG Industrieanlagen-Betriebsgesellschaft mbH",
       "canonical_domain": "iabg.de",
@@ -10166,6 +10209,44 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:simscale_gmbh",
+      "canonical_name": "SimScale GmbH",
+      "canonical_domain": "simscale.com",
+      "official_website_url": "https://www.simscale.com/",
+      "career_url": "https://www.simscale.com/jobs/",
+      "aliases": [
+        "SimScale"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering Simulation Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.simscale.com/jobs/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://www.simscale.com/jobs/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Engineering Simulation Software",
+        "evidence_note": "Der SimScale-Kandidat wurde ueber die offizielle SimScale-Domain und deren Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -10287,6 +10368,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:nfon_ag",
+      "canonical_name": "NFON AG",
+      "canonical_domain": "corporate.nfon.com",
+      "official_website_url": "https://corporate.nfon.com/en/",
+      "career_url": "https://corporate.nfon.com/en/careers/",
+      "aliases": [
+        "NFON"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Cloud Communications",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://corporate.nfon.com/en/careers/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://corporate.nfon.com/en/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Cloud Communications",
+        "evidence_note": "Der NFON-Kandidat wurde ueber die offizielle NFON-Corporate-Domain und deren Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:kgal_gmbh_and_co_kg",
       "canonical_name": "KGAL GmbH & Co. KG",
       "canonical_domain": "kgal.de",
@@ -10400,6 +10519,45 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:mytheresa",
+      "canonical_name": "Mytheresa",
+      "canonical_domain": "mytheresa.com",
+      "official_website_url": "https://www.mytheresa.com/",
+      "career_url": "https://career.mytheresa.com/en/open-positions",
+      "aliases": [
+        "MyTheresa",
+        "Mytheresa Group"
+      ],
+      "locations": [
+        {
+          "label": "Aschheim / Muenchen",
+          "city": "Aschheim",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Luxury E-Commerce",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://career.mytheresa.com/en/open-positions",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://career.mytheresa.com/en/open-positions",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Luxury E-Commerce",
+        "evidence_note": "Der Mytheresa-Kandidat wurde ueber die offizielle Mytheresa-Domain und das Mytheresa-Karriereportal mit offenen Positionen belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -10517,6 +10675,44 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:mutares_se_and_co_kgaa",
+      "canonical_name": "Mutares SE & Co. KGaA",
+      "canonical_domain": "mutares.com",
+      "official_website_url": "https://mutares.com/",
+      "career_url": "https://career.mutares.com/",
+      "aliases": [
+        "Mutares"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Private Equity",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 27,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://career.mutares.com/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://career.mutares.com/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH",
+        "industry_hint": "Private Equity",
+        "evidence_note": "Der Mutares-Kandidat wurde ueber die offizielle Mutares-Domain und deren offizielles Karriereportal belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -10714,6 +10910,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:holidaycheck_group_ag",
+      "canonical_name": "HolidayCheck Group AG",
+      "canonical_domain": "holidaycheckgroup.com",
+      "official_website_url": "https://www.holidaycheckgroup.com/",
+      "career_url": "https://holidaycheck.jobs.personio.de/?language=en",
+      "aliases": [
+        "HolidayCheck",
+        "HolidayCheck Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Travel Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 26,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://holidaycheck.jobs.personio.de/?language=en",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://holidaycheck.jobs.personio.de/?language=en",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Travel Technology",
+        "evidence_note": "Der HolidayCheck-Kandidat wurde ueber die offizielle HolidayCheck-Group-Domain und das HolidayCheck-Personio-Karriereportal belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hawk_ai_gmbh",
       "canonical_name": "HAWK:AI GmbH",
       "canonical_domain": "hawk.ai",
@@ -10750,6 +10985,45 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:serviceplan_gruppe_se_and_co_kg",
+      "canonical_name": "Serviceplan Gruppe SE & Co. KG",
+      "canonical_domain": "house-of-communication.com",
+      "official_website_url": "https://www.house-of-communication.com/de/en.html",
+      "career_url": "https://www.house-of-communication.com/de/en/career.html",
+      "aliases": [
+        "Serviceplan",
+        "Serviceplan Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Marketing and Communication",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 25,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.house-of-communication.com/de/en/career.html",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://www.house-of-communication.com/de/en/career.html",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Marketing and Communication",
+        "evidence_note": "Der Serviceplan-Kandidat wurde ueber die offizielle House-of-Communication-Domain und deren Serviceplan-Karriereseite belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -10867,6 +11141,44 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:muenchner_kammerspiele",
+      "canonical_name": "Muenchner Kammerspiele",
+      "canonical_domain": "muenchner-kammerspiele.de",
+      "official_website_url": "https://www.muenchner-kammerspiele.de/",
+      "career_url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+      "aliases": [
+        "Münchner Kammerspiele"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Theater",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 24,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Theater",
+        "evidence_note": "Der Kammerspiele-Kandidat wurde ueber die offizielle Muenchner-Kammerspiele-Domain und deren Jobs-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -11103,6 +11415,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:penguin_random_house_verlagsgruppe",
+      "canonical_name": "Penguin Random House Verlagsgruppe",
+      "canonical_domain": "penguin.de",
+      "official_website_url": "https://www.penguin.de/",
+      "career_url": "https://karriere.penguinrandomhouse.de/",
+      "aliases": [
+        "Penguin Random House",
+        "Penguin Random House Verlagsgruppe GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 22,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere.penguinrandomhouse.de/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://karriere.penguinrandomhouse.de/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing",
+        "evidence_note": "Der Penguin-Random-House-Kandidat wurde ueber die offizielle Penguin-Domain und das Karriereportal der Penguin Random House Verlagsgruppe belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:kpmg_ag_wirtschaftspruefungsgesellschaft",
       "canonical_name": "KPMG AG Wirtschaftspruefungsgesellschaft",
       "canonical_domain": "kpmg.de",
@@ -11216,6 +11567,45 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:pwc_deutschland",
+      "canonical_name": "PwC Deutschland",
+      "canonical_domain": "pwc.de",
+      "official_website_url": "https://www.pwc.de/",
+      "career_url": "https://jobs.pwc.de/",
+      "aliases": [
+        "PricewaterhouseCoopers GmbH",
+        "PwC"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Professional Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 21,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.pwc.de/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://jobs.pwc.de/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Professional Services",
+        "evidence_note": "Der PwC-Kandidat wurde ueber die offizielle PwC-Deutschland-Domain und das PwC-Deutschland-Karriereportal belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -11333,6 +11723,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:oracle_deutschland",
+      "canonical_name": "ORACLE Deutschland",
+      "canonical_domain": "oracle.com",
+      "official_website_url": "https://www.oracle.com/de/",
+      "career_url": "https://www.oracle.com/de/careers/",
+      "aliases": [
+        "Oracle",
+        "Oracle Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Enterprise Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 20,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.oracle.com/de/careers/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://www.oracle.com/de/careers/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Enterprise Software",
+        "evidence_note": "Der Oracle-Kandidat wurde ueber die offizielle Oracle-Deutschland-Domain und deren Karrierebereich belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:lingoking_gmbh",
       "canonical_name": "lingoking GmbH",
       "canonical_domain": "lingoking.com",
@@ -11445,6 +11874,45 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:roche_diagnostics",
+      "canonical_name": "Roche Diagnostics",
+      "canonical_domain": "roche.de",
+      "official_website_url": "https://www.roche.de/",
+      "career_url": "https://careers.roche.com/global/en/germany-penzberg",
+      "aliases": [
+        "Roche",
+        "Roche Diagnostics GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Penzberg / Greater Munich",
+          "city": "Penzberg",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Diagnostics and Pharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 19,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.roche.com/global/en/germany-penzberg",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://careers.roche.com/global/en/germany-penzberg",
+        "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Diagnostics and Pharmaceuticals",
+        "evidence_note": "Der Roche-Diagnostics-Kandidat wurde ueber die offizielle Roche-Deutschland-Domain und die offizielle Roche-Careers-Seite fuer Penzberg/Greater Munich belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -11604,6 +12072,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:muenchner_verkehrsgesellschaft_mbh",
+      "canonical_name": "Muenchner Verkehrsgesellschaft mbH",
+      "canonical_domain": "mvg.de",
+      "official_website_url": "https://www.mvg.de/",
+      "career_url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+      "aliases": [
+        "Muenchner Verkehrsgesellschaft",
+        "Münchner Verkehrsgesellschaft",
+        "MVG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Transport",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 18,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Public Transport",
+        "evidence_note": "Der MVG-Kandidat wurde ueber die offizielle MVG-Domain und deren Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:huawei_technologies_deutschland_gmbh",
       "canonical_name": "Huawei Technologies Deutschland GmbH",
       "canonical_domain": "huawei.com",
@@ -11718,6 +12226,83 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:piper_verlag_gmbh",
+      "canonical_name": "Piper Verlag GmbH",
+      "canonical_domain": "piper.de",
+      "official_website_url": "https://www.piper.de/",
+      "career_url": "https://www.piper.de/service/jobs-karriere",
+      "aliases": [
+        "Piper Verlag"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 17,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.piper.de/service/jobs-karriere",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://www.piper.de/service/jobs-karriere",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing",
+        "evidence_note": "Der Piper-Verlag-Kandidat wurde ueber die offizielle Piper-Domain und deren Jobs-und-Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:motorworld_muenchen",
+      "canonical_name": "MOTORWORLD Muenchen",
+      "canonical_domain": "motorworld.de",
+      "official_website_url": "https://motorworld.de/en/muenchen/",
+      "career_url": "https://motorworld.de/en/career/",
+      "aliases": [
+        "MOTORWORLD München",
+        "Motorworld Munich"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility Events and Real Estate",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 16,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://motorworld.de/en/career/",
+        "observed_at": "2026-08-31T06:04:40.636Z",
+        "verification_url": "https://motorworld.de/en/career/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Mobility Events and Real Estate",
+        "evidence_note": "Der Motorworld-Muenchen-Kandidat wurde ueber die offizielle Motorworld-Muenchen-Seite und die offizielle Motorworld-Career-Seite belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -15019,6 +15604,27 @@
       ]
     },
     {
+      "source_id": "source:holidaycheck_group_ag_career",
+      "company_id": "company:holidaycheck_group_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://holidaycheck.jobs.personio.de/?language=en",
+      "canonical_url": "https://holidaycheck.jobs.personio.de/?language=en",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://holidaycheck.jobs.personio.de/?language=en",
+          "basis_url": "https://www.holidaycheckgroup.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:holidu_gmbh_career",
       "company_id": "company:holidu_gmbh",
       "source_type": "CAREER_PAGE",
@@ -16115,6 +16721,27 @@
       ]
     },
     {
+      "source_id": "source:motorworld_muenchen_career",
+      "company_id": "company:motorworld_muenchen",
+      "source_type": "CAREER_PAGE",
+      "url": "https://motorworld.de/en/career/",
+      "canonical_url": "https://motorworld.de/en/career/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://motorworld.de/en/career/",
+          "basis_url": "https://motorworld.de/en/muenchen/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:mrg_muenchener_raumentwicklungsgesellschaft_mbh_career_url",
       "company_id": "company:mrg_muenchener_raumentwicklungsgesellschaft_mbh",
       "source_type": "CAREER_PAGE",
@@ -16314,6 +16941,27 @@
       ]
     },
     {
+      "source_id": "source:muenchener_volkstheater_gmbh_career",
+      "company_id": "company:muenchener_volkstheater_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+      "canonical_url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+          "basis_url": "https://www.muenchner-volkstheater.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:muenchener_volkstheater_gmbh_career_url",
       "company_id": "company:muenchener_volkstheater_gmbh",
       "source_type": "CAREER_PAGE",
@@ -16383,6 +17031,27 @@
       ]
     },
     {
+      "source_id": "source:muenchner_kammerspiele_career",
+      "company_id": "company:muenchner_kammerspiele",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+      "canonical_url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+          "basis_url": "https://www.muenchner-kammerspiele.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:muenchner_verkehrs_und_tarifverbund_gmbh_career_url",
       "company_id": "company:muenchner_verkehrs_und_tarifverbund_gmbh",
       "source_type": "CAREER_PAGE",
@@ -16406,6 +17075,27 @@
       ]
     },
     {
+      "source_id": "source:muenchner_verkehrsgesellschaft_mbh_career",
+      "company_id": "company:muenchner_verkehrsgesellschaft_mbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+      "canonical_url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+          "basis_url": "https://www.mvg.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:munich_re_career",
       "company_id": "company:munich_re",
       "source_type": "CAREER_PAGE",
@@ -16423,6 +17113,69 @@
         "observed_at": "2026-08-17T15:52:58.666Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:mutares_se_and_co_kgaa_career",
+      "company_id": "company:mutares_se_and_co_kgaa",
+      "source_type": "CAREER_PAGE",
+      "url": "https://career.mutares.com/",
+      "canonical_url": "https://career.mutares.com/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://career.mutares.com/",
+          "basis_url": "https://mutares.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:mvtec_software_gmbh_career",
+      "company_id": "company:mvtec_software_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.mvtec.com/",
+      "canonical_url": "https://jobs.mvtec.com/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.mvtec.com/",
+          "basis_url": "https://www.mvtec.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:mytheresa_career",
+      "company_id": "company:mytheresa",
+      "source_type": "CAREER_PAGE",
+      "url": "https://career.mytheresa.com/en/open-positions",
+      "canonical_url": "https://career.mytheresa.com/en/open-positions",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://career.mytheresa.com/en/open-positions",
+          "basis_url": "https://www.mytheresa.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:nagarro_se_career",
@@ -16482,6 +17235,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:nfon_ag_career",
+      "company_id": "company:nfon_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://corporate.nfon.com/en/careers/",
+      "canonical_url": "https://corporate.nfon.com/en/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://corporate.nfon.com/en/careers/",
+          "basis_url": "https://corporate.nfon.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:ntt_data_deutschland_se_career_url",
@@ -16546,6 +17320,27 @@
           "basis_url": "https://www.olympus-europa.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:oracle_deutschland_career",
+      "company_id": "company:oracle_deutschland",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.oracle.com/de/careers/",
+      "canonical_url": "https://www.oracle.com/de/careers/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.oracle.com/de/careers/",
+          "basis_url": "https://www.oracle.com/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -16769,6 +17564,27 @@
       ]
     },
     {
+      "source_id": "source:penguin_random_house_verlagsgruppe_career",
+      "company_id": "company:penguin_random_house_verlagsgruppe",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.penguinrandomhouse.de/",
+      "canonical_url": "https://karriere.penguinrandomhouse.de/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.penguinrandomhouse.de/",
+          "basis_url": "https://www.penguin.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:personio_se_and_co_kg_career",
       "company_id": "company:personio_se_and_co_kg",
       "source_type": "CAREER_PAGE",
@@ -16809,6 +17625,27 @@
           ],
           "observed_at": "2026-08-27T17:57:52.983Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:piper_verlag_gmbh_career",
+      "company_id": "company:piper_verlag_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.piper.de/service/jobs-karriere",
+      "canonical_url": "https://www.piper.de/service/jobs-karriere",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.piper.de/service/jobs-karriere",
+          "basis_url": "https://www.piper.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -16941,6 +17778,27 @@
       ]
     },
     {
+      "source_id": "source:pwc_deutschland_career",
+      "company_id": "company:pwc_deutschland",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.pwc.de/",
+      "canonical_url": "https://jobs.pwc.de/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.pwc.de/",
+          "basis_url": "https://www.pwc.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:qualcomm_germany_gmbh_career",
       "company_id": "company:qualcomm_germany_gmbh",
       "source_type": "CAREER_PAGE",
@@ -17002,6 +17860,27 @@
           ],
           "observed_at": "2026-08-28T05:03:36.959Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:roche_diagnostics_career",
+      "company_id": "company:roche_diagnostics",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.roche.com/global/en/germany-penzberg",
+      "canonical_url": "https://careers.roche.com/global/en/germany-penzberg",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.roche.com/global/en/germany-penzberg",
+          "basis_url": "https://www.roche.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -17086,6 +17965,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:serviceplan_gruppe_se_and_co_kg_career",
+      "company_id": "company:serviceplan_gruppe_se_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.house-of-communication.com/de/en/career.html",
+      "canonical_url": "https://www.house-of-communication.com/de/en/career.html",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.house-of-communication.com/de/en/career.html",
+          "basis_url": "https://www.house-of-communication.com/de/en.html",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:sfc_energy_ag_career",
@@ -17185,6 +18085,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:simscale_gmbh_career",
+      "company_id": "company:simscale_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.simscale.com/jobs/",
+      "canonical_url": "https://www.simscale.com/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.simscale.com/jobs/",
+          "basis_url": "https://www.simscale.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:sixt_se_career",

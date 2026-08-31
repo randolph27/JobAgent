@@ -1,0 +1,385 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T09:05:00.000Z",
+  "items": [
+    {
+      "canonical_name": "MVTec Software GmbH",
+      "official_website_url": "https://www.mvtec.com/",
+      "career_url": "https://jobs.mvtec.com/",
+      "aliases": [
+        "MVTec",
+        "MVTec Software"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Machine Vision Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.mvtec.com/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der MVTec-Kandidat wurde ueber die offizielle MVTec-Domain und das offiziell als MVTec Software GmbH ausgewiesene Jobportal belegt."
+    },
+    {
+      "canonical_name": "SimScale GmbH",
+      "official_website_url": "https://www.simscale.com/",
+      "career_url": "https://www.simscale.com/jobs/",
+      "aliases": [
+        "SimScale"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering Simulation Software",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.simscale.com/jobs/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der SimScale-Kandidat wurde ueber die offizielle SimScale-Domain und deren Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "NFON AG",
+      "official_website_url": "https://corporate.nfon.com/en/",
+      "career_url": "https://corporate.nfon.com/en/careers/",
+      "aliases": [
+        "NFON"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Cloud Communications",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://corporate.nfon.com/en/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der NFON-Kandidat wurde ueber die offizielle NFON-Corporate-Domain und deren Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Mytheresa",
+      "official_website_url": "https://www.mytheresa.com/",
+      "career_url": "https://career.mytheresa.com/en/open-positions",
+      "aliases": [
+        "MyTheresa",
+        "Mytheresa Group"
+      ],
+      "locations": [
+        {
+          "label": "Aschheim / Muenchen",
+          "city": "Aschheim",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Luxury E-Commerce",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://career.mytheresa.com/en/open-positions",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Mytheresa-Kandidat wurde ueber die offizielle Mytheresa-Domain und das Mytheresa-Karriereportal mit offenen Positionen belegt."
+    },
+    {
+      "canonical_name": "Mutares SE & Co. KGaA",
+      "official_website_url": "https://mutares.com/",
+      "career_url": "https://career.mutares.com/",
+      "aliases": [
+        "Mutares"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Private Equity",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://career.mutares.com/",
+      "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+      "evidence_note": "Der Mutares-Kandidat wurde ueber die offizielle Mutares-Domain und deren offizielles Karriereportal belegt."
+    },
+    {
+      "canonical_name": "HolidayCheck Group AG",
+      "official_website_url": "https://www.holidaycheckgroup.com/",
+      "career_url": "https://holidaycheck.jobs.personio.de/?language=en",
+      "aliases": [
+        "HolidayCheck",
+        "HolidayCheck Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Travel Technology",
+      "scan_priority": 26,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://holidaycheck.jobs.personio.de/?language=en",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der HolidayCheck-Kandidat wurde ueber die offizielle HolidayCheck-Group-Domain und das HolidayCheck-Personio-Karriereportal belegt."
+    },
+    {
+      "canonical_name": "Serviceplan Gruppe SE & Co. KG",
+      "official_website_url": "https://www.house-of-communication.com/de/en.html",
+      "career_url": "https://www.house-of-communication.com/de/en/career.html",
+      "aliases": [
+        "Serviceplan",
+        "Serviceplan Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Marketing and Communication",
+      "scan_priority": 25,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.house-of-communication.com/de/en/career.html",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Serviceplan-Kandidat wurde ueber die offizielle House-of-Communication-Domain und deren Serviceplan-Karriereseite belegt."
+    },
+    {
+      "canonical_name": "Muenchner Kammerspiele",
+      "official_website_url": "https://www.muenchner-kammerspiele.de/",
+      "career_url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+      "aliases": [
+        "Münchner Kammerspiele"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Theater",
+      "scan_priority": 24,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.muenchner-kammerspiele.de/de/1177-jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Kammerspiele-Kandidat wurde ueber die offizielle Muenchner-Kammerspiele-Domain und deren Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Muenchner Volkstheater",
+      "official_website_url": "https://www.muenchner-volkstheater.de/",
+      "career_url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+      "aliases": [
+        "Münchner Volkstheater"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Theater",
+      "scan_priority": 23,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.muenchner-volkstheater.de/service/jobs-praktika",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Volkstheater-Kandidat wurde ueber die offizielle Muenchner-Volkstheater-Domain und deren Jobs-und-Praktika-Seite belegt."
+    },
+    {
+      "canonical_name": "Penguin Random House Verlagsgruppe",
+      "official_website_url": "https://www.penguin.de/",
+      "career_url": "https://karriere.penguinrandomhouse.de/",
+      "aliases": [
+        "Penguin Random House",
+        "Penguin Random House Verlagsgruppe GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "scan_priority": 22,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://karriere.penguinrandomhouse.de/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Penguin-Random-House-Kandidat wurde ueber die offizielle Penguin-Domain und das Karriereportal der Penguin Random House Verlagsgruppe belegt."
+    },
+    {
+      "canonical_name": "PwC Deutschland",
+      "official_website_url": "https://www.pwc.de/",
+      "career_url": "https://jobs.pwc.de/",
+      "aliases": [
+        "PwC",
+        "PricewaterhouseCoopers GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Professional Services",
+      "scan_priority": 21,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.pwc.de/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der PwC-Kandidat wurde ueber die offizielle PwC-Deutschland-Domain und das PwC-Deutschland-Karriereportal belegt."
+    },
+    {
+      "canonical_name": "ORACLE Deutschland",
+      "official_website_url": "https://www.oracle.com/de/",
+      "career_url": "https://www.oracle.com/de/careers/",
+      "aliases": [
+        "Oracle",
+        "Oracle Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Enterprise Software",
+      "scan_priority": 20,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.oracle.com/de/careers/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Oracle-Kandidat wurde ueber die offizielle Oracle-Deutschland-Domain und deren Karrierebereich belegt."
+    },
+    {
+      "canonical_name": "Roche Diagnostics",
+      "official_website_url": "https://www.roche.de/",
+      "career_url": "https://careers.roche.com/global/en/germany-penzberg",
+      "aliases": [
+        "Roche Diagnostics GmbH",
+        "Roche"
+      ],
+      "locations": [
+        {
+          "label": "Penzberg / Greater Munich",
+          "city": "Penzberg",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Diagnostics and Pharmaceuticals",
+      "scan_priority": 19,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.roche.com/global/en/germany-penzberg",
+      "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+      "evidence_note": "Der Roche-Diagnostics-Kandidat wurde ueber die offizielle Roche-Deutschland-Domain und die offizielle Roche-Careers-Seite fuer Penzberg/Greater Munich belegt."
+    },
+    {
+      "canonical_name": "Muenchner Verkehrsgesellschaft mbH",
+      "official_website_url": "https://www.mvg.de/",
+      "career_url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+      "aliases": [
+        "Muenchner Verkehrsgesellschaft",
+        "MVG",
+        "Münchner Verkehrsgesellschaft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Public Transport",
+      "scan_priority": 18,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.mvg.de/ueber-die-mvg/karriere.html",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der MVG-Kandidat wurde ueber die offizielle MVG-Domain und deren Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Piper Verlag GmbH",
+      "official_website_url": "https://www.piper.de/",
+      "career_url": "https://www.piper.de/service/jobs-karriere",
+      "aliases": [
+        "Piper Verlag"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing",
+      "scan_priority": 17,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.piper.de/service/jobs-karriere",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Piper-Verlag-Kandidat wurde ueber die offizielle Piper-Domain und deren Jobs-und-Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "MOTORWORLD Muenchen",
+      "official_website_url": "https://motorworld.de/en/muenchen/",
+      "career_url": "https://motorworld.de/en/career/",
+      "aliases": [
+        "Motorworld Munich",
+        "MOTORWORLD München"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility Events and Real Estate",
+      "scan_priority": 16,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://motorworld.de/en/career/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Motorworld-Muenchen-Kandidat wurde ueber die offizielle Motorworld-Muenchen-Seite und die offizielle Motorworld-Career-Seite belegt."
+    }
+  ]
+}
