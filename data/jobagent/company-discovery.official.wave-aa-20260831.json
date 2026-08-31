@@ -1,0 +1,175 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T18:35:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Cobrainer",
+      "official_website_url": "https://www.cobrainer.com/",
+      "career_url": "https://www.cobrainer.com/open-positions",
+      "aliases": [
+        "Cobrainer GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "HR Technology",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.cobrainer.com/open-positions",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Cobrainer-Kandidat wurde ueber die offizielle Cobrainer-Domain und den offiziellen Open-Positions-Pfad belegt."
+    },
+    {
+      "canonical_name": "adnymics / ParcelDealz",
+      "official_website_url": "https://adnymics.com/",
+      "career_url": "https://adnymics.com/karriere/",
+      "aliases": [
+        "adnymics",
+        "adnymics GmbH",
+        "ParcelDealz"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Marketing Technology",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://adnymics.com/karriere/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der adnymics-/ParcelDealz-Kandidat wurde ueber die offizielle adnymics-Domain und die offizielle Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "KontextMaps",
+      "official_website_url": "https://www.kontextmaps.com/en/",
+      "career_url": "https://www.kontextmaps.com/en/company/",
+      "aliases": [
+        "KontextMaps",
+        "Kontextlab"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Knowledge Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.kontextmaps.com/en/company/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der KontextMaps-Kandidat wurde ueber die offizielle KontextMaps-Domain und die offizielle Company-Seite mit Jobs-Verweis belegt."
+    },
+    {
+      "canonical_name": "The Landbanking Group",
+      "official_website_url": "https://www.thelandbankinggroup.com/",
+      "career_url": "https://www.thelandbankinggroup.com/careers",
+      "aliases": [
+        "Landbanking Group",
+        "The Landbanking Group GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Nature Tech",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.thelandbankinggroup.com/careers",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der Landbanking-Group-Kandidat wurde ueber die offizielle Unternehmensdomain und die offizielle Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Hula Earth",
+      "official_website_url": "https://hula.earth/",
+      "career_url": "https://hula.earth/jobs",
+      "aliases": [
+        "Hula",
+        "Hula Earth"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Nature Tech",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://hula.earth/jobs",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der Hula-Kandidat wurde ueber die offizielle Hula-Earth-Domain und den dort verlinkten offiziellen Jobs-Pfad belegt."
+    },
+    {
+      "canonical_name": "95.5 Charivari",
+      "official_website_url": "https://www.charivari.de/",
+      "career_url": "https://www.charivari.de/radio/ueber-uns/jobs",
+      "aliases": [
+        "Charivari",
+        "Radio Charivari OHG",
+        "95.5 Charivari Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.charivari.de/radio/ueber-uns/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Charivari-Kandidat wurde ueber die offizielle Charivari-Domain und die offizielle Jobs-Seite des Muenchner Radiosenders belegt."
+    },
+    {
+      "canonical_name": "Burger Rudacs Architekten",
+      "official_website_url": "https://www.burger-rudacs.de/",
+      "career_url": "https://www.burger-rudacs.de/Jobs.html",
+      "aliases": [
+        "Burger Rudacs",
+        "Burger Rudacs Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.burger-rudacs.de/Jobs.html",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Burger-Rudacs-Kandidat wurde ueber die offizielle Burger-Rudacs-Domain und den offiziellen Jobs-Pfad belegt."
+    }
+  ]
+}

@@ -9977,6 +9977,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:cobrainer",
+      "canonical_name": "Cobrainer",
+      "canonical_domain": "cobrainer.com",
+      "official_website_url": "https://www.cobrainer.com/",
+      "career_url": "https://www.cobrainer.com/open-positions",
+      "aliases": [
+        "Cobrainer GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "HR Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.cobrainer.com/open-positions",
+        "observed_at": "2026-08-31T18:18:31.59Z",
+        "verification_url": "https://www.cobrainer.com/open-positions",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "HR Technology",
+        "evidence_note": "Der Cobrainer-Kandidat wurde ueber die offizielle Cobrainer-Domain und den offiziellen Open-Positions-Pfad belegt."
+      },
+      "created_at": "2026-08-31T18:18:31.59Z",
+      "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:speexx",
       "canonical_name": "Speexx",
       "canonical_domain": "speexx.com",
@@ -10173,6 +10211,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:adnymics_parceldealz",
+      "canonical_name": "adnymics / ParcelDealz",
+      "canonical_domain": "adnymics.com",
+      "official_website_url": "https://adnymics.com/",
+      "career_url": "https://adnymics.com/karriere/",
+      "aliases": [
+        "adnymics",
+        "adnymics GmbH",
+        "ParcelDealz"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Marketing Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://adnymics.com/karriere/",
+        "observed_at": "2026-08-31T18:18:31.59Z",
+        "verification_url": "https://adnymics.com/karriere/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Marketing Technology",
+        "evidence_note": "Der adnymics-/ParcelDealz-Kandidat wurde ueber die offizielle adnymics-Domain und die offizielle Karriere-Seite belegt."
+      },
+      "created_at": "2026-08-31T18:18:31.59Z",
+      "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:userlane",
       "canonical_name": "Userlane",
       "canonical_domain": "userlane.com",
@@ -10208,6 +10286,45 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:kontextmaps",
+      "canonical_name": "KontextMaps",
+      "canonical_domain": "kontextmaps.com",
+      "official_website_url": "https://www.kontextmaps.com/en/",
+      "career_url": "https://www.kontextmaps.com/en/company/",
+      "aliases": [
+        "Kontextlab",
+        "KontextMaps"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Knowledge Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.kontextmaps.com/en/company/",
+        "observed_at": "2026-08-31T18:18:31.59Z",
+        "verification_url": "https://www.kontextmaps.com/en/company/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Knowledge Software",
+        "evidence_note": "Der KontextMaps-Kandidat wurde ueber die offizielle KontextMaps-Domain und die offizielle Company-Seite mit Jobs-Verweis belegt."
+      },
+      "created_at": "2026-08-31T18:18:31.59Z",
+      "updated_at": "2026-08-31T18:18:31.59Z",
       "last_successful_scan_at": null
     },
     {
@@ -10362,6 +10479,45 @@
       },
       "created_at": "2026-08-31T11:28:28.112Z",
       "updated_at": "2026-08-31T11:28:28.112Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:the_landbanking_group",
+      "canonical_name": "The Landbanking Group",
+      "canonical_domain": "thelandbankinggroup.com",
+      "official_website_url": "https://www.thelandbankinggroup.com/",
+      "career_url": "https://www.thelandbankinggroup.com/careers",
+      "aliases": [
+        "Landbanking Group",
+        "The Landbanking Group GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Nature Tech",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.thelandbankinggroup.com/careers",
+        "observed_at": "2026-08-31T18:18:31.59Z",
+        "verification_url": "https://www.thelandbankinggroup.com/careers",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Nature Tech",
+        "evidence_note": "Der Landbanking-Group-Kandidat wurde ueber die offizielle Unternehmensdomain und die offizielle Careers-Seite belegt."
+      },
+      "created_at": "2026-08-31T18:18:31.59Z",
+      "updated_at": "2026-08-31T18:18:31.59Z",
       "last_successful_scan_at": null
     },
     {
@@ -10795,6 +10951,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hula_earth",
+      "canonical_name": "Hula Earth",
+      "canonical_domain": "hula.earth",
+      "official_website_url": "https://hula.earth/",
+      "career_url": "https://hula.earth/jobs",
+      "aliases": [
+        "Hula",
+        "Hula Earth"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Nature Tech",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://hula.earth/jobs",
+        "observed_at": "2026-08-31T18:18:31.59Z",
+        "verification_url": "https://hula.earth/jobs",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Geospatial Nature Tech",
+        "evidence_note": "Der Hula-Kandidat wurde ueber die offizielle Hula-Earth-Domain und den dort verlinkten offiziellen Jobs-Pfad belegt."
+      },
+      "created_at": "2026-08-31T18:18:31.59Z",
+      "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:fdg_entertainment_gmbh_and_co_kg",
       "canonical_name": "FDG Entertainment GmbH & Co. KG",
       "canonical_domain": "fdg-entertainment.com",
@@ -11145,6 +11340,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:95_5_charivari",
+      "canonical_name": "95.5 Charivari",
+      "canonical_domain": "charivari.de",
+      "official_website_url": "https://www.charivari.de/",
+      "career_url": "https://www.charivari.de/radio/ueber-uns/jobs",
+      "aliases": [
+        "95.5 Charivari Muenchen",
+        "Charivari",
+        "Radio Charivari OHG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.charivari.de/radio/ueber-uns/jobs",
+        "observed_at": "2026-08-31T18:18:31.59Z",
+        "verification_url": "https://www.charivari.de/radio/ueber-uns/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media",
+        "evidence_note": "Der Charivari-Kandidat wurde ueber die offizielle Charivari-Domain und die offizielle Jobs-Seite des Muenchner Radiosenders belegt."
+      },
+      "created_at": "2026-08-31T18:18:31.59Z",
+      "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:willy_bogner",
       "canonical_name": "Willy Bogner",
       "canonical_domain": "bogner.com",
@@ -11451,6 +11686,45 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:burger_rudacs_architekten",
+      "canonical_name": "Burger Rudacs Architekten",
+      "canonical_domain": "burger-rudacs.de",
+      "official_website_url": "https://www.burger-rudacs.de/",
+      "career_url": "https://www.burger-rudacs.de/Jobs.html",
+      "aliases": [
+        "Burger Rudacs",
+        "Burger Rudacs Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.burger-rudacs.de/Jobs.html",
+        "observed_at": "2026-08-31T18:18:31.59Z",
+        "verification_url": "https://www.burger-rudacs.de/Jobs.html",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture",
+        "evidence_note": "Der Burger-Rudacs-Kandidat wurde ueber die offizielle Burger-Rudacs-Domain und den offiziellen Jobs-Pfad belegt."
+      },
+      "created_at": "2026-08-31T18:18:31.59Z",
+      "updated_at": "2026-08-31T18:18:31.59Z",
       "last_successful_scan_at": null
     },
     {
@@ -13793,6 +14067,27 @@
       ]
     },
     {
+      "source_id": "source:95_5_charivari_career",
+      "company_id": "company:95_5_charivari",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.charivari.de/radio/ueber-uns/jobs",
+      "canonical_url": "https://www.charivari.de/radio/ueber-uns/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:18:31.59Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.charivari.de/radio/ueber-uns/jobs",
+          "basis_url": "https://www.charivari.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:18:31.59Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:aboalarm_gmbh_career",
       "company_id": "company:aboalarm_gmbh",
       "source_type": "CAREER_PAGE",
@@ -13872,6 +14167,27 @@
           "basis_url": "https://www.adac.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:adnymics_parceldealz_career",
+      "company_id": "company:adnymics_parceldealz",
+      "source_type": "CAREER_PAGE",
+      "url": "https://adnymics.com/karriere/",
+      "canonical_url": "https://adnymics.com/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:18:31.59Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://adnymics.com/karriere/",
+          "basis_url": "https://adnymics.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:18:31.59Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -15007,6 +15323,27 @@
       ]
     },
     {
+      "source_id": "source:burger_rudacs_architekten_career",
+      "company_id": "company:burger_rudacs_architekten",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.burger-rudacs.de/Jobs.html",
+      "canonical_url": "https://www.burger-rudacs.de/Jobs.html",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:18:31.59Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.burger-rudacs.de/Jobs.html",
+          "basis_url": "https://www.burger-rudacs.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:18:31.59Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bwi_gmbh_career",
       "company_id": "company:bwi_gmbh",
       "source_type": "CAREER_PAGE",
@@ -15231,6 +15568,27 @@
           "basis_url": "https://www.cloudflight.io/en/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:cobrainer_career",
+      "company_id": "company:cobrainer",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.cobrainer.com/open-positions",
+      "canonical_url": "https://www.cobrainer.com/open-positions",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:18:31.59Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.cobrainer.com/open-positions",
+          "basis_url": "https://www.cobrainer.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:18:31.59Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -17103,6 +17461,27 @@
       ]
     },
     {
+      "source_id": "source:hula_earth_career",
+      "company_id": "company:hula_earth",
+      "source_type": "CAREER_PAGE",
+      "url": "https://hula.earth/jobs",
+      "canonical_url": "https://hula.earth/jobs",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:18:31.59Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://hula.earth/jobs",
+          "basis_url": "https://hula.earth/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:18:31.59Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:hypovereinsbank_career",
       "company_id": "company:hypovereinsbank",
       "source_type": "CAREER_PAGE",
@@ -17623,6 +18002,27 @@
           "basis_url": "https://www.knowron.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:kontextmaps_career",
+      "company_id": "company:kontextmaps",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.kontextmaps.com/en/company/",
+      "canonical_url": "https://www.kontextmaps.com/en/company/",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:18:31.59Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.kontextmaps.com/en/company/",
+          "basis_url": "https://www.kontextmaps.com/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:18:31.59Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -20151,6 +20551,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:the_landbanking_group_career",
+      "company_id": "company:the_landbanking_group",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.thelandbankinggroup.com/careers",
+      "canonical_url": "https://www.thelandbankinggroup.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T18:18:31.59Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.thelandbankinggroup.com/careers",
+          "basis_url": "https://www.thelandbankinggroup.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T18:18:31.59Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:traton_se_career",

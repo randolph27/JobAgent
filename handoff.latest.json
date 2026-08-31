@@ -1,78 +1,35 @@
 {
-  "ts": "2026-08-31T19:38:00.000+02:00",
+  "ts": "2026-08-31T20:25:00.000+02:00",
   "agent_id": "codex",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "open_roadmap_points": [
-    "UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen",
-    "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen"
-  ],
-  "roadmap_rotation": "not-run-no-active-roadmap-point-complete",
-  "supertest": "not_newly_requested_treated_done_by_user_instruction",
-  "last_completed_slice": {
-    "roadmap_id": "JA-027",
-    "slice": "Welle Z/B-Import",
-    "status": "done",
-    "added_companies": [
-      "UnternehmerTUM",
-      "Speexx",
-      "Userlane",
-      "SPORT1",
-      "Plaion",
-      "Robominds",
-      "Willy Bogner",
-      "Vinzenzmurr Vertriebs GmbH",
-      "Valtech",
-      "Samsung Semiconductors Europe"
-    ],
-    "metrics": {
-      "companies_total": 327,
-      "job_sources_total": 324,
-      "official_sources": 326,
-      "career_sources": 325,
-      "candidate_queue_verified": 484,
-      "candidate_queue_manual_review": 1300,
-      "wave_gate_status": "passed",
-      "manual_review_rate": 0.0,
-      "duplicate_rate": 0.0,
-      "coverage_delta": 10
-    }
-  },
   "changed": [
+    "Roadmap.md",
+    "data/jobagent/company-discovery.official.wave-aa-20260831.json",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/store.json",
+    "html/jobagent/company-coverage.html",
     "handoff.latest.md",
     "handoff.latest.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json"
-  ],
-  "evidence": [
-    "data/jobagent/company-discovery.official.wave-z-20260831.json",
-    "logs/jobagent/company-discovery-import-20260831-114708.json",
-    "logs/jobagent/company-candidate-verification-20260831-114715.json",
-    "logs/jobagent/company-coverage-20260831-114811.json",
-    "logs/jobagent/company-coverage-20260831-114811.md",
-    "logs/jobagent/ja-023-source-coverage.json",
-    "html/jobagent/company-coverage.html",
-    "data/jobagent/backups/store-20260831T114708954Z-pre-wave-import.json",
-    "output/playwright/ja-022-viewport-800.png",
-    "output/playwright/ja-022-viewport-1366.png",
-    "output/playwright/ja-022-viewport-1920.png",
-    "logs/todo/done-events-20260831-193606.jsonl"
+    "todo.master.index.json",
+    "todo.state.json"
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-z-20260831.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-aa-20260831.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "Invoke-WebRequest fuer alle official_website_url/career_url/discovery_url aus Welle Z",
+      "cmd": "Invoke-WebRequest fuer alle official_website_url/career_url/discovery_url aus Welle AA",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-z-20260831.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-aa-20260831.json -WaveId B",
       "exit": 0
     },
     {
@@ -84,7 +41,7 @@
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
       "exit": 0
     },
     {
@@ -128,30 +85,37 @@
       "exit": 1
     },
     {
-      "cmd": "./ci.cmd stp",
+      "cmd": ".\\ci.cmd devserver-status",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
       "exit": 0
     }
   ],
-  "environment": {
-    "sonarqube": "UP on http://localhost:9000 at last documented check",
-    "devserver": "running on configured port 8500 at last documented check",
-    "note": "User text mentions 8090, project config .ci/ci.config.json currently uses 8500."
-  },
+  "route_ok": true,
+  "route_violations": [],
   "git": {
     "branch": "master",
+    "head": "ce82601aeda9",
     "upstream": "origin/master",
-    "head_before_handoff_commit": "985c208e7d35",
-    "ahead": 0,
-    "behind": 0
+    "ahead_behind": "0/0"
   },
-  "next": "Continue JA-027 with wave AA; import only candidates with verified official website plus official career/jobs/ATS evidence; then run function tests, sync, commit and push.",
+  "next": "JA-027 mit naechster verifizierter Importwelle AB fortsetzen.",
   "refs": [
-    "README.md",
-    "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
     "handoff.latest.md",
     "handoff.latest.json"
-  ]
+  ],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "env_inventory_path": null,
+  "supertest": "not-run: JA-027 bleibt offen und Supertest ist erst fuer Abschluss vorgesehen."
 }
