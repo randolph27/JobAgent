@@ -1,0 +1,198 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-08-31T12:45:00.000Z",
+  "items": [
+    {
+      "canonical_name": "McKinsey & Company Inc.",
+      "official_website_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+      "career_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+      "aliases": [
+        "McKinsey",
+        "McKinsey & Company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Management Consulting",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+      "discovery_origin": "source-registry:munich_business_us_companies",
+      "evidence_note": "Der McKinsey-Kandidat wurde ueber die offizielle deutsche McKinsey-Karrieresuche belegt."
+    },
+    {
+      "canonical_name": "limango GmbH",
+      "official_website_url": "https://www.limango.de/",
+      "career_url": "https://joinus.limango.com/",
+      "aliases": [
+        "limango",
+        "limango GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://joinus.limango.com/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der limango-Kandidat wurde ueber die offizielle limango-Domain und die offizielle limango-Karriereseite mit Muenchen-Bezug belegt."
+    },
+    {
+      "canonical_name": "F. X. MEILLER Fahrzeug- und Maschinenfabrik GmbH & Co. KG",
+      "official_website_url": "https://www.meiller.com/",
+      "career_url": "https://www.meiller.com/de/karriere/",
+      "aliases": [
+        "MEILLER Kipper",
+        "MEILLER Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Commercial Vehicles",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.meiller.com/de/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der MEILLER-Kipper-Kandidat wurde ueber die offizielle MEILLER-Domain und die offizielle MEILLER-Karriereseite belegt."
+    },
+    {
+      "canonical_name": "Medien.Bayern GmbH",
+      "official_website_url": "https://www.medien-bayern.de/",
+      "career_url": "https://medien-bayern.jobs.personio.de/",
+      "aliases": [
+        "Medien.Bayern",
+        "Media Lab Bayern"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Innovation",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://medien-bayern.jobs.personio.de/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Medien.Bayern-Kandidat wurde ueber die offizielle Medien.Bayern-Domain und das offizielle Medien.Bayern-Personio-Jobportal mit Muenchen-Stellen belegt."
+    },
+    {
+      "canonical_name": "Moderna",
+      "official_website_url": "https://www.modernatx.com/",
+      "career_url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+      "aliases": [
+        "Moderna",
+        "Moderna Therapeutics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biotechnology",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+      "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+      "evidence_note": "Der Moderna-Kandidat wurde ueber die offizielle Moderna-Domain und das offizielle Moderna-Workday-Jobportal belegt."
+    },
+    {
+      "canonical_name": "LivaNova Deutschland GmbH",
+      "official_website_url": "https://www.livanova.com/",
+      "career_url": "https://careers.livanova.com/de/de/search-results",
+      "aliases": [
+        "LivaNova",
+        "Livanova"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Devices",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.livanova.com/de/de/search-results",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der LivaNova-Kandidat wurde ueber die offizielle LivaNova-Domain und die offizielle LivaNova-Karrieresuche mit Muenchen-Treffern belegt."
+    },
+    {
+      "canonical_name": "megaherz GmbH",
+      "official_website_url": "https://www.megaherz.org/",
+      "career_url": "https://www.megaherz.org/en/jobs/",
+      "aliases": [
+        "megaherz",
+        "Megaherz"
+      ],
+      "locations": [
+        {
+          "label": "Unterfoehring bei Muenchen",
+          "city": "Unterfoehring",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Production",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.megaherz.org/en/jobs/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der megaherz-Kandidat wurde ueber die offizielle megaherz-Domain und die offizielle Jobs-Seite mit Standort Unterfoehring belegt."
+    },
+    {
+      "canonical_name": "MING Labs",
+      "official_website_url": "https://www.minglabs.com/",
+      "career_url": "https://www.minglabs.com/careers",
+      "aliases": [
+        "MING Labs",
+        "MING Labs GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Product Design",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.minglabs.com/careers",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der MING-Labs-Kandidat wurde ueber die offizielle MING-Labs-Domain und die offizielle Careers-Seite mit Muenchen-Bezug belegt."
+    }
+  ]
+}

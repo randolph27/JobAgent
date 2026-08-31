@@ -1,18 +1,17 @@
 {
-  "ts": "2026-08-31T13:18:00.000+02:00",
+  "ts": "2026-08-31T13:50:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "last_pushed_work_commit": "8b2c11df80ce",
+  "last_pushed_work_commit": "HEAD Add verified company import wave Y",
   "roadmap_rotation": "not-run-no-active-roadmap-point-complete",
-  "supertest": "treated_done_by_user_instruction_not_run_for_open_JA-027",
+  "supertest": "not_run_open_JA-027_function_tests_green",
   "changed": [
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-w-20260831.json",
-    "data/jobagent/company-discovery.official.wave-x-20260831.json",
+    "data/jobagent/company-discovery.official.wave-y-20260831.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
     "html/jobagent/company-coverage.html",
@@ -25,11 +24,79 @@
   ],
   "verified": [
     {
-      "cmd": "function-specific tests listed in handoff.latest.md",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-y-20260831.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
+      "cmd": "Invoke-WebRequest fuer alle official_website_url/career_url/discovery_url aus Welle Y",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-y-20260831.json -WaveId B",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
+      "exit": 1
+    },
+    {
       "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd devserver-status",
       "exit": 0
     }
   ],
@@ -38,12 +105,12 @@
   "git": {
     "upstream": "origin/master",
     "branch": "master",
-    "worktree": "clean-before-final-handoff-commit",
-    "head": "8b2c11df80ce",
+    "worktree": "clean-after-wave-y-commit",
+    "head": "HEAD after Add verified company import wave Y",
     "ahead": 0,
     "behind": 0
   },
-  "next": "JA-027 mit Welle Y fortsetzen; nur offiziell belegte Karriere-/Jobs-/ATS-Quellen importieren.",
+  "next": "JA-027 mit naechster offizieller Importwelle fortsetzen; nur offiziell belegte Karriere-/Jobs-/ATS-Quellen importieren.",
   "refs": [
     "Roadmap.md",
     "todo.current.md",

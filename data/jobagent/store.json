@@ -9782,6 +9782,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:mckinsey_and_company_inc",
+      "canonical_name": "McKinsey & Company Inc.",
+      "canonical_domain": "karriere.mckinsey.de",
+      "official_website_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+      "career_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+      "aliases": [
+        "McKinsey",
+        "McKinsey & Company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Management Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere.mckinsey.de/karriere/search-jobs",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+        "discovery_origin": "source-registry:munich_business_us_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Management Consulting",
+        "evidence_note": "Der McKinsey-Kandidat wurde ueber die offizielle deutsche McKinsey-Karrieresuche belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:jetbrains_gmbh",
       "canonical_name": "JetBrains GmbH",
       "canonical_domain": "jetbrains.com",
@@ -9896,6 +9935,45 @@
       },
       "created_at": "2026-08-31T11:01:43.474Z",
       "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:limango_gmbh",
+      "canonical_name": "limango GmbH",
+      "canonical_domain": "limango.de",
+      "official_website_url": "https://www.limango.de/",
+      "career_url": "https://joinus.limango.com/",
+      "aliases": [
+        "limango",
+        "limango GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://joinus.limango.com/",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://joinus.limango.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "E-Commerce",
+        "evidence_note": "Der limango-Kandidat wurde ueber die offizielle limango-Domain und die offizielle limango-Karriereseite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
       "last_successful_scan_at": null
     },
     {
@@ -10132,6 +10210,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:f_x_meiller_fahrzeug_und_maschinenfabrik_gmbh_and_co_kg",
+      "canonical_name": "F. X. MEILLER Fahrzeug- und Maschinenfabrik GmbH & Co. KG",
+      "canonical_domain": "meiller.com",
+      "official_website_url": "https://www.meiller.com/",
+      "career_url": "https://www.meiller.com/de/karriere/",
+      "aliases": [
+        "MEILLER Group",
+        "MEILLER Kipper"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Commercial Vehicles",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.meiller.com/de/karriere/",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://www.meiller.com/de/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Commercial Vehicles",
+        "evidence_note": "Der MEILLER-Kipper-Kandidat wurde ueber die offizielle MEILLER-Domain und die offizielle MEILLER-Karriereseite belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:salesforce_germany_gmbh",
       "canonical_name": "Salesforce Germany GmbH",
       "canonical_domain": "salesforce.com",
@@ -10168,6 +10285,45 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:medien_bayern_gmbh",
+      "canonical_name": "Medien.Bayern GmbH",
+      "canonical_domain": "medien-bayern.de",
+      "official_website_url": "https://www.medien-bayern.de/",
+      "career_url": "https://medien-bayern.jobs.personio.de/",
+      "aliases": [
+        "Media Lab Bayern",
+        "Medien.Bayern"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Innovation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://medien-bayern.jobs.personio.de/",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://medien-bayern.jobs.personio.de/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media Innovation",
+        "evidence_note": "Der Medien.Bayern-Kandidat wurde ueber die offizielle Medien.Bayern-Domain und das offizielle Medien.Bayern-Personio-Jobportal mit Muenchen-Stellen belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
       "last_successful_scan_at": null
     },
     {
@@ -10365,6 +10521,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:moderna",
+      "canonical_name": "Moderna",
+      "canonical_domain": "modernatx.com",
+      "official_website_url": "https://www.modernatx.com/",
+      "career_url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+      "aliases": [
+        "Moderna",
+        "Moderna Therapeutics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biotechnology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+        "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Biotechnology",
+        "evidence_note": "Der Moderna-Kandidat wurde ueber die offizielle Moderna-Domain und das offizielle Moderna-Workday-Jobportal belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:iabg_industrieanlagen_betriebsgesellschaft_mbh",
       "canonical_name": "IABG Industrieanlagen-Betriebsgesellschaft mbH",
       "canonical_domain": "iabg.de",
@@ -10556,6 +10751,44 @@
       },
       "created_at": "2026-08-31T11:01:43.474Z",
       "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:livanova_deutschland_gmbh",
+      "canonical_name": "LivaNova Deutschland GmbH",
+      "canonical_domain": "livanova.com",
+      "official_website_url": "https://www.livanova.com/",
+      "career_url": "https://careers.livanova.com/de/de/search-results",
+      "aliases": [
+        "LivaNova"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Medical Devices",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.livanova.com/de/de/search-results",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://careers.livanova.com/de/de/search-results",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Medical Devices",
+        "evidence_note": "Der LivaNova-Kandidat wurde ueber die offizielle LivaNova-Domain und die offizielle LivaNova-Karrieresuche mit Muenchen-Treffern belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
       "last_successful_scan_at": null
     },
     {
@@ -10792,6 +11025,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:megaherz_gmbh",
+      "canonical_name": "megaherz GmbH",
+      "canonical_domain": "megaherz.org",
+      "official_website_url": "https://www.megaherz.org/",
+      "career_url": "https://www.megaherz.org/en/jobs/",
+      "aliases": [
+        "megaherz"
+      ],
+      "locations": [
+        {
+          "label": "Unterfoehring bei Muenchen",
+          "city": "Unterfoehring",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Production",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.megaherz.org/en/jobs/",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://www.megaherz.org/en/jobs/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media Production",
+        "evidence_note": "Der megaherz-Kandidat wurde ueber die offizielle megaherz-Domain und die offizielle Jobs-Seite mit Standort Unterfoehring belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:kgal_gmbh_and_co_kg",
       "canonical_name": "KGAL GmbH & Co. KG",
       "canonical_domain": "kgal.de",
@@ -10944,6 +11215,45 @@
       },
       "created_at": "2026-08-31T06:04:40.636Z",
       "updated_at": "2026-08-31T06:04:40.636Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ming_labs",
+      "canonical_name": "MING Labs",
+      "canonical_domain": "minglabs.com",
+      "official_website_url": "https://www.minglabs.com/",
+      "career_url": "https://www.minglabs.com/careers",
+      "aliases": [
+        "MING Labs",
+        "MING Labs GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Product Design",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.minglabs.com/careers",
+        "observed_at": "2026-08-31T11:28:28.112Z",
+        "verification_url": "https://www.minglabs.com/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Product Design",
+        "evidence_note": "Der MING-Labs-Kandidat wurde ueber die offizielle MING-Labs-Domain und die offizielle Careers-Seite mit Muenchen-Bezug belegt."
+      },
+      "created_at": "2026-08-31T11:28:28.112Z",
+      "updated_at": "2026-08-31T11:28:28.112Z",
       "last_successful_scan_at": null
     },
     {
@@ -15309,6 +15619,27 @@
       ]
     },
     {
+      "source_id": "source:f_x_meiller_fahrzeug_und_maschinenfabrik_gmbh_and_co_kg_career",
+      "company_id": "company:f_x_meiller_fahrzeug_und_maschinenfabrik_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.meiller.com/de/karriere/",
+      "canonical_url": "https://www.meiller.com/de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.meiller.com/de/karriere/",
+          "basis_url": "https://www.meiller.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:factor_product_gmbh_career",
       "company_id": "company:factor_product_gmbh",
       "source_type": "CAREER_PAGE",
@@ -17117,6 +17448,27 @@
       ]
     },
     {
+      "source_id": "source:limango_gmbh_career",
+      "company_id": "company:limango_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://joinus.limango.com/",
+      "canonical_url": "https://joinus.limango.com/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://joinus.limango.com/",
+          "basis_url": "https://www.limango.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:lingoking_gmbh_career",
       "company_id": "company:lingoking_gmbh",
       "source_type": "CAREER_PAGE",
@@ -17133,6 +17485,27 @@
           "basis_url": "https://www.lingoking.com/en",
           "redirect_chain": [],
           "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:livanova_deutschland_gmbh_career",
+      "company_id": "company:livanova_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.livanova.com/de/de/search-results",
+      "canonical_url": "https://careers.livanova.com/de/de/search-results",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.livanova.com/de/de/search-results",
+          "basis_url": "https://www.livanova.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -17238,6 +17611,69 @@
           "basis_url": "https://www.man.eu/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:mckinsey_and_company_inc_career",
+      "company_id": "company:mckinsey_and_company_inc",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere.mckinsey.de/karriere/search-jobs",
+      "canonical_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere.mckinsey.de/karriere/search-jobs",
+          "basis_url": "https://karriere.mckinsey.de/karriere/search-jobs",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:medien_bayern_gmbh_career",
+      "company_id": "company:medien_bayern_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://medien-bayern.jobs.personio.de/",
+      "canonical_url": "https://medien-bayern.jobs.personio.de/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://medien-bayern.jobs.personio.de/",
+          "basis_url": "https://www.medien-bayern.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:megaherz_gmbh_career",
+      "company_id": "company:megaherz_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.megaherz.org/en/jobs/",
+      "canonical_url": "https://www.megaherz.org/en/jobs/",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.megaherz.org/en/jobs/",
+          "basis_url": "https://www.megaherz.org/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -17390,6 +17826,27 @@
       }
     },
     {
+      "source_id": "source:ming_labs_career",
+      "company_id": "company:ming_labs",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.minglabs.com/careers",
+      "canonical_url": "https://www.minglabs.com/careers",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.minglabs.com/careers",
+          "basis_url": "https://www.minglabs.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:mobileye_germany_gmbh_career",
       "company_id": "company:mobileye_germany_gmbh",
       "source_type": "CAREER_PAGE",
@@ -17406,6 +17863,27 @@
           "basis_url": "https://www.mobileye.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T05:39:43.239Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:moderna_career",
+      "company_id": "company:moderna",
+      "source_type": "CAREER_PAGE",
+      "url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+      "canonical_url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+      "is_official": true,
+      "verified_at": "2026-08-31T11:28:28.112Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://modernatx.wd1.myworkdayjobs.com/M_tx",
+          "basis_url": "https://www.modernatx.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-08-31T11:28:28.112Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
