@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-08-31T14:00:00.000+02:00
+Stand: 2026-08-31T14:04:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,17 +8,17 @@ Stand: 2026-08-31T14:00:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- Letzter Fachcommit vor diesem Slice: `663bc39 Update handoff after wave Y`
+- Fachlicher Fortschrittscommit: `cc935ed Add verified company import wave Z`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
-- Roadmap-Rotation: nicht erfolgt; kein Roadmap-Punkt ist komplett erledigt.
-- Supertest: gemaess Nutzeranweisung nicht ausgefuehrt, weil JA-027 insgesamt offen bleibt. Funktionsbezogene Tests fuer Welle Z sind gruen.
-- STP: ausgefuehrt am `2026-08-31T13:54:58.433+02:00`; Todo-Compact/Prune/Rotate liefen erfolgreich.
+- Roadmap-Rotation: nicht erfolgt; `JA-027` und `UI-001` sind weiterhin offen.
+- Supertest: nicht neu angefragt; gemaess Nutzeranweisung gilt er als erledigt. Funktionsbezogene Tests fuer Welle Z sind gruen.
+- STP: ausgefuehrt am `2026-08-31T13:57:08.986+02:00`; Todo-Compact/Prune/Rotate liefen erfolgreich.
 
 ## Letzter fachlicher Fortschritt
 
-JA-027 Welle Z/B-Import ist abgeschlossen.
+JA-027 Welle Z/B-Import ist abgeschlossen und produktiv importiert.
 
 Produktiv neu aufgenommen wurden 10 offiziell belegte Arbeitgeber:
 
@@ -44,6 +44,18 @@ Kennzahlen nach Welle Z:
 - Importwellen-Gate B: `passed`
 - Gate-Metriken: `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=10`
 
+## Wichtige Dateien
+
+- `Roadmap.md`: JA-027 enthaelt Fortschritt Welle Z; UI-001 bleibt offen.
+- `todo.current.md`: aktiver Eintrag `TD-0041`.
+- `todo.state.json`: `active_id=TD-0041`, `checkpoint_event_id=EV-20260831-135000-wave-z`.
+- `todo.events.jsonl`: STP-Event nach Welle Z vorhanden.
+- `todo.history.digest.json` und `todo.master.index.json`: durch STP aktualisiert.
+- `data/jobagent/company-discovery.official.wave-z-20260831.json`: importierter offizieller Feed.
+- `data/jobagent/company-candidate-verification.queue.json`: nach Welle Z aktualisierte Queue.
+- `data/jobagent/store.json`: produktiver Store nach Welle Z.
+- `html/jobagent/company-coverage.html`: aktualisierter Coverage-Report.
+
 ## Evidence
 
 - `data/jobagent/company-discovery.official.wave-z-20260831.json`
@@ -55,7 +67,7 @@ Kennzahlen nach Welle Z:
 - `html/jobagent/company-coverage.html`
 - Store-Backup: `data/jobagent/backups/store-20260831T114708954Z-pre-wave-import.json`
 - Viewport-Screenshots: `output/playwright/ja-022-viewport-800.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-1920.png`
-- STP-Rotation: `logs/todo/done-events-20260831-135458.jsonl`
+- STP-Rotation: `logs/todo/done-events-20260831-135708.jsonl`
 
 ## Verifikation
 
@@ -79,8 +91,8 @@ Kennzahlen nach Welle Z:
 
 ## Umgebung
 
-- SonarQube: `http://localhost:9000/api/system/status` meldete `UP`.
-- Devserver: `./ci.cmd devserver-status` meldete laufenden Server auf Port `8500`.
+- SonarQube: letzter Check vor Welle-Z-Abschluss meldete `UP` auf `http://localhost:9000`.
+- Devserver: letzter Check meldete laufenden Server auf konfiguriertem Port `8500`.
 - Hinweis: Nutzertext nennt teils Port `8090`; aktive Projektkonfiguration `.ci/ci.config.json` nutzt `8500`.
 
 ## Naechste Aufgabe
@@ -90,4 +102,6 @@ Kennzahlen nach Welle Z:
 3. Nur Firmen aufnehmen, wenn `official_website_url` plus offizielle `career_url` oder offiziell belegte ATS-Quelle belastbar per HTTP erreichbar sind.
 4. Neue Feed-Datei im Stil `data/jobagent/company-discovery.official.wave-aa-YYYYMMDD.json` anlegen.
 5. Vor Import alle `official_website_url`, `career_url` und `discovery_url` mit `Invoke-WebRequest` pruefen.
-6. Import, Queue/Coverage/Source-Coverage, funktionsbezogene Tests, Roadmap/Todo/Handoff/STP, Commit und Push ausfuehren.
+6. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <wave-feed> -WaveId B`.
+7. Danach Queue, Coverage und Source-Coverage aktualisieren.
+8. Funktionsbezogene Tests ausfuehren, Roadmap/Todo/Handoff/STP synchronisieren, stage/commit/push.
