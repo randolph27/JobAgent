@@ -9827,6 +9827,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:smart_reporting_gmbh",
+      "canonical_name": "Smart Reporting GmbH",
+      "canonical_domain": "smart-reporting.com",
+      "official_website_url": "https://www.smart-reporting.com/",
+      "career_url": "https://www.smart-reporting.com/company/careers",
+      "aliases": [
+        "Jacobian",
+        "Smart Reporting"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.smart-reporting.com/company/careers",
+        "observed_at": "2026-09-01T05:52:39.825Z",
+        "verification_url": "https://www.smart-reporting.com/company/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Healthcare Software",
+        "evidence_note": "Der Smart-Reporting-Kandidat wurde ueber die offizielle Smart-Reporting-Domain und die dort erreichbare Careers-Seite belegt."
+      },
+      "created_at": "2026-09-01T05:52:39.825Z",
+      "updated_at": "2026-09-01T05:52:39.825Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:msd_deutschland",
       "canonical_name": "MSD Deutschland",
       "canonical_domain": "msd.de",
@@ -10133,6 +10172,44 @@
       },
       "created_at": "2026-08-31T18:18:31.59Z",
       "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:veact_gmbh",
+      "canonical_name": "VEACT GmbH",
+      "canonical_domain": "veact.com",
+      "official_website_url": "https://www.veact.com/",
+      "career_url": "https://veact.jobs.personio.de/",
+      "aliases": [
+        "VEACT"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Marketing Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://veact.com/career",
+        "observed_at": "2026-09-01T05:52:39.825Z",
+        "verification_url": "https://veact.jobs.personio.de/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Marketing Software",
+        "evidence_note": "Der VEACT-Kandidat wurde ueber die offizielle VEACT-Domain und das offizielle, von der Karriere-Seite verwendete Personio-Jobportal belegt."
+      },
+      "created_at": "2026-09-01T05:52:39.825Z",
+      "updated_at": "2026-09-01T05:52:39.825Z",
       "last_successful_scan_at": null
     },
     {
@@ -10523,6 +10600,45 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:shore_gmbh",
+      "canonical_name": "Shore GmbH",
+      "canonical_domain": "shore.com",
+      "official_website_url": "https://www.shore.com/en/about-us",
+      "career_url": "https://shore.onapply.de/",
+      "aliases": [
+        "Shore",
+        "Shore Software"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://shore.onapply.de/",
+        "observed_at": "2026-09-01T05:52:39.825Z",
+        "verification_url": "https://shore.onapply.de/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Business Software",
+        "evidence_note": "Der Shore-Kandidat wurde ueber den offiziellen Shore-Auftritt und das erreichbare Shore-Bewerbungsportal belegt."
+      },
+      "created_at": "2026-09-01T05:52:39.825Z",
+      "updated_at": "2026-09-01T05:52:39.825Z",
       "last_successful_scan_at": null
     },
     {
@@ -10953,6 +11069,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:remote_control_productions_gmbh",
+      "canonical_name": "remote control productions GmbH",
+      "canonical_domain": "rcp.family",
+      "official_website_url": "https://rcp.family/",
+      "career_url": "https://remotecontrol.jobs.personio.com/?language=en",
+      "aliases": [
+        "rcp family",
+        "remote control productions"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games and Interactive Entertainment",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://rcp.family/career/",
+        "observed_at": "2026-09-01T05:52:39.825Z",
+        "verification_url": "https://remotecontrol.jobs.personio.com/?language=en",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Games and Interactive Entertainment",
+        "evidence_note": "Der remote-control-productions-Kandidat wurde ueber den offiziellen rcp-family-Auftritt und das offizielle Personio-Jobportal belegt."
+      },
+      "created_at": "2026-09-01T05:52:39.825Z",
+      "updated_at": "2026-09-01T05:52:39.825Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:microgenesis_techsoft",
       "canonical_name": "MicroGenesis TechSoft",
       "canonical_domain": "mgtechsoft.com",
@@ -11298,6 +11453,45 @@
       },
       "created_at": "2026-08-31T11:01:43.474Z",
       "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:retorio_gmbh",
+      "canonical_name": "Retorio GmbH",
+      "canonical_domain": "retorio.com",
+      "official_website_url": "https://www.retorio.com/",
+      "career_url": "https://www.retorio.com/en/career",
+      "aliases": [
+        "Retorio",
+        "Retorio AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Coaching Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.retorio.com/en/career",
+        "observed_at": "2026-09-01T05:52:39.825Z",
+        "verification_url": "https://www.retorio.com/en/career",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Coaching Software",
+        "evidence_note": "Der Retorio-Kandidat wurde ueber die offizielle Retorio-Domain und die dort erreichbare Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-01T05:52:39.825Z",
+      "updated_at": "2026-09-01T05:52:39.825Z",
       "last_successful_scan_at": null
     },
     {
@@ -11688,6 +11882,45 @@
       },
       "created_at": "2026-08-31T11:01:43.474Z",
       "updated_at": "2026-08-31T11:01:43.474Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:scandic_hotels_deutschland_gmbh",
+      "canonical_name": "Scandic Hotels Deutschland GmbH",
+      "canonical_domain": "scandichotels.de",
+      "official_website_url": "https://www.scandichotels.de/",
+      "career_url": "https://www.scandichotels.de/karriere",
+      "aliases": [
+        "Scandic",
+        "Scandic Hotels"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Hospitality",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.scandichotels.de/karriere",
+        "observed_at": "2026-09-01T05:52:39.825Z",
+        "verification_url": "https://www.scandichotels.de/karriere",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Hospitality",
+        "evidence_note": "Der Scandic-Kandidat wurde ueber die offizielle Scandic-Hotels-Domain und die deutschsprachige Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-01T05:52:39.825Z",
+      "updated_at": "2026-09-01T05:52:39.825Z",
       "last_successful_scan_at": null
     },
     {
@@ -20784,6 +21017,27 @@
       ]
     },
     {
+      "source_id": "source:remote_control_productions_gmbh_career",
+      "company_id": "company:remote_control_productions_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://remotecontrol.jobs.personio.com/?language=en",
+      "canonical_url": "https://remotecontrol.jobs.personio.com/?language=en",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:52:39.825Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://remotecontrol.jobs.personio.com/?language=en",
+          "basis_url": "https://rcp.family/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:resonac_europe_gmbh_career_url",
       "company_id": "company:resonac_europe_gmbh",
       "source_type": "CAREER_PAGE",
@@ -20803,6 +21057,27 @@
           ],
           "observed_at": "2026-08-28T05:03:36.959Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:retorio_gmbh_career",
+      "company_id": "company:retorio_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.retorio.com/en/career",
+      "canonical_url": "https://www.retorio.com/en/career",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:52:39.825Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.retorio.com/en/career",
+          "basis_url": "https://www.retorio.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -20975,6 +21250,27 @@
       ]
     },
     {
+      "source_id": "source:scandic_hotels_deutschland_gmbh_career",
+      "company_id": "company:scandic_hotels_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.scandichotels.de/karriere",
+      "canonical_url": "https://www.scandichotels.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:52:39.825Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.scandichotels.de/karriere",
+          "basis_url": "https://www.scandichotels.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:scout24_se_career",
       "company_id": "company:scout24_se",
       "source_type": "CAREER_PAGE",
@@ -21032,6 +21328,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:shore_gmbh_career",
+      "company_id": "company:shore_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://shore.onapply.de/",
+      "canonical_url": "https://shore.onapply.de/",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:52:39.825Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://shore.onapply.de/",
+          "basis_url": "https://www.shore.com/en/about-us",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:siemens_ag_career",
@@ -21173,6 +21490,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:smart_reporting_gmbh_career",
+      "company_id": "company:smart_reporting_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.smart-reporting.com/company/careers",
+      "canonical_url": "https://www.smart-reporting.com/company/careers",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:52:39.825Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.smart-reporting.com/company/careers",
+          "basis_url": "https://www.smart-reporting.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:speexx_career",
@@ -21653,6 +21991,27 @@
           "basis_url": "https://www.valtech.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T11:47:08.268Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:veact_gmbh_career",
+      "company_id": "company:veact_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://veact.jobs.personio.de/",
+      "canonical_url": "https://veact.jobs.personio.de/",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:52:39.825Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://veact.jobs.personio.de/",
+          "basis_url": "https://www.veact.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:52:39.825Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

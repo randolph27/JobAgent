@@ -1,0 +1,150 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-01T09:20:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Smart Reporting GmbH",
+      "official_website_url": "https://www.smart-reporting.com/",
+      "career_url": "https://www.smart-reporting.com/company/careers",
+      "aliases": [
+        "Smart Reporting",
+        "Jacobian"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare Software",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.smart-reporting.com/company/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Smart-Reporting-Kandidat wurde ueber die offizielle Smart-Reporting-Domain und die dort erreichbare Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "VEACT GmbH",
+      "official_website_url": "https://www.veact.com/",
+      "career_url": "https://veact.jobs.personio.de/",
+      "aliases": [
+        "VEACT",
+        "Veact"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Marketing Software",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://veact.com/career",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der VEACT-Kandidat wurde ueber die offizielle VEACT-Domain und das offizielle, von der Karriere-Seite verwendete Personio-Jobportal belegt."
+    },
+    {
+      "canonical_name": "Shore GmbH",
+      "official_website_url": "https://www.shore.com/en/about-us",
+      "career_url": "https://shore.onapply.de/",
+      "aliases": [
+        "Shore",
+        "Shore Software"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://shore.onapply.de/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Shore-Kandidat wurde ueber den offiziellen Shore-Auftritt und das erreichbare Shore-Bewerbungsportal belegt."
+    },
+    {
+      "canonical_name": "remote control productions GmbH",
+      "official_website_url": "https://rcp.family/",
+      "career_url": "https://remotecontrol.jobs.personio.com/?language=en",
+      "aliases": [
+        "remote control productions",
+        "rcp family"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games and Interactive Entertainment",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://rcp.family/career/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der remote-control-productions-Kandidat wurde ueber den offiziellen rcp-family-Auftritt und das offizielle Personio-Jobportal belegt."
+    },
+    {
+      "canonical_name": "Retorio GmbH",
+      "official_website_url": "https://www.retorio.com/",
+      "career_url": "https://www.retorio.com/en/career",
+      "aliases": [
+        "Retorio",
+        "Retorio AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Coaching Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.retorio.com/en/career",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Retorio-Kandidat wurde ueber die offizielle Retorio-Domain und die dort erreichbare Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Scandic Hotels Deutschland GmbH",
+      "official_website_url": "https://www.scandichotels.de/",
+      "career_url": "https://www.scandichotels.de/karriere",
+      "aliases": [
+        "Scandic",
+        "Scandic Hotels"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Hospitality",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.scandichotels.de/karriere",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Scandic-Kandidat wurde ueber die offizielle Scandic-Hotels-Domain und die deutschsprachige Karriere-Seite belegt."
+    }
+  ]
+}
