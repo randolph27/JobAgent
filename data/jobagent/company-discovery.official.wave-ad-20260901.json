@@ -1,0 +1,151 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-01T07:55:00.000Z",
+  "items": [
+    {
+      "canonical_name": "MSD Deutschland",
+      "official_website_url": "https://www.msd.de/",
+      "career_url": "https://jobs.msd.com/",
+      "aliases": [
+        "MSD",
+        "MSD Sharp & Dohme GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharmaceuticals",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.msd.com/",
+      "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+      "evidence_note": "Der MSD-Deutschland-Kandidat wurde ueber die offizielle MSD-Deutschland-Domain und den offiziellen MSD-Careers-Auftritt belegt."
+    },
+    {
+      "canonical_name": "JANUS Productions GmbH",
+      "official_website_url": "https://janus-productions.de/",
+      "career_url": "https://janus-productions.de/deine-karriere/",
+      "aliases": [
+        "Janus TV",
+        "Janus TV GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Ismaning",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Production",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://janus-productions.de/deine-karriere/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Janus-TV-Kandidat wurde ueber die offizielle JANUS-Productions-Domain und die dort erreichbare Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Merkur tz MEDIA",
+      "official_website_url": "https://merkurtz.media/",
+      "career_url": "https://merkurtz.media/karriere/",
+      "aliases": [
+        "Muenchner Merkur",
+        "Merkur tz Media"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing and Media",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://merkurtz.media/karriere/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Muenchner-Merkur-Kandidat wurde ueber den offiziellen Merkur-tz-MEDIA-Auftritt und dessen Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "MicroGenesis TechSoft",
+      "official_website_url": "https://mgtechsoft.com/",
+      "career_url": "https://mgtechsoft.com/",
+      "aliases": [
+        "MicroGenesis TechSoft Pvt Ltd",
+        "MicroGenesis Techsoft"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering and IT Services",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://mgtechsoft.com/",
+      "discovery_origin": "source-registry:munich_business_indian_companies",
+      "evidence_note": "Der MicroGenesis-TechSoft-Kandidat wurde ueber die offizielle MicroGenesis-TechSoft-Domain belegt; der erreichbare offizielle Auftritt enthaelt den Karriere-Einstieg."
+    },
+    {
+      "canonical_name": "MGH Muenchner Gewerbehof- und Technologiezentrumsgesellschaft mbH",
+      "official_website_url": "https://www.mgh-muc.de/",
+      "career_url": "https://jobs.mgh-muc.de/",
+      "aliases": [
+        "Muenchener Gewerbehof Giesing Grundstuecks GmbH",
+        "Muenchner Gewerbehoefe",
+        "MGH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Real Estate and Business Parks",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.mgh-muc.de/",
+      "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+      "evidence_note": "Der Muenchner-Gewerbehof-Kandidat wurde ueber den offiziellen MGH-Auftritt und das offizielle MGH-Bewerbungsportal belegt."
+    },
+    {
+      "canonical_name": "Fraunhofer-Gesellschaft",
+      "official_website_url": "https://www.fraunhofer.de/",
+      "career_url": "https://jobs.fraunhofer.de/",
+      "aliases": [
+        "Fraunhofer Institut",
+        "Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e.V."
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Applied Research",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.fraunhofer.de/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Fraunhofer-Institut-Kandidat wurde ueber die offizielle Fraunhofer-Domain und das offizielle Fraunhofer-Stellenportal belegt."
+    }
+  ]
+}

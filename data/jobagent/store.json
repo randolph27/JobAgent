@@ -1851,12 +1851,15 @@
     },
     {
       "company_id": "company:mgh_muenchener_gewerbehof_und_technologiegesellschaft",
-      "canonical_name": "MGH - Muenchener Gewerbehof- und Technologiegesellschaft",
+      "canonical_name": "MGH Muenchner Gewerbehof- und Technologiezentrumsgesellschaft mbH",
       "canonical_domain": "mgh-muc.de",
       "official_website_url": "https://www.mgh-muc.de/",
-      "career_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+      "career_url": "https://jobs.mgh-muc.de/",
       "aliases": [
         "MGH",
+        "MGH - Muenchener Gewerbehof- und Technologiegesellschaft",
+        "MGH Muenchner Gewerbehof- und Technologiezentrumsgesellschaft mbH",
+        "Muenchener Gewerbehof Giesing Grundstuecks GmbH",
         "Muenchener Gewerbehof- und Technologiezentrumsgesellschaft",
         "Muenchner Gewerbehoefe"
       ],
@@ -1877,16 +1880,16 @@
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
-        "observed_at": "2026-08-29T05:59:42.748Z",
-        "verification_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+        "url": "https://jobs.mgh-muc.de/",
+        "observed_at": "2026-09-01T05:38:52.069Z",
+        "verification_url": "https://jobs.mgh-muc.de/",
         "discovery_origin": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
         "target_area": "MUNICH",
-        "industry_hint": "Real Estate and Technology Centers",
-        "evidence_note": "Der MGH-Kandidat wurde ueber die offizielle MGH-Domain und die dortige Stellenangebotsseite belegt."
+        "industry_hint": "Real Estate and Business Parks",
+        "evidence_note": "Der Muenchner-Gewerbehof-Kandidat wurde ueber den offiziellen MGH-Auftritt und das offizielle MGH-Bewerbungsportal belegt."
       },
       "created_at": "2026-08-29T05:59:42.748Z",
-      "updated_at": "2026-08-29T05:59:42.748Z",
+      "updated_at": "2026-09-01T05:38:52.069Z",
       "last_successful_scan_at": null
     },
     {
@@ -9824,6 +9827,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:msd_deutschland",
+      "canonical_name": "MSD Deutschland",
+      "canonical_domain": "msd.de",
+      "official_website_url": "https://www.msd.de/",
+      "career_url": "https://jobs.msd.com/",
+      "aliases": [
+        "MSD",
+        "MSD Sharp & Dohme GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.msd.com/",
+        "observed_at": "2026-09-01T05:38:52.069Z",
+        "verification_url": "https://jobs.msd.com/",
+        "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Pharmaceuticals",
+        "evidence_note": "Der MSD-Deutschland-Kandidat wurde ueber die offizielle MSD-Deutschland-Domain und den offiziellen MSD-Careers-Auftritt belegt."
+      },
+      "created_at": "2026-09-01T05:38:52.069Z",
+      "updated_at": "2026-09-01T05:38:52.069Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:metoda",
       "canonical_name": "metoda",
       "canonical_domain": "metoda.com",
@@ -10210,6 +10252,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:janus_productions_gmbh",
+      "canonical_name": "JANUS Productions GmbH",
+      "canonical_domain": "janus-productions.de",
+      "official_website_url": "https://janus-productions.de/",
+      "career_url": "https://janus-productions.de/deine-karriere/",
+      "aliases": [
+        "Janus TV",
+        "Janus TV GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Ismaning",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media Production",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://janus-productions.de/deine-karriere/",
+        "observed_at": "2026-09-01T05:38:52.069Z",
+        "verification_url": "https://janus-productions.de/deine-karriere/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media Production",
+        "evidence_note": "Der Janus-TV-Kandidat wurde ueber die offizielle JANUS-Productions-Domain und die dort erreichbare Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-01T05:38:52.069Z",
+      "updated_at": "2026-09-01T05:38:52.069Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:innoactive",
       "canonical_name": "Innoactive",
       "canonical_domain": "innoactivegroup.com",
@@ -10442,6 +10523,45 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:merkur_tz_media",
+      "canonical_name": "Merkur tz MEDIA",
+      "canonical_domain": "merkurtz.media",
+      "official_website_url": "https://merkurtz.media/",
+      "career_url": "https://merkurtz.media/karriere/",
+      "aliases": [
+        "Merkur tz Media",
+        "Muenchner Merkur"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Publishing and Media",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://merkurtz.media/karriere/",
+        "observed_at": "2026-09-01T05:38:52.069Z",
+        "verification_url": "https://merkurtz.media/karriere/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Publishing and Media",
+        "evidence_note": "Der Muenchner-Merkur-Kandidat wurde ueber den offiziellen Merkur-tz-MEDIA-Auftritt und dessen Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-01T05:38:52.069Z",
+      "updated_at": "2026-09-01T05:38:52.069Z",
       "last_successful_scan_at": null
     },
     {
@@ -10830,6 +10950,45 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:microgenesis_techsoft",
+      "canonical_name": "MicroGenesis TechSoft",
+      "canonical_domain": "mgtechsoft.com",
+      "official_website_url": "https://mgtechsoft.com/",
+      "career_url": "https://mgtechsoft.com/",
+      "aliases": [
+        "MicroGenesis Techsoft",
+        "MicroGenesis TechSoft Pvt Ltd"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering and IT Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://mgtechsoft.com/",
+        "observed_at": "2026-09-01T05:38:52.069Z",
+        "verification_url": "https://mgtechsoft.com/",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Engineering and IT Services",
+        "evidence_note": "Der MicroGenesis-TechSoft-Kandidat wurde ueber die offizielle MicroGenesis-TechSoft-Domain belegt; der erreichbare offizielle Auftritt enthaelt den Karriere-Einstieg."
+      },
+      "created_at": "2026-09-01T05:38:52.069Z",
+      "updated_at": "2026-09-01T05:38:52.069Z",
       "last_successful_scan_at": null
     },
     {
@@ -11763,6 +11922,45 @@
       },
       "created_at": "2026-08-31T22:37:31.023Z",
       "updated_at": "2026-08-31T22:37:31.023Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:fraunhofer_gesellschaft",
+      "canonical_name": "Fraunhofer-Gesellschaft",
+      "canonical_domain": "fraunhofer.de",
+      "official_website_url": "https://www.fraunhofer.de/",
+      "career_url": "https://jobs.fraunhofer.de/",
+      "aliases": [
+        "Fraunhofer Institut",
+        "Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e.V."
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Applied Research",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.fraunhofer.de/",
+        "observed_at": "2026-09-01T05:38:52.069Z",
+        "verification_url": "https://jobs.fraunhofer.de/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Applied Research",
+        "evidence_note": "Der Fraunhofer-Institut-Kandidat wurde ueber die offizielle Fraunhofer-Domain und das offizielle Fraunhofer-Stellenportal belegt."
+      },
+      "created_at": "2026-09-01T05:38:52.069Z",
+      "updated_at": "2026-09-01T05:38:52.069Z",
       "last_successful_scan_at": null
     },
     {
@@ -17154,6 +17352,27 @@
       ]
     },
     {
+      "source_id": "source:fraunhofer_gesellschaft_career",
+      "company_id": "company:fraunhofer_gesellschaft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.fraunhofer.de/",
+      "canonical_url": "https://jobs.fraunhofer.de/",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:38:52.069Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.fraunhofer.de/",
+          "basis_url": "https://www.fraunhofer.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:38:52.069Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:fraunhofer_ivv_career",
       "company_id": "company:fraunhofer_ivv",
       "source_type": "CAREER_PAGE",
@@ -18412,6 +18631,27 @@
       ]
     },
     {
+      "source_id": "source:janus_productions_gmbh_career",
+      "company_id": "company:janus_productions_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://janus-productions.de/deine-karriere/",
+      "canonical_url": "https://janus-productions.de/deine-karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:38:52.069Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://janus-productions.de/deine-karriere/",
+          "basis_url": "https://janus-productions.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:38:52.069Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:jasmin_infotech_gmbh_career_url",
       "company_id": "company:jasmin_infotech_gmbh",
       "source_type": "CAREER_PAGE",
@@ -19109,6 +19349,27 @@
       ]
     },
     {
+      "source_id": "source:merkur_tz_media_career",
+      "company_id": "company:merkur_tz_media",
+      "source_type": "CAREER_PAGE",
+      "url": "https://merkurtz.media/karriere/",
+      "canonical_url": "https://merkurtz.media/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:38:52.069Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://merkurtz.media/karriere/",
+          "basis_url": "https://merkurtz.media/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:38:52.069Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:messe_muenchen_gmbh_career_url",
       "company_id": "company:messe_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -19177,19 +19438,19 @@
       "source_id": "source:mgh_muenchener_gewerbehof_und_technologiegesellschaft_career",
       "company_id": "company:mgh_muenchener_gewerbehof_und_technologiegesellschaft",
       "source_type": "CAREER_PAGE",
-      "url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
-      "canonical_url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+      "url": "https://jobs.mgh-muc.de/",
+      "canonical_url": "https://jobs.mgh-muc.de/",
       "is_official": true,
-      "verified_at": "2026-08-29T05:59:42.748Z",
+      "verified_at": "2026-09-01T05:38:52.069Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
           "status": "VERIFIED",
           "evidence_type": "CAREER_URL",
-          "url": "https://www.mgh-muc.de/mietparteien/stellenangebote",
+          "url": "https://jobs.mgh-muc.de/",
           "basis_url": "https://www.mgh-muc.de/",
           "redirect_chain": [],
-          "observed_at": "2026-08-29T05:59:42.748Z",
+          "observed_at": "2026-09-01T05:38:52.069Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -19232,6 +19493,27 @@
           "basis_url": "https://www.mhp.com/en/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:microgenesis_techsoft_career",
+      "company_id": "company:microgenesis_techsoft",
+      "source_type": "CAREER_PAGE",
+      "url": "https://mgtechsoft.com/",
+      "canonical_url": "https://mgtechsoft.com/",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:38:52.069Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://mgtechsoft.com/",
+          "basis_url": "https://mgtechsoft.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:38:52.069Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -19359,6 +19641,27 @@
           ],
           "observed_at": "2026-08-27T15:53:37.241Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:msd_deutschland_career",
+      "company_id": "company:msd_deutschland",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.msd.com/",
+      "canonical_url": "https://jobs.msd.com/",
+      "is_official": true,
+      "verified_at": "2026-09-01T05:38:52.069Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.msd.com/",
+          "basis_url": "https://www.msd.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T05:38:52.069Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
