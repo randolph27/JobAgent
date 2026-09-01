@@ -1,153 +1,115 @@
 {
+  "ts": "2026-09-01T08:14:05.003+02:00",
   "agent_id": "UTTER-20260817-39f7",
-  "ts": "2026-09-01T08:01:46.700+02:00",
-  "project": "JobAgent",
   "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "summary": "Welle AE/B hat 6 offiziell belegte Arbeitgeber produktiv neu aufgenommen: Smart Reporting GmbH, VEACT GmbH, Shore GmbH, remote control productions GmbH, Retorio GmbH, Scandic Hotels Deutschland GmbH. Store 356 Firmen, 353 JobSources, 355 offizielle Quellen, 354 Karrierequellen.",
-  "roadmap_rotation": "not-run: kein Roadmap-Punkt komplett erledigt",
-  "supertest": "nicht erneut angefragt; gemaess Nutzeranweisung fuer diese Uebergabe als erledigt behandelt",
   "changed": [
-    "data/jobagent/company-discovery.official.wave-ae-20260901.json",
-    "data/jobagent/store.json",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "html/jobagent/company-coverage.html",
-    "logs/jobagent/ja-023-source-coverage.json",
     "Roadmap.md",
+    "data/jobagent/company-discovery.official.wave-af-20260901.json",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/store.json",
+    "html/jobagent/company-coverage.html",
+    "handoff.latest.md",
+    "handoff.latest.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json",
-    "handoff.latest.md",
-    "handoff.latest.json"
+    "todo.master.index.json"
   ],
-  "evidence": [
-    "logs/jobagent/company-discovery-import-20260901-055239.json",
-    "logs/jobagent/company-candidate-verification-20260901-055245.json",
-    "logs/jobagent/company-coverage-20260901-055345.json",
-    "logs/jobagent/company-coverage-20260901-055345.md",
-    "logs/jobagent/ja-023-source-coverage.json",
-    "data/jobagent/backups/store-20260901T055240447Z-pre-wave-import.json",
-    "output/playwright/ja-022-viewport-800.png",
-    "output/playwright/ja-022-viewport-1366.png",
-    "output/playwright/ja-022-viewport-1920.png"
-  ],
-  "metrics": {
-    "companies_total": 356,
-    "job_sources_total": 353,
-    "official_sources": 355,
-    "career_sources": 354,
-    "queue_verified_or_store": 520,
-    "queue_manual_discover": 1264,
-    "wave_gate": "passed",
-    "manual_review_rate": 0.0,
-    "duplicate_rate": 0.0,
-    "coverage_delta": 6
-  },
   "verified": [
     {
-      "status": "pass",
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ae-20260901.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-af-20260901.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "status": "pass",
-      "cmd": "Invoke-WebRequest -Method Get fuer alle official_website_url/career_url/discovery_url aus Welle AE",
+      "cmd": "Invoke-WebRequest -Method Get fuer alle official_website_url/career_url/discovery_url aus Welle AF",
       "exit": 0
     },
     {
-      "status": "pass",
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ae-20260901.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-af-20260901.json -WaveId B",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
       "exit": 0
     },
     {
-      "status": "pass",
       "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
       "exit": 0
     },
     {
-      "status": "expected-no-match",
       "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
       "exit": 1
     },
     {
-      "status": "pass",
       "cmd": ".\\ci.cmd stp",
       "exit": 0
     }
   ],
   "route_ok": true,
   "route_violations": [],
-  "next_steps": [
-    "JA-027 mit Welle AF fortsetzen",
-    "DISCOVER_OFFICIAL_WEBSITE-Kandidaten priorisieren",
-    "offizielle Website plus Karriere-/ATS-Beleg per HTTP pruefen",
-    "Feed data/jobagent/company-discovery.official.wave-af-YYYYMMDD.json anlegen",
-    "Import mit WaveId B ausfuehren",
-    "Queue, Coverage und Source-Coverage aktualisieren",
-    "funktionsbezogene Tests ausfuehren",
-    "Roadmap/Todo/Handoff/STP syncen und commit/push"
-  ],
+  "git": {
+    "branch": "master",
+    "head": "817a763bb290",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty"
+  },
+  "next": "JA-027 mit Welle AG fortsetzen; Supertest erst bei Abschluss von JA-027 oder expliziter Nutzeranweisung.",
   "refs": [
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
-    "handoff.latest.json"
+    "handoff.latest.json",
+    "Roadmap.md"
+  ],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "notes": [
+    "Supertest wurde in diesem Slice nicht ausgefuehrt, weil JA-027 offen bleibt. Das von ci.cmd stp referenzierte Supertest-Ergebnis stammt aus dem vorhandenen Verify-Digest."
   ]
 }

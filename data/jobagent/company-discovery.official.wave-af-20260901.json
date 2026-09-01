@@ -1,0 +1,150 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-01T10:35:00.000Z",
+  "items": [
+    {
+      "canonical_name": "NanoTemper Technologies GmbH",
+      "official_website_url": "https://www.nanotempertech.com/",
+      "career_url": "https://nanotempertech.com/careers/",
+      "aliases": [
+        "Nanotemper Technologies GmbH",
+        "NanoTemper",
+        "NanoTemper Technologies"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biophysical Instrumentation",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://nanotempertech.com/careers/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der NanoTemper-Kandidat wurde ueber die offizielle NanoTemper-Domain und die dort erreichbare Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Mynaric AG",
+      "official_website_url": "https://mynaric.com/",
+      "career_url": "https://mynaric.com/careers/",
+      "aliases": [
+        "Mynaric"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Oberpfaffenhofen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Laser Communication",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://mynaric.com/careers/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Mynaric-Kandidat wurde ueber die offizielle Mynaric-Domain und die dort erreichbare Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Thoughtworks Deutschland GmbH",
+      "official_website_url": "https://www.thoughtworks.com/",
+      "career_url": "https://www.thoughtworks.com/careers",
+      "aliases": [
+        "Thoughtworks",
+        "ThoughtWorks"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Technology Consultancy",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.thoughtworks.com/careers",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Thoughtworks-Kandidat wurde ueber die offizielle Thoughtworks-Domain und die dort erreichbare Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "IBM Deutschland GmbH",
+      "official_website_url": "https://www.ibm.com/de-de",
+      "career_url": "https://www.ibm.com/careers/search",
+      "aliases": [
+        "IBM",
+        "IBM - Watson",
+        "IBM Watson"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Information Technology",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ibm.com/careers/search",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der IBM-Watson-Kandidat wurde ueber die offizielle IBM-Deutschland-Domain und die offizielle IBM-Careers-Suche belegt."
+    },
+    {
+      "canonical_name": "ZenML GmbH",
+      "official_website_url": "https://www.zenml.io/",
+      "career_url": "https://www.zenml.io/careers",
+      "aliases": [
+        "ZenML"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "MLOps Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.zenml.io/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der ZenML-Kandidat wurde ueber die offizielle ZenML-Domain und die dort erreichbare Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Tacto Technology GmbH",
+      "official_website_url": "https://www.tacto.ai/",
+      "career_url": "https://www.tacto.ai/karriere",
+      "aliases": [
+        "Tacto",
+        "Tacto AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Procurement Software",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tacto.ai/karriere",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Tacto-Kandidat wurde ueber die offizielle Tacto-Domain und die dort erreichbare Karriere-Seite belegt."
+    }
+  ]
+}

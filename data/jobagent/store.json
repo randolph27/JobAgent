@@ -9478,11 +9478,13 @@
       "canonical_name": "IBM Deutschland GmbH",
       "canonical_domain": "ibm.com",
       "official_website_url": "https://www.ibm.com/de-de",
-      "career_url": "https://www.ibm.com/de-de/careers",
+      "career_url": "https://www.ibm.com/careers/search",
       "aliases": [
         "IBM",
+        "IBM - Watson",
         "IBM Deutschland",
-        "IBM Deutschland GmbH"
+        "IBM Deutschland GmbH",
+        "IBM Watson"
       ],
       "locations": [
         {
@@ -9501,16 +9503,16 @@
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.ibm.com/de-de/careers",
-        "observed_at": "2026-08-30T12:20:57.68Z",
-        "verification_url": "https://www.ibm.com/de-de/careers",
-        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "url": "https://www.ibm.com/careers/search",
+        "observed_at": "2026-09-01T06:08:24.736Z",
+        "verification_url": "https://www.ibm.com/careers/search",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
         "target_area": "MUNICH",
         "industry_hint": "Information Technology",
-        "evidence_note": "Der IBM-Kandidat wurde ueber die offizielle IBM-Deutschland-Domain und deren Careers-Seite belegt."
+        "evidence_note": "Der IBM-Watson-Kandidat wurde ueber die offizielle IBM-Deutschland-Domain und die offizielle IBM-Careers-Suche belegt."
       },
       "created_at": "2026-08-30T12:20:57.68Z",
-      "updated_at": "2026-08-30T12:20:57.68Z",
+      "updated_at": "2026-09-01T06:08:24.736Z",
       "last_successful_scan_at": null
     },
     {
@@ -9863,6 +9865,46 @@
       },
       "created_at": "2026-09-01T05:52:39.825Z",
       "updated_at": "2026-09-01T05:52:39.825Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:nanotemper_technologies_gmbh",
+      "canonical_name": "NanoTemper Technologies GmbH",
+      "canonical_domain": "nanotempertech.com",
+      "official_website_url": "https://www.nanotempertech.com/",
+      "career_url": "https://nanotempertech.com/careers/",
+      "aliases": [
+        "NanoTemper",
+        "NanoTemper Technologies",
+        "Nanotemper Technologies GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biophysical Instrumentation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://nanotempertech.com/careers/",
+        "observed_at": "2026-09-01T06:08:24.736Z",
+        "verification_url": "https://nanotempertech.com/careers/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Biophysical Instrumentation",
+        "evidence_note": "Der NanoTemper-Kandidat wurde ueber die offizielle NanoTemper-Domain und die dort erreichbare Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-01T06:08:24.736Z",
+      "updated_at": "2026-09-01T06:08:24.736Z",
       "last_successful_scan_at": null
     },
     {
@@ -10252,6 +10294,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:mynaric_ag",
+      "canonical_name": "Mynaric AG",
+      "canonical_domain": "mynaric.com",
+      "official_website_url": "https://mynaric.com/",
+      "career_url": "https://mynaric.com/careers/",
+      "aliases": [
+        "Mynaric"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Oberpfaffenhofen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Laser Communication",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://mynaric.com/careers/",
+        "observed_at": "2026-09-01T06:08:24.736Z",
+        "verification_url": "https://mynaric.com/careers/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Laser Communication",
+        "evidence_note": "Der Mynaric-Kandidat wurde ueber die offizielle Mynaric-Domain und die dort erreichbare Careers-Seite belegt."
+      },
+      "created_at": "2026-09-01T06:08:24.736Z",
+      "updated_at": "2026-09-01T06:08:24.736Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:limango_gmbh",
       "canonical_name": "limango GmbH",
       "canonical_domain": "limango.de",
@@ -10600,6 +10680,44 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:thoughtworks_deutschland_gmbh",
+      "canonical_name": "Thoughtworks Deutschland GmbH",
+      "canonical_domain": "thoughtworks.com",
+      "official_website_url": "https://www.thoughtworks.com/",
+      "career_url": "https://www.thoughtworks.com/careers",
+      "aliases": [
+        "Thoughtworks"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Technology Consultancy",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.thoughtworks.com/careers",
+        "observed_at": "2026-09-01T06:08:24.736Z",
+        "verification_url": "https://www.thoughtworks.com/careers",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Technology Consultancy",
+        "evidence_note": "Der Thoughtworks-Kandidat wurde ueber die offizielle Thoughtworks-Domain und die dort erreichbare Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-01T06:08:24.736Z",
+      "updated_at": "2026-09-01T06:08:24.736Z",
       "last_successful_scan_at": null
     },
     {
@@ -11341,6 +11459,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:zenml_gmbh",
+      "canonical_name": "ZenML GmbH",
+      "canonical_domain": "zenml.io",
+      "official_website_url": "https://www.zenml.io/",
+      "career_url": "https://www.zenml.io/careers",
+      "aliases": [
+        "ZenML"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "MLOps Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.zenml.io/careers",
+        "observed_at": "2026-09-01T06:08:24.736Z",
+        "verification_url": "https://www.zenml.io/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "MLOps Software",
+        "evidence_note": "Der ZenML-Kandidat wurde ueber die offizielle ZenML-Domain und die dort erreichbare Careers-Seite belegt."
+      },
+      "created_at": "2026-09-01T06:08:24.736Z",
+      "updated_at": "2026-09-01T06:08:24.736Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:synopsys_gmbh",
       "canonical_name": "Synopsys GmbH",
       "canonical_domain": "synopsys.com",
@@ -11805,6 +11961,45 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tacto_technology_gmbh",
+      "canonical_name": "Tacto Technology GmbH",
+      "canonical_domain": "tacto.ai",
+      "official_website_url": "https://www.tacto.ai/",
+      "career_url": "https://www.tacto.ai/karriere",
+      "aliases": [
+        "Tacto",
+        "Tacto AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Procurement Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-02T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tacto.ai/karriere",
+        "observed_at": "2026-09-01T06:08:24.736Z",
+        "verification_url": "https://www.tacto.ai/karriere",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Procurement Software",
+        "evidence_note": "Der Tacto-Kandidat wurde ueber die offizielle Tacto-Domain und die dort erreichbare Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-01T06:08:24.736Z",
+      "updated_at": "2026-09-01T06:08:24.736Z",
       "last_successful_scan_at": null
     },
     {
@@ -18510,19 +18705,19 @@
       "source_id": "source:ibm_deutschland_gmbh_career",
       "company_id": "company:ibm_deutschland_gmbh",
       "source_type": "CAREER_PAGE",
-      "url": "https://www.ibm.com/de-de/careers",
-      "canonical_url": "https://www.ibm.com/de-de/careers",
+      "url": "https://www.ibm.com/careers/search",
+      "canonical_url": "https://www.ibm.com/careers/search",
       "is_official": true,
-      "verified_at": "2026-08-30T12:20:57.68Z",
+      "verified_at": "2026-09-01T06:08:24.736Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
           "status": "VERIFIED",
           "evidence_type": "CAREER_URL",
-          "url": "https://www.ibm.com/de-de/careers",
+          "url": "https://www.ibm.com/careers/search",
           "basis_url": "https://www.ibm.com/de-de",
           "redirect_chain": [],
-          "observed_at": "2026-08-30T12:20:57.68Z",
+          "observed_at": "2026-09-01T06:08:24.736Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -20291,6 +20486,27 @@
       ]
     },
     {
+      "source_id": "source:mynaric_ag_career",
+      "company_id": "company:mynaric_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://mynaric.com/careers/",
+      "canonical_url": "https://mynaric.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-01T06:08:24.736Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://mynaric.com/careers/",
+          "basis_url": "https://mynaric.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T06:08:24.736Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:mytheresa_career",
       "company_id": "company:mytheresa",
       "source_type": "CAREER_PAGE",
@@ -20329,6 +20545,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:nanotemper_technologies_gmbh_career",
+      "company_id": "company:nanotemper_technologies_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://nanotempertech.com/careers/",
+      "canonical_url": "https://nanotempertech.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-01T06:08:24.736Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://nanotempertech.com/careers/",
+          "basis_url": "https://www.nanotempertech.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T06:08:24.736Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:navvis_career",
@@ -21681,6 +21918,27 @@
       ]
     },
     {
+      "source_id": "source:tacto_technology_gmbh_career",
+      "company_id": "company:tacto_technology_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.tacto.ai/karriere",
+      "canonical_url": "https://www.tacto.ai/karriere",
+      "is_official": true,
+      "verified_at": "2026-09-01T06:08:24.736Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.tacto.ai/karriere",
+          "basis_url": "https://www.tacto.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T06:08:24.736Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:tado_gmbh_career",
       "company_id": "company:tado_gmbh",
       "source_type": "CAREER_PAGE",
@@ -21867,6 +22125,27 @@
           "basis_url": "https://www.thelandbankinggroup.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T18:18:31.59Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:thoughtworks_deutschland_gmbh_career",
+      "company_id": "company:thoughtworks_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.thoughtworks.com/careers",
+      "canonical_url": "https://www.thoughtworks.com/careers",
+      "is_official": true,
+      "verified_at": "2026-09-01T06:08:24.736Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.thoughtworks.com/careers",
+          "basis_url": "https://www.thoughtworks.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T06:08:24.736Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22267,6 +22546,27 @@
           ],
           "observed_at": "2026-08-28T05:43:33.975Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:zenml_gmbh_career",
+      "company_id": "company:zenml_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.zenml.io/careers",
+      "canonical_url": "https://www.zenml.io/careers",
+      "is_official": true,
+      "verified_at": "2026-09-01T06:08:24.736Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.zenml.io/careers",
+          "basis_url": "https://www.zenml.io/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-01T06:08:24.736Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },

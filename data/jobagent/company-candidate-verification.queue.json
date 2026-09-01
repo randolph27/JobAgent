@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-09-01T05:55:29.202Z",
+  "generated_at": "2026-09-01T06:10:25.348Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 520,
-    "DISCOVER_OFFICIAL_WEBSITE": 1262,
+    "ALREADY_VERIFIED_IN_STORE": 527,
+    "DISCOVER_OFFICIAL_WEBSITE": 1255,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -11582,6 +11582,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_ibm_watson_muenchen",
+      "candidate_id": "regional-hint:munich_business_ikt_companies_ibm_watson_muenchen",
+      "company_id": "company:ibm_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_ikt_companies_ibm_watson_muenchen"
+      ],
+      "canonical_name": "IBM - Watson",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:20:54.093Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_ikt_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
+        "observed_at": "08/26/2026 08:30:00",
+        "record_hash": "724ded84e546e57f589b3fd4f947dd542f102e5c7b57ca296a89b2868b23d730",
+        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:ibm watson"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_idnow_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_idnow_awesome_machine_learning_startups_munich_github_list",
       "company_id": "company:idnow",
@@ -14930,6 +14974,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_mynaric_muenchen_west",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_mynaric_muenchen_west",
+      "company_id": "company:mynaric_ag",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_mynaric_muenchen_west"
+      ],
+      "canonical_name": "Mynaric",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:48:55.788Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "5423a6df50e98d20fe77d5d90914d0d2613509f840b49a444043146f479a6af9",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:mynaric"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_mytheresa_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_mytheresa_muenchen_tech_unternehmen",
       "company_id": "company:mytheresa",
@@ -15016,6 +15104,52 @@
           "name:nagarro"
         ],
         "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_nanotemper_technologies_gmbh_muenchen_sued",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_nanotemper_technologies_gmbh_muenchen_sued",
+      "company_id": "company:nanotemper_technologies_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_nanotemper_technologies_gmbh_muenchen_sued"
+      ],
+      "canonical_name": "Nanotemper Technologies GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:48:55.788Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-sued.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "a5f7e3e4ecd338c490166cb2af0d9d3ebb2fb74d173e5df610e76c60199989fc",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:nanotemper technologies"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 1
       }
     },
@@ -18134,6 +18268,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_tacto_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_tacto_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:tacto_technology_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_tacto_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "Tacto",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:12:50.965Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "f2512ecba819f1451307b080fab2fece9b46b44c80977a75780d335081f4d11c",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:tacto"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_tado_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_tado_muenchen_tech_unternehmen",
       "company_id": "company:tado_gmbh",
@@ -18493,6 +18671,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_thoughtworks_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_thoughtworks_muenchen_tech_unternehmen",
+      "company_id": "company:thoughtworks_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_thoughtworks_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "Thoughtworks",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:18:54.711Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "fd40af66b3bfb9579819ce83e2bcdf2ac35c7de0cff3f3b25181dd467bdf68ce",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:thoughtworks"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -19205,6 +19427,50 @@
         "dedupe_keys": [
           "domain:yamaichi.de",
           "name:yamaichi electronics deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_zenml_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_zenml_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:zenml_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_zenml_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "ZenML",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:43:15.353Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "80109b25c818b1eebf0b24373e6b5872ad15209df6542f852a6d7c07ffce0c4b",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:zenml"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -21067,50 +21333,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_ibm_watson_muenchen",
-      "candidate_id": "regional-hint:munich_business_ikt_companies_ibm_watson_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_ikt_companies_ibm_watson_muenchen"
-      ],
-      "canonical_name": "IBM - Watson",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:20:54.093Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_ikt_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
-        "observed_at": "08/26/2026 08:30:00",
-        "record_hash": "724ded84e546e57f589b3fd4f947dd542f102e5c7b57ca296a89b2868b23d730",
-        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:ibm watson"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_icaros_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_icaros_muenchen_tech_unternehmen",
       "company_id": null,
@@ -22437,50 +22659,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_mynaric_muenchen_west",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_mynaric_muenchen_west",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_mynaric_muenchen_west"
-      ],
-      "canonical_name": "Mynaric",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:48:55.788Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "5423a6df50e98d20fe77d5d90914d0d2613509f840b49a444043146f479a6af9",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:mynaric"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_n_v_o_nuyken_von_oefele_architekten_muenchen",
       "candidate_id": "regional-hint:munich_business_creative_companies_n_v_o_nuyken_von_oefele_architekten_muenchen",
       "company_id": null,
@@ -22521,52 +22699,6 @@
           "name:n v o nuyken von oefele architekten"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_nanotemper_technologies_gmbh_muenchen_sued",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_nanotemper_technologies_gmbh_muenchen_sued",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_nanotemper_technologies_gmbh_muenchen_sued"
-      ],
-      "canonical_name": "Nanotemper Technologies GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:48:55.788Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-sued.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "a5f7e3e4ecd338c490166cb2af0d9d3ebb2fb74d173e5df610e76c60199989fc",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:nanotemper technologies"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -25799,50 +25931,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_tacto_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_tacto_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_tacto_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "Tacto",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:12:50.965Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "f2512ecba819f1451307b080fab2fece9b46b44c80977a75780d335081f4d11c",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:tacto"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_take_2_interactive_muenchen",
       "candidate_id": "regional-hint:munich_business_creative_companies_take_2_interactive_muenchen",
       "company_id": null,
@@ -26365,50 +26453,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:the boston consulting group"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_thoughtworks_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_thoughtworks_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_thoughtworks_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "Thoughtworks",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:18:54.711Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "fd40af66b3bfb9579819ce83e2bcdf2ac35c7de0cff3f3b25181dd467bdf68ce",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:thoughtworks"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -27695,50 +27739,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:ysura"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_zenml_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_zenml_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_zenml_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "ZenML",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:43:15.353Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "80109b25c818b1eebf0b24373e6b5872ad15209df6542f852a6d7c07ffce0c4b",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:zenml"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -30870,6 +30870,52 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:mytheresa"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_nanotemper_technologies_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_nanotemper_technologies_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:nanotemper_technologies_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_nanotemper_technologies_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "NanoTemper Technologies GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T11:39:47.314Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "38af92294db37527b9556bb48f9b085fba553b3cef4bc364f980502d3ccb158b",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:nanotemper technologies"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -63082,52 +63128,6 @@
           "name:nanotec international"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_nanotemper_technologies_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_nanotemper_technologies_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_nanotemper_technologies_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "NanoTemper Technologies GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T11:39:47.314Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "38af92294db37527b9556bb48f9b085fba553b3cef4bc364f980502d3ccb158b",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:nanotemper technologies"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
