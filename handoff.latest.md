@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-01T08:14:05.003+02:00
+Stand: 2026-09-01T08:16:55.196+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,17 +8,17 @@ Stand: 2026-09-01T08:14:05.003+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Abschlusscommit: `817a763bb290`
+- Letzter fachlicher Commit: `abab6b7 Add verified company import wave AF`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
 - Roadmap-Rotation: nicht erfolgt; kein Roadmap-Punkt ist komplett erledigt.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-01T08:14:05.003+02:00`.
-- Supertest: nicht ausgefuehrt, weil `JA-027` weiter offen ist.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-01T08:16:55.196+02:00`.
+- Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt er fuer diese Uebergabe als erledigt.
 
 ## Aktueller Fachstand
 
-JA-027 wurde mit Welle AF/B fortgesetzt. Welle AF hat 6 offiziell belegte Arbeitgeber verarbeitet, davon 5 neue produktive Firmen und 1 dedupliziertes Update:
+`JA-027` wurde zuletzt mit Welle AF/B fortgesetzt. Welle AF hat 6 offiziell belegte Arbeitgeber verarbeitet, davon 5 neue produktive Firmen und 1 dedupliziertes Update:
 
 - `NanoTemper Technologies GmbH`
 - `Mynaric AG`
@@ -38,7 +38,9 @@ Kennzahlen nach Welle AF:
 - Importwellen-Gate B: `passed`
 - Gate-Metriken: `manual_review_rate=0.0`, `duplicate_rate=0.1667`, `coverage_delta=5`
 
-## Geaenderte Dateien und Artefakte
+## Geaenderte Dateien und Artefakte aus dem letzten Slice
+
+Fachlicher Stand aus Welle AF:
 
 - `data/jobagent/company-discovery.official.wave-af-20260901.json`
 - `data/jobagent/store.json`
@@ -46,6 +48,9 @@ Kennzahlen nach Welle AF:
 - `html/jobagent/company-coverage.html`
 - `logs/jobagent/ja-023-source-coverage.json`
 - `Roadmap.md`
+
+Uebergabe-/STP-Sync:
+
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
@@ -63,6 +68,8 @@ Evidence aus Welle AF:
 - Viewport-Screenshots: `output/playwright/ja-022-viewport-800.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-1920.png`
 
 ## Verifikation
+
+Welle-AF-Funktionstests waren gruen:
 
 - `Get-Content -Raw data\jobagent\company-discovery.official.wave-af-20260901.json | ConvertFrom-Json -Depth 100` -> Exit `0`
 - `Invoke-WebRequest -Method Get` fuer alle `official_website_url`/`career_url`/`discovery_url` aus Welle AF -> Exit `0`
@@ -84,16 +91,22 @@ Evidence aus Welle AF:
 
 ## Naechste Aufgabe fuer neuen Agenten
 
-1. `JA-027` fortsetzen; `UI-001` nicht parallel bearbeiten, solange JA-027 der Hotspot bleibt.
+1. Aktiven Punkt `JA-027` fortsetzen; `UI-001` nicht parallel bearbeiten, solange JA-027 der Hotspot bleibt.
 2. In `data/jobagent/company-candidate-verification.queue.json` Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
 3. Kandidaten mit hohem `priority_score`, belastbarem Muenchen-/Freising-Bezug und niedrigem Identitaetsrisiko bevorzugen.
 4. Nur Kandidaten aufnehmen, deren `official_website_url` und `career_url` oder offiziell belegte ATS-Quelle per HTTP erreichbar sind.
-5. Naechste Feed-Datei im Stil `data/jobagent/company-discovery.official.wave-ag-YYYYMMDD.json` anlegen.
-6. Supertest erst bei Abschluss von `JA-027` oder expliziter Nutzeranweisung ausfuehren.
+5. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
+6. Naechste Feed-Datei im Stil `data/jobagent/company-discovery.official.wave-ag-YYYYMMDD.json` anlegen.
+7. Vor Import alle `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
+8. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <wave-feed> -WaveId B`.
+9. Danach Queue, Coverage und Source-Coverage aktualisieren.
+10. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`.
+11. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und offene Annahmen
 
 - `JA-027` ist noch nicht abschliessbar, weil noch `1257` Kandidaten in manueller Website-/Scope-Pruefung stehen.
+- `UI-001` ist fachlich offen, aber nicht der aktuelle Hotspot.
 - Viele verbleibende Kandidaten koennen wegen uneindeutiger Namen, fehlender Karrierepfade, dynamischer ATS-Portale oder Aggregator-Treffern nicht automatisch importiert werden; fail-closed beibehalten.
 
 
