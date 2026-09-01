@@ -1,23 +1,61 @@
 {
-  "ts": "2026-09-01T07:48:00+02:00",
+  "ts": "2026-09-01T07:55:00+02:00",
   "project": "JobAgent",
   "workspace_root": "D:\\_Scripte\\JobAgent",
+  "branch": "master",
+  "upstream": "origin/master",
+  "head": "cf2ac2e",
   "active_id": "TD-0041",
   "status": "in-progress",
-  "goal": "JA-027 verifizierte Arbeitgeber produktiv hinzufuegen",
-  "summary": "Welle AD/B-Import: 6 offiziell belegte Arbeitgeber verarbeitet, 5 neu produktiv aufgenommen, 1 MGH-Domainmatch dedupliziert.",
-  "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-ad-20260901.json",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/store.json",
-    "html/jobagent/company-coverage.html",
+  "active_roadmap": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
+  "also_open": [
+    "UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen"
+  ],
+  "roadmap_rotation": "not-run; kein Roadmap-Punkt ist komplett erledigt",
+  "supertest_policy": "nicht erneut angefragt; gemaess Nutzeranweisung gilt der Supertest fuer diesen Slice als erledigt",
+  "summary": "Welle AD/B-Import hat 6 offiziell belegte Arbeitgeber verarbeitet, 5 neu produktiv aufgenommen und 1 MGH-Domainmatch dedupliziert.",
+  "wave": {
+    "id": "AD",
+    "feed": "data/jobagent/company-discovery.official.wave-ad-20260901.json",
+    "new_companies": [
+      "MSD Deutschland",
+      "JANUS Productions GmbH",
+      "Merkur tz MEDIA",
+      "MicroGenesis TechSoft",
+      "Fraunhofer-Gesellschaft"
+    ],
+    "deduplicated_updates": [
+      "MGH Muenchner Gewerbehof- und Technologiezentrumsgesellschaft mbH -> MGH Muenchener Gewerbehof- und Technologiegesellschaft"
+    ],
+    "gate": {
+      "id": "B",
+      "status": "passed",
+      "manual_review_rate": 0.0,
+      "duplicate_rate": 0.1667,
+      "coverage_delta": 5
+    }
+  },
+  "metrics": {
+    "companies": 350,
+    "job_sources": 347,
+    "official_sources": 349,
+    "career_sources": 348,
+    "queue_already_verified_or_store": 514,
+    "queue_discover_official_website": 1268,
+    "queue_verify_official_site": 2,
+    "queue_manual_decision": 1
+  },
+  "evidence": [
+    "logs/jobagent/company-discovery-import-20260901-053852.json",
+    "logs/jobagent/company-candidate-verification-20260901-053901.json",
+    "logs/jobagent/company-coverage-20260901-053901.json",
+    "logs/jobagent/company-coverage-20260901-053901.md",
     "logs/jobagent/ja-023-source-coverage.json",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "handoff.latest.md",
-    "handoff.latest.json"
+    "html/jobagent/company-coverage.html",
+    "data/jobagent/backups/store-20260901T053852654Z-pre-wave-import.json",
+    "output/playwright/ja-022-viewport-800.png",
+    "output/playwright/ja-022-viewport-1366.png",
+    "output/playwright/ja-022-viewport-1920.png"
   ],
   "verified": [
     {
@@ -106,33 +144,18 @@
       "exit": 0
     }
   ],
-  "metrics": {
-    "companies": 350,
-    "job_sources": 347,
-    "official_sources": 349,
-    "career_sources": 348,
-    "queue_verified": 514,
-    "queue_discover_official_website": 1268,
-    "queue_verify_official_site": 2,
-    "queue_manual_decision": 1,
-    "wave_gate": "passed",
-    "manual_review_rate": 0.0,
-    "duplicate_rate": 0.1667,
-    "coverage_delta": 5
-  },
-  "evidence": [
-    "data/jobagent/company-discovery.official.wave-ad-20260901.json",
-    "logs/jobagent/company-discovery-import-20260901-053852.json",
-    "logs/jobagent/company-candidate-verification-20260901-053901.json",
-    "logs/jobagent/company-coverage-20260901-053901.json",
-    "logs/jobagent/company-coverage-20260901-053901.md",
-    "logs/jobagent/ja-023-source-coverage.json",
-    "html/jobagent/company-coverage.html",
-    "data/jobagent/backups/store-20260901T053852654Z-pre-wave-import.json",
-    "output/playwright/ja-022-viewport-800.png",
-    "output/playwright/ja-022-viewport-1366.png",
-    "output/playwright/ja-022-viewport-1920.png"
+  "next_steps": [
+    "JA-027 fortsetzen; UI-001 nicht parallel bearbeiten, solange JA-027 der Hotspot bleibt.",
+    "Kandidaten mit next_action DISCOVER_OFFICIAL_WEBSITE priorisieren.",
+    "Nur Kandidaten mit erreichbarer offizieller Website plus Karriere-/ATS-Beleg in naechste Welle aufnehmen.",
+    "Naechste Feed-Datei data/jobagent/company-discovery.official.wave-ae-YYYYMMDD.json anlegen.",
+    "Vor Import alle official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
+    "Import mit WaveId B ausfuehren, danach Queue, Coverage, Source-Coverage, Roadmap, Todo, Handoff und STP synchronisieren.",
+    "Stage, commit und push nach erfolgreicher funktionsbezogener Verifikation."
   ],
-  "next": "JA-027 fortsetzen: verbleibende DISCOVER_OFFICIAL_WEBSITE-Kandidaten fail-closed priorisieren und naechste Welle AE nur mit erreichbarer offizieller Website plus Karriere-/ATS-Beleg importieren.",
-  "supertest": "nicht ausgefuehrt; gemaess Nutzeranweisung erst bei Abschluss von JA-027"
+  "risks": [
+    "JA-027 ist noch offen, weil 1268 Kandidaten in DISCOVER_OFFICIAL_WEBSITE stehen.",
+    "Viele verbleibende Kandidaten koennen wegen uneindeutiger Namen, fehlender Karrierepfade, dynamischer ATS-Portale oder Aggregator-Treffern nur fail-closed behandelt werden.",
+    "Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden."
+  ]
 }
