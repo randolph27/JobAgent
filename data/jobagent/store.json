@@ -9868,6 +9868,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:nebumind_gmbh",
+      "canonical_name": "nebumind GmbH",
+      "canonical_domain": "nebumind.com",
+      "official_website_url": "https://www.nebumind.com/",
+      "career_url": "https://www.nebumind.com/career/?lang=en",
+      "aliases": [
+        "nebumind"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Manufacturing Analytics Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-03T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.nebumind.com/career/?lang=en",
+        "observed_at": "2026-09-02T16:40:09.87Z",
+        "verification_url": "https://www.nebumind.com/career/?lang=en",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Manufacturing Analytics Software",
+        "evidence_note": "Der nebumind-Kandidat wurde ueber die offizielle nebumind-Domain und die dort erreichbare Career-Seite belegt; diese verweist offiziell auf JOIN als Bewerbungsplattform."
+      },
+      "created_at": "2026-09-02T16:40:09.87Z",
+      "updated_at": "2026-09-02T16:40:09.87Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:nanotemper_technologies_gmbh",
       "canonical_name": "NanoTemper Technologies GmbH",
       "canonical_domain": "nanotempertech.com",
@@ -10605,6 +10643,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:brainamics_gmbh",
+      "canonical_name": "Brainamics GmbH",
+      "canonical_domain": "brainamics.de",
+      "official_website_url": "https://brainamics.de/",
+      "career_url": "https://brainamics.de/vacancy_page",
+      "aliases": [
+        "Brainamics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Martinsried",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Neurotechnology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-03T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://brainamics.de/vacancy_page",
+        "observed_at": "2026-09-02T16:40:09.87Z",
+        "verification_url": "https://brainamics.de/vacancy_page",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Neurotechnology",
+        "evidence_note": "Der Brainamics-Kandidat wurde ueber die offizielle Brainamics-Domain und die dort erreichbare Vacancy-Seite belegt."
+      },
+      "created_at": "2026-09-02T16:40:09.87Z",
+      "updated_at": "2026-09-02T16:40:09.87Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:adnymics_parceldealz",
       "canonical_name": "adnymics / ParcelDealz",
       "canonical_domain": "adnymics.com",
@@ -10757,6 +10833,44 @@
       },
       "created_at": "2026-09-01T05:52:39.825Z",
       "updated_at": "2026-09-01T05:52:39.825Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:nelhiebel_elektrotechnik_gmbh",
+      "canonical_name": "Nelhiebel Elektrotechnik GmbH",
+      "canonical_domain": "nelhiebel.de",
+      "official_website_url": "https://www.nelhiebel.de/",
+      "career_url": "https://www.nelhiebel.de/karriere/",
+      "aliases": [
+        "Nelhiebel Elektrotechnik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Elektrotechnik",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-03T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.nelhiebel.de/karriere/",
+        "observed_at": "2026-09-02T16:40:09.87Z",
+        "verification_url": "https://www.nelhiebel.de/karriere/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Elektrotechnik",
+        "evidence_note": "Der Nelhiebel-Kandidat wurde ueber die offizielle Nelhiebel-Domain und die dort erreichbare Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-02T16:40:09.87Z",
+      "updated_at": "2026-09-02T16:40:09.87Z",
       "last_successful_scan_at": null
     },
     {
@@ -11226,6 +11340,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:nuclino_gmbh",
+      "canonical_name": "Nuclino GmbH",
+      "canonical_domain": "nuclino.com",
+      "official_website_url": "https://www.nuclino.com/",
+      "career_url": "https://www.nuclino.com/jobs",
+      "aliases": [
+        "Nuclino"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Collaboration Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-03T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.nuclino.com/jobs",
+        "observed_at": "2026-09-02T16:40:09.87Z",
+        "verification_url": "https://www.nuclino.com/jobs",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Collaboration Software",
+        "evidence_note": "Der Nuclino-Kandidat wurde ueber die offizielle Nuclino-Domain und die dort erreichbare Jobs-Seite belegt."
+      },
+      "created_at": "2026-09-02T16:40:09.87Z",
+      "updated_at": "2026-09-02T16:40:09.87Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:microgenesis_techsoft",
       "canonical_name": "MicroGenesis TechSoft",
       "canonical_domain": "mgtechsoft.com",
@@ -11691,6 +11843,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:ocell_gmbh",
+      "canonical_name": "OCELL GmbH",
+      "canonical_domain": "ocell.io",
+      "official_website_url": "https://www.ocell.io/",
+      "career_url": "https://www.ocell.io/de-de/career",
+      "aliases": [
+        "Ocell"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Climate-Tech / Forestry Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-03T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ocell.io/de-de/career",
+        "observed_at": "2026-09-02T16:40:09.87Z",
+        "verification_url": "https://www.ocell.io/de-de/career",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Climate-Tech / Forestry Software",
+        "evidence_note": "Der OCELL-Kandidat wurde ueber die offizielle OCELL-Domain und die dort erreichbare Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-02T16:40:09.87Z",
+      "updated_at": "2026-09-02T16:40:09.87Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:mvtec_software_gmbh",
       "canonical_name": "MVTec Software GmbH",
       "canonical_domain": "mvtec.com",
@@ -11961,6 +12151,44 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:top_legal_gmbh",
+      "canonical_name": "top.legal GmbH",
+      "canonical_domain": "top.legal",
+      "official_website_url": "https://www.top.legal/en",
+      "career_url": "https://careers.smartrecruiters.com/toplegal",
+      "aliases": [
+        "top.legal"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Legal Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-03T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.top.legal/en/company",
+        "observed_at": "2026-09-02T16:40:09.87Z",
+        "verification_url": "https://careers.smartrecruiters.com/toplegal",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Legal Technology",
+        "evidence_note": "Der top.legal-Kandidat wurde ueber die offizielle top.legal-Domain belegt; die Company-Seite verlinkt offiziell auf SmartRecruiters als Karriereplattform."
+      },
+      "created_at": "2026-09-02T16:40:09.87Z",
+      "updated_at": "2026-09-02T16:40:09.87Z",
       "last_successful_scan_at": null
     },
     {
@@ -12469,6 +12697,44 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:travian_games_gmbh",
+      "canonical_name": "Travian Games GmbH",
+      "canonical_domain": "traviangames.com",
+      "official_website_url": "https://www.traviangames.com/",
+      "career_url": "https://www.traviangames.com/en/career",
+      "aliases": [
+        "Travian Games"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-03T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.traviangames.com/en/career",
+        "observed_at": "2026-09-02T16:40:09.87Z",
+        "verification_url": "https://www.traviangames.com/en/career",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Games",
+        "evidence_note": "Der Travian-Games-Kandidat wurde ueber die offizielle Travian-Games-Domain und die dort verlinkte Career-Seite belegt."
+      },
+      "created_at": "2026-09-02T16:40:09.87Z",
+      "updated_at": "2026-09-02T16:40:09.87Z",
       "last_successful_scan_at": null
     },
     {
@@ -16265,6 +16531,27 @@
           "basis_url": "https://www.bragi.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:36:07.133Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:brainamics_gmbh_career",
+      "company_id": "company:brainamics_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://brainamics.de/vacancy_page",
+      "canonical_url": "https://brainamics.de/vacancy_page",
+      "is_official": true,
+      "verified_at": "2026-09-02T16:40:09.87Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://brainamics.de/vacancy_page",
+          "basis_url": "https://brainamics.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-02T16:40:09.87Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -20589,6 +20876,48 @@
       ]
     },
     {
+      "source_id": "source:nebumind_gmbh_career",
+      "company_id": "company:nebumind_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.nebumind.com/career/?lang=en",
+      "canonical_url": "https://www.nebumind.com/career/?lang=en",
+      "is_official": true,
+      "verified_at": "2026-09-02T16:40:09.87Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.nebumind.com/career/?lang=en",
+          "basis_url": "https://www.nebumind.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-02T16:40:09.87Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:nelhiebel_elektrotechnik_gmbh_career",
+      "company_id": "company:nelhiebel_elektrotechnik_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.nelhiebel.de/karriere/",
+      "canonical_url": "https://www.nelhiebel.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-02T16:40:09.87Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.nelhiebel.de/karriere/",
+          "basis_url": "https://www.nelhiebel.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-02T16:40:09.87Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:nemetschek_se_career",
       "company_id": "company:nemetschek_se",
       "source_type": "CAREER_PAGE",
@@ -20652,6 +20981,27 @@
       ]
     },
     {
+      "source_id": "source:nuclino_gmbh_career",
+      "company_id": "company:nuclino_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.nuclino.com/jobs",
+      "canonical_url": "https://www.nuclino.com/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-02T16:40:09.87Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.nuclino.com/jobs",
+          "basis_url": "https://www.nuclino.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-02T16:40:09.87Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:nvidia_gmbh_career",
       "company_id": "company:nvidia_gmbh",
       "source_type": "CAREER_PAGE",
@@ -20668,6 +21018,27 @@
           "basis_url": "https://www.nvidia.com/en-us/about-nvidia/careers/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T11:01:43.474Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:ocell_gmbh_career",
+      "company_id": "company:ocell_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ocell.io/de-de/career",
+      "canonical_url": "https://www.ocell.io/de-de/career",
+      "is_official": true,
+      "verified_at": "2026-09-02T16:40:09.87Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ocell.io/de-de/career",
+          "basis_url": "https://www.ocell.io/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-02T16:40:09.87Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22151,6 +22522,27 @@
       ]
     },
     {
+      "source_id": "source:top_legal_gmbh_career",
+      "company_id": "company:top_legal_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.smartrecruiters.com/toplegal",
+      "canonical_url": "https://careers.smartrecruiters.com/toplegal",
+      "is_official": true,
+      "verified_at": "2026-09-02T16:40:09.87Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.smartrecruiters.com/toplegal",
+          "basis_url": "https://www.top.legal/en",
+          "redirect_chain": [],
+          "observed_at": "2026-09-02T16:40:09.87Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:traton_se_career",
       "company_id": "company:traton_se",
       "source_type": "CAREER_PAGE",
@@ -22168,6 +22560,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:travian_games_gmbh_career",
+      "company_id": "company:travian_games_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.traviangames.com/en/career",
+      "canonical_url": "https://www.traviangames.com/en/career",
+      "is_official": true,
+      "verified_at": "2026-09-02T16:40:09.87Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.traviangames.com/en/career",
+          "basis_url": "https://www.traviangames.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-02T16:40:09.87Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:tuev_sued_ag_career",

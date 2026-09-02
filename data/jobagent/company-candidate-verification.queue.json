@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-09-01T06:10:25.348Z",
+  "generated_at": "2026-09-02T16:42:08.266Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 527,
-    "DISCOVER_OFFICIAL_WEBSITE": 1255,
+    "ALREADY_VERIFIED_IN_STORE": 537,
+    "DISCOVER_OFFICIAL_WEBSITE": 1245,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -6081,6 +6081,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_brainamics_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_brainamics_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:brainamics_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_brainamics_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "Brainamics",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:29:24.935Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "cbc93d0af420aa8dcf14deec3a5b06be64dc06b91abedacedbf2fc0935376c25",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:brainamics"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -15246,6 +15290,94 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_nebumind_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_nebumind_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:nebumind_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_nebumind_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "nebumind",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:55:55.449Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "8d9eddc808fe724b417165763483811355110a028f65c97d562aeba796f5e2b3",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:nebumind"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_nelhiebel_elektrotechnik_muenchen_west",
+      "candidate_id": "regional-hint:munich_business_commercial_locations_nelhiebel_elektrotechnik_muenchen_west",
+      "company_id": "company:nelhiebel_elektrotechnik_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_commercial_locations_nelhiebel_elektrotechnik_muenchen_west"
+      ],
+      "canonical_name": "Nelhiebel Elektrotechnik",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:55:55.449Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_commercial_locations",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
+        "observed_at": "08/26/2026 14:00:00",
+        "record_hash": "03f09b0e3a574e10b1f2cf6954ec784af9f1906fd86204e53fb93810664e32f7",
+        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:nelhiebel elektrotechnik"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_nemetschek_se_muenchen_ost",
       "candidate_id": "regional-hint:munich_business_commercial_locations_nemetschek_se_muenchen_ost",
       "company_id": "company:nemetschek_se",
@@ -15469,6 +15601,142 @@
         "dedupe_keys": [
           "domain:de.nttdata.com",
           "name:ntt data deutschland"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_startup_platform_ecosystem_nuclino_gmbh_munich_startup_ecosystem",
+      "candidate_id": "regional-hint:munich_startup_platform_ecosystem_nuclino_gmbh_munich_startup_ecosystem",
+      "company_id": "company:nuclino_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_startup_platform_ecosystem_nuclino_gmbh_munich_startup_ecosystem"
+      ],
+      "canonical_name": "Nuclino GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:55:55.449Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_startup_platform_ecosystem",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://www.munich-startup.de/en/startups-and-ecosystem",
+        "observed_at": "08/26/2026 19:30:00",
+        "record_hash": "819aec0a1c208642e75422b20067bd95e33b834c71b9585f870eba508e6f18cf",
+        "allowed_use": "Oeffentlich gelistete Startups und Scaleups aus dem Munich-Startup-Oekosystem als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot einzelner Profilseiten; kein Login, kein Scraping hinter Schutzmechanismen, keine Nutzung der Insights-Login-Daten."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:nuclino"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_geospatial_companies_github_ocell_awesome_geospatial_companies_github_list_munich_area_entries",
+      "candidate_id": "regional-hint:awesome_geospatial_companies_github_ocell_awesome_geospatial_companies_github_list_munich_area_entries",
+      "company_id": "company:ocell_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_geospatial_companies_github_ocell_awesome_geospatial_companies_github_list_munich_area_entries"
+      ],
+      "canonical_name": "Ocell",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:55:55.449Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_geospatial_companies_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/chrieke/awesome-geospatial-companies",
+        "observed_at": "08/27/2026 12:00:00",
+        "record_hash": "55ada9f25885bd6fff8118c5ace68cdb99cab30a61ddf5ff252bfbbb0bddcefc",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Geo-, GIS-, Earth-Observation- und Climate-Tech-Arbeitgeberhinweise mit Muenchen- oder 20-km-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit, keine Google-Map- oder Spreadsheet-Automation und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:ocell"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_ocell_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_ocell_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:ocell_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_ocell_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "OCELL",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:55:55.449Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "9180c0ac18bc8f0d415a6cc9ed3a59dc05f44f9a9f536d95d7d81278e92048c1",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:ocell"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -18719,6 +18987,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_top_legal_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_top_legal_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:top_legal_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_top_legal_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "top.legal",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:18:54.711Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "b4328da97658ad91a7bc92f1d62ef907cbf83bf09a610c2a5f4c1e1847d8a380",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:top legal"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_boersennotierte_unternehmen_traton_se_muenchen_und_region_stand_der_quellseite_april_2026",
       "candidate_id": "regional-hint:stadt_muenchen_boersennotierte_unternehmen_traton_se_muenchen_und_region_stand_der_quellseite_april_2026",
       "company_id": "company:traton_se",
@@ -18759,6 +19071,98 @@
           "name:traton"
         ],
         "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_travian_games_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_travian_games_muenchen",
+      "company_id": "company:travian_games_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_travian_games_muenchen"
+      ],
+      "canonical_name": "Travian Games",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:18:54.711Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "154565e229123753a28349e809686ea85588fa5e6f8dbd350d5e8793bca8834d",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:travian games"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_travian_games_muenchen_tech_unternehmen",
+      "candidate_id": "regional-hint:tech_companies_munich_github_travian_games_muenchen_tech_unternehmen",
+      "company_id": "company:travian_games_gmbh",
+      "candidate_ids": [
+        "regional-hint:tech_companies_munich_github_travian_games_muenchen_tech_unternehmen"
+      ],
+      "canonical_name": "Travian Games",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:18:54.711Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:tech_companies_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
+        "observed_at": "08/26/2026 17:00:00",
+        "record_hash": "feeac3420c9403ac0f56682a7b543e5cef9ddc7e671227bc611c38fabbe18f1d",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:travian games"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 1
       }
     },
@@ -19917,50 +20321,6 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_brainamics_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_brainamics_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_brainamics_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "Brainamics",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:29:24.935Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "cbc93d0af420aa8dcf14deec3a5b06be64dc06b91abedacedbf2fc0935376c25",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:brainamics"
-        ],
-        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -22747,94 +23107,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_nebumind_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_nebumind_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_nebumind_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "nebumind",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:55:55.449Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "8d9eddc808fe724b417165763483811355110a028f65c97d562aeba796f5e2b3",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:nebumind"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_nelhiebel_elektrotechnik_muenchen_west",
-      "candidate_id": "regional-hint:munich_business_commercial_locations_nelhiebel_elektrotechnik_muenchen_west",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_commercial_locations_nelhiebel_elektrotechnik_muenchen_west"
-      ],
-      "canonical_name": "Nelhiebel Elektrotechnik",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:55:55.449Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_commercial_locations",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/gewerbeflaechen-immobilien/gewerbe-und-bueroflaechen-muenchen-west.html",
-        "observed_at": "08/26/2026 14:00:00",
-        "record_hash": "03f09b0e3a574e10b1f2cf6954ec784af9f1906fd86204e53fb93810664e32f7",
-        "allowed_use": "Oeffentlich genannte Unternehmen aus den Muenchner Gewerbeflaechen- und Standortseiten als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Standortseiten Nord, Ost, West, Sued und Mitte; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:nelhiebel elektrotechnik"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_neovii_biotech_gmbh_muenchen_und_region",
       "candidate_id": "regional-hint:munich_business_life_sciences_companies_neovii_biotech_gmbh_muenchen_und_region",
       "company_id": null,
@@ -23011,50 +23283,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_startup_platform_ecosystem_nuclino_gmbh_munich_startup_ecosystem",
-      "candidate_id": "regional-hint:munich_startup_platform_ecosystem_nuclino_gmbh_munich_startup_ecosystem",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_startup_platform_ecosystem_nuclino_gmbh_munich_startup_ecosystem"
-      ],
-      "canonical_name": "Nuclino GmbH",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:55:55.449Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_startup_platform_ecosystem",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.munich-startup.de/en/startups-and-ecosystem",
-        "observed_at": "08/26/2026 19:30:00",
-        "record_hash": "819aec0a1c208642e75422b20067bd95e33b834c71b9585f870eba508e6f18cf",
-        "allowed_use": "Oeffentlich gelistete Startups und Scaleups aus dem Munich-Startup-Oekosystem als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot einzelner Profilseiten; kein Login, kein Scraping hinter Schutzmechanismen, keine Nutzung der Insights-Login-Daten."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:nuclino"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_numi_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_numi_awesome_machine_learning_startups_munich_github_list",
       "company_id": null,
@@ -23095,98 +23323,6 @@
           "name:numi"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_geospatial_companies_github_ocell_awesome_geospatial_companies_github_list_munich_area_entries",
-      "candidate_id": "regional-hint:awesome_geospatial_companies_github_ocell_awesome_geospatial_companies_github_list_munich_area_entries",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_geospatial_companies_github_ocell_awesome_geospatial_companies_github_list_munich_area_entries"
-      ],
-      "canonical_name": "Ocell",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:55:55.449Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_geospatial_companies_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/chrieke/awesome-geospatial-companies",
-        "observed_at": "08/27/2026 12:00:00",
-        "record_hash": "55ada9f25885bd6fff8118c5ace68cdb99cab30a61ddf5ff252bfbbb0bddcefc",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Geo-, GIS-, Earth-Observation- und Climate-Tech-Arbeitgeberhinweise mit Muenchen- oder 20-km-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit, keine Google-Map- oder Spreadsheet-Automation und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:ocell"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_ocell_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_ocell_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_ocell_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "OCELL",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:55:55.449Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "9180c0ac18bc8f0d415a6cc9ed3a59dc05f44f9a9f536d95d7d81278e92048c1",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:ocell"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -26547,50 +26683,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_top_legal_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_top_legal_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_top_legal_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "top.legal",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:18:54.711Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "b4328da97658ad91a7bc92f1d62ef907cbf83bf09a610c2a5f4c1e1847d8a380",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:top legal"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_toponauten_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_toponauten_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -26719,98 +26811,6 @@
           "name:traindoo"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_travian_games_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_travian_games_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_travian_games_muenchen"
-      ],
-      "canonical_name": "Travian Games",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:18:54.711Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "154565e229123753a28349e809686ea85588fa5e6f8dbd350d5e8793bca8834d",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:travian games"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_travian_games_muenchen_tech_unternehmen",
-      "candidate_id": "regional-hint:tech_companies_munich_github_travian_games_muenchen_tech_unternehmen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:tech_companies_munich_github_travian_games_muenchen_tech_unternehmen"
-      ],
-      "canonical_name": "Travian Games",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:18:54.711Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:tech_companies_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/rmellojunior/tech_companies_munich",
-        "observed_at": "08/26/2026 17:00:00",
-        "record_hash": "feeac3420c9403ac0f56682a7b543e5cef9ddc7e671227bc611c38fabbe18f1d",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Muenchner Tech-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:travian games"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },
@@ -31912,6 +31912,52 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:tdk electronics"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_travian_games_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_travian_games_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:travian_games_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_travian_games_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Travian Games",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T11:40:17.412Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "6e4c68a85ba27a502a41eb6d3db9e75b4918a230ee6d023af10b40f737164aeb",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:travian games"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
@@ -74746,52 +74792,6 @@
           "name:transpedal fahrradkurier"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_travian_games_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_travian_games_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_travian_games_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Travian Games",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T11:40:17.412Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "6e4c68a85ba27a502a41eb6d3db9e75b4918a230ee6d023af10b40f737164aeb",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:travian games"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
         "cluster_candidate_count": 1
       }
     },

@@ -1,0 +1,168 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-02T08:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "nebumind GmbH",
+      "official_website_url": "https://www.nebumind.com/",
+      "career_url": "https://www.nebumind.com/career/?lang=en",
+      "aliases": [
+        "nebumind"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Manufacturing Analytics Software",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.nebumind.com/career/?lang=en",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der nebumind-Kandidat wurde ueber die offizielle nebumind-Domain und die dort erreichbare Career-Seite belegt; diese verweist offiziell auf JOIN als Bewerbungsplattform."
+    },
+    {
+      "canonical_name": "Brainamics GmbH",
+      "official_website_url": "https://brainamics.de/",
+      "career_url": "https://brainamics.de/vacancy_page",
+      "aliases": [
+        "Brainamics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Martinsried",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Neurotechnology",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://brainamics.de/vacancy_page",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Brainamics-Kandidat wurde ueber die offizielle Brainamics-Domain und die dort erreichbare Vacancy-Seite belegt."
+    },
+    {
+      "canonical_name": "Nelhiebel Elektrotechnik GmbH",
+      "official_website_url": "https://www.nelhiebel.de/",
+      "career_url": "https://www.nelhiebel.de/karriere/",
+      "aliases": [
+        "Nelhiebel Elektrotechnik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Elektrotechnik",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.nelhiebel.de/karriere/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Nelhiebel-Kandidat wurde ueber die offizielle Nelhiebel-Domain und die dort erreichbare Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Nuclino GmbH",
+      "official_website_url": "https://www.nuclino.com/",
+      "career_url": "https://www.nuclino.com/jobs",
+      "aliases": [
+        "Nuclino"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Collaboration Software",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.nuclino.com/jobs",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Nuclino-Kandidat wurde ueber die offizielle Nuclino-Domain und die dort erreichbare Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "OCELL GmbH",
+      "official_website_url": "https://www.ocell.io/",
+      "career_url": "https://www.ocell.io/de-de/career",
+      "aliases": [
+        "Ocell",
+        "OCELL"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Climate-Tech / Forestry Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ocell.io/de-de/career",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der OCELL-Kandidat wurde ueber die offizielle OCELL-Domain und die dort erreichbare Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "top.legal GmbH",
+      "official_website_url": "https://www.top.legal/en",
+      "career_url": "https://careers.smartrecruiters.com/toplegal",
+      "aliases": [
+        "top.legal"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Legal Technology",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.top.legal/en/company",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der top.legal-Kandidat wurde ueber die offizielle top.legal-Domain belegt; die Company-Seite verlinkt offiziell auf SmartRecruiters als Karriereplattform."
+    },
+    {
+      "canonical_name": "Travian Games GmbH",
+      "official_website_url": "https://www.traviangames.com/",
+      "career_url": "https://www.traviangames.com/en/career",
+      "aliases": [
+        "Travian Games"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Games",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.traviangames.com/en/career",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Travian-Games-Kandidat wurde ueber die offizielle Travian-Games-Domain und die dort verlinkte Career-Seite belegt."
+    }
+  ]
+}
