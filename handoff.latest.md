@@ -8,7 +8,7 @@ Stand: 2026-09-02T18:46:20.531+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit: `476a4a8c3f27`
+- Letzter fachlicher Commit: `e7a2610 Add verified company import wave AG`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
