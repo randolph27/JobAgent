@@ -1,0 +1,131 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-03T12:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Radio Gong 2000 GmbH & Co. KG",
+      "official_website_url": "https://www.radiogong.de/",
+      "career_url": "https://www.radiogong.de/unternehmen/jobs",
+      "aliases": [
+        "Radio Gong",
+        "Radio Gong 96.3",
+        "Gong 96.3"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "scan_priority": 36,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.radiogong.de/unternehmen/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Radio-Gong-Kandidat wurde ueber die offizielle radiogong.de-Domain mit Muenchner Senderbezug und die dort erreichbare Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Radio 93,3 MHz Muenchen GmbH",
+      "official_website_url": "https://www.energy.de/",
+      "career_url": "https://www.energy.de/jobs",
+      "aliases": [
+        "Radio Energy",
+        "ENERGY Muenchen",
+        "Radio NRJ Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.energy.de/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Radio-Energy-Kandidat wurde ueber die offizielle energy.de-Domain, deren Impressum mit ENERGY Muenchen/Radio 93,3 MHz Muenchen GmbH und die dort erreichbare Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Provinzial Versicherung AG",
+      "official_website_url": "https://www.provinzial.de/",
+      "career_url": "https://karriere-provinzial.de/stellenmarkt/",
+      "aliases": [
+        "Provinzial",
+        "Provinzial Konzern",
+        "Provinzial Versicherung"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Konzernrolle",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://karriere-provinzial.de/stellenmarkt/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der Provinzial-Kandidat wurde ueber die offizielle provinzial.de-Domain mit Konzern-/Karriere-Verweis und den offiziellen Provinzial-Stellenmarkt belegt; der Muenchen-Bezug stammt aus der regionalen Finanzwirtschaftsquelle."
+    },
+    {
+      "canonical_name": "RNA Digital Solutions GmbH",
+      "official_website_url": "https://www.rnadigital.de/en/start.html",
+      "career_url": "https://www.rnadigital.de/en/jobs-careers.html",
+      "aliases": [
+        "RNA Digital Solutions",
+        "RNA Digital",
+        "Design for Feeding"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI and Industrial Automation",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.rnadigital.de/en/jobs-careers.html",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der RNA-Digital-Solutions-Kandidat wurde ueber die offizielle rnadigital.de-Domain und die dort erreichbare Jobs-&-Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen ML-Startup-Quelle."
+    },
+    {
+      "canonical_name": "Sphera Germany GmbH",
+      "official_website_url": "https://sphera.com/",
+      "career_url": "https://sphera.com/company/join-our-team/",
+      "aliases": [
+        "riskmethods - Sphera",
+        "riskmethods",
+        "Sphera"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Risk and Sustainability Software",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://sphera.com/company/join-our-team/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der riskmethods/Sphera-Kandidat wurde ueber die offizielle Sphera-Domain, die offizielle Sphera-Akquisitionsmeldung zu riskmethods in Muenchen und die Sphera-Careers-Seite belegt."
+    }
+  ]
+}

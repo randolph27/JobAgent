@@ -1,19 +1,28 @@
 {
-  "ts": "2026-09-03T11:55:30+02:00",
-  "agent_id": "UTTER-20260817-39f7",
-  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "ts": "2026-09-03T12:50:00.000+02:00",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
-  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "summary": "Welle AI/B importierte 7 neue offiziell belegte Arbeitgeber und 1 dedupliziertes Update; JA-027 bleibt offen.",
+  "summary": "Welle AJ/B importierte 5 offiziell belegte Arbeitgeber; JA-027 bleibt offen.",
+  "metrics": {
+    "companies_total": 385,
+    "job_sources": 381,
+    "official_sources": 383,
+    "career_sources": 382,
+    "ats_sources": 1,
+    "queue_verified_or_store": 557,
+    "queue_manual_review": 1227,
+    "wave_gate": "passed",
+    "manual_review_rate": 0.0,
+    "duplicate_rate": 0.0,
+    "coverage_delta": 5
+  },
   "changed": [
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-ai-20260903.json",
+    "data/jobagent/company-discovery.official.wave-aj-20260903.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
     "html/jobagent/company-coverage.html",
-    "logs/jobagent/ja-023-source-coverage.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
@@ -22,15 +31,15 @@
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ai-20260903.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-aj-20260903.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AI",
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AJ",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ai-20260903.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-aj-20260903.json -WaveId B",
       "exit": 0
     },
     {
@@ -98,44 +107,126 @@
       "exit": 0
     }
   ],
-  "supertest": {
-    "status": "accepted_by_user_instruction",
-    "reason": "Der Nutzer hat festgelegt: Wenn Supertest nicht angefragt wurde, gilt er als erledigt. Kein neuer Supertest-Lauf in diesem Slice, weil JA-027 weiter offen ist."
-  },
-  "metrics": {
-    "companies_total": 380,
-    "job_sources_total": 376,
-    "official_sources": 378,
-    "career_sources": 377,
-    "ats_sources": 1,
-    "candidate_verified_or_store": 550,
-    "candidate_manual_review": 1234,
-    "wave_gate_status": "passed",
-    "manual_review_rate": 0.0,
-    "duplicate_rate": 0.125,
-    "coverage_delta": 7
-  },
-  "git": {
-    "branch": "master",
-    "head_before_commit": "a924be493a0b",
-    "upstream": "origin/master",
-    "ahead": 0,
-    "behind": 0,
-    "worktree": "clean-after-final-push-pending-handoff-commit",
-    "head_after_commit": "abb2ce2"
-  },
-  "route_ok": true,
-  "route_violations": [],
-  "next": "JA-027 mit Welle AJ fortsetzen: DISCOVER_OFFICIAL_WEBSITE-Kandidaten fail-closed auf offizielle Website und Karriere-/ATS-Beleg pruefen.",
-  "refs": [
-    "todo.current.md",
-    "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.json",
-    "Roadmap.md"
-  ],
-  "manual_missing": false,
-  "env_inventory_missing": false,
-  "env_inventory_used": false,
-  "env_inventory_path": null
+  "next": "Naechste verifizierte Firmenwelle als wave-ak vorbereiten, importieren und funktionsbezogen testen.",
+  "capsule": {
+    "ts": "2026-09-03T12:50:00.000+02:00",
+    "agent_id": "UTTER-20260817-39f7",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "TD-0041",
+    "status": "in-progress",
+    "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen fortsetzen.",
+    "changed": [
+      "Roadmap.md",
+      "data/jobagent/company-discovery.official.wave-aj-20260903.json",
+      "data/jobagent/company-candidate-verification.queue.json",
+      "data/jobagent/store.json",
+      "html/jobagent/company-coverage.html",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "handoff.latest.md",
+      "handoff.latest.json"
+    ],
+    "verified": [
+      {
+        "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-aj-20260903.json | ConvertFrom-Json -Depth 100",
+        "exit": 0
+      },
+      {
+        "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AJ",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-aj-20260903.json -WaveId B",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
+        "exit": 1
+      },
+      {
+        "cmd": ".\\ci.cmd devserver-status",
+        "exit": 0
+      },
+      {
+        "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+        "exit": 0
+      },
+      {
+        "cmd": ".\\ci.cmd stp",
+        "exit": 0
+      }
+    ],
+    "route_ok": true,
+    "route_violations": [],
+    "git": {
+      "branch": "master",
+      "head": "3e0ca589548c",
+      "upstream": "origin/master",
+      "ahead": 0,
+      "behind": 0,
+      "worktree": "dirty"
+    },
+    "next": "Naechste verifizierte Firmenwelle als wave-ak vorbereiten, importieren und funktionsbezogen testen.",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json",
+      "handoff.latest.md"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  }
 }

@@ -9752,6 +9752,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:radio_gong_2000_gmbh_and_co_kg",
+      "canonical_name": "Radio Gong 2000 GmbH & Co. KG",
+      "canonical_domain": "radiogong.de",
+      "official_website_url": "https://www.radiogong.de/",
+      "career_url": "https://www.radiogong.de/unternehmen/jobs",
+      "aliases": [
+        "Gong 96.3",
+        "Radio Gong",
+        "Radio Gong 96.3"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 36,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.radiogong.de/unternehmen/jobs",
+        "observed_at": "2026-09-03T10:38:45.617Z",
+        "verification_url": "https://www.radiogong.de/unternehmen/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media and Broadcasting",
+        "evidence_note": "Der Radio-Gong-Kandidat wurde ueber die offizielle radiogong.de-Domain mit Muenchner Senderbezug und die dort erreichbare Jobs-Seite belegt."
+      },
+      "created_at": "2026-09-03T10:38:45.617Z",
+      "updated_at": "2026-09-03T10:38:45.617Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:jambit_gmbh",
       "canonical_name": "jambit GmbH",
       "canonical_domain": "jambit.com",
@@ -9943,6 +9983,46 @@
       },
       "created_at": "2026-09-03T09:44:45.466Z",
       "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:radio_93_3_mhz_muenchen_gmbh",
+      "canonical_name": "Radio 93,3 MHz Muenchen GmbH",
+      "canonical_domain": "energy.de",
+      "official_website_url": "https://www.energy.de/",
+      "career_url": "https://www.energy.de/jobs",
+      "aliases": [
+        "ENERGY Muenchen",
+        "Radio Energy",
+        "Radio NRJ Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.energy.de/jobs",
+        "observed_at": "2026-09-03T10:38:45.617Z",
+        "verification_url": "https://www.energy.de/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media and Broadcasting",
+        "evidence_note": "Der Radio-Energy-Kandidat wurde ueber die offizielle energy.de-Domain, deren Impressum mit ENERGY Muenchen/Radio 93,3 MHz Muenchen GmbH und die dort erreichbare Jobs-Seite belegt."
+      },
+      "created_at": "2026-09-03T10:38:45.617Z",
+      "updated_at": "2026-09-03T10:38:45.617Z",
       "last_successful_scan_at": null
     },
     {
@@ -10485,6 +10565,46 @@
       },
       "created_at": "2026-09-03T09:44:45.466Z",
       "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:provinzial_versicherung_ag",
+      "canonical_name": "Provinzial Versicherung AG",
+      "canonical_domain": "provinzial.de",
+      "official_website_url": "https://www.provinzial.de/",
+      "career_url": "https://karriere-provinzial.de/stellenmarkt/",
+      "aliases": [
+        "Provinzial",
+        "Provinzial Konzern",
+        "Provinzial Versicherung"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen / Konzernrolle",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://karriere-provinzial.de/stellenmarkt/",
+        "observed_at": "2026-09-03T10:38:45.617Z",
+        "verification_url": "https://karriere-provinzial.de/stellenmarkt/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Insurance",
+        "evidence_note": "Der Provinzial-Kandidat wurde ueber die offizielle provinzial.de-Domain mit Konzern-/Karriere-Verweis und den offiziellen Provinzial-Stellenmarkt belegt; der Muenchen-Bezug stammt aus der regionalen Finanzwirtschaftsquelle."
+      },
+      "created_at": "2026-09-03T10:38:45.617Z",
+      "updated_at": "2026-09-03T10:38:45.617Z",
       "last_successful_scan_at": null
     },
     {
@@ -11069,6 +11189,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:rna_digital_solutions_gmbh",
+      "canonical_name": "RNA Digital Solutions GmbH",
+      "canonical_domain": "rnadigital.de",
+      "official_website_url": "https://www.rnadigital.de/en/start.html",
+      "career_url": "https://www.rnadigital.de/en/jobs-careers.html",
+      "aliases": [
+        "Design for Feeding",
+        "RNA Digital",
+        "RNA Digital Solutions"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI and Industrial Automation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.rnadigital.de/en/jobs-careers.html",
+        "observed_at": "2026-09-03T10:38:45.617Z",
+        "verification_url": "https://www.rnadigital.de/en/jobs-careers.html",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI and Industrial Automation",
+        "evidence_note": "Der RNA-Digital-Solutions-Kandidat wurde ueber die offizielle rnadigital.de-Domain und die dort erreichbare Jobs-&-Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen ML-Startup-Quelle."
+      },
+      "created_at": "2026-09-03T10:38:45.617Z",
+      "updated_at": "2026-09-03T10:38:45.617Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:nelhiebel_elektrotechnik_gmbh",
       "canonical_name": "Nelhiebel Elektrotechnik GmbH",
       "canonical_domain": "nelhiebel.de",
@@ -11530,6 +11690,46 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:sphera_germany_gmbh",
+      "canonical_name": "Sphera Germany GmbH",
+      "canonical_domain": "sphera.com",
+      "official_website_url": "https://sphera.com/",
+      "career_url": "https://sphera.com/company/join-our-team/",
+      "aliases": [
+        "riskmethods",
+        "riskmethods - Sphera",
+        "Sphera"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Risk and Sustainability Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://sphera.com/company/join-our-team/",
+        "observed_at": "2026-09-03T10:38:45.617Z",
+        "verification_url": "https://sphera.com/company/join-our-team/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Risk and Sustainability Software",
+        "evidence_note": "Der riskmethods/Sphera-Kandidat wurde ueber die offizielle Sphera-Domain, die offizielle Sphera-Akquisitionsmeldung zu riskmethods in Muenchen und die Sphera-Careers-Seite belegt."
+      },
+      "created_at": "2026-09-03T10:38:45.617Z",
+      "updated_at": "2026-09-03T10:38:45.617Z",
       "last_successful_scan_at": null
     },
     {
@@ -22111,6 +22311,27 @@
       }
     },
     {
+      "source_id": "source:provinzial_versicherung_ag_career",
+      "company_id": "company:provinzial_versicherung_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://karriere-provinzial.de/stellenmarkt/",
+      "canonical_url": "https://karriere-provinzial.de/stellenmarkt/",
+      "is_official": true,
+      "verified_at": "2026-09-03T10:38:45.617Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://karriere-provinzial.de/stellenmarkt/",
+          "basis_url": "https://www.provinzial.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T10:38:45.617Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:puren_pharma_gmbh_and_co_kg_career_url",
       "company_id": "company:puren_pharma_gmbh_and_co_kg",
       "source_type": "CAREER_PAGE",
@@ -22171,6 +22392,48 @@
           "basis_url": "https://www.qualcomm.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:radio_93_3_mhz_muenchen_gmbh_career",
+      "company_id": "company:radio_93_3_mhz_muenchen_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.energy.de/jobs",
+      "canonical_url": "https://www.energy.de/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-03T10:38:45.617Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.energy.de/jobs",
+          "basis_url": "https://www.energy.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T10:38:45.617Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:radio_gong_2000_gmbh_and_co_kg_career",
+      "company_id": "company:radio_gong_2000_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.radiogong.de/unternehmen/jobs",
+      "canonical_url": "https://www.radiogong.de/unternehmen/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-03T10:38:45.617Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.radiogong.de/unternehmen/jobs",
+          "basis_url": "https://www.radiogong.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T10:38:45.617Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22257,6 +22520,27 @@
           "basis_url": "https://www.retorio.com/",
           "redirect_chain": [],
           "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:rna_digital_solutions_gmbh_career",
+      "company_id": "company:rna_digital_solutions_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.rnadigital.de/en/jobs-careers.html",
+      "canonical_url": "https://www.rnadigital.de/en/jobs-careers.html",
+      "is_official": true,
+      "verified_at": "2026-09-03T10:38:45.617Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.rnadigital.de/en/jobs-careers.html",
+          "basis_url": "https://www.rnadigital.de/en/start.html",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T10:38:45.617Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22835,6 +23119,27 @@
           "basis_url": "https://www.speexx.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T11:47:08.268Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:sphera_germany_gmbh_career",
+      "company_id": "company:sphera_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://sphera.com/company/join-our-team/",
+      "canonical_url": "https://sphera.com/company/join-our-team/",
+      "is_official": true,
+      "verified_at": "2026-09-03T10:38:45.617Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://sphera.com/company/join-our-team/",
+          "basis_url": "https://sphera.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T10:38:45.617Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
