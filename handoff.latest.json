@@ -1,6 +1,6 @@
 {
   "capsule": {
-    "ts": "2026-09-03T16:22:00.000+02:00",
+    "ts": "2026-09-03T16:25:00.000+02:00",
     "agent_id": "codex",
     "workspace_root": "D:\\_Scripte\\JobAgent",
     "project": "JobAgent",
@@ -8,90 +8,13 @@
     "status": "in-progress",
     "goal": "JA-027: Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen.",
     "changed": [
-      "Roadmap.md",
-      "data/jobagent/company-discovery.official.wave-al-20260903.json",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/store.json",
-      "html/jobagent/company-coverage.html",
+      "handoff.latest.md",
+      "handoff.latest.json",
       "todo.events.jsonl",
       "todo.history.digest.json",
-      "todo.master.index.json",
-      "handoff.latest.md",
-      "handoff.latest.json"
+      "todo.master.index.json"
     ],
     "verified": [
-      {
-        "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-al-20260903.json | ConvertFrom-Json -Depth 100",
-        "exit": 0
-      },
-      {
-        "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AL",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-al-20260903.json -WaveId B",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
-        "exit": 0
-      },
-      {
-        "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
-        "exit": 1
-      },
-      {
-        "cmd": ".\\ci.cmd devserver-status",
-        "exit": 0
-      },
-      {
-        "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-        "exit": 0
-      },
       {
         "cmd": ".\\ci.cmd stp",
         "exit": 0
@@ -101,9 +24,9 @@
     "route_violations": [],
     "git": {
       "branch": "master",
-      "head_after_push": "22080ddc2f9a",
+      "head_before_handoff_commit": "6762a488ab1f",
       "upstream": "origin/master",
-      "ahead_behind_at_stp": "0/0"
+      "ahead_behind_before_handoff_commit": "0/0"
     },
     "next": "JA-027 mit Welle AM fortsetzen; Kandidaten mit DISCOVER_OFFICIAL_WEBSITE priorisieren.",
     "refs": [
@@ -191,11 +114,11 @@
       ".\\ci.cmd stp"
     ],
     "supertest_run": false,
-    "supertest_note": "Nicht neu ausgefuehrt; gemaess Nutzeranweisung erst bei expliziter Anforderung oder Abschluss von JA-027.",
+    "supertest_note": "Nicht neu ausgefuehrt; gemaess aktueller Nutzeranweisung gilt er als erledigt, wenn er nicht explizit angefragt wurde.",
     "stp": {
       "cmd": ".\\ci.cmd stp",
       "exit": 0,
-      "ts": "2026-09-03T16:17:43.017+02:00"
+      "ts": "2026-09-03T16:22:06.299+02:00"
     }
   },
   "next_steps": [
