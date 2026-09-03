@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-03T16:05:00.000+02:00
+Stand: 2026-09-03T16:08:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,18 +8,17 @@ Stand: 2026-09-03T16:05:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD nach letztem Fachcommit: `ccdf52b`
-- HEAD nach Handoff-Sync: `1e019a8`
+- HEAD beim letzten STP: `124fc5e`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
 - Roadmap-Rotation: nicht erfolgt. `JA-027` ist fachlich nicht komplett erledigt; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-03T15:58:21.929+02:00`.
-- Supertest: gemaess Nutzeranweisung nicht ausgefuehrt, weil `JA-027` insgesamt offen bleibt.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-03T16:02:53.405+02:00`.
+- Supertest: nicht neu ausgefuehrt; gemaess aktueller Nutzeranweisung gilt er als erledigt, wenn er nicht explizit angefragt wurde.
 
 ## Letzter abgeschlossener Fortschritt
 
-Commit `ccdf52b Import verified employers wave AK` und Handoff-Sync `1e019a8 Update handoff after wave AK` wurden auf `origin/master` gepusht. Welle AK/B hat 6 weitere offiziell belegte Arbeitgeber produktiv neu aufgenommen:
+Welle AK/B wurde abgeschlossen und gepusht. Produktiv neu aufgenommen wurden 6 offiziell belegte Arbeitgeber:
 
 - `Hild und K`
 - `Dermapharm AG`
@@ -27,6 +26,12 @@ Commit `ccdf52b Import verified employers wave AK` und Handoff-Sync `1e019a8 Upd
 - `Muenchner Philharmoniker`
 - `tacterion GmbH`
 - `trbo GmbH`
+
+Relevante Commits:
+
+- `ccdf52b Import verified employers wave AK`
+- `1e019a8 Update handoff after wave AK`
+- `124fc5e Update handoff push state`
 
 Kennzahlen nach Welle AK:
 
@@ -37,7 +42,9 @@ Kennzahlen nach Welle AK:
 - ATS-Quellen: `1`
 - Discovery Sources/Hints gesamt: `1820`
 - Kandidatenqueue: `563` bereits produktiv verifiziert oder im Store belegt
-- Kandidatenqueue: `1221` mit manueller Website-/Scope-Pruefung
+- Kandidatenqueue: `1219` mit `DISCOVER_OFFICIAL_WEBSITE`
+- Kandidatenqueue: `2` mit `VERIFY_OFFICIAL_SITE`
+- Kandidatenqueue: `1` mit `MANUAL_DECISION`
 - Importwellen-Gate B: `passed`
 - Gate-Metriken Welle AK: `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=6`
 
@@ -49,6 +56,8 @@ Kennzahlen nach Welle AK:
 - `html/jobagent/company-coverage.html`
 - `logs/jobagent/ja-023-source-coverage.json`
 - `Roadmap.md`
+- `todo.current.md`
+- `todo.state.json`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
@@ -95,8 +104,8 @@ Evidence:
 5. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
 6. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
 7. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
-8. Import, Queue, Coverage und Source-Coverage aktualisieren.
-9. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`.
+8. Import ausfuehren, danach Queue, Coverage und Source-Coverage aktualisieren.
+9. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`. Wenn kein Supertest angefragt wurde, gilt er gemaess Nutzeranweisung als erledigt.
 10. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und offene Annahmen
