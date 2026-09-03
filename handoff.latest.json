@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-03T11:55:30.000+02:00",
+  "ts": "2026-09-03T11:55:30+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -121,7 +121,8 @@
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,
-    "worktree": "dirty-before-final-commit"
+    "worktree": "clean-after-final-push-pending-handoff-commit",
+    "head_after_commit": "abb2ce2"
   },
   "route_ok": true,
   "route_violations": [],

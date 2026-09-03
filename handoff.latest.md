@@ -8,7 +8,7 @@ Stand: 2026-09-03T11:55:30.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit/Push: `a924be493a0b`
+- HEAD nach Commit/Push: `abb2ce2`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
@@ -112,3 +112,4 @@ Evidence:
 - `UI-001` ist fachlich offen, aber aktuell nicht der Hotspot.
 - Viele verbleibende Kandidaten sind vage OSM-/GitHub-/Regional-Hints oder koennen wegen uneindeutiger Namen, fehlender Karrierepfade, dynamischer ATS-Portale oder Aggregator-Treffern nicht automatisch importiert werden; fail-closed beibehalten.
 - Projektkonfiguration nutzt Devserver-Port `8500`; SonarQube laeuft auf `9000`.
+
