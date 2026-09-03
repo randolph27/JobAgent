@@ -101,7 +101,7 @@
     "route_violations": [],
     "git": {
       "branch": "master",
-      "head_at_stp": "8a6bfe14c0fe",
+      "head_after_push": "22080ddc2f9a",
       "upstream": "origin/master",
       "ahead_behind_at_stp": "0/0"
     },
@@ -130,6 +130,7 @@
   "latest_wave": {
     "id": "AL",
     "feed": "data/jobagent/company-discovery.official.wave-al-20260903.json",
+    "commit": "22080dd Import verified employers wave AL",
     "added_companies": [
       "Noventi Healthcare",
       "GE Aerospace Advanced Technology",

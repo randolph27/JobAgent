@@ -8,7 +8,7 @@ Stand: 2026-09-03T16:22:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD beim letzten STP: `8a6bfe14c0fe`
+- HEAD nach Push: `22080ddc2f9a`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
@@ -22,6 +22,7 @@ Welle AL/B wurde abgeschlossen. Verarbeitet wurden 6 offiziell belegte Arbeitgeb
 
 - Neu produktiv aufgenommen: `Noventi Healthcare`, `GE Aerospace Advanced Technology`, `Philip Morris GmbH`, `Sueddeutsche Zeitung`
 - Dedupliziert aktualisiert: `Muenchner Rueck AG` -> `Munich Re`, `Siemens Mobility` -> `Siemens AG`
+- Commit/Push: `22080dd Import verified employers wave AL`
 
 Kennzahlen nach Welle AL:
 
