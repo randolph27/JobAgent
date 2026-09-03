@@ -9831,6 +9831,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hild_und_k",
+      "canonical_name": "Hild und K",
+      "canonical_domain": "hildundk.de",
+      "official_website_url": "https://www.hildundk.de/",
+      "career_url": "https://www.hildundk.de/stellen/",
+      "aliases": [
+        "Hild und K Architekten",
+        "Hild und K Muenchen",
+        "Hild und Kaltwasser"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 36,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hildundk.de/stellen/",
+        "observed_at": "2026-09-03T13:52:36.955Z",
+        "verification_url": "https://www.hildundk.de/stellen/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture",
+        "evidence_note": "Der Hild-und-K-Kandidat wurde ueber die offizielle hildundk.de-Domain mit Muenchen-/Berlin-Buerobezug und die dort verlinkte Stellen-Seite belegt."
+      },
+      "created_at": "2026-09-03T13:52:36.955Z",
+      "updated_at": "2026-09-03T13:52:36.955Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hdi_global_se",
       "canonical_name": "HDI Global SE",
       "canonical_domain": "hdi.global",
@@ -10414,6 +10454,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:dermapharm_ag",
+      "canonical_name": "Dermapharm AG",
+      "canonical_domain": "dermapharm.com",
+      "official_website_url": "https://www.dermapharm.com/",
+      "career_url": "https://jobs.dermapharm.com/de/",
+      "aliases": [
+        "Dermapharm",
+        "Dermapharm Holding AG",
+        "Dermapharm Unternehmensgruppe"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald bei Muenchen",
+          "city": "Gruenwald",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Pharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://jobs.dermapharm.com/de/",
+        "observed_at": "2026-09-03T13:52:36.955Z",
+        "verification_url": "https://jobs.dermapharm.com/de/",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Pharmaceuticals",
+        "evidence_note": "Der Dermapharm-Kandidat wurde ueber die offizielle dermapharm.com-Domain mit Konzernzentrale in Gruenwald bei Muenchen und das offizielle Dermapharm-Jobportal belegt."
+      },
+      "created_at": "2026-09-03T13:52:36.955Z",
+      "updated_at": "2026-09-03T13:52:36.955Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:cobrainer",
       "canonical_name": "Cobrainer",
       "canonical_domain": "cobrainer.com",
@@ -10605,6 +10685,46 @@
       },
       "created_at": "2026-09-03T10:38:45.617Z",
       "updated_at": "2026-09-03T10:38:45.617Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:pari_pharma_gmbh",
+      "canonical_name": "PARI Pharma GmbH",
+      "canonical_domain": "pari.com",
+      "official_website_url": "https://www.pari.com/de/",
+      "career_url": "https://www.pari.com/de/ueber-pari/karriere/",
+      "aliases": [
+        "PARI",
+        "PARI GmbH",
+        "PARI Pharma"
+      ],
+      "locations": [
+        {
+          "label": "Starnberg bei Muenchen",
+          "city": "Starnberg",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Medical Technology and Pharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.pari.com/de/ueber-pari/karriere/",
+        "observed_at": "2026-09-03T13:52:36.955Z",
+        "verification_url": "https://www.pari.com/de/ueber-pari/karriere/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Medical Technology and Pharmaceuticals",
+        "evidence_note": "Der PARI-Pharma-Kandidat wurde ueber die offizielle pari.com-Domain und die dort erreichbare Karriere-Seite mit Verweis auf offene Stellen belegt."
+      },
+      "created_at": "2026-09-03T13:52:36.955Z",
+      "updated_at": "2026-09-03T13:52:36.955Z",
       "last_successful_scan_at": null
     },
     {
@@ -11267,6 +11387,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:muenchner_philharmoniker",
+      "canonical_name": "Muenchner Philharmoniker",
+      "canonical_domain": "mphil.de",
+      "official_website_url": "https://www.mphil.de/",
+      "career_url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+      "aliases": [
+        "Mphil",
+        "Muenchner Philharmoniker",
+        "Munich Philharmonic"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Culture and Performing Arts",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+        "observed_at": "2026-09-03T13:52:36.955Z",
+        "verification_url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Culture and Performing Arts",
+        "evidence_note": "Der Muenchner-Philharmoniker-Kandidat wurde ueber die offizielle mphil.de-Domain und die dort veroeffentlichte Offene-Stellen-Seite belegt."
+      },
+      "created_at": "2026-09-03T13:52:36.955Z",
+      "updated_at": "2026-09-03T13:52:36.955Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:merkur_tz_media",
       "canonical_name": "Merkur tz MEDIA",
       "canonical_domain": "merkurtz.media",
@@ -11650,6 +11810,45 @@
       },
       "created_at": "2026-08-31T18:18:31.59Z",
       "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tacterion_gmbh",
+      "canonical_name": "tacterion GmbH",
+      "canonical_domain": "tacterion.com",
+      "official_website_url": "https://www.tacterion.com/",
+      "career_url": "https://www.tacterion.com/company/career",
+      "aliases": [
+        "tacterion",
+        "tacterion GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sensor Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tacterion.com/company/career",
+        "observed_at": "2026-09-03T13:52:36.955Z",
+        "verification_url": "https://www.tacterion.com/company/career",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Sensor Technology",
+        "evidence_note": "Der tacterion-Kandidat wurde ueber die offizielle tacterion.com-Domain mit Muenchner Adresse und die dort erreichbare Career-Seite belegt."
+      },
+      "created_at": "2026-09-03T13:52:36.955Z",
+      "updated_at": "2026-09-03T13:52:36.955Z",
       "last_successful_scan_at": null
     },
     {
@@ -12194,6 +12393,45 @@
       },
       "created_at": "2026-09-01T06:08:24.736Z",
       "updated_at": "2026-09-01T06:08:24.736Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:trbo_gmbh",
+      "canonical_name": "trbo GmbH",
+      "canonical_domain": "trbo.com",
+      "official_website_url": "https://www.trbo.com/",
+      "career_url": "https://www.trbo.com/careers/",
+      "aliases": [
+        "trbo",
+        "trbo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.trbo.com/careers/",
+        "observed_at": "2026-09-03T13:52:36.955Z",
+        "verification_url": "https://www.trbo.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "E-Commerce Software",
+        "evidence_note": "Der trbo-Kandidat wurde ueber die offizielle trbo.com-Domain mit Muenchner Standort und die dort erreichbare Careers-Seite belegt."
+      },
+      "created_at": "2026-09-03T13:52:36.955Z",
+      "updated_at": "2026-09-03T13:52:36.955Z",
       "last_successful_scan_at": null
     },
     {
@@ -18020,6 +18258,27 @@
       ]
     },
     {
+      "source_id": "source:dermapharm_ag_career",
+      "company_id": "company:dermapharm_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://jobs.dermapharm.com/de/",
+      "canonical_url": "https://jobs.dermapharm.com/de/",
+      "is_official": true,
+      "verified_at": "2026-09-03T13:52:36.955Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://jobs.dermapharm.com/de/",
+          "basis_url": "https://www.dermapharm.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T13:52:36.955Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:deutsche_pfandbriefbank_ag_career",
       "company_id": "company:deutsche_pfandbriefbank_ag",
       "source_type": "CAREER_PAGE",
@@ -19441,6 +19700,27 @@
           "basis_url": "https://www.hexal.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T17:39:14.102Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hild_und_k_career",
+      "company_id": "company:hild_und_k",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.hildundk.de/stellen/",
+      "canonical_url": "https://www.hildundk.de/stellen/",
+      "is_official": true,
+      "verified_at": "2026-09-03T13:52:36.955Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.hildundk.de/stellen/",
+          "basis_url": "https://www.hildundk.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T13:52:36.955Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -21398,6 +21678,27 @@
       ]
     },
     {
+      "source_id": "source:muenchner_philharmoniker_career",
+      "company_id": "company:muenchner_philharmoniker",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+      "canonical_url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+      "is_official": true,
+      "verified_at": "2026-09-03T13:52:36.955Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+          "basis_url": "https://www.mphil.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T13:52:36.955Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:muenchner_verkehrs_und_tarifverbund_gmbh_career_url",
       "company_id": "company:muenchner_verkehrs_und_tarifverbund_gmbh",
       "source_type": "CAREER_PAGE",
@@ -22008,6 +22309,27 @@
           "basis_url": "https://parcellab.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:pari_pharma_gmbh_career",
+      "company_id": "company:pari_pharma_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.pari.com/de/ueber-pari/karriere/",
+      "canonical_url": "https://www.pari.com/de/ueber-pari/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-03T13:52:36.955Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.pari.com/de/ueber-pari/karriere/",
+          "basis_url": "https://www.pari.com/de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T13:52:36.955Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -23292,6 +23614,27 @@
       ]
     },
     {
+      "source_id": "source:tacterion_gmbh_career",
+      "company_id": "company:tacterion_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.tacterion.com/company/career",
+      "canonical_url": "https://www.tacterion.com/company/career",
+      "is_official": true,
+      "verified_at": "2026-09-03T13:52:36.955Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.tacterion.com/company/career",
+          "basis_url": "https://www.tacterion.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T13:52:36.955Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:tacto_technology_gmbh_career",
       "company_id": "company:tacto_technology_gmbh",
       "source_type": "CAREER_PAGE",
@@ -23581,6 +23924,27 @@
           "basis_url": "https://www.traviangames.com/",
           "redirect_chain": [],
           "observed_at": "2026-09-02T16:40:09.87Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:trbo_gmbh_career",
+      "company_id": "company:trbo_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.trbo.com/careers/",
+      "canonical_url": "https://www.trbo.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-03T13:52:36.955Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.trbo.com/careers/",
+          "basis_url": "https://www.trbo.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T13:52:36.955Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

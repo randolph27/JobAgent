@@ -1,0 +1,154 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-03T11:20:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Hild und K",
+      "official_website_url": "https://www.hildundk.de/",
+      "career_url": "https://www.hildundk.de/stellen/",
+      "aliases": [
+        "Hild und Kaltwasser",
+        "Hild und K Architekten",
+        "Hild und K Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "scan_priority": 36,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hildundk.de/stellen/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Hild-und-K-Kandidat wurde ueber die offizielle hildundk.de-Domain mit Muenchen-/Berlin-Buerobezug und die dort verlinkte Stellen-Seite belegt."
+    },
+    {
+      "canonical_name": "Dermapharm AG",
+      "official_website_url": "https://www.dermapharm.com/",
+      "career_url": "https://jobs.dermapharm.com/de/",
+      "aliases": [
+        "Dermapharm",
+        "Dermapharm Holding AG",
+        "Dermapharm Unternehmensgruppe"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald bei Muenchen",
+          "city": "Gruenwald",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Pharmaceuticals",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://jobs.dermapharm.com/de/",
+      "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+      "evidence_note": "Der Dermapharm-Kandidat wurde ueber die offizielle dermapharm.com-Domain mit Konzernzentrale in Gruenwald bei Muenchen und das offizielle Dermapharm-Jobportal belegt."
+    },
+    {
+      "canonical_name": "PARI Pharma GmbH",
+      "official_website_url": "https://www.pari.com/de/",
+      "career_url": "https://www.pari.com/de/ueber-pari/karriere/",
+      "aliases": [
+        "PARI",
+        "PARI GmbH",
+        "PARI Pharma"
+      ],
+      "locations": [
+        {
+          "label": "Starnberg bei Muenchen",
+          "city": "Starnberg",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Medical Technology and Pharmaceuticals",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.pari.com/de/ueber-pari/karriere/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der PARI-Pharma-Kandidat wurde ueber die offizielle pari.com-Domain und die dort erreichbare Karriere-Seite mit Verweis auf offene Stellen belegt."
+    },
+    {
+      "canonical_name": "Muenchner Philharmoniker",
+      "official_website_url": "https://www.mphil.de/",
+      "career_url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+      "aliases": [
+        "Muenchner Philharmoniker",
+        "Munich Philharmonic",
+        "Mphil"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Culture and Performing Arts",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.mphil.de/en/ueber-uns/offene-stellen",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Muenchner-Philharmoniker-Kandidat wurde ueber die offizielle mphil.de-Domain und die dort veroeffentlichte Offene-Stellen-Seite belegt."
+    },
+    {
+      "canonical_name": "tacterion GmbH",
+      "official_website_url": "https://www.tacterion.com/",
+      "career_url": "https://www.tacterion.com/company/career",
+      "aliases": [
+        "tacterion",
+        "tacterion GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sensor Technology",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tacterion.com/company/career",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der tacterion-Kandidat wurde ueber die offizielle tacterion.com-Domain mit Muenchner Adresse und die dort erreichbare Career-Seite belegt."
+    },
+    {
+      "canonical_name": "trbo GmbH",
+      "official_website_url": "https://www.trbo.com/",
+      "career_url": "https://www.trbo.com/careers/",
+      "aliases": [
+        "trbo",
+        "trbo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "E-Commerce Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.trbo.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der trbo-Kandidat wurde ueber die offizielle trbo.com-Domain mit Muenchner Standort und die dort erreichbare Careers-Seite belegt."
+    }
+  ]
+}
