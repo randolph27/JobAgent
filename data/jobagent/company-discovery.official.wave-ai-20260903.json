@@ -1,0 +1,196 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-03T10:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "RTLZWEI Fernsehen GmbH & Co. KG",
+      "official_website_url": "https://unternehmen.rtl2.de/",
+      "career_url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+      "aliases": [
+        "RTLZWEI",
+        "RTLII",
+        "RTL 2 Fernsehen"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald / Greater Munich",
+          "city": "Gruenwald",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "scan_priority": 36,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der RTLZWEI-Kandidat wurde ueber die offizielle RTLZWEI-Unternehmensdomain, deren Impressums-/Kontaktangaben mit Gruenwald-Sitz und die dort erreichbare Jobs-/Bewerbungsseite belegt."
+    },
+    {
+      "canonical_name": "sewts GmbH",
+      "official_website_url": "https://www.sewts.com/",
+      "career_url": "https://www.sewts.com/",
+      "aliases": [
+        "sewts"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics and Industrial Automation",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.sewts.com/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der sewts-Kandidat wurde ueber die offizielle sewts-Domain belegt; die Startseite fuehrt die Karriere-/Stellenansicht mit Muenchner Rollen direkt aus."
+    },
+    {
+      "canonical_name": "Schauburg - Theater fuer junges Publikum",
+      "official_website_url": "https://www.schauburg.net/",
+      "career_url": "https://www.schauburg.net/theater/stellenangebote",
+      "aliases": [
+        "Schauburg",
+        "Schauburg Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Theatre and Culture",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.schauburg.net/theater/stellenangebote",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Schauburg-Kandidat wurde ueber die offizielle schauspielbezogene Schauburg-Domain fuer Muenchen und die dort erreichbare Stellenangebote-Seite belegt."
+    },
+    {
+      "canonical_name": "Robotise Technologies GmbH",
+      "official_website_url": "https://robotise.eu/",
+      "career_url": "https://robotise.eu/career",
+      "aliases": [
+        "Robotise"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Service Robotics",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://robotise.eu/career",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Robotise-Kandidat wurde ueber die offizielle Robotise-Domain, die Kontaktseite mit Muenchner Adresse und die dort erreichbare Career-Seite belegt."
+    },
+    {
+      "canonical_name": "social sweethearts GmbH",
+      "official_website_url": "https://www.socialsweethearts.de/",
+      "career_url": "https://www.socialsweethearts.de/jobs",
+      "aliases": [
+        "SocialSweethearts",
+        "Social Sweethearts"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald / Greater Munich",
+          "city": "Gruenwald",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Digital Publishing and Entertainment",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.socialsweethearts.de/jobs",
+      "discovery_origin": "source-registry:remote_jobs_germany_github",
+      "evidence_note": "Der Social-Sweethearts-Kandidat wurde ueber die offizielle Domain und die dort verlinkte Jobs-Seite belegt; die Arbeitgeberseite nennt den Standort Gruenwald bei Muenchen."
+    },
+    {
+      "canonical_name": "Plan.Net Gruppe",
+      "official_website_url": "https://www.house-of-communication.com/de/en/brands/plan-net.html",
+      "career_url": "https://plan-net.softgarden.io/",
+      "aliases": [
+        "Plan.Net",
+        "Plan.Net Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Agency and Marketing Technology",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://plan-net.softgarden.io/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Plan.Net-Kandidat wurde ueber die offizielle House-of-Communication-Marken-Seite und die erreichbare Softgarden-Karriereseite der PLAN.NET Gruppe mit Muenchner Stellen belegt."
+    },
+    {
+      "canonical_name": "Pina Earth",
+      "official_website_url": "https://www.pina.earth/en",
+      "career_url": "https://pina.jobs.personio.com/?language=en",
+      "aliases": [
+        "Pina Technologies GmbH",
+        "Pina"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Climate Tech",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://pina.jobs.personio.com/?language=en",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der Pina-Earth-Kandidat wurde ueber die offizielle Pina-Earth-Domain und die erreichbare Personio-Jobs-Seite fuer Pina Earth mit Muenchner Rollen belegt."
+    },
+    {
+      "canonical_name": "Smartlane GmbH",
+      "official_website_url": "https://smartlane.ai/",
+      "career_url": "https://join.com/companies/smartlane",
+      "aliases": [
+        "Smartlane"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Logistics Software",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://join.com/companies/smartlane",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Smartlane-Kandidat wurde ueber die offizielle Smartlane-Domain und die erreichbare JOIN-Arbeitgeberseite fuer Smartlane GmbH belegt; die regionale Quelle liefert den Muenchen-Bezug."
+    }
+  ]
+}

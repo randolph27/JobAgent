@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-09-03T08:57:25.024Z",
+  "generated_at": "2026-09-03T09:47:38.941Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 542,
-    "DISCOVER_OFFICIAL_WEBSITE": 1240,
+    "ALREADY_VERIFIED_IN_STORE": 550,
+    "DISCOVER_OFFICIAL_WEBSITE": 1232,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -16682,6 +16682,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_geospatial_companies_github_pina_earth_awesome_geospatial_companies_github_list_munich_area_entries",
+      "candidate_id": "regional-hint:awesome_geospatial_companies_github_pina_earth_awesome_geospatial_companies_github_list_munich_area_entries",
+      "company_id": "company:pina_earth",
+      "candidate_ids": [
+        "regional-hint:awesome_geospatial_companies_github_pina_earth_awesome_geospatial_companies_github_list_munich_area_entries"
+      ],
+      "canonical_name": "Pina Earth",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:57:32.127Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_geospatial_companies_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/chrieke/awesome-geospatial-companies",
+        "observed_at": "08/27/2026 12:00:00",
+        "record_hash": "89eb5e6e51e356e32fc5c3002b2615475e6b6beb91193b27d11476ad695c63e0",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Geo-, GIS-, Earth-Observation- und Climate-Tech-Arbeitgeberhinweise mit Muenchen- oder 20-km-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit, keine Google-Map- oder Spreadsheet-Automation und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:pina earth"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:domain_pininfarina_de",
       "candidate_id": "regional-hint:munich_business_indian_companies_pininfarina_deutschland_gmbh_muenchen",
       "company_id": "company:pininfarina_deutschland_gmbh",
@@ -16815,6 +16859,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_plan_net_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_plan_net_muenchen",
+      "company_id": "company:serviceplan_gruppe_se_and_co_kg",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_plan_net_muenchen"
+      ],
+      "canonical_name": "Plan.Net",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T18:01:30.224Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "b494def0ec615ef43bf460bd62baf78b3349623ac9518007257ba7d2ee1e706f",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:plan net"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -17399,6 +17487,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_robotise_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_robotise_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:robotise_technologies_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_robotise_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "Robotise",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "a8ab6f516a8796a69780b4b5928c160a8462cbb68664b8c16c2976d8c1eecd65",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:robotise"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_munich_business_life_sciences_companies_roche_diagnostics_muenchen_und_region",
       "candidate_id": "regional-hint:munich_business_life_sciences_companies_roche_diagnostics_muenchen_und_region",
       "company_id": "company:roche_diagnostics",
@@ -17531,6 +17663,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_rtlii_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_rtlii_muenchen",
+      "company_id": "company:rtlzwei_fernsehen_gmbh_and_co_kg",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_rtlii_muenchen"
+      ],
+      "canonical_name": "RTLII",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "4d82e078388fb855c97ad288eabf3a482257b12fa54275824133def754906352",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:rtlii"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -17804,6 +17980,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_schauburg_muenchen",
+      "candidate_id": "regional-hint:munich_business_creative_companies_schauburg_muenchen",
+      "company_id": "company:schauburg_theater_fuer_junges_publikum",
+      "candidate_ids": [
+        "regional-hint:munich_business_creative_companies_schauburg_muenchen"
+      ],
+      "canonical_name": "Schauburg",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:03:15.139Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_creative_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "3f7460526d18baf1d443ddb77f339685167b41eb68025084891e18382a2f8e1d",
+        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:schauburg"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_scout24_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_scout24_muenchen_tech_unternehmen",
       "company_id": "company:scout24_se",
@@ -17978,6 +18198,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:serviceplan gruppe and co"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_sewts_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_sewts_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:sewts_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_sewts_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "sewts",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:09:09.46Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "4ca577217b0152b266f13c64ba03fe814d8e67e8d180202d2380c01783b0257b",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:sewts"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -18566,6 +18830,94 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:smart reporting"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_smartlane_awesome_machine_learning_startups_munich_github_list",
+      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_smartlane_awesome_machine_learning_startups_munich_github_list",
+      "company_id": "company:smartlane_gmbh",
+      "candidate_ids": [
+        "regional-hint:awesome_ml_startups_munich_github_smartlane_awesome_machine_learning_startups_munich_github_list"
+      ],
+      "canonical_name": "Smartlane",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:09:09.46Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:awesome_ml_startups_munich_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
+        "observed_at": "08/26/2026 20:00:00",
+        "record_hash": "59d7b891a4647b3b745c0c8ddc28bf025c5ab03eb67f1ecb67d1c6a514a7478a",
+        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:smartlane"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_remote_jobs_germany_github_socialsweethearts_remote_jobs_germany_github_list_entries_with_munich_area_fields",
+      "candidate_id": "regional-hint:remote_jobs_germany_github_socialsweethearts_remote_jobs_germany_github_list_entries_with_munich_area_fields",
+      "company_id": "company:social_sweethearts_gmbh",
+      "candidate_ids": [
+        "regional-hint:remote_jobs_germany_github_socialsweethearts_remote_jobs_germany_github_list_entries_with_munich_area_fields"
+      ],
+      "canonical_name": "SocialSweethearts",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:12:50.965Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:remote_jobs_germany_github",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://github.com/danielbayerlein/remote-jobs-germany",
+        "observed_at": "08/27/2026 12:00:00",
+        "record_hash": "db77900ddfc38f2a5dddc9832304ffd4c76c462e6b36dabe249cfbef44fc5388",
+        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer remote-freundliche deutsche Tech-Arbeitgeber mit Muenchen-, Unterfoehring-, Ismaning- oder Freising-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:socialsweethearts"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -24031,94 +24383,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_geospatial_companies_github_pina_earth_awesome_geospatial_companies_github_list_munich_area_entries",
-      "candidate_id": "regional-hint:awesome_geospatial_companies_github_pina_earth_awesome_geospatial_companies_github_list_munich_area_entries",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_geospatial_companies_github_pina_earth_awesome_geospatial_companies_github_list_munich_area_entries"
-      ],
-      "canonical_name": "Pina Earth",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:57:32.127Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_geospatial_companies_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/chrieke/awesome-geospatial-companies",
-        "observed_at": "08/27/2026 12:00:00",
-        "record_hash": "89eb5e6e51e356e32fc5c3002b2615475e6b6beb91193b27d11476ad695c63e0",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer Geo-, GIS-, Earth-Observation- und Climate-Tech-Arbeitgeberhinweise mit Muenchen- oder 20-km-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit, keine Google-Map- oder Spreadsheet-Automation und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:pina earth"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_plan_net_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_plan_net_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_plan_net_muenchen"
-      ],
-      "canonical_name": "Plan.Net",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T18:01:30.224Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "b494def0ec615ef43bf460bd62baf78b3349623ac9518007257ba7d2ee1e706f",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:plan net"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_planet_sports_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_planet_sports_muenchen_tech_unternehmen",
       "company_id": null,
@@ -24955,94 +25219,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_robotise_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_robotise_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_robotise_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "Robotise",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:03:15.139Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "a8ab6f516a8796a69780b4b5928c160a8462cbb68664b8c16c2976d8c1eecd65",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:robotise"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_rtlii_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_rtlii_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_rtlii_muenchen"
-      ],
-      "canonical_name": "RTLII",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:03:15.139Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "4d82e078388fb855c97ad288eabf3a482257b12fa54275824133def754906352",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:rtlii"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_ryver_ai_awesome_machine_learning_startups_munich_github_list",
       "candidate_id": "regional-hint:awesome_ml_startups_munich_github_ryver_ai_awesome_machine_learning_startups_munich_github_list",
       "company_id": null,
@@ -25081,94 +25257,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:ryver ai"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_creative_companies_schauburg_muenchen",
-      "candidate_id": "regional-hint:munich_business_creative_companies_schauburg_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_creative_companies_schauburg_muenchen"
-      ],
-      "canonical_name": "Schauburg",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:03:15.139Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Keine eindeutig namenspassende Firmenwebsite auf der offiziellen Quellseite gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_creative_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/kultur--und-kreativwirtschaft.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "3f7460526d18baf1d443ddb77f339685167b41eb68025084891e18382a2f8e1d",
-        "allowed_use": "Oeffentlich genannte Unternehmen und Institutionen der Muenchner Kultur- und Kreativwirtschaft als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:schauburg"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_sewts_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_sewts_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_sewts_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "sewts",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:09:09.46Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "4ca577217b0152b266f13c64ba03fe814d8e67e8d180202d2380c01783b0257b",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:sewts"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -25481,94 +25569,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:siticom"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_awesome_ml_startups_munich_github_smartlane_awesome_machine_learning_startups_munich_github_list",
-      "candidate_id": "regional-hint:awesome_ml_startups_munich_github_smartlane_awesome_machine_learning_startups_munich_github_list",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:awesome_ml_startups_munich_github_smartlane_awesome_machine_learning_startups_munich_github_list"
-      ],
-      "canonical_name": "Smartlane",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:09:09.46Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:awesome_ml_startups_munich_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/alxschwrz/awesome-machine-learning-startups-munich",
-        "observed_at": "08/26/2026 20:00:00",
-        "record_hash": "59d7b891a4647b3b745c0c8ddc28bf025c5ab03eb67f1ecb67d1c6a514a7478a",
-        "allowed_use": "Oeffentlich lesbare, kuratierte GitHub-Liste als lokalen Snapshot fuer Muenchner Machine-Learning- und AI-Arbeitgeberhinweise verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub-Web oder Raw-Abruf mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:smartlane"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_remote_jobs_germany_github_socialsweethearts_remote_jobs_germany_github_list_entries_with_munich_area_fields",
-      "candidate_id": "regional-hint:remote_jobs_germany_github_socialsweethearts_remote_jobs_germany_github_list_entries_with_munich_area_fields",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:remote_jobs_germany_github_socialsweethearts_remote_jobs_germany_github_list_entries_with_munich_area_fields"
-      ],
-      "canonical_name": "SocialSweethearts",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:12:50.965Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:remote_jobs_germany_github",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://github.com/danielbayerlein/remote-jobs-germany",
-        "observed_at": "08/27/2026 12:00:00",
-        "record_hash": "db77900ddfc38f2a5dddc9832304ffd4c76c462e6b36dabe249cfbef44fc5388",
-        "allowed_use": "Oeffentliche, MIT-lizenzierte GitHub-Liste als lokalen Snapshot fuer remote-freundliche deutsche Tech-Arbeitgeber mit Muenchen-, Unterfoehring-, Ismaning- oder Freising-Bezug verarbeiten; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
-        "rate_limit_policy": "Seltene lokale Snapshot-Aktualisierung ueber GitHub Raw/API mit Hash; keine CI-Live-Abhaengigkeit und kein Massencrawl externer Firmenlinks."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:socialsweethearts"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1

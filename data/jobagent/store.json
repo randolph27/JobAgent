@@ -9712,6 +9712,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:rtlzwei_fernsehen_gmbh_and_co_kg",
+      "canonical_name": "RTLZWEI Fernsehen GmbH & Co. KG",
+      "canonical_domain": "unternehmen.rtl2.de",
+      "official_website_url": "https://unternehmen.rtl2.de/",
+      "career_url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+      "aliases": [
+        "RTL 2 Fernsehen",
+        "RTLII",
+        "RTLZWEI"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald / Greater Munich",
+          "city": "Gruenwald",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Media and Broadcasting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 36,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Media and Broadcasting",
+        "evidence_note": "Der RTLZWEI-Kandidat wurde ueber die offizielle RTLZWEI-Unternehmensdomain, deren Impressums-/Kontaktangaben mit Gruenwald-Sitz und die dort erreichbare Jobs-/Bewerbungsseite belegt."
+      },
+      "created_at": "2026-09-03T09:44:45.466Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:jambit_gmbh",
       "canonical_name": "jambit GmbH",
       "canonical_domain": "jambit.com",
@@ -9865,6 +9905,44 @@
       },
       "created_at": "2026-09-01T05:52:39.825Z",
       "updated_at": "2026-09-01T05:52:39.825Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:sewts_gmbh",
+      "canonical_name": "sewts GmbH",
+      "canonical_domain": "sewts.com",
+      "official_website_url": "https://www.sewts.com/",
+      "career_url": "https://www.sewts.com/",
+      "aliases": [
+        "sewts"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics and Industrial Automation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.sewts.com/",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://www.sewts.com/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Robotics and Industrial Automation",
+        "evidence_note": "Der sewts-Kandidat wurde ueber die offizielle sewts-Domain belegt; die Startseite fuehrt die Karriere-/Stellenansicht mit Muenchner Rollen direkt aus."
+      },
+      "created_at": "2026-09-03T09:44:45.466Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
       "last_successful_scan_at": null
     },
     {
@@ -10368,6 +10446,45 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:schauburg_theater_fuer_junges_publikum",
+      "canonical_name": "Schauburg - Theater fuer junges Publikum",
+      "canonical_domain": "schauburg.net",
+      "official_website_url": "https://www.schauburg.net/",
+      "career_url": "https://www.schauburg.net/theater/stellenangebote",
+      "aliases": [
+        "Schauburg",
+        "Schauburg Muenchen"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Theatre and Culture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.schauburg.net/theater/stellenangebote",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://www.schauburg.net/theater/stellenangebote",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Theatre and Culture",
+        "evidence_note": "Der Schauburg-Kandidat wurde ueber die offizielle schauspielbezogene Schauburg-Domain fuer Muenchen und die dort erreichbare Stellenangebote-Seite belegt."
+      },
+      "created_at": "2026-09-03T09:44:45.466Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
       "last_successful_scan_at": null
     },
     {
@@ -10914,6 +11031,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:robotise_technologies_gmbh",
+      "canonical_name": "Robotise Technologies GmbH",
+      "canonical_domain": "robotise.eu",
+      "official_website_url": "https://robotise.eu/",
+      "career_url": "https://robotise.eu/career",
+      "aliases": [
+        "Robotise"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Service Robotics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://robotise.eu/career",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://robotise.eu/career",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Service Robotics",
+        "evidence_note": "Der Robotise-Kandidat wurde ueber die offizielle Robotise-Domain, die Kontaktseite mit Muenchner Adresse und die dort erreichbare Career-Seite belegt."
+      },
+      "created_at": "2026-09-03T09:44:45.466Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:nelhiebel_elektrotechnik_gmbh",
       "canonical_name": "Nelhiebel Elektrotechnik GmbH",
       "canonical_domain": "nelhiebel.de",
@@ -11375,6 +11530,45 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:social_sweethearts_gmbh",
+      "canonical_name": "social sweethearts GmbH",
+      "canonical_domain": "socialsweethearts.de",
+      "official_website_url": "https://www.socialsweethearts.de/",
+      "career_url": "https://www.socialsweethearts.de/jobs",
+      "aliases": [
+        "Social Sweethearts",
+        "SocialSweethearts"
+      ],
+      "locations": [
+        {
+          "label": "Gruenwald / Greater Munich",
+          "city": "Gruenwald",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Digital Publishing and Entertainment",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.socialsweethearts.de/jobs",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://www.socialsweethearts.de/jobs",
+        "discovery_origin": "source-registry:remote_jobs_germany_github",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Digital Publishing and Entertainment",
+        "evidence_note": "Der Social-Sweethearts-Kandidat wurde ueber die offizielle Domain und die dort verlinkte Jobs-Seite belegt; die Arbeitgeberseite nennt den Standort Gruenwald bei Muenchen."
+      },
+      "created_at": "2026-09-03T09:44:45.466Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
       "last_successful_scan_at": null
     },
     {
@@ -11954,6 +12148,49 @@
       },
       "created_at": "2026-09-01T05:52:39.825Z",
       "updated_at": "2026-09-01T05:52:39.825Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:serviceplan_gruppe_se_and_co_kg",
+      "canonical_name": "Plan.Net Gruppe",
+      "canonical_domain": "house-of-communication.com",
+      "official_website_url": "https://www.house-of-communication.com/de/en/brands/plan-net.html",
+      "career_url": "https://plan-net.softgarden.io/",
+      "aliases": [
+        "Plan.Net",
+        "Plan.Net Group",
+        "Plan.Net Gruppe",
+        "Serviceplan",
+        "Serviceplan Group",
+        "Serviceplan Gruppe SE & Co. KG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Marketing and Communication",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-01T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://plan-net.softgarden.io/",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://plan-net.softgarden.io/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Agency and Marketing Technology",
+        "evidence_note": "Der Plan.Net-Kandidat wurde ueber die offizielle House-of-Communication-Marken-Seite und die erreichbare Softgarden-Karriereseite der PLAN.NET Gruppe mit Muenchner Stellen belegt."
+      },
+      "created_at": "2026-08-31T06:04:40.636Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
       "last_successful_scan_at": null
     },
     {
@@ -12578,6 +12815,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:pina_earth",
+      "canonical_name": "Pina Earth",
+      "canonical_domain": "pina.earth",
+      "official_website_url": "https://www.pina.earth/en",
+      "career_url": "https://pina.jobs.personio.com/?language=en",
+      "aliases": [
+        "Pina",
+        "Pina Technologies GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Climate Tech",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://pina.jobs.personio.com/?language=en",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://pina.jobs.personio.com/?language=en",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Climate Tech",
+        "evidence_note": "Der Pina-Earth-Kandidat wurde ueber die offizielle Pina-Earth-Domain und die erreichbare Personio-Jobs-Seite fuer Pina Earth mit Muenchner Rollen belegt."
+      },
+      "created_at": "2026-09-03T09:44:45.466Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:livanova_deutschland_gmbh",
       "canonical_name": "LivaNova Deutschland GmbH",
       "canonical_domain": "livanova.com",
@@ -12965,6 +13241,44 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:smartlane_gmbh",
+      "canonical_name": "Smartlane GmbH",
+      "canonical_domain": "smartlane.ai",
+      "official_website_url": "https://smartlane.ai/",
+      "career_url": "https://join.com/companies/smartlane",
+      "aliases": [
+        "Smartlane"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Logistics Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://join.com/companies/smartlane",
+        "observed_at": "2026-09-03T09:44:45.466Z",
+        "verification_url": "https://join.com/companies/smartlane",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Logistics Software",
+        "evidence_note": "Der Smartlane-Kandidat wurde ueber die offizielle Smartlane-Domain und die erreichbare JOIN-Arbeitgeberseite fuer Smartlane GmbH belegt; die regionale Quelle liefert den Muenchen-Bezug."
+      },
+      "created_at": "2026-09-03T09:44:45.466Z",
+      "updated_at": "2026-09-03T09:44:45.466Z",
       "last_successful_scan_at": null
     },
     {
@@ -14016,45 +14330,6 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
-      "last_successful_scan_at": null
-    },
-    {
-      "company_id": "company:serviceplan_gruppe_se_and_co_kg",
-      "canonical_name": "Serviceplan Gruppe SE & Co. KG",
-      "canonical_domain": "house-of-communication.com",
-      "official_website_url": "https://www.house-of-communication.com/de/en.html",
-      "career_url": "https://www.house-of-communication.com/de/en/career.html",
-      "aliases": [
-        "Serviceplan",
-        "Serviceplan Group"
-      ],
-      "locations": [
-        {
-          "label": "Muenchen",
-          "city": "Muenchen",
-          "region": "Bayern",
-          "country": "DE",
-          "target_area": "MUNICH"
-        }
-      ],
-      "industry": "Marketing and Communication",
-      "ats": [],
-      "scan_status": "PENDING",
-      "scan_priority": 25,
-      "next_scan_at": "2026-09-01T00:00:00Z",
-      "verification_status": "CAREER_URL_VERIFIED",
-      "discovery_source": {
-        "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.house-of-communication.com/de/en/career.html",
-        "observed_at": "2026-08-31T06:04:40.636Z",
-        "verification_url": "https://www.house-of-communication.com/de/en/career.html",
-        "discovery_origin": "source-registry:munich_business_creative_companies",
-        "target_area": "MUNICH",
-        "industry_hint": "Marketing and Communication",
-        "evidence_note": "Der Serviceplan-Kandidat wurde ueber die offizielle House-of-Communication-Domain und deren Serviceplan-Karriereseite belegt."
-      },
-      "created_at": "2026-08-31T06:04:40.636Z",
-      "updated_at": "2026-08-31T06:04:40.636Z",
       "last_successful_scan_at": null
     },
     {
@@ -21645,6 +21920,27 @@
       ]
     },
     {
+      "source_id": "source:pina_earth_career",
+      "company_id": "company:pina_earth",
+      "source_type": "CAREER_PAGE",
+      "url": "https://pina.jobs.personio.com/?language=en",
+      "canonical_url": "https://pina.jobs.personio.com/?language=en",
+      "is_official": true,
+      "verified_at": "2026-09-03T09:44:45.466Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://pina.jobs.personio.com/?language=en",
+          "basis_url": "https://www.pina.earth/en",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T09:44:45.466Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:pininfarina_deutschland_gmbh_career_url",
       "company_id": "company:pininfarina_deutschland_gmbh",
       "source_type": "CAREER_PAGE",
@@ -21987,6 +22283,27 @@
       ]
     },
     {
+      "source_id": "source:robotise_technologies_gmbh_career",
+      "company_id": "company:robotise_technologies_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://robotise.eu/career",
+      "canonical_url": "https://robotise.eu/career",
+      "is_official": true,
+      "verified_at": "2026-09-03T09:44:45.466Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://robotise.eu/career",
+          "basis_url": "https://robotise.eu/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T09:44:45.466Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:roche_diagnostics_career",
       "company_id": "company:roche_diagnostics",
       "source_type": "CAREER_PAGE",
@@ -22046,6 +22363,27 @@
           ],
           "observed_at": "2026-08-27T05:08:12.805Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:rtlzwei_fernsehen_gmbh_and_co_kg_career",
+      "company_id": "company:rtlzwei_fernsehen_gmbh_and_co_kg",
+      "source_type": "CAREER_PAGE",
+      "url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+      "canonical_url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+      "is_official": true,
+      "verified_at": "2026-09-03T09:44:45.466Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://unternehmen.rtl2.de/p/jobs-bewerbung",
+          "basis_url": "https://unternehmen.rtl2.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T09:44:45.466Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -22155,6 +22493,27 @@
       ]
     },
     {
+      "source_id": "source:schauburg_theater_fuer_junges_publikum_career",
+      "company_id": "company:schauburg_theater_fuer_junges_publikum",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.schauburg.net/theater/stellenangebote",
+      "canonical_url": "https://www.schauburg.net/theater/stellenangebote",
+      "is_official": true,
+      "verified_at": "2026-09-03T09:44:45.466Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.schauburg.net/theater/stellenangebote",
+          "basis_url": "https://www.schauburg.net/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T09:44:45.466Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:scout24_se_career",
       "company_id": "company:scout24_se",
       "source_type": "CAREER_PAGE",
@@ -22177,19 +22536,40 @@
       "source_id": "source:serviceplan_gruppe_se_and_co_kg_career",
       "company_id": "company:serviceplan_gruppe_se_and_co_kg",
       "source_type": "CAREER_PAGE",
-      "url": "https://www.house-of-communication.com/de/en/career.html",
-      "canonical_url": "https://www.house-of-communication.com/de/en/career.html",
+      "url": "https://plan-net.softgarden.io/",
+      "canonical_url": "https://plan-net.softgarden.io/",
       "is_official": true,
-      "verified_at": "2026-08-31T06:04:40.636Z",
+      "verified_at": "2026-09-03T09:44:45.466Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
           "status": "VERIFIED",
           "evidence_type": "CAREER_URL",
-          "url": "https://www.house-of-communication.com/de/en/career.html",
-          "basis_url": "https://www.house-of-communication.com/de/en.html",
+          "url": "https://plan-net.softgarden.io/",
+          "basis_url": "https://www.house-of-communication.com/de/en/brands/plan-net.html",
           "redirect_chain": [],
-          "observed_at": "2026-08-31T06:04:40.636Z",
+          "observed_at": "2026-09-03T09:44:45.466Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:sewts_gmbh_career",
+      "company_id": "company:sewts_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.sewts.com/",
+      "canonical_url": "https://www.sewts.com/",
+      "is_official": true,
+      "verified_at": "2026-09-03T09:44:45.466Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.sewts.com/",
+          "basis_url": "https://www.sewts.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T09:44:45.466Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22392,6 +22772,48 @@
           "basis_url": "https://www.smart-reporting.com/",
           "redirect_chain": [],
           "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:smartlane_gmbh_career",
+      "company_id": "company:smartlane_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://join.com/companies/smartlane",
+      "canonical_url": "https://join.com/companies/smartlane",
+      "is_official": true,
+      "verified_at": "2026-09-03T09:44:45.466Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://join.com/companies/smartlane",
+          "basis_url": "https://smartlane.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T09:44:45.466Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:social_sweethearts_gmbh_career",
+      "company_id": "company:social_sweethearts_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.socialsweethearts.de/jobs",
+      "canonical_url": "https://www.socialsweethearts.de/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-03T09:44:45.466Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.socialsweethearts.de/jobs",
+          "basis_url": "https://www.socialsweethearts.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T09:44:45.466Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
