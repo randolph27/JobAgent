@@ -1,0 +1,123 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-03T08:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Neovii Biotech GmbH",
+      "official_website_url": "https://neovii.com/",
+      "career_url": "https://neovii.com/careers/",
+      "aliases": [
+        "Neovii",
+        "Neovii Biotech"
+      ],
+      "locations": [
+        {
+          "label": "Graefelfing / Greater Munich",
+          "city": "Graefelfing",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Biopharmaceuticals",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://neovii.com/careers/",
+      "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+      "evidence_note": "Der Neovii-Biotech-Kandidat wurde ueber die offizielle Neovii-Domain, die dort erreichbare Careers-Seite und die offizielle Kontaktseite mit Graefelfing-Standort belegt."
+    },
+    {
+      "canonical_name": "Muenchner Hybrid Systemtechnik GmbH",
+      "official_website_url": "https://www.mhshy.de/en/",
+      "career_url": "https://www.mhshy.de/en/strengthening-our-team/",
+      "aliases": [
+        "Muenchner Hybrid Systemtechnik",
+        "mhs"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sensor and Control Technology",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.mhshy.de/en/strengthening-our-team/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der MHS-Kandidat wurde ueber die offizielle mhshy.de-Domain, die dort erreichbare Team-/Bewerbungsseite und die dort genannte Muenchner Firmenadresse belegt."
+    },
+    {
+      "canonical_name": "Hyperganic",
+      "official_website_url": "https://www.hyperganic.com/",
+      "career_url": "https://careers.smartrecruiters.com/HyperganicGroup",
+      "aliases": [
+        "Hyperganic Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Additive Manufacturing Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.smartrecruiters.com/HyperganicGroup",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Hyperganic-Kandidat wurde ueber die offizielle Hyperganic-Domain mit Muenchner Office und die erreichbare SmartRecruiters-Karriereseite fuer Hyperganic Group belegt."
+    },
+    {
+      "canonical_name": "dstack.ai",
+      "official_website_url": "https://dstack.ai/",
+      "career_url": "https://join.com/companies/dstack",
+      "aliases": [
+        "dstack"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Infrastructure",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://join.com/companies/dstack",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der dstack.ai-Kandidat wurde ueber die offizielle dstack.ai-Domain und die erreichbare JOIN-Karriereseite fuer dstack belegt."
+    },
+    {
+      "canonical_name": "Datarella",
+      "official_website_url": "https://datarella.com/",
+      "career_url": null,
+      "aliases": [
+        "Datarella GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI and Web3 Solutions",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://datarella.com/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Datarella-Kandidat wurde ueber die offizielle Datarella-Domain belegt; ein eigener Karrierepfad wurde in dieser Welle nicht belastbar gefunden, daher bleibt die Verifikation auf Firmen-Domain-Ebene."
+    }
+  ]
+}

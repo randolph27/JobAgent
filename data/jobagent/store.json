@@ -9868,6 +9868,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:neovii_biotech_gmbh",
+      "canonical_name": "Neovii Biotech GmbH",
+      "canonical_domain": "neovii.com",
+      "official_website_url": "https://neovii.com/",
+      "career_url": "https://neovii.com/careers/",
+      "aliases": [
+        "Neovii",
+        "Neovii Biotech"
+      ],
+      "locations": [
+        {
+          "label": "Graefelfing / Greater Munich",
+          "city": "Graefelfing",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Biopharmaceuticals",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://neovii.com/careers/",
+        "observed_at": "2026-09-03T08:54:20.594Z",
+        "verification_url": "https://neovii.com/careers/",
+        "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Biopharmaceuticals",
+        "evidence_note": "Der Neovii-Biotech-Kandidat wurde ueber die offizielle Neovii-Domain, die dort erreichbare Careers-Seite und die offizielle Kontaktseite mit Graefelfing-Standort belegt."
+      },
+      "created_at": "2026-09-03T08:54:20.594Z",
+      "updated_at": "2026-09-03T08:54:20.594Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:nebumind_gmbh",
       "canonical_name": "nebumind GmbH",
       "canonical_domain": "nebumind.com",
@@ -10367,6 +10406,45 @@
       },
       "created_at": "2026-09-01T06:08:24.736Z",
       "updated_at": "2026-09-01T06:08:24.736Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:muenchner_hybrid_systemtechnik_gmbh",
+      "canonical_name": "Muenchner Hybrid Systemtechnik GmbH",
+      "canonical_domain": "mhshy.de",
+      "official_website_url": "https://www.mhshy.de/en/",
+      "career_url": "https://www.mhshy.de/en/strengthening-our-team/",
+      "aliases": [
+        "mhs",
+        "Muenchner Hybrid Systemtechnik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sensor and Control Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.mhshy.de/en/strengthening-our-team/",
+        "observed_at": "2026-09-03T08:54:20.594Z",
+        "verification_url": "https://www.mhshy.de/en/strengthening-our-team/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Sensor and Control Technology",
+        "evidence_note": "Der MHS-Kandidat wurde ueber die offizielle mhshy.de-Domain, die dort erreichbare Team-/Bewerbungsseite und die dort genannte Muenchner Firmenadresse belegt."
+      },
+      "created_at": "2026-09-03T08:54:20.594Z",
+      "updated_at": "2026-09-03T08:54:20.594Z",
       "last_successful_scan_at": null
     },
     {
@@ -11029,6 +11107,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hyperganic",
+      "canonical_name": "Hyperganic",
+      "canonical_domain": "hyperganic.com",
+      "official_website_url": "https://www.hyperganic.com/",
+      "career_url": "https://careers.smartrecruiters.com/HyperganicGroup",
+      "aliases": [
+        "Hyperganic Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Additive Manufacturing Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.smartrecruiters.com/HyperganicGroup",
+        "observed_at": "2026-09-03T08:54:20.594Z",
+        "verification_url": "https://careers.smartrecruiters.com/HyperganicGroup",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Additive Manufacturing Software",
+        "evidence_note": "Der Hyperganic-Kandidat wurde ueber die offizielle Hyperganic-Domain mit Muenchner Office und die erreichbare SmartRecruiters-Karriereseite fuer Hyperganic Group belegt."
+      },
+      "created_at": "2026-09-03T08:54:20.594Z",
+      "updated_at": "2026-09-03T08:54:20.594Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:heldele_gmbh",
       "canonical_name": "HELDELE GmbH",
       "canonical_domain": "heldele.de",
@@ -11532,6 +11648,44 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:dstack_ai",
+      "canonical_name": "dstack.ai",
+      "canonical_domain": "dstack.ai",
+      "official_website_url": "https://dstack.ai/",
+      "career_url": "https://join.com/companies/dstack",
+      "aliases": [
+        "dstack"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Infrastructure",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://join.com/companies/dstack",
+        "observed_at": "2026-09-03T08:54:20.594Z",
+        "verification_url": "https://join.com/companies/dstack",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Infrastructure",
+        "evidence_note": "Der dstack.ai-Kandidat wurde ueber die offizielle dstack.ai-Domain und die erreichbare JOIN-Karriereseite fuer dstack belegt."
+      },
+      "created_at": "2026-09-03T08:54:20.594Z",
+      "updated_at": "2026-09-03T08:54:20.594Z",
       "last_successful_scan_at": null
     },
     {
@@ -12073,6 +12227,44 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:datarella",
+      "canonical_name": "Datarella",
+      "canonical_domain": "datarella.com",
+      "official_website_url": "https://datarella.com/",
+      "career_url": null,
+      "aliases": [
+        "Datarella GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI and Web3 Solutions",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://datarella.com/",
+        "observed_at": "2026-09-03T08:54:20.594Z",
+        "verification_url": "https://datarella.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI and Web3 Solutions",
+        "evidence_note": "Der Datarella-Kandidat wurde ueber die offizielle Datarella-Domain belegt; ein eigener Karrierepfad wurde in dieser Welle nicht belastbar gefunden, daher bleibt die Verifikation auf Firmen-Domain-Ebene."
+      },
+      "created_at": "2026-09-03T08:54:20.594Z",
+      "updated_at": "2026-09-03T08:54:20.594Z",
       "last_successful_scan_at": null
     },
     {
@@ -17521,6 +17713,27 @@
       ]
     },
     {
+      "source_id": "source:dstack_ai_career",
+      "company_id": "company:dstack_ai",
+      "source_type": "CAREER_PAGE",
+      "url": "https://join.com/companies/dstack",
+      "canonical_url": "https://join.com/companies/dstack",
+      "is_official": true,
+      "verified_at": "2026-09-03T08:54:20.594Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://join.com/companies/dstack",
+          "basis_url": "https://dstack.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T08:54:20.594Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:dtv_verlagsgesellschaft_career",
       "company_id": "company:dtv_verlagsgesellschaft",
       "source_type": "CAREER_PAGE",
@@ -18942,6 +19155,27 @@
           "basis_url": "https://hula.earth/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T18:18:31.59Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:hyperganic_career",
+      "company_id": "company:hyperganic",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.smartrecruiters.com/HyperganicGroup",
+      "canonical_url": "https://careers.smartrecruiters.com/HyperganicGroup",
+      "is_official": true,
+      "verified_at": "2026-09-03T08:54:20.594Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.smartrecruiters.com/HyperganicGroup",
+          "basis_url": "https://www.hyperganic.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T08:54:20.594Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -20647,6 +20881,27 @@
       ]
     },
     {
+      "source_id": "source:muenchner_hybrid_systemtechnik_gmbh_career",
+      "company_id": "company:muenchner_hybrid_systemtechnik_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.mhshy.de/en/strengthening-our-team/",
+      "canonical_url": "https://www.mhshy.de/en/strengthening-our-team/",
+      "is_official": true,
+      "verified_at": "2026-09-03T08:54:20.594Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.mhshy.de/en/strengthening-our-team/",
+          "basis_url": "https://www.mhshy.de/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T08:54:20.594Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:muenchner_kammerspiele_career",
       "company_id": "company:muenchner_kammerspiele",
       "source_type": "CAREER_PAGE",
@@ -20935,6 +21190,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:neovii_biotech_gmbh_career",
+      "company_id": "company:neovii_biotech_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://neovii.com/careers/",
+      "canonical_url": "https://neovii.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-03T08:54:20.594Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://neovii.com/careers/",
+          "basis_url": "https://neovii.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T08:54:20.594Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:nfon_ag_career",
