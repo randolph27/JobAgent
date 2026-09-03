@@ -44,13 +44,16 @@
     },
     {
       "company_id": "company:siemens_ag",
-      "canonical_name": "Siemens AG",
+      "canonical_name": "Siemens Mobility",
       "canonical_domain": "siemens.com",
       "official_website_url": "https://www.siemens.com/",
-      "career_url": "https://jobs.siemens.com/",
+      "career_url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
       "aliases": [
         "Siemens",
-        "Siemens AG"
+        "Siemens AG",
+        "Siemens Hofmannstrasse",
+        "Siemens Mobility",
+        "Siemens Mobility GmbH"
       ],
       "locations": [
         {
@@ -69,16 +72,16 @@
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://jobs.siemens.com/",
-        "observed_at": "2026-08-17T15:52:58.666Z",
-        "verification_url": "https://siemens.com/en-us/company/jobs",
-        "discovery_origin": "seed.manual",
+        "url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
+        "observed_at": "2026-09-03T14:10:44.727Z",
+        "verification_url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
+        "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
         "target_area": "MUNICH",
-        "industry_hint": "Industrial Technology",
-        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
+        "industry_hint": "Mobility Technology",
+        "evidence_note": "Der Siemens-Mobility-Kandidat wurde ueber die offizielle siemens.com-Domain und die zentrale Siemens-Jobs-Seite belegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-27T05:08:12.805Z",
+      "updated_at": "2026-09-03T14:10:44.727Z",
       "last_successful_scan_at": "2026-08-17T13:49:12.49Z",
       "candidate_verification_evidence": [
         {
@@ -140,14 +143,16 @@
     },
     {
       "company_id": "company:munich_re",
-      "canonical_name": "Munich Re",
+      "canonical_name": "Muenchner Rueck AG",
       "canonical_domain": "munichre.com",
       "official_website_url": "https://www.munichre.com/",
       "career_url": "https://careers.munichre.com/",
       "aliases": [
         "Muenchener Rueck",
         "Muenchener Rueckversicherungs-Gesellschaft",
-        "Munich Re"
+        "Muenchner Rueck AG",
+        "Munich Re",
+        "Munich Re Group"
       ],
       "locations": [
         {
@@ -167,15 +172,15 @@
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
         "url": "https://careers.munichre.com/",
-        "observed_at": "2026-08-17T15:52:58.666Z",
+        "observed_at": "2026-09-03T14:10:44.727Z",
         "verification_url": "https://careers.munichre.com/",
-        "discovery_origin": "seed.manual",
+        "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
         "target_area": "MUNICH",
-        "industry_hint": "Insurance",
-        "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
+        "industry_hint": "Insurance and Reinsurance",
+        "evidence_note": "Der Muenchner-Rueck-Kandidat wurde ueber die offizielle munichre.com-Domain und das offizielle Munich-Re-Karriereportal belegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
+      "updated_at": "2026-09-03T14:10:44.727Z",
       "last_successful_scan_at": null
     },
     {
@@ -9792,6 +9797,47 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:noventi_healthcare",
+      "canonical_name": "Noventi Healthcare",
+      "canonical_domain": "noventi.de",
+      "official_website_url": "https://www.noventi.de/",
+      "career_url": "https://www.noventi.de/karriere/jobboerse/",
+      "aliases": [
+        "NOVENTI",
+        "NOVENTI Health",
+        "NOVENTI Health SE",
+        "NOVENTI HealthCare GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare IT and Financial Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 36,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.noventi.de/karriere/jobboerse/",
+        "observed_at": "2026-09-03T14:10:44.727Z",
+        "verification_url": "https://www.noventi.de/karriere/jobboerse/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Healthcare IT and Financial Services",
+        "evidence_note": "Der Noventi-Healthcare-Kandidat wurde ueber die offizielle noventi.de-Domain und die dort veroeffentlichte NOVENTI-Jobboerse belegt."
+      },
+      "created_at": "2026-09-03T14:10:44.727Z",
+      "updated_at": "2026-09-03T14:10:44.727Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:jambit_gmbh",
       "canonical_name": "jambit GmbH",
       "canonical_domain": "jambit.com",
@@ -11000,6 +11046,47 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:ge_aerospace_advanced_technology",
+      "canonical_name": "GE Aerospace Advanced Technology",
+      "canonical_domain": "geaerospace.com",
+      "official_website_url": "https://www.geaerospace.com/",
+      "career_url": "https://careers.geaerospace.com/global/en/garching",
+      "aliases": [
+        "GE AAT",
+        "GE Aerospace",
+        "GE Aerospace Advanced Technology",
+        "General Electric Holding GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Garching bei Muenchen",
+          "city": "Garching bei Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Aerospace Engineering",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.geaerospace.com/global/en/garching",
+        "observed_at": "2026-09-03T14:10:44.727Z",
+        "verification_url": "https://careers.geaerospace.com/global/en/garching",
+        "discovery_origin": "source-registry:munich_business_us_companies",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Aerospace Engineering",
+        "evidence_note": "Der General-Electric-Kandidat wurde fail-closed auf GE Aerospace Advanced Technology in Garching eingegrenzt und ueber die offizielle GE-Aerospace-Karriereseite fuer Garching belegt."
+      },
+      "created_at": "2026-09-03T14:10:44.727Z",
+      "updated_at": "2026-09-03T14:10:44.727Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:fnz_bank",
       "canonical_name": "FNZ Bank",
       "canonical_domain": "fnz.de",
@@ -11346,6 +11433,46 @@
       },
       "created_at": "2026-09-03T10:38:45.617Z",
       "updated_at": "2026-09-03T10:38:45.617Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:philip_morris_gmbh",
+      "canonical_name": "Philip Morris GmbH",
+      "canonical_domain": "pmi.com",
+      "official_website_url": "https://www.pmi.com/",
+      "career_url": "https://www.pmi.com/careers",
+      "aliases": [
+        "Philip Morris",
+        "Philip Morris GmbH",
+        "Philip Morris International"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Goods",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.pmi.com/careers",
+        "observed_at": "2026-09-03T14:10:44.727Z",
+        "verification_url": "https://www.pmi.com/careers",
+        "discovery_origin": "source-registry:munich_business_us_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Consumer Goods",
+        "evidence_note": "Der Philip-Morris-Kandidat wurde ueber die offizielle pmi.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-03T14:10:44.727Z",
+      "updated_at": "2026-09-03T14:10:44.727Z",
       "last_successful_scan_at": null
     },
     {
@@ -12470,6 +12597,46 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:sueddeutsche_zeitung",
+      "canonical_name": "Sueddeutsche Zeitung",
+      "canonical_domain": "sueddeutsche.de",
+      "official_website_url": "https://www.sueddeutsche.de/",
+      "career_url": "https://www.sueddeutsche.de/jobs",
+      "aliases": [
+        "Sueddeutsche Zeitung",
+        "Sueddeutsche Zeitung GmbH",
+        "SZ"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-04T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.sueddeutsche.de/jobs",
+        "observed_at": "2026-09-03T14:10:44.727Z",
+        "verification_url": "https://www.sueddeutsche.de/jobs",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media and Publishing",
+        "evidence_note": "Der Sueddeutsche-Zeitung-Kandidat wurde ueber die offizielle sueddeutsche.de-Domain und die dort veroeffentlichte Jobs-Seite belegt."
+      },
+      "created_at": "2026-09-03T14:10:44.727Z",
+      "updated_at": "2026-09-03T14:10:44.727Z",
       "last_successful_scan_at": null
     },
     {
@@ -19161,6 +19328,27 @@
       ]
     },
     {
+      "source_id": "source:ge_aerospace_advanced_technology_career",
+      "company_id": "company:ge_aerospace_advanced_technology",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.geaerospace.com/global/en/garching",
+      "canonical_url": "https://careers.geaerospace.com/global/en/garching",
+      "is_official": true,
+      "verified_at": "2026-09-03T14:10:44.727Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.geaerospace.com/global/en/garching",
+          "basis_url": "https://www.geaerospace.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T14:10:44.727Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:ge_healthcare_career",
       "company_id": "company:ge_healthcare",
       "source_type": "CAREER_PAGE",
@@ -21749,17 +21937,19 @@
       "url": "https://careers.munichre.com/",
       "canonical_url": "https://careers.munichre.com/",
       "is_official": true,
-      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verified_at": "2026-09-03T14:10:44.727Z",
       "verification_basis": "CAREER_URL",
-      "verification_evidence": {
-        "status": "VERIFIED",
-        "evidence_type": "CAREER_URL",
-        "url": "https://careers.munichre.com/",
-        "basis_url": "https://www.munichre.com/",
-        "redirect_chain": [],
-        "observed_at": "2026-08-17T15:52:58.666Z",
-        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
-      }
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.munichre.com/",
+          "basis_url": "https://www.munichre.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T14:10:44.727Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:mutares_se_and_co_kgaa_career",
@@ -22005,6 +22195,27 @@
           "basis_url": "https://corporate.nfon.com/en/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T06:04:40.636Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:noventi_healthcare_career",
+      "company_id": "company:noventi_healthcare",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.noventi.de/karriere/jobboerse/",
+      "canonical_url": "https://www.noventi.de/karriere/jobboerse/",
+      "is_official": true,
+      "verified_at": "2026-09-03T14:10:44.727Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.noventi.de/karriere/jobboerse/",
+          "basis_url": "https://www.noventi.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T14:10:44.727Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22437,6 +22648,27 @@
           "basis_url": "https://www.personio.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:philip_morris_gmbh_career",
+      "company_id": "company:philip_morris_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.pmi.com/careers",
+      "canonical_url": "https://www.pmi.com/careers",
+      "is_official": true,
+      "verified_at": "2026-09-03T14:10:44.727Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.pmi.com/careers",
+          "basis_url": "https://www.pmi.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T14:10:44.727Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -23224,20 +23456,22 @@
       "source_id": "source:siemens_ag_career",
       "company_id": "company:siemens_ag",
       "source_type": "CAREER_PAGE",
-      "url": "https://jobs.siemens.com/",
-      "canonical_url": "https://jobs.siemens.com/",
+      "url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
+      "canonical_url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
       "is_official": true,
-      "verified_at": "2026-08-17T15:52:58.666Z",
+      "verified_at": "2026-09-03T14:10:44.727Z",
       "verification_basis": "CAREER_URL",
-      "verification_evidence": {
-        "status": "VERIFIED",
-        "evidence_type": "CAREER_URL",
-        "url": "https://jobs.siemens.com/",
-        "basis_url": "https://www.siemens.com/",
-        "redirect_chain": [],
-        "observed_at": "2026-08-17T15:52:58.666Z",
-        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
-      }
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
+          "basis_url": "https://www.siemens.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T14:10:44.727Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:siemens_ag_career_url",
@@ -23569,6 +23803,27 @@
           "basis_url": "https://www.steelcase.com/eu-en/discover/steelcase/munich/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T22:37:31.023Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:sueddeutsche_zeitung_career",
+      "company_id": "company:sueddeutsche_zeitung",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.sueddeutsche.de/jobs",
+      "canonical_url": "https://www.sueddeutsche.de/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-03T14:10:44.727Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.sueddeutsche.de/jobs",
+          "basis_url": "https://www.sueddeutsche.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-03T14:10:44.727Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

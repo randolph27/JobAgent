@@ -1,0 +1,158 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-03T14:35:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Noventi Healthcare",
+      "official_website_url": "https://www.noventi.de/",
+      "career_url": "https://www.noventi.de/karriere/jobboerse/",
+      "aliases": [
+        "NOVENTI",
+        "NOVENTI Health",
+        "NOVENTI HealthCare GmbH",
+        "NOVENTI Health SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare IT and Financial Services",
+      "scan_priority": 36,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.noventi.de/karriere/jobboerse/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Noventi-Healthcare-Kandidat wurde ueber die offizielle noventi.de-Domain und die dort veroeffentlichte NOVENTI-Jobboerse belegt."
+    },
+    {
+      "canonical_name": "Muenchner Rueck AG",
+      "official_website_url": "https://www.munichre.com/",
+      "career_url": "https://careers.munichre.com/",
+      "aliases": [
+        "Muenchener Rueckversicherungs-Gesellschaft",
+        "Munich Re",
+        "Munich Re Group"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Insurance and Reinsurance",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.munichre.com/",
+      "discovery_origin": "source-registry:stadt_muenchen_boersennotierte_unternehmen",
+      "evidence_note": "Der Muenchner-Rueck-Kandidat wurde ueber die offizielle munichre.com-Domain und das offizielle Munich-Re-Karriereportal belegt."
+    },
+    {
+      "canonical_name": "GE Aerospace Advanced Technology",
+      "official_website_url": "https://www.geaerospace.com/",
+      "career_url": "https://careers.geaerospace.com/global/en/garching",
+      "aliases": [
+        "General Electric Holding GmbH",
+        "GE Aerospace",
+        "GE Aerospace Advanced Technology",
+        "GE AAT"
+      ],
+      "locations": [
+        {
+          "label": "Garching bei Muenchen",
+          "city": "Garching bei Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Aerospace Engineering",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.geaerospace.com/global/en/garching",
+      "discovery_origin": "source-registry:munich_business_us_companies",
+      "evidence_note": "Der General-Electric-Kandidat wurde fail-closed auf GE Aerospace Advanced Technology in Garching eingegrenzt und ueber die offizielle GE-Aerospace-Karriereseite fuer Garching belegt."
+    },
+    {
+      "canonical_name": "Philip Morris GmbH",
+      "official_website_url": "https://www.pmi.com/",
+      "career_url": "https://www.pmi.com/careers",
+      "aliases": [
+        "Philip Morris",
+        "Philip Morris International",
+        "Philip Morris GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Consumer Goods",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.pmi.com/careers",
+      "discovery_origin": "source-registry:munich_business_us_companies",
+      "evidence_note": "Der Philip-Morris-Kandidat wurde ueber die offizielle pmi.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Siemens Mobility",
+      "official_website_url": "https://www.siemens.com/",
+      "career_url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
+      "aliases": [
+        "Siemens Mobility GmbH",
+        "Siemens Mobility",
+        "Siemens Hofmannstrasse"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Mobility Technology",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.siemens.com/de/de/unternehmen/jobs.html",
+      "discovery_origin": "source-registry:munich_business_automotive_mobility_companies",
+      "evidence_note": "Der Siemens-Mobility-Kandidat wurde ueber die offizielle siemens.com-Domain und die zentrale Siemens-Jobs-Seite belegt."
+    },
+    {
+      "canonical_name": "Sueddeutsche Zeitung",
+      "official_website_url": "https://www.sueddeutsche.de/",
+      "career_url": "https://www.sueddeutsche.de/jobs",
+      "aliases": [
+        "Sueddeutsche Zeitung",
+        "Sueddeutsche Zeitung GmbH",
+        "SZ"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Publishing",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.sueddeutsche.de/jobs",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Sueddeutsche-Zeitung-Kandidat wurde ueber die offizielle sueddeutsche.de-Domain und die dort veroeffentlichte Jobs-Seite belegt."
+    }
+  ]
+}
