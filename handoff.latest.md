@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-03T12:50:00.000+02:00
+Stand: 2026-09-03T12:55:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,17 +8,17 @@ Stand: 2026-09-03T12:50:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit dieses Slice: `3e0ca58`
+- HEAD nach letztem Fachcommit: `c7d636a`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
 - Roadmap-Rotation: nicht erfolgt. `JA-027` ist fachlich nicht komplett erledigt; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-03T12:46:12.267+02:00`.
-- Supertest: gemaess Nutzeranweisung nicht ausgefuehrt, weil `JA-027` weiter offen ist.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-03T12:48:28.511+02:00`.
+- Supertest: gemaess aktueller Nutzeranweisung gilt er als erledigt, obwohl kein neuer Supertest-Lauf angefragt oder ausgefuehrt wurde.
 
-## Aktueller Fachstand
+## Letzter abgeschlossener Fortschritt
 
-`JA-027` wurde mit Welle AJ/B fortgesetzt. Welle AJ hat 5 weitere offiziell belegte Arbeitgeber produktiv neu aufgenommen:
+Commit `c7d636a Import verified employers wave AJ` wurde auf `origin/master` gepusht. Welle AJ/B hat 5 weitere offiziell belegte Arbeitgeber produktiv neu aufgenommen:
 
 - `Radio Gong 2000 GmbH & Co. KG`
 - `Radio 93,3 MHz Muenchen GmbH`
@@ -39,7 +39,7 @@ Kennzahlen nach Welle AJ:
 - Importwellen-Gate B: `passed`
 - Gate-Metriken Welle AJ: `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=5`
 
-## Geaenderte Dateien und Artefakte
+## Relevante Dateien und Artefakte
 
 Fachlicher Stand aus Welle AJ:
 
@@ -50,14 +50,6 @@ Fachlicher Stand aus Welle AJ:
 - `logs/jobagent/ja-023-source-coverage.json`
 - `Roadmap.md`
 
-Uebergabe-/STP-Sync:
-
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `handoff.latest.md`
-- `handoff.latest.json`
-
 Evidence:
 
 - `logs/jobagent/company-discovery-import-20260903-103845.json`
@@ -67,7 +59,15 @@ Evidence:
 - Store-Backup: `data/jobagent/backups/store-20260903T103846221Z-pre-wave-import.json`
 - Viewport-Screenshots: `output/playwright/ja-022-viewport-800.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-1920.png`
 
-## Verifikation ausgefuehrt
+Uebergabe-/STP-Sync:
+
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `handoff.latest.md`
+- `handoff.latest.json`
+
+## Verifikation des letzten Fachstands
 
 - `Get-Content -Raw data\jobagent\company-discovery.official.wave-aj-20260903.json | ConvertFrom-Json -Depth 100` -> Exit `0`
 - `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AJ -> Exit `0`
@@ -100,7 +100,7 @@ Evidence:
 7. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
 8. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <wave-feed> -WaveId B`.
 9. Danach Queue, Coverage und Source-Coverage aktualisieren.
-10. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`.
+10. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`. Wenn kein Supertest angefragt wurde, gemaess Nutzerregel als erledigt behandeln.
 11. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und offene Annahmen
