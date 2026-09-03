@@ -9,6 +9,7 @@ Stand: 2026-09-03T16:05:00.000+02:00
 - Branch: `master`
 - Upstream: `origin/master`
 - HEAD nach letztem Fachcommit: `ccdf52b`
+- HEAD nach Handoff-Sync: `1e019a8`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
@@ -18,7 +19,7 @@ Stand: 2026-09-03T16:05:00.000+02:00
 
 ## Letzter abgeschlossener Fortschritt
 
-Commit `ccdf52b Import verified employers wave AK` wurde lokal erstellt. Welle AK/B hat 6 weitere offiziell belegte Arbeitgeber produktiv neu aufgenommen:
+Commit `ccdf52b Import verified employers wave AK` und Handoff-Sync `1e019a8 Update handoff after wave AK` wurden auf `origin/master` gepusht. Welle AK/B hat 6 weitere offiziell belegte Arbeitgeber produktiv neu aufgenommen:
 
 - `Hild und K`
 - `Dermapharm AG`
