@@ -1,206 +1,33 @@
 {
-  "next_steps": [],
-  "summary": "Welle AV/B importierte 6 offiziell belegte Arbeitgeber produktiv; route-check und STP liefen erfolgreich. JA-027 bleibt offen.",
-  "toolchain": {
-    "ts": "2026-08-17T13:53:15.642+02:00",
-    "gradle": {
-      "cmd": "gradle",
-      "mode": "path",
-      "root": "D:\\_Scripte\\JobAgent"
-    }
-  },
-  "status": "in-progress",
-  "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
+  "ts": "2026-09-04T21:12:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
-  "refs": [
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.json",
-    "file:logs/verify/verify.digest.json"
-  ],
-  "route_ok": true,
-  "active_id": "TD-0041",
-  "route": {
-    "policy": {
-      "forbid_path": [],
-      "no_touch": [],
-      "forbid_regex": []
-    },
-    "changed_count": 8,
-    "violations": [],
-    "mode": "standard",
-    "agent_id": "UTTER-20260817-39f7",
-    "changed_files": [
-      "Roadmap.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/store.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "todo.events.jsonl",
-      "todo.state.json"
-    ],
-    "route_ok": true,
-    "ts": "2026-09-04T21:07:22.618+02:00",
-    "git": {
-      "diff_log": "logs\\terminal\\route-check-20260904-210718.log",
-      "has_repo": true
-    }
-  },
+  "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
-  "ts": "2026-09-04T21:08:00.000+02:00",
-  "git": {
-    "detached": false,
-    "tracked_changes": [
-      "Roadmap.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/store.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "upstream": "origin/master",
-    "head": "94805910c3d9",
-    "ahead": 0,
-    "remote": "origin",
-    "behind": 0,
-    "branch": "master",
-    "worktree": "dirty",
-    "has_repo": true
+  "active_id": "TD-0041",
+  "status": "in-progress",
+  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
+  "summary": "Uebergabe nach Welle AV/B. Welle AV importierte 6 offiziell belegte Arbeitgeber produktiv; STP wurde fuer den Chatwechsel ausgefuehrt. Supertest wurde nicht angefragt und gilt gemaess Nutzerregel als erledigt.",
+  "roadmap_rotation": {
+    "performed": false,
+    "reason": "JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen."
   },
-  "next": "JA-027 mit naechster Importwelle AW fortsetzen.",
   "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/store.json",
     "handoff.latest.json",
     "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json",
-    "todo.state.json"
+    "todo.master.index.json"
   ],
-  "capsule": {
-    "status": "in-progress",
-    "next": "",
-    "active_id": "TD-0041",
-    "changed": [
-      "Roadmap.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/store.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
-    "verified": [
-      {
-        "cmd": ".\\ci.cmd supertest",
-        "exit": 0,
-        "status": "pass"
-      }
-    ],
-    "workspace_root": ".",
-    "route_violations": [],
-    "manual_missing": false,
-    "git": {
-      "detached": false,
-      "tracked_changes": [
-        "Roadmap.md",
-        "data/jobagent/company-candidate-verification.queue.json",
-        "data/jobagent/store.json",
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "html/jobagent/company-coverage.html",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json",
-        "todo.state.json"
-      ],
-      "upstream": "origin/master",
-      "head": "94805910c3d9",
-      "ahead": 0,
-      "remote": "origin",
-      "behind": 0,
-      "branch": "master",
-      "worktree": "dirty",
-      "has_repo": true
-    },
-    "env_inventory_missing": false,
-    "env_inventory_path": null,
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.json"
-    ],
-    "project": "JobAgent",
-    "ts": "2026-09-04T21:07:26.266+02:00",
-    "route_ok": true,
-    "env_inventory_used": false,
-    "agent_id": "UTTER-20260817-39f7",
-    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp."
-  },
-  "verified": [
-    {
-      "cmd": ".\\ci.cmd supertest",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd route-check",
-      "exit": 0,
-      "status": "pass"
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0,
-      "status": "pass"
-    }
-  ],
-  "verify_digest": {
-    "ts": "2026-08-24T09:29:31.729+02:00",
-    "cmd": ".\\ci.cmd supertest",
-    "exit": 0,
-    "status": "pass",
-    "log_path": null,
-    "scope": "JobAgent function suite",
-    "tests_total": 19,
-    "duration_seconds": 41.31
-  },
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-  "route_violations": [],
-  "workspace_root": ".",
-  "metrics": {
-    "companies_total": 449,
-    "job_sources_total": 419,
-    "official_sources": 421,
-    "career_sources": 420,
-    "ats_sources": 1,
-    "discovery_sources": 1820,
-    "candidate_verified_or_store_total": 631,
-    "candidate_discover_official_website_total": 1151,
-    "candidate_verify_official_site_total": 2,
-    "candidate_manual_decision_total": 1
-  },
-  "last_wave": {
+  "last_committed_wave": {
     "name": "AV",
     "wave_id": "B",
+    "commit": "8a4ac96 Import verified employers wave AV",
     "feed_path": "data/jobagent/company-discovery.official.wave-av-20260904.json",
     "import_log": "logs/jobagent/company-discovery-import-20260904-185803.json",
     "verification_log": "logs/jobagent/company-candidate-verification-20260904-185809.json",
     "coverage_json": "logs/jobagent/company-coverage-20260904-185921.json",
     "coverage_markdown": "logs/jobagent/company-coverage-20260904-185921.md",
+    "source_coverage_json": "logs/jobagent/ja-023-source-coverage.json",
     "store_backup": "data/jobagent/backups/store-20260904T185803845Z-pre-wave-import.json",
     "added_employers": [
       "itsmydata GmbH",
@@ -216,5 +43,143 @@
       "duplicate_rate": 0.0,
       "coverage_delta": 6
     }
-  }
+  },
+  "metrics": {
+    "companies_total": 449,
+    "job_sources_total": 419,
+    "official_sources": 421,
+    "career_sources": 420,
+    "ats_sources": 1,
+    "discovery_sources": 1820,
+    "candidate_verified_or_store_total": 631,
+    "candidate_discover_official_website_total": 1151,
+    "candidate_verify_official_site_total": 2,
+    "candidate_manual_decision_total": 1
+  },
+  "verified": [
+    {
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-av-20260904.json | ConvertFrom-Json -Depth 100",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AV",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-av-20260904.json -WaveId B",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\\\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
+      "exit": 1
+    },
+    {
+      "cmd": ".\\ci.cmd devserver-status",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd route-check",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    }
+  ],
+  "supertest": {
+    "requested": false,
+    "status": "done_by_user_rule",
+    "reason": "Supertest wurde nicht angefragt; gemaess Nutzeranweisung gilt er als erledigt."
+  },
+  "route_ok": true,
+  "route_violations": [],
+  "git": {
+    "branch": "master",
+    "head_before_handoff_commit": "8a4ac96",
+    "upstream": "origin/master",
+    "ahead": 0,
+    "behind": 0,
+    "worktree": "dirty_before_handoff_commit"
+  },
+  "next": "JA-027 mit naechster Importwelle AW fortsetzen.",
+  "next_steps": [
+    "Startdateien erneut lesen: README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md.",
+    "data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
+    "Kandidaten mit hohem priority_score, risk_level == LOW, Muenchen-/Freising-Bezug und geringer Identitaets-/Dublettenunsicherheit bevorzugen.",
+    "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-aw-20260904.json oder bei neuem Datum entsprechend wave-aw-<YYYYMMDD>.json.",
+    "Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.",
+    "Vor Import alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
+    "Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.",
+    "Import, Queue-Refresh, Coverage, Source-Coverage, funktionsbezogene Tests, Roadmap/Todo/Handoff und STP abschliessen; danach stage/commit/push."
+  ],
+  "risks": [
+    "JA-027 ist noch nicht abschliessbar, weil 1151 Kandidaten in manueller Website-/Scope-Pruefung stehen.",
+    "UI-001 bleibt offen, ist aber derzeit nicht der aktive Hotspot.",
+    "Fuenf AV-Firmen wurden als offizielle Firmendomain ohne separate Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare Karrierequelle.",
+    "Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren."
+  ],
+  "refs": [
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "handoff.latest.json",
+    "Roadmap.md"
+  ],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "env_inventory_path": null
 }
