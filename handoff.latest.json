@@ -1,56 +1,14 @@
 {
-  "ts": "2026-09-04T10:30:54.493+02:00",
+  "ts": "2026-09-04T10:52:00+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
-  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "latest_commit": "4c80f7d Import verified employers wave AN",
-  "roadmap_rotation": {
-    "performed": false,
-    "reason": "JA-027 und UI-001 sind weiterhin offen."
-  },
-  "last_completed_slice": {
-    "wave": "AN",
-    "wave_id": "B",
-    "processed": 5,
-    "added": [
-      "DeutschlandGPT",
-      "Reply - Digital Experience",
-      "MorphoSys AG",
-      "Qlik Tech"
-    ],
-    "updated": [
-      "Capgemini Deutschland GmbH"
-    ],
-    "deduplicated": [
-      {
-        "input": "Capgemini Engineering",
-        "target": "Capgemini Deutschland GmbH",
-        "reason": "Domainmatch capgemini.com"
-      }
-    ],
-    "metrics": {
-      "companies": 403,
-      "job_sources": 399,
-      "official_sources": 401,
-      "career_sources": 400,
-      "ats_sources": 1,
-      "discovery_sources": 1820,
-      "queue_already_verified_or_store_backed": 583,
-      "queue_discover_official_website": 1199,
-      "queue_verify_official_site": 2,
-      "queue_manual_decision": 1,
-      "manual_review_rate": 0.0,
-      "duplicate_rate": 0.2,
-      "coverage_delta": 4,
-      "gate_status": "passed"
-    }
-  },
+  "goal": "JA-027 offizielle Arbeitgeber-Websites/Karrierequellen verifizieren und produktiv importieren",
   "changed": [
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-an-20260904.json",
+    "data/jobagent/company-discovery.official.wave-ao-20260904.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
     "html/jobagent/company-coverage.html",
@@ -60,28 +18,17 @@
     "handoff.latest.md",
     "handoff.latest.json"
   ],
-  "evidence": [
-    "logs/jobagent/company-discovery-import-20260904-082010.json",
-    "logs/jobagent/company-candidate-verification-20260904-082017.json",
-    "logs/jobagent/company-coverage-20260904-082130.json",
-    "logs/jobagent/company-coverage-20260904-082130.md",
-    "logs/jobagent/ja-023-source-coverage.json",
-    "data/jobagent/backups/store-20260904T082010746Z-pre-wave-import.json",
-    "output/playwright/ja-022-viewport-800.png",
-    "output/playwright/ja-022-viewport-1366.png",
-    "output/playwright/ja-022-viewport-1920.png"
-  ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-an-20260904.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ao-20260904.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AN",
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren URLs aus Welle AO",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-an-20260904.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ao-20260904.json -WaveId B",
       "exit": 0
     },
     {
@@ -149,60 +96,28 @@
       "exit": 0
     }
   ],
-  "supertest": {
-    "requested": false,
-    "status": "treated_done_by_user_instruction"
-  },
-  "services": {
-    "devserver": {
-      "port": 8500,
-      "status": "running"
-    },
-    "sonarqube": {
-      "port": 9000,
-      "status": "UP"
-    }
-  },
-  "next_steps": [
-    "JA-027 fortsetzen; UI-001 nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.",
-    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md erneut lesen.",
-    "data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
-    "Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.",
-    "Naechste Feed-Datei data/jobagent/company-discovery.official.wave-ao-20260904.json anlegen.",
-    "Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.",
-    "Vor Import alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
-    "Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.",
-    "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 und WaveId B ausfuehren.",
-    "Danach Queue, Coverage und Source-Coverage aktualisieren.",
-    "Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von JA-027.",
-    "Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push."
-  ],
-  "risks": [
-    "JA-027 ist noch nicht abschliessbar, weil weiter viele Kandidaten in manueller Website-/Scope-Pruefung stehen.",
-    "UI-001 bleibt offen, ist aber derzeit nicht der aktive Hotspot.",
-    "Deduplizierte Konzernkarriereseiten sind akzeptiert, solange der Domainmatch korrekt ist und keine produktive Firma ohne offiziellen Beleg entsteht.",
-    "Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren."
-  ],
   "route_ok": true,
   "route_violations": [],
   "git": {
-    "branch": "master",
-    "upstream": "origin/master",
-    "head_before_handoff_commit": "4c80f7d80cfa",
-    "ahead": 0,
     "behind": 0,
-    "worktree": "dirty"
+    "head": "4df8b0ae47cf",
+    "upstream": "origin/master",
+    "branch": "master",
+    "ahead": 0,
+    "worktree": "dirty-before-amend",
+    "commit": "4df8b0ae47cf31b75297112d60ccbf073aaa7c18"
   },
+  "next": "Naechste verifizierte Importwelle AP aus DISCOVER_OFFICIAL_WEBSITE-Kandidaten erstellen.",
   "refs": [
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
     "handoff.latest.json",
-    "handoff.latest.md"
+    "handoff.latest.md",
+    "Roadmap.md"
   ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "env_inventory_path": null,
-  "summary": "Uebergabe nach Welle AN/B; STP ausgefuehrt, keine Roadmap-Rotation."
+  "env_inventory_path": null
 }

@@ -10776,6 +10776,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:oncare_gmbh",
+      "canonical_name": "ONCARE GmbH",
+      "canonical_domain": "myoncare.com",
+      "official_website_url": "https://www.myoncare.com/",
+      "career_url": "https://www.myoncare.com/careers",
+      "aliases": [
+        "myoncare",
+        "ONCARE",
+        "ONCARE GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Health",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.myoncare.com/careers",
+        "observed_at": "2026-09-04T08:42:30.817Z",
+        "verification_url": "https://www.myoncare.com/careers",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Health",
+        "evidence_note": "Der ONCARE-Kandidat wurde ueber die offizielle myoncare.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:42:30.817Z",
+      "updated_at": "2026-09-04T08:42:30.817Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:mynaric_ag",
       "canonical_name": "Mynaric AG",
       "canonical_domain": "mynaric.com",
@@ -11596,6 +11636,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:olive_robotics",
+      "canonical_name": "Olive Robotics",
+      "canonical_domain": "olive-robotics.com",
+      "official_website_url": "https://olive-robotics.com/",
+      "career_url": "https://olive-robotics.com/company/career/",
+      "aliases": [
+        "Olive Robotics"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn / Muenchen",
+          "city": "Ottobrunn",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://olive-robotics.com/company/career/",
+        "observed_at": "2026-09-04T08:42:30.817Z",
+        "verification_url": "https://olive-robotics.com/company/career/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Robotics",
+        "evidence_note": "Der Olive-Robotics-Kandidat wurde ueber die offizielle olive-robotics.com-Domain und die dort veroeffentlichte Career-Seite mit Muenchner Standortbezug belegt."
+      },
+      "created_at": "2026-09-04T08:42:30.817Z",
+      "updated_at": "2026-09-04T08:42:30.817Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:nelhiebel_elektrotechnik_gmbh",
       "canonical_name": "Nelhiebel Elektrotechnik GmbH",
       "canonical_domain": "nelhiebel.de",
@@ -12374,6 +12452,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:neue_deutsche_filmgesellschaft_mbh",
+      "canonical_name": "neue deutsche Filmgesellschaft mbH",
+      "canonical_domain": "ndf.de",
+      "official_website_url": "https://www.ndf.de/",
+      "career_url": "https://www.ndf.de/karriere/",
+      "aliases": [
+        "ndF",
+        "ndF neue deutsche Filmgesellschaft mbH",
+        "neue deutsche Filmgesellschaft"
+      ],
+      "locations": [
+        {
+          "label": "Unterfoehring / Muenchen",
+          "city": "Unterfoehring",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Film and Television Production",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ndf.de/karriere/",
+        "observed_at": "2026-09-04T08:42:30.817Z",
+        "verification_url": "https://www.ndf.de/karriere/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Film and Television Production",
+        "evidence_note": "Der ndF-Kandidat wurde ueber die offizielle ndf.de-Domain und die dort veroeffentlichte Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:42:30.817Z",
+      "updated_at": "2026-09-04T08:42:30.817Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:microgenesis_techsoft",
       "canonical_name": "MicroGenesis TechSoft",
       "canonical_domain": "mgtechsoft.com",
@@ -13036,6 +13154,46 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:oska_mode_gmbh",
+      "canonical_name": "OSKA Mode GmbH",
+      "canonical_domain": "oska.fashion",
+      "official_website_url": "https://www.oska.fashion/",
+      "career_url": "https://www.oska.fashion/career/",
+      "aliases": [
+        "Oska",
+        "OSKA Fashion",
+        "OSKA Mode"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fashion",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.oska.fashion/career/",
+        "observed_at": "2026-09-04T08:42:30.817Z",
+        "verification_url": "https://www.oska.fashion/career/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Fashion",
+        "evidence_note": "Der OSKA-Kandidat wurde ueber die offizielle oska.fashion-Domain und die dort veroeffentlichte Career-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:42:30.817Z",
+      "updated_at": "2026-09-04T08:42:30.817Z",
       "last_successful_scan_at": null
     },
     {
@@ -13775,6 +13933,46 @@
       },
       "created_at": "2026-09-03T09:44:45.466Z",
       "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:n_v_o_nuyken_von_oefele_architekten_bda_und_stadtplaner",
+      "canonical_name": "N-V-O Nuyken von Oefele Architekten BDA und Stadtplaner",
+      "canonical_domain": "n-v-o.com",
+      "official_website_url": "https://n-v-o.com/",
+      "career_url": null,
+      "aliases": [
+        "N-V-O Architekten",
+        "N-V-O Nuyken von Oefele Architekten",
+        "Nuyken von Oefele Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://n-v-o.com/office/",
+        "observed_at": "2026-09-04T08:42:30.817Z",
+        "verification_url": "https://n-v-o.com/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture",
+        "evidence_note": "Der N-V-O-Kandidat wurde ueber die offizielle n-v-o.com-Domain und die dort veroeffentlichte Bueroseite mit Muenchner Standortbezug belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belegt."
+      },
+      "created_at": "2026-09-04T08:42:30.817Z",
+      "updated_at": "2026-09-04T08:42:30.817Z",
       "last_successful_scan_at": null
     },
     {
@@ -22624,6 +22822,27 @@
       ]
     },
     {
+      "source_id": "source:neue_deutsche_filmgesellschaft_mbh_career",
+      "company_id": "company:neue_deutsche_filmgesellschaft_mbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ndf.de/karriere/",
+      "canonical_url": "https://www.ndf.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:42:30.817Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ndf.de/karriere/",
+          "basis_url": "https://www.ndf.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:42:30.817Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:nfon_ag_career",
       "company_id": "company:nfon_ag",
       "source_type": "CAREER_PAGE",
@@ -22752,6 +22971,27 @@
       ]
     },
     {
+      "source_id": "source:olive_robotics_career",
+      "company_id": "company:olive_robotics",
+      "source_type": "CAREER_PAGE",
+      "url": "https://olive-robotics.com/company/career/",
+      "canonical_url": "https://olive-robotics.com/company/career/",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:42:30.817Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://olive-robotics.com/company/career/",
+          "basis_url": "https://olive-robotics.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:42:30.817Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:olympiapark_muenchen_gmbh_career_url",
       "company_id": "company:olympiapark_muenchen_gmbh",
       "source_type": "CAREER_PAGE",
@@ -22791,6 +23031,27 @@
           "basis_url": "https://www.olympus-europa.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:oncare_gmbh_career",
+      "company_id": "company:oncare_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.myoncare.com/careers",
+      "canonical_url": "https://www.myoncare.com/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:42:30.817Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.myoncare.com/careers",
+          "basis_url": "https://www.myoncare.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:42:30.817Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22854,6 +23115,27 @@
           "basis_url": "https://ororatech.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:oska_mode_gmbh_career",
+      "company_id": "company:oska_mode_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.oska.fashion/career/",
+      "canonical_url": "https://www.oska.fashion/career/",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:42:30.817Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.oska.fashion/career/",
+          "basis_url": "https://www.oska.fashion/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:42:30.817Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

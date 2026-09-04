@@ -1,0 +1,131 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T09:05:00.000Z",
+  "items": [
+    {
+      "canonical_name": "ONCARE GmbH",
+      "official_website_url": "https://www.myoncare.com/",
+      "career_url": "https://www.myoncare.com/careers",
+      "aliases": [
+        "ONCARE",
+        "ONCARE GmbH",
+        "myoncare"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Health",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.myoncare.com/careers",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der ONCARE-Kandidat wurde ueber die offizielle myoncare.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Olive Robotics",
+      "official_website_url": "https://olive-robotics.com/",
+      "career_url": "https://olive-robotics.com/company/career/",
+      "aliases": [
+        "Olive Robotics",
+        "olive robotics"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn / Muenchen",
+          "city": "Ottobrunn",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Robotics",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://olive-robotics.com/company/career/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Olive-Robotics-Kandidat wurde ueber die offizielle olive-robotics.com-Domain und die dort veroeffentlichte Career-Seite mit Muenchner Standortbezug belegt."
+    },
+    {
+      "canonical_name": "neue deutsche Filmgesellschaft mbH",
+      "official_website_url": "https://www.ndf.de/",
+      "career_url": "https://www.ndf.de/karriere/",
+      "aliases": [
+        "neue deutsche Filmgesellschaft",
+        "ndF",
+        "ndF neue deutsche Filmgesellschaft mbH"
+      ],
+      "locations": [
+        {
+          "label": "Unterfoehring / Muenchen",
+          "city": "Unterfoehring",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Film and Television Production",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ndf.de/karriere/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der ndF-Kandidat wurde ueber die offizielle ndf.de-Domain und die dort veroeffentlichte Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "OSKA Mode GmbH",
+      "official_website_url": "https://www.oska.fashion/",
+      "career_url": "https://www.oska.fashion/career/",
+      "aliases": [
+        "Oska",
+        "OSKA",
+        "OSKA Fashion",
+        "OSKA Mode"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fashion",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.oska.fashion/career/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der OSKA-Kandidat wurde ueber die offizielle oska.fashion-Domain und die dort veroeffentlichte Career-Seite belegt."
+    },
+    {
+      "canonical_name": "N-V-O Nuyken von Oefele Architekten BDA und Stadtplaner",
+      "official_website_url": "https://n-v-o.com/",
+      "career_url": null,
+      "aliases": [
+        "N-V-O Nuyken von Oefele Architekten",
+        "N-V-O Architekten",
+        "Nuyken von Oefele Architekten"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://n-v-o.com/office/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der N-V-O-Kandidat wurde ueber die offizielle n-v-o.com-Domain und die dort veroeffentlichte Bueroseite mit Muenchner Standortbezug belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belegt."
+    }
+  ]
+}
