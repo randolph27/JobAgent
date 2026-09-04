@@ -10466,6 +10466,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:infosys_ltd",
+      "canonical_name": "Infosys Ltd.",
+      "canonical_domain": "digitalcareers.infosys.com",
+      "official_website_url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+      "career_url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+      "aliases": [
+        "Infosys",
+        "Infosys Germany",
+        "Infosys Ltd."
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Services and Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+        "observed_at": "2026-09-04T13:49:32.861Z",
+        "verification_url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Services and Consulting",
+        "evidence_note": "Der Infosys-Kandidat wurde ueber das offizielle Infosys-Careers-Portal fuer Deutschland belegt; der Muenchen-Bezug stammt aus der regionalen Indian-Community-Quelle."
+      },
+      "created_at": "2026-09-04T13:49:32.861Z",
+      "updated_at": "2026-09-04T13:49:32.861Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:infinera",
       "canonical_name": "Infinera",
       "canonical_domain": "infinera.com",
@@ -11129,6 +11169,45 @@
       },
       "created_at": "2026-09-01T05:38:52.069Z",
       "updated_at": "2026-09-01T05:38:52.069Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:jameda",
+      "canonical_name": "jameda",
+      "canonical_domain": "jameda.de",
+      "official_website_url": "https://www.jameda.de/",
+      "career_url": null,
+      "aliases": [
+        "jameda",
+        "jameda GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Health",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.jameda.de/",
+        "observed_at": "2026-09-04T13:49:32.861Z",
+        "verification_url": "https://www.jameda.de/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Health",
+        "evidence_note": "Der jameda-Kandidat wurde ueber die offizielle jameda.de-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+      },
+      "created_at": "2026-09-04T13:49:32.861Z",
+      "updated_at": "2026-09-04T13:49:32.861Z",
       "last_successful_scan_at": null
     },
     {
@@ -11836,6 +11915,45 @@
       },
       "created_at": "2026-09-03T14:10:44.727Z",
       "updated_at": "2026-09-03T14:10:44.727Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:petafuel_gmbh",
+      "canonical_name": "petaFuel GmbH",
+      "canonical_domain": "petafuel.de",
+      "official_website_url": "https://petafuel.de/",
+      "career_url": "https://petafuel.de/karriere/",
+      "aliases": [
+        "petaFuel",
+        "petaFuel GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Payment Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://petafuel.de/karriere/",
+        "observed_at": "2026-09-04T13:49:32.861Z",
+        "verification_url": "https://petafuel.de/karriere/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "FREISING",
+        "industry_hint": "Payment Technology",
+        "evidence_note": "Der petaFuel-Kandidat wurde ueber die offizielle petafuel.de-Domain und die dort veroeffentlichte Karriere-Seite mit Freising-Bezug belegt."
+      },
+      "created_at": "2026-09-04T13:49:32.861Z",
+      "updated_at": "2026-09-04T13:49:32.861Z",
       "last_successful_scan_at": null
     },
     {
@@ -12770,6 +12888,46 @@
       },
       "created_at": "2026-09-01T05:38:52.069Z",
       "updated_at": "2026-09-01T05:38:52.069Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:micro_fuzzy_gmbh",
+      "canonical_name": "Micro Fuzzy GmbH",
+      "canonical_domain": "microfuzzy.com",
+      "official_website_url": "https://microfuzzy.com/",
+      "career_url": null,
+      "aliases": [
+        "Micro Fuzzy",
+        "Micro Fuzzy GmbH",
+        "Microfuzzy"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://microfuzzy.com/",
+        "observed_at": "2026-09-04T13:49:32.861Z",
+        "verification_url": "https://microfuzzy.com/",
+        "discovery_origin": "source-registry:munich_business_indian_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Software",
+        "evidence_note": "Der Micro-Fuzzy-Kandidat wurde ueber die offizielle microfuzzy.com-Domain mit Muenchner Standortbezug belegt; die dort genannte Karriereweiterleitung zur KPIT-Gruppe wurde nicht als eigene Karrierequelle importiert."
+      },
+      "created_at": "2026-09-04T13:49:32.861Z",
+      "updated_at": "2026-09-04T13:49:32.861Z",
       "last_successful_scan_at": null
     },
     {
@@ -13714,6 +13872,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:intellias",
+      "canonical_name": "Intellias",
+      "canonical_domain": "intellias.com",
+      "official_website_url": "https://www.intellias.com/",
+      "career_url": null,
+      "aliases": [
+        "Intellias",
+        "Intellias Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Software Engineering",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.intellias.com/",
+        "observed_at": "2026-09-04T13:49:32.861Z",
+        "verification_url": "https://www.intellias.com/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Software Engineering",
+        "evidence_note": "Der Intellias-Kandidat wurde ueber die offizielle intellias.com-Domain belegt; eine separate offizielle Karriere-Seite mit stabilem Abruf wurde in dieser Welle nicht belastbar belegt."
+      },
+      "created_at": "2026-09-04T13:49:32.861Z",
+      "updated_at": "2026-09-04T13:49:32.861Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:iabg_industrieanlagen_betriebsgesellschaft_mbh",
       "canonical_name": "IABG Industrieanlagen-Betriebsgesellschaft mbH",
       "canonical_domain": "iabg.de",
@@ -14296,6 +14493,45 @@
       },
       "created_at": "2026-09-04T08:20:10.115Z",
       "updated_at": "2026-09-04T08:20:10.115Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:presize_ai",
+      "canonical_name": "Presize.ai",
+      "canonical_domain": "presize.freshteam.com",
+      "official_website_url": "https://presize.freshteam.com/jobs",
+      "career_url": "https://presize.freshteam.com/jobs",
+      "aliases": [
+        "Presize",
+        "Presize.ai"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fashion Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://presize.freshteam.com/jobs",
+        "observed_at": "2026-09-04T13:49:32.861Z",
+        "verification_url": "https://presize.freshteam.com/jobs",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Fashion Technology",
+        "evidence_note": "Der Presize-Kandidat wurde ueber die erreichbare Presize-Freshteam-Karriereseite mit Muenchen-Bezug belegt; die Hauptdomain war lokal nicht belastbar abrufbar."
+      },
+      "created_at": "2026-09-04T13:49:32.861Z",
+      "updated_at": "2026-09-04T13:49:32.861Z",
       "last_successful_scan_at": null
     },
     {
@@ -21253,6 +21489,27 @@
       ]
     },
     {
+      "source_id": "source:infosys_ltd_career",
+      "company_id": "company:infosys_ltd",
+      "source_type": "CAREER_PAGE",
+      "url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+      "canonical_url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+      "is_official": true,
+      "verified_at": "2026-09-04T13:49:32.861Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+          "basis_url": "https://digitalcareers.infosys.com/infosys/global-careers?location=Germany",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T13:49:32.861Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:innoactive_career",
       "company_id": "company:innoactive",
       "source_type": "CAREER_PAGE",
@@ -23763,6 +24020,27 @@
       ]
     },
     {
+      "source_id": "source:petafuel_gmbh_career",
+      "company_id": "company:petafuel_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://petafuel.de/karriere/",
+      "canonical_url": "https://petafuel.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-04T13:49:32.861Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://petafuel.de/karriere/",
+          "basis_url": "https://petafuel.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T13:49:32.861Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:philip_morris_gmbh_career",
       "company_id": "company:philip_morris_gmbh",
       "source_type": "CAREER_PAGE",
@@ -23951,6 +24229,27 @@
           "basis_url": "https://www.ppro.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:presize_ai_career",
+      "company_id": "company:presize_ai",
+      "source_type": "CAREER_PAGE",
+      "url": "https://presize.freshteam.com/jobs",
+      "canonical_url": "https://presize.freshteam.com/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-04T13:49:32.861Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://presize.freshteam.com/jobs",
+          "basis_url": "https://presize.freshteam.com/jobs",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T13:49:32.861Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
