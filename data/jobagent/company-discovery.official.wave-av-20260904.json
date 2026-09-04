@@ -1,0 +1,152 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T19:15:00.000Z",
+  "items": [
+    {
+      "canonical_name": "itsmydata GmbH",
+      "official_website_url": "https://itsmydata.de/",
+      "career_url": null,
+      "aliases": [
+        "itsmydata",
+        "itsmydata GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Data Sovereignty and Consumer Data Platform",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://itsmydata.de/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der itsmydata-Kandidat wurde ueber die offizielle itsmydata.de-Domain belegt; die Website nennt die itsmydata GmbH, eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Lilio Health GmbH",
+      "official_website_url": "https://lilio.de/",
+      "career_url": "https://lilio.de/pages/careers",
+      "aliases": [
+        "Leevi Health",
+        "Leevi Health GmbH",
+        "Lilio",
+        "Lilio Health"
+      ],
+      "locations": [
+        {
+          "label": "Garching bei Muenchen",
+          "city": "Garching bei Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthtech and Baby Wearables",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://lilio.de/pages/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Leevi-Health-Kandidat wurde ueber die offizielle lilio.de-Domain und die dort erreichbare Careers-Seite als Lilio Health belegt; der Zielgebietsbezug stammt aus dem Muenchner Startup-Hinweis."
+    },
+    {
+      "canonical_name": "Karevo GmbH",
+      "official_website_url": "https://www.karevo.de/",
+      "career_url": null,
+      "aliases": [
+        "Karevo",
+        "Karevo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "AI-based Agricultural Sorting Technology",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.karevo.de/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Karevo-Kandidat wurde ueber die offizielle karevo.de-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Latheca GmbH",
+      "official_website_url": "https://latheca.de/",
+      "career_url": null,
+      "aliases": [
+        "Latheca",
+        "Latheca GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Food and Beverage Wholesale",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://latheca.de/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Latheca-Kandidat wurde ueber die offizielle latheca.de-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Landschaftspflegeverband Freising e.V.",
+      "official_website_url": "https://landschaftspflegeverband-freising.info/",
+      "career_url": null,
+      "aliases": [
+        "Landschaftspflegeverband Freising",
+        "Landschaftspflegeverband Freising e.V."
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Environmental and Landscape Conservation",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://landschaftspflegeverband-freising.info/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Landschaftspflegeverband-Freising-Kandidat wurde ueber die offizielle landschaftspflegeverband-freising.info-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "ALFA AI",
+      "official_website_url": "https://welovealfa.com/",
+      "career_url": null,
+      "aliases": [
+        "ALFA AI",
+        "Alfa AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Recruiting Software",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://welovealfa.com/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der ALFA-AI-Kandidat wurde ueber die offizielle welovealfa.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    }
+  ]
+}
