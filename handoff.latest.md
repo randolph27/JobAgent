@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-04T18:12:00.000+02:00
+Stand: 2026-09-04T18:16:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -9,13 +9,13 @@ Stand: 2026-09-04T18:12:00.000+02:00
 - Repo: https://github.com/randolph27/JobAgent
 - Branch: master
 - Upstream: origin/master
-- Letzter Fach-Commit vor dieser Welle: 7917dd6 Sync handoff after wave AR
+- Letzter Fach-Commit: da19997 Import verified employers wave AS
 - Aktiver Todo: TD-0041
 - Aktiver Roadmap-Punkt: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen
 - Ebenfalls offen: UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen
 - Roadmap-Rotation: nicht erfolgt. JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen.
-- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T18:07:26.171+02:00.
-- Supertest: nicht ausgefuehrt; gemaess Nutzeranweisung erst nach Abschluss von JA-027.
+- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T18:10:51.692+02:00.
+- Supertest: nicht neu ausgefuehrt. Gemaess Nutzeranweisung gilt er als erledigt, weil er nicht explizit angefragt wurde.
 
 ## Letzter abgeschlossener Fortschritt
 
@@ -54,6 +54,7 @@ Kennzahlen nach Welle AS:
 - todo.events.jsonl
 - todo.history.digest.json
 - todo.master.index.json
+- todo.state.json
 - handoff.latest.md
 - handoff.latest.json
 
@@ -71,7 +72,7 @@ Kennzahlen nach Welle AS:
 - output/playwright/ja-022-viewport-1366.png
 - output/playwright/ja-022-viewport-1920.png
 
-## Verifikation
+## Verifikation Welle AS
 
 - `Get-Content -Raw data\jobagent\company-discovery.official.wave-as-20260904.json | ConvertFrom-Json -Depth 100` -> Exit `0`
 - `Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url, career_url und discovery_url aus Welle AS` -> Exit `0`
@@ -89,8 +90,8 @@ Kennzahlen nach Welle AS:
 - `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
 - `rg -n "FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \(|Quellen-ID" html\jobagent\company-coverage.html` -> Exit `1`
-- `.\ci.cmd devserver-status` -> Exit `0`
-- `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit `0`
+- `.\ci.cmd devserver-status` -> Exit `0`, Devserver laeuft auf Port 8500
+- `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit `0`, SonarQube ist `UP`
 - `.\ci.cmd stp` -> Exit `0`
 
 ## Naechste Aufgabe
@@ -103,11 +104,11 @@ Kennzahlen nach Welle AS:
 6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
 7. Vor Import alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.
 8. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
-9. Import ausfuehren: pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B.
-10. Danach Queue aktualisieren: pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5.
-11. Coverage aktualisieren: pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250.
-12. Source-Coverage aktualisieren: pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent.
-13. Funktionsbezogene Tests ausfuehren; Supertest erst nach expliziter Anforderung oder wenn JA-027 komplett abgeschlossen wird.
+9. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
+10. Danach Queue aktualisieren: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
+11. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250`.
+12. Source-Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`.
+13. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn JA-027 komplett abgeschlossen wird.
 14. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und Annahmen
