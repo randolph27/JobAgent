@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-04T20:46:33.190+02:00
+Stand: 2026-09-04T20:55:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -9,15 +9,15 @@ Stand: 2026-09-04T20:46:33.190+02:00
 - Repo: https://github.com/randolph27/JobAgent
 - Branch: master
 - Upstream: origin/master
-- Letzter Fach-Commit vor diesem Slice: ddf400c
+- Aktueller HEAD vor Uebergabe-Commit: 0188939 Import verified employers wave AU
 - Aktiver Todo: TD-0041
 - Aktiver Roadmap-Punkt: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen
 - Ebenfalls offen: UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen
 - Roadmap-Rotation: nicht erfolgt. JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen.
-- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T20:46:33.190+02:00.
-- Supertest: nicht ausgefuehrt, weil JA-027 insgesamt offen bleibt und der Nutzer funktionsbezogene Tests vorgegeben hat.
+- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T20:50:47.747+02:00.
+- Supertest: nicht angefragt; gemaess Nutzeranweisung gilt er fuer diesen Uebergabeabschluss als erledigt.
 
-## Letzter abgeschlossener Fortschritt
+## Letzter Fachfortschritt
 
 Welle AU/B wurde abgeschlossen. Neu produktiv aufgenommen wurden:
 
@@ -43,20 +43,22 @@ Kennzahlen nach Welle AU:
 - Importwellen-Gate B: passed
 - Gate-Metriken Welle AU: manual_review_rate=0.0, duplicate_rate=0.0, coverage_delta=6
 
-## Geaenderte Dateien
+## Geaenderte und relevante Dateien
 
 - Roadmap.md
-- data/jobagent/company-candidate-verification.queue.json
-- data/jobagent/company-discovery.official.wave-au-20260904.json
-- data/jobagent/store.json
-- handoff.latest.md
-- handoff.latest.json
-- html/jobagent/company-coverage.html
+- todo.current.md
+- todo.state.json
 - todo.events.jsonl
 - todo.history.digest.json
 - todo.master.index.json
+- handoff.latest.md
+- handoff.latest.json
+- data/jobagent/store.json
+- data/jobagent/company-candidate-verification.queue.json
+- data/jobagent/company-discovery.official.wave-au-20260904.json
+- html/jobagent/company-coverage.html
 
-## Evidence
+## Evidence Welle AU
 
 - data/jobagent/company-discovery.official.wave-au-20260904.json
 - logs/jobagent/company-discovery-import-20260904-184040.json
@@ -70,10 +72,10 @@ Kennzahlen nach Welle AU:
 - output/playwright/ja-022-viewport-1366.png
 - output/playwright/ja-022-viewport-1920.png
 
-## Verifikation Welle AU
+## Verifikation
 
 - `Get-Content -Raw data\jobagent\company-discovery.official.wave-au-20260904.json | ConvertFrom-Json -Depth 100` -> Exit `0`
-- `Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url, career_url und discovery_url aus Welle AU` -> Exit `0`
+- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AU -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-au-20260904.json -WaveId B` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
@@ -90,21 +92,26 @@ Kennzahlen nach Welle AU:
 - `rg -n "FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \(|Quellen-ID" html\jobagent\company-coverage.html` -> Exit `1`
 - `.\ci.cmd devserver-status` -> Exit `0`, Devserver lief auf Port 8500
 - `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit `0`, SonarQube war `UP`
+- `.\ci.cmd route-check` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
+- `.\ci.cmd supertest` -> nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt nicht angefragter Supertest als erledigt.
 
 ## Naechste Aufgabe
 
 1. JA-027 fortsetzen; UI-001 nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.
-2. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == DISCOVER_OFFICIAL_WEBSITE` priorisieren.
-3. Bevorzugen: hoher `priority_score`, `risk_level == LOW`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
-4. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-av-20260904.json` oder bei neuem Datum entsprechend `wave-av-<YYYYMMDD>.json`.
-5. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
-6. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
-7. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
-8. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
-9. Danach Queue, Coverage und Source-Coverage aktualisieren.
-10. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn JA-027 komplett abgeschlossen wird.
-11. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
+2. Startdateien erneut lesen: README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md.
+3. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == DISCOVER_OFFICIAL_WEBSITE` priorisieren.
+4. Bevorzugen: hoher `priority_score`, `risk_level == LOW`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
+5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-av-20260904.json` oder bei neuem Datum entsprechend `wave-av-<YYYYMMDD>.json`.
+6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
+7. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
+8. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
+9. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
+10. Danach Queue aktualisieren: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
+11. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250`.
+12. Source-Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`.
+13. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn JA-027 komplett abgeschlossen wird. Wenn Supertest nicht angefragt ist, gilt er laut Nutzerregel als erledigt.
+14. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und Annahmen
 
