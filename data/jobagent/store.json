@@ -11165,6 +11165,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:cariad_se",
+      "canonical_name": "CARIAD SE",
+      "canonical_domain": "cariad.technology",
+      "official_website_url": "https://cariad.technology/de/en.html",
+      "career_url": "https://cariad.technology/de/en/careers.html",
+      "aliases": [
+        "CARIAD",
+        "CARIAD SE",
+        "Volkswagen Group Software Company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://cariad.technology/de/en/careers.html",
+        "observed_at": "2026-09-04T08:04:35.555Z",
+        "verification_url": "https://cariad.technology/de/en/careers.html",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Software",
+        "evidence_note": "Der CARIAD-Kandidat wurde ueber die offizielle cariad.technology-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:04:35.555Z",
+      "updated_at": "2026-09-04T08:04:35.555Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:brainamics_gmbh",
       "canonical_name": "Brainamics GmbH",
       "canonical_domain": "brainamics.de",
@@ -11590,6 +11630,46 @@
       },
       "created_at": "2026-09-01T05:38:52.069Z",
       "updated_at": "2026-09-01T05:38:52.069Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:leica_geosystems_gmbh_vertrieb_deutschland",
+      "canonical_name": "Leica Geosystems GmbH Vertrieb Deutschland",
+      "canonical_domain": "leica-geosystems.com",
+      "official_website_url": "https://leica-geosystems.com/",
+      "career_url": "https://leica-geosystems.com/about-us/careers",
+      "aliases": [
+        "Leica Geosystems",
+        "Leica Geosystems GmbH",
+        "Leica Geosystems GmbH Vertrieb Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://leica-geosystems.com/about-us/careers",
+        "observed_at": "2026-09-04T08:04:35.555Z",
+        "verification_url": "https://leica-geosystems.com/about-us/careers",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Geospatial Technology",
+        "evidence_note": "Der Leica-Geosystems-Kandidat wurde ueber die offizielle leica-geosystems.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:04:35.555Z",
+      "updated_at": "2026-09-04T08:04:35.555Z",
       "last_successful_scan_at": null
     },
     {
@@ -12485,6 +12565,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:adtran_networks_se",
+      "canonical_name": "Adtran Networks SE",
+      "canonical_domain": "adtran.com",
+      "official_website_url": "https://www.adtran.com/",
+      "career_url": "https://www.adtran.com/en/about-us/careers",
+      "aliases": [
+        "ADTRAN",
+        "Adtran Networks",
+        "Adtran Networks SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Telecommunications Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.adtran.com/en/about-us/careers",
+        "observed_at": "2026-09-04T08:04:35.555Z",
+        "verification_url": "https://www.adtran.com/en/about-us/careers",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Telecommunications Technology",
+        "evidence_note": "Der Adtran-Networks-Kandidat wurde ueber die offizielle adtran.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:04:35.555Z",
+      "updated_at": "2026-09-04T08:04:35.555Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:zenml_gmbh",
       "canonical_name": "ZenML GmbH",
       "canonical_domain": "zenml.io",
@@ -13146,6 +13266,46 @@
       },
       "created_at": "2026-08-31T18:53:01.819Z",
       "updated_at": "2026-08-31T18:53:01.819Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:arianegroup",
+      "canonical_name": "ArianeGroup",
+      "canonical_domain": "ariane.group",
+      "official_website_url": "https://www.ariane.group/",
+      "career_url": "https://www.ariane.group/en/careers/",
+      "aliases": [
+        "Ariane Group",
+        "ArianeGroup",
+        "ArianeGroup GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ariane.group/en/careers/",
+        "observed_at": "2026-09-04T08:04:35.555Z",
+        "verification_url": "https://www.ariane.group/en/careers/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Aerospace",
+        "evidence_note": "Der ArianeGroup-Kandidat wurde ueber die offizielle ariane.group-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:04:35.555Z",
+      "updated_at": "2026-09-04T08:04:35.555Z",
       "last_successful_scan_at": null
     },
     {
@@ -16604,6 +16764,27 @@
       ]
     },
     {
+      "source_id": "source:adtran_networks_se_career",
+      "company_id": "company:adtran_networks_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.adtran.com/en/about-us/careers",
+      "canonical_url": "https://www.adtran.com/en/about-us/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:04:35.555Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.adtran.com/en/about-us/careers",
+          "basis_url": "https://www.adtran.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:04:35.555Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:aenova_group_career",
       "company_id": "company:aenova_group",
       "source_type": "CAREER_PAGE",
@@ -16915,6 +17096,27 @@
           ],
           "observed_at": "2026-08-27T10:17:13.75Z",
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:arianegroup_career",
+      "company_id": "company:arianegroup",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ariane.group/en/careers/",
+      "canonical_url": "https://www.ariane.group/en/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:04:35.555Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ariane.group/en/careers/",
+          "basis_url": "https://www.ariane.group/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:04:35.555Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
     },
@@ -17832,6 +18034,27 @@
           "basis_url": "https://www.capgemini.com/de-de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T06:13:34.983Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:cariad_se_career",
+      "company_id": "company:cariad_se",
+      "source_type": "CAREER_PAGE",
+      "url": "https://cariad.technology/de/en/careers.html",
+      "canonical_url": "https://cariad.technology/de/en/careers.html",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:04:35.555Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://cariad.technology/de/en/careers.html",
+          "basis_url": "https://cariad.technology/de/en.html",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:04:35.555Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -20919,6 +21142,27 @@
           "basis_url": "https://www.lv1871.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:leica_geosystems_gmbh_vertrieb_deutschland_career",
+      "company_id": "company:leica_geosystems_gmbh_vertrieb_deutschland",
+      "source_type": "CAREER_PAGE",
+      "url": "https://leica-geosystems.com/about-us/careers",
+      "canonical_url": "https://leica-geosystems.com/about-us/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:04:35.555Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://leica-geosystems.com/about-us/careers",
+          "basis_url": "https://leica-geosystems.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:04:35.555Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

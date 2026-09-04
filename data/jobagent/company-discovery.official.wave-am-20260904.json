@@ -1,0 +1,106 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T08:15:00.000Z",
+  "items": [
+    {
+      "canonical_name": "CARIAD SE",
+      "official_website_url": "https://cariad.technology/de/en.html",
+      "career_url": "https://cariad.technology/de/en/careers.html",
+      "aliases": [
+        "CARIAD",
+        "CARIAD SE",
+        "Volkswagen Group Software Company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Software",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://cariad.technology/de/en/careers.html",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der CARIAD-Kandidat wurde ueber die offizielle cariad.technology-Domain und die dort veroeffentlichte Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Leica Geosystems GmbH Vertrieb Deutschland",
+      "official_website_url": "https://leica-geosystems.com/",
+      "career_url": "https://leica-geosystems.com/about-us/careers",
+      "aliases": [
+        "Leica Geosystems",
+        "Leica Geosystems GmbH",
+        "Leica Geosystems GmbH Vertrieb Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Technology",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://leica-geosystems.com/about-us/careers",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Leica-Geosystems-Kandidat wurde ueber die offizielle leica-geosystems.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "Adtran Networks SE",
+      "official_website_url": "https://www.adtran.com/",
+      "career_url": "https://www.adtran.com/en/about-us/careers",
+      "aliases": [
+        "ADTRAN",
+        "Adtran Networks",
+        "Adtran Networks SE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Telecommunications Technology",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.adtran.com/en/about-us/careers",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Adtran-Networks-Kandidat wurde ueber die offizielle adtran.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+    },
+    {
+      "canonical_name": "ArianeGroup",
+      "official_website_url": "https://www.ariane.group/",
+      "career_url": "https://www.ariane.group/en/careers/",
+      "aliases": [
+        "ArianeGroup",
+        "Ariane Group",
+        "ArianeGroup GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ariane.group/en/careers/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der ArianeGroup-Kandidat wurde ueber die offizielle ariane.group-Domain und die dort veroeffentlichte Careers-Seite belegt."
+    }
+  ]
+}

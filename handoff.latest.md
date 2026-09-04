@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-03T16:25:00.000+02:00
+Stand: 2026-09-04T10:15:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,40 +8,41 @@ Stand: 2026-09-03T16:25:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- Letzter Fach-Commit: `22080dd Import verified employers wave AL`
-- Letzter Handoff-Commit vor diesem STP: `6762a48 Update handoff after wave AL push`
+- HEAD vor Commit: `17a008724919`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
 - Roadmap-Rotation: nicht erfolgt. `JA-027` ist fachlich nicht komplett erledigt; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-03T16:22:06.299+02:00`.
-- Supertest: nicht neu ausgefuehrt; gemaess aktueller Nutzeranweisung gilt er als erledigt, wenn er nicht explizit angefragt wurde.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-04T10:10:08.783+02:00`.
+- Supertest: nicht ausgefuehrt, weil `JA-027` offen bleibt und der Nutzer funktionsbezogene Tests vorzieht.
 
 ## Letzter abgeschlossener Fortschritt
 
-Welle AL/B wurde abgeschlossen. Verarbeitet wurden 6 offiziell belegte Arbeitgeber:
+Welle AM/B wurde abgeschlossen. Neu produktiv aufgenommen wurden 4 offiziell belegte Arbeitgeber:
 
-- Neu produktiv aufgenommen: `Noventi Healthcare`, `GE Aerospace Advanced Technology`, `Philip Morris GmbH`, `Sueddeutsche Zeitung`
-- Dedupliziert aktualisiert: `Muenchner Rueck AG` -> `Munich Re`, `Siemens Mobility` -> `Siemens AG`
+- `CARIAD SE`
+- `Leica Geosystems GmbH Vertrieb Deutschland`
+- `Adtran Networks SE`
+- `ArianeGroup`
 
-Kennzahlen nach Welle AL:
+Kennzahlen nach Welle AM:
 
-- Store: `395` Firmen
-- JobSources: `391`
-- Source Coverage: `393` offizielle Quellen
-- Karrierequellen: `392`
+- Store: `399` Firmen
+- JobSources: `395`
+- Source Coverage: `397` offizielle Quellen
+- Karrierequellen: `396`
 - ATS-Quellen: `1`
 - Discovery Sources/Hints gesamt: `1820`
-- Kandidatenqueue: `573` bereits produktiv verifiziert oder im Store belegt
-- Kandidatenqueue: `1209` mit `DISCOVER_OFFICIAL_WEBSITE`
+- Kandidatenqueue: `577` bereits produktiv verifiziert oder im Store belegt
+- Kandidatenqueue: `1205` mit `DISCOVER_OFFICIAL_WEBSITE`
 - Kandidatenqueue: `2` mit `VERIFY_OFFICIAL_SITE`
 - Kandidatenqueue: `1` mit `MANUAL_DECISION`
 - Importwellen-Gate B: `passed`
-- Gate-Metriken Welle AL: `manual_review_rate=0.0`, `duplicate_rate=0.3333`, `coverage_delta=4`
+- Gate-Metriken Welle AM: `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=4`
 
 ## Geaenderte Dateien und Artefakte
 
-- `data/jobagent/company-discovery.official.wave-al-20260903.json`
+- `data/jobagent/company-discovery.official.wave-am-20260904.json`
 - `data/jobagent/store.json`
 - `data/jobagent/company-candidate-verification.queue.json`
 - `html/jobagent/company-coverage.html`
@@ -54,19 +55,19 @@ Kennzahlen nach Welle AL:
 
 Evidence:
 
-- `logs/jobagent/company-discovery-import-20260903-141044.json`
-- `logs/jobagent/company-candidate-verification-20260903-141052.json`
-- `logs/jobagent/company-coverage-20260903-141155.json`
-- `logs/jobagent/company-coverage-20260903-141155.md`
+- `logs/jobagent/company-discovery-import-20260904-080435.json`
+- `logs/jobagent/company-candidate-verification-20260904-080445.json`
+- `logs/jobagent/company-coverage-20260904-080446.json`
+- `logs/jobagent/company-coverage-20260904-080446.md`
 - `logs/jobagent/ja-023-source-coverage.json`
-- Store-Backup: `data/jobagent/backups/store-20260903T141045320Z-pre-wave-import.json`
+- Store-Backup: `data/jobagent/backups/store-20260904T080436173Z-pre-wave-import.json`
 - Viewport-Screenshots: `output/playwright/ja-022-viewport-800.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-1920.png`
 
 ## Verifikation
 
-- `Get-Content -Raw data\jobagent\company-discovery.official.wave-al-20260903.json | ConvertFrom-Json -Depth 100` -> Exit `0`
-- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AL -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-al-20260903.json -WaveId B` -> Exit `0`
+- `Get-Content -Raw data\jobagent\company-discovery.official.wave-am-20260904.json | ConvertFrom-Json -Depth 100` -> Exit `0`
+- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AM -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-am-20260904.json -WaveId B` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`
@@ -90,7 +91,7 @@ Evidence:
 2. `data/jobagent/company-candidate-verification.queue.json` lesen.
 3. Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
 4. Bevorzugen: hoher `priority_score`, `risk_level == "LOW"`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
-5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-am-YYYYMMDD.json`.
+5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-an-YYYYMMDD.json`.
 6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
 7. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
 8. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
