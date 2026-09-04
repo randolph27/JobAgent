@@ -2289,12 +2289,14 @@
     },
     {
       "company_id": "company:capgemini_deutschland_gmbh",
-      "canonical_name": "Capgemini Deutschland GmbH",
+      "canonical_name": "Capgemini Engineering",
       "canonical_domain": "capgemini.com",
-      "official_website_url": "https://www.capgemini.com/de-de/",
-      "career_url": "https://www.capgemini.com/de-de/karriere/jobs/",
+      "official_website_url": "https://www.capgemini.com/",
+      "career_url": "https://www.capgemini.com/careers/career-paths/careers-at-capgemini-engineering/",
       "aliases": [
         "Capgemini",
+        "Capgemini Deutschland GmbH",
+        "Capgemini Engineering",
         "Capgemini Germany"
       ],
       "locations": [
@@ -2314,16 +2316,16 @@
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.capgemini.com/de-de/karriere/jobs/",
-        "observed_at": "2026-08-29T06:13:34.983Z",
-        "verification_url": "https://www.capgemini.com/de-de/karriere/jobs/",
-        "discovery_origin": "source-registry:munich_business_international_companies",
+        "url": "https://www.capgemini.com/careers/career-paths/careers-at-capgemini-engineering/",
+        "observed_at": "2026-09-04T08:20:10.115Z",
+        "verification_url": "https://www.capgemini.com/careers/career-paths/careers-at-capgemini-engineering/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
         "target_area": "MUNICH",
-        "industry_hint": "IT Consulting and Digital Transformation",
-        "evidence_note": "Der Capgemini-Kandidat wurde ueber die offizielle Capgemini-Deutschland-Domain und die dortige Jobsuche belegt."
+        "industry_hint": "Engineering and R&D Services",
+        "evidence_note": "Der Capgemini-Engineering-Kandidat wurde ueber die offizielle capgemini.com-Domain und die dort veroeffentlichte Engineering-Careers-Seite belegt."
       },
       "created_at": "2026-08-29T06:13:34.983Z",
-      "updated_at": "2026-08-29T06:13:34.983Z",
+      "updated_at": "2026-09-04T08:20:10.115Z",
       "last_successful_scan_at": null
     },
     {
@@ -11165,6 +11167,44 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:deutschlandgpt",
+      "canonical_name": "DeutschlandGPT",
+      "canonical_domain": "deutschlandgpt.de",
+      "official_website_url": "https://www.deutschlandgpt.de/",
+      "career_url": "https://www.deutschlandgpt.de/karriere",
+      "aliases": [
+        "DeutschlandGPT"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Artificial Intelligence",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.deutschlandgpt.de/karriere",
+        "observed_at": "2026-09-04T08:20:10.115Z",
+        "verification_url": "https://www.deutschlandgpt.de/karriere",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Artificial Intelligence",
+        "evidence_note": "Der DeutschlandGPT-Kandidat wurde ueber die offizielle deutschlandgpt.de-Domain und die dort veroeffentlichte Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:20:10.115Z",
+      "updated_at": "2026-09-04T08:20:10.115Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:cariad_se",
       "canonical_name": "CARIAD SE",
       "canonical_domain": "cariad.technology",
@@ -11473,6 +11513,46 @@
       },
       "created_at": "2026-09-03T10:38:45.617Z",
       "updated_at": "2026-09-03T10:38:45.617Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:reply_digital_experience",
+      "canonical_name": "Reply - Digital Experience",
+      "canonical_domain": "reply.com",
+      "official_website_url": "https://www.reply.com/",
+      "career_url": "https://www.reply.com/en/about/careers",
+      "aliases": [
+        "Reply",
+        "Reply - Digital Experience",
+        "Reply Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IT Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.reply.com/en/about/careers",
+        "observed_at": "2026-09-04T08:20:10.115Z",
+        "verification_url": "https://www.reply.com/en/about/careers",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "IT Consulting",
+        "evidence_note": "Der Reply-Kandidat wurde ueber die offizielle reply.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:20:10.115Z",
+      "updated_at": "2026-09-04T08:20:10.115Z",
       "last_successful_scan_at": null
     },
     {
@@ -13036,6 +13116,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:morphosys_ag",
+      "canonical_name": "MorphoSys AG",
+      "canonical_domain": "morphosys.com",
+      "official_website_url": "https://www.morphosys.com/",
+      "career_url": "https://www.morphosys.com/careers",
+      "aliases": [
+        "MorphoSys",
+        "MorphoSys AG"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Biotechnology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.morphosys.com/careers",
+        "observed_at": "2026-09-04T08:20:10.115Z",
+        "verification_url": "https://www.morphosys.com/careers",
+        "discovery_origin": "source-registry:munich_business_life_sciences_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Biotechnology",
+        "evidence_note": "Der MorphoSys-Kandidat wurde ueber die offizielle morphosys.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:20:10.115Z",
+      "updated_at": "2026-09-04T08:20:10.115Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:moderna",
       "canonical_name": "Moderna",
       "canonical_domain": "modernatx.com",
@@ -13577,6 +13696,46 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:qlik_tech",
+      "canonical_name": "Qlik Tech",
+      "canonical_domain": "qlik.com",
+      "official_website_url": "https://www.qlik.com/us/company",
+      "career_url": "https://www.qlik.com/us/company/careers",
+      "aliases": [
+        "Qlik",
+        "Qlik Tech",
+        "QlikTech"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Data Analytics Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.qlik.com/us/company/careers",
+        "observed_at": "2026-09-04T08:20:10.115Z",
+        "verification_url": "https://www.qlik.com/us/company/careers",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Data Analytics Software",
+        "evidence_note": "Der Qlik-Tech-Kandidat wurde ueber die offizielle qlik.com-Domain und die dort veroeffentlichte Careers-Seite belegt."
+      },
+      "created_at": "2026-09-04T08:20:10.115Z",
+      "updated_at": "2026-09-04T08:20:10.115Z",
       "last_successful_scan_at": null
     },
     {
@@ -18021,19 +18180,19 @@
       "source_id": "source:capgemini_deutschland_gmbh_career",
       "company_id": "company:capgemini_deutschland_gmbh",
       "source_type": "CAREER_PAGE",
-      "url": "https://www.capgemini.com/de-de/karriere/jobs/",
-      "canonical_url": "https://www.capgemini.com/de-de/karriere/jobs/",
+      "url": "https://www.capgemini.com/careers/career-paths/careers-at-capgemini-engineering/",
+      "canonical_url": "https://www.capgemini.com/careers/career-paths/careers-at-capgemini-engineering/",
       "is_official": true,
-      "verified_at": "2026-08-29T06:13:34.983Z",
+      "verified_at": "2026-09-04T08:20:10.115Z",
       "verification_basis": "CAREER_URL",
       "verification_evidence": [
         {
           "status": "VERIFIED",
           "evidence_type": "CAREER_URL",
-          "url": "https://www.capgemini.com/de-de/karriere/jobs/",
-          "basis_url": "https://www.capgemini.com/de-de/",
+          "url": "https://www.capgemini.com/careers/career-paths/careers-at-capgemini-engineering/",
+          "basis_url": "https://www.capgemini.com/",
           "redirect_chain": [],
-          "observed_at": "2026-08-29T06:13:34.983Z",
+          "observed_at": "2026-09-04T08:20:10.115Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -18725,6 +18884,27 @@
           "basis_url": "https://www.deutsches-theater.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:33:21.197Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:deutschlandgpt_career",
+      "company_id": "company:deutschlandgpt",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.deutschlandgpt.de/karriere",
+      "canonical_url": "https://www.deutschlandgpt.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:20:10.115Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.deutschlandgpt.de/karriere",
+          "basis_url": "https://www.deutschlandgpt.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:20:10.115Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -21737,6 +21917,27 @@
       ]
     },
     {
+      "source_id": "source:morphosys_ag_career",
+      "company_id": "company:morphosys_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.morphosys.com/careers",
+      "canonical_url": "https://www.morphosys.com/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:20:10.115Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.morphosys.com/careers",
+          "basis_url": "https://www.morphosys.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:20:10.115Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:motorworld_muenchen_career",
       "company_id": "company:motorworld_muenchen",
       "source_type": "CAREER_PAGE",
@@ -23174,6 +23375,27 @@
       ]
     },
     {
+      "source_id": "source:qlik_tech_career",
+      "company_id": "company:qlik_tech",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.qlik.com/us/company/careers",
+      "canonical_url": "https://www.qlik.com/us/company/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:20:10.115Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.qlik.com/us/company/careers",
+          "basis_url": "https://www.qlik.com/us/company",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:20:10.115Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:qualcomm_germany_gmbh_career",
       "company_id": "company:qualcomm_germany_gmbh",
       "source_type": "CAREER_PAGE",
@@ -23274,6 +23496,27 @@
           "basis_url": "https://rcp.family/",
           "redirect_chain": [],
           "observed_at": "2026-09-01T05:52:39.825Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:reply_digital_experience_career",
+      "company_id": "company:reply_digital_experience",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.reply.com/en/about/careers",
+      "canonical_url": "https://www.reply.com/en/about/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T08:20:10.115Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.reply.com/en/about/careers",
+          "basis_url": "https://www.reply.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T08:20:10.115Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

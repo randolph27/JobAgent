@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-04T10:20:00.000+02:00
+Stand: 2026-09-04T10:27:21.877+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,41 +8,47 @@ Stand: 2026-09-04T10:20:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- Letzter Fach-Commit: `6a95d1a Import verified employers wave AM`
+- HEAD vor Commit: `03e5be619c41`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
 - Roadmap-Rotation: nicht erfolgt. `JA-027` ist fachlich nicht komplett erledigt; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-04T10:12:57.950+02:00`.
-- Supertest: nicht neu ausgefuehrt; gemaess aktueller Nutzeranweisung gilt er als erledigt, wenn er nicht explizit angefragt wurde.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-04T10:27:21.877+02:00`.
+- Supertest: nicht ausgefuehrt; gemaess Nutzeranweisung erst bei Abschluss von `JA-027`.
 
 ## Letzter abgeschlossener Fortschritt
 
-Welle AM/B wurde abgeschlossen. Neu produktiv aufgenommen wurden 4 offiziell belegte Arbeitgeber:
+Welle AN/B wurde abgeschlossen. Verarbeitet wurden 5 offiziell belegte Arbeitgeber.
 
-- `CARIAD SE`
-- `Leica Geosystems GmbH Vertrieb Deutschland`
-- `Adtran Networks SE`
-- `ArianeGroup`
+Neu produktiv aufgenommen wurden:
 
-Kennzahlen nach Welle AM:
+- `DeutschlandGPT`
+- `Reply - Digital Experience`
+- `MorphoSys AG`
+- `Qlik Tech`
 
-- Store: `399` Firmen
-- JobSources: `395`
-- Source Coverage: `397` offizielle Quellen
-- Karrierequellen: `396`
+Dedupliziertes Update:
+
+- `Capgemini Engineering` -> `Capgemini Deutschland GmbH` wegen Domainmatch `capgemini.com`
+
+Kennzahlen nach Welle AN:
+
+- Store: `403` Firmen
+- JobSources: `399`
+- Source Coverage: `401` offizielle Quellen
+- Karrierequellen: `400`
 - ATS-Quellen: `1`
 - Discovery Sources/Hints gesamt: `1820`
-- Kandidatenqueue: `577` bereits produktiv verifiziert oder im Store belegt
-- Kandidatenqueue: `1205` mit `DISCOVER_OFFICIAL_WEBSITE`
+- Kandidatenqueue: `583` bereits produktiv verifiziert oder im Store belegt
+- Kandidatenqueue: `1199` mit `DISCOVER_OFFICIAL_WEBSITE`
 - Kandidatenqueue: `2` mit `VERIFY_OFFICIAL_SITE`
 - Kandidatenqueue: `1` mit `MANUAL_DECISION`
 - Importwellen-Gate B: `passed`
-- Gate-Metriken Welle AM: `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=4`
+- Gate-Metriken Welle AN: `manual_review_rate=0.0`, `duplicate_rate=0.2`, `coverage_delta=4`
 
 ## Geaenderte Dateien und Artefakte
 
-- `data/jobagent/company-discovery.official.wave-am-20260904.json`
+- `data/jobagent/company-discovery.official.wave-an-20260904.json`
 - `data/jobagent/store.json`
 - `data/jobagent/company-candidate-verification.queue.json`
 - `html/jobagent/company-coverage.html`
@@ -55,19 +61,19 @@ Kennzahlen nach Welle AM:
 
 Evidence:
 
-- `logs/jobagent/company-discovery-import-20260904-080435.json`
-- `logs/jobagent/company-candidate-verification-20260904-080445.json`
-- `logs/jobagent/company-coverage-20260904-080446.json`
-- `logs/jobagent/company-coverage-20260904-080446.md`
+- `logs/jobagent/company-discovery-import-20260904-082010.json`
+- `logs/jobagent/company-candidate-verification-20260904-082017.json`
+- `logs/jobagent/company-coverage-20260904-082130.json`
+- `logs/jobagent/company-coverage-20260904-082130.md`
 - `logs/jobagent/ja-023-source-coverage.json`
-- Store-Backup: `data/jobagent/backups/store-20260904T080436173Z-pre-wave-import.json`
+- Store-Backup: `data/jobagent/backups/store-20260904T082010746Z-pre-wave-import.json`
 - Viewport-Screenshots: `output/playwright/ja-022-viewport-800.png`, `output/playwright/ja-022-viewport-1366.png`, `output/playwright/ja-022-viewport-1920.png`
 
 ## Verifikation
 
-- `Get-Content -Raw data\jobagent\company-discovery.official.wave-am-20260904.json | ConvertFrom-Json -Depth 100` -> Exit `0`
-- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AM -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-am-20260904.json -WaveId B` -> Exit `0`
+- `Get-Content -Raw data\jobagent\company-discovery.official.wave-an-20260904.json | ConvertFrom-Json -Depth 100` -> Exit `0`
+- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AN -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-an-20260904.json -WaveId B` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`
@@ -88,21 +94,19 @@ Evidence:
 ## Naechste Aufgabe
 
 1. `JA-027` fortsetzen; `UI-001` nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.
-2. `README.md`, `Roadmap.md`, `todo.current.md`, `todo.state.json`, `handoff.latest.md` erneut lesen.
-3. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
-4. Bevorzugen: hoher `priority_score`, `risk_level == "LOW"`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
-5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-an-20260904.json`.
-6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
-7. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
-8. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
-9. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-an-20260904.json -WaveId B`.
-10. Danach Queue, Coverage und Source-Coverage aktualisieren.
-11. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`.
-12. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
+2. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
+3. Bevorzugen: hoher `priority_score`, `risk_level == "LOW"`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
+4. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-ao-20260904.json`.
+5. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
+6. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
+7. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
+8. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-ao-20260904.json -WaveId B`.
+9. Danach Queue, Coverage und Source-Coverage aktualisieren.
+10. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`.
+11. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und Annahmen
 
 - `JA-027` ist noch nicht abschliessbar, weil weiter viele Kandidaten in manueller Website-/Scope-Pruefung stehen.
 - `UI-001` bleibt offen, ist aber derzeit nicht der aktive Hotspot.
-- Deduplizierte Konzernkarriereseiten sind akzeptiert, solange der Domainmatch korrekt ist und keine produktive Firma ohne offiziellen Beleg entsteht.
 - Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren.

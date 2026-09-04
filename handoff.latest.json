@@ -1,28 +1,14 @@
 {
-  "ts": "2026-09-04T10:20:00.000+02:00",
+  "ts": "2026-09-04T10:27:21.877+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "summary": "Welle AM/B abgeschlossen und gepusht: 4 offiziell belegte Arbeitgeber produktiv aufgenommen.",
-  "roadmap_rotation": {
-    "performed": false,
-    "reason": "JA-027 und UI-001 sind weiterhin offen."
-  },
-  "last_commit": {
-    "hash": "6a95d1a",
-    "message": "Import verified employers wave AM"
-  },
-  "stp": {
-    "cmd": ".\\ci.cmd stp",
-    "exit": 0,
-    "ts": "2026-09-04T10:12:57.950+02:00"
-  },
   "changed": [
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-am-20260904.json",
+    "data/jobagent/company-discovery.official.wave-an-20260904.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
     "html/jobagent/company-coverage.html",
@@ -34,15 +20,15 @@
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-am-20260904.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-an-20260904.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AM",
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AN",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-am-20260904.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-an-20260904.json -WaveId B",
       "exit": 0
     },
     {
@@ -110,75 +96,27 @@
       "exit": 0
     }
   ],
-  "supertest": {
-    "requested": false,
-    "status": "accepted_done_by_user_instruction",
-    "note": "Der Nutzer hat festgelegt: Wenn Supertest nicht angefragt wurde, gilt er als erledigt."
-  },
-  "metrics": {
-    "companies_total": 399,
-    "job_sources_total": 395,
-    "official_sources": 397,
-    "career_sources": 396,
-    "ats_sources": 1,
-    "discovery_sources": 1820,
-    "already_verified_in_store": 577,
-    "discover_official_website": 1205,
-    "verify_official_site": 2,
-    "manual_decision": 1,
-    "wave_gate_status": "passed",
-    "coverage_delta": 4,
-    "duplicate_rate": 0.0,
-    "manual_review_rate": 0.0
-  },
-  "evidence": [
-    "logs/jobagent/company-discovery-import-20260904-080435.json",
-    "logs/jobagent/company-candidate-verification-20260904-080445.json",
-    "logs/jobagent/company-coverage-20260904-080446.json",
-    "logs/jobagent/company-coverage-20260904-080446.md",
-    "logs/jobagent/ja-023-source-coverage.json",
-    "data/jobagent/backups/store-20260904T080436173Z-pre-wave-import.json",
-    "output/playwright/ja-022-viewport-800.png",
-    "output/playwright/ja-022-viewport-1366.png",
-    "output/playwright/ja-022-viewport-1920.png"
-  ],
-  "next_steps": [
-    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md erneut lesen.",
-    "JA-027 fortsetzen; UI-001 nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.",
-    "data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
-    "Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.",
-    "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-an-20260904.json.",
-    "Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.",
-    "Vor Import alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
-    "Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.",
-    "Import ausfuehren, danach Queue, Coverage und Source-Coverage aktualisieren.",
-    "Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von JA-027.",
-    "Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push."
-  ],
-  "risks": [
-    "JA-027 ist noch nicht abschliessbar, weil weiter viele Kandidaten in manueller Website-/Scope-Pruefung stehen.",
-    "Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren.",
-    "Deduplizierte Konzernkarriereseiten sind akzeptiert, solange der Domainmatch korrekt ist und keine produktive Firma ohne offiziellen Beleg entsteht."
-  ],
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head_before_handoff_commit": "6a95d1a0359d",
     "upstream": "origin/master",
+    "head_before_commit": "03e5be619c41",
     "ahead": 0,
     "behind": 0,
     "worktree": "dirty"
   },
-  "next": "JA-027 mit Welle AN fortsetzen: naechste DISCOVER_OFFICIAL_WEBSITE-Kandidaten mit offizieller Website und Karrierequelle fail-closed belegen.",
+  "next": "JA-027 mit data/jobagent/company-discovery.official.wave-ao-20260904.json fortsetzen; Supertest erst bei expliziter Anforderung oder Abschluss von JA-027.",
   "refs": [
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
-    "handoff.latest.json"
+    "handoff.latest.json",
+    "handoff.latest.md"
   ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "env_inventory_path": null
+  "env_inventory_path": null,
+  "summary": "Welle AN/B importierte 4 neue offiziell belegte Arbeitgeber und aktualisierte 1 bestehenden Capgemini-Domainmatch."
 }
