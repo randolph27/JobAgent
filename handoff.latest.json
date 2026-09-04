@@ -1,21 +1,29 @@
 {
-  "ts": "2026-09-04T15:45:00.000+02:00",
+  "ts": "2026-09-04T15:50:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 offizielle Arbeitgeber-Websites pruefen und nur verifizierte Firmen produktiv hinzufuegen.",
-  "summary": "Welle AQ/B ist abgeschlossen: 5 offiziell belegte Arbeitgeber verarbeitet, 4 neu produktiv aufgenommen und 1 dedupliziertes Update.",
+  "summary": "Uebergabe nach STP: Welle AQ/B ist abgeschlossen und gepusht; JA-027 bleibt aktiv, UI-001 bleibt offen.",
   "last_commit": {
-    "hash": "207c408",
-    "subject": "Sync handoff after wave AP"
+    "hash": "f7540fc",
+    "subject": "Import verified employers wave AQ"
   },
   "roadmap_rotation": {
     "performed": false,
     "reason": "JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen."
   },
   "changed": [
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ],
+  "last_slice_changed": [
     "Roadmap.md",
     "data/jobagent/company-discovery.official.wave-aq-20260904.json",
     "data/jobagent/company-candidate-verification.queue.json",
@@ -151,24 +159,26 @@
   "supertest": {
     "requested": false,
     "executed_in_this_handoff": false,
-    "status": "not-run-per-user-instruction"
+    "status": "treated_done_per-user-instruction"
   },
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head_before_commit": "207c408",
+    "head_before_handoff_commit": "f7540fc",
     "upstream": "origin/master",
-    "ahead_behind_before_commit": "0/0",
-    "worktree_before_commit": "dirty"
+    "ahead_behind_before_handoff_commit": "0/0",
+    "worktree_before_handoff_commit": "dirty"
   },
   "next": "JA-027 mit data/jobagent/company-discovery.official.wave-ar-20260904.json fortsetzen.",
   "next_steps": [
+    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md erneut lesen.",
     "data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
     "Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.",
     "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-ar-20260904.json.",
     "Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.",
     "Alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
+    "Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.",
     "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 -WaveId B ausfuehren.",
     "Queue, Coverage und Source-Coverage aktualisieren.",
     "Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anfrage oder Roadmap-Abschluss.",
