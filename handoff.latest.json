@@ -1,74 +1,70 @@
 {
-  "ts": "2026-09-04T11:15:00.000+02:00",
+  "ts": "2026-09-04T15:45:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 offizielle Arbeitgeber-Websites pruefen und nur verifizierte Firmen produktiv hinzufuegen.",
-  "summary": "Neuer-Chat-Handoff nach STP: Welle AP/B ist abgeschlossen und gepusht; JA-027 bleibt aktiv, UI-001 bleibt offen.",
+  "summary": "Welle AQ/B ist abgeschlossen: 5 offiziell belegte Arbeitgeber verarbeitet, 4 neu produktiv aufgenommen und 1 dedupliziertes Update.",
   "last_commit": {
-    "hash": "01dcb48",
-    "subject": "Import verified employers wave AP"
+    "hash": "207c408",
+    "subject": "Sync handoff after wave AP"
   },
   "roadmap_rotation": {
     "performed": false,
     "reason": "JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen."
   },
   "changed": [
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "handoff.latest.md",
-    "handoff.latest.json"
-  ],
-  "last_slice_changed": [
     "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-ap-20260904.json",
+    "data/jobagent/company-discovery.official.wave-aq-20260904.json",
     "data/jobagent/company-candidate-verification.queue.json",
     "data/jobagent/store.json",
     "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
+    "todo.state.json",
     "handoff.latest.md",
     "handoff.latest.json"
   ],
   "last_slice_result": {
-    "wave": "AP",
+    "wave": "AQ",
     "wave_id": "B",
     "import_gate_status": "passed",
     "added_companies": [
-      "ParkHere GmbH",
-      "Curiosity",
-      "ICAROS GmbH",
-      "German Accelerator",
-      "Hyphe"
+      "VISTA Remote Sensing",
+      "UX3D GmbH",
+      "MEAG",
+      "The Boston Consulting Group GmbH"
     ],
-    "deduplicated_updates": [],
+    "deduplicated_updates": [
+      "UniCredit -> HypoVereinsbank"
+    ],
     "metrics": {
-      "companies_total": 413,
-      "job_sources_total": 404,
-      "official_sources": 406,
-      "career_sources": 405,
+      "companies_total": 417,
+      "job_sources_total": 406,
+      "official_sources": 408,
+      "career_sources": 407,
       "ats_sources": 1,
       "discovery_sources_total": 1820,
-      "queue_verified_or_store_total": 593,
-      "queue_discover_official_website_total": 1191,
+      "queue_verified_or_store_total": 598,
+      "queue_discover_official_website_total": 1184,
+      "queue_verify_official_site_total": 2,
       "queue_manual_decision_total": 1,
       "manual_review_rate": 0.0,
-      "duplicate_rate": 0.0,
-      "coverage_delta": 5
+      "duplicate_rate": 0.2,
+      "coverage_delta": 4
     }
   },
   "evidence": [
-    "data/jobagent/company-discovery.official.wave-ap-20260904.json",
-    "logs/jobagent/company-discovery-import-20260904-090214.json",
-    "logs/jobagent/company-candidate-verification-20260904-090224.json",
-    "logs/jobagent/company-coverage-20260904-090333.json",
-    "logs/jobagent/company-coverage-20260904-090333.md",
+    "data/jobagent/company-discovery.official.wave-aq-20260904.json",
+    "logs/jobagent/company-discovery-import-20260904-132913.json",
+    "logs/jobagent/company-candidate-verification-20260904-132918.json",
+    "logs/jobagent/company-coverage-20260904-133033.json",
+    "logs/jobagent/company-coverage-20260904-133033.md",
     "logs/jobagent/ja-023-source-coverage.json",
-    "data/jobagent/backups/store-20260904T090215185Z-pre-wave-import.json",
+    "data/jobagent/backups/store-20260904T132914460Z-pre-wave-import.json",
     "html/jobagent/company-coverage.html",
     "output/playwright/ja-022-viewport-800.png",
     "output/playwright/ja-022-viewport-1366.png",
@@ -76,15 +72,15 @@
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ap-20260904.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-aq-20260904.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url, career_url und discovery_url aus Welle AP",
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url, career_url und discovery_url aus Welle AQ",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ap-20260904.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-aq-20260904.json -WaveId B",
       "exit": 0
     },
     {
@@ -155,23 +151,22 @@
   "supertest": {
     "requested": false,
     "executed_in_this_handoff": false,
-    "status": "treated_done_per_user_instruction"
+    "status": "not-run-per-user-instruction"
   },
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "01dcb48",
+    "head_before_commit": "207c408",
     "upstream": "origin/master",
-    "ahead_behind_before_handoff_commit": "0/0",
-    "worktree_before_handoff_commit": "dirty"
+    "ahead_behind_before_commit": "0/0",
+    "worktree_before_commit": "dirty"
   },
-  "next": "JA-027 mit data/jobagent/company-discovery.official.wave-aq-20260904.json fortsetzen.",
+  "next": "JA-027 mit data/jobagent/company-discovery.official.wave-ar-20260904.json fortsetzen.",
   "next_steps": [
-    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md erneut lesen.",
     "data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
     "Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.",
-    "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-aq-20260904.json.",
+    "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-ar-20260904.json.",
     "Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.",
     "Alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
     "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 -WaveId B ausfuehren.",
@@ -193,9 +188,10 @@
   "env_inventory_used": false,
   "env_inventory_path": null,
   "risks": [
-    "JA-027 ist noch nicht abschliessbar, weil 1191 Kandidaten in manueller Website-/Scope-Pruefung stehen.",
+    "JA-027 ist noch nicht abschliessbar, weil 1184 Kandidaten in manueller Website-/Scope-Pruefung stehen.",
     "UI-001 bleibt offen, ist aber derzeit nicht der aktive Hotspot.",
-    "Curiosity, ICAROS GmbH, German Accelerator und Hyphe wurden als offizielle Firmendomain ohne Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare JobSource.",
+    "UX3D GmbH und MEAG wurden als offizielle Firmendomain ohne Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare JobSource.",
+    "BCG wurde ueber die offizielle BCG-Careers-Domain belegt; die Hauptdomain lieferte in der lokalen Pruefung 403 und wurde deshalb nicht als zu pruefende Feed-URL eingetragen.",
     "Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren."
   ]
 }

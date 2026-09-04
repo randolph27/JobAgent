@@ -1,0 +1,131 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T10:15:00.000Z",
+  "items": [
+    {
+      "canonical_name": "VISTA Remote Sensing",
+      "official_website_url": "https://www.vista-geo.de/",
+      "career_url": "https://www.vista-geo.de/career/",
+      "aliases": [
+        "VISTA",
+        "VISTA Remote Sensing",
+        "Vista GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Remote Sensing and Geosciences",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.vista-geo.de/career/",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der VISTA-Remote-Sensing-Kandidat wurde ueber die offizielle vista-geo.de-Domain mit Muenchner Standortangabe und die dort veroeffentlichte Career-Seite belegt."
+    },
+    {
+      "canonical_name": "UniCredit",
+      "official_website_url": "https://www.unicreditgroup.eu/en/worldwide/our-worldwide-presence/europe/germany.html",
+      "career_url": "https://www.unicreditgroup.eu/en/careers.html",
+      "aliases": [
+        "UniCredit",
+        "UniCredit Bank",
+        "HypoVereinsbank"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Banking and Financial Services",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.unicreditgroup.eu/en/careers.html",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der UniCredit-Kandidat wurde ueber die offizielle unicreditgroup.eu-Praesenz fuer Deutschland und die dortige zentrale Karriere-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Finanzwirtschaftsquelle."
+    },
+    {
+      "canonical_name": "UX3D GmbH",
+      "official_website_url": "https://www.ux3d.io/",
+      "career_url": null,
+      "aliases": [
+        "UX3D",
+        "UX3D GmbH",
+        "ux3d.io"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "3D Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ux3d.io/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der UX3D-Kandidat wurde ueber die offizielle ux3d.io-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+    },
+    {
+      "canonical_name": "MEAG",
+      "official_website_url": "https://www.meag.com/",
+      "career_url": null,
+      "aliases": [
+        "MEAG",
+        "MEAG MUNICH ERGO AssetManagement",
+        "MEAG - A Munich Re company"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Asset Management",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.meag.com/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der MEAG-Kandidat wurde ueber die offizielle meag.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+    },
+    {
+      "canonical_name": "The Boston Consulting Group GmbH",
+      "official_website_url": "https://careers.bcg.com/",
+      "career_url": "https://careers.bcg.com/",
+      "aliases": [
+        "Boston Consulting Group",
+        "BCG",
+        "The Boston Consulting Group GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Management Consulting",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.bcg.com/",
+      "discovery_origin": "source-registry:munich_business_us_companies",
+      "evidence_note": "Der BCG-Kandidat wurde ueber die offizielle BCG-Careers-Domain belegt; der Muenchen-Bezug stammt aus der regionalen U.S.-Community-Quelle."
+    }
+  ]
+}
