@@ -1,12 +1,12 @@
 {
-  "ts": "2026-09-04T21:18:03.156+02:00",
+  "ts": "2026-09-04T21:22:51.544+02:00",
   "project": "JobAgent",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "agent_id": "UTTER-20260817-39f7",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen.",
-  "summary": "Uebergabe nach Welle AV/B. Welle AV importierte 6 offiziell belegte Arbeitgeber produktiv; STP wurde fuer den Chatwechsel ausgefuehrt. Supertest wurde nicht neu angefragt und gilt gemaess Nutzerregel fuer diesen Uebergabeabschluss als erledigt.",
+  "summary": "Uebergabe nach erneutem STP fuer Chatwechsel. Seit Welle AV/B gab es keine neue fachliche Importwelle; Welle AV importierte 6 offiziell belegte Arbeitgeber produktiv. Supertest wurde nicht neu angefragt und gilt gemaess Nutzerregel fuer diesen Uebergabeabschluss als erledigt.",
   "roadmap_rotation": {
     "performed": false,
     "reason": "JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen.",
@@ -19,7 +19,7 @@
     "branch": "master",
     "upstream": "origin/master",
     "remote": "origin",
-    "head_before_handoff_commit": "cf12d4c27224",
+    "head_before_handoff_commit": "46d9af452de1",
     "ahead": 0,
     "behind": 0,
     "worktree_at_stp": "dirty"
@@ -34,7 +34,6 @@
   "last_committed_wave": {
     "name": "AV",
     "wave_id": "B",
-    "commit": "cf12d4c Update handoff after wave AV",
     "feed_path": "data/jobagent/company-discovery.official.wave-av-20260904.json",
     "import_log": "logs/jobagent/company-discovery-import-20260904-185803.json",
     "verification_log": "logs/jobagent/company-candidate-verification-20260904-185809.json",
@@ -172,7 +171,8 @@
     {
       "cmd": ".\\ci.cmd stp",
       "exit": 0,
-      "status": "pass"
+      "status": "pass",
+      "ts": "2026-09-04T21:22:51.544+02:00"
     }
   ],
   "supertest": {

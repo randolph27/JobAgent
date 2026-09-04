@@ -1,23 +1,23 @@
 # Handoff latest
 
-Stand: 2026-09-04T21:18:03.156+02:00
+Stand: 2026-09-04T21:22:51.544+02:00
 
 ## Status fuer neuen Chat
 
 - Projekt: JobAgent
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`, Upstream: `origin/master`
-- HEAD vor diesem Uebergabe-Commit: `cf12d4c Update handoff after wave AV`
+- HEAD vor diesem Uebergabe-Commit: `46d9af4 Update handoff for chat transition`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
 - Roadmap-Rotation: nicht erfolgt. `JA-027` ist fachlich nicht komplett erledigt; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-04T21:18:03.156+02:00`.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-04T21:22:51.544+02:00`.
 - Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt ein nicht angefragter Supertest fuer diesen Uebergabeabschluss als erledigt.
 
 ## Letzter Fachfortschritt
 
-Welle AV/B wurde abgeschlossen und bereits committed/gepusht in `cf12d4c`. Neu produktiv aufgenommen wurden:
+Welle AV/B wurde abgeschlossen und bereits committed/gepusht. Neu produktiv aufgenommen wurden:
 
 - itsmydata GmbH
 - Lilio Health GmbH
