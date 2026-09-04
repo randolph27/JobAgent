@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-04T10:15:00.000+02:00
+Stand: 2026-09-04T10:20:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -8,13 +8,13 @@ Stand: 2026-09-04T10:15:00.000+02:00
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`
 - Upstream: `origin/master`
-- HEAD vor Commit: `17a008724919`
+- Letzter Fach-Commit: `6a95d1a Import verified employers wave AM`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
 - Roadmap-Rotation: nicht erfolgt. `JA-027` ist fachlich nicht komplett erledigt; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-04T10:10:08.783+02:00`.
-- Supertest: nicht ausgefuehrt, weil `JA-027` offen bleibt und der Nutzer funktionsbezogene Tests vorzieht.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-04T10:12:57.950+02:00`.
+- Supertest: nicht neu ausgefuehrt; gemaess aktueller Nutzeranweisung gilt er als erledigt, wenn er nicht explizit angefragt wurde.
 
 ## Letzter abgeschlossener Fortschritt
 
@@ -88,19 +88,21 @@ Evidence:
 ## Naechste Aufgabe
 
 1. `JA-027` fortsetzen; `UI-001` nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.
-2. `data/jobagent/company-candidate-verification.queue.json` lesen.
-3. Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
+2. `README.md`, `Roadmap.md`, `todo.current.md`, `todo.state.json`, `handoff.latest.md` erneut lesen.
+3. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
 4. Bevorzugen: hoher `priority_score`, `risk_level == "LOW"`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
-5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-an-YYYYMMDD.json`.
+5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-an-20260904.json`.
 6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
 7. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
 8. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
-9. Import ausfuehren, danach Queue, Coverage und Source-Coverage aktualisieren.
-10. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`.
-11. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
+9. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-an-20260904.json -WaveId B`.
+10. Danach Queue, Coverage und Source-Coverage aktualisieren.
+11. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von `JA-027`.
+12. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und Annahmen
 
 - `JA-027` ist noch nicht abschliessbar, weil weiter viele Kandidaten in manueller Website-/Scope-Pruefung stehen.
 - `UI-001` bleibt offen, ist aber derzeit nicht der aktive Hotspot.
 - Deduplizierte Konzernkarriereseiten sind akzeptiert, solange der Domainmatch korrekt ist und keine produktive Firma ohne offiziellen Beleg entsteht.
+- Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren.

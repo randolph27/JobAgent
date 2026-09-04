@@ -1,12 +1,25 @@
 {
-  "ts": "2026-09-04T10:15:00.000+02:00",
+  "ts": "2026-09-04T10:20:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "summary": "Welle AM/B hat 4 offiziell belegte Arbeitgeber produktiv aufgenommen: CARIAD SE, Leica Geosystems GmbH Vertrieb Deutschland, Adtran Networks SE und ArianeGroup.",
+  "summary": "Welle AM/B abgeschlossen und gepusht: 4 offiziell belegte Arbeitgeber produktiv aufgenommen.",
+  "roadmap_rotation": {
+    "performed": false,
+    "reason": "JA-027 und UI-001 sind weiterhin offen."
+  },
+  "last_commit": {
+    "hash": "6a95d1a",
+    "message": "Import verified employers wave AM"
+  },
+  "stp": {
+    "cmd": ".\\ci.cmd stp",
+    "exit": 0,
+    "ts": "2026-09-04T10:12:57.950+02:00"
+  },
   "changed": [
     "Roadmap.md",
     "data/jobagent/company-discovery.official.wave-am-20260904.json",
@@ -97,11 +110,18 @@
       "exit": 0
     }
   ],
+  "supertest": {
+    "requested": false,
+    "status": "accepted_done_by_user_instruction",
+    "note": "Der Nutzer hat festgelegt: Wenn Supertest nicht angefragt wurde, gilt er als erledigt."
+  },
   "metrics": {
     "companies_total": 399,
     "job_sources_total": 395,
     "official_sources": 397,
     "career_sources": 396,
+    "ats_sources": 1,
+    "discovery_sources": 1820,
     "already_verified_in_store": 577,
     "discover_official_website": 1205,
     "verify_official_site": 2,
@@ -122,11 +142,29 @@
     "output/playwright/ja-022-viewport-1366.png",
     "output/playwright/ja-022-viewport-1920.png"
   ],
+  "next_steps": [
+    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md erneut lesen.",
+    "JA-027 fortsetzen; UI-001 nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.",
+    "data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
+    "Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.",
+    "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-an-20260904.json.",
+    "Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.",
+    "Vor Import alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
+    "Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.",
+    "Import ausfuehren, danach Queue, Coverage und Source-Coverage aktualisieren.",
+    "Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von JA-027.",
+    "Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push."
+  ],
+  "risks": [
+    "JA-027 ist noch nicht abschliessbar, weil weiter viele Kandidaten in manueller Website-/Scope-Pruefung stehen.",
+    "Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren.",
+    "Deduplizierte Konzernkarriereseiten sind akzeptiert, solange der Domainmatch korrekt ist und keine produktive Firma ohne offiziellen Beleg entsteht."
+  ],
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head_before_commit": "17a008724919",
+    "head_before_handoff_commit": "6a95d1a0359d",
     "upstream": "origin/master",
     "ahead": 0,
     "behind": 0,
