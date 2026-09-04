@@ -1,0 +1,178 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T16:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Wolt",
+      "official_website_url": "https://wolt.com/",
+      "career_url": "https://careers.wolt.com/",
+      "aliases": [
+        "Wolt",
+        "Wolt Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Delivery Platform",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.wolt.com/",
+      "discovery_origin": "source-registry:remote_jobs_germany_github",
+      "evidence_note": "Der Wolt-Kandidat wurde ueber die offizielle wolt.com-Domain und das offizielle Karriereportal careers.wolt.com belegt; der Muenchen-Bezug stammt aus der regionalen Remote-Jobs-Quelle."
+    },
+    {
+      "canonical_name": "Zuehlke Engineering",
+      "official_website_url": "https://www.zuehlke.com/",
+      "career_url": "https://www.zuehlke.com/en/careers",
+      "aliases": [
+        "Zuehlke Engineering",
+        "Zuehlke",
+        "Zuehlke Engineering GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering and Technology Consulting",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.zuehlke.com/en/careers",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Zuehlke-Kandidat wurde ueber die offizielle zuehlke.com-Domain und die dortige Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Gewerbeflaechen- und Standortquelle."
+    },
+    {
+      "canonical_name": "Trimble",
+      "official_website_url": "https://www.trimble.com/",
+      "career_url": "https://www.trimble.com/en/careers",
+      "aliases": [
+        "Trimble",
+        "Trimble Germany",
+        "Trimble Geospatial"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial and Construction Technology",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.trimble.com/en/careers",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der Trimble-Kandidat wurde ueber die offizielle trimble.com-Domain und die offizielle Trimble-Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Geospatial-Arbeitgeberquelle."
+    },
+    {
+      "canonical_name": "Quantumrock",
+      "official_website_url": "https://www.quantumrock.ai/",
+      "career_url": null,
+      "aliases": [
+        "Quantumrock",
+        "Quantumrock GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Asset Management",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.quantumrock.ai/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Quantumrock-Kandidat wurde ueber die offizielle quantumrock.ai-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "SUMM",
+      "official_website_url": "https://www.summ-ai.com/",
+      "career_url": null,
+      "aliases": [
+        "SUMM",
+        "summ ai",
+        "SUMM AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.summ-ai.com/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der SUMM-Kandidat wurde ueber die offizielle summ-ai.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Sub Capitals",
+      "official_website_url": "https://www.subcapitals.com/",
+      "career_url": null,
+      "aliases": [
+        "Sub Capitals",
+        "subcapitals",
+        "Sub Capitals GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Investment Technology",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.subcapitals.com/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Sub-Capitals-Kandidat wurde ueber die offizielle subcapitals.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Riscognition GmbH",
+      "official_website_url": "https://riscognition.com/",
+      "career_url": null,
+      "aliases": [
+        "Riscognition GmbH",
+        "Riscognition"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Risk Analytics",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://riscognition.com/",
+      "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+      "evidence_note": "Der Riscognition-Kandidat wurde ueber die offizielle riscognition.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    }
+  ]
+}

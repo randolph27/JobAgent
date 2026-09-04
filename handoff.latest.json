@@ -1,153 +1,137 @@
 {
-  "toolchain": {
-    "ts": "2026-08-17T13:53:15.642+02:00",
-    "gradle": {
-      "cmd": "gradle",
-      "mode": "path",
-      "root": "D:\\_Scripte\\JobAgent"
-    }
-  },
-  "verify_digest": {
-    "ts": "2026-08-24T09:29:31.729+02:00",
-    "cmd": ".\\ci.cmd supertest",
-    "exit": 0,
-    "status": "pass",
-    "log_path": null,
-    "scope": "JobAgent function suite",
-    "tests_total": 19,
-    "duration_seconds": 41.31
-  },
-  "ts": "2026-09-04T18:16:00.000+02:00",
-  "capsule": {
-    "env_inventory_used": false,
-    "project": "JobAgent",
-    "status": "in-progress",
-    "env_inventory_missing": false,
-    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-    "route_ok": true,
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
-      "handoff.latest.json"
-    ],
-    "changed": [
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "ts": "2026-09-04T18:10:51.692+02:00",
-    "next": "",
-    "env_inventory_path": null,
-    "git": {
-      "remote": "origin",
-      "worktree": "dirty",
-      "behind": 0,
-      "branch": "master",
-      "head": "da19997cfbee",
-      "ahead": 0,
-      "has_repo": true,
-      "tracked_changes": [
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json",
-        "todo.state.json"
-      ],
-      "detached": false,
-      "upstream": "origin/master"
-    },
-    "verified": [
-      {
-        "status": "pass",
-        "cmd": ".\\ci.cmd supertest",
-        "exit": 0
-      }
-    ],
-    "agent_id": "UTTER-20260817-39f7",
-    "active_id": "TD-0041",
-    "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
-    "workspace_root": ".",
-    "route_violations": [],
-    "manual_missing": false
-  },
+  "ts": "2026-09-04T20:30:00.000+02:00",
+  "agent_id": "UTTER-20260817-39f7",
+  "workspace_root": "D:\\_Scripte\\JobAgent",
+  "project": "JobAgent",
+  "active_id": "TD-0041",
+  "status": "in-progress",
+  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
+  "summary": "Welle AT/B importierte 7 offiziell belegte Arbeitgeber produktiv.",
   "changed": [
+    "Roadmap.md",
+    "data/jobagent/company-discovery.official.wave-at-20260904.json",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/store.json",
+    "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json"
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
-  "route_violations": [],
-  "next": "Naechste Importwelle AT/B aus DISCOVER_OFFICIAL_WEBSITE-Kandidaten priorisieren, offizielle Websites/Karrierequellen live pruefen, importieren, Coverage und Funktionstests laufen lassen.",
-  "next_steps": [],
-  "refs": [
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.json",
-    "file:logs/verify/verify.digest.json"
-  ],
-  "workspace_root": ".",
-  "goal": "Aktive Punkte: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen #comment: Aus den Kandidaten werden erst dann Store-Firmen, wenn eine offizielle Firmenwebsite plus Jobs-/Karriere- oder belegte ATS-Quelle fail-closed verifiziert wurde.",
-  "active_id": "TD-0041",
-  "route_ok": true,
-  "route": {
-    "route_ok": true,
-    "mode": "standard",
-    "violations": [],
-    "ts": "2026-09-04T15:56:55.686+02:00",
-    "changed_files": [
-      "Roadmap.md",
-      "data/jobagent/company-candidate-verification.queue.json",
-      "data/jobagent/store.json",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "html/jobagent/company-coverage.html",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "agent_id": "UTTER-20260817-39f7",
-    "changed_count": 10,
-    "policy": {
-      "no_touch": [],
-      "forbid_regex": [],
-      "forbid_path": []
-    },
-    "git": {
-      "has_repo": true,
-      "diff_log": "logs\\terminal\\route-check-20260904-155650.log"
-    }
-  },
-  "agent_id": "UTTER-20260817-39f7",
   "verified": [
     {
-      "status": "pass",
-      "cmd": ".\\ci.cmd supertest",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-at-20260904.json | ConvertFrom-Json -Depth 100",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AT",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-at-20260904.json -WaveId B",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
+      "exit": 1
+    },
+    {
+      "cmd": ".\\ci.cmd devserver-status",
+      "exit": 0
+    },
+    {
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
+      "exit": 0
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
       "exit": 0
     }
   ],
-  "project": "JobAgent",
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-  "status": "in-progress",
+  "route_ok": true,
+  "route_violations": [],
   "git": {
-    "remote": "origin",
-    "worktree": "dirty-before-handoff-commit",
-    "behind": 0,
     "branch": "master",
-    "head": "da19997cfbee",
+    "head": "9e37e3b19d48",
+    "upstream": "origin/master",
     "ahead": 0,
-    "has_repo": true,
-    "tracked_changes": [
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "detached": false,
-    "upstream": "origin/master"
+    "behind": 0,
+    "worktree": "dirty"
   },
-  "supertest": "not-run-this-turn: gilt gemaess Nutzeranweisung als erledigt, weil nicht explizit angefragt; vollstaendiger Supertest erst bei JA-027-Abschluss oder expliziter Anforderung.",
-  "summary": "Welle AS/B abgeschlossen; STP fuer Chatwechsel ausgefuehrt; JA-027 bleibt offen."
+  "metrics": {
+    "companies_total": 437,
+    "job_sources_total": 417,
+    "official_sources": 419,
+    "career_sources": 418,
+    "ats_sources": 1,
+    "candidate_verified_or_store_total": 619,
+    "candidate_manual_review_total": 1165,
+    "wave_id": "B",
+    "wave_name": "AT",
+    "wave_added": 7,
+    "wave_duplicate_rate": 0.0,
+    "wave_manual_review_rate": 0.0,
+    "wave_coverage_delta": 7
+  },
+  "next": "JA-027 mit data/jobagent/company-discovery.official.wave-au-20260904.json oder naechstem Kalendertag fortsetzen; Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE, hoher Prioritaet und niedrigem Risiko offiziell verifizieren.",
+  "refs": [
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ],
+  "manual_missing": false,
+  "env_inventory_missing": false,
+  "env_inventory_used": false,
+  "env_inventory_path": null
 }

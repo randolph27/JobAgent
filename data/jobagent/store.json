@@ -9958,6 +9958,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:wolt",
+      "canonical_name": "Wolt",
+      "canonical_domain": "wolt.com",
+      "official_website_url": "https://wolt.com/",
+      "career_url": "https://careers.wolt.com/",
+      "aliases": [
+        "Wolt",
+        "Wolt Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Delivery Platform",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.wolt.com/",
+        "observed_at": "2026-09-04T18:22:11.919Z",
+        "verification_url": "https://careers.wolt.com/",
+        "discovery_origin": "source-registry:remote_jobs_germany_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Delivery Platform",
+        "evidence_note": "Der Wolt-Kandidat wurde ueber die offizielle wolt.com-Domain und das offizielle Karriereportal careers.wolt.com belegt; der Muenchen-Bezug stammt aus der regionalen Remote-Jobs-Quelle."
+      },
+      "created_at": "2026-09-04T18:22:11.919Z",
+      "updated_at": "2026-09-04T18:22:11.919Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:vista_remote_sensing",
       "canonical_name": "VISTA Remote Sensing",
       "canonical_domain": "vista-geo.de",
@@ -10736,6 +10775,46 @@
       },
       "created_at": "2026-08-31T18:18:31.59Z",
       "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:zuehlke_engineering",
+      "canonical_name": "Zuehlke Engineering",
+      "canonical_domain": "zuehlke.com",
+      "official_website_url": "https://www.zuehlke.com/",
+      "career_url": "https://www.zuehlke.com/en/careers",
+      "aliases": [
+        "Zuehlke",
+        "Zuehlke Engineering",
+        "Zuehlke Engineering GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering and Technology Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.zuehlke.com/en/careers",
+        "observed_at": "2026-09-04T18:22:11.919Z",
+        "verification_url": "https://www.zuehlke.com/en/careers",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Engineering and Technology Consulting",
+        "evidence_note": "Der Zuehlke-Kandidat wurde ueber die offizielle zuehlke.com-Domain und die dortige Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Gewerbeflaechen- und Standortquelle."
+      },
+      "created_at": "2026-09-04T18:22:11.919Z",
+      "updated_at": "2026-09-04T18:22:11.919Z",
       "last_successful_scan_at": null
     },
     {
@@ -11758,6 +11837,46 @@
       },
       "created_at": "2026-08-31T11:47:08.268Z",
       "updated_at": "2026-08-31T11:47:08.268Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:trimble",
+      "canonical_name": "Trimble",
+      "canonical_domain": "trimble.com",
+      "official_website_url": "https://www.trimble.com/",
+      "career_url": "https://www.trimble.com/en/careers",
+      "aliases": [
+        "Trimble",
+        "Trimble Geospatial",
+        "Trimble Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial and Construction Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.trimble.com/en/careers",
+        "observed_at": "2026-09-04T18:22:11.919Z",
+        "verification_url": "https://www.trimble.com/en/careers",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Geospatial and Construction Technology",
+        "evidence_note": "Der Trimble-Kandidat wurde ueber die offizielle trimble.com-Domain und die offizielle Trimble-Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Geospatial-Arbeitgeberquelle."
+      },
+      "created_at": "2026-09-04T18:22:11.919Z",
+      "updated_at": "2026-09-04T18:22:11.919Z",
       "last_successful_scan_at": null
     },
     {
@@ -12892,6 +13011,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:quantumrock",
+      "canonical_name": "Quantumrock",
+      "canonical_domain": "quantumrock.ai",
+      "official_website_url": "https://www.quantumrock.ai/",
+      "career_url": null,
+      "aliases": [
+        "Quantumrock",
+        "Quantumrock GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Asset Management",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.quantumrock.ai/",
+        "observed_at": "2026-09-04T18:22:11.919Z",
+        "verification_url": "https://www.quantumrock.ai/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Asset Management",
+        "evidence_note": "Der Quantumrock-Kandidat wurde ueber die offizielle quantumrock.ai-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:22:11.919Z",
+      "updated_at": "2026-09-04T18:22:11.919Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:planet_sports",
       "canonical_name": "Planet Sports",
       "canonical_domain": "planetsports.com",
@@ -13592,6 +13750,45 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:summ",
+      "canonical_name": "SUMM",
+      "canonical_domain": "summ-ai.com",
+      "official_website_url": "https://www.summ-ai.com/",
+      "career_url": null,
+      "aliases": [
+        "SUMM",
+        "summ ai"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.summ-ai.com/",
+        "observed_at": "2026-09-04T18:22:11.919Z",
+        "verification_url": "https://www.summ-ai.com/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Software",
+        "evidence_note": "Der SUMM-Kandidat wurde ueber die offizielle summ-ai.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:22:11.919Z",
+      "updated_at": "2026-09-04T18:22:11.919Z",
       "last_successful_scan_at": null
     },
     {
@@ -14538,6 +14735,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:sub_capitals",
+      "canonical_name": "Sub Capitals",
+      "canonical_domain": "subcapitals.com",
+      "official_website_url": "https://www.subcapitals.com/",
+      "career_url": null,
+      "aliases": [
+        "Sub Capitals",
+        "Sub Capitals GmbH",
+        "subcapitals"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Investment Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.subcapitals.com/",
+        "observed_at": "2026-09-04T18:22:11.919Z",
+        "verification_url": "https://www.subcapitals.com/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Investment Technology",
+        "evidence_note": "Der Sub-Capitals-Kandidat wurde ueber die offizielle subcapitals.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:22:11.919Z",
+      "updated_at": "2026-09-04T18:22:11.919Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:simscale_gmbh",
       "canonical_name": "SimScale GmbH",
       "canonical_domain": "simscale.com",
@@ -15275,6 +15512,45 @@
       },
       "created_at": "2026-09-03T09:44:45.466Z",
       "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:riscognition_gmbh",
+      "canonical_name": "Riscognition GmbH",
+      "canonical_domain": "riscognition.com",
+      "official_website_url": "https://riscognition.com/",
+      "career_url": null,
+      "aliases": [
+        "Riscognition",
+        "Riscognition GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Geospatial Risk Analytics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://riscognition.com/",
+        "observed_at": "2026-09-04T18:22:11.919Z",
+        "verification_url": "https://riscognition.com/",
+        "discovery_origin": "source-registry:awesome_geospatial_companies_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Geospatial Risk Analytics",
+        "evidence_note": "Der Riscognition-Kandidat wurde ueber die offizielle riscognition.com-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:22:11.919Z",
+      "updated_at": "2026-09-04T18:22:11.919Z",
       "last_successful_scan_at": null
     },
     {
@@ -26037,6 +26313,27 @@
       ]
     },
     {
+      "source_id": "source:trimble_career",
+      "company_id": "company:trimble",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.trimble.com/en/careers",
+      "canonical_url": "https://www.trimble.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T18:22:11.919Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.trimble.com/en/careers",
+          "basis_url": "https://www.trimble.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T18:22:11.919Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:tuev_sued_ag_career",
       "company_id": "company:tuev_sued_ag",
       "source_type": "CAREER_PAGE",
@@ -26394,6 +26691,27 @@
       ]
     },
     {
+      "source_id": "source:wolt_career",
+      "company_id": "company:wolt",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.wolt.com/",
+      "canonical_url": "https://careers.wolt.com/",
+      "is_official": true,
+      "verified_at": "2026-09-04T18:22:11.919Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.wolt.com/",
+          "basis_url": "https://wolt.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T18:22:11.919Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:workaround_gmbh_career",
       "company_id": "company:workaround_gmbh",
       "source_type": "CAREER_PAGE",
@@ -26517,6 +26835,27 @@
           "basis_url": "https://corporate.zooplus.com/en/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T17:56:02.051Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:zuehlke_engineering_career",
+      "company_id": "company:zuehlke_engineering",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.zuehlke.com/en/careers",
+      "canonical_url": "https://www.zuehlke.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-09-04T18:22:11.919Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.zuehlke.com/en/careers",
+          "basis_url": "https://www.zuehlke.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T18:22:11.919Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
