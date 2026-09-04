@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-04T16:03:00.000+02:00
+Stand: 2026-09-04T18:12:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -9,64 +9,63 @@ Stand: 2026-09-04T16:03:00.000+02:00
 - Repo: https://github.com/randolph27/JobAgent
 - Branch: master
 - Upstream: origin/master
-- Letzter Fach-Commit: a0059fc Import verified employers wave AR
+- Letzter Fach-Commit vor dieser Welle: 7917dd6 Sync handoff after wave AR
 - Aktiver Todo: TD-0041
 - Aktiver Roadmap-Punkt: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen
 - Ebenfalls offen: UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen
 - Roadmap-Rotation: nicht erfolgt. JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen.
-- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T16:00:57.393+02:00.
-- Supertest: nicht ausgefuehrt; gemaess Nutzeranweisung gilt er als erledigt, wenn er nicht explizit angefragt wurde.
+- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T18:07:26.171+02:00.
+- Supertest: nicht ausgefuehrt; gemaess Nutzeranweisung erst nach Abschluss von JA-027.
 
 ## Letzter abgeschlossener Fortschritt
 
-Welle AR/B wurde abgeschlossen. Neu produktiv aufgenommen wurden:
+Welle AS/B wurde abgeschlossen. Neu produktiv aufgenommen wurden:
 
-- Infosys Ltd.
-- jameda
-- petaFuel GmbH
-- Micro Fuzzy GmbH
-- Intellias
-- Presize.ai
+- steidle Architekten
+- sqanit
+- Take-Two Interactive
+- Planet Sports
+- Pearson Deutschland
+- Yahoo
+- ysura
 
-Kennzahlen nach Welle AR:
+Kennzahlen nach Welle AS:
 
-- Store: 423 Firmen
-- JobSources: 409
-- Source Coverage: 411 offizielle Quellen
-- Karrierequellen: 410
+- Store: 430 Firmen
+- JobSources: 414
+- Source Coverage: 416 offizielle Quellen
+- Karrierequellen: 415
 - ATS-Quellen: 1
 - Discovery Sources/Hints gesamt: 1820
-- Kandidatenqueue: 604 bereits produktiv verifiziert oder im Store belegt
-- Kandidatenqueue: 1178 mit DISCOVER_OFFICIAL_WEBSITE
+- Kandidatenqueue: 612 bereits produktiv verifiziert oder im Store belegt
+- Kandidatenqueue: 1170 mit DISCOVER_OFFICIAL_WEBSITE
 - Kandidatenqueue: 2 mit VERIFY_OFFICIAL_SITE
 - Kandidatenqueue: 1 mit MANUAL_DECISION
 - Importwellen-Gate B: passed
-- Gate-Metriken Welle AR: manual_review_rate=0.0, duplicate_rate=0.0, coverage_delta=6
+- Gate-Metriken Welle AS: manual_review_rate=0.0, duplicate_rate=0.0, coverage_delta=7
 
-## Geaenderte Dateien in Welle AR
+## Geaenderte Dateien in Welle AS
 
 - Roadmap.md
-- data/jobagent/company-discovery.official.wave-ar-20260904.json
+- data/jobagent/company-discovery.official.wave-as-20260904.json
 - data/jobagent/company-candidate-verification.queue.json
 - data/jobagent/store.json
 - html/jobagent/company-coverage.html
-- todo.current.md
 - todo.events.jsonl
 - todo.history.digest.json
 - todo.master.index.json
-- todo.state.json
 - handoff.latest.md
 - handoff.latest.json
 
 ## Evidence
 
-- data/jobagent/company-discovery.official.wave-ar-20260904.json
-- logs/jobagent/company-discovery-import-20260904-134932.json
-- logs/jobagent/company-candidate-verification-20260904-134943.json
-- logs/jobagent/company-coverage-20260904-134944.json
-- logs/jobagent/company-coverage-20260904-134944.md
+- data/jobagent/company-discovery.official.wave-as-20260904.json
+- logs/jobagent/company-discovery-import-20260904-160057.json
+- logs/jobagent/company-candidate-verification-20260904-160107.json
+- logs/jobagent/company-coverage-20260904-160108.json
+- logs/jobagent/company-coverage-20260904-160108.md
 - logs/jobagent/ja-023-source-coverage.json
-- data/jobagent/backups/store-20260904T134933503Z-pre-wave-import.json
+- data/jobagent/backups/store-20260904T160057876Z-pre-wave-import.json
 - html/jobagent/company-coverage.html
 - output/playwright/ja-022-viewport-800.png
 - output/playwright/ja-022-viewport-1366.png
@@ -74,9 +73,9 @@ Kennzahlen nach Welle AR:
 
 ## Verifikation
 
-- `Get-Content -Raw data\jobagent\company-discovery.official.wave-ar-20260904.json | ConvertFrom-Json -Depth 100` -> Exit `0`
-- `Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url, career_url und discovery_url aus Welle AR` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-ar-20260904.json -WaveId B` -> Exit `0`
+- `Get-Content -Raw data\jobagent\company-discovery.official.wave-as-20260904.json | ConvertFrom-Json -Depth 100` -> Exit `0`
+- `Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url, career_url und discovery_url aus Welle AS` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-as-20260904.json -WaveId B` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`
@@ -100,7 +99,7 @@ Kennzahlen nach Welle AR:
 2. Startdateien erneut lesen: README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md.
 3. data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.
 4. Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
-5. Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-as-20260904.json oder naechster Kalendertag.
+5. Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-at-20260904.json oder naechster Kalendertag.
 6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
 7. Vor Import alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.
 8. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
@@ -108,13 +107,12 @@ Kennzahlen nach Welle AR:
 10. Danach Queue aktualisieren: pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5.
 11. Coverage aktualisieren: pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250.
 12. Source-Coverage aktualisieren: pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent.
-13. Funktionsbezogene Tests ausfuehren; Supertest gilt als erledigt, wenn nicht explizit angefragt oder wenn JA-027 nicht komplett abgeschlossen wird.
+13. Funktionsbezogene Tests ausfuehren; Supertest erst nach expliziter Anforderung oder wenn JA-027 komplett abgeschlossen wird.
 14. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und Annahmen
 
-- JA-027 ist noch nicht abschliessbar, weil 1178 Kandidaten in manueller Website-/Scope-Pruefung stehen.
+- JA-027 ist noch nicht abschliessbar, weil 1170 Kandidaten in manueller Website-/Scope-Pruefung stehen.
 - UI-001 bleibt offen, ist aber derzeit nicht der aktive Hotspot.
-- jameda, Micro Fuzzy und Intellias wurden als offizielle Firmendomain ohne separate Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare JobSource.
-- Presize.ai wurde ueber eine erreichbare Freshteam-Karriereseite importiert, weil die Hauptdomain lokal nicht belastbar abrufbar war.
+- sqanit und ysura wurden als offizielle Firmendomain ohne separate Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare Karrierequelle.
 - Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren.

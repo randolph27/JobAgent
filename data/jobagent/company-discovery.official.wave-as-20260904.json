@@ -1,0 +1,178 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T14:45:00.000Z",
+  "items": [
+    {
+      "canonical_name": "steidle Architekten",
+      "official_website_url": "https://www.steidle-architekten.de/",
+      "career_url": "https://www.steidle-architekten.de/",
+      "aliases": [
+        "steidle Architekten",
+        "steidle architekten",
+        "steidle architekten Gesellschaft von Architekten und Stadtplanern mbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture and Urban Planning",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.steidle-architekten.de/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der steidle-Architekten-Kandidat wurde ueber die offizielle steidle-architekten.de-Domain belegt; die Startseite enthaelt zugleich aktuelle Stellenhinweise und den Muenchner Sitz."
+    },
+    {
+      "canonical_name": "sqanit",
+      "official_website_url": "https://www.sqanit.com/",
+      "career_url": null,
+      "aliases": [
+        "sqanit",
+        "sqanit GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Service Platform Software",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.sqanit.com/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der sqanit-Kandidat wurde ueber die offizielle sqanit.com-Domain mit Muenchner Adresse belegt; eine von der Firmenwebsite belegte Karriere-URL wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Take-Two Interactive",
+      "official_website_url": "https://www.take2games.com/",
+      "career_url": "https://careers.take2games.com/",
+      "aliases": [
+        "Take 2 Interactive",
+        "Take-Two Interactive",
+        "Take-Two Interactive Software, Inc."
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Interactive Entertainment",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.take2games.com/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Take-Two-Kandidat wurde ueber die offizielle take2games.com-Domain und die dort verlinkte offizielle Karriere-Domain careers.take2games.com belegt; der Muenchen-Bezug stammt aus der regionalen Kreativwirtschaftsquelle."
+    },
+    {
+      "canonical_name": "Planet Sports",
+      "official_website_url": "https://planetsports.com/",
+      "career_url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+      "aliases": [
+        "Planet Sports",
+        "Planet Sports GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sports and Lifestyle Retail",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Planet-Sports-Kandidat wurde ueber die offizielle planetsports.com-Domain und die dortige Jobs-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Tech-Arbeitgeberquelle."
+    },
+    {
+      "canonical_name": "Pearson Deutschland",
+      "official_website_url": "https://www.pearson.de/",
+      "career_url": "https://pearson.jobs/",
+      "aliases": [
+        "Pearson Deutschland",
+        "Pearson",
+        "Pearson Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Education and Assessment",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://pearson.jobs/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Pearson-Deutschland-Kandidat wurde ueber pearson.de und das offizielle Pearson-Karriereportal pearson.jobs belegt; der Muenchen-Bezug stammt aus der regionalen Standortquelle."
+    },
+    {
+      "canonical_name": "Yahoo",
+      "official_website_url": "https://www.yahooinc.com/",
+      "career_url": "https://www.yahooinc.com/careers/",
+      "aliases": [
+        "Yahoo",
+        "Yahoo Inc.",
+        "Yahoo Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Internet Services",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.yahooinc.com/careers/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der Yahoo-Kandidat wurde ueber yahooinc.com und die offizielle Yahoo-Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Tech-Arbeitgeberquelle."
+    },
+    {
+      "canonical_name": "ysura",
+      "official_website_url": "https://www.ysura.com/",
+      "career_url": null,
+      "aliases": [
+        "ysura",
+        "ysura GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharma CRM Software",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ysura.com/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der ysura-Kandidat wurde ueber die offizielle ysura.com-Domain mit Muenchner Unternehmensbezug belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+    }
+  ]
+}

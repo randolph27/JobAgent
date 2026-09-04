@@ -10037,6 +10037,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:steidle_architekten",
+      "canonical_name": "steidle Architekten",
+      "canonical_domain": "steidle-architekten.de",
+      "official_website_url": "https://www.steidle-architekten.de/",
+      "career_url": "https://www.steidle-architekten.de/",
+      "aliases": [
+        "steidle Architekten",
+        "steidle architekten Gesellschaft von Architekten und Stadtplanern mbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Architecture and Urban Planning",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.steidle-architekten.de/",
+        "observed_at": "2026-09-04T16:00:57.131Z",
+        "verification_url": "https://www.steidle-architekten.de/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Architecture and Urban Planning",
+        "evidence_note": "Der steidle-Architekten-Kandidat wurde ueber die offizielle steidle-architekten.de-Domain belegt; die Startseite enthaelt zugleich aktuelle Stellenhinweise und den Muenchner Sitz."
+      },
+      "created_at": "2026-09-04T16:00:57.131Z",
+      "updated_at": "2026-09-04T16:00:57.131Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:smart_reporting_gmbh",
       "canonical_name": "Smart Reporting GmbH",
       "canonical_domain": "smart-reporting.com",
@@ -10778,6 +10817,45 @@
       },
       "created_at": "2026-08-31T05:39:43.239Z",
       "updated_at": "2026-09-04T13:29:13.802Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:sqanit",
+      "canonical_name": "sqanit",
+      "canonical_domain": "sqanit.com",
+      "official_website_url": "https://www.sqanit.com/",
+      "career_url": null,
+      "aliases": [
+        "sqanit",
+        "sqanit GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Service Platform Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.sqanit.com/",
+        "observed_at": "2026-09-04T16:00:57.131Z",
+        "verification_url": "https://www.sqanit.com/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Service Platform Software",
+        "evidence_note": "Der sqanit-Kandidat wurde ueber die offizielle sqanit.com-Domain mit Muenchner Adresse belegt; eine von der Firmenwebsite belegte Karriere-URL wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T16:00:57.131Z",
+      "updated_at": "2026-09-04T16:00:57.131Z",
       "last_successful_scan_at": null
     },
     {
@@ -11718,6 +11796,46 @@
       },
       "created_at": "2026-09-01T06:08:24.736Z",
       "updated_at": "2026-09-01T06:08:24.736Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:take_two_interactive",
+      "canonical_name": "Take-Two Interactive",
+      "canonical_domain": "take2games.com",
+      "official_website_url": "https://www.take2games.com/",
+      "career_url": "https://careers.take2games.com/",
+      "aliases": [
+        "Take 2 Interactive",
+        "Take-Two Interactive",
+        "Take-Two Interactive Software, Inc."
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Interactive Entertainment",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.take2games.com/",
+        "observed_at": "2026-09-04T16:00:57.131Z",
+        "verification_url": "https://careers.take2games.com/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Interactive Entertainment",
+        "evidence_note": "Der Take-Two-Kandidat wurde ueber die offizielle take2games.com-Domain und die dort verlinkte offizielle Karriere-Domain careers.take2games.com belegt; der Muenchen-Bezug stammt aus der regionalen Kreativwirtschaftsquelle."
+      },
+      "created_at": "2026-09-04T16:00:57.131Z",
+      "updated_at": "2026-09-04T16:00:57.131Z",
       "last_successful_scan_at": null
     },
     {
@@ -12774,6 +12892,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:planet_sports",
+      "canonical_name": "Planet Sports",
+      "canonical_domain": "planetsports.com",
+      "official_website_url": "https://planetsports.com/",
+      "career_url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+      "aliases": [
+        "Planet Sports",
+        "Planet Sports GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sports and Lifestyle Retail",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+        "observed_at": "2026-09-04T16:00:57.131Z",
+        "verification_url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Sports and Lifestyle Retail",
+        "evidence_note": "Der Planet-Sports-Kandidat wurde ueber die offizielle planetsports.com-Domain und die dortige Jobs-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Tech-Arbeitgeberquelle."
+      },
+      "created_at": "2026-09-04T16:00:57.131Z",
+      "updated_at": "2026-09-04T16:00:57.131Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:nuclino_gmbh",
       "canonical_name": "Nuclino GmbH",
       "canonical_domain": "nuclino.com",
@@ -13677,6 +13834,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:pearson_deutschland",
+      "canonical_name": "Pearson Deutschland",
+      "canonical_domain": "pearson.de",
+      "official_website_url": "https://www.pearson.de/",
+      "career_url": "https://pearson.jobs/",
+      "aliases": [
+        "Pearson",
+        "Pearson Deutschland",
+        "Pearson Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Education and Assessment",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://pearson.jobs/",
+        "observed_at": "2026-09-04T16:00:57.131Z",
+        "verification_url": "https://pearson.jobs/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Education and Assessment",
+        "evidence_note": "Der Pearson-Deutschland-Kandidat wurde ueber pearson.de und das offizielle Pearson-Karriereportal pearson.jobs belegt; der Muenchen-Bezug stammt aus der regionalen Standortquelle."
+      },
+      "created_at": "2026-09-04T16:00:57.131Z",
+      "updated_at": "2026-09-04T16:00:57.131Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:oska_mode_gmbh",
       "canonical_name": "OSKA Mode GmbH",
       "canonical_domain": "oska.fashion",
@@ -14182,6 +14379,46 @@
       },
       "created_at": "2026-09-04T08:04:35.555Z",
       "updated_at": "2026-09-04T08:04:35.555Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:yahoo",
+      "canonical_name": "Yahoo",
+      "canonical_domain": "yahooinc.com",
+      "official_website_url": "https://www.yahooinc.com/",
+      "career_url": "https://www.yahooinc.com/careers/",
+      "aliases": [
+        "Yahoo",
+        "Yahoo Germany",
+        "Yahoo Inc."
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Internet Services",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.yahooinc.com/careers/",
+        "observed_at": "2026-09-04T16:00:57.131Z",
+        "verification_url": "https://www.yahooinc.com/careers/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Media and Internet Services",
+        "evidence_note": "Der Yahoo-Kandidat wurde ueber yahooinc.com und die offizielle Yahoo-Careers-Seite belegt; der Muenchen-Bezug stammt aus der regionalen Tech-Arbeitgeberquelle."
+      },
+      "created_at": "2026-09-04T16:00:57.131Z",
+      "updated_at": "2026-09-04T16:00:57.131Z",
       "last_successful_scan_at": null
     },
     {
@@ -14845,6 +15082,45 @@
       },
       "created_at": "2026-08-31T18:18:31.59Z",
       "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ysura",
+      "canonical_name": "ysura",
+      "canonical_domain": "ysura.com",
+      "official_website_url": "https://www.ysura.com/",
+      "career_url": null,
+      "aliases": [
+        "ysura",
+        "ysura GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Pharma CRM Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ysura.com/",
+        "observed_at": "2026-09-04T16:00:57.131Z",
+        "verification_url": "https://www.ysura.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Pharma CRM Software",
+        "evidence_note": "Der ysura-Kandidat wurde ueber die offizielle ysura.com-Domain mit Muenchner Unternehmensbezug belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+      },
+      "created_at": "2026-09-04T16:00:57.131Z",
+      "updated_at": "2026-09-04T16:00:57.131Z",
       "last_successful_scan_at": null
     },
     {
@@ -23978,6 +24254,27 @@
       ]
     },
     {
+      "source_id": "source:pearson_deutschland_career",
+      "company_id": "company:pearson_deutschland",
+      "source_type": "CAREER_PAGE",
+      "url": "https://pearson.jobs/",
+      "canonical_url": "https://pearson.jobs/",
+      "is_official": true,
+      "verified_at": "2026-09-04T16:00:57.131Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://pearson.jobs/",
+          "basis_url": "https://www.pearson.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T16:00:57.131Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:penguin_random_house_verlagsgruppe_career",
       "company_id": "company:penguin_random_house_verlagsgruppe",
       "source_type": "CAREER_PAGE",
@@ -24143,6 +24440,27 @@
           "basis_url": "https://plaion.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-31T11:47:08.268Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:planet_sports_career",
+      "company_id": "company:planet_sports",
+      "source_type": "CAREER_PAGE",
+      "url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+      "canonical_url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+      "is_official": true,
+      "verified_at": "2026-09-04T16:00:57.131Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://planetsports.com/Planet-Sports-Inside/Jobs/",
+          "basis_url": "https://planetsports.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T16:00:57.131Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -25259,6 +25577,27 @@
       ]
     },
     {
+      "source_id": "source:steidle_architekten_career",
+      "company_id": "company:steidle_architekten",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.steidle-architekten.de/",
+      "canonical_url": "https://www.steidle-architekten.de/",
+      "is_official": true,
+      "verified_at": "2026-09-04T16:00:57.131Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.steidle-architekten.de/",
+          "basis_url": "https://www.steidle-architekten.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T16:00:57.131Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:sueddeutsche_zeitung_career",
       "company_id": "company:sueddeutsche_zeitung",
       "source_type": "CAREER_PAGE",
@@ -25378,6 +25717,27 @@
           "basis_url": "https://www.tado.com/en-gb",
           "redirect_chain": [],
           "observed_at": "2026-08-30T06:22:15.182Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:take_two_interactive_career",
+      "company_id": "company:take_two_interactive",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.take2games.com/",
+      "canonical_url": "https://careers.take2games.com/",
+      "is_official": true,
+      "verified_at": "2026-09-04T16:00:57.131Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.take2games.com/",
+          "basis_url": "https://www.take2games.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T16:00:57.131Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -26050,6 +26410,27 @@
           "basis_url": "https://proglove.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:yahoo_career",
+      "company_id": "company:yahoo",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.yahooinc.com/careers/",
+      "canonical_url": "https://www.yahooinc.com/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-04T16:00:57.131Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.yahooinc.com/careers/",
+          "basis_url": "https://www.yahooinc.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T16:00:57.131Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
