@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-04T20:30:00.000+02:00
+Stand: 2026-09-04T20:34:00.000+02:00
 
 ## Status fuer neuen Chat
 
@@ -9,13 +9,13 @@ Stand: 2026-09-04T20:30:00.000+02:00
 - Repo: https://github.com/randolph27/JobAgent
 - Branch: master
 - Upstream: origin/master
-- HEAD vor Commit: 9e37e3b19d48
+- Letzter Fach-Commit: e3e1584 Import verified employers wave AT
 - Aktiver Todo: TD-0041
 - Aktiver Roadmap-Punkt: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen
 - Ebenfalls offen: UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen
 - Roadmap-Rotation: nicht erfolgt. JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen.
-- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T20:27:33.233+02:00.
-- Supertest: nicht ausgefuehrt, weil JA-027 insgesamt offen bleibt und der Nutzer funktionsbezogene Tests vor Supertest verlangt.
+- STP: .\ci.cmd stp lief erfolgreich am 2026-09-04T20:30:36.498+02:00.
+- Supertest: nicht neu ausgefuehrt. Gemaess Nutzeranweisung gilt er als erledigt, weil er nicht explizit angefragt wurde.
 
 ## Letzter abgeschlossener Fortschritt
 
@@ -42,18 +42,14 @@ Kennzahlen nach Welle AT:
 - Importwellen-Gate B: passed
 - Gate-Metriken Welle AT: manual_review_rate=0.0, duplicate_rate=0.0, coverage_delta=7
 
-## Geaenderte Dateien in Welle AT
+## Geaenderte Dateien seit letztem Fach-Commit
 
-- Roadmap.md
-- data/jobagent/company-discovery.official.wave-at-20260904.json
-- data/jobagent/company-candidate-verification.queue.json
-- data/jobagent/store.json
-- html/jobagent/company-coverage.html
+- handoff.latest.md
+- handoff.latest.json
 - todo.events.jsonl
 - todo.history.digest.json
 - todo.master.index.json
-- handoff.latest.md
-- handoff.latest.json
+- todo.state.json
 
 ## Evidence
 
@@ -87,19 +83,19 @@ Kennzahlen nach Welle AT:
 - `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
 - `rg -n "FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \(|Quellen-ID" html\jobagent\company-coverage.html` -> Exit `1`
-- `.\ci.cmd devserver-status` -> Exit `0`, Devserver laeuft auf Port 8500
-- `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit `0`, SonarQube ist `UP`
+- `.\ci.cmd devserver-status` -> Exit `0`, Devserver lief auf Port 8500
+- `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit `0`, SonarQube war `UP`
 - `.\ci.cmd stp` -> Exit `0`
 
 ## Naechste Aufgabe
 
 1. JA-027 fortsetzen; UI-001 nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.
 2. Startdateien erneut lesen: README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md.
-3. data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.
-4. Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
-5. Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-au-20260904.json oder naechster Kalendertag.
+3. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == DISCOVER_OFFICIAL_WEBSITE` priorisieren.
+4. Bevorzugen: hoher `priority_score`, `risk_level == LOW`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
+5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-au-20260904.json` oder bei neuem Datum entsprechend `wave-au-<YYYYMMDD>.json`.
 6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
-7. Vor Import alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.
+7. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
 8. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
 9. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
 10. Danach Queue aktualisieren: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
