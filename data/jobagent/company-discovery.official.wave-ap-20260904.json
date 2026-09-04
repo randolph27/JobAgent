@@ -1,0 +1,131 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T09:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "ParkHere GmbH",
+      "official_website_url": "https://park-here.eu/en/",
+      "career_url": "https://park-here.eu/en/karriere/",
+      "aliases": [
+        "ParkHere",
+        "ParkHere GmbH",
+        "park-here"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Parking Management Software",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://park-here.eu/en/karriere/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der ParkHere-Kandidat wurde ueber die offizielle park-here.eu-Domain, die About-Seite mit Muenchner Kontakt und die dort veroeffentlichte Karriere-Seite belegt."
+    },
+    {
+      "canonical_name": "Curiosity",
+      "official_website_url": "https://curiosity.ai/",
+      "career_url": null,
+      "aliases": [
+        "Curiosity",
+        "Curiosity AI",
+        "curiosity.ai"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial AI",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://curiosity.ai/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Curiosity-Kandidat wurde ueber die offizielle curiosity.ai-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+    },
+    {
+      "canonical_name": "ICAROS GmbH",
+      "official_website_url": "https://www.icaros.com/",
+      "career_url": null,
+      "aliases": [
+        "ICAROS",
+        "ICAROS GmbH",
+        "Icaros"
+      ],
+      "locations": [
+        {
+          "label": "Martinsried / Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Digital Fitness and Therapy",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.icaros.com/",
+      "discovery_origin": "source-registry:tech_companies_munich_github",
+      "evidence_note": "Der ICAROS-Kandidat wurde ueber die offizielle icaros.com-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+    },
+    {
+      "canonical_name": "German Accelerator",
+      "official_website_url": "https://www.germanaccelerator.com/",
+      "career_url": null,
+      "aliases": [
+        "German Accelerator",
+        "German Entrepreneurship",
+        "German Accelerator GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Startup Acceleration",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.germanaccelerator.com/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der German-Accelerator-Kandidat wurde ueber die offizielle germanaccelerator.com-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+    },
+    {
+      "canonical_name": "Hyphe",
+      "official_website_url": "https://hyphe.com/",
+      "career_url": null,
+      "aliases": [
+        "Hyphe",
+        "Hyphe Markets",
+        "hyphe.com"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Asset Liquidity",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://hyphe.com/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Hyphe-Kandidat wurde ueber die offizielle hyphe.com-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+    }
+  ]
+}

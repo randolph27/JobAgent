@@ -10114,6 +10114,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:parkhere_gmbh",
+      "canonical_name": "ParkHere GmbH",
+      "canonical_domain": "park-here.eu",
+      "official_website_url": "https://park-here.eu/en/",
+      "career_url": "https://park-here.eu/en/karriere/",
+      "aliases": [
+        "park-here",
+        "ParkHere",
+        "ParkHere GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Parking Management Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://park-here.eu/en/karriere/",
+        "observed_at": "2026-09-04T09:02:14.576Z",
+        "verification_url": "https://park-here.eu/en/karriere/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Parking Management Software",
+        "evidence_note": "Der ParkHere-Kandidat wurde ueber die offizielle park-here.eu-Domain, die About-Seite mit Muenchner Kontakt und die dort veroeffentlichte Karriere-Seite belegt."
+      },
+      "created_at": "2026-09-04T09:02:14.576Z",
+      "updated_at": "2026-09-04T09:02:14.576Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:neovii_biotech_gmbh",
       "canonical_name": "Neovii Biotech GmbH",
       "canonical_domain": "neovii.com",
@@ -11245,6 +11285,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:curiosity",
+      "canonical_name": "Curiosity",
+      "canonical_domain": "curiosity.ai",
+      "official_website_url": "https://curiosity.ai/",
+      "career_url": null,
+      "aliases": [
+        "Curiosity",
+        "Curiosity AI",
+        "curiosity.ai"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial AI",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://curiosity.ai/",
+        "observed_at": "2026-09-04T09:02:14.576Z",
+        "verification_url": "https://curiosity.ai/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial AI",
+        "evidence_note": "Der Curiosity-Kandidat wurde ueber die offizielle curiosity.ai-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+      },
+      "created_at": "2026-09-04T09:02:14.576Z",
+      "updated_at": "2026-09-04T09:02:14.576Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:cariad_se",
       "canonical_name": "CARIAD SE",
       "canonical_domain": "cariad.technology",
@@ -11947,6 +12027,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:icaros_gmbh",
+      "canonical_name": "ICAROS GmbH",
+      "canonical_domain": "icaros.com",
+      "official_website_url": "https://www.icaros.com/",
+      "career_url": null,
+      "aliases": [
+        "ICAROS",
+        "ICAROS GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Martinsried / Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "industry": "Digital Fitness and Therapy",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.icaros.com/",
+        "observed_at": "2026-09-04T09:02:14.576Z",
+        "verification_url": "https://www.icaros.com/",
+        "discovery_origin": "source-registry:tech_companies_munich_github",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "Digital Fitness and Therapy",
+        "evidence_note": "Der ICAROS-Kandidat wurde ueber die offizielle icaros.com-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+      },
+      "created_at": "2026-09-04T09:02:14.576Z",
+      "updated_at": "2026-09-04T09:02:14.576Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:hyperganic",
       "canonical_name": "Hyperganic",
       "canonical_domain": "hyperganic.com",
@@ -12646,6 +12765,46 @@
       },
       "created_at": "2026-08-30T11:59:14.67Z",
       "updated_at": "2026-08-30T11:59:14.67Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:german_accelerator",
+      "canonical_name": "German Accelerator",
+      "canonical_domain": "germanaccelerator.com",
+      "official_website_url": "https://www.germanaccelerator.com/",
+      "career_url": null,
+      "aliases": [
+        "German Accelerator",
+        "German Accelerator GmbH",
+        "German Entrepreneurship"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Startup Acceleration",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.germanaccelerator.com/",
+        "observed_at": "2026-09-04T09:02:14.576Z",
+        "verification_url": "https://www.germanaccelerator.com/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Startup Acceleration",
+        "evidence_note": "Der German-Accelerator-Kandidat wurde ueber die offizielle germanaccelerator.com-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+      },
+      "created_at": "2026-09-04T09:02:14.576Z",
+      "updated_at": "2026-09-04T09:02:14.576Z",
       "last_successful_scan_at": null
     },
     {
@@ -13388,6 +13547,46 @@
       },
       "created_at": "2026-08-30T12:20:57.68Z",
       "updated_at": "2026-08-30T12:20:57.68Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:hyphe",
+      "canonical_name": "Hyphe",
+      "canonical_domain": "hyphe.com",
+      "official_website_url": "https://hyphe.com/",
+      "career_url": null,
+      "aliases": [
+        "Hyphe",
+        "Hyphe Markets",
+        "hyphe.com"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Asset Liquidity",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://hyphe.com/",
+        "observed_at": "2026-09-04T09:02:14.576Z",
+        "verification_url": "https://hyphe.com/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Asset Liquidity",
+        "evidence_note": "Der Hyphe-Kandidat wurde ueber die offizielle hyphe.com-Domain belegt; eine offizielle Karriere-Seite wurde in dieser Welle nicht belastbar belegt."
+      },
+      "created_at": "2026-09-04T09:02:14.576Z",
+      "updated_at": "2026-09-04T09:02:14.576Z",
       "last_successful_scan_at": null
     },
     {
@@ -23289,6 +23488,27 @@
           "basis_url": "https://www.park-depot.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:00:11.947Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:parkhere_gmbh_career",
+      "company_id": "company:parkhere_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://park-here.eu/en/karriere/",
+      "canonical_url": "https://park-here.eu/en/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-04T09:02:14.576Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://park-here.eu/en/karriere/",
+          "basis_url": "https://park-here.eu/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T09:02:14.576Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
