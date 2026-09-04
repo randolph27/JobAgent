@@ -10700,6 +10700,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:enplas",
+      "canonical_name": "Enplas",
+      "canonical_domain": "en.enplas.com",
+      "official_website_url": "https://en.enplas.com/",
+      "career_url": "https://en.enplas.com/about-us/careers-with-enplas/",
+      "aliases": [
+        "Enplas",
+        "Enplas Deutschland",
+        "Enplas Global"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Precision Plastics and Engineering",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://en.enplas.com/about-us/careers-with-enplas/",
+        "observed_at": "2026-09-04T18:40:40.917Z",
+        "verification_url": "https://en.enplas.com/about-us/careers-with-enplas/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Precision Plastics and Engineering",
+        "evidence_note": "Der Enplas-Kandidat wurde ueber die offizielle en.enplas.com-Domain und die dort verlinkte Careers-Seite belegt; der Muenchen-Bezug stammt aus dem lokalen OSM-Overpass-Snapshot."
+      },
+      "created_at": "2026-09-04T18:40:40.917Z",
+      "updated_at": "2026-09-04T18:40:40.917Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:dermapharm_ag",
       "canonical_name": "Dermapharm AG",
       "canonical_domain": "dermapharm.com",
@@ -11722,6 +11762,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:assemblixx",
+      "canonical_name": "Assemblixx",
+      "canonical_domain": "assemblixx.io",
+      "official_website_url": "https://assemblixx.io/",
+      "career_url": null,
+      "aliases": [
+        "Assemblixx",
+        "Assemblixx GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "CPQ and Product Configuration Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://assemblixx.io/",
+        "observed_at": "2026-09-04T18:40:40.917Z",
+        "verification_url": "https://assemblixx.io/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "CPQ and Product Configuration Software",
+        "evidence_note": "Der Assemblixx-Kandidat wurde ueber die offizielle assemblixx.io-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:40:40.917Z",
+      "updated_at": "2026-09-04T18:40:40.917Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:adnymics_parceldealz",
       "canonical_name": "adnymics / ParcelDealz",
       "canonical_domain": "adnymics.com",
@@ -12698,6 +12777,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:done_by_gmbh",
+      "canonical_name": "done.by GmbH",
+      "canonical_domain": "done.by",
+      "official_website_url": "https://done.by/",
+      "career_url": null,
+      "aliases": [
+        "done.by",
+        "done.by GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Matching Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://done.by/",
+        "observed_at": "2026-09-04T18:40:40.917Z",
+        "verification_url": "https://done.by/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Business Matching Software",
+        "evidence_note": "Der done.by-Kandidat wurde ueber die offizielle done.by-Domain belegt; die Website nennt die done.by GmbH mit Adresse in Muenchen, eine separate Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:40:40.917Z",
+      "updated_at": "2026-09-04T18:40:40.917Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:convercus",
       "canonical_name": "Convercus",
       "canonical_domain": "convercus.com",
@@ -13479,6 +13597,44 @@
       },
       "created_at": "2026-09-03T08:54:20.594Z",
       "updated_at": "2026-09-03T08:54:20.594Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:digisale",
+      "canonical_name": "DIGISALE",
+      "canonical_domain": "digisale.org",
+      "official_website_url": "https://digisale.org/",
+      "career_url": null,
+      "aliases": [
+        "DIGISALE"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Corporate Publishing and Digital Publishing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://digisale.org/",
+        "observed_at": "2026-09-04T18:40:40.917Z",
+        "verification_url": "https://digisale.org/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Corporate Publishing and Digital Publishing",
+        "evidence_note": "Der DIGISALE-Kandidat wurde ueber die offizielle digisale.org-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:40:40.917Z",
+      "updated_at": "2026-09-04T18:40:40.917Z",
       "last_successful_scan_at": null
     },
     {
@@ -14423,6 +14579,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hannibal",
+      "canonical_name": "Hannibal",
+      "canonical_domain": "hannibal-collection.com",
+      "official_website_url": "https://hannibal-collection.com/",
+      "career_url": null,
+      "aliases": [
+        "Hannibal",
+        "Hannibal Collection"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fashion and Creative Industry",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://hannibal-collection.com/en/about-us",
+        "observed_at": "2026-09-04T18:40:40.917Z",
+        "verification_url": "https://hannibal-collection.com/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Fashion and Creative Industry",
+        "evidence_note": "Der Hannibal-Kandidat wurde ueber die offizielle hannibal-collection.com-Domain belegt; die About-Seite nennt den Ursprung in Muenchen, eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:40:40.917Z",
+      "updated_at": "2026-09-04T18:40:40.917Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:fdg_entertainment_gmbh_and_co_kg",
       "canonical_name": "FDG Entertainment GmbH & Co. KG",
       "canonical_domain": "fdg-entertainment.com",
@@ -15279,6 +15474,46 @@
       },
       "created_at": "2026-09-01T05:38:52.069Z",
       "updated_at": "2026-09-01T05:38:52.069Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:buerger_energie_genossenschaft_freisinger_land_eg",
+      "canonical_name": "Buerger Energie Genossenschaft Freisinger Land eG",
+      "canonical_domain": "beg-fs.de",
+      "official_website_url": "https://beg-fs.de/",
+      "career_url": null,
+      "aliases": [
+        "BEG-FS",
+        "Buerger Energie Genossenschaft",
+        "Buerger Energie Genossenschaft Freisinger Land"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Renewable Energy Cooperative",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-05T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://beg-fs.de/",
+        "observed_at": "2026-09-04T18:40:40.917Z",
+        "verification_url": "https://beg-fs.de/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "FREISING",
+        "industry_hint": "Renewable Energy Cooperative",
+        "evidence_note": "Der Buerger-Energie-Kandidat wurde ueber die offizielle beg-fs.de-Domain der Buerger Energie Genossenschaft Freisinger Land eG belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-04T18:40:40.917Z",
+      "updated_at": "2026-09-04T18:40:40.917Z",
       "last_successful_scan_at": null
     },
     {
@@ -20528,6 +20763,27 @@
           "basis_url": "https://www.emax-digital.com/en/home",
           "redirect_chain": [],
           "observed_at": "2026-08-30T06:41:25.349Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:enplas_career",
+      "company_id": "company:enplas",
+      "source_type": "CAREER_PAGE",
+      "url": "https://en.enplas.com/about-us/careers-with-enplas/",
+      "canonical_url": "https://en.enplas.com/about-us/careers-with-enplas/",
+      "is_official": true,
+      "verified_at": "2026-09-04T18:40:40.917Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://en.enplas.com/about-us/careers-with-enplas/",
+          "basis_url": "https://en.enplas.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-04T18:40:40.917Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

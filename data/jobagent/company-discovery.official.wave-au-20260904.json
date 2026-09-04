@@ -1,0 +1,152 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-04T18:40:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Enplas",
+      "official_website_url": "https://en.enplas.com/",
+      "career_url": "https://en.enplas.com/about-us/careers-with-enplas/",
+      "aliases": [
+        "Enplas",
+        "Enplas Global",
+        "Enplas Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Precision Plastics and Engineering",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://en.enplas.com/about-us/careers-with-enplas/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Enplas-Kandidat wurde ueber die offizielle en.enplas.com-Domain und die dort verlinkte Careers-Seite belegt; der Muenchen-Bezug stammt aus dem lokalen OSM-Overpass-Snapshot."
+    },
+    {
+      "canonical_name": "Assemblixx",
+      "official_website_url": "https://assemblixx.io/",
+      "career_url": null,
+      "aliases": [
+        "Assemblixx",
+        "Assemblixx GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "CPQ and Product Configuration Software",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://assemblixx.io/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Assemblixx-Kandidat wurde ueber die offizielle assemblixx.io-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "done.by GmbH",
+      "official_website_url": "https://done.by/",
+      "career_url": null,
+      "aliases": [
+        "done.by",
+        "done.by GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Business Matching Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://done.by/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der done.by-Kandidat wurde ueber die offizielle done.by-Domain belegt; die Website nennt die done.by GmbH mit Adresse in Muenchen, eine separate Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "DIGISALE",
+      "official_website_url": "https://digisale.org/",
+      "career_url": null,
+      "aliases": [
+        "DIGISALE",
+        "Digisale"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Corporate Publishing and Digital Publishing",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://digisale.org/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der DIGISALE-Kandidat wurde ueber die offizielle digisale.org-Domain belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Hannibal",
+      "official_website_url": "https://hannibal-collection.com/",
+      "career_url": null,
+      "aliases": [
+        "Hannibal",
+        "Hannibal Collection"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Fashion and Creative Industry",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://hannibal-collection.com/en/about-us",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Hannibal-Kandidat wurde ueber die offizielle hannibal-collection.com-Domain belegt; die About-Seite nennt den Ursprung in Muenchen, eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Buerger Energie Genossenschaft Freisinger Land eG",
+      "official_website_url": "https://beg-fs.de/",
+      "career_url": null,
+      "aliases": [
+        "Buerger Energie Genossenschaft",
+        "Buerger Energie Genossenschaft Freisinger Land",
+        "BEG-FS"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Renewable Energy Cooperative",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://beg-fs.de/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Buerger-Energie-Kandidat wurde ueber die offizielle beg-fs.de-Domain der Buerger Energie Genossenschaft Freisinger Land eG belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    }
+  ]
+}
