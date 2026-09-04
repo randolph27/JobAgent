@@ -1,13 +1,28 @@
 {
-  "ts": "2026-09-04T11:12:00.000+02:00",
+  "ts": "2026-09-04T11:15:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 offizielle Arbeitgeber-Websites pruefen und nur verifizierte Firmen produktiv hinzufuegen.",
-  "summary": "Welle AP/B abgeschlossen: 5 offiziell belegte Arbeitgeber neu importiert; Store 413 Firmen, 404 JobSources, Source Coverage 406 offizielle Quellen.",
+  "summary": "Neuer-Chat-Handoff nach STP: Welle AP/B ist abgeschlossen und gepusht; JA-027 bleibt aktiv, UI-001 bleibt offen.",
+  "last_commit": {
+    "hash": "01dcb48",
+    "subject": "Import verified employers wave AP"
+  },
+  "roadmap_rotation": {
+    "performed": false,
+    "reason": "JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen."
+  },
   "changed": [
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
+  ],
+  "last_slice_changed": [
     "Roadmap.md",
     "data/jobagent/company-discovery.official.wave-ap-20260904.json",
     "data/jobagent/company-candidate-verification.queue.json",
@@ -18,6 +33,46 @@
     "todo.master.index.json",
     "handoff.latest.md",
     "handoff.latest.json"
+  ],
+  "last_slice_result": {
+    "wave": "AP",
+    "wave_id": "B",
+    "import_gate_status": "passed",
+    "added_companies": [
+      "ParkHere GmbH",
+      "Curiosity",
+      "ICAROS GmbH",
+      "German Accelerator",
+      "Hyphe"
+    ],
+    "deduplicated_updates": [],
+    "metrics": {
+      "companies_total": 413,
+      "job_sources_total": 404,
+      "official_sources": 406,
+      "career_sources": 405,
+      "ats_sources": 1,
+      "discovery_sources_total": 1820,
+      "queue_verified_or_store_total": 593,
+      "queue_discover_official_website_total": 1191,
+      "queue_manual_decision_total": 1,
+      "manual_review_rate": 0.0,
+      "duplicate_rate": 0.0,
+      "coverage_delta": 5
+    }
+  },
+  "evidence": [
+    "data/jobagent/company-discovery.official.wave-ap-20260904.json",
+    "logs/jobagent/company-discovery-import-20260904-090214.json",
+    "logs/jobagent/company-candidate-verification-20260904-090224.json",
+    "logs/jobagent/company-coverage-20260904-090333.json",
+    "logs/jobagent/company-coverage-20260904-090333.md",
+    "logs/jobagent/ja-023-source-coverage.json",
+    "data/jobagent/backups/store-20260904T090215185Z-pre-wave-import.json",
+    "html/jobagent/company-coverage.html",
+    "output/playwright/ja-022-viewport-800.png",
+    "output/playwright/ja-022-viewport-1366.png",
+    "output/playwright/ja-022-viewport-1920.png"
   ],
   "verified": [
     {
@@ -97,40 +152,50 @@
       "exit": 0
     }
   ],
+  "supertest": {
+    "requested": false,
+    "executed_in_this_handoff": false,
+    "status": "treated_done_per_user_instruction"
+  },
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "d06ff62b77eb",
+    "head": "01dcb48",
     "upstream": "origin/master",
-    "ahead_behind": "0/0",
-    "worktree": "dirty"
+    "ahead_behind_before_handoff_commit": "0/0",
+    "worktree_before_handoff_commit": "dirty"
   },
   "next": "JA-027 mit data/jobagent/company-discovery.official.wave-aq-20260904.json fortsetzen.",
   "next_steps": [
-    "Queue-Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
-    "Nur offiziell belegte Firmenwebsite/Karriere-/ATS-Quellen in die naechste Welle aufnehmen.",
-    "Import, Queue, Coverage, Source-Coverage, Funktionstests, Roadmap-/Todo-/Handoff-Sync und STP zusammen abschliessen."
+    "README.md, Roadmap.md, todo.current.md, todo.state.json und handoff.latest.md erneut lesen.",
+    "data/jobagent/company-candidate-verification.queue.json lesen und Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE priorisieren.",
+    "Bevorzugen: hoher priority_score, risk_level == LOW, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.",
+    "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-aq-20260904.json.",
+    "Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.",
+    "Alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest pruefen.",
+    "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 -WaveId B ausfuehren.",
+    "Queue, Coverage und Source-Coverage aktualisieren.",
+    "Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anfrage oder Roadmap-Abschluss.",
+    "Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push."
   ],
   "refs": [
+    "README.md",
+    "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
-    "handoff.latest.json",
-    "Roadmap.md"
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
   "env_inventory_path": null,
-  "metrics": {
-    "companies_total": 413,
-    "job_sources_total": 404,
-    "official_sources": 406,
-    "career_sources": 405,
-    "ats_sources": 1,
-    "queue_verified_or_store_total": 593,
-    "queue_discover_official_website_total": 1191,
-    "queue_manual_decision_total": 1
-  }
+  "risks": [
+    "JA-027 ist noch nicht abschliessbar, weil 1191 Kandidaten in manueller Website-/Scope-Pruefung stehen.",
+    "UI-001 bleibt offen, ist aber derzeit nicht der aktive Hotspot.",
+    "Curiosity, ICAROS GmbH, German Accelerator und Hyphe wurden als offizielle Firmendomain ohne Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare JobSource.",
+    "Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren."
+  ]
 }

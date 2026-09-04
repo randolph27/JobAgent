@@ -1,20 +1,21 @@
 # Handoff latest
 
-Stand: 2026-09-04T11:12:00.000+02:00
+Stand: 2026-09-04T11:15:00.000+02:00
 
 ## Status fuer neuen Chat
 
 - Projekt: JobAgent
 - Workspace: D:\_Scripte\JobAgent
+- Repo: https://github.com/randolph27/JobAgent
 - Branch: master
 - Upstream: origin/master
-- HEAD vor Commit: d06ff62b77eb
+- Letzter Fach-Commit: 01dcb48 Import verified employers wave AP
 - Aktiver Todo: TD-0041
 - Aktiver Roadmap-Punkt: JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen
 - Ebenfalls offen: UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen
 - Roadmap-Rotation: nicht erfolgt. JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am 2026-09-04T11:09:37.043+02:00.
-- Supertest: nicht ausgefuehrt; gemaess Nutzeranweisung nur funktionsbezogene Tests, solange JA-027 offen bleibt.
+- STP: `.\ci.cmd stp` lief erfolgreich am 2026-09-04T11:12:55.976+02:00.
+- Supertest: nicht neu ausgefuehrt und gemaess aktueller Nutzeranweisung als erledigt behandelt, solange er nicht explizit angefragt wird.
 
 ## Letzter abgeschlossener Fortschritt
 
@@ -44,9 +45,7 @@ Kennzahlen nach Welle AP:
 - Importwellen-Gate B: passed
 - Gate-Metriken Welle AP: manual_review_rate=0.0, duplicate_rate=0.0, coverage_delta=5
 
-## Geaenderte Dateien und Artefakte
-
-Fach-Slice enthaelt:
+## Geaenderte Dateien im letzten Fach-Commit
 
 - data/jobagent/company-discovery.official.wave-ap-20260904.json
 - data/jobagent/store.json
@@ -59,7 +58,15 @@ Fach-Slice enthaelt:
 - handoff.latest.md
 - handoff.latest.json
 
-Evidence:
+Aktueller Uebergabe-Sync enthaelt nur STP-/Handoff-Artefakte:
+
+- todo.events.jsonl
+- todo.history.digest.json
+- todo.master.index.json
+- handoff.latest.md
+- handoff.latest.json
+
+## Evidence
 
 - logs/jobagent/company-discovery-import-20260904-090214.json
 - logs/jobagent/company-candidate-verification-20260904-090224.json
@@ -87,19 +94,27 @@ Evidence:
 - `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit 0
 - `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit 0
 - `rg -n "FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \(|Quellen-ID" html\jobagent\company-coverage.html` -> Exit 1
-- `.\ci.cmd devserver-status` -> Exit 0, Devserver laeuft auf Port 8500
+- `.\ci.cmd devserver-status` -> Exit 0, Devserver lief auf Port 8500
 - `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit 0, SonarQube UP
 - `.\ci.cmd stp` -> Exit 0
 
 ## Naechste Aufgabe
 
 1. JA-027 fortsetzen; UI-001 nicht parallel bearbeiten, solange JA-027 aktiver Hotspot bleibt.
-2. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
-3. Bevorzugen: hoher `priority_score`, `risk_level == "LOW"`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
-4. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-aq-20260904.json`.
-5. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen; bei nur belegter Firmendomain ist `career_url: null` erlaubt, wenn Welle B das akzeptiert.
-6. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
-7. Import, Queue-Aktualisierung, Coverage, Source-Coverage, funktionsbezogene Tests, Roadmap-/Todo-/Handoff-Sync und STP in einem Slice abschliessen.
+2. Zu Beginn erneut `README.md`, `Roadmap.md`, `todo.current.md`, `todo.state.json` und `handoff.latest.md` lesen.
+3. `data/jobagent/company-candidate-verification.queue.json` lesen und Kandidaten mit `next_action == "DISCOVER_OFFICIAL_WEBSITE"` priorisieren.
+4. Bevorzugen: hoher `priority_score`, `risk_level == "LOW"`, belastbarer Muenchen-/Freising-Bezug, geringe Identitaets-/Dublettenunsicherheit.
+5. Naechste Feed-Datei anlegen: `data/jobagent/company-discovery.official.wave-aq-20260904.json`.
+6. Pro Kandidat offizielle Firmenwebsite plus Karriere-URL oder offiziell von der Firmenwebsite belegte ATS-Quelle pruefen.
+7. Bei nur belegter Firmendomain ist `career_url: null` erlaubt, wenn Welle B das akzeptiert; das erzeugt dann keine zusaetzliche scannbare JobSource.
+8. Vor Import alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest` pruefen.
+9. Keine Jobboersen-, Arbeitsagentur-, Register-, LinkedIn-, Xing-, Kununu-, Glassdoor- oder Aggregator-URL als offizielle Karrierequelle verwenden.
+10. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-aq-20260904.json -WaveId B`.
+11. Danach Queue aktualisieren: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
+12. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250`.
+13. Source-Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`.
+14. Funktionsbezogene Tests ausfuehren; Supertest nicht ausfuehren, sofern nicht explizit angefragt.
+15. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und Annahmen
 
@@ -107,3 +122,4 @@ Evidence:
 - UI-001 bleibt offen, ist aber derzeit nicht der aktive Hotspot.
 - Curiosity, ICAROS GmbH, German Accelerator und Hyphe wurden als offizielle Firmendomain ohne Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare JobSource.
 - Externe Firmenwebsites koennen 403, Timeouts oder dynamische Karriereportale liefern; solche Kandidaten fail-closed belassen und nicht produktiv importieren.
+- SonarQube lief zuletzt auf `http://localhost:9000` mit Status `UP`; Devserver lief zuletzt auf Port `8500`.
