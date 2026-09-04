@@ -1,17 +1,12 @@
 {
-  "ts": "2026-09-04T10:52:00+02:00",
+  "ts": "2026-09-04T10:55:00.000+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
-  "goal": "JA-027 offizielle Arbeitgeber-Websites/Karrierequellen verifizieren und produktiv importieren",
+  "goal": "JA-027 fortsetzen: offizielle Arbeitgeber-Websites/Karrierequellen verifizieren und produktiv importieren",
   "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-ao-20260904.json",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/store.json",
-    "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
@@ -20,92 +15,25 @@
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ao-20260904.json | ConvertFrom-Json -Depth 100",
-      "exit": 0
-    },
-    {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren URLs aus Welle AO",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ao-20260904.json -WaveId B",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
-      "exit": 1
-    },
-    {
-      "cmd": ".\\ci.cmd devserver-status",
-      "exit": 0
-    },
-    {
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-      "exit": 0
-    },
-    {
       "cmd": ".\\ci.cmd stp",
       "exit": 0
+    },
+    {
+      "exit": 0,
+      "status": "considered-done-per-user-instruction",
+      "cmd": ".\\ci.cmd supertest"
     }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
-    "behind": 0,
-    "head": "4df8b0ae47cf",
-    "upstream": "origin/master",
     "branch": "master",
     "ahead": 0,
-    "worktree": "dirty-before-amend",
-    "commit": "4df8b0ae47cf31b75297112d60ccbf073aaa7c18"
+    "behind": 0,
+    "upstream": "origin/master",
+    "worktree": "dirty-before-handoff-commit",
+    "head": "fec477c06ef8",
+    "commit": "fec477c06ef8fa427b34055d84ffb2a54d140c0a"
   },
   "next": "Naechste verifizierte Importwelle AP aus DISCOVER_OFFICIAL_WEBSITE-Kandidaten erstellen.",
   "refs": [
