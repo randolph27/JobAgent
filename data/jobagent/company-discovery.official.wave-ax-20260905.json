@@ -1,0 +1,130 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-05T00:00:00.000Z",
+  "items": [
+    {
+      "canonical_name": "b.ing GmbH",
+      "official_website_url": "https://www.b-ing.info/",
+      "career_url": "https://www.b-ing.info/karriere",
+      "aliases": [
+        "b.ing",
+        "b.ing GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering and Construction Materials Testing",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.b-ing.info/karriere",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der b.ing-Kandidat wurde ueber die offizielle b-ing.info-Domain und die dortige Karriere-Seite belegt; der Muenchen-Bezug stammt aus dem lokalen OSM-Unternehmenshinweis und bleibt als regionaler Kandidatenbezug erhalten."
+    },
+    {
+      "canonical_name": "Pangaea Life GmbH",
+      "official_website_url": "https://www.pangaea-life.de/",
+      "career_url": null,
+      "aliases": [
+        "Pangea Life",
+        "Pangaea Life",
+        "Pangaea Life GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sustainable Investment Products",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.pangaea-life.de/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Pangea-Life-Kandidat wurde fail-closed auf die offizielle Schreibweise Pangaea Life GmbH normalisiert und ueber die offizielle pangaea-life.de-Domain belegt; eine separate belastbare Karriere-Seite wurde in dieser Welle nicht gefunden."
+    },
+    {
+      "canonical_name": "Paramount Home Entertainment (Germany) GmbH",
+      "official_website_url": "https://www.paramount.de/",
+      "career_url": "https://careers.paramount.com/",
+      "aliases": [
+        "Paramount Home Entertainment Germany GmbH",
+        "Paramount Home Entertainment (Germany) GmbH",
+        "Paramount Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Home Entertainment",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.paramount.de/impressum",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Paramount-Kandidat wurde ueber die offizielle paramount.de-Domain und das Impressum der Paramount Home Entertainment (Germany) GmbH mit Muenchner Adresse belegt; die globale Paramount-Karriereseite ist offiziell verlinkt und erreichbar."
+    },
+    {
+      "canonical_name": "Telit Cinterion Deutschland GmbH",
+      "official_website_url": "https://www.telit.com/",
+      "career_url": "https://www.telit.com/about/careers/",
+      "aliases": [
+        "Telit Cinterion",
+        "Telit Cinterion Deutschland",
+        "Telit Cinterion Deutschland GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IoT Connectivity and Modules",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.telit.com/about/careers/",
+      "discovery_origin": "source-registry:munich_business_commercial_locations",
+      "evidence_note": "Der Telit-Cinterion-Kandidat wurde ueber die offizielle telit.com-Domain und die offizielle Telit-Cinterion-Karriereseite belegt; der Muenchner Standortbezug bleibt aus dem regionalen Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "Swiss Re Europe S.A., Niederlassung Deutschland",
+      "official_website_url": "https://www.swissre.com/",
+      "career_url": null,
+      "aliases": [
+        "Swiss Re",
+        "Swiss Re Germany",
+        "Swiss Re Europe Niederlassung Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Reinsurance and Insurance",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.swissre.com/",
+      "discovery_origin": "source-registry:munich_business_finance_companies",
+      "evidence_note": "Der Swiss-Re-Kandidat wurde ueber die offizielle swissre.com-Domain belegt; der Muenchner Standortbezug stammt aus dem regionalen Finanzwirtschaftshinweis, eine lokal per CI abrufbare separate Karriere-URL wurde in dieser Welle nicht belastbar nachgewiesen."
+    }
+  ]
+}

@@ -10896,6 +10896,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:b_ing_gmbh",
+      "canonical_name": "b.ing GmbH",
+      "canonical_domain": "b-ing.info",
+      "official_website_url": "https://www.b-ing.info/",
+      "career_url": "https://www.b-ing.info/karriere",
+      "aliases": [
+        "b.ing",
+        "b.ing GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Engineering and Construction Materials Testing",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.b-ing.info/karriere",
+        "observed_at": "2026-09-05T07:16:21.53Z",
+        "verification_url": "https://www.b-ing.info/karriere",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Engineering and Construction Materials Testing",
+        "evidence_note": "Der b.ing-Kandidat wurde ueber die offizielle b-ing.info-Domain und die dortige Karriere-Seite belegt; der Muenchen-Bezug stammt aus dem lokalen OSM-Unternehmenshinweis und bleibt als regionaler Kandidatenbezug erhalten."
+      },
+      "created_at": "2026-09-05T07:16:21.53Z",
+      "updated_at": "2026-09-05T07:16:21.53Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:zuehlke_engineering",
       "canonical_name": "Zuehlke Engineering",
       "canonical_domain": "zuehlke.com",
@@ -11251,6 +11290,46 @@
       },
       "created_at": "2026-09-03T13:52:36.955Z",
       "updated_at": "2026-09-03T13:52:36.955Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:pangaea_life_gmbh",
+      "canonical_name": "Pangaea Life GmbH",
+      "canonical_domain": "pangaea-life.de",
+      "official_website_url": "https://www.pangaea-life.de/",
+      "career_url": null,
+      "aliases": [
+        "Pangaea Life",
+        "Pangaea Life GmbH",
+        "Pangea Life"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sustainable Investment Products",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.pangaea-life.de/",
+        "observed_at": "2026-09-05T07:16:21.53Z",
+        "verification_url": "https://www.pangaea-life.de/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "Sustainable Investment Products",
+        "evidence_note": "Der Pangea-Life-Kandidat wurde fail-closed auf die offizielle Schreibweise Pangaea Life GmbH normalisiert und ueber die offizielle pangaea-life.de-Domain belegt; eine separate belastbare Karriere-Seite wurde in dieser Welle nicht gefunden."
+      },
+      "created_at": "2026-09-05T07:16:21.53Z",
+      "updated_at": "2026-09-05T07:16:21.53Z",
       "last_successful_scan_at": null
     },
     {
@@ -12472,6 +12551,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:paramount_home_entertainment_germany_gmbh",
+      "canonical_name": "Paramount Home Entertainment (Germany) GmbH",
+      "canonical_domain": "paramount.de",
+      "official_website_url": "https://www.paramount.de/",
+      "career_url": "https://careers.paramount.com/",
+      "aliases": [
+        "Paramount Deutschland",
+        "Paramount Home Entertainment (Germany) GmbH",
+        "Paramount Home Entertainment Germany GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Media and Home Entertainment",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.paramount.de/impressum",
+        "observed_at": "2026-09-05T07:16:21.53Z",
+        "verification_url": "https://careers.paramount.com/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Media and Home Entertainment",
+        "evidence_note": "Der Paramount-Kandidat wurde ueber die offizielle paramount.de-Domain und das Impressum der Paramount Home Entertainment (Germany) GmbH mit Muenchner Adresse belegt; die globale Paramount-Karriereseite ist offiziell verlinkt und erreichbar."
+      },
+      "created_at": "2026-09-05T07:16:21.53Z",
+      "updated_at": "2026-09-05T07:16:21.53Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:olive_robotics",
       "canonical_name": "Olive Robotics",
       "canonical_domain": "olive-robotics.com",
@@ -13128,6 +13247,46 @@
       },
       "created_at": "2026-08-31T18:18:31.59Z",
       "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:telit_cinterion_deutschland_gmbh",
+      "canonical_name": "Telit Cinterion Deutschland GmbH",
+      "canonical_domain": "telit.com",
+      "official_website_url": "https://www.telit.com/",
+      "career_url": "https://www.telit.com/about/careers/",
+      "aliases": [
+        "Telit Cinterion",
+        "Telit Cinterion Deutschland",
+        "Telit Cinterion Deutschland GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "IoT Connectivity and Modules",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.telit.com/about/careers/",
+        "observed_at": "2026-09-05T07:16:21.53Z",
+        "verification_url": "https://www.telit.com/about/careers/",
+        "discovery_origin": "source-registry:munich_business_commercial_locations",
+        "target_area": "MUNICH",
+        "industry_hint": "IoT Connectivity and Modules",
+        "evidence_note": "Der Telit-Cinterion-Kandidat wurde ueber die offizielle telit.com-Domain und die offizielle Telit-Cinterion-Karriereseite belegt; der Muenchner Standortbezug bleibt aus dem regionalen Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T07:16:21.53Z",
+      "updated_at": "2026-09-05T07:16:21.53Z",
       "last_successful_scan_at": null
     },
     {
@@ -14263,6 +14422,46 @@
       },
       "created_at": "2026-08-31T06:27:36.232Z",
       "updated_at": "2026-08-31T06:27:36.232Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:swiss_re_europe_s_a_niederlassung_deutschland",
+      "canonical_name": "Swiss Re Europe S.A., Niederlassung Deutschland",
+      "canonical_domain": "swissre.com",
+      "official_website_url": "https://www.swissre.com/",
+      "career_url": null,
+      "aliases": [
+        "Swiss Re",
+        "Swiss Re Europe Niederlassung Deutschland",
+        "Swiss Re Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Reinsurance and Insurance",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.swissre.com/",
+        "observed_at": "2026-09-05T07:16:21.53Z",
+        "verification_url": "https://www.swissre.com/",
+        "discovery_origin": "source-registry:munich_business_finance_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Reinsurance and Insurance",
+        "evidence_note": "Der Swiss-Re-Kandidat wurde ueber die offizielle swissre.com-Domain belegt; der Muenchner Standortbezug stammt aus dem regionalen Finanzwirtschaftshinweis, eine lokal per CI abrufbare separate Karriere-URL wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-05T07:16:21.53Z",
+      "updated_at": "2026-09-05T07:16:21.53Z",
       "last_successful_scan_at": null
     },
     {
@@ -19416,6 +19615,27 @@
           "basis_url": "https://www.augustiner-braeu.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T11:14:53.775Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:b_ing_gmbh_career",
+      "company_id": "company:b_ing_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.b-ing.info/karriere",
+      "canonical_url": "https://www.b-ing.info/karriere",
+      "is_official": true,
+      "verified_at": "2026-09-05T07:16:21.53Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.b-ing.info/karriere",
+          "basis_url": "https://www.b-ing.info/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T07:16:21.53Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -25113,6 +25333,27 @@
       ]
     },
     {
+      "source_id": "source:paramount_home_entertainment_germany_gmbh_career",
+      "company_id": "company:paramount_home_entertainment_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.paramount.com/",
+      "canonical_url": "https://careers.paramount.com/",
+      "is_official": true,
+      "verified_at": "2026-09-05T07:16:21.53Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.paramount.com/",
+          "basis_url": "https://www.paramount.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T07:16:21.53Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:parcellab_gmbh_career",
       "company_id": "company:parcellab_gmbh",
       "source_type": "CAREER_PAGE",
@@ -26855,6 +27096,27 @@
           "basis_url": "https://www.telefonica.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:telit_cinterion_deutschland_gmbh_career",
+      "company_id": "company:telit_cinterion_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.telit.com/about/careers/",
+      "canonical_url": "https://www.telit.com/about/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-05T07:16:21.53Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.telit.com/about/careers/",
+          "basis_url": "https://www.telit.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T07:16:21.53Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
