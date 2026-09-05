@@ -1,0 +1,48 @@
+{
+  "schema": "jobagent-webreview-baseline/v1",
+  "captured_at": "2026-09-05T19:06:41.2948623+02:00",
+  "git_head": "ce6e8ba48016e91933c4ad58311bd9e898fb3ba0",
+  "store_sha256": "758483720A80676745A79BA61FE23E3FABD47C6AB500F50E6818CD107364923A",
+  "roadmap_before_sha256": "6474D29A4272573AA61F1307A133FA0072070A5D518839F696D7DEA84CEF016F",
+  "companies_total": 479,
+  "company_verification": [
+    {
+      "Name": "CAREER_URL_VERIFIED",
+      "Count": 433
+    },
+    {
+      "Name": "COMPANY_DOMAIN_VERIFIED",
+      "Count": 46
+    }
+  ],
+  "company_scan_status": [
+    {
+      "Name": "FAILED",
+      "Count": 1
+    },
+    {
+      "Name": "PENDING",
+      "Count": 476
+    },
+    {
+      "Name": "SUCCESS",
+      "Count": 2
+    }
+  ],
+  "stored_job_sources": 439,
+  "unique_career_urls": 432,
+  "stored_jobs": 3,
+  "stored_job_classification": [
+    {
+      "Name": "REJECTED",
+      "Count": 3
+    }
+  ],
+  "stored_scan_runs": 6,
+  "stored_scan_attempts": 10,
+  "unique_companies_with_success_timestamp": 2,
+  "goal": 1000,
+  "complete_live_scan_goal_status": "NOT_PROVEN",
+  "baseline_complete_live_count": null,
+  "note": "SUCCESS und Importstatus beweisen keine vollstaendige Stellenpruefung; Legacy-Logs getrennt im Review ausgewertet."
+}

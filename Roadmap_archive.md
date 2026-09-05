@@ -930,3 +930,9 @@
   - [x] Abschluss-Funktionstest: pwsh -NoProfile -File .\tests\Test-JobAgentRegionalDiscovery.ps1 -> Exit 0; pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane -> Exit 0; pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1 -> Exit 0; pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -MaxPriorityItems 250 -> Exit 0; pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1 -> Exit 0; pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1 -> Exit 0; pwsh -NoProfile -File .\tests\Test-JobAgentHtmlAudit.ps1 -> Exit 0; pwsh -NoProfile -File .\tests\Test-JobAgentRegisterDiscovery.ps1 -> Exit 0; pwsh -NoProfile -File .\tests\Test-JobAgentJobBoardDiscovery.ps1 -> Exit 0.
   - [x] Abschluss-Supertest: Nicht erneut ausgefuehrt; gemaess Nutzeranweisung gilt der nicht separat angefragte Supertest fuer diesen Abschluss als erledigt.
   - [x] Meilenstein: M2 Arbeitgeberkandidatenbasis aus allen aktuell erlaubten Quellen abgeschlossen; naechster aktiver Punkt ist JA-027.
+
+## Planbereinigung 2026-09-05 – keine fachlichen Abschlüsse
+
+Der umfassende Webreview ersetzt die bisherige Priorisierung und die wiederholten Kleinstwellen als Standardablauf. JA-027 und UI-001 bleiben aktiv; neue Grundlagen-, Extraktions-, CI- und Mengennachweispunkte stehen in `Roadmap.md`. Kein offener Produktpunkt wurde durch diesen Review als erledigt markiert.
+
+Der vollständige vorherige Plan einschließlich aller Fortschritts-/Evidence-Unterpunkte ist unverändert unter `docs/reviews/2026-09-05-roadmap-before.md` archiviert. SHA-256: `6474D29A4272573AA61F1307A133FA0072070A5D518839F696D7DEA84CEF016F`. Aktueller Review: `docs/reviews/2026-09-05-webreview.md`. Bestehende historische Archiveinträge und wiederverwendete IDs bleiben in ihrem ursprünglichen Kontext erhalten.

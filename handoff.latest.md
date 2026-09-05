@@ -1,104 +1,53 @@
 # Handoff latest
 
-Stand: 2026-09-05T14:48:00+02:00
+Stand: 2026-09-05T19:31:00.142+02:00
 
-## Status fuer neuen Chat
+## Zustand
 
-- Projekt: JobAgent
-- Workspace: `D:\_Scripte\JobAgent`
-- Repo: `https://github.com/randolph27/JobAgent`
+- Active: `TD-0051`
+- Status: `in-progress`
+- Ziel: JA-040 Jobidentität, Scanvollständigkeit und Aktualisierung korrekt absichern #comment: Die reproduzierten Identitäts- und Statusfehler müssen vor dem breiten produktiven Stellenscan geschlossen werden.
 - Branch: `master`
+- HEAD: `ce6e8ba48016`
 - Upstream: `origin/master`
-- Letzter Fach-Commit: `ec9a697 Add verified company import wave BB`
-- Aktiver Todo: `TD-0041`
-- Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
-- Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
-- Roadmap-Rotation: nicht erfolgt. Kein Roadmap-Punkt ist komplett erledigt.
-- Supertest: nicht neu ausgefuehrt; gemaess Nutzeranweisung gilt der nicht angefragte Supertest fuer diese Uebergabe als erledigt.
-- Letzter STP-Lauf: `.\ci.cmd stp` erfolgreich am `2026-09-05T14:46:48+02:00`.
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
+- Route: `True`
 
-## Letzter Fachfortschritt
+## Versionierte Aenderungen
 
-`JA-027` wurde mit Welle BB/B fortgesetzt. Neu produktiv aufgenommen wurden:
+- `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `todo.checkpoint.json`
+- `todo.current.md`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
 
-- Airbus Defence & Space
-- Bosch Building Automation GmbH
-- Actemium
-- Berylls Strategy
-- BAYROL Deutschland GmbH
+## Verifikation
 
-Kennzahlen nach Welle BB:
+- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `1`
 
-- Store: 479 Firmen
-- JobSources: 439
-- Source Coverage: 441 offizielle Quellen
-- Karrierequellen: 440
-- ATS-Quellen: 1
-- Discovery Sources: 1820
-- Kandidatenqueue: 662 bereits produktiv verifiziert oder im Store belegt
-- Kandidatenqueue: 1120 mit manueller Website-/Scope-Pruefung
-- Kandidatenqueue: 2 in `VERIFY_OFFICIAL_SITE`, 1 in `MANUAL_DECISION`
-- Importwellen-Gate B: `passed`, `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=5`
+## Nächster Umsetzungsschritt
 
-## Evidence Welle BB
+**JA-040 / TD-0051** fortsetzen: Job-ID-Kollision, Entfernung nach Teilscan und veraltete Updateklassifikation als Regressionen absichern und zusammenhängend korrigieren. CI-001 parallel bearbeiten; er ersetzt nicht den aktiven JA-040-Hotspot.
 
-- `data/jobagent/company-discovery.official.wave-bb-20260905.json`
-- `logs/jobagent/company-discovery-import-20260905-123442.json`
-- `logs/jobagent/company-candidate-verification-20260905-123447.json`
-- `logs/jobagent/company-coverage-20260905-123803.json`
-- `logs/jobagent/company-coverage-20260905-123803.md`
-- `logs/jobagent/ja-023-source-coverage.json`
-- `data/jobagent/backups/store-20260905T123443301Z-pre-wave-import.json`
-- `html/jobagent/company-coverage.html`
-- `html/jobagent/ja-022-viewport-audit.html`
-- `output/playwright/ja-022-viewport-800.png`
-- `output/playwright/ja-022-viewport-1366.png`
-- `output/playwright/ja-022-viewport-1920.png`
+Die vollständige [Übergabe für den nächsten Chat](docs/handoffs/2026-09-05-webreview-handoff.md) enthält Einstiegsdateien, belegte Datenzahlen, genaue Repros/Dateien, Umsetzungsschritte, Testcommands, alle sechs Prioritäten und die Betriebsgrenzen.
 
-## Validierung Welle BB
+## Abgeschlossener Stand
 
-- `Get-Content -Raw data\jobagent\company-discovery.official.wave-bb-20260905.json | ConvertFrom-Json -Depth 100` -> Exit `0`
-- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle BB -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-bb-20260905.json -WaveId B` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentImportWaves.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlAudit.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
-- `rg -n "FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \(|Quellen-ID" html\jobagent\company-coverage.html` -> Exit `1`
-- `.\ci.cmd devserver-status` -> Exit `0`, Devserver lief auf Port 8500
-- `Invoke-RestMethod http://localhost:9000/api/system/status` -> Exit `0`, SonarQube war `UP`
-- `.\ci.cmd route-check` -> Exit `0`
-- `.\ci.cmd stp` -> Exit `0`
+- Webreview, neue Roadmap und neun kanonische Screens sind erzeugt. Produktcode, Store, Hint-Store und Kandidatenqueue unverändert.
+- 479 Firmen gespeichert; drei verworfene Rohjobs, keine akzeptierten Stellen. 1.000 vollständig untersuchte Firmenkarriereseiten nicht belegt.
+- Alle sechs Produktpunkte bleiben offen; keine Rotation als erledigt. Historische Fortschritte wurden vollständig gesichert.
+- Sechs bestehende Funktionssuites bestanden im Review. Legacy-Viewporttest scheiterte am Chrome-GPU-Prozess; echter separater Browserreview in vier Breiten durchgeführt.
+- Self-check hat den bekannten Roadmap-Pin-Konflikt; Checkpoint/Handoff sind synchron. SonarQube war UP, keine neue Codeanalyse.
+- Supertest für diese Übergabe gemäß aktueller Nutzeranweisung als erledigt behandelt; tatsächlich nicht angefragt oder ausgeführt, kein Testpass erfunden.
+- Neun bytegleiche temporäre Screens entfernt. Verbindliche Belege: `doc/roadmap-screenshots/UI-001-review-20260905-*.png`.
 
-## Naechste Aufgabe
+## Git-Snapshot und Wiederaufnahme
 
-`JA-027` mit Welle BC fortsetzen. Naechste Feed-Datei:
-
-`data/jobagent/company-discovery.official.wave-bc-20260905.json`
-
-Empfohlene Reihenfolge:
-
-1. Kandidaten aus `data/jobagent/company-candidate-verification.queue.json` mit `next_action == DISCOVER_OFFICIAL_WEBSITE`, niedrigem Risiko und belastbarem Muenchen-/Freising-Bezug auswaehlen.
-2. Offizielle Firmenwebsite, Impressum-/Domainbeleg und Karriere-/Jobs-/ATS-Link fail-closed pruefen.
-3. Feed im Format `jobagent/company-discovery-feed/v1` anlegen; keine Jobboersen-, Arbeitsagentur- oder Register-URL als produktive Karrierequelle verwenden.
-4. Feed-JSON parsen und alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest -Method Get` pruefen.
-5. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
-6. Kandidatenqueue refreshen: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
-7. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250`.
-8. Source-Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`.
-9. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn `JA-027` komplett abgeschlossen wird.
-10. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
-
-## Risiken und offene Punkte
-
-- `JA-027` ist noch nicht abschliessbar, weil 1120 Kandidaten in manueller Website-/Scope-Pruefung stehen.
-- `UI-001` bleibt offen, ist aber derzeit nicht der aktive Hotspot.
-- Weitere Importwellen muessen fail-closed bleiben: keine erfundenen Firmen, keine Jobboersen-/Arbeitsagentur-/Register-URL als produktive Karrierequelle, keine automatische Bewerbung.
+Die Gitwerte oben stammen aus STP **vor** dem Abschlusscommit. Den endgültigen Stand mit `git status --short`, `git log -1 --oneline` und `git rev-list --left-right --count HEAD...origin/master` feststellen. Nach Commit/Push wird kein weiterer schreibender STP erzeugt, damit der veröffentlichte Worktree sauber bleibt.

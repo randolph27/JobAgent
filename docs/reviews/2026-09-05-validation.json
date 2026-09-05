@@ -1,0 +1,117 @@
+{
+  "schema": "jobagent-webreview-validation/v1",
+  "captured_at": "2026-09-05T19:32:00.2727324+02:00",
+  "review_status": "completed",
+  "product_goal_status": "NOT_PROVEN",
+  "production_store_changed": false,
+  "function_checks": [
+    {
+      "cmd": "pwsh -NoProfile -File tests/Test-JobAgentClassification.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests/Test-JobAgentLiveScan.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests/Test-JobAgentStatusMachine.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests/Test-JobAgentSourceAdapters.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests/Test-JobAgentReport.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests/Test-JobAgentHtmlAudit.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File tests/Test-JobAgentHtmlViewportAudit.ps1",
+      "exit": 1
+    }
+  ],
+  "browser_review": {
+    "technical_details_toggle": "passed",
+    "screenshots": "doc/roadmap-screenshots/UI-001-review-20260905-*.png",
+    "daily_fixture_controls": 0,
+    "status": "performed_findings_recorded",
+    "coverage_cards": 250,
+    "coverage_controls": 0,
+    "viewports": [
+      1920,
+      1366,
+      800,
+      390
+    ],
+    "global_horizontal_overflow": false,
+    "first_link_keyboard_focus": "passed"
+  },
+  "legacy_viewport_test": {
+    "reason": "Chrome GPU process crash before first screenshot; old summary is not current evidence",
+    "exit": 1,
+    "status": "failed",
+    "log": "output/playwright/ja-022-viewport-1920.stderr.log"
+  },
+  "self_check_before": {
+    "exit": 1,
+    "log": "logs/terminal/self-check-20260905-190041.log",
+    "issues": 5
+  },
+  "sonar": {
+    "server_status": "UP",
+    "analysis_status": "not-run"
+  },
+  "supertest": {
+    "reason": "Review and roadmap only; no product roadmap item completed",
+    "status": "not-run"
+  },
+  "stp": {
+    "active_id": "TD-0051",
+    "ts": "2026-09-05T19:31:00.142+02:00",
+    "exit": 0,
+    "status": "passed"
+  },
+  "route_check": {
+    "status": "passed",
+    "exit": 0
+  },
+  "artifact_checks": {
+    "roadmap_items": 6,
+    "boundary_event_present": true,
+    "historical_roadmap_hash_matches": true,
+    "checkpoint_state_matches": true,
+    "status": "passed",
+    "active_todo_matches": true,
+    "store_hash_unchanged": true,
+    "local_links_checked": 13
+  },
+  "self_check_after": {
+    "log": "logs\\terminal\\self-check-20260905-193159.log",
+    "issues": [
+      "- immutable_modified: Roadmap.md"
+    ],
+    "status": "failed"
+  },
+  "handoff_supertest_disposition": {
+    "execution_status": "not-run",
+    "recorded_at": "2026-09-05T19:29:19.3991146+02:00",
+    "requirement_status": "satisfied_by_user_instruction",
+    "reason": "User: wenn supertest nicht angefragt wurde, gilt er als erledigt. No supertest requested for this handoff."
+  },
+  "handoff_artifact_checks": {
+    "roadmap_items_rotated": 0,
+    "checked_at": "2026-09-05T19:32:00.5198471+02:00",
+    "canonical_screens_retained": 9,
+    "supertest_waiver_consistent": true,
+    "json_valid": true,
+    "credential_pattern_scan": "no_matches",
+    "resume_anchor": "JA-040 / TD-0051",
+    "local_links_checked": 8,
+    "screenshot_duplicates_removed": 9,
+    "status": "passed"
+  }
+}
