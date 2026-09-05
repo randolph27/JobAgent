@@ -1,91 +1,63 @@
 # Handoff latest
 
-Stand: 2026-09-05T14:06:55+02:00
+Stand: 2026-09-05T14:19:54+02:00
 
 ## Status fuer neuen Chat
 
 - Projekt: JobAgent
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`, Upstream: `origin/master`
-- HEAD vor diesem Handoff-Sync: `322329d Sync handoff after wave AZ`
+- HEAD vor diesem Handoff-Sync: `156d7a9`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
-- Roadmap-Rotation: nicht erfolgt. Kein Roadmap-Punkt ist komplett erledigt: `JA-027` bleibt aktiv, weil weiterhin 1132 Kandidaten fail-closed in manueller Website-/Scope-Pruefung stehen; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-05T14:06:55+02:00`.
-- Supertest: nicht neu ausgefuehrt. Laut aktueller Nutzeranweisung gilt ein nicht angefragter Supertest fuer diese Uebergabe als erledigt.
+- Roadmap-Rotation: nicht erfolgt. `JA-027` bleibt aktiv, weil weiterhin 1125 Kandidaten fail-closed in manueller Website-/Scope-Pruefung stehen; `UI-001` ist ebenfalls offen.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-05T14:19:54+02:00`.
+- Supertest: nicht neu ausgefuehrt. Laut aktueller Nutzeranweisung wird der Supertest erst bei abgeschlossenem Roadmap-Punkt ausgefuehrt.
 
 ## Letzter Fachfortschritt
 
-Welle AZ/B wurde abgeschlossen und im Commit `699cd79 Add verified company import wave AZ` gepusht. Der anschliessende Sync-Commit ist `322329d Sync handoff after wave AZ`. Neu produktiv aufgenommen wurden:
+Welle BA/B wurde abgeschlossen. Neu produktiv aufgenommen wurden:
 
-- toponauten GmbH
-- Ohrbeit GmbH
-- AV-Suite Veranstaltungstechnik GmbH
-- Tresor TV Produktions GmbH
-- Huntrees GmbH
+- Glanos GmbH
+- andrena objects ag
+- Basycon Unternehmensberatung GmbH
+- Bavaria Studios GmbH
+- ACENTISS GmbH
 
-Direkt davor wurde Welle AY/B ebenfalls abgeschlossen und gepusht. Neu produktiv aufgenommen wurden:
+Kennzahlen nach Welle BA:
 
-- hema.to GmbH
-- Fold ecosystemics
-- tiramizoo GmbH
-- TikTok Germany GmbH
-- Audi Business Innovation GmbH
-
-Kennzahlen nach Welle AZ:
-
-- Store: 469 Firmen
-- JobSources: 429
-- Source Coverage: 431 offizielle Quellen
-- Karrierequellen: 430
+- Store: 474 Firmen
+- JobSources: 434
+- Source Coverage: 436 offizielle Quellen
+- Karrierequellen: 435
 - ATS-Quellen: 1
 - Discovery Sources: 1820
-- Kandidatenqueue: 652 bereits produktiv verifiziert oder im Store belegt
-- Kandidatenqueue: 1132 mit manueller Website-/Scope-Pruefung
+- Kandidatenqueue: 657 bereits produktiv verifiziert oder im Store belegt
+- Kandidatenqueue: 1125 mit manueller Website-/Scope-Pruefung
+- Kandidatenqueue: 2 in `VERIFY_OFFICIAL_SITE`, 1 in `MANUAL_DECISION`
 - Importwellen-Gate B: passed, `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=5`
 
-## Versionierter Arbeitsstand
+## Evidence Welle BA
 
-Fach-Commits:
-
-- `64bee9f Add verified company import wave AY`
-- `699cd79 Add verified company import wave AZ`
-
-Sync-/Handoff-Commits:
-
-- `3d330ee Sync handoff after wave AY`
-- `322329d Sync handoff after wave AZ`
-
-Dieser Handoff-Sync aktualisiert nur Uebergabe- und Todo-Artefakte:
-
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `todo.state.json`
-
-## Evidence Welle AZ
-
-- `data/jobagent/company-discovery.official.wave-az-20260905.json`
-- `logs/jobagent/company-discovery-import-20260905-115720.json`
-- `logs/jobagent/company-candidate-verification-20260905-115725.json`
-- `logs/jobagent/company-coverage-20260905-115838.json`
-- `logs/jobagent/company-coverage-20260905-115838.md`
+- `data/jobagent/company-discovery.official.wave-ba-20260905.json`
+- `logs/jobagent/company-discovery-import-20260905-121332.json`
+- `logs/jobagent/company-candidate-verification-20260905-121341.json`
+- `logs/jobagent/company-coverage-20260905-121543.json`
+- `logs/jobagent/company-coverage-20260905-121543.md`
 - `logs/jobagent/ja-023-source-coverage.json`
-- `data/jobagent/backups/store-20260905T115721390Z-pre-wave-import.json`
+- `data/jobagent/backups/store-20260905T121333258Z-pre-wave-import.json`
 - `html/jobagent/company-coverage.html`
 - `html/jobagent/ja-022-viewport-audit.html`
 - `output/playwright/ja-022-viewport-800.png`
 - `output/playwright/ja-022-viewport-1366.png`
 - `output/playwright/ja-022-viewport-1920.png`
 
-## Validierung Welle AZ
+## Validierung Welle BA
 
-- `Get-Content -Raw data\jobagent\company-discovery.official.wave-az-20260905.json | ConvertFrom-Json -Depth 100` -> Exit `0`
-- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AZ -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-az-20260905.json -WaveId B` -> Exit `0`
+- `Get-Content -Raw data\jobagent\company-discovery.official.wave-ba-20260905.json | ConvertFrom-Json -Depth 100` -> Exit `0`
+- `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle BA -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath data\jobagent\company-discovery.official.wave-ba-20260905.json -WaveId B` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250` -> Exit `0`
 - `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent` -> Exit `0`
@@ -106,7 +78,7 @@ Dieser Handoff-Sync aktualisiert nur Uebergabe- und Todo-Artefakte:
 
 ## Naechste Aufgabe
 
-`JA-027` mit Welle BA fortsetzen. Naechste Feed-Datei: `data/jobagent/company-discovery.official.wave-ba-20260905.json`.
+`JA-027` mit Welle BB fortsetzen. Naechste Feed-Datei: `data/jobagent/company-discovery.official.wave-bb-20260905.json`.
 
 Empfohlene Reihenfolge:
 
@@ -115,15 +87,12 @@ Empfohlene Reihenfolge:
 3. Feed im Format `jobagent/company-discovery-feed/v1` anlegen; keine Jobboersen-, Arbeitsagentur- oder Register-URL als produktive Karrierequelle verwenden.
 4. Feed-JSON parsen und alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest -Method Get` pruefen.
 5. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
-6. Kandidatenqueue refreshen: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
-7. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250`.
-8. Source-Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`.
-9. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn `JA-027` komplett abgeschlossen wird.
-10. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
+6. Kandidatenqueue refreshen, Coverage und Source-Coverage aktualisieren.
+7. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn `JA-027` komplett abgeschlossen wird.
+8. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und offene Punkte
 
-- `JA-027` ist noch nicht abschliessbar, weil 1132 Kandidaten in manueller Website-/Scope-Pruefung stehen.
+- `JA-027` ist noch nicht abschliessbar, weil 1125 Kandidaten in manueller Website-/Scope-Pruefung stehen.
 - `UI-001` bleibt offen, ist aber derzeit nicht der aktive Hotspot.
-- Drei AZ-Firmen wurden als offizielle Firmendomain ohne separate Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare Karrierequelle.
 - Weitere Importwellen muessen fail-closed bleiben: keine erfundenen Firmen, keine Jobboersen-/Arbeitsagentur-/Register-URL als produktive Karrierequelle, keine automatische Bewerbung.

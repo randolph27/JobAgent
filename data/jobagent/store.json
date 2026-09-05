@@ -10778,6 +10778,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:glanos_gmbh",
+      "canonical_name": "Glanos GmbH",
+      "canonical_domain": "glanos.de",
+      "official_website_url": "https://www.glanos.de/",
+      "career_url": "https://www.glanos.de/careers/",
+      "aliases": [
+        "Glanos",
+        "Glanos GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Natural Language Processing and Business Data",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.glanos.de/careers/",
+        "observed_at": "2026-09-05T12:13:32.586Z",
+        "verification_url": "https://www.glanos.de/careers/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Natural Language Processing and Business Data",
+        "evidence_note": "Der Glanos-Kandidat wurde ueber die offizielle glanos.de-Domain, die dortige Careers-Seite und den Muenchner Standortbezug auf der Website belegt."
+      },
+      "created_at": "2026-09-05T12:13:32.586Z",
+      "updated_at": "2026-09-05T12:13:32.586Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:exb_labs_gmbh",
       "canonical_name": "ExB Labs GmbH",
       "canonical_domain": "exb.de",
@@ -12196,6 +12235,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:andrena_objects_ag",
+      "canonical_name": "andrena objects ag",
+      "canonical_domain": "andrena.de",
+      "official_website_url": "https://www.andrena.de/",
+      "career_url": "https://www.andrena.de/karriere",
+      "aliases": [
+        "andrena",
+        "andrena objects",
+        "andrena objects ag"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Agile Software Engineering and Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.andrena.de/karriere",
+        "observed_at": "2026-09-05T12:13:32.586Z",
+        "verification_url": "https://www.andrena.de/karriere",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Agile Software Engineering and Consulting",
+        "evidence_note": "Der andrena-Kandidat wurde ueber die offizielle andrena.de-Domain und die Karriere-Seite belegt; die Stellenuebersicht nennt Muenchen als moeglichen Standort."
+      },
+      "created_at": "2026-09-05T12:13:32.586Z",
+      "updated_at": "2026-09-05T12:13:32.586Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:adnymics_parceldealz",
       "canonical_name": "adnymics / ParcelDealz",
       "canonical_domain": "adnymics.com",
@@ -13407,6 +13486,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:basycon_unternehmensberatung_gmbh",
+      "canonical_name": "Basycon Unternehmensberatung GmbH",
+      "canonical_domain": "basycon.com",
+      "official_website_url": "https://www.basycon.com/",
+      "career_url": "https://www.basycon.com/de/karriere",
+      "aliases": [
+        "Basycon",
+        "Basycon Unternehmensberatung",
+        "Basycon Unternehmensberatung GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Management and IT Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.basycon.com/de/karriere",
+        "observed_at": "2026-09-05T12:13:32.586Z",
+        "verification_url": "https://www.basycon.com/de/karriere",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Management and IT Consulting",
+        "evidence_note": "Der Basycon-Kandidat wurde ueber die offizielle basycon.com-Domain und die dortige Karriere-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T12:13:32.586Z",
+      "updated_at": "2026-09-05T12:13:32.586Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:av_suite_veranstaltungstechnik_gmbh",
       "canonical_name": "AV-Suite Veranstaltungstechnik GmbH",
       "canonical_domain": "av-suite.de",
@@ -14501,6 +14620,45 @@
       },
       "created_at": "2026-08-31T18:53:01.819Z",
       "updated_at": "2026-08-31T18:53:01.819Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bavaria_studios_gmbh",
+      "canonical_name": "Bavaria Studios GmbH",
+      "canonical_domain": "bavaria-studios.de",
+      "official_website_url": "https://www.bavaria-studios.de/",
+      "career_url": "https://www.bavaria-studios.de/de/about/karriere/",
+      "aliases": [
+        "Bavaria Studios",
+        "Bavaria Studios GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen/Geiselgasteig",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Film and Television Studios",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bavaria-studios.de/de/about/karriere/",
+        "observed_at": "2026-09-05T12:13:32.586Z",
+        "verification_url": "https://www.bavaria-studios.de/de/about/karriere/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Film and Television Studios",
+        "evidence_note": "Der Bavaria-Studios-Kandidat wurde ueber die offizielle bavaria-studios.de-Domain und die dortige Karriere-Seite belegt; die Website verweist fuer Stellen auf das offizielle Bavaria-Film-Jobportal."
+      },
+      "created_at": "2026-09-05T12:13:32.586Z",
+      "updated_at": "2026-09-05T12:13:32.586Z",
       "last_successful_scan_at": null
     },
     {
@@ -15758,6 +15916,45 @@
       },
       "created_at": "2026-09-04T08:04:35.555Z",
       "updated_at": "2026-09-04T08:04:35.555Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:acentiss_gmbh",
+      "canonical_name": "ACENTISS GmbH",
+      "canonical_domain": "acentiss.de",
+      "official_website_url": "https://www.acentiss.de/en/",
+      "career_url": "https://www.acentiss.de/karriere/",
+      "aliases": [
+        "Acentiss",
+        "ACENTISS GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn",
+          "city": "Ottobrunn",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace Engineering and Certification",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.acentiss.de/karriere/",
+        "observed_at": "2026-09-05T12:13:32.586Z",
+        "verification_url": "https://www.acentiss.de/karriere/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Aerospace Engineering and Certification",
+        "evidence_note": "Der ACENTISS-Kandidat wurde ueber die offizielle acentiss.de-Domain und die Karriere-Seite belegt; Ottobrunn liegt im Muenchner Zielraum."
+      },
+      "created_at": "2026-09-05T12:13:32.586Z",
+      "updated_at": "2026-09-05T12:13:32.586Z",
       "last_successful_scan_at": null
     },
     {
@@ -19447,6 +19644,27 @@
       ]
     },
     {
+      "source_id": "source:acentiss_gmbh_career",
+      "company_id": "company:acentiss_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.acentiss.de/karriere/",
+      "canonical_url": "https://www.acentiss.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:13:32.586Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.acentiss.de/karriere/",
+          "basis_url": "https://www.acentiss.de/en/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:13:32.586Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:actyx_ag_career",
       "company_id": "company:actyx_ag",
       "source_type": "CAREER_PAGE",
@@ -19781,6 +19999,27 @@
       ]
     },
     {
+      "source_id": "source:andrena_objects_ag_career",
+      "company_id": "company:andrena_objects_ag",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.andrena.de/karriere",
+      "canonical_url": "https://www.andrena.de/karriere",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:13:32.586Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.andrena.de/karriere",
+          "basis_url": "https://www.andrena.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:13:32.586Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:angsa_robotics_gmbh_career",
       "company_id": "company:angsa_robotics_gmbh",
       "source_type": "CAREER_PAGE",
@@ -20075,6 +20314,27 @@
       ]
     },
     {
+      "source_id": "source:basycon_unternehmensberatung_gmbh_career",
+      "company_id": "company:basycon_unternehmensberatung_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.basycon.com/de/karriere",
+      "canonical_url": "https://www.basycon.com/de/karriere",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:13:32.586Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.basycon.com/de/karriere",
+          "basis_url": "https://www.basycon.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:13:32.586Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:bavaria_film_gmbh_career",
       "company_id": "company:bavaria_film_gmbh",
       "source_type": "CAREER_PAGE",
@@ -20091,6 +20351,27 @@
           "basis_url": "https://www.bavaria-film.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bavaria_studios_gmbh_career",
+      "company_id": "company:bavaria_studios_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bavaria-studios.de/de/about/karriere/",
+      "canonical_url": "https://www.bavaria-studios.de/de/about/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:13:32.586Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bavaria-studios.de/de/about/karriere/",
+          "basis_url": "https://www.bavaria-studios.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:13:32.586Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -22563,6 +22844,27 @@
           "basis_url": "https://joinus.gknaerospace.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T11:59:14.67Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:glanos_gmbh_career",
+      "company_id": "company:glanos_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.glanos.de/careers/",
+      "canonical_url": "https://www.glanos.de/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:13:32.586Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.glanos.de/careers/",
+          "basis_url": "https://www.glanos.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:13:32.586Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

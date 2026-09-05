@@ -1,0 +1,129 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-05T12:30:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Glanos GmbH",
+      "official_website_url": "https://www.glanos.de/",
+      "career_url": "https://www.glanos.de/careers/",
+      "aliases": [
+        "Glanos",
+        "Glanos GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Natural Language Processing and Business Data",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.glanos.de/careers/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Glanos-Kandidat wurde ueber die offizielle glanos.de-Domain, die dortige Careers-Seite und den Muenchner Standortbezug auf der Website belegt."
+    },
+    {
+      "canonical_name": "andrena objects ag",
+      "official_website_url": "https://www.andrena.de/",
+      "career_url": "https://www.andrena.de/karriere",
+      "aliases": [
+        "andrena",
+        "andrena objects",
+        "andrena objects ag"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Agile Software Engineering and Consulting",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.andrena.de/karriere",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der andrena-Kandidat wurde ueber die offizielle andrena.de-Domain und die Karriere-Seite belegt; die Stellenuebersicht nennt Muenchen als moeglichen Standort."
+    },
+    {
+      "canonical_name": "Basycon Unternehmensberatung GmbH",
+      "official_website_url": "https://www.basycon.com/",
+      "career_url": "https://www.basycon.com/de/karriere",
+      "aliases": [
+        "Basycon",
+        "Basycon Unternehmensberatung",
+        "Basycon Unternehmensberatung GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Management and IT Consulting",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.basycon.com/de/karriere",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Basycon-Kandidat wurde ueber die offizielle basycon.com-Domain und die dortige Karriere-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "Bavaria Studios GmbH",
+      "official_website_url": "https://www.bavaria-studios.de/",
+      "career_url": "https://www.bavaria-studios.de/de/about/karriere/",
+      "aliases": [
+        "Bavaria Studios",
+        "Bavaria Studios GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen/Geiselgasteig",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Film and Television Studios",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bavaria-studios.de/de/about/karriere/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Bavaria-Studios-Kandidat wurde ueber die offizielle bavaria-studios.de-Domain und die dortige Karriere-Seite belegt; die Website verweist fuer Stellen auf das offizielle Bavaria-Film-Jobportal."
+    },
+    {
+      "canonical_name": "ACENTISS GmbH",
+      "official_website_url": "https://www.acentiss.de/en/",
+      "career_url": "https://www.acentiss.de/karriere/",
+      "aliases": [
+        "Acentiss",
+        "ACENTISS",
+        "ACENTISS GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Ottobrunn",
+          "city": "Ottobrunn",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace Engineering and Certification",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.acentiss.de/karriere/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der ACENTISS-Kandidat wurde ueber die offizielle acentiss.de-Domain und die Karriere-Seite belegt; Ottobrunn liegt im Muenchner Zielraum."
+    }
+  ]
+}
