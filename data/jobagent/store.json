@@ -10857,6 +10857,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:breathment_gmbh",
+      "canonical_name": "Breathment GmbH",
+      "canonical_domain": "breathment.com",
+      "official_website_url": "https://breathment.com/en/",
+      "career_url": null,
+      "aliases": [
+        "Breathment",
+        "Breathment GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Respiratory Health",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://breathment.com/en/",
+        "observed_at": "2026-09-05T06:57:38.525Z",
+        "verification_url": "https://breathment.com/en/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Digital Respiratory Health",
+        "evidence_note": "Der Breathment-Kandidat wurde ueber die offizielle breathment.com-Domain belegt; die Website beschreibt die digitale Atemtherapie-Plattform, eine separate offiziell verlinkte Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-05T06:57:38.525Z",
+      "updated_at": "2026-09-05T06:57:38.525Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:zuehlke_engineering",
       "canonical_name": "Zuehlke Engineering",
       "canonical_domain": "zuehlke.com",
@@ -11092,6 +11131,46 @@
       },
       "created_at": "2026-09-03T09:44:45.466Z",
       "updated_at": "2026-09-03T09:44:45.466Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:raytheon_deutschland_gmbh",
+      "canonical_name": "Raytheon Deutschland GmbH",
+      "canonical_domain": "rtx.com",
+      "official_website_url": "https://www.rtx.com/raytheon/what-we-do/raytheon-deutschland",
+      "career_url": "https://careers.rtx.com/de/de/home",
+      "aliases": [
+        "Raytheon Deutschland",
+        "Raytheon Deutschland GmbH",
+        "RTX Raytheon Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Aerospace and Defense",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.rtx.com/de/de/home",
+        "observed_at": "2026-09-05T06:57:38.525Z",
+        "verification_url": "https://careers.rtx.com/de/de/home",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "FREISING",
+        "industry_hint": "Aerospace and Defense",
+        "evidence_note": "Der Raytheon-Deutschland-Kandidat wurde ueber die offizielle RTX-Raytheon-Seite mit Freising-Kontakt und die offizielle RTX-Karriereseite belegt."
+      },
+      "created_at": "2026-09-05T06:57:38.525Z",
+      "updated_at": "2026-09-05T06:57:38.525Z",
       "last_successful_scan_at": null
     },
     {
@@ -12274,6 +12353,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:rainer_schmidt_landschaftsarchitekten",
+      "canonical_name": "Rainer Schmidt Landschaftsarchitekten",
+      "canonical_domain": "rainerschmidt.com",
+      "official_website_url": "https://www.rainerschmidt.com/eng",
+      "career_url": null,
+      "aliases": [
+        "Rainer Schmidt Landscape Architects",
+        "Rainer Schmidt Landschaftsarchitekten",
+        "Rainer Schmidt Landschaftsarchitekten und Stadtplaner"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Landscape Architecture and Urban Planning",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.rainerschmidt.com/eng",
+        "observed_at": "2026-09-05T06:57:38.525Z",
+        "verification_url": "https://www.rainerschmidt.com/eng",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Landscape Architecture and Urban Planning",
+        "evidence_note": "Der Rainer-Schmidt-Kandidat wurde ueber die offizielle rainerschmidt.com-Domain belegt; die Website nennt das Buero und die Hauptniederlassung Muenchen, eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-05T06:57:38.525Z",
+      "updated_at": "2026-09-05T06:57:38.525Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:philip_morris_gmbh",
       "canonical_name": "Philip Morris GmbH",
       "canonical_domain": "pmi.com",
@@ -13009,6 +13128,46 @@
       },
       "created_at": "2026-08-31T18:18:31.59Z",
       "updated_at": "2026-08-31T18:18:31.59Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tawny_gmbh",
+      "canonical_name": "TAWNY GmbH",
+      "canonical_domain": "tawny.ai",
+      "official_website_url": "https://www.tawny.ai/",
+      "career_url": null,
+      "aliases": [
+        "Tawny",
+        "TAWNY GmbH",
+        "TAWNY.AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Vision AI and Human Analytics",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tawny.ai/",
+        "observed_at": "2026-09-05T06:57:38.525Z",
+        "verification_url": "https://www.tawny.ai/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Vision AI and Human Analytics",
+        "evidence_note": "Der Tawny-Kandidat wurde ueber die offizielle tawny.ai-Domain und den Muenchner Startup-/Impressumsbezug als TAWNY GmbH belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+      },
+      "created_at": "2026-09-05T06:57:38.525Z",
+      "updated_at": "2026-09-05T06:57:38.525Z",
       "last_successful_scan_at": null
     },
     {
@@ -14026,6 +14185,46 @@
       },
       "created_at": "2026-09-04T13:29:13.802Z",
       "updated_at": "2026-09-04T13:29:13.802Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tensordyne",
+      "canonical_name": "Tensordyne",
+      "canonical_domain": "tensordyne.ai",
+      "official_website_url": "https://www.tensordyne.ai/",
+      "career_url": "https://www.tensordyne.ai/careers",
+      "aliases": [
+        "Recogni",
+        "Recogni GmbH",
+        "Tensordyne"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Inference Systems",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tensordyne.ai/careers",
+        "observed_at": "2026-09-05T06:57:38.525Z",
+        "verification_url": "https://www.tensordyne.ai/careers",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "AI Inference Systems",
+        "evidence_note": "Der Recogni-Kandidat wurde fail-closed als aktueller Arbeitgeber Tensordyne erfasst, weil die offizielle recogni.com-Domain auf tensordyne.ai verweist und die offizielle Karriereseite unter tensordyne.ai erreichbar ist."
+      },
+      "created_at": "2026-09-05T06:57:38.525Z",
+      "updated_at": "2026-09-05T06:57:38.525Z",
       "last_successful_scan_at": null
     },
     {
@@ -25529,6 +25728,27 @@
       ]
     },
     {
+      "source_id": "source:raytheon_deutschland_gmbh_career",
+      "company_id": "company:raytheon_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.rtx.com/de/de/home",
+      "canonical_url": "https://careers.rtx.com/de/de/home",
+      "is_official": true,
+      "verified_at": "2026-09-05T06:57:38.525Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.rtx.com/de/de/home",
+          "basis_url": "https://www.rtx.com/raytheon/what-we-do/raytheon-deutschland",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T06:57:38.525Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:regiondo_gmbh_career",
       "company_id": "company:regiondo_gmbh",
       "source_type": "CAREER_PAGE",
@@ -26635,6 +26855,27 @@
           "basis_url": "https://www.telefonica.de/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:05:10.163Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:tensordyne_career",
+      "company_id": "company:tensordyne",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.tensordyne.ai/careers",
+      "canonical_url": "https://www.tensordyne.ai/careers",
+      "is_official": true,
+      "verified_at": "2026-09-05T06:57:38.525Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.tensordyne.ai/careers",
+          "basis_url": "https://www.tensordyne.ai/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T06:57:38.525Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

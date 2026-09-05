@@ -1,0 +1,131 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-05T00:00:00.000Z",
+  "items": [
+    {
+      "canonical_name": "Breathment GmbH",
+      "official_website_url": "https://breathment.com/en/",
+      "career_url": null,
+      "aliases": [
+        "Breathment",
+        "Breathment GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Digital Respiratory Health",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://breathment.com/en/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Breathment-Kandidat wurde ueber die offizielle breathment.com-Domain belegt; die Website beschreibt die digitale Atemtherapie-Plattform, eine separate offiziell verlinkte Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Raytheon Deutschland GmbH",
+      "official_website_url": "https://www.rtx.com/raytheon/what-we-do/raytheon-deutschland",
+      "career_url": "https://careers.rtx.com/de/de/home",
+      "aliases": [
+        "Raytheon Deutschland",
+        "Raytheon Deutschland GmbH",
+        "RTX Raytheon Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Aerospace and Defense",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.rtx.com/de/de/home",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Raytheon-Deutschland-Kandidat wurde ueber die offizielle RTX-Raytheon-Seite mit Freising-Kontakt und die offizielle RTX-Karriereseite belegt."
+    },
+    {
+      "canonical_name": "Rainer Schmidt Landschaftsarchitekten",
+      "official_website_url": "https://www.rainerschmidt.com/eng",
+      "career_url": null,
+      "aliases": [
+        "Rainer Schmidt Landschaftsarchitekten",
+        "Rainer Schmidt Landscape Architects",
+        "Rainer Schmidt Landschaftsarchitekten und Stadtplaner"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Landscape Architecture and Urban Planning",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.rainerschmidt.com/eng",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Rainer-Schmidt-Kandidat wurde ueber die offizielle rainerschmidt.com-Domain belegt; die Website nennt das Buero und die Hauptniederlassung Muenchen, eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "TAWNY GmbH",
+      "official_website_url": "https://www.tawny.ai/",
+      "career_url": null,
+      "aliases": [
+        "Tawny",
+        "TAWNY",
+        "TAWNY GmbH",
+        "TAWNY.AI"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Vision AI and Human Analytics",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tawny.ai/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Tawny-Kandidat wurde ueber die offizielle tawny.ai-Domain und den Muenchner Startup-/Impressumsbezug als TAWNY GmbH belegt; eine separate offizielle Karriere-Seite wurde in dieser Welle nicht belastbar nachgewiesen."
+    },
+    {
+      "canonical_name": "Tensordyne",
+      "official_website_url": "https://www.tensordyne.ai/",
+      "career_url": "https://www.tensordyne.ai/careers",
+      "aliases": [
+        "Recogni",
+        "Recogni GmbH",
+        "Tensordyne"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "AI Inference Systems",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tensordyne.ai/careers",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Recogni-Kandidat wurde fail-closed als aktueller Arbeitgeber Tensordyne erfasst, weil die offizielle recogni.com-Domain auf tensordyne.ai verweist und die offizielle Karriereseite unter tensordyne.ai erreichbar ist."
+    }
+  ]
+}

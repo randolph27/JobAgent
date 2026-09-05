@@ -1,208 +1,166 @@
 {
-  "ts": "2026-09-04T21:22:51.544+02:00",
+  "summary": "Welle AW/B abgeschlossen; 5 offiziell belegte Arbeitgeber produktiv aufgenommen; Supertest nicht neu ausgefuehrt.",
+  "ts": "2026-09-05T09:05:48.828+02:00",
   "project": "JobAgent",
   "workspace_root": "D:\\_Scripte\\JobAgent",
-  "agent_id": "UTTER-20260817-39f7",
   "active_id": "TD-0041",
   "status": "in-progress",
-  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen.",
-  "summary": "Uebergabe nach erneutem STP fuer Chatwechsel. Seit Welle AV/B gab es keine neue fachliche Importwelle; Welle AV importierte 6 offiziell belegte Arbeitgeber produktiv. Supertest wurde nicht neu angefragt und gilt gemaess Nutzerregel fuer diesen Uebergabeabschluss als erledigt.",
-  "roadmap_rotation": {
-    "performed": false,
-    "reason": "JA-027 ist fachlich nicht komplett erledigt; UI-001 ist ebenfalls offen.",
-    "open_roadmap_items": [
-      "JA-027",
-      "UI-001"
-    ]
-  },
-  "git": {
-    "branch": "master",
-    "upstream": "origin/master",
-    "remote": "origin",
-    "head_before_handoff_commit": "46d9af452de1",
-    "ahead": 0,
-    "behind": 0,
-    "worktree_at_stp": "dirty"
-  },
+  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
   "changed": [
-    "handoff.latest.md",
+    "Roadmap.md",
+    "data/jobagent/company-candidate-verification.queue.json",
+    "data/jobagent/company-discovery.official.wave-aw-20260905.json",
+    "data/jobagent/store.json",
     "handoff.latest.json",
+    "handoff.latest.md",
+    "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
-    "todo.master.index.json"
+    "todo.master.index.json",
+    "todo.state.json"
   ],
-  "last_committed_wave": {
-    "name": "AV",
-    "wave_id": "B",
-    "feed_path": "data/jobagent/company-discovery.official.wave-av-20260904.json",
-    "import_log": "logs/jobagent/company-discovery-import-20260904-185803.json",
-    "verification_log": "logs/jobagent/company-candidate-verification-20260904-185809.json",
-    "coverage_json": "logs/jobagent/company-coverage-20260904-185921.json",
-    "coverage_markdown": "logs/jobagent/company-coverage-20260904-185921.md",
-    "source_coverage": "logs/jobagent/ja-023-source-coverage.json",
-    "store_backup": "data/jobagent/backups/store-20260904T185803845Z-pre-wave-import.json",
-    "coverage_html": "html/jobagent/company-coverage.html",
-    "added_employers": [
-      "itsmydata GmbH",
-      "Lilio Health GmbH",
-      "Karevo GmbH",
-      "Latheca GmbH",
-      "Landschaftspflegeverband Freising e.V.",
-      "ALFA AI"
-    ],
-    "gate": {
-      "status": "passed",
-      "manual_review_rate": 0.0,
-      "duplicate_rate": 0.0,
-      "coverage_delta": 6
-    }
-  },
-  "metrics_after_wave_av": {
-    "companies_total": 449,
-    "job_sources_total": 419,
-    "official_sources": 421,
-    "career_sources": 420,
-    "ats_sources": 1,
-    "discovery_sources": 1820,
-    "candidate_verified_or_store_total": 631,
-    "candidate_discover_official_website_total": 1151,
-    "candidate_verify_official_site_total": 2,
-    "candidate_manual_decision_total": 1
-  },
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-av-20260904.json | ConvertFrom-Json -Depth 100",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-aw-20260905.json | ConvertFrom-Json -Depth 100"
     },
     {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AV",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AW"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-av-20260904.json -WaveId B",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-aw-20260905.json -WaveId B"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1"
     },
     {
-      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
+      "status": "pass",
       "exit": 1,
-      "status": "pass",
-      "reason": "Keine verbotenen technischen Labels im HTML gefunden."
+      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html"
     },
     {
-      "cmd": ".\\ci.cmd devserver-status",
-      "exit": 0,
       "status": "pass",
-      "note": "Devserver lief auf Port 8500."
+      "exit": 0,
+      "cmd": ".\\ci.cmd devserver-status"
     },
     {
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-      "exit": 0,
       "status": "pass",
-      "note": "SonarQube war UP."
+      "exit": 0,
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status"
     },
     {
-      "cmd": ".\\ci.cmd route-check",
+      "status": "pass",
       "exit": 0,
-      "status": "pass"
+      "cmd": ".\\ci.cmd route-check"
     },
     {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0,
       "status": "pass",
-      "ts": "2026-09-04T21:22:51.544+02:00"
+      "exit": 0,
+      "cmd": ".\\ci.cmd stp"
     }
   ],
-  "supertest": {
-    "requested_this_turn": false,
-    "status": "done_by_user_rule",
-    "reason": "Supertest wurde nicht angefragt; gemaess Nutzeranweisung gilt er als erledigt."
-  },
-  "next": "JA-027 mit Welle AW fortsetzen.",
-  "next_steps": [
-    "Startdateien erneut lesen: README.md, Roadmap.md, Roadmap_archive.md, Roadmap_index.md, todo.current.md, todo.state.json und handoff.latest.md.",
-    "Naechste Feed-Datei anlegen: data/jobagent/company-discovery.official.wave-aw-20260904.json oder bei neuem Datum entsprechend wave-aw-<YYYYMMDD>.json.",
-    "Kandidaten mit next_action == DISCOVER_OFFICIAL_WEBSITE, risk_level == LOW, hohem priority_score und belastbarem Muenchen-/Freising-Bezug auswaehlen.",
-    "Offizielle Website, Impressum-/Domainbeleg und Karriere-/Jobs-/ATS-Link fail-closed pruefen.",
-    "Keine Jobboersen-, Arbeitsagentur- oder Register-URL als produktive Karrierequelle verwenden.",
-    "Import, Queue-Refresh, Coverage, Source-Coverage, funktionsbezogene Tests, Roadmap/Todo/Handoff und STP abschliessen; danach stage/commit/push."
-  ],
-  "risks": [
-    "JA-027 bleibt offen, weil 1151 Kandidaten in manueller Website-/Scope-Pruefung stehen.",
-    "UI-001 bleibt offen, ist aber derzeit nicht der aktive Hotspot.",
-    "Fuenf AV-Firmen wurden als offizielle Firmendomain ohne separate Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare Karrierequelle.",
-    "Unklare Firmenidentitaet, unklarer Standortbezug oder nicht offiziell belegte Karriere-/ATS-Quelle muessen fail-closed in Review bleiben."
-  ],
+  "route_ok": true,
+  "route_violations": [],
+  "next": "JA-027 mit Welle AX fortsetzen: data/jobagent/company-discovery.official.wave-ax-20260905.json",
   "refs": [
-    "Roadmap.md",
-    "Roadmap_archive.md",
-    "Roadmap_index.md",
-    "todo.current.md",
-    "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.md",
-    "handoff.latest.json"
+    "file:Roadmap.md",
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.md",
+    "file:handoff.latest.json"
+  ],
+  "metrics": {
+    "companies_total": 454,
+    "job_sources": 421,
+    "official_sources": 423,
+    "career_sources": 422,
+    "ats_sources": 1,
+    "discovery_sources": 1820,
+    "queue_verified_total": 636,
+    "queue_manual_review_total": 1148,
+    "wave_gate": "passed",
+    "manual_review_rate": 0.0,
+    "duplicate_rate": 0.0,
+    "coverage_delta": 5
+  },
+  "evidence": [
+    "data/jobagent/company-discovery.official.wave-aw-20260905.json",
+    "logs/jobagent/company-discovery-import-20260905-065738.json",
+    "logs/jobagent/company-candidate-verification-20260905-065746.json",
+    "logs/jobagent/company-coverage-20260905-070052.json",
+    "logs/jobagent/company-coverage-20260905-070052.md",
+    "logs/jobagent/ja-023-source-coverage.json",
+    "data/jobagent/backups/store-20260905T065739183Z-pre-wave-import.json",
+    "html/jobagent/company-coverage.html",
+    "output/playwright/ja-022-viewport-800.png",
+    "output/playwright/ja-022-viewport-1366.png",
+    "output/playwright/ja-022-viewport-1920.png"
+  ],
+  "notes": [
+    "Supertest nicht neu ausgefuehrt; STP-Digest referenzierte alten Supertest, daher Korrektur-Event EV-20260905-090548-awcorr.",
+    "JA-027 bleibt offen. UI-001 bleibt offen."
   ]
 }
