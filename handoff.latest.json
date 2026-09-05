@@ -1,150 +1,52 @@
 {
-  "summary": "Welle AW/B abgeschlossen; 5 offiziell belegte Arbeitgeber produktiv aufgenommen; Supertest nicht neu ausgefuehrt.",
-  "ts": "2026-09-05T09:05:48.828+02:00",
+  "summary": "Uebergabe fuer neuen Chat nach Welle AW; STP ausgefuehrt; Supertest nicht neu angefragt und fuer Uebergabe als erledigt gewertet.",
+  "ts": "2026-09-05T09:09:04.564+02:00",
   "project": "JobAgent",
   "workspace_root": "D:\\_Scripte\\JobAgent",
+  "branch": "master",
+  "upstream": "origin/master",
+  "head_before_handoff_commit": "73b11dc Add verified company import wave AW",
   "active_id": "TD-0041",
+  "active_roadmap": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
+  "also_open": [
+    "UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen"
+  ],
   "status": "in-progress",
-  "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
-  "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/company-discovery.official.wave-aw-20260905.json",
-    "data/jobagent/store.json",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
-    "todo.events.jsonl",
-    "todo.history.digest.json",
-    "todo.master.index.json",
-    "todo.state.json"
-  ],
-  "verified": [
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-aw-20260905.json | ConvertFrom-Json -Depth 100"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AW"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-aw-20260905.json -WaveId B"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1"
-    },
-    {
-      "status": "pass",
-      "exit": 1,
-      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": ".\\ci.cmd devserver-status"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": ".\\ci.cmd route-check"
-    },
-    {
-      "status": "pass",
-      "exit": 0,
-      "cmd": ".\\ci.cmd stp"
+  "roadmap_rotation": "not-run: JA-027 und UI-001 sind offen",
+  "stp": {
+    "exit": 0,
+    "ts": "2026-09-05T09:09:04.564+02:00",
+    "cmd": ".\\ci.cmd stp"
+  },
+  "supertest": {
+    "status": "treated-done-per-user-instruction",
+    "requested": false,
+    "new_run": false
+  },
+  "last_progress": {
+    "added_companies": [
+      "Breathment GmbH",
+      "Raytheon Deutschland GmbH",
+      "Rainer Schmidt Landschaftsarchitekten",
+      "TAWNY GmbH",
+      "Tensordyne (vormals Recogni)"
+    ],
+    "wave_id": "B",
+    "wave": "AW",
+    "metrics": {
+      "manual_review_rate": 0.0,
+      "duplicate_rate": 0.0,
+      "gate": "passed",
+      "queue_verified_or_store": 636,
+      "official_sources": 423,
+      "career_sources": 422,
+      "job_sources": 421,
+      "companies_total": 454,
+      "discovery_sources": 1820,
+      "ats_sources": 1,
+      "queue_manual_website_scope_review": 1148,
+      "coverage_delta": 5
     }
-  ],
-  "route_ok": true,
-  "route_violations": [],
-  "next": "JA-027 mit Welle AX fortsetzen: data/jobagent/company-discovery.official.wave-ax-20260905.json",
-  "refs": [
-    "file:Roadmap.md",
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.md",
-    "file:handoff.latest.json"
-  ],
-  "metrics": {
-    "companies_total": 454,
-    "job_sources": 421,
-    "official_sources": 423,
-    "career_sources": 422,
-    "ats_sources": 1,
-    "discovery_sources": 1820,
-    "queue_verified_total": 636,
-    "queue_manual_review_total": 1148,
-    "wave_gate": "passed",
-    "manual_review_rate": 0.0,
-    "duplicate_rate": 0.0,
-    "coverage_delta": 5
   },
   "evidence": [
     "data/jobagent/company-discovery.official.wave-aw-20260905.json",
@@ -159,8 +61,54 @@
     "output/playwright/ja-022-viewport-1366.png",
     "output/playwright/ja-022-viewport-1920.png"
   ],
-  "notes": [
-    "Supertest nicht neu ausgefuehrt; STP-Digest referenzierte alten Supertest, daher Korrektur-Event EV-20260905-090548-awcorr.",
-    "JA-027 bleibt offen. UI-001 bleibt offen."
+  "validated": [
+    "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-aw-20260905.json | ConvertFrom-Json -Depth 100 -> Exit 0",
+    "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AW -> Exit 0",
+    "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-aw-20260905.json -WaveId B -> Exit 0",
+    "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5 -> Exit 0",
+    "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250 -> Exit 0",
+    "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -> Exit 0",
+    "Funktionsbezogene Tests Coverage, CandidateVerification, ImportWaves, Report, HtmlAudit, HtmlViewportAudit, SourceVerification, SourceAdapters, LiveScan -> Exit 0",
+    "rg technische Labels in html\\jobagent\\company-coverage.html -> Exit 1",
+    "Devserver :8500 status ok",
+    "SonarQube :9000 status UP",
+    "route-check -> Exit 0",
+    "stp -> Exit 0"
+  ],
+  "next_task": {
+    "feed": "data/jobagent/company-discovery.official.wave-ax-20260905.json",
+    "ordered_steps": [
+      "Kandidaten aus data/jobagent/company-candidate-verification.queue.json mit next_action DISCOVER_OFFICIAL_WEBSITE, niedrigem Risiko, hohem priority_score und belastbarem Muenchen-/Freising-Bezug auswaehlen.",
+      "Offizielle Firmenwebsite, Impressum-/Domainbeleg und Karriere-/Jobs-/ATS-Link fail-closed pruefen.",
+      "Feed im Format jobagent/company-discovery-feed/v1 anlegen; keine Jobboersen-, Arbeitsagentur- oder Register-URL als produktive Karrierequelle verwenden.",
+      "Feed-JSON parsen und alle nicht-leeren official_website_url, career_url und discovery_url per Invoke-WebRequest -Method Get pruefen.",
+      "Import mit tools/Import-JobAgentCompanyDiscovery.ps1 -WaveId B ausfuehren.",
+      "Queue, Coverage und Source-Coverage aktualisieren.",
+      "Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder Abschluss von JA-027.",
+      "Roadmap, Todo, Handoff, STP synchronisieren, dann stage/commit/push."
+    ],
+    "title": "JA-027 mit Welle AX fortsetzen"
+  },
+  "risks": [
+    "JA-027 nicht abschliessbar: 1148 Kandidaten bleiben in manueller Website-/Scope-Pruefung.",
+    "UI-001 offen, aber aktuell nicht Hotspot.",
+    "Drei AW-Firmen wurden als offizielle Firmendomain ohne separate Karriere-URL importiert; fuer Welle B erlaubt.",
+    "Fail-closed bleibt bindend: unklare Identitaet, Standortbezug oder nicht offiziell belegte Karriere-/ATS-Quelle bleiben Review."
+  ],
+  "changed": [
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json"
+  ],
+  "refs": [
+    "Roadmap.md",
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "handoff.latest.json"
   ]
 }
