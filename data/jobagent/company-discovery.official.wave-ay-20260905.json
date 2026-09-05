@@ -1,0 +1,128 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-05T00:00:00.000Z",
+  "items": [
+    {
+      "canonical_name": "hema.to GmbH",
+      "official_website_url": "https://www.hema.to/",
+      "career_url": null,
+      "aliases": [
+        "hema.to",
+        "hema.to GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare AI and Cytometry Software",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.hema.to/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der hema.to-Kandidat wurde ueber die offizielle hema.to-Domain belegt; die Website nennt die Muenchner Anschrift Metzstr. 14B, 81667 Muenchen. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+    },
+    {
+      "canonical_name": "Fold ecosystemics",
+      "official_website_url": "https://www.fold.eco/",
+      "career_url": null,
+      "aliases": [
+        "Fold.ai",
+        "Fold AI",
+        "Fold ecosystemics"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Environmental AI and Ecosystem Monitoring",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.fold.eco/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der Fold.ai-Kandidat wurde fail-closed auf Fold ecosystemics normalisiert und ueber die offizielle fold.eco-Domain belegt; der Muenchner Bezug bleibt aus dem regionalen AI-Startup-Hinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+    },
+    {
+      "canonical_name": "tiramizoo GmbH",
+      "official_website_url": "https://tiramizoo.com/",
+      "career_url": "https://tiramizoo.com/en/careers/",
+      "aliases": [
+        "tiramizoo",
+        "tiramizoo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Urban Logistics Software",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://tiramizoo.com/en/careers/",
+      "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+      "evidence_note": "Der tiramizoo-Kandidat wurde ueber die offizielle tiramizoo.com-Domain und die offizielle Careers-Seite belegt; die Careers-Seite nennt die TIRAMIZOO GMBH mit Muenchner Adresse."
+    },
+    {
+      "canonical_name": "TikTok Germany GmbH",
+      "official_website_url": "https://www.tiktok.com/about?lang=de-DE",
+      "career_url": "https://careers.tiktok.com/",
+      "aliases": [
+        "Tiktok",
+        "TikTok",
+        "TikTok Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Social Media and Digital Platforms",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://careers.tiktok.com/",
+      "discovery_origin": "source-registry:munich_business_ikt_companies",
+      "evidence_note": "Der TikTok-Kandidat wurde ueber die offizielle TikTok-About-Seite und die offizielle TikTok-Careers-Domain belegt; der Muenchner Standortbezug bleibt aus dem regionalen IKT-Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "Audi Business Innovation GmbH",
+      "official_website_url": "https://www.audi.com/en.html",
+      "career_url": "https://www.audi.com/en/careers.html",
+      "aliases": [
+        "Audi Business Innovation",
+        "Audi Business Innovation GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Digital Products and Mobility Software",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.audi.com/en/careers.html",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Audi-Business-Innovation-Kandidat wurde ueber die offizielle Audi-Domain und die offizielle Audi-Careers-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+    }
+  ]
+}

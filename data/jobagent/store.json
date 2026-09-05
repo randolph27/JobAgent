@@ -10661,6 +10661,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:hema_to_gmbh",
+      "canonical_name": "hema.to GmbH",
+      "canonical_domain": "hema.to",
+      "official_website_url": "https://www.hema.to/",
+      "career_url": null,
+      "aliases": [
+        "hema.to",
+        "hema.to GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Healthcare AI and Cytometry Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.hema.to/",
+        "observed_at": "2026-09-05T07:35:01.054Z",
+        "verification_url": "https://www.hema.to/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Healthcare AI and Cytometry Software",
+        "evidence_note": "Der hema.to-Kandidat wurde ueber die offizielle hema.to-Domain belegt; die Website nennt die Muenchner Anschrift Metzstr. 14B, 81667 Muenchen. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+      },
+      "created_at": "2026-09-05T07:35:01.054Z",
+      "updated_at": "2026-09-05T07:35:01.054Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:heidelberg_materials",
       "canonical_name": "Heidelberg Materials",
       "canonical_domain": "heidelbergmaterials.com",
@@ -11766,6 +11805,46 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:fold_ecosystemics",
+      "canonical_name": "Fold ecosystemics",
+      "canonical_domain": "fold.eco",
+      "official_website_url": "https://www.fold.eco/",
+      "career_url": null,
+      "aliases": [
+        "Fold AI",
+        "Fold ecosystemics",
+        "Fold.ai"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Environmental AI and Ecosystem Monitoring",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.fold.eco/",
+        "observed_at": "2026-09-05T07:35:01.054Z",
+        "verification_url": "https://www.fold.eco/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Environmental AI and Ecosystem Monitoring",
+        "evidence_note": "Der Fold.ai-Kandidat wurde fail-closed auf Fold ecosystemics normalisiert und ueber die offizielle fold.eco-Domain belegt; der Muenchner Bezug bleibt aus dem regionalen AI-Startup-Hinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+      },
+      "created_at": "2026-09-05T07:35:01.054Z",
+      "updated_at": "2026-09-05T07:35:01.054Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:fnz_bank",
       "canonical_name": "FNZ Bank",
       "canonical_domain": "fnz.de",
@@ -12194,6 +12273,45 @@
       },
       "created_at": "2026-09-04T18:22:11.919Z",
       "updated_at": "2026-09-04T18:22:11.919Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tiramizoo_gmbh",
+      "canonical_name": "tiramizoo GmbH",
+      "canonical_domain": "tiramizoo.com",
+      "official_website_url": "https://tiramizoo.com/",
+      "career_url": "https://tiramizoo.com/en/careers/",
+      "aliases": [
+        "tiramizoo",
+        "tiramizoo GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Urban Logistics Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://tiramizoo.com/en/careers/",
+        "observed_at": "2026-09-05T07:35:01.054Z",
+        "verification_url": "https://tiramizoo.com/en/careers/",
+        "discovery_origin": "source-registry:awesome_ml_startups_munich_github",
+        "target_area": "MUNICH",
+        "industry_hint": "Urban Logistics Software",
+        "evidence_note": "Der tiramizoo-Kandidat wurde ueber die offizielle tiramizoo.com-Domain und die offizielle Careers-Seite belegt; die Careers-Seite nennt die TIRAMIZOO GMBH mit Muenchner Adresse."
+      },
+      "created_at": "2026-09-05T07:35:01.054Z",
+      "updated_at": "2026-09-05T07:35:01.054Z",
       "last_successful_scan_at": null
     },
     {
@@ -13208,6 +13326,45 @@
       },
       "created_at": "2026-08-31T22:37:31.023Z",
       "updated_at": "2026-08-31T22:37:31.023Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tiktok_germany_gmbh",
+      "canonical_name": "TikTok Germany GmbH",
+      "canonical_domain": "tiktok.com",
+      "official_website_url": "https://www.tiktok.com/about?lang=de-DE",
+      "career_url": "https://careers.tiktok.com/",
+      "aliases": [
+        "Tiktok",
+        "TikTok Germany"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Social Media and Digital Platforms",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://careers.tiktok.com/",
+        "observed_at": "2026-09-05T07:35:01.054Z",
+        "verification_url": "https://careers.tiktok.com/",
+        "discovery_origin": "source-registry:munich_business_ikt_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Social Media and Digital Platforms",
+        "evidence_note": "Der TikTok-Kandidat wurde ueber die offizielle TikTok-About-Seite und die offizielle TikTok-Careers-Domain belegt; der Muenchner Standortbezug bleibt aus dem regionalen IKT-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T07:35:01.054Z",
+      "updated_at": "2026-09-05T07:35:01.054Z",
       "last_successful_scan_at": null
     },
     {
@@ -15326,6 +15483,45 @@
       },
       "created_at": "2026-08-31T18:53:01.819Z",
       "updated_at": "2026-08-31T18:53:01.819Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:audi_business_innovation_gmbh",
+      "canonical_name": "Audi Business Innovation GmbH",
+      "canonical_domain": "audi.com",
+      "official_website_url": "https://www.audi.com/en.html",
+      "career_url": "https://www.audi.com/en/careers.html",
+      "aliases": [
+        "Audi Business Innovation",
+        "Audi Business Innovation GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Automotive Digital Products and Mobility Software",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.audi.com/en/careers.html",
+        "observed_at": "2026-09-05T07:35:01.054Z",
+        "verification_url": "https://www.audi.com/en/careers.html",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Automotive Digital Products and Mobility Software",
+        "evidence_note": "Der Audi-Business-Innovation-Kandidat wurde ueber die offizielle Audi-Domain und die offizielle Audi-Careers-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T07:35:01.054Z",
+      "updated_at": "2026-09-05T07:35:01.054Z",
       "last_successful_scan_at": null
     },
     {
@@ -19597,6 +19793,27 @@
         "observed_at": "2026-08-23T06:20:56.355Z",
         "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
       }
+    },
+    {
+      "source_id": "source:audi_business_innovation_gmbh_career",
+      "company_id": "company:audi_business_innovation_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.audi.com/en/careers.html",
+      "canonical_url": "https://www.audi.com/en/careers.html",
+      "is_official": true,
+      "verified_at": "2026-09-05T07:35:01.054Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.audi.com/en/careers.html",
+          "basis_url": "https://www.audi.com/en.html",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T07:35:01.054Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
     },
     {
       "source_id": "source:augustiner_braeu_wagner_kg_career",
@@ -27241,6 +27458,48 @@
           "basis_url": "https://www.thoughtworks.com/",
           "redirect_chain": [],
           "observed_at": "2026-09-01T06:08:24.736Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:tiktok_germany_gmbh_career",
+      "company_id": "company:tiktok_germany_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://careers.tiktok.com/",
+      "canonical_url": "https://careers.tiktok.com/",
+      "is_official": true,
+      "verified_at": "2026-09-05T07:35:01.054Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://careers.tiktok.com/",
+          "basis_url": "https://www.tiktok.com/about?lang=de-DE",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T07:35:01.054Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:tiramizoo_gmbh_career",
+      "company_id": "company:tiramizoo_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://tiramizoo.com/en/careers/",
+      "canonical_url": "https://tiramizoo.com/en/careers/",
+      "is_official": true,
+      "verified_at": "2026-09-05T07:35:01.054Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://tiramizoo.com/en/careers/",
+          "basis_url": "https://tiramizoo.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T07:35:01.054Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
