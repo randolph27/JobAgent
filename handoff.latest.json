@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-05T09:42:36+02:00",
+  "ts": "2026-09-05T14:04:38+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -15,15 +15,15 @@
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ay-20260905.json | ConvertFrom-Json -Depth 100",
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-az-20260905.json | ConvertFrom-Json -Depth 100",
       "exit": 0
     },
     {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AY",
+      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle AZ",
       "exit": 0
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ay-20260905.json -WaveId B",
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-az-20260905.json -WaveId B",
       "exit": 0
     },
     {
@@ -91,11 +91,11 @@
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "64bee9fdd14f",
+    "head": "699cd7910505",
     "upstream": "origin/master",
     "ahead_behind": "0/0"
   },
-  "next": "JA-027 mit Welle AZ fortsetzen: data/jobagent/company-discovery.official.wave-az-20260905.json",
+  "next": "JA-027 mit Welle BA fortsetzen: data/jobagent/company-discovery.official.wave-ba-20260905.json",
   "refs": [
     "Roadmap.md",
     "todo.current.md",
