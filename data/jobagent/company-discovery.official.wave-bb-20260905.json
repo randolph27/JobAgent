@@ -1,0 +1,126 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-05T12:33:47.000Z",
+  "items": [
+    {
+      "canonical_name": "Airbus Defence & Space",
+      "official_website_url": "https://www.airbus.com/",
+      "career_url": "https://www.airbus.com/en/careers",
+      "aliases": [
+        "Airbus Defence and Space",
+        "Airbus Defence & Space"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen/Ottobrunn",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace and Defence",
+      "scan_priority": 30,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.airbus.com/en/careers",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Airbus-Defence-and-Space-Kandidat wurde ueber die offizielle airbus.com-Domain und die dortige Careers-Seite belegt; der Muenchner Zielraumbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "Bosch Building Automation GmbH",
+      "official_website_url": "https://www.bosch.de/",
+      "career_url": "https://www.bosch.de/karriere/",
+      "aliases": [
+        "Bosch Building Automation",
+        "Bosch Building Automation GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Building Automation and Technology",
+      "scan_priority": 29,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bosch.de/karriere/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Bosch-Building-Automation-Kandidat wurde ueber die offizielle Bosch-Domain bosch.de und die Karriere-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "Actemium",
+      "official_website_url": "https://www.actemium.de/",
+      "career_url": "https://www.actemium.de/karriere/",
+      "aliases": [
+        "Actemium",
+        "Actemium Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial Engineering and Automation",
+      "scan_priority": 28,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.actemium.de/karriere/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Actemium-Kandidat wurde ueber die offizielle actemium.de-Domain und die dortige Karriere-Seite belegt; der Muenchner Zielraumbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "Berylls Strategy",
+      "official_website_url": "https://www.berylls.com/",
+      "career_url": "https://www.berylls.com/career/",
+      "aliases": [
+        "Berylls",
+        "Berylls Strategy"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Strategy Consulting",
+      "scan_priority": 27,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.berylls.com/career/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Berylls-Strategy-Kandidat wurde ueber die offizielle berylls.com-Domain und die Career-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "BAYROL Deutschland GmbH",
+      "official_website_url": "https://www.bayrol.de/",
+      "career_url": "https://www.bayrol.de/karriere/",
+      "aliases": [
+        "BAYROL",
+        "BAYROL Deutschland GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Planegg",
+          "city": "Planegg",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Water Treatment and Pool Care",
+      "scan_priority": 26,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.bayrol.de/karriere/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der BAYROL-Kandidat wurde ueber die offizielle bayrol.de-Domain und die Karriere-Seite belegt; Planegg liegt im Muenchner Zielraum und der lokale Bezug bleibt aus dem OSM-Unternehmenshinweis erhalten."
+    }
+  ]
+}

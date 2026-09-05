@@ -1,13 +1,13 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-09-05T12:15:43.937Z",
+  "generated_at": "2026-09-05T12:38:03.998Z",
   "clusters_total": 1785,
   "candidates_total": 1790,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 657,
-    "DISCOVER_OFFICIAL_WEBSITE": 1125,
+    "ALREADY_VERIFIED_IN_STORE": 662,
+    "DISCOVER_OFFICIAL_WEBSITE": 1120,
     "MANUAL_DECISION": 1,
     "VERIFY_OFFICIAL_SITE": 2
   },
@@ -28106,6 +28106,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_actemium_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_actemium_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:actemium",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_actemium_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Actemium",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T05:50:28.244Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "cb5d8111cfee5b5b62b1fc0ed9dcc22bbe500a16e5704a4b62fe57a52c8754f2",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:actemium"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_adtran_networks_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_adtran_networks_se_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": "company:adtran_networks_se",
@@ -28284,6 +28328,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_airbus_defence_and_space_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_airbus_defence_and_space_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:airbus_defence_and_space",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_airbus_defence_and_space_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Airbus Defence & Space",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:04:44.668Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "ebe9c3777377bffb85b02465a92f467c5bb013ff3bf9654937b4a8171a9055dc",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:airbus defence and space"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -28826,6 +28914,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bayrol_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bayrol_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:bayrol_deutschland_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_bayrol_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "BAYROL Deutschland GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:49:01.975Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "b8dd729bdfd15e2df1fef50d7baedf2f6558bedfdd451b8851c2354d2acf8f9a",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bayrol deutschland"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_baywa_ag_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_baywa_ag_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": "company:baywa_ag",
@@ -28868,6 +29000,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_berylls_strategy_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_berylls_strategy_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:berylls_strategy",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_berylls_strategy_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Berylls Strategy",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:49:01.975Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "b8af332c41406e986f8b0b45d7ce478e0b644169e1d9bc0c9d8c5c0ee19cddf3",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:berylls strategy"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -29052,6 +29228,50 @@
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
         ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bosch_building_automation_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bosch_building_automation_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
+      "company_id": "company:bosch_building_automation_gmbh",
+      "candidate_ids": [
+        "regional-hint:openstreetmap_overpass_business_names_bosch_building_automation_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
+      ],
+      "canonical_name": "Bosch Building Automation GmbH",
+      "source_count": 1,
+      "priority_score": 91,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-28T06:55:37.322Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:openstreetmap_overpass_business_names",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://overpass-api.de/api/interpreter",
+        "observed_at": "08/27/2026 05:00:00",
+        "record_hash": "d72bb2d334a130af72484546b2a979c2ed2c0abc074fa6f5a6a085d3317f4757",
+        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bosch building automation"
+        ],
+        "conflict_flags": [],
         "cluster_candidate_count": 1
       }
     },
@@ -33954,50 +34174,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_actemium_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_actemium_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_actemium_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Actemium",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T05:50:28.244Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "cb5d8111cfee5b5b62b1fc0ed9dcc22bbe500a16e5704a4b62fe57a52c8754f2",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:actemium"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_additiv_e_k_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_additiv_e_k_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -34344,50 +34520,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:aicher ambulanz union"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_airbus_defence_and_space_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_airbus_defence_and_space_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_airbus_defence_and_space_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Airbus Defence & Space",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:04:44.668Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "ebe9c3777377bffb85b02465a92f467c5bb013ff3bf9654937b4a8171a9055dc",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:airbus defence and space"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -37430,50 +37562,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bayrol_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bayrol_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_bayrol_deutschland_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "BAYROL Deutschland GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:49:01.975Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "b8dd729bdfd15e2df1fef50d7baedf2f6558bedfdd451b8851c2354d2acf8f9a",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bayrol deutschland"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_baywa_r_e_ag_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_baywa_r_e_ag_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -37864,50 +37952,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:bertrandt ingenieurbuero"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_berylls_strategy_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_berylls_strategy_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_berylls_strategy_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Berylls Strategy",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:49:01.975Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "b8af332c41406e986f8b0b45d7ce478e0b644169e1d9bc0c9d8c5c0ee19cddf3",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:berylls strategy"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -38920,50 +38964,6 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:bosch automotive"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_bosch_building_automation_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "candidate_id": "regional-hint:openstreetmap_overpass_business_names_bosch_building_automation_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:openstreetmap_overpass_business_names_bosch_building_automation_gmbh_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes"
-      ],
-      "canonical_name": "Bosch Building Automation GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-28T06:55:37.322Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Quellentyp ist nicht als offizieller Website-Ermittlungsbeleg zugelassen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:openstreetmap_overpass_business_names",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://overpass-api.de/api/interpreter",
-        "observed_at": "08/27/2026 05:00:00",
-        "record_hash": "d72bb2d334a130af72484546b2a979c2ed2c0abc074fa6f5a6a085d3317f4757",
-        "allowed_use": "Oeffentliche OSM-Daten als lokalen Overpass-Snapshot fuer namentlich erfasste office=company-Elemente in Muenchen, 20-km-Umkreis und Freising als Arbeitgeberkandidaten verarbeiten; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Einzelner kleiner Overpass-Snapshot mit lokalem Cache; keine CI-Live-Abhaengigkeit, keine wiederholten Bulk-Abfragen und bei Serverlast oder Rate-Limit fail-closed."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "name:bosch building automation"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1

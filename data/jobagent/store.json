@@ -16739,6 +16739,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:airbus_defence_and_space",
+      "canonical_name": "Airbus Defence & Space",
+      "canonical_domain": "airbus.com",
+      "official_website_url": "https://www.airbus.com/",
+      "career_url": "https://www.airbus.com/en/careers",
+      "aliases": [
+        "Airbus Defence & Space",
+        "Airbus Defence and Space"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen/Ottobrunn",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Aerospace and Defence",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 30,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.airbus.com/en/careers",
+        "observed_at": "2026-09-05T12:34:42.633Z",
+        "verification_url": "https://www.airbus.com/en/careers",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Aerospace and Defence",
+        "evidence_note": "Der Airbus-Defence-and-Space-Kandidat wurde ueber die offizielle airbus.com-Domain und die dortige Careers-Seite belegt; der Muenchner Zielraumbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T12:34:42.633Z",
+      "updated_at": "2026-09-05T12:34:42.633Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:95_5_charivari",
       "canonical_name": "95.5 Charivari",
       "canonical_domain": "charivari.de",
@@ -17281,6 +17320,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:bosch_building_automation_gmbh",
+      "canonical_name": "Bosch Building Automation GmbH",
+      "canonical_domain": "bosch.de",
+      "official_website_url": "https://www.bosch.de/",
+      "career_url": "https://www.bosch.de/karriere/",
+      "aliases": [
+        "Bosch Building Automation",
+        "Bosch Building Automation GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Building Automation and Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 29,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bosch.de/karriere/",
+        "observed_at": "2026-09-05T12:34:42.633Z",
+        "verification_url": "https://www.bosch.de/karriere/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Building Automation and Technology",
+        "evidence_note": "Der Bosch-Building-Automation-Kandidat wurde ueber die offizielle Bosch-Domain bosch.de und die Karriere-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T12:34:42.633Z",
+      "updated_at": "2026-09-05T12:34:42.633Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:vinzenzmurr_vertriebs_gmbh",
       "canonical_name": "Vinzenzmurr Vertriebs GmbH",
       "canonical_domain": "vinzenzmurr.de",
@@ -17593,6 +17671,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:actemium",
+      "canonical_name": "Actemium",
+      "canonical_domain": "actemium.de",
+      "official_website_url": "https://www.actemium.de/",
+      "career_url": "https://www.actemium.de/karriere/",
+      "aliases": [
+        "Actemium",
+        "Actemium Deutschland"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Industrial Engineering and Automation",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 28,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.actemium.de/karriere/",
+        "observed_at": "2026-09-05T12:34:42.633Z",
+        "verification_url": "https://www.actemium.de/karriere/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Industrial Engineering and Automation",
+        "evidence_note": "Der Actemium-Kandidat wurde ueber die offizielle actemium.de-Domain und die dortige Karriere-Seite belegt; der Muenchner Zielraumbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T12:34:42.633Z",
+      "updated_at": "2026-09-05T12:34:42.633Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:valtech",
       "canonical_name": "Valtech",
       "canonical_domain": "valtech.com",
@@ -17867,6 +17984,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:berylls_strategy",
+      "canonical_name": "Berylls Strategy",
+      "canonical_domain": "berylls.com",
+      "official_website_url": "https://www.berylls.com/",
+      "career_url": "https://www.berylls.com/career/",
+      "aliases": [
+        "Berylls",
+        "Berylls Strategy"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Strategy Consulting",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 27,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.berylls.com/career/",
+        "observed_at": "2026-09-05T12:34:42.633Z",
+        "verification_url": "https://www.berylls.com/career/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Strategy Consulting",
+        "evidence_note": "Der Berylls-Strategy-Kandidat wurde ueber die offizielle berylls.com-Domain und die Career-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T12:34:42.633Z",
+      "updated_at": "2026-09-05T12:34:42.633Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:samsung_semiconductors_europe",
       "canonical_name": "Samsung Semiconductors Europe",
       "canonical_domain": "semiconductor.samsung.com",
@@ -18059,6 +18215,45 @@
       },
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:bayrol_deutschland_gmbh",
+      "canonical_name": "BAYROL Deutschland GmbH",
+      "canonical_domain": "bayrol.de",
+      "official_website_url": "https://www.bayrol.de/",
+      "career_url": "https://www.bayrol.de/karriere/",
+      "aliases": [
+        "BAYROL",
+        "BAYROL Deutschland GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Planegg",
+          "city": "Planegg",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Water Treatment and Pool Care",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 26,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.bayrol.de/karriere/",
+        "observed_at": "2026-09-05T12:34:42.633Z",
+        "verification_url": "https://www.bayrol.de/karriere/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Water Treatment and Pool Care",
+        "evidence_note": "Der BAYROL-Kandidat wurde ueber die offizielle bayrol.de-Domain und die Karriere-Seite belegt; Planegg liegt im Muenchner Zielraum und der lokale Bezug bleibt aus dem OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T12:34:42.633Z",
+      "updated_at": "2026-09-05T12:34:42.633Z",
       "last_successful_scan_at": null
     },
     {
@@ -19665,6 +19860,27 @@
       ]
     },
     {
+      "source_id": "source:actemium_career",
+      "company_id": "company:actemium",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.actemium.de/karriere/",
+      "canonical_url": "https://www.actemium.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:34:42.633Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.actemium.de/karriere/",
+          "basis_url": "https://www.actemium.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:34:42.633Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:actyx_ag_career",
       "company_id": "company:actyx_ag",
       "source_type": "CAREER_PAGE",
@@ -19849,6 +20065,27 @@
           "basis_url": "https://www.agile-robots.com/en/",
           "redirect_chain": [],
           "observed_at": "2026-08-28T16:22:41.522Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:airbus_defence_and_space_career",
+      "company_id": "company:airbus_defence_and_space",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.airbus.com/en/careers",
+      "canonical_url": "https://www.airbus.com/en/careers",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:34:42.633Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.airbus.com/en/careers",
+          "basis_url": "https://www.airbus.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:34:42.633Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -20587,6 +20824,27 @@
       ]
     },
     {
+      "source_id": "source:bayrol_deutschland_gmbh_career",
+      "company_id": "company:bayrol_deutschland_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bayrol.de/karriere/",
+      "canonical_url": "https://www.bayrol.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:34:42.633Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bayrol.de/karriere/",
+          "basis_url": "https://www.bayrol.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:34:42.633Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:baywa_ag_career",
       "company_id": "company:baywa_ag",
       "source_type": "CAREER_PAGE",
@@ -20666,6 +20924,27 @@
           "basis_url": "https://www.bertrandt.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-29T10:47:34.834Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:berylls_strategy_career",
+      "company_id": "company:berylls_strategy",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.berylls.com/career/",
+      "canonical_url": "https://www.berylls.com/career/",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:34:42.633Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.berylls.com/career/",
+          "basis_url": "https://www.berylls.com/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:34:42.633Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
@@ -20874,6 +21153,27 @@
           "basis_url": "https://www.boku.com/",
           "redirect_chain": [],
           "observed_at": "2026-08-30T06:11:36.779Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:bosch_building_automation_gmbh_career",
+      "company_id": "company:bosch_building_automation_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.bosch.de/karriere/",
+      "canonical_url": "https://www.bosch.de/karriere/",
+      "is_official": true,
+      "verified_at": "2026-09-05T12:34:42.633Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.bosch.de/karriere/",
+          "basis_url": "https://www.bosch.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T12:34:42.633Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]
