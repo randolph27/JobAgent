@@ -10076,6 +10076,45 @@
       "last_successful_scan_at": null
     },
     {
+      "company_id": "company:toponauten_gmbh",
+      "canonical_name": "toponauten GmbH",
+      "canonical_domain": "toponauten.de",
+      "official_website_url": "https://www.toponauten.de/",
+      "career_url": "https://www.toponauten.de/jobs",
+      "aliases": [
+        "Toponauten",
+        "toponauten GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Landscape Architecture and Urban Planning",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 35,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.toponauten.de/jobs",
+        "observed_at": "2026-09-05T11:57:20.728Z",
+        "verification_url": "https://www.toponauten.de/jobs",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "FREISING",
+        "industry_hint": "Landscape Architecture and Urban Planning",
+        "evidence_note": "Der Toponauten-Kandidat wurde ueber die offizielle toponauten.de-Domain und die dortige Jobs-Seite belegt; die Website nennt Freising als Standort."
+      },
+      "created_at": "2026-09-05T11:57:20.728Z",
+      "updated_at": "2026-09-05T11:57:20.728Z",
+      "last_successful_scan_at": null
+    },
+    {
       "company_id": "company:steidle_architekten",
       "canonical_name": "steidle Architekten",
       "canonical_domain": "steidle-architekten.de",
@@ -11409,6 +11448,45 @@
       },
       "created_at": "2026-09-04T08:42:30.817Z",
       "updated_at": "2026-09-04T08:42:30.817Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:ohrbeit_gmbh",
+      "canonical_name": "Ohrbeit GmbH",
+      "canonical_domain": "ohrbeit.de",
+      "official_website_url": "https://www.ohrbeit.de/",
+      "career_url": "https://www.ohrbeit.de/jobs",
+      "aliases": [
+        "Ohrbeit",
+        "Ohrbeit GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Recruiting Audio and Jobcast Platform",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 34,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "CAREER_URL_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.ohrbeit.de/jobs",
+        "observed_at": "2026-09-05T11:57:20.728Z",
+        "verification_url": "https://www.ohrbeit.de/jobs",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Recruiting Audio and Jobcast Platform",
+        "evidence_note": "Der Ohrbeit-Kandidat wurde ueber die offizielle ohrbeit.de-Domain und die dortige Jobs-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+      },
+      "created_at": "2026-09-05T11:57:20.728Z",
+      "updated_at": "2026-09-05T11:57:20.728Z",
       "last_successful_scan_at": null
     },
     {
@@ -13326,6 +13404,85 @@
       },
       "created_at": "2026-08-31T22:37:31.023Z",
       "updated_at": "2026-08-31T22:37:31.023Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:av_suite_veranstaltungstechnik_gmbh",
+      "canonical_name": "AV-Suite Veranstaltungstechnik GmbH",
+      "canonical_domain": "av-suite.de",
+      "official_website_url": "https://www.av-suite.de/",
+      "career_url": null,
+      "aliases": [
+        "AV-Suite",
+        "AV-Suite - Veranstaltungstechnik",
+        "AV-Suite Veranstaltungstechnik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Event Technology",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 33,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.av-suite.de/",
+        "observed_at": "2026-09-05T11:57:20.728Z",
+        "verification_url": "https://www.av-suite.de/",
+        "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+        "target_area": "MUNICH",
+        "industry_hint": "Event Technology",
+        "evidence_note": "Der AV-Suite-Kandidat wurde ueber die offizielle av-suite.de-Domain belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+      },
+      "created_at": "2026-09-05T11:57:20.728Z",
+      "updated_at": "2026-09-05T11:57:20.728Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:tresor_tv_produktions_gmbh",
+      "canonical_name": "Tresor TV Produktions GmbH",
+      "canonical_domain": "tresor.tv",
+      "official_website_url": "https://www.tresor.tv/",
+      "career_url": null,
+      "aliases": [
+        "Tresor TV",
+        "Tresor TV Produktions GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Television Production",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 32,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.tresor.tv/",
+        "observed_at": "2026-09-05T11:57:20.728Z",
+        "verification_url": "https://www.tresor.tv/",
+        "discovery_origin": "source-registry:munich_business_creative_companies",
+        "target_area": "MUNICH",
+        "industry_hint": "Television Production",
+        "evidence_note": "Der Tresor-TV-Kandidat wurde ueber die offizielle tresor.tv-Domain belegt; der Muenchner Standortbezug bleibt aus dem regionalen Kreativwirtschaftshinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+      },
+      "created_at": "2026-09-05T11:57:20.728Z",
+      "updated_at": "2026-09-05T11:57:20.728Z",
       "last_successful_scan_at": null
     },
     {
@@ -15289,6 +15446,45 @@
       },
       "created_at": "2026-09-04T09:02:14.576Z",
       "updated_at": "2026-09-04T09:02:14.576Z",
+      "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:huntrees_gmbh",
+      "canonical_name": "Huntrees GmbH",
+      "canonical_domain": "huntrees.com",
+      "official_website_url": "https://www.huntrees.com/",
+      "career_url": null,
+      "aliases": [
+        "Huntrees",
+        "Huntrees GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sustainable Food and Tree Planting Platform",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 31,
+      "next_scan_at": "2026-09-06T00:00:00Z",
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "discovery_source": {
+        "type": "OFFICIAL_WEBSITE",
+        "url": "https://www.huntrees.com/",
+        "observed_at": "2026-09-05T11:57:20.728Z",
+        "verification_url": "https://www.huntrees.com/",
+        "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+        "target_area": "MUNICH",
+        "industry_hint": "Sustainable Food and Tree Planting Platform",
+        "evidence_note": "Der Huntrees-Kandidat wurde ueber die offizielle huntrees.com-Domain belegt; der Muenchner Standortbezug bleibt aus dem Munich-Startup-Oekosystemhinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+      },
+      "created_at": "2026-09-05T11:57:20.728Z",
+      "updated_at": "2026-09-05T11:57:20.728Z",
       "last_successful_scan_at": null
     },
     {
@@ -25290,6 +25486,27 @@
       ]
     },
     {
+      "source_id": "source:ohrbeit_gmbh_career",
+      "company_id": "company:ohrbeit_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.ohrbeit.de/jobs",
+      "canonical_url": "https://www.ohrbeit.de/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-05T11:57:20.728Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.ohrbeit.de/jobs",
+          "basis_url": "https://www.ohrbeit.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T11:57:20.728Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
       "source_id": "source:olive_robotics_career",
       "company_id": "company:olive_robotics",
       "source_type": "CAREER_PAGE",
@@ -27521,6 +27738,27 @@
           "basis_url": "https://www.top.legal/en",
           "redirect_chain": [],
           "observed_at": "2026-09-02T16:40:09.87Z",
+          "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        }
+      ]
+    },
+    {
+      "source_id": "source:toponauten_gmbh_career",
+      "company_id": "company:toponauten_gmbh",
+      "source_type": "CAREER_PAGE",
+      "url": "https://www.toponauten.de/jobs",
+      "canonical_url": "https://www.toponauten.de/jobs",
+      "is_official": true,
+      "verified_at": "2026-09-05T11:57:20.728Z",
+      "verification_basis": "CAREER_URL",
+      "verification_evidence": [
+        {
+          "status": "VERIFIED",
+          "evidence_type": "CAREER_URL",
+          "url": "https://www.toponauten.de/jobs",
+          "basis_url": "https://www.toponauten.de/",
+          "redirect_chain": [],
+          "observed_at": "2026-09-05T11:57:20.728Z",
           "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
         }
       ]

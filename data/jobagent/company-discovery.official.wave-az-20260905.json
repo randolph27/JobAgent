@@ -1,0 +1,127 @@
+{
+  "schema_version": "jobagent/company-discovery-feed/v1",
+  "generated_at": "2026-09-05T00:00:00.000Z",
+  "items": [
+    {
+      "canonical_name": "toponauten GmbH",
+      "official_website_url": "https://www.toponauten.de/",
+      "career_url": "https://www.toponauten.de/jobs",
+      "aliases": [
+        "Toponauten",
+        "toponauten GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Freising",
+          "city": "Freising",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "FREISING"
+        }
+      ],
+      "industry": "Landscape Architecture and Urban Planning",
+      "scan_priority": 35,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.toponauten.de/jobs",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Toponauten-Kandidat wurde ueber die offizielle toponauten.de-Domain und die dortige Jobs-Seite belegt; die Website nennt Freising als Standort."
+    },
+    {
+      "canonical_name": "Ohrbeit GmbH",
+      "official_website_url": "https://www.ohrbeit.de/",
+      "career_url": "https://www.ohrbeit.de/jobs",
+      "aliases": [
+        "Ohrbeit",
+        "Ohrbeit GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Recruiting Audio and Jobcast Platform",
+      "scan_priority": 34,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.ohrbeit.de/jobs",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der Ohrbeit-Kandidat wurde ueber die offizielle ohrbeit.de-Domain und die dortige Jobs-Seite belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten."
+    },
+    {
+      "canonical_name": "AV-Suite Veranstaltungstechnik GmbH",
+      "official_website_url": "https://www.av-suite.de/",
+      "career_url": null,
+      "aliases": [
+        "AV-Suite",
+        "AV-Suite - Veranstaltungstechnik",
+        "AV-Suite Veranstaltungstechnik"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Event Technology",
+      "scan_priority": 33,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.av-suite.de/",
+      "discovery_origin": "source-registry:openstreetmap_overpass_business_names",
+      "evidence_note": "Der AV-Suite-Kandidat wurde ueber die offizielle av-suite.de-Domain belegt; der Muenchner Standortbezug bleibt aus dem lokalen OSM-Unternehmenshinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+    },
+    {
+      "canonical_name": "Tresor TV Produktions GmbH",
+      "official_website_url": "https://www.tresor.tv/",
+      "career_url": null,
+      "aliases": [
+        "Tresor TV",
+        "Tresor TV Produktions GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Television Production",
+      "scan_priority": 32,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.tresor.tv/",
+      "discovery_origin": "source-registry:munich_business_creative_companies",
+      "evidence_note": "Der Tresor-TV-Kandidat wurde ueber die offizielle tresor.tv-Domain belegt; der Muenchner Standortbezug bleibt aus dem regionalen Kreativwirtschaftshinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+    },
+    {
+      "canonical_name": "Huntrees GmbH",
+      "official_website_url": "https://www.huntrees.com/",
+      "career_url": null,
+      "aliases": [
+        "Huntrees",
+        "Huntrees GmbH"
+      ],
+      "locations": [
+        {
+          "label": "Muenchen",
+          "city": "Muenchen",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH"
+        }
+      ],
+      "industry": "Sustainable Food and Tree Planting Platform",
+      "scan_priority": 31,
+      "discovery_type": "OFFICIAL_WEBSITE",
+      "discovery_url": "https://www.huntrees.com/",
+      "discovery_origin": "source-registry:munich_startup_platform_ecosystem",
+      "evidence_note": "Der Huntrees-Kandidat wurde ueber die offizielle huntrees.com-Domain belegt; der Muenchner Standortbezug bleibt aus dem Munich-Startup-Oekosystemhinweis erhalten. Eine separate belastbare Karriere-URL wurde in dieser Welle nicht gefunden."
+    }
+  ]
+}
