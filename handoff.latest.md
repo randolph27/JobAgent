@@ -1,23 +1,23 @@
 # Handoff latest
 
-Stand: 2026-09-05T14:19:54+02:00
+Stand: 2026-09-05T14:25:16+02:00
 
 ## Status fuer neuen Chat
 
 - Projekt: JobAgent
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`, Upstream: `origin/master`
-- HEAD vor diesem Handoff-Sync: `156d7a9`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
-- Roadmap-Rotation: nicht erfolgt. `JA-027` bleibt aktiv, weil weiterhin 1125 Kandidaten fail-closed in manueller Website-/Scope-Pruefung stehen; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-05T14:19:54+02:00`.
-- Supertest: nicht neu ausgefuehrt. Laut aktueller Nutzeranweisung wird der Supertest erst bei abgeschlossenem Roadmap-Punkt ausgefuehrt.
+- Letzter Fach-Commit: `d412bc6 Add verified company import wave BA`
+- Letzter STP-Lauf: `.\ci.cmd stp` erfolgreich am `2026-09-05T14:25:16+02:00`
+- Supertest: nicht neu ausgefuehrt. Laut aktueller Nutzeranweisung gilt ein nicht angefragter Supertest fuer diese Uebergabe als erledigt.
+- Roadmap-Rotation: nicht erfolgt. Kein Roadmap-Punkt ist komplett erledigt: `JA-027` bleibt wegen 1125 offenen manuellen Website-/Scope-Pruefungen aktiv; `UI-001` bleibt ebenfalls aktiv.
 
 ## Letzter Fachfortschritt
 
-Welle BA/B wurde abgeschlossen. Neu produktiv aufgenommen wurden:
+Welle BA/B wurde abgeschlossen, committed und gepusht. Neu produktiv aufgenommen wurden:
 
 - Glanos GmbH
 - andrena objects ag
@@ -87,9 +87,11 @@ Empfohlene Reihenfolge:
 3. Feed im Format `jobagent/company-discovery-feed/v1` anlegen; keine Jobboersen-, Arbeitsagentur- oder Register-URL als produktive Karrierequelle verwenden.
 4. Feed-JSON parsen und alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest -Method Get` pruefen.
 5. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
-6. Kandidatenqueue refreshen, Coverage und Source-Coverage aktualisieren.
-7. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn `JA-027` komplett abgeschlossen wird.
-8. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
+6. Kandidatenqueue refreshen: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
+7. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250`.
+8. Source-Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`.
+9. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn `JA-027` komplett abgeschlossen wird.
+10. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und offene Punkte
 

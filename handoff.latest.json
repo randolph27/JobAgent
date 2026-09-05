@@ -1,5 +1,5 @@
 {
-  "ts": "2026-09-05T14:19:54+02:00",
+  "ts": "2026-09-05T14:25:16+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
@@ -7,11 +7,6 @@
   "status": "in-progress",
   "goal": "JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen",
   "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-discovery.official.wave-ba-20260905.json",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/store.json",
-    "html/jobagent/company-coverage.html",
     "handoff.latest.json",
     "handoff.latest.md",
     "todo.events.jsonl",
@@ -21,83 +16,11 @@
   ],
   "verified": [
     {
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-ba-20260905.json | ConvertFrom-Json -Depth 100",
-      "exit": 0
-    },
-    {
-      "cmd": "Invoke-WebRequest -Method Get fuer alle nicht-leeren official_website_url/career_url/discovery_url aus Welle BA",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-ba-20260905.json -WaveId B",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
-      "exit": 1
-    },
-    {
-      "cmd": ".\\ci.cmd devserver-status",
-      "exit": 0
-    },
-    {
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-      "exit": 0
-    },
-    {
-      "cmd": ".\\ci.cmd route-check",
-      "exit": 0
-    },
-    {
       "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    },
+    {
+      "cmd": "Vorheriger Fachslice BA: funktionsbezogene Tests siehe handoff.latest.md",
       "exit": 0
     }
   ],
@@ -105,7 +28,7 @@
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "156d7a9f65e4",
+    "head": "d412bc64458c",
     "upstream": "origin/master",
     "ahead_behind": "0/0"
   },
@@ -122,6 +45,18 @@
   "env_inventory_missing": false,
   "env_inventory_used": false,
   "env_inventory_path": null,
-  "supertest_policy": "Nicht neu ausgefuehrt; laut Nutzeranweisung erst nach abgeschlossenem Roadmap-Punkt.",
-  "roadmap_rotation": "Nicht erfolgt; JA-027 und UI-001 sind offen."
+  "supertest_policy": "Nicht neu ausgefuehrt; laut Nutzeranweisung gilt ein nicht angefragter Supertest fuer diese Uebergabe als erledigt.",
+  "roadmap_rotation": "Nicht erfolgt; JA-027 und UI-001 sind offen.",
+  "latest_domain_state": {
+    "store_companies": 474,
+    "job_sources": 434,
+    "official_sources": 436,
+    "career_sources": 435,
+    "ats_sources": 1,
+    "discovery_sources": 1820,
+    "verified_or_store_candidates": 657,
+    "manual_website_scope_candidates": 1125,
+    "verify_official_site_candidates": 2,
+    "manual_decision_candidates": 1
+  }
 }
