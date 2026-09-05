@@ -1,23 +1,23 @@
 # Handoff latest
 
-Stand: 2026-09-05T09:24:00+02:00
+Stand: 2026-09-05T09:27:30+02:00
 
 ## Status fuer neuen Chat
 
 - Projekt: JobAgent
 - Workspace: `D:\_Scripte\JobAgent`
 - Branch: `master`, Upstream: `origin/master`
-- HEAD vor diesem Arbeitsstand: `7bb07f2bbd50`
+- HEAD vor diesem Handoff-Commit: `c4bbe31 Add verified company import wave AX`
 - Aktiver Todo: `TD-0041`
 - Aktiver Roadmap-Punkt: `JA-027 Jede Arbeitgeberfirma auf offizielle Jobs-/Karriere-Website pruefen und nur verifizierte Firmen produktiv hinzufuegen`
 - Ebenfalls offen: `UI-001 Coverage- und Report-UI wie Stellenboerse lesbar machen`
-- Roadmap-Rotation: nicht erfolgt. `JA-027` ist fachlich nicht komplett erledigt; `UI-001` ist ebenfalls offen.
-- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-05T09:21:53+02:00`; der automatisch uebernommene Supertest-Vermerk stammt aus dem bestehenden Verify-Digest und ist fuer diese Welle nicht als neu gelaufen zu werten.
-- Supertest: nicht ausgefuehrt, weil `JA-027` weiterhin offen ist und die Nutzeranweisung funktionsbezogene Tests vorzieht.
+- Roadmap-Rotation: nicht erfolgt. Kein Roadmap-Punkt ist komplett erledigt; `JA-027` und `UI-001` bleiben aktiv.
+- STP: `.\ci.cmd stp` lief erfolgreich am `2026-09-05T09:25:44+02:00`.
+- Supertest: nicht neu ausgefuehrt. Laut aktueller Nutzeranweisung gilt ein nicht angefragter Supertest fuer diese Uebergabe als erledigt; letzte bekannte CI-Kapsel referenziert `.\ci.cmd supertest` Exit `0` aus dem Verify-Digest.
 
 ## Letzter Fachfortschritt
 
-Welle AX/B wurde abgeschlossen. Neu produktiv aufgenommen wurden:
+Welle AX/B wurde abgeschlossen und im Commit `c4bbe31 Add verified company import wave AX` gepusht. Neu produktiv aufgenommen wurden:
 
 - b.ing GmbH
 - Pangaea Life GmbH
@@ -38,18 +38,24 @@ Kennzahlen nach Welle AX:
 - Kandidatenqueue: 2 in `VERIFY_OFFICIAL_SITE`, 1 in `MANUAL_DECISION`
 - Importwellen-Gate B: passed, `manual_review_rate=0.0`, `duplicate_rate=0.0`, `coverage_delta=5`
 
-## Geaenderte Dateien
+## Versionierter Arbeitsstand
+
+Der STP-/Handoff-Commit nach Welle AX enthaelt nur Uebergabe- und Todo-Sync-Artefakte:
+
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
+
+Der Fach-Commit `c4bbe31` enthaelt die Welle-AX-Daten, Store-/Coverage-Aktualisierung und Roadmap-Fortschreibung:
 
 - `Roadmap.md`
 - `data/jobagent/company-candidate-verification.queue.json`
 - `data/jobagent/company-discovery.official.wave-ax-20260905.json`
 - `data/jobagent/store.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
 - `html/jobagent/company-coverage.html`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
 
 ## Evidence Welle AX
 
@@ -66,7 +72,7 @@ Kennzahlen nach Welle AX:
 - `output/playwright/ja-022-viewport-1366.png`
 - `output/playwright/ja-022-viewport-1920.png`
 
-## Validierung
+## Validierung Welle AX
 
 - `Get-Content -Raw data\jobagent\company-discovery.official.wave-ax-20260905.json | ConvertFrom-Json -Depth 100` -> Exit `0`
 - `Invoke-WebRequest -Method Get` fuer alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` aus Welle AX -> Exit `0`
@@ -99,7 +105,12 @@ Empfohlene Reihenfolge:
 2. Offizielle Firmenwebsite, Impressum-/Domainbeleg und Karriere-/Jobs-/ATS-Link fail-closed pruefen.
 3. Feed im Format `jobagent/company-discovery-feed/v1` anlegen; keine Jobboersen-, Arbeitsagentur- oder Register-URL als produktive Karrierequelle verwenden.
 4. Feed-JSON parsen und alle nicht-leeren `official_website_url`, `career_url` und `discovery_url` per `Invoke-WebRequest -Method Get` pruefen.
-5. Import, Queue-Refresh, Coverage, Source-Coverage, funktionsbezogene Tests, Roadmap-/Todo-/Handoff-Sync und STP ausfuehren.
+5. Import ausfuehren: `pwsh -NoProfile -File .\tools\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\_Scripte\JobAgent -FeedPath <feed> -WaveId B`.
+6. Kandidatenqueue refreshen: `pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxCandidates 1 -TimeoutSeconds 5`.
+7. Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent -MaxPriorityItems 250`.
+8. Source-Coverage aktualisieren: `pwsh -NoProfile -File .\tools\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\_Scripte\JobAgent`.
+9. Funktionsbezogene Tests ausfuehren; Supertest nur bei expliziter Anforderung oder wenn `JA-027` komplett abgeschlossen wird.
+10. Roadmap, Todo, Handoff und STP synchronisieren, dann stage/commit/push.
 
 ## Risiken und offene Punkte
 
@@ -107,4 +118,3 @@ Empfohlene Reihenfolge:
 - `UI-001` bleibt offen, ist aber derzeit nicht der aktive Hotspot.
 - Zwei AX-Firmen wurden als offizielle Firmendomain ohne separate Karriere-URL importiert; das ist fuer Welle B erlaubt, erzeugt aber keine zusaetzliche scannbare Karrierequelle.
 - Fail-closed bleibt bindend: unklare Firmenidentitaet, unklarer Standortbezug oder nicht offiziell belegte Karriere-/ATS-Quelle bleiben Review und werden nicht in den Store importiert.
-
