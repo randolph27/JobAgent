@@ -1,145 +1,146 @@
 {
-  "ts": "2026-09-05T14:45:03+02:00",
+  "ts": "2026-09-05T14:48:00+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
-  "goal": "JA-027 Welle BB: fuenf offiziell belegte Arbeitgeber produktiv importiert",
+  "goal": "JA-027 Welle BB abgeschlossen; naechster Chat setzt mit Welle BC fort",
   "changed": [
-    "Roadmap.md",
-    "data/jobagent/company-candidate-verification.queue.json",
-    "data/jobagent/company-discovery.official.wave-bb-20260905.json",
-    "data/jobagent/store.json",
+    "handoff.latest.json",
     "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json"
   ],
   "verified": [
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-bb-20260905.json | ConvertFrom-Json -Depth 100",
-      "status": "pass"
+      "cmd": "Get-Content -Raw data\\jobagent\\company-discovery.official.wave-bb-20260905.json | ConvertFrom-Json -Depth 100"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "Invoke-WebRequest -Method Get fuer alle official_website_url/career_url/discovery_url aus Welle BB",
-      "status": "pass"
+      "cmd": "Invoke-WebRequest -Method Get fuer alle official_website_url/career_url/discovery_url aus Welle BB"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-bb-20260905.json -WaveId B",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Import-JobAgentCompanyDiscovery.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -FeedPath data\\jobagent\\company-discovery.official.wave-bb-20260905.json -WaveId B"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxCandidates 1 -TimeoutSeconds 5"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent -MaxPriorityItems 250"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentSourceCoverage.ps1 -ProjectRoot D:\\_Scripte\\JobAgent"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentImportWaves.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlAudit.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceAdapters.ps1"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1",
-      "status": "pass"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentLiveScan.ps1"
     },
     {
+      "status": "pass",
       "exit": 1,
-      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html",
-      "status": "pass"
+      "cmd": "rg -n \"FAIL_CLOSED_REVIEW_OR_REJECT|ALREADY_VERIFIED_IN_STORE|identity-cluster:|source-registry:|Unbekannt \\(|Quellen-ID\" html\\jobagent\\company-coverage.html"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": ".\\ci.cmd devserver-status",
-      "status": "pass"
+      "cmd": ".\\ci.cmd devserver-status"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status",
-      "status": "pass"
+      "cmd": "Invoke-RestMethod http://localhost:9000/api/system/status"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": ".\\ci.cmd route-check",
-      "status": "pass"
+      "cmd": ".\\ci.cmd route-check"
     },
     {
+      "status": "pass",
       "exit": 0,
-      "cmd": ".\\ci.cmd stp",
-      "status": "pass"
+      "cmd": ".\\ci.cmd stp"
     }
   ],
   "route_ok": true,
   "route_violations": [],
   "git": {
-    "behind": 0,
+    "ahead": 0,
+    "head": "ec9a697",
     "branch": "master",
     "upstream": "origin/master",
     "worktree": "dirty",
-    "ahead": 0,
-    "head": "c775ae8"
+    "behind": 0
   },
   "next": "JA-027 mit Welle BC fortsetzen: data/jobagent/company-discovery.official.wave-bc-20260905.json",
   "refs": [
+    "README.md",
+    "Roadmap.md",
     "todo.current.md",
     "todo.state.json",
-    "todo.events.jsonl",
-    "handoff.latest.json",
     "handoff.latest.md",
-    "Roadmap.md"
+    "handoff.latest.json"
   ],
   "manual_missing": false,
   "env_inventory_missing": false,
   "env_inventory_used": false,
-  "env_inventory_path": null
+  "env_inventory_path": null,
+  "notes": [
+    "Supertest nicht neu ausgefuehrt; gemaess Nutzeranweisung als erledigt gewertet.",
+    "Roadmap-Rotation nicht erfolgt, weil JA-027 und UI-001 offen bleiben.",
+    "Welle BB ist bereits in Commit ec9a697 gepusht; dieser Handoff-Commit folgt separat."
+  ]
 }
