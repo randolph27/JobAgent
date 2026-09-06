@@ -1034,6 +1034,14 @@ function Get-SonarRiskGateSnapshot([string]$projectKey) {
 
 function Cmd-Sonar() {
   Ensure-CoreFolders; Ensure-BootstrapFiles
+  $cfg = Try-ReadJson (Get-ConfigPath)
+  $sonarCfg = Get-Prop $cfg "sonar" $null
+  if ([string](Get-Prop $sonarCfg "mode" "") -eq "not-supported") {
+    $reason = [string](Get-Prop $sonarCfg "reason" "Sonar-Analyse ist fuer dieses Projekt nicht konfiguriert.")
+    Write-Json (Join-Path $LogsRoot "verify\verify.digest.json") @{ ts=NowIso; cmd=".\ci.cmd sonar"; exit=$null; status="not-supported"; reason=$reason; analysis_started=$false; secret_sanitized=$true }
+    CI-Warn ("sonar: not-supported; " + $reason)
+    return
+  }
   $statusUrl = Get-SonarStatusUrl
   if (-not (Test-SonarServerHealthy $statusUrl).ok) {
     throw ("sonar: SonarQube ist nicht gesund erreichbar unter " + $statusUrl + ". Starte zuerst .\\ci.cmd sonar-start")

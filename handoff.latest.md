@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-06T07:38:49.277+02:00
+Stand: 2026-09-06T08:10:13.272+02:00
 
 ## Zustand
 
-- Active: `TD-0052`
+- Active: `TD-0041`
 - Status: `in-progress`
-- Ziel: CI-001 Projektbezogene CI- und Reviewnachweise verlässlich machen #comment: Ein erreichbarer Server und grüne Fixturetests dürfen weder einen erfolgreichen Neustart noch reale Browser- oder Sonar-Abnahme vortäuschen.
+- Ziel: JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.
 - Branch: `master`
-- HEAD: `8b21fc840d5b`
+- HEAD: `554f88575467`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,24 +16,20 @@ Stand: 2026-09-06T07:38:49.277+02:00
 
 ## Versionierte Aenderungen
 
+- `.ci/bin/modules/browser-logic.ps1`
+- `.ci/bin/modules/ci-commands-main.ps1`
+- `.ci/bin/modules/verify-logic.ps1`
+- `.ci/ci.config.json`
+- `.ci/pins/immutable.hashes.json`
 - `Roadmap.md`
 - `Roadmap_archive.md`
 - `Roadmap_index.md`
-- `data/jobagent/company-candidate-verification.queue.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `html/jobagent/company-coverage.html`
-- `schemas/jobagent.schema.json`
-- `src/JobAgent.Coverage.psm1`
-- `src/JobAgent.DailyRun.psm1`
-- `src/JobAgent.LiveScan.psm1`
-- `src/JobAgent.SourceAdapters.psm1`
-- `src/JobAgent.StatusMachine.psm1`
-- `tests/Test-JobAgentCoverage.ps1`
-- `tests/Test-JobAgentDailyRun.ps1`
-- `tests/Test-JobAgentLiveScan.ps1`
-- `tests/Test-JobAgentSourceAdapters.ps1`
-- `tests/Test-JobAgentStatusMachine.ps1`
+- `html/jobagent/ja-022-viewport-audit.html`
+- `output/playwright/ja-022-viewport-1366.png`
+- `output/playwright/ja-022-viewport-1920.png`
+- `tests/Test-JobAgentHtmlViewportAudit.ps1`
 - `todo.checkpoint.json`
 - `todo.current.md`
 - `todo.events.jsonl`
@@ -43,12 +39,8 @@ Stand: 2026-09-06T07:38:49.277+02:00
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `1`
+- `.\ci.cmd sonar` -> Exit ``
 
 ## Naechster Anker
 
-JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.
-
-## Detaillierte Übergabe
-
-Der technische Abschluss von JA-040, die Nachweise und der konkrete Arbeitsplan für CI-001 stehen in [docs/handoffs/2026-09-06-ja040-completion-handoff.md](docs/handoffs/2026-09-06-ja040-completion-handoff.md).
+JA-041 IT-Leiter/Lead/Manager über vollständige Karriere- und ATS-Ergebnislisten finden #comment: Firmenlinks werden erst durch verlässliche Extraktion and passende Rollen-/Standortbewertung zu nutzbaren Stellenangeboten.

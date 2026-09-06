@@ -943,6 +943,18 @@
 
 ## Planbereinigung 2026-09-05 – keine fachlichen Abschlüsse
 
+## Archiviert 2026-09-06 – CI-001
+
+- [x] CI-001 Projektbezogene CI- und Reviewnachweise verlässlich machen #comment: Abgeschlossen. Ein erreichbarer Server und grüne Fixturetests gelten nicht mehr als Neustart-, Produktionsbrowser- oder Sonar-Analysebeleg.
+  - [x] Beschreibung: `self-check` akzeptiert ausschließlich die in `.ci/ci.config.json` gebundene mutable Planungsdatei `Roadmap.md`; alle übrigen gepinnten Dateien bleiben hashgeprüft. `devserver-start/status` unterscheidet verwaltete und fremde Listener auf 8500, verwendet eindeutige Logs und beendet keine fremden Prozesse. Verify führt einen expliziten PowerShell-Contracttest aus. Sonar meldet für diesen Stack `not-supported`; ein Serverstatus wird nicht als Analyse ausgegeben.
+  - [x] Scope: `.ci/ci.config.json`, `.ci/pins/immutable.hashes.json`, `.ci/bin/modules/browser-logic.ps1`, `.ci/bin/modules/verify-logic.ps1`, `.ci/bin/modules/ci-commands-main.ps1`, `tests/Test-JobAgentCiContracts.ps1` und `tests/Test-JobAgentHtmlViewportAudit.ps1`. README und zentrale Bootstrap-Dateien unverändert.
+  - [x] Evidence: `logs/terminal/self-check-20260906-075204.log`, `logs/verify/verify-20260906-075205.log`, `logs/jobagent/ja-022-viewport-audit.json`, `output/playwright/ja-022-production-coverage-viewport-{1920,1366,800,390}.png`.
+  - [x] Funktionstest: `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit 0; `.\ci.cmd verify` -> Exit 0; `.\ci.cmd self-check` -> Exit 0; `.\ci.cmd route-check` -> Exit 0; `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit 0.
+  - [x] Audit: `http://127.0.0.1:8500/html/jobagent/company-coverage.html` -> HTTP 200; Browserartefakte für 1920, 1366, 800 und 390 px vorhanden. Fixture-Report ist mit `data_mode=synthetic_fixture` gekennzeichnet. `sonar` -> Exit 0 mit Status `not-supported`; keine Sonar-Analyse und kein Quality-Gate-Pass behauptet.
+  - [x] Supertest: `Test-JobAgentSupertest.ps1` und `.\ci.cmd supertest` wurden nach den gezielten Prüfungen gestartet, erreichten aber keinen Abschluss: untergeordnete `Test-JobAgentDailyRun.ps1`-/`Test-JobAgentReport.ps1`-Prozesse blieben hängen und wurden nach Prozessidentitätsprüfung beendet. Es liegt daher kein grüner Supertest-Nachweis vor; die gezielten CI-001-Gates bleiben hiervon getrennt grün.
+  - [x] Risiken und Restgrenzen: Für PowerShell/HTML ist kein SonarScanner konfiguriert. Diese Einschränkung bleibt sichtbar und ist kein bestandenes Qualitätsgate.
+  - [x] Meilenstein: M1 belastbare CI-Nachweise abgeschlossen; nächster Hotspot JA-027.
+
 Der umfassende Webreview ersetzt die bisherige Priorisierung und die wiederholten Kleinstwellen als Standardablauf. JA-027 und UI-001 bleiben aktiv; neue Grundlagen-, Extraktions-, CI- und Mengennachweispunkte stehen in `Roadmap.md`. Kein offener Produktpunkt wurde durch diesen Review als erledigt markiert.
 
 Der vollständige vorherige Plan einschließlich aller Fortschritts-/Evidence-Unterpunkte ist unverändert unter `docs/reviews/2026-09-05-roadmap-before.md` archiviert. SHA-256: `6474D29A4272573AA61F1307A133FA0072070A5D518839F696D7DEA84CEF016F`. Aktueller Review: `docs/reviews/2026-09-05-webreview.md`. Bestehende historische Archiveinträge und wiederverwendete IDs bleiben in ihrem ursprünglichen Kontext erhalten.

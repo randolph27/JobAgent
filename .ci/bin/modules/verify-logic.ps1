@@ -61,8 +61,12 @@ function Invoke-SelfCheck([string]$logPath=$null) {
     else {
       $pins = Read-ImmutablePins
       $files = @(Get-Prop $pins "files" @())
+      $config = Try-ReadJson (Get-ConfigPath)
+      $mutablePolicy = Get-Prop $config "immutable_policy" $null
+      $mutablePaths = @((Get-Prop $mutablePolicy "mutable_paths" @()) | ForEach-Object { ([string]$_).Replace('\', '/').ToLowerInvariant() })
       foreach ($f in $files) {
         $rel = [string](Get-Prop $f "path" ""); if (-not $rel) { continue }
+        if ($mutablePaths -contains $rel.Replace('\', '/').ToLowerInvariant()) { continue }
         $p = Join-Path $RepoRoot $rel; if (-not (Test-Path $p)) { $issues.Add("immutable_missing: " + $rel); continue }
         $exp = [string](Get-Prop $f "sha256" ""); $act = Sha256Path $p
         if ($exp -and $act -and ($exp.ToLowerInvariant() -ne $act.ToLowerInvariant())) { $issues.Add("immutable_modified: " + $rel) }

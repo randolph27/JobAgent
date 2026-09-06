@@ -2,10 +2,10 @@
 
 Stand: 2026-09-06.
 
-- `Roadmap.md`: verbindlicher aktiver JobAgent-Plan in Reihenfolge CI-001, JA-027, JA-041, UI-001, JA-042. Nächster Hotspot: CI-001; Akquisevorbereitung parallel zulässig.
+- `Roadmap.md`: verbindlicher aktiver JobAgent-Plan in Reihenfolge JA-027, JA-041, UI-001, JA-042. Nächster Hotspot: JA-027.
 - `docs/reviews/2026-09-05-webreview.md`: abgeschlossener Produkt-/Web-/UI-Review mit Messwerten, Repros, Primärquellen und Screenshots.
 - `docs/reviews/2026-09-05-roadmap-before.md`: vollständiger unveränderter Plan vor diesem Review, einschließlich sämtlicher Fortschritte zu JA-027 und UI-001. Historische Angaben; keine neu behaupteten Abschlüsse.
-- `Roadmap_archive.md`: historische abgeschlossene/ersetzte Punkte, einschließlich JA-040 am 2026-09-06. Historisch wiederverwendete IDs sind nur zusammen mit Titel und Archivdatum eindeutig; die alten Texte bleiben erhalten.
+- `Roadmap_archive.md`: historische abgeschlossene/ersetzte Punkte, einschließlich JA-040 und CI-001 am 2026-09-06. Historisch wiederverwendete IDs sind nur zusammen mit Titel und Archivdatum eindeutig; die alten Texte bleiben erhalten.
 - `docs/ROADMAP.md`: mitgeführter Bootstrap-Entwicklungsplan, kein konkurrierender aktiver JobAgent-Backlog.
 - `doc/roadmap-screenshots/UI-001-review-20260905-*.png`: bindende aktuelle UI-Belege; Quelle und vier Viewports im aktiven UI-001 aufgeführt.
 

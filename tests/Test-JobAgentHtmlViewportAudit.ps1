@@ -291,6 +291,11 @@ Write-Utf8File -Path $markdownPath -Content $markdown
 $reportUrl = 'http://127.0.0.1:8500/html/jobagent/ja-022-viewport-audit.html'
 $response = Invoke-WebRequest -UseBasicParsing -Uri $reportUrl -TimeoutSec 10
 Assert-True -Condition ($response.StatusCode -eq 200) -Message 'Visual-Audit-Report ist ueber den lokalen Devserver nicht mit HTTP 200 erreichbar.'
+$productionReportPath = Join-Path $root 'html\jobagent\company-coverage.html'
+$productionReportUrl = 'http://127.0.0.1:8500/html/jobagent/company-coverage.html'
+Assert-True -Condition (Test-Path -LiteralPath $productionReportPath -PathType Leaf) -Message 'Produktiver Coverage-Report fehlt.'
+$productionResponse = Invoke-WebRequest -UseBasicParsing -Uri $productionReportUrl -TimeoutSec 10
+Assert-True -Condition ($productionResponse.StatusCode -eq 200) -Message 'Produktiver Coverage-Report ist ueber den lokalen Devserver nicht mit HTTP 200 erreichbar.'
 
 if (-not (Test-Path -LiteralPath $screenshotRoot)) {
     New-Item -ItemType Directory -Path $screenshotRoot -Force | Out-Null
@@ -306,8 +311,12 @@ $browserPath = @($browserCandidates | Where-Object { Test-Path -LiteralPath $_ }
 Assert-True -Condition (-not [string]::IsNullOrWhiteSpace($browserPath)) -Message 'Kein lokaler Chrome- oder Edge-Browser fuer den Viewport-Audit gefunden.'
 
 $screenshots = New-Object System.Collections.Generic.List[string]
-foreach ($width in 1920, 1366, 800) {
-    $screenshotPath = Join-Path $screenshotRoot ("ja-022-viewport-" + $width + '.png')
+foreach ($target in @(
+    [pscustomobject]@{ label = 'fixture'; url = $reportUrl },
+    [pscustomobject]@{ label = 'production-coverage'; url = $productionReportUrl }
+)) {
+foreach ($width in 1920, 1366, 800, 390) {
+    $screenshotPath = Join-Path $screenshotRoot ("ja-022-" + $target.label + "-viewport-" + $width + '.png')
     $stderrPath = Join-Path $screenshotRoot ("ja-022-viewport-" + $width + '.stderr.log')
     if (Test-Path -LiteralPath $screenshotPath) {
         Remove-Item -LiteralPath $screenshotPath -Force
@@ -324,7 +333,7 @@ foreach ($width in 1920, 1366, 800) {
         '--virtual-time-budget=2000'
         ("--window-size={0},2200" -f $width)
         ("--screenshot={0}" -f $screenshotPath)
-        $reportUrl
+        $target.url
     )
     $process = Start-Process -FilePath $browserPath -ArgumentList $arguments -PassThru -Wait -NoNewWindow -RedirectStandardError $stderrPath
     if ($process.ExitCode -ne 0) {
@@ -337,6 +346,7 @@ foreach ($width in 1920, 1366, 800) {
     Assert-True -Condition ($screenshotFile.Length -gt 10000) -Message "Viewport-Screenshot fuer Breite $width ist unplausibel klein."
     $screenshots.Add($screenshotPath)
 }
+}
 
 $summary = [pscustomobject]@{
     status = 'ok'
@@ -344,14 +354,21 @@ $summary = [pscustomobject]@{
     markdown_report_path = $markdownPath
     html_report_url = $reportUrl
     http_status = [int]$response.StatusCode
+    data_mode = 'synthetic_fixture'
+    production_report_path = $productionReportPath
+    production_report_url = $productionReportUrl
+    production_http_status = [int]$productionResponse.StatusCode
     screenshots = @($screenshots.ToArray())
-    viewports = @(1920, 1366, 800)
+    viewports = @(1920, 1366, 800, 390)
     cases = @(
         'html_report_written_to_local_artifact_path',
         'html_report_reachable_over_devserver_http_200',
         'viewport_audit_1920',
         'viewport_audit_1366',
-        'viewport_audit_800'
+        'viewport_audit_800',
+        'viewport_audit_390',
+        'production_coverage_report_reachable_over_devserver_http_200',
+        'production_coverage_viewport_audit_1920_1366_800_390'
     )
 }
 

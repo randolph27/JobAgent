@@ -127,16 +127,45 @@ function Wait-PortListening([int]$port, [int]$timeoutSec=30) {
   return $null
 }
 
+function Get-ProcessIdentity([int]$processId) {
+  if ($processId -le 0) { return $null }
+  try {
+    $process = Get-Process -Id $processId -ErrorAction Stop
+    return @{ pid=$process.Id; name=$process.ProcessName; started_at=$process.StartTime.ToUniversalTime().ToString("o") }
+  } catch { return $null }
+}
+
+function Test-ManagedDevserverProcess([object]$state) {
+  $launcherPid = [int](Get-Prop $state "launcher_pid" (Get-Prop $state "pid" 0))
+  $identity = Get-ProcessIdentity $launcherPid
+  if ($null -eq $identity) { return $false }
+  $expectedStart = [string](Get-Prop $state "launcher_started_at" "")
+  return (-not $expectedStart -or $identity.started_at -eq $expectedStart)
+}
+
 function Cmd-DevserverStart() {
   Ensure-CoreFolders; Ensure-BootstrapFiles
   $cfg = Try-ReadJson (Get-ConfigPath); $ds = Get-Prop $cfg "devserver" $null; $port = [int](Get-Prop $ds "port" 8200); $timeoutSec = [int](Get-Prop $ds "wait_timeout_sec" 30); $waitReady = [bool](Get-Prop $ds "wait_ready" $true)
   $cmdOverride = Get-Prop $ds "cmd" $null
   $cwdOverride = Get-Prop $ds "cwd" $null
   $bs = Detect-BuildSystem
-  $pidPath = Join-Path $CiRoot "run\devserver.pid.json"; if (Test-Path $pidPath) { Cmd-DevserverStop }
-  $logDir = Join-Path $LogsRoot "devserver"; Ensure-Dir $logDir; $logPath = Join-Path $logDir "devserver.log"
-  if (Test-Path $logPath) { try { if ((Get-Item -LiteralPath $logPath).Length -gt 200kb) { Move-Item -Force -LiteralPath $logPath -Destination (Join-Path $logDir ("devserver-" + (TsId) + ".log")) } } catch { $null = $_ } }
-  $logRel = "logs\devserver\devserver.log"; Ensure-NonInteractiveEnv
+  $pidPath = Join-Path $CiRoot "run\devserver.pid.json"
+  $existingListenerPid = Get-ListeningPid $port
+  if ($existingListenerPid) {
+    $state = Try-ReadJson $pidPath
+    $managed = $false
+    if ($state -and [int](Get-Prop $state "listener_pid" 0) -eq $existingListenerPid -and (Test-ManagedDevserverProcess $state)) { $managed = $true }
+    CI-Info ("devserver-start: reusing " + $(if ($managed) { "managed" } else { "external" }) + " listener pid=" + $existingListenerPid + " url=http://localhost:" + $port + "/")
+    return
+  }
+  if (Test-Path $pidPath) {
+    $state = Try-ReadJson $pidPath
+    if ($state -and (Test-ManagedDevserverProcess $state)) { Cmd-DevserverStop } else { Remove-Item -Force -LiteralPath $pidPath -ErrorAction SilentlyContinue }
+  }
+  $logDir = Join-Path $LogsRoot "devserver"; Ensure-Dir $logDir
+  $logName = "devserver-" + (TsId) + ".log"
+  $logPath = Join-Path $logDir $logName
+  $logRel = "logs\devserver\" + $logName; Ensure-NonInteractiveEnv
   $devCwd = $RepoRoot
   if ($cwdOverride) {
     $overrideText = [string]$cwdOverride
@@ -168,27 +197,35 @@ function Cmd-DevserverStart() {
   $cmdLine = "$cmd >> `"$logPath`" 2>&1"; CI-Info ("run(detached): " + $cmd + " | cwd=" + $devCwd + " | log=" + $logPath)
   $p = Start-Process -FilePath "cmd.exe" -ArgumentList "/d","/c",$cmdLine -WorkingDirectory $devCwd -PassThru -WindowStyle Hidden
   if (-not $p) { throw "devserver-start failed: Start-Process returned null." }
-  @{ ts=(Get-Date).ToString("o"); pid=$p.Id; cmd=$cmd; cwd=$devCwd; port=$port; url=("http://localhost:" + $port + "/"); log=$logRel } | ConvertTo-Json -Compress | Set-Content -LiteralPath $pidPath -NoNewline -Encoding UTF8
-  if ($waitReady) { $lp = Wait-PortListening $port $timeoutSec; if (-not $lp) { throw ("devserver-start: port " + $port + " not listening after " + $timeoutSec + "s. See " + $logPath) } }
-  CI-Info ("devserver-start: pid=" + $p.Id + " url=http://localhost:" + $port + "/")
+  $launcherIdentity = Get-ProcessIdentity $p.Id
+  @{ ts=(Get-Date).ToString("o"); pid=$p.Id; launcher_pid=$p.Id; launcher_started_at=$(if ($launcherIdentity) { $launcherIdentity.started_at } else { $null }); listener_pid=$null; cmd=$cmd; cwd=$devCwd; port=$port; url=("http://localhost:" + $port + "/"); log=$logRel } | ConvertTo-Json -Compress | Set-Content -LiteralPath $pidPath -NoNewline -Encoding UTF8
+  if ($waitReady) {
+    $lp = Wait-PortListening $port $timeoutSec
+    if (-not $lp) { throw ("devserver-start: port " + $port + " not listening after " + $timeoutSec + "s. See " + $logPath) }
+    $state = Try-ReadJson $pidPath
+    if ($state) { Set-ObjProp $state "listener_pid" $lp; Write-Json $pidPath $state }
+  } else { $lp = $null }
+  CI-Info ("devserver-start: launcher_pid=" + $p.Id + " listener_pid=" + $lp + " url=http://localhost:" + $port + "/")
 }
 
 function Cmd-DevserverStop() {
   Ensure-CoreFolders; Ensure-BootstrapFiles; $cfg = Try-ReadJson (Get-ConfigPath); $ds = Get-Prop $cfg "devserver" $null; $port = [int](Get-Prop $ds "port" 8200); $pidPath = Join-Path $CiRoot "run\devserver.pid.json"; $killed = $false
   if (Test-Path $pidPath) {
-    try { $j = Get-Content -LiteralPath $pidPath -Raw | ConvertFrom-Json; $devPid = [int](Get-Prop $j "pid" 0); if ($devPid -gt 0) { CI-Info ("devserver-stop: taskkill /PID " + $devPid); cmd.exe /d /c ("taskkill /PID " + $devPid + " /T /F >nul 2>&1"); $killed = $true } } catch { $null = $_ }
+    try { $j = Get-Content -LiteralPath $pidPath -Raw | ConvertFrom-Json; $devPid = [int](Get-Prop $j "launcher_pid" (Get-Prop $j "pid" 0)); if ($devPid -gt 0 -and (Test-ManagedDevserverProcess $j)) { CI-Info ("devserver-stop: taskkill managed launcher /PID " + $devPid); cmd.exe /d /c ("taskkill /PID " + $devPid + " /T /F >nul 2>&1"); $killed = $true } } catch { $null = $_ }
     try { Remove-Item -Force -LiteralPath $pidPath -ErrorAction SilentlyContinue } catch { $null = $_ }
   }
-  $pid2 = Get-ListeningPid $port; if ($pid2) { CI-Info ("devserver-stop: killing port " + $port + " pid=" + $pid2); cmd.exe /d /c ("taskkill /PID " + $pid2 + " /T /F >nul 2>&1"); $killed = $true }
+  $pid2 = Get-ListeningPid $port
+  if ($pid2 -and $j -and [int](Get-Prop $j "listener_pid" 0) -eq $pid2) { CI-Info ("devserver-stop: killing managed listener pid=" + $pid2); cmd.exe /d /c ("taskkill /PID " + $pid2 + " /T /F >nul 2>&1"); $killed = $true }
   if (-not $killed) { CI-Info "devserver-stop: nothing to stop" }
 }
 
 function Cmd-DevserverStatus() {
   Ensure-CoreFolders; Ensure-BootstrapFiles; $pidPath = Join-Path $CiRoot "run\devserver.pid.json"
-  if (-not (Test-Path $pidPath)) { CI-Info "devserver-status: not running (no pid file)"; return }
+  $cfg = Try-ReadJson (Get-ConfigPath); $port = [int](Get-Prop (Get-Prop $cfg "devserver" $null) "port" 8200)
+  if (-not (Test-Path $pidPath)) { $listenerPid = Get-ListeningPid $port; if ($listenerPid) { CI-Info ("devserver-status: external listener pid=" + $listenerPid + " port=" + $port + " listening=True") } else { CI-Info "devserver-status: not running (no pid file)" }; return }
   $j = Try-ReadJson $pidPath; if (-not $j) { CI-Info "devserver-status: pid file corrupt"; return }
-  $devPid = [int](Get-Prop $j "pid" 0); $port = [int](Get-Prop $j "port" 8200); $lp = Get-ListeningPid $port
-  CI-Info ("devserver-status: pid=" + $devPid + " port=" + $port + " listening=" + [string]([bool]$lp) + " url=" + (Get-Prop $j "url" ""))
+  $devPid = [int](Get-Prop $j "launcher_pid" (Get-Prop $j "pid" 0)); $port = [int](Get-Prop $j "port" 8200); $lp = Get-ListeningPid $port; $managed = Test-ManagedDevserverProcess $j
+  CI-Info ("devserver-status: launcher_pid=" + $devPid + " listener_pid=" + $lp + " managed=" + $managed + " port=" + $port + " listening=" + [string]([bool]$lp) + " url=" + (Get-Prop $j "url" ""))
 }
 
 function Cmd-PyserverStart() {
