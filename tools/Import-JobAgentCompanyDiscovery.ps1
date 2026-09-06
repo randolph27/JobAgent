@@ -315,17 +315,25 @@ function New-ToolMergedHintStore {
     $replaceSet = [Collections.Generic.HashSet[string]]::new([string[]]@($ReplaceSourceIds | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }), [StringComparer]::Ordinal)
     foreach ($hint in @($ExistingHints)) {
         $sourceId = [string](Get-ToolObjectProperty -Object $hint -Name 'source_id' -Default '')
-        if ($replaceSet.Contains($sourceId)) {
-            continue
-        }
         $hintId = [string](Get-ToolObjectProperty -Object $hint -Name 'hint_id' -Default '')
         if (-not [string]::IsNullOrWhiteSpace($hintId)) {
+            if ($replaceSet.Contains($sourceId)) {
+                $hint | Add-Member -NotePropertyName retained_after_missing_source_refresh -NotePropertyValue $true -Force
+                $hint | Add-Member -NotePropertyName retention_status -NotePropertyValue 'NOT_OBSERVED_IN_SOURCE' -Force
+                $hint | Add-Member -NotePropertyName missing_since -NotePropertyValue ($GeneratedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)) -Force
+                if ($hint.PSObject.Properties.Name -notcontains 'last_observed_in_source') {
+                    $hint | Add-Member -NotePropertyName last_observed_in_source -NotePropertyValue ([string](Get-ToolObjectProperty -Object $hint -Name 'observed_at' -Default $null)) -Force
+                }
+            }
             $mergedById[$hintId] = $hint
         }
     }
     foreach ($hint in @($NewHints)) {
         $hintId = [string](Get-ToolObjectProperty -Object $hint -Name 'hint_id' -Default '')
         if (-not [string]::IsNullOrWhiteSpace($hintId)) {
+            $hint | Add-Member -NotePropertyName retained_after_missing_source_refresh -NotePropertyValue $false -Force
+            $hint | Add-Member -NotePropertyName retention_status -NotePropertyValue 'ACTIVE' -Force
+            $hint | Add-Member -NotePropertyName last_observed_in_source -NotePropertyValue ([string](Get-ToolObjectProperty -Object $hint -Name 'observed_at' -Default ($GeneratedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)))) -Force
             $mergedById[$hintId] = $hint
         }
     }
@@ -452,6 +460,10 @@ function Invoke-ToolDiscoverySnapshotLane {
     $replaceSourceIds = @($processedSourceIds.ToArray() | Sort-Object -Unique)
     $mergedStore = New-ToolMergedHintStore -ExistingHints $existingHints -NewHints @($newHints.ToArray()) -GeneratedAt $ObservedAt -SearchMatrixCount $searchMatrixCount -ReplaceSourceIds $replaceSourceIds
     Write-ToolAtomicJson -Path $hintsPath -Value $mergedStore -Depth 100
+    $storeUpdate = Invoke-JobAgentStoreTransaction -ProjectRoot $Root -DataRoot $DataRootPath -CreateBackup -ScriptBlock {
+        param($storeDocument)
+        Update-JobAgentDiscoveryHintRetention -Document $storeDocument -Hints @($mergedStore.hints) -ObservedAt $ObservedAt
+    }
     $sourceGate = New-ToolDiscoverySnapshotSourceGate -Registry $registry -ProcessedSourceIds @($processedSourceIds.ToArray())
 
     $digestPath = Join-Path $logRootPath ('company-discovery-snapshot-digest-' + $ObservedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
@@ -465,9 +477,12 @@ function Invoke-ToolDiscoverySnapshotLane {
         inputs_total = @($snapshotLogs.ToArray() | Select-Object -ExpandProperty input_path -Unique).Count
         new_hints_total = @($newHints.ToArray()).Count
         merged_hints_total = [int]$mergedStore.hints_total
+        retained_hint_inventory_total = @($storeUpdate.document.discovery_inventory).Count
+        retained_hint_url_total = @($storeUpdate.document.discovered_urls).Count
         snapshot_logs = @($snapshotLogs.ToArray())
         source_gate = $sourceGate
         productive_store_write = $false
+        retention_store_write = $true
         official_verification_required = $true
     }
     Write-ToolAtomicJson -Path $digestPath -Value $digest -Depth 100

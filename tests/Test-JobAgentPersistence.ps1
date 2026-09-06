@@ -175,6 +175,8 @@ try {
     $empty = Read-JobAgentStore -ProjectRoot $testRoot
     Assert-True -Condition ($empty.schema_version -eq 'jobagent/v1') -Message 'Leerer Store liefert falsche Schema-Version.'
     Assert-True -Condition (@($empty.jobs).Count -eq 0) -Message 'Leerer Store enthaelt Jobs.'
+    Assert-True -Condition (@($empty.discovery_inventory).Count -eq 0) -Message 'Leerer Store initialisiert discovery_inventory nicht.'
+    Assert-True -Condition (@($empty.discovered_urls).Count -eq 0) -Message 'Leerer Store initialisiert discovered_urls nicht.'
 
     $transaction = Invoke-JobAgentStoreTransaction -ProjectRoot $testRoot -ScriptBlock {
         param($document)
@@ -201,6 +203,8 @@ try {
     Assert-True -Condition (@($loaded.jobs).Count -eq 1) -Message 'Job wurde nicht persistiert.'
     Assert-True -Condition (@($loaded.scan_attempts).Count -eq 1) -Message 'ScanAttempt wurde nicht persistiert.'
     Assert-True -Condition (@($loaded.job_sources[0].verification_evidence).Count -eq 1) -Message 'Verifikationsbeleg wurde nicht persistiert.'
+    Assert-True -Condition (@($loaded.discovery_inventory).Count -eq 0) -Message 'Direkter Store-Upsert darf kein Discovery-Inventar erfinden.'
+    Assert-True -Condition (@($loaded.discovered_urls).Count -eq 0) -Message 'Direkter Store-Upsert darf keine Discovery-URLs erfinden.'
 
     Invoke-JobAgentStoreTransaction -ProjectRoot $testRoot -CreateBackup -ScriptBlock {
         param($document)
@@ -242,6 +246,8 @@ try {
     $legacyLoaded = Read-JobAgentStore -ProjectRoot $testRoot -DataRoot 'legacy-v1'
     Assert-True -Condition (@($legacyLoaded.job_sources[0].verification_evidence).Count -eq 1) -Message 'Legacy-v1-Quelle wurde nicht mit Verifikationsbeleg normalisiert.'
     Assert-True -Condition ($legacyLoaded.job_sources[0].verification_evidence[0].evidence_type -eq 'CAREER_URL') -Message 'Legacy-v1-Normalisierung nutzt falschen Evidenztyp.'
+    Assert-True -Condition (@($legacyLoaded.discovery_inventory).Count -eq 0) -Message 'Legacy-v1-Normalisierung setzt discovery_inventory nicht verlustfrei auf leer.'
+    Assert-True -Condition (@($legacyLoaded.discovered_urls).Count -eq 0) -Message 'Legacy-v1-Normalisierung setzt discovered_urls nicht verlustfrei auf leer.'
 
     $candidates = @(Get-JobAgentDailyOutputCandidates -Document $reloaded)
     Assert-True -Condition ($candidates.Count -eq 1) -Message 'DailyOutputCandidates liefert unerwartete Anzahl.'
@@ -298,7 +304,7 @@ try {
 
     [pscustomobject]@{
         status = 'ok'
-        cases = @('empty_store', 'write_reload', 'idempotent_upsert', 'backup', 'migration', 'legacy_v1_source_evidence_normalization', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
+        cases = @('empty_store', 'write_reload', 'idempotent_upsert', 'backup', 'migration', 'legacy_v1_source_evidence_normalization', 'discovery_retention_shape', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
         store_path = $paths.store_path
     } | ConvertTo-Json -Depth 4
 }

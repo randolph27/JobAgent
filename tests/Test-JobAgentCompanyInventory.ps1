@@ -62,11 +62,16 @@ Assert-True -Condition (@($seeded.document.job_sources | Where-Object { @($_.ver
 Assert-True -Condition (@($seeded.document.job_sources | Where-Object { $_.verification_evidence[0].evidence_type -ne 'CAREER_URL' }).Count -eq 0) -Message 'Seed hat Career-Quellen mit falschem Evidenztyp erzeugt.'
 Assert-True -Condition (@($seeded.document.companies | Where-Object { $_.discovery_source.verification_url -eq $null }).Count -eq 0) -Message 'Seed hat Discovery-Quellen ohne verification_url erzeugt.'
 Assert-True -Condition (@($seeded.document.companies | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.discovery_source.discovery_origin) }).Count -eq 0) -Message 'Seed hat Discovery-Quellen ohne discovery_origin erzeugt.'
+Assert-True -Condition (@($seeded.document.discovery_inventory).Count -eq @($seeded.document.companies).Count) -Message 'Seed schreibt keinen dauerhaften Discovery-Bestand je Firma.'
+Assert-True -Condition (@($seeded.document.discovered_urls | Where-Object { $_.url_type -eq 'WEBSITE' }).Count -eq @($seeded.document.companies).Count) -Message 'Seed speichert Website-URLs nicht dauerhaft.'
+Assert-True -Condition (@($seeded.document.discovered_urls | Where-Object { $_.url_type -eq 'CAREER' }).Count -eq @($seeded.document.job_sources).Count) -Message 'Seed speichert Karriere-URLs nicht dauerhaft.'
 
 $secondRun = Add-JobAgentCompanySeedInventory -Document $seeded.document -Seeds (Get-JobAgentCompanySeedInventory -CreatedAt (New-TestSeedDate) -NextScanAt (New-TestNextScanDate)) -SeededAt (New-TestSeedDate)
 Assert-JobAgentDocument -Document $secondRun.document
 Assert-True -Condition (@($secondRun.document.companies).Count -eq @($seeded.document.companies).Count) -Message 'Erneuter Seed hat Firmen dupliziert.'
 Assert-True -Condition (@($secondRun.document.job_sources).Count -eq @($seeded.document.job_sources).Count) -Message 'Erneuter Seed hat Quellen dupliziert.'
+Assert-True -Condition (@($secondRun.document.discovery_inventory).Count -eq @($seeded.document.discovery_inventory).Count) -Message 'Erneuter Seed dupliziert dauerhafte Firmenfunde.'
+Assert-True -Condition (@($secondRun.document.discovered_urls).Count -eq @($seeded.document.discovered_urls).Count) -Message 'Erneuter Seed dupliziert dauerhafte URLs.'
 
 $sameDomain = @(
     (New-TestCompanySeed -CanonicalName 'Example AG' -Website 'https://example.invalid/' -CareerUrl 'https://example.invalid/careers' -Aliases @('Example')),
@@ -109,6 +114,9 @@ Assert-True -Condition ($mergedCompany.next_scan_at -eq '2026-08-18T06:00:00.000
 Assert-True -Condition (@($mergedCompany.locations).Count -eq 2) -Message 'Merge vereinigt Standorte nicht verlustfrei.'
 Assert-True -Condition (@($mergedCompany.aliases | Where-Object { $_ -eq 'Merge Careers' }).Count -eq 1) -Message 'Merge uebernimmt neue Aliasnamen nicht.'
 Assert-True -Condition ($mergedCompany.discovery_source.type -eq 'OFFICIAL_WEBSITE') -Message 'Merge bevorzugt keine staerkere Discovery-Quelle.'
+Assert-True -Condition (@($mergeResult.document.discovery_inventory).Count -eq 2) -Message 'Merge verliert urspruengliche Discovery-Funde.'
+Assert-True -Condition (@($mergeResult.document.discovered_urls | Where-Object { $_.original_url -eq 'https://merge.invalid/careers' }).Count -eq 1) -Message 'Merge verliert neue Karriere-URL.'
+Assert-True -Condition (@($mergeResult.document.discovered_urls | Where-Object { $_.original_url -eq 'https://hint.invalid/merge' }).Count -eq 1) -Message 'Merge verliert urspruengliche Hinweis-URL.'
 
 $missingCareer = Add-JobAgentCompanySeedInventory -Document (New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)) -Seeds @(
     (New-TestCompanySeed -CanonicalName 'No Career GmbH' -Website 'https://nocareer.invalid/' -CareerUrl $null -Aliases @('No Career'))
@@ -117,6 +125,7 @@ Assert-JobAgentDocument -Document $missingCareer.document
 Assert-True -Condition ($missingCareer.document.companies[0].career_url -eq $null) -Message 'Fehlende Karriere-URL wurde nicht als null modelliert.'
 Assert-True -Condition ($missingCareer.document.companies[0].verification_status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'Fehlende Karriere-URL hat falschen Verifikationsstatus.'
 Assert-True -Condition (@($missingCareer.document.job_sources).Count -eq 0) -Message 'Fehlende Karriere-URL darf keine JobSource erzeugen.'
+Assert-True -Condition (@($missingCareer.document.discovered_urls | Where-Object { $_.url_type -eq 'CAREER' }).Count -eq 0) -Message 'Fehlende Karriere-URL darf keinen leeren URL-Eintrag erzeugen.'
 
 $discoveryImport = Import-JobAgentCompanyDiscoveryInventory -Document (New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)) -DiscoveryItems @(
     [pscustomobject]@{
@@ -151,6 +160,8 @@ $hintCompany = @($discoveryImport.document.companies | Where-Object { $_.company
 $officialOnlyCompany = @($discoveryImport.document.companies | Where-Object { $_.company_id -eq 'company:official_only_ag' })[0]
 Assert-True -Condition ($hintCompany.verification_status -eq 'UNVERIFIED') -Message 'Discovery-Hinweis muss unverifiziert importiert werden.'
 Assert-True -Condition ($hintCompany.discovery_source.verification_url -eq $null) -Message 'Discovery-Hinweis darf keine verification_url vortaeuschen.'
+Assert-True -Condition (@($discoveryImport.document.discovery_inventory | Where-Object { $_.company_id -eq 'company:discovery_hint_ag' -and $_.verification_status -eq 'UNVERIFIED' }).Count -eq 1) -Message 'Unverifizierter Discovery-Hinweis wird nicht dauerhaft als Firma erfasst.'
+Assert-True -Condition (@($discoveryImport.document.discovered_urls | Where-Object { $_.company_id -eq 'company:discovery_hint_ag' -and $_.verification_status -eq 'UNVERIFIED' }).Count -ge 1) -Message 'Unverifizierter Discovery-Hinweis speichert URL-Herkunft nicht dauerhaft.'
 Assert-True -Condition ($officialOnlyCompany.verification_status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'Offizielle Website ohne Karrierepfad muss domain-verifiziert bleiben.'
 Assert-True -Condition ($officialOnlyCompany.discovery_source.verification_url -eq 'https://official-only.invalid/') -Message 'Offizielle Website ohne Karrierepfad muss Website als verification_url tragen.'
 Assert-True -Condition (@($discoveryImport.document.job_sources).Count -eq 0) -Message 'Discovery-Import ohne Karriere-URL darf keine JobSource erzeugen.'
@@ -326,6 +337,30 @@ try {
             }
         )
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $snapshotProjectRoot 'data\jobagent\company-discovery.snapshot.json') -Encoding UTF8
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-hints/v1'
+        generated_at = '2026-08-22T00:00:00.000Z'
+        contract = 'Sekundaerquellen erzeugen ausschliesslich unverifizierte Discovery-Hints; sie duerfen keine JobSource und keine offizielle Karriere-URL erzeugen.'
+        search_matrix_count = 0
+        hints_total = 1
+        known_company_hints = 0
+        unverified_hints = 1
+        source_counts = [pscustomobject]@{
+            'source-registry:stepstone_muenchen' = 1
+        }
+        hints = @(
+            [pscustomobject]@{
+                hint_id = 'hint:retained_missing_after_refresh'
+                employer_name = 'Retained Missing AG'
+                normalized_name = 'retained missing'
+                source_id = 'source-registry:stepstone_muenchen'
+                observed_url = 'https://example.invalid/old-snapshot'
+                observed_at = '2026-08-22T00:00:00.000Z'
+                verification_status = 'UNVERIFIED'
+                candidate_status = 'DISCOVERY_HINT'
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $snapshotProjectRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
 
     $preSnapshotStore = Read-JobAgentStore -ProjectRoot $snapshotProjectRoot
     $snapshotOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Import-JobAgentCompanyDiscovery.ps1') -ProjectRoot $snapshotProjectRoot -SnapshotLane 2>&1)
@@ -337,7 +372,14 @@ try {
     Assert-True -Condition ($snapshotResult.sources_total -eq 6) -Message 'Snapshot-Lane verarbeitet falsche Quellenanzahl.'
     Assert-True -Condition ($snapshotResult.inputs_total -eq 4) -Message 'Snapshot-Lane verarbeitet Multi-Input-/Glob-Manifeste nicht nachvollziehbar.'
     Assert-True -Condition ($snapshotResult.new_hints_total -eq 16) -Message ('Snapshot-Lane erzeugt falsche neue Hint-Anzahl: ' + [string]$snapshotResult.new_hints_total)
-    Assert-True -Condition ($snapshotHints.hints_total -eq 16) -Message 'Snapshot-Lane merged Hints nicht in den Hint-Store.'
+    Assert-True -Condition ($snapshotHints.hints_total -eq 17) -Message 'Snapshot-Lane merged Hints nicht verlustfrei in den Hint-Store.'
+    $retainedHint = @($snapshotHints.hints | Where-Object { [string]$_.hint_id -eq 'hint:retained_missing_after_refresh' })[0]
+    Assert-True -Condition ([bool]$retainedHint.retained_after_missing_source_refresh -eq $true) -Message 'Quellenrefresh entfernt nicht erneut beobachtete Alt-Hints.'
+    Assert-True -Condition ([string]$retainedHint.retention_status -eq 'NOT_OBSERVED_IN_SOURCE') -Message 'Retained-Hint bekommt keinen Missing-Status.'
+    $retainedCapture = @($postSnapshotStore.discovery_inventory | Where-Object { $_.PSObject.Properties.Name -contains 'hint_id' -and [string]$_.hint_id -eq 'hint:retained_missing_after_refresh' })[0]
+    Assert-True -Condition ($null -ne $retainedCapture) -Message 'Nicht erneut beobachteter Hint wird nicht dauerhaft im Store erfasst.'
+    Assert-True -Condition ([string]$retainedCapture.retention_status -eq 'NOT_OBSERVED_IN_SOURCE') -Message 'Store-Retention uebernimmt Missing-Status nicht.'
+    Assert-True -Condition (@($postSnapshotStore.discovered_urls | Where-Object { $_.PSObject.Properties.Name -contains 'hint_id' -and [string]$_.hint_id -eq 'hint:retained_missing_after_refresh' -and [string]$_.original_url -eq 'https://example.invalid/old-snapshot' }).Count -eq 1) -Message 'Nicht erneut beobachtete Hint-URL wird nicht dauerhaft im Store erfasst.'
     Assert-True -Condition ($snapshotHints.unverified_hints -eq $snapshotHints.hints_total) -Message 'Snapshot-Lane darf keine verifizierten Hints erzeugen.'
     Assert-True -Condition ($snapshotResult.source_gate.schema_version -eq 'jobagent/company-discovery-snapshot-source-gate/v1') -Message 'Snapshot-Lane schreibt kein Source-Gate.'
     Assert-True -Condition ($snapshotResult.source_gate.status -eq 'failed') -Message 'Partielles Testmanifest muss fehlende importierbare Quellen sichtbar machen.'
@@ -346,7 +388,9 @@ try {
     Assert-True -Condition (@($snapshotResult.source_gate.missing_source_ids | Where-Object { $_ -eq 'source-registry:ba_jobsuche' }).Count -eq 1) -Message 'Source-Gate weist fehlende BA-Jobsuche nicht aus.'
     Assert-True -Condition (@($snapshotResult.source_gate.violations | Where-Object { $_ -eq 'SNAPSHOT_IMPORTABLE_SOURCES_MISSING' }).Count -eq 1) -Message 'Source-Gate meldet fehlende Quellen nicht fail-closed.'
     Assert-True -Condition ($snapshotResult.productive_store_write -eq $false) -Message 'Snapshot-Lane darf keinen produktiven Store-Write melden.'
+    Assert-True -Condition ($snapshotResult.retention_store_write -eq $true) -Message 'Snapshot-Lane meldet keinen Retention-Store-Write.'
     Assert-True -Condition (@($postSnapshotStore.job_sources).Count -eq @($preSnapshotStore.job_sources).Count) -Message 'Snapshot-Lane darf keine JobSources erzeugen.'
+    Assert-True -Condition (@($postSnapshotStore.companies).Count -eq @($preSnapshotStore.companies).Count) -Message 'Snapshot-Lane darf keine unverifizierten Hints als produktive Companies schreiben.'
     Assert-True -Condition (@($snapshotResult.snapshot_logs | Where-Object { [string]$_.input_hash -notmatch '^[a-f0-9]{64}$' -or [string]::IsNullOrWhiteSpace([string]$_.allowed_use) -or [string]::IsNullOrWhiteSpace([string]$_.rate_limit_policy) -or [string]::IsNullOrWhiteSpace([string]$_.robots_or_terms_note) }).Count -eq 0) -Message 'Snapshot-Lane protokolliert Nutzungs-/Hash-Evidenz unvollstaendig.'
     Assert-True -Condition (@($snapshotResult.snapshot_logs | Where-Object { [bool]$_.official_verification_required -ne $true -or [bool]$_.productive_store_write -ne $false }).Count -eq 0) -Message 'Snapshot-Lane verletzt Review-/No-Store-Vertrag.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$snapshotResult.digest_path) -PathType Leaf) -Message 'Snapshot-Lane schreibt keinen Digest.'
@@ -359,7 +403,7 @@ finally {
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script', 'company_career_verification_script', 'company_discovery_snapshot_lane')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'retained_discovery_inventory_and_urls', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script', 'company_career_verification_script', 'company_discovery_snapshot_lane')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4

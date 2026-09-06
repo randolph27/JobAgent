@@ -244,6 +244,282 @@ function Merge-JobAgentCompanyAtsBindings {
     return @($map.Values)
 }
 
+function Get-JobAgentStableTextHash {
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Value)
+
+    $bytes = [Text.UTF8Encoding]::new($false).GetBytes($Value)
+    return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes)).ToLowerInvariant()
+}
+
+function New-JobAgentDiscoveryCaptureId {
+    param(
+        [Parameter(Mandatory)][string]$CompanyId,
+        [Parameter(Mandatory)][string]$Origin,
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    return 'capture:' + (ConvertTo-JobAgentAsciiSlug -Value ($CompanyId.Substring(8) + '-' + $Origin + '-' + (Get-JobAgentStableTextHash -Value $Url).Substring(0, 12)))
+}
+
+function New-JobAgentDiscoveredUrlId {
+    param(
+        [Parameter(Mandatory)][string]$CompanyId,
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][string]$UrlType
+    )
+
+    return 'url:' + (ConvertTo-JobAgentAsciiSlug -Value ($CompanyId.Substring(8) + '-' + $UrlType + '-' + (Get-JobAgentStableTextHash -Value $Url).Substring(0, 12)))
+}
+
+function Add-JobAgentInventoryItem {
+    param(
+        [Parameter(Mandatory)][System.Collections.IDictionary]$Map,
+        [Parameter(Mandatory)][object]$Item,
+        [Parameter(Mandatory)][string]$IdProperty
+    )
+
+    $id = [string]$Item.$IdProperty
+    if ($Map.Contains($id)) {
+        $existing = $Map[$id]
+        if ($existing.PSObject.Properties.Name -contains 'last_observed_in_source') {
+            $existing.last_observed_in_source = $Item.last_observed_in_source
+        }
+        if ($existing.PSObject.Properties.Name -contains 'last_observed') {
+            $existing.last_observed = $Item.last_observed
+        }
+        if (($Item.PSObject.Properties.Name -contains 'company_id') -and -not [string]::IsNullOrWhiteSpace([string]$Item.company_id)) {
+            $existing.company_id = $Item.company_id
+        }
+        if (($Item.PSObject.Properties.Name -contains 'verification_status') -and [string]$Item.verification_status -ne 'UNVERIFIED') {
+            $existing.verification_status = $Item.verification_status
+        }
+        return
+    }
+    $Map[$id] = $Item
+}
+
+function New-JobAgentCompanyDiscoveryInventoryItem {
+    param(
+        [Parameter(Mandatory)][object]$Seed,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $source = $Seed.discovery_source
+    $sourceUrl = [string]$source.url
+    [pscustomobject]@{
+        capture_id = New-JobAgentDiscoveryCaptureId -CompanyId ([string]$Seed.company_id) -Origin ([string]$source.discovery_origin) -Url $sourceUrl
+        company_id = $Seed.company_id
+        original_name = $Seed.canonical_name
+        canonical_name = $Seed.canonical_name
+        aliases = @($Seed.aliases)
+        target_area = [string]$source.target_area
+        source_id = [string]$source.discovery_origin
+        source_url = $sourceUrl
+        source_record_hash = Get-JobAgentStableTextHash -Value ([string]($Seed | ConvertTo-Json -Depth 20 -Compress))
+        first_seen = [string]$source.observed_at
+        last_observed_in_source = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        last_checked_at = $null
+        verification_status = $Seed.verification_status
+        retention_status = 'ACTIVE'
+        is_test_data = $false
+    }
+}
+
+function New-JobAgentCompanyDiscoveredUrlItems {
+    param(
+        [Parameter(Mandatory)][object]$Seed,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $observed = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+    $items = New-Object System.Collections.Generic.List[object]
+    $urls = @(
+        [pscustomobject]@{ type = 'WEBSITE'; url = [string]$Seed.official_website_url },
+        [pscustomobject]@{ type = 'CAREER'; url = [string]$Seed.career_url },
+        [pscustomobject]@{ type = 'UNKNOWN'; url = [string]$Seed.discovery_source.url }
+    )
+    foreach ($item in $urls) {
+        if ([string]::IsNullOrWhiteSpace([string]$item.url)) {
+            continue
+        }
+        $items.Add([pscustomobject]@{
+                url_id = New-JobAgentDiscoveredUrlId -CompanyId ([string]$Seed.company_id) -Url ([string]$item.url) -UrlType ([string]$item.type)
+                company_id = $Seed.company_id
+                original_url = [string]$item.url
+                canonical_url = [string]$item.url
+                url_type = [string]$item.type
+                source_id = [string]$Seed.discovery_source.discovery_origin
+                source_url = [string]$Seed.discovery_source.url
+                first_seen = [string]$Seed.discovery_source.observed_at
+                last_observed = $observed
+                last_checked_at = $null
+                last_successful_check = $null
+                verification_status = if ([string]$Seed.verification_status -eq 'UNVERIFIED') { 'UNVERIFIED' } else { 'VERIFIED' }
+                reachability_status = 'UNKNOWN'
+                retention_status = 'ACTIVE'
+            })
+    }
+    return $items.ToArray()
+}
+
+function New-JobAgentHintCaptureId {
+    param(
+        [Parameter(Mandatory)][string]$HintId,
+        [Parameter(Mandatory)][string]$SourceId
+    )
+
+    return 'capture:' + (ConvertTo-JobAgentAsciiSlug -Value ($SourceId + '-' + $HintId))
+}
+
+function New-JobAgentHintUrlId {
+    param(
+        [Parameter(Mandatory)][string]$HintId,
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    return 'url:' + (ConvertTo-JobAgentAsciiSlug -Value ($HintId + '-' + (Get-JobAgentStableTextHash -Value $Url).Substring(0, 12)))
+}
+
+function ConvertTo-JobAgentDiscoveryHintRetentionItem {
+    param(
+        [Parameter(Mandatory)][object]$Hint,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $hintId = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('hint_id', 'candidate_id') -Default '')
+    if ([string]::IsNullOrWhiteSpace($hintId)) {
+        throw 'Discovery-Hint ohne stabile ID kann nicht dauerhaft erfasst werden.'
+    }
+    $sourceId = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('source_id') -Default 'UNKNOWN')
+    $name = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('employer_name', 'company_name', 'register_name', 'canonical_name') -Default '')
+    if ([string]::IsNullOrWhiteSpace($name)) {
+        throw "Discovery-Hint $hintId enthaelt keinen Firmennamen."
+    }
+    $observed = ConvertTo-JobAgentCompanyCandidateDate -Value (Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('observed_at', 'created_at') -Default $null) -Fallback $ObservedAt
+    $companyId = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('known_company_id', 'company_id') -Default '')
+
+    [pscustomobject]@{
+        capture_id = New-JobAgentHintCaptureId -HintId $hintId -SourceId $sourceId
+        company_id = if ([string]::IsNullOrWhiteSpace($companyId)) { $null } else { $companyId }
+        original_name = $name
+        canonical_name = $name
+        aliases = @()
+        target_area = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('target_area_match', 'target_area') -Default 'UNKNOWN')
+        source_id = $sourceId
+        source_url = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('observed_url', 'source_url') -Default '')
+        source_record_hash = Get-JobAgentStableTextHash -Value ([string]($Hint | ConvertTo-Json -Depth 20 -Compress))
+        first_seen = $observed.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        last_observed_in_source = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        last_checked_at = $null
+        verification_status = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('verification_status') -Default 'UNVERIFIED')
+        retention_status = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('retention_status') -Default 'ACTIVE')
+        is_test_data = $false
+        promoted_to_company = -not [string]::IsNullOrWhiteSpace($companyId)
+        hint_id = $hintId
+    }
+}
+
+function ConvertTo-JobAgentDiscoveryHintUrlRetentionItem {
+    param(
+        [Parameter(Mandatory)][object]$Hint,
+        [Parameter(Mandatory)][object]$Capture,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $url = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('observed_url', 'source_url') -Default '')
+    if ([string]::IsNullOrWhiteSpace($url)) {
+        return $null
+    }
+    $hintId = [string]$Capture.hint_id
+    [pscustomobject]@{
+        url_id = New-JobAgentHintUrlId -HintId $hintId -Url $url
+        company_id = $Capture.company_id
+        original_url = $url
+        canonical_url = $url
+        url_type = 'UNKNOWN'
+        source_id = $Capture.source_id
+        source_url = $url
+        first_seen = $Capture.first_seen
+        last_observed = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        last_checked_at = $null
+        last_successful_check = $null
+        verification_status = 'UNVERIFIED'
+        reachability_status = 'UNKNOWN'
+        retention_status = $Capture.retention_status
+        hint_id = $hintId
+    }
+}
+
+function Update-JobAgentDiscoveryHintRetention {
+    param(
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Hints,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $captureMap = [ordered]@{}
+    foreach ($item in @($Document.discovery_inventory)) {
+        $id = [string](Get-JobAgentCompanyCandidateProperty -Object $item -Names @('capture_id') -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($id)) {
+            $captureMap[$id] = $item
+        }
+    }
+    $urlMap = [ordered]@{}
+    foreach ($item in @($Document.discovered_urls)) {
+        $id = [string](Get-JobAgentCompanyCandidateProperty -Object $item -Names @('url_id') -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($id)) {
+            $urlMap[$id] = $item
+        }
+    }
+
+    foreach ($hint in @($Hints)) {
+        $capture = ConvertTo-JobAgentDiscoveryHintRetentionItem -Hint $hint -ObservedAt $ObservedAt
+        Add-JobAgentInventoryItem -Map $captureMap -Item $capture -IdProperty 'capture_id'
+        $urlItem = ConvertTo-JobAgentDiscoveryHintUrlRetentionItem -Hint $hint -Capture $capture -ObservedAt $ObservedAt
+        if ($null -ne $urlItem) {
+            Add-JobAgentInventoryItem -Map $urlMap -Item $urlItem -IdProperty 'url_id'
+        }
+    }
+
+    $Document.discovery_inventory = @($captureMap.Values | Sort-Object source_id, original_name, capture_id)
+    $Document.discovered_urls = @($urlMap.Values | Sort-Object source_id, canonical_url, url_id)
+    return $Document
+}
+
+function Update-JobAgentDiscoveryRetention {
+    param(
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Seeds,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $captureMap = [ordered]@{}
+    foreach ($item in @($Document.discovery_inventory)) {
+        $id = [string](Get-JobAgentCompanyCandidateProperty -Object $item -Names @('capture_id') -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($id)) {
+            $captureMap[$id] = $item
+        }
+    }
+    $urlMap = [ordered]@{}
+    foreach ($item in @($Document.discovered_urls)) {
+        $id = [string](Get-JobAgentCompanyCandidateProperty -Object $item -Names @('url_id') -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($id)) {
+            $urlMap[$id] = $item
+        }
+    }
+
+    foreach ($seed in @($Seeds)) {
+        Add-JobAgentInventoryItem -Map $captureMap -Item (New-JobAgentCompanyDiscoveryInventoryItem -Seed $seed -ObservedAt $ObservedAt) -IdProperty 'capture_id'
+        foreach ($urlItem in @(New-JobAgentCompanyDiscoveredUrlItems -Seed $seed -ObservedAt $ObservedAt)) {
+            Add-JobAgentInventoryItem -Map $urlMap -Item $urlItem -IdProperty 'url_id'
+        }
+    }
+
+    $Document.discovery_inventory = @($captureMap.Values | Sort-Object company_id, capture_id)
+    $Document.discovered_urls = @($urlMap.Values | Sort-Object company_id, url_type, canonical_url)
+    return $Document
+}
+
 function Get-JobAgentVerificationStatusRank {
     param([Parameter(Mandatory)][string]$Status)
 
@@ -409,6 +685,7 @@ function Add-JobAgentCompanySeedInventory {
     $added = New-Object System.Collections.Generic.List[string]
     $updated = New-Object System.Collections.Generic.List[string]
     $deduplicated = New-Object System.Collections.Generic.List[object]
+    $retentionSeeds = @($Seeds | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100)
     foreach ($seed in @($Seeds)) {
         $match = Find-JobAgentCompanyDuplicate -Companies $companies.ToArray() -Candidate $seed
         if ($null -eq $match) {
@@ -441,6 +718,7 @@ function Add-JobAgentCompanySeedInventory {
 
     $Document.companies = @($companies.ToArray() | Sort-Object -Property scan_priority, canonical_name -Descending)
     $Document.job_sources = @($sources.ToArray() | Sort-Object -Property company_id, source_id)
+    $Document = Update-JobAgentDiscoveryRetention -Document $Document -Seeds $retentionSeeds -ObservedAt $SeededAt
     [pscustomobject]@{
         document = $Document
         added = $added.ToArray()
@@ -1154,6 +1432,8 @@ Export-ModuleMember -Function @(
     'Find-JobAgentKnownCompanyForHint',
     'Get-JobAgentCompanySeedInventory',
     'Get-JobAgentCompanyDiscoveryHintSearchMatrix',
+    'Update-JobAgentDiscoveryHintRetention',
+    'Update-JobAgentDiscoveryRetention',
     'Import-JobAgentCompanyDiscoveryInventory',
     'Test-JobAgentCompanyImportWaveGate',
     'Merge-JobAgentCompanySeed',

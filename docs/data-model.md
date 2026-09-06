@@ -31,6 +31,7 @@ Repository-Funktionen:
 - `Record-JobAgentScanAttempt`
 - `Mark-JobAgentMissingJobs`
 - `Get-JobAgentDailyOutputCandidates`
+- `Update-JobAgentDiscoveryRetention`
 
 ## Firmeninventar-Seed
 
@@ -38,6 +39,7 @@ Repository-Funktionen:
 
 - `Get-JobAgentCompanySeedInventory` liefert einen initialen, vorsichtig kuratierten Seed fuer Muenchen/Freising mit offiziellen Websites, Karriere-URLs, Standortbezug, Branche, Aliasnamen, Scanprioritaet und naechstem Scanzeitpunkt.
 - `Add-JobAgentCompanySeedInventory` fuehrt Seeds idempotent in das Store-Dokument zusammen.
+- Jeder Seed wird zusaetzlich in `discovery_inventory` und `discovered_urls` festgehalten. Diese Sammlungen sind der dauerhafte Erstfund-/URL-Bestand und werden durch Refresh, Merge oder fehlende Jobs nicht geloescht.
 - Deduplikation nutzt stabile Keys in dieser Reihenfolge: `company_id`, kanonische Domain, rechtsformnormalisierter Name und Aliasnamen.
 - Getrennte Tochter-/Konzernunternehmen werden nur bei gleicher Domain, gleicher ID oder gleicher rechtsformbereinigter Namensidentitaet zusammengefuehrt; gemeinsame Konzernbestandteile allein reichen nicht aus.
 - Firmen ohne bekannte Karriere-URL bleiben als Company erhalten, erzeugen aber keine `JobSource` und erhalten `verification_status: COMPANY_DOMAIN_VERIFIED`.
@@ -120,8 +122,18 @@ Das Root-Dokument trägt `schema_version: "jobagent/v1"` und enthält getrennte 
 - `scan_attempts`
 - `job_snapshots`
 - `change_events`
+- `discovery_inventory`
+- `discovered_urls`
 
 Fachliche Daten dürfen nicht mit `todo.*`, `handoff.*` oder CI-Laufzeitdaten vermischt werden.
+
+## Dauerhafte Discovery-Retention
+
+`discovery_inventory` speichert Firmenfunde ab Erstbeobachtung mit stabiler `capture_id`, `company_id`, Original-/Kanoniknamen, Aliasen, Zielgebiet, Herkunft, Quellen-URL, Record-Hash, `first_seen`, `last_observed_in_source`, `last_checked_at`, `verification_status`, `retention_status` und Testdatenmarker.
+
+`discovered_urls` speichert firmenbezogene Website-, Karriere- und Discovery-URLs mit stabiler `url_id`, Original-/Kanonik-URL, `url_type` (`WEBSITE`, `CAREER`, `UNKNOWN`), Herkunft, Erst-/Letztbeobachtung, Check-Zeitpunkten, Verifikations- und Erreichbarkeitsstatus. Fehler, Ablauf, leere Karriereportale oder ein spaeterer Quellenrefresh duerfen diese Eintraege nicht entfernen; sie duerfen nur Status/Zeitstempel ergaenzen. Offizielle `JobSource`-Eintraege bleiben weiterhin nur fuer verifizierte Karriere-/ATS-Quellen erlaubt.
+
+Unverifizierte Name-only-Hints werden als `discovery_inventory`-Eintraege mit `company_id: null`, `hint_id`, Quelle und `promoted_to_company: false` gespeichert. Sie sind damit dauerhaft wiederauffindbare Company-Kandidaten, aber keine produktiven `companies` und erzeugen keine `JobSource`.
 
 ## Company
 

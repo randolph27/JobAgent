@@ -32,6 +32,8 @@ function New-JobAgentEmptyDocument {
         scan_attempts = @()
         job_snapshots = @()
         change_events = @()
+        discovery_inventory = @()
+        discovered_urls = @()
     }
 }
 
@@ -138,6 +140,17 @@ function Repair-JobAgentDocumentShape {
             $source | Add-Member -NotePropertyName verification_evidence -NotePropertyValue ([object[]]@(Complete-JobAgentSourceVerificationEvidence -Source $source)) -Force
         }
     }
+    foreach ($property in @('discovery_inventory', 'discovered_urls')) {
+        if ($Document.PSObject.Properties.Name -notcontains $property) {
+            $Document | Add-Member -NotePropertyName $property -NotePropertyValue @() -Force
+        }
+        elseif ($null -eq $Document.$property) {
+            $Document | Add-Member -NotePropertyName $property -NotePropertyValue @() -Force
+        }
+        elseif (-not ($Document.$property -is [array])) {
+            $Document | Add-Member -NotePropertyName $property -NotePropertyValue ([object[]]@($Document.$property)) -Force
+        }
+    }
 
     return $Document
 }
@@ -157,7 +170,7 @@ function Assert-JobAgentDocument {
         [Parameter(Mandatory)][object]$Document
     )
 
-    foreach ($property in @('schema_version', 'generated_at', 'companies', 'jobs', 'job_sources', 'scan_runs', 'scan_attempts', 'job_snapshots', 'change_events')) {
+    foreach ($property in @('schema_version', 'generated_at', 'companies', 'jobs', 'job_sources', 'scan_runs', 'scan_attempts', 'job_snapshots', 'change_events', 'discovery_inventory', 'discovered_urls')) {
         if ($Document.PSObject.Properties.Name -notcontains $property) {
             throw "JobAgent-Dokument fehlt Pflichtfeld $property."
         }
@@ -283,7 +296,7 @@ function ConvertTo-JobAgentV1Document {
     }
 
     $migrated = New-JobAgentEmptyDocument
-    foreach ($property in @('companies', 'jobs', 'job_sources', 'scan_runs', 'scan_attempts', 'job_snapshots', 'change_events')) {
+    foreach ($property in @('companies', 'jobs', 'job_sources', 'scan_runs', 'scan_attempts', 'job_snapshots', 'change_events', 'discovery_inventory', 'discovered_urls')) {
         if ($Document.PSObject.Properties.Name -contains $property) {
             $migrated.$property = @($Document.$property)
         }

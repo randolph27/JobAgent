@@ -49,7 +49,7 @@ Jede Quelle in `data/jobagent/company-discovery.sources.json` muss diese Felder 
 
 ## Datenschutz und Speicherung
 
-Persistiert werden nur nicht-personenbezogene Kandidaten-, Quellen- und Evidenzfelder. Registerrollen, Recruiter-Daten, Kontaktlisten, Anzeigenvolltexte und nicht erforderliche Rohseiten werden nicht gespeichert. Fuer volatile Jobboersen reicht ein minimaler Snapshot-Hash mit Suchparametern und Fund-URL.
+Persistiert werden nur nicht-personenbezogene Kandidaten-, Quellen- und Evidenzfelder. Registerrollen, Recruiter-Daten, Kontaktlisten, Anzeigenvolltexte und nicht erforderliche Rohseiten werden nicht gespeichert. Firmenfunde und entdeckte Website-/Karriere-/ATS-/Discovery-URLs werden ab Erstfund dauerhaft mit Herkunft, Zeitstempeln, Status und Hashbezug gespeichert. Ein spaeterer Quellenrefresh, HTTP-Fehler, Ablauf oder fehlende Jobs loescht diese Mindestdaten nicht; offizielle Nutzung und Zaehlung verlangen weiter unabhaengige Primaerevidenz.
 
 ## Validierung
 
