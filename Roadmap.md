@@ -1,6 +1,6 @@
 # Roadmap
 
-Stand: 2026-09-06. JA-027 wurde ausschließlich planerisch um dauerhafte Firmen-/URL-Speicherung und erneute Quellenerschließung ergänzt; die Umsetzung ist offen. Verbindliche Review-Basis der übrigen Punkte: [Webreview](docs/reviews/2026-09-05-webreview.md), [Messwerte](docs/reviews/2026-09-05-baseline.json). Historische Importfortschritte stehen vollständig im [vorherigen Plan](docs/reviews/2026-09-05-roadmap-before.md); JA-027 und UI-001 bleiben offen und behalten ihre IDs.
+Stand: 2026-09-06. JA-027.1 ist als Retention-Schnitt umgesetzt; JA-027 bleibt offen, weil Quellenerschließung, Verifikation/Benchmark und 1.000 belegte offizielle Karrierequellen noch fehlen. Verbindliche Review-Basis der übrigen Punkte: [Webreview](docs/reviews/2026-09-05-webreview.md), [Messwerte](docs/reviews/2026-09-05-baseline.json). Historische Importfortschritte stehen vollständig im [vorherigen Plan](docs/reviews/2026-09-05-roadmap-before.md); JA-027 und UI-001 bleiben offen und behalten ihre IDs.
 
 ## Ziel, Annahmen und Messvertrag
 
