@@ -149,6 +149,25 @@ Assert-True -Condition (@($osmResult.hints | Where-Object { [string]$_.officialn
 Assert-True -Condition (@($osmResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH_20KM', 'FREISING') }).Count -eq 0) -Message 'OpenStreetMap-Overpass-Hints muessen per Koordinate im Zielgebiet bleiben.'
 Assert-True -Condition (@($osmResult.hints | Where-Object { $_.PSObject.Properties.Name -contains 'phone' -or $_.PSObject.Properties.Name -contains 'email' -or $_.PSObject.Properties.Name -contains 'website_hint' -or $_.PSObject.Properties.Name -contains 'career_hint' }).Count -eq 0) -Message 'OpenStreetMap-Overpass-Hints duerfen keine Kontakt- oder offiziellen Linkfelder persistieren.'
 
+$izbFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\izb-startups-snapshot.json'
+$izbResult = Import-JobAgentRegionalDirectories -SnapshotPath $izbFixture -SourceRegistry $registry
+Assert-True -Condition ($izbResult.hints_total -eq 27) -Message 'IZB-Startups-Snapshot erzeugt falsche Arbeitgeberanzahl.'
+Assert-True -Condition ($izbResult.source_counts.'source-registry:izb_startups' -eq 27) -Message 'IZB-Startups-Hints werden nicht der Quelle zugeordnet.'
+Assert-True -Condition (@($izbResult.hints | Where-Object { [string]$_.officialness_level -ne 'SECONDARY_OFFICIAL_DIRECTORY' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'IZB-Startups muessen unverifizierte Sekundaerhinweise bleiben.'
+Assert-True -Condition (@($izbResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH_20KM', 'FREISING') }).Count -eq 0) -Message 'IZB-Startups muessen Planegg-20-km- oder Freising-Bezug behalten.'
+
+$landkreisFounderFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\landkreis-muenchen-gruenderzentren-snapshot.json'
+$landkreisFounderResult = Import-JobAgentRegionalDirectories -SnapshotPath $landkreisFounderFixture -SourceRegistry $registry
+Assert-True -Condition ($landkreisFounderResult.hints_total -eq 4) -Message 'Landkreis-Muenchen-Gruenderzentren-Snapshot erzeugt falsche Anzahl.'
+Assert-True -Condition ($landkreisFounderResult.source_counts.'source-registry:landkreis_muenchen_gruenderzentren' -eq 4) -Message 'Landkreis-Muenchen-Gruenderzentren-Hints werden nicht der Quelle zugeordnet.'
+Assert-True -Condition (@($landkreisFounderResult.hints | Where-Object { [string]$_.officialness_level -ne 'SECONDARY_OFFICIAL_DIRECTORY' }).Count -eq 0) -Message 'Landkreis-Muenchen-Gruenderzentren muessen Sekundaerhinweise bleiben.'
+
+$stadtFounderFixture = Join-Path $root 'tests\fixtures\jobagent\regional-discovery\stadt-muenchen-gruenderzentren-snapshot.json'
+$stadtFounderResult = Import-JobAgentRegionalDirectories -SnapshotPath $stadtFounderFixture -SourceRegistry $registry
+Assert-True -Condition ($stadtFounderResult.hints_total -eq 12) -Message 'Stadt-Muenchen-Gruenderzentren-Snapshot erzeugt falsche Anzahl.'
+Assert-True -Condition ($stadtFounderResult.source_counts.'source-registry:stadt_muenchen_gruenderzentren' -eq 12) -Message 'Stadt-Muenchen-Gruenderzentren-Hints werden nicht der Quelle zugeordnet.'
+Assert-True -Condition (@($stadtFounderResult.hints | Where-Object { [string]$_.target_area -notin @('MUNICH', 'MUNICH_20KM') }).Count -eq 0) -Message 'Stadt-Muenchen-Gruenderzentren muessen Muenchen- oder 20-km-Bezug behalten.'
+
 $projectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-regional-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $projectRoot -Force | Out-Null
 try {
@@ -206,6 +225,9 @@ finally {
         'production_remote_jobs_germany_snapshot',
         'production_awesome_geospatial_companies_snapshot',
         'production_openstreetmap_overpass_business_names_snapshot',
+        'production_izb_startups_snapshot',
+        'production_landkreis_muenchen_gruenderzentren_snapshot',
+        'production_stadt_muenchen_gruenderzentren_snapshot',
         'script_writes_regional_and_merged_hints'
     )
     hints = $result.hints_total

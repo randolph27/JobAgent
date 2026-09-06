@@ -23,10 +23,10 @@ $toolPath = Join-Path $root 'tools\Measure-JobAgentDiscoverySourceInventory.ps1'
 $output = & $toolPath -ProjectRoot $root | ConvertFrom-Json -Depth 100
 
 Assert-True -Condition ($output.status -eq 'ok') -Message 'JA-027.2 Quelleninventur liefert keinen OK-Status.'
-Assert-True -Condition ($output.sources_total -eq 32) -Message 'Quelleninventur muss alle 32 Registry-Quellen ausweisen.'
-Assert-True -Condition ($output.hints_total -eq 1790) -Message 'Quelleninventur zaehlt Discovery-Hints falsch.'
-Assert-True -Condition ($output.queue_total -eq 1785) -Message 'Quelleninventur zaehlt Kandidatenqueue falsch.'
-Assert-True -Condition ($output.hints_without_queue -eq 5) -Message 'Die fuenf Hints ohne Queueeintrag muessen einzeln erklaert werden.'
+Assert-True -Condition ($output.sources_total -eq 35) -Message 'Quelleninventur muss alle 35 Registry-Quellen ausweisen.'
+Assert-True -Condition ($output.hints_total -eq 1833) -Message 'Quelleninventur zaehlt Discovery-Hints falsch.'
+Assert-True -Condition ($output.queue_total -eq 1831) -Message 'Quelleninventur zaehlt Kandidatenqueue falsch.'
+Assert-True -Condition ($output.hints_without_queue -eq 0) -Message 'Alle Hints muessen ueber candidate_id oder candidate_ids in der Queue erreichbar sein.'
 Assert-True -Condition ($output.research_candidates_total -ge 6) -Message 'Quellenrecherche muss mindestens sechs neue Ansaetze dokumentieren.'
 
 foreach ($pathProperty in @('inventory_path', 'research_path', 'reconciliation_path')) {
@@ -40,16 +40,20 @@ $research = Get-Content -Raw -LiteralPath (Join-Path $root ([string]$output.rese
 $reconciliation = Get-Content -Raw -LiteralPath (Join-Path $root ([string]$output.reconciliation_path)) | ConvertFrom-Json -Depth 100
 
 Assert-True -Condition ($inventory.schema_version -eq 'jobagent/source-inventory-ja0272/v1') -Message 'Quelleninventur hat falsches Schema.'
-Assert-True -Condition (@($inventory.sources).Count -eq 32) -Message 'Quelleninventur enthaelt nicht jede Registry-Quelle als Zeile.'
+Assert-True -Condition (@($inventory.sources).Count -eq 35) -Message 'Quelleninventur enthaelt nicht jede Registry-Quelle als Zeile.'
 Assert-True -Condition ($inventory.totals.retained_discovery_inventory -ge 2000) -Message 'Retention-Bestand wird in der Quelleninventur nicht mitgefuehrt.'
 Assert-True -Condition ($inventory.totals.retained_discovered_urls -ge 1000) -Message 'Retained-URL-Bestand wird in der Quelleninventur nicht mitgefuehrt.'
 Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:openstreetmap_overpass_business_names' -and [int]$_.hint_count -ge 1000 }).Count -eq 1) -Message 'OSM-Hinweise werden nicht der Quelle zugeordnet.'
 Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:ba_jobsuche' -and [int]$_.hint_count -eq 4 }).Count -eq 1) -Message 'BA-Hinweise werden nicht exakt ausgewiesen.'
+Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:stepstone_freising' -and [int]$_.hint_count -eq 2 -and [int]$_.queue_count -eq 2 }).Count -eq 1) -Message 'Nicht-primaere Cluster-Kandidaten muessen ihrer Quelle in der Queue zugeordnet bleiben.'
+Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:izb_startups' -and [int]$_.hint_count -eq 27 -and [int]$_.queue_count -eq 27 }).Count -eq 1) -Message 'IZB-Startup-Quelle wird nicht nachgefuehrt.'
+Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:landkreis_muenchen_gruenderzentren' -and [int]$_.hint_count -eq 4 -and [int]$_.queue_count -eq 4 }).Count -eq 1) -Message 'Landkreis-Muenchen-Gruenderzentren werden nicht nachgefuehrt.'
+Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:stadt_muenchen_gruenderzentren' -and [int]$_.hint_count -eq 12 -and [int]$_.queue_count -eq 12 }).Count -eq 1) -Message 'Stadt-Muenchen-Gruenderzentren werden nicht nachgefuehrt.'
 Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:linkedin_jobs' -and [string]$_.next_action -eq 'blocked' }).Count -eq 1) -Message 'Blockierte Quellen muessen fail-closed ausgewiesen werden.'
 Assert-True -Condition (@($inventory.sources | Where-Object { @($_.sample_hints).Count -gt 3 }).Count -eq 0) -Message 'Quellensamples duerfen maximal drei Hints enthalten.'
 
 Assert-True -Condition ($reconciliation.schema_version -eq 'jobagent/candidate-reconciliation-ja0272/v1') -Message 'Reconciliation hat falsches Schema.'
-Assert-True -Condition (@($reconciliation.hints_without_queue).Count -eq 5) -Message 'Reconciliation erklaert nicht exakt fuenf Hints ohne Queue.'
+Assert-True -Condition (@($reconciliation.hints_without_queue).Count -eq 0) -Message 'Reconciliation darf keine bereits in candidate_ids enthaltenen Hints als fehlend melden.'
 Assert-True -Condition (@($reconciliation.hints_without_queue | Where-Object { [string]::IsNullOrWhiteSpace([string]$_.explanation) }).Count -eq 0) -Message 'Hints ohne Queue brauchen eine Erklaerung.'
 Assert-True -Condition (@($reconciliation.small_hint_sources | Where-Object { [string]$_.explanation -match 'kein Quellenerschoepfungsnachweis' }).Count -ge 1) -Message 'Kleine Bestaende muessen gegen Quellenerschoepfungsdeutung abgesichert werden.'
 
@@ -65,7 +69,7 @@ Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$
     cases = @(
         'source_inventory_writes_required_evidence',
         'all_registry_sources_reconciled',
-        'hint_queue_gap_explained',
+        'cluster_candidate_ids_count_as_queue_coverage',
         'small_source_counts_are_not_exhaustion',
         'research_matrix_has_new_source_approaches',
         'rejected_sources_fail_closed'

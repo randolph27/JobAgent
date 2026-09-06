@@ -1,0 +1,41 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-09-06T16:30:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:izb_startups",
+      "format": "json_items",
+      "source_page": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+      "region_reference": "Martinsried und Freising-Weihenstephan",
+      "items": [
+        { "company_name": "AATec Medical GmbH", "sector_hint": "Life Science", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Amplifold GmbH", "sector_hint": "Life Science", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Bavarian Biotech GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Bind-X International GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "BioM Biotech Cluster Development GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "BioNTech SE, Munich Small Molecules", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "CatalYm GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Cryondo GmbH", "sector_hint": "Life Science", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Eisbach Bio GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Galimedix Therapeutics GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Novogene", "sector_hint": "Life Science Services", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Omegametrix GmbH", "sector_hint": "Life Science", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Omicscouts GmbH", "sector_hint": "Life Science", "address_or_location_hint": "85354 Freising-Weihenstephan", "latitude": 48.402, "longitude": 11.728 },
+        { "company_name": "OncoBeta GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "PhaToCon", "sector_hint": "Pharma/Tox", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "PreOmics GmbH", "sector_hint": "Life Science", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Protevo Bio", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "RNhale GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "SCG Cell Therapy GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "SciRhom GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Secarna GmbH & Co. KG", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "SMEY", "sector_hint": "Life Science", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Sterna Biologicals", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Tubulis", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Twogee Biotech GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "VeonGen Therapeutics GmbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "XL-protein GmbH", "sector_hint": "Life Science", "address_or_location_hint": "85354 Freising-Weihenstephan", "latitude": 48.402, "longitude": 11.728 }
+      ]
+    }
+  ]
+}

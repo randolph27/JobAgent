@@ -179,24 +179,70 @@ function Get-InventoryHintSourceCounts {
 }
 
 function Get-InventoryQueueSourceCounts {
-    param([Parameter()][AllowNull()][object]$Queue)
+    param(
+        [Parameter()][AllowNull()][object]$Queue,
+        [Parameter()][AllowNull()][object]$HintStore
+    )
 
     $counts = [ordered]@{}
     if ($null -eq $Queue) {
         return [pscustomobject]$counts
     }
+    $sourceByHintId = @{}
+    if ($null -ne $HintStore) {
+        foreach ($hint in @($HintStore.hints)) {
+            $hintId = [string](Get-InventoryProperty -Object $hint -Name 'hint_id' -Default '')
+            if (-not [string]::IsNullOrWhiteSpace($hintId)) {
+                $sourceByHintId[$hintId] = [string](Get-InventoryProperty -Object $hint -Name 'source_id' -Default 'UNKNOWN')
+            }
+        }
+    }
     foreach ($entry in @($Queue.queue)) {
-        $evidence = Get-InventoryProperty -Object $entry -Name 'source_evidence'
-        $sourceId = [string](Get-InventoryProperty -Object $evidence -Name 'source_id' -Default 'UNKNOWN')
-        if ([string]::IsNullOrWhiteSpace($sourceId)) {
-            $sourceId = 'UNKNOWN'
+        $candidateIds = @((Get-InventoryProperty -Object $entry -Name 'candidate_ids' -Default @()))
+        if ($candidateIds.Count -eq 0) {
+            $candidateIds = @([string](Get-InventoryProperty -Object $entry -Name 'candidate_id' -Default ''))
         }
-        if (-not $counts.Contains($sourceId)) {
-            $counts[$sourceId] = 0
+        foreach ($candidateId in @($candidateIds)) {
+            $candidateIdText = [string]$candidateId
+            $sourceId = if ($sourceByHintId.ContainsKey($candidateIdText)) {
+                [string]$sourceByHintId[$candidateIdText]
+            }
+            else {
+                $evidence = Get-InventoryProperty -Object $entry -Name 'source_evidence'
+                [string](Get-InventoryProperty -Object $evidence -Name 'source_id' -Default 'UNKNOWN')
+            }
+            if ([string]::IsNullOrWhiteSpace($sourceId)) {
+                $sourceId = 'UNKNOWN'
+            }
+            if (-not $counts.Contains($sourceId)) {
+                $counts[$sourceId] = 0
+            }
+            $counts[$sourceId]++
         }
-        $counts[$sourceId]++
     }
     return [pscustomobject]$counts
+}
+
+function Get-InventoryQueueCandidateIdSet {
+    param([Parameter()][AllowNull()][object]$Queue)
+
+    $candidateIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    if ($null -eq $Queue) {
+        return $candidateIds
+    }
+    foreach ($entry in @($Queue.queue)) {
+        $primaryId = [string](Get-InventoryProperty -Object $entry -Name 'candidate_id' -Default '')
+        if (-not [string]::IsNullOrWhiteSpace($primaryId)) {
+            [void]$candidateIds.Add($primaryId)
+        }
+        foreach ($candidateId in @((Get-InventoryProperty -Object $entry -Name 'candidate_ids' -Default @()))) {
+            $candidateIdText = [string]$candidateId
+            if (-not [string]::IsNullOrWhiteSpace($candidateIdText)) {
+                [void]$candidateIds.Add($candidateIdText)
+            }
+        }
+    }
+    return $candidateIds
 }
 
 function New-InventorySample {
@@ -232,7 +278,7 @@ function New-InventorySourceRows {
     $hints = @($HintStore.hints)
     $queueEntries = @($Queue.queue)
     $hintSourceCounts = Get-InventoryHintSourceCounts -HintStore $HintStore
-    $queueSourceCounts = Get-InventoryQueueSourceCounts -Queue $Queue
+    $queueSourceCounts = Get-InventoryQueueSourceCounts -Queue $Queue -HintStore $HintStore
     $inventoryItems = @($Store.discovery_inventory)
     $urlItems = @($Store.discovered_urls)
 
@@ -399,7 +445,7 @@ $store = Read-InventoryJsonFile -Path $storePathResolved -Depth 100
 
 $sourceRows = New-InventorySourceRows -Registry $registry -SnapshotManifest $snapshotManifest -HintStore $hintStore -Queue $queue -Store $store -Root $projectRootPath
 $hintIds = [Collections.Generic.HashSet[string]]::new([string[]]@($hintStore.hints | ForEach-Object { [string](Get-InventoryProperty -Object $_ -Name 'hint_id' -Default '') }), [StringComparer]::Ordinal)
-$queueCandidateIds = [Collections.Generic.HashSet[string]]::new([string[]]@($queue.queue | ForEach-Object { [string](Get-InventoryProperty -Object $_ -Name 'candidate_id' -Default '') }), [StringComparer]::Ordinal)
+$queueCandidateIds = Get-InventoryQueueCandidateIdSet -Queue $queue
 $hintsWithoutQueue = @($hintStore.hints | Where-Object { -not $queueCandidateIds.Contains([string](Get-InventoryProperty -Object $_ -Name 'hint_id' -Default '')) } | Sort-Object hint_id)
 $queueWithoutHint = @($queue.queue | Where-Object { -not $hintIds.Contains([string](Get-InventoryProperty -Object $_ -Name 'candidate_id' -Default '')) } | Sort-Object candidate_id)
 $smallHintSources = @($sourceRows | Where-Object { [int]$_.hint_count -gt 0 -and [int]$_.hint_count -le 5 } | Sort-Object hint_count, source_id)

@@ -1,0 +1,18 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-09-06T16:30:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:landkreis_muenchen_gruenderzentren",
+      "format": "json_items",
+      "source_page": "https://www.landkreis-muenchen.de/themen/wirtschaft-wissenschaft/gruenderzentren/",
+      "region_reference": "Landkreis Muenchen",
+      "items": [
+        { "company_name": "ACU GmbH", "sector_hint": "Digitalisierung, Smart City, Smart Industry", "address_or_location_hint": "Unterschleissheim", "latitude": 48.280, "longitude": 11.576 },
+        { "company_name": "gate Garchinger Technologie- und Gruenderzentrum GmbH", "sector_hint": "High-Tech, Software, AI, Robotics", "address_or_location_hint": "85748 Garching b. Muenchen", "latitude": 48.249, "longitude": 11.651 },
+        { "company_name": "Innovations- und Gruenderzentrum Biotechnologie IZB", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg-Martinsried", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "WERK1.Bayern GmbH", "sector_hint": "Digitale Unternehmen", "address_or_location_hint": "Muenchen", "latitude": 48.124, "longitude": 11.607 }
+      ]
+    }
+  ]
+}

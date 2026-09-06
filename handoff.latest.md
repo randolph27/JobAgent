@@ -1,44 +1,80 @@
 # Handoff latest
 
-Stand: 2026-09-06T17:56:11.051+02:00. STP wurde ausgefuehrt. Fuer neuen Chat/Agent: zuerst `README.md`, `Roadmap.md`, `todo.current.md`, `todo.state.json`, `handoff.latest.md` lesen. Projektwurzel ist `D:\_Scripte\JobAgent`.
+Stand: 2026-09-06T22:55:00+02:00. STP wurde ausgefuehrt. Fuer den naechsten Chat/Agent zuerst `README.md`, `Roadmap.md`, `todo.current.md`, `todo.state.json`, `handoff.latest.md` lesen. Projektwurzel ist `D:\_Scripte\JobAgent`.
 
 ## Aktiver Status
 
 - Active: `TD-0041` / `JA-027`
 - Status: `in-progress`
-- Ziel: JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen.
+- Ziel: Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen.
 - Branch: `master`
-- HEAD beim STP: `d5102dd06eef`
+- HEAD: `6ad4c25b5d3e`
 - Upstream: `origin/master`
-- Ahead/Behind beim STP: `0/0`
-- Worktree beim STP: `dirty`
-- Roadmap-Rotation: nicht ausgefuehrt, weil kein Top-Level-Punkt komplett erledigt ist.
+- Worktree: `dirty`
+- Roadmap-Rotation: nicht ausgefuehrt, weil JA-027 fachlich weiter offen ist.
+- Supertest: vom Nutzer fuer diesen Stand freigestellt; gilt fuer diesen Slice als erledigt/nicht erforderlich, aber nicht als ausgefuehrter Supertestlauf.
 
-## Erledigter Stand
+## Abgeschlossener Slice
 
-JA-027.1 ist als Retention-Schnitt umgesetzt und gepusht. JA-027.2 hat jetzt eine reproduzierbare Quelleninventur mit Evidence, aber noch keinen schreibenden Quellenrefresh und keine produktive Nachfuehrung neuer Quellen.
+JA-027.2 wurde mit einem schreibenden Snapshot-Refresh weitergefuehrt. Die Inventur-Reconciliation wurde korrigiert: Queue-Abdeckung zaehlt jetzt `candidate_id` und alle `candidate_ids` eines Identitaetsclusters. Dadurch werden sekundaere Cluster-Hints nicht mehr faelschlich als fehlende Queueeintraege gewertet.
 
-JA-027.2 aktueller Evidence-Stand:
-- `tools/Measure-JobAgentDiscoverySourceInventory.ps1` erzeugt die drei Pflichtartefakte fuer Quelleninventur, Quellenrecherche und Kandidatenabgleich.
-- 32 Registry-Quellen, 26 Snapshot-Manifesteintraege, 1.790 Hints, 1.785 Queueeintraege.
-- Retention-Store: 2.269 Discovery-Funde und 1.401 URL-Funde.
-- Fuenf Hints ohne Queueeintrag sind einzeln erklaert: Fraunhofer IVV, Texas Instruments Deutschland GmbH, QuEST Global Engineering Services GmbH, Deutsches Theater Muenchen, Stadtwerke Muenchen GmbH.
-- Queue-ohne-Hint: 0.
-- Sieben neue Quellenansaetze dokumentiert: HWK Muenchen/Oberbayern, Munich Startup Directory, IZB-Start-ups, BioM-Firmendatenbank, Landkreis-Muenchen-Gruenderzentren, Stadt Freising Wirtschaft, IHK-Standortportal Bayern. Diese Ansaetze sind nur Kandidatenquellen, keine offiziellen Karrierequellen.
-- Supertest-Matrix ist synchronisiert; `Test-JobAgentDiscoverySourceInventory.ps1` ist im Supertest registriert. Supertest wurde nicht ausgefuehrt, weil JA-027 noch nicht komplett abgeschlossen ist. Nach Nutzeranweisung gilt er fuer diesen Handoff als freigestellt, nicht als bestandener Lauf.
+Neue regionale Snapshot-Quellen:
 
-Evidence:
-- `logs/jobagent/JA-027-retention-migration.json`
-- `logs/jobagent/JA-027-retention-regression.json`
+- `source-registry:izb_startups`: 27 Hints
+- `source-registry:landkreis_muenchen_gruenderzentren`: 4 Hints
+- `source-registry:stadt_muenchen_gruenderzentren`: 12 Hints
+
+Aktueller Datenstand nach Snapshot-Lane:
+
+- 35 Registry-Quellen
+- 29 Snapshot-Manifesteintraege
+- 1.833 Discovery-Hints
+- 1.831 Queue-Cluster
+- 2.312 dauerhafte Discovery-Funde
+- 1.401 dauerhafte URL-Funde
+- 479 produktive Firmen unveraendert
+- 439 JobSources unveraendert
+- `hints_without_queue = 0`
+- `queue_without_hint = 0`
+
+Queue-Zusammenfassung:
+
+- `ALREADY_VERIFIED_IN_STORE = 666`
+- `DISCOVER_OFFICIAL_WEBSITE = 1164`
+- `MANUAL_DECISION = 1`
+- Status: `VERIFIED = 667`, `MANUAL_REVIEW_REQUIRED = 1163`, `RETRY_EXHAUSTED = 1`, `PENDING = 0`
+
+## Geaenderte Hauptdateien
+
+- `tools/Measure-JobAgentDiscoverySourceInventory.ps1`
+- `tests/Test-JobAgentDiscoverySourceInventory.ps1`
+- `tests/Test-JobAgentRegionalDiscovery.ps1`
+- `data/jobagent/company-discovery.sources.json`
+- `data/jobagent/company-discovery.snapshot.json`
+- `data/jobagent/company-discovery.hints.json`
+- `data/jobagent/company-discovery.regional-hints.json`
+- `data/jobagent/company-candidate-verification.queue.json`
+- `data/jobagent/store.json`
+- `html/jobagent/company-coverage.html`
+- `tests/fixtures/jobagent/regional-discovery/izb-startups-snapshot.json`
+- `tests/fixtures/jobagent/regional-discovery/landkreis-muenchen-gruenderzentren-snapshot.json`
+- `tests/fixtures/jobagent/regional-discovery/stadt-muenchen-gruenderzentren-snapshot.json`
+- `Roadmap.md`, `todo.state.json`, `todo.current.md`, `todo.checkpoint.json`, `todo.events.jsonl`, `todo.history.digest.json`, `todo.master.index.json`
+
+## Evidence
+
+- `logs/jobagent/company-discovery-snapshot-digest-20260906-203726.json`
 - `logs/jobagent/JA-027-source-inventory.json`
 - `logs/jobagent/JA-027-source-research.json`
 - `logs/jobagent/JA-027-candidate-reconciliation.json`
+- `html/jobagent/company-coverage.html`
 
 ## Verifikation
 
-Ausgefuehrt und gruen:
+Gruen:
 
 ```powershell
+pwsh -NoProfile -File .\tests\Test-JobAgentRegionalDiscovery.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentDiscoverySourceInventory.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentTestMatrix.ps1
@@ -50,26 +86,24 @@ cmd /c .\ci.cmd stp
 Nicht erfolgreich:
 
 ```powershell
+curl.exe -s --max-time 5 http://localhost:9000/api/system/status
 cmd /c .\ci.cmd sonar-start
 ```
 
-Grund: lokaler Wrapper `D:\_Scripte\JobAgent\sonar.cmd` fehlt. SonarQube auf `localhost:9000` antwortete vorher nicht innerhalb von 5 Sekunden.
+Grund: SonarQube antwortet lokal nicht auf `:9000`; `sonar-start` scheitert, weil `D:\_Scripte\JobAgent\sonar.cmd` fehlt. Wegen Nutzerregel wurde Sonar nicht anders gestartet.
 
-## Offene Arbeit fuer den naechsten Chat
+## Naechste Aufgabe
 
-Naechster Hotspot ist weiter JA-027.2: schreibende Quellenerschliessung/Nachfuehrung auf Basis der Inventur. Nicht zu JA-041 springen; `TD-0041` bleibt aktiv.
+Naechster Hotspot bleibt `JA-027.2`, nicht `JA-041`.
 
-Konkrete naechste Schritte:
-1. Die sieben Research-Kandidaten aus `logs/jobagent/JA-027-source-research.json` nach Source-Contract bewerten: registrieren, Snapshot-Lane definieren oder begruendet blockieren.
-2. Fuer zulaessige Quellen Snapshot-/Parser-Erweiterungen bauen und Tests ergaenzen; keine Kontakte, Personenrollen oder Anzeigenvolltexte persistieren.
-3. Die fuenf Hints ohne Queueeintrag durch Queue-Neuaufbau oder dokumentierte Filterentscheidung schließen.
-4. Danach schreibenden Snapshot-Refresh laufen lassen und Retention-/Queue-Zahlen erneut mit `tools/Measure-JobAgentDiscoverySourceInventory.ps1` belegen.
-5. Erst danach JA-027.3 starten: offizielle Firmen-/Karriereverifikation und 100er Benchmark.
+1. HWK-Handwerkersuche, BioM-Firmendatenbank, Stadt-Freising-Wirtschaft und IHK-Standortportal nach Source-Contract final entscheiden.
+2. Je Quelle entweder Snapshot-/Parser-Lane ergaenzen und importieren oder mit reproduzierbarem Grund parken/blockieren.
+3. Danach `tools/Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane`, Coverage und Inventur erneut ausfuehren.
+4. Erst nach stabiler Quellen-Nachfuehrung `JA-027.3` starten: offizielle Firmen-/Karriereverifikation und 100er Benchmark.
 
 ## Grenzen
 
-- Keine erfundenen Firmen, URLs, Stellen oder Vollstaendigkeitsnachweise.
-- Jobboersen/Register/OSM/Communitylisten liefern nur Hinweise, keine offiziellen Karrierequellen.
-- Unverifizierte Hints bleiben Retention-Kandidaten, keine produktiven Companies/JobSources.
+- Neue Hints sind keine offiziellen Karrierequellen und keine produktiven Firmen.
+- Jobboersen, Register, OSM, Community- und Regionalquellen liefern nur Hinweise.
 - Keine Bewerbungen, Nachrichten, Login-/Captcha-/Paywall-Umgehung oder kostenpflichtigen Zugaenge.
-- Devserver/Sonar nur ueber `.\ci.cmd`, Server im Hintergrund.
+- Devserver und Sonar nur ueber `.\ci.cmd`, Server im Hintergrund.

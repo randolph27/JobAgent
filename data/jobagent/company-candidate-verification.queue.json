@@ -1,19 +1,18 @@
 {
   "schema_version": "jobagent/company-candidate-verification-queue/v1",
   "queue_type": "review",
-  "generated_at": "2026-09-06T05:24:52.174Z",
-  "clusters_total": 1785,
-  "candidates_total": 1790,
+  "generated_at": "2026-09-06T20:41:27.435Z",
+  "clusters_total": 1831,
+  "candidates_total": 1833,
   "ready_total": 0,
   "action_counts": {
-    "ALREADY_VERIFIED_IN_STORE": 662,
-    "DISCOVER_OFFICIAL_WEBSITE": 1120,
-    "MANUAL_DECISION": 1,
-    "VERIFY_OFFICIAL_SITE": 2
+    "ALREADY_VERIFIED_IN_STORE": 666,
+    "DISCOVER_OFFICIAL_WEBSITE": 1164,
+    "MANUAL_DECISION": 1
   },
   "queue": [
     {
-      "identity_cluster_id": "identity-cluster:domain_aquabench_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_aquabench_gmbh_muenchen",
       "company_id": "company:aquabench_gmbh",
       "candidate_ids": [
@@ -50,7 +49,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:aquabench.de",
           "name:aquabench"
         ],
         "conflict_flags": [],
@@ -236,7 +234,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_ms_klinik_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_behandlungszentrum_fuer_multiple_sklerose_kranke_muenchen",
       "company_id": "company:behandlungszentrum_fuer_multiple_sklerose_kranke",
       "candidate_ids": [
@@ -273,7 +271,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:ms-klinik.de",
           "name:behandlungszentrum fuer multiple sklerose kranke"
         ],
         "conflict_flags": [],
@@ -413,7 +410,51 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_digital_at_m_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen",
+      "company_id": "company:deutsches_theater_muenchen_betriebs_gmbh",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen"
+      ],
+      "canonical_name": "Deutsches Theater Muenchen",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "ef8a6f71e0ea428de1dd7e77875d1d70bbcbaa1d98a54aab27e7b84a15fe41de",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deutsches theater muenchen"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_digital_m_gmbh_muenchen",
       "company_id": "company:digital_m_gmbh",
       "candidate_ids": [
@@ -450,7 +491,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:digital-at-m.de",
           "name:digital m"
         ],
         "conflict_flags": [],
@@ -594,7 +634,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_munich_airport_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_flughafen_muenchen_gmbh_muenchen",
       "company_id": "company:flughafen_muenchen_gmbh",
       "candidate_ids": [
@@ -631,7 +671,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:munich-airport.de",
           "name:flughafen muenchen"
         ],
         "conflict_flags": [
@@ -687,7 +726,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_gasteig_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_gasteig_muenchen_gmbh_muenchen",
       "company_id": "company:gasteig_muenchen_gmbh",
       "candidate_ids": [
@@ -724,7 +763,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:gasteig.de",
           "name:gasteig muenchen"
         ],
         "conflict_flags": [
@@ -1000,7 +1038,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_iba_m_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_bauausstellung_metropolregion_muenchen_gmbh_muenchen",
       "company_id": "company:internationale_bauausstellung_metropolregion_muenchen_gmbh",
       "candidate_ids": [
@@ -1037,7 +1075,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:iba-m.de",
           "name:internationale bauausstellung metropolregion muenchen"
         ],
         "conflict_flags": [],
@@ -1045,7 +1082,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_filmfest_muenchen_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_internationale_muenchner_filmwochen_gmbh_muenchen",
       "company_id": "company:internationale_muenchner_filmwochen_gmbh",
       "candidate_ids": [
@@ -1082,7 +1119,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:filmfest-muenchen.de",
           "name:internationale muenchner filmwochen"
         ],
         "conflict_flags": [],
@@ -1180,7 +1216,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_lhm_services_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_lhm_services_gmbh_muenchen",
       "company_id": "company:lhm_services_gmbh",
       "candidate_ids": [
@@ -1217,7 +1253,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:lhm-services.de",
           "name:lhm services"
         ],
         "conflict_flags": [],
@@ -1271,7 +1306,51 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_messe_muenchen_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_media_lab_bayern_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_media_lab_bayern_muenchen_und_umland",
+      "company_id": "company:medien_bayern_gmbh",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_media_lab_bayern_muenchen_und_umland"
+      ],
+      "canonical_name": "Media Lab Bayern",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "fec789f2435777899ed9fcfc2d091649b41b2ca95b10a1a12cc87ab40ff26dcf",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:media lab bayern"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_messe_muenchen_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_messe_muenchen_gmbh_muenchen",
       "company_id": "company:messe_muenchen_gmbh",
       "candidate_ids": [
@@ -1308,7 +1387,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:messe-muenchen.de",
           "name:messe muenchen"
         ],
         "conflict_flags": [
@@ -1408,7 +1486,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_mrg_gmbh_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_mrg_muenchener_raumentwicklungsgesellschaft_mbh_muenchen",
       "company_id": "company:mrg_muenchener_raumentwicklungsgesellschaft_mbh",
       "candidate_ids": [
@@ -1445,7 +1523,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:mrg-gmbh.de",
           "name:mrg muenchener raumentwicklungsgesellschaft mbh"
         ],
         "conflict_flags": [],
@@ -1499,7 +1576,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_muenchen_klinik_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_klinik_ggmbh_muenchen",
       "company_id": "company:muenchen_klinik_ggmbh",
       "candidate_ids": [
@@ -1536,7 +1613,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:muenchen-klinik.de",
           "name:muenchen klinik ggmbh"
         ],
         "conflict_flags": [],
@@ -1544,7 +1620,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_muenchenticket_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchen_ticket_gmbh_muenchen",
       "company_id": "company:muenchen_ticket_gmbh",
       "candidate_ids": [
@@ -1581,7 +1657,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:muenchenticket.de",
           "name:muenchen ticket"
         ],
         "conflict_flags": [
@@ -1591,7 +1666,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_muenchner_arbeit_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_arbeit_gemeinnuetzige_gmbh_muenchen",
       "company_id": "company:muenchener_arbeit_gemeinnuetzige_gmbh",
       "candidate_ids": [
@@ -1628,7 +1703,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:muenchner-arbeit.de",
           "name:muenchener arbeit gemeinnuetzige"
         ],
         "conflict_flags": [],
@@ -1636,7 +1710,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_mgs_muenchen_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_gesellschaft_fuer_stadterneuerung_mbh_muenchen",
       "company_id": "company:muenchener_gesellschaft_fuer_stadterneuerung_mbh",
       "candidate_ids": [
@@ -1673,7 +1747,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:mgs-muenchen.de",
           "name:muenchener gesellschaft fuer stadterneuerung mbh"
         ],
         "conflict_flags": [],
@@ -1725,7 +1798,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_hellabrunn_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_tierpark_hellabrunn_ag_muenchen",
       "company_id": "company:muenchener_tierpark_hellabrunn_ag",
       "candidate_ids": [
@@ -1762,7 +1835,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:hellabrunn.de",
           "name:muenchener tierpark hellabrunn"
         ],
         "conflict_flags": [],
@@ -1770,7 +1842,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_mvhs_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkshochschule_gmbh_muenchen",
       "company_id": "company:muenchener_volkshochschule_gmbh",
       "candidate_ids": [
@@ -1807,7 +1879,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:mvhs.de",
           "name:muenchener volkshochschule"
         ],
         "conflict_flags": [],
@@ -1815,7 +1886,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_muenchner_volkstheater_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_volkstheater_gmbh_muenchen",
       "company_id": "company:muenchener_volkstheater_gmbh",
       "candidate_ids": [
@@ -1852,7 +1923,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:muenchner-volkstheater.de",
           "name:muenchener volkstheater"
         ],
         "conflict_flags": [],
@@ -1860,7 +1930,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_muenchner_wohnen_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchener_wohnen_gmbh_muenchen",
       "company_id": "company:muenchener_wohnen_gmbh",
       "candidate_ids": [
@@ -1897,7 +1967,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:muenchner-wohnen.de",
           "name:muenchener wohnen"
         ],
         "conflict_flags": [],
@@ -1905,7 +1974,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_muenchenstift_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchenstift_gmbh_gemeinnuetzige_gesellschaft_muenchen",
       "company_id": "company:muenchenstift_gmbh_gemeinnuetzige_gesellschaft",
       "candidate_ids": [
@@ -1942,7 +2011,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:muenchenstift.de",
           "name:muenchenstift gemeinnuetzige gesellschaft"
         ],
         "conflict_flags": [],
@@ -1950,7 +2018,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_mvv_muenchen_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_muenchner_verkehrs_und_tarifverbund_gmbh_muenchen",
       "company_id": "company:muenchner_verkehrs_und_tarifverbund_gmbh",
       "candidate_ids": [
@@ -1987,7 +2055,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:mvv-muenchen.de",
           "name:muenchner verkehrs und tarifverbund"
         ],
         "conflict_flags": [],
@@ -1995,7 +2062,53 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_olympiapark_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_munich_urban_colab_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_munich_urban_colab_muenchen_und_umland",
+      "company_id": "company:munich_urban_colab",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_munich_urban_colab_muenchen_und_umland"
+      ],
+      "canonical_name": "MUNICH URBAN COLAB",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": "COMPANY_DOMAIN_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "74ffb2874c081656dfa94c846c3bb4bea06c44d224945f1c84bf098be0fa9207",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:munich urban colab"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_olympiapark_muenchen_gmbh_muenchen",
       "company_id": "company:olympiapark_muenchen_gmbh",
       "candidate_ids": [
@@ -2032,7 +2145,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:olympiapark.de",
           "name:olympiapark muenchen"
         ],
         "conflict_flags": [],
@@ -2040,7 +2152,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_parkundride_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_p_plus_r_park_and_ride_gmbh_muenchen",
       "company_id": "company:p_plus_r_park_and_ride_gmbh",
       "candidate_ids": [
@@ -2077,7 +2189,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:parkundride.de",
           "name:p plus r park and ride"
         ],
         "conflict_flags": [],
@@ -2085,7 +2196,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_pasinger_fabrik_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_pasinger_fabrik_kultur_und_buergerzentrum_gmbh_muenchen",
       "company_id": "company:pasinger_fabrik_kultur_und_buergerzentrum_gmbh",
       "candidate_ids": [
@@ -2122,7 +2233,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:pasinger-fabrik.de",
           "name:pasinger fabrik kultur und buergerzentrum"
         ],
         "conflict_flags": [],
@@ -2130,7 +2240,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_muenchen_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_portal_muenchen_betriebs_gmbh_and_co_kg_muenchen",
       "company_id": "company:portal_muenchen_betriebs_gmbh_and_co_kg",
       "candidate_ids": [
@@ -2167,7 +2277,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:muenchen.de",
           "name:portal muenchen betriebs"
         ],
         "conflict_flags": [],
@@ -2267,7 +2376,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_spielmotor_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_spielmotor_muenchen",
       "company_id": "company:spielmotor",
       "candidate_ids": [
@@ -2304,7 +2413,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:spielmotor.de",
           "name:spielmotor"
         ],
         "conflict_flags": [],
@@ -2312,7 +2420,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_sparkasse_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtsparkasse_muenchen_muenchen",
       "company_id": "company:stadtsparkasse_muenchen",
       "candidate_ids": [
@@ -2349,7 +2457,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:sparkasse.de",
           "name:stadtsparkasse muenchen"
         ],
         "conflict_flags": [],
@@ -2391,6 +2498,52 @@
         "record_hash": "278ead84f2cccc8e6100dd70ad011bcc54e73a3aa9c8c96c75a0f82b7a41ecf7",
         "allowed_use": "Oeffentlich gelistete teilnehmende Muenchner Grossunternehmen und Kooperationspartner des Klimapakt 3 als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
         "rate_limit_policy": "Manueller oder seltener lokaler Snapshot der Klimapakt-3-Unternehmensliste; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:stadtwerke muenchen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen",
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen"
+      ],
+      "canonical_name": "Stadtwerke Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "6fe240630ab6603227e92daed05e12184d7164143ea8c0bb633e86262b07c8c2",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
       },
       "dedupe_context": {
         "dedupe_keys": [
@@ -2671,7 +2824,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_werk1_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
       "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_werk1_bayern_gmbh_muenchen",
       "company_id": "company:werk1_bayern_gmbh",
       "candidate_ids": [
@@ -2682,7 +2835,7 @@
       "priority_score": 100,
       "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
       ],
       "target_area_basis": [
         "BRANCH_HINT_IN_TARGET"
@@ -2708,10 +2861,57 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:werk1.com",
           "name:werk1 bayern"
         ],
-        "conflict_flags": [],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_landkreis_muenchen_gruenderzentren_werk1_bayern_gmbh_landkreis_muenchen",
+      "candidate_id": "regional-hint:landkreis_muenchen_gruenderzentren_werk1_bayern_gmbh_landkreis_muenchen",
+      "company_id": "company:werk1_bayern_gmbh",
+      "candidate_ids": [
+        "regional-hint:landkreis_muenchen_gruenderzentren_werk1_bayern_gmbh_landkreis_muenchen"
+      ],
+      "canonical_name": "WERK1.Bayern GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:landkreis_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.landkreis-muenchen.de/themen/wirtschaft-wissenschaft/gruenderzentren/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "a6386c4a4c5fd527894f69a81da301971c02feba60d8b2593787465d438da426",
+        "allowed_use": "Oeffentlich genannte Technologie- und Gruenderzentren im Landkreis Muenchen als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Mieter- oder Firmenlisten separat registrieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine tiefe Folgecrawls ohne neue Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:werk1 bayern"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 1
       }
     },
@@ -2850,6 +3050,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
+      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
+      "company_id": "company:deutsches_theater_muenchen_betriebs_gmbh",
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen"
+      ],
+      "canonical_name": "Deutsches Theater Grund- und Hausbesitz GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": "2026-08-27T05:25:33.701Z",
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
+        "observed_at": "08/26/2026 13:00:00",
+        "record_hash": "7131fa2efede620a8e93ecd68db99789a0d9962c05320c2eff2a4de826cd27a0",
+        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:deutsches theater grund und hausbesitz"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_9999",
       "candidate_id": "register-hint:offeneregister_sample_2026_08_epsilon_alt_gmbh_muenchen_6",
       "company_id": null,
@@ -2934,6 +3178,494 @@
         "dedupe_keys": [
           "name:gamma logistics",
           "register:amtsgericht_muenchen_hrb_2001"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_landkreis_muenchen_gruenderzentren_gate_garchinger_technologie_und_gruenderzentrum_gmbh_landkreis_muenchen",
+      "candidate_id": "regional-hint:landkreis_muenchen_gruenderzentren_gate_garchinger_technologie_und_gruenderzentrum_gmbh_landkreis_muenchen",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:landkreis_muenchen_gruenderzentren_gate_garchinger_technologie_und_gruenderzentrum_gmbh_landkreis_muenchen"
+      ],
+      "canonical_name": "gate Garchinger Technologie- und Gruenderzentrum GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:landkreis_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.landkreis-muenchen.de/themen/wirtschaft-wissenschaft/gruenderzentren/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "084413df3c650a1c33ee5e736cf073edae8e6e586d0a864a09b9c1a2ba8f6db8",
+        "allowed_use": "Oeffentlich genannte Technologie- und Gruenderzentren im Landkreis Muenchen als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Mieter- oder Firmenlisten separat registrieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine tiefe Folgecrawls ohne neue Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:gate garchinger technologie und gruenderzentrum"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_gate_garchinger_technologie_und_gruenderzentrum_gmbh_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_gate_garchinger_technologie_und_gruenderzentrum_gmbh_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_gate_garchinger_technologie_und_gruenderzentrum_gmbh_muenchen_und_umland"
+      ],
+      "canonical_name": "gate Garchinger Technologie- und Gruenderzentrum GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "NAME_MATCH_WITHOUT_STRONG_IDENTITY",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "65dc808144bd0a00fa2bcd06c027f40b93c5e3babe11f012441df20fc5c591bd",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:gate garchinger technologie und gruenderzentrum"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_impact_hub_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_impact_hub_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_impact_hub_muenchen_und_umland"
+      ],
+      "canonical_name": "Impact Hub",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "076aa3705d09c52ec2d20ca4597e4558b4dcb7159dd65fae5e7ddb2b6b1e9a10",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:impact hub"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_muenchner_gewerbehoefe_mgh_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_muenchner_gewerbehoefe_mgh_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_muenchner_gewerbehoefe_mgh_muenchen_und_umland"
+      ],
+      "canonical_name": "Muenchner Gewerbehoefe MGH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "ba9ba24bf7867ebf06785f66a1001afab18feecc41dc1c2abeac26d9d2809cb9",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchner gewerbehoefe mgh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_muenchner_technologiezentrum_mtz_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_muenchner_technologiezentrum_mtz_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_muenchner_technologiezentrum_mtz_muenchen_und_umland"
+      ],
+      "canonical_name": "Muenchner Technologiezentrum MTZ",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "ddc1889827c2f8cc4655c32d9d772c6bd06d4f4330ace65b26c223ecb76b547d",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:muenchner technologiezentrum mtz"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_omicscouts_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_omicscouts_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_omicscouts_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Omicscouts GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "a72068940b862c86def78255ecb28137b475cdc0e45490509138367b991284bc",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:omicscouts"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_unternehmertum_internationales_zentrum_fuer_innovation_und_gruendung_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_unternehmertum_internationales_zentrum_fuer_innovation_und_gruendung_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_unternehmertum_internationales_zentrum_fuer_innovation_und_gruendung_muenchen_und_umland"
+      ],
+      "canonical_name": "UnternehmerTUM Internationales Zentrum fuer Innovation und Gruendung",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "e55f3e1a30d1c16c9e0f73c3803c9bbdacc29e4c48d1926f10bdc11532e5b106",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:unternehmertum internationales zentrum fuer innovation und gruendung"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_wavelab_innovation_lab_und_gruenderzentrum_for_musik_arts_and_media_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_wavelab_innovation_lab_und_gruenderzentrum_for_musik_arts_and_media_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_wavelab_innovation_lab_und_gruenderzentrum_for_musik_arts_and_media_muenchen_und_umland"
+      ],
+      "canonical_name": "Wavelab - Innovation Lab und Gruenderzentrum for Musik, Arts & Media",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "8832669078d7c90385e5dc3db25c3052feb9f562d78527a8df5c4d4069200c02",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:wavelab innovation lab und gruenderzentrum for musik arts and media"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_werk1_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_werk1_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_werk1_muenchen_und_umland"
+      ],
+      "canonical_name": "WERK1",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "a21c9f19e4dd2bc35c36c81d1d05cbbc86f3a7a19a4d79cd8aff5379fdf7fdad",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:werk1"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_werkstadt_sendling_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_werkstadt_sendling_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_werkstadt_sendling_muenchen_und_umland"
+      ],
+      "canonical_name": "WerkStadt Sendling",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "2cbdaa80c8cacfe5ec1af5dbeeb0cf723f7425a7836d6d83a2df5b8686d966b1",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:werkstadt sendling"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_xl_protein_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_xl_protein_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_xl_protein_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "XL-protein GmbH",
+      "source_count": 1,
+      "priority_score": 100,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "38da8c388284c58509158ec3801819d4847289c5c25c9aa6ec18f92e6bd7d7c2",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:xl protein"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -4416,7 +5148,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_astellas_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_astellas_pharma_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_astellas_pharma_gmbh_muenchen",
       "company_id": "company:astellas_pharma_gmbh",
       "candidate_ids": [
@@ -4453,7 +5185,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:astellas.com",
           "name:astellas pharma"
         ],
         "conflict_flags": [
@@ -7299,7 +8030,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_cipla_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_cipla_deutschland_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_cipla_deutschland_muenchen",
       "company_id": "company:cipla_deutschland",
       "candidate_ids": [
@@ -7336,7 +8067,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:cipla.com",
           "name:cipla deutschland"
         ],
         "conflict_flags": [],
@@ -8144,7 +8874,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_daiichi_sankyo_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_daiichi_sankyo_europe_gmbh_muenchen",
       "company_id": "company:daiichi_sankyo_europe_gmbh",
       "candidate_ids": [
@@ -8181,7 +8911,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:daiichi-sankyo.de",
           "name:daiichi sankyo europe"
         ],
         "conflict_flags": [
@@ -8455,7 +9184,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_denso_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_denso_automotive_deutschland_gmbh_muenchen",
       "company_id": "company:denso_automotive_deutschland_gmbh",
       "candidate_ids": [
@@ -8492,7 +9221,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:denso.com",
           "name:denso automotive deutschland"
         ],
         "conflict_flags": [],
@@ -8720,7 +9448,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_de_dmgmori_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_dmg_mori_emea_holding_gmbh_muenchen",
       "company_id": "company:dmg_mori_emea_holding_gmbh",
       "candidate_ids": [
@@ -8757,7 +9485,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:de.dmgmori.com",
           "name:dmg mori emea holding"
         ],
         "conflict_flags": [],
@@ -10365,7 +11092,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_global_fujitsu",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_fujitsu_germany_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_fujitsu_germany_gmbh_muenchen",
       "company_id": "company:fujitsu_germany_gmbh",
       "candidate_ids": [
@@ -10402,7 +11129,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:global.fujitsu",
           "name:fujitsu germany"
         ],
         "conflict_flags": [],
@@ -10896,7 +11622,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_glenmark_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_glenmark_arzneimittel_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_glenmark_arzneimittel_gmbh_muenchen",
       "company_id": "company:glenmark_arzneimittel_gmbh",
       "candidate_ids": [
@@ -10933,7 +11659,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:glenmark.de",
           "name:glenmark arzneimittel"
         ],
         "conflict_flags": [],
@@ -11653,7 +12378,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_hepaticatech_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_hepatica_technologies_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_hepatica_technologies_gmbh_muenchen",
       "company_id": "company:hepatica_technologies_gmbh",
       "candidate_ids": [
@@ -11690,7 +12415,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:hepaticatech.com",
           "name:hepatica technologies"
         ],
         "conflict_flags": [],
@@ -13126,6 +13850,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
+      "candidate_id": "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
+      "company_id": "company:intelizign_engineering_services_gmbh",
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen"
+      ],
+      "canonical_name": "Intelizign Engineering Services GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T17:27:13.367Z",
+      "next_attempt_at": null,
+      "last_status": "COMPANY_DOMAIN_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "0f4dff69e3e97d130eb61227de530bbfcd14e659993296164bc1cc279784f20d",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:intelizign engineering services"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_tech_companies_munich_github_interhyp_muenchen_tech_unternehmen",
       "candidate_id": "regional-hint:tech_companies_munich_github_interhyp_muenchen_tech_unternehmen",
       "company_id": "company:interhyp_ag",
@@ -13526,7 +14294,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_jasmin_infotech_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_jasmin_infotech_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_jasmin_infotech_gmbh_muenchen",
       "company_id": "company:jasmin_infotech_gmbh",
       "candidate_ids": [
@@ -13563,7 +14331,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:jasmin-infotech.com",
           "name:jasmin infotech"
         ],
         "conflict_flags": [],
@@ -14161,7 +14928,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_kpit_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_kpit_technologies_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_kpit_technologies_gmbh_muenchen",
       "company_id": "company:kpit_technologies_gmbh",
       "candidate_ids": [
@@ -14198,7 +14965,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:kpit.com",
           "name:kpit technologies"
         ],
         "conflict_flags": [],
@@ -14470,7 +15236,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_larsentoubro_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_larsen_and_toubro_limited_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_larsen_and_toubro_limited_muenchen",
       "company_id": "company:larsen_and_toubro_limited",
       "candidate_ids": [
@@ -14507,7 +15273,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:larsentoubro.com",
           "name:larsen and toubro limited"
         ],
         "conflict_flags": [],
@@ -14825,7 +15590,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_ltm_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_ltm_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_ltm_muenchen",
       "company_id": "company:ltimindtree_gmbh",
       "candidate_ids": [
@@ -14862,7 +15627,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:ltm.com",
           "name:ltm"
         ],
         "conflict_flags": [],
@@ -15760,7 +16524,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_mhi_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_mitsubishi_heavy_industries_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_mitsubishi_heavy_industries_muenchen",
       "company_id": "company:mitsubishi_heavy_industries",
       "candidate_ids": [
@@ -15797,7 +16561,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:mhi.com",
           "name:mitsubishi heavy industries"
         ],
         "conflict_flags": [],
@@ -16427,7 +17190,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_munich_urban_colab_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_commercial_locations_munich_urban_colab_muenchen_mitte",
       "candidate_id": "regional-hint:munich_business_commercial_locations_munich_urban_colab_muenchen_mitte",
       "company_id": "company:munich_urban_colab",
       "candidate_ids": [
@@ -16438,7 +17201,7 @@
       "priority_score": 99,
       "next_action": "ALREADY_VERIFIED_IN_STORE",
       "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
       ],
       "target_area_basis": [
         "BRANCH_HINT_IN_TARGET"
@@ -16464,10 +17227,11 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:munich-urban-colab.de",
           "name:munich urban colab"
         ],
-        "conflict_flags": [],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
         "cluster_candidate_count": 1
       }
     },
@@ -17280,7 +18044,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_de_nttdata_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_ntt_data_deutschland_se_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_ntt_data_deutschland_se_muenchen",
       "company_id": "company:ntt_data_deutschland_se",
       "candidate_ids": [
@@ -17317,7 +18081,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:de.nttdata.com",
           "name:ntt data deutschland"
         ],
         "conflict_flags": [
@@ -17551,7 +18314,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_olympus_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_olympus_europa_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_olympus_europa_gmbh_muenchen",
       "company_id": "company:olympus_europa_se_and_co_kg",
       "candidate_ids": [
@@ -17588,7 +18351,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:olympus.de",
           "name:olympus europa"
         ],
         "conflict_flags": [],
@@ -17952,7 +18714,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_panacea_biotec_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_panacea_biotec_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_panacea_biotec_gmbh_muenchen",
       "company_id": "company:panacea_biotec_gmbh",
       "candidate_ids": [
@@ -17989,7 +18751,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:panacea-biotec.com",
           "name:panacea biotec"
         ],
         "conflict_flags": [],
@@ -17997,7 +18758,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_industry_panasonic_eu",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_panasonic_industry_europe_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_panasonic_industry_europe_gmbh_muenchen",
       "company_id": "company:panasonic_industry_europe_gmbh",
       "candidate_ids": [
@@ -18034,7 +18795,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:industry.panasonic.eu",
           "name:panasonic industry europe"
         ],
         "conflict_flags": [],
@@ -18664,7 +19424,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_pininfarina_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_pininfarina_deutschland_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_pininfarina_deutschland_gmbh_muenchen",
       "company_id": "company:pininfarina_deutschland_gmbh",
       "candidate_ids": [
@@ -18701,7 +19461,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:pininfarina.de",
           "name:pininfarina deutschland"
         ],
         "conflict_flags": [
@@ -19155,7 +19914,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_puren_pharma_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_puren_pharma_gmbh_and_co_kg_muenchen",
       "company_id": "company:puren_pharma_gmbh_and_co_kg",
       "candidate_ids": [
@@ -19192,7 +19951,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:puren-pharma.de",
           "name:puren pharma"
         ],
         "conflict_flags": [],
@@ -19776,7 +20534,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_eu_resonac_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_resonac_europe_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_resonac_europe_gmbh_muenchen",
       "company_id": "company:resonac_europe_gmbh",
       "candidate_ids": [
@@ -19813,7 +20571,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:eu.resonac.com",
           "name:resonac europe"
         ],
         "conflict_flags": [],
@@ -20445,7 +21202,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_smp_automotive_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_samvardhana_motherson_peguform_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_samvardhana_motherson_peguform_muenchen",
       "company_id": "company:samvardhana_motherson_peguform_gmbh",
       "candidate_ids": [
@@ -20482,7 +21239,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:smp-automotive.com",
           "name:samvardhana motherson peguform"
         ],
         "conflict_flags": [],
@@ -22378,7 +23134,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_tcs_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_tata_consultancy_services_deutschland_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_tata_consultancy_services_deutschland_gmbh_muenchen",
       "company_id": "company:tata_consultancy_services_deutschland_gmbh",
       "candidate_ids": [
@@ -22415,7 +23171,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:tcs.com",
           "name:tata consultancy services deutschland"
         ],
         "conflict_flags": [],
@@ -22467,7 +23222,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_tdk_electronics_tdk_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_tdk_electronics_ag_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_tdk_electronics_ag_muenchen",
       "company_id": "company:tdk_electronics_ag",
       "candidate_ids": [
@@ -22504,7 +23259,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:tdk-electronics.tdk.com",
           "name:tdk electronics"
         ],
         "conflict_flags": [
@@ -22560,7 +23314,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_techmahindra_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_tech_mahindra_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_tech_mahindra_muenchen",
       "company_id": "company:tech_mahindra",
       "candidate_ids": [
@@ -22597,7 +23351,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:techmahindra.com",
           "name:tech mahindra"
         ],
         "conflict_flags": [
@@ -24029,7 +24782,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_wipro_com",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_wipro_limited_muenchen",
       "candidate_id": "regional-hint:munich_business_indian_companies_wipro_limited_muenchen",
       "company_id": "company:wipro_limited",
       "candidate_ids": [
@@ -24066,7 +24819,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:wipro.com",
           "name:wipro limited"
         ],
         "conflict_flags": [],
@@ -24162,7 +24914,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_yamaichi_de",
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_yamaichi_electronics_deutschland_gmbh_muenchen",
       "candidate_id": "regional-hint:munich_business_japanese_companies_yamaichi_electronics_deutschland_gmbh_muenchen",
       "company_id": "company:yamaichi_electronics_deutschland_gmbh",
       "candidate_ids": [
@@ -24199,7 +24951,6 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:yamaichi.de",
           "name:yamaichi electronics deutschland"
         ],
         "conflict_flags": [],
@@ -24377,6 +25128,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:alexandrya"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_japanese_companies_all_nippon_airways_muenchen",
+      "candidate_id": "regional-hint:munich_business_japanese_companies_all_nippon_airways_muenchen",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:munich_business_japanese_companies_all_nippon_airways_muenchen"
+      ],
+      "canonical_name": "All Nippon Airways",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "RETRY_EXHAUSTED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 3,
+      "last_attempt_at": "2026-08-30T06:41:30.397Z",
+      "next_attempt_at": null,
+      "last_status": "UNVERIFIED",
+      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_japanese_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 11:10:00",
+        "record_hash": "a4ca8810cfbee6c4dd3678cc4afcfd160fbdd151f2b89b03514f77b9213d7e46",
+        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:all nippon airways"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -25045,6 +25840,50 @@
       "dedupe_context": {
         "dedupe_keys": [
           "name:fast ai movie"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_ikt_companies_google_deutschland_muenchen",
+      "candidate_id": "regional-hint:munich_business_ikt_companies_google_deutschland_muenchen",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:munich_business_ikt_companies_google_deutschland_muenchen"
+      ],
+      "canonical_name": "Google Deutschland",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T16:58:06.627Z",
+      "next_attempt_at": null,
+      "last_status": "MANUAL_REVIEW_REQUIRED",
+      "last_reason": "Suchmaschinen-Redirect wurde als offizieller Website-Beleg verworfen.",
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_ikt_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
+        "observed_at": "08/26/2026 08:30:00",
+        "record_hash": "00eb6d10f07e1381d79672eecf57846dec30c02a3d20d932746c343dadf8f8be",
+        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:google deutschland"
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
@@ -26463,6 +27302,50 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:regional_hint_munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen",
+      "candidate_id": "regional-hint:munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen"
+      ],
+      "canonical_name": "QuEST Global Engineering Services GmbH",
+      "source_count": 1,
+      "priority_score": 99,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:munich_business_indian_companies",
+        "source_class": "REGIONAL_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
+        "observed_at": "08/26/2026 12:00:00",
+        "record_hash": "41245cc365d8828230bb26e3b3221ad40abe8cb96e8b07223cd8014224bdc102",
+        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
+        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:quest global engineering services"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:regional_hint_openstreetmap_overpass_business_names_radio_data_center_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "candidate_id": "regional-hint:openstreetmap_overpass_business_names_radio_data_center_openstreetmap_overpass_snapshot_named_office_company_elements_in_munich_and_freising_bounding_boxes",
       "company_id": null,
@@ -27833,96 +28716,6 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_ana_co_jp",
-      "candidate_id": "regional-hint:munich_business_japanese_companies_all_nippon_airways_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_japanese_companies_all_nippon_airways_muenchen"
-      ],
-      "canonical_name": "All Nippon Airways",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "RETRY_EXHAUSTED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 3,
-      "last_attempt_at": "2026-08-30T06:41:30.397Z",
-      "next_attempt_at": null,
-      "last_status": "UNVERIFIED",
-      "last_reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_japanese_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Japanische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 11:10:00",
-        "record_hash": "a4ca8810cfbee6c4dd3678cc4afcfd160fbdd151f2b89b03514f77b9213d7e46",
-        "allowed_use": "Oeffentlich genannte japanische Unternehmen in Muenchen und Raum Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:ana.co.jp",
-          "name:all nippon airways"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_google_de",
-      "candidate_id": "regional-hint:munich_business_ikt_companies_google_deutschland_muenchen",
-      "company_id": null,
-      "candidate_ids": [
-        "regional-hint:munich_business_ikt_companies_google_deutschland_muenchen"
-      ],
-      "canonical_name": "Google Deutschland",
-      "source_count": 1,
-      "priority_score": 99,
-      "next_action": "VERIFY_OFFICIAL_SITE",
-      "reason_codes": [
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "MANUAL_REVIEW_REQUIRED",
-      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T16:58:06.627Z",
-      "next_attempt_at": null,
-      "last_status": "MANUAL_REVIEW_REQUIRED",
-      "last_reason": "Suchmaschinen-Redirect wurde als offizieller Website-Beleg verworfen.",
-      "freshness_status": "FRESH",
-      "risk_level": "LOW",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_ikt_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/brachenfokus/branche-IKT.html",
-        "observed_at": "08/26/2026 08:30:00",
-        "record_hash": "00eb6d10f07e1381d79672eecf57846dec30c02a3d20d932746c343dadf8f8be",
-        "allowed_use": "Oeffentlich genannte IKT-Unternehmen in Muenchen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:google.de",
-          "name:google deutschland"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 1
-      }
-    },
-    {
       "identity_cluster_id": "identity-cluster:register_amtsgericht_muenchen_hrb_3001",
       "candidate_id": "register-hint:offeneregister_sample_2026_08_delta_research_se_garching_b_muenchen_4",
       "company_id": null,
@@ -27968,51 +28761,1279 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_deutsches_theater_de",
-      "candidate_id": "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
-      "company_id": "company:deutsches_theater_muenchen_betriebs_gmbh",
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_aatec_medical_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_aatec_medical_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
       "candidate_ids": [
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_grund_und_hausbesitz_gmbh_muenchen",
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_deutsches_theater_muenchen_muenchen"
+        "regional-hint:izb_startups_aatec_medical_gmbh_martinsried_und_freising_weihenstephan"
       ],
-      "canonical_name": "Deutsches Theater Grund- und Hausbesitz GmbH",
+      "canonical_name": "AATec Medical GmbH",
       "source_count": 1,
       "priority_score": 95,
-      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
       "reason_codes": [
-        "DUPLICATE_CLUSTER_REVIEW",
         "OFFICIAL_VERIFICATION_REQUIRED"
       ],
       "target_area_basis": [
         "BRANCH_HINT_IN_TARGET"
       ],
-      "status": "VERIFIED",
-      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
       "retry_count": 0,
       "last_attempt_at": null,
-      "next_attempt_at": "2026-08-27T05:25:33.701Z",
-      "last_status": "CAREER_URL_VERIFIED",
-      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
       "freshness_status": "FRESH",
-      "risk_level": "MEDIUM",
+      "risk_level": "LOW",
       "source_evidence": {
-        "source_id": "source-registry:stadt_muenchen_unternehmensbeteiligungen",
+        "source_id": "source-registry:izb_startups",
         "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
         "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://stadt.muenchen.de/infos/unternehmensbeteiligungen.html",
-        "observed_at": "08/26/2026 13:00:00",
-        "record_hash": "7131fa2efede620a8e93ecd68db99789a0d9962c05320c2eff2a4de826cd27a0",
-        "allowed_use": "Oeffentlich gelistete staedtische Beteiligungen und Unternehmen als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "669af26ce6b8cd687fd67d1e48a4e7c6c86d25667940978add98148264c9ba20",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:deutsches-theater.de",
-          "name:deutsches theater grund und hausbesitz",
-          "name:deutsches theater muenchen"
+          "name:aatec medical"
         ],
         "conflict_flags": [],
-        "cluster_candidate_count": 2
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_landkreis_muenchen_gruenderzentren_acu_gmbh_landkreis_muenchen",
+      "candidate_id": "regional-hint:landkreis_muenchen_gruenderzentren_acu_gmbh_landkreis_muenchen",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:landkreis_muenchen_gruenderzentren_acu_gmbh_landkreis_muenchen"
+      ],
+      "canonical_name": "ACU GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:landkreis_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.landkreis-muenchen.de/themen/wirtschaft-wissenschaft/gruenderzentren/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "31bd010993079d2632c9b91313f4f522bbdccdb74fdec60030fff54bd5710335",
+        "allowed_use": "Oeffentlich genannte Technologie- und Gruenderzentren im Landkreis Muenchen als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Mieter- oder Firmenlisten separat registrieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine tiefe Folgecrawls ohne neue Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:acu"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_amplifold_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_amplifold_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_amplifold_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Amplifold GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "bc65863998f2c702635a95a339126ab219fbfebeb3099bbf7c66857fd6ea4a3c",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:amplifold"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_bavarian_biotech_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_bavarian_biotech_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_bavarian_biotech_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Bavarian Biotech GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "4ea9fd185752b419f8675af79cee309520596b65c62919bf7ce0ab3dfda58481",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bavarian biotech"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_bind_x_international_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_bind_x_international_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_bind_x_international_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Bind-X International GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "2e620089fb50cc3f63a7e7ad5969423505e7f9e6905c688d48636804868e4c03",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:bind x international"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_biom_biotech_cluster_development_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_biom_biotech_cluster_development_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_biom_biotech_cluster_development_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "BioM Biotech Cluster Development GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "fa1152fdfd554344c02862461d04974afc84364004cb07f73bf735399ad06abf",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:biom biotech cluster development"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_biontech_se_munich_small_molecules_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_biontech_se_munich_small_molecules_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_biontech_se_munich_small_molecules_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "BioNTech SE, Munich Small Molecules",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "3e2b059aa6851b48754d84b53a8d232ca3788fe18ccb545f38a8dbe365bf014d",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:biontech munich small molecules"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_catalym_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_catalym_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_catalym_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "CatalYm GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "e8b55891863725b36c056761a28c9bd2432c6bd349ea6d40f7d52481f590b3e6",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:catalym"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_cryondo_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_cryondo_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_cryondo_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Cryondo GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "0b7ca56c998743a1aa0167c4c1190bc77184ac1415a3ff9db52b8f5726c4725b",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:cryondo"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_eisbach_bio_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_eisbach_bio_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_eisbach_bio_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Eisbach Bio GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "093cc1777d4ac0bd0826116355062299daa9dac48b50565053bd1131d1798b1f",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:eisbach bio"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_galimedix_therapeutics_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_galimedix_therapeutics_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_galimedix_therapeutics_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Galimedix Therapeutics GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "c12f0e9704d0db38ff48b2ac017e21441007a558a66ab4a2b023591b0dbd32d3",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:galimedix therapeutics"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_landkreis_muenchen_gruenderzentren_innovations_und_gruenderzentrum_biotechnologie_izb_landkreis_muenchen",
+      "candidate_id": "regional-hint:landkreis_muenchen_gruenderzentren_innovations_und_gruenderzentrum_biotechnologie_izb_landkreis_muenchen",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:landkreis_muenchen_gruenderzentren_innovations_und_gruenderzentrum_biotechnologie_izb_landkreis_muenchen"
+      ],
+      "canonical_name": "Innovations- und Gruenderzentrum Biotechnologie IZB",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:landkreis_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.landkreis-muenchen.de/themen/wirtschaft-wissenschaft/gruenderzentren/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "b14a39bcb1adac7f4419ace884da086b5e1394c92cb2aac68e7b399baed65602",
+        "allowed_use": "Oeffentlich genannte Technologie- und Gruenderzentren im Landkreis Muenchen als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Mieter- oder Firmenlisten separat registrieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine tiefe Folgecrawls ohne neue Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:innovations und gruenderzentrum biotechnologie izb"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_izb_innovations_und_gruenderzentrum_biotechnologie_foerdergesellschaft_izb_mbh_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_izb_innovations_und_gruenderzentrum_biotechnologie_foerdergesellschaft_izb_mbh_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_izb_innovations_und_gruenderzentrum_biotechnologie_foerdergesellschaft_izb_mbh_muenchen_und_umland"
+      ],
+      "canonical_name": "IZB - Innovations- und Gruenderzentrum Biotechnologie Foerdergesellschaft IZB mbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "9b796fc5e7f1d03f0fef7104cc08380d01a4ab2cc1de7b7407eb878d383fbb30",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:izb innovations und gruenderzentrum biotechnologie foerdergesellschaft izb mbh"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_stadt_muenchen_gruenderzentren_life_science_factory_muenchen_und_umland",
+      "candidate_id": "regional-hint:stadt_muenchen_gruenderzentren_life_science_factory_muenchen_und_umland",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:stadt_muenchen_gruenderzentren_life_science_factory_muenchen_und_umland"
+      ],
+      "canonical_name": "Life Science Factory",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "3fa1d90073471aeb2770e0ad1828f11b71f8e28f0309b19f1b8774ead0343090",
+        "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:life science factory"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_novogene_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_novogene_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_novogene_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Novogene",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "d042516622bcef8e0f025790a1c2150477dd6745f2501fbdc2d0063940ebdddb",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:novogene"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_omegametrix_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_omegametrix_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_omegametrix_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Omegametrix GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "04a95930d91e6ce69c2e8f068ab4a9b08f9016d3d0ee588c00138d944c2a2caa",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:omegametrix"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_oncobeta_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_oncobeta_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_oncobeta_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "OncoBeta GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "6a9b04bcc7b1f67e58401f8a0d2842bdc30ebc9ebbddccd2022805ecdb986d32",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:oncobeta"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_phatocon_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_phatocon_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_phatocon_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "PhaToCon",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "d00c4e451d8f971988985115f805dd1b0e19bf18126eb428e34fb8e00ea6792c",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:phatocon"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_preomics_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_preomics_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_preomics_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "PreOmics GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "c68185e0feaf1f44e02376ab5b0782d65af6b6258cef8d16107af10107aed7fe",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:preomics"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_protevo_bio_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_protevo_bio_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_protevo_bio_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Protevo Bio",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "9f2d03754857ab1c3de941ae14ba9cf25ae5d75d2eb64212b1e5777d5b8e1914",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:protevo bio"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_rnhale_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_rnhale_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_rnhale_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "RNhale GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "325dde03fb4271f9516e07f239dcd390006f0e4dcdb9edcd36a70d8ef341db96",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:rnhale"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_scg_cell_therapy_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_scg_cell_therapy_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_scg_cell_therapy_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "SCG Cell Therapy GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "5bd7ae10419b1bed760c98ed1737ae01d1ac75f4d9f3b471e84b42eb3b2364dc",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:scg cell therapy"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_scirhom_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_scirhom_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_scirhom_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "SciRhom GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "1e6cda7f37955a87364cabeeac9fbbab6cbfd1f64ca0657df77a85cbe2573e1e",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:scirhom"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_secarna_gmbh_and_co_kg_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_secarna_gmbh_and_co_kg_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_secarna_gmbh_and_co_kg_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Secarna GmbH & Co. KG",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "5e3bf697e95889ab739b0f7f3ae34b8c64aca26592f3831747b37738c4e58fd3",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:secarna"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_smey_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_smey_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_smey_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "SMEY",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "81701f84a4653551ec36c6fed4c4f13789872783ca295799f474d7f650db990e",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:smey"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_sterna_biologicals_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_sterna_biologicals_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_sterna_biologicals_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Sterna Biologicals",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "5dbf52706e45e7dc275775a7c239b388395dbe96ee8d9a941b61145a0db7e811",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:sterna biologicals"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_tubulis_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_tubulis_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_tubulis_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Tubulis",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "bc20067613874803555efff9e437749da659f3e587b4c94488292faf34acf3a2",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:tubulis"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_twogee_biotech_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_twogee_biotech_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_twogee_biotech_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "Twogee Biotech GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "c5b6b55afe70a40a1fbe19477629c82a8f1baabd164dc39510adeee700b1ca89",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:twogee biotech"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
+      "identity_cluster_id": "identity-cluster:regional_hint_izb_startups_veongen_therapeutics_gmbh_martinsried_und_freising_weihenstephan",
+      "candidate_id": "regional-hint:izb_startups_veongen_therapeutics_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": null,
+      "candidate_ids": [
+        "regional-hint:izb_startups_veongen_therapeutics_gmbh_martinsried_und_freising_weihenstephan"
+      ],
+      "canonical_name": "VeonGen Therapeutics GmbH",
+      "source_count": 1,
+      "priority_score": 95,
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "reason_codes": [
+        "OFFICIAL_VERIFICATION_REQUIRED"
+      ],
+      "target_area_basis": [
+        "BRANCH_HINT_IN_TARGET"
+      ],
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "review_reason": "OFFICIAL_VERIFICATION_REQUIRED",
+      "retry_count": 0,
+      "last_attempt_at": null,
+      "next_attempt_at": null,
+      "last_status": null,
+      "last_reason": null,
+      "freshness_status": "FRESH",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:izb_startups",
+        "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+        "observed_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "09/06/2026 16:30:00",
+        "record_hash": "bcc84d41ffbd204b94a8ee2a54dece7f682e840da00f06cfe3798a46c9bbdd9e",
+        "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+        "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "name:veongen therapeutics"
+        ],
+        "conflict_flags": [],
+        "cluster_candidate_count": 1
       }
     },
     {
@@ -30805,54 +32826,6 @@
         ],
         "conflict_flags": [],
         "cluster_candidate_count": 1
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_intelizign_com",
-      "candidate_id": "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
-      "company_id": "company:intelizign_engineering_services_gmbh",
-      "candidate_ids": [
-        "regional-hint:munich_business_indian_companies_intelizign_engineering_services_gmbh_muenchen",
-        "regional-hint:munich_business_indian_companies_quest_global_engineering_services_gmbh_muenchen"
-      ],
-      "canonical_name": "Intelizign Engineering Services GmbH",
-      "source_count": 1,
-      "priority_score": 91,
-      "next_action": "ALREADY_VERIFIED_IN_STORE",
-      "reason_codes": [
-        "DUPLICATE_CLUSTER_REVIEW",
-        "OFFICIAL_VERIFICATION_REQUIRED"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET"
-      ],
-      "status": "VERIFIED",
-      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T17:27:13.367Z",
-      "next_attempt_at": null,
-      "last_status": "COMPANY_DOMAIN_VERIFIED",
-      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
-      "freshness_status": "FRESH",
-      "risk_level": "MEDIUM",
-      "source_evidence": {
-        "source_id": "source-registry:munich_business_indian_companies",
-        "source_class": "REGIONAL_DIRECTORY",
-        "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
-        "observed_url": "https://www.munich-business.eu/standort-muenchen/international/Indische-community-in-Muenchen.html",
-        "observed_at": "08/26/2026 12:00:00",
-        "record_hash": "0f4dff69e3e97d130eb61227de530bbfcd14e659993296164bc1cc279784f20d",
-        "allowed_use": "Oeffentlich genannte indische Unternehmen mit Muenchen- oder Bayern-Bezug als regionale Arbeitgeberkandidaten erfassen; offizielle Firmenwebsite und Karrierepfad danach separat verifizieren.",
-        "rate_limit_policy": "Manueller oder seltener lokaler Snapshot; kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:intelizign.com",
-          "name:intelizign engineering services",
-          "name:quest global engineering services"
-        ],
-        "conflict_flags": [],
-        "cluster_candidate_count": 2
       }
     },
     {
@@ -78758,7 +80731,7 @@
       }
     },
     {
-      "identity_cluster_id": "identity-cluster:domain_munich_airport_com",
+      "identity_cluster_id": "identity-cluster:domain_munich_airport_de",
       "candidate_id": "jobboard-hint:ba_jobsuche_flughafen_muenchen_it_operations_muenchen",
       "company_id": "company:flughafen_muenchen_gmbh",
       "candidate_ids": [
@@ -78797,7 +80770,7 @@
       },
       "dedupe_context": {
         "dedupe_keys": [
-          "domain:munich-airport.com",
+          "domain:munich-airport.de",
           "name:flughafen muenchen"
         ],
         "conflict_flags": [
@@ -78905,6 +80878,55 @@
       }
     },
     {
+      "identity_cluster_id": "identity-cluster:domain_swm_de",
+      "candidate_id": "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
+      "company_id": "company:stadtwerke_muenchen_gmbh",
+      "candidate_ids": [
+        "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen"
+      ],
+      "canonical_name": "Stadtwerke Muenchen GmbH",
+      "source_count": 1,
+      "priority_score": 89,
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "reason_codes": [
+        "CANDIDATE_REFRESH_DUE",
+        "KNOWN_COMPANY_HINT",
+        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+      ],
+      "target_area_basis": [
+        "JOB_LOCATION_IN_TARGET"
+      ],
+      "status": "VERIFIED",
+      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
+      "retry_count": 0,
+      "last_attempt_at": "2026-08-27T05:08:12.805Z",
+      "next_attempt_at": null,
+      "last_status": "CAREER_URL_VERIFIED",
+      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
+      "freshness_status": "EXPIRED",
+      "risk_level": "LOW",
+      "source_evidence": {
+        "source_id": "source-registry:ba_jobsuche",
+        "source_class": "JOB_BOARD_DISCOVERY",
+        "evidence_level": "DISCOVERY_HINT",
+        "observed_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1199999999-S",
+        "observed_at": "08/23/2026 08:20:00",
+        "record_hash": "4082a325b51aacfcfe6740e660eb689af508c4e0cd79e9978107613c485a64dd",
+        "allowed_use": "Suchergebnisse nur als Arbeitgeber-Hints verwenden; offizielle Firmenquelle separat verifizieren.",
+        "rate_limit_policy": "Nur begrenzte reproduzierbare Suchmatrix mit Cache; keine Massenextraktion."
+      },
+      "dedupe_context": {
+        "dedupe_keys": [
+          "domain:swm.de",
+          "name:stadtwerke muenchen"
+        ],
+        "conflict_flags": [
+          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
+        ],
+        "cluster_candidate_count": 1
+      }
+    },
+    {
       "identity_cluster_id": "identity-cluster:domain_ivv_fraunhofer_de",
       "candidate_id": "jobboard-hint:ba_jobsuche_fraunhofer_ivv_it_operations_freising",
       "company_id": "company:fraunhofer_ivv",
@@ -78948,58 +80970,6 @@
         "dedupe_keys": [
           "domain:ivv.fraunhofer.de",
           "name:fraunhofer ivv"
-        ],
-        "conflict_flags": [
-          "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-        ],
-        "cluster_candidate_count": 2
-      }
-    },
-    {
-      "identity_cluster_id": "identity-cluster:domain_swm_de",
-      "candidate_id": "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
-      "company_id": "company:stadtwerke_muenchen_gmbh",
-      "candidate_ids": [
-        "jobboard-hint:ba_jobsuche_stadtwerke_muenchen_it_operations_muenchen",
-        "regional-hint:stadt_muenchen_unternehmensbeteiligungen_stadtwerke_muenchen_gmbh_muenchen"
-      ],
-      "canonical_name": "Stadtwerke Muenchen GmbH",
-      "source_count": 2,
-      "priority_score": 84,
-      "next_action": "ALREADY_VERIFIED_IN_STORE",
-      "reason_codes": [
-        "CANDIDATE_REFRESH_DUE",
-        "DUPLICATE_CLUSTER_REVIEW",
-        "KNOWN_COMPANY_HINT",
-        "NAME_MATCH_WITHOUT_STRONG_IDENTITY"
-      ],
-      "target_area_basis": [
-        "BRANCH_HINT_IN_TARGET",
-        "JOB_LOCATION_IN_TARGET"
-      ],
-      "status": "VERIFIED",
-      "review_reason": "VERIFIED_PRODUCTIVE_COMPANY_EXISTS",
-      "retry_count": 0,
-      "last_attempt_at": "2026-08-27T05:08:12.805Z",
-      "next_attempt_at": null,
-      "last_status": "CAREER_URL_VERIFIED",
-      "last_reason": "Kandidat ist bereits als offiziell verifizierte produktive Firma im Store vorhanden.",
-      "freshness_status": "EXPIRED",
-      "risk_level": "MEDIUM",
-      "source_evidence": {
-        "source_id": "source-registry:ba_jobsuche",
-        "source_class": "JOB_BOARD_DISCOVERY",
-        "evidence_level": "DISCOVERY_HINT",
-        "observed_url": "https://www.arbeitsagentur.de/jobsuche/jobdetail/10000-1199999999-S",
-        "observed_at": "08/23/2026 08:20:00",
-        "record_hash": "4082a325b51aacfcfe6740e660eb689af508c4e0cd79e9978107613c485a64dd",
-        "allowed_use": "Suchergebnisse nur als Arbeitgeber-Hints verwenden; offizielle Firmenquelle separat verifizieren.",
-        "rate_limit_policy": "Nur begrenzte reproduzierbare Suchmatrix mit Cache; keine Massenextraktion."
-      },
-      "dedupe_context": {
-        "dedupe_keys": [
-          "domain:swm.de",
-          "name:stadtwerke muenchen"
         ],
         "conflict_flags": [
           "NAME_MATCH_WITHOUT_STRONG_IDENTITY"

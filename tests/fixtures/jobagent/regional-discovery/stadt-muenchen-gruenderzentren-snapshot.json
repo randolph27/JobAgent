@@ -1,0 +1,26 @@
+{
+  "schema_version": "jobagent/regional-directory-snapshot/v1",
+  "generated_at": "2026-09-06T16:30:00.000Z",
+  "sources": [
+    {
+      "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+      "format": "json_items",
+      "source_page": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+      "region_reference": "Muenchen und Umland",
+      "items": [
+        { "company_name": "Wavelab - Innovation Lab und Gruenderzentrum for Musik, Arts & Media", "sector_hint": "Music, Arts, Media", "address_or_location_hint": "Arcisstrasse 12, Muenchen" },
+        { "company_name": "Impact Hub", "sector_hint": "Gruenderzentrum", "address_or_location_hint": "Gotzinger Strasse 8, Muenchen" },
+        { "company_name": "IZB - Innovations- und Gruenderzentrum Biotechnologie Foerdergesellschaft IZB mbH", "sector_hint": "Biotechnologie", "address_or_location_hint": "82152 Planegg", "latitude": 48.108, "longitude": 11.452 },
+        { "company_name": "Media Lab Bayern", "sector_hint": "Media", "address_or_location_hint": "Balanstrasse 73, Muenchen" },
+        { "company_name": "Muenchner Technologiezentrum MTZ", "sector_hint": "Technologie", "address_or_location_hint": "Agnes-Pockels-Bogen 1, Muenchen" },
+        { "company_name": "Muenchner Gewerbehoefe MGH", "sector_hint": "Gewerbe- und Technologiezentrum", "address_or_location_hint": "Gollierstrasse 70, Muenchen" },
+        { "company_name": "MUNICH URBAN COLAB", "sector_hint": "Smart City, Innovation", "address_or_location_hint": "Freddie-Mercury-Strasse 5, Muenchen" },
+        { "company_name": "WERK1", "sector_hint": "Digitale Startups", "address_or_location_hint": "Am Kartoffelgarten 14, Muenchen" },
+        { "company_name": "WerkStadt Sendling", "sector_hint": "Gruenderzentrum", "address_or_location_hint": "Floessergasse 4, Muenchen" },
+        { "company_name": "Life Science Factory", "sector_hint": "Life Science", "address_or_location_hint": "85764 Oberschleissheim", "latitude": 48.250, "longitude": 11.558 },
+        { "company_name": "gate Garchinger Technologie- und Gruenderzentrum GmbH", "sector_hint": "High-Tech, DeepTech", "address_or_location_hint": "85748 Garching b. Muenchen", "latitude": 48.249, "longitude": 11.651 },
+        { "company_name": "UnternehmerTUM Internationales Zentrum fuer Innovation und Gruendung", "sector_hint": "Innovation, Gruendung", "address_or_location_hint": "85748 Garching b. Muenchen", "latitude": 48.249, "longitude": 11.651 }
+      ]
+    }
+  ]
+}

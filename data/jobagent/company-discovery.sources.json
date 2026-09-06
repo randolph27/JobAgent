@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent/discovery-source/v2",
-  "generated_at": "2026-08-27T12:00:00.000Z",
+  "generated_at": "2026-09-06T16:30:00.000Z",
   "items": [
     {
       "source_id": "source-registry:unternehmensregister",
@@ -716,6 +716,72 @@
       "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
       "review_required": true,
       "legal_risk": "MEDIUM"
+    },
+    {
+      "source_id": "source-registry:izb_startups",
+      "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+      "source_url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+      "operator": "Innovations- und Gruenderzentrum Biotechnologie IZB",
+      "allowed_use": "Oeffentlich gelistete aktuell ansaessige IZB-Start-ups in Martinsried und Weihenstephan als regionale Arbeitgeberkandidaten erfassen; Firmenwebsite und Karrierepfad danach separat offiziell verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer den regionalen Life-Sciences-Markt, keine Karrierequellenaufnahme allein aus der IZB-Liste und keine Uebernahme von Kontakt- oder Personenangaben.",
+      "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung mit Hash, kein Massencrawl und keine externe Linkverfolgung ohne getrennte Quellenentscheidung.",
+      "robots_or_terms_note": "Oeffentliche IZB-Seite vor Snapshot-Aktualisierung pruefen; bei Unklarheit nur manuell dokumentierten Snapshot verwenden.",
+      "expected_fields": [
+        "company_name",
+        "sector_hint",
+        "address_or_location_hint",
+        "source_url"
+      ],
+      "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+      "freshness_policy": "Bei Life-Sciences-Verifikationswelle neu pruefen; Seitenstand und Snapshot-Hash im Evidence-Log notieren.",
+      "retention_policy": "Nur Organisationsname, Standortbezug, Sektorhinweis und Source-URL speichern; keine Kontakt- oder Personendaten.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "LOW"
+    },
+    {
+      "source_id": "source-registry:landkreis_muenchen_gruenderzentren",
+      "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+      "source_url": "https://www.landkreis-muenchen.de/themen/wirtschaft-wissenschaft/gruenderzentren/",
+      "operator": "Landkreis Muenchen",
+      "allowed_use": "Oeffentlich genannte Technologie- und Gruenderzentren im Landkreis Muenchen als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Mieter- oder Firmenlisten separat registrieren.",
+      "forbidden_use": "Keine Ableitung aller Mieter oder Start-ups ohne eigene Quelle, keine Karrierequellenaufnahme allein aus der Infrastrukturseite und keine Kontakt- oder Personenfelder.",
+      "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine tiefe Folgecrawls ohne neue Quellenentscheidung.",
+      "robots_or_terms_note": "Kommunale Nutzungsbedingungen und robots vor automatisiertem Abruf pruefen; bei Unklarheit Snapshot manuell halten.",
+      "expected_fields": [
+        "company_name",
+        "sector_hint",
+        "address_or_location_hint",
+        "source_url"
+      ],
+      "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+      "freshness_policy": "Bei regionaler Verifikationswelle neu pruefen; Seitenstand im Evidence-Log notieren.",
+      "retention_policy": "Nur Organisationsname, Standortbezug, Sektorhinweis und Source-URL speichern.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "LOW"
+    },
+    {
+      "source_id": "source-registry:stadt_muenchen_gruenderzentren",
+      "source_class": "PUBLIC_INSTITUTION_DIRECTORY",
+      "source_url": "https://stadt.muenchen.de/service/info/grunderzentren/10214023/n0/",
+      "operator": "Landeshauptstadt Muenchen",
+      "allowed_use": "Oeffentlich gelistete Muenchner Gruenderzentren als regionale Organisations- und Follow-up-Kandidaten erfassen; konkrete Arbeitgeber, Firmenwebsites und Karrierepfade danach separat offiziell verifizieren.",
+      "forbidden_use": "Keine Vollstaendigkeitsbehauptung fuer Start-ups oder Arbeitgeber, keine Karrierequellenaufnahme allein aus der Gruenderzentrenliste und keine Kontakt- oder Personenfelder.",
+      "rate_limit_policy": "Lokaler Fixture-/Snapshot-Import; seltene manuelle Aktualisierung, keine Standortsuche oder Kartenautomation als Massencrawl.",
+      "robots_or_terms_note": "Kommunale Nutzungsbedingungen und robots vor automatisiertem Abruf pruefen; bei Unklarheit nur lokalen Snapshot verwenden.",
+      "expected_fields": [
+        "company_name",
+        "sector_hint",
+        "address_or_location_hint",
+        "source_url"
+      ],
+      "evidence_level": "SECONDARY_OFFICIAL_DIRECTORY",
+      "freshness_policy": "Bei regionaler Startup-/Technologie-Welle neu pruefen; Seitenstand im Evidence-Log notieren.",
+      "retention_policy": "Nur Organisationsname, Standortbezug, Sektorhinweis und Source-URL speichern; keine Kontakt- oder Personendaten.",
+      "import_mode": "FIXTURE_OR_SNAPSHOT_ONLY",
+      "review_required": true,
+      "legal_risk": "LOW"
     }
   ]
 }
