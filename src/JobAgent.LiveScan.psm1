@@ -247,6 +247,47 @@ function New-JobAgentLiveCandidate {
     }
 }
 
+function Get-JobAgentLiveUrlJobId {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$Url)
+
+    try {
+        $uri = [Uri]$Url
+    }
+    catch {
+        return $null
+    }
+
+    foreach ($queryPair in @($uri.Query.TrimStart('?') -split '&')) {
+        if ($queryPair -notmatch '^(?<name>[^=]+)=(?<value>.*)$') {
+            continue
+        }
+        $name = [Uri]::UnescapeDataString($Matches.name)
+        $value = [Uri]::UnescapeDataString($Matches.value)
+        if ($name -match '^(?i:jobid|job_id|job|req|requisition|posting)$' -and $value -match '^[A-Za-z0-9][A-Za-z0-9._-]{1,127}$') {
+            return $value
+        }
+    }
+
+    $segments = @($uri.AbsolutePath.Trim('/') -split '/' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    for ($index = 1; $index -lt $segments.Count; $index++) {
+        $prefix = [Uri]::UnescapeDataString($segments[$index - 1])
+        $value = [Uri]::UnescapeDataString($segments[$index])
+        if ($prefix -match '^(?i:job|jobs|job-details|posting|postings|req|requisition|requisitions)$' -and $value -match '^[A-Za-z0-9][A-Za-z0-9._-]{1,127}$') {
+            return $value
+        }
+    }
+
+    return $null
+}
+
+function Test-JobAgentLivePaginationHint {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Html)
+
+    return $Html -match '(?is)rel\s*=\s*["'']?next\b|\b(?:next|weiter|page|seite)\s*[=:]\s*\d+|[?&](?:page|offset|start)=\d+'
+}
+
 function Get-JobAgentLiveJsonLdNodes {
     param([Parameter()][AllowNull()][object]$Node)
 
@@ -557,8 +598,8 @@ function New-JobAgentLiveRawJob {
     if ([string]::IsNullOrWhiteSpace($summary) -and $Candidate.PSObject.Properties.Name -contains 'summary') {
         $summary = [string]$Candidate.summary
     }
-    $idMatch = [regex]::Match([string]$Candidate.detail_url, '(?i)(?:jobid|job_id|job|req|requisition|posting)[=/_-]?(?<id>[A-Za-z0-9._-]{2,})')
-    $externalId = if (($Candidate.PSObject.Properties.Name -contains 'external_job_id') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.external_job_id)) { [string]$Candidate.external_job_id } elseif ($idMatch.Success) { $idMatch.Groups['id'].Value } else { $null }
+    $urlJobId = Get-JobAgentLiveUrlJobId -Url ([string]$Candidate.detail_url)
+    $externalId = if (($Candidate.PSObject.Properties.Name -contains 'external_job_id') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.external_job_id)) { [string]$Candidate.external_job_id } elseif (-not [string]::IsNullOrWhiteSpace($urlJobId)) { $urlJobId } else { $null }
     $atsJobId = if (($Candidate.PSObject.Properties.Name -contains 'ats_job_id') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.ats_job_id)) { [string]$Candidate.ats_job_id } else { $externalId }
     $job = New-JobAgentRawJob `
         -Title ([string]$Candidate.title) `
@@ -632,6 +673,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
     $jobs = New-Object System.Collections.Generic.List[object]
     $detailFailures = New-Object System.Collections.Generic.List[object]
     $messages = New-Object System.Collections.Generic.List[string]
+    $detailBudgetReached = $candidates.Count -gt [int]$Policy.max_detail_fetches_per_source
     foreach ($candidate in @($candidates | Select-Object -First ([int]$Policy.max_detail_fetches_per_source))) {
         $detailFetch = Invoke-JobAgentLiveFetchWithRetry -Url ([string]$candidate.detail_url) -Policy $Policy -Fetcher $Fetcher
         if ($detailFetch.ok -eq $true) {
@@ -659,6 +701,27 @@ function Invoke-JobAgentLiveHtmlAdapter {
             -FinishedAt ([datetime]::UtcNow)
     }
 
+    $resultLimited = $candidates.Count -ge [int]$Policy.max_results_per_source
+    $paginationDetected = Test-JobAgentLivePaginationHint -Html ([string]$sourceFetch.content)
+    if ($detailBudgetReached -or $resultLimited -or $paginationDetected -or $detailFailures.Count -gt 0) {
+        $incompleteReasons = New-Object System.Collections.Generic.List[string]
+        if ($detailBudgetReached) { $incompleteReasons.Add('detail_fetch_limit_reached') }
+        if ($resultLimited) { $incompleteReasons.Add('result_limit_reached') }
+        if ($paginationDetected) { $incompleteReasons.Add('pagination_detected') }
+        if ($detailFailures.Count -gt 0) { $incompleteReasons.Add('detail_fetch_failed') }
+        return New-JobAgentAdapterResult `
+            -AdapterInput $AdapterInput `
+            -AdapterName 'live-html-adapter' `
+            -Status 'PARTIAL' `
+            -ErrorClass 'TECHNICAL_LIMITATION' `
+            -RetryRecommendation 'RETRY_NEXT_RUN' `
+            -RawJobs @($jobs.ToArray()) `
+            -HttpStatus $sourceFetch.status_code `
+            -ArtifactPaths @(@($messages.ToArray()) + @($incompleteReasons.ToArray())) `
+            -StartedAt $startedAt `
+            -FinishedAt ([datetime]::UtcNow)
+    }
+
     New-JobAgentAdapterResult `
         -AdapterInput $AdapterInput `
         -AdapterName 'live-html-adapter' `
@@ -668,6 +731,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
         -RawJobs @($jobs.ToArray()) `
         -HttpStatus $sourceFetch.status_code `
         -ArtifactPaths @($messages.ToArray()) `
+        -IsComplete $true `
         -StartedAt $startedAt `
         -FinishedAt ([datetime]::UtcNow)
 }

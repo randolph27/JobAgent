@@ -113,6 +113,9 @@ Assert-True -Condition ($fixtureResult.scan_attempt.error_class -eq 'NONE') -Mes
 
 $emptyFixtureResult = Invoke-JobAgentFixtureAdapter -AdapterInput $input -FixtureJobs @()
 Assert-True -Condition ($emptyFixtureResult.error_class -eq 'NO_JOBS_FOUND') -Message 'Leerer FixtureAdapter-Lauf klassifiziert nicht NO_JOBS_FOUND.'
+Assert-True -Condition (-not $emptyFixtureResult.scan_complete) -Message 'Nicht explizit vollstaendige leere Fixtures duerfen keine Entfernung freigeben.'
+$completeEmptyFixtureResult = Invoke-JobAgentFixtureAdapter -AdapterInput $input -FixtureJobs @() -CompleteEmptyResult
+Assert-True -Condition ($completeEmptyFixtureResult.status -eq 'SUCCESS' -and $completeEmptyFixtureResult.scan_complete) -Message 'Explizit vollstaendige leere Fixture wird nicht als vollstaendig markiert.'
 Assert-True -Condition ($emptyFixtureResult.retry_recommendation -eq 'RETRY_NEXT_RUN') -Message 'Leerer FixtureAdapter-Lauf setzt falsche Retry-Empfehlung.'
 
 $html = @'
@@ -145,6 +148,6 @@ Assert-True -Condition (@($contract.raw_job_optional) -contains 'description') -
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('scan_context', 'official_source_guard', 'raw_job_validation', 'raw_job_description_sanitizing', 'fixture_success', 'fixture_empty', 'html_success', 'html_no_jobs', 'html_parsing_error', 'contract_errors', 'raw_job_source_status')
+    cases = @('scan_context', 'official_source_guard', 'raw_job_validation', 'raw_job_description_sanitizing', 'fixture_success', 'fixture_empty', 'fixture_explicit_complete_empty', 'html_success', 'html_no_jobs', 'html_parsing_error', 'contract_errors', 'raw_job_source_status')
     raw_jobs = @($htmlResult.raw_jobs).Count
 } | ConvertTo-Json -Depth 4

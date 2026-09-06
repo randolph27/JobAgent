@@ -290,6 +290,11 @@ function Update-JobAgentExistingJobFromRawJob {
     $newAtsId = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'ats_job_id')
     $newDescription = Get-JobAgentRawDescription -RawJob $RawJob
     $oldDescription = ConvertTo-JobAgentStatusPlainText -Value (Get-JobAgentRawValue -RawJob $job -Name 'description' -Default 'UNKNOWN')
+    $newLocation = New-JobAgentStatusLocation -RawLocation (Get-JobAgentRawValue -RawJob $RawJob -Name 'location' -Default (Get-JobAgentRawValue -RawJob $RawJob -Name 'location_label' -Default $job.location))
+    $newClassification = if ($RawJob.PSObject.Properties.Name -contains 'classification') { $RawJob.classification } else { $job.classification }
+    $newPriority = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'priority' -Default $job.priority)
+    $newWorkModel = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_model' -Default $job.work_model)
+    $newEmploymentType = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'employment_type' -Default $job.employment_type)
 
     $job.title = $newTitle
     $job.official_url = $newUrl
@@ -297,13 +302,22 @@ function Update-JobAgentExistingJobFromRawJob {
     $job.ats_job_id = $newAtsId
     $job | Add-Member -NotePropertyName description -NotePropertyValue $newDescription -Force
     $job | Add-Member -NotePropertyName description_source -NotePropertyValue (Get-JobAgentRawDescriptionSource -RawJob $RawJob -Description $newDescription) -Force
-    $job.location = New-JobAgentStatusLocation -RawLocation (Get-JobAgentRawValue -RawJob $RawJob -Name 'location' -Default (Get-JobAgentRawValue -RawJob $RawJob -Name 'location_label' -Default $job.location))
+    $job.location = $newLocation
+    $job.classification = $newClassification
+    $job.priority = $newPriority
+    $job.work_model = $newWorkModel
+    $job.employment_type = $newEmploymentType
     $job.last_seen = $ObservedAt
     $job.identity_basis = $Decision.identity_basis
 
     if ($oldDescription -ne $newDescription) {
         $changedFields.Add('description')
     }
+    if (($ExistingJob.location | ConvertTo-Json -Depth 10 -Compress) -ne ($newLocation | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('location') }
+    if (($ExistingJob.classification | ConvertTo-Json -Depth 10 -Compress) -ne ($newClassification | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('classification') }
+    if ([string]$ExistingJob.priority -ne $newPriority) { $changedFields.Add('priority') }
+    if ([string]$ExistingJob.work_model -ne $newWorkModel) { $changedFields.Add('work_model') }
+    if ([string]$ExistingJob.employment_type -ne $newEmploymentType) { $changedFields.Add('employment_type') }
 
     if (($Decision.decision -eq 'UPDATED') -or ($oldDescription -ne $newDescription)) {
         $job.status = 'UPDATED'
@@ -382,13 +396,7 @@ function Test-JobAgentRemovalEligibleAdapterResult {
 
     $status = [string]$AdapterResult.status
     $errorClass = [string]$AdapterResult.error_class
-    if (($status -eq 'SUCCESS') -and ($errorClass -eq 'NONE')) {
-        return $true
-    }
-    if (($status -eq 'PARTIAL') -and ($errorClass -eq 'NO_JOBS_FOUND')) {
-        return $true
-    }
-    return $false
+    return ($status -eq 'SUCCESS') -and ($errorClass -eq 'NONE') -and ($AdapterResult.PSObject.Properties.Name -contains 'scan_complete') -and ([bool]$AdapterResult.scan_complete)
 }
 
 function Test-JobAgentRawJobValidForStatus {

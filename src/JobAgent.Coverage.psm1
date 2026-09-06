@@ -435,11 +435,19 @@ function Get-JobAgentCoverageCompanyMetric {
     $lastSuccessfulScanAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Company -Name 'last_successful_scan_at')
     $latestAttemptStatus = [string](Get-JobAgentCoverageProperty -Object $LatestAttempt -Name 'status' -Default 'NEVER_SCANNED')
     $latestErrorClass = [string](Get-JobAgentCoverageProperty -Object $LatestAttempt -Name 'error_class' -Default 'NONE')
+    $latestScanComplete = [bool](Get-JobAgentCoverageProperty -Object $LatestAttempt -Name 'scan_complete' -Default $false)
     $hasCareerUrl = -not [string]::IsNullOrWhiteSpace([string](Get-JobAgentCoverageProperty -Object $Company -Name 'career_url'))
-    $hasMatchingJobs = @($Jobs | Where-Object { $null -ne $_ -and (Test-JobAgentCoverageMatchingJob -Job $_) }).Count -gt 0
+    $matchingJobsCount = @($Jobs | Where-Object { $null -ne $_ -and (Test-JobAgentCoverageMatchingJob -Job $_) }).Count
+    $hasMatchingJobs = $matchingJobsCount -gt 0
     $wasScanned = $null -ne $LatestAttempt
     $latestScanFailed = $wasScanned -and $latestAttemptStatus -eq 'FAILED'
-    $latestScanSucceeded = $wasScanned -and $latestAttemptStatus -eq 'SUCCESS'
+    $latestScanSucceeded = $wasScanned -and $latestAttemptStatus -eq 'SUCCESS' -and $latestScanComplete
+    $officialSourceVerified = @($JobSources | Where-Object {
+            [bool](Get-JobAgentCoverageProperty -Object $_ -Name 'is_official' -Default $false) -and
+            @((Get-JobAgentCoverageProperty -Object $_ -Name 'verification_evidence' -Default @()) | Where-Object {
+                    [string](Get-JobAgentCoverageProperty -Object $_ -Name 'status' -Default '') -eq 'VERIFIED'
+                }).Count -gt 0
+        }).Count -gt 0
     $isStale = $null -eq $lastSuccessfulScanAt -or $lastSuccessfulScanAt -lt $Now.ToUniversalTime().AddDays(-$StaleAfterDays)
     $ats = @((Get-JobAgentCoverageProperty -Object $Company -Name 'ats' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
     $verificationStatus = [string](Get-JobAgentCoverageProperty -Object $Company -Name 'verification_status' -Default 'UNVERIFIED')
@@ -518,10 +526,14 @@ function Get-JobAgentCoverageCompanyMetric {
         primary_link = if ($primaryLink.Count -eq 1) { $primaryLink[0] } else { $null }
         has_career_url = $hasCareerUrl
         was_scanned = $wasScanned
+        official_source_verified = $officialSourceVerified
+        latest_scan_status = $latestAttemptStatus
+        latest_scan_complete = $latestScanComplete
         latest_scan_succeeded = $latestScanSucceeded
         latest_scan_failed = $latestScanFailed
         latest_error_class = $latestErrorClass
         has_matching_jobs = $hasMatchingJobs
+        matching_jobs_count = $matchingJobsCount
         last_successful_scan_at = if ($null -eq $lastSuccessfulScanAt) { $null } else { $lastSuccessfulScanAt.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture) }
         is_stale = $isStale
         ats_known = $ats.Count -gt 0
@@ -1646,6 +1658,15 @@ function New-JobAgentCoverageReport {
             scannable_without_official_source = $scannableWithoutOfficialSource
             with_career_url = @($metricsArray | Where-Object has_career_url).Count
             without_career_url = @($metricsArray | Where-Object { -not [bool]$_.has_career_url }).Count
+            discovered = $metricsArray.Count
+            official_source_verified = @($metricsArray | Where-Object official_source_verified).Count
+            live_attempted = @($metricsArray | Where-Object was_scanned).Count
+            live_complete = @($metricsArray | Where-Object latest_scan_complete).Count
+            partial = @($metricsArray | Where-Object { [bool]$_.was_scanned -and -not [bool]$_.latest_scan_complete -and -not [bool]$_.latest_scan_failed }).Count
+            blocked = @($metricsArray | Where-Object { [string]$_.latest_error_class -eq 'BLOCKED' }).Count
+            no_matching_job = @($metricsArray | Where-Object { [bool]$_.latest_scan_complete -and -not [bool]$_.has_matching_jobs }).Count
+            matching_jobs = (@($metricsArray | Measure-Object -Property matching_jobs_count -Sum).Sum)
+            legacy_successful_scans = @($metricsArray | Where-Object { [string]$_.latest_scan_status -eq 'SUCCESS' -and -not [bool]$_.latest_scan_complete }).Count
             successfully_scanned = @($metricsArray | Where-Object latest_scan_succeeded).Count
             failed_scanned = @($metricsArray | Where-Object latest_scan_failed).Count
             never_scanned = @($metricsArray | Where-Object { -not [bool]$_.was_scanned }).Count

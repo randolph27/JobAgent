@@ -304,13 +304,15 @@ function Update-JobAgentDailyRunCompanyState {
 
     $company = $Company.PSObject.Copy()
     $hasFailure = @($CompanyResults | Where-Object { [string]$_.status -eq 'FAILED' }).Count -gt 0
-    $hasSuccess = @($CompanyResults | Where-Object { ([string]$_.status -eq 'SUCCESS') -and ([string]$_.error_class -eq 'NONE') }).Count -gt 0
+    $hasCompleteScan = $CompanyResults.Count -gt 0 -and @($CompanyResults | Where-Object {
+            -not (([string]$_.status -eq 'SUCCESS') -and ([string]$_.error_class -eq 'NONE') -and ($_.PSObject.Properties.Name -contains 'scan_complete') -and ([bool]$_.scan_complete))
+        }).Count -eq 0
     $nowText = ConvertTo-JobAgentDailyIso -Value $Now
     $company.updated_at = $nowText
     if ($company.PSObject.Properties.Name -notcontains 'last_imported_at' -or [string]::IsNullOrWhiteSpace([string]$company.last_imported_at)) {
         $company | Add-Member -NotePropertyName last_imported_at -NotePropertyValue $nowText -Force
     }
-    if ($hasSuccess) {
+    if ($hasCompleteScan) {
         $company.scan_status = 'SUCCESS'
         $company.last_successful_scan_at = $nowText
         $company | Add-Member -NotePropertyName last_verified_at -NotePropertyValue $nowText -Force
@@ -349,6 +351,9 @@ function Get-JobAgentDailyRunStatus {
         return 'FAILED'
     }
     if (@($AdapterResults | Where-Object { [string]$_.status -ne 'SUCCESS' }).Count -gt 0) {
+        return 'PARTIAL'
+    }
+    if (@($AdapterResults | Where-Object { ($_.PSObject.Properties.Name -notcontains 'scan_complete') -or (-not [bool]$_.scan_complete) }).Count -gt 0) {
         return 'PARTIAL'
     }
     return 'SUCCESS'

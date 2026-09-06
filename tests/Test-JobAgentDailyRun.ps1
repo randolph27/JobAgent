@@ -294,7 +294,7 @@ try {
                 break
             }
             'source:alpha_ag_ats' {
-                Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @()
+                Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs @() -CompleteEmptyResult
                 break
             }
             default {

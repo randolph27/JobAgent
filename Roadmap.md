@@ -14,26 +14,7 @@ Stand: 2026-09-05. Verbindliche Review-Basis: [Webreview](docs/reviews/2026-09-0
 
 ## Meilensteine und priorisierte Punkte
 
-M1: korrekte Scan-/Jobidentität und belastbare CI-Nachweise (JA-040, CI-001). M2: schnelle Akquise und vollständige Live-Extraktion (JA-027, JA-041; nach den Verträgen parallelisierbar). M3: bedienbare Suche und nachgewiesener 1.000er-Lauf (UI-001, JA-042). Jeder Punkt wird als ein zusammenhängender Slice mit Implementierung, Funktionstest, Dokumentationssync und STP abgeschlossen; Supertest erst nach erfüllten Akzeptanzkriterien.
-
-- [ ] JA-040 Jobidentität, Scanvollständigkeit und Aktualisierung korrekt absichern #comment: Die reproduzierten Identitäts- und Statusfehler müssen vor dem breiten produktiven Stellenscan geschlossen werden.
-  - [ ] Beschreibung: Unterschiedliche Detail-URLs erhalten unterschiedliche stabile IDs. Teilscans, Limits, Parserfehler und ausgefallene Detailseiten können keine Stellen entfernen. Erneut erkannte Jobs übernehmen die aktuelle Klassifikation, Priorität und Arbeitsdaten. Die 1.000er-Kennzahl zählt ausschließlich belegte vollständige Live-Scans; alte SUCCESS-Werte bleiben als Legacy-Nachweise separat.
-  - [ ] Scope: `src/JobAgent.LiveScan.psm1`, `src/JobAgent.Deduplication.psm1`, `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.DailyRun.psm1`, `src/JobAgent.Coverage.psm1`, `schemas/jobagent.schema.json` sowie zugehörige bestehende Tests. Keine historischen Jobs/Scanbelege ohne Backup löschen oder als vollständig umdeuten.
-  - [ ] Ist-Stand (2026-09-05 19:00): Die ID-Regel liest `s.example.com` aus unterschiedlichen URLs auf `jobs.example.com`; ein teilweiser Detailabruf kann SUCCESS ergeben. Die Statusmaschine entfernt nicht wiedergefundene Jobs bei SUCCESS und übernimmt bei Updates nicht alle neu bewerteten Felder. Repros: `docs/reviews/2026-09-05-matching-analysis.md`.
-  - [ ] Abhängigkeiten: vorhandene Persistenz, Deduplikation und Statusmaschine; keine neue externe Abhängigkeit. CI-001 muss vor dem Abschlussgate geklärt sein, blockiert aber keine Implementierung.
-  - [ ] Aufwand/Dauer: L, 2–3 Personentage / 2–3 Arbeitstage bei einem Entwickler.
-  - [ ] Prioritätsscore: 100/100. Ordnungsbegründung: falsche Identitäten und falsche Entfernungen vervielfachen sich mit jedem größeren Scan und gefährden alle nachgelagerten Ergebnisse.
-  - [ ] Risiken: rückwirkende ID-Migration, Teilscan-Semantik und Altzustände. Migration muss idempotent sein; unklare Altfälle bleiben Reviewfälle.
-  - [ ] Schritte:
-    1. In LiveScan IDs aus parsbarer URL und strukturierten Jobdaten ableiten; Hostteile nicht als Job-ID akzeptieren. Repro für zwei Jobs und Trackingvarianten als Regressionstest übernehmen.
-    2. Vollständigkeits-/Abbruchgründe vom Adapter bis ScanRun, Snapshot und Statusmaschine durchreichen; nur autoritative vollständige Beobachtung darf REMOVED erzeugen.
-    3. Bei Statusupdates die aktuelle Klassifikation, Priorität, Arbeitsmodell und Beschäftigung konsistent übernehmen; REJECTED-zu-MATCH-Wechsel über zwei Läufe prüfen.
-    4. Coverage-Zählvertrag samt Zeitfenster, eindeutigen Firmen/Portalen und unbekannten Legacy-Werten implementieren; Fixture-Daten vom Live-Zähler ausschließen.
-  - [ ] Evidence: `logs/jobagent/JA-040-*.json`, dokumentierte Schemaänderung/Migration mit Backup, Regressionsergebnisse und aktualisierte Coverage-Zählung.
-  - [ ] Funktionstest: `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentDeduplication.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentStatusMachine.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentSchema.ps1` – jeweils um die beschriebenen Repros ergänzen.
-  - [ ] Audit: Coverage-Ausgabe bei 800/1366/1920 px auf getrennte Bestands-/Scanwerte prüfen; keine neue optische Gestaltung erforderlich. Ein Teilscan ist sichtbar unvollständig.
-  - [ ] Meilenstein/Parallelisierung: M1; unabhängig von CI-001 bearbeitbar. Websitehinweise für JA-027 dürfen parallel vorbereitet werden, produktiver Massen-Stellenscan erst danach.
-  - [ ] Supertest: erst nach grünen Funktionstests und vollständiger Umsetzung `.\ci.cmd supertest`; anschließend Roadmap/Todo/Handoff/STP synchronisieren.
+M1: belastbare CI-Nachweise (CI-001). M2: schnelle Akquise und vollständige Live-Extraktion (JA-027, JA-041; nach den Verträgen parallelisierbar). M3: bedienbare Suche und nachgewiesener 1.000er-Lauf (UI-001, JA-042). Jeder Punkt wird als ein zusammenhängender Slice mit Implementierung, Funktionstest, Dokumentationssync und STP abgeschlossen; Supertest erst nach erfüllten Akzeptanzkriterien.
 
 - [ ] CI-001 Projektbezogene CI- und Reviewnachweise verlässlich machen #comment: Ein erreichbarer Server und grüne Fixturetests dürfen weder einen erfolgreichen Neustart noch reale Browser- oder Sonar-Abnahme vortäuschen.
   - [ ] Beschreibung: `self-check` akzeptiert autorisierte mutable Roadmap-Änderungen bei weiterhin geprüfter Runtime; `devserver-start/status` erkennen eine bestehende Instanz auf 8500 korrekt. Verify/Sonar melden für diesen PowerShell-Stack tatsächlich ausgeführte Gates oder ausdrücklich nicht unterstützte Prüfungen. Handoff übernimmt ausschließlich datierte aktuelle Evidence.

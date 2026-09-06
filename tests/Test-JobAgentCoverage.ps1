@@ -71,10 +71,10 @@ $document.companies = @(
         -NextScanAt ([datetime]'2026-08-17T00:00:00Z'))
 )
 $document.scan_attempts = @(
-    [pscustomobject]@{ scan_attempt_id = 'scanattempt:failed'; scan_run_id = 'scanrun:1'; company_id = 'company:failed_ag'; source_id = 'source:failed'; started_at = '2026-08-17T08:00:00.000Z'; finished_at = '2026-08-17T08:01:00.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'NOT_REACHABLE'; retry_recommendation = 'RETRY_NEXT_RUN'; http_status = 503 }
-    [pscustomobject]@{ scan_attempt_id = 'scanattempt:stale'; scan_run_id = 'scanrun:1'; company_id = 'company:stale_ag'; source_id = 'source:stale'; started_at = '2026-07-01T08:00:00.000Z'; finished_at = '2026-07-01T08:01:00.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200 }
-    [pscustomobject]@{ scan_attempt_id = 'scanattempt:recent'; scan_run_id = 'scanrun:1'; company_id = 'company:recent_ag'; source_id = 'source:recent'; started_at = '2026-08-16T08:00:00.000Z'; finished_at = '2026-08-16T08:01:00.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200 }
-    [pscustomobject]@{ scan_attempt_id = 'scanattempt:match'; scan_run_id = 'scanrun:1'; company_id = 'company:match_ag'; source_id = 'source:match'; started_at = '2026-08-16T09:00:00.000Z'; finished_at = '2026-08-16T09:01:00.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200 }
+    [pscustomobject]@{ scan_attempt_id = 'scanattempt:failed'; scan_run_id = 'scanrun:1'; company_id = 'company:failed_ag'; source_id = 'source:failed'; started_at = '2026-08-17T08:00:00.000Z'; finished_at = '2026-08-17T08:01:00.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'NOT_REACHABLE'; retry_recommendation = 'RETRY_NEXT_RUN'; http_status = 503; scan_complete = $false }
+    [pscustomobject]@{ scan_attempt_id = 'scanattempt:stale'; scan_run_id = 'scanrun:1'; company_id = 'company:stale_ag'; source_id = 'source:stale'; started_at = '2026-07-01T08:00:00.000Z'; finished_at = '2026-07-01T08:01:00.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200; scan_complete = $true }
+    [pscustomobject]@{ scan_attempt_id = 'scanattempt:recent'; scan_run_id = 'scanrun:1'; company_id = 'company:recent_ag'; source_id = 'source:recent'; started_at = '2026-08-16T08:00:00.000Z'; finished_at = '2026-08-16T08:01:00.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200; scan_complete = $true }
+    [pscustomobject]@{ scan_attempt_id = 'scanattempt:match'; scan_run_id = 'scanrun:1'; company_id = 'company:match_ag'; source_id = 'source:match'; started_at = '2026-08-16T09:00:00.000Z'; finished_at = '2026-08-16T09:01:00.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200; scan_complete = $true }
 )
 $document.jobs = @(
     [pscustomobject]@{ job_id = 'job:match'; company_id = 'company:match_ag'; title = 'Head of IT'; status = 'ACTIVE'; priority = 'A'; official_url = 'https://match.example.invalid/jobs/head-it'; location = [pscustomobject]@{ label = 'Muenchen' }; classification = [pscustomobject]@{ result = 'MATCH'; score = 95; reasons = @('IT-Fuehrung') } }
@@ -99,6 +99,9 @@ Assert-True -Condition ($coverage.metrics.without_career_url -eq 1) -Message 'Co
 Assert-True -Condition ($coverage.metrics.failed_scanned -eq 1) -Message 'Coverage zaehlt fehlgeschlagene Portale falsch.'
 Assert-True -Condition ($coverage.metrics.never_scanned -eq 2) -Message 'Coverage zaehlt nie gescannte Firmen falsch.'
 Assert-True -Condition ($coverage.metrics.with_matching_jobs -eq 1) -Message 'Coverage zaehlt passende Stellen falsch.'
+Assert-True -Condition ($coverage.metrics.discovered -eq 6 -and $coverage.metrics.live_attempted -eq 4) -Message 'Coverage trennt entdeckte Firmen und Liveversuche nicht.'
+Assert-True -Condition ($coverage.metrics.live_complete -eq 3 -and $coverage.metrics.partial -eq 0 -and $coverage.metrics.no_matching_job -eq 2) -Message 'Coverage zaehlt vollstaendige und leere Scans nicht getrennt.'
+Assert-True -Condition ($coverage.metrics.official_source_verified -eq 1 -and $coverage.metrics.matching_jobs -eq 1) -Message 'Coverage trennt offizielle Quellen und passende Jobs nicht.'
 Assert-True -Condition ($coverage.approximation_notice -match 'keine vollstaendige Marktdeckung') -Message 'Coverage-Hinweis darf keine Vollstaendigkeit behaupten.'
 Assert-True -Condition ($coverage.metrics.manual_review_required -eq 1) -Message 'Coverage zaehlt manuell zu pruefende Discovery-Hinweise falsch.'
 Assert-True -Condition ($coverage.metrics.verified_without_career_url -eq 1) -Message 'Coverage zaehlt verifizierte Firmen ohne Karriere-URL falsch.'

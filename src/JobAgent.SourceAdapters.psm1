@@ -165,6 +165,7 @@ function New-JobAgentScanAttemptRecord {
         [Parameter(Mandatory)][ValidateSet('NONE', 'NOT_REACHABLE', 'TIMEOUT', 'BLOCKED', 'NO_JOBS_FOUND', 'UNCLEAR_SOURCE', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')][string]$ErrorClass,
         [Parameter(Mandatory)][ValidateSet('NONE', 'RETRY_SOON', 'RETRY_NEXT_RUN', 'MANUAL_REVIEW')][string]$RetryRecommendation,
         [Parameter()][AllowNull()][Nullable[int]]$HttpStatus,
+        [Parameter()][bool]$IsComplete = $false,
         [Parameter()][datetime]$StartedAt = [datetime]::UtcNow,
         [Parameter()][datetime]$FinishedAt = [datetime]::UtcNow
     )
@@ -190,6 +191,7 @@ function New-JobAgentScanAttemptRecord {
         error_class = $ErrorClass
         retry_recommendation = $RetryRecommendation
         http_status = $HttpStatus
+        scan_complete = $IsComplete
     }
 }
 
@@ -204,6 +206,7 @@ function New-JobAgentAdapterResult {
         [Parameter()][object[]]$RawJobs = @(),
         [Parameter()][AllowNull()][Nullable[int]]$HttpStatus,
         [Parameter()][string[]]$ArtifactPaths = @(),
+        [Parameter()][bool]$IsComplete = $false,
         [Parameter()][datetime]$StartedAt = [datetime]::UtcNow,
         [Parameter()][datetime]$FinishedAt = [datetime]::UtcNow
     )
@@ -214,6 +217,9 @@ function New-JobAgentAdapterResult {
     if (($Status -ne 'SUCCESS') -and ($ErrorClass -eq 'NONE')) {
         throw 'Ein nicht erfolgreicher Adapterlauf braucht eine konkrete Fehlerklasse.'
     }
+    if ($IsComplete -and (($Status -ne 'SUCCESS') -or ($ErrorClass -ne 'NONE'))) {
+        throw 'Nur ein fehlerfreier SUCCESS-Adapterlauf darf als vollstaendig markiert werden.'
+    }
 
     $attempt = New-JobAgentScanAttemptRecord `
         -AdapterInput $AdapterInput `
@@ -222,6 +228,7 @@ function New-JobAgentAdapterResult {
         -ErrorClass $ErrorClass `
         -RetryRecommendation $RetryRecommendation `
         -HttpStatus $HttpStatus `
+        -IsComplete $IsComplete `
         -StartedAt $StartedAt `
         -FinishedAt $FinishedAt
 
@@ -233,6 +240,7 @@ function New-JobAgentAdapterResult {
         status = $Status
         error_class = $ErrorClass
         retry_recommendation = $RetryRecommendation
+        scan_complete = $IsComplete
         raw_jobs = @($RawJobs)
         scan_attempt = $attempt
         artifact_paths = @($ArtifactPaths | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
@@ -285,7 +293,8 @@ function Invoke-JobAgentFixtureAdapter {
         [Parameter()][ValidateSet('SUCCESS', 'PARTIAL', 'FAILED', 'SKIPPED')][string]$Status = 'SUCCESS',
         [Parameter()][ValidateSet('NONE', 'NOT_REACHABLE', 'TIMEOUT', 'BLOCKED', 'NO_JOBS_FOUND', 'UNCLEAR_SOURCE', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')][string]$ErrorClass = 'NONE',
         [Parameter()][ValidateSet('NONE', 'RETRY_SOON', 'RETRY_NEXT_RUN', 'MANUAL_REVIEW')][string]$RetryRecommendation = 'NONE',
-        [Parameter()][AllowNull()][int]$HttpStatus = 200
+        [Parameter()][AllowNull()][int]$HttpStatus = 200,
+        [Parameter()][switch]$CompleteEmptyResult
     )
 
     $jobs = foreach ($job in @($FixtureJobs)) {
@@ -303,7 +312,7 @@ function Invoke-JobAgentFixtureAdapter {
             $job
         }
     }
-    if (($Status -eq 'SUCCESS') -and (@($jobs).Count -eq 0)) {
+    if (($Status -eq 'SUCCESS') -and (@($jobs).Count -eq 0) -and (-not $CompleteEmptyResult)) {
         $Status = 'PARTIAL'
         $ErrorClass = 'NO_JOBS_FOUND'
         $RetryRecommendation = 'RETRY_NEXT_RUN'
@@ -316,7 +325,8 @@ function Invoke-JobAgentFixtureAdapter {
         -ErrorClass $ErrorClass `
         -RetryRecommendation $RetryRecommendation `
         -RawJobs @($jobs) `
-        -HttpStatus $HttpStatus
+        -HttpStatus $HttpStatus `
+        -IsComplete ($Status -eq 'SUCCESS')
 }
 
 function Invoke-JobAgentGenericHtmlAdapter {

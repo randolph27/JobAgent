@@ -220,6 +220,7 @@ $fetcher = {
 
 $result = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $fetcher
 Assert-True -Condition ($result.status -eq 'SUCCESS') -Message 'Live-Adapter meldet fuer abrufbare offizielle Detailseite keinen Erfolg.'
+Assert-True -Condition ($result.scan_complete -eq $true -and $result.scan_attempt.scan_complete -eq $true) -Message 'Vollstaendiger Live-Adapterlauf markiert den Scan nicht vollstaendig.'
 Assert-True -Condition (@($result.raw_jobs).Count -eq 1) -Message 'Live-Adapter liefert falsche RawJob-Anzahl.'
 Assert-True -Condition ($result.raw_jobs[0].live_verification.detail_http_status -eq 200) -Message 'Live-Adapter protokolliert Detail-Verifikation nicht.'
 Assert-True -Condition ($result.raw_jobs[0].summary -match 'IT-Gesamtverantwortung') -Message 'Live-Adapter uebernimmt Detailseitenzusammenfassung nicht.'
@@ -347,6 +348,35 @@ Assert-True -Condition ($timeoutDetailResult.status -eq 'PARTIAL') -Message 'Liv
 Assert-True -Condition ($timeoutDetailResult.error_class -eq 'TIMEOUT') -Message 'Live-Adapter setzt fuer Timeout-Detailfetch nicht TIMEOUT.'
 Assert-True -Condition ($timeoutDetailResult.retry_recommendation -eq 'RETRY_NEXT_RUN') -Message 'Live-Adapter setzt fuer Timeout-Detailfetch nicht RETRY_NEXT_RUN.'
 
+$collisionHtml = '<html><body><a href="https://example.myworkdayjobs.invalid/job/123">IT Manager 123</a><a href="https://example.myworkdayjobs.invalid/job/456">IT Manager 456</a></body></html>'
+$collisionPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 5 -MaxDetailFetchesPerSource 5
+$collisionFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    if ($Url -eq 'https://example.invalid/careers') {
+        return New-FetchResult -Url $Url -Ok $true -Content $collisionHtml
+    }
+    return New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager</h1><p>IT-Fuehrung in Muenchen.</p></main>'
+}
+$collisionResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $collisionPolicy -Fetcher $collisionFetcher
+Assert-True -Condition ($collisionResult.status -eq 'SUCCESS' -and $collisionResult.scan_complete) -Message 'Vollstaendige unterschiedliche Detailseiten werden nicht als erfolgreicher Scan erkannt.'
+Assert-True -Condition ((@($collisionResult.raw_jobs | Select-Object -ExpandProperty external_job_id | Select-Object -Unique).Count -eq 2) -and (@($collisionResult.raw_jobs | Select-Object -ExpandProperty external_job_id) -notcontains 's.example.myworkdayjobs.invalid')) -Message 'Pfadbasierte Job-IDs unterscheiden verschiedene Jobs nicht sicher.'
+
+$mixedHtml = '<html><body><a href="https://example.myworkdayjobs.invalid/job/111">IT Manager 111</a><a href="https://example.myworkdayjobs.invalid/job/222">IT Manager 222</a></body></html>'
+$mixedFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    if ($Url -eq 'https://example.invalid/careers') {
+        return New-FetchResult -Url $Url -Ok $true -Content $mixedHtml
+    }
+    if ($Url -match '/222$') {
+        return New-FetchResult -Url $Url -Ok $false -StatusCode 503 -ErrorMessage 'unavailable'
+    }
+    return New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager</h1><p>IT-Fuehrung in Muenchen.</p></main>'
+}
+$mixedResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $collisionPolicy -Fetcher $mixedFetcher
+Assert-True -Condition ($mixedResult.status -eq 'PARTIAL' -and -not $mixedResult.scan_complete -and @($mixedResult.raw_jobs).Count -eq 1) -Message 'Gemischter Detailabruf darf weder vollstaendig noch SUCCESS sein.'
+
 $retryCounter = 0
 $retryFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -381,6 +411,8 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_structured_json_ats_success',
         'live_adapter_blocked_detail_fetch',
         'live_adapter_timeout_detail_fetch',
+        'path_scoped_job_identity',
+        'mixed_detail_fetch_is_partial',
         'retry_attempt_log'
     )
 } | ConvertTo-Json -Depth 5

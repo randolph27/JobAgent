@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-05T19:31:00.142+02:00
+Stand: 2026-09-06T07:38:49.277+02:00
 
 ## Zustand
 
-- Active: `TD-0051`
+- Active: `TD-0052`
 - Status: `in-progress`
-- Ziel: JA-040 Jobidentität, Scanvollständigkeit und Aktualisierung korrekt absichern #comment: Die reproduzierten Identitäts- und Statusfehler müssen vor dem breiten produktiven Stellenscan geschlossen werden.
+- Ziel: CI-001 Projektbezogene CI- und Reviewnachweise verlässlich machen #comment: Ein erreichbarer Server und grüne Fixturetests dürfen weder einen erfolgreichen Neustart noch reale Browser- oder Sonar-Abnahme vortäuschen.
 - Branch: `master`
-- HEAD: `ce6e8ba48016`
+- HEAD: `8b21fc840d5b`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -19,8 +19,21 @@ Stand: 2026-09-05T19:31:00.142+02:00
 - `Roadmap.md`
 - `Roadmap_archive.md`
 - `Roadmap_index.md`
+- `data/jobagent/company-candidate-verification.queue.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
+- `html/jobagent/company-coverage.html`
+- `schemas/jobagent.schema.json`
+- `src/JobAgent.Coverage.psm1`
+- `src/JobAgent.DailyRun.psm1`
+- `src/JobAgent.LiveScan.psm1`
+- `src/JobAgent.SourceAdapters.psm1`
+- `src/JobAgent.StatusMachine.psm1`
+- `tests/Test-JobAgentCoverage.ps1`
+- `tests/Test-JobAgentDailyRun.ps1`
+- `tests/Test-JobAgentLiveScan.ps1`
+- `tests/Test-JobAgentSourceAdapters.ps1`
+- `tests/Test-JobAgentStatusMachine.ps1`
 - `todo.checkpoint.json`
 - `todo.current.md`
 - `todo.events.jsonl`
@@ -32,22 +45,10 @@ Stand: 2026-09-05T19:31:00.142+02:00
 
 - `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `1`
 
-## Nächster Umsetzungsschritt
+## Naechster Anker
 
-**JA-040 / TD-0051** fortsetzen: Job-ID-Kollision, Entfernung nach Teilscan und veraltete Updateklassifikation als Regressionen absichern und zusammenhängend korrigieren. CI-001 parallel bearbeiten; er ersetzt nicht den aktiven JA-040-Hotspot.
+JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.
 
-Die vollständige [Übergabe für den nächsten Chat](docs/handoffs/2026-09-05-webreview-handoff.md) enthält Einstiegsdateien, belegte Datenzahlen, genaue Repros/Dateien, Umsetzungsschritte, Testcommands, alle sechs Prioritäten und die Betriebsgrenzen.
+## Detaillierte Übergabe
 
-## Abgeschlossener Stand
-
-- Webreview, neue Roadmap und neun kanonische Screens sind erzeugt. Produktcode, Store, Hint-Store und Kandidatenqueue unverändert.
-- 479 Firmen gespeichert; drei verworfene Rohjobs, keine akzeptierten Stellen. 1.000 vollständig untersuchte Firmenkarriereseiten nicht belegt.
-- Alle sechs Produktpunkte bleiben offen; keine Rotation als erledigt. Historische Fortschritte wurden vollständig gesichert.
-- Sechs bestehende Funktionssuites bestanden im Review. Legacy-Viewporttest scheiterte am Chrome-GPU-Prozess; echter separater Browserreview in vier Breiten durchgeführt.
-- Self-check hat den bekannten Roadmap-Pin-Konflikt; Checkpoint/Handoff sind synchron. SonarQube war UP, keine neue Codeanalyse.
-- Supertest für diese Übergabe gemäß aktueller Nutzeranweisung als erledigt behandelt; tatsächlich nicht angefragt oder ausgeführt, kein Testpass erfunden.
-- Neun bytegleiche temporäre Screens entfernt. Verbindliche Belege: `doc/roadmap-screenshots/UI-001-review-20260905-*.png`.
-
-## Git-Snapshot und Wiederaufnahme
-
-Die Gitwerte oben stammen aus STP **vor** dem Abschlusscommit. Den endgültigen Stand mit `git status --short`, `git log -1 --oneline` und `git rev-list --left-right --count HEAD...origin/master` feststellen. Nach Commit/Push wird kein weiterer schreibender STP erzeugt, damit der veröffentlichte Worktree sauber bleibt.
+Der technische Abschluss von JA-040, die Nachweise und der konkrete Arbeitsplan für CI-001 stehen in [docs/handoffs/2026-09-06-ja040-completion-handoff.md](docs/handoffs/2026-09-06-ja040-completion-handoff.md).

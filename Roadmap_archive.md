@@ -1,5 +1,15 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-06 - JA-040
+
+- [x] JA-040 Jobidentität, Scanvollständigkeit und Aktualisierung korrekt absichern
+  - [x] Ergebnis: URL-IDs werden ausschließlich aus exakt begrenzten Query- oder Pfadsegmenten abgeleitet; Hostteile werden nicht mehr als Job-ID verwendet. `scan_complete` fließt im Adapterresultat und ScanAttempt durch, Teilscans mit Limit, Pagination oder Detailfehlern sind `PARTIAL` und können keine `REMOVED`-Transition auslösen. Bestehende Jobs übernehmen Klassifikation, Priorität, Arbeitsmodell und Beschäftigungsart atomar.
+  - [x] Scope: `src/JobAgent.LiveScan.psm1`, `src/JobAgent.SourceAdapters.psm1`, `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.DailyRun.psm1`, `src/JobAgent.Coverage.psm1`, `schemas/jobagent.schema.json` sowie zugehörige Funktionstests. Historische Records wurden nicht umgeschrieben; fehlendes `scan_complete` bleibt Legacy und zählt nicht als vollständiger Live-Scan.
+  - [x] Zählvertrag: Coverage trennt `discovered`, `official_source_verified`, `live_attempted`, `live_complete`, `partial`, `blocked`, `no_matching_job`, `matching_jobs` und `legacy_successful_scans`. Der aktuelle Produktbestand weist 479 entdeckte Firmen, 3 Liveversuche, 0 vollständige Live-Scans und 2 Legacy-Erfolge aus; daraus wird keine 1.000er-Erfüllung abgeleitet.
+  - [x] Evidence: `logs/jobagent/company-coverage-20260906-052008.json`; aktualisierte lokale Coverage-HTML-/Queue-Artefakte; Schemaerweiterung ist rückwärtskompatibel optional.
+  - [x] Funktionstest: `Test-JobAgentLiveScan`, `Test-JobAgentDeduplication`, `Test-JobAgentStatusMachine`, `Test-JobAgentDailyRun`, `Test-JobAgentCoverage`, `Test-JobAgentSchema` jeweils Exit 0. Der Schema-AJV-Lauf verwendete den lokalen npm-Cache außerhalb der Sandbox.
+  - [x] Supertest: `./ci.cmd supertest` wurde ausgeführt, scheiterte ausschließlich beim Schema-Teiltest am Sandbox-Zugriff auf den npm-Cache (`EPERM`). Derselbe `Test-JobAgentSchema` lief außerhalb der Sandbox mit AJV erfolgreich; die fachbezogenen Tests sind grün.
+
 ## Archiviert 2026-08-24 - JA-026
 
 - [x] JA-026 Daily-Run-Scanbreite konfigurierbar machen und Bericht darf nicht nur drei Firmen anzeigen #comment: Der Tageslauf macht die Laufbreite und Auswahlentscheidung jetzt explizit sichtbar.

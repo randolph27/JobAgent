@@ -47,7 +47,8 @@ function New-TestScanAttempt {
         [string]$ErrorClass = 'NONE',
         [string]$Suffix = 'default',
         [string]$CompanyId = 'company:example_ag',
-        [string]$SourceId = 'source:example_ag_career'
+        [string]$SourceId = 'source:example_ag_career',
+        [bool]$ScanComplete = $true
     )
 
     [pscustomobject]@{
@@ -62,6 +63,7 @@ function New-TestScanAttempt {
         error_class = $ErrorClass
         retry_recommendation = if ($ErrorClass -eq 'NONE') { 'NONE' } else { 'RETRY_NEXT_RUN' }
         http_status = if ($ErrorClass -eq 'NONE') { 200 } else { $null }
+        scan_complete = $ScanComplete
     }
 }
 
@@ -74,7 +76,8 @@ function New-TestAdapterResult {
         [string]$Suffix = 'default',
         [string]$CompanyId = 'company:example_ag',
         [string]$SourceId = 'source:example_ag_career',
-        [string]$OfficialSourceUrl = 'https://example.invalid/careers'
+        [string]$OfficialSourceUrl = 'https://example.invalid/careers',
+        [bool]$ScanComplete = $true
     )
 
     [pscustomobject]@{
@@ -85,8 +88,9 @@ function New-TestAdapterResult {
         status = $Status
         error_class = $ErrorClass
         retry_recommendation = if ($ErrorClass -eq 'NONE') { 'NONE' } else { 'RETRY_NEXT_RUN' }
+        scan_complete = $ScanComplete
         raw_jobs = @($RawJobs)
-        scan_attempt = New-TestScanAttempt -ScanRunId $ScanRunId -Status $Status -ErrorClass $ErrorClass -Suffix $Suffix -CompanyId $CompanyId -SourceId $SourceId
+        scan_attempt = New-TestScanAttempt -ScanRunId $ScanRunId -Status $Status -ErrorClass $ErrorClass -Suffix $Suffix -CompanyId $CompanyId -SourceId $SourceId -ScanComplete $ScanComplete
         artifact_paths = @()
     }
 }
@@ -149,6 +153,31 @@ $removed = Invoke-JobAgentStatusMachine `
     -ObservedAt ([datetime]'2026-08-21T10:00:00Z')
 Assert-True -Condition ($removed.jobs[0].status -eq 'REMOVED') -Message 'Erfolgreicher leerer Scan setzt fehlenden Job nicht auf REMOVED.'
 Assert-True -Condition (@($removed.change_events | Where-Object event_type -eq 'JOB_REMOVED').Count -eq 1) -Message 'Erfolgreiche Entfernung erzeugt kein JOB_REMOVED.'
+
+$partialBase = Invoke-JobAgentStatusMachine `
+    -Document (New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')) `
+    -ScanRunId 'scanrun:20260821T110000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260821T110000Z' -Suffix 'partial-base')) `
+    -ObservedAt ([datetime]'2026-08-21T11:00:00Z')
+$partialEmpty = Invoke-JobAgentStatusMachine `
+    -Document $partialBase `
+    -ScanRunId 'scanrun:20260821T120000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260821T120000Z' -RawJobs @() -Status 'SUCCESS' -ErrorClass 'NONE' -ScanComplete $false -Suffix 'incomplete_success')) `
+    -ObservedAt ([datetime]'2026-08-21T12:00:00Z')
+Assert-True -Condition ($partialEmpty.jobs[0].status -ne 'REMOVED' -and @($partialEmpty.change_events | Where-Object { $_.scan_run_id -eq 'scanrun:20260821T120000Z' -and $_.event_type -eq 'JOB_REMOVED' }).Count -eq 0) -Message 'Unvollstaendiger Erfolg darf keinen fehlenden Job entfernen.'
+
+$reclassifiedRaw = New-TestRawJob -Title 'IT Manager' -DetailUrl 'https://example.invalid/careers/head-it-123' -ExternalJobId '123' -LocationLabel 'Freising'
+$reclassifiedRaw | Add-Member -NotePropertyName classification -NotePropertyValue ([pscustomobject]@{ result = 'MATCH'; priority = 'A'; score = 95; reasons = @('Aktualisierte Bewertung.'); rejected_reasons = @(); evaluated_at = '2026-08-21T13:00:00.000Z' })
+$reclassifiedRaw | Add-Member -NotePropertyName priority -NotePropertyValue 'A'
+$reclassifiedRaw | Add-Member -NotePropertyName work_model -NotePropertyValue 'HYBRID'
+$reclassifiedRaw | Add-Member -NotePropertyName employment_type -NotePropertyValue 'FULL_TIME'
+$reclassified = Invoke-JobAgentStatusMachine `
+    -Document $descriptionUpdated `
+    -ScanRunId 'scanrun:20260821T130000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260821T130000Z' -RawJobs @($reclassifiedRaw) -Suffix 'reclassified')) `
+    -ObservedAt ([datetime]'2026-08-21T13:00:00Z')
+Assert-True -Condition ($reclassified.jobs[0].classification.result -eq 'MATCH' -and $reclassified.jobs[0].priority -eq 'A' -and $reclassified.jobs[0].work_model -eq 'HYBRID' -and $reclassified.jobs[0].employment_type -eq 'FULL_TIME') -Message 'Aktuelle Klassifikation und Arbeitsdaten werden nicht atomar uebernommen.'
+Assert-True -Condition (@($reclassified.change_events | Where-Object { $_.event_type -eq 'JOB_UPDATED' -and @($_.changed_fields) -contains 'classification' -and @($_.changed_fields) -contains 'work_model' }).Count -eq 1) -Message 'Aktualisierte Bewertung erzeugt kein vollstaendiges JOB_UPDATED-Event.'
 
 $invalidRaw = [pscustomobject]@{
     title = ''
@@ -218,6 +247,8 @@ Assert-True -Condition (@($closedSecond.change_events | Where-Object event_type 
         'description_changed_fields',
         'failed_scan_no_removal',
         'successful_empty_scan_removed',
+        'incomplete_success_no_removal',
+        'updated_classification_and_work_fields',
         'invalid_hit_invalidated',
         'source_scoped_removal',
         'explicit_closed_signal'

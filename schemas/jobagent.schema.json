@@ -1014,6 +1014,9 @@
           ],
           "minimum": 100,
           "maximum": 599
+        },
+        "scan_complete": {
+          "type": "boolean"
         }
       }
     },
@@ -1069,6 +1072,9 @@
             "type": "string",
             "minLength": 1
           }
+        },
+        "scan_complete": {
+          "type": "boolean"
         }
       }
     },
