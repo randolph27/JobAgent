@@ -1,44 +1,36 @@
 # Handoff latest
 
-Stand: 2026-09-06T08:28:36.108+02:00
+Stand: 2026-09-06T12:40:30.047+02:00. Reiner Planungsabschluss vor Commit/Push; die Gitfelder im JSON sind der STP-Snapshot vor diesem Abschluss-Commit.
 
-## Zustand
+## Auftrag und Ergebnis
 
-- Active: `TD-0041` / JA-027, Status `in-progress`.
-- Roadmap-Punkte: keiner erfüllt; keine Rotation vorgenommen.
-- Supertest: nicht angefordert; gemäß Nutzerweisung für diesen Abschluss nicht auszuführen.
-- Branch: `master`; der Abschluss-Commit und Push dieses Handoffs folgen direkt nach dieser Ablage.
+Der Nutzer hat ausschließlich zuerst detaillierte Roadmap-Punkte angefordert, danach STP, sauberen Worktree, Stage, Commit und Push. Zusätzlich bindend: alle erfassten Firmen sowie entdeckte Website-/Jobs-/Karriere-/Stellenangebote-/ATS-URLs dauerhaft speichern. Keine Akquise oder Implementierung in diesem Abschluss.
 
-## Erledigter Teil-Slice
+`Roadmap.md` enthält JA-027 mit genau drei detaillierten checkboxbaren Arbeitspaketen, je Beschreibung, Scope, Ist-Stand, Abhängigkeiten, Aufwand/Dauer, Priorität, drei Umsetzungsschritten, messbarer Done/Evidence, konkreten vorhandenen Funktionstest-Commands, Audit und Abschlussgate. Reihenfolge nach Abhängigkeiten; keine zusätzlichen Top-Level-Todos. `Roadmap_index.md` und der aktive Todo-/Checkpointzustand sind synchronisiert.
 
-- `tools/Verify-JobAgentCompanyCandidates.ps1` trennt parallele Netzverifikation (ohne Fixture bis zu vier Worker, Hostlimit standardmäßig eins) von einem seriellen, atomaren Store-Writer mit Backup.
-- Resume-Vertrag: `data/jobagent/company-candidate-verification.checkpoint.json` speichert `running`/`completed`, Kandidaten-IDs und Batchmetriken. HTTP 429 respektiert `Retry-After`; sonst gilt exponentieller Backoff.
-- Funktionsprüfungen des ersten Teilslices waren grün: `Test-JobAgentRegionalDiscovery.ps1`, `Test-JobAgentSourceVerification.ps1`, `Test-JobAgentCompanyCandidateVerification.ps1`, `Test-JobAgentImportWaves.ps1` und `Test-JobAgentCompanyDedupeScale.ps1`. `git diff --check` war sauber.
-- `cmd /c .\ci.cmd stp` lief am 2026-09-06T08:28:36+02:00 mit Exit 0; Todo-Index, Digest und Eventlog wurden synchronisiert.
+## Nächster verbindlicher Hotspot
 
-## Aktueller harter Blocker
+1. JA-027.1: dauerhafte Erfassung vor weiteren schreibenden Quellenrefreshes umsetzen. Firmen ohne Website/offizielle Bestätigung bleiben gespeichert; alle entdeckten URLs samt Herkunft, Prüfstatus und Historie ebenso. Keine Löschung bei leeren Portalen, Quellenrefresh, Ablauf, 404/410 oder Timeout. `New-ToolMergedHintStore` überspringt derzeit alte Hinweise aus ersetzten Quellen; diesen Verlustpfad mit versionierter Migration, Backup, serieller Schreibphase und Restore-Tests absichern.
+2. JA-027.2: vorhandene Registry-/Jobbörsen-/Register-/Regionalbestände nutzen und neue Quellen gezielt recherchieren. Jobbörsen, Register, Suchmaschinen, OSM und weitere Sekundärquellen dürfen Firmen-/Websitehinweise liefern; offizielle Verifikation ist ein nachgelagerter Schritt. Im Plan stehen vorhandene Quellen-IDs, eine Suchmatrix und mindestens sechs zu prüfende neue Anbieter-/Datensatzansätze. Read-only-Inventur parallel zu JA-027.1; neue Imports erst nach sicherer Aufbewahrung.
+3. JA-027.3: Firmenwebsites unabhängig bestätigen, tatsächlich verlinkte Karriere-/Jobs-/Stellenangebote-/ATS-URLs dauerhaft übernehmen, 100 reale Kandidaten über hostbegrenzte Batches messen und bis 1.000 gültig belegte Karrierearbeitgeber fortführen. Domain-only/Fixture/Alias nicht mitzählen. Einzelresultat-Resume, tatsächliche Hostlimits einschließlich Redirect/ATS und Netto-/Request-/Quantilmetriken noch nachweisen.
 
-Der produktive 100-Kandidaten-Benchmark kann nicht gestartet werden, weil die aktuelle Kandidatenqueue keine ausführbaren Einträge enthält:
+JA-027 bleibt `TD-0041` / `in-progress`. Sein Akquiseabschluss verlangt 1.000 belegte Karrierearbeitgeber, nicht bereits 1.000 vollständige Stellenscans. Diese gehören zu JA-042. JA-041 darf mit vorhandenen verifizierten Quellen parallel beginnen; ein vollständiger JA-027-Abschluss ist keine Voraussetzung für Entwicklung/Pilot. UI-001 und JA-042 bleiben offen. Kein Roadmap-Punkt wurde archiviert.
 
-- `data/jobagent/company-candidate-verification.queue.json`: 1.785 Einträge, 662 `VERIFIED`, 1.122 `MANUAL_REVIEW_REQUIRED`, 1 `RETRY_EXHAUSTED`, 0 `PENDING`/ready.
-- 1.107 Reviewfälle haben `OFFICIAL_VERIFICATION_REQUIRED`; 15 haben `NAME_MATCH_WITHOUT_STRONG_IDENTITY`.
-- Die Reviewfälle enthalten keinen zulässigen offiziell belegten Website-/Domain-Hinweis. Sie dürfen nicht durch Namensraten, Aggregatoren oder unbestätigte Domains automatisch in die Verifikation überführt werden.
-- `data/jobagent/store.lock` enthielt eine alte PID `4916`; der Prozess existierte bei der Prüfung nicht. Die regulären Lock-Funktionen behandeln dies kontrolliert, es ist jedoch kein Ersatz für Kandidaten.
+## Bestandsbefund und Korrektur früherer Übergabe
 
-## Nächster Arbeitsauftrag
+32 registrierte Quellen, 1.790 Hinweise aus 26 Quellen, 1.785 Queueeinträge: 662 VERIFIED, 1.122 MANUAL_REVIEW_REQUIRED, 1 RETRY_EXHAUSTED, 0 PENDING; 479 gespeicherte Firmen und 439 JobSources. Die fünf Hinweise ohne Queueeintrag müssen einzeln erklärt werden. Kleine Jobbörsen-/Registerbestände auf Fixtureherkunft prüfen.
 
-1. Für mindestens 100 eindeutige, noch nicht verifizierte Arbeitgeber zulässige Belege beschaffen: eine offizielle Firmen-/Verzeichnisquelle mit eindeutig namenspassendem Link zur offiziellen Website oder einer belegten ATS-URL. Keine Jobbörsen, sozialen Netzwerke, Suchtreffer oder Domänenmutmaßungen als Primärbeleg verwenden.
-2. Die belegten Kandidaten über `tools/Discover-JobAgentCompanyCandidateWebsites.ps1` in `VERIFY_OFFICIAL_SITE`/`PENDING` überführen; Queue, Checkpoint und Store-Backup vor dem Lauf prüfen.
-3. Erst bei mindestens 100 bereiten Kandidaten den produktiven Lauf ausführen:
+Die frühere pauschale Aussage „keine nutzbaren Quellen“ ist nicht belegt. Keine gespeicherten PENDING-Einträge ist ein Queuezustand und kein Nachweis ausgeschöpfter Quellen. Registry, Hinweise, rekonstruierte Eligibility und tatsächliche Websitehinweise gemeinsam prüfen; keine Sammelrücksetzung aller Reviewfälle. Aktuelle externe Verfügbarkeit wurde in diesem Planungsauftrag nicht recherchiert und wird nicht behauptet.
 
-```powershell
-pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot . -MaxCandidates 100 -WorkerCount 4 -HostConcurrency 1
-```
+Commit `4d797ee` enthält die vorhandene Batchengine; deren frühere grünen Funktionstests sind historische Evidence. Ein running/completed-Laufcheckpoint allein beweist noch keinen verlustfreien Wiederanlauf einzelner Ergebnisse. Die vorhandene Auswahlbegrenzung garantiert nicht automatisch 100 bearbeitete Kandidaten oder ein gemeinsames Redirect-/ATS-Hostlimit. Der neue Plan benennt diese Nachweise ausdrücklich.
 
-4. Den daraus entstehenden Lauf als `logs/jobagent/JA-027-batch-*.json` auswerten bzw. ergänzen: Quellenprovenienz, netto verifizierte Arbeitgeber/min, P50/P95, Requests je Firma, Fehler-/Reviewquote und Restmenge. Ohne Messwerte keine ETA behaupten.
-5. JA-027 bleibt offen, bis die Roadmap-Kriterien einschließlich 1.000 offiziell belegter Karriere-/ATS-Quellen und vollständiger Live-Scans nachweisbar sind. Anschließend erst Todo abschließen, Roadmap rotieren und STP erneut ausführen.
+## Verifikation dieses Abschlusses
 
-## Nachgelagerte Punkte
+- Roadmapstruktur geprüft: genau drei JA-027-Unterpunkte mit allen Pflichtfeldern und je drei Umsetzungsschritten; aktive Reihenfolge und ein aktives Todo konsistent.
+- Alle zwölf referenzierten Testdateien und 21 konkreten bestehenden Quell-/Dokumentpfade vorhanden; geplante Evidence ist als künftig zu erzeugen markiert.
+- `git diff --check` ohne Fehler; `cmd /c .\ci.cmd stp` mit Exit 0.
+- Produktiver Store, Hinweise, Queue und Quellenregistry unverändert; SHA-256 vor/nach in `handoff.latest.json`.
+- Supertest nicht ausgeführt: für diesen Planungsabschluss vom Nutzer freigestellt, kein behaupteter erfolgreicher Testlauf. Keine Anwendungsfunktion geändert, daher keine Anwendungs-/Browser-/Netzwerktests.
+- Im generierten STP übernommene ältere Sonar-/Route-Digests bleiben im JSON als Historie erhalten; Sonarstatus not-supported ist kein Analyseerfolg.
 
-- JA-041 darf nur gegen verlässliche, offizielle Karriere-/ATS-Quellen umgesetzt werden und bleibt vom Abschluss von JA-027 abhängig.
-- UI-001 und JA-042 bleiben offen; ihre Akzeptanzkriterien sind nicht nachweislich erfüllt.
+Der nächste Chat arbeitet nach `Roadmap.md` an JA-027.1 weiter. Dieser Chat endet nach dem beauftragten Commit und Push.
