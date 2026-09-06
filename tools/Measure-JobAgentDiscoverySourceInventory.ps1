@@ -355,7 +355,11 @@ function New-InventoryResearchMatrix {
             url = 'https://www.hwk-muenchen.de/74,0,bdbsearch.html'
             observed_fact = 'Oeffentliche Handwerkersuche mit Ort/Umkreis- und Gewerke-Suche; fuer IT-nahe Handwerke nur als Kandidatenhinweis verwendbar.'
             allowed_use_decision = 'manual_or_fixture_snapshot_only'
-            next_action = 'Terms/Robots pruefen, Suchmatrix fuer Informationstechniker/Elektrotechniker in Muenchen/Freising definieren, keine personenbezogenen Rollen speichern.'
+            source_decision = 'parked_no_bulk_snapshot'
+            decision_status = 'blocked_for_automated_import'
+            decision_reason = 'Die oeffentliche Seite ist eine Suchmaske fuer Handwerksbetriebe mit Pflichtfeld PLZ/Ort; ohne dokumentierte Ergebnis-Snapshotfreigabe wird kein Massensuch- oder Formularimport registriert.'
+            evidence_urls = @('https://www.hwk-muenchen.de/74,0,bdbsearch.html')
+            next_action = 'Nur manuell dokumentierte, nicht-personenbezogene Einzelfallhinweise aufnehmen; kein Snapshot-Lane-Eintrag ohne separat belegte Nutzungsfreigabe.'
             risk = 'MEDIUM'
         }
         [pscustomobject]@{
@@ -385,7 +389,14 @@ function New-InventoryResearchMatrix {
             url = 'https://www.bio-m.org/en/'
             observed_fact = 'BioM verweist auf eine Company Database fuer Akteure im bayerischen Biotechnologiesektor.'
             allowed_use_decision = 'fixture_snapshot_candidate_hints'
-            next_action = 'Firmendatenbank-Seiten und regionale Filter pruefen; Kontakte/E-Mails nicht persistieren, nur Organisations-/Websitehinweise.'
+            source_decision = 'parked_until_snapshot_contract'
+            decision_status = 'deferred_for_parser_contract'
+            decision_reason = 'BioM belegt eine Company Database, eine interaktive Clusterkarte und Reports mit mehr als 300 Profilen; die aktuell erreichbare Karte ist jedoch eingebettet und es liegt noch kein lokaler, rechtlich und technisch abgegrenzter Firmen-Snapshot vor.'
+            evidence_urls = @(
+                'https://www.bio-m.org/en/our-cluster/interactive-cluster-map',
+                'https://www.bio-m.org/en/media-center/publications/biom-report-biotech-in-bavaria'
+            )
+            next_action = 'Separaten BioM-Snapshot-Vertrag bauen: nur Organisationsname, Region/Sektor und Source-URL aus Report/Database uebernehmen; Kontakte, Personen und Jobmarkt nicht persistieren.'
             risk = 'MEDIUM'
         }
         [pscustomobject]@{
@@ -405,7 +416,14 @@ function New-InventoryResearchMatrix {
             url = 'https://www.freising.de/wirtschaft'
             observed_fact = 'Stadt Freising beschreibt Wirtschaftsstandort, Gewerbegebiete und lokale Unternehmernetzwerke.'
             allowed_use_decision = 'manual_research_seed_only'
-            next_action = 'Pruefen, ob Seiten/Downloads konkrete Unternehmenslisten enthalten; sonst nur als Quellenansatz dokumentieren.'
+            source_decision = 'covered_by_existing_specific_source'
+            decision_status = 'no_new_source_registered'
+            decision_reason = 'Die allgemeine Wirtschaftsseite liefert Standort-, Netzwerk- und Konzeptinformationen, aber keine klar abgegrenzte importierbare Unternehmensliste; der konkrete Weihenstephan-Organisationspfad bleibt als bestehende Quelle registriert.'
+            evidence_urls = @(
+                'https://www.freising.de/wirtschaft',
+                'https://www.freising.de/wirtschaft/weihenstephan'
+            )
+            next_action = 'Allgemeine Seite nur als Recherchekontext fuehren; konkrete Freisinger Organisationslisten nur ueber eigene Source-ID und Fixture aufnehmen.'
             risk = 'LOW'
         }
         [pscustomobject]@{
@@ -415,7 +433,14 @@ function New-InventoryResearchMatrix {
             url = 'https://www.ihk-muenchen.de/politik/standortmanagement/standortportal-bayern/'
             observed_fact = 'Standortportal Bayern ist eine kostenlose Informationsplattform fuer Gewerbestandorte und Gewerbeimmobilien.'
             allowed_use_decision = 'not_company_directory_until_verified'
-            next_action = 'Nicht als Firmenliste zaehlen; nur pruefen, ob Gewerbeimmobilien-/Standortdaten einen zulaessigen regionalen Recherchepfad ergeben.'
+            source_decision = 'parked_until_company_export_or_api_verified'
+            decision_status = 'not_registered_for_import'
+            decision_reason = 'Die IHK-Seite beschreibt Standort-, Flaechen- und Immobilienfunktionen; externe Hinweise auf Unternehmensstandorte reichen ohne dokumentierte Export-/API- und Retentionfreigabe nicht fuer die lokale Snapshot-Lane.'
+            evidence_urls = @(
+                'https://www.ihk-muenchen.de/politik/standortmanagement/standortportal-bayern/',
+                'https://www.bayernportal.de/dokumente/leistung/3555344456'
+            )
+            next_action = 'Nur weiter verfolgen, wenn ein zulaessiger, nicht-personenbezogener Export oder eine dokumentierte API fuer Unternehmensstandorte gefunden wird.'
             risk = 'LOW'
         }
     )
@@ -425,6 +450,7 @@ function New-InventoryResearchMatrix {
         generated_at = $GeneratedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         contract = 'Diese Matrix dokumentiert recherchierte Quellenansaetze. Sie erzeugt keine offiziellen Karrierequellen und keine produktiven Firmen ohne spaetere Verifikation.'
         source_candidates_total = $sourceCandidates.Count
+        final_decisions_total = @($sourceCandidates | Where-Object { -not [string]::IsNullOrWhiteSpace([string](Get-InventoryProperty -Object $_ -Name 'source_decision' -Default '')) }).Count
         source_candidates = $sourceCandidates
     }
 }

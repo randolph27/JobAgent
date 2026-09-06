@@ -1,1 +1,179 @@
-{"verified":[{"cmd":".\\ci.cmd sonar","exit":null,"status":"not-supported"}],"status":"in-progress","goal":"JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.","workspace_root":".","route":{"mode":"standard","ts":"2026-09-06T08:04:47.602+02:00","violations":[],"agent_id":"UTTER-20260817-39f7","policy":{"forbid_path":[],"no_touch":[],"forbid_regex":[]},"git":{"has_repo":true,"diff_log":"logs\\terminal\\route-check-20260906-080445.log"},"changed_count":20,"changed_files":[".ci/bin/modules/browser-logic.ps1",".ci/bin/modules/ci-commands-main.ps1",".ci/bin/modules/verify-logic.ps1",".ci/ci.config.json",".ci/pins/immutable.hashes.json","Roadmap.md","Roadmap_archive.md","Roadmap_index.md","handoff.latest.json","handoff.latest.md","html/jobagent/ja-022-viewport-audit.html","output/playwright/ja-022-viewport-1366.png","output/playwright/ja-022-viewport-1920.png","tests/Test-JobAgentHtmlViewportAudit.ps1","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"route_ok":true},"route_violations":[],"verify_digest":{"ts":"2026-09-06T07:52:07.727+02:00","status":"not-supported","reason":"PowerShell- und statische HTML-Dateien werden im Projekt derzeit nicht mit einem konfigurierten SonarScanner analysiert; SonarQube-Serverstatus ist kein Analysebeleg.","exit":null,"cmd":".\\ci.cmd sonar","secret_sanitized":true,"analysis_started":false},"refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:handoff.latest.md","file:Roadmap.md","file:logs/jobagent/company-discovery-snapshot-digest-20260906-203726.json","file:logs/jobagent/JA-027-source-inventory.json","file:logs/jobagent/JA-027-source-research.json","file:logs/jobagent/JA-027-candidate-reconciliation.json"],"changed":["Roadmap.md","data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.regional-hints.json","data/jobagent/company-discovery.snapshot.json","data/jobagent/company-discovery.sources.json","data/jobagent/store.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentDiscoverySourceInventory.ps1","tests/Test-JobAgentRegionalDiscovery.ps1","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Measure-JobAgentDiscoverySourceInventory.ps1"],"capsule":{"ts":"2026-09-06T22:47:41.742+02:00","route_violations":[],"env_inventory_missing":false,"changed":["Roadmap.md","data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.regional-hints.json","data/jobagent/company-discovery.snapshot.json","data/jobagent/company-discovery.sources.json","data/jobagent/store.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentDiscoverySourceInventory.ps1","tests/Test-JobAgentRegionalDiscovery.ps1","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Measure-JobAgentDiscoverySourceInventory.ps1"],"project":"JobAgent","manual_missing":false,"active_id":"TD-0041","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"git":{"has_repo":true,"remote":"origin","ahead":0,"detached":false,"behind":0,"worktree":"dirty","head":"6ad4c25b5d3e","branch":"master","upstream":"origin/master","tracked_changes":["Roadmap.md","data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.regional-hints.json","data/jobagent/company-discovery.snapshot.json","data/jobagent/company-discovery.sources.json","data/jobagent/store.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentDiscoverySourceInventory.ps1","tests/Test-JobAgentRegionalDiscovery.ps1","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Measure-JobAgentDiscoverySourceInventory.ps1"]},"next":"JA-027.2 fortsetzen: HWK-Handwerkersuche, BioM-Firmendatenbank, Stadt-Freising-Wirtschaft und IHK-Standortportal nach Source-Contract final entscheiden; Snapshot-/Parser-Lane ergaenzen oder begruendet parken/blockieren; danach Snapshot-Lane, Coverage und Inventur erneut ausfuehren. JA-041 erst nach diesem JA-027.2-Hotspot.","env_inventory_used":false,"status":"in-progress","verified":[{"cmd":".\\ci.cmd sonar","exit":null,"status":"not-supported"}],"env_inventory_path":null,"workspace_root":".","goal":"JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.","route_ok":true,"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","agent_id":"UTTER-20260817-39f7"},"next":"JA-027.2 fortsetzen: HWK-Handwerkersuche, BioM-Firmendatenbank, Stadt-Freising-Wirtschaft und IHK-Standortportal nach Source-Contract final entscheiden; Snapshot-/Parser-Lane ergaenzen oder begruendet parken/blockieren; danach Snapshot-Lane, Coverage und Inventur erneut ausfuehren. JA-041 erst nach diesem JA-027.2-Hotspot.","ts":"2026-09-06T22:47:41.742+02:00","summary":"JA-027.2 Schreibender Snapshot-Refresh und Inventory-Reconciliation abgeschlossen; JA-027 bleibt offen.","toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"next_steps":["JA-027.2 fortsetzen: HWK-Handwerkersuche, BioM-Firmendatenbank, Stadt-Freising-Wirtschaft und IHK-Standortportal nach Source-Contract final entscheiden; Snapshot-/Parser-Lane ergaenzen oder begruendet parken/blockieren; danach Snapshot-Lane, Coverage und Inventur erneut ausfuehren. JA-041 erst nach diesem JA-027.2-Hotspot."],"project":"JobAgent","active_id":"TD-0041","agent_id":"UTTER-20260817-39f7","route_ok":true,"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","git":{"has_repo":true,"remote":"origin","ahead":0,"detached":false,"behind":0,"worktree":"dirty","head":"6ad4c25b5d3e","branch":"master","upstream":"origin/master","tracked_changes":["Roadmap.md","data/jobagent/company-candidate-verification.queue.json","data/jobagent/company-discovery.hints.json","data/jobagent/company-discovery.regional-hints.json","data/jobagent/company-discovery.snapshot.json","data/jobagent/company-discovery.sources.json","data/jobagent/store.json","handoff.latest.json","handoff.latest.md","html/jobagent/company-coverage.html","tests/Test-JobAgentDiscoverySourceInventory.ps1","tests/Test-JobAgentRegionalDiscovery.ps1","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Measure-JobAgentDiscoverySourceInventory.ps1"]}}
+{
+  "verified": [
+    {
+      "status": "not-supported",
+      "exit": null,
+      "cmd": ".\\ci.cmd sonar"
+    }
+  ],
+  "agent_id": "UTTER-20260817-39f7",
+  "route": {
+    "mode": "standard",
+    "ts": "2026-09-06T08:04:47.602+02:00",
+    "violations": [],
+    "agent_id": "UTTER-20260817-39f7",
+    "policy": {
+      "forbid_path": [],
+      "no_touch": [],
+      "forbid_regex": []
+    },
+    "git": {
+      "has_repo": true,
+      "diff_log": "logs\\terminal\\route-check-20260906-080445.log"
+    },
+    "changed_count": 20,
+    "changed_files": [
+      ".ci/bin/modules/browser-logic.ps1",
+      ".ci/bin/modules/ci-commands-main.ps1",
+      ".ci/bin/modules/verify-logic.ps1",
+      ".ci/ci.config.json",
+      ".ci/pins/immutable.hashes.json",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/ja-022-viewport-audit.html",
+      "output/playwright/ja-022-viewport-1366.png",
+      "output/playwright/ja-022-viewport-1920.png",
+      "tests/Test-JobAgentHtmlViewportAudit.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json"
+    ],
+    "route_ok": true
+  },
+  "project": "JobAgent",
+  "workspace_root": ".",
+  "ts": "2026-09-06T22:56:27.464+02:00",
+  "summary": "JA-027.2 source decisions recorded and tested",
+  "active_id": "TD-0041",
+  "next_steps": [
+    "JA-027.3 starten: offizielle Firmen-/Karriereverifikation und 100er Benchmark vorbereiten; geparkte/blockierte JA-027.2-Quellen nicht importieren."
+  ],
+  "capsule": {
+    "env_inventory_missing": false,
+    "git": {
+      "has_repo": true,
+      "upstream": "origin/master",
+      "behind": 0,
+      "ahead": 0,
+      "worktree": "dirty",
+      "remote": "origin",
+      "tracked_changes": [
+        "Roadmap.md",
+        "tests/Test-JobAgentDiscoverySourceInventory.ps1",
+        "todo.checkpoint.json",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json",
+        "todo.state.json",
+        "tools/Measure-JobAgentDiscoverySourceInventory.ps1"
+      ],
+      "detached": false,
+      "branch": "master",
+      "head": "07bc582b653f"
+    },
+    "route_violations": [],
+    "status": "in-progress",
+    "active_id": "TD-0041",
+    "env_inventory_path": null,
+    "manual_missing": false,
+    "changed": [
+      "Roadmap.md",
+      "tests/Test-JobAgentDiscoverySourceInventory.ps1",
+      "todo.checkpoint.json",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Measure-JobAgentDiscoverySourceInventory.ps1"
+    ],
+    "next": "JA-027.3 starten: offizielle Firmen-/Karriereverifikation und 100er Benchmark vorbereiten; geparkte/blockierte JA-027.2-Quellen nicht importieren.",
+    "agent_id": "UTTER-20260817-39f7",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "project": "JobAgent",
+    "goal": "JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.",
+    "workspace_root": ".",
+    "route_ok": true,
+    "ts": "2026-09-06T22:56:27.464+02:00",
+    "env_inventory_used": false,
+    "verified": [
+      {
+        "status": "not-supported",
+        "exit": null,
+        "cmd": ".\\ci.cmd sonar"
+      }
+    ],
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp."
+  },
+  "next": "JA-027.3 starten: offizielle Firmen-/Karriereverifikation und 100er Benchmark vorbereiten; geparkte/blockierte JA-027.2-Quellen nicht importieren.",
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:logs/verify/verify.digest.json"
+  ],
+  "goal": "JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.",
+  "toolchain": {
+    "ts": "2026-08-17T13:53:15.642+02:00",
+    "gradle": {
+      "cmd": "gradle",
+      "mode": "path",
+      "root": "D:\\_Scripte\\JobAgent"
+    }
+  },
+  "git": {
+    "has_repo": true,
+    "upstream": "origin/master",
+    "behind": 0,
+    "ahead": 0,
+    "worktree": "dirty",
+    "remote": "origin",
+    "tracked_changes": [
+      "Roadmap.md",
+      "tests/Test-JobAgentDiscoverySourceInventory.ps1",
+      "todo.checkpoint.json",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Measure-JobAgentDiscoverySourceInventory.ps1"
+    ],
+    "detached": false,
+    "branch": "master",
+    "head": "07bc582b653f"
+  },
+  "route_violations": [],
+  "verify_digest": {
+    "ts": "2026-09-06T07:52:07.727+02:00",
+    "status": "not-supported",
+    "reason": "PowerShell- und statische HTML-Dateien werden im Projekt derzeit nicht mit einem konfigurierten SonarScanner analysiert; SonarQube-Serverstatus ist kein Analysebeleg.",
+    "exit": null,
+    "cmd": ".\\ci.cmd sonar",
+    "secret_sanitized": true,
+    "analysis_started": false
+  },
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+  "route_ok": true,
+  "changed": [
+    "Roadmap.md",
+    "tests/Test-JobAgentDiscoverySourceInventory.ps1",
+    "todo.checkpoint.json",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "tools/Measure-JobAgentDiscoverySourceInventory.ps1"
+  ],
+  "status": "in-progress"
+}

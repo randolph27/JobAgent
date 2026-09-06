@@ -59,10 +59,16 @@ Assert-True -Condition (@($reconciliation.small_hint_sources | Where-Object { [s
 
 Assert-True -Condition ($research.schema_version -eq 'jobagent/source-research/v1') -Message 'Quellenrecherche hat falsches Schema.'
 Assert-True -Condition (@($research.source_candidates).Count -ge 6) -Message 'Quellenrecherche enthaelt zu wenige Quellenansaetze.'
+Assert-True -Condition ([int]$research.final_decisions_total -ge 4) -Message 'Quellenrecherche muss die vier offenen JA-027.2-Quellen final entscheiden.'
 foreach ($family in @('Kammer-/Branchenverzeichnis', 'Startup-/Technologieverzeichnis', 'Forschungs-/Hochschul-Ausgruendungen', 'Technologiepark-/Gruenderzentrum-Mitglieder')) {
     Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$_.family -eq $family }).Count -ge 1) -Message "Quellenfamilie fehlt: $family"
 }
 Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$_.allowed_use_decision -match 'official' }).Count -eq 0) -Message 'Rechercheansaetze duerfen nicht als offizielle Karrierequellen markiert werden.'
+Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$_.source_id -eq 'research-candidate:hwk_muenchen_oberbayern_handwerkersuche' -and [string]$_.decision_status -eq 'blocked_for_automated_import' }).Count -eq 1) -Message 'HWK-Handwerkersuche muss fuer automatisierten Import blockiert sein.'
+Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$_.source_id -eq 'research-candidate:biom_company_database' -and [string]$_.decision_status -eq 'deferred_for_parser_contract' }).Count -eq 1) -Message 'BioM muss bis zum Snapshot-/Parservertrag geparkt sein.'
+Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$_.source_id -eq 'research-candidate:stadt_freising_wirtschaft' -and [string]$_.source_decision -eq 'covered_by_existing_specific_source' }).Count -eq 1) -Message 'Stadt-Freising-Wirtschaft muss durch spezifische Quelle statt neue Allgemeinquelle entschieden sein.'
+Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$_.source_id -eq 'research-candidate:ihk_standortportal_bayern' -and [string]$_.decision_status -eq 'not_registered_for_import' }).Count -eq 1) -Message 'IHK-Standortportal darf ohne Export/API nicht fuer Import registriert sein.'
+Assert-True -Condition (@($research.source_candidates | Where-Object { $_.PSObject.Properties.Name -contains 'source_decision' -and @($_.evidence_urls).Count -lt 1 }).Count -eq 0) -Message 'Final entschiedene Quellen brauchen Evidence-URLs.'
 
 [pscustomobject]@{
     status = 'ok'
@@ -72,6 +78,7 @@ Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$
         'cluster_candidate_ids_count_as_queue_coverage',
         'small_source_counts_are_not_exhaustion',
         'research_matrix_has_new_source_approaches',
+        'ja0272_open_sources_have_final_decisions',
         'rejected_sources_fail_closed'
     )
     evidence = @($output.inventory_path, $output.research_path, $output.reconciliation_path)
