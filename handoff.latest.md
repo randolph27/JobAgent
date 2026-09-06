@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-06T17:31:48.335+02:00
+Stand: 2026-09-06T17:33:22+02:00
 
 ## Zustand
 
@@ -8,10 +8,10 @@ Stand: 2026-09-06T17:31:48.335+02:00
 - Status: `in-progress`
 - Ziel: JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen.
 - Branch: `master`
-- HEAD: `4cb9fb5536ef`
+- HEAD: `304b38e349dd`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
-- Worktree: `dirty`
+- Worktree: `clean`
 - Route: `True`
 
 ## Ergebnis dieses Arbeitsschritts
