@@ -340,6 +340,10 @@ try {
     Assert-True -Condition ($scriptCompany.verification_status -eq 'CAREER_URL_VERIFIED') -Message 'Candidate-Verifikationsscript aktualisiert Firmenstatus nicht.'
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Candidate-Verifikationsscript erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'
+    Assert-True -Condition ($scriptResult.batch_policy.worker_count -eq 4 -and $scriptResult.batch_policy.host_concurrency -eq 1) -Message 'Candidate-Verifikationsscript dokumentiert den Worker-/Hostlimit-Vertrag nicht.'
+    $checkpoint = Get-Content -Raw -LiteralPath ([string]$scriptResult.checkpoint_path) | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($checkpoint.schema_version -eq 'jobagent/company-candidate-verification-checkpoint/v1' -and $checkpoint.state -eq 'completed') -Message 'Candidate-Verifikationsscript schreibt keinen abgeschlossenen Batch-Checkpoint.'
+    Assert-True -Condition ($checkpoint.metrics.processed_total -eq $scriptResult.verification_queue.processed_total) -Message 'Batch-Checkpoint und Verifikationssummary widersprechen sich.'
 
     $secondScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 -ExpiresAfterDays 730 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript-Zweitlauf ist fehlgeschlagen: " + ($secondScriptOutput -join "`n"))
@@ -349,6 +353,32 @@ try {
 finally {
     if (Test-Path -LiteralPath $projectRoot) {
         Remove-Item -LiteralPath $projectRoot -Recurse -Force
+    }
+}
+
+$parallelRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-candidate-parallel-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $parallelRoot -Force | Out-Null
+try {
+    Write-JobAgentStore -ProjectRoot $parallelRoot -Document (New-JobAgentEmptyDocument -GeneratedAt $observedAt) | Out-Null
+    New-Item -ItemType Directory -Path (Join-Path $parallelRoot 'data\jobagent') -Force | Out-Null
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-hints/v1'
+        generated_at = '2026-08-23T09:00:00.000Z'
+        hints = @(
+            (New-TestCandidate -Id 'hint:parallel-one' -Name 'Parallel One GmbH' -OfficialWebsiteUrl 'http://127.0.0.1:1/' -OfficialWebsiteVerified $true),
+            (New-TestCandidate -Id 'hint:parallel-two' -Name 'Parallel Two GmbH' -OfficialWebsiteUrl 'http://localhost:1/' -OfficialWebsiteVerified $true)
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $parallelRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
+
+    $parallelOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $parallelRoot -MaxCandidates 2 -WorkerCount 2 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Parallel-Workerlauf ist fehlgeschlagen: " + ($parallelOutput -join "`n"))
+    $parallelResult = ($parallelOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($parallelResult.verification_queue.processed_total -eq 2) -Message ('Parallel-Workerlauf verarbeitet nicht beide unabhängigen Kandidaten: ' + ($parallelOutput -join "`n"))
+    Assert-True -Condition ($parallelResult.batch_policy.worker_count -eq 2) -Message 'Parallel-Workerlauf übernimmt die Workeranzahl nicht.'
+}
+finally {
+    if (Test-Path -LiteralPath $parallelRoot) {
+        Remove-Item -LiteralPath $parallelRoot -Recurse -Force
     }
 }
 
@@ -583,6 +613,8 @@ finally {
         'candidate_verification_cluster_queue_retry_and_review',
         'candidate_verification_retry_schedule_skip_until_due',
         'candidate_verification_decision_report_review_and_reject',
+        'candidate_verification_batch_checkpoint_and_worker_policy',
+        'candidate_verification_parallel_workers',
         'website_discovery_requeues_domain_missing_reviews_with_official_source_evidence'
     )
 } | ConvertTo-Json -Depth 4

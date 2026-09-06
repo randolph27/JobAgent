@@ -12,6 +12,9 @@ param(
     [Parameter()][ValidateRange(1, 60)][int]$TimeoutSeconds = 12,
     [Parameter()][ValidateRange(1, 730)][int]$ExpiresAfterDays = 90,
     [Parameter()][ValidateRange(1, 20)][int]$MaxRetries = 3,
+    [Parameter()][ValidateRange(1, 16)][int]$WorkerCount = 4,
+    [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
+    [Parameter()][string]$CheckpointPath = 'data/jobagent/company-candidate-verification.checkpoint.json',
     [Parameter()][string]$FixtureMapPath
 )
 
@@ -233,6 +236,7 @@ function New-ToolFixtureFetcher {
                 status_code = if ($null -eq $entry.status_code) { $null } else { [int]$entry.status_code }
                 content = if ($null -eq $entry.content) { '' } else { [string]$entry.content }
                 content_type = 'text/html'
+                retry_after_seconds = if ($null -eq $entry.retry_after_seconds) { $null } else { [int]$entry.retry_after_seconds }
                 error = if ([bool]$entry.ok) { $null } else { 'fixture failure' }
             }
         }
@@ -243,6 +247,7 @@ function New-ToolFixtureFetcher {
             status_code = 404
             content = ''
             content_type = 'text/html'
+            retry_after_seconds = $null
             error = 'fixture missing'
         }
     }.GetNewClosure()
@@ -351,7 +356,7 @@ function New-ToolQueueEntry {
 
 function New-ToolCandidateVerificationQueue {
     param(
-        [Parameter(Mandatory)][object[]]$Candidates,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Candidates,
         [Parameter(Mandatory)][object]$PreviousQueue,
         [Parameter(Mandatory)][datetime]$Now
     )
@@ -445,6 +450,77 @@ function ConvertTo-ToolActionCounts {
     return [pscustomobject]$counts
 }
 
+function Get-ToolCandidateHostKey {
+    param([Parameter(Mandatory)][object]$Candidate)
+
+    foreach ($property in @('official_website_url', 'verified_official_website_url', 'known_company_domain', 'canonical_domain')) {
+        if ($Candidate.PSObject.Properties.Name -notcontains $property -or [string]::IsNullOrWhiteSpace([string]$Candidate.$property)) {
+            continue
+        }
+        $value = [string]$Candidate.$property
+        try {
+            if ($value -notmatch '^[a-z][a-z0-9+.-]*://') {
+                $value = 'https://' + $value.Trim('/')
+            }
+            return (([Uri]$value).Host.ToLowerInvariant() -replace '^www\.', '')
+        }
+        catch {
+            continue
+        }
+    }
+    return 'candidate:' + (Get-ToolCandidateId -Candidate $Candidate)
+}
+
+function Select-ToolHostLimitedCandidates {
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Candidates,
+        [Parameter(Mandatory)][int]$HostLimit
+    )
+
+    $selected = [System.Collections.Generic.List[object]]::new()
+    $hostCounts = @{}
+    foreach ($candidate in $Candidates) {
+        $hostKey = Get-ToolCandidateHostKey -Candidate $candidate
+        $count = if ($hostCounts.ContainsKey($hostKey)) { [int]$hostCounts[$hostKey] } else { 0 }
+        if ($count -ge $HostLimit) {
+            continue
+        }
+        $hostCounts[$hostKey] = $count + 1
+        $selected.Add($candidate)
+    }
+    return $selected.ToArray()
+}
+
+function Write-ToolBatchCheckpoint {
+    param(
+        [Parameter(Mandatory)][string]$Path,
+        [Parameter(Mandatory)][string]$State,
+        [Parameter(Mandatory)][datetime]$StartedAt,
+        [Parameter()][AllowEmptyCollection()][object[]]$CandidateIds = @(),
+        [Parameter()][AllowNull()][object]$Metrics = $null
+    )
+
+    New-Item -ItemType Directory -Path (Split-Path -Parent $Path) -Force | Out-Null
+    $checkpoint = [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-checkpoint/v1'
+        state = $State
+        started_at = ConvertTo-ToolIso -Value $StartedAt
+        updated_at = ConvertTo-ToolIso -Value ([datetime]::UtcNow)
+        candidate_ids = @($CandidateIds)
+        metrics = $Metrics
+    }
+    $temporaryPath = $Path + '.' + [guid]::NewGuid().ToString('N') + '.tmp'
+    try {
+        $checkpoint | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $temporaryPath -Encoding UTF8
+        Move-Item -LiteralPath $temporaryPath -Destination $Path -Force
+    }
+    finally {
+        if (Test-Path -LiteralPath $temporaryPath) {
+            Remove-Item -LiteralPath $temporaryPath -Force
+        }
+    }
+}
+
 function Update-ToolCandidateVerificationQueue {
     param(
         [Parameter(Mandatory)][object]$Queue,
@@ -479,7 +555,17 @@ function Update-ToolCandidateVerificationQueue {
                 'RETRY_EXHAUSTED'
             }
             else {
-                $nextAttemptAt = $Now.ToUniversalTime().AddHours([Math]::Min([double]168, [double](24 * [Math]::Pow(2, ($retryCount - 1)))))
+                $retryAfterSeconds = @($result.fetches |
+                    Where-Object { $_.PSObject.Properties.Name -contains 'retry_after_seconds' -and $null -ne $_.retry_after_seconds } |
+                    ForEach-Object { [int]$_.retry_after_seconds } |
+                    Sort-Object -Descending |
+                    Select-Object -First 1)
+                if ($retryAfterSeconds.Count -eq 1 -and $retryAfterSeconds[0] -gt 0) {
+                    $nextAttemptAt = $Now.ToUniversalTime().AddSeconds($retryAfterSeconds[0])
+                }
+                else {
+                    $nextAttemptAt = $Now.ToUniversalTime().AddHours([Math]::Min([double]168, [double](24 * [Math]::Pow(2, ($retryCount - 1)))))
+                }
                 'RETRY_SCHEDULED'
             }
         }
@@ -582,11 +668,14 @@ $hintStore = Get-Content -Raw -LiteralPath $hintStoreResolved | ConvertFrom-Json
 $sourceRegistry = if (Test-Path -LiteralPath $sourceRegistryResolved -PathType Leaf) { Get-Content -Raw -LiteralPath $sourceRegistryResolved | ConvertFrom-Json -Depth 100 } else { $null }
 $policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds
 $fetcher = if ([string]::IsNullOrWhiteSpace($FixtureMapPath)) { $null } else { New-ToolFixtureFetcher -Path (Resolve-ToolPath -Root $projectRootResolved -Path $FixtureMapPath) }
+$checkpointResolved = Resolve-ToolPath -Root $projectRootResolved -Path $CheckpointPath
+$results = New-Object System.Collections.Generic.List[object]
+$queue = $null
+$document = $null
 
 $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootResolved -DataRoot $DataRoot
 try {
     $document = Read-JobAgentStore -ProjectRoot $projectRootResolved -DataRoot $DataRoot
-    $results = New-Object System.Collections.Generic.List[object]
     $previousQueue = Read-ToolCandidateVerificationQueue -Path $queueResolved -Now $startedAt
     $queue = New-JobAgentCoverageCandidateReviewQueue -HintStore $hintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousQueue -ExistingCompanies @($document.companies) -Now $startedAt -MaxItems 1000
     $candidateById = @{}
@@ -606,18 +695,46 @@ try {
         Sort-Object @{ Expression = { -[int](Get-ToolCandidateActionabilityScore -Candidate $candidateById[[string]$_.candidate_id]) }; Ascending = $true }, @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
         ForEach-Object { $candidateById[[string]$_.candidate_id] } |
         Select-Object -First $MaxCandidates)
+}
+finally {
+    Exit-JobAgentStoreLock -Lock $lock
+}
 
+$targetCandidates = @(Select-ToolHostLimitedCandidates -Candidates $targetCandidates -HostLimit $HostConcurrency)
+$existingCompanies = @($document.companies)
+Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'running' -StartedAt $startedAt -CandidateIds @($targetCandidates | ForEach-Object { Get-ToolCandidateId -Candidate $_ }) -Metrics ([pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency })
+
+if ($null -ne $fetcher -or $targetCandidates.Count -le 1) {
     foreach ($candidate in $targetCandidates) {
-        $verification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($document.companies) -Policy $policy -Fetcher $fetcher -ObservedAt $startedAt -ExpiresAfterDays $ExpiresAfterDays
+        $verification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies $existingCompanies -Policy $policy -Fetcher $fetcher -ObservedAt $startedAt -ExpiresAfterDays $ExpiresAfterDays
         $results.Add($verification)
-        if (@('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$verification.status) {
-            $company = ConvertTo-ToolCompanyFromCandidateVerification -Candidate $candidate -Verification $verification -ObservedAt $startedAt
-            $document = Upsert-JobAgentCompany -Document $document -Company $company
-            if (@('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$verification.status) {
-                $source = New-ToolJobSourceFromCandidateVerification -Verification $verification -ObservedAt $startedAt
-                if ($null -ne $source) {
-                    $document = Upsert-JobAgentJobSource -Document $document -JobSource $source
-                }
+    }
+}
+else {
+    $sourceVerificationModule = Join-Path $toolRoot 'src\JobAgent.SourceVerification.psm1'
+    $parallelResults = $targetCandidates | ForEach-Object -Parallel {
+        Import-Module $using:sourceVerificationModule -Force -DisableNameChecking
+        Resolve-JobAgentCompanyCandidateVerification -Candidate $_ -ExistingCompanies $using:existingCompanies -Policy $using:policy -ObservedAt $using:startedAt -ExpiresAfterDays $using:ExpiresAfterDays
+    } -ThrottleLimit $WorkerCount
+    foreach ($verification in @($parallelResults)) {
+        $results.Add($verification)
+    }
+}
+
+$lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootResolved -DataRoot $DataRoot
+try {
+    $document = Read-JobAgentStore -ProjectRoot $projectRootResolved -DataRoot $DataRoot
+    foreach ($verification in @($results.ToArray())) {
+        $candidate = $candidateById[[string]$verification.candidate_id]
+        if (@('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -notcontains [string]$verification.status) {
+            continue
+        }
+        $company = ConvertTo-ToolCompanyFromCandidateVerification -Candidate $candidate -Verification $verification -ObservedAt $startedAt
+        $document = Upsert-JobAgentCompany -Document $document -Company $company
+        if (@('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$verification.status) {
+            $source = New-ToolJobSourceFromCandidateVerification -Verification $verification -ObservedAt $startedAt
+            if ($null -ne $source) {
+                $document = Upsert-JobAgentJobSource -Document $document -JobSource $source
             }
         }
     }
@@ -629,6 +746,8 @@ try {
 finally {
     Exit-JobAgentStoreLock -Lock $lock
 }
+
+Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'completed' -StartedAt $startedAt -CandidateIds @($results | ForEach-Object { [string]$_.candidate_id }) -Metrics ([pscustomobject]@{ processed_total = $results.Count; verified_total = @($results | Where-Object { [string]$_.status -in @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') }).Count })
 
 $logRootPath = Resolve-ToolPath -Root $projectRootResolved -Path $LogRoot
 New-Item -ItemType Directory -Path $logRootPath -Force | Out-Null
@@ -646,6 +765,8 @@ $summary = [pscustomobject]@{
     store_path = $storePath
     hint_store_path = $hintStoreResolved
     queue_path = $queueResolved
+    checkpoint_path = $checkpointResolved
+    batch_policy = [pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; writer = 'serial_atomic_store_writer' }
     policy = $policy
     verification_queue = [pscustomobject]@{
         clusters_total = [int]$queue.clusters_total

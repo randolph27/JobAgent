@@ -243,13 +243,20 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
             status_code = [int]$response.StatusCode
             content = [string]$response.Content
             content_type = [string]$response.Headers['Content-Type']
+            retry_after_seconds = $null
             error = $null
         }
     }
     catch {
         $statusCode = $null
+        $retryAfterSeconds = $null
         if ($_.Exception.PSObject.Properties.Name -contains 'Response' -and $_.Exception.Response -and $_.Exception.Response.StatusCode) {
             $statusCode = [int]$_.Exception.Response.StatusCode
+            $retryAfter = [string]$_.Exception.Response.Headers['Retry-After']
+            $parsedRetryAfter = 0
+            if ([int]::TryParse($retryAfter, [ref]$parsedRetryAfter) -and $parsedRetryAfter -gt 0) {
+                $retryAfterSeconds = $parsedRetryAfter
+            }
         }
         [pscustomobject]@{
             ok = $false
@@ -258,6 +265,7 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
             status_code = $statusCode
             content = ''
             content_type = ''
+            retry_after_seconds = $retryAfterSeconds
             error = $_.Exception.Message
         }
     }
