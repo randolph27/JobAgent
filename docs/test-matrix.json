@@ -317,6 +317,22 @@
       ]
     },
     {
+      "roadmap_id": "JA-027.2",
+      "title": "Quelleninventur und Kandidatenabgleich fuer JA-027.2",
+      "test_file": "tests/Test-JobAgentDiscoverySourceInventory.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentDiscoverySourceInventory.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "alle 32 Registry-Quellen werden gegen Snapshot-Manifest, Hint-Store, Queue und Retention-Store abgeglichen",
+        "die fuenf Hints ohne Queueeintrag werden einzeln erklaert",
+        "kleine BA-, StepStone-, Indeed-, Register- und Regionalbestaende werden nicht als Quellenerschoepfung bewertet",
+        "mindestens sechs neue Quellenansaetze werden als Recherchematrix ohne offizielle Karrierequellenbehauptung dokumentiert",
+        "blockierte Quellen bleiben fail-closed"
+      ]
+    },
+    {
       "roadmap_id": "JA-029",
       "title": "Produktive Erweiterungswellen fuer tausende Muenchen-/Freising-Arbeitgeber mit Coverage-Gates einfuehren",
       "test_file": "tests/Test-JobAgentImportWaves.ps1",
