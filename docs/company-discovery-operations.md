@@ -23,6 +23,12 @@ Jobboersen- und Discovery-Hints laufen schnell ab, Register- und offizielle Quel
 
 Der Daily-Run bevorzugt refresh-faellige Firmen vor regulaeren Scanfaellen. Innerhalb dieser Gruppe bleiben fehlende erfolgreiche Scans, hoehere `scan_priority`, `next_refresh_at`, `next_scan_at` und Firmenname deterministische Sortierkriterien.
 
+## Kandidatenverifikation
+
+`tools/Verify-JobAgentCompanyCandidates.ps1` verarbeitet nur faellige `VERIFY_OFFICIAL_SITE`-Queueeintraege, schreibt produktive Firmen-/JobSource-Aenderungen ueber einen seriellen Store-Writer und legt pro Lauf ein Batchmanifest `logs/jobagent/JA-027-batch-<run-id>.json` an. Das Manifest enthaelt `run_id`, Policy, Queue-Mengen, Decision-Report, je Kandidat `batch_telemetry` und `batch_metrics`.
+
+`batch_metrics` nutzt ausschliesslich tatsaechlich verarbeitete eindeutige Kandidaten als Nenner fuer Dauer- und Requestwerte. P50/P95 werden per Nearest-Rank ueber sortierte Kandidatendauern berechnet. `net_official_career_growth` zaehlt nur Arbeitgeber, die nach dem seriellen Store-Commit neu als offizielle Karriere-/ATS-Quelle belegt sind; Domain-only, Fixture, Alias-Duplikate und Revalidierungen erhoehen diesen Wert nicht. Der laufbezogene Checkpoint speichert dieselben Metriken im `completed`-Zustand.
+
 ## Reports
 
 `tools/Measure-JobAgentCompanyCoverage.ps1` erzeugt JSON, Markdown und HTML. Die Reports enthalten Freshness-Metriken nach Status, Refresh-Grund, Zielgebiet, Quelle, Verifikationsstatus, Kandidaten-Freshness und segmentiertem Firmeninventar. Grosse HTML-Listen bleiben in Scroll-Containern mit Sticky-Headern.

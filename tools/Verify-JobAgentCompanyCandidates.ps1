@@ -301,7 +301,135 @@ function ConvertTo-ToolVerificationLogResult {
         }
         career_url = if ($Result.PSObject.Properties.Name -contains 'career_url') { $Result.career_url } else { $null }
         ats = if ($Result.PSObject.Properties.Name -contains 'ats') { $Result.ats } else { $null }
+        batch_telemetry = if ($Result.PSObject.Properties.Name -contains 'batch_telemetry') { $Result.batch_telemetry } else { $null }
         next_action = [string]$Result.next_action
+    }
+}
+
+function Get-ToolOfficialCareerCompanyIds {
+    param(
+        [Parameter(Mandatory)][object]$Document
+    )
+
+    $ids = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($company in @($Document.companies)) {
+        $status = if ($company.PSObject.Properties.Name -contains 'verification_status') { [string]$company.verification_status } else { 'UNVERIFIED' }
+        if (@('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains $status) {
+            [void]$ids.Add([string]$company.company_id)
+        }
+    }
+    foreach ($source in @($Document.job_sources)) {
+        $sourceType = if ($source.PSObject.Properties.Name -contains 'source_type') { [string]$source.source_type } else { '' }
+        $isOfficial = ($source.PSObject.Properties.Name -contains 'is_official') -and [bool]$source.is_official
+        if ($isOfficial -and @('CAREER_PAGE', 'OFFICIAL_ATS') -contains $sourceType) {
+            [void]$ids.Add([string]$source.company_id)
+        }
+    }
+    return @($ids | ForEach-Object { [string]$_ })
+}
+
+function Get-ToolNearestRankPercentile {
+    param(
+        [Parameter()][AllowEmptyCollection()][double[]]$Values = @(),
+        [Parameter(Mandatory)][ValidateRange(0.01, 1.0)][double]$Percentile
+    )
+
+    $ordered = @($Values | Sort-Object)
+    if ($ordered.Count -eq 0) {
+        return $null
+    }
+    $rank = [Math]::Ceiling($Percentile * [double]$ordered.Count)
+    $index = [Math]::Max(0, [Math]::Min($ordered.Count - 1, [int]$rank - 1))
+    return [Math]::Round([double]$ordered[$index], 3)
+}
+
+function Add-ToolVerificationTelemetry {
+    param(
+        [Parameter(Mandatory)][object]$Result,
+        [Parameter(Mandatory)][string]$CandidateId,
+        [Parameter(Mandatory)][datetime]$AttemptStartedAt,
+        [Parameter(Mandatory)][datetime]$AttemptCompletedAt
+    )
+
+    $durationMs = [Math]::Max(0, [int][Math]::Round(($AttemptCompletedAt.ToUniversalTime() - $AttemptStartedAt.ToUniversalTime()).TotalMilliseconds))
+    $requestCount = @($Result.fetches).Count
+    $Result | Add-Member -NotePropertyName batch_telemetry -NotePropertyValue ([pscustomobject]@{
+            candidate_id = $CandidateId
+            attempt_started_at = ConvertTo-ToolIso -Value $AttemptStartedAt
+            attempt_completed_at = ConvertTo-ToolIso -Value $AttemptCompletedAt
+            duration_ms = $durationMs
+            request_count = $requestCount
+        }) -Force
+    return $Result
+}
+
+function Invoke-ToolCandidateVerification {
+    param(
+        [Parameter(Mandatory)][object]$Candidate,
+        [Parameter(Mandatory)][object[]]$ExistingCompanies,
+        [Parameter(Mandatory)][object]$Policy,
+        [Parameter()][AllowNull()][scriptblock]$Fetcher,
+        [Parameter(Mandatory)][datetime]$ObservedAt,
+        [Parameter(Mandatory)][int]$ExpiresAfterDays
+    )
+
+    $candidateId = Get-ToolCandidateId -Candidate $Candidate
+    $attemptStartedAt = [datetime]::UtcNow
+    $verification = Resolve-JobAgentCompanyCandidateVerification -Candidate $Candidate -ExistingCompanies $ExistingCompanies -Policy $Policy -Fetcher $Fetcher -ObservedAt $ObservedAt -ExpiresAfterDays $ExpiresAfterDays
+    return Add-ToolVerificationTelemetry -Result $verification -CandidateId $candidateId -AttemptStartedAt $attemptStartedAt -AttemptCompletedAt ([datetime]::UtcNow)
+}
+
+function New-ToolCandidateVerificationBatchMetrics {
+    param(
+        [Parameter(Mandatory)][datetime]$StartedAt,
+        [Parameter(Mandatory)][datetime]$CompletedAt,
+        [Parameter()][AllowEmptyCollection()][object[]]$Results = @(),
+        [Parameter()][AllowEmptyCollection()][string[]]$BeforeOfficialCareerCompanyIds = @(),
+        [Parameter()][AllowEmptyCollection()][string[]]$AfterOfficialCareerCompanyIds = @()
+    )
+
+    $durations = @($Results |
+        Where-Object { $_.PSObject.Properties.Name -contains 'batch_telemetry' -and $null -ne $_.batch_telemetry } |
+        ForEach-Object { [double]$_.batch_telemetry.duration_ms })
+    $requestTotal = 0
+    foreach ($result in @($Results)) {
+        if ($result.PSObject.Properties.Name -contains 'batch_telemetry' -and $null -ne $result.batch_telemetry) {
+            $requestTotal += [int]$result.batch_telemetry.request_count
+        }
+    }
+    $before = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($id in @($BeforeOfficialCareerCompanyIds)) {
+        if (-not [string]::IsNullOrWhiteSpace($id)) {
+            [void]$before.Add($id)
+        }
+    }
+    $after = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($id in @($AfterOfficialCareerCompanyIds)) {
+        if (-not [string]::IsNullOrWhiteSpace($id)) {
+            [void]$after.Add($id)
+        }
+    }
+    $newCareerCompanyIds = @($after | ForEach-Object { [string]$_ } | Where-Object { -not $before.Contains($_) } | Sort-Object)
+    $wallclockSeconds = [Math]::Max(0.001, ($CompletedAt.ToUniversalTime() - $StartedAt.ToUniversalTime()).TotalSeconds)
+    $processedTotal = @($Results).Count
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-batch-metrics/v1'
+        started_at = ConvertTo-ToolIso -Value $StartedAt
+        completed_at = ConvertTo-ToolIso -Value $CompletedAt
+        wallclock_seconds = [Math]::Round($wallclockSeconds, 3)
+        processed_total = $processedTotal
+        verified_total = @($Results | Where-Object { [string]$_.status -in @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') }).Count
+        official_career_verified_before = $before.Count
+        official_career_verified_after = $after.Count
+        net_official_career_growth = $newCareerCompanyIds.Count
+        new_official_career_company_ids = $newCareerCompanyIds
+        request_total = $requestTotal
+        requests_per_candidate = if ($processedTotal -eq 0) { $null } else { [Math]::Round([double]$requestTotal / [double]$processedTotal, 3) }
+        duration_ms_p50 = Get-ToolNearestRankPercentile -Values $durations -Percentile 0.50
+        duration_ms_p95 = Get-ToolNearestRankPercentile -Values $durations -Percentile 0.95
+        net_official_career_per_minute = if ($newCareerCompanyIds.Count -eq 0) { 0.0 } else { [Math]::Round([double]$newCareerCompanyIds.Count / ($wallclockSeconds / 60.0), 4) }
+        denominator_note = 'Durations and request_total use actually processed unique candidates; net growth counts newly official career/ATS employers after the serial store commit.'
     }
 }
 
@@ -676,6 +804,7 @@ $document = $null
 $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootResolved -DataRoot $DataRoot
 try {
     $document = Read-JobAgentStore -ProjectRoot $projectRootResolved -DataRoot $DataRoot
+    $beforeOfficialCareerCompanyIds = @(Get-ToolOfficialCareerCompanyIds -Document $document)
     $previousQueue = Read-ToolCandidateVerificationQueue -Path $queueResolved -Now $startedAt
     $queue = New-JobAgentCoverageCandidateReviewQueue -HintStore $hintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousQueue -ExistingCompanies @($document.companies) -Now $startedAt -MaxItems 1000
     $candidateById = @{}
@@ -706,7 +835,7 @@ Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'running' -StartedAt 
 
 if ($null -ne $fetcher -or $targetCandidates.Count -le 1) {
     foreach ($candidate in $targetCandidates) {
-        $verification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies $existingCompanies -Policy $policy -Fetcher $fetcher -ObservedAt $startedAt -ExpiresAfterDays $ExpiresAfterDays
+        $verification = Invoke-ToolCandidateVerification -Candidate $candidate -ExistingCompanies $existingCompanies -Policy $policy -Fetcher $fetcher -ObservedAt $startedAt -ExpiresAfterDays $ExpiresAfterDays
         $results.Add($verification)
     }
 }
@@ -714,7 +843,27 @@ else {
     $sourceVerificationModule = Join-Path $toolRoot 'src\JobAgent.SourceVerification.psm1'
     $parallelResults = $targetCandidates | ForEach-Object -Parallel {
         Import-Module $using:sourceVerificationModule -Force -DisableNameChecking
-        Resolve-JobAgentCompanyCandidateVerification -Candidate $_ -ExistingCompanies $using:existingCompanies -Policy $using:policy -ObservedAt $using:startedAt -ExpiresAfterDays $using:ExpiresAfterDays
+        function Get-ToolCandidateIdLocal {
+            param([Parameter(Mandatory)][object]$Candidate)
+            foreach ($property in @('candidate_id', 'hint_id', 'company_id')) {
+                if ($Candidate.PSObject.Properties.Name -contains $property -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.$property)) {
+                    return [string]$Candidate.$property
+                }
+            }
+            throw 'Kandidat enthaelt keine stabile ID.'
+        }
+        $candidateId = Get-ToolCandidateIdLocal -Candidate $_
+        $attemptStartedAt = [datetime]::UtcNow
+        $verification = Resolve-JobAgentCompanyCandidateVerification -Candidate $_ -ExistingCompanies $using:existingCompanies -Policy $using:policy -ObservedAt $using:startedAt -ExpiresAfterDays $using:ExpiresAfterDays
+        $durationMs = [Math]::Max(0, [int][Math]::Round((([datetime]::UtcNow).ToUniversalTime() - $attemptStartedAt.ToUniversalTime()).TotalMilliseconds))
+        $verification | Add-Member -NotePropertyName batch_telemetry -NotePropertyValue ([pscustomobject]@{
+                candidate_id = $candidateId
+                attempt_started_at = $attemptStartedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+                attempt_completed_at = ([datetime]::UtcNow).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+                duration_ms = $durationMs
+                request_count = @($verification.fetches).Count
+            }) -Force
+        $verification
     } -ThrottleLimit $WorkerCount
     foreach ($verification in @($parallelResults)) {
         $results.Add($verification)
@@ -742,16 +891,20 @@ try {
     New-Item -ItemType Directory -Path (Split-Path -Parent $queueResolved) -Force | Out-Null
     $queue | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $queueResolved -Encoding UTF8
     $storePath = Write-JobAgentStore -ProjectRoot $projectRootResolved -DataRoot $DataRoot -Document $document -CreateBackup
+    $afterOfficialCareerCompanyIds = @(Get-ToolOfficialCareerCompanyIds -Document $document)
 }
 finally {
     Exit-JobAgentStoreLock -Lock $lock
 }
 
-Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'completed' -StartedAt $startedAt -CandidateIds @($results | ForEach-Object { [string]$_.candidate_id }) -Metrics ([pscustomobject]@{ processed_total = $results.Count; verified_total = @($results | Where-Object { [string]$_.status -in @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') }).Count })
+$completedAt = [datetime]::UtcNow
+$batchMetrics = New-ToolCandidateVerificationBatchMetrics -StartedAt $startedAt -CompletedAt $completedAt -Results @($results.ToArray()) -BeforeOfficialCareerCompanyIds $beforeOfficialCareerCompanyIds -AfterOfficialCareerCompanyIds $afterOfficialCareerCompanyIds
+Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'completed' -StartedAt $startedAt -CandidateIds @($results | ForEach-Object { [string]$_.candidate_id }) -Metrics $batchMetrics
 
 $logRootPath = Resolve-ToolPath -Root $projectRootResolved -Path $LogRoot
 New-Item -ItemType Directory -Path $logRootPath -Force | Out-Null
-$logPath = Join-Path $logRootPath ('company-candidate-verification-' + $startedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
+$runId = $startedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture)
+$logPath = Join-Path $logRootPath ('JA-027-batch-' + $runId + '.json')
 $resultItems = @($results.ToArray())
 $logResultItems = [object[]]@($resultItems | ForEach-Object { ConvertTo-ToolVerificationLogResult -Result $_ })
 $queueItems = @($queue.queue)
@@ -766,7 +919,9 @@ $summary = [pscustomobject]@{
     hint_store_path = $hintStoreResolved
     queue_path = $queueResolved
     checkpoint_path = $checkpointResolved
+    run_id = $runId
     batch_policy = [pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; writer = 'serial_atomic_store_writer' }
+    batch_metrics = $batchMetrics
     policy = $policy
     verification_queue = [pscustomobject]@{
         clusters_total = [int]$queue.clusters_total

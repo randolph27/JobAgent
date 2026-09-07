@@ -340,10 +340,18 @@ try {
     Assert-True -Condition ($scriptCompany.verification_status -eq 'CAREER_URL_VERIFIED') -Message 'Candidate-Verifikationsscript aktualisiert Firmenstatus nicht.'
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Candidate-Verifikationsscript erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'
+    Assert-True -Condition ((Split-Path -Leaf ([string]$scriptResult.log_path)) -match '^JA-027-batch-\d{8}-\d{6}\.json$') -Message 'Candidate-Verifikationsscript schreibt kein JA-027-Batchmanifest.'
     Assert-True -Condition ($scriptResult.batch_policy.worker_count -eq 4 -and $scriptResult.batch_policy.host_concurrency -eq 1) -Message 'Candidate-Verifikationsscript dokumentiert den Worker-/Hostlimit-Vertrag nicht.'
+    Assert-True -Condition ($scriptResult.batch_metrics.schema_version -eq 'jobagent/company-candidate-verification-batch-metrics/v1') -Message 'Candidate-Verifikationsscript schreibt keine Batch-Metriken.'
+    Assert-True -Condition ($scriptResult.batch_metrics.processed_total -eq $scriptResult.verification_queue.processed_total) -Message 'Batch-Metriken und Queue widersprechen sich bei processed_total.'
+    Assert-True -Condition ($scriptResult.batch_metrics.request_total -ge 1 -and $scriptResult.batch_metrics.requests_per_candidate -gt 0) -Message 'Batch-Metriken zaehlen Requests pro Kandidat nicht.'
+    Assert-True -Condition ($null -ne $scriptResult.batch_metrics.duration_ms_p50 -and $null -ne $scriptResult.batch_metrics.duration_ms_p95) -Message 'Batch-Metriken enthalten keine Nearest-Rank-Quantile.'
+    Assert-True -Condition ($scriptResult.batch_metrics.net_official_career_growth -eq 1) -Message 'Batch-Metriken zaehlen Nettozuwachs offizieller Karrierequellen falsch.'
+    Assert-True -Condition (@($scriptResult.results | Where-Object { $_.candidate_id -eq 'hint:example' -and $_.batch_telemetry.duration_ms -ge 0 }).Count -eq 1) -Message 'Resultate enthalten keine Kandidaten-Telemetrie.'
     $checkpoint = Get-Content -Raw -LiteralPath ([string]$scriptResult.checkpoint_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($checkpoint.schema_version -eq 'jobagent/company-candidate-verification-checkpoint/v1' -and $checkpoint.state -eq 'completed') -Message 'Candidate-Verifikationsscript schreibt keinen abgeschlossenen Batch-Checkpoint.'
     Assert-True -Condition ($checkpoint.metrics.processed_total -eq $scriptResult.verification_queue.processed_total) -Message 'Batch-Checkpoint und Verifikationssummary widersprechen sich.'
+    Assert-True -Condition ($checkpoint.metrics.net_official_career_growth -eq $scriptResult.batch_metrics.net_official_career_growth) -Message 'Batch-Checkpoint und Batch-Metriken widersprechen sich beim Nettozuwachs.'
 
     $secondScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 -ExpiresAfterDays 730 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript-Zweitlauf ist fehlgeschlagen: " + ($secondScriptOutput -join "`n"))
@@ -375,6 +383,7 @@ try {
     $parallelResult = ($parallelOutput -join "`n") | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($parallelResult.verification_queue.processed_total -eq 2) -Message ('Parallel-Workerlauf verarbeitet nicht beide unabhängigen Kandidaten: ' + ($parallelOutput -join "`n"))
     Assert-True -Condition ($parallelResult.batch_policy.worker_count -eq 2) -Message 'Parallel-Workerlauf übernimmt die Workeranzahl nicht.'
+    Assert-True -Condition (@($parallelResult.results | Where-Object { $_.batch_telemetry.request_count -ge 1 }).Count -eq 2) -Message 'Parallel-Workerlauf protokolliert Request-Telemetrie nicht je Kandidat.'
 }
 finally {
     if (Test-Path -LiteralPath $parallelRoot) {
