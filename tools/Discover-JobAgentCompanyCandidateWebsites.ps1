@@ -150,6 +150,13 @@ function Update-ToolQueueWithWebsiteDiscoveryResults {
 
         $result = $resultByCandidate[$candidateId]
         $verified = [string]$result.status -eq 'OFFICIAL_WEBSITE_VERIFIED'
+        $retryable = (-not $verified) -and [string]$result.next_action -eq 'retry_official_website_discovery'
+        $retryCount = [int]$entry.retry_count
+        $nextAttemptAt = $null
+        if ($retryable) {
+            $retryCount++
+            $nextAttemptAt = $ObservedAt.ToUniversalTime().AddHours([Math]::Min([double]168, [double](24 * [Math]::Pow(2, ($retryCount - 1)))))
+        }
         [pscustomobject]@{
             identity_cluster_id = [string]$entry.identity_cluster_id
             candidate_id = $candidateId
@@ -160,11 +167,11 @@ function Update-ToolQueueWithWebsiteDiscoveryResults {
             next_action = if ($verified) { 'VERIFY_OFFICIAL_SITE' } else { [string]$entry.next_action }
             reason_codes = @($entry.reason_codes)
             target_area_basis = @($entry.target_area_basis)
-            status = if ($verified) { 'PENDING' } else { 'MANUAL_REVIEW_REQUIRED' }
+            status = if ($verified) { 'PENDING' } elseif ($retryable) { 'RETRY_SCHEDULED' } else { 'MANUAL_REVIEW_REQUIRED' }
             review_reason = if ($verified) { [string]$entry.review_reason } else { [string]$result.reason }
-            retry_count = [int]$entry.retry_count
+            retry_count = $retryCount
             last_attempt_at = $observedAtText
-            next_attempt_at = if ($verified) { $observedAtText } else { $null }
+            next_attempt_at = if ($verified) { $observedAtText } elseif ($null -ne $nextAttemptAt) { ConvertTo-ToolIso -Value $nextAttemptAt } else { $null }
             last_status = [string]$result.status
             last_reason = [string]$result.reason
             freshness_status = if ($entry.PSObject.Properties.Name -contains 'freshness_status') { [string]$entry.freshness_status } else { 'UNKNOWN' }
@@ -251,6 +258,12 @@ function Test-ToolWebsiteDiscoveryQueueEntryDue {
     }
 
     $lastReason = if ($Entry.PSObject.Properties.Name -contains 'last_reason') { [string]$Entry.last_reason } else { '' }
+    $lastStatus = if ($Entry.PSObject.Properties.Name -contains 'last_status') { [string]$Entry.last_status } else { '' }
+    $nextAttemptAt = if ($Entry.PSObject.Properties.Name -contains 'next_attempt_at') { [string]$Entry.next_attempt_at } else { '' }
+    if ($lastStatus -eq 'UNVERIFIED' -and $lastReason -eq 'Quellseite fuer Website-Ermittlung konnte nicht abgerufen werden.' -and [string]::IsNullOrWhiteSpace($nextAttemptAt)) {
+        return $true
+    }
+
     $sourceEvidence = if ($Entry.PSObject.Properties.Name -contains 'source_evidence') { $Entry.source_evidence } else { $null }
     $sourceClass = if ($null -ne $sourceEvidence -and $sourceEvidence.PSObject.Properties.Name -contains 'source_class') { [string]$sourceEvidence.source_class } else { '' }
     $evidenceLevel = if ($null -ne $sourceEvidence -and $sourceEvidence.PSObject.Properties.Name -contains 'evidence_level') { [string]$sourceEvidence.evidence_level } else { '' }

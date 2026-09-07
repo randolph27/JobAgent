@@ -221,7 +221,7 @@ $websiteDiscoveryFetcher = {
     param([string]$Url, [object]$Policy)
 
     switch ($Url) {
-        'https://directory.example.invalid/companies' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="https://www.example.invalid/">Example AG</a></html>'; break }
+        'https://directory.example.invalid/companies' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="https://">Kaputter Link</a><a href="https://www.example.invalid/">Example AG</a></html>'; break }
         default { New-FetchResult -Url $Url -Ok $false -StatusCode 404; break }
     }
 }
@@ -465,8 +465,8 @@ try {
     [pscustomobject]@{
         schema_version = 'jobagent/company-discovery-hints/v1'
         generated_at = '2026-08-23T08:00:00.000Z'
-        hints_total = 2
-        unverified_hints = 2
+        hints_total = 3
+        unverified_hints = 3
         hints = @(
             [pscustomobject]@{
                 hint_id = 'hint:website-tool'
@@ -497,6 +497,21 @@ try {
                 confidence_score = 80
                 official_verification_required = $true
                 next_action = 'verify_official_company_website_or_career_url'
+            },
+            [pscustomobject]@{
+                hint_id = 'hint:website-fetch-retry'
+                employer_name = 'Retry Source AG'
+                normalized_name = 'retry source'
+                location = 'Muenchen'
+                target_area = 'MUNICH'
+                source_id = 'source-registry:test_official_directory'
+                observed_url = 'https://directory.example.invalid/retry'
+                observed_at = $freshObservedAt
+                verification_status = 'UNVERIFIED'
+                candidate_status = 'REGIONAL_DISCOVERY_HINT'
+                confidence_score = 80
+                official_verification_required = $true
+                next_action = 'verify_official_company_website_or_career_url'
             }
         )
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $websiteRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
@@ -507,24 +522,40 @@ try {
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $websiteRoot 'fixture-map.json') -Encoding UTF8
 
-    $websiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' 2>&1)
+    $websiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript ist fehlgeschlagen: " + ($websiteScriptOutput -join "`n"))
     $websiteScriptResult = ($websiteScriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     $updatedHints = Get-Content -Raw -LiteralPath (Join-Path $websiteRoot 'data\jobagent\company-discovery.hints.json') | ConvertFrom-Json -Depth 100
     $updatedQueue = Get-Content -Raw -LiteralPath ([string]$websiteScriptResult.queue_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($websiteScriptResult.verified_total -eq 1) -Message 'Website-Ermittlungsscript meldet verifizierte Website nicht.'
     Assert-True -Condition ($websiteScriptResult.manual_review_total -eq 1) -Message 'Website-Ermittlungsscript meldet fail-closed Manual-Review nicht.'
+    Assert-True -Condition ($websiteScriptResult.unverified_total -eq 1) -Message 'Website-Ermittlungsscript meldet retryfaehige Abruffehler nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_url -eq 'https://example.invalid/') -Message 'Website-Ermittlungsscript persistiert offizielle Website nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_evidence[0].verified_by_url -eq 'https://directory.example.invalid/companies/example-ag') -Message 'Website-Ermittlungsscript persistiert Detailseitenbeleg nicht.'
     Assert-True -Condition ($updatedHints.hints[0].official_website_verification_status -eq 'OFFICIAL_WEBSITE_VERIFIED') -Message 'Website-Ermittlungsscript persistiert Verifikationsstatus nicht.'
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-tool' -and $_.next_action -eq 'VERIFY_OFFICIAL_SITE' -and $_.status -eq 'PENDING' }).Count -eq 1) -Message 'Website-Ermittlung ueberfuehrt Queue nicht in offizielle Site-Verifikation.'
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-missing-source' -and $_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $_.status -eq 'MANUAL_REVIEW_REQUIRED' -and $_.last_status -eq 'MANUAL_REVIEW_REQUIRED' -and -not [string]::IsNullOrWhiteSpace([string]$_.last_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung persistiert fail-closed Manual-Review-Ergebnis nicht in der Queue.'
+    Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and $_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.last_status -eq 'UNVERIFIED' -and -not [string]::IsNullOrWhiteSpace([string]$_.next_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung muss Abruffehler retryfaehig terminieren statt permanentem Manual Review.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$websiteScriptResult.log_path) -PathType Leaf) -Message 'Website-Ermittlungsscript schreibt kein Logartefakt.'
 
     $secondWebsiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Zweitlauf ist fehlgeschlagen: " + ($secondWebsiteScriptOutput -join "`n"))
     $secondWebsiteScriptResult = ($secondWebsiteScriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($secondWebsiteScriptResult.processed_total -eq 0) -Message 'Website-Ermittlung darf bereits fail-closed gepruefte Kandidaten nicht sofort wiederholen.'
+
+    $legacyRetryQueue = Get-Content -Raw -LiteralPath ([string]$websiteScriptResult.queue_path) | ConvertFrom-Json -Depth 100
+    $legacyRetryEntry = @($legacyRetryQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:website-fetch-retry' })[0]
+    $legacyRetryEntry.status = 'MANUAL_REVIEW_REQUIRED'
+    $legacyRetryEntry.next_attempt_at = $null
+    $legacyRetryEntry.last_status = 'UNVERIFIED'
+    $legacyRetryEntry.last_reason = 'Quellseite fuer Website-Ermittlung konnte nicht abgerufen werden.'
+    $legacyRetryQueue | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath ([string]$websiteScriptResult.queue_path) -Encoding UTF8
+    $legacyRetryOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Legacy-Retry ist fehlgeschlagen: " + ($legacyRetryOutput -join "`n"))
+    $legacyRetryResult = ($legacyRetryOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $legacyRetryUpdatedQueue = Get-Content -Raw -LiteralPath ([string]$legacyRetryResult.queue_path) | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($legacyRetryResult.processed_total -eq 1) -Message 'Website-Ermittlung verarbeitet alten unscheduled Abruffehler nicht erneut.'
+    Assert-True -Condition (@($legacyRetryUpdatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.last_status -eq 'UNVERIFIED' -and -not [string]::IsNullOrWhiteSpace([string]$_.next_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung migriert alten unscheduled Abruffehler nicht in Retry.'
 }
 finally {
     if (Test-Path -LiteralPath $websiteRoot) {

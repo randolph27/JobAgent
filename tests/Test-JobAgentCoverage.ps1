@@ -290,6 +290,25 @@ Assert-True -Condition (@($unverifiedWebsiteQueueItem.reason_codes | Where-Objec
 Assert-True -Condition ($missingWebsiteQueueItem.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $missingWebsiteQueueItem.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Kandidat ohne Domain und Website braucht zuerst Website-Ermittlung.'
 Assert-True -Condition ($actionQueue.ready_total -eq 1) -Message 'Nur Kandidaten mit verifizierbarer Domain duerfen als bereit zaehlen.'
 
+$previousManualQueue = [pscustomobject]@{
+    schema_version = 'jobagent/company-candidate-verification-queue/v1'
+    queue = @(
+        [pscustomobject]@{
+            candidate_id = 'hint:queue-known-domain'
+            status = 'MANUAL_REVIEW_REQUIRED'
+            retry_count = 0
+            last_attempt_at = '2026-08-22T08:00:00.000Z'
+            next_attempt_at = $null
+            last_status = 'MANUAL_REVIEW_REQUIRED'
+            last_reason = 'Kein offizieller Firmendomain-Hinweis vorhanden; keine automatische Uebernahme.'
+        }
+    )
+}
+$recoveredActionQueue = New-JobAgentCoverageCandidateReviewQueue -HintStore $queueHintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousManualQueue -Now ([datetime]'2026-08-23T08:30:00Z') -MaxItems 10
+$recoveredKnownDomainQueueItem = @($recoveredActionQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:queue-known-domain' })[0]
+Assert-True -Condition ($recoveredKnownDomainQueueItem.next_action -eq 'VERIFY_OFFICIAL_SITE' -and $recoveredKnownDomainQueueItem.status -eq 'PENDING') -Message 'Manual-Review-Kandidat mit nachgereichter belastbarer Domain muss wieder verifizierbar werden.'
+Assert-True -Condition ($recoveredActionQueue.ready_total -eq 1) -Message 'Reaktivierte Domain-Kandidaten muessen wieder als bereit zaehlen.'
+
 $storeAwareQueue = New-JobAgentCoverageCandidateReviewQueue `
     -HintStore $queueHintStore `
     -SourceRegistry $sourceRegistry `

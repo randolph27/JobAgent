@@ -1,0 +1,85 @@
+{
+  "candidate_id": "regional-hint:izb_startups_eisbach_bio_gmbh_martinsried_und_freising_weihenstephan",
+  "company_id": "company:eisbach_bio_gmbh",
+  "status": "UNVERIFIED",
+  "priority_score": 76,
+  "review_reasons": [],
+  "evidence": [
+    {
+      "candidate_id": "regional-hint:izb_startups_eisbach_bio_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": "company:eisbach_bio_gmbh",
+      "canonical_name": "Eisbach Bio GmbH",
+      "status": "UNVERIFIED",
+      "verification_url": "https://eisbach.bio/",
+      "verified_by_url": null,
+      "redirect_chain": [
+        "https://eisbach.bio/",
+        "https://eisbach.bio/sitemap.xml",
+        "https://eisbach.bio/sitemap_index.xml"
+      ],
+      "evidence_type": "UNVERIFIED",
+      "evidence_text_hash": "3ad3405c7469f7e50ee96d800a5d341ce78a29fea36f85f4e2c5038aa1c97a36",
+      "observed_at": "2026-09-07T11:19:32.541Z",
+      "http_status": null,
+      "final_url": null,
+      "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "expires_at": "2026-12-06T11:19:32.541Z"
+    }
+  ],
+  "fetches": [
+    {
+      "ok": false,
+      "url": "https://eisbach.bio/",
+      "final_url": "https://eisbach.bio/",
+      "status_code": null,
+      "content": "",
+      "content_type": "",
+      "retry_after_seconds": null,
+      "error": "Operation is not valid due to the current state of the object."
+    },
+    {
+      "ok": false,
+      "url": "https://eisbach.bio/sitemap.xml",
+      "final_url": "https://eisbach.bio/sitemap.xml",
+      "status_code": null,
+      "content": "",
+      "content_type": "",
+      "retry_after_seconds": null,
+      "error": "Operation is not valid due to the current state of the object."
+    },
+    {
+      "ok": false,
+      "url": "https://eisbach.bio/sitemap_index.xml",
+      "final_url": "https://eisbach.bio/sitemap_index.xml",
+      "status_code": null,
+      "content": "",
+      "content_type": "",
+      "retry_after_seconds": null,
+      "error": "Operation is not valid due to the current state of the object."
+    }
+  ],
+  "company": {
+    "company_id": "company:eisbach_bio_gmbh",
+    "canonical_name": "Eisbach Bio GmbH",
+    "canonical_domain": "eisbach.bio",
+    "official_website_url": "https://eisbach.bio/",
+    "career_url": null,
+    "aliases": [],
+    "locations": [],
+    "industry": "UNKNOWN",
+    "ats": [],
+    "scan_status": "PENDING",
+    "scan_priority": 50,
+    "verification_status": "UNVERIFIED"
+  },
+  "career_url": "",
+  "ats": null,
+  "next_action": "retry_or_manual_review_official_source",
+  "batch_telemetry": {
+    "candidate_id": "regional-hint:izb_startups_eisbach_bio_gmbh_martinsried_und_freising_weihenstephan",
+    "attempt_started_at": "2026-09-07T11:20:42.352Z",
+    "attempt_completed_at": "2026-09-07T11:20:42.863Z",
+    "duration_ms": 511,
+    "request_count": 3
+  }
+}

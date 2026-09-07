@@ -630,8 +630,8 @@ function Get-JobAgentCandidateOfficialWebsiteDiscoveryLinksByScope {
         if ($href -match '^(mailto:|tel:|javascript:|#)') {
             continue
         }
-        $absolute = [Uri]::new($baseUri, $href).AbsoluteUri
         try {
+            $absolute = [Uri]::new($baseUri, $href).AbsoluteUri
             $canonical = ConvertTo-JobAgentCanonicalUrlSafe -Url $absolute
         }
         catch {

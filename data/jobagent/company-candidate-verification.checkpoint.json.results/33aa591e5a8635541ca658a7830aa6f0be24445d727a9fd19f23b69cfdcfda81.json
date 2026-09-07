@@ -1,0 +1,85 @@
+{
+  "candidate_id": "regional-hint:izb_startups_omicscouts_gmbh_martinsried_und_freising_weihenstephan",
+  "company_id": "company:omicscouts_gmbh",
+  "status": "UNVERIFIED",
+  "priority_score": 84,
+  "review_reasons": [],
+  "evidence": [
+    {
+      "candidate_id": "regional-hint:izb_startups_omicscouts_gmbh_martinsried_und_freising_weihenstephan",
+      "company_id": "company:omicscouts_gmbh",
+      "canonical_name": "Omicscouts GmbH",
+      "status": "UNVERIFIED",
+      "verification_url": "https://omicscouts.com/",
+      "verified_by_url": null,
+      "redirect_chain": [
+        "https://omicscouts.com/",
+        "https://omicscouts.com/sitemap.xml",
+        "https://omicscouts.com/sitemap_index.xml"
+      ],
+      "evidence_type": "UNVERIFIED",
+      "evidence_text_hash": "3ad3405c7469f7e50ee96d800a5d341ce78a29fea36f85f4e2c5038aa1c97a36",
+      "observed_at": "2026-09-07T11:19:32.541Z",
+      "http_status": null,
+      "final_url": null,
+      "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+      "expires_at": "2026-12-06T11:19:32.541Z"
+    }
+  ],
+  "fetches": [
+    {
+      "ok": false,
+      "url": "https://omicscouts.com/",
+      "final_url": "https://omicscouts.com/",
+      "status_code": null,
+      "content": "",
+      "content_type": "",
+      "retry_after_seconds": null,
+      "error": "Operation is not valid due to the current state of the object."
+    },
+    {
+      "ok": false,
+      "url": "https://omicscouts.com/sitemap.xml",
+      "final_url": "https://omicscouts.com/sitemap.xml",
+      "status_code": 404,
+      "content": "",
+      "content_type": "text/html",
+      "retry_after_seconds": null,
+      "error": "HTTP 404"
+    },
+    {
+      "ok": false,
+      "url": "https://omicscouts.com/sitemap_index.xml",
+      "final_url": "https://omicscouts.com/sitemap_index.xml",
+      "status_code": 404,
+      "content": "",
+      "content_type": "text/html",
+      "retry_after_seconds": null,
+      "error": "HTTP 404"
+    }
+  ],
+  "company": {
+    "company_id": "company:omicscouts_gmbh",
+    "canonical_name": "Omicscouts GmbH",
+    "canonical_domain": "omicscouts.com",
+    "official_website_url": "https://omicscouts.com/",
+    "career_url": null,
+    "aliases": [],
+    "locations": [],
+    "industry": "UNKNOWN",
+    "ats": [],
+    "scan_status": "PENDING",
+    "scan_priority": 50,
+    "verification_status": "UNVERIFIED"
+  },
+  "career_url": "",
+  "ats": null,
+  "next_action": "retry_or_manual_review_official_source",
+  "batch_telemetry": {
+    "candidate_id": "regional-hint:izb_startups_omicscouts_gmbh_martinsried_und_freising_weihenstephan",
+    "attempt_started_at": "2026-09-07T11:20:41.526Z",
+    "attempt_completed_at": "2026-09-07T11:20:42.333Z",
+    "duration_ms": 806,
+    "request_count": 3
+  }
+}

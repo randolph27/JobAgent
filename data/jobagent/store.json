@@ -19612,6 +19612,471 @@
       "created_at": "2026-08-30T17:39:14.102Z",
       "updated_at": "2026-08-30T17:39:14.102Z",
       "last_successful_scan_at": null
+    },
+    {
+      "company_id": "company:amplifold_gmbh",
+      "canonical_name": "Amplifold GmbH",
+      "canonical_domain": "amplifold.com",
+      "official_website_url": "https://amplifold.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://amplifold.com/",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_amplifold_gmbh_martinsried_und_freising_weihenstephan",
+          "company_id": "company:amplifold_gmbh",
+          "canonical_name": "Amplifold GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://amplifold.com/",
+          "verified_by_url": "https://amplifold.com/",
+          "redirect_chain": [
+            "https://amplifold.com/",
+            "https://amplifold.com/sitemap.xml",
+            "https://amplifold.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "7a60e588e1086e7c13373b1705385d45684d5776614f714c706f27479d1550ae",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://amplifold.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:aatec_medical_gmbh",
+      "canonical_name": "AATec Medical GmbH",
+      "canonical_domain": "aatec-medical.com",
+      "official_website_url": "https://aatec-medical.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://aatec-medical.com/",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_aatec_medical_gmbh_martinsried_und_freising_weihenstephan",
+          "company_id": "company:aatec_medical_gmbh",
+          "canonical_name": "AATec Medical GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://aatec-medical.com/",
+          "verified_by_url": "https://aatec-medical.com/",
+          "redirect_chain": [
+            "https://aatec-medical.com/",
+            "https://aatec-medical.com/sitemap.xml",
+            "https://aatec-medical.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "cf06f3ba343a14129c461927b72378fdc1fb2aaace61fa72eb39fc3c12b26e73",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://aatec-medical.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:cryondo_gmbh",
+      "canonical_name": "Cryondo GmbH",
+      "canonical_domain": "cryondo.de",
+      "official_website_url": "https://cryondo.de/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://cryondo.de/sitemap_index.xml",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_cryondo_gmbh_martinsried_und_freising_weihenstephan",
+          "company_id": "company:cryondo_gmbh",
+          "canonical_name": "Cryondo GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://cryondo.de/sitemap_index.xml",
+          "verified_by_url": "https://cryondo.de/sitemap_index.xml",
+          "redirect_chain": [
+            "https://cryondo.de/",
+            "https://cryondo.de/sitemap.xml",
+            "https://cryondo.de/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "e55c29953c9919b8913b8ad13f1ea611181264c46f7e5b8ff7a9e23de5eba737",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://cryondo.de/sitemap_index.xml",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:oncobeta_gmbh",
+      "canonical_name": "OncoBeta GmbH",
+      "canonical_domain": "oncobeta.com",
+      "official_website_url": "https://oncobeta.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://oncobeta.com/sitemap_index.xml",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_oncobeta_gmbh_martinsried_und_freising_weihenstephan",
+          "company_id": "company:oncobeta_gmbh",
+          "canonical_name": "OncoBeta GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://oncobeta.com/sitemap_index.xml",
+          "verified_by_url": "https://oncobeta.com/sitemap_index.xml",
+          "redirect_chain": [
+            "https://oncobeta.com/",
+            "https://oncobeta.com/sitemap.xml",
+            "https://oncobeta.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "28778545bc9a9399bb9f0d64373d5c0a95460975fe80c6ac53ae4b496621ac47",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://oncobeta.com/sitemap_index.xml",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:phatocon",
+      "canonical_name": "PhaToCon",
+      "canonical_domain": "phatocon.com",
+      "official_website_url": "https://phatocon.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://phatocon.com/",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_phatocon_martinsried_und_freising_weihenstephan",
+          "company_id": "company:phatocon",
+          "canonical_name": "PhaToCon",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://phatocon.com/",
+          "verified_by_url": "https://phatocon.com/",
+          "redirect_chain": [
+            "https://phatocon.com/",
+            "https://phatocon.com/sitemap.xml",
+            "https://phatocon.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "90322b07e81822e4604404ca7bb58aeb4244b95a6a25b2e9ca2d5abdb16e1d39",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://phatocon.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:scirhom_gmbh",
+      "canonical_name": "SciRhom GmbH",
+      "canonical_domain": "scirhom.com",
+      "official_website_url": "https://scirhom.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://scirhom.com/",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_scirhom_gmbh_martinsried_und_freising_weihenstephan",
+          "company_id": "company:scirhom_gmbh",
+          "canonical_name": "SciRhom GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://scirhom.com/",
+          "verified_by_url": "https://scirhom.com/",
+          "redirect_chain": [
+            "https://scirhom.com/",
+            "https://scirhom.com/sitemap.xml",
+            "https://scirhom.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "354cded57044a8ab1adb97d42a5fcce1ce0718db35b20579d0cc1d2dc071a2ba",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://scirhom.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:rnhale_gmbh",
+      "canonical_name": "RNhale GmbH",
+      "canonical_domain": "rnhale.com",
+      "official_website_url": "https://rnhale.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://rnhale.com/",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_rnhale_gmbh_martinsried_und_freising_weihenstephan",
+          "company_id": "company:rnhale_gmbh",
+          "canonical_name": "RNhale GmbH",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://rnhale.com/",
+          "verified_by_url": "https://rnhale.com/",
+          "redirect_chain": [
+            "https://rnhale.com/",
+            "https://rnhale.com/sitemap.xml",
+            "https://rnhale.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "7f5c7daf7832207cab1e88aeaa80060bfa14b37c199c2fe64728d571dd4bd4e3",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://rnhale.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
+    },
+    {
+      "company_id": "company:tubulis",
+      "canonical_name": "Tubulis",
+      "canonical_domain": "tubulis.com",
+      "official_website_url": "https://tubulis.com/",
+      "career_url": null,
+      "aliases": [],
+      "industry": "UNKNOWN",
+      "ats": [],
+      "scan_status": "PENDING",
+      "scan_priority": 50,
+      "verification_status": "COMPANY_DOMAIN_VERIFIED",
+      "locations": [
+        {
+          "label": "82152 Planegg-Martinsried",
+          "city": "UNKNOWN",
+          "region": "Bayern",
+          "country": "DE",
+          "target_area": "MUNICH_20KM"
+        }
+      ],
+      "updated_at": "2026-09-07T11:19:32.541Z",
+      "created_at": "2026-09-07T11:19:32.541Z",
+      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "last_successful_scan_at": null,
+      "discovery_source": {
+        "type": "DISCOVERY_HINT",
+        "url": "https://www.izb-online.de/hotspot-for-life-sciences/start-ups-im-izb/",
+        "observed_at": "2026-09-07T11:19:32.541Z",
+        "verification_url": "https://tubulis.com/",
+        "discovery_origin": "source-registry:izb_startups",
+        "target_area": "MUNICH_20KM",
+        "industry_hint": "UNKNOWN",
+        "evidence_note": "Discovery-Kandidat wurde ueber offizielle Firmen-/Karrierequelle verifiziert."
+      },
+      "candidate_verification_evidence": [
+        {
+          "candidate_id": "regional-hint:izb_startups_tubulis_martinsried_und_freising_weihenstephan",
+          "company_id": "company:tubulis",
+          "canonical_name": "Tubulis",
+          "status": "COMPANY_DOMAIN_VERIFIED",
+          "verification_url": "https://tubulis.com/",
+          "verified_by_url": "https://tubulis.com/",
+          "redirect_chain": [
+            "https://tubulis.com/",
+            "https://tubulis.com/career",
+            "https://tubulis.com/sitemap.xml",
+            "https://tubulis.com/sitemap_index.xml"
+          ],
+          "evidence_type": "COMPANY_DOMAIN",
+          "evidence_text_hash": "d29e62e6064151474a61746a391a5d25d9cf3656fe2272d952cf3540c9ae076f",
+          "observed_at": "2026-09-07T11:19:32.541Z",
+          "http_status": 200,
+          "final_url": "https://tubulis.com/",
+          "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
+          "expires_at": "2026-12-06T11:19:32.541Z"
+        }
+      ]
     }
   ],
   "jobs": [
