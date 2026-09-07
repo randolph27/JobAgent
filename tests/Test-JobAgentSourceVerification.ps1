@@ -109,6 +109,10 @@ Assert-True -Condition (@($resolved.alternative_official_urls).Count -eq 1) -Mes
 
 $careerPolicy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds 3 -MaxFetchesPerCompany 4 -MaxCandidatesPerCompany 5
 Assert-True -Condition ($careerPolicy.policy -eq 'official-site-linked-career-or-ats-only') -Message 'Career-Verifikationspolicy dokumentiert den Fail-closed-Vertrag nicht.'
+Assert-True -Condition ($careerPolicy.host_concurrency -eq 1) -Message 'Career-Verifikationspolicy setzt das Host-Concurrency-Limit nicht.'
+
+$parallelPolicy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds 3 -MaxFetchesPerCompany 4 -MaxCandidatesPerCompany 5 -HostConcurrency 3
+Assert-True -Condition ($parallelPolicy.host_concurrency -eq 3) -Message 'Career-Verifikationspolicy uebernimmt ein explizites Host-Concurrency-Limit nicht.'
 
 $careerHtml = '<html><body><a href="/de/karriere">Karriere</a><a href="https://www.linkedin.com/jobs/view/123">Jobs</a></body></html>'
 $careerLinks = @(Get-JobAgentCompanyCareerCandidateLinks -Html $careerHtml -BaseUrl 'https://example.invalid/' -Company (New-TestCompany) -MaxCandidates 5)
@@ -261,5 +265,5 @@ Assert-True -Condition ($manualVerification.status -eq 'MANUAL_REVIEW') -Message
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
+    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
 } | ConvertTo-Json -Depth 4

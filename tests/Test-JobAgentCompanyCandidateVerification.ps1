@@ -342,6 +342,7 @@ try {
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'
     Assert-True -Condition ((Split-Path -Leaf ([string]$scriptResult.log_path)) -match '^JA-027-batch-\d{8}-\d{6}\.json$') -Message 'Candidate-Verifikationsscript schreibt kein JA-027-Batchmanifest.'
     Assert-True -Condition ($scriptResult.batch_policy.worker_count -eq 4 -and $scriptResult.batch_policy.host_concurrency -eq 1) -Message 'Candidate-Verifikationsscript dokumentiert den Worker-/Hostlimit-Vertrag nicht.'
+    Assert-True -Condition ($scriptResult.policy.host_concurrency -eq 1) -Message 'Candidate-Verifikationsscript uebergibt HostConcurrency nicht an die HTTP-Policy.'
     Assert-True -Condition ($scriptResult.batch_metrics.schema_version -eq 'jobagent/company-candidate-verification-batch-metrics/v1') -Message 'Candidate-Verifikationsscript schreibt keine Batch-Metriken.'
     Assert-True -Condition ($scriptResult.batch_metrics.processed_total -eq $scriptResult.verification_queue.processed_total) -Message 'Batch-Metriken und Queue widersprechen sich bei processed_total.'
     Assert-True -Condition ($scriptResult.batch_metrics.request_total -ge 1 -and $scriptResult.batch_metrics.requests_per_candidate -gt 0) -Message 'Batch-Metriken zaehlen Requests pro Kandidat nicht.'
@@ -670,6 +671,7 @@ finally {
         'candidate_verification_retry_schedule_skip_until_due',
         'candidate_verification_decision_report_review_and_reject',
         'candidate_verification_batch_checkpoint_and_worker_policy',
+        'candidate_verification_http_policy_host_concurrency',
         'candidate_verification_result_checkpoint_resume_before_commit',
         'candidate_verification_parallel_workers',
         'website_discovery_requeues_domain_missing_reviews_with_official_source_evidence'

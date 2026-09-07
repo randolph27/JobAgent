@@ -1,0 +1,33 @@
+{
+  "schema_version": "jobagent/company-candidate-verification-checkpoint/v1",
+  "state": "completed",
+  "started_at": "2026-09-07T06:57:19.767Z",
+  "updated_at": "2026-09-07T06:58:29.347Z",
+  "candidate_ids": [
+    null
+  ],
+  "completed_candidate_ids": [],
+  "pending_candidate_ids": [
+    null
+  ],
+  "result_checkpoint_root": "D:\\_Scripte\\JobAgent\\data\\jobagent\\company-candidate-verification.checkpoint.json.results",
+  "commit_applied_at": "2026-09-07T06:58:29.323Z",
+  "metrics": {
+    "schema_version": "jobagent/company-candidate-verification-batch-metrics/v1",
+    "started_at": "2026-09-07T06:57:19.767Z",
+    "completed_at": "2026-09-07T06:58:29.323Z",
+    "wallclock_seconds": 69.555,
+    "processed_total": 0,
+    "verified_total": 0,
+    "official_career_verified_before": 433,
+    "official_career_verified_after": 433,
+    "net_official_career_growth": 0,
+    "new_official_career_company_ids": [],
+    "request_total": 0,
+    "requests_per_candidate": null,
+    "duration_ms_p50": null,
+    "duration_ms_p95": null,
+    "net_official_career_per_minute": 0.0,
+    "denominator_note": "Durations and request_total use actually processed unique candidates; net growth counts newly official career/ATS employers after the serial store commit."
+  }
+}

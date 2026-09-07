@@ -870,7 +870,7 @@ if (-not (Test-Path -LiteralPath $hintStoreResolved -PathType Leaf)) {
 
 $hintStore = Get-Content -Raw -LiteralPath $hintStoreResolved | ConvertFrom-Json -Depth 100
 $sourceRegistry = if (Test-Path -LiteralPath $sourceRegistryResolved -PathType Leaf) { Get-Content -Raw -LiteralPath $sourceRegistryResolved | ConvertFrom-Json -Depth 100 } else { $null }
-$policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds
+$policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds -HostConcurrency $HostConcurrency
 $fetcher = if ([string]::IsNullOrWhiteSpace($FixtureMapPath)) { $null } else { New-ToolFixtureFetcher -Path (Resolve-ToolPath -Root $projectRootResolved -Path $FixtureMapPath) }
 $checkpointResolved = Resolve-ToolPath -Root $projectRootResolved -Path $CheckpointPath
 $resultCheckpointRoot = Get-ToolResultCheckpointRoot -CheckpointPath $checkpointResolved

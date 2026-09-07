@@ -208,6 +208,7 @@ function New-JobAgentCompanyCareerVerificationPolicy {
         [Parameter()][ValidateRange(1, 60)][int]$TimeoutSeconds = 12,
         [Parameter()][ValidateRange(1, 20)][int]$MaxFetchesPerCompany = 6,
         [Parameter()][ValidateRange(1, 20)][int]$MaxCandidatesPerCompany = 10,
+        [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
         [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+company-career-verification; fail-closed)'
     )
 
@@ -215,8 +216,55 @@ function New-JobAgentCompanyCareerVerificationPolicy {
         timeout_seconds = $TimeoutSeconds
         max_fetches_per_company = $MaxFetchesPerCompany
         max_candidates_per_company = $MaxCandidatesPerCompany
+        host_concurrency = $HostConcurrency
         user_agent = $UserAgent
         policy = 'official-site-linked-career-or-ats-only'
+    }
+}
+
+function Get-JobAgentCompanyVerificationHostSemaphoreName {
+    param([Parameter(Mandatory)][string]$Host)
+
+    $bytes = [Text.UTF8Encoding]::new($false).GetBytes($Host.ToLowerInvariant())
+    $hash = [Security.Cryptography.SHA256]::Create()
+    try {
+        $digest = ([BitConverter]::ToString($hash.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
+    }
+    finally {
+        $hash.Dispose()
+    }
+    return 'Global\JobAgentCompanyVerificationHost_' + $digest
+}
+
+function Invoke-JobAgentCompanyVerificationHostLimitedRequest {
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    $uri = [Uri]$Url
+    $host = $uri.Host.ToLowerInvariant() -replace '^www\.', ''
+    $hostConcurrency = if ($Policy.PSObject.Properties.Name -contains 'host_concurrency') { [int]$Policy.host_concurrency } else { 1 }
+    $createdNew = $false
+    $semaphore = [Threading.Semaphore]::new($hostConcurrency, $hostConcurrency, (Get-JobAgentCompanyVerificationHostSemaphoreName -Host $host), [ref]$createdNew)
+    try {
+        [void]$semaphore.WaitOne()
+        try {
+            return Invoke-WebRequest `
+                -Uri $Url `
+                -Method Get `
+                -TimeoutSec ([int]$Policy.timeout_seconds) `
+                -UserAgent ([string]$Policy.user_agent) `
+                -MaximumRedirection 0 `
+                -SkipHttpErrorCheck `
+                -ErrorAction Stop
+        }
+        finally {
+            [void]$semaphore.Release()
+        }
+    }
+    finally {
+        $semaphore.Dispose()
     }
 }
 
@@ -227,24 +275,34 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
         [Parameter(Mandatory)][object]$Policy
     )
 
-    try {
-        $response = Invoke-WebRequest `
-            -Uri $Url `
-            -Method Get `
-            -TimeoutSec ([int]$Policy.timeout_seconds) `
-            -UserAgent ([string]$Policy.user_agent) `
-            -MaximumRedirection 5 `
-            -ErrorAction Stop
+    $currentUrl = $Url
+    $finalUrl = $Url
+    $redirectLimit = 5
 
-        [pscustomobject]@{
-            ok = $true
-            url = $Url
-            final_url = if ($response.BaseResponse.PSObject.Properties.Name -contains 'ResponseUri' -and $response.BaseResponse.ResponseUri) { [string]$response.BaseResponse.ResponseUri.AbsoluteUri } else { $Url }
-            status_code = [int]$response.StatusCode
-            content = [string]$response.Content
-            content_type = [string]$response.Headers['Content-Type']
-            retry_after_seconds = $null
-            error = $null
+    try {
+        for ($redirectIndex = 0; $redirectIndex -le $redirectLimit; $redirectIndex++) {
+            $response = Invoke-JobAgentCompanyVerificationHostLimitedRequest -Url $currentUrl -Policy $Policy
+            $statusCode = [int]$response.StatusCode
+            $finalUrl = if ($response.BaseResponse.PSObject.Properties.Name -contains 'ResponseUri' -and $response.BaseResponse.ResponseUri) { [string]$response.BaseResponse.ResponseUri.AbsoluteUri } else { $currentUrl }
+            if ($statusCode -ge 300 -and $statusCode -lt 400 -and -not [string]::IsNullOrWhiteSpace([string]$response.Headers['Location'])) {
+                if ($redirectIndex -eq $redirectLimit) {
+                    throw "Maximale Redirect-Anzahl erreicht: $Url"
+                }
+                $currentUrl = [Uri]::new([Uri]$currentUrl, [string]$response.Headers['Location']).AbsoluteUri
+                $finalUrl = $currentUrl
+                continue
+            }
+
+            return [pscustomobject]@{
+                ok = ($statusCode -ge 200 -and $statusCode -lt 300)
+                url = $Url
+                final_url = $finalUrl
+                status_code = $statusCode
+                content = if ($statusCode -ge 200 -and $statusCode -lt 300) { [string]$response.Content } else { '' }
+                content_type = [string]$response.Headers['Content-Type']
+                retry_after_seconds = $null
+                error = if ($statusCode -ge 200 -and $statusCode -lt 300) { $null } else { 'HTTP ' + [string]$statusCode }
+            }
         }
     }
     catch {
@@ -261,7 +319,7 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
         [pscustomobject]@{
             ok = $false
             url = $Url
-            final_url = $Url
+            final_url = $finalUrl
             status_code = $statusCode
             content = ''
             content_type = ''
