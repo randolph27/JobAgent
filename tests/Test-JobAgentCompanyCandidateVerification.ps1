@@ -364,6 +364,53 @@ finally {
     }
 }
 
+$resumeRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-candidate-resume-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path (Join-Path $resumeRoot 'data\jobagent') -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $resumeRoot 'logs\jobagent') -Force | Out-Null
+try {
+    Write-JobAgentStore -ProjectRoot $resumeRoot -Document (New-JobAgentEmptyDocument -GeneratedAt $observedAt) | Out-Null
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-hints/v1'
+        generated_at = '2026-08-23T08:00:00.000Z'
+        hints_total = 1
+        unverified_hints = 1
+        hints = @(
+            (New-TestCandidate -Id 'hint:resume-example' -Name 'Resume Example AG' -OfficialWebsiteUrl 'https://resume.example.invalid/' -OfficialWebsiteVerified $true)
+        )
+    } | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath (Join-Path $resumeRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
+    [pscustomobject]@{
+        responses = @(
+            [pscustomobject]@{ url = 'https://resume.example.invalid/'; ok = $true; status_code = 200; final_url = 'https://resume.example.invalid/'; content = '<html><a href="/jobs">Jobs</a></html>' },
+            [pscustomobject]@{ url = 'https://resume.example.invalid/sitemap.xml'; ok = $true; status_code = 200; final_url = 'https://resume.example.invalid/sitemap.xml'; content = '<urlset></urlset>' },
+            [pscustomobject]@{ url = 'https://resume.example.invalid/sitemap_index.xml'; ok = $true; status_code = 200; final_url = 'https://resume.example.invalid/sitemap_index.xml'; content = '<sitemapindex></sitemapindex>' },
+            [pscustomobject]@{ url = 'https://resume.example.invalid/jobs'; ok = $true; status_code = 200; final_url = 'https://resume.example.invalid/jobs'; content = '<main>Jobs bei Resume Example</main>' }
+        )
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $resumeRoot 'fixture-map.json') -Encoding UTF8
+
+    $networkOnlyOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $resumeRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' -StopBeforeCommitForResumeTest 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 77) -Message ("Resume-Testlauf hat nicht vor Commit gestoppt: " + ($networkOnlyOutput -join "`n"))
+    $networkOnlyResult = ($networkOnlyOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($networkOnlyResult.schema_version -eq 'jobagent/company-candidate-verification-resume/v1' -and $networkOnlyResult.commit_applied -eq $false) -Message 'Resume-Testlauf schreibt keinen Pending-Commit-Report.'
+    $pendingCheckpoint = Get-Content -Raw -LiteralPath ([string]$networkOnlyResult.checkpoint_path) | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($pendingCheckpoint.state -eq 'running' -and @($pendingCheckpoint.completed_candidate_ids).Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$pendingCheckpoint.commit_applied_at)) -Message 'Resume-Checkpoint enthaelt keinen verlustfrei gespeicherten Einzelkandidaten vor Commit.'
+    $resumeStoreBeforeCommit = Read-JobAgentStore -ProjectRoot $resumeRoot
+    Assert-True -Condition (@($resumeStoreBeforeCommit.companies | Where-Object { $_.company_id -eq 'company:resume_example_ag' }).Count -eq 0) -Message 'Resume-Test darf vor Commit keine Firma schreiben.'
+
+    $resumeOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $resumeRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Resume-Commitlauf ist fehlgeschlagen: " + ($resumeOutput -join "`n"))
+    $resumeResult = ($resumeOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($resumeResult.resume_report.schema_version -eq 'jobagent/company-candidate-verification-resume/v1' -and $resumeResult.resume_report.resumed_from_running_checkpoint -eq $true) -Message 'Resume-Commitlauf erkennt den offenen Running-Checkpoint nicht.'
+    Assert-True -Condition (@($resumeResult.resume_report.loaded_candidate_ids | Where-Object { $_ -eq 'hint:resume-example' }).Count -eq 1) -Message 'Resume-Commitlauf laedt das einzelne Kandidatenresultat nicht aus dem Checkpoint.'
+    $resumeStoreAfterCommit = Read-JobAgentStore -ProjectRoot $resumeRoot
+    Assert-True -Condition (@($resumeStoreAfterCommit.companies | Where-Object { $_.company_id -eq 'company:resume_example_ag' -and $_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count -eq 1) -Message 'Resume-Commitlauf uebernimmt verifiziertes Resultat nicht in den Store.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$resumeResult.resume_log_path) -PathType Leaf) -Message 'Resume-Commitlauf schreibt kein JA-027-Resume-Log.'
+}
+finally {
+    if (Test-Path -LiteralPath $resumeRoot) {
+        Remove-Item -LiteralPath $resumeRoot -Recurse -Force
+    }
+}
+
 $parallelRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-candidate-parallel-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $parallelRoot -Force | Out-Null
 try {
@@ -623,6 +670,7 @@ finally {
         'candidate_verification_retry_schedule_skip_until_due',
         'candidate_verification_decision_report_review_and_reject',
         'candidate_verification_batch_checkpoint_and_worker_policy',
+        'candidate_verification_result_checkpoint_resume_before_commit',
         'candidate_verification_parallel_workers',
         'website_discovery_requeues_domain_missing_reviews_with_official_source_evidence'
     )

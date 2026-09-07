@@ -15,7 +15,8 @@ param(
     [Parameter()][ValidateRange(1, 16)][int]$WorkerCount = 4,
     [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
     [Parameter()][string]$CheckpointPath = 'data/jobagent/company-candidate-verification.checkpoint.json',
-    [Parameter()][string]$FixtureMapPath
+    [Parameter()][string]$FixtureMapPath,
+    [Parameter()][switch]$StopBeforeCommitForResumeTest
 )
 
 Set-StrictMode -Version 3.0
@@ -366,7 +367,7 @@ function Add-ToolVerificationTelemetry {
 function Invoke-ToolCandidateVerification {
     param(
         [Parameter(Mandatory)][object]$Candidate,
-        [Parameter(Mandatory)][object[]]$ExistingCompanies,
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$ExistingCompanies,
         [Parameter(Mandatory)][object]$Policy,
         [Parameter()][AllowNull()][scriptblock]$Fetcher,
         [Parameter(Mandatory)][datetime]$ObservedAt,
@@ -619,27 +620,32 @@ function Select-ToolHostLimitedCandidates {
     return $selected.ToArray()
 }
 
-function Write-ToolBatchCheckpoint {
+function Get-ToolResultCheckpointRoot {
+    param([Parameter(Mandatory)][string]$CheckpointPath)
+
+    return $CheckpointPath + '.results'
+}
+
+function Get-ToolResultCheckpointPath {
+    param(
+        [Parameter(Mandatory)][string]$Root,
+        [Parameter(Mandatory)][string]$CandidateId
+    )
+
+    return Join-Path $Root ((Get-ToolTextSha256 -Text $CandidateId) + '.json')
+}
+
+function Write-ToolJsonAtomic {
     param(
         [Parameter(Mandatory)][string]$Path,
-        [Parameter(Mandatory)][string]$State,
-        [Parameter(Mandatory)][datetime]$StartedAt,
-        [Parameter()][AllowEmptyCollection()][object[]]$CandidateIds = @(),
-        [Parameter()][AllowNull()][object]$Metrics = $null
+        [Parameter(Mandatory)][object]$Value,
+        [Parameter()][ValidateRange(1, 100)][int]$Depth = 100
     )
 
     New-Item -ItemType Directory -Path (Split-Path -Parent $Path) -Force | Out-Null
-    $checkpoint = [pscustomobject]@{
-        schema_version = 'jobagent/company-candidate-verification-checkpoint/v1'
-        state = $State
-        started_at = ConvertTo-ToolIso -Value $StartedAt
-        updated_at = ConvertTo-ToolIso -Value ([datetime]::UtcNow)
-        candidate_ids = @($CandidateIds)
-        metrics = $Metrics
-    }
     $temporaryPath = $Path + '.' + [guid]::NewGuid().ToString('N') + '.tmp'
     try {
-        $checkpoint | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $temporaryPath -Encoding UTF8
+        $Value | ConvertTo-Json -Depth $Depth | Set-Content -LiteralPath $temporaryPath -Encoding UTF8
         Move-Item -LiteralPath $temporaryPath -Destination $Path -Force
     }
     finally {
@@ -647,6 +653,76 @@ function Write-ToolBatchCheckpoint {
             Remove-Item -LiteralPath $temporaryPath -Force
         }
     }
+}
+
+function Write-ToolCandidateResultCheckpoint {
+    param(
+        [Parameter(Mandatory)][string]$Root,
+        [Parameter(Mandatory)][object]$Result
+    )
+
+    $candidateId = [string]$Result.candidate_id
+    if ([string]::IsNullOrWhiteSpace($candidateId)) {
+        throw 'Resultat enthaelt keine candidate_id fuer den Resume-Checkpoint.'
+    }
+    $path = Get-ToolResultCheckpointPath -Root $Root -CandidateId $candidateId
+    Write-ToolJsonAtomic -Path $path -Value $Result -Depth 100
+    return $path
+}
+
+function Read-ToolBatchCheckpoint {
+    param([Parameter(Mandatory)][string]$Path)
+
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        return $null
+    }
+    return Get-Content -Raw -LiteralPath $Path | ConvertFrom-Json -Depth 100
+}
+
+function Read-ToolCheckpointResults {
+    param(
+        [Parameter(Mandatory)][string]$Root,
+        [Parameter()][AllowEmptyCollection()][string[]]$CandidateIds = @()
+    )
+
+    $items = New-Object System.Collections.Generic.List[object]
+    foreach ($candidateId in @($CandidateIds)) {
+        if ([string]::IsNullOrWhiteSpace($candidateId)) {
+            continue
+        }
+        $path = Get-ToolResultCheckpointPath -Root $Root -CandidateId $candidateId
+        if (Test-Path -LiteralPath $path -PathType Leaf) {
+            $items.Add((Get-Content -Raw -LiteralPath $path | ConvertFrom-Json -Depth 100))
+        }
+    }
+    return $items.ToArray()
+}
+
+function Write-ToolBatchCheckpoint {
+    param(
+        [Parameter(Mandatory)][string]$Path,
+        [Parameter(Mandatory)][string]$State,
+        [Parameter(Mandatory)][datetime]$StartedAt,
+        [Parameter()][AllowEmptyCollection()][object[]]$CandidateIds = @(),
+        [Parameter()][AllowEmptyCollection()][object[]]$CompletedCandidateIds = @(),
+        [Parameter()][string]$ResultCheckpointRoot = '',
+        [Parameter()][AllowNull()][object]$CommitAppliedAt = $null,
+        [Parameter()][AllowNull()][object]$Metrics = $null
+    )
+
+    $checkpoint = [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-checkpoint/v1'
+        state = $State
+        started_at = ConvertTo-ToolIso -Value $StartedAt
+        updated_at = ConvertTo-ToolIso -Value ([datetime]::UtcNow)
+        candidate_ids = @($CandidateIds)
+        completed_candidate_ids = @($CompletedCandidateIds)
+        pending_candidate_ids = @($CandidateIds | Where-Object { $_ -notin @($CompletedCandidateIds) })
+        result_checkpoint_root = $ResultCheckpointRoot
+        commit_applied_at = if ($null -eq $CommitAppliedAt) { $null } else { ConvertTo-ToolIso -Value $CommitAppliedAt }
+        metrics = $Metrics
+    }
+    Write-ToolJsonAtomic -Path $Path -Value $checkpoint -Depth 20
 }
 
 function Update-ToolCandidateVerificationQueue {
@@ -797,9 +873,14 @@ $sourceRegistry = if (Test-Path -LiteralPath $sourceRegistryResolved -PathType L
 $policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds
 $fetcher = if ([string]::IsNullOrWhiteSpace($FixtureMapPath)) { $null } else { New-ToolFixtureFetcher -Path (Resolve-ToolPath -Root $projectRootResolved -Path $FixtureMapPath) }
 $checkpointResolved = Resolve-ToolPath -Root $projectRootResolved -Path $CheckpointPath
+$resultCheckpointRoot = Get-ToolResultCheckpointRoot -CheckpointPath $checkpointResolved
 $results = New-Object System.Collections.Generic.List[object]
 $queue = $null
 $document = $null
+$resumeCheckpoint = Read-ToolBatchCheckpoint -Path $checkpointResolved
+$resumeResultItems = @()
+$resumeCandidateIds = @()
+$resumedFromCheckpoint = $false
 
 $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootResolved -DataRoot $DataRoot
 try {
@@ -811,36 +892,64 @@ try {
     foreach ($candidate in @($hintStore.hints)) {
         $candidateById[(Get-ToolCandidateId -Candidate $candidate)] = $candidate
     }
-    $targetCandidates = @($queue.queue |
-        Where-Object {
-            $entryStatus = [string]$_.status
-            $entryAction = [string](Get-ToolEntryProperty -Entry $_ -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
-            $dueAt = ConvertTo-ToolDateOrNull -Value $_.next_attempt_at
-            $entryAction -eq 'VERIFY_OFFICIAL_SITE' -and
-                $entryStatus -eq 'PENDING' -and
-                $dueAt -le $startedAt.ToUniversalTime() -and
-                $entryStatus -notin @('VERIFIED', 'RETRY_EXHAUSTED')
-        } |
-        Sort-Object @{ Expression = { -[int](Get-ToolCandidateActionabilityScore -Candidate $candidateById[[string]$_.candidate_id]) }; Ascending = $true }, @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
-        ForEach-Object { $candidateById[[string]$_.candidate_id] } |
-        Select-Object -First $MaxCandidates)
+    $checkpointCommitAppliedAt = if ($null -ne $resumeCheckpoint -and $resumeCheckpoint.PSObject.Properties.Name -contains 'commit_applied_at') { [string]$resumeCheckpoint.commit_applied_at } else { $null }
+    if ($null -ne $resumeCheckpoint -and [string]$resumeCheckpoint.state -eq 'running' -and [string]::IsNullOrWhiteSpace($checkpointCommitAppliedAt)) {
+        $checkpointCandidateIds = @($resumeCheckpoint.candidate_ids | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+        if ($checkpointCandidateIds.Count -gt 0) {
+            $checkpointResultRoot = if ($resumeCheckpoint.PSObject.Properties.Name -contains 'result_checkpoint_root' -and -not [string]::IsNullOrWhiteSpace([string]$resumeCheckpoint.result_checkpoint_root)) { [string]$resumeCheckpoint.result_checkpoint_root } else { $resultCheckpointRoot }
+            $resumeResultItems = @(Read-ToolCheckpointResults -Root $checkpointResultRoot -CandidateIds $checkpointCandidateIds)
+            $resumeCandidateIds = @($resumeResultItems | ForEach-Object { [string]$_.candidate_id })
+            $targetCandidates = @($checkpointCandidateIds |
+                Where-Object { $candidateById.ContainsKey($_) -and $_ -notin $resumeCandidateIds } |
+                ForEach-Object { $candidateById[$_] })
+            $startedAt = ConvertTo-ToolDateOrNull -Value $resumeCheckpoint.started_at
+            if ($null -eq $startedAt) {
+                $startedAt = [datetime]::UtcNow
+            }
+            $resumedFromCheckpoint = $true
+        }
+    }
+    if (-not $resumedFromCheckpoint) {
+        $targetCandidates = @($queue.queue |
+            Where-Object {
+                $entryStatus = [string]$_.status
+                $entryAction = [string](Get-ToolEntryProperty -Entry $_ -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
+                $dueAt = ConvertTo-ToolDateOrNull -Value $_.next_attempt_at
+                $entryAction -eq 'VERIFY_OFFICIAL_SITE' -and
+                    $entryStatus -eq 'PENDING' -and
+                    $dueAt -le $startedAt.ToUniversalTime() -and
+                    $entryStatus -notin @('VERIFIED', 'RETRY_EXHAUSTED')
+            } |
+            Sort-Object @{ Expression = { -[int](Get-ToolCandidateActionabilityScore -Candidate $candidateById[[string]$_.candidate_id]) }; Ascending = $true }, @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
+            ForEach-Object { $candidateById[[string]$_.candidate_id] } |
+            Select-Object -First $MaxCandidates)
+    }
 }
 finally {
     Exit-JobAgentStoreLock -Lock $lock
 }
 
-$targetCandidates = @(Select-ToolHostLimitedCandidates -Candidates $targetCandidates -HostLimit $HostConcurrency)
+if (-not $resumedFromCheckpoint) {
+    $targetCandidates = @(Select-ToolHostLimitedCandidates -Candidates $targetCandidates -HostLimit $HostConcurrency)
+}
 $existingCompanies = @($document.companies)
-Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'running' -StartedAt $startedAt -CandidateIds @($targetCandidates | ForEach-Object { Get-ToolCandidateId -Candidate $_ }) -Metrics ([pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency })
+$plannedCandidateIds = if ($resumedFromCheckpoint) { @($resumeCheckpoint.candidate_ids | ForEach-Object { [string]$_ }) } else { @($targetCandidates | ForEach-Object { Get-ToolCandidateId -Candidate $_ }) }
+foreach ($resumeResult in $resumeResultItems) {
+    $results.Add($resumeResult)
+}
+Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'running' -StartedAt $startedAt -CandidateIds $plannedCandidateIds -CompletedCandidateIds $resumeCandidateIds -ResultCheckpointRoot $resultCheckpointRoot -Metrics ([pscustomObject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; resume_results_loaded = $resumeCandidateIds.Count })
 
 if ($null -ne $fetcher -or $targetCandidates.Count -le 1) {
     foreach ($candidate in $targetCandidates) {
         $verification = Invoke-ToolCandidateVerification -Candidate $candidate -ExistingCompanies $existingCompanies -Policy $policy -Fetcher $fetcher -ObservedAt $startedAt -ExpiresAfterDays $ExpiresAfterDays
+        [void](Write-ToolCandidateResultCheckpoint -Root $resultCheckpointRoot -Result $verification)
         $results.Add($verification)
+        Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'running' -StartedAt $startedAt -CandidateIds $plannedCandidateIds -CompletedCandidateIds @($results | ForEach-Object { [string]$_.candidate_id }) -ResultCheckpointRoot $resultCheckpointRoot -Metrics ([pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; resume_results_loaded = $resumeCandidateIds.Count })
     }
 }
 else {
     $sourceVerificationModule = Join-Path $toolRoot 'src\JobAgent.SourceVerification.psm1'
+    $parallelResultCheckpointRoot = $resultCheckpointRoot
     $parallelResults = $targetCandidates | ForEach-Object -Parallel {
         Import-Module $using:sourceVerificationModule -Force -DisableNameChecking
         function Get-ToolCandidateIdLocal {
@@ -851,6 +960,31 @@ else {
                 }
             }
             throw 'Kandidat enthaelt keine stabile ID.'
+        }
+        function Get-ToolTextSha256Local {
+            param([Parameter()][AllowEmptyString()][string]$Text)
+            $bytes = [Text.UTF8Encoding]::new($false).GetBytes($Text)
+            $hash = [Security.Cryptography.SHA256]::Create()
+            try {
+                return ([BitConverter]::ToString($hash.ComputeHash($bytes))).Replace('-', '').ToLowerInvariant()
+            }
+            finally {
+                $hash.Dispose()
+            }
+        }
+        function Write-ToolJsonAtomicLocal {
+            param([Parameter(Mandatory)][string]$Path, [Parameter(Mandatory)][object]$Value)
+            New-Item -ItemType Directory -Path (Split-Path -Parent $Path) -Force | Out-Null
+            $temporaryPath = $Path + '.' + [guid]::NewGuid().ToString('N') + '.tmp'
+            try {
+                $Value | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $temporaryPath -Encoding UTF8
+                Move-Item -LiteralPath $temporaryPath -Destination $Path -Force
+            }
+            finally {
+                if (Test-Path -LiteralPath $temporaryPath) {
+                    Remove-Item -LiteralPath $temporaryPath -Force
+                }
+            }
         }
         $candidateId = Get-ToolCandidateIdLocal -Candidate $_
         $attemptStartedAt = [datetime]::UtcNow
@@ -863,11 +997,32 @@ else {
                 duration_ms = $durationMs
                 request_count = @($verification.fetches).Count
             }) -Force
+        $resultPath = Join-Path $using:parallelResultCheckpointRoot ((Get-ToolTextSha256Local -Text $candidateId) + '.json')
+        Write-ToolJsonAtomicLocal -Path $resultPath -Value $verification
         $verification
     } -ThrottleLimit $WorkerCount
     foreach ($verification in @($parallelResults)) {
         $results.Add($verification)
     }
+    Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'running' -StartedAt $startedAt -CandidateIds $plannedCandidateIds -CompletedCandidateIds @($results | ForEach-Object { [string]$_.candidate_id }) -ResultCheckpointRoot $resultCheckpointRoot -Metrics ([pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; resume_results_loaded = $resumeCandidateIds.Count })
+}
+
+if ($StopBeforeCommitForResumeTest) {
+    $resumeRunId = $startedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture)
+    $resumeLogRoot = Resolve-ToolPath -Root $projectRootResolved -Path $LogRoot
+    $resumeLogPath = Join-Path $resumeLogRoot ('JA-027-resume-' + $resumeRunId + '.json')
+    $resumeSummary = [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification-resume/v1'
+        state = 'network_checkpoint_only'
+        checkpoint_path = $checkpointResolved
+        result_checkpoint_root = $resultCheckpointRoot
+        planned_candidate_ids = $plannedCandidateIds
+        completed_candidate_ids = @($results | ForEach-Object { [string]$_.candidate_id })
+        commit_applied = $false
+    }
+    Write-ToolJsonAtomic -Path $resumeLogPath -Value $resumeSummary -Depth 20
+    $resumeSummary | Add-Member -NotePropertyName resume_log_path -NotePropertyValue $resumeLogPath -PassThru | ConvertTo-Json -Depth 20
+    exit 77
 }
 
 $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootResolved -DataRoot $DataRoot
@@ -899,12 +1054,13 @@ finally {
 
 $completedAt = [datetime]::UtcNow
 $batchMetrics = New-ToolCandidateVerificationBatchMetrics -StartedAt $startedAt -CompletedAt $completedAt -Results @($results.ToArray()) -BeforeOfficialCareerCompanyIds $beforeOfficialCareerCompanyIds -AfterOfficialCareerCompanyIds $afterOfficialCareerCompanyIds
-Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'completed' -StartedAt $startedAt -CandidateIds @($results | ForEach-Object { [string]$_.candidate_id }) -Metrics $batchMetrics
+Write-ToolBatchCheckpoint -Path $checkpointResolved -State 'completed' -StartedAt $startedAt -CandidateIds $plannedCandidateIds -CompletedCandidateIds @($results | ForEach-Object { [string]$_.candidate_id }) -ResultCheckpointRoot $resultCheckpointRoot -CommitAppliedAt $completedAt -Metrics $batchMetrics
 
 $logRootPath = Resolve-ToolPath -Root $projectRootResolved -Path $LogRoot
 New-Item -ItemType Directory -Path $logRootPath -Force | Out-Null
 $runId = $startedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture)
 $logPath = Join-Path $logRootPath ('JA-027-batch-' + $runId + '.json')
+$resumeLogPath = Join-Path $logRootPath ('JA-027-resume-' + $runId + '.json')
 $resultItems = @($results.ToArray())
 $logResultItems = [object[]]@($resultItems | ForEach-Object { ConvertTo-ToolVerificationLogResult -Result $_ })
 $queueItems = @($queue.queue)
@@ -912,6 +1068,19 @@ $checkedCandidateIds = @($resultItems | ForEach-Object { [string]$_.candidate_id
 $verifiedCandidateIds = @($resultItems | Where-Object { @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$_.status } | ForEach-Object { [string]$_.candidate_id })
 $manualReviewCandidateIds = @($resultItems | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' } | ForEach-Object { [string]$_.candidate_id })
 $unverifiedCandidateIds = @($resultItems | Where-Object { [string]$_.status -eq 'UNVERIFIED' } | ForEach-Object { [string]$_.candidate_id })
+$resumeReport = [pscustomobject]@{
+    schema_version = 'jobagent/company-candidate-verification-resume/v1'
+    checkpoint_path = $checkpointResolved
+    result_checkpoint_root = $resultCheckpointRoot
+    resumed_from_running_checkpoint = $resumedFromCheckpoint
+    planned_candidate_ids = $plannedCandidateIds
+    loaded_candidate_ids = $resumeCandidateIds
+    completed_candidate_ids = $checkedCandidateIds
+    pending_candidate_ids = @($plannedCandidateIds | Where-Object { $_ -notin $checkedCandidateIds })
+    commit_applied = $true
+    commit_applied_at = ConvertTo-ToolIso -Value $completedAt
+}
+Write-ToolJsonAtomic -Path $resumeLogPath -Value $resumeReport -Depth 30
 $summary = [pscustomobject]@{
     schema_version = 'jobagent/company-candidate-verification/v1'
     ts = ConvertTo-ToolIso -Value $startedAt
@@ -922,6 +1091,8 @@ $summary = [pscustomobject]@{
     run_id = $runId
     batch_policy = [pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; writer = 'serial_atomic_store_writer' }
     batch_metrics = $batchMetrics
+    resume_report = $resumeReport
+    resume_log_path = $resumeLogPath
     policy = $policy
     verification_queue = [pscustomobject]@{
         clusters_total = [int]$queue.clusters_total
