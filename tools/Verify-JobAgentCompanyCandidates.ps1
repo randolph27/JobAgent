@@ -54,7 +54,17 @@ function ConvertTo-ToolDateOrNull {
     if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
         return $null
     }
-    return [datetime]::Parse([string]$Value, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
+
+    $text = ([string]$Value).Trim()
+    $styles = [Globalization.DateTimeStyles]::AssumeUniversal -bor [Globalization.DateTimeStyles]::AdjustToUniversal
+    $parsed = [datetime]::MinValue
+    foreach ($culture in @([Globalization.CultureInfo]::InvariantCulture, [Globalization.CultureInfo]::GetCultureInfo('en-US'), [Globalization.CultureInfo]::GetCultureInfo('de-DE'))) {
+        if ([datetime]::TryParse($text, $culture, $styles, [ref]$parsed)) {
+            return $parsed.ToUniversalTime()
+        }
+    }
+
+    return $null
 }
 
 function Get-ToolTextSha256 {

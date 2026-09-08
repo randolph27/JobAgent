@@ -40,6 +40,25 @@ function ConvertTo-ToolIso {
     return $Value.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
 }
 
+function ConvertTo-ToolDateOrNull {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value -or [string]::IsNullOrWhiteSpace([string]$Value)) {
+        return $null
+    }
+
+    $text = ([string]$Value).Trim()
+    $styles = [Globalization.DateTimeStyles]::AssumeUniversal -bor [Globalization.DateTimeStyles]::AdjustToUniversal
+    $parsed = [datetime]::MinValue
+    foreach ($culture in @([Globalization.CultureInfo]::InvariantCulture, [Globalization.CultureInfo]::GetCultureInfo('en-US'), [Globalization.CultureInfo]::GetCultureInfo('de-DE'))) {
+        if ([datetime]::TryParse($text, $culture, $styles, [ref]$parsed)) {
+            return $parsed.ToUniversalTime()
+        }
+    }
+
+    return $null
+}
+
 function Get-ToolCandidateId {
     param([Parameter(Mandatory)][object]$Candidate)
 
@@ -252,6 +271,13 @@ function Test-ToolWebsiteDiscoveryQueueEntryDue {
         [Parameter(Mandatory)][object]$Entry
     )
 
+    $status = if ($Entry.PSObject.Properties.Name -contains 'status') { [string]$Entry.status } else { '' }
+    $nextAttemptAt = if ($Entry.PSObject.Properties.Name -contains 'next_attempt_at') { [string]$Entry.next_attempt_at } else { '' }
+    $nextAttemptDate = ConvertTo-ToolDateOrNull -Value $nextAttemptAt
+    if ($status -eq 'RETRY_SCHEDULED' -and $null -ne $nextAttemptDate) {
+        return $nextAttemptDate -le ([datetime]::UtcNow)
+    }
+
     $lastAttemptAt = if ($Entry.PSObject.Properties.Name -contains 'last_attempt_at') { [string]$Entry.last_attempt_at } else { '' }
     if ([string]::IsNullOrWhiteSpace($lastAttemptAt)) {
         return $true
@@ -259,7 +285,6 @@ function Test-ToolWebsiteDiscoveryQueueEntryDue {
 
     $lastReason = if ($Entry.PSObject.Properties.Name -contains 'last_reason') { [string]$Entry.last_reason } else { '' }
     $lastStatus = if ($Entry.PSObject.Properties.Name -contains 'last_status') { [string]$Entry.last_status } else { '' }
-    $nextAttemptAt = if ($Entry.PSObject.Properties.Name -contains 'next_attempt_at') { [string]$Entry.next_attempt_at } else { '' }
     if ($lastStatus -eq 'UNVERIFIED' -and $lastReason -eq 'Quellseite fuer Website-Ermittlung konnte nicht abgerufen werden.' -and [string]::IsNullOrWhiteSpace($nextAttemptAt)) {
         return $true
     }

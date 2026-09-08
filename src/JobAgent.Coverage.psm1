@@ -1271,6 +1271,9 @@ function New-JobAgentCoverageCandidateReviewQueueEntry {
         elseif ($previousStatus -eq 'MANUAL_REVIEW_REQUIRED' -and $nextAction -notin @('VERIFY_OFFICIAL_SITE', 'ALREADY_VERIFIED_IN_STORE')) {
             $status = 'MANUAL_REVIEW_REQUIRED'
         }
+        elseif ($previousStatus -eq 'RETRY_SCHEDULED' -and $nextAction -eq 'DISCOVER_OFFICIAL_WEBSITE') {
+            $status = 'RETRY_SCHEDULED'
+        }
         elseif ($previousStatus -eq 'RETRY_SCHEDULED' -and ($null -eq $previousNextAttemptAt -or $previousNextAttemptAt -gt $Now.ToUniversalTime())) {
             $status = 'RETRY_SCHEDULED'
         }

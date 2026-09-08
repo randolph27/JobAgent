@@ -556,6 +556,18 @@ try {
     $legacyRetryUpdatedQueue = Get-Content -Raw -LiteralPath ([string]$legacyRetryResult.queue_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($legacyRetryResult.processed_total -eq 1) -Message 'Website-Ermittlung verarbeitet alten unscheduled Abruffehler nicht erneut.'
     Assert-True -Condition (@($legacyRetryUpdatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.last_status -eq 'UNVERIFIED' -and -not [string]::IsNullOrWhiteSpace([string]$_.next_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung migriert alten unscheduled Abruffehler nicht in Retry.'
+
+    $dueRetryQueue = Get-Content -Raw -LiteralPath ([string]$legacyRetryResult.queue_path) | ConvertFrom-Json -Depth 100
+    $dueRetryEntry = @($dueRetryQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:website-fetch-retry' })[0]
+    $dueRetryEntry.status = 'RETRY_SCHEDULED'
+    $dueRetryEntry.next_attempt_at = ([datetime]::UtcNow.AddDays(-1)).ToString('MM/dd/yyyy HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
+    $dueRetryEntry.last_status = 'UNVERIFIED'
+    $dueRetryEntry.last_reason = 'Quellseite fuer Website-Ermittlung konnte nicht abgerufen werden.'
+    $dueRetryQueue | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath ([string]$legacyRetryResult.queue_path) -Encoding UTF8
+    $dueRetryOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Due-Retry ist fehlgeschlagen: " + ($dueRetryOutput -join "`n"))
+    $dueRetryResult = ($dueRetryOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($dueRetryResult.processed_total -eq 1) -Message 'Website-Ermittlung verarbeitet faellige Retry-Scheduled-Kandidaten mit Legacy-Datum nicht.'
 }
 finally {
     if (Test-Path -LiteralPath $websiteRoot) {
