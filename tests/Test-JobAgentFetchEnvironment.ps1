@@ -58,6 +58,14 @@ try {
                     error_detail = $null
                     exception_types = @()
                 }
+                wsl_curl = [pscustomobject]@{
+                    client = 'wsl-curl'
+                    ok = $false
+                    status_code = $null
+                    error = 'not needed'
+                    error_detail = 'not needed'
+                    exception_types = @()
+                }
             },
             [pscustomobject]@{
                 url = 'https://beta.example.invalid/'
@@ -71,6 +79,14 @@ try {
                 }
                 curl = [pscustomobject]@{
                     client = 'curl.exe'
+                    ok = $false
+                    status_code = $null
+                    error = 'Could not resolve host'
+                    error_detail = 'Could not resolve host'
+                    exception_types = @()
+                }
+                wsl_curl = [pscustomobject]@{
+                    client = 'wsl-curl'
                     ok = $false
                     status_code = $null
                     error = 'Could not resolve host'
@@ -96,8 +112,26 @@ try {
         results = @(
             [pscustomobject]@{
                 url = 'https://alpha.example.invalid/'
+                dotnet = [pscustomobject]@{ client = 'dotnet-invoke-webrequest'; ok = $false; status_code = $null; error = 'SEC_E_NO_CREDENTIALS'; error_detail = 'SEC_E_NO_CREDENTIALS'; exception_types = @('System.Net.Http.HttpRequestException') }
+                curl = [pscustomobject]@{ client = 'curl.exe'; ok = $false; status_code = $null; error = 'SEC_E_NO_CREDENTIALS'; error_detail = 'SEC_E_NO_CREDENTIALS'; exception_types = @() }
+                wsl_curl = [pscustomobject]@{ client = 'wsl-curl'; ok = $true; status_code = 200; error = $null; error_detail = $null; exception_types = @() }
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
+
+    $wslOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Test-JobAgentFetchEnvironment.ps1') -ProjectRoot $projectRoot -InspectionPath $inspectionPath -FixturePath $fixturePath -OutputPath $outputPath -MaxUrls 1 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Fetch-Environment-Probe-WSL ist fehlgeschlagen: " + ($wslOutput -join "`n"))
+    $wslResult = ($wslOutput -join "`n") | ConvertFrom-Json -Depth 30
+    Assert-True -Condition ($wslResult.status -eq 'schannel_fetch_fails_but_wsl_curl_succeeds') -Message 'Fetch-Environment-Probe erkennt WSL-Curl als kontrollierten Schannel-Fallback nicht.'
+    Assert-True -Condition (@($wslResult.results | Where-Object { $_.wsl_curl.ok -eq $true -and $_.curl.ok -eq $false }).Count -eq 1) -Message 'Fetch-Environment-Probe verliert WSL-Curl-Ergebnisse.'
+
+    [pscustomobject]@{
+        results = @(
+            [pscustomobject]@{
+                url = 'https://alpha.example.invalid/'
                 dotnet = [pscustomobject]@{ client = 'dotnet-invoke-webrequest'; ok = $true; status_code = 200; error = $null; error_detail = $null; exception_types = @() }
                 curl = [pscustomobject]@{ client = 'curl.exe'; ok = $true; status_code = 200; error = $null; error_detail = $null; exception_types = @() }
+                wsl_curl = [pscustomobject]@{ client = 'wsl-curl'; ok = $true; status_code = 200; error = $null; error_detail = $null; exception_types = @() }
             }
         )
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8

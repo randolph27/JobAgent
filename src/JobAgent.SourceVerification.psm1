@@ -209,6 +209,8 @@ function New-JobAgentCompanyCareerVerificationPolicy {
         [Parameter()][ValidateRange(1, 20)][int]$MaxFetchesPerCompany = 6,
         [Parameter()][ValidateRange(1, 20)][int]$MaxCandidatesPerCompany = 10,
         [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
+        [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
+        [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
         [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+company-career-verification; fail-closed)'
     )
 
@@ -217,6 +219,8 @@ function New-JobAgentCompanyCareerVerificationPolicy {
         max_fetches_per_company = $MaxFetchesPerCompany
         max_candidates_per_company = $MaxCandidatesPerCompany
         host_concurrency = $HostConcurrency
+        fetch_client = $FetchClient
+        wsl_distribution = $WslDistribution
         user_agent = $UserAgent
         policy = 'official-site-linked-career-or-ats-only'
     }
@@ -278,6 +282,139 @@ function Get-JobAgentHttpFailureDiagnostic {
     }
 }
 
+function Get-JobAgentCurlFailureDiagnostic {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Output
+    )
+
+    $class = if ($Output -match 'SEC_E_NO_CREDENTIALS|keine Anmeldeinformationen|no credentials') {
+        'TLS_CREDENTIAL_UNAVAILABLE'
+    }
+    elseif ($Output -match 'certificate|SSL:|TLS|schannel|OpenSSL|verify|subject name') {
+        'TLS_HANDSHAKE_FAILED'
+    }
+    elseif ($Output -match 'timed out|Timeout|Operation timed out') {
+        'TIMEOUT'
+    }
+    elseif ($Output -match 'Could not resolve host|Name or service not known|No such host|DNS') {
+        'DNS_RESOLUTION_FAILED'
+    }
+    else {
+        'HTTP_REQUEST_FAILED'
+    }
+
+    [pscustomobject]@{
+        error_class = $class
+        error = if ([string]::IsNullOrWhiteSpace($Output)) { 'curl failed' } else { $Output.Trim() }
+        error_detail = $Output
+        exception_types = @('curl')
+    }
+}
+
+function Test-JobAgentCompanyVerificationWslCurlAvailable {
+    param([Parameter(Mandatory)][object]$Policy)
+
+    if ((Get-Command wsl.exe -ErrorAction SilentlyContinue) -eq $null) {
+        return $false
+    }
+    $distribution = if ($Policy.PSObject.Properties.Name -contains 'wsl_distribution' -and -not [string]::IsNullOrWhiteSpace([string]$Policy.wsl_distribution)) {
+        [string]$Policy.wsl_distribution
+    }
+    else {
+        'Ubuntu-22.04'
+    }
+    $version = @(& wsl.exe -d $distribution -- curl -V 2>&1)
+    return ($LASTEXITCODE -eq 0 -and (($version -join "`n") -match 'curl'))
+}
+
+function Test-JobAgentCompanyVerificationCurlExeAvailable {
+    return ((Get-Command curl.exe -ErrorAction SilentlyContinue) -ne $null)
+}
+
+function ConvertFrom-JobAgentCompanyVerificationCurlOutput {
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][AllowEmptyString()][string[]]$Output,
+        [Parameter(Mandatory)][int]$ExitCode,
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][string]$ClientName
+    )
+
+    $raw = ($Output -join "`n")
+    $statusLine = @($Output | Where-Object { [string]$_ -like 'JOBAGENT_STATUS:*' } | Select-Object -Last 1)
+    $finalLine = @($Output | Where-Object { [string]$_ -like 'JOBAGENT_FINAL_URL:*' } | Select-Object -Last 1)
+    $statusCode = $null
+    if ($statusLine.Count -gt 0) {
+        $parsedStatus = 0
+        if ([int]::TryParse(([string]$statusLine[0]).Substring(16), [ref]$parsedStatus) -and $parsedStatus -gt 0) {
+            $statusCode = $parsedStatus
+        }
+    }
+    $finalUrl = if ($finalLine.Count -gt 0 -and -not [string]::IsNullOrWhiteSpace(([string]$finalLine[0]).Substring(19))) {
+        ([string]$finalLine[0]).Substring(19)
+    }
+    else {
+        $Url
+    }
+    $payload = (($Output | Where-Object { [string]$_ -notlike 'JOBAGENT_STATUS:*' -and [string]$_ -notlike 'JOBAGENT_FINAL_URL:*' }) -join "`n")
+    $headerText = ''
+    $body = ''
+    $headerMatch = [regex]::Match($payload, '(?s)^(?<headers>HTTP/\S+\s+\d+.*?)(\r?\n){2}(?<body>.*)$')
+    if ($headerMatch.Success) {
+        $headerText = [string]$headerMatch.Groups['headers'].Value
+        $body = [string]$headerMatch.Groups['body'].Value
+    }
+
+    $headers = @{}
+    foreach ($line in ($headerText -split '\r?\n')) {
+        if ($line -notmatch '^\s*([^:]+):\s*(.*)$') {
+            continue
+        }
+        $headers[$matches[1]] = $matches[2]
+    }
+
+    if ($ExitCode -ne 0) {
+        $diagnostic = Get-JobAgentCurlFailureDiagnostic -Output $raw
+        return [pscustomobject]@{
+            ok = $false
+            url = $Url
+            final_url = $finalUrl
+            status_code = $statusCode
+            content = ''
+            content_type = ''
+            retry_after_seconds = $null
+            error_class = [string]$diagnostic.error_class
+            error = [string]$diagnostic.error
+            error_detail = [string]$diagnostic.error_detail
+            exception_types = @($diagnostic.exception_types)
+            fetch_client = $ClientName
+        }
+    }
+
+    $retryAfterSeconds = $null
+    if ($headers.ContainsKey('Retry-After')) {
+        $parsedRetryAfter = 0
+        if ([int]::TryParse([string]$headers['Retry-After'], [ref]$parsedRetryAfter) -and $parsedRetryAfter -gt 0) {
+            $retryAfterSeconds = $parsedRetryAfter
+        }
+    }
+
+    [pscustomobject]@{
+        ok = ($null -ne $statusCode -and $statusCode -ge 200 -and $statusCode -lt 300)
+        url = $Url
+        final_url = $finalUrl
+        status_code = $statusCode
+        content = if ($null -ne $statusCode -and $statusCode -ge 200 -and $statusCode -lt 300) { $body } else { '' }
+        content_type = if ($headers.ContainsKey('Content-Type')) { [string]$headers['Content-Type'] } else { '' }
+        retry_after_seconds = $retryAfterSeconds
+        error_class = if ($null -ne $statusCode -and $statusCode -ge 200 -and $statusCode -lt 300) { $null } else { 'HTTP_STATUS' }
+        error = if ($null -ne $statusCode -and $statusCode -ge 200 -and $statusCode -lt 300) { $null } else { 'HTTP ' + [string]$statusCode }
+        error_detail = if ($null -ne $statusCode -and $statusCode -ge 200 -and $statusCode -lt 300) { $null } else { 'HTTP ' + [string]$statusCode }
+        location = if ($headers.ContainsKey('Location')) { [string]$headers['Location'] } else { $null }
+        fetch_client = $ClientName
+    }
+}
+
 function Invoke-JobAgentCompanyVerificationHostLimitedRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
@@ -310,6 +447,171 @@ function Invoke-JobAgentCompanyVerificationHostLimitedRequest {
     }
 }
 
+function Invoke-JobAgentCompanyVerificationCurlExeSingleRequest {
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    $curl = Get-Command curl.exe -ErrorAction Stop
+    $writeOut = "`nJOBAGENT_FINAL_URL:%{url_effective}`nJOBAGENT_STATUS:%{http_code}`n"
+    $output = @(& $curl.Source -i --max-time ([string]$Policy.timeout_seconds) --silent --show-error --user-agent ([string]$Policy.user_agent) --write-out $writeOut --url $Url 2>&1)
+    ConvertFrom-JobAgentCompanyVerificationCurlOutput -Output $output -ExitCode $LASTEXITCODE -Url $Url -ClientName 'curl.exe'
+}
+
+function Invoke-JobAgentCompanyVerificationWslCurlSingleRequest {
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    $distribution = if ($Policy.PSObject.Properties.Name -contains 'wsl_distribution' -and -not [string]::IsNullOrWhiteSpace([string]$Policy.wsl_distribution)) {
+        [string]$Policy.wsl_distribution
+    }
+    else {
+        'Ubuntu-22.04'
+    }
+    $writeOut = "`nJOBAGENT_FINAL_URL:%{url_effective}`nJOBAGENT_STATUS:%{http_code}`n"
+    $output = @(& wsl.exe -d $distribution -- curl -i --max-time ([string]$Policy.timeout_seconds) --silent --show-error --user-agent ([string]$Policy.user_agent) --write-out $writeOut --url $Url 2>&1)
+    ConvertFrom-JobAgentCompanyVerificationCurlOutput -Output $output -ExitCode $LASTEXITCODE -Url $Url -ClientName 'wsl-curl'
+}
+
+function Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest {
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    $uri = [Uri]$Url
+    $host = $uri.Host.ToLowerInvariant() -replace '^www\.', ''
+    $hostConcurrency = if ($Policy.PSObject.Properties.Name -contains 'host_concurrency') { [int]$Policy.host_concurrency } else { 1 }
+    $createdNew = $false
+    $semaphore = [Threading.Semaphore]::new($hostConcurrency, $hostConcurrency, (Get-JobAgentCompanyVerificationHostSemaphoreName -Host $host), [ref]$createdNew)
+    try {
+        [void]$semaphore.WaitOne()
+        try {
+            return Invoke-JobAgentCompanyVerificationCurlExeSingleRequest -Url $Url -Policy $Policy
+        }
+        finally {
+            [void]$semaphore.Release()
+        }
+    }
+    finally {
+        $semaphore.Dispose()
+    }
+}
+
+function Invoke-JobAgentCompanyVerificationHostLimitedWslCurlRequest {
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    $uri = [Uri]$Url
+    $host = $uri.Host.ToLowerInvariant() -replace '^www\.', ''
+    $hostConcurrency = if ($Policy.PSObject.Properties.Name -contains 'host_concurrency') { [int]$Policy.host_concurrency } else { 1 }
+    $createdNew = $false
+    $semaphore = [Threading.Semaphore]::new($hostConcurrency, $hostConcurrency, (Get-JobAgentCompanyVerificationHostSemaphoreName -Host $host), [ref]$createdNew)
+    try {
+        [void]$semaphore.WaitOne()
+        try {
+            return Invoke-JobAgentCompanyVerificationWslCurlSingleRequest -Url $Url -Policy $Policy
+        }
+        finally {
+            [void]$semaphore.Release()
+        }
+    }
+    finally {
+        $semaphore.Dispose()
+    }
+}
+
+function Invoke-JobAgentCompanyVerificationWslCurlHttpRequest {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    $currentUrl = $Url
+    $finalUrl = $Url
+    $redirectLimit = 5
+
+    for ($redirectIndex = 0; $redirectIndex -le $redirectLimit; $redirectIndex++) {
+        $result = Invoke-JobAgentCompanyVerificationHostLimitedWslCurlRequest -Url $currentUrl -Policy $Policy
+        $statusCode = if ($null -ne $result.status_code) { [int]$result.status_code } else { $null }
+        $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$result.final_url)) { $currentUrl } else { [string]$result.final_url }
+        $location = if ($result.PSObject.Properties.Name -contains 'location') { [string]$result.location } else { '' }
+        if ($null -ne $statusCode -and $statusCode -ge 300 -and $statusCode -lt 400 -and -not [string]::IsNullOrWhiteSpace($location)) {
+            if ($redirectIndex -eq $redirectLimit) {
+                return [pscustomobject]@{
+                    ok = $false
+                    url = $Url
+                    final_url = $finalUrl
+                    status_code = $statusCode
+                    content = ''
+                    content_type = ''
+                    retry_after_seconds = $null
+                    error_class = 'HTTP_REQUEST_FAILED'
+                    error = 'Maximale Redirect-Anzahl erreicht'
+                    error_detail = 'Maximale Redirect-Anzahl erreicht: ' + $Url
+                    exception_types = @('curl')
+                    fetch_client = 'wsl-curl'
+                }
+            }
+            $currentUrl = [Uri]::new([Uri]$currentUrl, $location).AbsoluteUri
+            $finalUrl = $currentUrl
+            continue
+        }
+
+        $result.final_url = $finalUrl
+        return $result
+    }
+}
+
+function Invoke-JobAgentCompanyVerificationCurlExeHttpRequest {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][object]$Policy
+    )
+
+    $currentUrl = $Url
+    $finalUrl = $Url
+    $redirectLimit = 5
+
+    for ($redirectIndex = 0; $redirectIndex -le $redirectLimit; $redirectIndex++) {
+        $result = Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest -Url $currentUrl -Policy $Policy
+        $statusCode = if ($null -ne $result.status_code) { [int]$result.status_code } else { $null }
+        $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$result.final_url)) { $currentUrl } else { [string]$result.final_url }
+        $location = if ($result.PSObject.Properties.Name -contains 'location') { [string]$result.location } else { '' }
+        if ($null -ne $statusCode -and $statusCode -ge 300 -and $statusCode -lt 400 -and -not [string]::IsNullOrWhiteSpace($location)) {
+            if ($redirectIndex -eq $redirectLimit) {
+                return [pscustomobject]@{
+                    ok = $false
+                    url = $Url
+                    final_url = $finalUrl
+                    status_code = $statusCode
+                    content = ''
+                    content_type = ''
+                    retry_after_seconds = $null
+                    error_class = 'HTTP_REQUEST_FAILED'
+                    error = 'Maximale Redirect-Anzahl erreicht'
+                    error_detail = 'Maximale Redirect-Anzahl erreicht: ' + $Url
+                    exception_types = @('curl')
+                    fetch_client = 'curl.exe'
+                }
+            }
+            $currentUrl = [Uri]::new([Uri]$currentUrl, $location).AbsoluteUri
+            $finalUrl = $currentUrl
+            continue
+        }
+
+        $result.final_url = $finalUrl
+        return $result
+    }
+}
+
 function Invoke-JobAgentCompanyVerificationHttpRequest {
     [CmdletBinding()]
     param(
@@ -320,6 +622,14 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
     $currentUrl = $Url
     $finalUrl = $Url
     $redirectLimit = 5
+    $fetchClient = if ($Policy.PSObject.Properties.Name -contains 'fetch_client') { [string]$Policy.fetch_client } else { 'auto' }
+
+    if ($fetchClient -eq 'wsl-curl') {
+        return Invoke-JobAgentCompanyVerificationWslCurlHttpRequest -Url $Url -Policy $Policy
+    }
+    if ($fetchClient -eq 'curl') {
+        return Invoke-JobAgentCompanyVerificationCurlExeHttpRequest -Url $Url -Policy $Policy
+    }
 
     try {
         for ($redirectIndex = 0; $redirectIndex -le $redirectLimit; $redirectIndex++) {
@@ -351,6 +661,15 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
     }
     catch {
         $diagnostic = Get-JobAgentHttpFailureDiagnostic -Exception $_.Exception
+        if ($fetchClient -eq 'auto' -and (Test-JobAgentCompanyVerificationCurlExeAvailable)) {
+            $curlResult = Invoke-JobAgentCompanyVerificationCurlExeHttpRequest -Url $Url -Policy $Policy
+            if ($curlResult.ok -eq $true -or [string]$curlResult.error_class -ne 'TLS_CREDENTIAL_UNAVAILABLE') {
+                return $curlResult
+            }
+        }
+        if ($fetchClient -eq 'auto' -and [string]$diagnostic.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE' -and (Test-JobAgentCompanyVerificationWslCurlAvailable -Policy $Policy)) {
+            return Invoke-JobAgentCompanyVerificationWslCurlHttpRequest -Url $Url -Policy $Policy
+        }
         $statusCode = $null
         $retryAfterSeconds = $null
         if ($_.Exception.PSObject.Properties.Name -contains 'Response' -and $_.Exception.Response -and $_.Exception.Response.StatusCode) {

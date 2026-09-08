@@ -1,4 +1,4 @@
-# JA-027 Handoff: TLS-Blocker und Wiederaufnahme
+# JA-027 Handoff: Fetch-Blocker entfernt und Wiederaufnahme
 
 Stand: 2026-09-08T20:14:12.857+02:00
 
@@ -6,16 +6,16 @@ Stand: 2026-09-08T20:14:12.857+02:00
 
 - Aktives Todo: `TD-0041`
 - Roadmap-Punkt: `JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen`
-- Status: `blocked` fuer den naechsten produktiven JA-027.3-Live-Schritt
+- Status: `in-progress`; der lokale Schannel-Fehler ist durch kontrollierten Curl-Fallback kein Projektblocker mehr
 - Branch/HEAD vor diesem Handoff: `master` / `4a5131d57e6b`
 - Upstream: `origin/master`, Ahead/Behind vor finalem Commit: `0/0`
 - Roadmap-Rotation: keine Rotation; `JA-027` ist fachlich nicht komplett abgeschlossen.
 
 ## Kurzlage fuer den naechsten Chat
 
-JA-027.1/.2 und grosse Teile von JA-027.3 sind implementiert, aber der produktive Live-Benchmark kann aktuell nicht belastbar fortgesetzt werden. Der dominante Live-Fehler liegt nicht in Queue-/Retry-Logik, sondern im lokalen Windows-TLS-Fetchpfad: PowerShell/.NET und `curl.exe` scheitern auf denselben HTTPS-Beispiel-URLs mit Schannel `SEC_E_NO_CREDENTIALS`.
+JA-027.1/.2 und grosse Teile von JA-027.3 sind implementiert. Der vorherige lokale Windows-Schannel-Blocker wurde entfernt: Die produktive HTTP-Policy nutzt im Auto-Modus jetzt einen kontrollierten `curl.exe`-Fallback und optional `wsl-curl`, jeweils mit Redirect-Behandlung und Hostlimit je tatsaechlich abgerufenem Host.
 
-Der naechste Agent soll deshalb nicht sofort Retry-Kandidaten verbrauchen. Zuerst muss die lokale TLS-/Schannel-Umgebung repariert oder ein kontrollierter alternativer Fetchpfad entschieden und getestet werden.
+Der naechste Agent soll trotzdem nicht vor dem Retryfenster sinnlos Kandidaten verbrauchen. Naechster fachlicher Schritt ist der Retry-Lauf ab `2026-09-10T12:51:07Z` / `2026-09-10T14:51:07+02:00`.
 
 ## Umgesetzter Stand aus JA-027
 
@@ -41,8 +41,9 @@ Der naechste Agent soll deshalb nicht sofort Retry-Kandidaten verbrauchen. Zuers
 - `logs/jobagent/JA-027-fetch-error-inspection-20260908-153700.json`
 - `logs/jobagent/JA-027-fetch-environment-20260908-174432.json`
 - `logs/jobagent/JA-027-fetch-environment-20260908-181311.json`
+- `logs/jobagent/JA-027-fetch-environment-20260908-183047.json`
 
-## Aktuelle Messwerte und Blocker
+## Aktuelle Messwerte und entfernte Blockade
 
 Letzter produktiver Retrylauf:
 
@@ -61,10 +62,12 @@ Fetch-Environment-Probes:
 
 - `logs/jobagent/JA-027-fetch-environment-20260908-174432.json`
 - `logs/jobagent/JA-027-fetch-environment-20260908-181311.json`
-- Beide bestaetigen: `status=all_probe_clients_failed`.
+- `logs/jobagent/JA-027-fetch-environment-20260908-183047.json`
+- Alt: `status=all_probe_clients_failed` in `174432`/`181311`.
+- Neu: `status=dotnet_fetch_fails_but_curl_succeeds` in `183047`; einzelne fehlerhafte Firmenzertifikate bleiben fail-closed, valide Beispiel-URLs sind per Curl erreichbar.
 - Geprueft wurden fuenf TLS-Beispiel-URLs aus dem Inspection-Log.
-- PowerShell/.NET: `The SSL connection could not be established ... Im Sicherheitspaket sind keine Anmeldeinformationen verfuegbar.`
-- `curl.exe`: `schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS`.
+- PowerShell/.NET bleibt fuer Teile der Beispielmenge fehlerhaft.
+- `curl.exe` ist fuer valide Beispiel-URLs als kontrollierter Fallback erfolgreich; direkter produktiver Auto-Fallback-Probe auf `https://catalym.com/` lieferte HTTP 200 ueber `curl.exe`.
 
 ## Verifikation in diesem Abschluss
 
@@ -77,8 +80,8 @@ pwsh -NoProfile -File .\tools\Test-JobAgentFetchEnvironment.ps1 -ProjectRoot . -
 Ergebnis:
 
 - Exitcode: `0`
-- Fachstatus: `all_probe_clients_failed`
-- Output: `logs/jobagent/JA-027-fetch-environment-20260908-181311.json`
+- Fachstatus: `dotnet_fetch_fails_but_curl_succeeds`
+- Output: `logs/jobagent/JA-027-fetch-environment-20260908-183047.json`
 
 STP wurde anschliessend ausgefuehrt:
 
@@ -90,22 +93,17 @@ Supertest wurde in diesem Chat nicht angefragt; gemaess Nutzeranweisung gilt ein
 
 ## Offene Aufgaben in fachlicher Reihenfolge
 
-1. TLS-/Fetch-Umgebung reparieren oder kontrollierten alternativen Fetchpfad festlegen.
-   - Abhaengigkeit: lokale Windows-Schannel-/Credential-Konfiguration oder bewusst implementierter alternativer Client.
-   - Erfolgskriterium: `tools/Test-JobAgentFetchEnvironment.ps1` meldet mindestens `dotnet_fetch_available` oder `dotnet_fetch_fails_but_curl_succeeds`.
-   - Risiko: erneutes Verbrauchen von Retry-Kandidaten ohne funktionierenden Fetchpfad erzeugt nur weitere technische Retries ohne Akquisefortschritt.
-
-2. Nach erfolgreichem Probe-Lauf faellige Website-Discovery-Retries ausfuehren.
+1. Faellige Website-Discovery-Retries nach Retryfenster ausfuehren.
    - Command:
 
    ```powershell
    pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -ProjectRoot . -MaxCandidates 100
    ```
 
-   - Abhaengigkeit: funktionierender HTTPS-Fetch.
+   - Abhaengigkeit: Retryfaelligkeit ab `2026-09-10T12:51:07Z`; Auto-Fallback auf `curl.exe` ist implementiert.
    - Erfolgskriterium: neue offizielle Firmenwebsites oder begruendete Review-/Retry-Ergebnisse; kein dominanter `SEC_E_NO_CREDENTIALS`-Fehler.
 
-3. Danach faellige Candidate-Verification-Retries ausfuehren.
+2. Danach faellige Candidate-Verification-Retries ausfuehren.
    - Command:
 
    ```powershell
@@ -115,7 +113,7 @@ Supertest wurde in diesem Chat nicht angefragt; gemaess Nutzeranweisung gilt ein
    - Abhaengigkeit: Schritt 2 und faellige Queue-Eintraege.
    - Erfolgskriterium: echter 100er-Benchmark mit bearbeiteten Kandidaten, Request-/Quantilmetriken und verwertbarem Nettozuwachs oder belastbarer Restursache.
 
-4. Coverage neu messen.
+3. Coverage neu messen.
    - Command:
 
    ```powershell
@@ -124,14 +122,14 @@ Supertest wurde in diesem Chat nicht angefragt; gemaess Nutzeranweisung gilt ein
 
    - Erfolgskriterium: getrennte Zahlen fuer Firmenbestand, offizielle Quellen, Ready-Kandidaten und Zielinventar-Gate; keine widerspruechlichen Discovery-Hint-Konflikte.
 
-5. JA-027 erst abschliessen/rotieren, wenn alle fachlichen Done-Kriterien belegt sind.
+4. JA-027 erst abschliessen/rotieren, wenn alle fachlichen Done-Kriterien belegt sind.
    - Noch offen: 100er-Live-Benchmark, 1.000 belegte offizielle Karriere-/ATS-Arbeitgeberquellen, Abschluss-Evidence `JA-027-1000-career-sources.json`.
    - Bis dahin bleibt `TD-0041` `in-progress` beziehungsweise bei TLS-Blockade fachlich blockiert.
 
 ## No-Gos fuer den naechsten Agent
 
 - Keine Roadmap-Rotation fuer `JA-027`, solange 100er-Benchmark und 1.000 offizielle Karrierequellen fehlen.
-- Keine Retry-Kandidaten erneut verbrauchen, solange `Test-JobAgentFetchEnvironment.ps1` weiter `all_probe_clients_failed` meldet.
+- Keine Retry-Kandidaten vor dem naechsten Retryfenster verbrauchen; bei erneutem `all_probe_clients_failed` zuerst Shell-/Sandbox-/WSL-Zugriff pruefen.
 - Keine Firmen-/URL-Funde loeschen, nur weil eine Quelle temporaer nicht erreichbar ist.
 - Keine Aggregatoren als offizielle Karrierequelle zaehlen.
 - Keine 1.000 aus Kandidaten-, Domain-, Queue- oder Snapshotzahlen ableiten; nur belegte offizielle Karriere-/ATS-Arbeitgeberquellen zaehlen.
@@ -142,4 +140,4 @@ Supertest wurde in diesem Chat nicht angefragt; gemaess Nutzeranweisung gilt ein
 pwsh -NoProfile -File .\tools\Test-JobAgentFetchEnvironment.ps1 -ProjectRoot . -MaxUrls 5 -TimeoutSeconds 12
 ```
 
-Wenn der Status weiter `all_probe_clients_failed` ist, bleibt JA-027.3 blockiert. Dann zuerst Windows-Schannel/TLS beziehungsweise einen explizit kontrollierten Fetchadapter behandeln. Wenn mindestens ein Client erfolgreich ist, mit den Website-Discovery- und Candidate-Verification-Retrycommands oben fortfahren.
+Wenn der Status `dotnet_fetch_fails_but_curl_succeeds` oder `dotnet_fetch_available` ist, mit den Website-Discovery- und Candidate-Verification-Retrycommands oben fortfahren. Nur bei erneutem `all_probe_clients_failed` zuerst die lokale Shell-/Sandbox-/WSL-Zugriffsfrage pruefen.

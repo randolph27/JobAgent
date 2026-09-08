@@ -7,7 +7,7 @@ Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
 
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-Import-Module (Join-Path $root 'src\JobAgent.SourceVerification.psm1') -Force -DisableNameChecking
+$sourceVerificationModule = Import-Module (Join-Path $root 'src\JobAgent.SourceVerification.psm1') -Force -DisableNameChecking -PassThru
 
 function Assert-True {
     param(
@@ -113,6 +113,27 @@ Assert-True -Condition ($careerPolicy.host_concurrency -eq 1) -Message 'Career-V
 
 $parallelPolicy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds 3 -MaxFetchesPerCompany 4 -MaxCandidatesPerCompany 5 -HostConcurrency 3
 Assert-True -Condition ($parallelPolicy.host_concurrency -eq 3) -Message 'Career-Verifikationspolicy uebernimmt ein explizites Host-Concurrency-Limit nicht.'
+
+$curlPolicy = New-JobAgentCompanyCareerVerificationPolicy -FetchClient 'curl'
+Assert-True -Condition ($curlPolicy.fetch_client -eq 'curl') -Message 'Career-Verifikationspolicy uebernimmt den nativen Curl-Fetch-Client nicht.'
+
+$wslPolicy = New-JobAgentCompanyCareerVerificationPolicy -FetchClient 'wsl-curl' -WslDistribution 'Ubuntu-22.04'
+Assert-True -Condition ($wslPolicy.fetch_client -eq 'wsl-curl') -Message 'Career-Verifikationspolicy uebernimmt den expliziten Fetch-Client nicht.'
+Assert-True -Condition ($wslPolicy.wsl_distribution -eq 'Ubuntu-22.04') -Message 'Career-Verifikationspolicy dokumentiert die WSL-Distribution nicht.'
+
+$curlCertificateDiagnostic = $sourceVerificationModule.Invoke({ Get-JobAgentCurlFailureDiagnostic -Output 'curl: (60) SSL: no alternative certificate subject name matches target host name' })
+Assert-True -Condition ($curlCertificateDiagnostic.error_class -eq 'TLS_HANDSHAKE_FAILED') -Message 'Curl-Diagnose klassifiziert Zertifikatsfehler nicht als TLS-Handshake-Fehler.'
+$curlCredentialDiagnostic = $sourceVerificationModule.Invoke({ Get-JobAgentCurlFailureDiagnostic -Output 'schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS' })
+Assert-True -Condition ($curlCredentialDiagnostic.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE') -Message 'Curl-Diagnose klassifiziert Schannel-Credentialfehler nicht.'
+
+$curlParsed = $sourceVerificationModule.Invoke({
+        ConvertFrom-JobAgentCompanyVerificationCurlOutput `
+            -Output @('HTTP/2 200', 'content-type: text/html', '', '<html>ok</html>', 'JOBAGENT_FINAL_URL:https://example.invalid/jobs', 'JOBAGENT_STATUS:200') `
+            -ExitCode 0 `
+            -Url 'https://example.invalid/jobs' `
+            -ClientName 'curl.exe'
+    })
+Assert-True -Condition ($curlParsed.ok -eq $true -and $curlParsed.fetch_client -eq 'curl.exe' -and $curlParsed.content -match 'ok') -Message 'Curl-Output-Parser verliert Erfolg, Client oder Content.'
 
 $careerHtml = '<html><body><a href="/de/karriere">Karriere</a><a href="https://www.linkedin.com/jobs/view/123">Jobs</a></body></html>'
 $careerLinks = @(Get-JobAgentCompanyCareerCandidateLinks -Html $careerHtml -BaseUrl 'https://example.invalid/' -Company (New-TestCompany) -MaxCandidates 5)
@@ -265,5 +286,5 @@ Assert-True -Condition ($manualVerification.status -eq 'MANUAL_REVIEW') -Message
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
+    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_verification_curl_policy', 'career_verification_wsl_curl_policy', 'curl_tls_error_diagnostics', 'curl_output_parser', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
 } | ConvertTo-Json -Depth 4

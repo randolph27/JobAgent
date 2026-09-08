@@ -163,16 +163,59 @@ function Invoke-ToolCurlProbe {
     }
 }
 
+function Invoke-ToolWslCurlProbe {
+    param(
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][int]$Timeout,
+        [Parameter()][string]$Distribution = 'Ubuntu-22.04'
+    )
+
+    if ($null -eq (Get-Command wsl.exe -ErrorAction SilentlyContinue)) {
+        return [pscustomobject]@{
+            client = 'wsl-curl'
+            ok = $false
+            status_code = $null
+            error = 'wsl.exe nicht gefunden'
+            error_detail = 'wsl.exe nicht gefunden'
+            exception_types = @()
+        }
+    }
+
+    $output = @(& wsl.exe -d $Distribution -- curl -I -L --max-time $Timeout -sS -w "JOBAGENT_STATUS:%{http_code}`n" $Url 2>&1)
+    $exit = $LASTEXITCODE
+    $statusLine = @($output | Where-Object { [string]$_ -like 'JOBAGENT_STATUS:*' } | Select-Object -Last 1)
+    $statusCode = if ($statusLine.Count -gt 0) {
+        $parsed = 0
+        if ([int]::TryParse(([string]$statusLine[0]).Substring(16), [ref]$parsed) -and $parsed -gt 0) { $parsed } else { $null }
+    }
+    else {
+        $null
+    }
+
+    [pscustomobject]@{
+        client = 'wsl-curl'
+        ok = ($exit -eq 0 -and $null -ne $statusCode -and $statusCode -ge 100)
+        status_code = $statusCode
+        error = if ($exit -eq 0) { $null } else { ($output -join "`n") }
+        error_detail = if ($exit -eq 0) { $null } else { ($output -join "`n") }
+        exception_types = @()
+    }
+}
+
 function Resolve-ToolEnvironmentStatus {
     param([Parameter(Mandatory)][object[]]$Results)
 
     $dotNet = @($Results | Where-Object { $_.dotnet.ok -eq $true })
     $curl = @($Results | Where-Object { $_.curl.ok -eq $true })
+    $wslCurl = @($Results | Where-Object { ($_.PSObject.Properties.Name -contains 'wsl_curl') -and $_.wsl_curl.ok -eq $true })
     if ($dotNet.Count -gt 0) {
         return 'dotnet_fetch_available'
     }
     if ($curl.Count -gt 0) {
         return 'dotnet_fetch_fails_but_curl_succeeds'
+    }
+    if ($wslCurl.Count -gt 0) {
+        return 'schannel_fetch_fails_but_wsl_curl_succeeds'
     }
     return 'all_probe_clients_failed'
 }
@@ -202,6 +245,7 @@ foreach ($url in $urls) {
                 url = [string]$url
                 dotnet = $row[0].dotnet
                 curl = $row[0].curl
+                wsl_curl = if ($row[0].PSObject.Properties.Name -contains 'wsl_curl') { $row[0].wsl_curl } else { [pscustomobject]@{ client = 'wsl-curl'; ok = $false; status_code = $null; error = 'fixture missing wsl_curl'; error_detail = 'fixture missing wsl_curl'; exception_types = @() } }
             })
         continue
     }
@@ -210,13 +254,15 @@ foreach ($url in $urls) {
             url = [string]$url
             dotnet = Invoke-ToolDotNetProbe -Url ([string]$url) -Timeout $TimeoutSeconds
             curl = Invoke-ToolCurlProbe -Url ([string]$url) -Timeout $TimeoutSeconds
+            wsl_curl = Invoke-ToolWslCurlProbe -Url ([string]$url) -Timeout $TimeoutSeconds
         })
 }
 
 $status = Resolve-ToolEnvironmentStatus -Results @($results.ToArray())
 $nextAction = switch ($status) {
     'dotnet_fetch_available' { 'JA-027-Retry erneut laufen lassen; TLS ist fuer mindestens eine Beispiel-URL im produktiven Fetch-Client erreichbar.' }
-    'dotnet_fetch_fails_but_curl_succeeds' { 'PowerShell/.NET-Fetchpfad untersuchen oder kontrollierten Curl-Fetchadapter ergaenzen; externe Erreichbarkeit ist fuer mindestens eine Beispiel-URL belegt.' }
+    'dotnet_fetch_fails_but_curl_succeeds' { 'JA-027-Retry mit Auto-Fallback auf curl.exe erneut laufen lassen; externe Erreichbarkeit ist fuer mindestens eine Beispiel-URL belegt.' }
+    'schannel_fetch_fails_but_wsl_curl_succeeds' { 'JA-027-Retry mit Auto-Fallback auf WSL-Curl erneut laufen lassen; externe Erreichbarkeit ist belegt und Schannel bleibt lokal fehlerhaft.' }
     default { 'Netzwerk/TLS ausserhalb des Projekts klaeren, bevor Retrykandidaten erneut verbraucht werden.' }
 }
 
