@@ -320,7 +320,8 @@ try {
             [pscustomobject]@{ url = 'https://example.invalid/'; ok = $true; status_code = 200; final_url = 'https://example.invalid/'; content = '<html><a href="/karriere">Karriere</a></html>' },
             [pscustomobject]@{ url = 'https://example.invalid/sitemap.xml'; ok = $true; status_code = 200; final_url = 'https://example.invalid/sitemap.xml'; content = '<urlset></urlset>' },
             [pscustomobject]@{ url = 'https://example.invalid/sitemap_index.xml'; ok = $true; status_code = 200; final_url = 'https://example.invalid/sitemap_index.xml'; content = '<sitemapindex></sitemapindex>' },
-            [pscustomobject]@{ url = 'https://example.invalid/karriere'; ok = $true; status_code = 200; final_url = 'https://example.invalid/karriere'; content = '<main>Karriere bei Example</main>' }
+            [pscustomobject]@{ url = 'https://example.invalid/karriere'; ok = $true; status_code = 200; final_url = 'https://example.invalid/karriere'; content = '<main>Karriere bei Example</main>' },
+            [pscustomobject]@{ url = 'https://noresponse.example.invalid/'; ok = $false; status_code = $null; final_url = 'https://noresponse.example.invalid/'; content = ''; error_class = 'TLS_CREDENTIAL_UNAVAILABLE'; error_detail = 'SEC_E_NO_CREDENTIALS'; exception_types = @('System.Net.Http.HttpRequestException') }
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $projectRoot 'fixture-map.json') -Encoding UTF8
 
@@ -355,7 +356,9 @@ try {
     Assert-True -Condition ($null -ne $scriptResult.batch_metrics.duration_ms_p50 -and $null -ne $scriptResult.batch_metrics.duration_ms_p95) -Message 'Batch-Metriken enthalten keine Nearest-Rank-Quantile.'
     Assert-True -Condition ($scriptResult.batch_metrics.net_official_career_growth -eq 1) -Message 'Batch-Metriken zaehlen Nettozuwachs offizieller Karrierequellen falsch.'
     Assert-True -Condition (@($scriptResult.results | Where-Object { $_.candidate_id -eq 'hint:example' -and $_.batch_telemetry.duration_ms -ge 0 }).Count -eq 1) -Message 'Resultate enthalten keine Kandidaten-Telemetrie.'
-    Assert-True -Condition (@($scriptResult.results | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and @($_.fetches | Where-Object { $_.error_class -eq 'HTTP_STATUS' }).Count -ge 1 }).Count -eq 1) -Message 'Candidate-Verifikationsscript verliert Fetch-Fehlerklassen im Batchmanifest.'
+    Assert-True -Condition (@($scriptResult.results | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and @($_.fetches | Where-Object { $_.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE' -and @($_.exception_types | Where-Object { $_ -eq 'System.Net.Http.HttpRequestException' }).Count -eq 1 }).Count -ge 1 }).Count -eq 1) -Message 'Candidate-Verifikationsscript verliert Fetch-Fehlerklassen oder Exception-Typen im Batchmanifest.'
+    Assert-True -Condition ($scriptResult.fetch_error_summary.schema_version -eq 'jobagent/fetch-error-summary/v1') -Message 'Candidate-Verifikationsscript schreibt keine Fetch-Fehlerzusammenfassung.'
+    Assert-True -Condition (@($scriptResult.fetch_error_summary.by_error_class | Where-Object { $_.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE' -and $_.candidate_count -eq 1 -and @($_.exception_types | Where-Object { $_ -eq 'System.Net.Http.HttpRequestException' }).Count -eq 1 }).Count -eq 1) -Message 'Candidate-Verifikationsscript aggregiert TLS-Fetchfehler nicht auswertbar.'
     $checkpoint = Get-Content -Raw -LiteralPath ([string]$scriptResult.checkpoint_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($checkpoint.schema_version -eq 'jobagent/company-candidate-verification-checkpoint/v1' -and $checkpoint.state -eq 'completed') -Message 'Candidate-Verifikationsscript schreibt keinen abgeschlossenen Batch-Checkpoint.'
     Assert-True -Condition ($checkpoint.metrics.processed_total -eq $scriptResult.verification_queue.processed_total) -Message 'Batch-Checkpoint und Verifikationssummary widersprechen sich.'
@@ -537,7 +540,8 @@ try {
     [pscustomobject]@{
         responses = @(
             [pscustomobject]@{ url = 'https://directory.example.invalid/companies'; ok = $true; status_code = 200; final_url = 'https://directory.example.invalid/companies'; content = '<html><a href="/companies/example-ag">Example AG</a></html>' },
-            [pscustomobject]@{ url = 'https://directory.example.invalid/companies/example-ag'; ok = $true; status_code = 200; final_url = 'https://directory.example.invalid/companies/example-ag'; content = '<html><a href="https://www.example.invalid/">Website Example AG</a></html>' }
+            [pscustomobject]@{ url = 'https://directory.example.invalid/companies/example-ag'; ok = $true; status_code = 200; final_url = 'https://directory.example.invalid/companies/example-ag'; content = '<html><a href="https://www.example.invalid/">Website Example AG</a></html>' },
+            [pscustomobject]@{ url = 'https://directory.example.invalid/retry'; ok = $false; status_code = $null; final_url = 'https://directory.example.invalid/retry'; content = ''; error_class = 'TLS_CREDENTIAL_UNAVAILABLE'; error_detail = 'SEC_E_NO_CREDENTIALS'; exception_types = @('System.Net.Http.HttpRequestException') }
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $websiteRoot 'fixture-map.json') -Encoding UTF8
 
@@ -556,7 +560,9 @@ try {
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-missing-source' -and $_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $_.status -eq 'MANUAL_REVIEW_REQUIRED' -and $_.last_status -eq 'MANUAL_REVIEW_REQUIRED' -and -not [string]::IsNullOrWhiteSpace([string]$_.last_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung persistiert fail-closed Manual-Review-Ergebnis nicht in der Queue.'
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and $_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.last_status -eq 'UNVERIFIED' -and -not [string]::IsNullOrWhiteSpace([string]$_.next_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung muss Abruffehler retryfaehig terminieren statt permanentem Manual Review.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$websiteScriptResult.log_path) -PathType Leaf) -Message 'Website-Ermittlungsscript schreibt kein Logartefakt.'
-    Assert-True -Condition (@($websiteScriptResult.results | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and @($_.fetches | Where-Object { $_.error_class -eq 'HTTP_STATUS' }).Count -ge 1 }).Count -eq 1) -Message 'Website-Ermittlungsscript verliert Fetch-Fehlerklassen im Log.'
+    Assert-True -Condition (@($websiteScriptResult.results | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and @($_.fetches | Where-Object { $_.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE' -and @($_.exception_types | Where-Object { $_ -eq 'System.Net.Http.HttpRequestException' }).Count -eq 1 }).Count -ge 1 }).Count -eq 1) -Message 'Website-Ermittlungsscript verliert Fetch-Fehlerklassen oder Exception-Typen im Log.'
+    Assert-True -Condition ($websiteScriptResult.fetch_error_summary.schema_version -eq 'jobagent/fetch-error-summary/v1') -Message 'Website-Ermittlungsscript schreibt keine Fetch-Fehlerzusammenfassung.'
+    Assert-True -Condition (@($websiteScriptResult.fetch_error_summary.by_error_class | Where-Object { $_.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE' -and $_.candidate_count -eq 1 -and @($_.exception_types | Where-Object { $_ -eq 'System.Net.Http.HttpRequestException' }).Count -eq 1 }).Count -eq 1) -Message 'Website-Ermittlungsscript aggregiert TLS-Fetchfehler nicht auswertbar.'
 
     $secondWebsiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Zweitlauf ist fehlgeschlagen: " + ($secondWebsiteScriptOutput -join "`n"))

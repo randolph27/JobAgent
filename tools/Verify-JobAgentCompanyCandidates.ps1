@@ -251,6 +251,7 @@ function New-ToolFixtureFetcher {
                 error_class = if ($entry.PSObject.Properties.Name -contains 'error_class') { $entry.error_class } else { $null }
                 error = if ([bool]$entry.ok) { $null } else { 'fixture failure' }
                 error_detail = if ($entry.PSObject.Properties.Name -contains 'error_detail') { $entry.error_detail } else { $null }
+                exception_types = if ($entry.PSObject.Properties.Name -contains 'exception_types') { @($entry.exception_types) } else { @() }
             }
         }
         [pscustomobject]@{
@@ -264,6 +265,7 @@ function New-ToolFixtureFetcher {
             error_class = 'HTTP_STATUS'
             error = 'fixture missing'
             error_detail = 'fixture missing'
+            exception_types = @()
         }
     }.GetNewClosure()
 }
@@ -286,7 +288,52 @@ function ConvertTo-ToolFetchEvidence {
             error_class = if ($fetch.PSObject.Properties.Name -contains 'error_class') { $fetch.error_class } else { $null }
             error = if ($fetch.PSObject.Properties.Name -contains 'error') { $fetch.error } else { $null }
             error_detail = if ($fetch.PSObject.Properties.Name -contains 'error_detail') { $fetch.error_detail } else { $null }
+            exception_types = if ($fetch.PSObject.Properties.Name -contains 'exception_types') { @($fetch.exception_types) } else { @() }
         }
+    }
+}
+
+function New-ToolFetchErrorSummary {
+    param(
+        [Parameter()][AllowEmptyCollection()][object[]]$Results = @()
+    )
+
+    $fetches = @($Results | ForEach-Object {
+            $candidateId = if ($_.PSObject.Properties.Name -contains 'candidate_id') { [string]$_.candidate_id } else { '' }
+            if ($_.PSObject.Properties.Name -contains 'fetches') {
+                @($_.fetches | ForEach-Object {
+                        $_ | Add-Member -NotePropertyName candidate_id -NotePropertyValue $candidateId -Force
+                        $_
+                    })
+            }
+        } | Where-Object {
+            $_.PSObject.Properties.Name -contains 'error_class' -and
+            -not [string]::IsNullOrWhiteSpace([string]$_.error_class)
+        })
+
+    $byClass = @($fetches |
+        Group-Object { [string]$_.error_class } |
+        Sort-Object @{ Expression = 'Count'; Descending = $true }, Name |
+        ForEach-Object {
+            [pscustomobject]@{
+                error_class = [string]$_.Name
+                fetch_count = [int]$_.Count
+                candidate_count = @($_.Group | ForEach-Object { [string]$_.candidate_id } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique).Count
+                sample_urls = @($_.Group | ForEach-Object { [string]$_.url } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique -First 5)
+                sample_details = @($_.Group | ForEach-Object {
+                        if ($_.PSObject.Properties.Name -contains 'error_detail') { [string]$_.error_detail }
+                    } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique -First 3)
+                exception_types = @($_.Group | ForEach-Object {
+                        if ($_.PSObject.Properties.Name -contains 'exception_types') { @($_.exception_types) }
+                    } | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object { [string]$_ } | Select-Object -Unique)
+            }
+        })
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/fetch-error-summary/v1'
+        failed_fetch_total = $fetches.Count
+        error_class_total = $byClass.Count
+        by_error_class = @($byClass)
     }
 }
 
@@ -1097,6 +1144,7 @@ $logPath = Join-Path $logRootPath ('JA-027-batch-' + $runId + '.json')
 $resumeLogPath = Join-Path $logRootPath ('JA-027-resume-' + $runId + '.json')
 $resultItems = @($results.ToArray())
 $logResultItems = [object[]]@($resultItems | ForEach-Object { ConvertTo-ToolVerificationLogResult -Result $_ })
+$fetchErrorSummary = New-ToolFetchErrorSummary -Results $logResultItems
 $queueItems = @($queue.queue)
 $checkedCandidateIds = @($resultItems | ForEach-Object { [string]$_.candidate_id })
 $verifiedCandidateIds = @($resultItems | Where-Object { @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$_.status } | ForEach-Object { [string]$_.candidate_id })
@@ -1141,6 +1189,7 @@ $summary = [pscustomobject]@{
     verified_candidate_ids = $verifiedCandidateIds
     manual_review_candidate_ids = $manualReviewCandidateIds
     unverified_candidate_ids = $unverifiedCandidateIds
+    fetch_error_summary = $fetchErrorSummary
     decision_report = New-ToolCandidateVerificationDecisionReport -Results $resultItems -Queue $queue
     results = $logResultItems
 }

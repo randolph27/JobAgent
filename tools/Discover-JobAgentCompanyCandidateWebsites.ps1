@@ -70,6 +70,50 @@ function Get-ToolCandidateId {
     throw 'Kandidat enthaelt keine stabile ID.'
 }
 
+function New-ToolFetchErrorSummary {
+    param(
+        [Parameter()][AllowEmptyCollection()][object[]]$Results = @()
+    )
+
+    $fetches = @($Results | ForEach-Object {
+            $candidateId = if ($_.PSObject.Properties.Name -contains 'candidate_id') { [string]$_.candidate_id } else { '' }
+            if ($_.PSObject.Properties.Name -contains 'fetches') {
+                @($_.fetches | ForEach-Object {
+                        $_ | Add-Member -NotePropertyName candidate_id -NotePropertyValue $candidateId -Force
+                        $_
+                    })
+            }
+        } | Where-Object {
+            $_.PSObject.Properties.Name -contains 'error_class' -and
+            -not [string]::IsNullOrWhiteSpace([string]$_.error_class)
+        })
+
+    $byClass = @($fetches |
+        Group-Object { [string]$_.error_class } |
+        Sort-Object @{ Expression = 'Count'; Descending = $true }, Name |
+        ForEach-Object {
+            [pscustomobject]@{
+                error_class = [string]$_.Name
+                fetch_count = [int]$_.Count
+                candidate_count = @($_.Group | ForEach-Object { [string]$_.candidate_id } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique).Count
+                sample_urls = @($_.Group | ForEach-Object { [string]$_.url } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique -First 5)
+                sample_details = @($_.Group | ForEach-Object {
+                        if ($_.PSObject.Properties.Name -contains 'error_detail') { [string]$_.error_detail }
+                    } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Select-Object -Unique -First 3)
+                exception_types = @($_.Group | ForEach-Object {
+                        if ($_.PSObject.Properties.Name -contains 'exception_types') { @($_.exception_types) }
+                    } | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object { [string]$_ } | Select-Object -Unique)
+            }
+        })
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/fetch-error-summary/v1'
+        failed_fetch_total = $fetches.Count
+        error_class_total = $byClass.Count
+        by_error_class = @($byClass)
+    }
+}
+
 function New-ToolFixtureFetcher {
     param([Parameter(Mandatory)][string]$Path)
 
@@ -94,6 +138,7 @@ function New-ToolFixtureFetcher {
                 error_class = if ($entry.PSObject.Properties.Name -contains 'error_class') { $entry.error_class } else { $null }
                 error = if ([bool]$entry.ok) { $null } else { 'fixture failure' }
                 error_detail = if ($entry.PSObject.Properties.Name -contains 'error_detail') { $entry.error_detail } else { $null }
+                exception_types = if ($entry.PSObject.Properties.Name -contains 'exception_types') { @($entry.exception_types) } else { @() }
             }
         }
         [pscustomobject]@{
@@ -106,6 +151,7 @@ function New-ToolFixtureFetcher {
             error_class = 'HTTP_STATUS'
             error = 'fixture missing'
             error_detail = 'fixture missing'
+            exception_types = @()
         }
     }.GetNewClosure()
 }
@@ -264,6 +310,7 @@ function ConvertTo-ToolWebsiteDiscoveryLogResult {
                     error_class = if ($_.PSObject.Properties.Name -contains 'error_class') { $_.error_class } else { $null }
                     error = if ($_.PSObject.Properties.Name -contains 'error') { $_.error } else { $null }
                     error_detail = if ($_.PSObject.Properties.Name -contains 'error_detail') { $_.error_detail } else { $null }
+                    exception_types = if ($_.PSObject.Properties.Name -contains 'exception_types') { @($_.exception_types) } else { @() }
                 }
             })
         candidates = @($candidateItems)
@@ -355,6 +402,7 @@ New-Item -ItemType Directory -Path $logRootPath -Force | Out-Null
 $logPath = Join-Path $logRootPath ('company-candidate-website-discovery-' + $startedAt.ToString('yyyyMMdd-HHmmss', [Globalization.CultureInfo]::InvariantCulture) + '.json')
 $resultItems = @($results.ToArray())
 $logResultItems = @($resultItems | ForEach-Object { ConvertTo-ToolWebsiteDiscoveryLogResult -Result $_ })
+$fetchErrorSummary = New-ToolFetchErrorSummary -Results $logResultItems
 $summary = [pscustomobject]@{
     schema_version = 'jobagent/company-candidate-website-discovery/v1'
     ts = ConvertTo-ToolIso -Value $startedAt
@@ -366,6 +414,7 @@ $summary = [pscustomobject]@{
     manual_review_total = @($resultItems | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count
     unverified_total = @($resultItems | Where-Object { [string]$_.status -eq 'UNVERIFIED' }).Count
     verified_candidate_ids = @($resultItems | Where-Object { [string]$_.status -eq 'OFFICIAL_WEBSITE_VERIFIED' } | ForEach-Object { [string]$_.candidate_id })
+    fetch_error_summary = $fetchErrorSummary
     results = @($logResultItems)
 }
 $summary | ConvertTo-Json -Depth 100 | Set-Content -LiteralPath $logPath -Encoding UTF8
