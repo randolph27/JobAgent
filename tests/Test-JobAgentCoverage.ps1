@@ -309,6 +309,46 @@ $recoveredKnownDomainQueueItem = @($recoveredActionQueue.queue | Where-Object { 
 Assert-True -Condition ($recoveredKnownDomainQueueItem.next_action -eq 'VERIFY_OFFICIAL_SITE' -and $recoveredKnownDomainQueueItem.status -eq 'PENDING') -Message 'Manual-Review-Kandidat mit nachgereichter belastbarer Domain muss wieder verifizierbar werden.'
 Assert-True -Condition ($recoveredActionQueue.ready_total -eq 1) -Message 'Reaktivierte Domain-Kandidaten muessen wieder als bereit zaehlen.'
 
+$previousFutureRetryQueue = [pscustomobject]@{
+    schema_version = 'jobagent/company-candidate-verification-queue/v1'
+    queue = @(
+        [pscustomobject]@{
+            candidate_id = 'hint:queue-known-domain'
+            next_action = 'VERIFY_OFFICIAL_SITE'
+            status = 'RETRY_SCHEDULED'
+            retry_count = 1
+            last_attempt_at = '2026-08-23T08:00:00.000Z'
+            next_attempt_at = '2026-08-24T08:00:00.000Z'
+            last_status = 'UNVERIFIED'
+            last_reason = 'Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.'
+        }
+    )
+}
+$futureRetryQueue = New-JobAgentCoverageCandidateReviewQueue -HintStore $queueHintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousFutureRetryQueue -Now ([datetime]'2026-08-23T08:30:00Z') -MaxItems 10
+$futureRetryKnownDomainQueueItem = @($futureRetryQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:queue-known-domain' })[0]
+Assert-True -Condition ($futureRetryKnownDomainQueueItem.status -eq 'RETRY_SCHEDULED') -Message 'Nicht faellige Retry-Kandidaten muessen terminiert bleiben.'
+Assert-True -Condition ($futureRetryQueue.ready_total -eq 0) -Message 'Nicht faellige Retry-Kandidaten duerfen nicht als bereit zaehlen.'
+
+$previousDueRetryQueue = [pscustomobject]@{
+    schema_version = 'jobagent/company-candidate-verification-queue/v1'
+    queue = @(
+        [pscustomobject]@{
+            candidate_id = 'hint:queue-known-domain'
+            next_action = 'VERIFY_OFFICIAL_SITE'
+            status = 'RETRY_SCHEDULED'
+            retry_count = 1
+            last_attempt_at = '2026-08-22T08:00:00.000Z'
+            next_attempt_at = '08/23/2026 08:00:00'
+            last_status = 'UNVERIFIED'
+            last_reason = 'Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.'
+        }
+    )
+}
+$dueRetryQueue = New-JobAgentCoverageCandidateReviewQueue -HintStore $queueHintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousDueRetryQueue -Now ([datetime]'2026-08-23T08:30:00Z') -MaxItems 10
+$dueRetryKnownDomainQueueItem = @($dueRetryQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:queue-known-domain' })[0]
+Assert-True -Condition ($dueRetryKnownDomainQueueItem.next_action -eq 'VERIFY_OFFICIAL_SITE' -and $dueRetryKnownDomainQueueItem.status -eq 'PENDING') -Message 'Faellige Retry-Kandidaten muessen wieder in die Verifikation laufen.'
+Assert-True -Condition ($dueRetryQueue.ready_total -eq 1) -Message 'Faellige Retry-Kandidaten muessen als bereit zaehlen.'
+
 $storeAwareQueue = New-JobAgentCoverageCandidateReviewQueue `
     -HintStore $queueHintStore `
     -SourceRegistry $sourceRegistry `

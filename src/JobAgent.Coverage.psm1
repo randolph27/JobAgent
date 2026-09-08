@@ -49,6 +49,30 @@ function ConvertTo-JobAgentCoverageIso {
     return $date.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
 }
 
+function Test-JobAgentCoverageCandidateQueueEntryReady {
+    param(
+        [Parameter(Mandatory)][object]$Entry,
+        [Parameter(Mandatory)][datetime]$Now
+    )
+
+    $status = [string](Get-JobAgentCoverageProperty -Object $Entry -Name 'status' -Default '')
+    if ($status -notin @('PENDING', 'RETRY_SCHEDULED')) {
+        return $false
+    }
+
+    $action = [string](Get-JobAgentCoverageProperty -Object $Entry -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
+    if ($action -ne 'VERIFY_OFFICIAL_SITE') {
+        return $false
+    }
+
+    $dueAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Entry -Name 'next_attempt_at' -Default $null)
+    if ($null -eq $dueAt) {
+        return $status -eq 'PENDING'
+    }
+
+    return $dueAt -le $Now.ToUniversalTime()
+}
+
 function Get-JobAgentCoveragePolicyDays {
     param(
         [Parameter()][AllowEmptyString()][string]$Kind,
@@ -1372,7 +1396,7 @@ function New-JobAgentCoverageCandidateReviewQueue {
         generated_at = $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         clusters_total = [int]$clusterReport.clusters_total
         candidates_total = [int]$clusterReport.candidates_total
-        ready_total = @($sortedEntries | Where-Object { [string]$_.status -eq 'PENDING' }).Count
+        ready_total = @($sortedEntries | Where-Object { Test-JobAgentCoverageCandidateQueueEntryReady -Entry $_ -Now $Now }).Count
         action_counts = ConvertTo-JobAgentCoverageCountsObject -Counts $actionCounts
         queue = $sortedEntries
     }
@@ -1695,7 +1719,7 @@ function New-JobAgentCoverageReport {
             candidate_conflict_clusters = $candidateClusters.conflict_clusters
             candidate_review_queue_total = $candidateClusters.review_queue_total
             candidate_verification_queue_total = @($candidateReviewQueue.queue).Count
-            candidate_verification_ready = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -in @('PENDING', 'RETRY_SCHEDULED') }).Count
+            candidate_verification_ready = @($candidateReviewQueue.queue | Where-Object { Test-JobAgentCoverageCandidateQueueEntryReady -Entry $_ -Now $Now }).Count
             candidate_verification_verified = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'VERIFIED' }).Count
             candidate_verification_manual_review = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count
             candidate_verification_retry_exhausted = @($candidateReviewQueue.queue | Where-Object { [string]$_.status -eq 'RETRY_EXHAUSTED' }).Count
