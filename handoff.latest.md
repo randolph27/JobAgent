@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-08T19:52:26.579+02:00
+Stand: 2026-09-08T20:15:08.343+02:00
 
 ## Zustand
 
@@ -8,15 +8,16 @@ Stand: 2026-09-08T19:52:26.579+02:00
 - Status: `in-progress`
 - Ziel: JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.
 - Branch: `master`
-- HEAD: `7c6e71692b11`
+- HEAD: `4a5131d57e6b`
 - Upstream: `origin/master`
-- Ahead/Behind: `1/0`
+- Ahead/Behind: `0/0`
 - Worktree: `dirty`
 - Route: `True`
 
 ## Versionierte Aenderungen
 
-- `todo.checkpoint.json`
+- `handoff.latest.json`
+- `handoff.latest.md`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
