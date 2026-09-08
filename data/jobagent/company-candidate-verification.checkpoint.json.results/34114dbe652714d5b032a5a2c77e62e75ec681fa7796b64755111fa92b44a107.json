@@ -19,11 +19,11 @@
       ],
       "evidence_type": "UNVERIFIED",
       "evidence_text_hash": "3ad3405c7469f7e50ee96d800a5d341ce78a29fea36f85f4e2c5038aa1c97a36",
-      "observed_at": "2026-09-07T11:19:32.541Z",
+      "observed_at": "2026-09-08T12:51:07.128Z",
       "http_status": null,
       "final_url": null,
       "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "expires_at": "2026-12-06T11:19:32.541Z"
+      "expires_at": "2026-12-07T12:51:07.128Z"
     }
   ],
   "fetches": [
@@ -35,7 +35,7 @@
       "content": "",
       "content_type": "",
       "retry_after_seconds": null,
-      "error": "Operation is not valid due to the current state of the object."
+      "error": "The SSL connection could not be established, see inner exception."
     },
     {
       "ok": false,
@@ -45,7 +45,7 @@
       "content": "",
       "content_type": "",
       "retry_after_seconds": null,
-      "error": "Operation is not valid due to the current state of the object."
+      "error": "The SSL connection could not be established, see inner exception."
     },
     {
       "ok": false,
@@ -55,7 +55,7 @@
       "content": "",
       "content_type": "",
       "retry_after_seconds": null,
-      "error": "Operation is not valid due to the current state of the object."
+      "error": "The SSL connection could not be established, see inner exception."
     }
   ],
   "company": {
@@ -77,9 +77,9 @@
   "next_action": "retry_or_manual_review_official_source",
   "batch_telemetry": {
     "candidate_id": "regional-hint:izb_startups_catalym_gmbh_martinsried_und_freising_weihenstephan",
-    "attempt_started_at": "2026-09-07T11:20:41.923Z",
-    "attempt_completed_at": "2026-09-07T11:20:43.326Z",
-    "duration_ms": 1403,
+    "attempt_started_at": "2026-09-08T12:52:18.622Z",
+    "attempt_completed_at": "2026-09-08T12:52:18.923Z",
+    "duration_ms": 295,
     "request_count": 3
   }
 }

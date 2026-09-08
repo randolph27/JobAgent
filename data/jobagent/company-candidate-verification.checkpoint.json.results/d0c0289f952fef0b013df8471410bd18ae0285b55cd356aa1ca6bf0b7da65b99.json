@@ -19,11 +19,11 @@
       ],
       "evidence_type": "UNVERIFIED",
       "evidence_text_hash": "3ad3405c7469f7e50ee96d800a5d341ce78a29fea36f85f4e2c5038aa1c97a36",
-      "observed_at": "2026-09-07T11:19:32.541Z",
+      "observed_at": "2026-09-08T12:51:07.128Z",
       "http_status": null,
       "final_url": null,
       "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "expires_at": "2026-12-06T11:19:32.541Z"
+      "expires_at": "2026-12-07T12:51:07.128Z"
     }
   ],
   "fetches": [
@@ -77,9 +77,9 @@
   "next_action": "retry_or_manual_review_official_source",
   "batch_telemetry": {
     "candidate_id": "regional-hint:izb_startups_xl_protein_gmbh_martinsried_und_freising_weihenstephan",
-    "attempt_started_at": "2026-09-07T11:20:41.535Z",
-    "attempt_completed_at": "2026-09-07T11:20:41.900Z",
-    "duration_ms": 359,
+    "attempt_started_at": "2026-09-08T12:52:18.635Z",
+    "attempt_completed_at": "2026-09-08T12:52:18.923Z",
+    "duration_ms": 281,
     "request_count": 3
   }
 }

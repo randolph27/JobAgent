@@ -67,6 +67,21 @@ $document.companies = @(
         -DiscoverySourceType 'DISCOVERY_HINT' `
         -DiscoveryOrigin 'directory.seed' `
         -DiscoveryEvidenceNote 'Sekundaerquelle, offizielle Verifikation fehlt.' `
+        -VerificationStatus 'UNVERIFIED' `
+        -CreatedAt ([datetime]'2026-08-01T00:00:00Z') `
+        -NextScanAt ([datetime]'2026-08-17T00:00:00Z'))
+    (New-JobAgentCompanySeed `
+        -CanonicalName 'Verified Hint AG' `
+        -OfficialWebsiteUrl 'https://verified-hint.example.invalid/' `
+        -CareerUrl 'https://verified-hint.example.invalid/careers' `
+        -Aliases @() `
+        -Locations @((New-JobAgentTargetLocation -Label 'Muenchen' -City 'Muenchen' -TargetArea 'MUNICH')) `
+        -Industry 'UNKNOWN' `
+        -ScanPriority 66 `
+        -DiscoverySourceUrl 'https://directory.example.invalid/verified-hint' `
+        -DiscoverySourceType 'DISCOVERY_HINT' `
+        -DiscoveryOrigin 'directory.seed' `
+        -DiscoveryEvidenceNote 'Sekundaerhinweis wurde durch offizielle Karriere-URL bestaetigt.' `
         -CreatedAt ([datetime]'2026-08-01T00:00:00Z') `
         -NextScanAt ([datetime]'2026-08-17T00:00:00Z'))
 )
@@ -88,8 +103,8 @@ $document.scan_runs = @(
 )
 $document.change_events = @()
 
-$coverage = New-JobAgentCoverageReport -Document $document -Now ([datetime]'2026-08-17T12:00:00Z') -StaleAfterDays 7 -MaxPriorityItems 5
-Assert-True -Condition ($coverage.metrics.companies_total -eq 6) -Message 'Coverage zaehlt Firmen falsch.'
+$coverage = New-JobAgentCoverageReport -Document $document -Now ([datetime]'2026-08-17T12:00:00Z') -StaleAfterDays 7 -MaxPriorityItems 7
+Assert-True -Condition ($coverage.metrics.companies_total -eq 7) -Message 'Coverage zaehlt Firmen falsch.'
 Assert-True -Condition ($coverage.metrics.sources_total -eq 2) -Message 'Coverage zaehlt Quellenbestand aus JobSources falsch.'
 Assert-True -Condition ($coverage.metrics.official_sources -eq 1) -Message 'Coverage zaehlt offizielle Quellen falsch.'
 Assert-True -Condition ($coverage.metrics.ats_sources -eq 1) -Message 'Coverage zaehlt ATS-Quellen falsch.'
@@ -97,9 +112,9 @@ Assert-True -Condition ($coverage.metrics.unverified_sources -eq 1) -Message 'Co
 Assert-True -Condition ($coverage.metrics.never_scanned_sources -eq 2) -Message 'Coverage zaehlt nie gescannte Quellen falsch.'
 Assert-True -Condition ($coverage.metrics.without_career_url -eq 1) -Message 'Coverage zaehlt Firmen ohne Karriere-URL falsch.'
 Assert-True -Condition ($coverage.metrics.failed_scanned -eq 1) -Message 'Coverage zaehlt fehlgeschlagene Portale falsch.'
-Assert-True -Condition ($coverage.metrics.never_scanned -eq 2) -Message 'Coverage zaehlt nie gescannte Firmen falsch.'
+Assert-True -Condition ($coverage.metrics.never_scanned -eq 3) -Message 'Coverage zaehlt nie gescannte Firmen falsch.'
 Assert-True -Condition ($coverage.metrics.with_matching_jobs -eq 1) -Message 'Coverage zaehlt passende Stellen falsch.'
-Assert-True -Condition ($coverage.metrics.discovered -eq 6 -and $coverage.metrics.live_attempted -eq 4) -Message 'Coverage trennt entdeckte Firmen und Liveversuche nicht.'
+Assert-True -Condition ($coverage.metrics.discovered -eq 7 -and $coverage.metrics.live_attempted -eq 4) -Message 'Coverage trennt entdeckte Firmen und Liveversuche nicht.'
 Assert-True -Condition ($coverage.metrics.live_complete -eq 3 -and $coverage.metrics.partial -eq 0 -and $coverage.metrics.no_matching_job -eq 2) -Message 'Coverage zaehlt vollstaendige und leere Scans nicht getrennt.'
 Assert-True -Condition ($coverage.metrics.official_source_verified -eq 1 -and $coverage.metrics.matching_jobs -eq 1) -Message 'Coverage trennt offizielle Quellen und passende Jobs nicht.'
 Assert-True -Condition ($coverage.approximation_notice -match 'keine vollstaendige Marktdeckung') -Message 'Coverage-Hinweis darf keine Vollstaendigkeit behaupten.'
@@ -109,8 +124,8 @@ Assert-True -Condition ($coverage.metrics.career_url_verified -eq 5) -Message 'C
 Assert-True -Condition ($coverage.metrics.company_refresh_due -ge 2) -Message 'Coverage zaehlt refresh-faellige Firmen nicht.'
 Assert-True -Condition ($coverage.dimensions.by_staleness_status.EXPIRED -ge 1) -Message 'Coverage weist abgelaufene Firmen-Freshness nicht aus.'
 Assert-True -Condition ($coverage.dimensions.by_refresh_reason.official_verification_required -ge 1) -Message 'Coverage zaehlt Refresh-Gruende nicht.'
-Assert-True -Condition ($coverage.dimensions.by_target_area.MUNICH -eq 6) -Message 'Coverage zaehlt Zielgebiete falsch.'
-Assert-True -Condition ($coverage.dimensions.by_industry.UNKNOWN -eq 6) -Message 'Coverage zaehlt Branchen falsch.'
+Assert-True -Condition ($coverage.dimensions.by_target_area.MUNICH -eq 7) -Message 'Coverage zaehlt Zielgebiete falsch.'
+Assert-True -Condition ($coverage.dimensions.by_industry.UNKNOWN -eq 7) -Message 'Coverage zaehlt Branchen falsch.'
 Assert-True -Condition ($coverage.dimensions.by_inventory_state.MANUAL_REVIEW_REQUIRED -eq 1) -Message 'Coverage zaehlt Reviewstatus falsch.'
 
 $backlogKinds = @($coverage.backlog | ForEach-Object { [string]$_.kind })
@@ -135,6 +150,8 @@ Assert-True -Condition (@($matchLinks | Where-Object { [string]$_.link_type -eq 
 $hintLinks = @((@($coverage.companies | Where-Object { $_.company_id -eq 'company:hint_ag' })[0]).links)
 Assert-True -Condition (@($hintLinks | Where-Object { [string]$_.link_type -eq 'review_hint' -and [bool]$_.review_only -and -not [bool]$_.is_clickable }).Count -eq 1) -Message 'Coverage-Linkvertrag markiert Discovery-Hints nicht als nicht-produktiven Review-Hinweis.'
 Assert-True -Condition (@($hintLinks | Where-Object { [string]$_.url -eq 'https://jobs.example.invalid/hint-ag' }).Count -eq 0) -Message 'Coverage-Linkvertrag darf unoffizielle Jobboersen-Hints nicht als Anbieterlink uebernehmen.'
+$verifiedHintLinks = @((@($coverage.companies | Where-Object { $_.company_id -eq 'company:verified_hint_ag' })[0]).links)
+Assert-True -Condition (@($verifiedHintLinks | Where-Object { [string]$_.link_type -eq 'career' -and [bool]$_.is_clickable -and -not [bool]$_.review_only }).Count -eq 1) -Message 'Coverage-Linkvertrag darf bestaetigte Discovery-Hints nicht als Review-Konflikt markieren.'
 $missingLinks = @(Get-JobAgentCoverageCompanyLinks -Company ([pscustomobject]@{ company_id = 'company:missing'; canonical_name = 'Missing AG'; verification_status = 'UNVERIFIED'; career_url = $null; official_website_url = $null; discovery_source = [pscustomobject]@{ type = 'MANUAL_REVIEW'; url = $null; discovery_origin = 'test' } }) -JobSources @())
 Assert-True -Condition (@($missingLinks | Where-Object { [string]$_.link_type -eq 'missing' -and [string]$_.reason -match 'Keine verifizierte' }).Count -eq 1) -Message 'Coverage-Linkvertrag muss fehlende offizielle Links fail-closed ausweisen.'
 

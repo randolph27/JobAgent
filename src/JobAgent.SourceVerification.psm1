@@ -236,6 +236,48 @@ function Get-JobAgentCompanyVerificationHostSemaphoreName {
     return 'Global\JobAgentCompanyVerificationHost_' + $digest
 }
 
+function Get-JobAgentHttpFailureDiagnostic {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][Exception]$Exception
+    )
+
+    $messages = New-Object System.Collections.Generic.List[string]
+    $typeNames = New-Object System.Collections.Generic.List[string]
+    $current = $Exception
+    while ($null -ne $current) {
+        $typeNames.Add($current.GetType().FullName)
+        if (-not [string]::IsNullOrWhiteSpace($current.Message)) {
+            $messages.Add($current.Message)
+        }
+        $current = $current.InnerException
+    }
+
+    $combined = (@($messages.ToArray()) -join ' | ')
+    $class = if ($combined -match 'SEC_E_NO_CREDENTIALS|keine Anmeldeinformationen|no credentials') {
+        'TLS_CREDENTIAL_UNAVAILABLE'
+    }
+    elseif ($combined -match 'certificate|Zertifikat|Authentication failed|SSL connection|TLS') {
+        'TLS_HANDSHAKE_FAILED'
+    }
+    elseif ($combined -match 'timed out|Timeout|Zeit') {
+        'TIMEOUT'
+    }
+    elseif ($combined -match 'Name or service not known|nodename nor servname|No such host|DNS') {
+        'DNS_RESOLUTION_FAILED'
+    }
+    else {
+        'HTTP_REQUEST_FAILED'
+    }
+
+    [pscustomobject]@{
+        error_class = $class
+        error = $Exception.Message
+        error_detail = $combined
+        exception_types = @($typeNames.ToArray())
+    }
+}
+
 function Invoke-JobAgentCompanyVerificationHostLimitedRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
@@ -301,11 +343,14 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
                 content = if ($statusCode -ge 200 -and $statusCode -lt 300) { [string]$response.Content } else { '' }
                 content_type = [string]$response.Headers['Content-Type']
                 retry_after_seconds = $null
+                error_class = if ($statusCode -ge 200 -and $statusCode -lt 300) { $null } else { 'HTTP_STATUS' }
                 error = if ($statusCode -ge 200 -and $statusCode -lt 300) { $null } else { 'HTTP ' + [string]$statusCode }
+                error_detail = if ($statusCode -ge 200 -and $statusCode -lt 300) { $null } else { 'HTTP ' + [string]$statusCode }
             }
         }
     }
     catch {
+        $diagnostic = Get-JobAgentHttpFailureDiagnostic -Exception $_.Exception
         $statusCode = $null
         $retryAfterSeconds = $null
         if ($_.Exception.PSObject.Properties.Name -contains 'Response' -and $_.Exception.Response -and $_.Exception.Response.StatusCode) {
@@ -324,7 +369,10 @@ function Invoke-JobAgentCompanyVerificationHttpRequest {
             content = ''
             content_type = ''
             retry_after_seconds = $retryAfterSeconds
-            error = $_.Exception.Message
+            error_class = [string]$diagnostic.error_class
+            error = [string]$diagnostic.error
+            error_detail = [string]$diagnostic.error_detail
+            exception_types = @($diagnostic.exception_types)
         }
     }
 }
@@ -1491,6 +1539,7 @@ Export-ModuleMember -Function @(
     'ConvertTo-JobAgentCanonicalUrl',
     'Complete-JobAgentVerificationEvidence',
     'Get-JobAgentAtsBindingForUrl',
+    'Get-JobAgentHttpFailureDiagnostic',
     'Get-JobAgentOfficialSourceEvaluation',
     'Get-JobAgentCompanyCareerCandidateLinks',
     'Get-JobAgentCandidateOfficialWebsiteDiscoveryDetailLinks',

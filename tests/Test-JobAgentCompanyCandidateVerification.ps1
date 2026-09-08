@@ -192,6 +192,12 @@ $notFoundFetcher = {
 $notFoundVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($company) -Policy $policy -Fetcher $notFoundFetcher -ObservedAt $observedAt
 Assert-True -Condition ($notFoundVerification.status -eq 'UNVERIFIED') -Message '404-Fall muss unverifiziert bleiben.'
 
+$tlsCredentialDiagnostic = Get-JobAgentHttpFailureDiagnostic -Exception ([Exception]::new(
+        'The SSL connection could not be established, see inner exception.',
+        [Exception]::new('Authentication failed, see inner exception. SEC_E_NO_CREDENTIALS')))
+Assert-True -Condition ($tlsCredentialDiagnostic.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE') -Message 'TLS-Diagnose klassifiziert fehlende Schannel-Credentials nicht.'
+Assert-True -Condition ($tlsCredentialDiagnostic.error_detail -match 'SEC_E_NO_CREDENTIALS') -Message 'TLS-Diagnose verliert den inneren Fehlerkontext.'
+
 $jsOnlyFetcher = {
     param([string]$Url, [object]$Policy)
 
@@ -349,6 +355,7 @@ try {
     Assert-True -Condition ($null -ne $scriptResult.batch_metrics.duration_ms_p50 -and $null -ne $scriptResult.batch_metrics.duration_ms_p95) -Message 'Batch-Metriken enthalten keine Nearest-Rank-Quantile.'
     Assert-True -Condition ($scriptResult.batch_metrics.net_official_career_growth -eq 1) -Message 'Batch-Metriken zaehlen Nettozuwachs offizieller Karrierequellen falsch.'
     Assert-True -Condition (@($scriptResult.results | Where-Object { $_.candidate_id -eq 'hint:example' -and $_.batch_telemetry.duration_ms -ge 0 }).Count -eq 1) -Message 'Resultate enthalten keine Kandidaten-Telemetrie.'
+    Assert-True -Condition (@($scriptResult.results | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and @($_.fetches | Where-Object { $_.error_class -eq 'HTTP_STATUS' }).Count -ge 1 }).Count -eq 1) -Message 'Candidate-Verifikationsscript verliert Fetch-Fehlerklassen im Batchmanifest.'
     $checkpoint = Get-Content -Raw -LiteralPath ([string]$scriptResult.checkpoint_path) | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($checkpoint.schema_version -eq 'jobagent/company-candidate-verification-checkpoint/v1' -and $checkpoint.state -eq 'completed') -Message 'Candidate-Verifikationsscript schreibt keinen abgeschlossenen Batch-Checkpoint.'
     Assert-True -Condition ($checkpoint.metrics.processed_total -eq $scriptResult.verification_queue.processed_total) -Message 'Batch-Checkpoint und Verifikationssummary widersprechen sich.'
@@ -549,6 +556,7 @@ try {
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-missing-source' -and $_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $_.status -eq 'MANUAL_REVIEW_REQUIRED' -and $_.last_status -eq 'MANUAL_REVIEW_REQUIRED' -and -not [string]::IsNullOrWhiteSpace([string]$_.last_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung persistiert fail-closed Manual-Review-Ergebnis nicht in der Queue.'
     Assert-True -Condition (@($updatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and $_.next_action -eq 'DISCOVER_OFFICIAL_WEBSITE' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.last_status -eq 'UNVERIFIED' -and -not [string]::IsNullOrWhiteSpace([string]$_.next_attempt_at) }).Count -eq 1) -Message 'Website-Ermittlung muss Abruffehler retryfaehig terminieren statt permanentem Manual Review.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$websiteScriptResult.log_path) -PathType Leaf) -Message 'Website-Ermittlungsscript schreibt kein Logartefakt.'
+    Assert-True -Condition (@($websiteScriptResult.results | Where-Object { $_.candidate_id -eq 'hint:website-fetch-retry' -and @($_.fetches | Where-Object { $_.error_class -eq 'HTTP_STATUS' }).Count -ge 1 }).Count -eq 1) -Message 'Website-Ermittlungsscript verliert Fetch-Fehlerklassen im Log.'
 
     $secondWebsiteScriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Zweitlauf ist fehlgeschlagen: " + ($secondWebsiteScriptOutput -join "`n"))
@@ -711,6 +719,7 @@ finally {
         'candidate_invalid_official_website_url_rejected',
         'candidate_timeout_unverified',
         'candidate_404_unverified',
+        'http_failure_diagnostic_tls_credentials',
         'candidate_js_only_domain_only',
         'aggregator_not_accepted_as_career_source',
         'official_directory_website_discovery',

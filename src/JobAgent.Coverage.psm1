@@ -248,7 +248,10 @@ function Get-JobAgentCoverageCompanyLinks {
     $companyStatus = [string](Get-JobAgentCoverageProperty -Object $Company -Name 'verification_status' -Default 'UNVERIFIED')
     $discoverySource = Get-JobAgentCoverageProperty -Object $Company -Name 'discovery_source'
     $discoveryType = [string](Get-JobAgentCoverageProperty -Object $discoverySource -Name 'type' -Default '')
-    $requiresReview = $companyStatus -eq 'UNVERIFIED' -or @('DISCOVERY_HINT', 'MANUAL_REVIEW') -contains $discoveryType
+    $verifiedCompanyStatuses = @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED')
+    $requiresReview = $companyStatus -eq 'UNVERIFIED' -or
+        $discoveryType -eq 'MANUAL_REVIEW' -or
+        ($discoveryType -eq 'DISCOVERY_HINT' -and $companyStatus -notin $verifiedCompanyStatuses)
     $careerUrl = Get-JobAgentCoverageProperty -Object $Company -Name 'career_url'
     $websiteUrl = Get-JobAgentCoverageProperty -Object $Company -Name 'official_website_url'
 
@@ -511,13 +514,14 @@ function Get-JobAgentCoverageCompanyMetric {
         -NextRefreshAt $nextScanAt `
         -ExpiresAfterDays (Get-JobAgentCoveragePolicyDays -Kind $policyKey -DefaultDays $StaleAfterDays) `
         -RefreshReason $(if ($verificationStatus -eq 'UNVERIFIED' -or $discoveryType -in @('DISCOVERY_HINT', 'MANUAL_REVIEW')) { 'official_verification_required' } elseif ($latestScanFailed) { 'last_scan_failed' } elseif ($null -eq $lastSuccessfulScanAt) { 'initial_scan_required' } else { 'scheduled_company_rotation' })
+    $verifiedCompanyStatuses = @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED')
     $inventoryState = if (-not $hasCareerUrl -and $verificationStatus -eq 'CAREER_URL_VERIFIED') {
         'DATA_INCONSISTENT'
     }
     elseif (-not $hasCareerUrl -and $verificationStatus -eq 'COMPANY_DOMAIN_VERIFIED') {
         'VERIFIED_WEBSITE_ONLY'
     }
-    elseif ($verificationStatus -eq 'UNVERIFIED' -or $discoveryType -in @('MANUAL_REVIEW', 'DISCOVERY_HINT')) {
+    elseif ($verificationStatus -eq 'UNVERIFIED' -or $discoveryType -eq 'MANUAL_REVIEW' -or ($discoveryType -eq 'DISCOVERY_HINT' -and $verificationStatus -notin $verifiedCompanyStatuses)) {
         'MANUAL_REVIEW_REQUIRED'
     }
     elseif (-not $wasScanned) {

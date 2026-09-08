@@ -19636,7 +19636,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -19694,7 +19694,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -19752,7 +19752,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -19810,7 +19810,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -19868,7 +19868,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -19926,7 +19926,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -19984,7 +19984,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",
@@ -20042,7 +20042,7 @@
       ],
       "updated_at": "2026-09-07T11:19:32.541Z",
       "created_at": "2026-09-07T11:19:32.541Z",
-      "next_scan_at": "2026-09-08T00:00:00.000Z",
+      "next_scan_at": "2026-09-08T00:00:00Z",
       "last_successful_scan_at": null,
       "discovery_source": {
         "type": "DISCOVERY_HINT",

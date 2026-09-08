@@ -91,7 +91,9 @@ function New-ToolFixtureFetcher {
                 status_code = if ($null -eq $entry.status_code) { $null } else { [int]$entry.status_code }
                 content = if ($null -eq $entry.content) { '' } else { [string]$entry.content }
                 content_type = 'text/html'
+                error_class = if ($entry.PSObject.Properties.Name -contains 'error_class') { $entry.error_class } else { $null }
                 error = if ([bool]$entry.ok) { $null } else { 'fixture failure' }
+                error_detail = if ($entry.PSObject.Properties.Name -contains 'error_detail') { $entry.error_detail } else { $null }
             }
         }
         [pscustomobject]@{
@@ -101,7 +103,9 @@ function New-ToolFixtureFetcher {
             status_code = 404
             content = ''
             content_type = 'text/html'
+            error_class = 'HTTP_STATUS'
             error = 'fixture missing'
+            error_detail = 'fixture missing'
         }
     }.GetNewClosure()
 }
@@ -257,7 +261,9 @@ function ConvertTo-ToolWebsiteDiscoveryLogResult {
                     content_type = if ($_.PSObject.Properties.Name -contains 'content_type') { [string]$_.content_type } else { '' }
                     content_hash = if ([string]::IsNullOrWhiteSpace($content)) { $null } else { ConvertTo-ToolTextHash -Text $content }
                     content_excerpt = if ([string]::IsNullOrWhiteSpace($content)) { '' } else { ConvertTo-ToolPlainTextExcerpt -Html $content -MaxLength 160 }
+                    error_class = if ($_.PSObject.Properties.Name -contains 'error_class') { $_.error_class } else { $null }
                     error = if ($_.PSObject.Properties.Name -contains 'error') { $_.error } else { $null }
+                    error_detail = if ($_.PSObject.Properties.Name -contains 'error_detail') { $_.error_detail } else { $null }
                 }
             })
         candidates = @($candidateItems)
