@@ -31,6 +31,8 @@ Der Daily-Run bevorzugt refresh-faellige Firmen vor regulaeren Scanfaellen. Inne
 
 `tools/Discover-JobAgentCompanyCandidateWebsites.ps1` schreibt dieselbe `fetch_error_summary` in `logs/jobagent/company-candidate-website-discovery-<run-id>.json`. Einzelne Fetches fuehren neben `error_class`, `error` und `error_detail` auch `exception_types`; Fixture-Fetcher geben diese Felder deterministisch weiter.
 
+`tools/Inspect-JobAgentFetchErrors.ps1` wertet die neuesten `JA-027-batch-*.json`- und `company-candidate-website-discovery-*.json`-Logs aus. Primaer nutzt es `fetch_error_summary`; fuer aeltere Logs baut es eine Fallback-Summary aus `results[].fetches` und klassifiziert Legacy-Fehlertexte deterministisch. Das JSON-Ergebnis `jobagent/fetch-error-inspection/v1` nennt dominante Fehlerklasse, Prozentanteil, Beispiel-URLs, Exception-Typen, Summary-Quelle je Lauf und eine naechste Massnahme. Dominante TLS-Fehler (`TLS_CREDENTIAL_UNAVAILABLE` oder `TLS_HANDSHAKE_FAILED`) erzeugen `status=environment_tls_check_required`.
+
 ## Reports
 
 `tools/Measure-JobAgentCompanyCoverage.ps1` erzeugt JSON, Markdown und HTML. Die Reports enthalten Freshness-Metriken nach Status, Refresh-Grund, Zielgebiet, Quelle, Verifikationsstatus, Kandidaten-Freshness und segmentiertem Firmeninventar. Grosse HTML-Listen bleiben in Scroll-Containern mit Sticky-Headern.
@@ -87,6 +89,7 @@ pwsh -NoProfile -File tests\Test-JobAgentRegionalDiscovery.ps1
 pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1
 pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1
 pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1
+pwsh -NoProfile -File tests\Test-JobAgentFetchErrorInspection.ps1
 ```
 
 Der Supertest ist Abschluss-Gate nach gruenen Funktionstests:
