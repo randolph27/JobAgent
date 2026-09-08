@@ -325,7 +325,7 @@ try {
         )
     } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $projectRoot 'fixture-map.json') -Encoding UTF8
 
-    $scriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 -ExpiresAfterDays 730 2>&1)
+    $scriptOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 -ExpiresAfterDays 730 -FetchClient curl -WslDistribution FixtureDistro 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript ist fehlgeschlagen: " + ($scriptOutput -join "`n"))
     $scriptResult = ($scriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     $scriptStore = Read-JobAgentStore -ProjectRoot $projectRoot
@@ -348,7 +348,8 @@ try {
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Candidate-Verifikationsscript erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'
     Assert-True -Condition ((Split-Path -Leaf ([string]$scriptResult.log_path)) -match '^JA-027-batch-\d{8}-\d{6}\.json$') -Message 'Candidate-Verifikationsscript schreibt kein JA-027-Batchmanifest.'
-    Assert-True -Condition ($scriptResult.batch_policy.worker_count -eq 4 -and $scriptResult.batch_policy.host_concurrency -eq 1) -Message 'Candidate-Verifikationsscript dokumentiert den Worker-/Hostlimit-Vertrag nicht.'
+    Assert-True -Condition ($scriptResult.batch_policy.worker_count -eq 4 -and $scriptResult.batch_policy.host_concurrency -eq 1 -and $scriptResult.batch_policy.fetch_client -eq 'curl' -and $scriptResult.batch_policy.wsl_distribution -eq 'FixtureDistro') -Message 'Candidate-Verifikationsscript dokumentiert den Worker-/Hostlimit-/Fetchclient-Vertrag nicht.'
+    Assert-True -Condition ($scriptResult.policy.fetch_client -eq 'curl' -and $scriptResult.policy.wsl_distribution -eq 'FixtureDistro') -Message 'Candidate-Verifikationsscript dokumentiert die produktive Fetch-Policy nicht.'
     Assert-True -Condition ($scriptResult.policy.host_concurrency -eq 1) -Message 'Candidate-Verifikationsscript uebergibt HostConcurrency nicht an die HTTP-Policy.'
     Assert-True -Condition ($scriptResult.batch_metrics.schema_version -eq 'jobagent/company-candidate-verification-batch-metrics/v1') -Message 'Candidate-Verifikationsscript schreibt keine Batch-Metriken.'
     Assert-True -Condition ($scriptResult.batch_metrics.processed_total -eq $scriptResult.verification_queue.processed_total) -Message 'Batch-Metriken und Queue widersprechen sich bei processed_total.'
@@ -590,10 +591,11 @@ try {
     $dueRetryEntry.last_status = 'UNVERIFIED'
     $dueRetryEntry.last_reason = 'Quellseite fuer Website-Ermittlung konnte nicht abgerufen werden.'
     $dueRetryQueue | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath ([string]$legacyRetryResult.queue_path) -Encoding UTF8
-    $dueRetryOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' 2>&1)
+    $dueRetryOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1') -ProjectRoot $websiteRoot -MaxCandidates 1 -FixtureMapPath 'fixture-map.json' -FetchClient wsl-curl -WslDistribution FixtureDistro 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Website-Ermittlungsscript-Due-Retry ist fehlgeschlagen: " + ($dueRetryOutput -join "`n"))
     $dueRetryResult = ($dueRetryOutput -join "`n") | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($dueRetryResult.processed_total -eq 1) -Message 'Website-Ermittlung verarbeitet faellige Retry-Scheduled-Kandidaten mit Legacy-Datum nicht.'
+    Assert-True -Condition ($dueRetryResult.policy.fetch_client -eq 'wsl-curl' -and $dueRetryResult.policy.wsl_distribution -eq 'FixtureDistro') -Message 'Website-Ermittlung dokumentiert die produktive Fetch-Policy nicht.'
 }
 finally {
     if (Test-Path -LiteralPath $websiteRoot) {

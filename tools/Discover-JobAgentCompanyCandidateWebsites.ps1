@@ -9,6 +9,8 @@ param(
     [Parameter()][string]$LogRoot = 'logs/jobagent',
     [Parameter()][ValidateRange(1, 1000)][int]$MaxCandidates = 25,
     [Parameter()][ValidateRange(1, 60)][int]$TimeoutSeconds = 12,
+    [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
+    [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
     [Parameter()][string]$FixtureMapPath
 )
 
@@ -361,7 +363,7 @@ if (-not (Test-Path -LiteralPath $hintStoreResolved -PathType Leaf)) {
 $hintStore = Get-Content -Raw -LiteralPath $hintStoreResolved | ConvertFrom-Json -Depth 100
 $sourceRegistry = if (Test-Path -LiteralPath $sourceRegistryResolved -PathType Leaf) { Get-Content -Raw -LiteralPath $sourceRegistryResolved | ConvertFrom-Json -Depth 100 } else { $null }
 $previousQueue = if (Test-Path -LiteralPath $queueResolved -PathType Leaf) { Get-Content -Raw -LiteralPath $queueResolved | ConvertFrom-Json -Depth 100 } else { $null }
-$policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds
+$policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds -FetchClient $FetchClient -WslDistribution $WslDistribution
 $fetcher = if ([string]::IsNullOrWhiteSpace($FixtureMapPath)) { $null } else { New-ToolFixtureFetcher -Path (Resolve-ToolPath -Root $projectRootResolved -Path $FixtureMapPath) }
 
 $queue = New-JobAgentCoverageCandidateReviewQueue -HintStore $hintStore -SourceRegistry $sourceRegistry -PreviousQueue $previousQueue -Now $startedAt -MaxItems 1000
@@ -410,6 +412,7 @@ $summary = [pscustomobject]@{
     queue_path = $queueResolved
     log_path = $logPath
     processed_total = $resultItems.Count
+    policy = $policy
     verified_total = @($resultItems | Where-Object { [string]$_.status -eq 'OFFICIAL_WEBSITE_VERIFIED' }).Count
     manual_review_total = @($resultItems | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count
     unverified_total = @($resultItems | Where-Object { [string]$_.status -eq 'UNVERIFIED' }).Count

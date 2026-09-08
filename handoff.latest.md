@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-08T20:34:05.013+02:00
+Stand: 2026-09-08T20:58:57.239+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-08T20:34:05.013+02:00
 - Status: `in-progress`
 - Ziel: JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.
 - Branch: `master`
-- HEAD: `dde6539dc543`
+- HEAD: `33117d34ba32`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -17,16 +17,18 @@ Stand: 2026-09-08T20:34:05.013+02:00
 ## Versionierte Aenderungen
 
 - `Roadmap.md`
+- `docs/company-discovery-operations.md`
 - `docs/handoffs/2026-09-08-ja027-tls-blocker-next-chat.md`
-- `src/JobAgent.SourceVerification.psm1`
-- `tests/Test-JobAgentFetchEnvironment.ps1`
-- `tests/Test-JobAgentSourceVerification.ps1`
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `tests/Test-JobAgentCompanyCandidateVerification.ps1`
 - `todo.checkpoint.json`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 - `todo.state.json`
-- `tools/Test-JobAgentFetchEnvironment.ps1`
+- `tools/Discover-JobAgentCompanyCandidateWebsites.ps1`
+- `tools/Verify-JobAgentCompanyCandidates.ps1`
 
 ## Verifikation
 

@@ -14,6 +14,8 @@ param(
     [Parameter()][ValidateRange(1, 20)][int]$MaxRetries = 3,
     [Parameter()][ValidateRange(1, 16)][int]$WorkerCount = 4,
     [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
+    [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
+    [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
     [Parameter()][string]$CheckpointPath = 'data/jobagent/company-candidate-verification.checkpoint.json',
     [Parameter()][string]$FixtureMapPath,
     [Parameter()][switch]$StopBeforeCommitForResumeTest
@@ -957,7 +959,7 @@ if (-not (Test-Path -LiteralPath $hintStoreResolved -PathType Leaf)) {
 
 $hintStore = Get-Content -Raw -LiteralPath $hintStoreResolved | ConvertFrom-Json -Depth 100
 $sourceRegistry = if (Test-Path -LiteralPath $sourceRegistryResolved -PathType Leaf) { Get-Content -Raw -LiteralPath $sourceRegistryResolved | ConvertFrom-Json -Depth 100 } else { $null }
-$policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds -HostConcurrency $HostConcurrency
+$policy = New-JobAgentCompanyCareerVerificationPolicy -TimeoutSeconds $TimeoutSeconds -HostConcurrency $HostConcurrency -FetchClient $FetchClient -WslDistribution $WslDistribution
 $fetcher = if ([string]::IsNullOrWhiteSpace($FixtureMapPath)) { $null } else { New-ToolFixtureFetcher -Path (Resolve-ToolPath -Root $projectRootResolved -Path $FixtureMapPath) }
 $checkpointResolved = Resolve-ToolPath -Root $projectRootResolved -Path $CheckpointPath
 $resultCheckpointRoot = Get-ToolResultCheckpointRoot -CheckpointPath $checkpointResolved
@@ -1171,7 +1173,7 @@ $summary = [pscustomobject]@{
     queue_path = $queueResolved
     checkpoint_path = $checkpointResolved
     run_id = $runId
-    batch_policy = [pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; writer = 'serial_atomic_store_writer' }
+    batch_policy = [pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; fetch_client = $FetchClient; wsl_distribution = $WslDistribution; writer = 'serial_atomic_store_writer' }
     batch_metrics = $batchMetrics
     resume_report = $resumeReport
     resume_log_path = $resumeLogPath

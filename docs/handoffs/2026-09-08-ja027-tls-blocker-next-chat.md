@@ -1,6 +1,6 @@
 # JA-027 Handoff: Fetch-Blocker entfernt und Wiederaufnahme
 
-Stand: 2026-09-08T20:14:12.857+02:00
+Stand: 2026-09-08T21:02:18.000+02:00
 
 ## Aktiver Stand
 
@@ -14,6 +14,8 @@ Stand: 2026-09-08T20:14:12.857+02:00
 ## Kurzlage fuer den naechsten Chat
 
 JA-027.1/.2 und grosse Teile von JA-027.3 sind implementiert. Der vorherige lokale Windows-Schannel-Blocker wurde entfernt: Die produktive HTTP-Policy nutzt im Auto-Modus jetzt einen kontrollierten `curl.exe`-Fallback und optional `wsl-curl`, jeweils mit Redirect-Behandlung und Hostlimit je tatsaechlich abgerufenem Host.
+
+Die Retry-Einstiege sind jetzt explizit steuerbar: `tools/Discover-JobAgentCompanyCandidateWebsites.ps1` und `tools/Verify-JobAgentCompanyCandidates.ps1` akzeptieren `-FetchClient auto|dotnet|curl|wsl-curl` sowie `-WslDistribution` und schreiben die verwendete Fetch-Policy in ihre JSON-Manifeste. Damit kann der naechste produktive Retry reproduzierbar im Auto-Modus oder gezielt mit Curl/WSL-Curl laufen.
 
 Der naechste Agent soll trotzdem nicht vor dem Retryfenster sinnlos Kandidaten verbrauchen. Naechster fachlicher Schritt ist der Retry-Lauf ab `2026-09-10T12:51:07Z` / `2026-09-10T14:51:07+02:00`.
 
@@ -29,6 +31,7 @@ Der naechste Agent soll trotzdem nicht vor dem Retryfenster sinnlos Kandidaten v
 - Coverage-Gate-Konflikt fuer bestaetigte Discovery-Hints ist geschlossen: verifizierte `CAREER_URL_VERIFIED`/`COMPANY_DOMAIN_VERIFIED`/`OFFICIAL_ATS_VERIFIED`-Firmen werden nicht mehr als manuelle Review-Konflikte behandelt.
 - Strukturierte Fetch-Diagnostik ist umgesetzt: Fetches enthalten `error_class`, `error_detail`, `exception_types`; Batch- und Website-Discovery-Manifeste enthalten `fetch_error_summary`.
 - `tools/Inspect-JobAgentFetchErrors.ps1` und `tools/Test-JobAgentFetchEnvironment.ps1` sind vorhanden und funktional getestet.
+- Produktive Retry-CLI-Parameter sind umgesetzt: Website-Discovery und Candidate-Verification uebernehmen `FetchClient`/`WslDistribution` in die HTTP-Policy und dokumentieren sie im Laufmanifest.
 
 ## Letzte belastbare Live-/Evidence-Artefakte
 
@@ -75,6 +78,9 @@ Ausgefuehrt:
 
 ```powershell
 pwsh -NoProfile -File .\tools\Test-JobAgentFetchEnvironment.ps1 -ProjectRoot . -MaxUrls 5 -TimeoutSeconds 12
+pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentFetchEnvironment.ps1
 ```
 
 Ergebnis:
@@ -82,6 +88,7 @@ Ergebnis:
 - Exitcode: `0`
 - Fachstatus: `dotnet_fetch_fails_but_curl_succeeds`
 - Output: `logs/jobagent/JA-027-fetch-environment-20260908-183047.json`
+- Funktionstests: alle drei oben genannten Testskripte Exitcode `0`; `Test-JobAgentCompanyCandidateVerification.ps1` prueft explizite `curl`- und `wsl-curl`-CLI-Policyuebergabe.
 
 STP wurde anschliessend ausgefuehrt:
 
@@ -97,7 +104,7 @@ Supertest wurde in diesem Chat nicht angefragt; gemaess Nutzeranweisung gilt ein
    - Command:
 
    ```powershell
-   pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -ProjectRoot . -MaxCandidates 100
+   pwsh -NoProfile -File .\tools\Discover-JobAgentCompanyCandidateWebsites.ps1 -ProjectRoot . -MaxCandidates 100 -FetchClient auto
    ```
 
    - Abhaengigkeit: Retryfaelligkeit ab `2026-09-10T12:51:07Z`; Auto-Fallback auf `curl.exe` ist implementiert.
@@ -107,7 +114,7 @@ Supertest wurde in diesem Chat nicht angefragt; gemaess Nutzeranweisung gilt ein
    - Command:
 
    ```powershell
-   pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot . -MaxCandidates 100 -WorkerCount 4 -HostConcurrency 1
+   pwsh -NoProfile -File .\tools\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot . -MaxCandidates 100 -WorkerCount 4 -HostConcurrency 1 -FetchClient auto
    ```
 
    - Abhaengigkeit: Schritt 2 und faellige Queue-Eintraege.
