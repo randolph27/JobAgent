@@ -1,1 +1,240 @@
-{"workspace_root":".","active_id":"TD-0041","status":"in-progress","capsule":{"project":"JobAgent","route_violations":[],"changed":["Roadmap.md","docs/company-discovery-operations.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Inspect-JobAgentFetchErrors.ps1","tests/Test-JobAgentFetchErrorInspection.ps1","logs/jobagent/JA-027-fetch-error-inspection-20260908-153700.json"],"verified":[{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentFetchErrorInspection.ps1","exit":0},{"cmd":"pwsh -NoProfile -File .\\tools\\Inspect-JobAgentFetchErrors.ps1 -ProjectRoot .","exit":0},{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1","exit":0},{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1","exit":0},{"cmd":"git -c core.pager=cat -c color.ui=false --no-pager diff --check","exit":0},{"cmd":"cmd /c .\\ci.cmd stp","exit":0}],"ts":"2026-09-08T15:43:00+02:00","agent_id":"UTTER-20260817-39f7","active_id":"TD-0041","env_inventory_missing":false,"route_ok":true,"next":"TLS-Schicht ausserhalb der aktuellen Sandbox/Schannel-Umgebung gegen Beispiel-URLs aus logs/jobagent/JA-027-fetch-error-inspection-20260908-153700.json pruefen; danach ab 2026-09-10T12:51:07Z Retrylauf wiederholen.","workspace_root":".","refs":["todo.current.md","todo.state.json","todo.events.jsonl","handoff.latest.json"],"manual_missing":false,"git":{"behind":0,"head":"1523f26d7dd6","worktree":"dirty","detached":false,"ahead":0,"tracked_changes":["Roadmap.md","docs/company-discovery-operations.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"has_repo":true,"branch":"master","remote":"origin","upstream":"origin/master"},"status":"in-progress","env_inventory_path":null,"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","env_inventory_used":false,"goal":"JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt."},"route":{"mode":"standard","ts":"2026-09-06T08:04:47.602+02:00","violations":[],"agent_id":"UTTER-20260817-39f7","policy":{"forbid_path":[],"no_touch":[],"forbid_regex":[]},"git":{"has_repo":true,"diff_log":"logs\\terminal\\route-check-20260906-080445.log"},"changed_count":20,"changed_files":[".ci/bin/modules/browser-logic.ps1",".ci/bin/modules/ci-commands-main.ps1",".ci/bin/modules/verify-logic.ps1",".ci/ci.config.json",".ci/pins/immutable.hashes.json","Roadmap.md","Roadmap_archive.md","Roadmap_index.md","handoff.latest.json","handoff.latest.md","html/jobagent/ja-022-viewport-audit.html","output/playwright/ja-022-viewport-1366.png","output/playwright/ja-022-viewport-1920.png","tests/Test-JobAgentHtmlViewportAudit.ps1","todo.checkpoint.json","todo.current.md","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"route_ok":true},"project":"JobAgent","toolchain":{"ts":"2026-08-17T13:53:15.642+02:00","gradle":{"cmd":"gradle","mode":"path","root":"D:\\_Scripte\\JobAgent"}},"changed":["Roadmap.md","docs/company-discovery-operations.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json","tools/Inspect-JobAgentFetchErrors.ps1","tests/Test-JobAgentFetchErrorInspection.ps1","logs/jobagent/JA-027-fetch-error-inspection-20260908-153700.json"],"route_ok":true,"verified":[{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentFetchErrorInspection.ps1","exit":0},{"cmd":"pwsh -NoProfile -File .\\tools\\Inspect-JobAgentFetchErrors.ps1 -ProjectRoot .","exit":0},{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1","exit":0},{"cmd":"pwsh -NoProfile -File .\\tests\\Test-JobAgentSourceVerification.ps1","exit":0},{"cmd":"git -c core.pager=cat -c color.ui=false --no-pager diff --check","exit":0},{"cmd":"cmd /c .\\ci.cmd stp","exit":0}],"verify_digest":{"ts":"2026-09-06T07:52:07.727+02:00","status":"not-supported","reason":"PowerShell- und statische HTML-Dateien werden im Projekt derzeit nicht mit einem konfigurierten SonarScanner analysiert; SonarQube-Serverstatus ist kein Analysebeleg.","exit":null,"cmd":".\\ci.cmd sonar","secret_sanitized":true,"analysis_started":false},"route_violations":[],"refs":["file:todo.current.md","file:todo.state.json","file:todo.events.jsonl","file:handoff.latest.json","file:logs/verify/verify.digest.json"],"chat_flow_policy":"Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.","next":"TLS-Schicht ausserhalb der aktuellen Sandbox/Schannel-Umgebung gegen Beispiel-URLs aus logs/jobagent/JA-027-fetch-error-inspection-20260908-153700.json pruefen; danach ab 2026-09-10T12:51:07Z Retrylauf wiederholen.","summary":"JA-027 Fetch-Error-Inspection implementiert; aktuelle Logs triagieren dominant TLS_HANDSHAKE_FAILED und verlangen Environment-TLS-Check vor naechstem Retry.","git":{"behind":0,"head":"1523f26d7dd6","worktree":"dirty","detached":false,"ahead":0,"tracked_changes":["Roadmap.md","docs/company-discovery-operations.md","handoff.latest.json","handoff.latest.md","todo.checkpoint.json","todo.events.jsonl","todo.history.digest.json","todo.master.index.json","todo.state.json"],"has_repo":true,"branch":"master","remote":"origin","upstream":"origin/master"},"goal":"JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.","next_steps":["TLS-Schicht ausserhalb der aktuellen Sandbox/Schannel-Umgebung gegen Beispiel-URLs aus logs/jobagent/JA-027-fetch-error-inspection-20260908-153700.json pruefen.","Ab 2026-09-10T12:51:07Z Discover/Verify/Coverage/Inspect erneut ausfuehren.","JA-027 erst nach 100er-Benchmark und 1.000 offiziellen Karriere-/ATS-Quellen abschliessen."],"agent_id":"UTTER-20260817-39f7","ts":"2026-09-08T15:43:00+02:00"}
+{
+  "next_steps": [
+    "Windows-Schannel/TLS-Credentials ausserhalb des Projektcodes reparieren oder kontrollierten alternativen Fetchpfad belegen; danach tools/Test-JobAgentFetchEnvironment.ps1 erneut ausfuehren und JA-027.3 fruehestens ab 2026-09-10T12:51:07Z fortsetzen."
+  ],
+  "agent_id": "UTTER-20260817-39f7",
+  "git": {
+    "behind": 0,
+    "has_repo": true,
+    "remote": "origin",
+    "worktree": "dirty",
+    "upstream": "origin/master",
+    "branch": "master",
+    "tracked_changes": [
+      "Roadmap.md",
+      "docs/company-discovery-operations.md",
+      "handoff.latest.md",
+      "todo.checkpoint.json",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json"
+    ],
+    "detached": false,
+    "ahead": 0,
+    "head": "see-current-git-head"
+  },
+  "project": "JobAgent",
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentFetchEnvironment.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tools\\Test-JobAgentFetchEnvironment.ps1 -ProjectRoot . -InspectionPath logs\\jobagent\\JA-027-fetch-error-inspection-20260908-153700.json -MaxUrls 5",
+      "exit": 0,
+      "status": "all_probe_clients_failed"
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentFetchErrorInspection.ps1",
+      "exit": 0
+    },
+    {
+      "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
+      "exit": 0
+    },
+    {
+      "cmd": "curl.exe -s http://localhost:9000/api/system/status",
+      "exit": 0,
+      "status": "UP"
+    },
+    {
+      "cmd": "cmd /c .\\ci.cmd devserver-status",
+      "exit": 0,
+      "status": "listening True port 8500"
+    },
+    {
+      "cmd": "cmd /c .\\ci.cmd stp",
+      "exit": 0
+    }
+  ],
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+  "toolchain": {
+    "ts": "2026-08-17T13:53:15.642+02:00",
+    "gradle": {
+      "cmd": "gradle",
+      "mode": "path",
+      "root": "D:\\_Scripte\\JobAgent"
+    }
+  },
+  "route": {
+    "mode": "standard",
+    "ts": "2026-09-06T08:04:47.602+02:00",
+    "violations": [],
+    "agent_id": "UTTER-20260817-39f7",
+    "policy": {
+      "forbid_path": [],
+      "no_touch": [],
+      "forbid_regex": []
+    },
+    "git": {
+      "has_repo": true,
+      "diff_log": "logs\\terminal\\route-check-20260906-080445.log"
+    },
+    "changed_count": 20,
+    "changed_files": [
+      ".ci/bin/modules/browser-logic.ps1",
+      ".ci/bin/modules/ci-commands-main.ps1",
+      ".ci/bin/modules/verify-logic.ps1",
+      ".ci/ci.config.json",
+      ".ci/pins/immutable.hashes.json",
+      "Roadmap.md",
+      "Roadmap_archive.md",
+      "Roadmap_index.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "html/jobagent/ja-022-viewport-audit.html",
+      "output/playwright/ja-022-viewport-1366.png",
+      "output/playwright/ja-022-viewport-1920.png",
+      "tests/Test-JobAgentHtmlViewportAudit.ps1",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json"
+    ],
+    "route_ok": true
+  },
+  "changed": [
+    "Roadmap.md",
+    "docs/company-discovery-operations.md",
+    "handoff.latest.json",
+    "handoff.latest.md",
+    "todo.checkpoint.json",
+    "todo.events.jsonl",
+    "todo.history.digest.json",
+    "todo.master.index.json",
+    "todo.state.json",
+    "tools/Test-JobAgentFetchEnvironment.ps1",
+    "tests/Test-JobAgentFetchEnvironment.ps1",
+    "logs/jobagent/JA-027-fetch-environment-20260908-174432.json"
+  ],
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:logs/jobagent/JA-027-fetch-environment-20260908-174432.json"
+  ],
+  "status": "in-progress",
+  "ts": "2026-09-08T19:49:06.315+02:00",
+  "route_ok": true,
+  "next": "Windows-Schannel/TLS-Credentials ausserhalb des Projektcodes reparieren oder kontrollierten alternativen Fetchpfad belegen; danach tools/Test-JobAgentFetchEnvironment.ps1 erneut ausfuehren und JA-027.3 fruehestens ab 2026-09-10T12:51:07Z fortsetzen.",
+  "workspace_root": ".",
+  "route_violations": [],
+  "verify_digest": {
+    "ts": "2026-09-06T07:52:07.727+02:00",
+    "status": "not-supported",
+    "reason": "PowerShell- und statische HTML-Dateien werden im Projekt derzeit nicht mit einem konfigurierten SonarScanner analysiert; SonarQube-Serverstatus ist kein Analysebeleg.",
+    "exit": null,
+    "cmd": ".\\ci.cmd sonar",
+    "secret_sanitized": true,
+    "analysis_started": false
+  },
+  "goal": "JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.",
+  "active_id": "TD-0041",
+  "summary": "JA-027 Fetch-Environment-Probe implementiert; aktuelle TLS-Beispiel-URLs scheitern in .NET und curl.exe mit SEC_E_NO_CREDENTIALS, daher ist der naechste Retry bis zur lokalen TLS/Schannel-Klaerung blockiert.",
+  "capsule": {
+    "next": "Windows-Schannel/TLS-Credentials ausserhalb des Projektcodes reparieren oder kontrollierten alternativen Fetchpfad belegen; danach tools/Test-JobAgentFetchEnvironment.ps1 erneut ausfuehren und JA-027.3 fruehestens ab 2026-09-10T12:51:07Z fortsetzen.",
+    "goal": "JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.",
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json",
+      "logs/jobagent/JA-027-fetch-environment-20260908-174432.json"
+    ],
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentFetchEnvironment.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tools\\Test-JobAgentFetchEnvironment.ps1 -ProjectRoot . -InspectionPath logs\\jobagent\\JA-027-fetch-error-inspection-20260908-153700.json -MaxUrls 5",
+        "exit": 0,
+        "status": "all_probe_clients_failed"
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentFetchErrorInspection.ps1",
+        "exit": 0
+      },
+      {
+        "cmd": "git -c core.pager=cat -c color.ui=false --no-pager diff --check",
+        "exit": 0
+      },
+      {
+        "cmd": "curl.exe -s http://localhost:9000/api/system/status",
+        "exit": 0,
+        "status": "UP"
+      },
+      {
+        "cmd": "cmd /c .\\ci.cmd devserver-status",
+        "exit": 0,
+        "status": "listening True port 8500"
+      },
+      {
+        "cmd": "cmd /c .\\ci.cmd stp",
+        "exit": 0
+      }
+    ],
+    "status": "in-progress",
+    "active_id": "TD-0041",
+    "agent_id": "UTTER-20260817-39f7",
+    "project": "JobAgent",
+    "manual_missing": false,
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+    "git": {
+      "behind": 0,
+      "has_repo": true,
+      "remote": "origin",
+      "worktree": "dirty",
+      "upstream": "origin/master",
+      "branch": "master",
+      "tracked_changes": [
+        "Roadmap.md",
+        "docs/company-discovery-operations.md",
+        "handoff.latest.md",
+        "todo.checkpoint.json",
+        "todo.events.jsonl",
+        "todo.history.digest.json",
+        "todo.master.index.json",
+        "todo.state.json"
+      ],
+      "detached": false,
+      "ahead": 0,
+      "head": "see-current-git-head"
+    },
+    "changed": [
+      "Roadmap.md",
+      "docs/company-discovery-operations.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.checkpoint.json",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Test-JobAgentFetchEnvironment.ps1",
+      "tests/Test-JobAgentFetchEnvironment.ps1",
+      "logs/jobagent/JA-027-fetch-environment-20260908-174432.json"
+    ],
+    "workspace_root": ".",
+    "ts": "2026-09-08T19:49:06.315+02:00",
+    "route_violations": [],
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "route_ok": true,
+    "env_inventory_path": null
+  }
+}

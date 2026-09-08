@@ -33,6 +33,8 @@ Der Daily-Run bevorzugt refresh-faellige Firmen vor regulaeren Scanfaellen. Inne
 
 `tools/Inspect-JobAgentFetchErrors.ps1` wertet die neuesten `JA-027-batch-*.json`- und `company-candidate-website-discovery-*.json`-Logs aus. Primaer nutzt es `fetch_error_summary`; fuer aeltere Logs baut es eine Fallback-Summary aus `results[].fetches` und klassifiziert Legacy-Fehlertexte deterministisch. Das JSON-Ergebnis `jobagent/fetch-error-inspection/v1` nennt dominante Fehlerklasse, Prozentanteil, Beispiel-URLs, Exception-Typen, Summary-Quelle je Lauf und eine naechste Massnahme. Dominante TLS-Fehler (`TLS_CREDENTIAL_UNAVAILABLE` oder `TLS_HANDSHAKE_FAILED`) erzeugen `status=environment_tls_check_required`.
 
+`tools/Test-JobAgentFetchEnvironment.ps1` prueft die TLS-Beispiel-URLs aus einem Inspection-Log mit dem produktionsnahen PowerShell/.NET-Fetchpfad und `curl.exe` getrennt. Das Evidence-JSON `jobagent/fetch-environment-probe/v1` schreibt je URL beide Client-Ergebnisse, Exception-Ketten und einen Status: `dotnet_fetch_available`, `dotnet_fetch_fails_but_curl_succeeds` oder `all_probe_clients_failed`. Der aktuelle Probe-Lauf `logs/jobagent/JA-027-fetch-environment-20260908-174432.json` meldet fuer fuenf Beispiel-URLs `all_probe_clients_failed`; sowohl .NET als auch `curl.exe` scheitern mit `SEC_E_NO_CREDENTIALS`, daher duerfen Retrykandidaten noch nicht als fachliche Quellenfehler verbraucht werden.
+
 ## Reports
 
 `tools/Measure-JobAgentCompanyCoverage.ps1` erzeugt JSON, Markdown und HTML. Die Reports enthalten Freshness-Metriken nach Status, Refresh-Grund, Zielgebiet, Quelle, Verifikationsstatus, Kandidaten-Freshness und segmentiertem Firmeninventar. Grosse HTML-Listen bleiben in Scroll-Containern mit Sticky-Headern.
@@ -90,6 +92,7 @@ pwsh -NoProfile -File tests\Test-JobAgentCoverage.ps1
 pwsh -NoProfile -File tests\Test-JobAgentDailyRun.ps1
 pwsh -NoProfile -File tests\Test-JobAgentOperations.ps1
 pwsh -NoProfile -File tests\Test-JobAgentFetchErrorInspection.ps1
+pwsh -NoProfile -File tests\Test-JobAgentFetchEnvironment.ps1
 ```
 
 Der Supertest ist Abschluss-Gate nach gruenen Funktionstests:
