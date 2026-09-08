@@ -525,7 +525,7 @@ function New-ToolCandidateVerificationQueue {
         generated_at = ConvertTo-ToolIso -Value $Now
         clusters_total = [int]$clusterReport.clusters_total
         candidates_total = @($Candidates).Count
-        ready_total = @($entries | Where-Object { (ConvertTo-ToolDateOrNull -Value $_.next_attempt_at) -le $Now.ToUniversalTime() -and [string]$_.status -notin @('VERIFIED', 'MANUAL_REVIEW_REQUIRED', 'RETRY_EXHAUSTED') }).Count
+        ready_total = @($entries | Where-Object { Test-ToolCandidateVerificationQueueEntryReady -Entry $_ -Now $Now }).Count
         queue = @($entries | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id)
     }
 }
@@ -587,6 +587,30 @@ function ConvertTo-ToolActionCounts {
         $counts[$action]++
     }
     return [pscustomobject]$counts
+}
+
+function Test-ToolCandidateVerificationQueueEntryReady {
+    param(
+        [Parameter(Mandatory)][object]$Entry,
+        [Parameter(Mandatory)][datetime]$Now
+    )
+
+    $status = [string](Get-ToolEntryProperty -Entry $Entry -Name 'status' -Default '')
+    if ($status -notin @('PENDING', 'RETRY_SCHEDULED')) {
+        return $false
+    }
+
+    $action = [string](Get-ToolEntryProperty -Entry $Entry -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
+    if ($action -ne 'VERIFY_OFFICIAL_SITE') {
+        return $false
+    }
+
+    $dueAt = ConvertTo-ToolDateOrNull -Value (Get-ToolEntryProperty -Entry $Entry -Name 'next_attempt_at' -Default $null)
+    if ($null -eq $dueAt) {
+        return $status -eq 'PENDING'
+    }
+
+    return $dueAt -le $Now.ToUniversalTime()
 }
 
 function Get-ToolCandidateHostKey {
@@ -809,7 +833,7 @@ function Update-ToolCandidateVerificationQueue {
 
     $Queue.queue = @($updated | Sort-Object @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id)
     $Queue.generated_at = ConvertTo-ToolIso -Value $Now
-    $Queue.ready_total = @($Queue.queue | Where-Object { (ConvertTo-ToolDateOrNull -Value $_.next_attempt_at) -le $Now.ToUniversalTime() -and [string]$_.status -notin @('VERIFIED', 'MANUAL_REVIEW_REQUIRED', 'RETRY_EXHAUSTED') -and [string](Get-ToolEntryProperty -Entry $_ -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE') -eq 'VERIFY_OFFICIAL_SITE' }).Count
+    $Queue.ready_total = @($Queue.queue | Where-Object { Test-ToolCandidateVerificationQueueEntryReady -Entry $_ -Now $Now }).Count
     $Queue | Add-Member -NotePropertyName action_counts -NotePropertyValue (ConvertTo-ToolActionCounts -Entries @($Queue.queue)) -Force
     if ($Queue.PSObject.Properties.Name -notcontains 'queue_type') {
         $Queue | Add-Member -NotePropertyName queue_type -NotePropertyValue 'review' -Force
@@ -922,13 +946,7 @@ try {
     if (-not $resumedFromCheckpoint) {
         $targetCandidates = @($queue.queue |
             Where-Object {
-                $entryStatus = [string]$_.status
-                $entryAction = [string](Get-ToolEntryProperty -Entry $_ -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
-                $dueAt = ConvertTo-ToolDateOrNull -Value $_.next_attempt_at
-                $entryAction -eq 'VERIFY_OFFICIAL_SITE' -and
-                    $entryStatus -eq 'PENDING' -and
-                    $dueAt -le $startedAt.ToUniversalTime() -and
-                    $entryStatus -notin @('VERIFIED', 'RETRY_EXHAUSTED')
+                Test-ToolCandidateVerificationQueueEntryReady -Entry $_ -Now $startedAt
             } |
             Sort-Object @{ Expression = { -[int](Get-ToolCandidateActionabilityScore -Candidate $candidateById[[string]$_.candidate_id]) }; Ascending = $true }, @{ Expression = { -[int]$_.priority_score }; Ascending = $true }, canonical_name, candidate_id |
             ForEach-Object { $candidateById[[string]$_.candidate_id] } |

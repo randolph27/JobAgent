@@ -358,6 +358,18 @@ try {
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript-Zweitlauf ist fehlgeschlagen: " + ($secondScriptOutput -join "`n"))
     $secondScriptResult = ($secondScriptOutput -join "`n") | ConvertFrom-Json -Depth 100
     Assert-True -Condition ($secondScriptResult.verification_queue.processed_total -eq 0) -Message 'Candidate-Verifikationsscript darf Retry-Kandidaten vor next_attempt_at nicht erneut verarbeiten.'
+
+    $dueRetryQueue = Get-Content -Raw -LiteralPath ([string]$scriptResult.queue_path) | ConvertFrom-Json -Depth 100
+    $dueRetryEntry = @($dueRetryQueue.queue | Where-Object { $_.candidate_id -eq 'hint:noresponse' })[0]
+    $dueRetryEntry.status = 'RETRY_SCHEDULED'
+    $dueRetryEntry.next_attempt_at = ([datetime]::UtcNow.AddDays(-1)).ToString('MM/dd/yyyy HH:mm:ss', [Globalization.CultureInfo]::InvariantCulture)
+    $dueRetryQueue | ConvertTo-Json -Depth 30 | Set-Content -LiteralPath ([string]$scriptResult.queue_path) -Encoding UTF8
+    $dueRetryOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $projectRoot -MaxCandidates 3 -FixtureMapPath 'fixture-map.json' -MaxRetries 3 -ExpiresAfterDays 730 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Candidate-Verifikationsscript-Due-Retry ist fehlgeschlagen: " + ($dueRetryOutput -join "`n"))
+    $dueRetryResult = ($dueRetryOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $dueRetryUpdatedQueue = Get-Content -Raw -LiteralPath ([string]$dueRetryResult.queue_path) | ConvertFrom-Json -Depth 100
+    Assert-True -Condition (@($dueRetryResult.checked_candidate_ids | Where-Object { $_ -eq 'hint:noresponse' }).Count -eq 1) -Message 'Candidate-Verifikationsscript verarbeitet faellige Retry-Scheduled-Kandidaten nicht.'
+    Assert-True -Condition (@($dueRetryUpdatedQueue.queue | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.retry_count -eq 2 }).Count -eq 1) -Message 'Candidate-Verifikationsscript schreibt faelligen Retry nicht erneut in die Queue.'
 }
 finally {
     if (Test-Path -LiteralPath $projectRoot) {

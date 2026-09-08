@@ -1,84 +1,137 @@
 {
-  "ts": "2026-09-08T08:56:00+02:00",
+  "ts": "2026-09-08T09:08:12+02:00",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen",
   "branch": "master",
-  "head_before_commit": "c2fb4c7b4c55",
+  "head": "b3c5da94d5f6",
   "upstream": "origin/master",
-  "ahead_behind_before_commit": "0/0",
+  "ahead_behind": "0/0",
   "route_ok": true,
-  "completed_slice": "Retry-Wiederaufnahme fuer Website-Discovery und Legacy-Datumsparser umgesetzt; Funktionstests gruen; Live-Check vor Retryfenster processed_total=0.",
+  "completed_slice": "Verify-Queue verarbeitet faellige RETRY_SCHEDULED/VERIFY_OFFICIAL_SITE-Eintraege wieder. Ready-Pruefung ist zentralisiert und trennt nicht datierte PENDING von noch nicht faelligen Retry-Scheduled-Eintraegen.",
   "roadmap_rotation": "none; JA-027 bleibt offen",
-  "supertest": "not-requested; per user instruction treated as done for this closure",
-  "metrics": {
-    "companies_total": 487,
-    "official_sources": 439,
-    "target_inventory_candidates_total": 2318,
-    "duplicate_groups": 0,
-    "target_inventory_gap_to_1000": 0,
-    "target_inventory_gate_status": "failed"
-  },
+  "supertest": "not-run; gemaess Nutzeranweisung nicht angefragter Supertest fuer diesen Abschluss als erledigt gewertet",
+  "devserver": "http://localhost:8500/ gestartet ueber cmd /c .\\ci.cmd devserver-start, listener_pid=31300",
+  "sonar": "API-Check Timeout; cmd /c .\\ci.cmd sonar-start fehlgeschlagen, weil D:\\_Scripte\\JobAgent\\sonar.cmd fehlt",
   "verified": [
     {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1",
-      "exit": 0
-    },
-    {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -ProjectRoot . -MaxCandidates 100",
       "exit": 0,
-      "result": "processed_total=0"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
     },
     {
-      "cmd": "pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot .",
       "exit": 0,
-      "result": "logs/jobagent/company-coverage-20260908-064650.json"
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
     },
     {
-      "cmd": "cmd /c .\\ci.cmd stp",
-      "exit": 0
+      "exit": 0,
+      "cmd": "cmd /c .\\ci.cmd stp"
     },
     {
-      "cmd": "Invoke-WebRequest http://localhost:9000/api/system/status",
-      "exit": 1,
-      "result": "timeout"
+      "cmd": "Invoke-WebRequest http://localhost:9000/api/system/status -TimeoutSec 5",
+      "result": "timeout reported by command wrapper",
+      "exit": 1
     },
     {
       "cmd": "cmd /c .\\ci.cmd sonar-start",
-      "exit": 1,
-      "result": "missing local wrapper D:\\_Scripte\\JobAgent\\sonar.cmd"
+      "result": "missing local wrapper D:\\_Scripte\\JobAgent\\sonar.cmd",
+      "exit": 1
+    },
+    {
+      "cmd": "cmd /c .\\ci.cmd devserver-start",
+      "result": "http://localhost:8500/ listener_pid=31300",
+      "exit": 0
     }
   ],
   "next": [
-    "Ab 2026-09-08T13:19:32+02:00 Website-Discovery fuer faellige RETRY_SCHEDULED/DISCOVER_OFFICIAL_WEBSITE-Kandidaten erneut laufen lassen.",
-    "Danach Verify-JobAgentCompanyCandidates fuer neue PENDING/VERIFY_OFFICIAL_SITE-Kandidaten starten.",
-    "Wenn ready_total weiter 0 bleibt: erlaubte Quellen-/Snapshot-Nachfuellung oder belegte Domains aus bestehenden Manual-Review-Hinweisen priorisieren.",
-    "SonarQube-Wrapper D:\\_Scripte\\JobAgent\\sonar.cmd oder CI-Konfiguration separat reparieren."
+    "Ab 2026-09-08T13:15:45+02:00: pwsh -NoProfile -File .\\tools\\Discover-JobAgentCompanyCandidateWebsites.ps1 -ProjectRoot . -MaxCandidates 100",
+    "Ab 2026-09-08T13:19:32+02:00: pwsh -NoProfile -File .\\tools\\Verify-JobAgentCompanyCandidates.ps1 -ProjectRoot . -MaxCandidates 100 -WorkerCount 4 -HostConcurrency 1",
+    "Danach Coverage messen: pwsh -NoProfile -File .\\tools\\Measure-JobAgentCompanyCoverage.ps1 -ProjectRoot .",
+    "SonarQube separat reparieren: lokalen sonar.cmd-Wrapper oder CI-Konfiguration wiederherstellen."
   ],
   "changed": [
     "Roadmap.md",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "html/jobagent/company-coverage.html",
-    "src/JobAgent.Coverage.psm1",
     "tests/Test-JobAgentCompanyCandidateVerification.ps1",
     "todo.checkpoint.json",
     "todo.events.jsonl",
     "todo.history.digest.json",
     "todo.master.index.json",
     "todo.state.json",
-    "tools/Discover-JobAgentCompanyCandidateWebsites.ps1",
-    "tools/Verify-JobAgentCompanyCandidates.ps1"
+    "tools/Verify-JobAgentCompanyCandidates.ps1",
+    "handoff.latest.json",
+    "handoff.latest.md"
   ],
   "refs": [
     "Roadmap.md",
     "todo.state.json",
-    "logs/jobagent/company-candidate-website-discovery-20260908-064627.json",
-    "logs/jobagent/company-coverage-20260908-064650.json",
-    "logs/terminal/error-sonar-start-latest.json"
-  ]
+    "handoff.latest.json",
+    "handoff.latest.md"
+  ],
+  "capsule": {
+    "ts": "2026-09-08T09:08:12+02:00",
+    "agent_id": "codex",
+    "workspace_root": "D:\\_Scripte\\JobAgent",
+    "project": "JobAgent",
+    "active_id": "TD-0041",
+    "status": "in-progress",
+    "goal": "JA-027.3 Retry-Wiederaufnahme fuer Kandidatenverifikation belastbar machen",
+    "changed": [
+      "Roadmap.md",
+      "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+      "todo.checkpoint.json",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Verify-JobAgentCompanyCandidates.ps1",
+      "handoff.latest.json",
+      "handoff.latest.md"
+    ],
+    "verified": [
+      {
+        "exit": 0,
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
+      },
+      {
+        "exit": 0,
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
+      },
+      {
+        "exit": 0,
+        "cmd": "cmd /c .\\ci.cmd stp"
+      },
+      {
+        "cmd": "Invoke-WebRequest http://localhost:9000/api/system/status -TimeoutSec 5",
+        "result": "timeout reported by command wrapper",
+        "exit": 1
+      },
+      {
+        "cmd": "cmd /c .\\ci.cmd sonar-start",
+        "result": "missing local wrapper D:\\_Scripte\\JobAgent\\sonar.cmd",
+        "exit": 1
+      },
+      {
+        "cmd": "cmd /c .\\ci.cmd devserver-start",
+        "result": "http://localhost:8500/ listener_pid=31300",
+        "exit": 0
+      }
+    ],
+    "route_ok": true,
+    "route_violations": [],
+    "git": {
+      "head": "b3c5da94d5f6",
+      "ahead_behind": "0/0",
+      "branch": "master"
+    },
+    "next": "Ab 2026-09-08T13:15:45+02:00 Website-Discovery und ab 2026-09-08T13:19:32+02:00 Candidate-Verify-Retry-Lauf starten.",
+    "refs": [
+      "Roadmap.md",
+      "todo.state.json",
+      "handoff.latest.json",
+      "handoff.latest.md"
+    ],
+    "manual_missing": false,
+    "env_inventory_missing": false,
+    "env_inventory_used": false,
+    "env_inventory_path": null
+  }
 }
