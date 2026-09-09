@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-09T07:51:12.157+02:00
+Stand: 2026-09-09T08:16:10.830+02:00
 
 ## Zustand
 
-- Active: `TD-0041`
+- Active: `TD-0053`
 - Status: `in-progress`
-- Ziel: JA-027 Firmenakquise als wiederaufnehmbaren Batch bis mindestens 1.000 offizielle Karrierequellen ausbauen #comment: Vorhandene Kandidaten und Websitehinweise automatisch nutzen, damit nicht mehr jede Handvoll Firmen einen eigenen manuellen Chat-Slice benötigt.
+- Ziel: JA-041 IT-Leiter/Lead/Manager über vollständige Karriere- und ATS-Ergebnislisten finden #comment: Firmenlinks werden erst durch verlässliche Extraktion and passende Rollen-/Standortbewertung zu nutzbaren Stellenangeboten.
 - Branch: `master`
-- HEAD: `b49a1b24046d`
+- HEAD: `3289edd323ce`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,14 +16,17 @@ Stand: 2026-09-09T07:51:12.157+02:00
 
 ## Versionierte Aenderungen
 
-- `.ci/bin/modules/browser-logic.ps1`
 - `Roadmap.md`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `src/JobAgent.SourceVerification.psm1`
-- `tests/Test-JobAgentCiContracts.ps1`
-- `tests/Test-JobAgentSourceVerification.ps1`
+- `docs/handoffs/2026-09-09-ja041-pagination-classification-handoff.md`
+- `src/JobAgent.Classification.psm1`
+- `src/JobAgent.Coverage.psm1`
+- `src/JobAgent.LiveScan.psm1`
+- `tests/Test-JobAgentClassification.ps1`
+- `tests/Test-JobAgentLiveScan.ps1`
 - `todo.checkpoint.json`
+- `todo.current.md`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
@@ -31,8 +34,21 @@ Stand: 2026-09-09T07:51:12.157+02:00
 
 ## Verifikation
 
-- `.\ci.cmd sonar` -> Exit ``
+- `pwsh -NoProfile -File .\tests\Test-JobAgentClassification.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
+- `cmd /c .\ci.cmd route-check` -> Exit `0`
+- `cmd /c .\ci.cmd stp` -> Exit `0`
 
 ## Naechster Anker
 
-JA-041 IT-Leiter/Lead/Manager über vollständige Karriere- und ATS-Ergebnislisten finden #comment: Firmenlinks werden erst durch verlässliche Extraktion and passende Rollen-/Standortbewertung zu nutzbaren Stellenangeboten.
+JA-041 fortsetzen: produktiven Live-Einstieg ohne Fixture-Zwang fuer kontrollierten Pilot und weitere ATS-/iframe-Vollstaendigkeitsfaelle erweitern.
+
+## Detail-Handoff
+
+- Vollstaendiger Uebergabeanker: `docs/handoffs/2026-09-09-ja041-pagination-classification-handoff.md`
+- Roadmap-Rotation: keine; JA-041 bleibt offen, JA-027 bleibt offen.
+- Supertest: nicht erneut ausgefuehrt; gemaess Nutzeranweisung fuer diesen Uebergabeschnitt nicht blockierend.

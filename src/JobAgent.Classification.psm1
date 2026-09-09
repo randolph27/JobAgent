@@ -115,13 +115,23 @@ function Get-JobAgentLeadershipClassification {
         '\bit[- ]?leitung\b',
         '\bbereichsleiter(in)? (it|informationstechnologie)\b'
     )
+    $managerTitlePatterns = @(
+        '\bit[- ]?manager(in)?\b',
+        '\bmanager(in)? (it|informationstechnologie|information technology)\b',
+        '\b(it|informationstechnologie|information technology) lead\b',
+        '\blead (it|informationstechnologie|information technology)\b'
+    )
     $leadershipPatterns = @(
         'gesamtverantwortung',
         'gesamtleitung',
         'verantwortung fuer (die )?(it|informationstechnologie)',
         'end-to-end verantwortung',
         'disziplinarische fuehrung',
+        '\bfuehrt\b',
+        '\bleitet\b',
+        'leitung (der )?(it|informationstechnologie|organisation|abteilung|teams?)',
         'personalverantwortung',
+        'personalfuehrung',
         'budgetverantwortung',
         '\bpeople management\b',
         '\bline management\b'
@@ -129,6 +139,7 @@ function Get-JobAgentLeadershipClassification {
     $strategyPatterns = @(
         '\bit[- ]?strategie\b',
         'it roadmap',
+        'roadmap[- ]?verantwortung',
         'digitalisierungsstrategie',
         'technologiestrategie',
         'strategische (ausrichtung|verantwortung)',
@@ -156,6 +167,7 @@ function Get-JobAgentLeadershipClassification {
     )
 
     $hasExecutiveTitle = Test-JobAgentClassificationPattern -Text $titleText -Patterns $executiveTitlePatterns
+    $hasManagerTitle = Test-JobAgentClassificationPattern -Text $titleText -Patterns $managerTitlePatterns
     $hasLeadershipEvidence = Test-JobAgentClassificationPattern -Text $allText -Patterns $leadershipPatterns
     $hasStrategyEvidence = Test-JobAgentClassificationPattern -Text $allText -Patterns $strategyPatterns
     $hasSpecialistNegative = Test-JobAgentClassificationPattern -Text $titleText -Patterns $negativeSpecialistPatterns
@@ -165,6 +177,10 @@ function Get-JobAgentLeadershipClassification {
     if ($hasExecutiveTitle) {
         $score += 38
         Add-JobAgentClassificationReason -Reasons $reasons -Reason 'Titel signalisiert IT-Gesamt- oder Bereichsleitung.'
+    }
+    elseif ($hasManagerTitle) {
+        $score += 24
+        Add-JobAgentClassificationReason -Reasons $reasons -Reason 'Titel signalisiert IT-Management oder IT-Lead.'
     }
     if ($hasLeadershipEvidence) {
         $score += 24
@@ -226,7 +242,7 @@ function Get-JobAgentLeadershipClassification {
         $score -= 25
         $rejectedReasons.Add('Projektleitung ohne belegte IT-Gesamtverantwortung reicht nicht aus.')
     }
-    if ($hasTeamLeadTitle -and -not ($hasLeadershipEvidence -or $hasStrategyEvidence)) {
+    if ($hasTeamLeadTitle -and -not $hasStrategyEvidence) {
         $score -= 30
         $rejectedReasons.Add('Teamlead-Rolle ohne wesentliche Fuehrungs- oder Strategie-Verantwortung wird ausgeschlossen.')
     }
@@ -239,7 +255,7 @@ function Get-JobAgentLeadershipClassification {
         $result = 'REJECTED'
         $priority = 'UNRATED'
     }
-    elseif ($score -ge 70 -and ($hasExecutiveTitle -or ($hasLeadershipEvidence -and $hasStrategyEvidence))) {
+    elseif ($score -ge 70 -and ($hasExecutiveTitle -or ($hasManagerTitle -and $hasLeadershipEvidence -and $hasStrategyEvidence) -or ($hasLeadershipEvidence -and $hasStrategyEvidence))) {
         $result = 'MATCH'
         $priority = if ($score -ge 85) { 'A' } else { 'B' }
     }

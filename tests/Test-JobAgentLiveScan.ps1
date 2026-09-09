@@ -278,6 +278,34 @@ Assert-True -Condition ($jsonLdResult.raw_jobs[0].ats_job_id -eq 'WD-987') -Mess
 Assert-True -Condition ($jsonLdResult.raw_jobs[0].location_label -eq 'Muenchen') -Message 'Live-Adapter uebernimmt JSON-LD-Ort nicht.'
 Assert-True -Condition ($jsonLdResult.raw_jobs[0].employment_type -eq 'FULL_TIME') -Message 'Live-Adapter uebernimmt employmentType aus JSON-LD nicht.'
 
+$paginationPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('IT Manager')
+$paginationFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/about">About</a><a rel="next" href="/careers?page=2">Weiter</a></html>'
+            break
+        }
+        'https://example.invalid/careers?page=2' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/careers/jobs/it-manager-200">IT Manager</a></html>'
+            break
+        }
+        'https://example.invalid/careers/jobs/it-manager-200' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager</h1><p>Personalverantwortung und IT-Strategie in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$paginationResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $paginationPolicy -Fetcher $paginationFetcher
+Assert-True -Condition ($paginationResult.status -eq 'SUCCESS' -and $paginationResult.scan_complete) -Message 'Live-Adapter verarbeitet belegte Pagination nicht vollstaendig.'
+Assert-True -Condition (@($paginationResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer auf Folgeseite nicht.'
+Assert-True -Condition ($paginationResult.raw_jobs[0].detail_url -eq 'https://example.invalid/careers/jobs/it-manager-200') -Message 'Live-Adapter kanonisiert Treffer von Folgeseite falsch.'
+
 $structuredJsonFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -408,6 +436,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_blocked_source_detection',
         'live_adapter_dynamic_source_detection',
         'live_adapter_jsonld_ats_success',
+        'live_adapter_pagination_success',
         'live_adapter_structured_json_ats_success',
         'live_adapter_blocked_detail_fetch',
         'live_adapter_timeout_detail_fetch',

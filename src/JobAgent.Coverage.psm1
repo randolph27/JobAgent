@@ -1615,12 +1615,12 @@ function New-JobAgentCoverageImportWaveMetrics {
     [pscustomobject]@{
         schema_version = 'jobagent/company-import-wave-metrics/v1'
         waves_total = @($waves).Count
-        target_size_total = (@($waves) | Measure-Object -Property target_size -Sum).Sum
-        candidates_total = (@($waves) | Measure-Object -Property candidates_total -Sum).Sum
-        verified_total = (@($waves) | Measure-Object -Property verified_total -Sum).Sum
-        hint_only_total = (@($waves) | Measure-Object -Property hint_only_total -Sum).Sum
-        review_total = (@($waves) | Measure-Object -Property review_total -Sum).Sum
-        scannable_total = (@($waves) | Measure-Object -Property scannable_total -Sum).Sum
+        target_size_total = [double](@($waves) | Measure-Object -Property target_size -Sum | Select-Object -ExpandProperty Sum)
+        candidates_total = [double](@($waves) | Measure-Object -Property candidates_total -Sum | Select-Object -ExpandProperty Sum)
+        verified_total = [double](@($waves) | Measure-Object -Property verified_total -Sum | Select-Object -ExpandProperty Sum)
+        hint_only_total = [double](@($waves) | Measure-Object -Property hint_only_total -Sum | Select-Object -ExpandProperty Sum)
+        review_total = [double](@($waves) | Measure-Object -Property review_total -Sum | Select-Object -ExpandProperty Sum)
+        scannable_total = [double](@($waves) | Measure-Object -Property scannable_total -Sum | Select-Object -ExpandProperty Sum)
         waves = @($waves)
     }
 }
@@ -1699,7 +1699,7 @@ function New-JobAgentCoverageReport {
             partial = @($metricsArray | Where-Object { [bool]$_.was_scanned -and -not [bool]$_.latest_scan_complete -and -not [bool]$_.latest_scan_failed }).Count
             blocked = @($metricsArray | Where-Object { [string]$_.latest_error_class -eq 'BLOCKED' }).Count
             no_matching_job = @($metricsArray | Where-Object { [bool]$_.latest_scan_complete -and -not [bool]$_.has_matching_jobs }).Count
-            matching_jobs = (@($metricsArray | Measure-Object -Property matching_jobs_count -Sum).Sum)
+            matching_jobs = [double](@($metricsArray) | Measure-Object -Property matching_jobs_count -Sum | Select-Object -ExpandProperty Sum)
             legacy_successful_scans = @($metricsArray | Where-Object { [string]$_.latest_scan_status -eq 'SUCCESS' -and -not [bool]$_.latest_scan_complete }).Count
             successfully_scanned = @($metricsArray | Where-Object latest_scan_succeeded).Count
             failed_scanned = @($metricsArray | Where-Object latest_scan_failed).Count

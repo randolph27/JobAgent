@@ -23,8 +23,9 @@ function New-JobAgentLiveScanPolicy {
         [Parameter()][ValidateRange(1, 600)][int]$TimeoutSeconds = 20,
         [Parameter()][ValidateRange(0, 5)][int]$MaxRetries = 1,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
-        [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 10,
-        [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 5,
+        [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 100,
+        [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 100,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxPagesPerSource = 10,
         [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+local-pilot; official-career-source-only)',
         [Parameter()][string[]]$SearchTerms = @('Head of IT', 'Director IT', 'IT Leitung', 'IT-Leitung', 'Leiter IT', 'CIO')
     )
@@ -35,6 +36,7 @@ function New-JobAgentLiveScanPolicy {
         max_companies = $MaxCompanies
         max_results_per_source = $MaxResultsPerSource
         max_detail_fetches_per_source = $MaxDetailFetchesPerSource
+        max_pages_per_source = $MaxPagesPerSource
         user_agent = $UserAgent
         search_terms = @($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
         source_policy = 'official-career-source-only'
@@ -286,6 +288,64 @@ function Test-JobAgentLivePaginationHint {
     param([Parameter(Mandatory)][AllowEmptyString()][string]$Html)
 
     return $Html -match '(?is)rel\s*=\s*["'']?next\b|\b(?:next|weiter|page|seite)\s*[=:]\s*\d+|[?&](?:page|offset|start)=\d+'
+}
+
+function Get-JobAgentLiveNextPageUrls {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxPages = 10
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Html) -or $MaxPages -le 1) {
+        return @()
+    }
+
+    $baseUri = [Uri]$BaseUrl
+    $urls = New-Object System.Collections.Generic.List[string]
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $patterns = @(
+        '<link\b(?<attrs>[^>]*)>',
+        '<a\b(?<attrs>[^>]*)>(?<text>.*?)</a>'
+    )
+
+    foreach ($pattern in $patterns) {
+        foreach ($match in [regex]::Matches($Html, $pattern, [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)) {
+            if ($urls.Count -ge ($MaxPages - 1)) {
+                break
+            }
+
+            $attrs = [string]$match.Groups['attrs'].Value
+            $text = if ($match.Groups['text'].Success) { ConvertTo-JobAgentLivePlainText -Html ([string]$match.Groups['text'].Value) -MaxLength 80 } else { '' }
+            $relMatch = [regex]::Match($attrs, '\brel\s*=\s*["'']?([^"''>\s]+)', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+            $hrefMatch = [regex]::Match($attrs, '\bhref\s*=\s*["''](?<href>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+            if (-not $hrefMatch.Success) {
+                continue
+            }
+
+            $rel = if ($relMatch.Success) { [string]$relMatch.Groups[1].Value } else { '' }
+            $href = [Net.WebUtility]::HtmlDecode($hrefMatch.Groups['href'].Value)
+            $isNext = ($rel -match '(?i)\bnext\b') -or ($text -match '(?i)^(next|weiter|naechste|nächste|>)$') -or ($href -match '(?i)([?&](page|p|offset|start)=\d+|/page/\d+)')
+            if (-not $isNext -or $href -match '^(mailto:|tel:|javascript:|#)') {
+                continue
+            }
+
+            $absolute = [Uri]::new($baseUri, $href).AbsoluteUri
+            try {
+                $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
+                if ($evaluation.is_official -eq $true -and $seen.Add([string]$evaluation.canonical_url)) {
+                    $urls.Add([string]$evaluation.canonical_url)
+                }
+            }
+            catch {
+                continue
+            }
+        }
+    }
+
+    return $urls.ToArray()
 }
 
 function Get-JobAgentLiveJsonLdNodes {
@@ -630,6 +690,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
     )
 
     $startedAt = [datetime]::UtcNow
+    $maxPages = if ($Policy.PSObject.Properties.Name -contains 'max_pages_per_source') { [int]$Policy.max_pages_per_source } else { 1 }
     $sourceFetch = Invoke-JobAgentLiveFetchWithRetry -Url ([string]$AdapterInput.source.canonical_url) -Policy $Policy -Fetcher $Fetcher
     if ($sourceFetch.ok -ne $true) {
         return New-JobAgentAdapterResult `
@@ -645,12 +706,51 @@ function Invoke-JobAgentLiveHtmlAdapter {
             -FinishedAt ([datetime]::UtcNow)
     }
 
-    $candidates = @(ConvertFrom-JobAgentLiveCareerPage `
-            -Html ([string]$sourceFetch.content) `
-            -BaseUrl ([string]$sourceFetch.final_url) `
-            -Company $AdapterInput.company `
-            -MaxResults ([int]$Policy.max_results_per_source) `
-            -SearchTerms @($Policy.search_terms))
+    $sourceFetches = New-Object System.Collections.Generic.List[object]
+    $sourceFetches.Add($sourceFetch)
+    $pageUrlsToFetch = New-Object System.Collections.Generic.Queue[string]
+    $seenPageUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    [void]$seenPageUrls.Add([string]$sourceFetch.final_url)
+    foreach ($nextUrl in @(Get-JobAgentLiveNextPageUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)) {
+        if ($seenPageUrls.Add($nextUrl)) {
+            $pageUrlsToFetch.Enqueue($nextUrl)
+        }
+    }
+
+    while ($pageUrlsToFetch.Count -gt 0 -and $sourceFetches.Count -lt $maxPages) {
+        $pageUrl = $pageUrlsToFetch.Dequeue()
+        $pageFetch = Invoke-JobAgentLiveFetchWithRetry -Url $pageUrl -Policy $Policy -Fetcher $Fetcher
+        $sourceFetches.Add($pageFetch)
+        if ($pageFetch.ok -ne $true) {
+            continue
+        }
+        foreach ($nextUrl in @(Get-JobAgentLiveNextPageUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)) {
+            if ($seenPageUrls.Add($nextUrl)) {
+                $pageUrlsToFetch.Enqueue($nextUrl)
+            }
+        }
+    }
+
+    $candidates = New-Object System.Collections.Generic.List[object]
+    $seenCandidateUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($fetch in @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true })) {
+        foreach ($candidate in @(ConvertFrom-JobAgentLiveCareerPage `
+                    -Html ([string]$fetch.content) `
+                    -BaseUrl ([string]$fetch.final_url) `
+                    -Company $AdapterInput.company `
+                    -MaxResults ([int]$Policy.max_results_per_source) `
+                    -SearchTerms @($Policy.search_terms))) {
+            if ($candidates.Count -ge [int]$Policy.max_results_per_source) {
+                break
+            }
+            if ($seenCandidateUrls.Add([string]$candidate.detail_url)) {
+                $candidates.Add($candidate)
+            }
+        }
+        if ($candidates.Count -ge [int]$Policy.max_results_per_source) {
+            break
+        }
+    }
     if ($candidates.Count -eq 0) {
         $blockedByContent = Test-JobAgentLiveBlockedContentHint -Html ([string]$sourceFetch.content)
         $dynamicOnly = if (-not $blockedByContent) { Test-JobAgentLiveDynamicContentHint -Html ([string]$sourceFetch.content) } else { $false }
@@ -673,8 +773,9 @@ function Invoke-JobAgentLiveHtmlAdapter {
     $jobs = New-Object System.Collections.Generic.List[object]
     $detailFailures = New-Object System.Collections.Generic.List[object]
     $messages = New-Object System.Collections.Generic.List[string]
-    $detailBudgetReached = $candidates.Count -gt [int]$Policy.max_detail_fetches_per_source
-    foreach ($candidate in @($candidates | Select-Object -First ([int]$Policy.max_detail_fetches_per_source))) {
+    $candidateItems = @($candidates.ToArray())
+    $detailBudgetReached = $candidateItems.Count -gt [int]$Policy.max_detail_fetches_per_source
+    foreach ($candidate in @($candidateItems | Select-Object -First ([int]$Policy.max_detail_fetches_per_source))) {
         $detailFetch = Invoke-JobAgentLiveFetchWithRetry -Url ([string]$candidate.detail_url) -Policy $Policy -Fetcher $Fetcher
         if ($detailFetch.ok -eq $true) {
             $jobs.Add((New-JobAgentLiveRawJob -Candidate $candidate -DetailFetch $detailFetch))
@@ -701,8 +802,8 @@ function Invoke-JobAgentLiveHtmlAdapter {
             -FinishedAt ([datetime]::UtcNow)
     }
 
-    $resultLimited = $candidates.Count -ge [int]$Policy.max_results_per_source
-    $paginationDetected = Test-JobAgentLivePaginationHint -Html ([string]$sourceFetch.content)
+    $resultLimited = $candidateItems.Count -ge [int]$Policy.max_results_per_source
+    $paginationDetected = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and (Test-JobAgentLivePaginationHint -Html ([string]$_.content) -eq $true) }).Count -gt 0)
     if ($detailBudgetReached -or $resultLimited -or $paginationDetected -or $detailFailures.Count -gt 0) {
         $incompleteReasons = New-Object System.Collections.Generic.List[string]
         if ($detailBudgetReached) { $incompleteReasons.Add('detail_fetch_limit_reached') }

@@ -120,6 +120,25 @@ $possible = Get-JobAgentLeadershipClassification `
 Assert-True -Condition ($possible.result -eq 'POSSIBLE') -Message 'Grenzfall IT Manager wurde nicht als POSSIBLE klassifiziert.'
 Assert-True -Condition ($possible.priority -eq 'C') -Message 'Grenzfall muss Prioritaet C erhalten.'
 
+$itManagerLeadership = Get-JobAgentLeadershipClassification `
+    -Title 'IT Manager' `
+    -Summary 'Personalverantwortung, Budgetverantwortung und IT-Strategie fuer die zentrale IT.' `
+    -Location (New-TestLocation) `
+    -WorkModel 'HYBRID' `
+    -EmploymentType 'FULL_TIME' `
+    -EvaluatedAt $fixedTime
+Assert-True -Condition ($itManagerLeadership.result -eq 'MATCH') -Message 'IT-Manager-Rolle mit belegter Fuehrungsverantwortung wurde nicht als MATCH klassifiziert.'
+Assert-True -Condition ($itManagerLeadership.priority -eq 'A') -Message 'IT-Manager-Rolle mit starker Fuehrung muss Prioritaet A erhalten.'
+
+$itLeadLeadership = Get-JobAgentLeadershipClassification `
+    -Title 'IT Lead' `
+    -Summary 'Leitet die IT-Organisation mit Personalverantwortung und Roadmap-Verantwortung.' `
+    -Location (New-TestLocation -TargetArea 'FREISING' -Label 'Freising') `
+    -WorkModel 'ON_SITE' `
+    -EmploymentType 'FULL_TIME' `
+    -EvaluatedAt $fixedTime
+Assert-True -Condition ($itLeadLeadership.result -eq 'MATCH') -Message 'IT-Lead-Rolle mit belegter Fuehrungsverantwortung wurde nicht als MATCH klassifiziert.'
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -131,6 +150,8 @@ Assert-True -Condition ($possible.priority -eq 'C') -Message 'Grenzfall muss Pri
         'unclear_location',
         'out_of_scope_location',
         'empty_title',
-        'possible_it_manager'
+        'possible_it_manager',
+        'it_manager_with_leadership_match',
+        'it_lead_with_leadership_match'
     )
 } | ConvertTo-Json -Depth 4
