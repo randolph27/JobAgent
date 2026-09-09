@@ -303,6 +303,16 @@ Assert-True -Condition ($emptyResult.status -eq 'SUCCESS') -Message 'Live-Adapte
 Assert-True -Condition ($emptyResult.scan_complete -eq $true) -Message 'Live-Adapter markiert vollstaendig verarbeitete leere Quelle nicht als complete.'
 Assert-True -Condition ($emptyResult.error_class -eq 'NONE') -Message 'Live-Adapter setzt falsche Fehlerklasse fuer vollstaendig leere Quelle.'
 
+$unprocessedEmptyPaginationPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 10 -MaxDetailFetchesPerSource 10 -MaxPagesPerSource 1
+$unprocessedEmptyPaginationFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    New-FetchResult -Url $Url -Ok $true -Content '<html><body><a rel="next" href="/careers?page=2">Weiter</a></body></html>'
+}
+$unprocessedEmptyPaginationResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $unprocessedEmptyPaginationPolicy -Fetcher $unprocessedEmptyPaginationFetcher
+Assert-True -Condition ($unprocessedEmptyPaginationResult.status -eq 'PARTIAL') -Message 'Live-Adapter muss leere Quellen mit unerreichter Pagination als PARTIAL markieren.'
+Assert-True -Condition ($unprocessedEmptyPaginationResult.error_class -eq 'NO_JOBS_FOUND') -Message 'Live-Adapter klassifiziert leere Quellen mit unerreichter Pagination falsch.'
+
 $blockedFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -374,6 +384,29 @@ $paginationResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy 
 Assert-True -Condition ($paginationResult.status -eq 'SUCCESS' -and $paginationResult.scan_complete) -Message 'Live-Adapter verarbeitet belegte Pagination nicht vollstaendig.'
 Assert-True -Condition (@($paginationResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer auf Folgeseite nicht.'
 Assert-True -Condition ($paginationResult.raw_jobs[0].detail_url -eq 'https://example.invalid/careers/jobs/it-manager-200') -Message 'Live-Adapter kanonisiert Treffer von Folgeseite falsch.'
+
+$unprocessedJobPaginationPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 1 -SearchTerms @('IT Manager')
+$unprocessedJobPaginationFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/careers/jobs/it-manager-201">IT Manager</a><a rel="next" href="/careers?page=2">Weiter</a></html>'
+            break
+        }
+        'https://example.invalid/careers/jobs/it-manager-201' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager</h1><p>Personalverantwortung und IT-Strategie in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$unprocessedJobPaginationResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $unprocessedJobPaginationPolicy -Fetcher $unprocessedJobPaginationFetcher
+Assert-True -Condition ($unprocessedJobPaginationResult.status -eq 'PARTIAL' -and -not $unprocessedJobPaginationResult.scan_complete) -Message 'Live-Adapter darf Jobs mit unerreichter Pagination nicht als vollstaendig markieren.'
+Assert-True -Condition ((@($unprocessedJobPaginationResult.artifact_paths) -join "`n") -match 'pagination_detected') -Message 'Live-Adapter dokumentiert unerreichte Pagination nicht.'
 
 $iframePolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('IT Lead')
 $iframeFetcher = {
@@ -638,10 +671,12 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_success_with_detail_verification',
         'live_adapter_replaces_generic_anchor_title_from_detail_page',
         'live_adapter_complete_empty_source',
+        'live_adapter_empty_pagination_remains_partial',
         'live_adapter_blocked_source_detection',
         'live_adapter_dynamic_source_detection',
         'live_adapter_jsonld_ats_success',
         'live_adapter_pagination_success',
+        'live_adapter_job_pagination_remains_partial',
         'live_adapter_official_iframe_ats_success',
         'live_adapter_official_linked_job_portal_success',
         'live_adapter_structured_json_ats_success',

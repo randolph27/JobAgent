@@ -1118,7 +1118,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
         $blockedByContent = Test-JobAgentLiveBlockedContentHint -Html ([string]$sourceFetch.content)
         $dynamicOnly = if (-not $blockedByContent) { Test-JobAgentLiveDynamicContentHint -Html ([string]$sourceFetch.content) } else { $false }
         $failedPageFetches = @($sourceFetches.ToArray() | Where-Object { $_.ok -ne $true })
-        $unprocessedPageHint = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and (Test-JobAgentLivePaginationHint -Html ([string]$_.content) -eq $true) }).Count -gt 0)
+        $unprocessedPageHint = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and ((Test-JobAgentLivePaginationHint -Html ([string]$_.content)) -eq $true) }).Count -gt 0)
         if ((-not $blockedByContent) -and (-not $dynamicOnly) -and $failedPageFetches.Count -eq 0 -and (-not $unprocessedPageHint)) {
             return New-JobAgentAdapterResult `
                 -AdapterInput $AdapterInput `
@@ -1182,7 +1182,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
     }
 
     $resultLimited = $candidateItems.Count -ge [int]$Policy.max_results_per_source
-    $paginationDetected = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and (Test-JobAgentLivePaginationHint -Html ([string]$_.content) -eq $true) }).Count -gt 0)
+    $paginationDetected = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and ((Test-JobAgentLivePaginationHint -Html ([string]$_.content)) -eq $true) }).Count -gt 0)
     if ($detailBudgetReached -or $resultLimited -or $paginationDetected -or $detailFailures.Count -gt 0) {
         $incompleteReasons = New-Object System.Collections.Generic.List[string]
         if ($detailBudgetReached) { $incompleteReasons.Add('detail_fetch_limit_reached') }

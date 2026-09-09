@@ -463,9 +463,9 @@
       ],
       "industry": "Defense Electronics",
       "ats": [],
-      "scan_status": "FAILED",
+      "scan_status": "PARTIAL",
       "scan_priority": 86,
-      "next_scan_at": "2026-09-09T17:00:53.094Z",
+      "next_scan_at": "2026-09-10T20:53:27.347Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -478,12 +478,12 @@
         "evidence_note": "Regionale offizielle Quelle nennt HENSOLDT; Karrierebereich liegt auf der offiziellen Domain."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-09-09T11:00:53.094Z",
+      "updated_at": "2026-09-09T20:53:27.347Z",
       "last_successful_scan_at": null,
       "last_imported_at": "2026-09-09T11:00:53.094Z",
-      "expires_at": "2026-09-09T17:00:53.094Z",
-      "next_refresh_at": "2026-09-09T17:00:53.094Z",
-      "refresh_reason": "last_scan_failed",
+      "expires_at": "2026-09-10T20:53:27.347Z",
+      "next_refresh_at": "2026-09-10T20:53:27.347Z",
+      "refresh_reason": "partial_scan_recheck",
       "staleness_status": "REFRESH_DUE"
     },
     {
@@ -508,9 +508,9 @@
       ],
       "industry": "Technology",
       "ats": [],
-      "scan_status": "FAILED",
+      "scan_status": "SUCCESS",
       "scan_priority": 86,
-      "next_scan_at": "2026-09-09T16:49:17.305Z",
+      "next_scan_at": "2026-09-10T20:53:27.347Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -523,13 +523,14 @@
         "evidence_note": "Offizielle Google-Careers-Standortseite fuer Muenchen als Primaerquelle gepflegt."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-09-09T10:49:17.305Z",
-      "last_successful_scan_at": null,
+      "updated_at": "2026-09-09T20:53:27.347Z",
+      "last_successful_scan_at": "2026-09-09T20:53:27.347Z",
       "last_imported_at": "2026-09-09T10:49:17.305Z",
-      "expires_at": "2026-09-09T16:49:17.305Z",
-      "next_refresh_at": "2026-09-09T16:49:17.305Z",
-      "refresh_reason": "last_scan_failed",
-      "staleness_status": "REFRESH_DUE"
+      "last_verified_at": "2026-09-09T20:53:27.347Z",
+      "expires_at": "2026-10-09T20:53:27.347Z",
+      "next_refresh_at": "2026-09-10T20:53:27.347Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:giesecke_plus_devrient_gmbh",
@@ -553,9 +554,9 @@
       ],
       "industry": "Security Technology",
       "ats": [],
-      "scan_status": "FAILED",
+      "scan_status": "PARTIAL",
       "scan_priority": 86,
-      "next_scan_at": "2026-09-09T16:49:17.305Z",
+      "next_scan_at": "2026-09-10T20:53:27.347Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -568,12 +569,12 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-09-09T10:49:17.305Z",
+      "updated_at": "2026-09-09T20:53:27.347Z",
       "last_successful_scan_at": null,
       "last_imported_at": "2026-09-09T10:49:17.305Z",
-      "expires_at": "2026-09-09T16:49:17.305Z",
-      "next_refresh_at": "2026-09-09T16:49:17.305Z",
-      "refresh_reason": "last_scan_failed",
+      "expires_at": "2026-09-10T20:53:27.347Z",
+      "next_refresh_at": "2026-09-10T20:53:27.347Z",
+      "refresh_reason": "partial_scan_recheck",
       "staleness_status": "REFRESH_DUE"
     },
     {
@@ -598,9 +599,9 @@
       ],
       "industry": "Entertainment Technology",
       "ats": [],
-      "scan_status": "FAILED",
+      "scan_status": "SUCCESS",
       "scan_priority": 86,
-      "next_scan_at": "2026-09-09T16:50:52.362Z",
+      "next_scan_at": "2026-09-10T20:53:27.347Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -613,13 +614,14 @@
         "evidence_note": "Regionale offizielle Quelle nennt CTS Eventim; Karrierebereich liegt auf der Corporate-Domain."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-09-09T10:50:52.362Z",
-      "last_successful_scan_at": null,
+      "updated_at": "2026-09-09T20:53:27.347Z",
+      "last_successful_scan_at": "2026-09-09T20:53:27.347Z",
       "last_imported_at": "2026-09-09T10:50:52.362Z",
-      "expires_at": "2026-09-09T16:50:52.362Z",
-      "next_refresh_at": "2026-09-09T16:50:52.362Z",
-      "refresh_reason": "last_scan_failed",
-      "staleness_status": "REFRESH_DUE"
+      "last_verified_at": "2026-09-09T20:53:27.347Z",
+      "expires_at": "2026-10-09T20:53:27.347Z",
+      "next_refresh_at": "2026-09-10T20:53:27.347Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:nemetschek_se",
@@ -824,9 +826,9 @@
       ],
       "industry": "Mobility Technology",
       "ats": [],
-      "scan_status": "FAILED",
+      "scan_status": "PARTIAL",
       "scan_priority": 84,
-      "next_scan_at": "2026-09-09T17:25:34.198Z",
+      "next_scan_at": "2026-09-10T20:53:27.347Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -839,12 +841,12 @@
         "evidence_note": "Offizielle Knorr-Bremse-Karriereseite fuer Muenchen als Primaerquelle gepflegt."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-09-09T11:25:34.198Z",
+      "updated_at": "2026-09-09T20:53:27.347Z",
       "last_successful_scan_at": null,
       "last_imported_at": "2026-09-09T11:25:34.198Z",
-      "expires_at": "2026-09-09T17:25:34.198Z",
-      "next_refresh_at": "2026-09-09T17:25:34.198Z",
-      "refresh_reason": "last_scan_failed",
+      "expires_at": "2026-09-10T20:53:27.347Z",
+      "next_refresh_at": "2026-09-10T20:53:27.347Z",
+      "refresh_reason": "partial_scan_recheck",
       "staleness_status": "REFRESH_DUE"
     },
     {
@@ -868,9 +870,9 @@
       ],
       "industry": "Chemicals",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "PARTIAL",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-24T00:00:00Z",
+      "next_scan_at": "2026-09-10T20:53:27.347Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -883,8 +885,13 @@
         "evidence_note": "Regionale offizielle Quelle nennt Wacker Chemie; Karrierebereich ist auf der offiziellen Domain belegt."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T20:53:27.347Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T20:53:27.347Z",
+      "expires_at": "2026-09-10T20:53:27.347Z",
+      "next_refresh_at": "2026-09-10T20:53:27.347Z",
+      "refresh_reason": "partial_scan_recheck",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:europaeisches_patentamt",
@@ -908,9 +915,9 @@
       ],
       "industry": "Public Institution",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 83,
-      "next_scan_at": "2026-08-29T00:00:00Z",
+      "next_scan_at": "2026-09-10T20:58:59.107Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -923,8 +930,14 @@
         "evidence_note": "Der priorisierte Kandidat Europaeisches Patentamt wurde ueber die offizielle EPO-Domain und das EPO-Karriereportal jobs.epo.org belegt."
       },
       "created_at": "2026-08-28T16:22:41.522Z",
-      "updated_at": "2026-08-28T16:22:41.522Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T20:58:59.107Z",
+      "last_successful_scan_at": "2026-09-09T20:58:59.107Z",
+      "last_imported_at": "2026-09-09T20:53:27.347Z",
+      "last_verified_at": "2026-09-09T20:58:59.107Z",
+      "expires_at": "2026-10-09T20:58:59.107Z",
+      "next_refresh_at": "2026-09-10T20:58:59.107Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:bwi_gmbh",
@@ -1235,9 +1248,9 @@
       ],
       "industry": "Banking",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-10T20:53:27.347Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1250,8 +1263,14 @@
         "evidence_note": "Der BayernLB-Kandidat wurde ueber die offizielle BayernLB-Domain und das Karriereportal jobs.bayernlb.de belegt."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-28T16:22:41.522Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T20:53:27.347Z",
+      "last_successful_scan_at": "2026-09-09T20:53:27.347Z",
+      "last_imported_at": "2026-09-09T20:53:27.347Z",
+      "last_verified_at": "2026-09-09T20:53:27.347Z",
+      "expires_at": "2026-10-09T20:53:27.347Z",
+      "next_refresh_at": "2026-09-10T20:53:27.347Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:bayerischer_rundfunk",
@@ -3443,7 +3462,7 @@
       "ats": [],
       "scan_status": "SUCCESS",
       "scan_priority": 75,
-      "next_scan_at": "2026-09-10T16:29:00.710Z",
+      "next_scan_at": "2026-09-10T16:29:00.71Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -3456,12 +3475,12 @@
         "evidence_note": "Der 4.screen-Kandidat wurde ueber die offizielle 4screen-Domain und die Careers-Seite mit Standortfilter Muenchen belegt."
       },
       "created_at": "2026-08-29T05:59:42.748Z",
-      "updated_at": "2026-09-09T16:29:00.710Z",
-      "last_successful_scan_at": "2026-09-09T16:29:00.710Z",
+      "updated_at": "2026-09-09T16:29:00.71Z",
+      "last_successful_scan_at": "2026-09-09T16:29:00.71Z",
       "last_imported_at": "2026-09-09T16:26:10.51Z",
-      "last_verified_at": "2026-09-09T16:29:00.710Z",
-      "expires_at": "2026-10-09T16:29:00.710Z",
-      "next_refresh_at": "2026-09-10T16:29:00.710Z",
+      "last_verified_at": "2026-09-09T16:29:00.71Z",
+      "expires_at": "2026-10-09T16:29:00.71Z",
+      "next_refresh_at": "2026-09-10T16:29:00.71Z",
       "refresh_reason": "scheduled_company_rotation",
       "staleness_status": "FRESH"
     },
@@ -26462,8 +26481,8 @@
       "employment_type": "UNKNOWN",
       "status": "UPDATED",
       "first_seen": "2026-09-09T16:26:10.51Z",
-      "last_seen": "2026-09-09T16:29:00.710Z",
-      "changed_at": "2026-09-09T16:29:00.710Z",
+      "last_seen": "2026-09-09T16:29:00.71Z",
+      "changed_at": "2026-09-09T16:29:00.71Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -26473,7 +26492,7 @@
           "Kein expliziter IT-Bezug erkennbar.",
           "Standortbezug ist unklar."
         ],
-        "evaluated_at": "2026-09-09T16:29:00.710Z"
+        "evaluated_at": "2026-09-09T16:29:00.71Z"
       },
       "priority": "UNRATED",
       "requirements": [],
@@ -26502,8 +26521,8 @@
       "employment_type": "UNKNOWN",
       "status": "UPDATED",
       "first_seen": "2026-09-09T16:26:10.51Z",
-      "last_seen": "2026-09-09T16:29:00.710Z",
-      "changed_at": "2026-09-09T16:29:00.710Z",
+      "last_seen": "2026-09-09T16:29:00.71Z",
+      "changed_at": "2026-09-09T16:29:00.71Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -26513,7 +26532,7 @@
           "Kein expliziter IT-Bezug erkennbar.",
           "Standortbezug ist unklar."
         ],
-        "evaluated_at": "2026-09-09T16:29:00.710Z"
+        "evaluated_at": "2026-09-09T16:29:00.71Z"
       },
       "priority": "UNRATED",
       "requirements": [],
@@ -26521,6 +26540,1173 @@
       "identity_basis": "CANONICAL_URL",
       "description": "Business Ops Intern – People & Culture (f/m/x) - 4screen | The Driver Interaction Platform Security notice: did you visit this site on a Windows device between 13 June and 18 August 2026? Read more Solutions 4 Automotives 4 Businesses Features Branded Pins Sponsored Search Recommendations + Detail Screen Resources Blog Case Studies Guides & Tools About us 4screen News Team Culture Careers FAQs Book a meeting Solutions 4 Automotives 4 Businesses Features Branded Pins Sponsored Search Recommendati",
       "description_source": "OFFICIAL_SOURCE"
+    },
+    {
+      "job_id": "job:company_google_germany_gmbh_official_job_id_dist",
+      "company_id": "company:google_germany_gmbh",
+      "official_url": "https://careers.google.com/jobs/dist/legal/EEOC_KnowYourRights_10_20.pdf",
+      "alternative_official_urls": [],
+      "source_id": "source:google_germany_gmbh_career",
+      "external_job_id": "dist",
+      "ats_job_id": "dist",
+      "title": "Know your rights: workplace discrimination is illegal",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "%PDF-1.4 %���� 416 0 obj > endobj xref 416 65 0000000016 00000 n 0000002167 00000 n 0000002364 00000 n 0000002487 00000 n 0000005298 00000 n 0000005349 00000 n 0000005463 00000 n 0000016795 00000 n 0000027858 00000 n 0000037795 00000 n 0000046639 00000 n 0000056165 00000 n 0000065823 00000 n 0000065960 00000 n 0000066092 00000 n 0000066231 00000 n 0000066610 00000 n 0000066988 00000 n 0000067400 00000 n 0000067897 00000 n 0000068080 00000 n 0000068192 00000 n 0000068853 00000 n 0000068880 00000",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_systems_engineer_en3_7xq",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Senior-Systems-Engineer-EN3-7XQ/1360153255",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Enfield-Senior-Systems-Engineer-EN3-7XQ",
+      "ats_job_id": "Enfield-Senior-Systems-Engineer-EN3-7XQ",
+      "title": "Senior Systems Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Senior Systems Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Si",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_production_engineer_en3_7xq",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Production-Engineer-EN3-7XQ/1334235255",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Enfield-Production-Engineer-EN3-7XQ",
+      "ats_job_id": "Enfield-Production-Engineer-EN3-7XQ",
+      "title": "Production Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Production Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_ils_engineer_en3_7xq",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-ILS-Engineer-EN3-7XQ/1354551155",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Enfield-ILS-Engineer-EN3-7XQ",
+      "ats_job_id": "Enfield-ILS-Engineer-EN3-7XQ",
+      "title": "ILS Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "ILS Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_rf_engineer_en3_7xq",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Senior-RF-Engineer-EN3-7XQ/1350822255",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Enfield-Senior-RF-Engineer-EN3-7XQ",
+      "ats_job_id": "Enfield-Senior-RF-Engineer-EN3-7XQ",
+      "title": "Senior RF Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Senior RF Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites G",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_software_engineer_en3_7xq",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Senior-Software-Engineer-EN3-7XQ/1365395955",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Enfield-Senior-Software-Engineer-EN3-7XQ",
+      "ats_job_id": "Enfield-Senior-Software-Engineer-EN3-7XQ",
+      "title": "Senior Software Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Senior Software Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home S",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar.",
+          "Titel wirkt wie Spezialisten- oder Entwicklerrolle ohne belegte Gesamtverantwortung."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_project_manager_en3_7xq",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Project-Manager-EN3-7XQ/1361861755",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Enfield-Project-Manager-EN3-7XQ",
+      "ats_job_id": "Enfield-Project-Manager-EN3-7XQ",
+      "title": "Project Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germ",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar.",
+          "Projektleitung ohne belegte IT-Gesamtverantwortung reicht nicht aus."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_customer_services_technician",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Customer-Services-Technician/1367532455",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Pretoria-Customer-Services-Technician",
+      "ats_job_id": "Pretoria-Customer-Services-Technician",
+      "title": "Customer Services Technician",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Customer Services Technician Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Ho",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_technical_sales_specialist",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Technical-Sales-Specialist/1360613455",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Pretoria-Technical-Sales-Specialist",
+      "ats_job_id": "Pretoria-Technical-Sales-Specialist",
+      "title": "Technical Sales Specialist",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Technical Sales Specialist Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar.",
+          "Titel wirkt wie Spezialisten- oder Entwicklerrolle ohne belegte Gesamtverantwortung."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_technical_trainer",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Technical-Trainer/1358899655",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Pretoria-Technical-Trainer",
+      "ats_job_id": "Pretoria-Technical-Trainer",
+      "title": "Technical Trainer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Technical Trainer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Ge",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_configuration_specialist",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Configuration-Specialist/1367319855",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Irene-Configuration-Specialist",
+      "ats_job_id": "Irene-Configuration-Specialist",
+      "title": "Configuration Specialist",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Configuration Specialist Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home S",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar.",
+          "Titel wirkt wie Spezialisten- oder Entwicklerrolle ohne belegte Gesamtverantwortung."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_production_planner",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Production-Planner/1367288955",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Pretoria-Production-Planner",
+      "ats_job_id": "Pretoria-Production-Planner",
+      "title": "Production Planner",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Production Planner Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites G",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_artisan",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Artisan/1367284655",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Irene-Artisan",
+      "ats_job_id": "Irene-Artisan",
+      "title": "Artisan",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Artisan Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Unit",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_operator",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Operator/1367282155",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Irene-Operator",
+      "ats_job_id": "Irene-Operator",
+      "title": "Operator",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Operator Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Uni",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_bid_manager",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Bid-Manager/1356210255",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Pretoria-Bid-Manager",
+      "ats_job_id": "Pretoria-Bid-Manager",
+      "title": "Bid Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Bid Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_sales_and_marketing_manager_customer_services",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Sales-and-Marketing-Manager-Customer-Services/1351297955",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Pretoria-Sales-and-Marketing-Manager-Customer-Services",
+      "ats_job_id": "Pretoria-Sales-and-Marketing-Manager-Customer-Services",
+      "title": "Sales and Marketing Manager: Customer Services",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Sales and Marketing Manager: Customer Services Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_cape_town_production_engineer",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Cape-Town-Production-Engineer/1367017755",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Cape-Town-Production-Engineer",
+      "ats_job_id": "Cape-Town-Production-Engineer",
+      "title": "Production Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Production Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_cape_town_senior_project_manager",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Cape-Town-Senior-Project-Manager/1367017955",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Cape-Town-Senior-Project-Manager",
+      "ats_job_id": "Cape-Town-Senior-Project-Manager",
+      "title": "Senior Project Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Senior Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sit",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar.",
+          "Projektleitung ohne belegte IT-Gesamtverantwortung reicht nicht aus."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_electronic_technician",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Electronic-Technician/1367022455",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Irene-Electronic-Technician",
+      "ats_job_id": "Irene-Electronic-Technician",
+      "title": "Electronic Technician",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Electronic Technician Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Site",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_development_project_manager",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Development-Project-Manager/1360363755",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Pretoria-Development-Project-Manager",
+      "ats_job_id": "Pretoria-Development-Project-Manager",
+      "title": "Development Project Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Development Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Hom",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar.",
+          "Projektleitung ohne belegte IT-Gesamtverantwortung reicht nicht aus."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_usineur_hf_32430",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Cologne-Usineur-HF-32430/1354034355",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Cologne-Usineur-HF-32430",
+      "ats_job_id": "Cologne-Usineur-HF-32430",
+      "title": "Usineur H/F",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Usineur H/F Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_soudeur_32430",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Cologne-Soudeur-32430/1345695455",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Cologne-Soudeur-32430",
+      "ats_job_id": "Cologne-Soudeur-32430",
+      "title": "Soudeur",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Soudeur Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Unit",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_chaudronnier_hf_32430",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Cologne-Chaudronnier-HF-32430/1342585755",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Cologne-Chaudronnier-HF-32430",
+      "ats_job_id": "Cologne-Chaudronnier-HF-32430",
+      "title": "Chaudronnier H/F",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Chaudronnier H/F Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Ger",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_hensoldt_ag_official_job_id_six_fours_les_plages_technicien_mco_83140",
+      "company_id": "company:hensoldt_ag",
+      "official_url": "https://jobs.hensoldt.net/job/Six-Fours-Les-Plages-Technicien-MCO-83140/1342601055",
+      "alternative_official_urls": [],
+      "source_id": "source:hensoldt_ag_career",
+      "external_job_id": "Six-Fours-Les-Plages-Technicien-MCO-83140",
+      "ats_job_id": "Six-Fours-Les-Plages-Technicien-MCO-83140",
+      "title": "Technicien MCO",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Technicien MCO Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germa",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_westminster_plant_repair_systems_manager_md_21157",
+      "company_id": "company:knorr_bremse_ag",
+      "official_url": "https://careers.knorr-bremse.com/job/Westminster-Plant-Repair-Systems-Manager-MD-21157/1291931201",
+      "alternative_official_urls": [],
+      "source_id": "source:knorr_bremse_ag_career",
+      "external_job_id": "Westminster-Plant-Repair-Systems-Manager-MD-21157",
+      "ats_job_id": "Westminster-Plant-Repair-Systems-Manager-MD-21157",
+      "title": "Plant Repair Systems Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Plant Repair Systems Manager Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the si",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_salisbury_ccbii_technician_i_nc_28146",
+      "company_id": "company:knorr_bremse_ag",
+      "official_url": "https://careers.knorr-bremse.com/job/Salisbury-CCBII-Technician-I-NC-28146/1435424233",
+      "alternative_official_urls": [],
+      "source_id": "source:knorr_bremse_ag_career",
+      "external_job_id": "Salisbury-CCBII-Technician-I-NC-28146",
+      "ats_job_id": "Salisbury-CCBII-Technician-I-NC-28146",
+      "title": "CCBII Technician I",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "CCBII Technician I Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the site and the",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_liberec_professional_buyer_for_it_category_in_indirect_purchasing_460_01",
+      "company_id": "company:knorr_bremse_ag",
+      "official_url": "https://careers.knorr-bremse.com/job/Liberec-Professional-Buyer-for-IT-Category-in-Indirect-Purchasing-460-01/1435489433",
+      "alternative_official_urls": [],
+      "source_id": "source:knorr_bremse_ag_career",
+      "external_job_id": "Liberec-Professional-Buyer-for-IT-Category-in-Indirect-Purchasing-460-01",
+      "ats_job_id": "Liberec-Professional-Buyer-for-IT-Category-in-Indirect-Purchasing-460-01",
+      "title": "Professional Buyer for IT Category in Indirect Purchasing",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Professional Buyer for IT Category in Indirect Purchasing Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interes",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 8,
+        "reasons": [
+          "IT-Bezug ist explizit vorhanden."
+        ],
+        "rejected_reasons": [
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_westminster_rail_services_material_handler_i_md_21157",
+      "company_id": "company:knorr_bremse_ag",
+      "official_url": "https://careers.knorr-bremse.com/job/Westminster-Rail-Services-Material-Handler-I-MD-21157/1435058133",
+      "alternative_official_urls": [],
+      "source_id": "source:knorr_bremse_ag_career",
+      "external_job_id": "Westminster-Rail-Services-Material-Handler-I-MD-21157",
+      "ats_job_id": "Westminster-Rail-Services-Material-Handler-I-MD-21157",
+      "title": "Rail Services Material Handler I",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Rail Services Material Handler I Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of th",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_knorr_bremse_ag_canonical_url_https_careers_knorr_bremse_com_content_content_functional_areas_locale_hu_hu",
+      "company_id": "company:knorr_bremse_ag",
+      "official_url": "https://careers.knorr-bremse.com/content/content-functional-areas?locale=hu_HU",
+      "alternative_official_urls": [],
+      "source_id": "source:knorr_bremse_ag_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Funkcionális területek",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Careers at Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the site and the services we are able",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T20:53:27.347Z",
+      "last_seen": "2026-09-09T20:53:27.347Z",
+      "changed_at": "2026-09-09T20:53:27.347Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T20:53:27.347Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
     }
   ],
   "job_sources": [
@@ -37415,7 +38601,7 @@
     },
     {
       "scan_run_id": "scanrun:20260909T162900710Z",
-      "started_at": "2026-09-09T16:29:00.710Z",
+      "started_at": "2026-09-09T16:29:00.71Z",
       "finished_at": "2026-09-09T16:29:08.243Z",
       "status": "SUCCESS",
       "company_ids": [
@@ -37436,6 +38622,168 @@
         "logs/jobagent/daily-run-20260909T162900710Z.json",
         "logs/jobagent/daily-run-20260909T162900710Z.md",
         "html/jobagent/daily-run-20260909T162900710Z.html"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "started_at": "2026-09-09T20:53:27.347Z",
+      "finished_at": "2026-09-09T20:54:23.053Z",
+      "status": "PARTIAL",
+      "company_ids": [
+        "company:giesecke_plus_devrient_gmbh",
+        "company:google_germany_gmbh",
+        "company:cts_eventim_ag_and_co_kgaa",
+        "company:hensoldt_ag",
+        "company:knorr_bremse_ag",
+        "company:wacker_chemie_ag",
+        "company:europaeisches_patentamt",
+        "company:bayerische_landesbank"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 416,
+        "companies_due": 416,
+        "companies_selected": 8,
+        "companies_skipped": 479,
+        "limit": 8,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:antenne_bayern_gmbh_and_co_kg",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:apple_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aquabench_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T205327347Z.json",
+        "logs/jobagent/daily-run-20260909T205327347Z.md",
+        "html/jobagent/daily-run-20260909T205327347Z.html"
+      ],
+      "errors": [
+        "TECHNICAL_LIMITATION"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260909T205859107Z",
+      "started_at": "2026-09-09T20:58:59.107Z",
+      "finished_at": "2026-09-09T20:59:07.988Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:europaeisches_patentamt"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 25,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T205859107Z.json",
+        "logs/jobagent/daily-run-20260909T205859107Z.md",
+        "html/jobagent/daily-run-20260909T205859107Z.html"
       ],
       "errors": []
     }
@@ -38124,6 +39472,132 @@
       "source_id": "source:4_screen_gmbh_career",
       "started_at": "2026-09-09T16:29:02.654Z",
       "finished_at": "2026-09-09T16:29:08.091Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:giesecke_plus_devrient_gmbh_giesecke_plus_devrient_gmbh_career_20260909t205329302z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:giesecke_plus_devrient_gmbh",
+      "source_id": "source:giesecke_plus_devrient_gmbh_career",
+      "started_at": "2026-09-09T20:53:29.302Z",
+      "finished_at": "2026-09-09T20:53:33.087Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "NO_JOBS_FOUND",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:google_germany_gmbh_google_germany_gmbh_career_20260909t205333098z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:google_germany_gmbh",
+      "source_id": "source:google_germany_gmbh_career",
+      "started_at": "2026-09-09T20:53:33.098Z",
+      "finished_at": "2026-09-09T20:53:35.076Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:cts_eventim_ag_and_co_kgaa_cts_eventim_ag_and_co_kgaa_career_20260909t205335096z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:cts_eventim_ag_and_co_kgaa",
+      "source_id": "source:cts_eventim_ag_and_co_kgaa_career",
+      "started_at": "2026-09-09T20:53:35.096Z",
+      "finished_at": "2026-09-09T20:53:36.018Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:hensoldt_ag_hensoldt_ag_career_20260909t205336023z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:hensoldt_ag",
+      "source_id": "source:hensoldt_ag_career",
+      "started_at": "2026-09-09T20:53:36.023Z",
+      "finished_at": "2026-09-09T20:53:58.923Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:knorr_bremse_ag_knorr_bremse_ag_career_20260909t205358933z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:knorr_bremse_ag",
+      "source_id": "source:knorr_bremse_ag_career",
+      "started_at": "2026-09-09T20:53:58.933Z",
+      "finished_at": "2026-09-09T20:54:07.7Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:wacker_chemie_ag_wacker_chemie_ag_career_20260909t205407706z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:wacker_chemie_ag",
+      "source_id": "source:wacker_chemie_ag_career",
+      "started_at": "2026-09-09T20:54:07.706Z",
+      "finished_at": "2026-09-09T20:54:13.135Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "NO_JOBS_FOUND",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:europaeisches_patentamt_europaeisches_patentamt_career_20260909t205413163z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:europaeisches_patentamt",
+      "source_id": "source:europaeisches_patentamt_career",
+      "started_at": "2026-09-09T20:54:13.163Z",
+      "finished_at": "2026-09-09T20:54:20.351Z",
+      "status": "FAILED",
+      "adapter": "daily-run-adapter-wrapper",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 599,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:bayerische_landesbank_bayerische_landesbank_career_20260909t205420354z",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "company_id": "company:bayerische_landesbank",
+      "source_id": "source:bayerische_landesbank_career",
+      "started_at": "2026-09-09T20:54:20.354Z",
+      "finished_at": "2026-09-09T20:54:21.923Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:europaeisches_patentamt_europaeisches_patentamt_career_20260909t205901023z",
+      "scan_run_id": "scanrun:20260909T205859107Z",
+      "company_id": "company:europaeisches_patentamt",
+      "source_id": "source:europaeisches_patentamt_career",
+      "started_at": "2026-09-09T20:59:01.023Z",
+      "finished_at": "2026-09-09T20:59:07.922Z",
       "status": "SUCCESS",
       "adapter": "live-html-adapter",
       "error_class": "NONE",
@@ -43072,7 +44546,7 @@
       "job_id": "job:company_4_screen_gmbh_canonical_url_https_4screen_com_position_initiative_applications_f_m_x",
       "scan_run_id": "scanrun:20260909T162900710Z",
       "source_id": "source:4_screen_gmbh_career",
-      "captured_at": "2026-09-09T16:29:00.710Z",
+      "captured_at": "2026-09-09T16:29:00.71Z",
       "content_hash": "29875145816dd427b019d06f60a2a15fd18f6ea1e62e6cbfa04b47c65bb41b86",
       "status": "UPDATED",
       "title": "Initiative Applications (f/m/x)",
@@ -43092,7 +44566,7 @@
       "job_id": "job:company_4_screen_gmbh_canonical_url_https_4screen_com_position_business_ops_intern_people_culture_f_m_x_2",
       "scan_run_id": "scanrun:20260909T162900710Z",
       "source_id": "source:4_screen_gmbh_career",
-      "captured_at": "2026-09-09T16:29:00.710Z",
+      "captured_at": "2026-09-09T16:29:00.71Z",
       "content_hash": "6b3e31bd2fd2b717c97db7ddcf9c5c90be6cba1a4114a1d1d26e8fa236ccd41e",
       "status": "UPDATED",
       "title": "Business Ops Intern – People & Culture (f/m/x)",
@@ -43106,6 +44580,586 @@
       "official_url": "https://4screen.com/position/business-ops-intern-people-culture-f-m-x-2",
       "summary": "Business Ops Intern – People & Culture (f/m/x) - 4screen | The Driver Interaction Platform Security notice: did you visit this site on a Windows device between 13 June and 18 August 2026? Read more Solutions 4 Automotives 4 Businesses Features Branded Pins Sponsored Search Recommendations + Detail Screen Resources Blog Case Studies Guides & Tools About us 4screen News Team Culture Careers FAQs Book a meeting Solutions 4 Automotives 4 Businesses Features Branded Pins Sponsored Search Recommendati",
       "description": "Business Ops Intern – People & Culture (f/m/x) - 4screen | The Driver Interaction Platform Security notice: did you visit this site on a Windows device between 13 June and 18 August 2026? Read more Solutions 4 Automotives 4 Businesses Features Branded Pins Sponsored Search Recommendations + Detail Screen Resources Blog Case Studies Guides & Tools About us 4screen News Team Culture Careers FAQs Book a meeting Solutions 4 Automotives 4 Businesses Features Branded Pins Sponsored Search Recommendati"
+    },
+    {
+      "snapshot_id": "snapshot:company_google_germany_gmbh_official_job_id_dist_20260909t205327347z",
+      "job_id": "job:company_google_germany_gmbh_official_job_id_dist",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:google_germany_gmbh_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "e1ae67e1f119843fd64f3c3822bf32314c1ae5a876007f680a904c20898467b2",
+      "status": "NEW",
+      "title": "Know your rights: workplace discrimination is illegal",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://careers.google.com/jobs/dist/legal/EEOC_KnowYourRights_10_20.pdf",
+      "summary": "%PDF-1.4 %���� 416 0 obj > endobj xref 416 65 0000000016 00000 n 0000002167 00000 n 0000002364 00000 n 0000002487 00000 n 0000005298 00000 n 0000005349 00000 n 0000005463 00000 n 0000016795 00000 n 0000027858 00000 n 0000037795 00000 n 0000046639 00000 n 0000056165 00000 n 0000065823 00000 n 0000065960 00000 n 0000066092 00000 n 0000066231 00000 n 0000066610 00000 n 0000066988 00000 n 0000067400 00000 n 0000067897 00000 n 0000068080 00000 n 0000068192 00000 n 0000068853 00000 n 0000068880 00000",
+      "description": "%PDF-1.4 %���� 416 0 obj > endobj xref 416 65 0000000016 00000 n 0000002167 00000 n 0000002364 00000 n 0000002487 00000 n 0000005298 00000 n 0000005349 00000 n 0000005463 00000 n 0000016795 00000 n 0000027858 00000 n 0000037795 00000 n 0000046639 00000 n 0000056165 00000 n 0000065823 00000 n 0000065960 00000 n 0000066092 00000 n 0000066231 00000 n 0000066610 00000 n 0000066988 00000 n 0000067400 00000 n 0000067897 00000 n 0000068080 00000 n 0000068192 00000 n 0000068853 00000 n 0000068880 00000"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_enfield_senior_systems_engineer_en3_7xq_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_systems_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "f0587f0a40b7b44559125d3b9fea19da7ff6ba1b68e1cc3dd55c8b28a095c964",
+      "status": "NEW",
+      "title": "Senior Systems Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Senior-Systems-Engineer-EN3-7XQ/1360153255",
+      "summary": "Senior Systems Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Si",
+      "description": "Senior Systems Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Si"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_enfield_production_engineer_en3_7xq_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_production_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "b4d909641958065c574a71eeec92623c958b2b4060d5c2a349628a31003e592e",
+      "status": "NEW",
+      "title": "Production Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Production-Engineer-EN3-7XQ/1334235255",
+      "summary": "Production Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites",
+      "description": "Production Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_enfield_ils_engineer_en3_7xq_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_ils_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "25eeff193a73329c7024da3f2cab76620b24ae27ea52ce21be78c6db211ca8d5",
+      "status": "NEW",
+      "title": "ILS Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-ILS-Engineer-EN3-7XQ/1354551155",
+      "summary": "ILS Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany",
+      "description": "ILS Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_enfield_senior_rf_engineer_en3_7xq_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_rf_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "98e49201aa4a073aa66e46fdc49594e0653c4011dad1aa8e50d18b90c4c3836f",
+      "status": "NEW",
+      "title": "Senior RF Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Senior-RF-Engineer-EN3-7XQ/1350822255",
+      "summary": "Senior RF Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites G",
+      "description": "Senior RF Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites G"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_enfield_senior_software_engineer_en3_7xq_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_software_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "eb0552a8171e4767eda73754bd9fac09f7dd637ef2d0a32fa6667b757f86a3df",
+      "status": "NEW",
+      "title": "Senior Software Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Senior-Software-Engineer-EN3-7XQ/1365395955",
+      "summary": "Senior Software Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home S",
+      "description": "Senior Software Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home S"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_enfield_project_manager_en3_7xq_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_project_manager_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "f9f79b89d3519c98fd27caee7f3f15cb9382563b29e85979c77341fb4c701009",
+      "status": "NEW",
+      "title": "Project Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Enfield-Project-Manager-EN3-7XQ/1361861755",
+      "summary": "Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germ",
+      "description": "Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germ"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_pretoria_customer_services_technician_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_customer_services_technician",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "cfc12aa4be14601994782ec6ac71b8e21041f03440c9355202977d1e6604ac13",
+      "status": "NEW",
+      "title": "Customer Services Technician",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Customer-Services-Technician/1367532455",
+      "summary": "Customer Services Technician Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Ho",
+      "description": "Customer Services Technician Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Ho"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_pretoria_technical_sales_specialist_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_technical_sales_specialist",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "f21efef5b0cce7a96693f9bdc4ec57b79442cab7ee40be7d87eb6d0acc03bb18",
+      "status": "NEW",
+      "title": "Technical Sales Specialist",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Technical-Sales-Specialist/1360613455",
+      "summary": "Technical Sales Specialist Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home",
+      "description": "Technical Sales Specialist Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_pretoria_technical_trainer_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_technical_trainer",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "226490eec3de41d00603260e64340a924d32263fe96098cf1530b7a2e9e875f9",
+      "status": "NEW",
+      "title": "Technical Trainer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Technical-Trainer/1358899655",
+      "summary": "Technical Trainer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Ge",
+      "description": "Technical Trainer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Ge"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_irene_configuration_specialist_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_configuration_specialist",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "cb50e63e82ab5b23c6e8bc60c65ea37201e4664d1dda12c1efb5854b411dd9cf",
+      "status": "NEW",
+      "title": "Configuration Specialist",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Configuration-Specialist/1367319855",
+      "summary": "Configuration Specialist Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home S",
+      "description": "Configuration Specialist Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home S"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_pretoria_production_planner_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_production_planner",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "ae87797f7011421e3a8c91d8cd5f768787e8b004abccff4a11a0329aab6a3458",
+      "status": "NEW",
+      "title": "Production Planner",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Production-Planner/1367288955",
+      "summary": "Production Planner Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites G",
+      "description": "Production Planner Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites G"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_irene_artisan_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_artisan",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "091bb562f4452df63927773179403435c8ae3ed9c4b1253795860a43f35917b7",
+      "status": "NEW",
+      "title": "Artisan",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Artisan/1367284655",
+      "summary": "Artisan Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Unit",
+      "description": "Artisan Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Unit"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_irene_operator_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_operator",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "ad1dc1b0396210b7cdb92fe46ea2ade9434081f2346fe1a537ca042af637b871",
+      "status": "NEW",
+      "title": "Operator",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Operator/1367282155",
+      "summary": "Operator Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Uni",
+      "description": "Operator Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Uni"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_pretoria_bid_manager_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_bid_manager",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "abdb1d9938829ea7b047f1f075e597870169fa243a1ecb11a1aa347afe57070e",
+      "status": "NEW",
+      "title": "Bid Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Bid-Manager/1356210255",
+      "summary": "Bid Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany",
+      "description": "Bid Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_pretoria_sales_and_marketing_manager_customer_services_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_sales_and_marketing_manager_customer_services",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "c1ffaffe4bcdc0b5f784a4344a3ee1d40e3cc2e59bd604743384740a84891fd1",
+      "status": "NEW",
+      "title": "Sales and Marketing Manager: Customer Services",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Sales-and-Marketing-Manager-Customer-Services/1351297955",
+      "summary": "Sales and Marketing Manager: Customer Services Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile",
+      "description": "Sales and Marketing Manager: Customer Services Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_cape_town_production_engineer_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cape_town_production_engineer",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "5969507090491f72722a05bad8c42f88e2c29e62746adde8a59a99388426f6e5",
+      "status": "NEW",
+      "title": "Production Engineer",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Cape-Town-Production-Engineer/1367017755",
+      "summary": "Production Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites",
+      "description": "Production Engineer Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_cape_town_senior_project_manager_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cape_town_senior_project_manager",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "5f953a590ae4c108de60cd99c6f71c38fb56b87d40b598f620828092272e04c6",
+      "status": "NEW",
+      "title": "Senior Project Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Cape-Town-Senior-Project-Manager/1367017955",
+      "summary": "Senior Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sit",
+      "description": "Senior Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sit"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_irene_electronic_technician_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_electronic_technician",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "d51ce4053f321d0c76026c73262b98c7f3098644f441193b590d198964414585",
+      "status": "NEW",
+      "title": "Electronic Technician",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Irene-Electronic-Technician/1367022455",
+      "summary": "Electronic Technician Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Site",
+      "description": "Electronic Technician Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Site"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_pretoria_development_project_manager_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_development_project_manager",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "88e2f5ce6ec3961baa0f6f2e9c7406ab4d00f7b425df51bfaa863b37eb5685ca",
+      "status": "NEW",
+      "title": "Development Project Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Pretoria-Development-Project-Manager/1360363755",
+      "summary": "Development Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Hom",
+      "description": "Development Project Manager Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Hom"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_cologne_usineur_hf_32430_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_usineur_hf_32430",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "84d9bc53ef61a88c9f342e022017c64f2271d5731d0d108b4090fcdd55dd659e",
+      "status": "NEW",
+      "title": "Usineur H/F",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Cologne-Usineur-HF-32430/1354034355",
+      "summary": "Usineur H/F Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany",
+      "description": "Usineur H/F Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_cologne_soudeur_32430_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_soudeur_32430",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "a3d36e72cb698e3c8a044fe6775cf7c13ff1b75a9d480718218a66e3d156724c",
+      "status": "NEW",
+      "title": "Soudeur",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Cologne-Soudeur-32430/1345695455",
+      "summary": "Soudeur Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Unit",
+      "description": "Soudeur Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany Unit"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_cologne_chaudronnier_hf_32430_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_chaudronnier_hf_32430",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "9daab9e482aaada378a572676837f7efc31518aa39dba33366a736b420c54622",
+      "status": "NEW",
+      "title": "Chaudronnier H/F",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Cologne-Chaudronnier-HF-32430/1342585755",
+      "summary": "Chaudronnier H/F Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Ger",
+      "description": "Chaudronnier H/F Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Ger"
+    },
+    {
+      "snapshot_id": "snapshot:company_hensoldt_ag_official_job_id_six_fours_les_plages_technicien_mco_83140_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_six_fours_les_plages_technicien_mco_83140",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:hensoldt_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "4e0d118d6b56acdd7e7bc519003da44a9dd9abb51f25d7563b98ff4d77aeb6a7",
+      "status": "NEW",
+      "title": "Technicien MCO",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.hensoldt.net/job/Six-Fours-Les-Plages-Technicien-MCO-83140/1342601055",
+      "summary": "Technicien MCO Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germa",
+      "description": "Technicien MCO Job Details | HENSOLDT Skip to main content Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germany United Kingdom South Africa France Career Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Language Deutsch (Deutschland) English (United States) Français (France) View Profile Employee Login Home Sites Germa"
+    },
+    {
+      "snapshot_id": "snapshot:company_knorr_bremse_ag_official_job_id_westminster_plant_repair_systems_manager_md_21157_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_westminster_plant_repair_systems_manager_md_21157",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:knorr_bremse_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "ca1aabe36789eaf48c81c7a1974287489a4284834673d67e3ce8289615ec08cf",
+      "status": "NEW",
+      "title": "Plant Repair Systems Manager",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://careers.knorr-bremse.com/job/Westminster-Plant-Repair-Systems-Manager-MD-21157/1291931201",
+      "summary": "Plant Repair Systems Manager Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the si",
+      "description": "Plant Repair Systems Manager Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the si"
+    },
+    {
+      "snapshot_id": "snapshot:company_knorr_bremse_ag_official_job_id_salisbury_ccbii_technician_i_nc_28146_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_salisbury_ccbii_technician_i_nc_28146",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:knorr_bremse_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "419bc3cf928acfcd543eddc1612fd38ffe2d26ff926a510ae6c63c0100d94835",
+      "status": "NEW",
+      "title": "CCBII Technician I",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://careers.knorr-bremse.com/job/Salisbury-CCBII-Technician-I-NC-28146/1435424233",
+      "summary": "CCBII Technician I Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the site and the",
+      "description": "CCBII Technician I Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the site and the"
+    },
+    {
+      "snapshot_id": "snapshot:company_knorr_bremse_ag_official_job_id_liberec_professional_buyer_for_it_category_in_indirect_purchasing_460_01_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_liberec_professional_buyer_for_it_category_in_indirect_purchasing_460_01",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:knorr_bremse_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "0cc433fd106de30baad9b3e26450038897a74b8d96c22bf5f68f5016aacca6bb",
+      "status": "NEW",
+      "title": "Professional Buyer for IT Category in Indirect Purchasing",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://careers.knorr-bremse.com/job/Liberec-Professional-Buyer-for-IT-Category-in-Indirect-Purchasing-460-01/1435489433",
+      "summary": "Professional Buyer for IT Category in Indirect Purchasing Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interes",
+      "description": "Professional Buyer for IT Category in Indirect Purchasing Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interes"
+    },
+    {
+      "snapshot_id": "snapshot:company_knorr_bremse_ag_official_job_id_westminster_rail_services_material_handler_i_md_21157_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_westminster_rail_services_material_handler_i_md_21157",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:knorr_bremse_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "86b252074efa0adf515a1d0886477d94dd1bdc94e0e3799376da9044cda6e58d",
+      "status": "NEW",
+      "title": "Rail Services Material Handler I",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://careers.knorr-bremse.com/job/Westminster-Rail-Services-Material-Handler-I-MD-21157/1435058133",
+      "summary": "Rail Services Material Handler I Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of th",
+      "description": "Rail Services Material Handler I Job Details | Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of th"
+    },
+    {
+      "snapshot_id": "snapshot:company_knorr_bremse_ag_canonical_url_https_careers_knorr_bremse_com_content_content_functional_areas_locale_hu_hu_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_canonical_url_https_careers_knorr_bremse_com_content_content_functional_areas_locale_hu_hu",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "source_id": "source:knorr_bremse_ag_career",
+      "captured_at": "2026-09-09T20:53:27.347Z",
+      "content_hash": "308c1b86b72eba5846e18126524aaa74820b84b27804bdc90063e4977ea79f5d",
+      "status": "NEW",
+      "title": "Funkcionális területek",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://careers.knorr-bremse.com/content/content-functional-areas?locale=hu_HU",
+      "summary": "Careers at Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the site and the services we are able",
+      "description": "Careers at Knorr-Bremse We use cookies to offer you the best possible website experience. Your cookie preferences will be stored in your browser’s local storage. This includes cookies necessary for the website's operation. Additionally, you can freely decide and change any time whether you accept cookies or choose to opt out of cookies to improve website's performance, as well as cookies used to display content tailored to your interests. Your experience of the site and the services we are able"
     }
   ],
   "change_events": [
@@ -47016,7 +49070,7 @@
       "job_id": "job:company_4_screen_gmbh_canonical_url_https_4screen_com_position_initiative_applications_f_m_x",
       "scan_run_id": "scanrun:20260909T162900710Z",
       "event_type": "JOB_UPDATED",
-      "created_at": "2026-09-09T16:29:00.710Z",
+      "created_at": "2026-09-09T16:29:00.71Z",
       "old_status": "NEW",
       "new_status": "UPDATED",
       "changed_fields": [
@@ -47031,7 +49085,7 @@
       "job_id": "job:company_4_screen_gmbh_canonical_url_https_4screen_com_position_business_ops_intern_people_culture_f_m_x_2",
       "scan_run_id": "scanrun:20260909T162900710Z",
       "event_type": "JOB_UPDATED",
-      "created_at": "2026-09-09T16:29:00.710Z",
+      "created_at": "2026-09-09T16:29:00.71Z",
       "old_status": "NEW",
       "new_status": "UPDATED",
       "changed_fields": [
@@ -47040,6 +49094,441 @@
         "status"
       ],
       "reason": "Identitaet ueber CANONICAL_URL wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_google_germany_gmbh_official_job_id_dist_created_20260909t205327347z",
+      "job_id": "job:company_google_germany_gmbh_official_job_id_dist",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_enfield_senior_systems_engineer_en3_7xq_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_systems_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_enfield_production_engineer_en3_7xq_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_production_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_enfield_ils_engineer_en3_7xq_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_ils_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_enfield_senior_rf_engineer_en3_7xq_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_rf_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_enfield_senior_software_engineer_en3_7xq_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_senior_software_engineer_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_enfield_project_manager_en3_7xq_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_enfield_project_manager_en3_7xq",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_pretoria_customer_services_technician_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_customer_services_technician",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_pretoria_technical_sales_specialist_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_technical_sales_specialist",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_pretoria_technical_trainer_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_technical_trainer",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_irene_configuration_specialist_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_configuration_specialist",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_pretoria_production_planner_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_production_planner",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_irene_artisan_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_artisan",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_irene_operator_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_operator",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_pretoria_bid_manager_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_bid_manager",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_pretoria_sales_and_marketing_manager_customer_services_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_sales_and_marketing_manager_customer_services",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_cape_town_production_engineer_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cape_town_production_engineer",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_cape_town_senior_project_manager_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cape_town_senior_project_manager",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_irene_electronic_technician_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_irene_electronic_technician",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_pretoria_development_project_manager_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_pretoria_development_project_manager",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_cologne_usineur_hf_32430_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_usineur_hf_32430",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_cologne_soudeur_32430_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_soudeur_32430",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_cologne_chaudronnier_hf_32430_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_cologne_chaudronnier_hf_32430",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_hensoldt_ag_official_job_id_six_fours_les_plages_technicien_mco_83140_created_20260909t205327347z",
+      "job_id": "job:company_hensoldt_ag_official_job_id_six_fours_les_plages_technicien_mco_83140",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_knorr_bremse_ag_official_job_id_westminster_plant_repair_systems_manager_md_21157_created_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_westminster_plant_repair_systems_manager_md_21157",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_knorr_bremse_ag_official_job_id_salisbury_ccbii_technician_i_nc_28146_created_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_salisbury_ccbii_technician_i_nc_28146",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_knorr_bremse_ag_official_job_id_liberec_professional_buyer_for_it_category_in_indirect_purchasing_460_01_created_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_liberec_professional_buyer_for_it_category_in_indirect_purchasing_460_01",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_knorr_bremse_ag_official_job_id_westminster_rail_services_material_handler_i_md_21157_created_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_official_job_id_westminster_rail_services_material_handler_i_md_21157",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_knorr_bremse_ag_canonical_url_https_careers_knorr_bremse_com_content_content_functional_areas_locale_hu_hu_created_20260909t205327347z",
+      "job_id": "job:company_knorr_bremse_ag_canonical_url_https_careers_knorr_bremse_com_content_content_functional_areas_locale_hu_hu",
+      "scan_run_id": "scanrun:20260909T205327347Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T20:53:27.347Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
     }
   ],
   "discovery_inventory": [
