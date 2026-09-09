@@ -183,6 +183,18 @@ function Test-JobAgentLiveDetailUrlPattern {
     return $Url -match '(?i)(jobid=|job_id=|gh_jid=|/job-details/[^/?#]+|/vacanc(y|ies)/[^/?#]+|/position/[^/?#]+|/posting/[^/?#]+|/requisition/[^/?#]+|lever\.co/[^/?#]+/[^/?#]+|workdayjobs.*/job/|smartrecruiters.*/jobs?/[^/?#]+|recruitee.*/o/[^/?#]+|join\.com.*/jobs?/[^/?#]+|personio.*/job/|softgarden.*/job/|ashbyhq.*/[^/?#]+|greenhouse\.io/[^/?#]+/jobs/[^/?#]+)'
 }
 
+function Test-JobAgentLiveExcludedContentUrl {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][string]$Url)
+
+    if (-not [Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
+        return $true
+    }
+
+    $path = ([Uri]$Url).AbsolutePath.ToLowerInvariant()
+    return $path -match '(^|/)(news(room)?|stories|story|blog|press|media|event|events|case-stud(y|ies)|insights?)(/|$)'
+}
+
 function Test-JobAgentLiveCandidateText {
     [CmdletBinding()]
     param(
@@ -209,6 +221,10 @@ function Test-JobAgentLiveConcreteJobCandidate {
         [Parameter(Mandatory)][string]$Url,
         [Parameter()][string[]]$SearchTerms = @()
     )
+
+    if (Test-JobAgentLiveExcludedContentUrl -Url $Url) {
+        return $false
+    }
 
     if (Test-JobAgentLiveDetailUrlPattern -Url $Url) {
         return $true
@@ -372,8 +388,8 @@ function Get-JobAgentLiveNextPageUrls {
             $absolute = ConvertTo-JobAgentLiveEvaluationUrl -Url ([Uri]::new($baseUri, $href).AbsoluteUri)
             try {
                 $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
-                if ($evaluation.is_official -eq $true -and $seen.Add([string]$evaluation.canonical_url)) {
-                    $urls.Add([string]$evaluation.canonical_url)
+                if ($evaluation.is_official -eq $true -and $seen.Add($absolute)) {
+                    $urls.Add($absolute)
                 }
             }
             catch {
@@ -497,19 +513,129 @@ function Get-JobAgentLiveJsonLdNodes {
 
     $nodes.Add($Node)
     $propertyNames = @($Node.PSObject.Properties | ForEach-Object { $_.Name })
-    foreach ($propertyName in @('@graph', 'graph', 'itemListElement', 'jobs', 'postings', 'positions', 'results', 'openings')) {
+    foreach ($propertyName in @('@graph', 'graph', 'itemListElement', 'jobs', 'postings', 'positions', 'results', 'openings', 'data', 'result', 'allGreenhouseJob', 'edges')) {
         if ($propertyNames -contains $propertyName) {
             foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.$propertyName)) {
                 $nodes.Add($resolved)
             }
         }
     }
-    if ($propertyNames -contains 'item') {
-        foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.item)) {
-            $nodes.Add($resolved)
+    foreach ($propertyName in @('item', 'node')) {
+        if ($propertyNames -contains $propertyName) {
+            foreach ($resolved in @(Get-JobAgentLiveJsonLdNodes -Node $Node.$propertyName)) {
+                $nodes.Add($resolved)
+            }
         }
     }
     return $nodes.ToArray()
+}
+
+function ConvertTo-JobAgentLiveSlug {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][AllowEmptyString()][string]$Value)
+
+    $normalized = $Value.ToLowerInvariant()
+    $normalized = $normalized.Normalize([Text.NormalizationForm]::FormD)
+    $normalized = [regex]::Replace($normalized, '\p{Mn}', '')
+    $normalized = [regex]::Replace($normalized, '[^a-z0-9]+', '-').Trim('-')
+    if ([string]::IsNullOrWhiteSpace($normalized)) {
+        return 'job'
+    }
+    return $normalized
+}
+
+function ConvertTo-JobAgentLiveGreenhouseDetailUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][string]$JobId,
+        [Parameter(Mandatory)][string]$Title
+    )
+
+    if (-not [Uri]::IsWellFormedUriString($BaseUrl, [UriKind]::Absolute)) {
+        return $null
+    }
+
+    $uri = [Uri]$BaseUrl
+    $path = $uri.AbsolutePath.TrimEnd('/')
+    if ($path -match '(?i)/page-data/' -or [string]::IsNullOrWhiteSpace($path)) {
+        return $null
+    }
+    if ($path -notmatch '(?i)/jobs$') {
+        $path = "$path/jobs"
+    }
+
+    $builder = [UriBuilder]::new($uri.Scheme, $uri.Host, $uri.Port, "$path/$JobId-$(ConvertTo-JobAgentLiveSlug -Value $Title)")
+    $builder.Query = "gh_jid=$JobId"
+    return $builder.Uri.AbsoluteUri
+}
+
+function Get-JobAgentLiveGatsbyStaticQueryUrls {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxUrls = 10
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Html)) {
+        return @()
+    }
+
+    try {
+        $baseUri = [Uri]$BaseUrl
+    }
+    catch {
+        return @()
+    }
+
+    $hashes = [Collections.Generic.List[string]]::new()
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($match in [regex]::Matches($Html, '"staticQueryHashes"\s*:\s*\[(?<hashes>.*?)\]', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)) {
+        foreach ($hashMatch in [regex]::Matches([string]$match.Groups['hashes'].Value, '"(?<hash>[0-9]{6,})"')) {
+            $hash = [string]$hashMatch.Groups['hash'].Value
+            if ($seen.Add($hash)) {
+                $hashes.Add($hash)
+            }
+            if ($hashes.Count -ge $MaxUrls) {
+                break
+            }
+        }
+        if ($hashes.Count -ge $MaxUrls) {
+            break
+        }
+    }
+
+    foreach ($hashMatch in [regex]::Matches($Html, '/page-data/sq/d/(?<hash>[0-9]{6,})\.json', [Text.RegularExpressions.RegexOptions]::IgnoreCase)) {
+        if ($hashes.Count -ge $MaxUrls) {
+            break
+        }
+        $hash = [string]$hashMatch.Groups['hash'].Value
+        if ($seen.Add($hash)) {
+            $hashes.Add($hash)
+        }
+    }
+
+    return @($hashes | ForEach-Object {
+            ([Uri]::new($baseUri, "/page-data/sq/d/$_.json")).AbsoluteUri
+        })
+}
+
+function Add-JobAgentLiveSourcePageQueueItem {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][System.Collections.Generic.Queue[object]]$Queue,
+        [Parameter(Mandatory)][System.Collections.Generic.HashSet[string]]$Seen,
+        [Parameter(Mandatory)][string]$Url,
+        [Parameter(Mandatory)][string]$ParseBaseUrl
+    )
+
+    if ($Seen.Add($Url)) {
+        $Queue.Enqueue([pscustomobject]@{
+                url = $Url
+                parse_base_url = $ParseBaseUrl
+        })
+    }
 }
 
 function Get-JobAgentLiveStructuredValue {
@@ -538,15 +664,22 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
     )
 
     $scriptMatches = [regex]::Matches($Html, '<script\b[^>]*type\s*=\s*["'']application/(?:ld\+json|json)["''][^>]*>(?<json>.*?)</script>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+    $jsonTexts = New-Object System.Collections.Generic.List[string]
+    foreach ($match in $scriptMatches) {
+        $jsonTexts.Add([Net.WebUtility]::HtmlDecode($match.Groups['json'].Value).Trim())
+    }
+    $plainContent = $Html.Trim()
+    if ($jsonTexts.Count -eq 0 -and ($plainContent.StartsWith('{') -or $plainContent.StartsWith('['))) {
+        $jsonTexts.Add($plainContent)
+    }
     $candidates = New-Object System.Collections.Generic.List[object]
     $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
 
-    foreach ($match in $scriptMatches) {
+    foreach ($jsonText in $jsonTexts) {
         if ($candidates.Count -ge $MaxResults) {
             break
         }
 
-        $jsonText = [Net.WebUtility]::HtmlDecode($match.Groups['json'].Value).Trim()
         if ([string]::IsNullOrWhiteSpace($jsonText)) {
             continue
         }
@@ -573,6 +706,23 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
                 @('apply_url'),
                 @('applyUrl')
             )
+            $title = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('title'),
+                @('text'),
+                @('name')
+            )
+            if ([string]::IsNullOrWhiteSpace($title)) {
+                continue
+            }
+
+            $greenhouseJobId = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
+                @('gh_Id'),
+                @('gh_id'),
+                @('ghJid')
+            )
+            if ([string]::IsNullOrWhiteSpace($detailUrlRaw) -and -not [string]::IsNullOrWhiteSpace($greenhouseJobId)) {
+                $detailUrlRaw = ConvertTo-JobAgentLiveGreenhouseDetailUrl -BaseUrl $BaseUrl -JobId $greenhouseJobId -Title $title
+            }
             if ([string]::IsNullOrWhiteSpace($detailUrlRaw)) {
                 continue
             }
@@ -580,15 +730,6 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
             $detailUrl = ConvertTo-JobAgentLiveEvaluationUrl -Url ([Uri]::new([Uri]$BaseUrl, $detailUrlRaw).AbsoluteUri)
             $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $detailUrl
             if ($evaluation.is_official -ne $true) {
-                continue
-            }
-
-            $title = Get-JobAgentLiveStructuredValue -Node $node -Paths @(
-                @('title'),
-                @('text'),
-                @('name')
-            )
-            if ([string]::IsNullOrWhiteSpace($title)) {
                 continue
             }
 
@@ -603,6 +744,9 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
                 @('id'),
                 @('jobId'),
                 @('job_id'),
+                @('gh_Id'),
+                @('gh_id'),
+                @('ghJid'),
                 @('requisition_id'),
                 @('requisitionId')
             )
@@ -866,7 +1010,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
 
     $sourceFetches = New-Object System.Collections.Generic.List[object]
     $sourceFetches.Add($sourceFetch)
-    $pageUrlsToFetch = New-Object System.Collections.Generic.Queue[string]
+    $pageUrlsToFetch = New-Object System.Collections.Generic.Queue[object]
     $seenPageUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     [void]$seenPageUrls.Add([string]$sourceFetch.final_url)
     $initialFollowUps = @(
@@ -875,14 +1019,17 @@ function Invoke-JobAgentLiveHtmlAdapter {
         @(Get-JobAgentLiveNextPageUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
     )
     foreach ($nextUrl in $initialFollowUps) {
-        if ($seenPageUrls.Add($nextUrl)) {
-            $pageUrlsToFetch.Enqueue($nextUrl)
-        }
+        Add-JobAgentLiveSourcePageQueueItem -Queue $pageUrlsToFetch -Seen $seenPageUrls -Url $nextUrl -ParseBaseUrl $nextUrl
+    }
+    foreach ($nextUrl in @(Get-JobAgentLiveGatsbyStaticQueryUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -MaxUrls $maxPages)) {
+        Add-JobAgentLiveSourcePageQueueItem -Queue $pageUrlsToFetch -Seen $seenPageUrls -Url $nextUrl -ParseBaseUrl ([string]$sourceFetch.final_url)
     }
 
     while ($pageUrlsToFetch.Count -gt 0 -and $sourceFetches.Count -lt $maxPages) {
-        $pageUrl = $pageUrlsToFetch.Dequeue()
+        $pageItem = $pageUrlsToFetch.Dequeue()
+        $pageUrl = [string]$pageItem.url
         $pageFetch = Invoke-JobAgentLiveFetchWithRetry -Url $pageUrl -Policy $Policy -Fetcher $Fetcher
+        $pageFetch | Add-Member -NotePropertyName content_base_url -NotePropertyValue ([string]$pageItem.parse_base_url) -Force
         $sourceFetches.Add($pageFetch)
         if ($pageFetch.ok -ne $true) {
             continue
@@ -893,18 +1040,17 @@ function Invoke-JobAgentLiveHtmlAdapter {
             @(Get-JobAgentLiveNextPageUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
         )
         foreach ($nextUrl in $followUps) {
-            if ($seenPageUrls.Add($nextUrl)) {
-                $pageUrlsToFetch.Enqueue($nextUrl)
-            }
+            Add-JobAgentLiveSourcePageQueueItem -Queue $pageUrlsToFetch -Seen $seenPageUrls -Url $nextUrl -ParseBaseUrl $nextUrl
         }
     }
 
     $candidates = New-Object System.Collections.Generic.List[object]
     $seenCandidateUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($fetch in @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true })) {
+        $parseBaseUrl = if ($fetch.PSObject.Properties.Name -contains 'content_base_url' -and -not [string]::IsNullOrWhiteSpace([string]$fetch.content_base_url)) { [string]$fetch.content_base_url } else { [string]$fetch.final_url }
         foreach ($candidate in @(ConvertFrom-JobAgentLiveCareerPage `
                     -Html ([string]$fetch.content) `
-                    -BaseUrl ([string]$fetch.final_url) `
+                    -BaseUrl $parseBaseUrl `
                     -Company $AdapterInput.company `
                     -MaxResults ([int]$Policy.max_results_per_source) `
                     -SearchTerms @($Policy.search_terms))) {

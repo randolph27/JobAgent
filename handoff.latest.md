@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-09T13:42:13.176+02:00
+Stand: 2026-09-09T18:20:00+02:00
 
 ## Zustand
 
@@ -10,47 +10,62 @@ Stand: 2026-09-09T13:42:13.176+02:00
 - Aktiver Roadmap-Punkt: `JA-041 IT-Leiter/Lead/Manager ueber vollstaendige Karriere- und ATS-Ergebnislisten finden`
 - Status: `in-progress`
 - Branch: `master`
-- HEAD: `09e6818207ff`
-- Ahead/Behind: `0/0`
-- Route: `ok`
-- STP: `cmd /c .\ci.cmd stp` erfolgreich um 2026-09-09T13:42:13+02:00
-- Supertest: nicht ausgefuehrt, weil JA-041 offen ist.
-- Devserver: `cmd /c .\ci.cmd devserver-status` erfolgreich, Port 8500 lauscht (`http://localhost:8500/`).
-- SonarQube: `curl.exe --max-time 5 --silent --show-error http://localhost:9000/api/system/status` Timeout; `cmd /c .\ci.cmd sonar-start` fehlgeschlagen mit `docker_engine_unavailable; wsl_fallback=sonarqube_wsl_not_started`.
+- HEAD vor Commit: `ad13122cd3fb`
+- Ahead/Behind vor Commit: `0/0`
+- STP: `cmd /c .\ci.cmd stp` erfolgreich um 2026-09-09T18:12:11+02:00
+- Devserver: Port 8500 lauscht (`http://localhost:8500/`).
+- Supertest: gemaess Nutzeranweisung in diesem Chat nicht separat angefordert; JA-041 ist trotzdem fachlich noch nicht vollstaendig abgeschlossen.
 
-## Ergebnis
+## Abgeschlossener Slice
 
-- `scanrun:20260909T110550035Z` wurde fachlich ausgewertet: Die 10 MAN-Snapshots waren Karriere-/Navigationsseiten, keine konkreten Jobs.
-- `src\JobAgent.LiveScan.psm1` trennt konkrete Jobdetail-Kandidaten von Karriere-Navigation.
-- Offiziell verlinkte Jobportale werden als Quellseiten verfolgt, statt als Jobs gespeichert zu werden.
-- Percent-encodete UTF-8-Detailpfade werden vor der offiziellen Quellenpruefung tolerant normalisiert.
-- Strukturierte `application/json`-Navigation ohne `JobPosting` wird nicht mehr als Job akzeptiert.
-- `tests\Test-JobAgentLiveScan.ps1` deckt Navigation, Jobportal-Followups, UTF-8-Detailpfade und strukturierte Navigation ab.
+ATOSS/TRATON-Hotspot aus JA-041 wurde bearbeitet:
+
+- Gatsby-StaticQuery-JSON unter `/page-data/sq/d/<hash>.json` wird aus offiziellen Karrierepages als Zusatzquelle verfolgt.
+- Greenhouse-Knoten aus Gatsby-StaticQuery-Daten werden mit `gh_Id` zu konkreten Detailseiten rekonstruiert: `<career>/jobs/<gh_Id>-<slug>?gh_jid=<gh_Id>`.
+- Pagination-URLs behalten Query-Parameter, damit `?page=2` und aehnliche Folgeseiten nicht mit der Startseite kollidieren.
+- Newsroom-, Story-, Blog-, Presse-, Event-, Case-Study- und Insight-URLs werden nicht mehr als Jobdetailkandidaten akzeptiert.
+- Parsing nutzt fuer Gatsby-StaticQuery-Inhalte weiter die urspruengliche Karrierepage als Basis-URL; iframe-/Portal-/Pagination-Folgeseiten behalten ihre eigene Basis-URL.
 
 ## Evidence
 
-- `logs/jobagent/daily-run-20260909T112404328Z.json`: MAN-Kontrolllauf, Status `SUCCESS`, 0 Raw-Jobs, 0 Snapshots, 10 entfernte falsche Navigations-Jobs.
-- `logs/jobagent/daily-run-20260909T113019911Z.json`: Mehrfirmen-Pilot, Status `PARTIAL`, 3 Firmen, 46 gepruefte Detailseiten, 0 Zielrollentreffer.
-- `logs/jobagent/daily-run-20260909T113552446Z.json`: ATOSS-Nachlauf, Status `PARTIAL`, 30 echte Detailkandidaten; `Overview` und `Jobs` wurden nicht mehr als Snapshots erzeugt.
-- `docs/handoffs/2026-09-09-ja041-navigation-jobportal-handoff.md`: Detail-Handoff.
+- `logs/jobagent/daily-run-20260909T155902193Z.json`: ATOSS-Pilot, Status `SUCCESS`, 1 Firma, 72 Raw-Jobs, 72 gepruefte Jobs, 0 unsichere Quellen, 0 Fehler.
+- `html/jobagent/daily-run-20260909T155902193Z.html`: HTML-Bericht zum ATOSS-Pilot.
+- `logs/jobagent/daily-run-20260909T160523370Z.json`: TRATON-Pilot nach Story-Abgrenzung, Status `SUCCESS`, 1 Firma, 0 Raw-Jobs, 1 alter Story-Snapshot entfernt, 0 unsichere Quellen, 0 Fehler.
+- `html/jobagent/daily-run-20260909T160523370Z.html`: HTML-Bericht zum TRATON-Pilot.
+- `docs/handoffs/2026-09-09-ja041-gatsby-static-query-traton-atoss-handoff.md`: Detail-Handoff.
 
 ## Verifikation
+
+Erfolgreich mit Exitcode 0:
 
 ```powershell
 pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1
-pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentClassification.ps1
+pwsh -NoProfile -File .\tools\Invoke-JobAgentLivePilot.ps1 -MaxCompanies 1 -CompanyIds company:atoss_software_se -MaxResultsPerSource 100 -MaxDetailFetchesPerSource 100 -MaxPagesPerSource 10 -MaxRetries 0 -FetchClient auto -HostConcurrency 1
+pwsh -NoProfile -File .\tools\Invoke-JobAgentLivePilot.ps1 -MaxCompanies 1 -CompanyIds company:traton_se -MaxResultsPerSource 100 -MaxDetailFetchesPerSource 100 -MaxPagesPerSource 10 -MaxRetries 0 -FetchClient auto -HostConcurrency 1
 cmd /c .\ci.cmd route-check
-cmd /c .\ci.cmd stp
 cmd /c .\ci.cmd devserver-status
+cmd /c .\ci.cmd stp
+```
+
+SonarQube:
+
+```powershell
 curl.exe --max-time 5 --silent --show-error http://localhost:9000/api/system/status
 cmd /c .\ci.cmd sonar-start
 ```
 
-Funktionstests, Route-Check, STP und Devserver-Status waren erfolgreich. SonarQube blieb blockiert, weil Docker nicht verfuegbar ist und die WSL-Sonar-Distribution nicht laeuft.
+Ergebnis: Status-Request Timeout; Start fehlgeschlagen mit `docker_engine_unavailable; wsl_fallback=sonarqube_wsl_not_started`.
+
+## Roadmap/Todo
+
+- `TD-0053` bleibt `in-progress`.
+- `JA-041` bleibt offen. Nicht archivieren: weitere ATS-/Static-Site-Familien, produktiver Mehrfirmen-Pilot und Abschlussgate fehlen noch.
+- Keine Roadmap-Punkte wurden komplett erledigt; daher keine Rotation nach `Roadmap_archive.md`.
+- `TD-0041`/`JA-027`, `TD-0054`/`UI-001`, `TD-0055`/`JA-042` bleiben offen.
 
 ## Naechster Anker
 
-TRATON/ATOSS-Folgefaelle priorisieren: TRATON braucht staerkere Abgrenzung von Story-/News-Seiten gegen echte Joblisten; ATOSS braucht kontrollierte Pagination/Limit-Fortsetzung jenseits der ersten 30 Detailseiten.
-
+Naechsten Mehrfirmen-Pilot auf weitere ATS-/Static-Site-Familien ausweiten. ATOSS und TRATON sind fuer Gatsby/Story/Pagination nicht mehr der aktive Blocker.

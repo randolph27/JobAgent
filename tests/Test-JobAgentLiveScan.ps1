@@ -147,6 +147,10 @@ $navigationHtml = @'
 $navigationCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $navigationHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Head of IT'))
 Assert-True -Condition ($navigationCandidates.Count -eq 0) -Message 'Live-Parser darf Karriere-Navigation und Jobportal-Links nicht als Stellen speichern.'
 
+$storyHtml = '<html><body><a href="/en/newsroom/stories/how-product-strategy-works.html">How Product Strategy Works</a></body></html>'
+$storyCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $storyHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Head of IT'))
+Assert-True -Condition ($storyCandidates.Count -eq 0) -Message 'Live-Parser darf Newsroom-/Story-Seiten nicht als Stellen speichern.'
+
 $jsonLdHtml = @'
 <html>
   <head>
@@ -428,6 +432,72 @@ Assert-True -Condition ($structuredJsonResult.raw_jobs[0].ats_job_id -eq 'lever-
 Assert-True -Condition ($structuredJsonResult.raw_jobs[0].employment_type -eq 'FULL_TIME') -Message 'Live-Adapter uebernimmt employmentType aus strukturierter JSON-Liste nicht.'
 Assert-True -Condition ($structuredJsonResult.raw_jobs[0].location_label -eq 'Muenchen') -Message 'Live-Adapter uebernimmt Ort aus strukturierter JSON-Liste nicht.'
 
+$gatsbyPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 10 -MaxDetailFetchesPerSource 10 -MaxPagesPerSource 10 -SearchTerms @('Head of IT')
+$gatsbySourceHtml = '<html><script id="gatsby-script-loader">window.pagePath="/en/company/career";</script><script id="gatsby-static-query">{"staticQueryHashes":["111111111","2312721738"]}</script></html>'
+$gatsbyStaticQueryJson = @'
+{
+  "data": {
+    "allGreenhouseJob": {
+      "edges": [
+        {
+          "node": {
+            "id": "Greenhouse__Job__4762894101",
+            "gh_Id": 4762894101,
+            "title": "Director People Systems & Business Performance (m/w/d)",
+            "departments": [{"name": "People Systems"}],
+            "location": {"name": "Muenchen"}
+          }
+        },
+        {
+          "node": {
+            "id": "Greenhouse__Job__4883791101",
+            "gh_Id": 4883791101,
+            "title": "Engineering Lead (m/f/d)",
+            "departments": [{"name": "Innovation, Development & Services"}],
+            "location": {"name": "Muenchen"}
+          }
+        }
+      ]
+    }
+  }
+}
+'@
+$gatsbyFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content $gatsbySourceHtml
+            break
+        }
+        'https://example.invalid/page-data/sq/d/111111111.json' {
+            New-FetchResult -Url $Url -Ok $true -Content '{"data":{"irrelevant":true}}'
+            break
+        }
+        'https://example.invalid/page-data/sq/d/2312721738.json' {
+            New-FetchResult -Url $Url -Ok $true -Content $gatsbyStaticQueryJson
+            break
+        }
+        'https://example.invalid/careers/jobs/4762894101-director-people-systems-business-performance-m-w-d?gh_jid=4762894101' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Director People Systems</h1><p>Leitet People Systems in Muenchen.</p></main>'
+            break
+        }
+        'https://example.invalid/careers/jobs/4883791101-engineering-lead-m-f-d?gh_jid=4883791101' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Engineering Lead</h1><p>Fuehrt Engineering in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$gatsbyResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $gatsbyPolicy -Fetcher $gatsbyFetcher
+Assert-True -Condition ($gatsbyResult.status -eq 'SUCCESS' -and $gatsbyResult.scan_complete) -Message 'Live-Adapter verarbeitet Gatsby-StaticQuery-Greenhouse-Listen nicht vollstaendig.'
+Assert-True -Condition (@($gatsbyResult.raw_jobs).Count -eq 2) -Message 'Live-Adapter extrahiert nicht alle Greenhouse-Jobs aus Gatsby-StaticQuery.'
+Assert-True -Condition (@($gatsbyResult.raw_jobs | Where-Object { [string]$_.detail_url -match '/careers/jobs/[0-9]+-' }).Count -eq 2) -Message 'Live-Adapter baut Greenhouse-Detail-URLs aus Gatsby-Daten falsch.'
+Assert-True -Condition (@($gatsbyResult.raw_jobs | Where-Object { [string]$_.location_label -eq 'Muenchen' }).Count -eq 2) -Message 'Live-Adapter uebernimmt Greenhouse-Orte aus Gatsby-Daten nicht.'
+
 $blockedDetailFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -534,6 +604,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'policy_limits',
         'official_candidate_filter',
         'career_navigation_candidate_rejection',
+        'newsroom_story_candidate_rejection',
         'aggregator_rejection',
         'jsonld_jobposting_extraction',
         'ats_url_pattern_detection',
@@ -550,6 +621,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_official_iframe_ats_success',
         'live_adapter_official_linked_job_portal_success',
         'live_adapter_structured_json_ats_success',
+        'live_adapter_gatsby_static_query_greenhouse_success',
         'live_adapter_blocked_detail_fetch',
         'live_adapter_timeout_detail_fetch',
         'live_adapter_preserves_fetch_error_diagnostics',
