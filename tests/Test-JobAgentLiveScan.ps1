@@ -270,6 +270,29 @@ Assert-True -Condition (@($result.raw_jobs).Count -eq 1) -Message 'Live-Adapter 
 Assert-True -Condition ($result.raw_jobs[0].live_verification.detail_http_status -eq 200) -Message 'Live-Adapter protokolliert Detail-Verifikation nicht.'
 Assert-True -Condition ($result.raw_jobs[0].summary -match 'IT-Gesamtverantwortung') -Message 'Live-Adapter uebernimmt Detailseitenzusammenfassung nicht.'
 
+$genericTitleHtml = '<html><body><a href="/position/head-of-it-555">Learn More</a></body></html>'
+$genericTitleFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content $genericTitleHtml
+            break
+        }
+        'https://example.invalid/position/head-of-it-555' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Head of IT Platform Operations</h1><p>IT-Gesamtverantwortung in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$genericTitleResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $genericTitleFetcher
+Assert-True -Condition ($genericTitleResult.status -eq 'SUCCESS') -Message 'Live-Adapter verarbeitet generischen Linktext mit Detailtitel nicht erfolgreich.'
+Assert-True -Condition ($genericTitleResult.raw_jobs[0].title -eq 'Head of IT Platform Operations') -Message 'Live-Adapter ersetzt generischen Linktext nicht durch Detailseitentitel.'
+
 $emptyFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -613,6 +636,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'structured_navigation_candidate_rejection',
         'structured_ats_json_extraction',
         'live_adapter_success_with_detail_verification',
+        'live_adapter_replaces_generic_anchor_title_from_detail_page',
         'live_adapter_complete_empty_source',
         'live_adapter_blocked_source_detection',
         'live_adapter_dynamic_source_detection',

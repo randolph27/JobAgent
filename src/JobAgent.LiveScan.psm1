@@ -956,6 +956,14 @@ function New-JobAgentLiveRawJob {
         [Parameter(Mandatory)][object]$DetailFetch
     )
 
+    $detailTitle = Get-JobAgentLiveDetailTitle -Html ([string]$DetailFetch.content)
+    $candidateTitle = [string]$Candidate.title
+    $title = if ((Test-JobAgentLiveGenericActionTitle -Title $candidateTitle) -and -not [string]::IsNullOrWhiteSpace($detailTitle)) {
+        $detailTitle
+    }
+    else {
+        $candidateTitle
+    }
     $summary = ConvertTo-JobAgentLivePlainText -Html ([string]$DetailFetch.content) -MaxLength 500
     if ([string]::IsNullOrWhiteSpace($summary) -and $Candidate.PSObject.Properties.Name -contains 'summary') {
         $summary = [string]$Candidate.summary
@@ -964,7 +972,7 @@ function New-JobAgentLiveRawJob {
     $externalId = if (($Candidate.PSObject.Properties.Name -contains 'external_job_id') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.external_job_id)) { [string]$Candidate.external_job_id } elseif (-not [string]::IsNullOrWhiteSpace($urlJobId)) { $urlJobId } else { $null }
     $atsJobId = if (($Candidate.PSObject.Properties.Name -contains 'ats_job_id') -and -not [string]::IsNullOrWhiteSpace([string]$Candidate.ats_job_id)) { [string]$Candidate.ats_job_id } else { $externalId }
     $job = New-JobAgentRawJob `
-        -Title ([string]$Candidate.title) `
+        -Title $title `
         -DetailUrl ([string]$Candidate.detail_url) `
         -ExternalJobId $externalId `
         -AtsJobId $atsJobId `
@@ -981,6 +989,47 @@ function New-JobAgentLiveRawJob {
         verification_basis = [string]$Candidate.verification_basis
     }) -Force
     return $job
+}
+
+function Test-JobAgentLiveGenericActionTitle {
+    [CmdletBinding()]
+    param([Parameter()][AllowNull()][string]$Title)
+
+    if ([string]::IsNullOrWhiteSpace($Title)) {
+        return $true
+    }
+
+    $normalized = [regex]::Replace($Title.ToLowerInvariant(), '\s+', ' ').Trim()
+    return $normalized -match '^(learn more|mehr erfahren|details?|view job|show more|read more|apply|apply now|jetzt bewerben|bewerben)$'
+}
+
+function Get-JobAgentLiveDetailTitle {
+    [CmdletBinding()]
+    param([Parameter()][AllowEmptyString()][string]$Html)
+
+    if ([string]::IsNullOrWhiteSpace($Html)) {
+        return $null
+    }
+
+    $patterns = @(
+        '<h1\b[^>]*>(?<value>.*?)</h1>',
+        '<meta\b(?=[^>]*\bproperty\s*=\s*["'']og:title["''])(?=[^>]*\bcontent\s*=\s*["''](?<value>[^"'']+)["''])[^>]*>',
+        '<title\b[^>]*>(?<value>.*?)</title>'
+    )
+    foreach ($pattern in $patterns) {
+        $match = [regex]::Match($Html, $pattern, [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
+        if (-not $match.Success) {
+            continue
+        }
+
+        $title = ConvertTo-JobAgentLivePlainText -Html ([string]$match.Groups['value'].Value) -MaxLength 180
+        $title = [regex]::Replace($title, '\s+[-|]\s+.*$', '').Trim()
+        if (-not [string]::IsNullOrWhiteSpace($title) -and -not (Test-JobAgentLiveGenericActionTitle -Title $title)) {
+            return $title
+        }
+    }
+
+    return $null
 }
 
 function Invoke-JobAgentLiveHtmlAdapter {
