@@ -134,6 +134,19 @@ $candidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $html -BaseUrl 'https:/
 Assert-True -Condition ($candidates.Count -eq 1) -Message 'Live-Parser filtert offizielle Kandidaten nicht korrekt.'
 Assert-True -Condition ($candidates[0].detail_url -eq 'https://example.invalid/careers/head-of-it-123') -Message 'Live-Parser kanonisiert Detail-URL nicht.'
 
+$navigationHtml = @'
+<html>
+  <body>
+    <a href="/careers">Career at Example</a>
+    <a href="/careers/benefits">Benefits</a>
+    <a href="/careers/students">Students</a>
+    <a href="https://jobs.example.invalid/">Job Portal</a>
+  </body>
+</html>
+'@
+$navigationCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $navigationHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Head of IT'))
+Assert-True -Condition ($navigationCandidates.Count -eq 0) -Message 'Live-Parser darf Karriere-Navigation und Jobportal-Links nicht als Stellen speichern.'
+
 $jsonLdHtml = @'
 <html>
   <head>
@@ -181,6 +194,23 @@ $greenhouseHtml = '<html><body><a href="https://boards.greenhouse.io/example/job
 $greenhouseCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $greenhouseHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @())
 Assert-True -Condition ($greenhouseCandidates.Count -eq 1) -Message 'Greenhouse-ATS-URL wurde nicht als offizieller Kandidat erkannt.'
 Assert-True -Condition ($greenhouseCandidates[0].detail_url -eq 'https://boards.greenhouse.io/example/jobs/4242') -Message 'Greenhouse-ATS-URL wurde nicht korrekt kanonisiert.'
+
+$encodedPathHtml = '<html><body><a href="https://jobs.example.invalid/job/M%C3%BCnchen-Head-of-IT-%28mwd%29-4242/">Head of IT</a></body></html>'
+$encodedPathCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $encodedPathHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @('Head of IT'))
+Assert-True -Condition ($encodedPathCandidates.Count -eq 1) -Message 'Bereits percent-encodete UTF-8-Detailpfade wurden nicht akzeptiert.'
+Assert-True -Condition ($encodedPathCandidates[0].detail_url -match 'M%C3%BCnchen-Head-of-IT') -Message 'UTF-8-Detailpfad wurde falsch kanonisiert.'
+
+$structuredNavigationHtml = @'
+<html>
+  <head>
+    <script type="application/json">
+      {"items":[{"title":"Overview","url":"https://example.invalid/careers"},{"title":"Jobs","url":"https://example.invalid/careers/jobs"}]}
+    </script>
+  </head>
+</html>
+'@
+$structuredNavigationCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $structuredNavigationHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @('Head of IT'))
+Assert-True -Condition ($structuredNavigationCandidates.Count -eq 0) -Message 'Strukturierte Karriere-Navigation darf nicht als JobPosting gespeichert werden.'
 
 $structuredJsonHtml = @'
 <html>
@@ -346,6 +376,34 @@ Assert-True -Condition ($iframeResult.status -eq 'SUCCESS' -and $iframeResult.sc
 Assert-True -Condition (@($iframeResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer aus ATS-Frame nicht.'
 Assert-True -Condition ($iframeResult.raw_jobs[0].detail_url -eq 'https://example.myworkdayjobs.invalid/job/it-lead-333') -Message 'Live-Adapter kanonisiert ATS-Frame-Treffer falsch.'
 
+$linkedSourcePolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('Head of IT')
+$linkedSourceFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/careers/benefits">Benefits</a><a href="https://jobs.example.invalid/">Job Portal</a></html>'
+            break
+        }
+        'https://jobs.example.invalid/' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/job/head-it-444">Head of IT</a></html>'
+            break
+        }
+        'https://jobs.example.invalid/job/head-it-444' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Head of IT</h1><p>Gesamtverantwortung und IT-Strategie in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$linkedSourceResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $linkedSourcePolicy -Fetcher $linkedSourceFetcher
+Assert-True -Condition ($linkedSourceResult.status -eq 'SUCCESS' -and $linkedSourceResult.scan_complete) -Message 'Live-Adapter folgt offiziell verlinktem Jobportal nicht als Quellseite.'
+Assert-True -Condition (@($linkedSourceResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer aus verlinktem Jobportal nicht.'
+Assert-True -Condition ($linkedSourceResult.raw_jobs[0].detail_url -eq 'https://jobs.example.invalid/job/head-it-444') -Message 'Live-Adapter kanonisiert Treffer aus verlinktem Jobportal falsch.'
+
 $structuredJsonFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -475,10 +533,13 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
     cases = @(
         'policy_limits',
         'official_candidate_filter',
+        'career_navigation_candidate_rejection',
         'aggregator_rejection',
         'jsonld_jobposting_extraction',
         'ats_url_pattern_detection',
         'greenhouse_ats_url_pattern_detection',
+        'encoded_utf8_detail_path',
+        'structured_navigation_candidate_rejection',
         'structured_ats_json_extraction',
         'live_adapter_success_with_detail_verification',
         'live_adapter_complete_empty_source',
@@ -487,6 +548,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_jsonld_ats_success',
         'live_adapter_pagination_success',
         'live_adapter_official_iframe_ats_success',
+        'live_adapter_official_linked_job_portal_success',
         'live_adapter_structured_json_ats_success',
         'live_adapter_blocked_detail_fetch',
         'live_adapter_timeout_detail_fetch',
