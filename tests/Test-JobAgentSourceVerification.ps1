@@ -128,12 +128,13 @@ Assert-True -Condition ($curlCredentialDiagnostic.error_class -eq 'TLS_CREDENTIA
 
 $curlParsed = $sourceVerificationModule.Invoke({
         ConvertFrom-JobAgentCompanyVerificationCurlOutput `
-            -Output @('HTTP/2 200', 'content-type: text/html', '', '<html>ok</html>', 'JOBAGENT_FINAL_URL:https://example.invalid/jobs', 'JOBAGENT_STATUS:200') `
+            -Output @('HTTP/2 200', 'content-type: text/html', 'retry-after: 17', '', '<html>ok</html>', 'JOBAGENT_FINAL_URL:https://example.invalid/jobs', 'JOBAGENT_STATUS:200') `
             -ExitCode 0 `
             -Url 'https://example.invalid/jobs' `
             -ClientName 'curl.exe'
     })
 Assert-True -Condition ($curlParsed.ok -eq $true -and $curlParsed.fetch_client -eq 'curl.exe' -and $curlParsed.content -match 'ok') -Message 'Curl-Output-Parser verliert Erfolg, Client oder Content.'
+Assert-True -Condition ($curlParsed.content_type -eq 'text/html' -and $curlParsed.retry_after_seconds -eq 17) -Message 'Curl-Output-Parser liest Header nicht case-insensitive aus.'
 
 $careerHtml = '<html><body><a href="/de/karriere">Karriere</a><a href="https://www.linkedin.com/jobs/view/123">Jobs</a></body></html>'
 $careerLinks = @(Get-JobAgentCompanyCareerCandidateLinks -Html $careerHtml -BaseUrl 'https://example.invalid/' -Company (New-TestCompany) -MaxCandidates 5)

@@ -365,12 +365,12 @@ function ConvertFrom-JobAgentCompanyVerificationCurlOutput {
         $body = [string]$headerMatch.Groups['body'].Value
     }
 
-    $headers = @{}
+    $headers = [Collections.Generic.Dictionary[string, string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($line in ($headerText -split '\r?\n')) {
         if ($line -notmatch '^\s*([^:]+):\s*(.*)$') {
             continue
         }
-        $headers[$matches[1]] = $matches[2]
+        $headers[[string]$matches[1]] = [string]$matches[2]
     }
 
     if ($ExitCode -ne 0) {

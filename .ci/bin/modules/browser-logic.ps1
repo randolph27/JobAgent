@@ -118,7 +118,18 @@ function Cmd-BrowserSmoke() {
 }
 
 function Get-ListeningPid([int]$port) {
-  try { $c = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1; if ($c) { return [int]$c.OwningProcess } } catch { $null = $_ }; return $null
+  try {
+    $c = Get-NetTCPConnection -LocalPort $port -State Listen -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($c) { return [int]$c.OwningProcess }
+  } catch { $null = $_ }
+  try {
+    $pattern = '^\s*TCP\s+(?:\[[^\]]+\]|[^\s:]+):' + [regex]::Escape([string]$port) + '\s+\S+\s+\S*ABH\S*REN\s+(\d+)\s*$'
+    $lines = @(netstat -ano -p tcp 2>$null)
+    foreach ($line in $lines) {
+      if ([string]$line -match $pattern) { return [int]$Matches[1] }
+    }
+  } catch { $null = $_ }
+  return $null
 }
 
 function Wait-PortListening([int]$port, [int]$timeoutSec=30) {

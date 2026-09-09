@@ -20,6 +20,7 @@ Assert-True ($browserLogic -match 'function Get-ProcessIdentity') 'Devserver-Pro
 Assert-True ($browserLogic -match 'if \(\$managed\) \{ "managed" \} else \{ "external" \}') 'Devserver-Start unterscheidet verwaltete und fremde Listener nicht.'
 Assert-True ($browserLogic -match 'devserver-" \+ \(TsId\) \+ "\.log') 'Devserver verwendet kein datiertes, konfliktfreies Log.'
 Assert-True ($browserLogic -notmatch 'devserver-stop: killing port') 'Devserver-Stop darf keinen beliebigen Prozess auf dem Port beenden.'
+Assert-True ($browserLogic -match 'netstat -ano -p tcp' -and $browserLogic.Contains('ABH\S*REN')) 'Devserver-Listenererkennung braucht einen netstat-Fallback fuer eingeschraenkte Get-NetTCPConnection-Umgebungen.'
 Assert-True ($config.verify.shell -eq 'powershell') 'Verify muss den PowerShell-Funktionstest explizit ausfuehren.'
 Assert-True ($config.verify.cmd -match 'Test-JobAgentCiContracts\.ps1$') 'Verify verweist nicht auf den CI-Vertragstest.'
 Assert-True ($config.sonar.mode -eq 'not-supported') 'Nicht konfigurierte Sonar-Analyse muss explizit als nicht unterstuetzt markiert sein.'
@@ -29,5 +30,5 @@ Assert-True ($commands -match 'analysis_started=\$false') 'Sonar-Nichtunterstuet
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs')
+    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback')
 } | ConvertTo-Json -Depth 4
