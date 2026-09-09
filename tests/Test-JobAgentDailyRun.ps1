@@ -235,10 +235,11 @@ try {
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.html_report_path)) -Message 'Daily-Run-CLI schreibt kein HTML-Artefakt.'
 
     $cliLiveProjectRoot = New-TestProjectRoot
-    $cliLiveOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $cliLiveProjectRoot -MaxCompanies 1 -MaxResultsPerSource 2 -MaxDetailFetchesPerSource 2 -MaxPagesPerSource 2 -MaxRetries 0 2>&1)
+    $cliLiveOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $cliLiveProjectRoot -MaxCompanies 1 -MaxResultsPerSource 2 -MaxDetailFetchesPerSource 2 -MaxPagesPerSource 2 -MaxRetries 0 -FetchClient curl -WslDistribution FixtureDistro 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI-Live-Modus ohne Fixture ist fehlgeschlagen: " + ($cliLiveOutput -join "`n"))
     $cliLiveResult = ($cliLiveOutput -join "`n") | ConvertFrom-Json -Depth 20
     Assert-True -Condition ($cliLiveResult.adapter_mode -eq 'live') -Message 'Daily-Run-CLI waehlt ohne Fixture nicht den Live-Modus.'
+    Assert-True -Condition ($cliLiveResult.fetch_client -eq 'curl' -and $cliLiveResult.wsl_distribution -eq 'FixtureDistro') -Message 'Daily-Run-CLI dokumentiert Fetch-Client-/WSL-Policy nicht.'
     Assert-True -Condition ($cliLiveResult.status -eq 'SKIPPED') -Message 'Daily-Run-CLI-Live-Modus mit leerem Store liefert keinen kontrollierten SKIPPED-Status.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliLiveResult.report_path)) -Message 'Daily-Run-CLI-Live-Modus schreibt kein Reportartefakt.'
 

@@ -10,6 +10,9 @@ param(
     [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 100,
     [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 100,
     [Parameter()][ValidateRange(1, 20)][int]$MaxPagesPerSource = 10,
+    [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
+    [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
+    [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
     [Parameter()][string[]]$SearchTerms = @('Head of IT', 'Director IT', 'IT Leitung', 'IT-Leitung', 'Leiter IT', 'CIO'),
     [Parameter()][string[]]$CompanyIds = @(),
     [Parameter()][string]$LogRoot = 'logs/jobagent',
@@ -32,6 +35,9 @@ $policy = New-JobAgentLiveScanPolicy `
     -MaxResultsPerSource $MaxResultsPerSource `
     -MaxDetailFetchesPerSource $MaxDetailFetchesPerSource `
     -MaxPagesPerSource $MaxPagesPerSource `
+    -HostConcurrency $HostConcurrency `
+    -FetchClient $FetchClient `
+    -WslDistribution $WslDistribution `
     -SearchTerms $SearchTerms
 
 $adapter = {

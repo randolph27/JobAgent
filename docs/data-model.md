@@ -370,7 +370,7 @@ pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1
 - `Get-JobAgentDailyRunCandidateCompanies` priorisiert Firmen mit offizieller Quelle nach fehlendem erfolgreichem Scan, hoher `scan_priority`, faelligem `next_scan_at` und stabilem Namen. Mit `CompanyIds` kann ein Lauf fuer Tests oder fokussierte Wiederholungen begrenzt werden.
 - Adapterfehler werden als `ScanAttempt` mit `FAILED` und konkreter Fehlerklasse persistiert; sie brechen den Gesamtlauf nicht ab und entfernen keine bestehenden Stellen.
 - Jeder Lauf erzeugt genau einen `ScanRun` und ein JSON-Ergebnisartefakt unter `logs/jobagent/daily-run-<timestamp>.json`.
-- `tools/Invoke-JobAgentDailyRun.ps1` stellt den lokalen CLI-Einstieg fuer deterministische Fixture-Laeufe und kontrollierte produktive Live-Laeufe bereit. Mit `-FixturePath` oder `-AdapterMode fixture` wird der Fixture-Adapter genutzt; ohne Fixture waehlt `-AdapterMode auto` den Live-HTML-Adapter.
+- `tools/Invoke-JobAgentDailyRun.ps1` stellt den lokalen CLI-Einstieg fuer deterministische Fixture-Laeufe und kontrollierte produktive Live-Laeufe bereit. Mit `-FixturePath` oder `-AdapterMode fixture` wird der Fixture-Adapter genutzt; ohne Fixture waehlt `-AdapterMode auto` den Live-HTML-Adapter. Live-Laeufe reichen `-FetchClient`, `-WslDistribution` und `-HostConcurrency` bis in die gemeinsame HTTP-Policy durch; Fehlartefakte enthalten die konkrete Fetch-Fehlerklasse und den tatsaechlichen Client.
 - Der Orchestrator nutzt in Funktionstests Fixture-Adapter oder injizierte Fake-Fetcher; Live-Recherche bleibt eine separate Betriebs-/Pilot-Lane und wird nicht in Funktionstests gegen externe Websites ausgefuehrt.
 
 Funktionstest:

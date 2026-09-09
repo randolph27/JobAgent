@@ -26,6 +26,9 @@ function New-JobAgentLiveScanPolicy {
         [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 100,
         [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 100,
         [Parameter()][ValidateRange(1, 20)][int]$MaxPagesPerSource = 10,
+        [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
+        [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
+        [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
         [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+local-pilot; official-career-source-only)',
         [Parameter()][string[]]$SearchTerms = @('Head of IT', 'Director IT', 'IT Leitung', 'IT-Leitung', 'Leiter IT', 'CIO')
     )
@@ -37,6 +40,9 @@ function New-JobAgentLiveScanPolicy {
         max_results_per_source = $MaxResultsPerSource
         max_detail_fetches_per_source = $MaxDetailFetchesPerSource
         max_pages_per_source = $MaxPagesPerSource
+        host_concurrency = $HostConcurrency
+        fetch_client = $FetchClient
+        wsl_distribution = $WslDistribution
         user_agent = $UserAgent
         search_terms = @($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
         source_policy = 'official-career-source-only'
@@ -52,44 +58,10 @@ function Invoke-JobAgentLiveHttpRequest {
     )
 
     $started = [datetime]::UtcNow
-    try {
-        $response = Invoke-WebRequest `
-            -Uri $Url `
-            -Method Get `
-            -TimeoutSec ([int]$Policy.timeout_seconds) `
-            -UserAgent ([string]$Policy.user_agent) `
-            -MaximumRedirection 5 `
-            -ErrorAction Stop
-
-        [pscustomobject]@{
-            ok = $true
-            url = $Url
-            final_url = if ($response.BaseResponse.PSObject.Properties.Name -contains 'ResponseUri' -and $response.BaseResponse.ResponseUri) { [string]$response.BaseResponse.ResponseUri.AbsoluteUri } else { $Url }
-            status_code = [int]$response.StatusCode
-            content = [string]$response.Content
-            content_type = [string]$response.Headers['Content-Type']
-            started_at = ConvertTo-JobAgentLiveIso -Value $started
-            finished_at = ConvertTo-JobAgentLiveIso -Value ([datetime]::UtcNow)
-            error = $null
-        }
-    }
-    catch {
-        $statusCode = $null
-        if ($_.Exception.PSObject.Properties.Name -contains 'Response' -and $_.Exception.Response -and $_.Exception.Response.StatusCode) {
-            $statusCode = [int]$_.Exception.Response.StatusCode
-        }
-        [pscustomobject]@{
-            ok = $false
-            url = $Url
-            final_url = $Url
-            status_code = $statusCode
-            content = ''
-            content_type = ''
-            started_at = ConvertTo-JobAgentLiveIso -Value $started
-            finished_at = ConvertTo-JobAgentLiveIso -Value ([datetime]::UtcNow)
-            error = $_.Exception.Message
-        }
-    }
+    $result = Invoke-JobAgentCompanyVerificationHttpRequest -Url $Url -Policy $Policy
+    $result | Add-Member -NotePropertyName started_at -NotePropertyValue (ConvertTo-JobAgentLiveIso -Value $started) -Force
+    $result | Add-Member -NotePropertyName finished_at -NotePropertyValue (ConvertTo-JobAgentLiveIso -Value ([datetime]::UtcNow)) -Force
+    return $result
 }
 
 function Invoke-JobAgentLiveFetchWithRetry {
@@ -621,6 +593,13 @@ function ConvertTo-JobAgentLiveErrorClass {
     if ($null -eq $FetchResult) {
         return 'TECHNICAL_LIMITATION'
     }
+    if (($FetchResult.PSObject.Properties.Name -contains 'error_class') -and -not [string]::IsNullOrWhiteSpace([string]$FetchResult.error_class)) {
+        switch ([string]$FetchResult.error_class) {
+            'TIMEOUT' { return 'TIMEOUT' }
+            'BLOCKED' { return 'BLOCKED' }
+            default { return 'NOT_REACHABLE' }
+        }
+    }
     $statusCode = if ($FetchResult.PSObject.Properties.Name -contains 'status_code') { $FetchResult.status_code } else { $null }
     if ($statusCode -eq 408 -or $statusCode -eq 504) {
         return 'TIMEOUT'
@@ -632,6 +611,26 @@ function ConvertTo-JobAgentLiveErrorClass {
         return 'NOT_REACHABLE'
     }
     return 'NOT_REACHABLE'
+}
+
+function Format-JobAgentLiveFetchFailureMessage {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Prefix,
+        [Parameter()][AllowNull()][object]$FetchResult,
+        [Parameter()][AllowNull()][string]$Url
+    )
+
+    $sourceUrl = if (-not [string]::IsNullOrWhiteSpace($Url)) { $Url } elseif ($null -ne $FetchResult -and $FetchResult.PSObject.Properties.Name -contains 'url') { [string]$FetchResult.url } else { 'UNKNOWN' }
+    $errorClass = if ($null -ne $FetchResult -and $FetchResult.PSObject.Properties.Name -contains 'error_class' -and -not [string]::IsNullOrWhiteSpace([string]$FetchResult.error_class)) { [string]$FetchResult.error_class } else { ConvertTo-JobAgentLiveErrorClass -FetchResult $FetchResult }
+    $client = if ($null -ne $FetchResult -and $FetchResult.PSObject.Properties.Name -contains 'fetch_client' -and -not [string]::IsNullOrWhiteSpace([string]$FetchResult.fetch_client)) { [string]$FetchResult.fetch_client } else { 'dotnet' }
+    $detail = if ($null -ne $FetchResult -and $FetchResult.PSObject.Properties.Name -contains 'error_detail' -and -not [string]::IsNullOrWhiteSpace([string]$FetchResult.error_detail)) { [string]$FetchResult.error_detail } elseif ($null -ne $FetchResult -and $FetchResult.PSObject.Properties.Name -contains 'error') { [string]$FetchResult.error } else { 'UNKNOWN' }
+    $normalizedDetail = [regex]::Replace($detail, '\x00', '')
+    $normalizedDetail = [regex]::Replace($normalizedDetail, '\s+', ' ').Trim()
+    if ($normalizedDetail.Length -gt 300) {
+        $normalizedDetail = $normalizedDetail.Substring(0, 300).Trim()
+    }
+    return "$Prefix[$errorClass][$client]: $sourceUrl`: $normalizedDetail"
 }
 
 function Test-JobAgentLiveBlockedContentHint {
@@ -748,7 +747,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
             -RetryRecommendation 'RETRY_NEXT_RUN' `
             -RawJobs @() `
             -HttpStatus $sourceFetch.status_code `
-            -ArtifactPaths @("source_fetch_failed: $($sourceFetch.error)") `
+            -ArtifactPaths @((Format-JobAgentLiveFetchFailureMessage -Prefix 'source_fetch_failed' -FetchResult $sourceFetch -Url ([string]$AdapterInput.source.canonical_url))) `
             -StartedAt $startedAt `
             -FinishedAt ([datetime]::UtcNow)
     }
@@ -854,7 +853,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
         else {
             $detailFailures.Add($detailFetch)
             $failureClass = ConvertTo-JobAgentLiveErrorClass -FetchResult $detailFetch
-            $messages.Add("detail_fetch_failed[$failureClass]: $($candidate.detail_url): $($detailFetch.error)")
+            $messages.Add((Format-JobAgentLiveFetchFailureMessage -Prefix 'detail_fetch_failed' -FetchResult $detailFetch -Url ([string]$candidate.detail_url)))
         }
     }
 

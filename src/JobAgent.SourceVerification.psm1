@@ -1863,6 +1863,7 @@ Export-ModuleMember -Function @(
     'Get-JobAgentCompanyCareerCandidateLinks',
     'Get-JobAgentCandidateOfficialWebsiteDiscoveryDetailLinks',
     'Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks',
+    'Invoke-JobAgentCompanyVerificationHttpRequest',
     'New-JobAgentVerifiedJobSource',
     'New-JobAgentCompanyCareerVerificationPolicy',
     'Resolve-JobAgentCandidateOfficialWebsiteDiscovery',

@@ -12,6 +12,9 @@ param(
     [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 100,
     [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 100,
     [Parameter()][ValidateRange(1, 20)][int]$MaxPagesPerSource = 10,
+    [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
+    [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
+    [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
     [Parameter()][string[]]$SearchTerms = @('Head of IT', 'Director IT', 'IT Leitung', 'IT-Leitung', 'Leiter IT', 'CIO'),
     [Parameter()][string[]]$CompanyIds = @(),
     [Parameter()][string]$LogRoot = 'logs/jobagent',
@@ -79,6 +82,9 @@ else {
         -MaxResultsPerSource $MaxResultsPerSource `
         -MaxDetailFetchesPerSource $MaxDetailFetchesPerSource `
         -MaxPagesPerSource $MaxPagesPerSource `
+        -HostConcurrency $HostConcurrency `
+        -FetchClient $FetchClient `
+        -WslDistribution $WslDistribution `
         -SearchTerms $SearchTerms
 
     $adapter = {
@@ -110,6 +116,8 @@ $result = $managed.result
     run_state = $managed.status
     exit_code = $managed.exit_code
     adapter_mode = $resolvedMode
+    fetch_client = if ($resolvedMode -eq 'live') { $FetchClient } else { $null }
+    wsl_distribution = if ($resolvedMode -eq 'live') { $WslDistribution } else { $null }
     scan_run_id = if ($result) { $result.scan_run_id } else { $null }
     store_path = if ($result) { $result.store_path } else { $null }
     report_path = if ($result) { $result.report_path } else { $null }

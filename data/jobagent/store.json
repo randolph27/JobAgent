@@ -26,7 +26,7 @@
       "ats": [],
       "scan_status": "FAILED",
       "scan_priority": 95,
-      "next_scan_at": "2026-08-17T19:48:05Z",
+      "next_scan_at": "2026-09-09T12:44:00.575Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -39,8 +39,13 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T06:44:00.575Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T06:44:00.575Z",
+      "expires_at": "2026-09-09T12:44:00.575Z",
+      "next_refresh_at": "2026-09-09T12:44:00.575Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:siemens_ag",
@@ -123,9 +128,9 @@
       ],
       "industry": "Insurance",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 92,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-09T12:44:00.575Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -138,8 +143,13 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T06:44:00.575Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T06:44:00.575Z",
+      "expires_at": "2026-09-09T12:44:00.575Z",
+      "next_refresh_at": "2026-09-09T12:44:00.575Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:munich_re",
@@ -165,9 +175,9 @@
       ],
       "industry": "Insurance",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 91,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-09T12:44:00.575Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -180,8 +190,13 @@
         "evidence_note": "Der Muenchner-Rueck-Kandidat wurde ueber die offizielle munichre.com-Domain und das offizielle Munich-Re-Karriereportal belegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-09-03T14:10:44.727Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T06:44:00.575Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T06:44:00.575Z",
+      "expires_at": "2026-09-09T12:44:00.575Z",
+      "next_refresh_at": "2026-09-09T12:44:00.575Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:siemens_energy_ag",
@@ -204,9 +219,9 @@
       ],
       "industry": "Energy Technology",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 90,
-      "next_scan_at": "2026-08-24T00:00:00Z",
+      "next_scan_at": "2026-09-09T12:48:43.046Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -219,8 +234,13 @@
         "evidence_note": "Regionale offizielle Quelle nennt Siemens Energy; offizielle Jobdomain ist erreichbar."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T06:48:43.046Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T06:48:43.046Z",
+      "expires_at": "2026-09-09T12:48:43.046Z",
+      "next_refresh_at": "2026-09-09T12:48:43.046Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:scout24_se",
@@ -243,9 +263,9 @@
       ],
       "industry": "Digital Marketplace",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 90,
-      "next_scan_at": "2026-08-24T00:00:00Z",
+      "next_scan_at": "2026-09-09T12:48:43.046Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -258,8 +278,13 @@
         "evidence_note": "Regionale offizielle Quelle nennt Scout24; Karrierepfad ist auf der offiziellen Unternehmensdomain erreichbar."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T06:48:43.046Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T06:48:43.046Z",
+      "expires_at": "2026-09-09T12:48:43.046Z",
+      "next_refresh_at": "2026-09-09T12:48:43.046Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
@@ -283,9 +308,9 @@
       ],
       "industry": "Electronics",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 89,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-09T12:48:43.046Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -298,7 +323,7 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-27T05:08:12.805Z",
+      "updated_at": "2026-09-09T06:48:43.046Z",
       "last_successful_scan_at": null,
       "candidate_verification_evidence": [
         {
@@ -317,7 +342,12 @@
           "reason": "Karriere-URL liegt auf offizieller Firmendomain und wurde per Link/HTTP belegt.",
           "expires_at": "2026-11-25T05:08:12.805Z"
         }
-      ]
+      ],
+      "last_imported_at": "2026-09-09T06:48:43.046Z",
+      "expires_at": "2026-09-09T12:48:43.046Z",
+      "next_refresh_at": "2026-09-09T12:48:43.046Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:infineon_technologies_ag",
@@ -340,9 +370,9 @@
       ],
       "industry": "Semiconductors",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 88,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-09T12:50:16.633Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -355,8 +385,13 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T06:50:16.633Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T06:50:16.633Z",
+      "expires_at": "2026-09-09T12:50:16.633Z",
+      "next_refresh_at": "2026-09-09T12:50:16.633Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:microsoft_deutschland_gmbh",
@@ -380,9 +415,9 @@
       ],
       "industry": "Technology",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 87,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-09T12:50:16.633Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -395,8 +430,13 @@
         "evidence_note": "Offizielle Microsoft-Karriereseite fuer Muenchen als Primaerquelle gepflegt."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-17T16:02:19.059Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T06:50:16.633Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T06:50:16.633Z",
+      "expires_at": "2026-09-09T12:50:16.633Z",
+      "next_refresh_at": "2026-09-09T12:50:16.633Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:hensoldt_ag",
@@ -459,9 +499,9 @@
       ],
       "industry": "Technology",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-09T16:49:17.305Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -474,8 +514,13 @@
         "evidence_note": "Offizielle Google-Careers-Standortseite fuer Muenchen als Primaerquelle gepflegt."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-17T16:02:19.059Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T10:49:17.305Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T10:49:17.305Z",
+      "expires_at": "2026-09-09T16:49:17.305Z",
+      "next_refresh_at": "2026-09-09T16:49:17.305Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:giesecke_plus_devrient_gmbh",
@@ -499,9 +544,9 @@
       ],
       "industry": "Security Technology",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-09T16:49:17.305Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -514,8 +559,13 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T10:49:17.305Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T10:49:17.305Z",
+      "expires_at": "2026-09-09T16:49:17.305Z",
+      "next_refresh_at": "2026-09-09T16:49:17.305Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:cts_eventim_ag_and_co_kgaa",
@@ -539,9 +589,9 @@
       ],
       "industry": "Entertainment Technology",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-24T00:00:00Z",
+      "next_scan_at": "2026-09-09T16:50:52.362Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -554,8 +604,13 @@
         "evidence_note": "Regionale offizielle Quelle nennt CTS Eventim; Karrierebereich liegt auf der Corporate-Domain."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T10:50:52.362Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T10:50:52.362Z",
+      "expires_at": "2026-09-09T16:50:52.362Z",
+      "next_refresh_at": "2026-09-09T16:50:52.362Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:nemetschek_se",
@@ -29536,6 +29591,664 @@
         "logs/jobagent/daily-run-20260817T134912490Z.md"
       ],
       "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260909T064400575Z",
+      "started_at": "2026-09-09T06:44:00.575Z",
+      "finished_at": "2026-09-09T06:44:03.13Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:bmw_group",
+        "company:allianz_se",
+        "company:munich_re"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 433,
+        "companies_due": 433,
+        "companies_selected": 3,
+        "companies_skipped": 484,
+        "limit": 3,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T064400575Z.json",
+        "logs/jobagent/daily-run-20260909T064400575Z.md",
+        "html/jobagent/daily-run-20260909T064400575Z.html"
+      ],
+      "errors": [
+        "NOT_REACHABLE",
+        "NOT_REACHABLE",
+        "NOT_REACHABLE"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260909T064843046Z",
+      "started_at": "2026-09-09T06:48:43.046Z",
+      "finished_at": "2026-09-09T06:48:46.453Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:scout24_se",
+        "company:siemens_energy_ag",
+        "company:rohde_and_schwarz_gmbh_and_co_kg"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 430,
+        "companies_due": 430,
+        "companies_selected": 3,
+        "companies_skipped": 484,
+        "limit": 3,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T064843046Z.json",
+        "logs/jobagent/daily-run-20260909T064843046Z.md",
+        "html/jobagent/daily-run-20260909T064843046Z.html"
+      ],
+      "errors": [
+        "NOT_REACHABLE",
+        "NOT_REACHABLE",
+        "NOT_REACHABLE",
+        "NOT_REACHABLE"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260909T065016633Z",
+      "started_at": "2026-09-09T06:50:16.633Z",
+      "finished_at": "2026-09-09T06:50:18.863Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:infineon_technologies_ag",
+        "company:microsoft_deutschland_gmbh"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 427,
+        "companies_due": 427,
+        "companies_selected": 2,
+        "companies_skipped": 485,
+        "limit": 2,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T065016633Z.json",
+        "logs/jobagent/daily-run-20260909T065016633Z.md",
+        "html/jobagent/daily-run-20260909T065016633Z.html"
+      ],
+      "errors": [
+        "NOT_REACHABLE",
+        "NOT_REACHABLE"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260909T104917305Z",
+      "started_at": "2026-09-09T10:49:17.305Z",
+      "finished_at": "2026-09-09T10:49:19.917Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:giesecke_plus_devrient_gmbh",
+        "company:google_germany_gmbh"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 425,
+        "companies_due": 425,
+        "companies_selected": 2,
+        "companies_skipped": 485,
+        "limit": 2,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T104917305Z.json",
+        "logs/jobagent/daily-run-20260909T104917305Z.md",
+        "html/jobagent/daily-run-20260909T104917305Z.html"
+      ],
+      "errors": [
+        "NOT_REACHABLE",
+        "NOT_REACHABLE"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260909T105052362Z",
+      "started_at": "2026-09-09T10:50:52.362Z",
+      "finished_at": "2026-09-09T10:50:54.725Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:cts_eventim_ag_and_co_kgaa"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 423,
+        "companies_due": 423,
+        "companies_selected": 1,
+        "companies_skipped": 486,
+        "limit": 1,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T105052362Z.json",
+        "logs/jobagent/daily-run-20260909T105052362Z.md",
+        "html/jobagent/daily-run-20260909T105052362Z.html"
+      ],
+      "errors": [
+        "NOT_REACHABLE"
+      ]
     }
   ],
   "scan_attempts": [
@@ -29668,6 +30381,174 @@
       "error_class": "NONE",
       "retry_recommendation": "NONE",
       "http_status": 200
+    },
+    {
+      "scan_attempt_id": "scanattempt:bmw_group_bmw_group_career_20260909t064402597z",
+      "scan_run_id": "scanrun:20260909T064400575Z",
+      "company_id": "company:bmw_group",
+      "source_id": "source:bmw_group_career",
+      "started_at": "2026-09-09T06:44:02.597Z",
+      "finished_at": "2026-09-09T06:44:02.763Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:allianz_se_allianz_se_career_20260909t064402785z",
+      "scan_run_id": "scanrun:20260909T064400575Z",
+      "company_id": "company:allianz_se",
+      "source_id": "source:allianz_se_career",
+      "started_at": "2026-09-09T06:44:02.785Z",
+      "finished_at": "2026-09-09T06:44:02.897Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:munich_re_munich_re_career_20260909t064402902z",
+      "scan_run_id": "scanrun:20260909T064400575Z",
+      "company_id": "company:munich_re",
+      "source_id": "source:munich_re_career",
+      "started_at": "2026-09-09T06:44:02.902Z",
+      "finished_at": "2026-09-09T06:44:03.029Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:scout24_se_scout24_se_career_20260909t064845064z",
+      "scan_run_id": "scanrun:20260909T064843046Z",
+      "company_id": "company:scout24_se",
+      "source_id": "source:scout24_se_career",
+      "started_at": "2026-09-09T06:48:45.064Z",
+      "finished_at": "2026-09-09T06:48:45.41Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260909t064845428z",
+      "scan_run_id": "scanrun:20260909T064843046Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-09T06:48:45.428Z",
+      "finished_at": "2026-09-09T06:48:45.621Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:rohde_and_schwarz_gmbh_and_co_kg_rohde_and_schwarz_gmbh_and_co_kg_career_20260909t064845625z",
+      "scan_run_id": "scanrun:20260909T064843046Z",
+      "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+      "source_id": "source:rohde_and_schwarz_gmbh_and_co_kg_career",
+      "started_at": "2026-09-09T06:48:45.625Z",
+      "finished_at": "2026-09-09T06:48:45.789Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:rohde_and_schwarz_gmbh_and_co_kg_rohde_and_schwarz_gmbh_and_co_kg_career_url_20260909t064845791z",
+      "scan_run_id": "scanrun:20260909T064843046Z",
+      "company_id": "company:rohde_and_schwarz_gmbh_and_co_kg",
+      "source_id": "source:rohde_and_schwarz_gmbh_and_co_kg_career_url",
+      "started_at": "2026-09-09T06:48:45.791Z",
+      "finished_at": "2026-09-09T06:48:46.389Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:infineon_technologies_ag_infineon_technologies_ag_career_20260909t065018592z",
+      "scan_run_id": "scanrun:20260909T065016633Z",
+      "company_id": "company:infineon_technologies_ag",
+      "source_id": "source:infineon_technologies_ag_career",
+      "started_at": "2026-09-09T06:50:18.592Z",
+      "finished_at": "2026-09-09T06:50:18.701Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:microsoft_deutschland_gmbh_microsoft_deutschland_gmbh_career_20260909t065018721z",
+      "scan_run_id": "scanrun:20260909T065016633Z",
+      "company_id": "company:microsoft_deutschland_gmbh",
+      "source_id": "source:microsoft_deutschland_gmbh_career",
+      "started_at": "2026-09-09T06:50:18.721Z",
+      "finished_at": "2026-09-09T06:50:18.767Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:giesecke_plus_devrient_gmbh_giesecke_plus_devrient_gmbh_career_20260909t104919329z",
+      "scan_run_id": "scanrun:20260909T104917305Z",
+      "company_id": "company:giesecke_plus_devrient_gmbh",
+      "source_id": "source:giesecke_plus_devrient_gmbh_career",
+      "started_at": "2026-09-09T10:49:19.329Z",
+      "finished_at": "2026-09-09T10:49:19.676Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:google_germany_gmbh_google_germany_gmbh_career_20260909t104919692z",
+      "scan_run_id": "scanrun:20260909T104917305Z",
+      "company_id": "company:google_germany_gmbh",
+      "source_id": "source:google_germany_gmbh_career",
+      "started_at": "2026-09-09T10:49:19.692Z",
+      "finished_at": "2026-09-09T10:49:19.819Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:cts_eventim_ag_and_co_kgaa_cts_eventim_ag_and_co_kgaa_career_20260909t105054388z",
+      "scan_run_id": "scanrun:20260909T105052362Z",
+      "company_id": "company:cts_eventim_ag_and_co_kgaa",
+      "source_id": "source:cts_eventim_ag_and_co_kgaa_career",
+      "started_at": "2026-09-09T10:50:54.388Z",
+      "finished_at": "2026-09-09T10:50:54.616Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
     }
   ],
   "job_snapshots": [

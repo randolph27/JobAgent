@@ -84,10 +84,12 @@ function New-FetchResult {
         [Parameter(Mandatory)][bool]$Ok,
         [Parameter()][int]$StatusCode = 200,
         [Parameter()][string]$Content = '',
-        [Parameter()][string]$ErrorMessage = $null
+        [Parameter()][string]$ErrorMessage = $null,
+        [Parameter()][string]$ErrorClass = $null,
+        [Parameter()][string]$FetchClient = $null
     )
 
-    [pscustomobject]@{
+    $result = [pscustomobject]@{
         ok = $Ok
         url = $Url
         final_url = $Url
@@ -98,11 +100,20 @@ function New-FetchResult {
         finished_at = '2026-08-17T10:00:01.000Z'
         error = $ErrorMessage
     }
+    if (-not [string]::IsNullOrWhiteSpace($ErrorClass)) {
+        $result | Add-Member -NotePropertyName error_class -NotePropertyValue $ErrorClass -Force
+        $result | Add-Member -NotePropertyName error_detail -NotePropertyValue $ErrorMessage -Force
+    }
+    if (-not [string]::IsNullOrWhiteSpace($FetchClient)) {
+        $result | Add-Member -NotePropertyName fetch_client -NotePropertyValue $FetchClient -Force
+    }
+    return $result
 }
 
-$policy = New-JobAgentLiveScanPolicy -TimeoutSeconds 7 -MaxRetries 1 -MaxResultsPerSource 3 -MaxDetailFetchesPerSource 2 -SearchTerms @('Head of IT')
+$policy = New-JobAgentLiveScanPolicy -TimeoutSeconds 7 -MaxRetries 1 -MaxResultsPerSource 3 -MaxDetailFetchesPerSource 2 -HostConcurrency 2 -FetchClient 'curl' -WslDistribution 'FixtureDistro' -SearchTerms @('Head of IT')
 Assert-True -Condition ($policy.timeout_seconds -eq 7) -Message 'Policy uebernimmt Timeout nicht.'
 Assert-True -Condition ($policy.max_retries -eq 1) -Message 'Policy uebernimmt Retry-Grenze nicht.'
+Assert-True -Condition ($policy.host_concurrency -eq 2 -and $policy.fetch_client -eq 'curl' -and $policy.wsl_distribution -eq 'FixtureDistro') -Message 'Policy uebernimmt Fetch-Client-/Hostlimit-Vertrag nicht.'
 Assert-True -Condition ($policy.source_policy -eq 'official-career-source-only') -Message 'Policy dokumentiert offizielle Quellen nicht.'
 
 $company = New-TestCompany
@@ -405,6 +416,15 @@ Assert-True -Condition ($timeoutDetailResult.status -eq 'PARTIAL') -Message 'Liv
 Assert-True -Condition ($timeoutDetailResult.error_class -eq 'TIMEOUT') -Message 'Live-Adapter setzt fuer Timeout-Detailfetch nicht TIMEOUT.'
 Assert-True -Condition ($timeoutDetailResult.retry_recommendation -eq 'RETRY_NEXT_RUN') -Message 'Live-Adapter setzt fuer Timeout-Detailfetch nicht RETRY_NEXT_RUN.'
 
+$tlsSourceFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    New-FetchResult -Url $Url -Ok $false -ErrorMessage 'SEC_E_NO_CREDENTIALS' -ErrorClass 'TLS_CREDENTIAL_UNAVAILABLE' -FetchClient 'curl.exe'
+}
+$tlsSourceResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $tlsSourceFetcher
+Assert-True -Condition ($tlsSourceResult.status -eq 'FAILED' -and $tlsSourceResult.error_class -eq 'NOT_REACHABLE') -Message 'Live-Adapter klassifiziert TLS-Quellfehler nicht fail-closed.'
+Assert-True -Condition ((@($tlsSourceResult.artifact_paths) -join "`n") -match 'source_fetch_failed\[TLS_CREDENTIAL_UNAVAILABLE\]\[curl\.exe\]') -Message 'Live-Adapter verliert konkrete Fetch-Fehlerklasse oder Client im Artefakt.'
+
 $collisionHtml = '<html><body><a href="https://example.myworkdayjobs.invalid/job/123">IT Manager 123</a><a href="https://example.myworkdayjobs.invalid/job/456">IT Manager 456</a></body></html>'
 $collisionPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 5 -MaxDetailFetchesPerSource 5
 $collisionFetcher = {
@@ -470,6 +490,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_structured_json_ats_success',
         'live_adapter_blocked_detail_fetch',
         'live_adapter_timeout_detail_fetch',
+        'live_adapter_preserves_fetch_error_diagnostics',
         'path_scoped_job_identity',
         'mixed_detail_fetch_is_partial',
         'retry_attempt_log'
