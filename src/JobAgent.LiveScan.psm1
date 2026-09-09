@@ -348,6 +348,53 @@ function Get-JobAgentLiveNextPageUrls {
     return $urls.ToArray()
 }
 
+function Get-JobAgentLiveEmbeddedSourceUrls {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxUrls = 10
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Html)) {
+        return @()
+    }
+
+    $baseUri = [Uri]$BaseUrl
+    $urls = New-Object System.Collections.Generic.List[string]
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($match in [regex]::Matches($Html, '<(?:iframe|frame)\b(?<attrs>[^>]*)>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)) {
+        if ($urls.Count -ge $MaxUrls) {
+            break
+        }
+
+        $attrs = [string]$match.Groups['attrs'].Value
+        $srcMatch = [regex]::Match($attrs, '\b(?:src|data-src)\s*=\s*["''](?<src>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if (-not $srcMatch.Success) {
+            continue
+        }
+
+        $src = [Net.WebUtility]::HtmlDecode($srcMatch.Groups['src'].Value)
+        if ([string]::IsNullOrWhiteSpace($src) -or $src -match '^(mailto:|tel:|javascript:|#|about:)') {
+            continue
+        }
+
+        try {
+            $absolute = [Uri]::new($baseUri, $src).AbsoluteUri
+            $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
+            if ($evaluation.is_official -eq $true -and $seen.Add([string]$evaluation.canonical_url)) {
+                $urls.Add([string]$evaluation.canonical_url)
+            }
+        }
+        catch {
+            continue
+        }
+    }
+
+    return $urls.ToArray()
+}
+
 function Get-JobAgentLiveJsonLdNodes {
     param([Parameter()][AllowNull()][object]$Node)
 
@@ -711,7 +758,11 @@ function Invoke-JobAgentLiveHtmlAdapter {
     $pageUrlsToFetch = New-Object System.Collections.Generic.Queue[string]
     $seenPageUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     [void]$seenPageUrls.Add([string]$sourceFetch.final_url)
-    foreach ($nextUrl in @(Get-JobAgentLiveNextPageUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)) {
+    $initialFollowUps = @(
+        @(Get-JobAgentLiveEmbeddedSourceUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
+        @(Get-JobAgentLiveNextPageUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
+    )
+    foreach ($nextUrl in $initialFollowUps) {
         if ($seenPageUrls.Add($nextUrl)) {
             $pageUrlsToFetch.Enqueue($nextUrl)
         }
@@ -724,7 +775,11 @@ function Invoke-JobAgentLiveHtmlAdapter {
         if ($pageFetch.ok -ne $true) {
             continue
         }
-        foreach ($nextUrl in @(Get-JobAgentLiveNextPageUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)) {
+        $followUps = @(
+            @(Get-JobAgentLiveEmbeddedSourceUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
+            @(Get-JobAgentLiveNextPageUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
+        )
+        foreach ($nextUrl in $followUps) {
             if ($seenPageUrls.Add($nextUrl)) {
                 $pageUrlsToFetch.Enqueue($nextUrl)
             }
@@ -754,6 +809,22 @@ function Invoke-JobAgentLiveHtmlAdapter {
     if ($candidates.Count -eq 0) {
         $blockedByContent = Test-JobAgentLiveBlockedContentHint -Html ([string]$sourceFetch.content)
         $dynamicOnly = if (-not $blockedByContent) { Test-JobAgentLiveDynamicContentHint -Html ([string]$sourceFetch.content) } else { $false }
+        $failedPageFetches = @($sourceFetches.ToArray() | Where-Object { $_.ok -ne $true })
+        $unprocessedPageHint = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and (Test-JobAgentLivePaginationHint -Html ([string]$_.content) -eq $true) }).Count -gt 0)
+        if ((-not $blockedByContent) -and (-not $dynamicOnly) -and $failedPageFetches.Count -eq 0 -and (-not $unprocessedPageHint)) {
+            return New-JobAgentAdapterResult `
+                -AdapterInput $AdapterInput `
+                -AdapterName 'live-html-adapter' `
+                -Status 'SUCCESS' `
+                -ErrorClass 'NONE' `
+                -RetryRecommendation 'NONE' `
+                -RawJobs @() `
+                -HttpStatus $sourceFetch.status_code `
+                -ArtifactPaths @('no_verified_job_candidates_complete') `
+                -IsComplete $true `
+                -StartedAt $startedAt `
+                -FinishedAt ([datetime]::UtcNow)
+        }
         $errorClass = if ($blockedByContent) { 'BLOCKED' } elseif ($dynamicOnly) { 'TECHNICAL_LIMITATION' } else { 'NO_JOBS_FOUND' }
         $retryRecommendation = Resolve-JobAgentLiveRetryRecommendation -ErrorClass $errorClass
         $artifactPath = if ($blockedByContent) { 'source_blocked_or_challenged' } elseif ($dynamicOnly) { 'dynamic_client_side_only' } else { 'no_verified_job_candidates' }

@@ -231,8 +231,9 @@ $emptyFetcher = {
     New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/about">About us</a></html>'
 }
 $emptyResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $policy -Fetcher $emptyFetcher
-Assert-True -Condition ($emptyResult.status -eq 'PARTIAL') -Message 'Live-Adapter markiert leere offizielle Quelle nicht als PARTIAL.'
-Assert-True -Condition ($emptyResult.error_class -eq 'NO_JOBS_FOUND') -Message 'Live-Adapter setzt falsche Fehlerklasse fuer leere Quelle.'
+Assert-True -Condition ($emptyResult.status -eq 'SUCCESS') -Message 'Live-Adapter markiert vollstaendig verarbeitete leere Quelle nicht als SUCCESS.'
+Assert-True -Condition ($emptyResult.scan_complete -eq $true) -Message 'Live-Adapter markiert vollstaendig verarbeitete leere Quelle nicht als complete.'
+Assert-True -Condition ($emptyResult.error_class -eq 'NONE') -Message 'Live-Adapter setzt falsche Fehlerklasse fuer vollstaendig leere Quelle.'
 
 $blockedFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -305,6 +306,34 @@ $paginationResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy 
 Assert-True -Condition ($paginationResult.status -eq 'SUCCESS' -and $paginationResult.scan_complete) -Message 'Live-Adapter verarbeitet belegte Pagination nicht vollstaendig.'
 Assert-True -Condition (@($paginationResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer auf Folgeseite nicht.'
 Assert-True -Condition ($paginationResult.raw_jobs[0].detail_url -eq 'https://example.invalid/careers/jobs/it-manager-200') -Message 'Live-Adapter kanonisiert Treffer von Folgeseite falsch.'
+
+$iframePolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('IT Lead')
+$iframeFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><iframe src="https://example.myworkdayjobs.invalid/embed/jobs"></iframe></html>'
+            break
+        }
+        'https://example.myworkdayjobs.invalid/embed/jobs' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/job/it-lead-333">IT Lead</a></html>'
+            break
+        }
+        'https://example.myworkdayjobs.invalid/job/it-lead-333' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Lead</h1><p>Leitet Team und verantwortet die IT-Roadmap in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$iframeResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $iframePolicy -Fetcher $iframeFetcher
+Assert-True -Condition ($iframeResult.status -eq 'SUCCESS' -and $iframeResult.scan_complete) -Message 'Live-Adapter verarbeitet offiziell verlinkten ATS-Frame nicht vollstaendig.'
+Assert-True -Condition (@($iframeResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer aus ATS-Frame nicht.'
+Assert-True -Condition ($iframeResult.raw_jobs[0].detail_url -eq 'https://example.myworkdayjobs.invalid/job/it-lead-333') -Message 'Live-Adapter kanonisiert ATS-Frame-Treffer falsch.'
 
 $structuredJsonFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -432,11 +461,12 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'greenhouse_ats_url_pattern_detection',
         'structured_ats_json_extraction',
         'live_adapter_success_with_detail_verification',
-        'live_adapter_no_jobs_found',
+        'live_adapter_complete_empty_source',
         'live_adapter_blocked_source_detection',
         'live_adapter_dynamic_source_detection',
         'live_adapter_jsonld_ats_success',
         'live_adapter_pagination_success',
+        'live_adapter_official_iframe_ats_success',
         'live_adapter_structured_json_ats_success',
         'live_adapter_blocked_detail_fetch',
         'live_adapter_timeout_detail_fetch',

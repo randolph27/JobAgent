@@ -370,8 +370,8 @@ pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1
 - `Get-JobAgentDailyRunCandidateCompanies` priorisiert Firmen mit offizieller Quelle nach fehlendem erfolgreichem Scan, hoher `scan_priority`, faelligem `next_scan_at` und stabilem Namen. Mit `CompanyIds` kann ein Lauf fuer Tests oder fokussierte Wiederholungen begrenzt werden.
 - Adapterfehler werden als `ScanAttempt` mit `FAILED` und konkreter Fehlerklasse persistiert; sie brechen den Gesamtlauf nicht ab und entfernen keine bestehenden Stellen.
 - Jeder Lauf erzeugt genau einen `ScanRun` und ein JSON-Ergebnisartefakt unter `logs/jobagent/daily-run-<timestamp>.json`.
-- `tools/Invoke-JobAgentDailyRun.ps1` stellt den lokalen CLI-Einstieg fuer deterministische Fixture-Laeufe bereit. Ohne `-FixturePath` bricht das Skript bewusst ab, bis Live-Adapter als getrennte Lane angebunden sind.
-- Der Orchestrator nutzt in Funktionstests ausschliesslich Fixture-Adapter; Live-Recherche bleibt eine getrennte Lane.
+- `tools/Invoke-JobAgentDailyRun.ps1` stellt den lokalen CLI-Einstieg fuer deterministische Fixture-Laeufe und kontrollierte produktive Live-Laeufe bereit. Mit `-FixturePath` oder `-AdapterMode fixture` wird der Fixture-Adapter genutzt; ohne Fixture waehlt `-AdapterMode auto` den Live-HTML-Adapter.
+- Der Orchestrator nutzt in Funktionstests Fixture-Adapter oder injizierte Fake-Fetcher; Live-Recherche bleibt eine separate Betriebs-/Pilot-Lane und wird nicht in Funktionstests gegen externe Websites ausgefuehrt.
 
 Funktionstest:
 
@@ -403,7 +403,7 @@ pwsh -NoProfile -File tests\Test-JobAgentReport.ps1
 - `Invoke-JobAgentManagedDailyRun` kapselt den fachlichen Daily-Run mit separatem Betriebs-Lock unter `logs/jobagent/daily-run.lock`, Statusdatei `logs/jobagent/daily-run.status.json`, Run-Log und Exitcode-Vertrag.
 - `Get-JobAgentDailyRunOperationalStatus` liefert nicht-interaktiv den letzten bekannten Laufzustand und erkennt einen laufenden Prozess ueber das Lock-Payload.
 - `Invoke-JobAgentLogRotation` begrenzt `logs/jobagent/daily-run-*.log` auf die konfigurierte Anzahl und entfernt nur diese verwalteten Betriebslogs.
-- `tools\Invoke-JobAgentDailyRun.ps1` nutzt den Betriebswrapper. Ohne `-FixturePath` bleibt die Live-Lane weiterhin fail-closed.
+- `tools\Invoke-JobAgentDailyRun.ps1` nutzt den Betriebswrapper. Ohne `-FixturePath` laeuft der Live-HTML-Adapter mit denselben Policy-Parametern wie `tools\Invoke-JobAgentLivePilot.ps1`: `MaxRetries`, `MaxResultsPerSource`, `MaxDetailFetchesPerSource`, `MaxPagesPerSource` und `SearchTerms`.
 - `tools\Get-JobAgentDailyRunStatus.ps1` gibt den Status als JSON aus und ist fuer Scheduler-Checks geeignet.
 
 Exitcodes:
@@ -420,7 +420,7 @@ schtasks /Create /TN "JobAgent Daily Run" /SC DAILY /ST 07:30 /TR "pwsh -NoProfi
 Hinweise:
 
 - Arbeitsverzeichnis muss `D:\_Scripte\JobAgent` sein, wenn spaeter `.\ci.cmd daily-run` verwendet wird.
-- Produktive Live-Recherche wird erst mit JA-014 aktiviert; bis dahin nur Fixture- oder Mock-Laeufe planen.
+- Produktive Live-Recherche ist kontrolliert ueber den Daily-Run-CLI oder `tools\Invoke-JobAgentLivePilot.ps1` verfuegbar. Vor breiteren Laeufen MaxCompanies/CompanyIds bewusst begrenzen und den Operational-Status pruefen.
 - Vor einem manuellen Re-Run `pwsh -NoProfile -File tools\Get-JobAgentDailyRunStatus.ps1` ausfuehren und bei `is_running=true` keinen zweiten Lauf starten.
 - Logs und Statusdateien duerfen keine Secrets enthalten; Fixture- und Live-Parameter mit Secrets sind nicht vorgesehen.
 

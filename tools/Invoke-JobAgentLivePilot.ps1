@@ -7,8 +7,10 @@ param(
     [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
     [Parameter()][ValidateRange(1, 600)][int]$TimeoutSeconds = 20,
     [Parameter()][ValidateRange(0, 5)][int]$MaxRetries = 1,
-    [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 10,
-    [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 5,
+    [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 100,
+    [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 100,
+    [Parameter()][ValidateRange(1, 20)][int]$MaxPagesPerSource = 10,
+    [Parameter()][string[]]$SearchTerms = @('Head of IT', 'Director IT', 'IT Leitung', 'IT-Leitung', 'Leiter IT', 'CIO'),
     [Parameter()][string[]]$CompanyIds = @(),
     [Parameter()][string]$LogRoot = 'logs/jobagent',
     [Parameter()][ValidateRange(1, 1000)][int]$RetainLogs = 30
@@ -28,7 +30,9 @@ $policy = New-JobAgentLiveScanPolicy `
     -MaxRetries $MaxRetries `
     -MaxCompanies $MaxCompanies `
     -MaxResultsPerSource $MaxResultsPerSource `
-    -MaxDetailFetchesPerSource $MaxDetailFetchesPerSource
+    -MaxDetailFetchesPerSource $MaxDetailFetchesPerSource `
+    -MaxPagesPerSource $MaxPagesPerSource `
+    -SearchTerms $SearchTerms
 
 $adapter = {
     param([object]$AdapterInput)

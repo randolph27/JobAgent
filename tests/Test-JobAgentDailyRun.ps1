@@ -234,6 +234,14 @@ try {
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.report_path)) -Message 'Daily-Run-CLI schreibt kein Reportartefakt.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.html_report_path)) -Message 'Daily-Run-CLI schreibt kein HTML-Artefakt.'
 
+    $cliLiveProjectRoot = New-TestProjectRoot
+    $cliLiveOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $cliLiveProjectRoot -MaxCompanies 1 -MaxResultsPerSource 2 -MaxDetailFetchesPerSource 2 -MaxPagesPerSource 2 -MaxRetries 0 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI-Live-Modus ohne Fixture ist fehlgeschlagen: " + ($cliLiveOutput -join "`n"))
+    $cliLiveResult = ($cliLiveOutput -join "`n") | ConvertFrom-Json -Depth 20
+    Assert-True -Condition ($cliLiveResult.adapter_mode -eq 'live') -Message 'Daily-Run-CLI waehlt ohne Fixture nicht den Live-Modus.'
+    Assert-True -Condition ($cliLiveResult.status -eq 'SKIPPED') -Message 'Daily-Run-CLI-Live-Modus mit leerem Store liefert keinen kontrollierten SKIPPED-Status.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$cliLiveResult.report_path)) -Message 'Daily-Run-CLI-Live-Modus schreibt kein Reportartefakt.'
+
     $multiSourceProjectRoot = New-TestProjectRoot
     New-TestStore -ProjectRoot $multiSourceProjectRoot
     Add-TestSource -ProjectRoot $multiSourceProjectRoot -CompanyId 'company:alpha_ag' -SourceId 'source:alpha_ag_ats' -Url 'https://jobs.alpha.example.invalid/search'
@@ -465,8 +473,9 @@ try {
             'daily_run_reports_secure_job_provider_and_source_links',
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
-            'daily_run_cli_fixture_mode',
-            'daily_run_multi_source_partial_removal',
+        'daily_run_cli_fixture_mode',
+        'daily_run_cli_live_mode_without_fixture',
+        'daily_run_multi_source_partial_removal',
             'daily_run_prioritizes_refresh_due_companies',
             'daily_run_persists_selection_summary',
             'daily_run_report_renders_selection_metrics',
@@ -487,6 +496,9 @@ finally {
     }
     if ($null -ne (Get-Variable -Name cliProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $cliProjectRoot)) {
         Remove-Item -LiteralPath $cliProjectRoot -Recurse -Force
+    }
+    if ($null -ne (Get-Variable -Name cliLiveProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $cliLiveProjectRoot)) {
+        Remove-Item -LiteralPath $cliLiveProjectRoot -Recurse -Force
     }
     if (Test-Path -LiteralPath $projectRoot) {
         Remove-Item -LiteralPath $projectRoot -Recurse -Force
