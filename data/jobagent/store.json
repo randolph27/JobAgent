@@ -459,9 +459,9 @@
       ],
       "industry": "Defense Electronics",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "FAILED",
       "scan_priority": 86,
-      "next_scan_at": "2026-08-24T00:00:00Z",
+      "next_scan_at": "2026-09-09T17:00:53.094Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -474,8 +474,13 @@
         "evidence_note": "Regionale offizielle Quelle nennt HENSOLDT; Karrierebereich liegt auf der offiziellen Domain."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T11:00:53.094Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-09T11:00:53.094Z",
+      "expires_at": "2026-09-09T17:00:53.094Z",
+      "next_refresh_at": "2026-09-09T17:00:53.094Z",
+      "refresh_reason": "last_scan_failed",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:google_germany_gmbh",
@@ -675,9 +680,9 @@
       ],
       "industry": "Automotive",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 85,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-10T11:05:50.035Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -690,8 +695,14 @@
         "evidence_note": "Klimapakt-3-Hinweis nennt MAN Truck and Bus; die offizielle MAN-Domain enthaelt die Karriereseite."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-28T16:05:10.163Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-09T11:05:50.035Z",
+      "last_successful_scan_at": "2026-09-09T11:05:50.035Z",
+      "last_imported_at": "2026-09-09T11:05:50.035Z",
+      "last_verified_at": "2026-09-09T11:05:50.035Z",
+      "expires_at": "2026-10-09T11:05:50.035Z",
+      "next_refresh_at": "2026-09-10T11:05:50.035Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:traton_se",
@@ -20250,6 +20261,406 @@
       "requirements": [],
       "salary": "UNKNOWN",
       "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_career_at_man_career_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Career at MAN",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Career at MAN Truck & Bus | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Career MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal Shape the mobility of tomorrow W",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_benefits_benefits_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/corporate/en/career/man-as-employer/benefits/benefits.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Benefits",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Benefits | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom BENEFITS MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal These are the benefits that await you at MAN A",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_values_values_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/corporate/en/career/man-as-employer/values/values.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Values",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Values | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Our values MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal Experience our corporate culture Here at MAN, w",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_pupils_our_offers_pupils_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/corporate/en/career/your-career-at-man/pupils/our-offers/pupils.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Pupils",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Pupils | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Pupils Pupils Our offers Apprenticeship Dual Studies Job Portal The start of your future – career paths for pupils at MAN Have you left s",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_students_our_offers_students_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/corporate/en/career/your-career-at-man/students/our-offers/students.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Students",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Students | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Students Students Our offers Internship Trainees Working Students Thesis Dual Studies Job Portal Get started while you study Are you mi",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_professionals_our_offers_professionals_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/corporate/en/career/your-career-at-man/professionals/our-offers/professionals.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Professionals",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Professionals | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Experienced professionals Professionals Our offers Direct Entry Doctoral Programme Job Portal Time for your next challenge Do you",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_jobs_man_eu",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://jobs.man.eu/",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Job Portal",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "MAN Truck & Bus Jobbörse Diese Website verwendet Cookies und Drittanbieterinhalte. Um die Website und ihre Angebote optimal nutzen zu können, erklären Sie sich bitte mit der Verwendung dieser Cookies und Drittanbieterinhalte einverstanden. Sie haben auch die Möglichkeit, die Seite unter Verwendung nur der unbedingt erforderlichen Cookies und ohne Drittanbieterinhalte zu nutzen. Dadurch kann jedoch die Nutzerfreundlichkeit der Website eingeschränkt sein. Cookie-Einstellungen ändern Alle Cookies a",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_at_de_ueber_uns_unternehmen_karriere_bei_man_arbeiten_bei_man_arbeiten_bei_man_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/at/de/ueber-uns/unternehmen/karriere-bei-man/arbeiten-bei-man/arbeiten-bei-man.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Find your job at MAN Truck & Bus Austria here.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Arbeiten bei MAN Österreich | MAN MAN Österreich Lkw Lkw Alle Modelle Alle Modelle Modellübersicht Der MAN TGX Der MAN eTGX Der MAN TGS Der MAN eTGS Der MAN TGM & MAN TGL Der MAN eTGM Der MAN eTGL Elektro-LKW D30 PowerLion Fahrerhäuser Assistenzsysteme Lkw für Branchen Lkw für Branchen Übersicht Fernverkehr Baufahrzeuge & Betonmischer Verteilerverkehr Kommunalfahrzeuge Feuerwehr & Einsatzfahrzeuge Tankwagen & Silofahrzeuge Agrar- & Forst-Lkw Kühlfahrzeuge Getränkefahrzeuge Schwertransport Reichw",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_es_es_sobre_nosotros_empresa_carrera_profesional_trabaja_en_man_trabaja_en_man_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/es/es/sobre-nosotros/empresa/carrera-profesional/trabaja-en-man/trabaja-en-man.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Find your job at MAN Truck & Bus Iberia here.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Trabaja en MAN | MAN MAN España Camiones Camiones Todos los modelos Todos los modelos Modelos MAN TGX MAN eTGX MAN TGS MAN eTGS MAN TGM y MAN TGL MAN eTGM MAN eTGL Camión eléctrico D30 PowerLion Cabinas Sistemas de asistencia Un camión para cada sector Un camión para cada sector Vista general Transporte de larga distancia Vehículos para la construcción y hormigoneras Transporte de distribución Vehículos municipales Bomberos y vehículos de emergencia Camiones cisterna y vehículos con silo Camione",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
+    },
+    {
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_hu_hu_rolunk_vallalat_karrier_az_man_vallalatnal_karrier_az_man_vallalatnal_html",
+      "company_id": "company:man_truck_and_bus_se",
+      "official_url": "https://man.eu/hu/hu/rolunk/vallalat/karrier-az-man-vallalatnal/karrier-az-man-vallalatnal.html",
+      "alternative_official_urls": [],
+      "source_id": "source:man_truck_and_bus_se_career",
+      "external_job_id": "UNKNOWN",
+      "ats_job_id": "UNKNOWN",
+      "title": "Find your job at MAN Truck & Bus Hungary here.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Karrier | MAN MAN Magyarország Tehergépkocsi Tehergépkocsi Minden modell Minden modell Típusok áttekintése Az MAN TGX MAN eTGX Az MAN TGS MAN eTGS Az MAN TGM és az MAN TGL Az MAN eTGM Az MAN eTGL Elektromos teherautó D30 PowerLion Vezetőfülkék Asszisztensrendszerek Ágazatspecifikus tehergépkocsik Ágazatspecifikus tehergépkocsik Áttekintés Távolsági fuvarozás Építőipari járművek és betonkeverők Elosztófuvarozás Kommunális járművek Tűzoltó- és sürgősségi járművek Tartálykocsik és silós járművek Me",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-09T11:05:50.035Z",
+      "last_seen": "2026-09-09T11:05:50.035Z",
+      "changed_at": "2026-09-09T11:05:50.035Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-09T11:05:50.035Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "CANONICAL_URL"
     }
   ],
   "job_sources": [
@@ -30249,6 +30660,262 @@
       "errors": [
         "NOT_REACHABLE"
       ]
+    },
+    {
+      "scan_run_id": "scanrun:20260909T110053094Z",
+      "started_at": "2026-09-09T11:00:53.094Z",
+      "finished_at": "2026-09-09T11:00:55.431Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:hensoldt_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 422,
+        "companies_due": 422,
+        "companies_selected": 1,
+        "companies_skipped": 486,
+        "limit": 1,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T110053094Z.json",
+        "logs/jobagent/daily-run-20260909T110053094Z.md",
+        "html/jobagent/daily-run-20260909T110053094Z.html"
+      ],
+      "errors": [
+        "NOT_REACHABLE"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "started_at": "2026-09-09T11:05:50.035Z",
+      "finished_at": "2026-09-09T11:06:07.469Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:man_truck_and_bus_se"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 421,
+        "companies_due": 421,
+        "companies_selected": 1,
+        "companies_skipped": 486,
+        "limit": 1,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:accenture",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adac",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adobe",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260909T110550035Z.json",
+        "logs/jobagent/daily-run-20260909T110550035Z.md",
+        "html/jobagent/daily-run-20260909T110550035Z.html"
+      ],
+      "errors": []
     }
   ],
   "scan_attempts": [
@@ -30549,6 +31216,34 @@
       "retry_recommendation": "RETRY_NEXT_RUN",
       "http_status": null,
       "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:hensoldt_ag_hensoldt_ag_career_20260909t110055042z",
+      "scan_run_id": "scanrun:20260909T110053094Z",
+      "company_id": "company:hensoldt_ag",
+      "source_id": "source:hensoldt_ag_career",
+      "started_at": "2026-09-09T11:00:55.042Z",
+      "finished_at": "2026-09-09T11:00:55.331Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:man_truck_and_bus_se_man_truck_and_bus_se_career_20260909t110552006z",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "company_id": "company:man_truck_and_bus_se",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "started_at": "2026-09-09T11:05:52.006Z",
+      "finished_at": "2026-09-09T11:06:07.244Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
     }
   ],
   "job_snapshots": [
@@ -30665,6 +31360,206 @@
       },
       "official_url": "https://swm.de/karriere/it",
       "summary": "IT-Jobs: Karriere bei den SWM --> Zum Inhalt springen Logo Logo Jobs & Bewerbung Jobs & Bewerbung Freie Stellen Bewerbungstipps Einstiegsmöglichkeiten Einstiegsmöglichkeiten Schüler*in Ausbildung | Schülerpraktikum Duales Studium Student*in Übersicht Erfahrungsberichte Fach- oder Führungskraft Ingenieur*in Technische Fachkraft Kaufmännische Fachkraft IT-Expert*in Fahrer*in Saisonkraft Bäder SWM als Arbeitgeber SWM als Arbeitgeber Die SWM als Arbeitgeber Unsere Unternehmenswerte Unsere Arbeitskul"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_career_at_man_career_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_career_at_man_career_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "6b4d6102c736bb0e16e72236e93866aa1223fb7f445bdc3643811994da2c490b",
+      "status": "NEW",
+      "title": "Career at MAN",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/corporate/en/career/man-as-employer/career-at-man/career.html",
+      "summary": "Career at MAN Truck & Bus | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Career MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal Shape the mobility of tomorrow W",
+      "description": "Career at MAN Truck & Bus | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Career MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal Shape the mobility of tomorrow W"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_benefits_benefits_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_benefits_benefits_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "1d794b8c58de7254a1964ac5232db475ba3f659dc3335af9247bc6743e261dfc",
+      "status": "NEW",
+      "title": "Benefits",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/corporate/en/career/man-as-employer/benefits/benefits.html",
+      "summary": "Benefits | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom BENEFITS MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal These are the benefits that await you at MAN A",
+      "description": "Benefits | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom BENEFITS MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal These are the benefits that await you at MAN A"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_values_values_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_values_values_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "a3f59f8ec7161fc69f78bd30c9691560e0bed3b5bccc5e4b1e3065cd74d5b64c",
+      "status": "NEW",
+      "title": "Values",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/corporate/en/career/man-as-employer/values/values.html",
+      "summary": "Values | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Our values MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal Experience our corporate culture Here at MAN, w",
+      "description": "Values | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Our values MAN as employer Career at MAN Benefits Values Diversity & Inclusion Job Portal Experience our corporate culture Here at MAN, w"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_pupils_our_offers_pupils_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_pupils_our_offers_pupils_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "bc30b7ae83f7f9ec5331eb4752569f702033583be4712587be0092a03ef855e0",
+      "status": "NEW",
+      "title": "Pupils",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/corporate/en/career/your-career-at-man/pupils/our-offers/pupils.html",
+      "summary": "Pupils | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Pupils Pupils Our offers Apprenticeship Dual Studies Job Portal The start of your future – career paths for pupils at MAN Have you left s",
+      "description": "Pupils | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Pupils Pupils Our offers Apprenticeship Dual Studies Job Portal The start of your future – career paths for pupils at MAN Have you left s"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_students_our_offers_students_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_students_our_offers_students_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "f49e8070be31be5787c9c2110e0d69e7f85f1cd0c9ea64edfdd6ea65f52e96e3",
+      "status": "NEW",
+      "title": "Students",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/corporate/en/career/your-career-at-man/students/our-offers/students.html",
+      "summary": "Students | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Students Students Our offers Internship Trainees Working Students Thesis Dual Studies Job Portal Get started while you study Are you mi",
+      "description": "Students | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Students Students Our offers Internship Trainees Working Students Thesis Dual Studies Job Portal Get started while you study Are you mi"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_professionals_our_offers_professionals_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_professionals_our_offers_professionals_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "dbd734bf85b11a00195ca140bd68a462d8478b5f2cf0f123fdf37e39354d75dc",
+      "status": "NEW",
+      "title": "Professionals",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/corporate/en/career/your-career-at-man/professionals/our-offers/professionals.html",
+      "summary": "Professionals | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Experienced professionals Professionals Our offers Direct Entry Doctoral Programme Job Portal Time for your next challenge Do you",
+      "description": "Professionals | MAN Truck & Bus MAN Truck & Bus About MAN Products Products Truck Van Bus Engines NEOPLAN TopUsed Services Digital Services Zero Emission Digitalisation Automation Sustainability Career Career MAN as employer MAN as employer Career at MAN Benefits Values Diversity & Inclusion Your Career at MAN Your Career at MAN Pupils Students Professionals Newsroom Experienced professionals Professionals Our offers Direct Entry Doctoral Programme Job Portal Time for your next challenge Do you"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_jobs_man_eu_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_jobs_man_eu",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "e07a1458524c4b26f84e6f01b3af06a6ba058d2e0094f94d6fa37d3888663226",
+      "status": "NEW",
+      "title": "Job Portal",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.man.eu/",
+      "summary": "MAN Truck & Bus Jobbörse Diese Website verwendet Cookies und Drittanbieterinhalte. Um die Website und ihre Angebote optimal nutzen zu können, erklären Sie sich bitte mit der Verwendung dieser Cookies und Drittanbieterinhalte einverstanden. Sie haben auch die Möglichkeit, die Seite unter Verwendung nur der unbedingt erforderlichen Cookies und ohne Drittanbieterinhalte zu nutzen. Dadurch kann jedoch die Nutzerfreundlichkeit der Website eingeschränkt sein. Cookie-Einstellungen ändern Alle Cookies a",
+      "description": "MAN Truck & Bus Jobbörse Diese Website verwendet Cookies und Drittanbieterinhalte. Um die Website und ihre Angebote optimal nutzen zu können, erklären Sie sich bitte mit der Verwendung dieser Cookies und Drittanbieterinhalte einverstanden. Sie haben auch die Möglichkeit, die Seite unter Verwendung nur der unbedingt erforderlichen Cookies und ohne Drittanbieterinhalte zu nutzen. Dadurch kann jedoch die Nutzerfreundlichkeit der Website eingeschränkt sein. Cookie-Einstellungen ändern Alle Cookies a"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_at_de_ueber_uns_unternehmen_karriere_bei_man_arbeiten_bei_man_arbeiten_bei_man_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_at_de_ueber_uns_unternehmen_karriere_bei_man_arbeiten_bei_man_arbeiten_bei_man_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "a8b1b595a982c66dacd6a43bc2f345a7a888e8a684e32fbbc89860c539b92819",
+      "status": "NEW",
+      "title": "Find your job at MAN Truck & Bus Austria here.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/at/de/ueber-uns/unternehmen/karriere-bei-man/arbeiten-bei-man/arbeiten-bei-man.html",
+      "summary": "Arbeiten bei MAN Österreich | MAN MAN Österreich Lkw Lkw Alle Modelle Alle Modelle Modellübersicht Der MAN TGX Der MAN eTGX Der MAN TGS Der MAN eTGS Der MAN TGM & MAN TGL Der MAN eTGM Der MAN eTGL Elektro-LKW D30 PowerLion Fahrerhäuser Assistenzsysteme Lkw für Branchen Lkw für Branchen Übersicht Fernverkehr Baufahrzeuge & Betonmischer Verteilerverkehr Kommunalfahrzeuge Feuerwehr & Einsatzfahrzeuge Tankwagen & Silofahrzeuge Agrar- & Forst-Lkw Kühlfahrzeuge Getränkefahrzeuge Schwertransport Reichw",
+      "description": "Arbeiten bei MAN Österreich | MAN MAN Österreich Lkw Lkw Alle Modelle Alle Modelle Modellübersicht Der MAN TGX Der MAN eTGX Der MAN TGS Der MAN eTGS Der MAN TGM & MAN TGL Der MAN eTGM Der MAN eTGL Elektro-LKW D30 PowerLion Fahrerhäuser Assistenzsysteme Lkw für Branchen Lkw für Branchen Übersicht Fernverkehr Baufahrzeuge & Betonmischer Verteilerverkehr Kommunalfahrzeuge Feuerwehr & Einsatzfahrzeuge Tankwagen & Silofahrzeuge Agrar- & Forst-Lkw Kühlfahrzeuge Getränkefahrzeuge Schwertransport Reichw"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_es_es_sobre_nosotros_empresa_carrera_profesional_trabaja_en_man_trabaja_en_man_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_es_es_sobre_nosotros_empresa_carrera_profesional_trabaja_en_man_trabaja_en_man_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "b304b6dfba62054dfeb360afeb006342a9814b5e3ef12a9883bc3766e2546c46",
+      "status": "NEW",
+      "title": "Find your job at MAN Truck & Bus Iberia here.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/es/es/sobre-nosotros/empresa/carrera-profesional/trabaja-en-man/trabaja-en-man.html",
+      "summary": "Trabaja en MAN | MAN MAN España Camiones Camiones Todos los modelos Todos los modelos Modelos MAN TGX MAN eTGX MAN TGS MAN eTGS MAN TGM y MAN TGL MAN eTGM MAN eTGL Camión eléctrico D30 PowerLion Cabinas Sistemas de asistencia Un camión para cada sector Un camión para cada sector Vista general Transporte de larga distancia Vehículos para la construcción y hormigoneras Transporte de distribución Vehículos municipales Bomberos y vehículos de emergencia Camiones cisterna y vehículos con silo Camione",
+      "description": "Trabaja en MAN | MAN MAN España Camiones Camiones Todos los modelos Todos los modelos Modelos MAN TGX MAN eTGX MAN TGS MAN eTGS MAN TGM y MAN TGL MAN eTGM MAN eTGL Camión eléctrico D30 PowerLion Cabinas Sistemas de asistencia Un camión para cada sector Un camión para cada sector Vista general Transporte de larga distancia Vehículos para la construcción y hormigoneras Transporte de distribución Vehículos municipales Bomberos y vehículos de emergencia Camiones cisterna y vehículos con silo Camione"
+    },
+    {
+      "snapshot_id": "snapshot:company_man_truck_and_bus_se_canonical_url_https_man_eu_hu_hu_rolunk_vallalat_karrier_az_man_vallalatnal_karrier_az_man_vallalatnal_html_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_hu_hu_rolunk_vallalat_karrier_az_man_vallalatnal_karrier_az_man_vallalatnal_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "source_id": "source:man_truck_and_bus_se_career",
+      "captured_at": "2026-09-09T11:05:50.035Z",
+      "content_hash": "1df3c0cec3375445373f511ecf6a6c23f707a11e516dee349058e6a53fc44e3e",
+      "status": "NEW",
+      "title": "Find your job at MAN Truck & Bus Hungary here.",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://man.eu/hu/hu/rolunk/vallalat/karrier-az-man-vallalatnal/karrier-az-man-vallalatnal.html",
+      "summary": "Karrier | MAN MAN Magyarország Tehergépkocsi Tehergépkocsi Minden modell Minden modell Típusok áttekintése Az MAN TGX MAN eTGX Az MAN TGS MAN eTGS Az MAN TGM és az MAN TGL Az MAN eTGM Az MAN eTGL Elektromos teherautó D30 PowerLion Vezetőfülkék Asszisztensrendszerek Ágazatspecifikus tehergépkocsik Ágazatspecifikus tehergépkocsik Áttekintés Távolsági fuvarozás Építőipari járművek és betonkeverők Elosztófuvarozás Kommunális járművek Tűzoltó- és sürgősségi járművek Tartálykocsik és silós járművek Me",
+      "description": "Karrier | MAN MAN Magyarország Tehergépkocsi Tehergépkocsi Minden modell Minden modell Típusok áttekintése Az MAN TGX MAN eTGX Az MAN TGS MAN eTGS Az MAN TGM és az MAN TGL Az MAN eTGM Az MAN eTGL Elektromos teherautó D30 PowerLion Vezetőfülkék Asszisztensrendszerek Ágazatspecifikus tehergépkocsik Ágazatspecifikus tehergépkocsik Áttekintés Távolsági fuvarozás Építőipari járművek és betonkeverők Elosztófuvarozás Kommunális járművek Tűzoltó- és sürgősségi járművek Tartálykocsik és silós járművek Me"
     }
   ],
   "change_events": [
@@ -30751,6 +31646,156 @@
         "status"
       ],
       "reason": "Identitaet ueber CANONICAL_URL wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_career_at_man_career_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_career_at_man_career_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_benefits_benefits_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_benefits_benefits_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_values_values_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_man_as_employer_values_values_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_pupils_our_offers_pupils_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_pupils_our_offers_pupils_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_students_our_offers_students_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_students_our_offers_students_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_professionals_our_offers_professionals_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_corporate_en_career_your_career_at_man_professionals_our_offers_professionals_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_jobs_man_eu_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_jobs_man_eu",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_at_de_ueber_uns_unternehmen_karriere_bei_man_arbeiten_bei_man_arbeiten_bei_man_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_at_de_ueber_uns_unternehmen_karriere_bei_man_arbeiten_bei_man_arbeiten_bei_man_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_es_es_sobre_nosotros_empresa_carrera_profesional_trabaja_en_man_trabaja_en_man_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_es_es_sobre_nosotros_empresa_carrera_profesional_trabaja_en_man_trabaja_en_man_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_man_truck_and_bus_se_canonical_url_https_man_eu_hu_hu_rolunk_vallalat_karrier_az_man_vallalatnal_karrier_az_man_vallalatnal_html_created_20260909t110550035z",
+      "job_id": "job:company_man_truck_and_bus_se_canonical_url_https_man_eu_hu_hu_rolunk_vallalat_karrier_az_man_vallalatnal_karrier_az_man_vallalatnal_html",
+      "scan_run_id": "scanrun:20260909T110550035Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-09T11:05:50.035Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
     }
   ],
   "discovery_inventory": [

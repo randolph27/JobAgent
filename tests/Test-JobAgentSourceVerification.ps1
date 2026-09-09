@@ -116,6 +116,7 @@ Assert-True -Condition ($parallelPolicy.host_concurrency -eq 3) -Message 'Career
 
 $curlPolicy = New-JobAgentCompanyCareerVerificationPolicy -FetchClient 'curl'
 Assert-True -Condition ($curlPolicy.fetch_client -eq 'curl') -Message 'Career-Verifikationspolicy uebernimmt den nativen Curl-Fetch-Client nicht.'
+Assert-True -Condition ($curlPolicy.curl_schannel_revoke_best_effort -eq $true) -Message 'Career-Verifikationspolicy dokumentiert den kontrollierten Schannel-Curl-Fallback nicht.'
 
 $wslPolicy = New-JobAgentCompanyCareerVerificationPolicy -FetchClient 'wsl-curl' -WslDistribution 'Ubuntu-22.04'
 Assert-True -Condition ($wslPolicy.fetch_client -eq 'wsl-curl') -Message 'Career-Verifikationspolicy uebernimmt den expliziten Fetch-Client nicht.'
@@ -126,6 +127,16 @@ Assert-True -Condition ($curlCertificateDiagnostic.error_class -eq 'TLS_HANDSHAK
 $curlCredentialDiagnostic = $sourceVerificationModule.Invoke({ Get-JobAgentCurlFailureDiagnostic -Output 'schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS' })
 Assert-True -Condition ($curlCredentialDiagnostic.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE') -Message 'Curl-Diagnose klassifiziert Schannel-Credentialfehler nicht.'
 
+$curlOpenSslOptions = $sourceVerificationModule.Invoke({
+        Resolve-JobAgentCurlInvocationOptions -Path 'C:\tools\curl.exe' -VersionOutput 'curl 8.17.0 libcurl/8.17.0 LibreSSL/4.2.1 Features: CAcert SSL'
+    })
+Assert-True -Condition ([string]$curlOpenSslOptions.tls_backend -eq 'openssl-compatible' -and $curlOpenSslOptions.ca_native -eq $true) -Message 'Curl-Aufrufoptionen aktivieren OS-CA fuer OpenSSL-kompatibles curl nicht.'
+
+$curlSchannelOptions = $sourceVerificationModule.Invoke({
+        Resolve-JobAgentCurlInvocationOptions -Path 'C:\Windows\System32\curl.exe' -VersionOutput 'curl 8.13.0 libcurl/8.13.0 Schannel Features: SSL'
+    })
+Assert-True -Condition ([string]$curlSchannelOptions.tls_backend -eq 'schannel' -and $curlSchannelOptions.ca_native -eq $false) -Message 'Curl-Aufrufoptionen duerfen Schannel nicht mit --ca-native konfigurieren.'
+
 $curlParsed = $sourceVerificationModule.Invoke({
         ConvertFrom-JobAgentCompanyVerificationCurlOutput `
             -Output @('HTTP/2 200', 'content-type: text/html', 'retry-after: 17', '', '<html>ok</html>', 'JOBAGENT_FINAL_URL:https://example.invalid/jobs', 'JOBAGENT_STATUS:200') `
@@ -135,6 +146,17 @@ $curlParsed = $sourceVerificationModule.Invoke({
     })
 Assert-True -Condition ($curlParsed.ok -eq $true -and $curlParsed.fetch_client -eq 'curl.exe' -and $curlParsed.content -match 'ok') -Message 'Curl-Output-Parser verliert Erfolg, Client oder Content.'
 Assert-True -Condition ($curlParsed.content_type -eq 'text/html' -and $curlParsed.retry_after_seconds -eq 17) -Message 'Curl-Output-Parser liest Header nicht case-insensitive aus.'
+
+$curlSchannelFallback = $sourceVerificationModule.Invoke({
+        $result = ConvertFrom-JobAgentCompanyVerificationCurlOutput `
+            -Output @('HTTP/2 200', 'content-type: text/html', '', '<html>ok</html>', 'JOBAGENT_FINAL_URL:https://example.invalid/jobs', 'JOBAGENT_STATUS:200') `
+            -ExitCode 0 `
+            -Url 'https://example.invalid/jobs' `
+            -ClientName 'curl.exe'
+        Add-JobAgentCurlSchannelFallbackMetadata -Result $result
+    })
+Assert-True -Condition ($curlSchannelFallback.ok -eq $true -and $curlSchannelFallback.fetch_client -eq 'curl.exe+ssl-revoke-best-effort') -Message 'Curl-Schannel-Fallback verliert Erfolg oder Client-Metadaten.'
+Assert-True -Condition ($curlSchannelFallback.tls_revocation_policy -eq 'ssl-revoke-best-effort') -Message 'Curl-Schannel-Fallback dokumentiert die TLS-Revocation-Policy nicht.'
 
 $careerHtml = '<html><body><a href="/de/karriere">Karriere</a><a href="https://www.linkedin.com/jobs/view/123">Jobs</a></body></html>'
 $careerLinks = @(Get-JobAgentCompanyCareerCandidateLinks -Html $careerHtml -BaseUrl 'https://example.invalid/' -Company (New-TestCompany) -MaxCandidates 5)
@@ -287,5 +309,5 @@ Assert-True -Condition ($manualVerification.status -eq 'MANUAL_REVIEW') -Message
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_verification_curl_policy', 'career_verification_wsl_curl_policy', 'curl_tls_error_diagnostics', 'curl_output_parser', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
+    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_verification_curl_policy', 'career_verification_wsl_curl_policy', 'curl_tls_error_diagnostics', 'curl_invocation_options', 'curl_output_parser', 'curl_schannel_fallback_metadata', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
 } | ConvertTo-Json -Depth 4

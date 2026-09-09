@@ -211,6 +211,7 @@ function New-JobAgentCompanyCareerVerificationPolicy {
         [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
         [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
         [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
+        [Parameter()][bool]$CurlSchannelRevokeBestEffort = $true,
         [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+company-career-verification; fail-closed)'
     )
 
@@ -221,6 +222,7 @@ function New-JobAgentCompanyCareerVerificationPolicy {
         host_concurrency = $HostConcurrency
         fetch_client = $FetchClient
         wsl_distribution = $WslDistribution
+        curl_schannel_revoke_best_effort = $CurlSchannelRevokeBestEffort
         user_agent = $UserAgent
         policy = 'official-site-linked-career-or-ats-only'
     }
@@ -332,6 +334,56 @@ function Test-JobAgentCompanyVerificationCurlExeAvailable {
     return ((Get-Command curl.exe -ErrorAction SilentlyContinue) -ne $null)
 }
 
+function Resolve-JobAgentCurlInvocationOptions {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Path,
+        [Parameter()][AllowEmptyString()][string]$VersionOutput = ''
+    )
+
+    $usesSchannel = $VersionOutput -match '(?i)\bSchannel\b'
+    $supportsCaNative = $VersionOutput -match '(?i)\bCAcert\b'
+    [pscustomobject]@{
+        path = $Path
+        tls_backend = if ($usesSchannel) { 'schannel' } elseif ($VersionOutput -match '(?i)\b(OpenSSL|LibreSSL|BoringSSL)\b') { 'openssl-compatible' } else { 'unknown' }
+        ca_native = (-not $usesSchannel -and $supportsCaNative)
+    }
+}
+
+function Get-JobAgentCurlExeInvocationOptions {
+    [CmdletBinding()]
+    param()
+
+    $paths = New-Object System.Collections.Generic.List[string]
+    foreach ($path in @(& where.exe curl.exe 2>$null)) {
+        if (-not [string]::IsNullOrWhiteSpace([string]$path) -and (Test-Path -LiteralPath ([string]$path))) {
+            $paths.Add([string]$path)
+        }
+    }
+    $command = Get-Command curl.exe -ErrorAction SilentlyContinue
+    if ($null -ne $command -and -not [string]::IsNullOrWhiteSpace([string]$command.Source) -and (Test-Path -LiteralPath ([string]$command.Source))) {
+        $paths.Add([string]$command.Source)
+    }
+
+    $uniquePaths = @($paths.ToArray() | Select-Object -Unique)
+    if ($uniquePaths.Count -eq 0) {
+        throw 'curl.exe nicht gefunden'
+    }
+
+    $fallback = $null
+    foreach ($path in $uniquePaths) {
+        $versionOutput = (@(& $path -V 2>&1) -join "`n")
+        $options = Resolve-JobAgentCurlInvocationOptions -Path $path -VersionOutput $versionOutput
+        if ($null -eq $fallback) {
+            $fallback = $options
+        }
+        if ([string]$options.tls_backend -ne 'schannel') {
+            return $options
+        }
+    }
+    return $fallback
+}
+
 function ConvertFrom-JobAgentCompanyVerificationCurlOutput {
     param(
         [Parameter(Mandatory)][AllowEmptyCollection()][AllowEmptyString()][string[]]$Output,
@@ -415,6 +467,22 @@ function ConvertFrom-JobAgentCompanyVerificationCurlOutput {
     }
 }
 
+function Add-JobAgentCurlSchannelFallbackMetadata {
+    param(
+        [Parameter(Mandatory)][object]$Result
+    )
+
+    $client = if ($Result.PSObject.Properties.Name -contains 'fetch_client' -and -not [string]::IsNullOrWhiteSpace([string]$Result.fetch_client)) {
+        [string]$Result.fetch_client
+    }
+    else {
+        'curl.exe'
+    }
+    $Result | Add-Member -NotePropertyName fetch_client -NotePropertyValue ($client + '+ssl-revoke-best-effort') -Force
+    $Result | Add-Member -NotePropertyName tls_revocation_policy -NotePropertyValue 'ssl-revoke-best-effort' -Force
+    return $Result
+}
+
 function Invoke-JobAgentCompanyVerificationHostLimitedRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
@@ -450,13 +518,42 @@ function Invoke-JobAgentCompanyVerificationHostLimitedRequest {
 function Invoke-JobAgentCompanyVerificationCurlExeSingleRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
-        [Parameter(Mandatory)][object]$Policy
+        [Parameter(Mandatory)][object]$Policy,
+        [Parameter()][switch]$SslRevokeBestEffort
     )
 
-    $curl = Get-Command curl.exe -ErrorAction Stop
+    $curlOptions = Get-JobAgentCurlExeInvocationOptions
     $writeOut = "`nJOBAGENT_FINAL_URL:%{url_effective}`nJOBAGENT_STATUS:%{http_code}`n"
-    $output = @(& $curl.Source -i --max-time ([string]$Policy.timeout_seconds) --silent --show-error --user-agent ([string]$Policy.user_agent) --write-out $writeOut --url $Url 2>&1)
-    ConvertFrom-JobAgentCompanyVerificationCurlOutput -Output $output -ExitCode $LASTEXITCODE -Url $Url -ClientName 'curl.exe'
+    $arguments = @(
+        '-i',
+        '--max-time',
+        ([string]$Policy.timeout_seconds),
+        '--silent',
+        '--show-error',
+        '--user-agent',
+        ([string]$Policy.user_agent),
+        '--write-out',
+        $writeOut,
+        '--url',
+        $Url
+    )
+    if ($curlOptions.ca_native -eq $true) {
+        $arguments = @('--ca-native') + $arguments
+    }
+    if ($SslRevokeBestEffort) {
+        $arguments = @('--ssl-revoke-best-effort') + $arguments
+    }
+    $output = @(& ([string]$curlOptions.path) @arguments 2>&1)
+    $result = ConvertFrom-JobAgentCompanyVerificationCurlOutput -Output $output -ExitCode $LASTEXITCODE -Url $Url -ClientName 'curl.exe'
+    $result | Add-Member -NotePropertyName curl_path -NotePropertyValue ([string]$curlOptions.path) -Force
+    $result | Add-Member -NotePropertyName curl_tls_backend -NotePropertyValue ([string]$curlOptions.tls_backend) -Force
+    if ($curlOptions.ca_native -eq $true) {
+        $result | Add-Member -NotePropertyName curl_ca_native -NotePropertyValue $true -Force
+    }
+    if ($SslRevokeBestEffort) {
+        return Add-JobAgentCurlSchannelFallbackMetadata -Result $result
+    }
+    return $result
 }
 
 function Invoke-JobAgentCompanyVerificationWslCurlSingleRequest {
@@ -479,7 +576,8 @@ function Invoke-JobAgentCompanyVerificationWslCurlSingleRequest {
 function Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
-        [Parameter(Mandatory)][object]$Policy
+        [Parameter(Mandatory)][object]$Policy,
+        [Parameter()][switch]$SslRevokeBestEffort
     )
 
     $uri = [Uri]$Url
@@ -490,7 +588,7 @@ function Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest {
     try {
         [void]$semaphore.WaitOne()
         try {
-            return Invoke-JobAgentCompanyVerificationCurlExeSingleRequest -Url $Url -Policy $Policy
+            return Invoke-JobAgentCompanyVerificationCurlExeSingleRequest -Url $Url -Policy $Policy -SslRevokeBestEffort:$SslRevokeBestEffort
         }
         finally {
             [void]$semaphore.Release()
@@ -579,9 +677,21 @@ function Invoke-JobAgentCompanyVerificationCurlExeHttpRequest {
     $currentUrl = $Url
     $finalUrl = $Url
     $redirectLimit = 5
+    $allowSchannelFallback = if ($Policy.PSObject.Properties.Name -contains 'curl_schannel_revoke_best_effort') {
+        [bool]$Policy.curl_schannel_revoke_best_effort
+    }
+    else {
+        $true
+    }
 
     for ($redirectIndex = 0; $redirectIndex -le $redirectLimit; $redirectIndex++) {
         $result = Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest -Url $currentUrl -Policy $Policy
+        if ($allowSchannelFallback -and $result.ok -ne $true -and [string]$result.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE') {
+            $fallbackResult = Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest -Url $currentUrl -Policy $Policy -SslRevokeBestEffort
+            if ($fallbackResult.ok -eq $true -or [string]$fallbackResult.error_class -ne 'TLS_CREDENTIAL_UNAVAILABLE') {
+                $result = $fallbackResult
+            }
+        }
         $statusCode = if ($null -ne $result.status_code) { [int]$result.status_code } else { $null }
         $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$result.final_url)) { $currentUrl } else { [string]$result.final_url }
         $location = if ($result.PSObject.Properties.Name -contains 'location') { [string]$result.location } else { '' }
