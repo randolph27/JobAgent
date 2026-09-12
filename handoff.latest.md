@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-12T21:36:00+02:00
+Stand: 2026-09-12T21:59:30+02:00
 
 ## Zustand
 
 - Active: `TD-0053`
 - Status: `in-progress`
-- Ziel: JA-041 IT-Leiter/Lead/Manager über vollständige Karriere- und ATS-Ergebnislisten finden.
+- Ziel: JA-041 IT-Leiter/Lead/Manager ueber vollstaendige Karriere- und ATS-Ergebnislisten finden.
 - Branch: `master`
-- HEAD: `4a0450e382fe`
+- HEAD: `11a4d4228b64`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,12 +16,13 @@ Stand: 2026-09-12T21:36:00+02:00
 
 ## Abgeschlossener Slice in diesem Arbeitsstand
 
-Breitere Live-Stichprobe und False-Positive-Filter fuer offizielle Detailkandidaten:
+Siemens-Energy-/Avature-Hotspot:
 
-- 10-Firmen-Pilot `logs/jobagent/daily-run-20260912T190510537Z.json`: `PARTIAL`, 10 Firmen, 99 Raw-Jobs, 74 Snapshots, 7 vollstaendig erfolgreiche Quellen, 2 unsichere Quellen, 1 nicht erreichbare Quelle, 0 Zielrollentreffer.
-- Gefundener Hotspot geschlossen: ATS-Kategorie-, Account-, Registrierungs-, Bewerbungs-/CheckLogin- und Labor-Condition-Seiten werden nicht mehr als Jobdetails akzeptiert.
-- Bayerischer-Rundfunk-Kontrolllauf `logs/jobagent/daily-run-20260912T192801804Z.json`: `SUCCESS`, 10 Raw-Jobs/gepruefte Jobs/Snapshots, 0 unsichere Quellen, 0 Zielrollentreffer.
-- Siemens-Energy-Kontrolllauf `logs/jobagent/daily-run-20260912T192545574Z.json`: Kategorie-/Accountseiten werden nicht mehr gespeichert; Lauf bleibt wegen Ergebnislimit/Oracle-ATS-Familie `PARTIAL`.
+- Avature-Portale werden anhand der `avature.portal.*`-Metadaten erkannt und erzeugen offizielle Such-Follow-ups aus den konfigurierten Suchbegriffen.
+- `folderOffset`-Pagination wird erkannt; Pagination-Links werden nicht mehr als Jobdetails gespeichert.
+- Avature-Anker muessen zielrollennahe IT-/Digital-/Technology-Fuehrungstexte belegen, bevor sie als Jobkandidaten verarbeitet werden.
+- Siemens-Energy-Kontrolllauf `logs/jobagent/daily-run-20260912T195044560Z.json`: `PARTIAL`, 4 Raw-Jobs, 1 Snapshot, 0 Zielrollentreffer. Das fruehere `result_limit_reached` ist entfernt; offen bleibt belegte Avature-Pagination.
+- `cmd /c .\ci.cmd stp` lief erfolgreich; der automatisch gesetzte naechste Anker wurde anschliessend wieder auf JA-041 korrigiert.
 
 ## Geaenderte Hauptdateien
 
@@ -36,24 +37,21 @@ Breitere Live-Stichprobe und False-Positive-Filter fuer offizielle Detailkandida
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `docs/handoffs/2026-09-12-ja041-live-sample-false-positive-handoff.md`
-- `html/jobagent/daily-run-20260912T190510537Z.html`
-- `html/jobagent/daily-run-20260912T192545574Z.html`
-- `html/jobagent/daily-run-20260912T192801804Z.html`
+- `docs/handoffs/2026-09-12-ja041-avature-siemens-energy-handoff.md`
+- `html/jobagent/daily-run-20260912T194511065Z.html`
+- `html/jobagent/daily-run-20260912T195044560Z.html`
 
 ## Verifikation
 
 - `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
-- 10-Firmen-Live-Pilot `scanrun:20260912T190510537Z` -> `PARTIAL`, siehe oben.
-- Siemens-Kontrolllauf `scanrun:20260912T192545574Z` -> `PARTIAL`, false-positive Kategorie-/Accountseiten entfernt, Ergebnislimit offen.
-- Bayerischer-Rundfunk-Kontrolllauf `scanrun:20260912T192801804Z` -> `SUCCESS`.
-- `cmd /c .\ci.cmd stp` -> Exit `0`; STP setzte den naechsten Anker erneut auf UI-001, danach Korrekturevent `EV-20260912-213600-ja041-live-sample-stp-correction` geschrieben.
+- Siemens-Energy-Kontrolllauf `scanrun:20260912T195044560Z` -> `PARTIAL`, `result_limit_reached` entfernt, offen `pagination_detected`.
+- `cmd /c .\ci.cmd stp` -> Exit `0`
 
 ## Roadmap-Rotation
 
-Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil Siemens-Energy-Ergebnislimit/Oracle-ATS-Familie, BMW-Erreichbarkeit, Abschlussgate und breitere Abnahme noch ausstehen. Nach Nutzeranweisung ist ein nicht ausdruecklich angefragter Supertest kein Blocker.
+Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil Avature-Pagination bei Siemens Energy, BMW-Erreichbarkeit, Abschlussgate und breitere Abnahme noch ausstehen. Nach Nutzeranweisung ist ein nicht ausdruecklich angefragter Supertest kein Blocker.
 
 ## Bekannter Zusatzblocker
 
@@ -61,4 +59,4 @@ SonarQube war im vorherigen STP-Kontext lokal nicht erreichbar. Startversuch ueb
 
 ## Naechster Anker
 
-JA-041 fortsetzen: Siemens-Energy-Ergebnislimit/Oracle-ATS-Familie priorisieren, danach BMW-Erreichbarkeit pruefen und Abschlussgate/breitere Stichprobe erneut laufen lassen.
+JA-041 fortsetzen: Avature-Pagination fuer Siemens Energy gezielt abschliessen oder als belegte Quellenbegrenzung mit reproduzierbarem Vertrag behandeln; danach BMW-Erreichbarkeit pruefen und die breitere Abschlussstichprobe erneut laufen lassen.

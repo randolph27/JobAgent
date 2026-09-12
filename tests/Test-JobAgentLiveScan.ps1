@@ -497,6 +497,61 @@ Assert-True -Condition ($linkedSourceResult.status -eq 'SUCCESS' -and $linkedSou
 Assert-True -Condition (@($linkedSourceResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer aus verlinktem Jobportal nicht.'
 Assert-True -Condition ($linkedSourceResult.raw_jobs[0].detail_url -eq 'https://jobs.example.invalid/job/head-it-444') -Message 'Live-Adapter kanonisiert Treffer aus verlinktem Jobportal falsch.'
 
+$avaturePolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 4 -SearchTerms @('Head of IT')
+$avatureCompany = [pscustomobject]@{
+    company_id = 'company:example_avature'
+    canonical_name = 'Example Avature AG'
+    canonical_domain = 'example.invalid'
+    official_website_url = 'https://example.invalid/'
+    career_url = 'https://jobs.example.invalid/en_US/jobs'
+    ats = @()
+}
+$avatureSource = [pscustomobject]@{
+    source_id = 'source:example_avature_career'
+    company_id = 'company:example_avature'
+    source_type = 'CAREER_PAGE'
+    url = 'https://jobs.example.invalid/en_US/jobs'
+    canonical_url = 'https://jobs.example.invalid/en_US/jobs'
+    is_official = $true
+    verified_at = '2026-08-17T09:00:00.000Z'
+    verification_basis = 'CAREER_URL'
+    verification_evidence = @()
+}
+$avatureInput = New-JobAgentAdapterInput -Company $avatureCompany -JobSource $avatureSource -ScanContext $context
+$avatureSourceHtml = '<html><head><meta name="avature.portal.id" content="140"/><meta name="avature.portal.page" content="Home"/></head><body><a href="https://jobs.example.invalid/en_US/jobs/Jobs">Search Jobs</a></body></html>'
+$avatureSearchHtml = '<html><head><meta name="avature.portal.id" content="140"/><meta name="avature.portal.page" content="Jobs"/></head><body><article><h3><a href="https://jobs.example.invalid/en_US/jobs/FolderDetail?folderId=123456">Head of IT Infrastructure</a></h3><p>Munich, Bavaria, Germany</p></article><a class="paginationNextLink" href="https://jobs.example.invalid/en_US/jobs/Jobs/Head+of+IT?folderRecordsPerPage=20&amp;folderOffset=20">Next &gt;&gt;</a></body></html>'
+$avatureSearchPage2Html = '<html><head><meta name="avature.portal.id" content="140"/><meta name="avature.portal.page" content="Jobs"/></head><body><p>No more relevant jobs.</p></body></html>'
+$avatureFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://jobs.example.invalid/en_US/jobs' {
+            New-FetchResult -Url $Url -Ok $true -Content $avatureSourceHtml
+            break
+        }
+        'https://jobs.example.invalid/en_US/jobs/Jobs/Head+of+IT?folderRecordsPerPage=20' {
+            New-FetchResult -Url $Url -Ok $true -Content $avatureSearchHtml
+            break
+        }
+        'https://jobs.example.invalid/en_US/jobs/Jobs/Head+of+IT?folderOffset=20&folderRecordsPerPage=20' {
+            New-FetchResult -Url $Url -Ok $true -Content $avatureSearchPage2Html
+            break
+        }
+        'https://jobs.example.invalid/en_US/jobs/FolderDetail?folderId=123456' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Head of IT Infrastructure</h1><p>Leitet IT-Infrastruktur in Munich.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage ('not found: ' + $Url)
+            break
+        }
+    }
+}
+$avatureResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $avatureInput -Policy $avaturePolicy -Fetcher $avatureFetcher
+Assert-True -Condition ($avatureResult.status -eq 'SUCCESS' -and $avatureResult.scan_complete) -Message 'Live-Adapter verarbeitet Avature-Suchseiten und Pagination nicht vollstaendig.'
+Assert-True -Condition (@($avatureResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Avature-FolderDetail-Treffer nicht.'
+Assert-True -Condition ($avatureResult.raw_jobs[0].detail_url -eq 'https://jobs.example.invalid/en_US/jobs/FolderDetail?folderId=123456') -Message 'Live-Adapter kanonisiert Avature-FolderDetail falsch.'
+
 $rssFeedPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('IT Manager')
 $rssFeedFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -784,6 +839,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_job_pagination_remains_partial',
         'live_adapter_official_iframe_ats_success',
         'live_adapter_official_linked_job_portal_success',
+        'live_adapter_avature_search_pagination_success',
         'rss_feed_job_extraction',
         'live_adapter_official_rss_feed_success',
         'live_adapter_successfactors_search_followup_success',
