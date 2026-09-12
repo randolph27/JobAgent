@@ -155,6 +155,14 @@ $contentPageHtml = '<html><body><a href="/content/content-functional-areas?local
 $contentPageCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $contentPageHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Functional areas'))
 Assert-True -Condition ($contentPageCandidates.Count -eq 0) -Message 'Live-Parser darf Content-/Funktionsbereichsseiten nicht als Stellen speichern.'
 
+$searchCategoryHtml = '<html><body><a href="https://jobs.siemens-energy.example/en_US/jobs/SearchJobsRomania">Romania</a><a href="https://jobs.siemens-energy.example/en_US/jobs/HotJobs">View more</a><a href="https://jobs.siemens-energy.example/en_US/jobs/StayConnected">Sign up for email updates</a><a href="https://jobs.siemens-energy.example/en_US/jobs/ResetPassword">Forgot your password?</a><a href="https://jobs.siemens-energy.example/en_US/jobs/ResumeUpload">Get job recommendations</a><a href="https://siemens-energy.example/us/en/company/jobs/labor-condition-applications.html">Labor Condition Application</a></body></html>'
+$searchCategoryCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $searchCategoryHtml -BaseUrl 'https://jobs.siemens-energy.example/en_US/jobs' -Company $company -MaxResults 10 -SearchTerms @())
+Assert-True -Condition ($searchCategoryCandidates.Count -eq 0) -Message 'Live-Parser darf ATS-Kategorie-/Registrierungsseiten nicht als Stellen speichern.'
+
+$applicationHtml = '<html><body><a href="https://example.invalid/Vacancies/1345/Description/1">Broadcast Engineer</a><a href="https://example.invalid/Vacancies/1345/Application/CheckLogin/1">Jetzt bewerben</a></body></html>'
+$applicationCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $applicationHtml -BaseUrl 'https://example.invalid/Vacancies' -Company $company -MaxResults 10 -SearchTerms @())
+Assert-True -Condition ($applicationCandidates.Count -eq 1 -and $applicationCandidates[0].detail_url -eq 'https://example.invalid/Vacancies/1345/Description/1') -Message 'Live-Parser muss Bewerbungs-/CheckLogin-Seiten ausschliessen, aber Detailseiten behalten.'
+
 $jsonLdHtml = @'
 <html>
   <head>
@@ -755,6 +763,8 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'career_navigation_candidate_rejection',
         'newsroom_story_candidate_rejection',
         'content_page_candidate_rejection',
+        'ats_category_page_candidate_rejection',
+        'application_page_candidate_rejection',
         'aggregator_rejection',
         'jsonld_jobposting_extraction',
         'ats_url_pattern_detection',

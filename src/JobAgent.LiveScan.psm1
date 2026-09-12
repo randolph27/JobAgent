@@ -175,6 +175,9 @@ function Test-JobAgentLiveDetailUrlPattern {
     if (-not [Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
         return $false
     }
+    if (Test-JobAgentLiveExcludedContentUrl -Url $Url) {
+        return $false
+    }
 
     if (-not [string]::IsNullOrWhiteSpace((Get-JobAgentLiveUrlJobId -Url $Url))) {
         return $true
@@ -191,8 +194,23 @@ function Test-JobAgentLiveExcludedContentUrl {
         return $true
     }
 
-    $path = ([Uri]$Url).AbsolutePath.ToLowerInvariant()
-    return $path -match '(^|/)(news(room)?|stories|story|blog|press|media|event|events|case-stud(y|ies)|insights?|content)(/|$)'
+    $uri = [Uri]$Url
+    $path = $uri.AbsolutePath.ToLowerInvariant()
+    $decodedPath = [Net.WebUtility]::UrlDecode($path)
+    $leaf = (($decodedPath.TrimEnd('/') -split '/') | Select-Object -Last 1)
+    if ($decodedPath -match '(^|/)(news(room)?|stories|story|blog|press|media|event|events|case-stud(y|ies)|insights?|content)(/|$)') {
+        return $true
+    }
+    if ($decodedPath -match '(^|/)(application|apply|bewerbung)(/|$)' -or $decodedPath -match '(^|/)checklogin(/|$)') {
+        return $true
+    }
+    if ($decodedPath -match '(resetpassword|resumeupload|savedjobs|jobcart|stayconnected|labor-condition-application)') {
+        return $true
+    }
+    if ($decodedPath -match '(^|/)jobs?/[^/]+/?$' -and $leaf -match '^(jobs?|searchjobs.*|hotjobs|stayconnected|savedjobs|jobcart|profile|login|register|resetpassword|resumeupload)$') {
+        return $true
+    }
+    return $false
 }
 
 function Test-JobAgentLiveCandidateText {

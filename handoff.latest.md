@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-12T16:02:00+02:00
+Stand: 2026-09-12T21:36:00+02:00
 
 ## Zustand
 
@@ -8,15 +8,20 @@ Stand: 2026-09-12T16:02:00+02:00
 - Status: `in-progress`
 - Ziel: JA-041 IT-Leiter/Lead/Manager über vollständige Karriere- und ATS-Ergebnislisten finden.
 - Branch: `master`
-- HEAD vor Commit: `ba089c6d308f`
+- HEAD: `4a0450e382fe`
 - Upstream: `origin/master`
-- Worktree: `dirty` vor Stage/Commit
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
 - Route: `True`
 
-## Abgeschlossene Slices in diesem Arbeitsstand
+## Abgeschlossener Slice in diesem Arbeitsstand
 
-1. Wacker/`jobs.wacker.com`: offiziell verlinkte SuccessFactors-/j2w-RSS-Feeds werden verfolgt; RSS-/Atom-Items werden als offizielle Detailkandidaten extrahiert; `/go/`-Kategoriequellen sind auf relevante Joblisten begrenzt; relative Host-Strings werden nicht mehr zu Scheindetailpfaden aufgeloest.
-2. Giesecke+Devrient, HENSOLDT und Knorr-Bremse: belegte SuccessFactors-Seiten priorisieren rollenbezogene `/services/rss/job/`-Feeds aus den konfigurierten Suchbegriffen vor generischen Suchseiten; generische Suchseiten bleiben Fallback; nicht abgearbeitete RSS-/Quellen-Follow-ups erzeugen nicht mehr pauschal `pagination_detected`.
+Breitere Live-Stichprobe und False-Positive-Filter fuer offizielle Detailkandidaten:
+
+- 10-Firmen-Pilot `logs/jobagent/daily-run-20260912T190510537Z.json`: `PARTIAL`, 10 Firmen, 99 Raw-Jobs, 74 Snapshots, 7 vollstaendig erfolgreiche Quellen, 2 unsichere Quellen, 1 nicht erreichbare Quelle, 0 Zielrollentreffer.
+- Gefundener Hotspot geschlossen: ATS-Kategorie-, Account-, Registrierungs-, Bewerbungs-/CheckLogin- und Labor-Condition-Seiten werden nicht mehr als Jobdetails akzeptiert.
+- Bayerischer-Rundfunk-Kontrolllauf `logs/jobagent/daily-run-20260912T192801804Z.json`: `SUCCESS`, 10 Raw-Jobs/gepruefte Jobs/Snapshots, 0 unsichere Quellen, 0 Zielrollentreffer.
+- Siemens-Energy-Kontrolllauf `logs/jobagent/daily-run-20260912T192545574Z.json`: Kategorie-/Accountseiten werden nicht mehr gespeichert; Lauf bleibt wegen Ergebnislimit/Oracle-ATS-Familie `PARTIAL`.
 
 ## Geaenderte Hauptdateien
 
@@ -24,26 +29,31 @@ Stand: 2026-09-12T16:02:00+02:00
 - `tests/Test-JobAgentLiveScan.ps1`
 - `data/jobagent/store.json`
 - `Roadmap.md`
+- `handoff.latest.md`
+- `handoff.latest.json`
 - `todo.state.json`
-- `todo.events.jsonl`
 - `todo.checkpoint.json`
-- `docs/handoffs/2026-09-12-ja041-wacker-rss-handoff.md`
-- `docs/handoffs/2026-09-12-ja041-successfactors-rss-priority-handoff.md`
-- `html/jobagent/daily-run-20260912T090641065Z.html`
-- `html/jobagent/daily-run-20260912T135204013Z.html`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `docs/handoffs/2026-09-12-ja041-live-sample-false-positive-handoff.md`
+- `html/jobagent/daily-run-20260912T190510537Z.html`
+- `html/jobagent/daily-run-20260912T192545574Z.html`
+- `html/jobagent/daily-run-20260912T192801804Z.html`
 
 ## Verifikation
 
 - `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
-- Wacker-Live-Kontrolllauf `scanrun:20260912T090641065Z` -> `SUCCESS`, 3 Raw-Jobs/gepruefte Jobs, 0 Adapterfehler, 0 Zielrollentreffer.
-- G+D/HENSOLDT/Knorr-Bremse-Live-Kontrolllauf `scanrun:20260912T135204013Z` -> `SUCCESS`, 17 Raw-Jobs, 16 gepruefte Jobs/Snapshots, 0 unsichere Quellen, 0 Adapterfehler, 0 Zielrollentreffer.
-- `cmd /c .\ci.cmd stp` -> Exit `0` am 2026-09-12T16:00:03+02:00.
+- 10-Firmen-Live-Pilot `scanrun:20260912T190510537Z` -> `PARTIAL`, siehe oben.
+- Siemens-Kontrolllauf `scanrun:20260912T192545574Z` -> `PARTIAL`, false-positive Kategorie-/Accountseiten entfernt, Ergebnislimit offen.
+- Bayerischer-Rundfunk-Kontrolllauf `scanrun:20260912T192801804Z` -> `SUCCESS`.
+- `cmd /c .\ci.cmd stp` -> Exit `0`; STP setzte den naechsten Anker erneut auf UI-001, danach Korrekturevent `EV-20260912-213600-ja041-live-sample-stp-correction` geschrieben.
 
 ## Roadmap-Rotation
 
-Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil Abschlussgate und breitere Live-Stichprobe noch ausstehen. Nach Nutzeranweisung ist ein nicht ausdruecklich angefragter Supertest kein Blocker.
+Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil Siemens-Energy-Ergebnislimit/Oracle-ATS-Familie, BMW-Erreichbarkeit, Abschlussgate und breitere Abnahme noch ausstehen. Nach Nutzeranweisung ist ein nicht ausdruecklich angefragter Supertest kein Blocker.
 
 ## Bekannter Zusatzblocker
 
@@ -51,4 +61,4 @@ SonarQube war im vorherigen STP-Kontext lokal nicht erreichbar. Startversuch ueb
 
 ## Naechster Anker
 
-JA-041 fortsetzen: Abschlussgate und breitere Live-Stichprobe nach erfolgreichem SuccessFactors-RSS-Hotspot vorbereiten; Supertest ist nach Nutzeranweisung nicht blockierend, wenn nicht ausdruecklich angefragt.
+JA-041 fortsetzen: Siemens-Energy-Ergebnislimit/Oracle-ATS-Familie priorisieren, danach BMW-Erreichbarkeit pruefen und Abschlussgate/breitere Stichprobe erneut laufen lassen.
