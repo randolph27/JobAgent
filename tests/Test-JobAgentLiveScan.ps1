@@ -252,6 +252,23 @@ Assert-True -Condition ($structuredJsonCandidates[0].detail_url -eq 'https://job
 Assert-True -Condition ($structuredJsonCandidates[0].external_job_id -eq 'lever-123') -Message 'Strukturierte ATS-JSON-Liste extrahiert keine Job-ID.'
 Assert-True -Condition ($structuredJsonCandidates[0].employment_type -eq 'FULL_TIME') -Message 'Strukturierte ATS-JSON-Liste extrahiert employmentType nicht.'
 
+$rssFeed = @'
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <item>
+      <title><![CDATA[IT Manager Platform Operations (Muenchen, DE)]]></title>
+      <link>https://jobs.example.invalid/job/Muenchen-IT-Manager-Platform-Operations/987654321/?utm_source=J2WRSS</link>
+      <description><![CDATA[<p>Verantwortet IT-Strategie und Plattformbetrieb.</p>]]></description>
+    </item>
+  </channel>
+</rss>
+'@
+$rssCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $rssFeed -BaseUrl 'https://jobs.example.invalid/services/rss/category/?catid=42' -Company $company -MaxResults 5 -SearchTerms @())
+Assert-True -Condition ($rssCandidates.Count -eq 1) -Message 'RSS-Feed-Kandidaten wurden nicht extrahiert.'
+Assert-True -Condition ($rssCandidates[0].detail_url -eq 'https://jobs.example.invalid/job/Muenchen-IT-Manager-Platform-Operations/987654321') -Message 'RSS-Feed-Detail-URL wurde nicht kanonisiert.'
+Assert-True -Condition ($rssCandidates[0].external_job_id -eq '987654321') -Message 'RSS-Feed-Job-ID wurde nicht aus der Detail-URL gelesen.'
+
 $fetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -472,7 +489,35 @@ Assert-True -Condition ($linkedSourceResult.status -eq 'SUCCESS' -and $linkedSou
 Assert-True -Condition (@($linkedSourceResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer aus verlinktem Jobportal nicht.'
 Assert-True -Condition ($linkedSourceResult.raw_jobs[0].detail_url -eq 'https://jobs.example.invalid/job/head-it-444') -Message 'Live-Adapter kanonisiert Treffer aus verlinktem Jobportal falsch.'
 
-$successFactorsPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('Head of IT')
+$rssFeedPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('IT Manager')
+$rssFeedFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><link rel="alternate" type="application/rss+xml" title="IT" href="https://jobs.example.invalid/services/rss/category/?catid=42" /></html>'
+            break
+        }
+        'https://jobs.example.invalid/services/rss/category?catid=42' {
+            New-FetchResult -Url $Url -Ok $true -Content $rssFeed
+            break
+        }
+        'https://jobs.example.invalid/job/Muenchen-IT-Manager-Platform-Operations/987654321' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager Platform Operations</h1><p>IT-Strategie und Plattformbetrieb in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$rssFeedResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $rssFeedPolicy -Fetcher $rssFeedFetcher
+Assert-True -Condition ($rssFeedResult.status -eq 'SUCCESS' -and $rssFeedResult.scan_complete) -Message 'Live-Adapter folgt offiziell verlinktem RSS-Feed nicht als Quellseite.'
+Assert-True -Condition (@($rssFeedResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer aus verlinktem RSS-Feed nicht.'
+Assert-True -Condition ($rssFeedResult.raw_jobs[0].detail_url -eq 'https://jobs.example.invalid/job/Muenchen-IT-Manager-Platform-Operations/987654321') -Message 'Live-Adapter kanonisiert Treffer aus RSS-Feed falsch.'
+
+$successFactorsPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 4 -SearchTerms @('Head of IT')
 $successFactorsFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -481,8 +526,20 @@ $successFactorsFetcher = {
             New-FetchResult -Url $Url -Ok $true -Content '<html><script>j2w.init({"ssoCompanyId":"example"});</script></html>'
             break
         }
+        'https://example.invalid/services/rss/job?keywords=(IT)&locale=en_US' {
+            New-FetchResult -Url $Url -Ok $true -Content $rssFeed
+            break
+        }
+        'https://example.invalid/services/rss/job?keywords=(Head%20of%20IT)&locale=en_US' {
+            New-FetchResult -Url $Url -Ok $true -Content $rssFeed
+            break
+        }
         'https://example.invalid/search?createNewAlert=false&locationsearch=&q=' {
             New-FetchResult -Url $Url -Ok $true -Content '<html><a class="jobTitle-link" href="/job/Muenchen-Head-of-IT-80809/424242/">Head of IT</a></html>'
+            break
+        }
+        'https://jobs.example.invalid/job/Muenchen-IT-Manager-Platform-Operations/987654321' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager Platform Operations</h1><p>IT-Strategie und Plattformbetrieb in Muenchen.</p></main>'
             break
         }
         'https://example.invalid/job/Muenchen-Head-of-IT-80809/424242' {
@@ -497,8 +554,8 @@ $successFactorsFetcher = {
 }
 $successFactorsResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $successFactorsPolicy -Fetcher $successFactorsFetcher
 Assert-True -Condition ($successFactorsResult.status -eq 'SUCCESS' -and $successFactorsResult.scan_complete) -Message 'Live-Adapter folgt SuccessFactors-Suchseiten nicht aus belegten j2w-Karriereseiten.'
-Assert-True -Condition (@($successFactorsResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert SuccessFactors-Suchtreffer nicht.'
-Assert-True -Condition ($successFactorsResult.raw_jobs[0].detail_url -eq 'https://example.invalid/job/Muenchen-Head-of-IT-80809/424242') -Message 'Live-Adapter kanonisiert SuccessFactors-Suchtreffer falsch.'
+Assert-True -Condition (@($successFactorsResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert SuccessFactors-RSS-Treffer nicht.'
+Assert-True -Condition (@($successFactorsResult.raw_jobs | Where-Object { [string]$_.detail_url -eq 'https://jobs.example.invalid/job/Muenchen-IT-Manager-Platform-Operations/987654321' }).Count -eq 1) -Message 'Live-Adapter verarbeitet SuccessFactors-RSS-Follow-up nicht.'
 
 $structuredJsonFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -717,7 +774,10 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_job_pagination_remains_partial',
         'live_adapter_official_iframe_ats_success',
         'live_adapter_official_linked_job_portal_success',
+        'rss_feed_job_extraction',
+        'live_adapter_official_rss_feed_success',
         'live_adapter_successfactors_search_followup_success',
+        'live_adapter_successfactors_rss_followup_success',
         'live_adapter_structured_json_ats_success',
         'live_adapter_gatsby_static_query_greenhouse_success',
         'live_adapter_blocked_detail_fetch',

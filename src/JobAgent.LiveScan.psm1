@@ -259,7 +259,11 @@ function Test-JobAgentLiveListingSourceLink {
     }
 
     $normalizedText = $Text.ToLowerInvariant()
-    $normalizedUrl = ($uri.Host + $uri.AbsolutePath).ToLowerInvariant()
+    if ($uri.AbsolutePath -match '^(?i)/go/' -and $normalizedText -notmatch '\b(it|all jobs|global jobs|see all jobs)\b') {
+        return $false
+    }
+
+    $normalizedUrl = $uri.AbsolutePath.ToLowerInvariant()
     return ($normalizedText -match '\b(job portal|jobportal|jobs|stellenangebote|stellenportal|offene stellen|open positions|vacancies|jobboerse|jobbörse)\b') -or
         ($normalizedUrl -match '(^|[./-])jobs?[./-]|/career(s)?/(jobs?|search|openings|vacancies)(/)?$')
 }
@@ -318,6 +322,12 @@ function Get-JobAgentLiveUrlJobId {
         $prefix = [Uri]::UnescapeDataString($segments[$index - 1])
         $value = [Uri]::UnescapeDataString($segments[$index])
         if ($prefix -match '^(?i:job|jobs|job-details|posting|postings|req|requisition|requisitions)$' -and $value -match '^[A-Za-z0-9][A-Za-z0-9._-]{1,127}$') {
+            if ($prefix -match '^(?i:job|jobs)$' -and $value -match '-' -and ($index + 1) -lt $segments.Count) {
+                $nextValue = [Uri]::UnescapeDataString($segments[$index + 1])
+                if ($nextValue -match '^[0-9]{3,}$') {
+                    return $nextValue
+                }
+            }
             return $value
         }
     }
@@ -494,12 +504,66 @@ function Get-JobAgentLiveLinkedSourceUrls {
         if ([string]::IsNullOrWhiteSpace($href) -or $href -match '^(mailto:|tel:|javascript:|#)') {
             continue
         }
+        if ($href -notmatch '^(?i:https?://|/)' -and $href -match '\.') {
+            continue
+        }
 
         try {
             $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $href
             $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
             $text = ConvertTo-JobAgentLivePlainText -Html $match.Groups['text'].Value -MaxLength 120
             if ($evaluation.is_official -eq $true -and (Test-JobAgentLiveListingSourceLink -Text $text -Url ([string]$evaluation.canonical_url)) -and $seen.Add([string]$evaluation.canonical_url)) {
+                $urls.Add([string]$evaluation.canonical_url)
+            }
+        }
+        catch {
+            continue
+        }
+    }
+
+    return $urls.ToArray()
+}
+
+function Get-JobAgentLiveRssFeedUrls {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxUrls = 10
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Html)) {
+        return @()
+    }
+
+    $baseUri = [Uri]$BaseUrl
+    $urls = New-Object System.Collections.Generic.List[string]
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($match in [regex]::Matches($Html, '<link\b(?<attrs>[^>]*)>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)) {
+        if ($urls.Count -ge $MaxUrls) {
+            break
+        }
+
+        $attrs = [string]$match.Groups['attrs'].Value
+        if ($attrs -notmatch '(?i)\btype\s*=\s*["'']application/rss\+xml["'']') {
+            continue
+        }
+
+        $hrefMatch = [regex]::Match($attrs, '\bhref\s*=\s*["''](?<href>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase)
+        if (-not $hrefMatch.Success) {
+            continue
+        }
+
+        $href = [Net.WebUtility]::HtmlDecode($hrefMatch.Groups['href'].Value)
+        if ([string]::IsNullOrWhiteSpace($href) -or $href -match '^(mailto:|tel:|javascript:|#)') {
+            continue
+        }
+
+        try {
+            $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $href
+            $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
+            if ($evaluation.is_official -eq $true -and $seen.Add([string]$evaluation.canonical_url)) {
                 $urls.Add([string]$evaluation.canonical_url)
             }
         }
@@ -560,6 +624,134 @@ function Get-JobAgentLiveSuccessFactorsSearchUrls {
     }
 
     return @()
+}
+
+function Get-JobAgentLiveSuccessFactorsRssUrls {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][string[]]$SearchTerms = @(),
+        [Parameter()][ValidateRange(1, 20)][int]$MaxUrls = 10
+    )
+
+    if (-not (Test-JobAgentLiveSuccessFactorsPage -Html $Html -BaseUrl $BaseUrl)) {
+        return @()
+    }
+
+    try {
+        $uri = [Uri]$BaseUrl
+    }
+    catch {
+        return @()
+    }
+
+    $terms = New-Object System.Collections.Generic.List[string]
+    $seenTerms = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($term in @($SearchTerms)) {
+        $normalized = [string]$term
+        if (-not [string]::IsNullOrWhiteSpace($normalized) -and $seenTerms.Add($normalized.Trim())) {
+            $terms.Add($normalized.Trim())
+        }
+        if ($terms.Count -ge $MaxUrls) {
+            break
+        }
+    }
+    if ($terms.Count -eq 0) {
+        $terms.Add('IT')
+    }
+
+    $urls = New-Object System.Collections.Generic.List[string]
+    foreach ($term in $terms.ToArray()) {
+        try {
+            $builder = [UriBuilder]::new($uri.Scheme, $uri.Host, $uri.Port, '/services/rss/job/')
+            $builder.Query = 'locale=en_US&keywords=(' + [Uri]::EscapeDataString($term) + ')'
+            $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $builder.Uri.AbsoluteUri
+            if ($evaluation.is_official -eq $true) {
+                $urls.Add([string]$evaluation.canonical_url)
+            }
+        }
+        catch {
+            continue
+        }
+    }
+
+    return $urls.ToArray()
+}
+
+function ConvertFrom-JobAgentLiveRssCandidates {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Content,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][ValidateRange(1, 100)][int]$MaxResults = 10
+    )
+
+    if ($Content -notmatch '^\s*<\?xml|<rss\b|<feed\b') {
+        return @()
+    }
+
+    try {
+        [xml]$xml = $Content
+    }
+    catch {
+        return @()
+    }
+
+    $items = @($xml.SelectNodes('//*[local-name()="item" or local-name()="entry"]'))
+
+    $baseUri = [Uri]$BaseUrl
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $candidates = New-Object System.Collections.Generic.List[object]
+    foreach ($item in $items) {
+        if ($candidates.Count -ge $MaxResults) {
+            break
+        }
+        if ($null -eq $item) {
+            continue
+        }
+
+        $titleNode = $item.SelectSingleNode('./*[local-name()="title"]')
+        $linkNode = $item.SelectSingleNode('./*[local-name()="link"]')
+        $descriptionNode = $item.SelectSingleNode('./*[local-name()="description" or local-name()="summary" or local-name()="content"]')
+        $title = if ($null -ne $titleNode) { [string]$titleNode.InnerText } else { $null }
+        $link = if ($null -ne $linkNode) { [string]$linkNode.InnerText } else { $null }
+        if ([string]::IsNullOrWhiteSpace($link) -and $null -ne $linkNode -and $null -ne $linkNode.Attributes['href']) {
+            $link = [string]$linkNode.Attributes['href'].Value
+        }
+        if ([string]::IsNullOrWhiteSpace($link)) {
+            continue
+        }
+
+        try {
+            $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $link
+            $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
+            if ($evaluation.is_official -ne $true -or -not (Test-JobAgentLiveDetailUrlPattern -Url ([string]$evaluation.canonical_url))) {
+                continue
+            }
+            if (-not $seen.Add([string]$evaluation.canonical_url)) {
+                continue
+            }
+
+            $description = if ($null -ne $descriptionNode) { [string]$descriptionNode.InnerText } else { $null }
+            $externalJobId = Get-JobAgentLiveUrlJobId -Url ([string]$evaluation.canonical_url)
+            $candidates.Add((New-JobAgentLiveCandidate `
+                    -Title $(if ([string]::IsNullOrWhiteSpace($title)) { 'UNKNOWN' } else { $title }) `
+                    -DetailUrl ([string]$evaluation.canonical_url) `
+                    -VerificationBasis ([string]$evaluation.verification_basis) `
+                    -ExternalJobId $externalJobId `
+                    -AtsJobId $externalJobId `
+                    -Summary $description `
+                    -ExtractionConfidence 88))
+        }
+        catch {
+            continue
+        }
+    }
+
+    return $candidates.ToArray()
 }
 
 function Get-JobAgentLiveJsonLdNodes {
@@ -703,6 +895,28 @@ function Add-JobAgentLiveSourcePageQueueItem {
                 parse_base_url = $ParseBaseUrl
         })
     }
+}
+
+function Test-JobAgentLivePaginationQueueUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Url
+    )
+
+    try {
+        $uri = [Uri]$Url
+    }
+    catch {
+        return $false
+    }
+
+    if ($uri.AbsolutePath -match '/services/rss/') {
+        return $false
+    }
+    if ($uri.AbsolutePath -match '/(page|p)/[0-9]+/?$') {
+        return $true
+    }
+    return $uri.Query -match '(^|[?&])(page|p|startrow|start|offset|currentPage)=[0-9]+'
 }
 
 function Get-JobAgentLiveStructuredValue {
@@ -868,6 +1082,15 @@ function ConvertFrom-JobAgentLiveCareerPage {
     $baseUri = [Uri]$BaseUrl
     $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     $candidates = New-Object System.Collections.Generic.List[object]
+    foreach ($candidate in @(ConvertFrom-JobAgentLiveRssCandidates -Content $Html -BaseUrl $BaseUrl -Company $Company -MaxResults $MaxResults)) {
+        if ($candidates.Count -ge $MaxResults) {
+            break
+        }
+        if ($seen.Add([string]$candidate.detail_url)) {
+            $candidates.Add($candidate)
+        }
+    }
+
     foreach ($candidate in @(ConvertFrom-JobAgentLiveJsonLdCandidates -Html $Html -BaseUrl $BaseUrl -Company $Company -MaxResults $MaxResults)) {
         if ($candidates.Count -ge $MaxResults) {
             break
@@ -1129,8 +1352,12 @@ function Invoke-JobAgentLiveHtmlAdapter {
     $pageUrlsToFetch = New-Object System.Collections.Generic.Queue[object]
     $seenPageUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     [void]$seenPageUrls.Add([string]$sourceFetch.final_url)
+    $initialSuccessFactorsRssUrls = @(Get-JobAgentLiveSuccessFactorsRssUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -SearchTerms @($Policy.search_terms) -MaxUrls $maxPages)
+    $initialSuccessFactorsSearchUrls = if ($initialSuccessFactorsRssUrls.Count -gt 0) { @() } else { @(Get-JobAgentLiveSuccessFactorsSearchUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) }
     $initialFollowUps = @(
-        @(Get-JobAgentLiveSuccessFactorsSearchUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
+        @($initialSuccessFactorsRssUrls) +
+        @($initialSuccessFactorsSearchUrls) +
+        @(Get-JobAgentLiveRssFeedUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
         @(Get-JobAgentLiveEmbeddedSourceUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
         @(Get-JobAgentLiveLinkedSourceUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
         @(Get-JobAgentLiveNextPageUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
@@ -1151,8 +1378,12 @@ function Invoke-JobAgentLiveHtmlAdapter {
         if ($pageFetch.ok -ne $true) {
             continue
         }
+        $successFactorsRssUrls = @(Get-JobAgentLiveSuccessFactorsRssUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -SearchTerms @($Policy.search_terms) -MaxUrls $maxPages)
+        $successFactorsSearchUrls = if ($successFactorsRssUrls.Count -gt 0) { @() } else { @(Get-JobAgentLiveSuccessFactorsSearchUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) }
         $followUps = @(
-            @(Get-JobAgentLiveSuccessFactorsSearchUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
+            @($successFactorsRssUrls) +
+            @($successFactorsSearchUrls) +
+            @(Get-JobAgentLiveRssFeedUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
             @(Get-JobAgentLiveEmbeddedSourceUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
             @(Get-JobAgentLiveLinkedSourceUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
             @(Get-JobAgentLiveNextPageUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
@@ -1187,7 +1418,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
         $blockedByContent = Test-JobAgentLiveBlockedContentHint -Html ([string]$sourceFetch.content)
         $dynamicOnly = if (-not $blockedByContent) { Test-JobAgentLiveDynamicContentHint -Html ([string]$sourceFetch.content) } else { $false }
         $failedPageFetches = @($sourceFetches.ToArray() | Where-Object { $_.ok -ne $true })
-        $unprocessedPageHint = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and ((Test-JobAgentLivePaginationHint -Html ([string]$_.content)) -eq $true) }).Count -gt 0)
+        $unprocessedPageHint = (@($pageUrlsToFetch.ToArray() | Where-Object { Test-JobAgentLivePaginationQueueUrl -Url ([string]$_.url) }).Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and ((Test-JobAgentLivePaginationHint -Html ([string]$_.content)) -eq $true) }).Count -gt 0)
         if ((-not $blockedByContent) -and (-not $dynamicOnly) -and $failedPageFetches.Count -eq 0 -and (-not $unprocessedPageHint)) {
             return New-JobAgentAdapterResult `
                 -AdapterInput $AdapterInput `
@@ -1251,7 +1482,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
     }
 
     $resultLimited = $candidateItems.Count -ge [int]$Policy.max_results_per_source
-    $paginationDetected = ($pageUrlsToFetch.Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and ((Test-JobAgentLivePaginationHint -Html ([string]$_.content)) -eq $true) }).Count -gt 0)
+    $paginationDetected = (@($pageUrlsToFetch.ToArray() | Where-Object { Test-JobAgentLivePaginationQueueUrl -Url ([string]$_.url) }).Count -gt 0) -or ($sourceFetches.Count -ge $maxPages -and @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true -and ((Test-JobAgentLivePaginationHint -Html ([string]$_.content)) -eq $true) }).Count -gt 0)
     if ($detailBudgetReached -or $resultLimited -or $paginationDetected -or $detailFailures.Count -gt 0) {
         $incompleteReasons = New-Object System.Collections.Generic.List[string]
         if ($detailBudgetReached) { $incompleteReasons.Add('detail_fetch_limit_reached') }

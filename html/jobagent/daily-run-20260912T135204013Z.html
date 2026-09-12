@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JobAgent Daily-Run-Bericht</title>
+<style>
+:root { color-scheme: light; --bg: #f4f1ea; --surface: #fffdf8; --surface-alt: #f7efe2; --line: #d8c7a9; --text: #1f2933; --muted: #5d6b78; --accent: #7a4b20; --ok: #155e3b; --warn: #8a4b0f; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Segoe UI", Tahoma, sans-serif; background: linear-gradient(180deg, #f7f2e8 0%, #efe6d6 100%); color: var(--text); }
+main { max-width: 1440px; margin: 0 auto; padding: 24px 16px 40px; }
+section { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-bottom: 16px; box-shadow: 0 8px 24px rgba(31, 41, 51, 0.06); }
+h1, h2, h3 { margin: 0 0 12px; line-height: 1.2; }
+h1 { font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--accent); }
+h2 { font-size: 1.25rem; }
+p, li { line-height: 1.5; }
+.summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; }
+.card { background: var(--surface-alt); border: 1px solid var(--line); border-radius: 12px; padding: 12px; min-width: 0; }
+.label { display: block; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+.value { display: block; font-size: 1.05rem; font-weight: 600; overflow-wrap: anywhere; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 720px; }
+.job-table { min-width: 1500px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+th { background: #f2e7d4; font-size: 0.92rem; }
+tbody tr:nth-child(even) { background: rgba(122, 75, 32, 0.04); }
+a { color: var(--accent); }
+.unknown { color: var(--muted); font-style: italic; }
+@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1360px; } th, td { padding: 9px 10px; } }
+</style>
+</head>
+<body>
+<main>
+<section>
+<h1>JobAgent Daily-Run-Bericht</h1>
+<div class="summary">
+<div class="card"><span class="label">ScanRun</span><span class="value">scanrun:20260912T135204013Z</span></div>
+<div class="card"><span class="label">Status</span><span class="value">Erfolgreich</span></div>
+<div class="card"><span class="label">Firmen gesamt</span><span class="value">487</span></div>
+<div class="card"><span class="label">Firmen im Lauf</span><span class="value">3</span></div>
+<div class="card"><span class="label">Faellige Firmen</span><span class="value">3</span></div>
+<div class="card"><span class="label">Uebersprungene Firmen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Limit</span><span class="value">25</span></div>
+<div class="card"><span class="label">Auswahlgrund</span><span class="value">Explizite Firmenauswahl</span></div>
+<div class="card"><span class="label">Adapterversuche</span><span class="value">3</span></div>
+<div class="card"><span class="label">Snapshots</span><span class="value">16</span></div>
+<div class="card"><span class="label">Fehler</span><span class="value">0</span></div>
+</div>
+</section>
+<section><h2>Neue passende Stellen</h2>
+<p>Keine neuen passenden Stellen im Lauf.</p>
+</section>
+<section><h2>Aktive passende Stellen</h2>
+<p>Keine unveraenderten aktiven passenden Stellen im Lauf.</p>
+</section>
+<section><h2>Aenderungen</h2>
+<p>Keine geaenderten passenden Stellen im Lauf.</p>
+</section>
+<section><h2>Geschlossene oder entfernte Stellen</h2>
+<p>Keine geschlossenen oder entfernten passenden Stellen im Lauf.</p>
+</section>
+<section><h2>Neue Unternehmen</h2>
+<p>Keine neuen Unternehmen im Lauf.</p>
+</section>
+<section><h2>Fehler und unsichere Quellen</h2>
+<p>Keine Fehler oder unsicheren Quellen im Lauf.</p>
+</section>
+<section><h2>Recherche-Statistik</h2><div class="summary">
+<div class="card"><span class="label">Gepruefte Stellen</span><span class="value">16</span></div>
+<div class="card"><span class="label">Neue Stellen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Aktive passende Stellen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Aktualisierte Stellen</span><span class="value">16</span></div>
+<div class="card"><span class="label">Entfernte oder geschlossene Stellen</span><span class="value">5</span></div>
+<div class="card"><span class="label">Ungueltige Stellen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Neue Unternehmen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Unsichere Quellen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Nicht erreichbare Karriereportale</span><span class="value">0</span></div>
+<div class="card"><span class="label">Fehler</span><span class="value">0</span></div>
+</div></section>
+<section><h2>Coverage und Adapter-Backlog</h2>
+<p>Coverage-Werte sind operative Naeherungen aus dem lokalen Firmeninventar und behaupten keine vollstaendige Marktdeckung.</p>
+<div class="summary">
+<div class="card"><span class="label">Unternehmen gesamt</span><span class="value">487</span></div>
+<div class="card"><span class="label">Mit Karriere-URL</span><span class="value">433</span></div>
+<div class="card"><span class="label">Ohne Karriere-URL</span><span class="value">54</span></div>
+<div class="card"><span class="label">Erfolgreich gescannt</span><span class="value">19</span></div>
+<div class="card"><span class="label">Scan fehlgeschlagen</span><span class="value">4</span></div>
+<div class="card"><span class="label">Noch nie gescannt</span><span class="value">460</span></div>
+<div class="card"><span class="label">Ohne passende Stellen</span><span class="value">19</span></div>
+<div class="card"><span class="label">Mit passenden Stellen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Faellig oder ungescannt</span><span class="value">469</span></div>
+</div>
+<h3>Quellenbestand</h3><div class="summary">
+<div class="card"><span class="label">Quellen gesamt</span><span class="value">2307</span></div>
+<div class="card"><span class="label">Offizielle Quellen</span><span class="value">441</span></div>
+<div class="card"><span class="label">Karrierequellen</span><span class="value">440</span></div>
+<div class="card"><span class="label">ATS-Quellen</span><span class="value">1</span></div>
+<div class="card"><span class="label">Discovery-Hinweise</span><span class="value">1866</span></div>
+<div class="card"><span class="label">Verifizierte Quellen</span><span class="value">441</span></div>
+<div class="card"><span class="label">Offene Quellen</span><span class="value">1865</span></div>
+<div class="card"><span class="label">Blockierte Quellen</span><span class="value">1</span></div>
+<div class="card"><span class="label">Retry offen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Im letzten Lauf versucht</span><span class="value">3</span></div>
+<div class="card"><span class="label">Im letzten Lauf gescannt</span><span class="value">3</span></div>
+<div class="card"><span class="label">Im letzten Lauf fehlgeschlagen</span><span class="value">0</span></div>
+<div class="card"><span class="label">Nie gescannte Quellen</span><span class="value">436</span></div>
+<div class="card"><span class="label">Faellige Quellen</span><span class="value">2304</span></div>
+</div>
+<h3>Naechste Scanprioritaeten</h3>
+<div class="table-wrap"><table><thead><tr><th>Score</th><th>Firma</th><th>Aktion</th><th>Gruende</th></tr></thead><tbody>
+<tr><td>176</td><td>Deutsche Lufthansa AG</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>AATec Medical GmbH</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>Amplifold GmbH</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>Behandlungszentrum fuer Multiple Sklerose Kranke</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>Cipla Deutschland</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>Cryondo GmbH</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>DMG MORI EMEA Holding GmbH</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>Intelizign Engineering Services GmbH</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>Internationale Bauausstellung Metropolregion Muenchen GmbH</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+<tr><td>145</td><td>Mitsubishi Heavy Industries</td><td>Unbekannt (discover_career_url)</td><td>Unbekannt (career_url_missing), Noch nie gescannt</td></tr>
+</tbody></table></div>
+<h3>Adapter- und Coverage-Backlog</h3>
+<div class="table-wrap"><table><thead><tr><th>Score</th><th>Typ</th><th>Firma</th><th>Begruendung</th><th>Naechster Schritt</th></tr></thead><tbody>
+<tr><td>95</td><td>Karriere-URL finden</td><td>AATec Medical GmbH</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>ALFA AI</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>Amplifold GmbH</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>Assemblixx</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>AV-Suite Veranstaltungstechnik GmbH</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>Behandlungszentrum fuer Multiple Sklerose Kranke</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>Breathment GmbH</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>Buerger Energie Genossenschaft Freisinger Land eG</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>Cipla Deutschland</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+<tr><td>95</td><td>Karriere-URL finden</td><td>Cryondo GmbH</td><td>Keine Karriere-URL im Firmeninventar.</td><td>Offizielle Unternehmenswebsite auf Karrierepfad pruefen und verifizieren.</td></tr>
+</tbody></table></div>
+</section>
+</main>
+</body>
+</html>
