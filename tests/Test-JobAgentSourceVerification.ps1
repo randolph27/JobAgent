@@ -51,6 +51,10 @@ Assert-True -Condition ($career.verification_basis -eq 'CAREER_URL') -Message 'K
 Assert-True -Condition (@($career.verification_evidence).Count -eq 1) -Message 'Karriere-URL liefert keinen einzelnen Verifikationsbeleg.'
 Assert-True -Condition ($career.verification_evidence[0].evidence_type -eq 'CAREER_URL') -Message 'Karriere-URL nutzt falschen Evidenztyp.'
 
+$encodedOfficial = Get-JobAgentOfficialSourceEvaluation -Company (New-TestCompany) -Url 'https://example.invalid/job/Ulm-Senior-Strategischer-Eink%C3%A4ufer-Externalisierung-Baugruppen-%28E%20E%29-%28wmd%29-89077/1364637855'
+Assert-True -Condition ($encodedOfficial.is_official -eq $true) -Message 'Percent-encodete offizielle Detail-URL mit kodiertem Leerzeichen wurde abgelehnt.'
+Assert-True -Condition ($encodedOfficial.canonical_url -match '%20') -Message 'Percent-encodetes Leerzeichen wurde in der kanonischen URL verloren.'
+
 $ats = Get-JobAgentOfficialSourceEvaluation -Company (New-TestCompany) -Url 'https://example.myworkdayjobs.invalid/job/789?source=linkedin'
 Assert-True -Condition ($ats.is_official -eq $true) -Message 'Firmengebundene ATS-Domain wurde nicht akzeptiert.'
 Assert-True -Condition ($ats.verification_basis -eq 'COMPANY_LINKED_ATS') -Message 'ATS-Verifikationsbasis ist falsch.'
@@ -309,5 +313,5 @@ Assert-True -Condition ($manualVerification.status -eq 'MANUAL_REVIEW') -Message
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('canonical_url', 'company_domain', 'career_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_verification_curl_policy', 'career_verification_wsl_curl_policy', 'curl_tls_error_diagnostics', 'curl_invocation_options', 'curl_output_parser', 'curl_schannel_fallback_metadata', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
+    cases = @('canonical_url', 'company_domain', 'career_url', 'encoded_official_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_verification_curl_policy', 'career_verification_wsl_curl_policy', 'curl_tls_error_diagnostics', 'curl_invocation_options', 'curl_output_parser', 'curl_schannel_fallback_metadata', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
 } | ConvertTo-Json -Depth 4

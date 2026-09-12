@@ -1,87 +1,76 @@
 # Handoff latest
 
-Stand: 2026-09-09T23:05:00+02:00
+Stand: 2026-09-12T10:46:10.029+02:00
 
 ## Zustand
 
 - Active: `TD-0053`
 - Status: `in-progress`
-- Roadmap-Punkt: JA-041 IT-Leiter/Lead/Manager ueber vollstaendige Karriere- und ATS-Ergebnislisten finden.
-- Branch vor Commit: `master`
-- HEAD vor Commit: `dc52ad911778`
+- Ziel: JA-041 IT-Leiter/Lead/Manager über vollständige Karriere- und ATS-Ergebnislisten finden #comment: Firmenlinks werden erst durch verlässliche Extraktion and passende Rollen-/Standortbewertung zu nutzbaren Stellenangeboten.
+- Branch: `master`
+- HEAD: `0d1d9e8e6a66`
 - Upstream: `origin/master`
-- Ahead/Behind vor Commit: `0/0`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
 - Route: `True`
-- Supertest: vom Nutzer nicht separat angefragt; gemaess Nutzeranweisung fuer diesen Abschluss nicht blockierend.
-- Roadmap-Rotation: keine Rotation, weil JA-041 fachlich noch offen ist.
 
 ## Erledigter Slice
 
-Der JA-041-Hotspot `source:europaeisches_patentamt_career` ist geschlossen. Ursache war eine PowerShell-Ausdrucksbindung in `src/JobAgent.LiveScan.psm1`: `-eq $true` wurde innerhalb des Funktionsaufrufs von `Test-JobAgentLivePaginationHint` als nicht vorhandener Parameter interpretiert. Beide Vollstaendigkeitszweige vergleichen das Funktionsergebnis jetzt ausserhalb des Aufrufs.
+JA-041 SuccessFactors/j2w-Hotspot erweitert:
 
-Ergaenzte Regressionen in `tests/Test-JobAgentLiveScan.ps1`:
+- belegte SuccessFactors-Karriereseiten erzeugen automatisch die offizielle `/search/?createNewAlert=false&q=&locationsearch=`-Quellseite als Follow-up;
+- SuccessFactors-Contentseiten wie `/content/...` werden nicht mehr als Jobdetails akzeptiert;
+- percent-encodete offizielle Detail-URLs mit kodierten Leerzeichen bleiben in SourceVerification zulaessig;
+- absolute reale Detail-URLs, die `IsWellFormedUriString` ablehnt, werden host- und evidence-seitig tolerant per `[Uri]` geparst.
 
-- leere Quelle mit weiterer, wegen Page-Limit nicht abgearbeiteter Seite bleibt `PARTIAL`;
-- Quelle mit gefundenem Job und weiterer, wegen Page-Limit nicht abgearbeiteter Seite bleibt `PARTIAL` und dokumentiert `pagination_detected`.
+Roadmap-Rotation: keine. JA-041 bleibt offen, weil G+D/HENSOLDT/Knorr-Bremse noch `PARTIAL` sind und Wacker/`jobs.wacker.com` noch keinen vollstaendigen scan-lokalen Quellenvertrag hat.
 
-## Produktive Evidence
+Supertest: nicht ausgefuehrt; gemaess Nutzeranweisung vom 2026-09-12 gilt ein nicht separat angefragter Supertest fuer diesen Uebergabeabschluss als erledigt/nicht blockierend.
 
-- Mehrfirmen-Pilot vor Fix: `logs/jobagent/daily-run-20260909T205327347Z.json`
-  - Status `PARTIAL`
-  - 8 Firmen gescannt
-  - 29 Raw-Jobs / 29 gepruefte Jobs / 29 Snapshots
-  - Adapterfehler bei `company:europaeisches_patentamt`, `source:europaeisches_patentamt_career`: `A parameter cannot be found that matches parameter name 'eq'.`
-  - weitere sichtbare JA-041-Folgefaelle: Giesecke+Devrient, HENSOLDT, Knorr-Bremse, Wacker
-- Kontrolllauf nach Fix: `logs/jobagent/daily-run-20260909T205859107Z.json`
-  - `company:europaeisches_patentamt`
-  - Status `SUCCESS`
-  - 1 Firma, 0 Raw-Jobs, 0 Fehler, 0 unsichere Quellen
-- HTML-Evidence:
-  - `html/jobagent/daily-run-20260909T205327347Z.html`
-  - `html/jobagent/daily-run-20260909T205859107Z.html`
-- Detailliertes Handoff: `docs/handoffs/2026-09-09-ja041-pagination-expression-handoff.md`
+## Versionierte Aenderungen
 
-## Geaenderte Dateien
-
-- `src/JobAgent.LiveScan.psm1`
-- `tests/Test-JobAgentLiveScan.ps1`
 - `Roadmap.md`
 - `data/jobagent/store.json`
-- `docs/handoffs/2026-09-09-ja041-pagination-expression-handoff.md`
-- `html/jobagent/daily-run-20260909T205327347Z.html`
-- `html/jobagent/daily-run-20260909T205859107Z.html`
-- `todo.state.json`
-- `todo.events.jsonl`
+- `docs/handoffs/2026-09-12-ja041-successfactors-followup-handoff.md`
+- `html/jobagent/daily-run-20260912T083135724Z.html`
+- `html/jobagent/daily-run-20260912T083922868Z.html`
+- `src/JobAgent.LiveScan.psm1`
+- `src/JobAgent.SourceVerification.psm1`
+- `tests/Test-JobAgentLiveScan.ps1`
+- `tests/Test-JobAgentSourceVerification.ps1`
 - `todo.checkpoint.json`
+- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
+- `todo.state.json`
 - `handoff.latest.md`
 - `handoff.latest.json`
 
 ## Verifikation
 
 - `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tools\Invoke-JobAgentDailyRun.ps1 -ProjectRoot . -CompanyIds company:europaeisches_patentamt -MaxResultsPerSource 100 -MaxDetailFetchesPerSource 100 -MaxPagesPerSource 10 -MaxRetries 0 -FetchClient curl -HostConcurrency 1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
+- `pwsh -NoProfile -Command "& { .\tools\Invoke-JobAgentDailyRun.ps1 -ProjectRoot . -CompanyIds @('company:giesecke_plus_devrient_gmbh','company:hensoldt_ag','company:knorr_bremse_ag','company:wacker_chemie_ag') -MaxResultsPerSource 100 -MaxDetailFetchesPerSource 100 -MaxPagesPerSource 10 -MaxRetries 0 -FetchClient curl -HostConcurrency 1 }"` -> Exit `0`
 - `.\ci.cmd stp` -> Exit `0`
+- `curl.exe -s http://localhost:9000/api/system/status` -> Exit `1`
+- `.\ci.cmd sonar-start` -> Exit `1`
+
+## Evidence
+
+- `logs/jobagent/daily-run-20260912T083135724Z.json`: vor URL-Fix, 4 Firmen, 18 Raw-Jobs, 1 Adapterfehler bei HENSOLDT wegen encoded Detail-URL.
+- `logs/jobagent/daily-run-20260912T083922868Z.json`: nach URL-Fix, 4 Firmen, 39 Raw-Jobs/gepruefte Jobs, 0 Adapterfehler.
+- `html/jobagent/daily-run-20260912T083922868Z.html`: HTML-Report zum Kontrolllauf.
 
 ## Blockierte Zusatzpruefung
 
-SonarQube konnte nicht gestartet werden:
+SonarQube ist lokal nicht erreichbar. Startversuch ueber `.\ci.cmd sonar-start` scheitert mit `docker_engine_unavailable; wsl_fallback=wsl_missing`. Evidence: `logs\verify\sq-005-sonarqube-wsl-fallback.md`, Log: `logs\terminal\sonar-start-20260912-104434.log`.
 
-- `curl.exe -s http://localhost:9000/api/system/status` -> Exit `1`
-- `.\ci.cmd sonar-start` -> Exit `1`
-- Blocker: `docker_engine_unavailable; wsl_fallback=wsl_missing`
-- Evidence: `logs\verify\sq-005-sonarqube-wsl-fallback.md`
+## Naechster Anker
 
-## Naechste Aufgaben fuer neuen Chat
+JA-041 fortsetzen, nicht zu UI-001 wechseln:
 
-1. Bei JA-041 bleiben und nicht zu UI-001 wechseln.
-2. Mehrfirmen-Pilot-Folgefaelle aus `logs/jobagent/daily-run-20260909T205327347Z.json` priorisieren:
-   - Giesecke+Devrient: `PARTIAL`, `NO_JOBS_FOUND`, manuelle Pruefung/Adapteranalyse.
-   - HENSOLDT: `PARTIAL`, `TECHNICAL_LIMITATION`, Retry/Adapteranalyse.
-   - Knorr-Bremse: `PARTIAL`, `TECHNICAL_LIMITATION`, Retry/Adapteranalyse.
-   - Wacker: `PARTIAL`, `NO_JOBS_FOUND`, manuelle Pruefung/Adapteranalyse.
-3. Pro Folgefall zuerst die offiziellen Quell-/HTML-Artefakte und aktuellen Store-Eintraege pruefen, dann nur den kleinsten gemeinsamen Adapter-Hotspot implementieren.
-4. Nach jedem funktionalen Adapter-Slice betroffene Funktionstests ausfuehren, einen gezielten Live-Kontrolllauf mit `-FetchClient curl` starten und Roadmap/Todo/Handoff via `.\ci.cmd stp` synchronisieren.
-5. JA-041 erst rotieren, wenn die Roadmap-Done-Kriterien fachlich erfuellt sind; der nicht separat angefragte Supertest blockiert diesen Chat-Abschluss nicht.
+1. Wacker-Hotspot priorisieren: `https://www.wacker.com/cms/en-us/careers/overview.html` verlinkt offiziell auf `https://jobs.wacker.com/?locale=en_US`; diese Quelle wird im Live-Scan noch nicht als firmengebundene ATS-/Karrierequelle akzeptiert und endet deshalb `NO_JOBS_FOUND`.
+2. Danach SuccessFactors-PARTIAL-Ursachen fuer Giesecke+Devrient, HENSOLDT und Knorr-Bremse pruefen: Ergebnis-/Pagination-Limits verhindern weiterhin `SUCCESS`.
+3. Nach jedem Adapter-Slice: betroffene Funktionstests, gezielter Live-Kontrolllauf mit `-FetchClient curl`, Roadmap/Todo/Handoff-Sync und STP.

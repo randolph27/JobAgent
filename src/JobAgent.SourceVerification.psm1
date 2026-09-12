@@ -103,7 +103,16 @@ function Get-JobAgentUrlHost {
     )
 
     if (-not [Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
-        throw "URL ist nicht absolut oder ungueltig: $Url"
+        try {
+            $uri = [Uri]$Url
+            if (-not $uri.IsAbsoluteUri) {
+                throw
+            }
+        }
+        catch {
+            throw "URL ist nicht absolut oder ungueltig: $Url"
+        }
+        return $uri.Host.ToLowerInvariant() -replace '^www\.', ''
     }
 
     return ([Uri]$Url).Host.ToLowerInvariant() -replace '^www\.', ''
@@ -1660,7 +1669,15 @@ function New-JobAgentVerificationEvidence {
     )
 
     if (-not [Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
-        throw "Evidence-URL ist nicht absolut oder ungueltig: $Url"
+        try {
+            $uri = [Uri]$Url
+            if (-not $uri.IsAbsoluteUri) {
+                throw
+            }
+        }
+        catch {
+            throw "Evidence-URL ist nicht absolut oder ungueltig: $Url"
+        }
     }
 
     $canonicalUrl = ConvertTo-JobAgentCanonicalUrl -Url $Url
@@ -1720,10 +1737,19 @@ function ConvertTo-JobAgentCanonicalUrl {
     )
 
     if (-not [Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
-        throw "URL ist nicht absolut oder ungueltig: $Url"
+        try {
+            $uri = [Uri]$Url
+            if (-not $uri.IsAbsoluteUri) {
+                throw
+            }
+        }
+        catch {
+            throw "URL ist nicht absolut oder ungueltig: $Url"
+        }
     }
-
-    $uri = [Uri]$Url
+    else {
+        $uri = [Uri]$Url
+    }
     if (@('http', 'https') -notcontains $uri.Scheme.ToLowerInvariant()) {
         throw "URL-Schema wird nicht unterstuetzt: $($uri.Scheme)"
     }
@@ -1733,7 +1759,7 @@ function ConvertTo-JobAgentCanonicalUrl {
     $builder.Host = $uri.Host.ToLowerInvariant() -replace '^www\.', ''
     $builder.Fragment = ''
 
-    $path = [Net.WebUtility]::UrlDecode($builder.Path)
+    $path = $builder.Path
     $path = [regex]::Replace($path, '/+', '/')
     if (($path.Length -gt 1) -and $path.EndsWith('/')) {
         $path = $path.TrimEnd('/')

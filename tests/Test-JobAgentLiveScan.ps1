@@ -151,6 +151,10 @@ $storyHtml = '<html><body><a href="/en/newsroom/stories/how-product-strategy-wor
 $storyCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $storyHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Head of IT'))
 Assert-True -Condition ($storyCandidates.Count -eq 0) -Message 'Live-Parser darf Newsroom-/Story-Seiten nicht als Stellen speichern.'
 
+$contentPageHtml = '<html><body><a href="/content/content-functional-areas?locale=de_DE">Functional areas</a></body></html>'
+$contentPageCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $contentPageHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Functional areas'))
+Assert-True -Condition ($contentPageCandidates.Count -eq 0) -Message 'Live-Parser darf Content-/Funktionsbereichsseiten nicht als Stellen speichern.'
+
 $jsonLdHtml = @'
 <html>
   <head>
@@ -203,6 +207,10 @@ $encodedPathHtml = '<html><body><a href="https://jobs.example.invalid/job/M%C3%B
 $encodedPathCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $encodedPathHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @('Head of IT'))
 Assert-True -Condition ($encodedPathCandidates.Count -eq 1) -Message 'Bereits percent-encodete UTF-8-Detailpfade wurden nicht akzeptiert.'
 Assert-True -Condition ($encodedPathCandidates[0].detail_url -match 'M%C3%BCnchen-Head-of-IT') -Message 'UTF-8-Detailpfad wurde falsch kanonisiert.'
+
+$encodedSpaceHtml = '<html><body><a href="https://example.invalid/job/Ulm-Senior-Strategischer-Eink%C3%A4ufer-Externalisierung-Baugruppen-%28E%20E%29-%28wmd%29-89077/1364637855">Senior Strategischer Einkäufer</a></body></html>'
+$encodedSpaceCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $encodedSpaceHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @())
+Assert-True -Condition ($encodedSpaceCandidates.Count -eq 0) -Message 'Nicht passende percent-encodete Detailpfade duerfen nicht als Zielrollen-Kandidat durchrutschen.'
 
 $structuredNavigationHtml = @'
 <html>
@@ -464,6 +472,34 @@ Assert-True -Condition ($linkedSourceResult.status -eq 'SUCCESS' -and $linkedSou
 Assert-True -Condition (@($linkedSourceResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Treffer aus verlinktem Jobportal nicht.'
 Assert-True -Condition ($linkedSourceResult.raw_jobs[0].detail_url -eq 'https://jobs.example.invalid/job/head-it-444') -Message 'Live-Adapter kanonisiert Treffer aus verlinktem Jobportal falsch.'
 
+$successFactorsPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('Head of IT')
+$successFactorsFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://example.invalid/careers' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><script>j2w.init({"ssoCompanyId":"example"});</script></html>'
+            break
+        }
+        'https://example.invalid/search?createNewAlert=false&locationsearch=&q=' {
+            New-FetchResult -Url $Url -Ok $true -Content '<html><a class="jobTitle-link" href="/job/Muenchen-Head-of-IT-80809/424242/">Head of IT</a></html>'
+            break
+        }
+        'https://example.invalid/job/Muenchen-Head-of-IT-80809/424242' {
+            New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Head of IT</h1><p>Gesamtverantwortung und IT-Strategie in Muenchen.</p></main>'
+            break
+        }
+        default {
+            New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'
+            break
+        }
+    }
+}
+$successFactorsResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $successFactorsPolicy -Fetcher $successFactorsFetcher
+Assert-True -Condition ($successFactorsResult.status -eq 'SUCCESS' -and $successFactorsResult.scan_complete) -Message 'Live-Adapter folgt SuccessFactors-Suchseiten nicht aus belegten j2w-Karriereseiten.'
+Assert-True -Condition (@($successFactorsResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert SuccessFactors-Suchtreffer nicht.'
+Assert-True -Condition ($successFactorsResult.raw_jobs[0].detail_url -eq 'https://example.invalid/job/Muenchen-Head-of-IT-80809/424242') -Message 'Live-Adapter kanonisiert SuccessFactors-Suchtreffer falsch.'
+
 $structuredJsonFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
 
@@ -661,11 +697,13 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'official_candidate_filter',
         'career_navigation_candidate_rejection',
         'newsroom_story_candidate_rejection',
+        'content_page_candidate_rejection',
         'aggregator_rejection',
         'jsonld_jobposting_extraction',
         'ats_url_pattern_detection',
         'greenhouse_ats_url_pattern_detection',
         'encoded_utf8_detail_path',
+        'encoded_space_detail_path',
         'structured_navigation_candidate_rejection',
         'structured_ats_json_extraction',
         'live_adapter_success_with_detail_verification',
@@ -679,6 +717,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_job_pagination_remains_partial',
         'live_adapter_official_iframe_ats_success',
         'live_adapter_official_linked_job_portal_success',
+        'live_adapter_successfactors_search_followup_success',
         'live_adapter_structured_json_ats_success',
         'live_adapter_gatsby_static_query_greenhouse_success',
         'live_adapter_blocked_detail_fetch',

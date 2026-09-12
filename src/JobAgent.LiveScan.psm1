@@ -192,7 +192,7 @@ function Test-JobAgentLiveExcludedContentUrl {
     }
 
     $path = ([Uri]$Url).AbsolutePath.ToLowerInvariant()
-    return $path -match '(^|/)(news(room)?|stories|story|blog|press|media|event|events|case-stud(y|ies)|insights?)(/|$)'
+    return $path -match '(^|/)(news(room)?|stories|story|blog|press|media|event|events|case-stud(y|ies)|insights?|content)(/|$)'
 }
 
 function Test-JobAgentLiveCandidateText {
@@ -336,11 +336,27 @@ function ConvertTo-JobAgentLiveEvaluationUrl {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$Url)
 
+    if ([Uri]::IsWellFormedUriString($Url, [UriKind]::Absolute)) {
+        return $Url
+    }
     $decoded = [Net.WebUtility]::UrlDecode($Url)
-    if ([Uri]::IsWellFormedUriString($decoded, [UriKind]::Absolute)) {
+    if ($decoded -notmatch '\s' -and [Uri]::IsWellFormedUriString($decoded, [UriKind]::Absolute)) {
         return $decoded
     }
     return $Url
+}
+
+function Resolve-JobAgentLiveHrefUrl {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][Uri]$BaseUri,
+        [Parameter(Mandatory)][string]$Href
+    )
+
+    if ($Href -match '^(?i:https?://)') {
+        return ConvertTo-JobAgentLiveEvaluationUrl -Url $Href
+    }
+    return ConvertTo-JobAgentLiveEvaluationUrl -Url ([Uri]::new($BaseUri, $Href).AbsoluteUri)
 }
 
 function Get-JobAgentLiveNextPageUrls {
@@ -385,7 +401,7 @@ function Get-JobAgentLiveNextPageUrls {
                 continue
             }
 
-            $absolute = ConvertTo-JobAgentLiveEvaluationUrl -Url ([Uri]::new($baseUri, $href).AbsoluteUri)
+            $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $href
             try {
                 $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
                 if ($evaluation.is_official -eq $true -and $seen.Add($absolute)) {
@@ -434,7 +450,7 @@ function Get-JobAgentLiveEmbeddedSourceUrls {
         }
 
         try {
-            $absolute = ConvertTo-JobAgentLiveEvaluationUrl -Url ([Uri]::new($baseUri, $src).AbsoluteUri)
+            $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $src
             $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
             if ($evaluation.is_official -eq $true -and $seen.Add([string]$evaluation.canonical_url)) {
                 $urls.Add([string]$evaluation.canonical_url)
@@ -480,7 +496,7 @@ function Get-JobAgentLiveLinkedSourceUrls {
         }
 
         try {
-            $absolute = ConvertTo-JobAgentLiveEvaluationUrl -Url ([Uri]::new($baseUri, $href).AbsoluteUri)
+            $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $href
             $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
             $text = ConvertTo-JobAgentLivePlainText -Html $match.Groups['text'].Value -MaxLength 120
             if ($evaluation.is_official -eq $true -and (Test-JobAgentLiveListingSourceLink -Text $text -Url ([string]$evaluation.canonical_url)) -and $seen.Add([string]$evaluation.canonical_url)) {
@@ -493,6 +509,57 @@ function Get-JobAgentLiveLinkedSourceUrls {
     }
 
     return $urls.ToArray()
+}
+
+function Test-JobAgentLiveSuccessFactorsPage {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl
+    )
+
+    try {
+        $uri = [Uri]$BaseUrl
+    }
+    catch {
+        return $false
+    }
+
+    $hostPath = ($uri.Host + $uri.AbsolutePath).ToLowerInvariant()
+    if (($hostPath -match '(^|\.)(jobs|careers)\.' -or $hostPath -match '(^|/)career(s)?(/|$)') -and $Html -match '(?is)\bj2w\.init\s*\(|\bssoCompanyId\b|\bsearchresults\b|\bjobTitle-link\b') {
+        return $true
+    }
+    return $false
+}
+
+function Get-JobAgentLiveSuccessFactorsSearchUrls {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Html,
+        [Parameter(Mandatory)][string]$BaseUrl,
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][ValidateRange(1, 20)][int]$MaxUrls = 10
+    )
+
+    if (-not (Test-JobAgentLiveSuccessFactorsPage -Html $Html -BaseUrl $BaseUrl)) {
+        return @()
+    }
+
+    try {
+        $uri = [Uri]$BaseUrl
+        $builder = [UriBuilder]::new($uri.Scheme, $uri.Host, $uri.Port, '/search/')
+        $builder.Query = 'createNewAlert=false&q=&locationsearch='
+        $searchUrl = $builder.Uri.AbsoluteUri
+        $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $searchUrl
+        if ($evaluation.is_official -eq $true) {
+            return @([string]$evaluation.canonical_url)
+        }
+    }
+    catch {
+        return @()
+    }
+
+    return @()
 }
 
 function Get-JobAgentLiveJsonLdNodes {
@@ -823,7 +890,7 @@ function ConvertFrom-JobAgentLiveCareerPage {
         if ($href -match '^(mailto:|tel:|javascript:|#)') {
             continue
         }
-        $absolute = ConvertTo-JobAgentLiveEvaluationUrl -Url ([Uri]::new($baseUri, $href).AbsoluteUri)
+        $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $href
         $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
         if ($evaluation.is_official -ne $true) {
             continue
@@ -1063,6 +1130,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
     $seenPageUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     [void]$seenPageUrls.Add([string]$sourceFetch.final_url)
     $initialFollowUps = @(
+        @(Get-JobAgentLiveSuccessFactorsSearchUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
         @(Get-JobAgentLiveEmbeddedSourceUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
         @(Get-JobAgentLiveLinkedSourceUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
         @(Get-JobAgentLiveNextPageUrls -Html ([string]$sourceFetch.content) -BaseUrl ([string]$sourceFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
@@ -1084,6 +1152,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
             continue
         }
         $followUps = @(
+            @(Get-JobAgentLiveSuccessFactorsSearchUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
             @(Get-JobAgentLiveEmbeddedSourceUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
             @(Get-JobAgentLiveLinkedSourceUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxUrls $maxPages) +
             @(Get-JobAgentLiveNextPageUrls -Html ([string]$pageFetch.content) -BaseUrl ([string]$pageFetch.final_url) -Company $AdapterInput.company -MaxPages $maxPages)
