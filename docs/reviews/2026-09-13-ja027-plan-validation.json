@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-09-13T14:27:37+02:00",
+  "status": "passed",
+  "scope": "planning only after user correction",
+  "checks": [
+    "four prioritized roadmap points",
+    "exactly three subpoints and three steps each",
+    "required fields and test paths",
+    "UI001 screenshot references preserved",
+    "production input hashes unchanged",
+    "single active task, checkpoint state and boundary match",
+    "unique event IDs; active JA027 absent from done digest"
+  ],
+  "roadmap_sha256": "f45017dd4a8fdfa05b17bbe9b0974801a0ec5e8374762d80dedbd5a6966c839f",
+  "verification": [
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1",
+      "exit": 0,
+      "status": "passed"
+    },
+    {
+      "cmd": ".\\ci.cmd route-check",
+      "exit": 0,
+      "status": "passed"
+    },
+    {
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0,
+      "status": "passed"
+    }
+  ],
+  "self_check": "pre-existing failure, not claimed passed",
+  "supertest": "not-run: planning only",
+  "staged_diff_exception": "Inherited blank EOF lines in preserved original roadmap snapshot only."
+}

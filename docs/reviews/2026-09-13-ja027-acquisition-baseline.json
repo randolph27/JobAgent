@@ -1,0 +1,55 @@
+{
+  "schema": "jobagent/acquisition-planning-baseline/v1",
+  "observed_at": "2026-09-13T10:15:36+02:00",
+  "mode": "local-read-only-no-live-verification",
+  "counts": {
+    "companies": 487,
+    "job_sources": 439,
+    "discovery_inventory": 2312,
+    "discovered_urls": 1401
+  },
+  "queue_total": 1831,
+  "queue_groups": [
+    {
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "count": 1131
+    },
+    {
+      "status": "MANUAL_REVIEW_REQUIRED",
+      "next_action": "MANUAL_DECISION",
+      "count": 1
+    },
+    {
+      "status": "RETRY_EXHAUSTED",
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "count": 1
+    },
+    {
+      "status": "RETRY_SCHEDULED",
+      "next_action": "DISCOVER_OFFICIAL_WEBSITE",
+      "count": 14
+    },
+    {
+      "status": "RETRY_SCHEDULED",
+      "next_action": "VERIFY_OFFICIAL_SITE",
+      "count": 9
+    },
+    {
+      "status": "VERIFIED",
+      "next_action": "ALREADY_VERIFIED_IN_STORE",
+      "count": 675
+    }
+  ],
+  "input_sha256": {
+    "data/jobagent/store.json": "0898e574a53236c964a9e3d17cb5c9ec1a6d21228b613108b2fd8410f795b848",
+    "data/jobagent/company-candidate-verification.queue.json": "87a03b7f53840d578a1b9bf8cda5324028c69f4065c9c2dfb456ae3e3597830e",
+    "data/jobagent/company-discovery.hints.json": "e41fdb655bdedaf6351c84b2f509c9bfb2fd5f70c13b5c74c1cc310bc7fdaf6d",
+    "data/jobagent/company-discovery.sources.json": "9ab24d3da00d541b6c1aaa419a918944607dcafac7067a1cbe159c68aa3ffc15"
+  },
+  "limits": [
+    "Queue statuses are persisted, not recomputed eligibility.",
+    "JobSource count is not the number of currently valid unique career employers.",
+    "No speedup or ETA measured."
+  ]
+}

@@ -1,7 +1,3 @@
-# Handoff latest
-
-Active: `TD-0041`; Status: `in-progress`; Branch: `master`.
-
 # Planungsabschluss: automatische Firmenbasis und allgemeine Suche
 
 Stand: 2026-09-13T14:27:37+02:00
