@@ -97,13 +97,20 @@ function Get-JobAgentDailyRunCandidateCompanies {
         [Parameter(Mandatory)][object]$Document,
         [Parameter()][datetime]$Now = [datetime]::UtcNow,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
-        [Parameter()][string[]]$CompanyIds = @()
+        [Parameter()][string[]]$CompanyIds = @(),
+        [Parameter()][string[]]$AlwaysIncludeCompanyIds = @()
     )
 
     $allowedIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($companyId in @($CompanyIds)) {
         if (-not [string]::IsNullOrWhiteSpace($companyId)) {
             [void]$allowedIds.Add($companyId)
+        }
+    }
+    $forcedIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($companyId in @($AlwaysIncludeCompanyIds)) {
+        if (-not [string]::IsNullOrWhiteSpace($companyId)) {
+            [void]$forcedIds.Add($companyId)
         }
     }
 
@@ -116,7 +123,7 @@ function Get-JobAgentDailyRunCandidateCompanies {
             if (@(Get-JobAgentDailyRunSources -Document $Document -CompanyId ([string]$_.company_id)).Count -eq 0) {
                 return $false
             }
-            if ($allowedIds.Count -gt 0) {
+            if ($allowedIds.Count -gt 0 -or $forcedIds.Contains([string]$_.company_id)) {
                 return $true
             }
             if ($_.PSObject.Properties.Name -notcontains 'next_scan_at' -or [string]::IsNullOrWhiteSpace([string]$_.next_scan_at)) {
@@ -139,13 +146,20 @@ function New-JobAgentDailyRunSelection {
         [Parameter(Mandatory)][object]$Document,
         [Parameter()][datetime]$Now = [datetime]::UtcNow,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
-        [Parameter()][string[]]$CompanyIds = @()
+        [Parameter()][string[]]$CompanyIds = @(),
+        [Parameter()][string[]]$AlwaysIncludeCompanyIds = @()
     )
 
     $allowedIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($companyId in @($CompanyIds)) {
         if (-not [string]::IsNullOrWhiteSpace($companyId)) {
             [void]$allowedIds.Add($companyId)
+        }
+    }
+    $forcedIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($companyId in @($AlwaysIncludeCompanyIds)) {
+        if (-not [string]::IsNullOrWhiteSpace($companyId)) {
+            [void]$forcedIds.Add($companyId)
         }
     }
 
@@ -163,7 +177,7 @@ function New-JobAgentDailyRunSelection {
             $excluded.Add([pscustomobject]@{ company_id = $companyId; reason = 'no_official_source' })
             continue
         }
-        if ($allowedIds.Count -gt 0) {
+        if ($allowedIds.Count -gt 0 -or $forcedIds.Contains($companyId)) {
             $eligible.Add($company)
             continue
         }
@@ -212,8 +226,9 @@ function New-JobAgentDailyRunSelection {
             companies_selected = $selected.Count
             companies_skipped = @($skipped.ToArray()).Count
             limit = $MaxCompanies
-            selection_reason = if ($allowedIds.Count -gt 0) { 'explicit_company_ids' } else { 'due_by_next_scan_at_then_priority' }
+            selection_reason = if ($allowedIds.Count -gt 0) { 'explicit_company_ids' } elseif ($forcedIds.Count -gt 0) { 'due_by_next_scan_at_then_acquisition' } else { 'due_by_next_scan_at_then_priority' }
             explicit_company_ids = $allowedIds.Count -gt 0
+            always_include_company_ids = @($AlwaysIncludeCompanyIds)
             skipped = @($skipped.ToArray() | Sort-Object reason, company_id | Select-Object -First 25)
         }
     }
@@ -508,6 +523,7 @@ function Invoke-JobAgentDailyRun {
         [Parameter()][ValidateRange(1, 600)][int]$TimeoutSeconds = 30,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxResultsPerSource = 100,
         [Parameter()][string[]]$CompanyIds = @(),
+        [Parameter()][string[]]$AlwaysIncludeCompanyIds = @(),
         [Parameter()][datetime]$StartedAt = [datetime]::UtcNow
     )
 
@@ -519,7 +535,7 @@ function Invoke-JobAgentDailyRun {
     $lock = Enter-JobAgentStoreLock -ProjectRoot $projectRootFull -DataRoot $DataRoot
     try {
         $document = Read-JobAgentStore -ProjectRoot $projectRootFull -DataRoot $DataRoot
-        $selection = New-JobAgentDailyRunSelection -Document $document -Now $StartedAt -MaxCompanies $MaxCompanies -CompanyIds $CompanyIds
+        $selection = New-JobAgentDailyRunSelection -Document $document -Now $StartedAt -MaxCompanies $MaxCompanies -CompanyIds $CompanyIds -AlwaysIncludeCompanyIds $AlwaysIncludeCompanyIds
         $companies = @($selection.companies)
         $adapterResults = New-Object System.Collections.Generic.List[object]
 

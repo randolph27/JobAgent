@@ -1,222 +1,158 @@
 {
+  "ts": "2026-09-13T14:58:55+02:00",
   "workspace_root": ".",
-  "git": {
-    "behind": 0,
-    "has_repo": true,
-    "remote": "origin",
-    "tracked_changes": [
-      "Roadmap.md",
-      "Roadmap_index.md",
-      "docs/handoffs/2026-09-13-ja027-acquisition-plan.md",
-      "docs/reviews/2026-09-13-ja027-acquisition-baseline.json",
-      "docs/reviews/2026-09-13-ja027-plan-validation.json",
-      "docs/reviews/2026-09-13-ja027-roadmap-before.md",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "todo.checkpoint.json",
-      "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "branch": "master",
-    "upstream": "origin/master",
-    "head": "ce2c72ea3219",
-    "ahead": 0,
-    "detached": false,
-    "worktree": "dirty"
-  },
-  "status": "in-progress",
-  "verified": [
-    {
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1",
-      "exit": 0,
-      "status": "passed"
-    },
-    {
-      "cmd": ".\\ci.cmd route-check",
-      "exit": 0,
-      "status": "passed"
-    },
-    {
-      "cmd": ".\\ci.cmd stp",
-      "exit": 0,
-      "status": "passed"
-    },
-    {
-      "cmd": "roadmap structure, screenshot refs, data hashes and state checks",
-      "exit": 0,
-      "status": "passed",
-      "ref": "docs/reviews/2026-09-13-ja027-plan-validation.json"
-    }
-  ],
-  "next_steps": [
-    "JA-027: vorhandene Retention pruefen; Neufirmenakquise mit Website/Karrierequelle in regulaeren Daily-Start integrieren und Firmen im WebIF anzeigen. Keine manuellen Firmenmengenwellen."
-  ],
-  "active_id": "TD-0041",
-  "route_ok": true,
-  "agent_id": "UTTER-20260817-39f7",
-  "toolchain": {
-    "ts": "2026-08-17T13:53:15.642+02:00",
-    "gradle": {
-      "cmd": "gradle",
-      "mode": "path",
-      "root": "D:\\_Scripte\\JobAgent"
-    }
-  },
-  "route": {
-    "route_ok": true,
-    "violations": [],
-    "git": {
-      "diff_log": "logs\\terminal\\route-check-20260913-142600.log",
-      "has_repo": true
-    },
-    "agent_id": "UTTER-20260817-39f7",
-    "ts": "2026-09-13T14:26:03.866+02:00",
-    "changed_files": [
-      "docs/reviews/2026-09-13-ja027-plan-validation.json",
-      "Roadmap_index.md",
-      "Roadmap.md",
-      "todo.state.json",
-      "todo.current.md"
-    ],
-    "changed_count": 5,
-    "mode": "standard",
-    "policy": {
-      "no_touch": [],
-      "forbid_path": [],
-      "forbid_regex": []
-    }
-  },
-  "refs": [
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.json",
-    "file:logs/verify/verify.digest.json",
-    "docs/handoffs/2026-09-13-ja027-acquisition-plan.md",
-    "docs/reviews/2026-09-13-ja027-plan-validation.json"
-  ],
-  "next": "JA-027: vorhandene Retention pruefen; Neufirmenakquise mit Website/Karrierequelle in regulaeren Daily-Start integrieren und Firmen im WebIF anzeigen. Keine manuellen Firmenmengenwellen.",
-  "route_violations": [],
   "project": "JobAgent",
+  "active_id": "TD-0041",
+  "status": "in-progress",
+  "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern",
+  "summary": "Daily-Run-Akquise integriert: vorhandene Hints werden vor dem Scan verifiziert, neue Karrierearbeitgeber im selben Lauf gescannt und im HTML-Bericht angezeigt.",
   "changed": [
+    "tools/Invoke-JobAgentDailyRun.ps1",
+    "src/JobAgent.DailyRun.psm1",
+    "src/JobAgent.Report.psm1",
+    "tests/Test-JobAgentDailyRun.ps1",
+    "manual/PROGRAM.md",
     "Roadmap.md",
-    "Roadmap_index.md",
-    "docs/handoffs/2026-09-13-ja027-acquisition-plan.md",
-    "docs/reviews/2026-09-13-ja027-acquisition-baseline.json",
-    "docs/reviews/2026-09-13-ja027-plan-validation.json",
-    "docs/reviews/2026-09-13-ja027-roadmap-before.md",
-    "handoff.latest.json",
-    "handoff.latest.md",
-    "todo.checkpoint.json",
-    "todo.current.md",
+    "todo.state.json",
     "todo.events.jsonl",
+    "todo.checkpoint.json",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "todo.state.json"
+    "handoff.latest.md",
+    "handoff.latest.json",
+    "docs/handoffs/2026-09-13-ja027-regular-start-acquisition-handoff.md",
+    "logs/jobagent/JA-027-regular-start-acquisition.json"
   ],
-  "summary": "Nur Planung: automatische Firmenbasis beim Jobstart und berufsneutrale Filter",
-  "capsule": {
-    "env_inventory_missing": false,
-    "manual_missing": false,
-    "changed": [
-      "Roadmap.md",
-      "Roadmap_index.md",
-      "docs/handoffs/2026-09-13-ja027-acquisition-plan.md",
-      "docs/reviews/2026-09-13-ja027-acquisition-baseline.json",
-      "docs/reviews/2026-09-13-ja027-plan-validation.json",
-      "docs/reviews/2026-09-13-ja027-roadmap-before.md",
-      "handoff.latest.json",
-      "handoff.latest.md",
-      "todo.checkpoint.json",
-      "todo.current.md",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json"
-    ],
-    "env_inventory_path": null,
-    "git": {
-      "behind": 0,
-      "has_repo": true,
-      "remote": "origin",
-      "tracked_changes": [
-        "Roadmap.md",
-        "Roadmap_index.md",
-        "docs/handoffs/2026-09-13-ja027-acquisition-plan.md",
-        "docs/reviews/2026-09-13-ja027-acquisition-baseline.json",
-        "docs/reviews/2026-09-13-ja027-plan-validation.json",
-        "docs/reviews/2026-09-13-ja027-roadmap-before.md",
-        "handoff.latest.json",
-        "handoff.latest.md",
-        "todo.checkpoint.json",
-        "todo.current.md",
-        "todo.events.jsonl",
-        "todo.history.digest.json",
-        "todo.master.index.json",
-        "todo.state.json"
-      ],
-      "branch": "master",
-      "upstream": "origin/master",
-      "head": "ce2c72ea3219",
-      "ahead": 0,
-      "detached": false,
-      "worktree": "dirty"
+  "verified": [
+    {
+      "status": "passed",
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDailyRun.ps1"
     },
-    "status": "in-progress",
-    "ts": "2026-09-13T14:26:12.494+02:00",
-    "route_violations": [],
-    "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.",
+    {
+      "status": "passed",
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
+    },
+    {
+      "status": "passed",
+      "exit": 0,
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1"
+    },
+    {
+      "status": "passed",
+      "exit": 0,
+      "cmd": ".\\ci.cmd route-check"
+    },
+    {
+      "status": "passed",
+      "exit": 0,
+      "cmd": ".\\ci.cmd stp"
+    },
+    {
+      "status": "failed",
+      "exit": 1,
+      "cmd": "curl.exe -s http://localhost:9000/api/system/status"
+    },
+    {
+      "status": "failed",
+      "exit": 1,
+      "cmd": ".\\ci.cmd sonar-start",
+      "reason": "docker_engine_unavailable; wsl_fallback=wsl_missing"
+    }
+  ],
+  "route_ok": true,
+  "route_violations": [],
+  "git": {
+    "head": "62fdeda5f94f",
+    "worktree": "dirty",
+    "branch": "master"
+  },
+  "next": "JA-027.2 Quellen-Nachfuellzyklus/Source-Inventory fuer verwertbare Website-/Karrierehinweise vervollstaendigen.",
+  "refs": [
+    "todo.current.md",
+    "todo.state.json",
+    "todo.events.jsonl",
+    "handoff.latest.md",
+    "docs/handoffs/2026-09-13-ja027-regular-start-acquisition-handoff.md",
+    "logs/jobagent/JA-027-regular-start-acquisition.json"
+  ],
+  "capsule": {
+    "ts": "2026-09-13T14:58:55+02:00",
+    "agent_id": "codex",
     "workspace_root": ".",
     "project": "JobAgent",
+    "active_id": "TD-0041",
+    "status": "in-progress",
+    "goal": "JA-027 Daily-Run-Akquise integriert",
+    "changed": [
+      "tools/Invoke-JobAgentDailyRun.ps1",
+      "src/JobAgent.DailyRun.psm1",
+      "src/JobAgent.Report.psm1",
+      "tests/Test-JobAgentDailyRun.ps1",
+      "manual/PROGRAM.md",
+      "Roadmap.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "todo.checkpoint.json",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "handoff.latest.md",
+      "handoff.latest.json",
+      "docs/handoffs/2026-09-13-ja027-regular-start-acquisition-handoff.md",
+      "logs/jobagent/JA-027-regular-start-acquisition.json"
+    ],
+    "verified": [
+      {
+        "status": "passed",
+        "exit": 0,
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDailyRun.ps1"
+      },
+      {
+        "status": "passed",
+        "exit": 0,
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
+      },
+      {
+        "status": "passed",
+        "exit": 0,
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1"
+      },
+      {
+        "status": "passed",
+        "exit": 0,
+        "cmd": ".\\ci.cmd route-check"
+      },
+      {
+        "status": "passed",
+        "exit": 0,
+        "cmd": ".\\ci.cmd stp"
+      },
+      {
+        "status": "failed",
+        "exit": 1,
+        "cmd": "curl.exe -s http://localhost:9000/api/system/status"
+      },
+      {
+        "status": "failed",
+        "exit": 1,
+        "cmd": ".\\ci.cmd sonar-start",
+        "reason": "docker_engine_unavailable; wsl_fallback=wsl_missing"
+      }
+    ],
     "route_ok": true,
+    "route_violations": [],
+    "git": {
+      "head": "62fdeda5f94f",
+      "worktree": "dirty",
+      "branch": "master"
+    },
+    "next": "JA-027.2 Quellen-Nachfuellzyklus/Source-Inventory fuer verwertbare Website-/Karrierehinweise vervollstaendigen.",
     "refs": [
       "todo.current.md",
       "todo.state.json",
       "todo.events.jsonl",
       "handoff.latest.json"
-    ],
-    "verified": [
-      {
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1",
-        "exit": 0,
-        "status": "passed"
-      },
-      {
-        "cmd": ".\\ci.cmd route-check",
-        "exit": 0,
-        "status": "passed"
-      },
-      {
-        "cmd": ".\\ci.cmd stp",
-        "exit": 0,
-        "status": "passed"
-      },
-      {
-        "cmd": "roadmap structure, screenshot refs, data hashes and state checks",
-        "exit": 0,
-        "status": "passed",
-        "ref": "docs/reviews/2026-09-13-ja027-plan-validation.json"
-      }
-    ],
-    "next": "JA-027: vorhandene Retention pruefen; Neufirmenakquise mit Website/Karrierequelle in regulaeren Daily-Start integrieren und Firmen im WebIF anzeigen. Keine manuellen Firmenmengenwellen.",
-    "env_inventory_used": false,
-    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-    "agent_id": "UTTER-20260817-39f7",
-    "active_id": "TD-0041"
-  },
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-  "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.",
-  "ts": "2026-09-13T14:27:37+02:00",
-  "verify_digest": {
-    "ts": "2026-09-06T07:52:07.727+02:00",
-    "status": "not-supported",
-    "reason": "PowerShell- und statische HTML-Dateien werden im Projekt derzeit nicht mit einem konfigurierten SonarScanner analysiert; SonarQube-Serverstatus ist kein Analysebeleg.",
-    "exit": null,
-    "cmd": ".\\ci.cmd sonar",
-    "secret_sanitized": true,
-    "analysis_started": false
+    ]
   }
 }

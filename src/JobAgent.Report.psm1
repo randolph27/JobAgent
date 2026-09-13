@@ -127,6 +127,7 @@ function ConvertTo-JobAgentReportDisplayLabel {
             switch ($key) {
                 'DUE_BY_NEXT_SCAN_AT_THEN_PRIORITY' { return 'Faellig nach next_scan_at, danach Prioritaet' }
                 'EXPLICIT_COMPANY_IDS' { return 'Explizite Firmenauswahl' }
+                'DUE_BY_NEXT_SCAN_AT_THEN_ACQUISITION' { return 'Faellig nach next_scan_at plus neue Akquise' }
                 'manual_review_discovery_hint' { return 'Discovery-Hinweis braucht manuelle Pruefung' }
                 'missing_career_url' { return 'Karriere-URL fehlt' }
                 'latest_scan_failed' { return 'Letzter Scan ist fehlgeschlagen' }

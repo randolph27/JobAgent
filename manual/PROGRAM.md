@@ -1,10 +1,10 @@
 # JobAgent Programmvertrag
 
-Stand: 2026-08-17
+Stand: 2026-09-13
 
 ## Zweck
 
-Der JobAgent ist ein lokaler Recherche- und Zustandsagent fuer IT-Fuehrungspositionen im Raum Muenchen und Freising. Er soll offizielle Unternehmens- und Recruitingquellen wiederholt pruefen, passende Stellen nachvollziehbar bewerten und taegliche Aenderungen ohne Dubletten ausgeben.
+Der JobAgent ist ein lokaler Recherche- und Zustandsagent fuer berufsneutrale Firmen- und Stellenerfassung im Raum Muenchen und Freising. Er soll neue Arbeitgeber ueber zulaessige Sekundaerhinweise entdecken, offizielle Unternehmens- und Recruitingquellen wiederholt pruefen, Stellen lokal filterbar machen und taegliche Aenderungen ohne Dubletten ausgeben.
 
 Der Agent darf keine Bewerbungen ausloesen, keine Kontakte anschreiben, keine personenbezogenen Bewerbungsdaten speichern und keine nicht belegten Stellen, Unternehmen, URLs, Geodaten, Gehaelter oder Verifikationsaussagen erzeugen.
 
@@ -12,7 +12,7 @@ Der Agent darf keine Bewerbungen ausloesen, keine Kontakte anschreiben, keine pe
 
 ### Muss
 
-- Gesucht werden IT-Fuehrungspositionen mit substanzieller Verantwortlichkeit fuer IT-Organisation, IT-Strategie, IT-Betrieb, IT-Transformation, IT-Security, IT-Infrastruktur, Enterprise Applications, Data/AI oder vergleichbare IT-Gesamtbereiche.
+- Die Firmen- und Stellenerfassung ist berufsneutral; konkrete Rollen, Berufe oder Profile werden danach ueber lokale Filter gesucht.
 - Der Standortbezug muss Muenchen, ein Umkreis von 20 km um Muenchen, Freising oder ein belastbar passendes Remote-/Hybridmodell mit Bezug zum Zielgebiet sein.
 - Vollstaendigkeit ist ein langfristiges Ziel, darf aber nie behauptet werden, solange sie nicht belegt ist.
 - Jede ausgegebene Stelle muss eine offizielle URL oder eine vom Unternehmen offiziell angebundene Recruiting-/ATS-URL besitzen.
@@ -20,7 +20,7 @@ Der Agent darf keine Bewerbungen ausloesen, keine Kontakte anschreiben, keine pe
 
 ### Soll
 
-- Rollen mit Titeln wie `Head of IT`, `Director IT`, `IT Leiter`, `CIO`, `VP IT`, `Leitung Digitalisierung`, `IT Operations Lead`, `IT Security Lead` oder vergleichbaren Varianten werden bevorzugt geprueft.
+- Rollen mit Titeln wie `Head of IT`, `Director IT`, `IT Leiter`, `CIO`, `VP IT`, `Leitung Digitalisierung`, `IT Operations Lead`, `IT Security Lead` oder vergleichbaren Varianten sind nur ein optionales Filterprofil, kein versteckter Erfassungsdefault.
 - Stellen werden nach A/B/C priorisiert:
   - `A`: klare IT-Fuehrungsrolle, belastbarer Zielgebietsbezug, hohe fachliche Passung.
   - `B`: wahrscheinlich passend, aber einzelne Felder sind unklar oder nur teilweise passend.
@@ -29,7 +29,7 @@ Der Agent darf keine Bewerbungen ausloesen, keine Kontakte anschreiben, keine pe
 
 ### Darf Nicht
 
-- Reine Entwickler-, Administrator-, Support-, Produkt-, Projektleitungs- oder Spezialistenstellen duerfen nicht als passende IT-Fuehrungsposition ausgegeben werden, wenn keine wesentliche Fuehrungs- oder Gesamtverantwortung belegt ist.
+- Berufs- oder Profilfilter duerfen die gespeicherte Firmen- und Stellenbasis nicht verkleinern oder loeschen.
 - Jobboersen, Aggregatoren oder soziale Netzwerke duerfen nicht als Primaerbeleg gelten.
 - Eine bekannte unveraenderte Stelle darf in spaeteren Laeufen nicht erneut als `NEW` ausgegeben werden.
 
@@ -94,15 +94,16 @@ Ein Tageslauf muss deterministisch und wiederholbar sein:
 
 1. Zustand laden und Schema-Version validieren.
 2. Lauf-ID erzeugen und Lock pruefen.
-3. Firmen nach Prioritaet auswaehlen.
-4. Quellenadapter je Firma mit Timeout und Fehlerisolation ausfuehren.
-5. Nur offizielle oder offiziell angebundene URLs akzeptieren.
-6. Rohstellen normalisieren und kanonisieren.
-7. Stellen klassifizieren und A/B/C priorisieren.
-8. Deduplikation gegen vorhandene Historie ausfuehren.
-9. Statusmaschine anwenden und ChangeEvents schreiben.
-10. Bericht und maschinenlesbares Ergebnisartefakt erzeugen.
-11. Lock freigeben und ScanRun finalisieren.
+3. Bei vorhandenem Hint-Store eine budgetierte Firmenakquise starten und offizielle Website-/Karriere-/ATS-Belege verifizieren.
+4. Firmen nach Prioritaet auswaehlen; neu verifizierte Karrierearbeitgeber werden im selben Lauf mitgescannt.
+5. Quellenadapter je Firma mit Timeout und Fehlerisolation ausfuehren.
+6. Nur offizielle oder offiziell angebundene URLs akzeptieren.
+7. Rohstellen normalisieren und kanonisieren.
+8. Stellen klassifizieren und A/B/C priorisieren, ohne die berufsneutrale Rohbasis zu verwerfen.
+9. Deduplikation gegen vorhandene Historie ausfuehren.
+10. Statusmaschine anwenden und ChangeEvents schreiben.
+11. Bericht und maschinenlesbares Ergebnisartefakt erzeugen.
+12. Lock freigeben und ScanRun finalisieren.
 
 Ein Fehler bei einer einzelnen Firma darf den Gesamtlauf nicht abbrechen, sofern Persistenz und Abschlussbericht noch konsistent erzeugt werden koennen.
 

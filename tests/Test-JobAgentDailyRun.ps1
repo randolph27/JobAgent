@@ -243,6 +243,75 @@ try {
     Assert-True -Condition ($cliLiveResult.status -eq 'SKIPPED') -Message 'Daily-Run-CLI-Live-Modus mit leerem Store liefert keinen kontrollierten SKIPPED-Status.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliLiveResult.report_path)) -Message 'Daily-Run-CLI-Live-Modus schreibt kein Reportartefakt.'
 
+    $acquisitionProjectRoot = New-TestProjectRoot
+    New-Item -ItemType Directory -Path (Join-Path $acquisitionProjectRoot 'data\jobagent') -Force | Out-Null
+    $emptyAcquisitionDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
+    Write-JobAgentStore -ProjectRoot $acquisitionProjectRoot -Document $emptyAcquisitionDocument | Out-Null
+    $acquisitionObservedAt = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-hints/v1'
+        generated_at = $acquisitionObservedAt
+        hints_total = 1
+        unverified_hints = 1
+        hints = @(
+            [pscustomobject]@{
+                hint_id = 'hint:daily-acquisition-example'
+                employer_name = 'Example AG'
+                normalized_name = 'example ag'
+                location = 'Muenchen'
+                target_area = 'MUNICH'
+                source_id = 'source-registry:daily-acquisition-fixture'
+                observed_url = 'https://jobs.example.invalid/search'
+                observed_at = $acquisitionObservedAt
+                verification_status = 'UNVERIFIED'
+                candidate_status = 'DISCOVERY_HINT'
+                known_company_id = 'company:example_ag'
+                known_company_domain = 'example.invalid'
+                confidence_score = 90
+                is_staffing_agency = $false
+                official_verification_required = $true
+                next_action = 'verify_official_company_website_or_career_url'
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
+    [pscustomobject]@{
+        responses = @(
+            [pscustomobject]@{ url = 'https://example.invalid/'; ok = $true; status_code = 200; final_url = 'https://example.invalid/'; content = '<html><a href="/karriere">Karriere</a></html>' },
+            [pscustomobject]@{ url = 'https://example.invalid/sitemap.xml'; ok = $true; status_code = 200; final_url = 'https://example.invalid/sitemap.xml'; content = '<urlset></urlset>' },
+            [pscustomobject]@{ url = 'https://example.invalid/sitemap_index.xml'; ok = $true; status_code = 200; final_url = 'https://example.invalid/sitemap_index.xml'; content = '<sitemapindex></sitemapindex>' },
+            [pscustomobject]@{ url = 'https://example.invalid/karriere'; ok = $true; status_code = 200; final_url = 'https://example.invalid/karriere'; content = '<main>Offene Stellen bei Example</main>' }
+        )
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'acquisition-fixture-map.json') -Encoding UTF8
+    [pscustomobject]@{
+        'company:example_ag' = [pscustomobject]@{
+            status = 'SUCCESS'
+            error_class = 'NONE'
+            retry_recommendation = 'NONE'
+            http_status = 200
+            raw_jobs = @([pscustomobject]@{
+                    title = 'Head of IT'
+                    detail_url = 'https://example.invalid/karriere/head-it-acquired'
+                    external_job_id = 'acquired-100'
+                    ats_job_id = 'UNKNOWN'
+                    location_label = 'Muenchen'
+                    summary = 'IT-Gesamtverantwortung nach automatischer Akquise.'
+                    extraction_confidence = 95
+                })
+        }
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -Encoding UTF8
+
+    $acquisitionOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $acquisitionProjectRoot -FixturePath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -AcquisitionFixtureMapPath 'acquisition-fixture-map.json' -AcquisitionCandidateBudget 1 -MaxCompanies 1 -FetchClient curl -WslDistribution FixtureDistro 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI mit automatischer Akquise ist fehlgeschlagen: " + ($acquisitionOutput -join "`n"))
+    $acquisitionResult = ($acquisitionOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $acquisitionStore = Read-JobAgentStore -ProjectRoot $acquisitionProjectRoot
+    Assert-True -Condition ($acquisitionResult.acquisition.status -eq 'COMPLETED') -Message 'Daily-Run-CLI fuehrt Akquisephase nicht automatisch aus.'
+    Assert-True -Condition ($acquisitionResult.acquisition.new_official_career_companies -eq 1) -Message ('Daily-Run-CLI zaehlt neuen offiziellen Karrierearbeitgeber nicht: ' + ($acquisitionResult.acquisition | ConvertTo-Json -Depth 20 -Compress))
+    Assert-True -Condition (@($acquisitionStore.companies | Where-Object { $_.company_id -eq 'company:example_ag' -and $_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count -eq 1) -Message 'Automatische Akquise schreibt verifizierte Firma nicht in den Store.'
+    Assert-True -Condition (@($acquisitionStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' -and $_.is_official -eq $true }).Count -eq 1) -Message 'Automatische Akquise schreibt offizielle Karrierequelle nicht in den Store.'
+    Assert-True -Condition (@($acquisitionStore.jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Daily-Run scannt automatisch akquirierte Firma nicht im selben Lauf.'
+    $acquisitionHtml = Get-Content -LiteralPath ([string]$acquisitionResult.html_report_path) -Raw
+    Assert-True -Condition ($acquisitionHtml.Contains('<section><h2>Neue Unternehmen</h2>') -and $acquisitionHtml.Contains('<td>Example AG</td>') -and $acquisitionHtml.Contains('href="https://example.invalid/karriere" target="_blank" rel="noopener noreferrer">Karriere</a>')) -Message 'WebIF zeigt automatisch akquirierte Firma nicht mit Karrierequelle an.'
+
     $multiSourceProjectRoot = New-TestProjectRoot
     New-TestStore -ProjectRoot $multiSourceProjectRoot
     Add-TestSource -ProjectRoot $multiSourceProjectRoot -CompanyId 'company:alpha_ag' -SourceId 'source:alpha_ag_ats' -Url 'https://jobs.alpha.example.invalid/search'
@@ -474,9 +543,10 @@ try {
             'daily_run_reports_secure_job_provider_and_source_links',
             'daily_run_classifies_raw_jobs',
             'daily_run_second_pass_deduplicates_to_active',
-        'daily_run_cli_fixture_mode',
-        'daily_run_cli_live_mode_without_fixture',
-        'daily_run_multi_source_partial_removal',
+            'daily_run_cli_fixture_mode',
+            'daily_run_cli_live_mode_without_fixture',
+            'daily_run_cli_acquires_and_scans_new_company',
+            'daily_run_multi_source_partial_removal',
             'daily_run_prioritizes_refresh_due_companies',
             'daily_run_persists_selection_summary',
             'daily_run_report_renders_selection_metrics',
@@ -500,6 +570,9 @@ finally {
     }
     if ($null -ne (Get-Variable -Name cliLiveProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $cliLiveProjectRoot)) {
         Remove-Item -LiteralPath $cliLiveProjectRoot -Recurse -Force
+    }
+    if ($null -ne (Get-Variable -Name acquisitionProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $acquisitionProjectRoot)) {
+        Remove-Item -LiteralPath $acquisitionProjectRoot -Recurse -Force
     }
     if (Test-Path -LiteralPath $projectRoot) {
         Remove-Item -LiteralPath $projectRoot -Recurse -Force

@@ -1,0 +1,35 @@
+{
+  "schema_version": "jobagent/ja027-regular-start-acquisition/v1",
+  "generated_at": "2026-09-13T14:54:11+02:00",
+  "git_head": "62fdeda5f94f",
+  "scope": [
+    "tools/Invoke-JobAgentDailyRun.ps1",
+    "src/JobAgent.DailyRun.psm1",
+    "src/JobAgent.Report.psm1",
+    "tests/Test-JobAgentDailyRun.ps1"
+  ],
+  "result": "regular_daily_run_cli_runs_budgeted_acquisition_before_scan_and_forces_new_official_career_companies_into_same_scan_selection",
+  "acceptance": {
+    "skip_contract": "SKIPPED when disabled, zero budget, or hint store missing",
+    "same_run_scan": "new official career company ids from acquisition are always included in the scan selection",
+    "webif": "daily HTML report renders newly acquired company with website and career link",
+    "acquisition_default": "enabled when hint store exists and AcquisitionCandidateBudget greater than zero"
+  },
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDailyRun.ps1",
+      "cases": 15,
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "cases": 29,
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1",
+      "cases": 10,
+      "exit": 0
+    }
+  ]
+}
