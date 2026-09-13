@@ -159,6 +159,11 @@ $searchCategoryHtml = '<html><body><a href="https://jobs.siemens-energy.example/
 $searchCategoryCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $searchCategoryHtml -BaseUrl 'https://jobs.siemens-energy.example/en_US/jobs' -Company $company -MaxResults 10 -SearchTerms @())
 Assert-True -Condition ($searchCategoryCandidates.Count -eq 0) -Message 'Live-Parser darf ATS-Kategorie-/Registrierungsseiten nicht als Stellen speichern.'
 
+$avatureListingHtml = '<html><body><a href="https://example.invalid/ja_JP/jobs/Jobs/CIO?folderRecordsPerPage=20">日本語</a><a href="https://example.invalid/en_US/jobs/SearchJobsGermany">Germany</a><a href="https://example.invalid/en_US/jobs/FolderDetail/IT-Product-Manager-SCM-Logistics/301949">IT Product Manager SCM &amp; Logistics</a></body></html>'
+$avatureListingCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $avatureListingHtml -BaseUrl 'https://example.invalid/en_US/jobs/Jobs/CIO?folderRecordsPerPage=20' -Company $company -MaxResults 10 -SearchTerms @('CIO'))
+Assert-True -Condition ($avatureListingCandidates.Count -eq 1) -Message 'Avature-Listing-/Sprachlinks duerfen nicht als Stellen gelten, FolderDetail-Treffer muessen erhalten bleiben.'
+Assert-True -Condition ($avatureListingCandidates[0].detail_url -eq 'https://example.invalid/en_US/jobs/FolderDetail/IT-Product-Manager-SCM-Logistics/301949') -Message 'Avature-FolderDetail-Treffer wird falsch gefiltert.'
+
 $applicationHtml = '<html><body><a href="https://example.invalid/Vacancies/1345/Description/1">Broadcast Engineer</a><a href="https://example.invalid/Vacancies/1345/Application/CheckLogin/1">Jetzt bewerben</a></body></html>'
 $applicationCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $applicationHtml -BaseUrl 'https://example.invalid/Vacancies' -Company $company -MaxResults 10 -SearchTerms @())
 Assert-True -Condition ($applicationCandidates.Count -eq 1 -and $applicationCandidates[0].detail_url -eq 'https://example.invalid/Vacancies/1345/Description/1') -Message 'Live-Parser muss Bewerbungs-/CheckLogin-Seiten ausschliessen, aber Detailseiten behalten.'
@@ -819,6 +824,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'newsroom_story_candidate_rejection',
         'content_page_candidate_rejection',
         'ats_category_page_candidate_rejection',
+        'avature_listing_navigation_rejection',
         'application_page_candidate_rejection',
         'aggregator_rejection',
         'jsonld_jobposting_extraction',

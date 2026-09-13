@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-12T21:59:30+02:00
+Stand: 2026-09-13T02:59:26.027+02:00
 
 ## Zustand
 
@@ -8,28 +8,34 @@ Stand: 2026-09-12T21:59:30+02:00
 - Status: `in-progress`
 - Ziel: JA-041 IT-Leiter/Lead/Manager ueber vollstaendige Karriere- und ATS-Ergebnislisten finden.
 - Branch: `master`
-- HEAD: `11a4d4228b64`
+- HEAD vor Commit: `334957f59a0f`
 - Upstream: `origin/master`
-- Ahead/Behind: `0/0`
-- Worktree: `dirty`
+- Ahead/Behind vor Commit: `0/0`
+- Worktree vor Commit: `dirty`
 - Route: `True`
 
-## Abgeschlossener Slice in diesem Arbeitsstand
+## Abgeschlossener Slice
 
-Siemens-Energy-/Avature-Hotspot:
+JA-041 Avature-Navigation/Seitenbudget:
 
-- Avature-Portale werden anhand der `avature.portal.*`-Metadaten erkannt und erzeugen offizielle Such-Follow-ups aus den konfigurierten Suchbegriffen.
-- `folderOffset`-Pagination wird erkannt; Pagination-Links werden nicht mehr als Jobdetails gespeichert.
-- Avature-Anker muessen zielrollennahe IT-/Digital-/Technology-Fuehrungstexte belegen, bevor sie als Jobkandidaten verarbeitet werden.
-- Siemens-Energy-Kontrolllauf `logs/jobagent/daily-run-20260912T195044560Z.json`: `PARTIAL`, 4 Raw-Jobs, 1 Snapshot, 0 Zielrollentreffer. Das fruehere `result_limit_reached` ist entfernt; offen bleibt belegte Avature-Pagination.
-- `cmd /c .\ci.cmd stp` lief erfolgreich; der automatisch gesetzte naechste Anker wurde anschliessend wieder auf JA-041 korrigiert.
+- Avature-Listing-, Sprach-, Kategorie- und Accountpfade werden nicht mehr als Jobs akzeptiert, nur weil sie unter `/jobs/...` liegen.
+- `FolderDetail`-Treffer bleiben zulaessig; Avature-Listing-Navigation ist durch einen eigenen Funktionstest abgedeckt.
+- Avature-Seiten verfolgen keine generischen Jobportal-Follow-ups mehr, wenn zielrollenbezogene Avature-Such-Follow-ups aktiv sind.
+- Abgearbeitete Pagination wird nicht mehr nur wegen sichtbarem Next-Link als offen markiert; offen bleibt nur eine noch nicht besuchte Folgeseite.
+- Live-/Pilot-Seitenbudget ist bis `MaxPagesPerSource 100` steuerbar.
+- Siemens-Energy-Kontrolllauf `logs/jobagent/daily-run-20260913T005454858Z.json`: `PARTIAL`, 1 Raw-Job, 1 Snapshot, 0 Zielrollentreffer; bewusst enges CIO-Budget, kein Abschlussgate.
+- Zwischenlaeufe mit groesserem Budget wurden wegen Laufzeit abgebrochen oder als explorative Fehl-/Teilversuche bereinigt; kein Abschlussgate daraus ableiten.
 
 ## Geaenderte Hauptdateien
 
 - `src/JobAgent.LiveScan.psm1`
 - `tests/Test-JobAgentLiveScan.ps1`
+- `tools/Invoke-JobAgentDailyRun.ps1`
+- `tools/Invoke-JobAgentLivePilot.ps1`
 - `data/jobagent/store.json`
 - `Roadmap.md`
+- `docs/handoffs/2026-09-13-ja041-avature-navigation-budget-handoff.md`
+- `html/jobagent/daily-run-20260913T005454858Z.html`
 - `handoff.latest.md`
 - `handoff.latest.json`
 - `todo.state.json`
@@ -37,26 +43,24 @@ Siemens-Energy-/Avature-Hotspot:
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `docs/handoffs/2026-09-12-ja041-avature-siemens-energy-handoff.md`
-- `html/jobagent/daily-run-20260912T194511065Z.html`
-- `html/jobagent/daily-run-20260912T195044560Z.html`
 
 ## Verifikation
 
 - `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
-- Siemens-Energy-Kontrolllauf `scanrun:20260912T195044560Z` -> `PARTIAL`, `result_limit_reached` entfernt, offen `pagination_detected`.
 - `cmd /c .\ci.cmd stp` -> Exit `0`
+- `cmd /c .\ci.cmd route-check` -> Exit `0`
 
 ## Roadmap-Rotation
 
-Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil Avature-Pagination bei Siemens Energy, BMW-Erreichbarkeit, Abschlussgate und breitere Abnahme noch ausstehen. Nach Nutzeranweisung ist ein nicht ausdruecklich angefragter Supertest kein Blocker.
-
-## Bekannter Zusatzblocker
-
-SonarQube war im vorherigen STP-Kontext lokal nicht erreichbar. Startversuch ueber `.\ci.cmd sonar-start` scheiterte mit `docker_engine_unavailable; wsl_fallback=wsl_missing`. Evidence: `logs\verify\sq-005-sonarqube-wsl-fallback.md`, Log: `logs\terminal\sonar-start-20260912-111035.log`.
+Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil Avature-Abschlussbudget/Quellenbegrenzung, BMW-Erreichbarkeit und breitere Abschlussstichprobe noch fehlen. Nach Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt und wurde nicht gestartet.
 
 ## Naechster Anker
 
-JA-041 fortsetzen: Avature-Pagination fuer Siemens Energy gezielt abschliessen oder als belegte Quellenbegrenzung mit reproduzierbarem Vertrag behandeln; danach BMW-Erreichbarkeit pruefen und die breitere Abschlussstichprobe erneut laufen lassen.
+JA-041 fortsetzen:
+
+1. Siemens Energy/Avature mit reproduzierbarem breitem Budget abschliessen oder einen belegten Quellenbegrenzungsvertrag dokumentieren.
+2. BMW-Erreichbarkeit pruefen und bei Bedarf Adapter-/Fetch-Hotspot isolieren.
+3. Breitere JA-041-Abschlussstichprobe erneut laufen lassen.
+4. Danach Roadmap/Todo/Handoff synchronisieren; Supertest nur bei ausdruecklicher Anforderung.

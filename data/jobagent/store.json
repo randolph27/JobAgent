@@ -223,7 +223,7 @@
       "ats": [],
       "scan_status": "PARTIAL",
       "scan_priority": 90,
-      "next_scan_at": "2026-09-13T19:50:44.560Z",
+      "next_scan_at": "2026-09-14T00:54:54.858Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -236,12 +236,12 @@
         "evidence_note": "Regionale offizielle Quelle nennt Siemens Energy; offizielle Jobdomain ist erreichbar."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-09-12T19:50:44.560Z",
-      "last_successful_scan_at": "2026-09-12T19:05:10.537Z",
+      "updated_at": "2026-09-13T00:54:54.858Z",
+      "last_successful_scan_at": "2026-09-13T00:49:55.058Z",
       "last_imported_at": "2026-09-09T06:48:43.046Z",
-      "last_verified_at": "2026-09-12T19:05:10.537Z",
-      "expires_at": "2026-09-13T19:50:44.560Z",
-      "next_refresh_at": "2026-09-13T19:50:44.560Z",
+      "last_verified_at": "2026-09-13T00:49:55.058Z",
+      "expires_at": "2026-09-14T00:54:54.858Z",
+      "next_refresh_at": "2026-09-14T00:54:54.858Z",
       "refresh_reason": "partial_scan_recheck",
       "staleness_status": "REFRESH_DUE"
     },
@@ -29121,10 +29121,10 @@
       },
       "work_model": "UNKNOWN",
       "employment_type": "UNKNOWN",
-      "status": "UPDATED",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:45:11.065Z",
-      "changed_at": "2026-09-12T19:45:11.065Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29163,10 +29163,10 @@
       "employment_type": "UNKNOWN",
       "description": "Login | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Login Are you already registered? Login: user and password Email * Password * Login Forgot your password? First time applicant If you haven't registered yet or your account has been deleted due to inactivity, please use this link to create a",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29203,10 +29203,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Germany Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Germany jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarct",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29243,10 +29243,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search United States Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search United States jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Angu",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29283,10 +29283,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Romania Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Romania jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarct",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29323,10 +29323,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search United Kingdom Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search United Kingdom jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola An",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29363,10 +29363,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Brazil Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Brazil jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctic",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29403,10 +29403,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Sweden Jobs | Siemens Energy Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Sweden jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica Antigua and Barbuda",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29443,10 +29443,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Mexico Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Mexico jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctic",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29483,10 +29483,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Denmark Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Denmark jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarct",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29523,10 +29523,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Spain Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Spain jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29563,10 +29563,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search China Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search China jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarctica",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29603,10 +29603,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Engineering Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Engineering Jobs Get job recommendations Be at the heart of what we do We make global innovation possible through various engineering sectors. By helping unlock incredible potential in technology, we create a safer c",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29644,10 +29644,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Project Management Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Project Management Jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra A",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29684,10 +29684,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Sales Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Sales Jobs Get job recommendations Let the world know we’re changing it We ensure that our forward-thinking ideas and innovations are recognized across the globe. The products and services we build will create a better fut",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29725,10 +29725,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Finance Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Finance Jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Anguilla Antarct",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29765,10 +29765,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Manufacturing Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Manufacturing Jobs Get job recommendations Improve how people engage with technology We help the world embrace the future of energy by transforming how materials and resources are manufactured. Our successful integ",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29806,10 +29806,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Field Service Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Field Service Jobs Get job recommendations Search for open positions Search for open positions Keywords Country / Region Select an option Afghanistan Åland Islands Albania Algeria American Samoa Andorra Angola Angu",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29846,10 +29846,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Information Technology Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Information Technology Jobs Get job recommendations Reinvent the way the world works We harness critical technologies to keep both Siemens Energy and our world connected and protected. Developing innovativ",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29887,10 +29887,10 @@
       "employment_type": "UNKNOWN",
       "description": "Search Student and Graduate Opportunity Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Search Student and Graduate Opportunity Jobs Get job recommendations Contribute to one of the biggest challenges in the world Our Siemens Energy Graduate Program is a two-year experience for recent mast",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29927,10 +29927,10 @@
       "employment_type": "UNKNOWN",
       "description": "Hot Jobs | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Hot Jobs Get job recommendations 1 - 20 of 277 results Sort by Unsorted Job Name Posted Date (Senior) Strategy Consultant Hot Job Apply Share this job: Share (Senior) Strategy Project Manager Hot Job Apply Share this job: Share Account Ma",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -29950,12 +29950,12 @@
     {
       "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
       "company_id": "company:siemens_energy_ag",
-      "official_url": "https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/Senior-Project-Manager-f-m-d-for-Digital-Procurement-Transformation/301983",
+      "official_url": "https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/Digital-Technology-Portfolio-Lead/302966",
       "alternative_official_urls": [],
       "source_id": "source:siemens_energy_ag_career",
       "external_job_id": "FolderDetail",
       "ats_job_id": "FolderDetail",
-      "title": "Senior Project Manager (f/m/d) for Digital Procurement Transformation",
+      "title": "Digital Technology Portfolio Lead",
       "location": {
         "label": "UNKNOWN",
         "city": "UNKNOWN",
@@ -29967,25 +29967,25 @@
       "employment_type": "UNKNOWN",
       "status": "UPDATED",
       "first_seen": "2026-09-12T19:05:10.537Z",
-      "last_seen": "2026-09-12T19:50:44.560Z",
-      "changed_at": "2026-09-12T19:50:44.560Z",
+      "last_seen": "2026-09-13T00:54:54.858Z",
+      "changed_at": "2026-09-13T00:54:54.858Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
-        "score": 0,
-        "reasons": [],
-        "rejected_reasons": [
-          "Kein expliziter IT-Bezug erkennbar.",
-          "Standortbezug ist unklar.",
-          "Projektleitung ohne belegte IT-Gesamtverantwortung reicht nicht aus."
+        "score": 8,
+        "reasons": [
+          "IT-Bezug ist explizit vorhanden."
         ],
-        "evaluated_at": "2026-09-12T19:50:44.560Z"
+        "rejected_reasons": [
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-13T00:54:54.858Z"
       },
       "priority": "UNRATED",
       "requirements": [],
       "salary": "UNKNOWN",
       "identity_basis": "OFFICIAL_JOB_ID",
-      "description": "Senior Project Manager (f/m/d) for Digital Procurement Transformation - Germany - 301983 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our",
+      "description": "Digital Technology Portfolio Lead - India - 302966 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. Wi",
       "description_source": "OFFICIAL_SOURCE"
     },
     {
@@ -30008,10 +30008,10 @@
       "employment_type": "UNKNOWN",
       "description": "Register | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Stay Connected Create an account to stay up to date on opportunities in areas that interest you, track applications and view apply history. Let's energize society. Already have an account? Sign in To begin please enter your information be",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:05:10.537Z",
-      "changed_at": "2026-09-12T19:05:10.537Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -30046,10 +30046,10 @@
       },
       "work_model": "UNKNOWN",
       "employment_type": "UNKNOWN",
-      "status": "ACTIVE",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:05:10.537Z",
       "last_seen": "2026-09-12T19:16:23.312Z",
-      "changed_at": "2026-09-12T19:16:23.312Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -31852,10 +31852,10 @@
       "employment_type": "UNKNOWN",
       "description": "Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Get job recommendations Upload your CV Add your resume using the file selection below to view job recommendations tailored to you. Upload your CV Technical Issues? En cliquant sur les icônes ci-dessous, vous serez redirigé vers les réseaux sociaux,",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:16:23.312Z",
       "last_seen": "2026-09-12T19:16:23.312Z",
-      "changed_at": "2026-09-12T19:16:23.312Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -31892,10 +31892,10 @@
       "employment_type": "UNKNOWN",
       "description": "Reset Password | Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Forgot password Forgot your password? Enter the email address associated with your account, then click \"Continue\". We will email you a link to reset your password. Reset password with your e-mail E-mail * Continue Back to login Tech",
       "description_source": "OFFICIAL_SOURCE",
-      "status": "NEW",
+      "status": "REMOVED",
       "first_seen": "2026-09-12T19:16:23.312Z",
       "last_seen": "2026-09-12T19:16:23.312Z",
-      "changed_at": "2026-09-12T19:16:23.312Z",
+      "changed_at": "2026-09-13T00:44:43.327Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
@@ -43609,7 +43609,7 @@
     },
     {
       "scan_run_id": "scanrun:20260912T195044560Z",
-      "started_at": "2026-09-12T19:50:44.560Z",
+      "started_at": "2026-09-12T19:50:44.56Z",
       "finished_at": "2026-09-12T19:51:27.777Z",
       "status": "PARTIAL",
       "company_ids": [
@@ -43630,6 +43630,164 @@
         "logs/jobagent/daily-run-20260912T195044560Z.json",
         "logs/jobagent/daily-run-20260912T195044560Z.md",
         "html/jobagent/daily-run-20260912T195044560Z.html"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T003009520Z",
+      "started_at": "2026-09-13T00:30:09.52Z",
+      "finished_at": "2026-09-13T00:31:26.72Z",
+      "status": "PARTIAL",
+      "company_ids": [
+        "company:siemens_energy_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T003009520Z.json",
+        "logs/jobagent/daily-run-20260913T003009520Z.md",
+        "html/jobagent/daily-run-20260913T003009520Z.html"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T003843963Z",
+      "started_at": "2026-09-13T00:38:43.963Z",
+      "finished_at": "2026-09-13T00:40:18.389Z",
+      "status": "PARTIAL",
+      "company_ids": [
+        "company:siemens_energy_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T003843963Z.json",
+        "logs/jobagent/daily-run-20260913T003843963Z.md",
+        "html/jobagent/daily-run-20260913T003843963Z.html"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T004238795Z",
+      "started_at": "2026-09-13T00:42:38.795Z",
+      "finished_at": "2026-09-13T00:42:43.031Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:siemens_energy_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T004238795Z.json",
+        "logs/jobagent/daily-run-20260913T004238795Z.md",
+        "html/jobagent/daily-run-20260913T004238795Z.html"
+      ],
+      "errors": [
+        "TECHNICAL_LIMITATION"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "started_at": "2026-09-13T00:44:43.327Z",
+      "finished_at": "2026-09-13T00:48:00.535Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:siemens_energy_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T004443327Z.json",
+        "logs/jobagent/daily-run-20260913T004443327Z.md",
+        "html/jobagent/daily-run-20260913T004443327Z.html"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T004955058Z",
+      "started_at": "2026-09-13T00:49:55.058Z",
+      "finished_at": "2026-09-13T00:51:29.48Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:siemens_energy_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T004955058Z.json",
+        "logs/jobagent/daily-run-20260913T004955058Z.md",
+        "html/jobagent/daily-run-20260913T004955058Z.html"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T005454858Z",
+      "started_at": "2026-09-13T00:54:54.858Z",
+      "finished_at": "2026-09-13T00:55:07.416Z",
+      "status": "PARTIAL",
+      "company_ids": [
+        "company:siemens_energy_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T005454858Z.json",
+        "logs/jobagent/daily-run-20260913T005454858Z.md",
+        "html/jobagent/daily-run-20260913T005454858Z.html"
       ],
       "errors": []
     }
@@ -45032,6 +45190,90 @@
       "source_id": "source:siemens_energy_ag_career",
       "started_at": "2026-09-12T19:50:46.504Z",
       "finished_at": "2026-09-12T19:51:27.542Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260913t003011793z",
+      "scan_run_id": "scanrun:20260913T003009520Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-13T00:30:11.793Z",
+      "finished_at": "2026-09-13T00:31:26.395Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260913t003845904z",
+      "scan_run_id": "scanrun:20260913T003843963Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-13T00:38:45.904Z",
+      "finished_at": "2026-09-13T00:40:17.665Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260913t004240772z",
+      "scan_run_id": "scanrun:20260913T004238795Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-13T00:42:40.772Z",
+      "finished_at": "2026-09-13T00:42:42.948Z",
+      "status": "FAILED",
+      "adapter": "daily-run-adapter-wrapper",
+      "error_class": "TECHNICAL_LIMITATION",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 599,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260913t004445317z",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-13T00:44:45.317Z",
+      "finished_at": "2026-09-13T00:47:59.572Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260913t004957065z",
+      "scan_run_id": "scanrun:20260913T004955058Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-13T00:49:57.065Z",
+      "finished_at": "2026-09-13T00:51:28.614Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260913t005456887z",
+      "scan_run_id": "scanrun:20260913T005454858Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-13T00:54:56.887Z",
+      "finished_at": "2026-09-13T00:55:07.255Z",
       "status": "PARTIAL",
       "adapter": "live-html-adapter",
       "error_class": "TECHNICAL_LIMITATION",
@@ -55240,7 +55482,7 @@
       "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
       "scan_run_id": "scanrun:20260912T195044560Z",
       "source_id": "source:siemens_energy_ag_career",
-      "captured_at": "2026-09-12T19:50:44.560Z",
+      "captured_at": "2026-09-12T19:50:44.56Z",
       "content_hash": "42e1ea26e882c57979a9facc6abcdde58f8034d5e139bdfb5e7393b93e404d78",
       "status": "UPDATED",
       "title": "Senior Project Manager (f/m/d) for Digital Procurement Transformation",
@@ -55254,6 +55496,106 @@
       "official_url": "https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/Senior-Project-Manager-f-m-d-for-Digital-Procurement-Transformation/301983",
       "summary": "Senior Project Manager (f/m/d) for Digital Procurement Transformation - Germany - 301983 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our",
       "description": "Senior Project Manager (f/m/d) for Digital Procurement Transformation - Germany - 301983 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_energy_ag_official_job_id_folderdetail_20260913t003009520z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T003009520Z",
+      "source_id": "source:siemens_energy_ag_career",
+      "captured_at": "2026-09-13T00:30:09.52Z",
+      "content_hash": "eedb38b3c451e82b90f808ff4b8bd44fb5606420fd5c93122d80c19d616a865a",
+      "status": "UPDATED",
+      "title": "IT Product Manager SCM & Logistics",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/IT-Product-Manager-SCM-Logistics/301949",
+      "summary": "IT Product Manager SCM & Logistics - Spain - 301949 - Siemens Gamesa - Careers Marketplace Skip to content Skip to footer Siemens Gamesa Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Gamesa Renewable Energy Together, we are committed to making sustainable, reliable, and affordable energy a reality by pushing the boundaries of what is possible. As a leading player in t",
+      "description": "IT Product Manager SCM & Logistics - Spain - 301949 - Siemens Gamesa - Careers Marketplace Skip to content Skip to footer Siemens Gamesa Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Gamesa Renewable Energy Together, we are committed to making sustainable, reliable, and affordable energy a reality by pushing the boundaries of what is possible. As a leading player in t"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_energy_ag_official_job_id_folderdetail_20260913t003843963z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T003843963Z",
+      "source_id": "source:siemens_energy_ag_career",
+      "captured_at": "2026-09-13T00:38:43.963Z",
+      "content_hash": "5a2fce9a4f2cb217780f4743b6fb58d8abe1a9590affbcb480d597a32c789b70",
+      "status": "UPDATED",
+      "title": "Client Manager (Australia) - Compression Products",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens-energy.com/jobs/FolderDetail/Client-Manager-Australia-Compression-Products/291499",
+      "summary": "Client Manager (Australia) - Compression Products - Australia - 291499 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn id",
+      "description": "Client Manager (Australia) - Compression Products - Australia - 291499 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn id"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_energy_ag_official_job_id_folderdetail_20260913t004443327z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "source_id": "source:siemens_energy_ag_career",
+      "captured_at": "2026-09-13T00:44:43.327Z",
+      "content_hash": "1b3307881f6c55d20fa72baa377b00db98b71926bcf0439673ef26cba11ff011",
+      "status": "UPDATED",
+      "title": "Bid Manager for GT Sales",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens-energy.com/jobs/FolderDetail/Bid-Manager-for-GT-Sales/303359",
+      "summary": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near",
+      "description": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_energy_ag_official_job_id_folderdetail_20260913t004955058z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T004955058Z",
+      "source_id": "source:siemens_energy_ag_career",
+      "captured_at": "2026-09-13T00:49:55.058Z",
+      "content_hash": "1b3307881f6c55d20fa72baa377b00db98b71926bcf0439673ef26cba11ff011",
+      "status": "UPDATED",
+      "title": "Bid Manager for GT Sales",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens-energy.com/jobs/FolderDetail/Bid-Manager-for-GT-Sales/303359",
+      "summary": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near",
+      "description": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_energy_ag_official_job_id_folderdetail_20260913t005454858z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T005454858Z",
+      "source_id": "source:siemens_energy_ag_career",
+      "captured_at": "2026-09-13T00:54:54.858Z",
+      "content_hash": "a9b3ee68214e0f05999ceb45967f7c5ba0031b805529e57d3672447285f4e499",
+      "status": "UPDATED",
+      "title": "Digital Technology Portfolio Lead",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/Digital-Technology-Portfolio-Lead/302966",
+      "summary": "Digital Technology Portfolio Lead - India - 302966 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. Wi",
+      "description": "Digital Technology Portfolio Lead - India - 302966 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. Wi"
     }
   ],
   "change_events": [
@@ -63835,7 +64177,441 @@
       "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
       "scan_run_id": "scanrun:20260912T195044560Z",
       "event_type": "JOB_UPDATED",
-      "created_at": "2026-09-12T19:50:44.560Z",
+      "created_at": "2026-09-12T19:50:44.56Z",
+      "old_status": "UPDATED",
+      "new_status": "UPDATED",
+      "changed_fields": [
+        "title",
+        "official_url",
+        "description",
+        "classification",
+        "status"
+      ],
+      "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_folderdetail_updated_20260913t003009520z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T003009520Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-09-13T00:30:09.52Z",
+      "old_status": "UPDATED",
+      "new_status": "UPDATED",
+      "changed_fields": [
+        "title",
+        "official_url",
+        "description",
+        "classification",
+        "status"
+      ],
+      "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_folderdetail_updated_20260913t003843963z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T003843963Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-09-13T00:38:43.963Z",
+      "old_status": "UPDATED",
+      "new_status": "UPDATED",
+      "changed_fields": [
+        "title",
+        "official_url",
+        "description",
+        "status"
+      ],
+      "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_folderdetail_updated_20260913t004443327z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "UPDATED",
+      "new_status": "UPDATED",
+      "changed_fields": [
+        "title",
+        "official_url",
+        "description",
+        "classification",
+        "status"
+      ],
+      "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_jobs_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_jobs",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "UPDATED",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_login_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_login",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsgermany_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsgermany",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsus_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsus",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsromania_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsromania",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsuk_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsuk",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsbrazil_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsbrazil",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobssweden_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobssweden",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsmexico_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsmexico",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsdenmark_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsdenmark",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsspain_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsspain",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobschina_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobschina",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsengineering_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsengineering",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobspm_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobspm",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobssales_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobssales",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsfinance_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsfinance",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsmanufacturing_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsmanufacturing",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobscs_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobscs",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsit_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsit",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_searchjobsstudents_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_searchjobsstudents",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_hotjobs_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_hotjobs",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_stayconnected_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_stayconnected",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_labor_condition_applications_html_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_labor_condition_applications_html",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "ACTIVE",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_resumeupload_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_resumeupload",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_resetpassword_removed_20260913T004443327Z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_resetpassword",
+      "scan_run_id": "scanrun:20260913T004443327Z",
+      "event_type": "JOB_REMOVED",
+      "created_at": "2026-09-13T00:44:43.327Z",
+      "old_status": "NEW",
+      "new_status": "REMOVED",
+      "changed_fields": [
+        "status",
+        "changed_at"
+      ],
+      "reason": "Nach erfolgreichem offiziellem Scan nicht mehr auffindbar."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_folderdetail_updated_20260913t004955058z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T004955058Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-09-13T00:49:55.058Z",
+      "old_status": "UPDATED",
+      "new_status": "UPDATED",
+      "changed_fields": [
+        "title",
+        "official_url",
+        "description",
+        "classification",
+        "status"
+      ],
+      "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_folderdetail_updated_20260913t005454858z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T005454858Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-09-13T00:54:54.858Z",
       "old_status": "UPDATED",
       "new_status": "UPDATED",
       "changed_fields": [

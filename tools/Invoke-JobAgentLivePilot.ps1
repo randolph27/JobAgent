@@ -9,7 +9,7 @@ param(
     [Parameter()][ValidateRange(0, 5)][int]$MaxRetries = 1,
     [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 100,
     [Parameter()][ValidateRange(1, 100)][int]$MaxDetailFetchesPerSource = 100,
-    [Parameter()][ValidateRange(1, 20)][int]$MaxPagesPerSource = 10,
+    [Parameter()][ValidateRange(1, 100)][int]$MaxPagesPerSource = 10,
     [Parameter()][ValidateRange(1, 8)][int]$HostConcurrency = 1,
     [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
     [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
