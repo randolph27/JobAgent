@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-13T02:59:26.027+02:00
+Stand: 2026-09-13T03:15:30.000+02:00
 
 ## Zustand
 
@@ -8,34 +8,29 @@ Stand: 2026-09-13T02:59:26.027+02:00
 - Status: `in-progress`
 - Ziel: JA-041 IT-Leiter/Lead/Manager ueber vollstaendige Karriere- und ATS-Ergebnislisten finden.
 - Branch: `master`
-- HEAD vor Commit: `334957f59a0f`
+- HEAD: `fc4677b032ed`
 - Upstream: `origin/master`
-- Ahead/Behind vor Commit: `0/0`
-- Worktree vor Commit: `dirty`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
 - Route: `True`
 
 ## Abgeschlossener Slice
 
-JA-041 Avature-Navigation/Seitenbudget:
+JA-041 Avature-Budget und BMW-Erreichbarkeit:
 
-- Avature-Listing-, Sprach-, Kategorie- und Accountpfade werden nicht mehr als Jobs akzeptiert, nur weil sie unter `/jobs/...` liegen.
-- `FolderDetail`-Treffer bleiben zulaessig; Avature-Listing-Navigation ist durch einen eigenen Funktionstest abgedeckt.
-- Avature-Seiten verfolgen keine generischen Jobportal-Follow-ups mehr, wenn zielrollenbezogene Avature-Such-Follow-ups aktiv sind.
-- Abgearbeitete Pagination wird nicht mehr nur wegen sichtbarem Next-Link als offen markiert; offen bleibt nur eine noch nicht besuchte Folgeseite.
-- Live-/Pilot-Seitenbudget ist bis `MaxPagesPerSource 100` steuerbar.
-- Siemens-Energy-Kontrolllauf `logs/jobagent/daily-run-20260913T005454858Z.json`: `PARTIAL`, 1 Raw-Job, 1 Snapshot, 0 Zielrollentreffer; bewusst enges CIO-Budget, kein Abschlussgate.
-- Zwischenlaeufe mit groesserem Budget wurden wegen Laufzeit abgebrochen oder als explorative Fehl-/Teilversuche bereinigt; kein Abschlussgate daraus ableiten.
+- Siemens Energy/Avature wurde mit breitem Budget reproduzierbar abgeschlossen.
+- Kontrolllauf `logs/jobagent/daily-run-20260913T010421462Z.json`: `SUCCESS`, 1 Firma, 30 Raw-Jobs, 1 gepruefter Snapshot, 0 unsichere Quellen, 0 nicht erreichbare Quellen, 0 Fehler, 0 Zielrollentreffer.
+- Verwendete Parameter: `-MaxPagesPerSource 100 -MaxResultsPerSource 100 -MaxDetailFetchesPerSource 100 -FetchClient auto`.
+- BMW-Erreichbarkeit wurde separat reproduziert: `logs/jobagent/daily-run-20260913T010245703Z.json` bleibt `FAILED`, `NOT_REACHABLE`, weil `curl.exe` fuer `https://www.bmwgroup.jobs/de/en.html` mit HTTP/2-Streamfehler beziehungsweise lokalem Schannel-Fehler `SEC_E_NO_CREDENTIALS` scheitert.
+- WSL-Fallback ist aktuell nicht nutzbar; `Ubuntu-22.04` ist auf diesem System nicht vorhanden.
 
 ## Geaenderte Hauptdateien
 
-- `src/JobAgent.LiveScan.psm1`
-- `tests/Test-JobAgentLiveScan.ps1`
-- `tools/Invoke-JobAgentDailyRun.ps1`
-- `tools/Invoke-JobAgentLivePilot.ps1`
-- `data/jobagent/store.json`
 - `Roadmap.md`
-- `docs/handoffs/2026-09-13-ja041-avature-navigation-budget-handoff.md`
-- `html/jobagent/daily-run-20260913T005454858Z.html`
+- `data/jobagent/store.json`
+- `docs/handoffs/2026-09-13-ja041-avature-budget-bmw-reachability-handoff.md`
+- `html/jobagent/daily-run-20260913T010245703Z.html`
+- `html/jobagent/daily-run-20260913T010421462Z.html`
 - `handoff.latest.md`
 - `handoff.latest.json`
 - `todo.state.json`
@@ -46,21 +41,22 @@ JA-041 Avature-Navigation/Seitenbudget:
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1` -> Exit `0`
-- `cmd /c .\ci.cmd stp` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Invoke-JobAgentDailyRun.ps1 -CompanyIds company:siemens_energy_ag -MaxCompanies 1 -MaxResultsPerSource 100 -MaxDetailFetchesPerSource 100 -MaxPagesPerSource 100 -MaxRetries 0 -TimeoutSeconds 30 -FetchClient auto` -> Exit `0`
+- `pwsh -NoProfile -File .\tools\Invoke-JobAgentDailyRun.ps1 -CompanyIds company:bmw_group -MaxCompanies 1 -MaxResultsPerSource 100 -MaxDetailFetchesPerSource 100 -MaxPagesPerSource 30 -MaxRetries 0 -TimeoutSeconds 30 -FetchClient auto` -> Exit `1`, dokumentierter Erreichbarkeitsfehler
+- `cmd /c .\ci.cmd devserver-start` -> Exit `0`
+- `Test-NetConnection localhost -Port 9000` -> `TcpTestSucceeded=True`
+- `Get-Content todo.state.json/handoff.latest.json | ConvertFrom-Json` -> Exit `0`
 - `cmd /c .\ci.cmd route-check` -> Exit `0`
+- `cmd /c .\ci.cmd stp` -> Exit `0`
 
 ## Roadmap-Rotation
 
-Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil Avature-Abschlussbudget/Quellenbegrenzung, BMW-Erreichbarkeit und breitere Abschlussstichprobe noch fehlen. Nach Nutzeranweisung gilt ein nicht angefragter Supertest als erledigt und wurde nicht gestartet.
+Keine Rotation. `TD-0053`/JA-041 bleibt offen, weil BMW-Fetch/Fallback beziehungsweise Quellenwechsel und die breitere Abschlussstichprobe noch fehlen. Nach Nutzeranweisung wurde kein Supertest gestartet.
 
 ## Naechster Anker
 
 JA-041 fortsetzen:
 
-1. Siemens Energy/Avature mit reproduzierbarem breitem Budget abschliessen oder einen belegten Quellenbegrenzungsvertrag dokumentieren.
-2. BMW-Erreichbarkeit pruefen und bei Bedarf Adapter-/Fetch-Hotspot isolieren.
-3. Breitere JA-041-Abschlussstichprobe erneut laufen lassen.
-4. Danach Roadmap/Todo/Handoff synchronisieren; Supertest nur bei ausdruecklicher Anforderung.
+1. BMW-spezifischen Fetch-/Fallback-Slice isolieren oder belegte alternative offizielle BMW-Karriere-/ATS-Quelle im Store verifizieren.
+2. Breitere JA-041-Abschlussstichprobe erneut laufen lassen.
+3. Danach Roadmap/Todo/Handoff synchronisieren; Supertest nur bei ausdruecklicher Anforderung.

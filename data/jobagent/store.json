@@ -26,7 +26,7 @@
       "ats": [],
       "scan_status": "FAILED",
       "scan_priority": 95,
-      "next_scan_at": "2026-09-13T01:05:10.537Z",
+      "next_scan_at": "2026-09-13T07:02:45.703Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -39,11 +39,11 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-09-12T19:05:10.537Z",
+      "updated_at": "2026-09-13T01:02:45.703Z",
       "last_successful_scan_at": null,
       "last_imported_at": "2026-09-09T06:44:00.575Z",
-      "expires_at": "2026-09-13T01:05:10.537Z",
-      "next_refresh_at": "2026-09-13T01:05:10.537Z",
+      "expires_at": "2026-09-13T07:02:45.703Z",
+      "next_refresh_at": "2026-09-13T07:02:45.703Z",
       "refresh_reason": "last_scan_failed",
       "staleness_status": "REFRESH_DUE"
     },
@@ -221,9 +221,9 @@
       ],
       "industry": "Energy Technology",
       "ats": [],
-      "scan_status": "PARTIAL",
+      "scan_status": "SUCCESS",
       "scan_priority": 90,
-      "next_scan_at": "2026-09-14T00:54:54.858Z",
+      "next_scan_at": "2026-09-14T01:04:21.462Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -236,14 +236,14 @@
         "evidence_note": "Regionale offizielle Quelle nennt Siemens Energy; offizielle Jobdomain ist erreichbar."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-09-13T00:54:54.858Z",
-      "last_successful_scan_at": "2026-09-13T00:49:55.058Z",
+      "updated_at": "2026-09-13T01:04:21.462Z",
+      "last_successful_scan_at": "2026-09-13T01:04:21.462Z",
       "last_imported_at": "2026-09-09T06:48:43.046Z",
-      "last_verified_at": "2026-09-13T00:49:55.058Z",
-      "expires_at": "2026-09-14T00:54:54.858Z",
-      "next_refresh_at": "2026-09-14T00:54:54.858Z",
-      "refresh_reason": "partial_scan_recheck",
-      "staleness_status": "REFRESH_DUE"
+      "last_verified_at": "2026-09-13T01:04:21.462Z",
+      "expires_at": "2026-10-13T01:04:21.462Z",
+      "next_refresh_at": "2026-09-14T01:04:21.462Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:scout24_se",
@@ -29950,12 +29950,12 @@
     {
       "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
       "company_id": "company:siemens_energy_ag",
-      "official_url": "https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/Digital-Technology-Portfolio-Lead/302966",
+      "official_url": "https://jobs.siemens-energy.com/jobs/FolderDetail/Bid-Manager-for-GT-Sales/303359",
       "alternative_official_urls": [],
       "source_id": "source:siemens_energy_ag_career",
       "external_job_id": "FolderDetail",
       "ats_job_id": "FolderDetail",
-      "title": "Digital Technology Portfolio Lead",
+      "title": "Bid Manager for GT Sales",
       "location": {
         "label": "UNKNOWN",
         "city": "UNKNOWN",
@@ -29967,25 +29967,24 @@
       "employment_type": "UNKNOWN",
       "status": "UPDATED",
       "first_seen": "2026-09-12T19:05:10.537Z",
-      "last_seen": "2026-09-13T00:54:54.858Z",
-      "changed_at": "2026-09-13T00:54:54.858Z",
+      "last_seen": "2026-09-13T01:04:21.462Z",
+      "changed_at": "2026-09-13T01:04:21.462Z",
       "classification": {
         "result": "REJECTED",
         "priority": "UNRATED",
-        "score": 8,
-        "reasons": [
-          "IT-Bezug ist explizit vorhanden."
-        ],
+        "score": 0,
+        "reasons": [],
         "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
           "Standortbezug ist unklar."
         ],
-        "evaluated_at": "2026-09-13T00:54:54.858Z"
+        "evaluated_at": "2026-09-13T01:04:21.462Z"
       },
       "priority": "UNRATED",
       "requirements": [],
       "salary": "UNKNOWN",
       "identity_basis": "OFFICIAL_JOB_ID",
-      "description": "Digital Technology Portfolio Lead - India - 302966 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. Wi",
+      "description": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near",
       "description_source": "OFFICIAL_SOURCE"
     },
     {
@@ -43790,6 +43789,60 @@
         "html/jobagent/daily-run-20260913T005454858Z.html"
       ],
       "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T010245703Z",
+      "started_at": "2026-09-13T01:02:45.703Z",
+      "finished_at": "2026-09-13T01:02:48.414Z",
+      "status": "FAILED",
+      "company_ids": [
+        "company:bmw_group"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T010245703Z.json",
+        "logs/jobagent/daily-run-20260913T010245703Z.md",
+        "html/jobagent/daily-run-20260913T010245703Z.html"
+      ],
+      "errors": [
+        "NOT_REACHABLE"
+      ]
+    },
+    {
+      "scan_run_id": "scanrun:20260913T010421462Z",
+      "started_at": "2026-09-13T01:04:21.462Z",
+      "finished_at": "2026-09-13T01:07:38.244Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:siemens_energy_ag"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T010421462Z.json",
+        "logs/jobagent/daily-run-20260913T010421462Z.md",
+        "html/jobagent/daily-run-20260913T010421462Z.html"
+      ],
+      "errors": []
     }
   ],
   "scan_attempts": [
@@ -45280,6 +45333,34 @@
       "retry_recommendation": "RETRY_NEXT_RUN",
       "http_status": 200,
       "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:bmw_group_bmw_group_career_20260913t010247698z",
+      "scan_run_id": "scanrun:20260913T010245703Z",
+      "company_id": "company:bmw_group",
+      "source_id": "source:bmw_group_career",
+      "started_at": "2026-09-13T01:02:47.698Z",
+      "finished_at": "2026-09-13T01:02:48.283Z",
+      "status": "FAILED",
+      "adapter": "live-html-adapter",
+      "error_class": "NOT_REACHABLE",
+      "retry_recommendation": "RETRY_NEXT_RUN",
+      "http_status": null,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:siemens_energy_ag_siemens_energy_ag_career_20260913t010423545z",
+      "scan_run_id": "scanrun:20260913T010421462Z",
+      "company_id": "company:siemens_energy_ag",
+      "source_id": "source:siemens_energy_ag_career",
+      "started_at": "2026-09-13T01:04:23.545Z",
+      "finished_at": "2026-09-13T01:07:37.308Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
     }
   ],
   "job_snapshots": [
@@ -55596,6 +55677,26 @@
       "official_url": "https://jobs.siemens-energy.com/en_US/jobs/FolderDetail/Digital-Technology-Portfolio-Lead/302966",
       "summary": "Digital Technology Portfolio Lead - India - 302966 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. Wi",
       "description": "Digital Technology Portfolio Lead - India - 302966 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. Wi"
+    },
+    {
+      "snapshot_id": "snapshot:company_siemens_energy_ag_official_job_id_folderdetail_20260913t010421462z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T010421462Z",
+      "source_id": "source:siemens_energy_ag_career",
+      "captured_at": "2026-09-13T01:04:21.462Z",
+      "content_hash": "1b3307881f6c55d20fa72baa377b00db98b71926bcf0439673ef26cba11ff011",
+      "status": "UPDATED",
+      "title": "Bid Manager for GT Sales",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.siemens-energy.com/jobs/FolderDetail/Bid-Manager-for-GT-Sales/303359",
+      "summary": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near",
+      "description": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near"
     }
   ],
   "change_events": [
@@ -64612,6 +64713,23 @@
       "scan_run_id": "scanrun:20260913T005454858Z",
       "event_type": "JOB_UPDATED",
       "created_at": "2026-09-13T00:54:54.858Z",
+      "old_status": "UPDATED",
+      "new_status": "UPDATED",
+      "changed_fields": [
+        "title",
+        "official_url",
+        "description",
+        "classification",
+        "status"
+      ],
+      "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_siemens_energy_ag_official_job_id_folderdetail_updated_20260913t010421462z",
+      "job_id": "job:company_siemens_energy_ag_official_job_id_folderdetail",
+      "scan_run_id": "scanrun:20260913T010421462Z",
+      "event_type": "JOB_UPDATED",
+      "created_at": "2026-09-13T01:04:21.462Z",
       "old_status": "UPDATED",
       "new_status": "UPDATED",
       "changed_fields": [
