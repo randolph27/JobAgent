@@ -302,6 +302,9 @@ function Get-JobAgentCurlFailureDiagnostic {
     $class = if ($Output -match 'SEC_E_NO_CREDENTIALS|keine Anmeldeinformationen|no credentials') {
         'TLS_CREDENTIAL_UNAVAILABLE'
     }
+    elseif ($Output -match 'curl:\s*\(92\)|HTTP/2 stream \d+ was not closed cleanly|HTTP/2 stream .*INTERNAL_ERROR') {
+        'HTTP2_STREAM_FAILED'
+    }
     elseif ($Output -match 'certificate|SSL:|TLS|schannel|OpenSSL|verify|subject name') {
         'TLS_HANDSHAKE_FAILED'
     }
@@ -492,6 +495,22 @@ function Add-JobAgentCurlSchannelFallbackMetadata {
     return $Result
 }
 
+function Add-JobAgentCurlHttp1FallbackMetadata {
+    param(
+        [Parameter(Mandatory)][object]$Result
+    )
+
+    $client = if ($Result.PSObject.Properties.Name -contains 'fetch_client' -and -not [string]::IsNullOrWhiteSpace([string]$Result.fetch_client)) {
+        [string]$Result.fetch_client
+    }
+    else {
+        'curl.exe'
+    }
+    $Result | Add-Member -NotePropertyName fetch_client -NotePropertyValue ($client + '+http1.1') -Force
+    $Result | Add-Member -NotePropertyName http_version_policy -NotePropertyValue 'http1.1-fallback' -Force
+    return $Result
+}
+
 function Invoke-JobAgentCompanyVerificationHostLimitedRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
@@ -528,7 +547,8 @@ function Invoke-JobAgentCompanyVerificationCurlExeSingleRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
         [Parameter(Mandatory)][object]$Policy,
-        [Parameter()][switch]$SslRevokeBestEffort
+        [Parameter()][switch]$SslRevokeBestEffort,
+        [Parameter()][switch]$ForceHttp1
     )
 
     $curlOptions = Get-JobAgentCurlExeInvocationOptions
@@ -552,6 +572,9 @@ function Invoke-JobAgentCompanyVerificationCurlExeSingleRequest {
     if ($SslRevokeBestEffort) {
         $arguments = @('--ssl-revoke-best-effort') + $arguments
     }
+    if ($ForceHttp1) {
+        $arguments = @('--http1.1') + $arguments
+    }
     $output = @(& ([string]$curlOptions.path) @arguments 2>&1)
     $result = ConvertFrom-JobAgentCompanyVerificationCurlOutput -Output $output -ExitCode $LASTEXITCODE -Url $Url -ClientName 'curl.exe'
     $result | Add-Member -NotePropertyName curl_path -NotePropertyValue ([string]$curlOptions.path) -Force
@@ -561,6 +584,9 @@ function Invoke-JobAgentCompanyVerificationCurlExeSingleRequest {
     }
     if ($SslRevokeBestEffort) {
         return Add-JobAgentCurlSchannelFallbackMetadata -Result $result
+    }
+    if ($ForceHttp1) {
+        return Add-JobAgentCurlHttp1FallbackMetadata -Result $result
     }
     return $result
 }
@@ -586,7 +612,8 @@ function Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest {
     param(
         [Parameter(Mandatory)][string]$Url,
         [Parameter(Mandatory)][object]$Policy,
-        [Parameter()][switch]$SslRevokeBestEffort
+        [Parameter()][switch]$SslRevokeBestEffort,
+        [Parameter()][switch]$ForceHttp1
     )
 
     $uri = [Uri]$Url
@@ -597,7 +624,7 @@ function Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest {
     try {
         [void]$semaphore.WaitOne()
         try {
-            return Invoke-JobAgentCompanyVerificationCurlExeSingleRequest -Url $Url -Policy $Policy -SslRevokeBestEffort:$SslRevokeBestEffort
+            return Invoke-JobAgentCompanyVerificationCurlExeSingleRequest -Url $Url -Policy $Policy -SslRevokeBestEffort:$SslRevokeBestEffort -ForceHttp1:$ForceHttp1
         }
         finally {
             [void]$semaphore.Release()
@@ -695,6 +722,12 @@ function Invoke-JobAgentCompanyVerificationCurlExeHttpRequest {
 
     for ($redirectIndex = 0; $redirectIndex -le $redirectLimit; $redirectIndex++) {
         $result = Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest -Url $currentUrl -Policy $Policy
+        if ($result.ok -ne $true -and [string]$result.error_class -eq 'HTTP2_STREAM_FAILED') {
+            $http1Result = Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest -Url $currentUrl -Policy $Policy -ForceHttp1
+            if ($http1Result.ok -eq $true -or [string]$http1Result.error_class -ne 'HTTP2_STREAM_FAILED') {
+                $result = $http1Result
+            }
+        }
         if ($allowSchannelFallback -and $result.ok -ne $true -and [string]$result.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE') {
             $fallbackResult = Invoke-JobAgentCompanyVerificationHostLimitedCurlExeRequest -Url $currentUrl -Policy $Policy -SslRevokeBestEffort
             if ($fallbackResult.ok -eq $true -or [string]$fallbackResult.error_class -ne 'TLS_CREDENTIAL_UNAVAILABLE') {

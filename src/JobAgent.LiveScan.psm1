@@ -1228,12 +1228,17 @@ function ConvertFrom-JobAgentLiveCareerPage {
         if (-not $hrefMatch.Success) {
             continue
         }
-        $href = [Net.WebUtility]::HtmlDecode($hrefMatch.Groups['href'].Value)
+        $href = [Net.WebUtility]::HtmlDecode($hrefMatch.Groups['href'].Value).Trim()
         if ($href -match '^(mailto:|tel:|javascript:|#)') {
             continue
         }
-        $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $href
-        $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
+        try {
+            $absolute = Resolve-JobAgentLiveHrefUrl -BaseUri $baseUri -Href $href
+            $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $absolute
+        }
+        catch {
+            continue
+        }
         if ($evaluation.is_official -ne $true) {
             continue
         }

@@ -130,6 +130,8 @@ $curlCertificateDiagnostic = $sourceVerificationModule.Invoke({ Get-JobAgentCurl
 Assert-True -Condition ($curlCertificateDiagnostic.error_class -eq 'TLS_HANDSHAKE_FAILED') -Message 'Curl-Diagnose klassifiziert Zertifikatsfehler nicht als TLS-Handshake-Fehler.'
 $curlCredentialDiagnostic = $sourceVerificationModule.Invoke({ Get-JobAgentCurlFailureDiagnostic -Output 'schannel: AcquireCredentialsHandle failed: SEC_E_NO_CREDENTIALS' })
 Assert-True -Condition ($curlCredentialDiagnostic.error_class -eq 'TLS_CREDENTIAL_UNAVAILABLE') -Message 'Curl-Diagnose klassifiziert Schannel-Credentialfehler nicht.'
+$curlHttp2Diagnostic = $sourceVerificationModule.Invoke({ Get-JobAgentCurlFailureDiagnostic -Output 'curl: (92) HTTP/2 stream 1 was not closed cleanly: INTERNAL_ERROR (err 2)' })
+Assert-True -Condition ($curlHttp2Diagnostic.error_class -eq 'HTTP2_STREAM_FAILED') -Message 'Curl-Diagnose klassifiziert HTTP/2-Streamfehler nicht.'
 
 $curlOpenSslOptions = $sourceVerificationModule.Invoke({
         Resolve-JobAgentCurlInvocationOptions -Path 'C:\tools\curl.exe' -VersionOutput 'curl 8.17.0 libcurl/8.17.0 LibreSSL/4.2.1 Features: CAcert SSL'
@@ -161,6 +163,17 @@ $curlSchannelFallback = $sourceVerificationModule.Invoke({
     })
 Assert-True -Condition ($curlSchannelFallback.ok -eq $true -and $curlSchannelFallback.fetch_client -eq 'curl.exe+ssl-revoke-best-effort') -Message 'Curl-Schannel-Fallback verliert Erfolg oder Client-Metadaten.'
 Assert-True -Condition ($curlSchannelFallback.tls_revocation_policy -eq 'ssl-revoke-best-effort') -Message 'Curl-Schannel-Fallback dokumentiert die TLS-Revocation-Policy nicht.'
+
+$curlHttp1Fallback = $sourceVerificationModule.Invoke({
+        $result = ConvertFrom-JobAgentCompanyVerificationCurlOutput `
+            -Output @('HTTP/1.1 200', 'content-type: text/html', '', '<html>ok</html>', 'JOBAGENT_FINAL_URL:https://example.invalid/jobs', 'JOBAGENT_STATUS:200') `
+            -ExitCode 0 `
+            -Url 'https://example.invalid/jobs' `
+            -ClientName 'curl.exe'
+        Add-JobAgentCurlHttp1FallbackMetadata -Result $result
+    })
+Assert-True -Condition ($curlHttp1Fallback.ok -eq $true -and $curlHttp1Fallback.fetch_client -eq 'curl.exe+http1.1') -Message 'Curl-HTTP/1.1-Fallback verliert Erfolg oder Client-Metadaten.'
+Assert-True -Condition ($curlHttp1Fallback.http_version_policy -eq 'http1.1-fallback') -Message 'Curl-HTTP/1.1-Fallback dokumentiert die HTTP-Version-Policy nicht.'
 
 $careerHtml = '<html><body><a href="/de/karriere">Karriere</a><a href="https://www.linkedin.com/jobs/view/123">Jobs</a></body></html>'
 $careerLinks = @(Get-JobAgentCompanyCareerCandidateLinks -Html $careerHtml -BaseUrl 'https://example.invalid/' -Company (New-TestCompany) -MaxCandidates 5)
@@ -313,5 +326,5 @@ Assert-True -Condition ($manualVerification.status -eq 'MANUAL_REVIEW') -Message
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('canonical_url', 'company_domain', 'career_url', 'encoded_official_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_verification_curl_policy', 'career_verification_wsl_curl_policy', 'curl_tls_error_diagnostics', 'curl_invocation_options', 'curl_output_parser', 'curl_schannel_fallback_metadata', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
+    cases = @('canonical_url', 'company_domain', 'career_url', 'encoded_official_url', 'ats_domain', 'aggregator_rejection', 'unverified_third_party', 'verified_source', 'ats_requires_verified_by_url', 'resolved_alternatives', 'career_verification_policy', 'career_verification_host_concurrency_policy', 'career_verification_curl_policy', 'career_verification_wsl_curl_policy', 'curl_tls_error_diagnostics', 'curl_http2_error_diagnostics', 'curl_invocation_options', 'curl_output_parser', 'curl_schannel_fallback_metadata', 'curl_http1_fallback_metadata', 'career_link_extraction', 'career_link_rejects_non_career_company_path', 'career_link_rejects_substring_path_match', 'company_career_path_verification', 'company_linked_ats_verification', 'workable_company_linked_ats_verification', 'career_dynamic_limitation', 'career_manual_review')
 } | ConvertTo-Json -Depth 4

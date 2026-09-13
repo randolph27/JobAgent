@@ -7,7 +7,7 @@
       "canonical_name": "BMW Group",
       "canonical_domain": "bmwgroup.com",
       "official_website_url": "https://www.bmwgroup.com/",
-      "career_url": "https://www.bmwgroup.jobs/de/en.html",
+      "career_url": "https://jobs.bmwgroup.com/",
       "aliases": [
         "Bayerische Motoren Werke",
         "BMW AG",
@@ -24,28 +24,29 @@
       ],
       "industry": "Automotive",
       "ats": [],
-      "scan_status": "FAILED",
+      "scan_status": "SUCCESS",
       "scan_priority": 95,
-      "next_scan_at": "2026-09-13T07:02:45.703Z",
+      "next_scan_at": "2026-09-14T07:35:11.041Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
-        "url": "https://www.bmwgroup.jobs/de/en.html",
+        "url": "https://jobs.bmwgroup.com/",
         "observed_at": "2026-08-17T15:52:58.666Z",
-        "verification_url": "https://www.bmwgroup.jobs/de/en.html",
+        "verification_url": "https://jobs.bmwgroup.com/",
         "discovery_origin": "seed.manual",
         "target_area": "MUNICH",
         "industry_hint": "Automotive",
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-09-13T01:02:45.703Z",
-      "last_successful_scan_at": null,
+      "updated_at": "2026-09-13T07:35:11.041Z",
+      "last_successful_scan_at": "2026-09-13T07:35:11.041Z",
       "last_imported_at": "2026-09-09T06:44:00.575Z",
-      "expires_at": "2026-09-13T07:02:45.703Z",
-      "next_refresh_at": "2026-09-13T07:02:45.703Z",
-      "refresh_reason": "last_scan_failed",
-      "staleness_status": "REFRESH_DUE"
+      "last_verified_at": "2026-09-13T07:35:11.041Z",
+      "expires_at": "2026-10-13T07:35:11.041Z",
+      "next_refresh_at": "2026-09-14T07:35:11.041Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:siemens_ag",
@@ -1114,9 +1115,9 @@
       ],
       "industry": "Higher Education",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 82,
-      "next_scan_at": "2026-08-29T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1129,8 +1130,14 @@
         "evidence_note": "Der Weihenstephan-Kandidat HSWT wurde ueber die offizielle Hochschuldomain und die dortige Stellenangebote-Seite belegt."
       },
       "created_at": "2026-08-28T16:22:41.522Z",
-      "updated_at": "2026-08-28T16:22:41.522Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:deutsche_telekom_ag",
@@ -1439,9 +1446,9 @@
       ],
       "industry": "Insurance",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 81,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1454,8 +1461,14 @@
         "evidence_note": "Der Versicherungskammer-Kandidat wurde ueber die offizielle VKB-Domain und das offizielle Stellenangebote-Portal belegt."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-30T06:41:25.349Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft",
@@ -1477,9 +1490,9 @@
       ],
       "industry": "Public Research",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 81,
-      "next_scan_at": "2026-08-29T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1492,8 +1505,14 @@
         "evidence_note": "Weihenstephan-Hinweis nennt die LWF; die offizielle LWF-Domain enthaelt aktuelle Stellenangebote."
       },
       "created_at": "2026-08-28T16:05:10.163Z",
-      "updated_at": "2026-08-28T16:05:10.163Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:adac",
@@ -1516,9 +1535,9 @@
       ],
       "industry": "Mobility Services",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 81,
-      "next_scan_at": "2026-08-29T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1531,8 +1550,14 @@
         "evidence_note": "Der ADAC-Kandidat wurde ueber die offizielle ADAC-Website und das ADAC-Karriereportal mit Stellenanzeigen belegt."
       },
       "created_at": "2026-08-28T16:22:41.522Z",
-      "updated_at": "2026-08-28T16:22:41.522Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:nagarro_se",
@@ -1555,9 +1580,9 @@
       ],
       "industry": "IT Services",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-24T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1570,8 +1595,14 @@
         "evidence_note": "Regionale offizielle Quelle nennt Nagarro; Karrierebereich liegt auf der offiziellen Domain."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:msg_systems_ag",
@@ -1595,9 +1626,9 @@
       ],
       "industry": "IT Consulting",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "PARTIAL",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1610,8 +1641,13 @@
         "evidence_note": "Offizielle msg-Standortseite fuer Ismaning bei Muenchen und Jobseite als Primaerquelle gepflegt."
       },
       "created_at": "2026-08-17T16:01:23.149Z",
-      "updated_at": "2026-08-17T16:02:19.059Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": null,
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-09-14T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "partial_scan_recheck",
+      "staleness_status": "REFRESH_DUE"
     },
     {
       "company_id": "company:landeshauptstadt_muenchen",
@@ -1635,9 +1671,9 @@
       ],
       "industry": "Public Sector",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-18T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1650,8 +1686,14 @@
         "evidence_note": "Offizielle Firmenquelle wurde manuell gepflegt."
       },
       "created_at": "2026-08-17T11:25:03.559Z",
-      "updated_at": "2026-08-17T15:52:58.666Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:jungheinrich_moosburg_gmbh",
@@ -1791,9 +1833,9 @@
       ],
       "industry": "Banking",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-24T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1806,8 +1848,14 @@
         "evidence_note": "Regionale offizielle Quelle nennt Deutsche Pfandbriefbank; Karrierebereich liegt auf der offiziellen Domain."
       },
       "created_at": "2026-08-23T06:20:01.451Z",
-      "updated_at": "2026-08-23T06:20:56.355Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:adobe",
@@ -1830,9 +1878,9 @@
       ],
       "industry": "Software",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-29T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1845,8 +1893,14 @@
         "evidence_note": "Der Adobe-Kandidat wurde ueber die offizielle Adobe-Domain und das Adobe-Karriereportal careers.adobe.com belegt."
       },
       "created_at": "2026-08-28T16:22:41.522Z",
-      "updated_at": "2026-08-28T16:22:41.522Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:accenture",
@@ -1869,9 +1923,9 @@
       ],
       "industry": "Consulting and Technology",
       "ats": [],
-      "scan_status": "PENDING",
+      "scan_status": "SUCCESS",
       "scan_priority": 80,
-      "next_scan_at": "2026-08-29T00:00:00Z",
+      "next_scan_at": "2026-09-14T07:36:48.578Z",
       "verification_status": "CAREER_URL_VERIFIED",
       "discovery_source": {
         "type": "OFFICIAL_WEBSITE",
@@ -1884,8 +1938,14 @@
         "evidence_note": "Der Accenture-Kandidat wurde ueber die offizielle Accenture-Domain und die deutsche Jobsuche mit Standortfilter Muenchen belegt."
       },
       "created_at": "2026-08-28T16:22:41.522Z",
-      "updated_at": "2026-08-28T16:22:41.522Z",
-      "last_successful_scan_at": null
+      "updated_at": "2026-09-13T07:36:48.578Z",
+      "last_successful_scan_at": "2026-09-13T07:36:48.578Z",
+      "last_imported_at": "2026-09-13T07:36:48.578Z",
+      "last_verified_at": "2026-09-13T07:36:48.578Z",
+      "expires_at": "2026-10-13T07:36:48.578Z",
+      "next_refresh_at": "2026-09-14T07:36:48.578Z",
+      "refresh_reason": "scheduled_company_rotation",
+      "staleness_status": "FRESH"
     },
     {
       "company_id": "company:tuev_sued_ag",
@@ -31910,6 +31970,171 @@
       "requirements": [],
       "salary": "UNKNOWN",
       "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_bmw_group_official_job_id_1399977533",
+      "company_id": "company:bmw_group",
+      "official_url": "https://jobs.bmwgroup.com/job/Mountain-View-Senior-Advanced-Technology-Engineer-Cali/1399977533?feedId=null",
+      "alternative_official_urls": [],
+      "source_id": "source:bmw_group_career",
+      "external_job_id": "1399977533",
+      "ats_job_id": "1399977533",
+      "title": "Senior Advanced Technology Engineer (Mountain View, California, US)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Senior Advanced Technology Engineer Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: Senior Advanced Technology Engineer Posting Start Date: 6/9/26 Job Location (Long): Mountain View, California United States Job Description: As an independent group of companies, the BMW Group has a",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-13T07:35:11.041Z",
+      "last_seen": "2026-09-13T07:35:11.041Z",
+      "changed_at": "2026-09-13T07:35:11.041Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 8,
+        "reasons": [
+          "IT-Bezug ist explizit vorhanden."
+        ],
+        "rejected_reasons": [
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-13T07:35:11.041Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_bmw_group_official_job_id_1288689101",
+      "company_id": "company:bmw_group",
+      "official_url": "https://jobs.bmwgroup.com/job/Woodcliff-Lake-Customer-Support-Steering-Specialist-New/1288689101?feedId=null",
+      "alternative_official_urls": [],
+      "source_id": "source:bmw_group_career",
+      "external_job_id": "1288689101",
+      "ats_job_id": "1288689101",
+      "title": "Customer Support Steering Specialist (Woodcliff Lake, New Jersey, US)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "Customer Support Steering Specialist Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: Customer Support Steering Specialist Posting Start Date: 9/9/26 Job Location (Long): Woodcliff Lake, New Jersey United States Job Description: WHAT AWAITS YOU. Support ongoing development, improveme",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-13T07:35:11.041Z",
+      "last_seen": "2026-09-13T07:35:11.041Z",
+      "changed_at": "2026-09-13T07:35:11.041Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [],
+        "rejected_reasons": [
+          "Kein expliziter IT-Bezug erkennbar.",
+          "Standortbezug ist unklar.",
+          "Titel wirkt wie Spezialisten- oder Entwicklerrolle ohne belegte Gesamtverantwortung."
+        ],
+        "evaluated_at": "2026-09-13T07:35:11.041Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_bmw_group_official_job_id_1407333333",
+      "company_id": "company:bmw_group",
+      "official_url": "https://jobs.bmwgroup.com/job/Rome-General-Accountant-Specialist/1407333333?feedId=null",
+      "alternative_official_urls": [],
+      "source_id": "source:bmw_group_career",
+      "external_job_id": "1407333333",
+      "ats_job_id": "1407333333",
+      "title": "General Accountant Specialist (Rome, IT)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "General Accountant Specialist Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: General Accountant Specialist Posting Start Date: 6/30/26 Job Location (Long): Rome, Italy Job Description: La passione è il motore che guida il nostro Gruppo, ci permette di sviluppare idee e soluzioni pe",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-13T07:35:11.041Z",
+      "last_seen": "2026-09-13T07:35:11.041Z",
+      "changed_at": "2026-09-13T07:35:11.041Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 0,
+        "reasons": [
+          "IT-Bezug ist explizit vorhanden."
+        ],
+        "rejected_reasons": [
+          "Standortbezug ist unklar.",
+          "Titel wirkt wie Spezialisten- oder Entwicklerrolle ohne belegte Gesamtverantwortung."
+        ],
+        "evaluated_at": "2026-09-13T07:35:11.041Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
+    },
+    {
+      "job_id": "job:company_bmw_group_official_job_id_1420006133",
+      "company_id": "company:bmw_group",
+      "official_url": "https://jobs.bmwgroup.com/job/San-Luis-Potosi-General-Ledger-Accounting-Coordinator/1420006133?feedId=null",
+      "alternative_official_urls": [],
+      "source_id": "source:bmw_group_career",
+      "external_job_id": "1420006133",
+      "ats_job_id": "1420006133",
+      "title": "General Ledger Accounting Coordinator (San Luis Potosi, MX)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "work_model": "UNKNOWN",
+      "employment_type": "UNKNOWN",
+      "description": "General Ledger Accounting Coordinator Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: General Ledger Accounting Coordinator Posting Start Date: 9/1/26 Job Location (Long): San Luis Potosi, Mexico Job Description: At the BMW Group, everything starts with passion. It turns a professio",
+      "description_source": "OFFICIAL_SOURCE",
+      "status": "NEW",
+      "first_seen": "2026-09-13T07:35:11.041Z",
+      "last_seen": "2026-09-13T07:35:11.041Z",
+      "changed_at": "2026-09-13T07:35:11.041Z",
+      "classification": {
+        "result": "REJECTED",
+        "priority": "UNRATED",
+        "score": 8,
+        "reasons": [
+          "IT-Bezug ist explizit vorhanden."
+        ],
+        "rejected_reasons": [
+          "Standortbezug ist unklar."
+        ],
+        "evaluated_at": "2026-09-13T07:35:11.041Z"
+      },
+      "priority": "UNRATED",
+      "requirements": [],
+      "salary": "UNKNOWN",
+      "identity_basis": "OFFICIAL_JOB_ID"
     }
   ],
   "job_sources": [
@@ -33280,19 +33505,19 @@
       "source_id": "source:bmw_group_career",
       "company_id": "company:bmw_group",
       "source_type": "CAREER_PAGE",
-      "url": "https://www.bmwgroup.jobs/de/en.html",
-      "canonical_url": "https://www.bmwgroup.jobs/de/en.html",
+      "url": "https://jobs.bmwgroup.com/",
+      "canonical_url": "https://jobs.bmwgroup.com/",
       "is_official": true,
       "verified_at": "2026-08-17T15:52:58.666Z",
-      "verification_basis": "CAREER_URL",
+      "verification_basis": "COMPANY_DOMAIN",
       "verification_evidence": {
         "status": "VERIFIED",
-        "evidence_type": "CAREER_URL",
-        "url": "https://www.bmwgroup.jobs/de/en.html",
+        "evidence_type": "COMPANY_DOMAIN",
+        "url": "https://jobs.bmwgroup.com/",
         "basis_url": "https://www.bmwgroup.com/",
         "redirect_chain": [],
         "observed_at": "2026-08-17T15:52:58.666Z",
-        "reason": "Karriere-URL wurde als offizielle Firmenquelle gepflegt."
+        "reason": "URL liegt auf der offiziellen BMW-Group-Subdomain jobs.bmwgroup.com."
       }
     },
     {
@@ -43843,6 +44068,168 @@
         "html/jobagent/daily-run-20260913T010421462Z.html"
       ],
       "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "started_at": "2026-09-13T07:35:11.041Z",
+      "finished_at": "2026-09-13T07:35:19.309Z",
+      "status": "SUCCESS",
+      "company_ids": [
+        "company:bmw_group"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 1,
+        "companies_due": 1,
+        "companies_selected": 1,
+        "companies_skipped": 0,
+        "limit": 1,
+        "selection_reason": "explicit_company_ids",
+        "explicit_company_ids": true,
+        "skipped": []
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T073511041Z.json",
+        "logs/jobagent/daily-run-20260913T073511041Z.md",
+        "html/jobagent/daily-run-20260913T073511041Z.html"
+      ],
+      "errors": []
+    },
+    {
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "started_at": "2026-09-13T07:36:48.578Z",
+      "finished_at": "2026-09-13T07:38:04.037Z",
+      "status": "PARTIAL",
+      "company_ids": [
+        "company:hochschule_weihenstephan_triesdorf",
+        "company:versicherungskammer_bayern",
+        "company:adac",
+        "company:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft",
+        "company:landeshauptstadt_muenchen",
+        "company:msg_systems_ag",
+        "company:deutsche_pfandbriefbank_ag",
+        "company:nagarro_se",
+        "company:accenture",
+        "company:adobe"
+      ],
+      "selection_summary": {
+        "companies_total": 487,
+        "companies_eligible": 419,
+        "companies_due": 419,
+        "companies_selected": 10,
+        "companies_skipped": 477,
+        "limit": 10,
+        "selection_reason": "due_by_next_scan_at_then_priority",
+        "explicit_company_ids": false,
+        "skipped": [
+          {
+            "company_id": "company:36zero_vision_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:4_screen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:95_5_charivari",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aboalarm_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:acentiss_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actemium",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:actyx_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adnymics_parceldealz",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:adtran_networks_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aenova_group",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aes_aerospace_embedded_solutions_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:aesir_interactive_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:agile_robots_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:airbus_defence_and_space",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allianz_se",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:allmannwappner_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:alphabet",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_de_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amazon_web_services",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:amgen_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:ams_osram",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:andrena_objects_ag",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:angsa_robotics_gmbh",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:antenne_bayern_gmbh_and_co_kg",
+            "reason": "limit_reached"
+          },
+          {
+            "company_id": "company:apple_gmbh",
+            "reason": "limit_reached"
+          }
+        ]
+      },
+      "artifact_paths": [
+        "logs/jobagent/daily-run-20260913T073648578Z.json",
+        "logs/jobagent/daily-run-20260913T073648578Z.md",
+        "html/jobagent/daily-run-20260913T073648578Z.html"
+      ],
+      "errors": []
     }
   ],
   "scan_attempts": [
@@ -45355,6 +45742,160 @@
       "source_id": "source:siemens_energy_ag_career",
       "started_at": "2026-09-13T01:04:23.545Z",
       "finished_at": "2026-09-13T01:07:37.308Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:bmw_group_bmw_group_career_20260913t073513077z",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "company_id": "company:bmw_group",
+      "source_id": "source:bmw_group_career",
+      "started_at": "2026-09-13T07:35:13.077Z",
+      "finished_at": "2026-09-13T07:35:19.117Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:hochschule_weihenstephan_triesdorf_hochschule_weihenstephan_triesdorf_career_20260913t073650593z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:hochschule_weihenstephan_triesdorf",
+      "source_id": "source:hochschule_weihenstephan_triesdorf_career",
+      "started_at": "2026-09-13T07:36:50.593Z",
+      "finished_at": "2026-09-13T07:36:55.367Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:versicherungskammer_bayern_versicherungskammer_bayern_career_20260913t073655378z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:versicherungskammer_bayern",
+      "source_id": "source:versicherungskammer_bayern_career",
+      "started_at": "2026-09-13T07:36:55.378Z",
+      "finished_at": "2026-09-13T07:36:56.095Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:adac_adac_career_20260913t073656097z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:adac",
+      "source_id": "source:adac_career",
+      "started_at": "2026-09-13T07:36:56.097Z",
+      "finished_at": "2026-09-13T07:36:56.969Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft_bayerische_landesanstalt_fuer_wald_und_forstwirtschaft_career_20260913t073656971z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft",
+      "source_id": "source:bayerische_landesanstalt_fuer_wald_und_forstwirtschaft_career",
+      "started_at": "2026-09-13T07:36:56.971Z",
+      "finished_at": "2026-09-13T07:36:57.323Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:landeshauptstadt_muenchen_landeshauptstadt_muenchen_career_20260913t073657324z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:landeshauptstadt_muenchen",
+      "source_id": "source:landeshauptstadt_muenchen_career",
+      "started_at": "2026-09-13T07:36:57.324Z",
+      "finished_at": "2026-09-13T07:36:57.728Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:msg_systems_ag_msg_systems_ag_career_20260913t073657761z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:msg_systems_ag",
+      "source_id": "source:msg_systems_ag_career",
+      "started_at": "2026-09-13T07:36:57.761Z",
+      "finished_at": "2026-09-13T07:37:08.329Z",
+      "status": "PARTIAL",
+      "adapter": "live-html-adapter",
+      "error_class": "NO_JOBS_FOUND",
+      "retry_recommendation": "MANUAL_REVIEW",
+      "http_status": 200,
+      "scan_complete": false
+    },
+    {
+      "scan_attempt_id": "scanattempt:deutsche_pfandbriefbank_ag_deutsche_pfandbriefbank_ag_career_20260913t073708355z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:deutsche_pfandbriefbank_ag",
+      "source_id": "source:deutsche_pfandbriefbank_ag_career",
+      "started_at": "2026-09-13T07:37:08.355Z",
+      "finished_at": "2026-09-13T07:37:11.809Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:nagarro_se_nagarro_se_career_20260913t073711810z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:nagarro_se",
+      "source_id": "source:nagarro_se_career",
+      "started_at": "2026-09-13T07:37:11.810Z",
+      "finished_at": "2026-09-13T07:37:12.485Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:accenture_accenture_career_20260913t073712487z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:accenture",
+      "source_id": "source:accenture_career",
+      "started_at": "2026-09-13T07:37:12.487Z",
+      "finished_at": "2026-09-13T07:37:16.730Z",
+      "status": "SUCCESS",
+      "adapter": "live-html-adapter",
+      "error_class": "NONE",
+      "retry_recommendation": "NONE",
+      "http_status": 200,
+      "scan_complete": true
+    },
+    {
+      "scan_attempt_id": "scanattempt:adobe_adobe_career_20260913t073716733z",
+      "scan_run_id": "scanrun:20260913T073648578Z",
+      "company_id": "company:adobe",
+      "source_id": "source:adobe_career",
+      "started_at": "2026-09-13T07:37:16.733Z",
+      "finished_at": "2026-09-13T07:38:03.967Z",
       "status": "SUCCESS",
       "adapter": "live-html-adapter",
       "error_class": "NONE",
@@ -55697,6 +56238,86 @@
       "official_url": "https://jobs.siemens-energy.com/jobs/FolderDetail/Bid-Manager-for-GT-Sales/303359",
       "summary": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near",
       "description": "Bid Manager for GT Sales - Romania - 303359 - Siemens Energy - Careers Marketplace Skip to content Skip to footer Siemens Energy Menu Search Jobs About us Early careers Hiring process Login Current language Deutsch English Español Français Magyar Nederlands Português Română Čeština 简体中文 繁體中文 日本語 Siemens Energy \"We energize society\" by supporting our customers to make the transition to a more sustainable world, based on innovative technologies and our ability to turn ideas into reality. With near"
+    },
+    {
+      "snapshot_id": "snapshot:company_bmw_group_official_job_id_1399977533_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1399977533",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "source_id": "source:bmw_group_career",
+      "captured_at": "2026-09-13T07:35:11.041Z",
+      "content_hash": "c37209a77ba2b406b05d2a1d9c5e4a16cdfb785992caa463438242d4cdd77379",
+      "status": "NEW",
+      "title": "Senior Advanced Technology Engineer (Mountain View, California, US)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.bmwgroup.com/job/Mountain-View-Senior-Advanced-Technology-Engineer-Cali/1399977533?feedId=null",
+      "summary": "Senior Advanced Technology Engineer Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: Senior Advanced Technology Engineer Posting Start Date: 6/9/26 Job Location (Long): Mountain View, California United States Job Description: As an independent group of companies, the BMW Group has a",
+      "description": "Senior Advanced Technology Engineer Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: Senior Advanced Technology Engineer Posting Start Date: 6/9/26 Job Location (Long): Mountain View, California United States Job Description: As an independent group of companies, the BMW Group has a"
+    },
+    {
+      "snapshot_id": "snapshot:company_bmw_group_official_job_id_1288689101_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1288689101",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "source_id": "source:bmw_group_career",
+      "captured_at": "2026-09-13T07:35:11.041Z",
+      "content_hash": "f2f564f0b1adcc9b890b114eb0562502898a2a1c5ddba0042bc0ecfa4f656f1b",
+      "status": "NEW",
+      "title": "Customer Support Steering Specialist (Woodcliff Lake, New Jersey, US)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.bmwgroup.com/job/Woodcliff-Lake-Customer-Support-Steering-Specialist-New/1288689101?feedId=null",
+      "summary": "Customer Support Steering Specialist Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: Customer Support Steering Specialist Posting Start Date: 9/9/26 Job Location (Long): Woodcliff Lake, New Jersey United States Job Description: WHAT AWAITS YOU. Support ongoing development, improveme",
+      "description": "Customer Support Steering Specialist Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: Customer Support Steering Specialist Posting Start Date: 9/9/26 Job Location (Long): Woodcliff Lake, New Jersey United States Job Description: WHAT AWAITS YOU. Support ongoing development, improveme"
+    },
+    {
+      "snapshot_id": "snapshot:company_bmw_group_official_job_id_1407333333_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1407333333",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "source_id": "source:bmw_group_career",
+      "captured_at": "2026-09-13T07:35:11.041Z",
+      "content_hash": "1542236c979b682c2f2fecf10fb3a65df056fcf3afd5816e45ecb708407babf3",
+      "status": "NEW",
+      "title": "General Accountant Specialist (Rome, IT)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.bmwgroup.com/job/Rome-General-Accountant-Specialist/1407333333?feedId=null",
+      "summary": "General Accountant Specialist Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: General Accountant Specialist Posting Start Date: 6/30/26 Job Location (Long): Rome, Italy Job Description: La passione è il motore che guida il nostro Gruppo, ci permette di sviluppare idee e soluzioni pe",
+      "description": "General Accountant Specialist Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: General Accountant Specialist Posting Start Date: 6/30/26 Job Location (Long): Rome, Italy Job Description: La passione è il motore che guida il nostro Gruppo, ci permette di sviluppare idee e soluzioni pe"
+    },
+    {
+      "snapshot_id": "snapshot:company_bmw_group_official_job_id_1420006133_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1420006133",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "source_id": "source:bmw_group_career",
+      "captured_at": "2026-09-13T07:35:11.041Z",
+      "content_hash": "1ada50ef286a161e05a8ede435eeb593f3cc93484ef33c3c652c86dcbd941df3",
+      "status": "NEW",
+      "title": "General Ledger Accounting Coordinator (San Luis Potosi, MX)",
+      "location": {
+        "label": "UNKNOWN",
+        "city": "UNKNOWN",
+        "region": "UNKNOWN",
+        "country": "DE",
+        "target_area": "UNKNOWN"
+      },
+      "official_url": "https://jobs.bmwgroup.com/job/San-Luis-Potosi-General-Ledger-Accounting-Coordinator/1420006133?feedId=null",
+      "summary": "General Ledger Accounting Coordinator Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: General Ledger Accounting Coordinator Posting Start Date: 9/1/26 Job Location (Long): San Luis Potosi, Mexico Job Description: At the BMW Group, everything starts with passion. It turns a professio",
+      "description": "General Ledger Accounting Coordinator Job Details | BMW Group Skip to main content Search Jobs Language Deutsch (Deutschland) English (United States) Español (México) Français (France) Magyar (Magyarország) Português (Brasil) View Profile Employee Login Search Jobs Job Description Apply now Job Title: General Ledger Accounting Coordinator Posting Start Date: 9/1/26 Job Location (Long): San Luis Potosi, Mexico Job Description: At the BMW Group, everything starts with passion. It turns a professio"
     }
   ],
   "change_events": [
@@ -64740,6 +65361,66 @@
         "status"
       ],
       "reason": "Identitaet ueber OFFICIAL_JOB_ID wiedererkannt."
+    },
+    {
+      "change_event_id": "change:company_bmw_group_official_job_id_1399977533_created_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1399977533",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-13T07:35:11.041Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_bmw_group_official_job_id_1288689101_created_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1288689101",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-13T07:35:11.041Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_bmw_group_official_job_id_1407333333_created_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1407333333",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-13T07:35:11.041Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
+    },
+    {
+      "change_event_id": "change:company_bmw_group_official_job_id_1420006133_created_20260913t073511041z",
+      "job_id": "job:company_bmw_group_official_job_id_1420006133",
+      "scan_run_id": "scanrun:20260913T073511041Z",
+      "event_type": "JOB_CREATED",
+      "created_at": "2026-09-13T07:35:11.041Z",
+      "old_status": "",
+      "new_status": "NEW",
+      "changed_fields": [
+        "status",
+        "first_seen",
+        "last_seen"
+      ],
+      "reason": "Erstmals ueber offiziellen Adapterlauf erkannt."
     }
   ],
   "discovery_inventory": [

@@ -147,6 +147,10 @@ $navigationHtml = @'
 $navigationCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $navigationHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Head of IT'))
 Assert-True -Condition ($navigationCandidates.Count -eq 0) -Message 'Live-Parser darf Karriere-Navigation und Jobportal-Links nicht als Stellen speichern.'
 
+$malformedHrefHtml = '<html><body><a href="http://www.sec.gov.&nbsp">SEC</a><a href="/careers/head-of-it-123">Head of IT</a></body></html>'
+$malformedHrefCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $malformedHrefHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Head of IT'))
+Assert-True -Condition ($malformedHrefCandidates.Count -eq 1 -and $malformedHrefCandidates[0].detail_url -eq 'https://example.invalid/careers/head-of-it-123') -Message 'Live-Parser muss kaputte Fremd-Hrefs ignorieren und gueltige Treffer weiter auswerten.'
+
 $storyHtml = '<html><body><a href="/en/newsroom/stories/how-product-strategy-works.html">How Product Strategy Works</a></body></html>'
 $storyCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $storyHtml -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 10 -SearchTerms @('Head of IT'))
 Assert-True -Condition ($storyCandidates.Count -eq 0) -Message 'Live-Parser darf Newsroom-/Story-Seiten nicht als Stellen speichern.'
@@ -821,6 +825,7 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'policy_limits',
         'official_candidate_filter',
         'career_navigation_candidate_rejection',
+        'malformed_href_candidate_skip',
         'newsroom_story_candidate_rejection',
         'content_page_candidate_rejection',
         'ats_category_page_candidate_rejection',
