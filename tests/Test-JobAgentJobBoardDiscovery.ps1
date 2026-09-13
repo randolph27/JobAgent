@@ -71,6 +71,7 @@ Assert-True -Condition (@($result.hints | Where-Object { [string]$_.employer_nam
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.candidate_status -ne 'DISCOVERY_HINT' -or [string]$_.verification_status -ne 'UNVERIFIED' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Jobboersen-Hints muessen unverifiziert bleiben.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.observed_url -notmatch '^https://www\.stepstone\.de/' }).Count -eq 0) -Message 'Posting-URLs werden nicht absolut normalisiert.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_record_hash -notmatch '^[a-f0-9]{64}$' -or [string]$_.evidence_snippet_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Hash-Evidenz fehlt.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_evidence.content_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Jobboersen-Hints verlieren strukturierte Source-Evidence.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.raw_retention_policy -ne 'minimal_metadata_only_no_full_posting_content' }).Count -eq 0) -Message 'Retention-Policy fehlt.'
 Assert-True -Condition (@($result.hints | Where-Object { $_.PSObject.Properties.Name -contains 'description' -or $_.PSObject.Properties.Name -contains 'full_text' -or $_.PSObject.Properties.Name -contains 'recruiter' }).Count -eq 0) -Message 'Unzulaessige Anzeigen-/Personendaten wurden persistiert.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.known_company_id -eq 'company:siemens_ag' }).Count -eq 1) -Message 'Bekannte Firma wird nicht markiert.'
@@ -108,6 +109,18 @@ Assert-True -Condition (@($freisingResult.hints | Where-Object { [string]$_.empl
 $emptyFixture = Join-Path $root 'tests\fixtures\jobagent\jobboard-discovery\stepstone-empty-snapshot.json'
 $emptyResult = Import-JobAgentJobBoardEmployers -SnapshotPath $emptyFixture -SourceRegistry $registry -KnownCompanies $companies
 Assert-True -Condition ($emptyResult.hints_total -eq 0 -and $emptyResult.records_read -eq 0) -Message 'Leere Ergebnisse werden falsch behandelt.'
+
+$jobBoardUrlHintRecords = ConvertFrom-JobAgentJobBoardSnapshot `
+    -Html '<article data-jobagent-job data-jobagent-employer="Urlhint AG" data-jobagent-title="Controller" data-jobagent-location="Muenchen" data-jobagent-url="/jobs/1" data-jobagent-website="https://urlhint.invalid/" data-jobagent-career="/karriere"></article><article data-jobagent-job data-jobagent-employer="Unsafe AG" data-jobagent-title="Sales" data-jobagent-location="Muenchen" data-jobagent-url="/jobs/2" data-jobagent-website="javascript:alert(1)"></article>' `
+    -BaseUrl 'https://jobs.example.invalid/' `
+    -SourceId 'source-registry:stepstone_muenchen' `
+    -Platform 'StepStone' `
+    -SearchParameters ([pscustomobject]@{ keyword = 'all'; location = 'Muenchen'; radius_km = 20 }) `
+    -FetchedAt ([datetime]'2026-08-23T08:00:00Z')
+$urlHint = ConvertTo-JobAgentJobBoardHint -Record (@($jobBoardUrlHintRecords | Where-Object { [string]$_.employer_name -eq 'Urlhint AG' })[0])
+$unsafeHint = ConvertTo-JobAgentJobBoardHint -Record (@($jobBoardUrlHintRecords | Where-Object { [string]$_.employer_name -eq 'Unsafe AG' })[0])
+Assert-True -Condition ([string]$urlHint.website_hint -eq 'https://urlhint.invalid/' -and [string]$urlHint.career_hint -eq 'https://jobs.example.invalid/karriere') -Message 'Jobboersenimport transportiert explizite Website-/Karrierehinweise nicht.'
+Assert-True -Condition ($unsafeHint.PSObject.Properties.Name -notcontains 'website_hint') -Message 'Jobboersenimport muss unsichere URL-Schemes ablehnen.'
 
 $blockedFixture = Join-Path $root 'tests\fixtures\jobagent\jobboard-discovery\indeed-blocked-snapshot.json'
 try {
@@ -173,6 +186,7 @@ finally {
         'ba_jobsuche_freising_snapshot_import',
         'stepstone_freising_snapshot_import',
         'minimal_hash_evidence',
+        'structured_jobboard_url_hints',
         'empty_results',
         'no_jobsource_side_effect',
         'script_writes_jobboard_and_merged_hints'

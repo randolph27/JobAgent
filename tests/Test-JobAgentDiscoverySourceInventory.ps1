@@ -43,6 +43,8 @@ Assert-True -Condition ($inventory.schema_version -eq 'jobagent/source-inventory
 Assert-True -Condition (@($inventory.sources).Count -eq 35) -Message 'Quelleninventur enthaelt nicht jede Registry-Quelle als Zeile.'
 Assert-True -Condition ($inventory.totals.retained_discovery_inventory -ge 2000) -Message 'Retention-Bestand wird in der Quelleninventur nicht mitgefuehrt.'
 Assert-True -Condition ($inventory.totals.retained_discovered_urls -ge 1000) -Message 'Retained-URL-Bestand wird in der Quelleninventur nicht mitgefuehrt.'
+Assert-True -Condition ($inventory.totals.PSObject.Properties.Name -contains 'structured_url_hints') -Message 'Quelleninventur weist strukturierte Website-/Karrierehinweise nicht aus.'
+Assert-True -Condition (@($inventory.sources | Where-Object { $_.PSObject.Properties.Name -contains 'structured_url_hint_count' }).Count -eq 35) -Message 'Quelleninventur muss je Quelle strukturierte URL-Hints zaehlen.'
 Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:openstreetmap_overpass_business_names' -and [int]$_.hint_count -ge 1000 }).Count -eq 1) -Message 'OSM-Hinweise werden nicht der Quelle zugeordnet.'
 Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:ba_jobsuche' -and [int]$_.hint_count -eq 4 }).Count -eq 1) -Message 'BA-Hinweise werden nicht exakt ausgewiesen.'
 Assert-True -Condition (@($inventory.sources | Where-Object { [string]$_.source_id -eq 'source-registry:stepstone_freising' -and [int]$_.hint_count -eq 2 -and [int]$_.queue_count -eq 2 }).Count -eq 1) -Message 'Nicht-primaere Cluster-Kandidaten muessen ihrer Quelle in der Queue zugeordnet bleiben.'
@@ -77,6 +79,7 @@ Assert-True -Condition (@($research.source_candidates | Where-Object { $_.PSObje
         'all_registry_sources_reconciled',
         'cluster_candidate_ids_count_as_queue_coverage',
         'small_source_counts_are_not_exhaustion',
+        'structured_url_hint_counts',
         'research_matrix_has_new_source_approaches',
         'ja0272_open_sources_have_final_decisions',
         'rejected_sources_fail_closed'

@@ -55,6 +55,7 @@ Assert-True -Condition (@($result.hints | Where-Object { [string]$_.candidate_st
 Assert-True -Condition (@($result.hints | Where-Object { @($_.dedupe_keys).Count -lt 1 }).Count -eq 0) -Message 'Register-Hints brauchen Dedupe-Keys.'
 Assert-True -Condition (@($result.hints | Where-Object { @($_.dedupe_keys | Where-Object { [string]$_ -match '^name:' }).Count -ne 1 -or @($_.dedupe_keys | Where-Object { [string]$_ -match '^register:' }).Count -ne 1 }).Count -eq 0) -Message 'Register-Hints brauchen getrennte Name- und Register-Dedupe-Keys.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_snapshot.record_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Record-Hashes fehlen oder sind ungueltig.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_evidence.content_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Register-Hints verlieren strukturierte Source-Evidence.'
 Assert-True -Condition (@($result.hints | Where-Object { $_.PSObject.Properties.Name -match 'geschäft|geschaeft|director|shareholder|person' }).Count -eq 0) -Message 'Personenbezogene Registerrollen duerfen nicht persistiert werden.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.review_status -eq 'MANUAL_REVIEW_REQUIRED' }).Count -eq 1) -Message 'Geloeschte Registereintraege muessen Review-Faelle bleiben.'
 
@@ -186,6 +187,46 @@ finally {
     }
 }
 
+$urlHintFixture = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-register-urlhint-' + [guid]::NewGuid().ToString('N') + '.json')
+try {
+    [pscustomobject]@{
+        items = @(
+            [pscustomobject]@{
+                register_name = 'Register Urlhint GmbH'
+                register_city = 'Muenchen'
+                register_court = 'Amtsgericht Muenchen'
+                register_number = 'HRB 82001'
+                legal_form = 'GmbH'
+                status = 'active'
+                website_hint = 'https://register-urlhint.invalid/'
+                career_hint = 'https://register-urlhint.invalid/jobs'
+            },
+            [pscustomobject]@{
+                register_name = 'Unsafe Urlhint GmbH'
+                register_city = 'Muenchen'
+                register_court = 'Amtsgericht Muenchen'
+                register_number = 'HRB 82002'
+                legal_form = 'GmbH'
+                status = 'active'
+                website_hint = 'javascript:alert(1)'
+            }
+        )
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $urlHintFixture -Encoding UTF8
+    $urlHintResult = Import-JobAgentRegisterCandidates `
+        -InputPath $urlHintFixture `
+        -SourceRegistry $registry `
+        -SnapshotId 'offeneregister-urlhint-2026-08' `
+        -SnapshotDate ([datetime]'2026-08-01T00:00:00Z') `
+        -ObservedAt ([datetime]'2026-08-23T08:00:00Z')
+    Assert-True -Condition (@($urlHintResult.hints | Where-Object { [string]$_.register_name -eq 'Register Urlhint GmbH' -and [string]$_.website_hint -eq 'https://register-urlhint.invalid/' -and [string]$_.career_hint -eq 'https://register-urlhint.invalid/jobs' }).Count -eq 1) -Message 'Registerimport transportiert gueltige Website-/Karrierehinweise nicht.'
+    Assert-True -Condition (@($urlHintResult.hints | Where-Object { [string]$_.register_name -eq 'Unsafe Urlhint GmbH' -and $_.PSObject.Properties.Name -contains 'website_hint' }).Count -eq 0) -Message 'Registerimport muss unsichere URL-Schemes ablehnen.'
+}
+finally {
+    if (Test-Path -LiteralPath $urlHintFixture -PathType Leaf) {
+        Remove-Item -LiteralPath $urlHintFixture -Force
+    }
+}
+
 $badRegistry = [pscustomobject]@{
     schema_version = 'jobagent/discovery-source/v2'
     items = @()
@@ -241,6 +282,7 @@ finally {
         'csv_import',
         'coordinate_target_area_mapping',
         'coordinate_register_import_filter',
+        'structured_register_url_hints',
         'opencorporates_jsonl_nested_fields',
         'target_area_mapping',
         'dedupe_keys',

@@ -70,6 +70,24 @@ function ConvertTo-JobAgentRegisterHash {
     return [Convert]::ToHexString($hash).ToLowerInvariant()
 }
 
+function Resolve-JobAgentRegisterUrlHint {
+    [CmdletBinding()]
+    param([Parameter()][AllowEmptyString()][string]$Url)
+
+    if ([string]::IsNullOrWhiteSpace($Url)) {
+        return $null
+    }
+    $candidate = $Url.Trim()
+    if (-not [Uri]::IsWellFormedUriString($candidate, [UriKind]::Absolute)) {
+        return $null
+    }
+    $uri = [Uri]$candidate
+    if ($uri.Scheme -notin @('http', 'https')) {
+        return $null
+    }
+    return $uri.AbsoluteUri
+}
+
 function ConvertTo-JobAgentRegisterAsciiSlug {
     [CmdletBinding()]
     param([Parameter(Mandatory)][AllowEmptyString()][string]$Value)
@@ -257,6 +275,8 @@ function ConvertTo-JobAgentRegisterRecord {
     $status = [string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('status', 'register_status', 'current_status') -Default 'UNKNOWN')
     $latitude = Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('latitude', 'lat', 'geo_lat', 'y') -Default $null
     $longitude = Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('longitude', 'lon', 'lng', 'geo_lon', 'x') -Default $null
+    $websiteHint = Resolve-JobAgentRegisterUrlHint -Url ([string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('website_hint', 'website_url', 'company_url') -Default ''))
+    $careerHint = Resolve-JobAgentRegisterUrlHint -Url ([string](Get-JobAgentRegisterDiscoveryProperty -Object $Record -Names @('career_hint', 'career_url', 'jobs_url') -Default ''))
 
     if ([string]::IsNullOrWhiteSpace($registerName)) {
         throw "Registerdatensatz in Zeile $LineNumber enthaelt keinen Namen."
@@ -302,7 +322,7 @@ function ConvertTo-JobAgentRegisterRecord {
         $dedupeKeys.Add($registerKey)
     }
 
-    [pscustomobject]@{
+    $hint = [pscustomobject]@{
         hint_id = 'register-hint:' + (ConvertTo-JobAgentRegisterAsciiSlug -Value ($SnapshotId + '-' + $registerName + '-' + $registerCity + '-' + $LineNumber))
         register_name = $registerName
         normalized_name = $nameKey
@@ -324,8 +344,22 @@ function ConvertTo-JobAgentRegisterRecord {
         official_verification_required = $true
         dedupe_keys = @($dedupeKeys.ToArray() | Sort-Object -Unique)
         candidate_status = 'REGISTER_DISCOVERY_HINT'
+        source_evidence = [pscustomobject]@{
+            source_id = $SourceId
+            source_page = ''
+            record_id = [string]$LineNumber
+            observed_at = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+            content_hash = ConvertTo-JobAgentRegisterHash -Value $RawLine
+        }
         next_action = 'verify_official_company_website_or_career_url'
     }
+    if ($null -ne $websiteHint) {
+        $hint | Add-Member -NotePropertyName website_hint -NotePropertyValue $websiteHint -Force
+    }
+    if ($null -ne $careerHint) {
+        $hint | Add-Member -NotePropertyName career_hint -NotePropertyValue $careerHint -Force
+    }
+    return $hint
 }
 
 function Read-JobAgentRegisterRecords {

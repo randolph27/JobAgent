@@ -61,6 +61,26 @@ function ConvertFrom-JobAgentRegionalHtmlText {
     return ([regex]::Replace($text, '\s+', ' ')).Trim()
 }
 
+function Resolve-JobAgentRegionalUrlHint {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowEmptyString()][string]$Url,
+        [Parameter(Mandatory)][string]$BaseUrl
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Url)) {
+        return $null
+    }
+    if (-not [Uri]::IsWellFormedUriString($BaseUrl, [UriKind]::Absolute)) {
+        throw "BaseUrl ist keine absolute URL: $BaseUrl"
+    }
+    $resolved = [Uri]::new([Uri]$BaseUrl, $Url.Trim())
+    if ($resolved.Scheme -notin @('http', 'https')) {
+        return $null
+    }
+    return $resolved.AbsoluteUri
+}
+
 function ConvertTo-JobAgentRegionalCoordinate {
     [CmdletBinding()]
     param([Parameter()][AllowNull()][object]$Value)
@@ -215,6 +235,8 @@ function ConvertFrom-JobAgentRegionalHtmlRows {
                 company_name = $name
                 sector_hint = & $getValue 'sector'
                 address_or_location_hint = & $getValue 'location'
+                website_hint = & $getValue 'website'
+                career_hint = & $getValue 'career'
                 region_reference = $RegionReference
                 source_page = $SourcePage
                 source_id = $SourceId
@@ -244,6 +266,8 @@ function ConvertTo-JobAgentRegionalHint {
     $longitude = Get-JobAgentRegionalProperty -Object $Record -Names @('longitude', 'lon', 'lng', 'geo_lon', 'x') -Default $null
     $sourcePage = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('source_page', 'source_url') -Default ([string]$Source.source_url))
     $observedAt = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('observed_at') -Default ([datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)))
+    $websiteHint = Resolve-JobAgentRegionalUrlHint -Url ([string](Get-JobAgentRegionalProperty -Object $Record -Names @('website_hint', 'website_url', 'company_url') -Default '')) -BaseUrl $sourcePage
+    $careerHint = Resolve-JobAgentRegionalUrlHint -Url ([string](Get-JobAgentRegionalProperty -Object $Record -Names @('career_hint', 'career_url', 'jobs_url') -Default '')) -BaseUrl $sourcePage
     $targetArea = Get-JobAgentRegionalTargetArea -Location $location -RegionReference $region -Latitude $latitude -Longitude $longitude
     $officialness = if ([string]$Source.evidence_level -eq 'SECONDARY_OFFICIAL_DIRECTORY') { 'SECONDARY_OFFICIAL_DIRECTORY' } else { 'CURATED_DISCOVERY_HINT' }
     $manualReviewReason = switch ($targetArea) {
@@ -264,7 +288,7 @@ function ConvertTo-JobAgentRegionalHint {
     }
 
     $rawEvidence = ($Record | ConvertTo-Json -Compress -Depth 20)
-    [pscustomobject]@{
+    $hint = [pscustomobject]@{
         hint_id = 'regional-hint:' + (ConvertTo-JobAgentRegionalSlug -Value (([string]$Source.source_id).Substring(16) + '-' + $companyName + '-' + $region))
         company_name = $companyName
         normalized_name = ConvertTo-JobAgentCompanyNameKey -Name $companyName
@@ -284,8 +308,22 @@ function ConvertTo-JobAgentRegionalHint {
         official_verification_required = $true
         raw_retention_policy = 'minimal_regional_metadata_only_no_contact_collection'
         source_record_hash = ConvertTo-JobAgentRegionalHash -Value $rawEvidence
+        source_evidence = [pscustomobject]@{
+            source_id = [string]$Source.source_id
+            source_page = $sourcePage
+            record_id = [string](Get-JobAgentRegionalProperty -Object $Record -Names @('record_id', 'id', 'record_index') -Default '')
+            observed_at = $observedAt
+            content_hash = ConvertTo-JobAgentRegionalHash -Value $rawEvidence
+        }
         next_action = 'verify_official_company_website_or_career_url'
     }
+    if ($null -ne $websiteHint) {
+        $hint | Add-Member -NotePropertyName website_hint -NotePropertyValue $websiteHint -Force
+    }
+    if ($null -ne $careerHint) {
+        $hint | Add-Member -NotePropertyName career_hint -NotePropertyValue $careerHint -Force
+    }
+    return $hint
 }
 
 function Import-JobAgentRegionalDirectories {

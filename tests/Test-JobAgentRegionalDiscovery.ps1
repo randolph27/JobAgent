@@ -71,6 +71,8 @@ Assert-True -Condition (@($result.hints | Where-Object { [string]$_.target_area 
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.company_name -eq 'Coordinate Park GmbH' -and [string]$_.target_area -eq 'MUNICH_20KM' }).Count -eq 1) -Message 'Koordinatenbasierter Regional-Hint fehlt.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.target_area -eq 'TARGET_AREA_UNCERTAIN' }).Count -eq 1) -Message 'Unsicherer Standort muss Review-Hint bleiben.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.candidate_status -ne 'REGIONAL_DISCOVERY_HINT' -or [string]$_.verification_status -ne 'UNVERIFIED' -or [bool]$_.official_verification_required -ne $true }).Count -eq 0) -Message 'Regional-Hints muessen unverifiziert bleiben.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.company_name -eq 'Alpha Regional AG' -and [string]$_.website_hint -eq 'https://stadt.muenchen.de/alpha' -and [string]$_.career_hint -eq 'https://stadt.muenchen.de/alpha/jobs' }).Count -eq 1) -Message 'Regionalimport transportiert relative Website-/Karrierehinweise nicht.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.company_name -eq 'Alpha Regional AG' -and [string]$_.source_evidence.content_hash -match '^[a-f0-9]{64}$' }).Count -eq 1) -Message 'Regionalimport verliert strukturierte Source-Evidence.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_record_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Hash-Evidenz fehlt.'
 Assert-True -Condition (@($result.hints | Where-Object { $_.PSObject.Properties.Name -contains 'email' -or $_.PSObject.Properties.Name -contains 'phone' -or $_.PSObject.Properties.Name -contains 'contact' }).Count -eq 0) -Message 'Kontaktfelder duerfen nicht persistiert werden.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.raw_retention_policy -ne 'minimal_regional_metadata_only_no_contact_collection' }).Count -eq 0) -Message 'Retention-Policy fehlt.'
@@ -212,6 +214,7 @@ finally {
         'card_html_parser',
         'json_snapshot_parser',
         'coordinate_target_area_filter',
+        'structured_regional_url_hints',
         'community_tech_directory_snapshot',
         'target_area_filter',
         'dedupe_by_hint_id',

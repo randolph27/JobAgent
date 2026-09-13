@@ -260,9 +260,26 @@ function New-InventorySample {
                 hint_id = [string](Get-InventoryProperty -Object $_ -Name 'hint_id' -Default '')
                 employer_name = [string](Get-InventoryProperty -Object $_ -Name 'employer_name' -Default (Get-InventoryProperty -Object $_ -Name 'company_name' -Default 'UNKNOWN'))
                 observed_url = [string](Get-InventoryProperty -Object $_ -Name 'observed_url' -Default '')
+                website_hint = [string](Get-InventoryProperty -Object $_ -Name 'website_hint' -Default '')
+                career_hint = [string](Get-InventoryProperty -Object $_ -Name 'career_hint' -Default '')
                 candidate_status = [string](Get-InventoryProperty -Object $_ -Name 'candidate_status' -Default 'UNKNOWN')
             }
         })
+}
+
+function Get-InventoryStructuredUrlHintCount {
+    param(
+        [Parameter()][AllowEmptyCollection()][object[]]$Hints,
+        [Parameter(Mandatory)][string]$SourceId
+    )
+
+    return @($Hints | Where-Object {
+            [string](Get-InventoryProperty -Object $_ -Name 'source_id' -Default '') -eq $SourceId -and
+            (
+                -not [string]::IsNullOrWhiteSpace([string](Get-InventoryProperty -Object $_ -Name 'website_hint' -Default '')) -or
+                -not [string]::IsNullOrWhiteSpace([string](Get-InventoryProperty -Object $_ -Name 'career_hint' -Default ''))
+            )
+        }).Count
 }
 
 function New-InventorySourceRows {
@@ -303,8 +320,12 @@ function New-InventorySourceRows {
             $queueCount = if ($queueSourceCounts.PSObject.Properties.Name -contains $sourceId) { [int]$queueSourceCounts.$sourceId } else { 0 }
             $retainedInventoryCount = @($inventoryItems | Where-Object { [string](Get-InventoryProperty -Object $_ -Name 'source_id' -Default '') -eq $sourceId }).Count
             $retainedUrlCount = @($urlItems | Where-Object { [string](Get-InventoryProperty -Object $_ -Name 'source_id' -Default '') -eq $sourceId }).Count
+            $structuredUrlHintCount = Get-InventoryStructuredUrlHintCount -Hints $hints -SourceId $sourceId
             $nextAction = if ([string]$source.import_mode -eq 'REJECT') {
                 'blocked'
+            }
+            elseif ($structuredUrlHintCount -gt 0) {
+                'verify_structured_url_hints'
             }
             elseif ($hintCount -eq 0 -and $manifestItems.Count -eq 0 -and [string]$source.import_mode -in @('BULK_SNAPSHOT', 'FIXTURE_OR_SNAPSHOT_ONLY')) {
                 'add_snapshot_or_explain_no_input'
@@ -335,6 +356,7 @@ function New-InventorySourceRows {
                 input_records_total = $inputRecordsTotal
                 hint_count = $hintCount
                 queue_count = $queueCount
+                structured_url_hint_count = $structuredUrlHintCount
                 retained_inventory_count = $retainedInventoryCount
                 retained_url_count = $retainedUrlCount
                 sample_hints = New-InventorySample -Hints $hints -SourceId $sourceId
@@ -499,6 +521,10 @@ $inventory = [pscustomobject]@{
         queue_entries = @($queue.queue).Count
         retained_discovery_inventory = @($store.discovery_inventory).Count
         retained_discovered_urls = @($store.discovered_urls).Count
+        structured_url_hints = @($hintStore.hints | Where-Object {
+                -not [string]::IsNullOrWhiteSpace([string](Get-InventoryProperty -Object $_ -Name 'website_hint' -Default '')) -or
+                -not [string]::IsNullOrWhiteSpace([string](Get-InventoryProperty -Object $_ -Name 'career_hint' -Default ''))
+            }).Count
         hints_without_queue = $hintsWithoutQueue.Count
         queue_without_hint = $queueWithoutHint.Count
     }
@@ -565,6 +591,7 @@ $summaryHashInput = ($inventory.input_hashes | ConvertTo-Json -Depth 8) + ($inve
     queue_total = $inventory.totals.queue_entries
     hints_without_queue = $inventory.totals.hints_without_queue
     queue_without_hint = $inventory.totals.queue_without_hint
+    structured_url_hints = $inventory.totals.structured_url_hints
     research_candidates_total = $research.source_candidates_total
     evidence_hash = ConvertTo-InventorySha256 -Value $summaryHashInput
 } | ConvertTo-Json -Depth 8

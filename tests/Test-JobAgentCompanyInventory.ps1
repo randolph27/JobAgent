@@ -220,6 +220,23 @@ Assert-True -Condition ($hintReport.hints_total -eq 1) -Message 'Hint-Report zae
 Assert-True -Condition ($hintReport.unverified_hints -eq 1) -Message 'Hint-Report muss alle Hints unverifiziert ausweisen.'
 Assert-True -Condition ($hintReport.contract -match 'keine JobSource') -Message 'Hint-Report dokumentiert JobSource-Sperre nicht.'
 
+$hintRetentionDocument = New-JobAgentEmptyDocument -GeneratedAt (New-TestSeedDate)
+$hintRetentionHint = [pscustomobject]@{
+    hint_id = 'hint:url-retention'
+    employer_name = 'Url Retention AG'
+    normalized_name = 'url retention'
+    source_id = 'source-registry:ba_jobsuche'
+    observed_url = 'https://jobs.example.invalid/url-retention'
+    website_hint = 'https://url-retention.invalid/'
+    career_hint = 'https://url-retention.invalid/careers'
+    observed_at = '2026-08-23T08:00:00.000Z'
+    verification_status = 'UNVERIFIED'
+    candidate_status = 'DISCOVERY_HINT'
+}
+$hintRetentionDocument = Update-JobAgentDiscoveryHintRetention -Document $hintRetentionDocument -Hints @($hintRetentionHint) -ObservedAt (New-TestSeedDate)
+Assert-True -Condition (@($hintRetentionDocument.discovered_urls | Where-Object { [string]$_.hint_id -eq 'hint:url-retention' -and [string]$_.url_type -eq 'WEBSITE_HINT' -and [string]$_.original_url -eq 'https://url-retention.invalid/' }).Count -eq 1) -Message 'Hint-Retention speichert Website-Hinweis nicht dauerhaft.'
+Assert-True -Condition (@($hintRetentionDocument.discovered_urls | Where-Object { [string]$_.hint_id -eq 'hint:url-retention' -and [string]$_.url_type -eq 'CAREER_HINT' -and [string]$_.original_url -eq 'https://url-retention.invalid/careers' }).Count -eq 1) -Message 'Hint-Retention speichert Karriere-Hinweis nicht dauerhaft.'
+
 $importProjectRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-discovery-import-' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $importProjectRoot -Force | Out-Null
 try {
@@ -403,7 +420,7 @@ finally {
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'retained_discovery_inventory_and_urls', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script', 'company_career_verification_script', 'company_discovery_snapshot_lane')
+    cases = @('initial_seed', 'idempotent_seed', 'same_domain', 'legal_form_variant', 'separate_subsidiary', 'merged_priority_and_locations', 'retained_discovery_inventory_and_urls', 'missing_career_url', 'discovery_import_manual_review_and_verified_website_only', 'regional_discovery_feed_contract', 'secondary_hint_search_matrix', 'secondary_hint_contract', 'structured_hint_url_retention', 'secondary_hint_script', 'regional_discovery_import_script', 'discovery_import_script', 'company_career_verification_script', 'company_discovery_snapshot_lane')
     companies = @($secondRun.document.companies).Count
     sources = @($secondRun.document.job_sources).Count
 } | ConvertTo-Json -Depth 4

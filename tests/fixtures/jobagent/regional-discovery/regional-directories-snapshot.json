@@ -7,7 +7,7 @@
       "format": "table_html",
       "source_page": "https://stadt.muenchen.de/lhm-ms-wirtschaftsfoerderung/standort-muenchen/boersennotierte_unternehmen.html",
       "region_reference": "Muenchen",
-      "html": "<table><tr data-jobagent-regional><td data-jobagent-name>Alpha Regional AG</td><td data-jobagent-sector>Software</td><td data-jobagent-location>Muenchen</td></tr><tr data-jobagent-regional><td data-jobagent-name>Alpha Regional AG</td><td data-jobagent-sector>Software</td><td data-jobagent-location>Muenchen</td></tr><tr data-jobagent-regional><td data-jobagent-name>Out Hamburg AG</td><td data-jobagent-sector>Media</td><td data-jobagent-location>Hamburg</td></tr></table>"
+      "html": "<table><tr data-jobagent-regional data-jobagent-website=\"/alpha\"><td data-jobagent-name>Alpha Regional AG</td><td data-jobagent-sector>Software</td><td data-jobagent-location>Muenchen</td><td data-jobagent-career>/alpha/jobs</td></tr><tr data-jobagent-regional><td data-jobagent-name>Alpha Regional AG</td><td data-jobagent-sector>Software</td><td data-jobagent-location>Muenchen</td></tr><tr data-jobagent-regional data-jobagent-website=\"javascript:alert(1)\"><td data-jobagent-name>Out Hamburg AG</td><td data-jobagent-sector>Media</td><td data-jobagent-location>Hamburg</td></tr></table>"
     },
     {
       "source_id": "source-registry:landkreis_freising_wirtschaft",

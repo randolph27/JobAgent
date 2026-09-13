@@ -61,6 +61,26 @@ function ConvertFrom-JobAgentJobBoardHtmlText {
     return ([regex]::Replace($text, '\s+', ' ')).Trim()
 }
 
+function Resolve-JobAgentJobBoardUrlHint {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowEmptyString()][string]$Url,
+        [Parameter(Mandatory)][string]$BaseUrl
+    )
+
+    if ([string]::IsNullOrWhiteSpace($Url)) {
+        return $null
+    }
+    if (-not [Uri]::IsWellFormedUriString($BaseUrl, [UriKind]::Absolute)) {
+        throw "BaseUrl ist keine absolute URL: $BaseUrl"
+    }
+    $resolved = [Uri]::new([Uri]$BaseUrl, $Url.Trim())
+    if ($resolved.Scheme -notin @('http', 'https')) {
+        return $null
+    }
+    return $resolved.AbsoluteUri
+}
+
 function Get-JobAgentJobBoardTargetArea {
     [CmdletBinding()]
     param([Parameter(Mandatory)][AllowEmptyString()][string]$Location)
@@ -179,6 +199,8 @@ function ConvertFrom-JobAgentJobBoardSnapshot {
         $title = & $getAttr 'title'
         $location = & $getAttr 'location'
         $href = & $getAttr 'url'
+        $websiteHint = Resolve-JobAgentJobBoardUrlHint -Url (& $getAttr 'website') -BaseUrl $BaseUrl
+        $careerHint = Resolve-JobAgentJobBoardUrlHint -Url (& $getAttr 'career') -BaseUrl $BaseUrl
         if ([string]::IsNullOrWhiteSpace($href)) {
             $hrefMatch = [regex]::Match($body, '<a\b(?<attrs>[^>]*)href\s*=\s*["''](?<href>[^"'']+)["'']', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)
             if ($hrefMatch.Success) {
@@ -191,7 +213,7 @@ function ConvertFrom-JobAgentJobBoardSnapshot {
 
         $postingUrl = [Uri]::new($baseUri, $href).AbsoluteUri
         $minimalEvidence = ('{0}|{1}|{2}|{3}' -f $employer, $title, $location, $postingUrl)
-        $records.Add([pscustomobject]@{
+        $record = [pscustomobject]@{
                 employer_name = $employer
                 normalized_name = ConvertTo-JobAgentCompanyNameKey -Name $employer
                 job_title = $title
@@ -212,7 +234,14 @@ function ConvertFrom-JobAgentJobBoardSnapshot {
                 candidate_status = 'DISCOVERY_HINT'
                 next_action = 'verify_official_company_website_or_career_url'
                 record_index = $index
-            })
+            }
+        if ($null -ne $websiteHint) {
+            $record | Add-Member -NotePropertyName website_hint -NotePropertyValue $websiteHint -Force
+        }
+        if ($null -ne $careerHint) {
+            $record | Add-Member -NotePropertyName career_hint -NotePropertyValue $careerHint -Force
+        }
+        $records.Add($record)
     }
     return $records.ToArray()
 }
@@ -226,7 +255,7 @@ function ConvertTo-JobAgentJobBoardHint {
 
     $searchKeyword = [string](Get-JobAgentJobBoardProperty -Object $Record.search_parameters -Names @('keyword', 'query') -Default 'UNKNOWN')
     $searchLocation = [string](Get-JobAgentJobBoardProperty -Object $Record.search_parameters -Names @('location') -Default ([string]$Record.job_location))
-    [pscustomobject]@{
+    $hint = [pscustomobject]@{
         hint_id = 'jobboard-hint:' + (ConvertTo-JobAgentJobBoardSlug -Value ((([string]$Record.source_id).Substring(16)) + '-' + [string]$Record.normalized_name + '-' + $searchKeyword + '-' + $searchLocation))
         employer_name = [string]$Record.employer_name
         normalized_name = [string]$Record.normalized_name
@@ -253,8 +282,22 @@ function ConvertTo-JobAgentJobBoardHint {
         is_staffing_agency = [bool]$Record.is_staffing_agency
         known_company_id = if ($null -eq $KnownCompany) { $null } else { [string]$KnownCompany.company_id }
         known_company_domain = if ($null -eq $KnownCompany) { $null } else { [string]$KnownCompany.canonical_domain }
+        source_evidence = [pscustomobject]@{
+            source_id = [string]$Record.source_id
+            source_page = [string]$Record.posting_url
+            record_id = [string]$Record.record_index
+            observed_at = [string]$Record.fetched_at
+            content_hash = [string]$Record.source_record_hash
+        }
         next_action = 'verify_official_company_website_or_career_url'
     }
+    if ($Record.PSObject.Properties.Name -contains 'website_hint') {
+        $hint | Add-Member -NotePropertyName website_hint -NotePropertyValue ([string]$Record.website_hint) -Force
+    }
+    if ($Record.PSObject.Properties.Name -contains 'career_hint') {
+        $hint | Add-Member -NotePropertyName career_hint -NotePropertyValue ([string]$Record.career_hint) -Force
+    }
+    return $hint
 }
 
 function Import-JobAgentJobBoardEmployers {

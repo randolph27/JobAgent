@@ -450,6 +450,51 @@ function ConvertTo-JobAgentDiscoveryHintUrlRetentionItem {
     }
 }
 
+function ConvertTo-JobAgentDiscoveryHintStructuredUrlRetentionItems {
+    param(
+        [Parameter(Mandatory)][object]$Hint,
+        [Parameter(Mandatory)][object]$Capture,
+        [Parameter(Mandatory)][datetime]$ObservedAt
+    )
+
+    $items = [System.Collections.Generic.List[object]]::new()
+    foreach ($spec in @(
+            [pscustomobject]@{ PropertyName = 'website_hint'; UrlType = 'WEBSITE_HINT' },
+            [pscustomobject]@{ PropertyName = 'career_hint'; UrlType = 'CAREER_HINT' }
+        )) {
+        $url = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @($spec.PropertyName) -Default '')
+        if ([string]::IsNullOrWhiteSpace($url)) {
+            continue
+        }
+        if (-not [Uri]::IsWellFormedUriString($url, [UriKind]::Absolute)) {
+            continue
+        }
+        $uri = [Uri]$url
+        if ($uri.Scheme -notin @('http', 'https')) {
+            continue
+        }
+        $hintId = [string]$Capture.hint_id
+        $items.Add([pscustomobject]@{
+                url_id = New-JobAgentHintUrlId -HintId $hintId -Url ($spec.UrlType + ':' + $uri.AbsoluteUri)
+                company_id = $Capture.company_id
+                original_url = $uri.AbsoluteUri
+                canonical_url = $uri.AbsoluteUri
+                url_type = [string]$spec.UrlType
+                source_id = $Capture.source_id
+                source_url = [string](Get-JobAgentCompanyCandidateProperty -Object $Hint -Names @('source_page', 'observed_url', 'source_url') -Default '')
+                first_seen = $Capture.first_seen
+                last_observed = $ObservedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+                last_checked_at = $null
+                last_successful_check = $null
+                verification_status = 'UNVERIFIED'
+                reachability_status = 'UNKNOWN'
+                retention_status = $Capture.retention_status
+                hint_id = $hintId
+            })
+    }
+    return $items.ToArray()
+}
+
 function Update-JobAgentDiscoveryHintRetention {
     param(
         [Parameter(Mandatory)][object]$Document,
@@ -478,6 +523,9 @@ function Update-JobAgentDiscoveryHintRetention {
         $urlItem = ConvertTo-JobAgentDiscoveryHintUrlRetentionItem -Hint $hint -Capture $capture -ObservedAt $ObservedAt
         if ($null -ne $urlItem) {
             Add-JobAgentInventoryItem -Map $urlMap -Item $urlItem -IdProperty 'url_id'
+        }
+        foreach ($structuredUrlItem in @(ConvertTo-JobAgentDiscoveryHintStructuredUrlRetentionItems -Hint $hint -Capture $capture -ObservedAt $ObservedAt)) {
+            Add-JobAgentInventoryItem -Map $urlMap -Item $structuredUrlItem -IdProperty 'url_id'
         }
     }
 

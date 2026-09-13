@@ -1,26 +1,44 @@
 # Handoff latest
 
-Active: `TD-0041`; Status: `in-progress`; Branch: `master`.
+Stand: 2026-09-13T19:21:00.981+02:00
 
-# JA-027: Daily-Run-Akquise integriert
+## Zustand
 
-Stand: 2026-09-13T14:59:00+02:00
+- Active: `TD-0041`
+- Status: `in-progress`
+- Ziel: JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.
+- Branch: `master`
+- HEAD: `14a82a1ac5f8`
+- Upstream: `origin/master`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
+- Route: `True`
 
-## Ergebnis
+## Versionierte Aenderungen
 
-Der regulaere Einstieg `tools/Invoke-JobAgentDailyRun.ps1` fuehrt vor dem Scan automatisch eine budgetierte Akquisephase aus, wenn ein Hint-Store vorhanden ist. Die Phase nutzt die vorhandene Website-Ermittlung und Kandidatenverifikation, schreibt ihre Artefaktpfade ins CLI-JSON und ueberspringt kontrolliert bei fehlendem Hint-Store, Budget 0 oder `-DisableAcquisition`.
-
-Neu verifizierte Firmen mit offizieller Karriere-/ATS-Quelle werden im selben Lauf in `src/JobAgent.DailyRun.psm1` per `AlwaysIncludeCompanyIds` in die Scan-Auswahl aufgenommen, auch wenn `next_scan_at` spaeter liegt. Der HTML-Bericht zeigt die automatisch akquirierte Firma unter `Neue Unternehmen` mit Website und Karrierequelle. `manual/PROGRAM.md` ist auf berufsneutrale Erfassung mit nachgelagerten Filtern synchronisiert.
+- `Roadmap.md`
+- `handoff.latest.md`
+- `src/JobAgent.CompanyInventory.psm1`
+- `src/JobAgent.JobBoardDiscovery.psm1`
+- `src/JobAgent.RegionalDiscovery.psm1`
+- `src/JobAgent.RegisterDiscovery.psm1`
+- `tests/Test-JobAgentCompanyInventory.ps1`
+- `tests/Test-JobAgentDiscoverySourceInventory.ps1`
+- `tests/Test-JobAgentJobBoardDiscovery.ps1`
+- `tests/Test-JobAgentRegionalDiscovery.ps1`
+- `tests/Test-JobAgentRegisterDiscovery.ps1`
+- `tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json`
+- `todo.checkpoint.json`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
+- `tools/Measure-JobAgentDiscoverySourceInventory.ps1`
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit 0, 15 Faelle.
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit 0, 29 Faelle.
-- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit 0, 10 Faelle.
-- `.\ci.cmd route-check` -> Exit 0.
-- `.\ci.cmd stp` -> Exit 0.
-- SonarQube-Status auf `http://localhost:9000/api/system/status` war nicht erreichbar; `.\ci.cmd sonar-start` schlug fehl mit `docker_engine_unavailable; wsl_fallback=wsl_missing`.
+- `.\ci.cmd sonar` -> Exit ``
 
 ## Naechster Anker
 
-JA-027 bleibt offen. Naechster Hotspot: JA-027.2 Quellen-Nachfuellzyklus/Source-Inventory fuer verwertbare Website-/Karrierehinweise vervollstaendigen. Die automatische Startintegration verarbeitet vorhandene Hints, ersetzt aber noch keine vollstaendige Quellenzufuhr.
+JA-041 Berufsneutrale Stellenerfassung von Suchprofilen trennen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
