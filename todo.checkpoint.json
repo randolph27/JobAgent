@@ -9,7 +9,7 @@
         "source": "roadmap",
         "title": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.",
         "status": "in-progress",
-        "last_ts": "2026-09-13T19:18:44+02:00",
+        "last_ts": "2026-09-13T19:42:05+02:00",
         "refs": [
           "docs/handoffs/2026-09-06-ja027-next-chat.md",
           "docs/handoffs/2026-09-07-ja027-batch-metrics-handoff.md",
@@ -73,13 +73,23 @@
           "tests/Test-JobAgentRegisterDiscovery.ps1",
           "tests/Test-JobAgentJobBoardDiscovery.ps1",
           "tests/Test-JobAgentCompanyInventory.ps1",
-          "tests/Test-JobAgentDiscoverySourceInventory.ps1"
+          "tests/Test-JobAgentDiscoverySourceInventory.ps1",
+          "tools/Invoke-JobAgentDiscoveryRefill.ps1",
+          "docs/handoffs/2026-09-13-ja0272-refill-orchestrator-handoff.md",
+          "todo.current.md",
+          "todo.state.json",
+          "todo.events.jsonl",
+          "todo.checkpoint.json",
+          "todo.history.digest.json",
+          "todo.master.index.json",
+          "handoff.latest.md",
+          "handoff.latest.json"
         ],
-        "next_action": "JA-027.2 offen: automatischen Nachfuell-/Quellenwellen-Orchestrator fuer faellige erlaubte Quellen/Snapshots bauen; URL-Hint-Transport und strukturierte Retention sind umgesetzt und getestet.",
+        "next_action": "JA-027.3: Domain-only-/bereits-verifizierte Kandidaten in getrennte Karrierequellen-Pruefung bringen, Hostwellen logisch planen und neue Karrierearbeitgeber getrennt von Domain-only messen.",
         "planning_status": "Nur Planung: Nutzerkorrektur 2026-09-13, automatische Neufirmenakquise beim Jobstart, WebIF-Anzeige und berufsneutrale Filter. Vorhandene technische Fortschritte bleiben; reale Firmenmindestmenge kein Done-Gate.",
         "retention_requirement": "Alle erfassten Firmen und entdeckten Website-/Jobs-/Karriere-/Stellenangebote-/ATS-URLs dauerhaft mit Herkunft, Status und Historie erhalten.",
         "retention_progress": "Store-Schema discovery_inventory/discovered_urls, Import-Retention, Snapshot-Hint-Retention, Name-only-Hint-Retention und Produktivmigration umgesetzt; nach Snapshot-Refresh 2.312 Discovery-Funde/1.401 URL-Funde, 479 Firmen und 439 JobSources unveraendert; unbegruendeter Firmenverlust 0.",
-        "source_inventory_progress": "JA-027.2 URL-Hint-Transport umgesetzt: Regional-, Register- und Jobboard-Adapter transportieren optionale website_hint/career_hint mit Source-Evidence; relative URLs werden normalisiert, unsichere Schemes verworfen; Update-JobAgentDiscoveryHintRetention persistiert WEBSITE_HINT/CAREER_HINT in discovered_urls; Quelleninventur zaehlt strukturierte URL-Hints je Quelle. Automatischer Refill-Orchestrator bleibt offen.",
+        "source_inventory_progress": "JA-027.2 geschlossen: URL-Hint-Transport/Retention, Quelleninventur und automatischer Snapshot-Refill-Orchestrator sind umgesetzt. Invoke-JobAgentDiscoveryRefill importiert nur erlaubte neue/geaenderte Snapshotquellen, persistiert Inputhash-Cursor, ueberspringt blockierte Quellen, baut die Kandidatenqueue neu und wird im regulaeren Daily-Run vor Website-Ermittlung/Verify ausgefuehrt. Naechster Hotspot ist JA-027.3 fuer getrennte Karrierequellen-Pruefung von Domain-only-/bereits-verifizierten Kandidaten.",
         "handoff_status": "planning-complete; implementation and quantity gates remain open",
         "benchmark_metrics_progress": "Verify-JobAgentCompanyCandidates.ps1 schreibt JA-027-batch-<run-id>.json mit batch_metrics, Kandidaten-Telemetrie, Requestzaehlung, Nearest-Rank-P50/P95, Nettozuwachs offizieller Karriere-/ATS-Arbeitgeber, Resume-Report und identischen completed-Checkpoint-Metriken; getestet ueber Test-JobAgentCompanyCandidateVerification, Test-JobAgentSourceVerification und Test-JobAgentCoverage.",
         "resume_progress": "Einzelresultat-Resume umgesetzt: running-Checkpoint speichert geplante/erledigte/offene Kandidaten und Resultatcheckpoint-Root; jedes Kandidatenresultat wird vor Store-Commit atomar gesichert; Folgelauf laedt offene Resultate, verarbeitet nur fehlende Kandidaten und dokumentiert JA-027-resume-<run-id>.json.",
@@ -213,21 +223,21 @@
         "planning_status": "Nur Planung: Nutzerkorrektur 2026-09-13, automatische Neufirmenakquise beim Jobstart, WebIF-Anzeige und berufsneutrale Filter. Vorhandene technische Fortschritte bleiben; reale Firmenmindestmenge kein Done-Gate."
       }
     ],
-    "checkpoint_event_id": "EV-20260913-regular-start-acquisition",
+    "checkpoint_event_id": "EV-20260913-194205-ja0272-final-handoff",
     "history_archives": [
       "logs/todo/active-events-20260828175542--20260912104254.jsonl"
     ]
   },
   "version": 2,
-  "checkpoint_event_id": "EV-20260913-191844-ja0272-url-hint-transport",
+  "checkpoint_event_id": "EV-20260913-194205-ja0272-final-handoff",
   "history_archives": [
     "logs/todo/active-events-20260828175542--20260912104254.jsonl"
   ],
   "schema": "todo-checkpoint-v2",
-  "next": "JA-027.2: automatischen Nachfuell-/Quellenwellen-Orchestrator fertigstellen; neue URL-Hint-Evidence gezielt reaktivieren, identische Hashes nicht erneut planen, Freising-Fairness und gesperrte Quellen beachten.",
+  "next": "JA-027.3: Domain-only-/bereits-verifizierte Kandidaten in getrennte Karrierequellen-Pruefung bringen, Hostwellen logisch planen und neue Karrierearbeitgeber getrennt von Domain-only messen.",
   "next_steps": [
-    "JA-027.2: automatischen Nachfuell-/Quellenwellen-Orchestrator fertigstellen; neue URL-Hint-Evidence gezielt reaktivieren, identische Hashes nicht erneut planen, Freising-Fairness und gesperrte Quellen beachten."
+    "JA-027.3: Domain-only-/bereits-verifizierte Kandidaten in getrennte Karrierequellen-Pruefung bringen, Hostwellen logisch planen und neue Karrierearbeitgeber getrennt von Domain-only messen."
   ],
-  "event_id": "EV-20260913-191844-ja0272-url-hint-transport",
-  "ts": "2026-09-13T19:21:00+02:00"
+  "event_id": "EV-20260913-194205-ja0272-final-handoff",
+  "ts": "2026-09-13T19:42:05+02:00"
 }

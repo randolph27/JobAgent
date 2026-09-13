@@ -107,6 +107,13 @@ function Invoke-JobAgentDailyAcquisitionPhase {
         $commonArgs += @('-FixtureMapPath', $FixtureMapPath)
     }
 
+    $refillScript = Join-Path $repoRoot 'tools\Invoke-JobAgentDiscoveryRefill.ps1'
+    $refillOutput = @(& pwsh -NoProfile -File $refillScript -ProjectRoot $root -DataRoot $DataRoot -LogRoot $LogRoot -MaxSources 1 2>&1)
+    if ($LASTEXITCODE -ne 0) {
+        throw ('Akquise-Quellennachfuellung fehlgeschlagen: ' + ($refillOutput -join "`n"))
+    }
+    $refillResult = ($refillOutput -join "`n") | ConvertFrom-Json -Depth 100
+
     $websiteScript = Join-Path $repoRoot 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1'
     $websiteOutput = @(& pwsh -NoProfile -File $websiteScript @commonArgs 2>&1)
     if ($LASTEXITCODE -ne 0) {
@@ -156,6 +163,13 @@ function Invoke-JobAgentDailyAcquisitionPhase {
         started_at = $startedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         finished_at = ([datetime]::UtcNow).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         budget = $MaxCandidates
+        source_refill = [pscustomobject]@{
+            status = [string]$refillResult.status
+            reason = [string]$refillResult.reason
+            imported_sources_total = [int]$refillResult.imported_sources_total
+            log_path = if ($refillResult.PSObject.Properties.Name -contains 'log_path') { [string]$refillResult.log_path } else { $null }
+            wake_at = if ($refillResult.PSObject.Properties.Name -contains 'wake_at') { $refillResult.wake_at } else { $null }
+        }
         website_discovery = [pscustomobject]@{
             processed_total = [int]$websiteResult.processed_total
             verified_total = [int]$websiteResult.verified_total

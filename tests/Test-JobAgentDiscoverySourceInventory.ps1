@@ -72,6 +72,130 @@ Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$
 Assert-True -Condition (@($research.source_candidates | Where-Object { [string]$_.source_id -eq 'research-candidate:ihk_standortportal_bayern' -and [string]$_.decision_status -eq 'not_registered_for_import' }).Count -eq 1) -Message 'IHK-Standortportal darf ohne Export/API nicht fuer Import registriert sein.'
 Assert-True -Condition (@($research.source_candidates | Where-Object { $_.PSObject.Properties.Name -contains 'source_decision' -and @($_.evidence_urls).Count -lt 1 }).Count -eq 0) -Message 'Final entschiedene Quellen brauchen Evidence-URLs.'
 
+$refillRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-discovery-refill-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path (Join-Path $refillRoot 'data\jobagent') -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $refillRoot 'snapshots') -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $refillRoot 'logs\jobagent') -Force | Out-Null
+try {
+    $fixtureSource = [pscustomobject]@{
+        source_id = 'source-registry:refill_regional'
+        source_class = 'REGIONAL_DIRECTORY'
+        source_url = 'https://directory.example.invalid/companies'
+        operator = 'Fixture Directory'
+        allowed_use = 'Fixture snapshot only.'
+        forbidden_use = 'No live crawl.'
+        rate_limit_policy = 'Fixture.'
+        robots_or_terms_note = 'Fixture.'
+        expected_fields = @('company_name', 'source_url')
+        evidence_level = 'SECONDARY_OFFICIAL_DIRECTORY'
+        freshness_policy = 'Fixture.'
+        retention_policy = 'Minimal fixture metadata.'
+        import_mode = 'FIXTURE_OR_SNAPSHOT_ONLY'
+        review_required = $true
+        legal_risk = 'LOW'
+    }
+    [pscustomobject]@{
+        schema_version = 'jobagent/discovery-source/v2'
+        generated_at = '2026-09-13T08:00:00.000Z'
+        items = @(
+            $fixtureSource,
+            [pscustomobject]@{
+                source_id = 'source-registry:blocked_refill'
+                source_class = 'REJECTED'
+                source_url = 'https://blocked.example.invalid/'
+                operator = 'Blocked'
+                allowed_use = 'Nicht verwenden.'
+                forbidden_use = 'Automatisierter Abruf ist blockiert.'
+                rate_limit_policy = 'Blocked.'
+                robots_or_terms_note = 'Blocked.'
+                expected_fields = @('company_name')
+                evidence_level = 'NOT_IMPORTABLE'
+                freshness_policy = 'Nicht importieren.'
+                retention_policy = 'Nur Entscheidung.'
+                import_mode = 'REJECT'
+                review_required = $true
+                legal_risk = 'BLOCKED'
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $refillRoot 'data\jobagent\company-discovery.sources.json') -Encoding UTF8
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-snapshot-manifest/v1'
+        generated_at = '2026-09-13T08:00:00.000Z'
+        contract = 'Fixture'
+        items = @(
+            [pscustomobject]@{
+                kind = 'regional'
+                source_id = 'source-registry:refill_regional'
+                input_path = 'snapshots/regional.json'
+            },
+            [pscustomobject]@{
+                kind = 'regional'
+                source_id = 'source-registry:blocked_refill'
+                input_path = 'snapshots/blocked.json'
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $refillRoot 'data\jobagent\company-discovery.snapshot.json') -Encoding UTF8
+    [pscustomobject]@{
+        schema_version = 'jobagent/regional-directory-snapshot/v1'
+        generated_at = '2026-09-13T08:00:00.000Z'
+        sources = @(
+            [pscustomobject]@{
+                source_id = 'source-registry:refill_regional'
+                format = 'json_items'
+                source_page = 'https://directory.example.invalid/companies'
+                region_reference = 'Muenchen'
+                items = @(
+                    [pscustomobject]@{
+                        organization_name = 'Refill Alpha GmbH'
+                        sector = 'Technology'
+                        location = 'Muenchen'
+                        website_hint = 'https://refill-alpha.example.invalid/'
+                    }
+                )
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $refillRoot 'snapshots\regional.json') -Encoding UTF8
+    [pscustomobject]@{
+        schema_version = 'jobagent/regional-directory-snapshot/v1'
+        generated_at = '2026-09-13T08:00:00.000Z'
+        sources = @()
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $refillRoot 'snapshots\blocked.json') -Encoding UTF8
+    [pscustomobject]@{
+        schema_version = 'jobagent/store/v1'
+        companies = @()
+        job_sources = @()
+        jobs = @()
+        scan_attempts = @()
+        scan_runs = @()
+        job_snapshots = @()
+        change_events = @()
+        discovery_inventory = @()
+        discovered_urls = @()
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $refillRoot 'data\jobagent\store.json') -Encoding UTF8
+
+    $refillOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDiscoveryRefill.ps1') -ProjectRoot $refillRoot -MaxSources 2 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Discovery-Refill ist fehlgeschlagen: " + ($refillOutput -join "`n"))
+    $refill = ($refillOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $refillHints = Get-Content -Raw -LiteralPath (Join-Path $refillRoot 'data\jobagent\company-discovery.hints.json') | ConvertFrom-Json -Depth 100
+    $refillQueue = Get-Content -Raw -LiteralPath (Join-Path $refillRoot 'data\jobagent\company-candidate-verification.queue.json') | ConvertFrom-Json -Depth 100
+    $refillState = Get-Content -Raw -LiteralPath (Join-Path $refillRoot 'data\jobagent\company-discovery.refill.state.json') | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($refill.status -eq 'COMPLETED') -Message 'Discovery-Refill meldet keinen abgeschlossenen Quellenlauf.'
+    Assert-True -Condition ($refill.imported_sources_total -eq 1) -Message 'Discovery-Refill darf blockierte Quellen nicht importieren.'
+    Assert-True -Condition (@($refillHints.hints | Where-Object { [string]$_.company_name -eq 'Refill Alpha GmbH' -and [string]$_.website_hint -eq 'https://refill-alpha.example.invalid/' }).Count -eq 1) -Message 'Discovery-Refill transportiert Snapshot-Hints nicht in den Hint-Store.'
+    Assert-True -Condition (@($refillQueue.queue | Where-Object { [string]$_.candidate_id -match 'refill_alpha' }).Count -eq 1) -Message 'Discovery-Refill baut die Kandidatenqueue nicht nach.'
+    Assert-True -Condition (@($refillState.imports | Where-Object { [string]$_.source_id -eq 'source-registry:refill_regional' -and -not [string]::IsNullOrWhiteSpace([string]$_.input_hash) }).Count -eq 1) -Message 'Discovery-Refill persistiert keinen Quellen-Cursor mit Inputhash.'
+
+    $secondRefillOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDiscoveryRefill.ps1') -ProjectRoot $refillRoot -MaxSources 2 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Discovery-Refill-Zweitlauf ist fehlgeschlagen: " + ($secondRefillOutput -join "`n"))
+    $secondRefill = ($secondRefillOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($secondRefill.imported_sources_total -eq 0) -Message 'Discovery-Refill darf unveraenderte Snapshotquellen nicht erneut importieren.'
+}
+finally {
+    if (Test-Path -LiteralPath $refillRoot) {
+        Remove-Item -LiteralPath $refillRoot -Recurse -Force
+    }
+}
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -82,7 +206,10 @@ Assert-True -Condition (@($research.source_candidates | Where-Object { $_.PSObje
         'structured_url_hint_counts',
         'research_matrix_has_new_source_approaches',
         'ja0272_open_sources_have_final_decisions',
-        'rejected_sources_fail_closed'
+        'rejected_sources_fail_closed',
+        'discovery_refill_imports_changed_allowed_snapshot',
+        'discovery_refill_rebuilds_candidate_queue',
+        'discovery_refill_skips_blocked_and_unchanged_sources'
     )
     evidence = @($output.inventory_path, $output.research_path, $output.reconciliation_path)
 } | ConvertTo-Json -Depth 5

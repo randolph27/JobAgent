@@ -1,160 +1,185 @@
 {
-  "capsule": {
-    "manual_missing": false,
-    "ts": "2026-09-13T19:21:00+02:00",
-    "refs": [
-      "todo.current.md",
-      "todo.state.json",
-      "todo.events.jsonl",
+  "refs": [
+    "file:todo.current.md",
+    "file:todo.state.json",
+    "file:todo.events.jsonl",
+    "file:handoff.latest.json",
+    "file:logs/verify/verify.digest.json"
+  ],
+  "git": {
+    "behind": 0,
+    "head": "f300584bcd19",
+    "worktree": "dirty",
+    "ahead": 0,
+    "has_repo": true,
+    "upstream": "origin/master",
+    "detached": false,
+    "remote": "origin",
+    "tracked_changes": [
+      "Roadmap.md",
       "handoff.latest.json",
-      "docs/handoffs/2026-09-13-ja0272-url-hint-transport-handoff.md"
+      "handoff.latest.md",
+      "tests/Test-JobAgentDiscoverySourceInventory.ps1",
+      "todo.checkpoint.json",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Invoke-JobAgentDailyRun.ps1"
     ],
+    "branch": "master"
+  },
+  "ts": "2026-09-13T19:42:05+02:00",
+  "next_steps": [
+    "JA-027.3: Domain-only-/bereits-verifizierte Kandidaten in getrennte Karrierequellen-Pruefung bringen, Hostwellen logisch planen und neue Karrierearbeitgeber getrennt von Domain-only messen."
+  ],
+  "toolchain": {
+    "ts": "2026-08-17T13:53:15.642+02:00",
+    "gradle": {
+      "cmd": "gradle",
+      "mode": "path",
+      "root": "D:\\_Scripte\\JobAgent"
+    }
+  },
+  "status": "in-progress",
+  "verified": [
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDiscoverySourceInventory.ps1",
+      "status": "passed",
+      "exit": 0
+    },
+    {
+      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDailyRun.ps1",
+      "status": "passed",
+      "exit": 0
+    },
+    {
+      "cmd": "cmd /c .\\ci.cmd stp",
+      "status": "passed",
+      "exit": 0
+    },
+    {
+      "cmd": "cmd /c .\\ci.cmd route-check",
+      "status": "passed",
+      "exit": 0
+    }
+  ],
+  "project": "JobAgent",
+  "active_id": "TD-0041",
+  "agent_id": "UTTER-20260817-39f7",
+  "summary": "JA-027.2 Refill-Orchestrator geschlossen; DailyRun ruft den Snapshot-Refill vor Website-Ermittlung und Verify auf. Kein Supertest ausstehend, da nicht angefragt.",
+  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+  "capsule": {
+    "ts": "2026-09-13T19:42:05+02:00",
+    "project": "JobAgent",
+    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
+    "env_inventory_used": false,
+    "agent_id": "UTTER-20260817-39f7",
+    "next": "JA-027.3: Domain-only-/bereits-verifizierte Kandidaten in getrennte Karrierequellen-Pruefung bringen, Hostwellen logisch planen und neue Karrierearbeitgeber getrennt von Domain-only messen.",
+    "status": "in-progress",
     "changed": [
       "Roadmap.md",
-      "src/JobAgent.CompanyInventory.psm1",
-      "src/JobAgent.JobBoardDiscovery.psm1",
-      "src/JobAgent.RegionalDiscovery.psm1",
-      "src/JobAgent.RegisterDiscovery.psm1",
-      "tests/Test-JobAgentCompanyInventory.ps1",
+      "tools/Invoke-JobAgentDiscoveryRefill.ps1",
+      "tools/Invoke-JobAgentDailyRun.ps1",
       "tests/Test-JobAgentDiscoverySourceInventory.ps1",
-      "tests/Test-JobAgentJobBoardDiscovery.ps1",
-      "tests/Test-JobAgentRegionalDiscovery.ps1",
-      "tests/Test-JobAgentRegisterDiscovery.ps1",
-      "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
-      "tools/Measure-JobAgentDiscoverySourceInventory.ps1",
-      "docs/handoffs/2026-09-13-ja0272-url-hint-transport-handoff.md",
-      "handoff.latest.md",
-      "handoff.latest.json",
+      "docs/handoffs/2026-09-13-ja0272-refill-orchestrator-handoff.md",
+      "todo.current.md",
       "todo.state.json",
       "todo.events.jsonl",
       "todo.checkpoint.json",
       "todo.history.digest.json",
-      "todo.master.index.json"
+      "todo.master.index.json",
+      "handoff.latest.md",
+      "handoff.latest.json"
     ],
+    "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.",
+    "route_ok": true,
     "git": {
+      "behind": 0,
+      "head": "f300584bcd19",
+      "worktree": "dirty",
+      "ahead": 0,
+      "has_repo": true,
+      "upstream": "origin/master",
       "detached": false,
       "remote": "origin",
-      "upstream": "origin/master",
-      "behind": 0,
       "tracked_changes": [
         "Roadmap.md",
+        "handoff.latest.json",
         "handoff.latest.md",
-        "src/JobAgent.CompanyInventory.psm1",
-        "src/JobAgent.JobBoardDiscovery.psm1",
-        "src/JobAgent.RegionalDiscovery.psm1",
-        "src/JobAgent.RegisterDiscovery.psm1",
-        "tests/Test-JobAgentCompanyInventory.ps1",
         "tests/Test-JobAgentDiscoverySourceInventory.ps1",
-        "tests/Test-JobAgentJobBoardDiscovery.ps1",
-        "tests/Test-JobAgentRegionalDiscovery.ps1",
-        "tests/Test-JobAgentRegisterDiscovery.ps1",
-        "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
         "todo.checkpoint.json",
         "todo.events.jsonl",
         "todo.history.digest.json",
         "todo.master.index.json",
         "todo.state.json",
-        "tools/Measure-JobAgentDiscoverySourceInventory.ps1"
+        "tools/Invoke-JobAgentDailyRun.ps1"
       ],
-      "head": "14a82a1ac5f8",
-      "branch": "master",
-      "has_repo": true,
-      "ahead": 0,
-      "worktree": "dirty"
+      "branch": "master"
     },
-    "verified": [
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegisterDiscovery.ps1"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentJobBoardDiscovery.ps1"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyInventory.ps1"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDiscoverySourceInventory.ps1"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": ".\\ci.cmd route-check"
-      },
-      {
-        "exit": 0,
-        "status": "passed",
-        "cmd": ".\\ci.cmd stp"
-      }
-    ],
-    "status": "in-progress",
-    "next": "JA-027.2: automatischen Nachfuell-/Quellenwellen-Orchestrator fertigstellen; neue URL-Hint-Evidence gezielt reaktivieren, identische Hashes nicht erneut planen, Freising-Fairness und gesperrte Quellen beachten.",
-    "route_ok": true,
     "route_violations": [],
     "workspace_root": ".",
-    "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp.",
-    "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.",
-    "env_inventory_missing": false,
-    "agent_id": "UTTER-20260817-39f7",
-    "active_id": "TD-0041",
+    "manual_missing": false,
+    "verified": [
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDiscoverySourceInventory.ps1",
+        "status": "passed",
+        "exit": 0
+      },
+      {
+        "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDailyRun.ps1",
+        "status": "passed",
+        "exit": 0
+      },
+      {
+        "cmd": "cmd /c .\\ci.cmd stp",
+        "status": "passed",
+        "exit": 0
+      },
+      {
+        "cmd": "cmd /c .\\ci.cmd route-check",
+        "status": "passed",
+        "exit": 0
+      }
+    ],
     "env_inventory_path": null,
-    "env_inventory_used": false,
-    "project": "JobAgent"
+    "refs": [
+      "todo.current.md",
+      "todo.state.json",
+      "todo.events.jsonl",
+      "handoff.latest.json"
+    ],
+    "env_inventory_missing": false,
+    "active_id": "TD-0041"
   },
-  "active_id": "TD-0041",
   "route": {
     "git": {
       "has_repo": true,
-      "diff_log": "logs\\terminal\\route-check-20260913-192024.log"
+      "diff_log": "logs\\terminal\\route-check-20260913-194050.log"
     },
-    "violations": [],
     "changed_files": [
       "Roadmap.md",
       "handoff.latest.md",
-      "src/JobAgent.JobBoardDiscovery.psm1",
-      "src/JobAgent.RegionalDiscovery.psm1",
-      "src/JobAgent.RegisterDiscovery.psm1",
-      "tests/Test-JobAgentCompanyInventory.ps1",
       "tests/Test-JobAgentDiscoverySourceInventory.ps1",
-      "tests/Test-JobAgentJobBoardDiscovery.ps1",
-      "tests/Test-JobAgentRegionalDiscovery.ps1",
-      "tests/Test-JobAgentRegisterDiscovery.ps1",
-      "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
-      "tools/Measure-JobAgentDiscoverySourceInventory.ps1",
-      "src/JobAgent.CompanyInventory.psm1"
+      "todo.checkpoint.json",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "tools/Invoke-JobAgentDailyRun.ps1",
+      "handoff.latest.json"
     ],
-    "changed_count": 13,
     "route_ok": true,
-    "mode": "standard",
-    "ts": "2026-09-13T19:20:27.124+02:00",
     "agent_id": "UTTER-20260817-39f7",
+    "changed_count": 10,
+    "violations": [],
+    "mode": "standard",
     "policy": {
+      "no_touch": [],
       "forbid_regex": [],
-      "forbid_path": [],
-      "no_touch": []
-    }
+      "forbid_path": []
+    },
+    "ts": "2026-09-13T19:40:54.116+02:00"
   },
   "verify_digest": {
     "ts": "2026-09-06T07:52:07.727+02:00",
@@ -165,133 +190,24 @@
     "secret_sanitized": true,
     "analysis_started": false
   },
-  "agent_id": "UTTER-20260817-39f7",
-  "refs": [
-    "file:todo.current.md",
-    "file:todo.state.json",
-    "file:todo.events.jsonl",
-    "file:handoff.latest.json",
-    "file:docs/handoffs/2026-09-13-ja0272-url-hint-transport-handoff.md"
-  ],
-  "ts": "2026-09-13T19:21:00+02:00",
+  "route_ok": true,
+  "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.",
+  "next": "JA-027.3: Domain-only-/bereits-verifizierte Kandidaten in getrennte Karrierequellen-Pruefung bringen, Hostwellen logisch planen und neue Karrierearbeitgeber getrennt von Domain-only messen.",
   "changed": [
     "Roadmap.md",
-    "src/JobAgent.CompanyInventory.psm1",
-    "src/JobAgent.JobBoardDiscovery.psm1",
-    "src/JobAgent.RegionalDiscovery.psm1",
-    "src/JobAgent.RegisterDiscovery.psm1",
-    "tests/Test-JobAgentCompanyInventory.ps1",
+    "tools/Invoke-JobAgentDiscoveryRefill.ps1",
+    "tools/Invoke-JobAgentDailyRun.ps1",
     "tests/Test-JobAgentDiscoverySourceInventory.ps1",
-    "tests/Test-JobAgentJobBoardDiscovery.ps1",
-    "tests/Test-JobAgentRegionalDiscovery.ps1",
-    "tests/Test-JobAgentRegisterDiscovery.ps1",
-    "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
-    "tools/Measure-JobAgentDiscoverySourceInventory.ps1",
-    "docs/handoffs/2026-09-13-ja0272-url-hint-transport-handoff.md",
-    "handoff.latest.md",
-    "handoff.latest.json",
+    "docs/handoffs/2026-09-13-ja0272-refill-orchestrator-handoff.md",
+    "todo.current.md",
     "todo.state.json",
     "todo.events.jsonl",
     "todo.checkpoint.json",
     "todo.history.digest.json",
-    "todo.master.index.json"
+    "todo.master.index.json",
+    "handoff.latest.md",
+    "handoff.latest.json"
   ],
-  "status": "in-progress",
-  "toolchain": {
-    "ts": "2026-08-17T13:53:15.642+02:00",
-    "gradle": {
-      "cmd": "gradle",
-      "mode": "path",
-      "root": "D:\\_Scripte\\JobAgent"
-    }
-  },
-  "project": "JobAgent",
   "route_violations": [],
-  "next_steps": [
-    "JA-027.2: automatischen Nachfuell-/Quellenwellen-Orchestrator fertigstellen; neue URL-Hint-Evidence gezielt reaktivieren, identische Hashes nicht erneut planen, Freising-Fairness und gesperrte Quellen beachten."
-  ],
-  "next": "JA-027.2: automatischen Nachfuell-/Quellenwellen-Orchestrator fertigstellen; neue URL-Hint-Evidence gezielt reaktivieren, identische Hashes nicht erneut planen, Freising-Fairness und gesperrte Quellen beachten.",
-  "workspace_root": ".",
-  "verified": [
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegionalDiscovery.ps1"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentRegisterDiscovery.ps1"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentJobBoardDiscovery.ps1"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyInventory.ps1"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyCandidateVerification.ps1"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCoverage.ps1"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDiscoverySourceInventory.ps1"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": ".\\ci.cmd route-check"
-    },
-    {
-      "exit": 0,
-      "status": "passed",
-      "cmd": ".\\ci.cmd stp"
-    }
-  ],
-  "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern #comment: Quellenzufuhr und Karriereverifikation in einem wiederaufnehmbaren Lauf verbinden; Fortschritt an neuen belegten Arbeitgebern statt an Reparatur- oder Importwellen messen.",
-  "summary": "JA-027.2 URL-Hint-Transport/Retention umgesetzt und funktionsbezogen verifiziert.",
-  "git": {
-    "detached": false,
-    "remote": "origin",
-    "upstream": "origin/master",
-    "behind": 0,
-    "tracked_changes": [
-      "Roadmap.md",
-      "handoff.latest.md",
-      "src/JobAgent.CompanyInventory.psm1",
-      "src/JobAgent.JobBoardDiscovery.psm1",
-      "src/JobAgent.RegionalDiscovery.psm1",
-      "src/JobAgent.RegisterDiscovery.psm1",
-      "tests/Test-JobAgentCompanyInventory.ps1",
-      "tests/Test-JobAgentDiscoverySourceInventory.ps1",
-      "tests/Test-JobAgentJobBoardDiscovery.ps1",
-      "tests/Test-JobAgentRegionalDiscovery.ps1",
-      "tests/Test-JobAgentRegisterDiscovery.ps1",
-      "tests/fixtures/jobagent/regional-discovery/regional-directories-snapshot.json",
-      "todo.checkpoint.json",
-      "todo.events.jsonl",
-      "todo.history.digest.json",
-      "todo.master.index.json",
-      "todo.state.json",
-      "tools/Measure-JobAgentDiscoverySourceInventory.ps1"
-    ],
-    "head": "14a82a1ac5f8",
-    "branch": "master",
-    "has_repo": true,
-    "ahead": 0,
-    "worktree": "dirty"
-  },
-  "route_ok": true,
-  "chat_flow_policy": "Keine Rueckfragen, keine Bestaetigungen, keine Text-Unterbrechungen.\r\nArbeite sequenziell weiter, bis ein harter Blocker erreicht ist.\r\nBei Blocker: status=blocked + reproduzierbare Schritte (Commands/Dateien) + ci stp."
+  "workspace_root": "."
 }
