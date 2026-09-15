@@ -688,6 +688,13 @@
           "items": {
             "$ref": "#/$defs/verification_evidence"
           }
+        },
+        "search_term_requirement": {
+          "enum": [
+            "NOT_REQUIRED",
+            "REQUIRED",
+            "UNKNOWN"
+          ]
         }
       }
     },

@@ -285,7 +285,7 @@ Ein fehlgeschlagener Versuch darf bestehende Jobs nicht automatisch schließen o
 Adapter-Input:
 
 - `company`: Company-Objekt mit `company_id`, `canonical_name` und `canonical_domain`.
-- `source`: offizielle `JobSource` derselben Firma. `is_official` muss `true` sein; Aggregatoren und Jobboersen werden abgelehnt.
+- `source`: offizielle `JobSource` derselben Firma. `is_official` muss `true` sein; Aggregatoren und Jobboersen werden abgelehnt. Optionales `search_term_requirement` ist `NOT_REQUIRED`, `REQUIRED` oder `UNKNOWN`; eine `REQUIRED`-Quelle wird ohne Suchbegriffe als eingeschraenkt/`PARTIAL` protokolliert.
 - `scan_context`: `scan_run_id`, Startzeit, Timeout, Ergebnisbudget und optionale Suchbegriffe.
 
 Adapter-Output:
@@ -309,6 +309,7 @@ Grenzen:
 - Keine Live-Webrecherche in Funktionstests.
 - Keine Jobboerse als Primaerquelle.
 - Ein leerer oder technisch fehlerhafter Adapterlauf schliesst keine bestehenden Jobs.
+- Leere `search_terms` stehen fuer den Erfassungsscope `ALL_ROLES`, nicht fuer einen impliziten IT-Fallback. Nichtleere Begriffe erzeugen den eingeschraenkten Scope `EXPLICIT_TERMS`.
 
 ## JobSnapshot
 

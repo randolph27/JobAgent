@@ -13,6 +13,7 @@ Der Agent darf keine Bewerbungen ausloesen, keine Kontakte anschreiben, keine pe
 ### Muss
 
 - Die Firmen- und Stellenerfassung ist berufsneutral; konkrete Rollen, Berufe oder Profile werden danach ueber lokale Filter gesucht.
+- Leere Suchbegriffe bedeuten alle Berufe. Explizite Suchbegriffe begrenzen nur den jeweiligen Lauf; Quellen mit `search_term_requirement: REQUIRED` werden ohne Suchbegriff als `PARTIAL` markiert und duerfen keine Vollstaendigkeit behaupten.
 - Der Standortbezug muss Muenchen, ein Umkreis von 20 km um Muenchen, Freising oder ein belastbar passendes Remote-/Hybridmodell mit Bezug zum Zielgebiet sein.
 - Vollstaendigkeit ist ein langfristiges Ziel, darf aber nie behauptet werden, solange sie nicht belegt ist.
 - Jede ausgegebene Stelle muss eine offizielle URL oder eine vom Unternehmen offiziell angebundene Recruiting-/ATS-URL besitzen.

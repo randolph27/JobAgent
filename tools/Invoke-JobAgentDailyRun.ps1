@@ -18,7 +18,7 @@ param(
     [Parameter()][string]$AcquisitionFixtureMapPath,
     [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
     [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
-    [Parameter()][string[]]$SearchTerms = @('Head of IT', 'Director IT', 'IT Leitung', 'IT-Leitung', 'Leiter IT', 'CIO'),
+    [Parameter()][string[]]$SearchTerms = @(),
     [Parameter()][string[]]$CompanyIds = @(),
     [Parameter()][string]$LogRoot = 'logs/jobagent',
     [Parameter()][ValidateRange(1, 1000)][int]$RetainLogs = 30

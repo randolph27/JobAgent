@@ -115,6 +115,8 @@ Assert-True -Condition ($policy.timeout_seconds -eq 7) -Message 'Policy uebernim
 Assert-True -Condition ($policy.max_retries -eq 1) -Message 'Policy uebernimmt Retry-Grenze nicht.'
 Assert-True -Condition ($policy.host_concurrency -eq 2 -and $policy.fetch_client -eq 'curl' -and $policy.wsl_distribution -eq 'FixtureDistro') -Message 'Policy uebernimmt Fetch-Client-/Hostlimit-Vertrag nicht.'
 Assert-True -Condition ($policy.source_policy -eq 'official-career-source-only') -Message 'Policy dokumentiert offizielle Quellen nicht.'
+$defaultPolicy = New-JobAgentLiveScanPolicy
+Assert-True -Condition (@($defaultPolicy.search_terms).Count -eq 0 -and $defaultPolicy.collection_scope -eq 'ALL_ROLES') -Message 'Leere Live-Policy muss den berufsneutralen ALL_ROLES-Scope setzen.'
 
 $company = New-TestCompany
 $source = New-TestSource
@@ -133,6 +135,16 @@ $html = @'
 $candidates = @(ConvertFrom-JobAgentLiveCareerPage -Html $html -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @('Head of IT'))
 Assert-True -Condition ($candidates.Count -eq 1) -Message 'Live-Parser filtert offizielle Kandidaten nicht korrekt.'
 Assert-True -Condition ($candidates[0].detail_url -eq 'https://example.invalid/careers/head-of-it-123') -Message 'Live-Parser kanonisiert Detail-URL nicht.'
+
+$generalCandidates = @(ConvertFrom-JobAgentLiveCareerPage -Html '<html><body><a href="/careers/jobs/finanzbuchhalter-789">Finanzbuchhalter (m/w/d)</a><a href="/careers/jobs/pflegefachkraft-456">Pflegefachkraft</a><a href="/about">Unternehmen</a></body></html>' -BaseUrl 'https://example.invalid/careers' -Company $company -MaxResults 5 -SearchTerms @())
+Assert-True -Condition ($generalCandidates.Count -eq 2 -and @($generalCandidates.title) -contains 'Finanzbuchhalter (m/w/d)' -and @($generalCandidates.title) -contains 'Pflegefachkraft') -Message 'Berufsneutrale Erfassung verwirft nicht-IT-Stellen aus offiziellen Detailpfaden.'
+
+$termRequiredSource = (New-TestSource).PSObject.Copy()
+$termRequiredSource | Add-Member -NotePropertyName search_term_requirement -NotePropertyValue 'REQUIRED'
+$termRequiredInput = New-JobAgentAdapterInput -Company $company -JobSource $termRequiredSource -ScanContext $context
+$termRequiredResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $termRequiredInput -Policy $defaultPolicy -Fetcher { throw 'Eine termpflichtige Quelle darf ohne Scope nicht abgefragt werden.' }
+Assert-True -Condition ($termRequiredResult.status -eq 'PARTIAL' -and $termRequiredResult.error_class -eq 'TECHNICAL_LIMITATION' -and -not $termRequiredResult.scan_complete) -Message 'Termpflichtige Quelle wird ohne Suchscope nicht als eingeschraenkt markiert.'
+Assert-True -Condition (@($termRequiredResult.artifact_paths) -contains 'source_requires_search_terms_for_all_roles') -Message 'Termpflichtige Quelle dokumentiert die Vollstaendigkeitsgrenze nicht.'
 
 $navigationHtml = @'
 <html>
@@ -561,6 +573,20 @@ Assert-True -Condition ($avatureResult.status -eq 'SUCCESS' -and $avatureResult.
 Assert-True -Condition (@($avatureResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert Avature-FolderDetail-Treffer nicht.'
 Assert-True -Condition ($avatureResult.raw_jobs[0].detail_url -eq 'https://jobs.example.invalid/en_US/jobs/FolderDetail?folderId=123456') -Message 'Live-Adapter kanonisiert Avature-FolderDetail falsch.'
 
+$generalAvaturePolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 4
+$generalAvatureFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    switch ($Url) {
+        'https://jobs.example.invalid/en_US/jobs' { New-FetchResult -Url $Url -Ok $true -Content $avatureSourceHtml; break }
+        'https://jobs.example.invalid/en_US/jobs/Jobs?folderRecordsPerPage=20' { New-FetchResult -Url $Url -Ok $true -Content '<html><head><meta name="avature.portal.id" content="140"/><meta name="avature.portal.page" content="Jobs"/></head><body><article><h3><a href="https://jobs.example.invalid/en_US/jobs/FolderDetail?folderId=654321">Pflegefachkraft (m/w/d)</a></h3></article></body></html>'; break }
+        'https://jobs.example.invalid/en_US/jobs/FolderDetail?folderId=654321' { New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Pflegefachkraft (m/w/d)</h1><p>Stationaere Pflege in Muenchen.</p></main>'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage ('not found: ' + $Url); break }
+    }
+}
+$generalAvatureResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $avatureInput -Policy $generalAvaturePolicy -Fetcher $generalAvatureFetcher
+Assert-True -Condition ($generalAvatureResult.status -eq 'SUCCESS' -and $generalAvatureResult.scan_complete -and @($generalAvatureResult.raw_jobs).Count -eq 1 -and $generalAvatureResult.raw_jobs[0].title -eq 'Pflegefachkraft (m/w/d)') -Message 'Berufsneutraler Avature-Lauf sammelt keine allgemeine offizielle Stellenliste.'
+
 $rssFeedPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 20 -MaxDetailFetchesPerSource 20 -MaxPagesPerSource 3 -SearchTerms @('IT Manager')
 $rssFeedFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -628,6 +654,22 @@ $successFactorsResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Pol
 Assert-True -Condition ($successFactorsResult.status -eq 'SUCCESS' -and $successFactorsResult.scan_complete) -Message 'Live-Adapter folgt SuccessFactors-Suchseiten nicht aus belegten j2w-Karriereseiten.'
 Assert-True -Condition (@($successFactorsResult.raw_jobs).Count -eq 1) -Message 'Live-Adapter extrahiert SuccessFactors-RSS-Treffer nicht.'
 Assert-True -Condition (@($successFactorsResult.raw_jobs | Where-Object { [string]$_.detail_url -eq 'https://jobs.example.invalid/job/Muenchen-IT-Manager-Platform-Operations/987654321' }).Count -eq 1) -Message 'Live-Adapter verarbeitet SuccessFactors-RSS-Follow-up nicht.'
+
+$generalSuccessFactorsFetches = [System.Collections.Generic.List[string]]::new()
+$generalSuccessFactorsFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    $script:generalSuccessFactorsFetches.Add($Url)
+    switch ($Url) {
+        'https://example.invalid/careers' { New-FetchResult -Url $Url -Ok $true -Content '<html><script>j2w.init({"ssoCompanyId":"example"});</script></html>'; break }
+        'https://example.invalid/search?createNewAlert=false&locationsearch=&q=' { New-FetchResult -Url $Url -Ok $true -Content '<html><a class="jobTitle-link" href="/job/Muenchen-Finanzbuchhalter-80809/515151/">Finanzbuchhalter (m/w/d)</a></html>'; break }
+        'https://example.invalid/job/Muenchen-Finanzbuchhalter-80809/515151' { New-FetchResult -Url $Url -Ok $true -Content '<main><h1>Finanzbuchhalter (m/w/d)</h1><p>Buchhaltung in Muenchen.</p></main>'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'; break }
+    }
+}
+$generalSuccessFactorsResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $defaultPolicy -Fetcher $generalSuccessFactorsFetcher
+Assert-True -Condition ($generalSuccessFactorsResult.status -eq 'SUCCESS' -and $generalSuccessFactorsResult.scan_complete -and @($generalSuccessFactorsResult.raw_jobs).Count -eq 1 -and $generalSuccessFactorsResult.raw_jobs[0].title -eq 'Finanzbuchhalter (m/w/d)') -Message 'Berufsneutraler SuccessFactors-Lauf nutzt keine allgemeine Stellenliste.'
+Assert-True -Condition (@($generalSuccessFactorsFetches | Where-Object { $_ -match '/services/rss/job/' }).Count -eq 0) -Message 'Berufsneutraler SuccessFactors-Lauf darf nicht auf den IT-RSS-Fallback zurueckfallen.'
 
 $structuredJsonFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -823,6 +865,9 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
     status = 'ok'
     cases = @(
         'policy_limits',
+        'default_policy_collects_all_roles',
+        'general_official_detail_candidates',
+        'term_required_source_is_partial_without_scope',
         'official_candidate_filter',
         'career_navigation_candidate_rejection',
         'malformed_href_candidate_skip',
@@ -851,10 +896,12 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_official_iframe_ats_success',
         'live_adapter_official_linked_job_portal_success',
         'live_adapter_avature_search_pagination_success',
+        'live_adapter_avature_general_listing_success',
         'rss_feed_job_extraction',
         'live_adapter_official_rss_feed_success',
         'live_adapter_successfactors_search_followup_success',
         'live_adapter_successfactors_rss_followup_success',
+        'live_adapter_successfactors_general_search_success',
         'live_adapter_structured_json_ats_success',
         'live_adapter_gatsby_static_query_greenhouse_success',
         'live_adapter_blocked_detail_fetch',

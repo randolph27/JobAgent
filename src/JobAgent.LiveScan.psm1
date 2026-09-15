@@ -30,7 +30,7 @@ function New-JobAgentLiveScanPolicy {
         [Parameter()][ValidateSet('auto', 'dotnet', 'curl', 'wsl-curl')][string]$FetchClient = 'auto',
         [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
         [Parameter()][string]$UserAgent = 'JobAgent/0.1 (+local-pilot; official-career-source-only)',
-        [Parameter()][string[]]$SearchTerms = @('Head of IT', 'Director IT', 'IT Leitung', 'IT-Leitung', 'Leiter IT', 'CIO')
+        [Parameter()][string[]]$SearchTerms = @()
     )
 
     [pscustomobject]@{
@@ -45,9 +45,25 @@ function New-JobAgentLiveScanPolicy {
         wsl_distribution = $WslDistribution
         user_agent = $UserAgent
         search_terms = @($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+        collection_scope = if (@($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }).Count -eq 0) { 'ALL_ROLES' } else { 'EXPLICIT_TERMS' }
         source_policy = 'official-career-source-only'
         no_go = @('no_job_board_primary_source', 'no_login_bypass', 'no_captcha_bypass', 'no_unverified_job_claims')
     }
+}
+
+function Test-JobAgentLiveSourceRequiresSearchTerms {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][object]$Source,
+        [Parameter()][string[]]$SearchTerms = @()
+    )
+
+    $hasSearchTerms = @($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) }).Count -gt 0
+    if ($hasSearchTerms -or $Source.PSObject.Properties.Name -notcontains 'search_term_requirement') {
+        return $false
+    }
+
+    return [string]$Source.search_term_requirement -eq 'REQUIRED'
 }
 
 function Invoke-JobAgentLiveHttpRequest {
@@ -256,7 +272,12 @@ function Test-JobAgentLiveConcreteJobCandidate {
     }
 
     $normalized = $Text.ToLowerInvariant()
-    foreach ($term in @($SearchTerms)) {
+    $terms = @($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+    if ($terms.Count -eq 0) {
+        return -not [string]::IsNullOrWhiteSpace($normalized) -and $normalized -match '\b(job|jobs|position|positions|stelle|stellenangebot|stellenangebote|vacanc(y|ies)|opening|openings)\b'
+    }
+
+    foreach ($term in $terms) {
         if (-not [string]::IsNullOrWhiteSpace($term) -and $normalized.Contains($term.ToLowerInvariant())) {
             return $true
         }
@@ -670,18 +691,22 @@ function Get-JobAgentLiveAvatureSearchUrls {
 
     $urls = New-Object System.Collections.Generic.List[string]
     $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
-    foreach ($term in @($SearchTerms)) {
+    $terms = @($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+    if ($terms.Count -eq 0) {
+        $terms = @($null)
+    }
+    foreach ($term in $terms) {
         if ($urls.Count -ge $MaxUrls) {
             break
         }
         $value = ([string]$term).Trim()
-        if ([string]::IsNullOrWhiteSpace($value)) {
-            continue
-        }
 
         try {
-            $encoded = [Uri]::EscapeDataString($value).Replace('%20', '+')
-            $builder = [UriBuilder]::new($uri.Scheme, $uri.Host, $uri.Port, ([string]$match.Groups['prefix'].Value + '/Jobs/' + $encoded))
+            $path = [string]$match.Groups['prefix'].Value + '/Jobs'
+            if (-not [string]::IsNullOrWhiteSpace($value)) {
+                $path += '/' + [Uri]::EscapeDataString($value).Replace('%20', '+')
+            }
+            $builder = [UriBuilder]::new($uri.Scheme, $uri.Host, $uri.Port, $path)
             $builder.Query = 'folderRecordsPerPage=20'
             $evaluation = Get-JobAgentOfficialSourceEvaluation -Company $Company -Url $builder.Uri.AbsoluteUri
             if ($evaluation.is_official -eq $true -and $seen.Add([string]$evaluation.canonical_url)) {
@@ -759,7 +784,7 @@ function Get-JobAgentLiveSuccessFactorsRssUrls {
         }
     }
     if ($terms.Count -eq 0) {
-        $terms.Add('IT')
+        return @()
     }
 
     $urls = New-Object System.Collections.Generic.List[string]
@@ -1177,7 +1202,11 @@ function Test-JobAgentLiveTargetRoleText {
     )
 
     $normalized = [regex]::Replace($Text.ToLowerInvariant(), '\s+', ' ').Trim()
-    foreach ($term in @($SearchTerms)) {
+    $terms = @($SearchTerms | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) })
+    if ($terms.Count -eq 0) {
+        return $true
+    }
+    foreach ($term in $terms) {
         $termText = [regex]::Replace(([string]$term).ToLowerInvariant(), '\s+', ' ').Trim()
         if (-not [string]::IsNullOrWhiteSpace($termText) -and $normalized.Contains($termText)) {
             return $true
@@ -1458,6 +1487,18 @@ function Invoke-JobAgentLiveHtmlAdapter {
     )
 
     $startedAt = [datetime]::UtcNow
+    if (Test-JobAgentLiveSourceRequiresSearchTerms -Source $AdapterInput.source -SearchTerms @($Policy.search_terms)) {
+        return New-JobAgentAdapterResult `
+            -AdapterInput $AdapterInput `
+            -AdapterName 'live-html-adapter' `
+            -Status 'PARTIAL' `
+            -ErrorClass 'TECHNICAL_LIMITATION' `
+            -RetryRecommendation 'MANUAL_REVIEW' `
+            -RawJobs @() `
+            -ArtifactPaths @('source_requires_search_terms_for_all_roles') `
+            -StartedAt $startedAt `
+            -FinishedAt ([datetime]::UtcNow)
+    }
     $maxPages = if ($Policy.PSObject.Properties.Name -contains 'max_pages_per_source') { [int]$Policy.max_pages_per_source } else { 1 }
     $sourceFetch = Invoke-JobAgentLiveFetchWithRetry -Url ([string]$AdapterInput.source.canonical_url) -Policy $Policy -Fetcher $Fetcher
     if ($sourceFetch.ok -ne $true) {

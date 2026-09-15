@@ -25,22 +25,23 @@ M1: vorhandene Grundlagen JA-040/CI-001. M2-A: Akquise beim Jobstart und sichtba
   Prioritaetsscore: 98/100, Planungsentscheidung. Ordnungsbegruendung: neutrale Attribute vor allgemeinen Filtern.
   Risiken: implizite Altfilter, fehlende Attribute, partielle Quellen und veraltete Anzeige. UNKNOWN sichtbar erhalten. Meilenstein/Parallelisierung: M2-B; ein zusammenhaengender Slice, Fixtures bei zusaetzlicher Kapazitaet parallel, produktive Writer seriell.
 
-  - [ ] JA-041.1 Erfassung ohne impliziten Berufsfilter als Standard liefern.
+  - [x] JA-041.1 Erfassung ohne impliziten Berufsfilter als Standard liefern.
 
     Beschreibung: Auch Buchhaltung, Pflege, Handwerk, Vertrieb und Ausbildung werden bei belegter regionaler Stelle gesammelt; IT-Fuehrung ist nur ein optionales Suchprofil.
-    Scope: tools/Invoke-JobAgentDailyRun.ps1; src/JobAgent.LiveScan.psm1; src/JobAgent.DailyRun.psm1; manual/PROGRAM.md. Kein Frameworkwechsel, keine Gebietsaufweitung oder Bewerbungen.
-    Ist-Stand (2026-09-13): Grundlagen/Altgrenzen siehe Hauptpunkt; diese neue Anforderung ist noch nicht fertig verifiziert.
+    Scope: tools/Invoke-JobAgentDailyRun.ps1; src/JobAgent.LiveScan.psm1; schemas/jobagent.schema.json; manual/PROGRAM.md; docs/data-model.md; tests/Test-JobAgentLiveScan.ps1. Kein Frameworkwechsel, keine Gebietsaufweitung oder Bewerbungen.
+    Ist-Stand (2026-09-15): Standardlauf und Live-Policy verwenden leere Suchbegriffe als `ALL_ROLES`; es gibt keinen IT-Fallback. Allgemeine Avature- und SuccessFactors-Listen werden ohne Rollenquery abgefragt. Als `REQUIRED` markierte Quellabfragen liefern ohne Scope `PARTIAL` mit expliziter Vollstaendigkeitsgrenze. Explizite Begriffe bleiben kompatibel als `EXPLICIT_TERMS`.
     Abhaengigkeiten/Prioritaet: Hauptpunkt-Grundlagen; Score 100/100 intern, Reihenfolge Vertrag → Integration → Abnahme. Aufwand/Dauer anteilig 40 % der Hauptpunktschaetzung bei gleicher Kapazitaet. Meilenstein M2-B. Risiko: Altvertrag oder unvollstaendige Daten verfälschen Ergebnis; Fixtures vor produktiver Integration.
     Schritte:
     1. Daily-SearchTerms und Live-Policy auf berufsneutralen Standard umstellen: leere Begriffe bedeuten alle Berufe, nicht die alte IT-Fallbackliste. Explizite CLI-/Profilbegriffe kompatibel als eingeschraenkten Suchscope dokumentieren. Alle impliziten IT-Vorselektionen zwischen Start, Request und Normalisierung verfolgen und entfernen.
     2. Offizielle allgemeine Joblisten/Feeds ohne Berufsfilter verwenden. Quelle mit zwingendem Suchterm und ohne allgemeine Liste als eingeschraenkt/PARTIAL dokumentieren, nicht als vollstaendig leer. Pagination, Timeout und Resultatlimits weiterhin sichtbar begrenzen. Kein Filter im WebIF veraendert diesen Erfassungsauftrag.
     3. manual/PROGRAM.md und Datenvertrag nach ausdruecklicher Nutzerkorrektur synchronisieren: Berufsprofil steuert Anzeige, nicht Firmenakquise. Muenchen mit bestehendem 20-km-Bereich und Freising beibehalten; Firmenstandort und Stellenort getrennt. Kein pauschaler Bayern-/Deutschland-Match; UNKNOWN explizit.
-    Evidence/Done: Bei Umsetzung neu `logs/jobagent/JA-041-1-acceptance.json`: Gitstand, Input-/Resultat-IDs, Commands/Exitcodes und erwartete/erhaltene Zaehler. Alle drei Schritte positiv/negativ nachgewiesen; keine offene Kernanforderung. Geplante Screens bei sichtbaren Aenderungen `doc/roadmap-screenshots/JA-041-1-<width>.png`; noch nicht vorhandene Artefakte.
+    Evidence/Done: `logs/jobagent/JA-041-1-acceptance.json` dokumentiert Gitstand, Fixture-IDs, Commands, Exitcodes und Soll-/Istzaehler. Allgemeine Buchhaltungs-, Pflege-, Avature- und SuccessFactors-Fixtures sowie die negative termpflichtige Quelle sind nachgewiesen; keine sichtbare UI-Aenderung, daher UI-Lane nicht anwendbar.
     Funktionstest: Bestehende Tests um die genannten Faelle ergaenzen; isolierter Store, Fake Clock/Fetcher und exakte Assertions.
     ~~~powershell
-    pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1
-    pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1
-    pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1
+    pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1 # Exit 0
+    pwsh -NoProfile -File .\tests\Test-JobAgentLiveScan.ps1 # Exit 0
+    pwsh -NoProfile -File .\tests\Test-JobAgentSourceAdapters.ps1 # Exit 0
+    pwsh -NoProfile -File .\tests\Test-JobAgentSchema.ps1 # Exit 0
     ~~~
     Audit: Automatischer ID-/Status-/Mengenabgleich; bei sichtbaren Aenderungen echter Browser in 390/800/1366/1920 px, kein Clipping/Overlap, lesbare Kernfelder, korrekte Zaehler. Ohne Darstellungsänderung UI-Lane begruendet nicht anwendbar; keine Android-Lane.
     Supertest: Erst nach allen drei Unterpunkten und gruenen Funktionstests .\ci.cmd supertest; kein eigener Supertest/Miniabschluss pro Unterpunkt. Danach vollstaendige Archivierung des Softwarepunkts, Todo/Handoff und STP synchronisieren. Dieser Planungsauftrag fuehrt ihn nicht aus.
