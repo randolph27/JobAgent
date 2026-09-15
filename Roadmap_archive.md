@@ -1081,3 +1081,19 @@ Der vollständige vorherige Plan einschließlich aller Fortschritts-/Evidence-Un
 
 
   - [x] Abschlussnotiz (2026-09-15): Die lokale Chrome-Headless-GPU-Lane ist durch die Playwright-CLI ersetzt. Die Viewport-Pruefung erzeugt fuer Fixture und produktiven Coverage-Report Screenshots bei 390/800/1366/1920 px; logs/jobagent/ja-022-viewport-audit.json meldet status ok. Test-JobAgentHtmlAudit.ps1, route-check und stp sind gruen. Der gestartete ci.cmd supertest wurde kontrolliert beendet, weil sein unabhängiger Test-JobAgentDailyRun.ps1-Teiltest nach mehreren Minuten nicht abschloss; kein grünes Supertest-Ergebnis wird behauptet. Dies ist nach bestehendem Nutzervertrag kein Abschlussblocker.
+
+## Archiviert 2026-09-15 - UI-001
+
+- [x] UI-001 Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern bereitstellen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
+
+  Beschreibung: Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern bereitstellen. Abnahme erfolgte ohne reale Firmenquote auf einer isolierten Fixture.
+  Abhaengigkeiten: Firmenansicht aus JA-027 und allgemeine Stellenattribute aus JA-041.
+  Scope: `src/JobAgent.Report.psm1`, `tools/Measure-JobAgentCompanyCoverage.ps1`, HTML-Bericht und funktionsbezogene Test-Audits. Kein Frameworkwechsel, keine Gebietserweiterung und keine Bewerbungen.
+
+  - [x] UI-001.1: Gemeinsamer WebIF-Einstieg zeigt Firmen und Stellen getrennt, ohne versteckten IT-Default. Firmen ohne offene Stelle bleiben sichtbar; Gesamtbestand, gefilterte Treffer und sichtbare Seite sind getrennt gezählt und über Pagination erreichbar.
+  - [x] UI-001.2: Lokale Freitextsuche normalisiert Unicode und Groß-/Kleinschreibung; mehrere Begriffe wirken als UND. Gebiet, Arbeitgeber, Arbeitsmodell, Anstellungsart, Arbeitszeit und Aktualität kombinieren feldübergreifend per UND, Mehrfachwerte innerhalb eines Felds per ODER. München, bestehender 20-km-Bereich, Freising und `UNKNOWN` bleiben getrennt; Filterwechsel startet weder HTTP noch Akquise, Joblauf oder Storemutation.
+  - [x] UI-001.3: Der Browseraudit verwendet 251 Firmen und 256 Stellen. Er belegt die Erreichbarkeit hinter der alten 250er-Grenze, Freising/Pflege, München/Buchhaltung, Teilzeit/Hybrid, `UNKNOWN`, Unicode-Freitext, Nulltreffer, Reset und Browser-Rücknavigation. Die vier geprüften Ansichtsbreiten 390/800/1366/1920 px sind ohne wesentliche Überlappung oder Clipping abgenommen.
+
+  - [x] Evidence: `logs/jobagent/ui-001-browser-audit.json` enthält Fixturemodus, erwartete Job-IDs, alle acht Testfälle und Screenshotpfade. Screenshots: `output/playwright/ui-001-browser-audit-390.png`, `output/playwright/ui-001-browser-audit-800.png`, `output/playwright/ui-001-browser-audit-1366.png`, `output/playwright/ui-001-browser-audit-1920.png`.
+  - [x] Funktionstest: `Test-JobAgentHtmlAudit.ps1`, `Test-JobAgentReport.ps1` und `Test-JobAgentUiBrowserAudit.ps1` jeweils Exit 0. `./ci.cmd supertest` Exit 0 in 475,55 s; das Protokoll liegt unter `logs/jobagent/ui-001-supertest.log`.
+  - [x] Audit: Isolierte Fixture verhindert Produktivdatenmutationen; der Browseraudit prüft explizit das Ausbleiben lokaler API-, Job- und Store-Requests. Keine Android-Lane, da die WebIF-Änderung ausschließlich im Browser erfolgt.
