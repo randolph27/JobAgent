@@ -1,25 +1,22 @@
 {
-  "ts": "2026-09-14T08:33:10+02:00",
+  "ts": "2026-09-15T13:25:34.584+02:00",
   "agent_id": "UTTER-20260817-39f7",
   "workspace_root": "D:\\_Scripte\\JobAgent",
   "project": "JobAgent",
   "active_id": "TD-0041",
   "status": "in-progress",
   "goal": "JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern.",
-  "summary": "JA-027.3 Domain-only-Reaktivierung, Hostwellen ohne Kandidatenverlust und getrennte Karriere-/Domain-only-Metriken umgesetzt; Viewport-Audit lokal blockiert.",
+  "summary": "Neuer-Chat-Handoff aktualisiert. JA-027.3 ist mit Commit 16cd619 umgesetzt und gepusht; JA-027 bleibt wegen lokaler Viewport-Audit-Lane offen.",
+  "last_function_commit": "16cd619",
+  "roadmap_rotation": "none; JA-027 remains open until viewport audit lane is green",
+  "supertest": "not requested; treated as done per user rule",
   "changed": [
-    "Roadmap.md",
-    "src/JobAgent.Coverage.psm1",
-    "tools/Verify-JobAgentCompanyCandidates.ps1",
-    "tests/Test-JobAgentCompanyCandidateVerification.ps1",
-    "docs/handoffs/2026-09-13-ja0273-domain-hostwave-handoff.md",
-    "todo.state.json",
+    "handoff.latest.md",
+    "handoff.latest.json",
     "todo.events.jsonl",
-    "todo.checkpoint.json",
     "todo.history.digest.json",
     "todo.master.index.json",
-    "handoff.latest.md",
-    "handoff.latest.json"
+    "docs/handoffs/2026-09-15-ja027-new-chat-status-handoff.md"
   ],
   "verified": [
     {
@@ -71,26 +68,35 @@
       "cmd": "cmd /c .\\ci.cmd stp",
       "status": "passed",
       "exit": 0
+    },
+    {
+      "cmd": "cmd /c .\\ci.cmd route-check",
+      "status": "passed",
+      "exit": 0
     }
   ],
   "blocker": {
     "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentHtmlViewportAudit.ps1",
-    "reason": "Chrome Headless bricht lokal bei 1920 px mit GPU process isn't usable ab.",
+    "reason": "Chrome Headless bricht lokal bei 1920 px mit GPU process isn't usable ab; Gegenprobe mit Zusatzflags hing; Edge wurde nicht unter Standardpfad gefunden.",
     "exit": 1
   },
   "route_ok": true,
   "route_violations": [],
   "git": {
     "branch": "master",
-    "head": "1248ab46ee60",
+    "head": "16cd6195e474",
     "ahead": 0,
+    "behind": 0,
     "worktree": "dirty",
-    "upstream": "origin/master",
-    "behind": 0
+    "upstream": "origin/master"
   },
   "next": "JA-027.3: Viewport-Audit-Lane fuer JA-027 stabilisieren oder alternative lokale Browser-Lane konfigurieren; danach Abschlussgate/Supertest ausfuehren und JA-027 archivieren.",
   "next_steps": [
-    "JA-027.3: Viewport-Audit-Lane fuer JA-027 stabilisieren oder alternative lokale Browser-Lane konfigurieren; danach Abschlussgate/Supertest ausfuehren und JA-027 archivieren."
+    "tests/Test-JobAgentHtmlViewportAudit.ps1 und Browser-Startkonfiguration pruefen.",
+    "Stabile lokale Lane fuer 390/800/1366/1920 px herstellen, ohne visuelle Akzeptanzkriterien zu verwaessern.",
+    "JA-027-Abschlussabnahme mit relevanten Funktionstests, Viewport-Audit, route-check und stp ausfuehren.",
+    "Bei gruenem Abschluss JA-027 aus Roadmap.md nach Roadmap_archive.md rotieren und TD-0041 abschliessen.",
+    "Erst danach TD-0053 / JA-041 beginnen."
   ],
   "refs": [
     "todo.current.md",
@@ -99,6 +105,7 @@
     "todo.checkpoint.json",
     "handoff.latest.md",
     "handoff.latest.json",
-    "docs/handoffs/2026-09-13-ja0273-domain-hostwave-handoff.md"
+    "docs/handoffs/2026-09-13-ja0273-domain-hostwave-handoff.md",
+    "docs/handoffs/2026-09-15-ja027-new-chat-status-handoff.md"
   ]
 }
