@@ -1,5 +1,16 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-15 - QA-003
+
+- [x] QA-003 Discovery, Quellenverifikation, Wiederanlauf und CLI-Betrieb vollstaendig testen #comment: Der regulaere Start vom Firmenhinweis bis zur atomaren WebIF-Publikation ist in isolierten Fixtures nachgewiesen.
+  - [x] Scope und Grenzen: CompanyCandidateVerification, FetchEnvironment, FetchErrorInspection, SourceAdapters, SourceVerification, LiveScan, RegisterDiscovery, JobBoardDiscovery, RegionalDiscovery, CompanyDedupeScale, DiscoverySourceInventory, ImportWaves, DailyRun und Operations liefen ohne reale Firmenwellen, Kontakte oder produktive Storebearbeitung.
+  - [x] QA-003.1: Register-, Jobboersen- und Regionalfixtures decken leere, doppelte, veraltete, ungueltige und `UNKNOWN`-Hinweise sowie Domain-/Registerkonflikte ab. Offizielle Quellen bleiben fail-closed; 1.008 Kandidaten und 1.006 Cluster sind stabil nachgewiesen. Evidence: `docs/reviews/QA-003.1-discovery-verification.md`.
+  - [x] QA-003.2: Adapter- und Transportfixtures decken HTML/JSON-LD/ATS/Pagination, 200/404/429/503, Timeout, DNS/TLS, fehlerhaftes JSON, Redirectschleife und `Retry-After` mit Requestfolge und Fehlerklasse ab. Diagnosepfade redigieren Secrets. Evidence: `docs/reviews/QA-003.2-adapter-error-handling.md`.
+  - [x] QA-003.3: Zwei frische, bytegleiche CLI-Fixturewurzeln erzeugen gleiche normalisierte SHA-256-Hashes fuer Firmen, Quellen, Stellen, Checkpoint sowie JSON-, Markdown- und HTML-Berichte. Volatile Lauf-IDs, UTC-Zeitstempel, Laufstempel und Temp-Pfade sind explizit normalisiert. Ein Folgelauf dupliziert weder Firmen noch Stellen; Akquise und Scan teilen die `run_id`; Resume, `PARTIAL`, `wake_at`, atomare Publikation, Logrotation, Status- und Lockfaelle sind durch DailyRun-, Operations- und Candidate-Verification-Vertraege belegt. Evidence: `docs/reviews/QA-003-cli-cases.md`.
+  - [x] Funktionstest: Alle 14 festgelegten QA-003-Tests sowie `Test-JobAgentCiContracts.ps1` endeten mit Exit 0. `Test-JobAgentDailyRun.ps1` enthaelt den frischen Zweiwurzel-Hashvergleich.
+  - [x] Supertest: `./ci.cmd supertest` endete mit Exit 0 nach 384,59 s. Der erste Lauf konnte den npm-Cache in der Sandbox nicht oeffnen; der gezielte `Test-JobAgentSchema.ps1` und der Wiederholungslauf mit Zugriff auf den vorhandenen lokalen Cache endeten Exit 0.
+  - [x] Meilenstein: M2 ist abgeschlossen. Naechster aktiver Fachpunkt ist QA-004.
+
 ## Archiviert 2026-09-15 - QA-002
 
 - [x] QA-002 Daten-, Identitaets-, Status- und Berichtsvertraege mit Grenzfaellen absichern #comment: Falsche Stellenidentitaeten, Statuswechsel oder Persistenzschreibvorgaenge beschaedigen den Bestand und haben Vorrang vor weiteren UI-Pruefungen.

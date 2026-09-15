@@ -29,6 +29,83 @@ function New-TestProjectRoot {
     return $path
 }
 
+function Get-TestSha256 {
+    param([Parameter(Mandatory)][string]$Content)
+
+    $sha256 = [Security.Cryptography.SHA256]::Create()
+    try {
+        $bytes = [Text.Encoding]::UTF8.GetBytes($Content)
+        return ([Convert]::ToHexString($sha256.ComputeHash($bytes))).ToLowerInvariant()
+    }
+    finally {
+        $sha256.Dispose()
+    }
+}
+
+function Get-TestDeterministicCliArtifactHash {
+    param(
+        [Parameter(Mandatory)][string]$ProjectRoot,
+        [Parameter(Mandatory)][object]$Result
+    )
+
+    $document = Read-JobAgentStore -ProjectRoot $ProjectRoot
+    $checkpointPath = [string]$Result.acquisition.candidate_verification.checkpoint_path
+    $checkpoint = Get-Content -LiteralPath $checkpointPath -Raw | ConvertFrom-Json -Depth 100
+    $reportContents = @(
+        $Result.report_path,
+        $Result.markdown_report_path,
+        $Result.html_report_path | ForEach-Object {
+            $content = Get-Content -LiteralPath ([string]$_) -Raw
+            $content = $content.Replace($ProjectRoot, '<PROJECT_ROOT>')
+            $escapedProjectRoot = [regex]::Escape($ProjectRoot.Replace('\', '\\'))
+            $content = [regex]::Replace($content, $escapedProjectRoot, '<PROJECT_ROOT>')
+            $content = $content -replace '(?:dailyrun|scan|scanrun):[A-Za-z0-9:-]+', '<RUN_ID>'
+            $content = $content -replace 'daily-run-\d{8}T\d{9}Z', 'daily-run-<RUN_STAMP>'
+            $content = $content -replace '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z', '<UTC_TIMESTAMP>'
+            Get-TestSha256 -Content $content
+        }
+    )
+    $projection = [ordered]@{
+        companies = @($document.companies | Sort-Object company_id | ForEach-Object {
+                [ordered]@{
+                    company_id = [string]$_.company_id
+                    verification_status = [string]$_.verification_status
+                    career_url = [string]$_.career_url
+                }
+            })
+        job_sources = @($document.job_sources | Sort-Object source_id | ForEach-Object {
+                [ordered]@{
+                    source_id = [string]$_.source_id
+                    company_id = [string]$_.company_id
+                    source_type = [string]$_.source_type
+                    canonical_url = [string]$_.canonical_url
+                    is_official = [bool]$_.is_official
+                }
+            })
+        jobs = @($document.jobs | Sort-Object company_id, source_id, external_job_id | ForEach-Object {
+                [ordered]@{
+                    company_id = [string]$_.company_id
+                    source_id = [string]$_.source_id
+                    external_job_id = [string]$_.external_job_id
+                    status = [string]$_.status
+                    classification = [string]$_.classification.result
+                    regional_scope = [string]$_.regional_scope.result
+                }
+            })
+        checkpoint = [ordered]@{
+            schema_version = [string]$checkpoint.schema_version
+            state = [string]$checkpoint.state
+            candidate_ids = @($checkpoint.candidate_ids | Sort-Object)
+            completed_candidate_ids = @($checkpoint.completed_candidate_ids | Sort-Object)
+            pending_candidate_ids = @($checkpoint.pending_candidate_ids | Sort-Object)
+            processed_total = [int]$checkpoint.metrics.processed_total
+            net_official_career_growth = [int]$checkpoint.metrics.net_official_career_growth
+        }
+        report_hashes = @($reportContents)
+    }
+    return Get-TestSha256 -Content ($projection | ConvertTo-Json -Depth 20 -Compress)
+}
+
 function New-TestCompany {
     param(
         [Parameter(Mandatory)][string]$Name,
@@ -314,6 +391,11 @@ try {
         }
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -Encoding UTF8
 
+    $determinismProjectRoot = New-TestProjectRoot
+    Copy-Item -LiteralPath (Join-Path $acquisitionProjectRoot 'data') -Destination $determinismProjectRoot -Recurse
+    Copy-Item -LiteralPath (Join-Path $acquisitionProjectRoot 'acquisition-fixture-map.json') -Destination $determinismProjectRoot
+    Copy-Item -LiteralPath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -Destination $determinismProjectRoot
+
     $acquisitionOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $acquisitionProjectRoot -FixturePath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -AcquisitionFixtureMapPath 'acquisition-fixture-map.json' -AcquisitionCandidateBudget 1 -MaxCompanies 1 -FetchClient curl -WslDistribution FixtureDistro 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI mit automatischer Akquise ist fehlgeschlagen: " + ($acquisitionOutput -join "`n"))
     $acquisitionResult = ($acquisitionOutput -join "`n") | ConvertFrom-Json -Depth 100
@@ -326,6 +408,12 @@ try {
     Assert-True -Condition (@($acquisitionStore.jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 2) -Message 'Daily-Run scannt automatisch akquirierte Firma nicht berufsneutral im selben Lauf.'
     $acquisitionHtml = Get-Content -LiteralPath ([string]$acquisitionResult.html_report_path) -Raw
     Assert-True -Condition ($acquisitionHtml.Contains('<section><h2>Neue Unternehmen</h2>') -and $acquisitionHtml.Contains('<td>Example AG</td>') -and $acquisitionHtml.Contains('href="https://example.invalid/karriere" target="_blank" rel="noopener noreferrer">Karriere</a>')) -Message 'WebIF zeigt automatisch akquirierte Firma nicht mit Karrierequelle an.'
+
+    $determinismOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $determinismProjectRoot -FixturePath (Join-Path $determinismProjectRoot 'daily-scan-fixture.json') -AcquisitionFixtureMapPath 'acquisition-fixture-map.json' -AcquisitionCandidateBudget 1 -MaxCompanies 1 -FetchClient curl -WslDistribution FixtureDistro 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Zweiter isolierter Daily-Run fuer den Determinismusvergleich ist fehlgeschlagen: " + ($determinismOutput -join "`n"))
+    $determinismResult = ($determinismOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($determinismResult.acquisition.run_id -eq $determinismResult.run_id) -Message 'Der zweite isolierte Lauf verliert die gemeinsame Akquise-/Scan-ID.'
+    Assert-True -Condition ((Get-TestDeterministicCliArtifactHash -ProjectRoot $acquisitionProjectRoot -Result $acquisitionResult) -eq (Get-TestDeterministicCliArtifactHash -ProjectRoot $determinismProjectRoot -Result $determinismResult)) -Message 'Gleiche isolierte CLI-Fixtures erzeugen unterschiedliche normalisierte Store-, Checkpoint- oder Reporthashes.'
 
     $partialAcquisitionOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $acquisitionProjectRoot -FixturePath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -AcquisitionFixtureMapPath 'missing-fixture-map.json' -AcquisitionCandidateBudget 1 -MaxCompanies 1 -CompanyIds 'company:example_ag' -FetchClient curl -WslDistribution FixtureDistro 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI muss bei isoliertem Akquisefehler weiter scannen: " + ($partialAcquisitionOutput -join "`n"))
@@ -746,6 +834,9 @@ finally {
     }
     if ($null -ne (Get-Variable -Name acquisitionProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $acquisitionProjectRoot)) {
         Remove-Item -LiteralPath $acquisitionProjectRoot -Recurse -Force
+    }
+    if ($null -ne (Get-Variable -Name determinismProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $determinismProjectRoot)) {
+        Remove-Item -LiteralPath $determinismProjectRoot -Recurse -Force
     }
     if (Test-Path -LiteralPath $projectRoot) {
         Remove-Item -LiteralPath $projectRoot -Recurse -Force
