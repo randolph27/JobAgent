@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-15T15:51:35.445+02:00
+Stand: 2026-09-15T15:52:56.547+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-15T15:51:35.445+02:00
 - Status: `in-progress`
 - Ziel: UI-001 Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern bereitstellen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
 - Branch: `master`
-- HEAD: `a45a3662f658`
+- HEAD: `cfb6ba36159f`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,10 +16,6 @@ Stand: 2026-09-15T15:51:35.445+02:00
 
 ## Versionierte Aenderungen
 
-- `html/jobagent/ja-022-viewport-audit.html`
-- `src/JobAgent.Report.psm1`
-- `tests/Test-JobAgentHtmlAudit.ps1`
-- `tests/Test-JobAgentReport.ps1`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
