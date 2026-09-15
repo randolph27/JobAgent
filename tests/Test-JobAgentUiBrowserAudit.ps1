@@ -56,7 +56,7 @@ function Invoke-JobAgentPlaywrightCli {
 
     Push-Location -LiteralPath $WorkingDirectory
     try {
-        $output = @(& $npxCommand.Source --yes --package '@playwright/cli' playwright-cli @Arguments 2>&1)
+        $output = @(& $npxCommand.Source --no-install --package '@playwright/cli' playwright-cli @Arguments 2>&1)
         if ($LASTEXITCODE -ne 0) {
             throw ('Playwright-CLI fehlgeschlagen: ' + ($output -join [Environment]::NewLine))
         }
@@ -73,7 +73,16 @@ function Get-JobAgentCliSnapshot {
         [Parameter(Mandatory)][string]$SessionName
     )
 
-    return Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'snapshot')
+    $output = Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'snapshot')
+    $snapshotLink = [regex]::Match($output, '\[Snapshot\]\((?<path>[^)]+)\)')
+    if ($snapshotLink.Success) {
+        $snapshotPath = Join-Path $WorkingDirectory $snapshotLink.Groups['path'].Value
+        if (Test-Path -LiteralPath $snapshotPath -PathType Leaf) {
+            return Get-Content -LiteralPath $snapshotPath -Raw
+        }
+    }
+
+    return $output
 }
 
 function Get-JobAgentCliRef {
@@ -85,14 +94,15 @@ function Get-JobAgentCliRef {
 
     $escapedName = [regex]::Escape($Name)
     foreach ($role in $Roles) {
-        $pattern = '(?m)\b' + [regex]::Escape($role) + '\s+"' + $escapedName + '"[^\r\n]*\[ref=(e\d+)\]'
+        $pattern = '(?m)\b' + [regex]::Escape($role) + '\s+"' + $escapedName + '"[^\r\n]*\[ref=([A-Za-z0-9]+)\]'
         $match = [regex]::Match($Snapshot, $pattern)
         if ($match.Success) {
             return $match.Groups[1].Value
         }
     }
 
-    throw "Playwright-Snapshot enthaelt kein steuerbares Element '$Name' mit Rollen $($Roles -join ', ')."
+    $diagnostic = $Snapshot.Substring(0, [Math]::Min(1200, $Snapshot.Length))
+    throw "Playwright-Snapshot enthaelt kein steuerbares Element '$Name' mit Rollen $($Roles -join ', '). Snapshot-Anfang: $diagnostic"
 }
 
 function Assert-JobAgentSnapshotContains {
@@ -103,6 +113,63 @@ function Assert-JobAgentSnapshotContains {
     )
 
     Assert-True -Condition $Snapshot.Contains($Expected) -Message "${Case}: erwarteter Browserinhalt fehlt: $Expected"
+}
+
+function Get-JobAgentVisibleRecordIds {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string]$SessionName,
+        [Parameter(Mandatory)][ValidateSet('jobs', 'companies')][string]$View
+    )
+
+    $selector = if ($View -eq 'jobs') { '#jobagent-job-results article' } else { '#jobagent-company-results article' }
+    $property = if ($View -eq 'jobs') { 'jobId' } else { 'companyId' }
+    $script = "() => JSON.stringify(Array.from(document.querySelectorAll('$selector')).map(article => article.dataset.$property))"
+    $output = Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'eval', $script)
+    $result = [regex]::Match($output, '(?ms)### Result\s*\r?\n(?<payload>.+?)\s*$')
+    Assert-True -Condition $result.Success -Message "Playwright-CLI lieferte keine lesbare ID-Antwort fuer $View."
+    $serializedIds = $result.Groups['payload'].Value.Trim() | ConvertFrom-Json -Depth 10
+    return @($serializedIds | ConvertFrom-Json -Depth 10)
+}
+
+function Assert-JobAgentSetEqual {
+    param(
+        [Parameter(Mandatory)][string[]]$Actual,
+        [Parameter(Mandatory)][string[]]$Expected,
+        [Parameter(Mandatory)][string]$Case
+    )
+
+    $actualSorted = @($Actual | Sort-Object -Unique)
+    $expectedSorted = @($Expected | Sort-Object -Unique)
+    Assert-True -Condition ($actualSorted.Count -eq $expectedSorted.Count) -Message "${Case}: abweichende Anzahl sichtbarer IDs."
+    Assert-True -Condition (@(Compare-Object -ReferenceObject $expectedSorted -DifferenceObject $actualSorted).Count -eq 0) -Message "${Case}: sichtbare IDs weichen von der Sollmenge ab."
+}
+
+function Assert-JobAgentLocationHash {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string]$SessionName,
+        [Parameter(Mandatory)][string]$Expected,
+        [Parameter(Mandatory)][string]$Case
+    )
+
+    $output = Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'eval', '() => window.location.hash')
+    Assert-True -Condition ($output -match [regex]::Escape('"' + $Expected + '"')) -Message "${Case}: URL-Hash ist nicht normalisiert auf $Expected."
+}
+
+function Set-JobAgentLocationHash {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string]$SessionName,
+        [Parameter(Mandatory)][string[]]$Segments
+    )
+
+    $javascriptSegments = foreach ($segment in $Segments) {
+        $characterCodes = $segment.ToCharArray() | ForEach-Object { [int][char]$_ }
+        'String.fromCharCode(' + ($characterCodes -join ',') + ')'
+    }
+    $script = '() => { window.location.hash = [' + ($javascriptSegments -join ',') + '].join(String.fromCharCode(38)); }'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'eval', $script) | Out-Null
 }
 
 function New-TestLocation {
@@ -216,7 +283,9 @@ $document = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-09-15T10:00:
 $document.companies = @(1..251 | ForEach-Object { New-TestCompany -Number $_ -Location $munich })
 $document.jobs = @(1..251 | ForEach-Object {
         $suffix = $_.ToString('000', [Globalization.CultureInfo]::InvariantCulture)
-        New-TestJob -JobId "job:company_$suffix" -CompanyId "company:fixture_$suffix" -Title "Position $suffix" -Location $munich
+        $companyNumber = if ($_ -eq 251) { 250 } else { $_ }
+        $companySuffix = $companyNumber.ToString('000', [Globalization.CultureInfo]::InvariantCulture)
+        New-TestJob -JobId "job:company_$suffix" -CompanyId "company:fixture_$companySuffix" -Title "Position $suffix" -Location $munich
     })
 $document.jobs += @(
     New-TestJob -JobId 'job:munich-accounting' -CompanyId 'company:fixture_001' -Title 'Buchhalterin Muenchen' -Location $munich -Category 'Buchhaltung'
@@ -342,6 +411,18 @@ try {
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
 
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=companies', 'page=999', 'q=Firma%20251')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Firmenhash mit uebergrosser Seitennummer'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firma 251' -Case 'Firma ohne offene Stelle'
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=companies&q=Firma+251' -Case 'Firmenhash mit uebergrosser Seitennummer'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'reload') | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Reload eines normalisierten Firmenhashes'
+
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'goto', $reportUrl) | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+
     $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Position 251') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
@@ -351,6 +432,15 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'go-back') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Ruecknavigation'
+
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'go-forward') | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Vorwaertsnavigation'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Position 251' -Case 'Vorwaertsnavigation'
+
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'go-back') | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Ruecknavigation nach Vorwaertsnavigation'
 
     $areaRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Gebiet'
     $workModelRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Arbeitsmodell'
@@ -414,7 +504,8 @@ try {
     $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Burokauffrau') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Bürokauffrau Muenchen' -Case 'Unicode-normalisierte Umlautsuche'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Unicode-normalisierte Umlautsuche'
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:umlaut') -Case 'Unicode-normalisierte Umlautsuche'
 
     $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'keine-passende-stelle') | Out-Null
@@ -432,10 +523,50 @@ try {
     $jobsTabRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('tab', 'button') -Name 'Stellen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $jobsTabRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    $pageSixRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name '6'
-    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $pageSixRef) | Out-Null
+    $visibleJobIds = [System.Collections.Generic.List[string]]::new()
+    foreach ($pageNumber in 1..6) {
+        if ($pageNumber -gt 1) {
+            $pageRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name ([string]$pageNumber)
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $pageRef) | Out-Null
+            $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+        }
+
+        $expectedVisible = if ($pageNumber -eq 6) { 14 } else { 50 }
+        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected "Stellen: 264 Treffer, Seite $pageNumber von 6 (sichtbar $expectedVisible)." -Case "Stellenpagination Seite $pageNumber"
+        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected ('button "' + $pageNumber + '" [disabled]') -Case "deaktivierte aktuelle Stellenseite $pageNumber"
+        foreach ($jobId in Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) {
+            $visibleJobIds.Add($jobId)
+        }
+    }
+    Assert-JobAgentSetEqual -Actual $visibleJobIds.ToArray() -Expected @($report.sections.active_jobs.job_id) -Case 'alle Stellenueber Seiten'
+
+    $companiesTabRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('tab', 'button') -Name 'Firmen'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $companiesTabRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Position 251' -Case 'Pagination hinter der Altgrenze'
+    $visibleCompanyIds = [System.Collections.Generic.List[string]]::new()
+    foreach ($pageNumber in 1..6) {
+        if ($pageNumber -gt 1) {
+            $pageRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name ([string]$pageNumber)
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $pageRef) | Out-Null
+            $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+        }
+
+        $expectedVisible = if ($pageNumber -eq 6) { 1 } else { 50 }
+        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected "Firmen: 251 Treffer, Seite $pageNumber von 6 (sichtbar $expectedVisible)." -Case "Firmenpagination Seite $pageNumber"
+        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected ('button "' + $pageNumber + '" [disabled]') -Case "deaktivierte aktuelle Firmenseite $pageNumber"
+        foreach ($companyId in Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View companies) {
+            $visibleCompanyIds.Add($companyId)
+        }
+    }
+    Assert-JobAgentSetEqual -Actual $visibleCompanyIds.ToArray() -Expected @($report.sections.companies.company_id) -Case 'alle Firmen ueber Seiten'
+
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('page=-3', 'area=NOT_A_REAL_AREA')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 0 Treffer, Seite 1 von 1 (sichtbar 0).' -Case 'ungueltiger Hashfilter'
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=jobs&area=NOT_A_REAL_AREA' -Case 'ungueltiger Hashfilter'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'reload') | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 0 Treffer, Seite 1 von 1 (sichtbar 0).' -Case 'Reload eines ungueltigen Hashfilters'
 
     $searchHeadingRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('heading') -Name 'Firmen und Stellen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'hover', $searchHeadingRef) | Out-Null
@@ -479,7 +610,9 @@ $summary = [pscustomobject]@{
         'qa004_all_offered_facet_values_and_age_boundaries',
         'unicode_free_text_search',
         'empty_result',
-        'reset_and_browser_back_navigation',
+        'reset_and_browser_back_forward_navigation',
+        'hash_normalization_reload_and_all_pages_with_exact_ids',
+        'companies_without_open_jobs',
         'local_filter_does_not_mutate_fixture_or_call_job_api',
         'viewports_390_800_1366_1920'
     )
