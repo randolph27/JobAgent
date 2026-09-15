@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-15T15:52:56.547+02:00
+Stand: 2026-09-15T16:43:24.333+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-15T15:52:56.547+02:00
 - Status: `in-progress`
 - Ziel: UI-001 Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern bereitstellen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
 - Branch: `master`
-- HEAD: `cfb6ba36159f`
+- HEAD: `5b4f77afcf32`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -25,8 +25,4 @@ Stand: 2026-09-15T15:52:56.547+02:00
 
 ## Naechster Anker
 
-UI-001 abschliessen: dedizierten Browser-Funktionstest mit mehr als 250 Fixture-Stellen, exakten IDs/Zählern, Filterkombinationen, Reset und Rücknavigation ergänzen; dann Evidence, Roadmap-Abschluss und Archivierung.
-
-## Detaillierter Wechselstatus
-
-Vollständiger Umsetzungs-, Test- und Restaufgabenstand: docs/handoffs/2026-09-15-ui001-search-slice.md.
+JA-042 Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
