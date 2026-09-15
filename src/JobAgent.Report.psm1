@@ -850,7 +850,7 @@ function New-JobAgentDailyReport {
 
     [pscustomobject]@{
         scan_run_id = $ScanRunId
-        generated_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        generated_at = $finished.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         sections = [pscustomobject]@{
             companies = @($allCompanies)
             active_jobs = @($allActiveEntries)

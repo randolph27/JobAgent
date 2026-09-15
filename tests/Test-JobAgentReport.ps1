@@ -194,7 +194,12 @@ $document.change_events = @(
     [pscustomobject]@{ change_event_id = 'change:beta_rejected'; job_id = 'job:beta_rejected'; scan_run_id = $scanRunId; event_type = 'JOB_CREATED'; created_at = '2026-08-17T10:00:00.000Z'; old_status = $null; new_status = 'NEW'; changed_fields = @('status'); reason = 'Erstmals erkannt.' }
 )
 
-$report = New-JobAgentDailyReport -Document $document -ScanRunId $scanRunId
+$isolatedSourceRegistry = [pscustomobject]@{ schema_version = 'fixture/v1'; generated_at = '2026-08-17T10:10:00.000Z'; items = @() }
+$isolatedHintStore = [pscustomobject]@{ schema_version = 'fixture/v1'; generated_at = '2026-08-17T10:10:00.000Z'; hints = @() }
+$report = New-JobAgentDailyReport -Document $document -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
+Assert-True -Condition ($report.generated_at -eq '2026-08-17T10:10:00.000Z') -Message 'Report leitet generated_at nicht deterministisch aus der festen Storegeneration ab.'
+Assert-True -Condition ((ConvertTo-JobAgentDailyReportMarkdown -Report $report) -eq (ConvertTo-JobAgentDailyReportMarkdown -Report $report)) -Message 'Feste Storegeneration erzeugt keinen deterministischen Markdown-Report.'
+Assert-True -Condition ((ConvertTo-JobAgentDailyReportHtml -Report $report) -eq (ConvertTo-JobAgentDailyReportHtml -Report $report)) -Message 'Feste Storegeneration erzeugt keinen deterministischen HTML-Report.'
 Assert-True -Condition (@($report.sections.new_matching_jobs).Count -eq 1) -Message 'Neue passende Stellen werden nicht korrekt gefiltert.'
 Assert-True -Condition (@($report.sections.active_matching_jobs).Count -eq 1) -Message 'Unveraenderte aktive passende Stellen werden nicht kompakt getrennt ausgegeben.'
 Assert-True -Condition (@($report.sections.changed_jobs).Count -eq 1) -Message 'Geaenderte passende Stellen fehlen.'
@@ -259,9 +264,13 @@ foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sourc
     Assert-True -Condition (-not $html.Contains($rawLabel)) -Message "HTML-Report darf technische Metriklabels nicht primaer anzeigen: $rawLabel"
 }
 
+$report.sections.new_matching_jobs[0].official_url = 'javascript:alert(1)'
+$unsafeLinkHtml = ConvertTo-JobAgentDailyReportHtml -Report $report
+Assert-True -Condition (-not $unsafeLinkHtml.Contains('href="javascript:alert(1)"')) -Message 'HTML-Report darf unzulaessige URL-Schemata nicht verlinken.'
+
 $document.job_sources += [pscustomobject]@{ source_id = 'source:beta_ag_board'; company_id = 'company:beta_ag'; source_type = 'JOB_BOARD_DISCOVERY'; url = 'https://jobs.example.invalid/beta'; canonical_url = 'https://jobs.example.invalid/beta'; is_official = $false; verified_at = $null; verification_basis = 'DISCOVERY_HINT'; verification_evidence = @() }
 $document.scan_attempts += [pscustomobject]@{ scan_attempt_id = 'scanattempt:beta-board'; scan_run_id = $scanRunId; company_id = 'company:beta_ag'; source_id = 'source:beta_ag_board'; started_at = '2026-08-17T10:00:00.000Z'; finished_at = '2026-08-17T10:00:01.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'TECHNICAL_LIMITATION'; retry_recommendation = 'MANUAL_REVIEW'; http_status = 599 }
-$issueReport = New-JobAgentDailyReport -Document $document -ScanRunId $scanRunId
+$issueReport = New-JobAgentDailyReport -Document $document -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
 $unofficialIssue = @($issueReport.sections.source_issues | Where-Object { [string]$_.source_id -eq 'source:beta_ag_board' })[0]
 Assert-True -Condition (-not [bool]$unofficialIssue.source_link.is_clickable) -Message 'Unoffizielle Quellen-Issues duerfen nicht klickbar sein.'
 Assert-True -Condition ($unofficialIssue.source_review_reason -match 'nicht als offizielle JobSource') -Message 'Unoffizielle Quellen-Issues brauchen einen Review-Grund.'
@@ -272,7 +281,7 @@ Assert-True -Condition (-not $issueHtml.Contains('href="https://jobs.example.inv
 
 $empty = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
 $empty.scan_runs = @($document.scan_runs[0])
-$emptyReport = New-JobAgentDailyReport -Document $empty -ScanRunId $scanRunId
+$emptyReport = New-JobAgentDailyReport -Document $empty -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
 $emptyMarkdown = ConvertTo-JobAgentDailyReportMarkdown -Report $emptyReport
 Assert-True -Condition ($emptyMarkdown.Contains('Keine neuen passenden Stellen im Lauf.')) -Message 'Leere Reports erhalten keinen stabilen Leerzustand.'
 $emptyHtml = ConvertTo-JobAgentDailyReportHtml -Report $emptyReport
@@ -291,6 +300,8 @@ Assert-True -Condition ($emptyHtml.Contains('Keine neuen passenden Stellen im La
         'report_renders_secure_job_provider_and_source_links',
         'report_blocks_unofficial_source_issue_links',
         'report_escapes_html_content',
+        'report_is_deterministic_for_fixed_store_generation',
+        'report_blocks_unsafe_url_schemes',
         'report_renders_empty_state'
     )
 } | ConvertTo-Json -Depth 4

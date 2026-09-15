@@ -1,7 +1,9 @@
 #requires -Version 7.4
 
 [CmdletBinding()]
-param()
+param(
+    [Parameter()][switch]$IncludeToolIntegration
+)
 
 Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
@@ -474,7 +476,8 @@ Assert-True -Condition (@($coverageWithInputs.import_waves.waves).Count -eq 5) -
 Assert-True -Condition (@($coverageWithInputs.import_waves.waves | Where-Object { $_.wave_id -eq 'D' -and $_.candidates_total -ge 1 }).Count -eq 1) -Message 'Importwelle D enthaelt keine Sekundaerhinweise.'
 Assert-True -Condition ($coverageWithInputs.import_waves.contract -match 'unverifizierte Hints') -Message 'Importwellen muessen Hints fail-closed beschreiben.'
 
-$coverageLog = Join-Path $root 'logs\jobagent\ja-023-source-coverage.json'
+if ($IncludeToolIntegration) {
+    $coverageLog = Join-Path $root 'logs\jobagent\ja-023-source-coverage.json'
 New-Item -ItemType Directory -Path (Split-Path -Parent $coverageLog) -Force | Out-Null
 $sourceCoverage | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $coverageLog -Encoding UTF8
 
@@ -574,28 +577,30 @@ Assert-True -Condition ($sourceToolOutput.status -eq 'ok') -Message 'Quellenbest
 Assert-True -Condition ($sourceToolOutput.sources_total -eq ($sourceToolOutput.by_group.job_source + $sourceToolOutput.by_group.source_registry + $sourceToolOutput.by_group.discovery_hint)) -Message 'Quellenbestand-Tool weist inkonsistente Gesamtzahl aus.'
 $sourceToolMarkdown = & (Join-Path $root 'tools\Measure-JobAgentSourceCoverage.ps1') -ProjectRoot $root -Markdown
 Assert-True -Condition ($sourceToolMarkdown.Contains('Quellen gesamt')) -Message 'Quellenbestand-Tool-Markdown beantwortet die Quellenanzahl nicht.'
+}
 
-[pscustomobject]@{
-    status = 'ok'
-    cases = @(
-        'coverage_metrics_for_inventory_attempts_and_matches',
-        'unknown_companies_prioritized',
-        'manual_review_discovery_prioritized',
-        'stale_companies_prioritized',
-        'failed_portals_prioritized_for_adapter_review',
-        'recent_success_rotation_penalty',
-        'coverage_report_has_approximation_notice',
-        'coverage_dimensions_by_status_target_industry_and_source',
-        'coverage_freshness_metrics_for_companies_sources_and_candidates',
-        'coverage_company_link_contract_for_career_website_ats_review_and_missing',
-        'coverage_duplicate_groups_by_domain',
-        'coverage_import_wave_plan',
-        'daily_report_includes_coverage_and_backlog',
-        'discovery_source_registry_schema_valid',
-        'discovery_source_coverage_by_class_and_decision',
-        'discovery_source_secondary_sources_are_not_official',
-        'discovery_source_usage_notes_required',
-        'secondary_hint_store_contract',
+$cases = @(
+    'coverage_metrics_for_inventory_attempts_and_matches',
+    'unknown_companies_prioritized',
+    'manual_review_discovery_prioritized',
+    'stale_companies_prioritized',
+    'failed_portals_prioritized_for_adapter_review',
+    'recent_success_rotation_penalty',
+    'coverage_report_has_approximation_notice',
+    'coverage_dimensions_by_status_target_industry_and_source',
+    'coverage_freshness_metrics_for_companies_sources_and_candidates',
+    'coverage_company_link_contract_for_career_website_ats_review_and_missing',
+    'coverage_duplicate_groups_by_domain',
+    'coverage_import_wave_plan',
+    'daily_report_includes_coverage_and_backlog',
+    'discovery_source_registry_schema_valid',
+    'discovery_source_coverage_by_class_and_decision',
+    'discovery_source_secondary_sources_are_not_official',
+    'discovery_source_usage_notes_required',
+    'secondary_hint_store_contract'
+)
+if ($IncludeToolIntegration) {
+    $cases += @(
         'coverage_tool_generates_json_markdown_html_artifacts',
         'source_inventory_metrics_for_job_sources_registry_and_hints',
         'source_coverage_tool_outputs_json_and_markdown',
@@ -607,4 +612,10 @@ Assert-True -Condition ($sourceToolMarkdown.Contains('Quellen gesamt')) -Message
         'coverage_target_inventory_gate',
         'candidate_dedupe_tool_generates_json_markdown_and_enriched_hints'
     )
+}
+
+[pscustomobject]@{
+    status = 'ok'
+    tool_integration = [bool]$IncludeToolIntegration
+    cases = $cases
 } | ConvertTo-Json -Depth 4

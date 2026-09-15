@@ -319,6 +319,16 @@ $updated.change_events[0].changed_fields = @('title', 'status')
 $updated.change_events[0].reason = 'Titel auf offizieller Detailseite geaendert.'
 Test-JobAgentDocument -Document $updated
 
+$invalidStatus = New-ValidJobAgentDocument
+$invalidStatus.jobs[0].status = 'NOT_A_STATUS'
+try {
+    Test-JobAgentDocument -Document $invalidStatus
+    throw 'Negativtest ungueltiger Jobstatus hat keinen Fehler erzeugt.'
+}
+catch {
+    Assert-True -Condition ($_.Exception.Message -match 'Jobstatus') -Message "Unerwarteter Fehler fuer ungueltigen Jobstatus: $($_.Exception.Message)"
+}
+
 $ajv = Get-Command npx -ErrorAction SilentlyContinue
 if ($null -ne $ajv) {
     $validFixture = Join-Path $fixtureRoot 'valid.json'
@@ -335,11 +345,40 @@ if ($null -ne $ajv) {
         $invalidOutput = @(& npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s $schemaPath -d $invalidFixture --spec=draft2020 -c ajv-formats 2>&1)
         Assert-True -Condition ($LASTEXITCODE -ne 0) -Message "AJV hat ungueltiges Fixture akzeptiert: $invalidFixture`n$($invalidOutput -join "`n")"
     }
+
+    $generatedFixtureRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-schema-' + [guid]::NewGuid().ToString('N'))
+    New-Item -ItemType Directory -Path $generatedFixtureRoot -Force | Out-Null
+    try {
+        $wrongEnumFixture = Join-Path $generatedFixtureRoot 'invalid-wrong-enum.json'
+        $wrongEnum = New-ValidJobAgentDocument
+        $wrongEnum.jobs[0].status = 'NOT_A_STATUS'
+        Set-Content -LiteralPath $wrongEnumFixture -Value ($wrongEnum | ConvertTo-Json -Depth 100) -Encoding UTF8
+
+        $wrongTypeFixture = Join-Path $generatedFixtureRoot 'invalid-wrong-type.json'
+        $wrongType = New-ValidJobAgentDocument
+        $wrongType.companies[0].scan_priority = 'high'
+        Set-Content -LiteralPath $wrongTypeFixture -Value ($wrongType | ConvertTo-Json -Depth 100) -Encoding UTF8
+
+        $nullRequiredFixture = Join-Path $generatedFixtureRoot 'invalid-null-required.json'
+        $nullRequired = New-ValidJobAgentDocument
+        $nullRequired.companies[0].canonical_name = $null
+        Set-Content -LiteralPath $nullRequiredFixture -Value ($nullRequired | ConvertTo-Json -Depth 100) -Encoding UTF8
+
+        foreach ($invalidFixture in @($wrongEnumFixture, $wrongTypeFixture, $nullRequiredFixture)) {
+            $invalidOutput = @(& npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s $schemaPath -d $invalidFixture --spec=draft2020 -c ajv-formats 2>&1)
+            Assert-True -Condition ($LASTEXITCODE -ne 0) -Message "AJV hat generiertes ungueltiges Fixture akzeptiert: $invalidFixture`n$($invalidOutput -join "`n")"
+        }
+    }
+    finally {
+        if (Test-Path -LiteralPath $generatedFixtureRoot) {
+            Remove-Item -LiteralPath $generatedFixtureRoot -Recurse -Force
+        }
+    }
 }
 
 [pscustomobject]@{
     status = 'ok'
     schema = $schemaPath
     ajv = $(if ($null -ne $ajv) { 'run' } else { 'not-found' })
-    cases = @('valid', 'missing_official_url', 'missing_stable_job_id', 'updated_job', 'removed_job')
+    cases = @('valid', 'missing_official_url', 'missing_stable_job_id', 'invalid_job_status', 'invalid_enum', 'invalid_type', 'invalid_null_required', 'updated_job', 'removed_job')
 } | ConvertTo-Json -Depth 4

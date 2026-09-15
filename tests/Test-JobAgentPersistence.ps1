@@ -19,6 +19,55 @@ function Assert-True {
     }
 }
 
+function Get-FileSha256 {
+    param([Parameter(Mandatory)][string]$Path)
+
+    (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash
+}
+
+function Set-AtomicWriteFault {
+    param([Parameter()][scriptblock]$FaultInjector)
+
+    $module = Get-Module JobAgent.Persistence
+    & $module {
+        param($injector)
+        $script:AtomicWriteFaultInjector = $injector
+    } $FaultInjector
+}
+
+function Assert-AtomicWriteFailurePreservesStore {
+    param(
+        [Parameter(Mandatory)][string]$ProjectRoot,
+        [Parameter(Mandatory)][string]$DataRoot,
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter(Mandatory)][string]$FailurePoint,
+        [Parameter()][switch]$CreateBackup
+    )
+
+    $paths = Get-JobAgentStorePaths -ProjectRoot $ProjectRoot -DataRoot $DataRoot
+    $beforeHash = Get-FileSha256 -Path $paths.store_path
+    Set-AtomicWriteFault -FaultInjector {
+        param($point)
+        if ($point -eq $FailurePoint) {
+            throw "Erwartete Testunterbrechung: $point"
+        }
+    }
+    try {
+        try {
+            Write-JobAgentStore -ProjectRoot $ProjectRoot -DataRoot $DataRoot -Document $Document -CreateBackup:$CreateBackup | Out-Null
+            throw "Testunterbrechung $FailurePoint wurde nicht ausgeloest."
+        }
+        catch {
+            Assert-True -Condition ($_.Exception.Message -match 'Erwartete Testunterbrechung') -Message "Unerwarteter Fehler bei ${FailurePoint}: $($_.Exception.Message)"
+        }
+    }
+    finally {
+        Set-AtomicWriteFault
+    }
+    Assert-True -Condition ((Get-FileSha256 -Path $paths.store_path) -eq $beforeHash) -Message "Store wurde bei Unterbrechung $FailurePoint veraendert."
+    Assert-True -Condition (@(Get-ChildItem -LiteralPath $paths.data_root -Filter '.store.json.*.tmp' -File).Count -eq 0) -Message "Temporäre Datei blieb nach Unterbrechung $FailurePoint zurueck."
+}
+
 function New-TestLocation {
     [pscustomobject]@{
         label = 'Muenchen'
@@ -218,6 +267,19 @@ try {
     $paths = Get-JobAgentStorePaths -ProjectRoot $testRoot
     Assert-True -Condition (@(Get-ChildItem -LiteralPath $paths.backup_root -Filter '*.json').Count -ge 1) -Message 'Backup wurde nicht erzeugt.'
 
+    $interruptedDocument = $reloaded.PSObject.Copy()
+    $interruptedDocument.companies = @($reloaded.companies)
+    $interruptedDocument.companies[0].canonical_name = 'Darf nicht persistiert werden'
+    foreach ($failurePoint in @('before_temp_write', 'before_replace')) {
+        Assert-AtomicWriteFailurePreservesStore -ProjectRoot $testRoot -DataRoot 'data/jobagent' -Document $interruptedDocument -FailurePoint $failurePoint
+    }
+    $backupPathsBeforeInterruptedWrite = @((Get-ChildItem -LiteralPath $paths.backup_root -Filter '*.json' -File).FullName)
+    Assert-AtomicWriteFailurePreservesStore -ProjectRoot $testRoot -DataRoot 'data/jobagent' -Document $interruptedDocument -FailurePoint 'after_backup' -CreateBackup
+    $backupPathsAfterInterruptedWrite = @((Get-ChildItem -LiteralPath $paths.backup_root -Filter '*.json' -File).FullName)
+    $interruptedBackup = @($backupPathsAfterInterruptedWrite | Where-Object { $_ -notin $backupPathsBeforeInterruptedWrite })
+    Assert-True -Condition ($interruptedBackup.Count -eq 1) -Message 'Unterbrechung nach Backup erzeugt keinen eindeutigen belegbaren Backup-Snapshot.'
+    Assert-True -Condition ((Get-FileSha256 -Path $paths.store_path) -eq (Get-FileSha256 -Path $interruptedBackup[0])) -Message 'Backup nach Unterbrechung stimmt nicht mit der geschuetzten Storegeneration ueberein.'
+
     $migrationPaths = Get-JobAgentStorePaths -ProjectRoot $testRoot -DataRoot 'migration'
     New-Item -ItemType Directory -Path $migrationPaths.data_root -Force | Out-Null
     $legacy = New-JobAgentEmptyDocument
@@ -227,6 +289,21 @@ try {
     Assert-True -Condition ($migration.migrated -eq $true) -Message 'Migration wurde nicht ausgefuehrt.'
     Assert-True -Condition ((Read-JobAgentStore -ProjectRoot $testRoot -DataRoot 'migration').schema_version -eq 'jobagent/v1') -Message 'Migration hat Schema-Version nicht angehoben.'
     Assert-True -Condition (Test-Path -LiteralPath $migrationPaths.migration_log_path) -Message 'Migrationslog wurde nicht geschrieben.'
+
+    $unsupportedMigrationPaths = Get-JobAgentStorePaths -ProjectRoot $testRoot -DataRoot 'unsupported-migration'
+    New-Item -ItemType Directory -Path $unsupportedMigrationPaths.data_root -Force | Out-Null
+    $unsupportedMigration = New-JobAgentEmptyDocument
+    $unsupportedMigration.schema_version = 'jobagent/v999'
+    Set-Content -LiteralPath $unsupportedMigrationPaths.store_path -Value ($unsupportedMigration | ConvertTo-Json -Depth 100) -Encoding UTF8
+    $unsupportedMigrationHash = Get-FileSha256 -Path $unsupportedMigrationPaths.store_path
+    try {
+        Update-JobAgentStoreMigration -ProjectRoot $testRoot -DataRoot 'unsupported-migration' | Out-Null
+        throw 'Unbekannte Schema-Migration wurde akzeptiert.'
+    }
+    catch {
+        Assert-True -Condition ($_.Exception.Message -match 'Keine Migration') -Message "Unerwarteter Fehler fuer unbekannte Migration: $($_.Exception.Message)"
+    }
+    Assert-True -Condition ((Get-FileSha256 -Path $unsupportedMigrationPaths.store_path) -eq $unsupportedMigrationHash) -Message 'Unbekannte Migration hat den vorhandenen Store veraendert.'
 
     $legacyPaths = Get-JobAgentStorePaths -ProjectRoot $testRoot -DataRoot 'legacy-v1'
     New-Item -ItemType Directory -Path $legacyPaths.data_root -Force | Out-Null
@@ -295,6 +372,17 @@ try {
         Exit-JobAgentStoreLock -Lock $lock
     }
 
+    $stalePaths = Get-JobAgentStorePaths -ProjectRoot $testRoot -DataRoot 'stale-lock'
+    New-Item -ItemType Directory -Path $stalePaths.data_root -Force | Out-Null
+    Set-Content -LiteralPath $stalePaths.lock_path -Value '{"pid":999999,"acquired_at":"2000-01-01T00:00:00.000Z"}' -Encoding UTF8
+    $staleLock = Enter-JobAgentStoreLock -ProjectRoot $testRoot -DataRoot 'stale-lock'
+    Exit-JobAgentStoreLock -Lock $staleLock
+    Exit-JobAgentStoreLock -Lock $staleLock
+    $stalePayload = Get-Content -LiteralPath $stalePaths.lock_path -Raw | ConvertFrom-Json
+    Assert-True -Condition ($stalePayload.pid -eq $PID) -Message 'Stale-Lock wurde nicht durch den aktuellen Besitzer uebernommen.'
+    $reacquiredLock = Enter-JobAgentStoreLock -ProjectRoot $testRoot -DataRoot 'stale-lock'
+    Exit-JobAgentStoreLock -Lock $reacquiredLock
+
     $outside = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-outside-' + [guid]::NewGuid().ToString('N'))
     try {
         Get-JobAgentStorePaths -ProjectRoot $testRoot -DataRoot $outside | Out-Null
@@ -304,9 +392,17 @@ try {
         Assert-True -Condition ($_.Exception.Message -match 'ausserhalb') -Message "Unerwarteter Pfadfehler: $($_.Exception.Message)"
     }
 
+    try {
+        Get-JobAgentStorePaths -ProjectRoot $testRoot -DataRoot '..\\escaped' | Out-Null
+        throw 'Traversal-Pfad wurde akzeptiert.'
+    }
+    catch {
+        Assert-True -Condition ($_.Exception.Message -match 'ausserhalb') -Message "Unerwarteter Traversalfehler: $($_.Exception.Message)"
+    }
+
     [pscustomobject]@{
         status = 'ok'
-        cases = @('empty_store', 'write_reload', 'legacy_job_scope_normalization', 'idempotent_upsert', 'backup', 'migration', 'legacy_v1_source_evidence_normalization', 'discovery_retention_shape', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
+        cases = @('empty_store', 'write_reload', 'legacy_job_scope_normalization', 'idempotent_upsert', 'backup', 'atomic_write_interruptions', 'migration', 'unsupported_migration_preserves_store', 'legacy_v1_source_evidence_normalization', 'discovery_retention_shape', 'corrupt_store', 'lock_violation', 'stale_lock_and_repeated_release', 'path_guard', 'traversal_guard', 'missing_jobs', 'source_scoped_missing_jobs')
         store_path = $paths.store_path
     } | ConvertTo-Json -Depth 4
 }

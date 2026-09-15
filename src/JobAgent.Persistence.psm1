@@ -5,6 +5,18 @@ Set-StrictMode -Version 3.0
 $script:SchemaVersion = 'jobagent/v1'
 $script:StoreFileName = 'store.json'
 $script:LockFileName = 'store.lock'
+$script:AtomicWriteFaultInjector = $null
+
+function Invoke-JobAgentAtomicWriteFaultInjector {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][ValidateSet('before_temp_write', 'before_replace', 'after_backup')][string]$Point
+    )
+
+    if ($null -ne $script:AtomicWriteFaultInjector) {
+        & $script:AtomicWriteFaultInjector $Point
+    }
+}
 
 function Resolve-JobAgentStoreRoot {
     [CmdletBinding()]
@@ -381,22 +393,31 @@ function Write-JobAgentAtomicFile {
         New-Item -ItemType Directory -Path $directory -Force | Out-Null
     }
 
+    Invoke-JobAgentAtomicWriteFaultInjector -Point 'before_temp_write'
     $tempPath = Join-Path $directory ('.' + [IO.Path]::GetFileName($Path) + '.' + [guid]::NewGuid().ToString('N') + '.tmp')
-    $bytes = [Text.UTF8Encoding]::new($false).GetBytes($Content + "`n")
-    $stream = [IO.File]::Open($tempPath, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
     try {
-        $stream.Write($bytes, 0, $bytes.Length)
-        $stream.Flush($true)
+        $bytes = [Text.UTF8Encoding]::new($false).GetBytes($Content + "`n")
+        $stream = [IO.File]::Open($tempPath, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::None)
+        try {
+            $stream.Write($bytes, 0, $bytes.Length)
+            $stream.Flush($true)
+        }
+        finally {
+            $stream.Dispose()
+        }
+
+        Invoke-JobAgentAtomicWriteFaultInjector -Point 'before_replace'
+        if (Test-Path -LiteralPath $Path) {
+            Move-Item -LiteralPath $tempPath -Destination $Path -Force
+        }
+        else {
+            Move-Item -LiteralPath $tempPath -Destination $Path
+        }
     }
     finally {
-        $stream.Dispose()
-    }
-
-    if (Test-Path -LiteralPath $Path) {
-        Move-Item -LiteralPath $tempPath -Destination $Path -Force
-    }
-    else {
-        Move-Item -LiteralPath $tempPath -Destination $Path
+        if (Test-Path -LiteralPath $tempPath) {
+            Remove-Item -LiteralPath $tempPath -Force -ErrorAction SilentlyContinue
+        }
     }
 }
 
@@ -434,6 +455,7 @@ function Write-JobAgentStore {
     Assert-JobAgentDocument -Document $Document
     if ($CreateBackup) {
         Backup-JobAgentStore -Paths $paths -Reason 'pre-write' | Out-Null
+        Invoke-JobAgentAtomicWriteFaultInjector -Point 'after_backup'
     }
     Write-JobAgentAtomicFile -Path $paths.store_path -Content (ConvertTo-JobAgentJson -Document $Document)
     return $paths.store_path

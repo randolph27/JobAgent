@@ -136,6 +136,24 @@ $alternativeDecision = Resolve-JobAgentJobDeduplication -Document $document -Can
 Assert-True -Condition ($alternativeDecision.is_existing -eq $true) -Message 'Alternative offizielle URL wurde nicht zur Wiedererkennung genutzt.'
 Assert-True -Condition ($alternativeDecision.identity_basis -eq 'CANONICAL_URL') -Message 'Alternative URL wurde nicht als CANONICAL_URL-Match ausgewiesen.'
 
+$atsDocument = New-TestDocument -Jobs @(New-TestJob -JobId 'job:example_ag_ats_77' -ExternalJobId 'UNKNOWN' -AtsJobId '77' -OfficialUrl 'https://jobs.example.invalid/posting/77')
+$atsCandidate = New-JobAgentJobIdentityCandidate `
+    -CompanyId 'company:example_ag' `
+    -Title 'Head of IT' `
+    -OfficialUrl 'https://jobs.example.invalid/posting/77?tracking=source' `
+    -ExternalJobId 'UNKNOWN' `
+    -AtsJobId '77' `
+    -Location (New-TestLocation) `
+    -SourceId 'source:example_ag_career'
+$atsDecision = Resolve-JobAgentJobDeduplication -Document $atsDocument -Candidate $atsCandidate
+Assert-True -Condition ($atsDecision.is_existing -eq $true -and $atsDecision.identity_basis -eq 'ATS_JOB_ID') -Message 'Firmengebundene ATS-ID wurde nicht mit korrekter Prioritaet wiedererkannt.'
+
+$otherCompanyAtsJob = New-TestJob -JobId 'job:other_ag_ats_77' -ExternalJobId 'UNKNOWN' -AtsJobId '77' -OfficialUrl 'https://jobs.other.invalid/posting/77'
+$otherCompanyAtsJob.company_id = 'company:other_ag'
+$crossCompanyAtsDocument = New-TestDocument -Jobs @($otherCompanyAtsJob)
+$crossCompanyAtsDecision = Resolve-JobAgentJobDeduplication -Document $crossCompanyAtsDocument -Candidate $atsCandidate
+Assert-True -Condition ($crossCompanyAtsDecision.decision -eq 'NEW') -Message 'Gleiche ATS-ID verschiedener Firmen wurde faelschlich zusammengefuehrt.'
+
 $repostCandidate = New-JobAgentJobIdentityCandidate `
     -CompanyId 'company:example_ag' `
     -Title 'Head of IT' `
@@ -145,6 +163,17 @@ $repostCandidate = New-JobAgentJobIdentityCandidate `
     -SourceId 'source:example_ag_career'
 $repostDecision = Resolve-JobAgentJobDeduplication -Document $document -Candidate $repostCandidate
 Assert-True -Condition ($repostDecision.decision -eq 'NEW') -Message 'Echte Neuausschreibung mit neuer ID und neuer URL wurde faelschlich zusammengefuehrt.'
+
+$uncertainRepostCandidate = New-JobAgentJobIdentityCandidate `
+    -CompanyId 'company:example_ag' `
+    -Title 'Head of IT' `
+    -OfficialUrl 'https://example.invalid/careers/head-it-repost' `
+    -ExternalJobId 'UNKNOWN' `
+    -AtsJobId 'UNKNOWN' `
+    -Location (New-TestLocation) `
+    -SourceId 'source:example_ag_career'
+$uncertainRepostDecision = Resolve-JobAgentJobDeduplication -Document $document -Candidate $uncertainRepostCandidate
+Assert-True -Condition ($uncertainRepostDecision.decision -eq 'NEW') -Message 'Unsichere Neuausschreibung ohne gemeinsame belastbare Identitaet wurde faelschlich zusammengefuehrt.'
 
 $fallbackDocument = New-TestDocument -Jobs @(New-TestJob -JobId 'job:example_ag_composite_head_it' -ExternalJobId 'UNKNOWN' -AtsJobId 'UNKNOWN' -OfficialUrl 'https://example.invalid/search?job=head-it' -Title 'Head of IT')
 $fallbackDocument.jobs[0].alternative_official_urls = @()
@@ -168,6 +197,9 @@ Assert-True -Condition ($fallbackDecision.is_existing -eq $true) -Message 'Kanon
         'url_parameter_canonicalization',
         'title_change_is_update',
         'alternative_official_url_match',
-        'reposting_new_id_new_url_is_new'
+        'ats_job_id_priority',
+        'same_ats_id_different_company_is_new',
+        'reposting_new_id_new_url_is_new',
+        'uncertain_reposting_without_shared_identity_is_new'
     )
 } | ConvertTo-Json -Depth 4

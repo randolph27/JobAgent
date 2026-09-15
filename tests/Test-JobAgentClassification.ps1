@@ -152,6 +152,34 @@ $itLeadLeadership = Get-JobAgentLeadershipClassification `
     -EvaluatedAt $fixedTime
 Assert-True -Condition ($itLeadLeadership.result -eq 'MATCH') -Message 'IT-Lead-Rolle mit belegter Fuehrungsverantwortung wurde nicht als MATCH klassifiziert.'
 
+$regionalCases = @(
+    [pscustomobject]@{ name = 'muenchen'; target_area = 'MUNICH'; label = 'Muenchen'; expected_scope = 'IN_SCOPE' },
+    [pscustomobject]@{ name = 'freising'; target_area = 'FREISING'; label = 'Freising'; expected_scope = 'IN_SCOPE' },
+    [pscustomobject]@{ name = 'outside'; target_area = 'OUT_OF_SCOPE'; label = 'Augsburg'; expected_scope = 'OUT_OF_SCOPE' },
+    [pscustomobject]@{ name = 'unknown'; target_area = 'UNKNOWN'; label = 'UNKNOWN'; expected_scope = 'UNKNOWN' }
+)
+$roleCases = @(
+    [pscustomobject]@{ name = 'it_leitung'; title = 'IT Leitung'; summary = 'Gesamtverantwortung fuer IT, Budget und Strategie.'; expected_result = 'MATCH' },
+    [pscustomobject]@{ name = 'pflege'; title = 'Pflegefachkraft'; summary = 'Stationaere Pflege und Dokumentation.'; expected_result = 'REJECTED' },
+    [pscustomobject]@{ name = 'buchhaltung'; title = 'Sachbearbeitung Buchhaltung'; summary = 'Debitoren, Kreditoren und Monatsabschluss.'; expected_result = 'REJECTED' },
+    [pscustomobject]@{ name = 'ausbildung'; title = 'Ausbildung Kaufleute fuer Bueromanagement'; summary = 'Ausbildungsplatz im kaufmaennischen Bereich.'; expected_result = 'REJECTED' }
+)
+foreach ($regionalCase in $regionalCases) {
+    $location = New-TestLocation -TargetArea $regionalCase.target_area -Label $regionalCase.label
+    $scope = Get-JobAgentRegionalScope -Location $location -EvaluatedAt $fixedTime
+    Assert-True -Condition ($scope.result -eq $regionalCase.expected_scope) -Message "Gebietsgrenze $($regionalCase.name) liefert $($scope.result) statt $($regionalCase.expected_scope)."
+    foreach ($roleCase in $roleCases) {
+        $classification = Get-JobAgentLeadershipClassification `
+            -Title $roleCase.title `
+            -Summary $roleCase.summary `
+            -Location $location `
+            -WorkModel 'ON_SITE' `
+            -EmploymentType 'FULL_TIME' `
+            -EvaluatedAt $fixedTime
+        Assert-True -Condition ($classification.result -eq $roleCase.expected_result) -Message "Rolle $($roleCase.name) im Gebiet $($regionalCase.name) liefert $($classification.result) statt $($roleCase.expected_result)."
+    }
+}
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -168,6 +196,7 @@ Assert-True -Condition ($itLeadLeadership.result -eq 'MATCH') -Message 'IT-Lead-
         'empty_title',
         'possible_it_manager',
         'it_manager_with_leadership_match',
-        'it_lead_with_leadership_match'
+        'it_lead_with_leadership_match',
+        'four_roles_across_munich_freising_outside_and_unknown'
     )
 } | ConvertTo-Json -Depth 4

@@ -145,6 +145,7 @@ $failed = Invoke-JobAgentStatusMachine `
     -ObservedAt ([datetime]'2026-08-20T10:00:00Z')
 Assert-True -Condition ($failed.jobs[0].status -eq 'UPDATED') -Message 'Fehlgeschlagener Scan hat bestehenden Job faelschlich entfernt oder geaendert.'
 Assert-True -Condition (@($failed.change_events | Where-Object event_type -eq 'JOB_REMOVED').Count -eq 0) -Message 'Fehlgeschlagener Scan erzeugt faelschlich JOB_REMOVED.'
+Assert-True -Condition ($failed.jobs[0].last_seen -eq $descriptionUpdated.jobs[0].last_seen) -Message 'Fehlgeschlagener Scan darf last_seen nicht fortschreiben.'
 
 $removed = Invoke-JobAgentStatusMachine `
     -Document $failed `
@@ -165,6 +166,15 @@ $partialEmpty = Invoke-JobAgentStatusMachine `
     -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260821T120000Z' -RawJobs @() -Status 'SUCCESS' -ErrorClass 'NONE' -ScanComplete $false -Suffix 'incomplete_success')) `
     -ObservedAt ([datetime]'2026-08-21T12:00:00Z')
 Assert-True -Condition ($partialEmpty.jobs[0].status -ne 'REMOVED' -and @($partialEmpty.change_events | Where-Object { $_.scan_run_id -eq 'scanrun:20260821T120000Z' -and $_.event_type -eq 'JOB_REMOVED' }).Count -eq 0) -Message 'Unvollstaendiger Erfolg darf keinen fehlenden Job entfernen.'
+Assert-True -Condition ($partialEmpty.jobs[0].last_seen -eq $partialBase.jobs[0].last_seen) -Message 'PARTIAL-Quelle darf last_seen nicht fortschreiben.'
+
+$reappeared = Invoke-JobAgentStatusMachine `
+    -Document $removed `
+    -ScanRunId 'scanrun:20260822T090000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260822T090000Z' -RawJobs @((New-TestRawJob -Title 'Director Information Technology' -Summary 'IT-Leitung mit Budget, Plattformbetrieb und Lieferantensteuerung.')) -Suffix 'reappeared')) `
+    -ObservedAt ([datetime]'2026-08-22T09:00:00Z')
+Assert-True -Condition ($reappeared.jobs[0].status -eq 'ACTIVE') -Message "Wiederaufgetauchte Stelle wird nicht als ACTIVE reaktiviert: $($reappeared.jobs[0].status)."
+Assert-True -Condition ($reappeared.jobs[0].last_seen -eq '2026-08-22T09:00:00.000Z') -Message 'Wiederaufgetauchte Stelle aktualisiert last_seen nicht.'
 
 $reclassifiedRaw = New-TestRawJob -Title 'IT Manager' -DetailUrl 'https://example.invalid/careers/head-it-123' -ExternalJobId '123' -LocationLabel 'Freising'
 $reclassifiedRaw | Add-Member -NotePropertyName classification -NotePropertyValue ([pscustomobject]@{ result = 'MATCH'; priority = 'A'; score = 95; reasons = @('Aktualisierte Bewertung.'); rejected_reasons = @(); evaluated_at = '2026-08-21T13:00:00.000Z' })
@@ -260,6 +270,8 @@ Assert-True -Condition (@($closedSecond.change_events | Where-Object event_type 
         'failed_scan_no_removal',
         'successful_empty_scan_removed',
         'incomplete_success_no_removal',
+        'failed_or_partial_scan_does_not_advance_last_seen',
+        'reappeared_job_reactivated',
         'updated_classification_and_work_fields',
         'separate_validity_and_regional_scope',
         'invalid_hit_invalidated',
