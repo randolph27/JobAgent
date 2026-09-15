@@ -1,7 +1,9 @@
 #requires -Version 7.4
 
 [CmdletBinding()]
-param()
+param(
+    [switch]$FixtureOnly
+)
 
 Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
@@ -157,7 +159,9 @@ function New-TestJob {
         [string]$Category = 'Allgemein',
         [string]$WorkModel = 'ONSITE',
         [string]$EmploymentType = 'FULL_TIME',
-        [string]$WorkTime = 'UNKNOWN'
+        [string]$WorkTime = 'UNKNOWN',
+        [string]$PublishedAt = '2026-09-14T10:00:00.000Z',
+        [string]$FirstSeen = '2026-09-14T10:00:00.000Z'
     )
 
     [pscustomobject]@{
@@ -175,8 +179,8 @@ function New-TestJob {
         employment_type = $EmploymentType
         work_time = $WorkTime
         status = 'ACTIVE'
-        published_at = '2026-09-14T10:00:00.000Z'
-        first_seen = '2026-09-14T10:00:00.000Z'
+        published_at = $PublishedAt
+        first_seen = $FirstSeen
         last_seen = '2026-09-15T10:00:00.000Z'
         changed_at = '2026-09-15T10:00:00.000Z'
         classification = [pscustomobject]@{
@@ -196,9 +200,18 @@ function New-TestJob {
 }
 
 $scanRunId = 'scanrun:ui001-browser-audit'
+$uiContractPath = Join-Path $root 'tests\fixtures\jobagent\qa-004-ui-contract.json'
+Assert-True -Condition (Test-Path -LiteralPath $uiContractPath -PathType Leaf) -Message 'QA-004-UI-Vertragsfixture fehlt.'
+$uiContract = Get-Content -LiteralPath $uiContractPath -Raw | ConvertFrom-Json -Depth 20
+Assert-True -Condition ($uiContract.schema_version -eq 'jobagent-ui-contract/v1') -Message 'QA-004-UI-Vertragsfixture hat eine ungueltige Schema-Version.'
+$referenceTime = [datetime]$uiContract.reference_time
 $munich = New-TestLocation -Label 'Muenchen'
 $freising = New-TestLocation -Label 'Freising' -City 'Freising' -Region 'Landkreis Freising' -TargetArea 'FREISING'
 $unknown = New-TestLocation -Label 'UNKNOWN' -City 'UNKNOWN' -Region 'UNKNOWN' -TargetArea 'UNKNOWN'
+$munich20Km = New-TestLocation -Label 'Dachau bei Muenchen' -City 'Dachau' -Region 'Bayern' -TargetArea 'MUNICH_20KM'
+$freisingCounty = New-TestLocation -Label 'Moosburg' -City 'Moosburg' -Region 'Landkreis Freising' -TargetArea 'FREISING'
+$freisingUnspecified = New-TestLocation -Label 'Freising Gebiet' -City 'UNKNOWN' -Region 'UNKNOWN' -TargetArea 'FREISING'
+$remoteTarget = New-TestLocation -Label 'Remote mit Muenchenbezug' -City 'UNKNOWN' -Region 'UNKNOWN' -TargetArea 'REMOTE_WITH_TARGET_REFERENCE'
 $document = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-09-15T10:00:00Z')
 $document.companies = @(1..251 | ForEach-Object { New-TestCompany -Number $_ -Location $munich })
 $document.jobs = @(1..251 | ForEach-Object {
@@ -211,6 +224,14 @@ $document.jobs += @(
     New-TestJob -JobId 'job:part-time-hybrid' -CompanyId 'company:fixture_003' -Title 'Hybrid Teilzeit Beraterin' -Location $munich -Category 'Beratung' -WorkModel 'HYBRID' -EmploymentType 'PART_TIME'
     New-TestJob -JobId 'job:unknown' -CompanyId 'company:fixture_004' -Title 'Unklare Position' -Location $unknown -Category 'UNKNOWN' -WorkModel 'UNKNOWN' -EmploymentType 'UNKNOWN'
     New-TestJob -JobId 'job:umlaut' -CompanyId 'company:fixture_005' -Title 'Bürokauffrau Muenchen' -Location $munich -Category 'Büro'
+    New-TestJob -JobId 'job:remote-contract' -CompanyId 'company:fixture_006' -Title 'Remote Vertrag Spezialistin' -Location $remoteTarget -Category 'Beratung' -WorkModel 'REMOTE' -EmploymentType 'CONTRACT'
+    New-TestJob -JobId 'job:munich20-permanent' -CompanyId 'company:fixture_007' -Title 'Dachau Unbefristet' -Location $munich20Km -Category 'Verwaltung' -EmploymentType 'PERMANENT'
+    New-TestJob -JobId 'job:freising-county-internship' -CompanyId 'company:fixture_008' -Title 'Moosburg Praktikum' -Location $freisingCounty -Category 'Ausbildung' -EmploymentType 'INTERNSHIP'
+    New-TestJob -JobId 'job:freising-unspecified' -CompanyId 'company:fixture_009' -Title 'Freising Gebiet Stelle' -Location $freisingUnspecified -Category 'Allgemein'
+    New-TestJob -JobId 'job:age-seven' -CompanyId 'company:fixture_010' -Title 'Grenze Sieben Tage' -Location $munich -PublishedAt '2026-09-08T10:00:00.000Z'
+    New-TestJob -JobId 'job:age-thirty' -CompanyId 'company:fixture_011' -Title 'Grenze Dreissig Tage' -Location $munich -PublishedAt '2026-08-16T10:00:00.000Z'
+    New-TestJob -JobId 'job:age-older' -CompanyId 'company:fixture_012' -Title 'Aelter Als Dreissig Tage' -Location $munich -PublishedAt '2026-08-15T10:00:00.000Z'
+    New-TestJob -JobId 'job:age-unknown' -CompanyId 'company:fixture_013' -Title 'Datum Unbekannt' -Location $munich -PublishedAt 'UNKNOWN' -FirstSeen 'UNKNOWN'
 )
 $document.job_sources = @()
 $document.scan_runs = @([pscustomobject]@{
@@ -228,13 +249,78 @@ $document.change_events = @()
 
 $documentBefore = ConvertTo-JobAgentFixtureJson -Document $document
 $report = New-JobAgentDailyReport -Document $document -ScanRunId $scanRunId
-$expectedJobIds = @('job:company_251', 'job:munich-accounting', 'job:freising-pflege', 'job:part-time-hybrid', 'job:unknown', 'job:umlaut')
+$expectedJobIds = @('job:company_251', 'job:munich-accounting', 'job:freising-pflege', 'job:part-time-hybrid', 'job:unknown', 'job:umlaut', 'job:remote-contract', 'job:munich20-permanent', 'job:freising-county-internship', 'job:freising-unspecified', 'job:age-seven', 'job:age-thirty', 'job:age-older', 'job:age-unknown')
 $actualJobIds = @($report.sections.active_jobs.job_id)
 foreach ($expectedJobId in $expectedJobIds) {
     Assert-True -Condition ($actualJobIds -contains $expectedJobId) -Message "Fixture-Report enthaelt erwartete Stellen-ID nicht: $expectedJobId"
 }
 Assert-True -Condition ($report.sections.companies.Count -eq 251) -Message 'Fixture-Report muss 251 Firmen enthalten.'
-Assert-True -Condition ($report.sections.active_jobs.Count -eq 256) -Message 'Fixture-Report muss 256 aktive Stellen enthalten.'
+Assert-True -Condition ($report.sections.active_jobs.Count -eq 264) -Message 'Fixture-Report muss 264 aktive Stellen enthalten.'
+
+$actualAreaValues = @($report.sections.active_jobs | ForEach-Object { @($_.area_facets) } | Select-Object -Unique)
+foreach ($expectedAreaValue in @($uiContract.area_values)) {
+    Assert-True -Condition ($actualAreaValues -contains $expectedAreaValue) -Message "Gebietsfixture fuer $expectedAreaValue fehlt."
+}
+foreach ($facet in @(
+        @{ property = 'work_model'; values = @($uiContract.work_model_values) },
+        @{ property = 'employment_type'; values = @($uiContract.employment_type_values) },
+        @{ property = 'work_time'; values = @($uiContract.work_time_values) }
+    )) {
+    $actualValues = @($report.sections.active_jobs | ForEach-Object { [string]$_.$($facet.property) } | Select-Object -Unique)
+    foreach ($expectedValue in $facet.values) {
+        Assert-True -Condition ($actualValues -contains $expectedValue) -Message "Facetfixture $($facet.property) fuer $expectedValue fehlt."
+    }
+}
+$jobsById = @{}
+foreach ($job in @($report.sections.active_jobs)) { $jobsById[[string]$job.job_id] = $job }
+foreach ($ageExpectation in @(
+        @{ job_id = 'job:age-seven'; age_days = '7' },
+        @{ job_id = 'job:age-thirty'; age_days = '30' },
+        @{ job_id = 'job:age-older'; age_days = '31' },
+        @{ job_id = 'job:age-unknown'; age_days = 'UNKNOWN' }
+    )) {
+    Assert-True -Condition ([string]$jobsById[$ageExpectation.job_id].age_days -eq $ageExpectation.age_days) -Message "Alters-Grenzfixture $($ageExpectation.job_id) hat keinen stabilen Wert $($ageExpectation.age_days)."
+}
+
+foreach ($boundaryCount in @($uiContract.boundary_counts)) {
+    $boundaryDocument = New-JobAgentEmptyDocument -GeneratedAt $referenceTime
+    $boundaryDocument.scan_runs = @([pscustomobject]@{
+            scan_run_id = 'scanrun:boundary'
+            started_at = $uiContract.reference_time
+            finished_at = $uiContract.reference_time
+            status = 'SUCCESS'
+            company_ids = @()
+            artifact_paths = @()
+            errors = @()
+        })
+    if ([int]$boundaryCount -eq 0) {
+        $boundaryDocument.companies = @()
+        $boundaryDocument.jobs = @()
+    }
+    else {
+        $boundaryDocument.companies = @(1..[int]$boundaryCount | ForEach-Object { New-TestCompany -Number $_ -Location $munich })
+        $boundaryDocument.jobs = @(1..[int]$boundaryCount | ForEach-Object {
+                $suffix = $_.ToString('000', [Globalization.CultureInfo]::InvariantCulture)
+                New-TestJob -JobId "job:boundary_$suffix" -CompanyId "company:fixture_$suffix" -Title "Grenzposition $suffix" -Location $munich
+            })
+    }
+    $expectedPages = [Math]::Max(1, [Math]::Ceiling([int]$boundaryCount / 50.0))
+    Assert-True -Condition (@($boundaryDocument.companies).Count -eq [int]$boundaryCount) -Message "Firmen-Grenzfixture $boundaryCount ist nicht stabil."
+    Assert-True -Condition (@($boundaryDocument.jobs).Count -eq [int]$boundaryCount) -Message "Stellen-Grenzfixture $boundaryCount ist nicht stabil."
+    Assert-True -Condition ($expectedPages -eq [Math]::Max(1, [Math]::Ceiling(@($boundaryDocument.jobs).Count / 50.0))) -Message "Seitengrenzfixture $boundaryCount ist nicht stabil."
+}
+
+if ($FixtureOnly) {
+    [pscustomobject]@{
+        status = 'ok'
+        mode = 'isolated_fixture_only'
+        companies = 251
+        jobs = 264
+        boundary_counts = @($uiContract.boundary_counts)
+        cases = @('qa004_boundary_fixtures_0_1_49_50_51_250_251', 'qa004_all_offered_facet_values_and_age_boundaries')
+    } | ConvertTo-Json -Depth 10
+    return
+}
 
 $htmlPath = Join-Path $root 'html\jobagent\ui-001-browser-audit.html'
 $artifactRoot = Join-Path $root 'output\playwright'
@@ -254,7 +340,7 @@ $screenshots = [System.Collections.Generic.List[string]]::new()
 try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'open', $reportUrl) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 256 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
 
     $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Position 251') | Out-Null
@@ -264,7 +350,7 @@ try {
 
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'go-back') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 256 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Ruecknavigation'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Ruecknavigation'
 
     $areaRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Gebiet'
     $workModelRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Arbeitsmodell'
@@ -279,7 +365,42 @@ try {
     $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 256 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Filter-Reset'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Filter-Reset'
+
+    foreach ($facetCase in @(
+            @{ control = 'Gebiet'; value = 'MUNICH'; expected = 'Grenze Sieben Tage' },
+            @{ control = 'Gebiet'; value = 'MUNICH_20KM'; expected = 'Dachau Unbefristet' },
+            @{ control = 'Gebiet'; value = 'FREISING_CITY'; expected = 'Pflegefachkraft Freising' },
+            @{ control = 'Gebiet'; value = 'FREISING_COUNTY'; expected = 'Moosburg Praktikum' },
+            @{ control = 'Gebiet'; value = 'FREISING_UNSPECIFIED'; expected = 'Freising Gebiet Stelle' },
+            @{ control = 'Gebiet'; value = 'REMOTE_WITH_TARGET_REFERENCE'; expected = 'Remote Vertrag Spezialistin' },
+            @{ control = 'Gebiet'; value = 'UNKNOWN'; expected = 'Unklare Position' },
+            @{ control = 'Arbeitsmodell'; value = 'REMOTE'; expected = 'Remote Vertrag Spezialistin' },
+            @{ control = 'Arbeitsmodell'; value = 'HYBRID'; expected = 'Hybrid Teilzeit Beraterin' },
+            @{ control = 'Arbeitsmodell'; value = 'ONSITE'; expected = 'Grenze Sieben Tage' },
+            @{ control = 'Arbeitsmodell'; value = 'UNKNOWN'; expected = 'Unklare Position' },
+            @{ control = 'Anstellungsart'; value = 'FULL_TIME'; expected = 'Grenze Sieben Tage' },
+            @{ control = 'Anstellungsart'; value = 'PART_TIME'; expected = 'Hybrid Teilzeit Beraterin' },
+            @{ control = 'Anstellungsart'; value = 'CONTRACT'; expected = 'Remote Vertrag Spezialistin' },
+            @{ control = 'Anstellungsart'; value = 'PERMANENT'; expected = 'Dachau Unbefristet' },
+            @{ control = 'Anstellungsart'; value = 'INTERNSHIP'; expected = 'Moosburg Praktikum' },
+            @{ control = 'Anstellungsart'; value = 'UNKNOWN'; expected = 'Unklare Position' },
+            @{ control = 'Arbeitszeit'; value = 'UNKNOWN'; expected = 'Grenze Sieben Tage' },
+            @{ control = 'Aktualitaet'; value = '7'; expected = 'Grenze Sieben Tage' },
+            @{ control = 'Aktualitaet'; value = '30'; expected = 'Grenze Dreissig Tage' },
+            @{ control = 'Aktualitaet'; value = 'older'; expected = 'Aelter Als Dreissig Tage' },
+            @{ control = 'Aktualitaet'; value = 'UNKNOWN'; expected = 'Datum Unbekannt' }
+        )) {
+        $controlRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name $facetCase.control
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'select', $controlRef, $facetCase.value) | Out-Null
+        $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected $facetCase.expected -Case ("Facet $($facetCase.control)=$($facetCase.value)")
+
+        $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
+        $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case ("Reset nach Facet $($facetCase.control)=$($facetCase.value)")
+    }
 
     $workModelRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Arbeitsmodell'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'select', $workModelRef, 'UNKNOWN') | Out-Null
@@ -347,13 +468,15 @@ $summary = [pscustomobject]@{
     data_mode = 'isolated_fixture'
     report_url = $reportUrl
     companies = 251
-    jobs = 256
+    jobs = 264
     expected_job_ids = $expectedJobIds
     screenshots = @($screenshots.ToArray())
     cases = @(
         'all_companies_and_jobs_reachable_beyond_250',
         'freising_pflegerische_teilzeit_hybrid_combination',
         'unknown_filter',
+        'qa004_boundary_fixtures_0_1_49_50_51_250_251',
+        'qa004_all_offered_facet_values_and_age_boundaries',
         'unicode_free_text_search',
         'empty_result',
         'reset_and_browser_back_navigation',

@@ -514,6 +514,9 @@ function New-JobAgentReportJobEntry {
     if ($targetArea -ne 'UNKNOWN') {
         $areaFacets.Add($targetArea)
     }
+    else {
+        $areaFacets.Add('UNKNOWN')
+    }
     if ($locationCity -eq 'Freising') {
         $areaFacets.Add('FREISING_CITY')
     }

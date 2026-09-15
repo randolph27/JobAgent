@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-15T21:33:18.924+02:00
+Stand: 2026-09-15T22:01:30.732+02:00
 
 ## Zustand
 
-- Active: ``
-- Status: `open`
-- Ziel:
+- Active: `TD-0061`
+- Status: `in-progress`
+- Ziel: QA-004 Jede UI-Funktion mit exakten Ergebnis- und Zustandsassertions pruefen #comment: Vorhandene Browserstichproben werden zu einer vollstaendigen Bedienmatrix fuer Firmen, Stellen, Filter, Navigation und Ausgabelinks erweitert.
 - Branch: `master`
-- HEAD: `2933de4c992e`
+- HEAD: `491977af554e`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,17 +16,10 @@ Stand: 2026-09-15T21:33:18.924+02:00
 
 ## Versionierte Aenderungen
 
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `docs/reviews/QA-001-function-inventory.json`
-- `docs/reviews/QA-003-cli-cases.md`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `tests/Test-JobAgentDailyRun.ps1`
+- `src/JobAgent.Report.psm1`
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
 - `todo.checkpoint.json`
 - `todo.current.md`
-- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 - `todo.state.json`
@@ -37,6 +30,6 @@ Stand: 2026-09-15T21:33:18.924+02:00
 
 ## Naechster Anker
 
-QA-004 Jede UI-Funktion mit exakten Ergebnis- und Zustandsassertions pruefen #comment: Vorhandene Browserstichproben werden zu einer vollstaendigen Bedienmatrix fuer Firmen, Stellen, Filter, Navigation und Ausgabelinks erweitert.
+QA-004.1 im echten lokalen Browser abschliessen: Playwright-CLI ohne npm-Cache-Download verfuegbar machen, dann Test-JobAgentUiBrowserAudit.ps1 vollstaendig ausfuehren und erst danach QA-004.2 beginnen.
 
-Details fuer den Folgechat: `docs/handoffs/2026-09-15-qa003-completion-qa004-next.md`.
+Details fuer den Folgechat: `docs/handoffs/2026-09-15-qa004-1-progress.md`.

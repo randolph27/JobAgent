@@ -1,0 +1,10 @@
+{
+  "schema_version": "jobagent-ui-contract/v1",
+  "reference_time": "2026-09-15T10:00:00.000Z",
+  "boundary_counts": [0, 1, 49, 50, 51, 250, 251],
+  "area_values": ["MUNICH", "MUNICH_20KM", "FREISING_CITY", "FREISING_COUNTY", "FREISING_UNSPECIFIED", "REMOTE_WITH_TARGET_REFERENCE", "UNKNOWN"],
+  "work_model_values": ["REMOTE", "HYBRID", "ONSITE", "UNKNOWN"],
+  "employment_type_values": ["FULL_TIME", "PART_TIME", "CONTRACT", "PERMANENT", "INTERNSHIP", "UNKNOWN"],
+  "work_time_values": ["UNKNOWN"],
+  "age_values": ["7", "30", "older", "UNKNOWN"]
+}
