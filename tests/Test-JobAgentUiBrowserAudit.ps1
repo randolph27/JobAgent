@@ -67,6 +67,32 @@ function Get-JobAgentSessionValue {
     return $value
 }
 
+function Get-JobAgentGeometryMeasurement {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string]$SessionName,
+        [Parameter(Mandatory)][string]$Case,
+        [Parameter(Mandatory)][int]$ViewportWidth
+    )
+
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'resize', $ViewportWidth, 1080) | Out-Null
+    $script = @'
+() => { const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!=='none'&&style.visibility!=='hidden'&&rect.width>0&&rect.height>0}; const controls=Array.from(document.querySelectorAll('button,input,select'),element=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||element.textContent.trim(),left:rect.left,right:rect.right,width:rect.width,height:rect.height,visible:visible(element)}}).filter(item=>item.visible); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); return JSON.stringify({viewport_width:window.innerWidth,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,controls:controls.map(item=>({id:item.id,width:item.width,height:item.height,left:item.left,right:item.right}))}); }
+'@
+    return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Script $script -Case $Case
+}
+
+function Assert-JobAgentGeometryMeasurement {
+    param(
+        [Parameter(Mandatory)][object]$Measurement,
+        [Parameter(Mandatory)][object]$VisualContract,
+        [Parameter(Mandatory)][string]$Case
+    )
+
+    Assert-True -Condition ([int]$Measurement.root_scroll_width -le ([int]$Measurement.viewport_width + [int]$VisualContract.max_root_overflow_css_px)) -Message "${Case}: Die Dokumentbreite uebersteigt den Viewport unzulaessig."
+    Assert-True -Condition (@($Measurement.invalid_controls).Count -eq 0) -Message "${Case}: Ein sichtbares Control ist kleiner als $($VisualContract.min_control_size_css_px) CSS-px oder ausserhalb des Viewports."
+}
+
 function Invoke-JobAgentPlaywrightCli {
     param(
         [Parameter(Mandatory)][string]$WorkingDirectory,
@@ -295,6 +321,11 @@ $uiContractPath = Join-Path $root 'tests\fixtures\jobagent\qa-004-ui-contract.js
 Assert-True -Condition (Test-Path -LiteralPath $uiContractPath -PathType Leaf) -Message 'QA-004-UI-Vertragsfixture fehlt.'
 $uiContract = Get-Content -LiteralPath $uiContractPath -Raw | ConvertFrom-Json -Depth 20
 Assert-True -Condition ($uiContract.schema_version -eq 'jobagent-ui-contract/v1') -Message 'QA-004-UI-Vertragsfixture hat eine ungueltige Schema-Version.'
+$visualContractPath = Join-Path $root 'tests\fixtures\jobagent\QA-005-visual-contract.json'
+Assert-True -Condition (Test-Path -LiteralPath $visualContractPath -PathType Leaf) -Message 'QA-005-Visual-Vertragsfixture fehlt.'
+$visualContract = Get-Content -LiteralPath $visualContractPath -Raw | ConvertFrom-Json -Depth 20
+Assert-True -Condition ($visualContract.schema_version -eq 'jobagent-visual-contract/v1') -Message 'QA-005-Visual-Vertragsfixture hat eine ungueltige Schema-Version.'
+Assert-True -Condition (@($visualContract.viewports).Count -eq 4) -Message 'QA-005-Visual-Vertragsfixture muss vier Pflichtviewports enthalten.'
 $referenceTime = [datetime]$uiContract.reference_time
 $munich = New-TestLocation -Label 'Muenchen'
 $freising = New-TestLocation -Label 'Freising' -City 'Freising' -Region 'Landkreis Freising' -TargetArea 'FREISING'
@@ -326,6 +357,8 @@ $document.jobs += @(
     New-TestJob -JobId 'job:age-older' -CompanyId 'company:fixture_012' -Title 'Aelter Als Dreissig Tage' -Location $munich -PublishedAt '2026-08-15T10:00:00.000Z'
     New-TestJob -JobId 'job:age-unknown' -CompanyId 'company:fixture_013' -Title 'Datum Unbekannt' -Location $munich -PublishedAt 'UNKNOWN' -FirstSeen 'UNKNOWN'
 )
+$longContentJob = @($document.jobs | Where-Object { $_.job_id -eq 'job:company_001' })[0]
+$longContentJob.title = 'Leitung Digitalisierung mit einem absichtlich sehr langen ungetrennten Layoutpruefwort ' + ('Verantwortungsbereich' * 12)
 $document.job_sources = @()
 $document.scan_runs = @([pscustomobject]@{
         scan_run_id = $scanRunId
@@ -439,17 +472,30 @@ $sessionErrors = @()
 $network = ''
 $environmentalExternalHosts = @()
 $unexpectedExternalHosts = @()
+$geometryEvidence = [System.Collections.Generic.List[object]]::new()
 try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'open', $reportUrl) | Out-Null
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { window.__qa004Errors=[]; const errorEvent=String.fromCharCode(101,114,114,111,114),rejectionEvent=String.fromCharCode(117,110,104,97,110,100,108,101,100,114,101,106,101,99,116,105,111,110),fallback=String.fromCharCode(101,114,114,111,114); window.addEventListener(errorEvent,event=>window.__qa004Errors.push(String(event.message||event.error||fallback))); window.addEventListener(rejectionEvent,event=>window.__qa004Errors.push(String(event.reason||rejectionEvent))); return JSON.stringify({ready:true}); }') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Leitung Digitalisierung mit einem absichtlich sehr langen ungetrennten Layoutpruefwort' -Case 'Langer Titel bleibt erreichbar'
+    foreach ($width in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht' -ViewportWidth ([int]$width)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Initialansicht ${width}px"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'initial_jobs'; viewport_width = [int]$width; measurement = $measurement })
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'long_content'; viewport_width = [int]$width; measurement = $measurement })
+    }
 
     Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=companies', 'page=999', 'q=Firma%20251')
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Firmenhash mit uebergrosser Seitennummer'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firma 251' -Case 'Firma ohne offene Stelle'
     Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=companies&q=Firma+251' -Case 'Firmenhash mit uebergrosser Seitennummer'
+    foreach ($width in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Firma ohne Stelle' -ViewportWidth ([int]$width)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Firma ohne Stelle ${width}px"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'company_without_open_jobs'; viewport_width = [int]$width; measurement = $measurement })
+    }
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'reload') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Reload eines normalisierten Firmenhashes'
@@ -485,6 +531,11 @@ try {
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Freising Pflege Teilzeit Hybrid'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Pflegefachkraft Freising' -Case 'Freising Pflege Teilzeit Hybrid'
+    foreach ($width in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Komplexer Filter' -ViewportWidth ([int]$width)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Komplexer Filter ${width}px"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'complex_filter'; viewport_width = [int]$width; measurement = $measurement })
+    }
 
     $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
@@ -580,6 +631,11 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'keine-passende-stelle') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Keine Treffer im angezeigten Bestand.' -Case 'Nulltreffer'
+    foreach ($width in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Nulltreffer' -ViewportWidth ([int]$width)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Nulltreffer ${width}px"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'empty_results'; viewport_width = [int]$width; measurement = $measurement })
+    }
 
     $companiesTabRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('tab', 'button') -Name 'Firmen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $companiesTabRef) | Out-Null
@@ -619,6 +675,11 @@ try {
         }
     }
     Assert-JobAgentSetEqual -Actual $visibleJobIds.ToArray() -Expected @($report.sections.active_jobs.job_id) -Case 'alle Stellenueber Seiten'
+    foreach ($width in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Letzte Stellenseite' -ViewportWidth ([int]$width)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Letzte Stellenseite ${width}px"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'last_jobs_page'; viewport_width = [int]$width; measurement = $measurement })
+    }
 
     $companiesTabRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('tab', 'button') -Name 'Firmen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $companiesTabRef) | Out-Null
@@ -725,6 +786,7 @@ $summary = [pscustomobject]@{
         console_or_page_errors = @($sessionErrors)
     }
     controls = @($caseEvidence.ToArray())
+    geometry = @($geometryEvidence.ToArray())
     companies = 251
     jobs = 264
     expected_job_ids = $expectedJobIds

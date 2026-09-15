@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-16T00:02:22.668+02:00
+Stand: 2026-09-16T00:25:45.401+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-16T00:02:22.668+02:00
 - Status: `in-progress`
 - Ziel: QA-005 Layout, Lesbarkeit und Tastaturbedienung messbar abnehmen #comment: Das blosse Vorhandensein einer Screenshotdatei beweist weder fehlerfreies Layout noch barrierearme Bedienbarkeit.
 - Branch: `master`
-- HEAD: `87070fc1d846`
+- HEAD: `9e17541ec5ad`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,7 +16,11 @@ Stand: 2026-09-16T00:02:22.668+02:00
 
 ## Versionierte Aenderungen
 
-- `docs/handoffs/2026-09-16-qa005-start.md`
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `src/JobAgent.Report.psm1`
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
+- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 

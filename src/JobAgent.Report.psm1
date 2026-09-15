@@ -1362,7 +1362,7 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('.unknown { color: var(--muted); font-style: italic; }')
     [void]$lines.Add('.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end; }')
     [void]$lines.Add('.filters label { display: grid; gap: 5px; font-weight: 600; }')
-    [void]$lines.Add('input, select, button { font: inherit; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--surface); color: var(--text); }')
+    [void]$lines.Add('input, select, button { font: inherit; min-width: 44px; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--surface); color: var(--text); }')
     [void]$lines.Add('select[multiple] { min-height: 116px; } button { cursor: pointer; font-weight: 600; } button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid #1d70b8; outline-offset: 2px; }')
     [void]$lines.Add('.search-tabs, .pagination { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; } .search-tabs button[aria-selected="true"] { background: var(--accent); color: #fff; } .result-count { font-weight: 600; }')
     [void]$lines.Add('.result-list { display: grid; gap: 10px; } .result-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--surface-alt); overflow-wrap: anywhere; } .result-card h3, .result-card p { margin: 0 0 8px; }')
