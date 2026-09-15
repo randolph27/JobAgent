@@ -1,6 +1,6 @@
 # JobAgent Testmatrix
 
-Stand: 2026-08-23
+Stand: 2026-09-15
 
 Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 
@@ -35,7 +35,8 @@ Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 | JA-027 | `tests/Test-JobAgentCompanyDedupeScale.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCompanyDedupeScale.ps1` | ja | Skalierte Kandidaten-Cluster, starke Identitaetskeys, Konfliktflags, Review-Queue, 5.000+ Kandidaten |
 | JA-027.2 | `tests/Test-JobAgentDiscoverySourceInventory.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentDiscoverySourceInventory.ps1` | ja | Quelleninventur, Hint-/Queue-Abgleich, kleine Bestaende, Recherchematrix, fail-closed Quellen |
 | JA-029 | `tests/Test-JobAgentImportWaves.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentImportWaves.ps1` | ja | Importwellen-Konfiguration, produktive Gate-Pruefung, Rollback-Backup, fail-closed CLI ohne Store-Aenderung |
+| UI-001 | `tests/Test-JobAgentUiBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUiBrowserAudit.ps1` | ja | Lokale Browser-Fixture mit 251 Firmen/256 Stellen, Filterkombinationen, UNKNOWN, Umlautsuche, Pagination, Reset, Ruecknavigation, Store- und Request-Invarianz sowie 390/800/1366/1920 px |
 
 ## Live-Lane
 
-JA-014 ergänzt Live-Scan-Logik mit deterministischen Fixtures im Supertest. Echte Live-Nachweise bleiben getrennt, laufen mit begrenzter Firmenauswahl und werden unter `logs/jobagent/` geführt.
+JA-014 ergänzt Live-Scan-Logik mit deterministischen Fixtures im Supertest. UI-001 nutzt ausschliesslich eine lokal erzeugte HTML-Fixture auf dem CI-Devserver; es findet keine Live-Webrecherche statt. Echte Live-Nachweise bleiben getrennt, laufen mit begrenzter Firmenauswahl und werden unter `logs/jobagent/` geführt.

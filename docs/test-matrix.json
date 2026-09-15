@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent-test-matrix/v1",
-  "updated_at": "2026-08-23T12:20:00+02:00",
+  "updated_at": "2026-09-15T16:31:00+02:00",
   "policy": {
     "default_lane": "deterministic-fixture",
     "live_lane": "separate-not-supertest",
@@ -346,6 +346,22 @@
         "unverifizierte Discovery-Hints werden fail-closed abgelehnt",
         "Rollback-Backup ist fuer Wellenimporte Pflicht",
         "CLI-Import schreibt Gate-Report und veraendert den Store bei Gate-Fehler nicht"
+      ]
+    },
+    {
+      "roadmap_id": "UI-001",
+      "title": "Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern",
+      "test_file": "tests/Test-JobAgentUiBrowserAudit.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentUiBrowserAudit.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "251 Firmen und 256 Stellen bleiben ueber die bisherige 250er-Grenze erreichbar",
+        "Freising, Pflege, Teilzeit und Hybrid werden kombiniert gefiltert; UNKNOWN und Unicode-Freitext bleiben suchbar",
+        "Pagination, Reset, Tabwechsel und Browser-Ruecknavigation erhalten den lokalen Zustand",
+        "Filter mutieren die isolierte Fixture nicht und erzeugen keine API-, Joblauf- oder Store-Requests",
+        "390, 800, 1366 und 1920 px werden im echten Browser erfasst"
       ]
     }
   ]
