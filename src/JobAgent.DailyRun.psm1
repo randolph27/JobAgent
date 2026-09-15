@@ -117,7 +117,7 @@ function Get-JobAgentDailyRunCandidateCompanies {
     $nowUtc = $Now.ToUniversalTime()
     @($Document.companies) |
         Where-Object {
-            if ($allowedIds.Count -gt 0 -and -not $allowedIds.Contains([string]$_.company_id)) {
+            if ($allowedIds.Count -gt 0 -and -not $allowedIds.Contains([string]$_.company_id) -and -not $forcedIds.Contains([string]$_.company_id)) {
                 return $false
             }
             if (@(Get-JobAgentDailyRunSources -Document $Document -CompanyId ([string]$_.company_id)).Count -eq 0) {
@@ -169,7 +169,7 @@ function New-JobAgentDailyRunSelection {
     foreach ($company in @($Document.companies)) {
         $companyId = [string]$company.company_id
         $sources = @(Get-JobAgentDailyRunSources -Document $Document -CompanyId $companyId)
-        if ($allowedIds.Count -gt 0 -and -not $allowedIds.Contains($companyId)) {
+        if ($allowedIds.Count -gt 0 -and -not $allowedIds.Contains($companyId) -and -not $forcedIds.Contains($companyId)) {
             $excluded.Add([pscustomobject]@{ company_id = $companyId; reason = 'not_requested' })
             continue
         }

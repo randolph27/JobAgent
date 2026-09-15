@@ -276,21 +276,23 @@ try {
             }
         )
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
-    [pscustomobject]@{
+    $acquisitionFixtureMap = [pscustomobject]@{
         responses = @(
             [pscustomobject]@{ url = 'https://example.invalid/'; ok = $true; status_code = 200; final_url = 'https://example.invalid/'; content = '<html><a href="/karriere">Karriere</a></html>' },
             [pscustomobject]@{ url = 'https://example.invalid/sitemap.xml'; ok = $true; status_code = 200; final_url = 'https://example.invalid/sitemap.xml'; content = '<urlset></urlset>' },
             [pscustomobject]@{ url = 'https://example.invalid/sitemap_index.xml'; ok = $true; status_code = 200; final_url = 'https://example.invalid/sitemap_index.xml'; content = '<sitemapindex></sitemapindex>' },
             [pscustomobject]@{ url = 'https://example.invalid/karriere'; ok = $true; status_code = 200; final_url = 'https://example.invalid/karriere'; content = '<main>Offene Stellen bei Example</main>' }
         )
-    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'acquisition-fixture-map.json') -Encoding UTF8
+    }
+    $acquisitionFixtureMap | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'acquisition-fixture-map.json') -Encoding UTF8
     [pscustomobject]@{
         'company:example_ag' = [pscustomobject]@{
             status = 'SUCCESS'
             error_class = 'NONE'
             retry_recommendation = 'NONE'
             http_status = 200
-            raw_jobs = @([pscustomobject]@{
+            raw_jobs = @(
+                [pscustomobject]@{
                     title = 'Head of IT'
                     detail_url = 'https://example.invalid/karriere/head-it-acquired'
                     external_job_id = 'acquired-100'
@@ -298,7 +300,17 @@ try {
                     location_label = 'Muenchen'
                     summary = 'IT-Gesamtverantwortung nach automatischer Akquise.'
                     extraction_confidence = 95
-                })
+                }
+                [pscustomobject]@{
+                    title = 'Finanzbuchhalter (m/w/d)'
+                    detail_url = 'https://example.invalid/karriere/finanzbuchhaltung-acquired'
+                    external_job_id = 'acquired-200'
+                    ats_job_id = 'UNKNOWN'
+                    location_label = 'Freising'
+                    summary = 'Berufsneutrale Erfassung einer Finanzbuchhaltungsstelle.'
+                    extraction_confidence = 95
+                }
+            )
         }
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -Encoding UTF8
 
@@ -310,7 +322,7 @@ try {
     Assert-True -Condition ($acquisitionResult.acquisition.new_official_career_companies -eq 1) -Message ('Daily-Run-CLI zaehlt neuen offiziellen Karrierearbeitgeber nicht: ' + ($acquisitionResult.acquisition | ConvertTo-Json -Depth 20 -Compress))
     Assert-True -Condition (@($acquisitionStore.companies | Where-Object { $_.company_id -eq 'company:example_ag' -and $_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count -eq 1) -Message 'Automatische Akquise schreibt verifizierte Firma nicht in den Store.'
     Assert-True -Condition (@($acquisitionStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' -and $_.is_official -eq $true }).Count -eq 1) -Message 'Automatische Akquise schreibt offizielle Karrierequelle nicht in den Store.'
-    Assert-True -Condition (@($acquisitionStore.jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Daily-Run scannt automatisch akquirierte Firma nicht im selben Lauf.'
+    Assert-True -Condition (@($acquisitionStore.jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 2) -Message 'Daily-Run scannt automatisch akquirierte Firma nicht berufsneutral im selben Lauf.'
     $acquisitionHtml = Get-Content -LiteralPath ([string]$acquisitionResult.html_report_path) -Raw
     Assert-True -Condition ($acquisitionHtml.Contains('<section><h2>Neue Unternehmen</h2>') -and $acquisitionHtml.Contains('<td>Example AG</td>') -and $acquisitionHtml.Contains('href="https://example.invalid/karriere" target="_blank" rel="noopener noreferrer">Karriere</a>')) -Message 'WebIF zeigt automatisch akquirierte Firma nicht mit Karrierequelle an.'
 
@@ -320,7 +332,64 @@ try {
     Assert-True -Condition ($partialAcquisitionResult.status -eq 'PARTIAL') -Message 'Isolierter Akquisefehler wird nicht als PARTIAL sichtbar.'
     Assert-True -Condition ($partialAcquisitionResult.run_id -match '^dailyrun:') -Message 'Daily-Run-CLI gibt keine gemeinsame Run-ID aus.'
     Assert-True -Condition ($partialAcquisitionResult.acquisition.status -eq 'PARTIAL') -Message 'Akquisefehler wird nicht im Akquisestatus ausgewiesen.'
-    Assert-True -Condition (@((Read-JobAgentStore -ProjectRoot $acquisitionProjectRoot).jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Isolierter Akquisefehler darf vorhandene Stellen nicht entfernen.'
+    Assert-True -Condition (@((Read-JobAgentStore -ProjectRoot $acquisitionProjectRoot).jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 2) -Message 'Isolierter Akquisefehler darf vorhandene Stellen nicht entfernen.'
+
+    $secondHintStorePath = Join-Path $acquisitionProjectRoot 'data\jobagent\company-discovery.hints.json'
+    $secondHintStore = Get-Content -LiteralPath $secondHintStorePath -Raw | ConvertFrom-Json -Depth 20
+    $secondHintStore.hints += [pscustomobject]@{
+        hint_id = 'hint:daily-acquisition-second-example'
+        employer_name = 'Second Example GmbH'
+        normalized_name = 'second example gmbh'
+        location = 'Freising'
+        target_area = 'FREISING'
+        source_id = 'source-registry:daily-acquisition-fixture'
+        observed_url = 'https://jobs.second-example.invalid/search'
+        observed_at = $acquisitionObservedAt
+        verification_status = 'UNVERIFIED'
+        candidate_status = 'DISCOVERY_HINT'
+        known_company_id = 'company:second_example_gmbh'
+        known_company_domain = 'second-example.invalid'
+        confidence_score = 90
+        is_staffing_agency = $false
+        official_verification_required = $true
+        next_action = 'verify_official_company_website_or_career_url'
+    }
+    $secondHintStore.hints_total = @($secondHintStore.hints).Count
+    $secondHintStore.unverified_hints = @($secondHintStore.hints | Where-Object { $_.verification_status -eq 'UNVERIFIED' }).Count
+    $secondHintStore | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $secondHintStorePath -Encoding UTF8
+    $acquisitionFixtureMap.responses += @(
+        [pscustomobject]@{ url = 'https://second-example.invalid/'; ok = $true; status_code = 200; final_url = 'https://second-example.invalid/'; content = '<html><a href="/jobs">Jobs</a></html>' }
+        [pscustomobject]@{ url = 'https://second-example.invalid/sitemap.xml'; ok = $true; status_code = 200; final_url = 'https://second-example.invalid/sitemap.xml'; content = '<urlset></urlset>' }
+        [pscustomobject]@{ url = 'https://second-example.invalid/sitemap_index.xml'; ok = $true; status_code = 200; final_url = 'https://second-example.invalid/sitemap_index.xml'; content = '<sitemapindex></sitemapindex>' }
+        [pscustomobject]@{ url = 'https://second-example.invalid/jobs'; ok = $true; status_code = 200; final_url = 'https://second-example.invalid/jobs'; content = '<main>Offene Stellen bei Second Example</main>' }
+    )
+    $acquisitionFixtureMap | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $acquisitionProjectRoot 'acquisition-fixture-map.json') -Encoding UTF8
+    $secondDailyFixturePath = Join-Path $acquisitionProjectRoot 'daily-scan-second-fixture.json'
+    [pscustomobject]@{
+        'company:example_ag' = [pscustomobject]@{
+            status = 'SUCCESS'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200
+            raw_jobs = @(
+                [pscustomobject]@{ title = 'Head of IT'; detail_url = 'https://example.invalid/karriere/head-it-acquired'; external_job_id = 'acquired-100'; ats_job_id = 'UNKNOWN'; location_label = 'Muenchen'; summary = 'IT-Gesamtverantwortung nach automatischer Akquise.'; extraction_confidence = 95 }
+                [pscustomobject]@{ title = 'Finanzbuchhalter (m/w/d)'; detail_url = 'https://example.invalid/karriere/finanzbuchhaltung-acquired'; external_job_id = 'acquired-200'; ats_job_id = 'UNKNOWN'; location_label = 'Freising'; summary = 'Berufsneutrale Erfassung einer Finanzbuchhaltungsstelle.'; extraction_confidence = 95 }
+            )
+        }
+        'company:second_example_gmbh' = [pscustomobject]@{
+            status = 'SUCCESS'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200
+            raw_jobs = @([pscustomobject]@{ title = 'Pflegefachkraft (m/w/d)'; detail_url = 'https://second-example.invalid/jobs/pflege-300'; external_job_id = 'second-300'; ats_job_id = 'UNKNOWN'; location_label = 'Freising'; summary = 'Berufsneutrale neue Stelle der zweiten Firma.'; extraction_confidence = 95 })
+        }
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $secondDailyFixturePath -Encoding UTF8
+    $secondAcquisitionOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $acquisitionProjectRoot -FixturePath $secondDailyFixturePath -AcquisitionFixtureMapPath 'acquisition-fixture-map.json' -AcquisitionCandidateBudget 2 -MaxCompanies 1 -CompanyIds 'company:example_ag' -FetchClient curl -WslDistribution FixtureDistro 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Zweiter regulaerer Akquise-Start ist fehlgeschlagen: " + ($secondAcquisitionOutput -join "`n"))
+    $secondAcquisitionResult = ($secondAcquisitionOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $secondAcquisitionStore = Read-JobAgentStore -ProjectRoot $acquisitionProjectRoot
+    Assert-True -Condition ($secondAcquisitionResult.status -eq 'SUCCESS') -Message 'Zweiter regulaerer Akquise-Start ist nicht erfolgreich.'
+    Assert-True -Condition ($secondAcquisitionResult.acquisition.new_official_career_companies -eq 1) -Message 'Zweiter Start darf genau eine neue offizielle Karrierefirma zaehlen.'
+    Assert-True -Condition (@($secondAcquisitionStore.companies | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Bekannte Firma wurde beim zweiten Start dupliziert.'
+    Assert-True -Condition (@($secondAcquisitionStore.companies | Where-Object { $_.company_id -eq 'company:second_example_gmbh' -and $_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count -eq 1) -Message 'Zweiter Start uebernimmt die neue offizielle Karrierefirma nicht.'
+    Assert-True -Condition (@($secondAcquisitionStore.jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 2) -Message 'Bekannte Firma erzeugt beim zweiten Start Stellenduplikate.'
+    Assert-True -Condition (@($secondAcquisitionStore.jobs | Where-Object { $_.company_id -eq 'company:second_example_gmbh' }).Count -eq 1) -Message ('Zweiter Start erfasst die neue Firma nicht im selben Lauf. Vorhandene Jobs: ' + (@($secondAcquisitionStore.jobs | ForEach-Object { $_.company_id + '/' + $_.external_job_id }) -join ', '))
+    $secondAcquisitionHtml = Get-Content -LiteralPath ([string]$secondAcquisitionResult.html_report_path) -Raw
+    Assert-True -Condition ($secondAcquisitionHtml.Contains('Second Example GmbH') -and $secondAcquisitionHtml.Contains('Pflegefachkraft (m/w/d)')) -Message 'WebIF zeigt die neue Firma und ihre berufsneutrale Stelle nicht.'
 
     $multiSourceProjectRoot = New-TestProjectRoot
     New-TestStore -ProjectRoot $multiSourceProjectRoot
@@ -640,6 +709,7 @@ try {
             'daily_run_cli_fixture_mode',
             'daily_run_cli_live_mode_without_fixture',
             'daily_run_cli_acquires_and_scans_new_company',
+            'daily_run_two_regular_starts_keep_known_company_and_add_exactly_one',
             'daily_run_continues_scan_after_isolated_acquisition_failure',
             'daily_run_multi_source_partial_removal',
             'daily_run_prioritizes_refresh_due_companies',

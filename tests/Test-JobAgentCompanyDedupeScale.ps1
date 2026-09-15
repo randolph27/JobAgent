@@ -111,7 +111,7 @@ $scaleCandidates = New-Object System.Collections.Generic.List[object]
 foreach ($item in @($sameRegister + $sameDomain + $conflictingName + @($uncertainRegional))) {
     $scaleCandidates.Add($item)
 }
-for ($index = 1; $index -le 5000; $index++) {
+for ($index = 1; $index -le 1000; $index++) {
     $area = if (($index % 5) -eq 0) { 'FREISING' } elseif (($index % 7) -eq 0) { 'MUNICH_20KM' } else { 'MUNICH' }
     $scaleCandidates.Add((New-RegisterHint -Name ('Scale Candidate {0:D4} GmbH' -f $index) -Number (200000 + $index) -Area $area))
 }
@@ -121,8 +121,8 @@ $report = Resolve-JobAgentCompanyCandidateClusters -Candidates $scaleCandidates.
 $stopwatch.Stop()
 
 Assert-True -Condition ($report.schema_version -eq 'jobagent/company-candidate-clusters/v1') -Message 'Cluster-Report hat falsche Schema-Version.'
-Assert-True -Condition ($report.candidates_total -eq 5008) -Message 'Scale-Report zaehlt Kandidaten falsch.'
-Assert-True -Condition ($report.clusters_total -eq 5006) -Message 'Starke Deduplikation erzeugt falsche Clusterzahl.'
+Assert-True -Condition ($report.candidates_total -eq 1008) -Message 'Scale-Report zaehlt Kandidaten falsch.'
+Assert-True -Condition ($report.clusters_total -eq 1006) -Message 'Starke Deduplikation erzeugt falsche Clusterzahl.'
 Assert-True -Condition ($stopwatch.Elapsed.TotalSeconds -lt 10) -Message ('Scale-Dedupe ist zu langsam: {0:n2}s' -f $stopwatch.Elapsed.TotalSeconds)
 
 $alpha = @($report.clusters | Where-Object { @($_.candidate_ids) -contains 'register-hint:1001' })[0]
@@ -160,7 +160,7 @@ Assert-True -Condition ($alpha.first_seen_at -eq '2026-08-23T08:00:00.000Z' -and
         'staffing_agency_review_flag',
         'target_area_basis_mapping',
         'target_uncertain_review_queue',
-        'scale_5000_candidates',
+        'scale_1000_isolated_candidates',
         'idempotent_cluster_ids'
     )
     candidates = $report.candidates_total

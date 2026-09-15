@@ -1,5 +1,17 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-15 - JA-042
+
+- [x] JA-042 Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern
+  - [x] JA-042.1: Ein regulaerer Start teilt eine `dailyrun:`-ID zwischen Akquise, allgemeinem Scan und atomarer Status-/Reportpublikation. Teilfehler bleiben `PARTIAL`; der letzte publizierte Report bleibt bei Neuberechnung oder Fehler sichtbar.
+  - [x] JA-042.2: Kandidatenresultate werden vor dem Commit checkpointed, beim Wiederanlauf hoechstens einmal seriell uebernommen und zukuenftige Retries als `wake_at` ohne Busy-Wait ausgegeben. Teil- und Fehler-Scans entfernen keine Stellen.
+  - [x] JA-042.3: Die 1.000er-Isolationsfixture umfasst 1.008 Kandidaten und 1.006 Cluster, prueft Register-/Domain-Dedupe, Namenskonflikte, unsichere Gebiete und stabile IDs. Zwei regulaere Fixture-Starts belegen zuerst eine neue offizielle Karrierefirma mit zwei berufsneutral erfassten Stellen, danach dieselbe bekannte Firma ohne Duplikate und genau eine neue offizielle Karrierefirma mit einer Stelle. Akquirierte Firmen werden bei expliziter Scan-Auswahl im selben Lauf zusaetzlich erfasst.
+  - [x] Scope: `src/JobAgent.DailyRun.psm1`, `tests/Test-JobAgentCompanyDedupeScale.ps1`, `tests/Test-JobAgentDailyRun.ps1`, `tests/Test-JobAgentReport.ps1`, `docs/company-discovery-operations.md`.
+  - [x] Evidence: `logs/jobagent/JA-042-1-acceptance.json`, `logs/jobagent/JA-042-2-acceptance.json`, `logs/jobagent/JA-042-3-acceptance.json`.
+  - [x] Funktionstest: `Test-JobAgentCompanyDedupeScale.ps1`, `Test-JobAgentDailyRun.ps1` und `Test-JobAgentReport.ps1` jeweils Exit 0.
+  - [x] Audit: Der Supertest einschliesslich Browseraudit bei 390/800/1366/1920 px endete Exit 0. Keine Android-Lane; keine reale Akquisewelle gestartet.
+  - [x] Supertest: `./ci.cmd supertest` Exit 0 in 507,07 s; der erste Sandboxversuch scheiterte ausschliesslich am gesperrten npm-Cache, der Wiederholungslauf mit dem vorhandenen lokalen Cache war vollstaendig gruen.
+
 ## Archiviert 2026-09-15 - JA-041
 
 - [x] JA-041 Berufsneutrale Stellenerfassung von Suchprofilen trennen

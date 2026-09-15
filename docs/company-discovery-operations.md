@@ -79,6 +79,27 @@ Beispiel:
 pwsh -NoProfile -File tools\Import-JobAgentCompanyDiscovery.ps1 -SnapshotLane
 ```
 
+## Regulaerer Tageslauf und Wiederanlauf
+
+Der regulaere Start verbindet Quellennachfuellung, Website-Ermittlung, offizielle Kandidatenverifikation, berufsneutrale Stellenerfassung und die atomare Reportpublikation. Es gibt keinen manuellen Import-, Verify- oder Reportschritt im Normalbetrieb:
+
+```powershell
+.\ci.cmd daily-run
+```
+
+Die steuerbaren Grenzen bleiben pro Start endlich. `MaxCompanies` begrenzt die Scan-Auswahl, `AcquisitionCandidateBudget` die Kandidaten in Website-Ermittlung und Verifikation, `HostConcurrency` die gleichzeitige Arbeit je Host, und `TimeoutSeconds`/`MaxRetries` begrenzen einzelne Abrufe beziehungsweise Wiederholungen. Beispiel mit bewusst kleinen Betriebsbudgets:
+
+```powershell
+pwsh -NoProfile -File .\tools\Invoke-JobAgentDailyRun.ps1 `
+  -MaxCompanies 25 `
+  -AcquisitionCandidateBudget 5 `
+  -HostConcurrency 1 `
+  -TimeoutSeconds 30 `
+  -MaxRetries 1
+```
+
+Der Status-Pointer liegt unter `logs/jobagent/daily-run.status.json`; das JSON-, Markdown- und HTML-Reporttrio steht in `logs/jobagent/` beziehungsweise `html/jobagent/`. Waehrend einer Neuberechnung und nach einem fehlgeschlagenen Lauf bleibt der letzte erfolgreich publizierte Report als veralteter Stand sichtbar. Ein erneuter Start setzt Resultat-Checkpoints der Kandidatenverifikation fort und uebernimmt jedes Resultat hoechstens einmal. Ein zukuenftiges `wake_at` ist eine Wiedervorlage: Der Lauf endet ohne Busy-Wait und wird zum angegebenen Zeitpunkt durch den naechsten regulaeren Start fortgesetzt. Akquirierte Firmen werden auch bei expliziter Scan-Auswahl im selben Lauf zusaetzlich gescannt; bekannte Firmen und Stellen bleiben dabei dedupliziert.
+
 ## Validierung
 
 Funktionale Pflichttests:

@@ -1,0 +1,22 @@
+{
+  "schema_version": "jobagent/ja-042-3-acceptance/v1",
+  "status": "completed",
+  "completed_at": "2026-09-15T18:13:18.355+02:00",
+  "git_head_before_commit": "f1738ac",
+  "scope": { "fixture_companies": 1000, "fixture_candidates": 1008, "fixture_clusters": 1006, "production_store_mutated": false },
+  "results": {
+    "dedupe": { "status": "ok", "elapsed_ms": 1867, "cases": ["domain_and_register_dedupe", "name_only_conflicts_remain_separate", "regional_uncertainty_remains_reviewable", "stable_cluster_ids"] },
+    "two_regular_fixture_starts": {
+      "first_run": { "new_official_career_companies": 1, "company_id": "company:example_ag", "captured_jobs": 2 },
+      "second_run": { "new_official_career_companies": 1, "existing_company_duplicates": 0, "new_company_id": "company:second_example_gmbh", "captured_jobs_for_new_company": 1 },
+      "contract": "Akquirierte Firmen werden auch bei expliziter Scan-Auswahl im selben Lauf gescannt."
+    }
+  },
+  "verification": [
+    { "command": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCompanyDedupeScale.ps1", "exit_code": 0 },
+    { "command": "pwsh -NoProfile -File .\\tests\\Test-JobAgentDailyRun.ps1", "exit_code": 0 },
+    { "command": "pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1", "exit_code": 0 },
+    { "command": ".\\ci.cmd supertest", "exit_code": 0, "duration_seconds": 507.07 }
+  ],
+  "audit": { "browser": "Supertest-UI-Audit erfolgreich bei 390, 800, 1366 und 1920 px.", "android": "not-applicable", "live_acquisition": "not-run; nur isolierte Fixtures, keine reale Firmenwelle." }
+}
