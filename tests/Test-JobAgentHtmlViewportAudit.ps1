@@ -36,6 +36,29 @@ function Write-Utf8File {
     [IO.File]::WriteAllText($Path, $Content + "`n", $encoding)
 }
 
+function Invoke-JobAgentPlaywrightCli {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string[]]$Arguments
+    )
+
+    $npxCommand = Get-Command -Name 'npx.cmd' -ErrorAction SilentlyContinue
+    if ($null -eq $npxCommand) {
+        throw 'npx.cmd fehlt; der Viewport-Audit benoetigt die lokal installierbare Playwright-CLI.'
+    }
+
+    Push-Location -LiteralPath $WorkingDirectory
+    try {
+        $commandOutput = @(& $npxCommand.Source --yes --package '@playwright/cli' playwright-cli @Arguments 2>&1)
+        if ($LASTEXITCODE -ne 0) {
+            throw ("Playwright-CLI fehlgeschlagen: " + ($commandOutput -join [Environment]::NewLine))
+        }
+    }
+    finally {
+        Pop-Location
+    }
+}
+
 function New-TestLocation {
     param([Parameter(Mandatory)][string]$Label)
 
@@ -301,51 +324,32 @@ if (-not (Test-Path -LiteralPath $screenshotRoot)) {
     New-Item -ItemType Directory -Path $screenshotRoot -Force | Out-Null
 }
 
-$browserCandidates = @(
-    'C:\Program Files\Google\Chrome\Application\chrome.exe'
-    'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
-    'C:\Program Files\Microsoft\Edge\Application\msedge.exe'
-    'C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe'
-)
-$browserPath = @($browserCandidates | Where-Object { Test-Path -LiteralPath $_ } | Select-Object -First 1)[0]
-Assert-True -Condition (-not [string]::IsNullOrWhiteSpace($browserPath)) -Message 'Kein lokaler Chrome- oder Edge-Browser fuer den Viewport-Audit gefunden.'
-
 $screenshots = New-Object System.Collections.Generic.List[string]
-foreach ($target in @(
-    [pscustomobject]@{ label = 'fixture'; url = $reportUrl },
-    [pscustomobject]@{ label = 'production-coverage'; url = $productionReportUrl }
-)) {
-foreach ($width in 1920, 1366, 800, 390) {
-    $screenshotPath = Join-Path $screenshotRoot ("ja-022-" + $target.label + "-viewport-" + $width + '.png')
-    $stderrPath = Join-Path $screenshotRoot ("ja-022-viewport-" + $width + '.stderr.log')
-    if (Test-Path -LiteralPath $screenshotPath) {
-        Remove-Item -LiteralPath $screenshotPath -Force
-    }
-    if (Test-Path -LiteralPath $stderrPath) {
-        Remove-Item -LiteralPath $stderrPath -Force
-    }
+ $sessionName = 'jobagent-viewport-' + [guid]::NewGuid().ToString('N')
+try {
+    foreach ($target in @(
+        [pscustomobject]@{ label = 'fixture'; url = $reportUrl },
+        [pscustomobject]@{ label = 'production-coverage'; url = $productionReportUrl }
+    )) {
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, 'open', $target.url)
+        foreach ($width in 1920, 1366, 800, 390) {
+            $screenshotPath = Join-Path $screenshotRoot ("ja-022-" + $target.label + "-viewport-" + $width + '.png')
+            if (Test-Path -LiteralPath $screenshotPath) {
+                Remove-Item -LiteralPath $screenshotPath -Force
+            }
 
-    $arguments = @(
-        '--headless=new'
-        '--disable-gpu'
-        '--hide-scrollbars'
-        '--run-all-compositor-stages-before-draw'
-        '--virtual-time-budget=2000'
-        ("--window-size={0},2200" -f $width)
-        ("--screenshot={0}" -f $screenshotPath)
-        $target.url
-    )
-    $process = Start-Process -FilePath $browserPath -ArgumentList $arguments -PassThru -Wait -NoNewWindow -RedirectStandardError $stderrPath
-    if ($process.ExitCode -ne 0) {
-        $stderr = if (Test-Path -LiteralPath $stderrPath) { Get-Content -LiteralPath $stderrPath -Raw } else { '' }
-        throw ("Viewport-Screenshot fehlgeschlagen fuer Breite " + $width + ": " + $stderr)
-    }
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, 'resize', $width, 2200)
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, 'screenshot', '--filename', $screenshotPath)
 
-    Assert-True -Condition (Test-Path -LiteralPath $screenshotPath) -Message "Viewport-Screenshot fehlt fuer Breite $width."
-    $screenshotFile = Get-Item -LiteralPath $screenshotPath
-    Assert-True -Condition ($screenshotFile.Length -gt 10000) -Message "Viewport-Screenshot fuer Breite $width ist unplausibel klein."
-    $screenshots.Add($screenshotPath)
+            Assert-True -Condition (Test-Path -LiteralPath $screenshotPath) -Message "Viewport-Screenshot fehlt fuer Breite $width."
+            $screenshotFile = Get-Item -LiteralPath $screenshotPath
+            Assert-True -Condition ($screenshotFile.Length -gt 10000) -Message "Viewport-Screenshot fuer Breite $width ist unplausibel klein."
+            $screenshots.Add($screenshotPath)
+        }
+    }
 }
+finally {
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, 'close')
 }
 
 $summary = [pscustomobject]@{

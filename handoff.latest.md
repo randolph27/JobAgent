@@ -1,76 +1,51 @@
 # Handoff latest
 
-Stand: 2026-09-15T13:25:34.584+02:00
+Stand: 2026-09-15T13:58:36.775+02:00
 
 ## Zustand
 
-- Active: `TD-0041`
+- Active: `TD-0053`
 - Status: `in-progress`
-- Ziel: `JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern`
+- Ziel: JA-041 Berufsneutrale Stellenerfassung von Suchprofilen trennen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
 - Branch: `master`
-- HEAD vor Handoff-Commit: `16cd6195e474`
+- HEAD: `79c0915bc639`
 - Upstream: `origin/master`
-- Worktree: wird fuer Handoff-/STP-Commit bereinigt.
-- Roadmap-Rotation: keine Rotation. `JA-027` bleibt offen, weil die Viewport-Audit-Lane lokal blockiert ist.
-- Supertest: gemaess Nutzerregel nicht als Blocker behandelt, weil er nicht separat angefragt wurde.
-- STP: `cmd /c .\ci.cmd stp` -> Exit `0`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
+- Route: `True`
 
-## Letzter abgeschlossener Slice
-
-`JA-027.3` wurde im Commit `16cd619` umgesetzt und nach `origin/master` gepusht:
-
-- Domain-only-Bestandsfirmen mit fehlender `career_url` werden in `src/JobAgent.Coverage.psm1` nicht mehr dauerhaft als `ALREADY_VERIFIED_IN_STORE`/`VERIFIED` aus der Arbeit entfernt.
-- Diese Firmen werden mit `next_action = VERIFY_CAREER_SOURCE`, `status = PENDING` und `review_reason = PRODUCTIVE_COMPANY_NEEDS_OFFICIAL_CAREER_SOURCE` wieder startbar.
-- `tools/Verify-JobAgentCompanyCandidates.ps1` akzeptiert `VERIFY_CAREER_SOURCE` als startbare Queue-Aktion.
-- `HostConcurrency` kuerzt keine Kandidatenauswahl mehr; es bleibt Request-Concurrency-Policy.
-- `logical_host_waves` protokolliert Hostgruppen und Wellen vor der HTTP-Arbeit.
-- Batchmetriken trennen offizielle Karriere-/ATS-Erfolge von Domain-only-Erfolgen: `official_career_verified_total`, `domain_only_verified_total`, `official_career_verified_candidate_ids`, `domain_only_candidate_ids`.
-- Reine Karrierequellen-Pruefauftraege, die erneut nur Domain-Erreichbarkeit bestaetigen, bleiben als `MANUAL_REVIEW_REQUIRED` mit `CAREER_SOURCE_MISSING_AFTER_DOMAIN_VERIFICATION` sichtbar und werden nicht als erledigte Karrierequelle gezaehlt.
-
-## Verifikation des abgeschlossenen Slice
-
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentDiscoverySourceInventory.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlAudit.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit `0`
-- `cmd /c .\ci.cmd stp` -> Exit `0`
-- `cmd /c .\ci.cmd route-check` -> Exit `0`
-
-## Bekannter Blocker
-
-- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `1`
-- Fehler: Chrome Headless bricht lokal bei 1920 px mit `GPU process isn't usable` ab.
-- Gegenprobe mit zusaetzlichen Chrome-Flags hing. Edge wurde lokal nicht unter Standardpfad gefunden.
-- Der Blocker ist eine lokale Browser-/Viewport-Lane, kein fachlicher Supertest-Blocker.
-
-## Neuer Chat: naechster Arbeitsanker
-
-1. `tests/Test-JobAgentHtmlViewportAudit.ps1` stabilisieren oder eine alternative lokale Browser-Lane konfigurieren, ohne die visuellen Akzeptanzkriterien zu verwaessern.
-2. Danach die JA-027-Abschlussabnahme ausfuehren: relevante Funktionstests, Viewport-Audit, `.\ci.cmd route-check`, `.\ci.cmd stp`.
-3. Wenn alle fachlichen Gates gruen sind, `JA-027` aus `Roadmap.md` nach `Roadmap_archive.md` rotieren und Todo/Handoff synchronisieren.
-4. Danach erst zu `JA-041` wechseln: berufsneutrale Stellenerfassung von festen IT-Suchbegriffen und Profilpassung entkoppeln.
-
-## Priorisierte offene Aufgaben
-
-- P1: Viewport-Audit-Lane reparieren. Startpunkt ist die Chrome-Headless-Konfiguration des HTML-Viewport-Tests bei 1920 px; Ziel ist ein reproduzierbar gruener visueller Audit fuer 390/800/1366/1920 px.
-- P2: JA-027-Abschlussgate ausfuehren. Keine reale Firmenmindestmenge, aber Nachweis der Softwarefunktion: automatischer regulaerer Start, nachfuellbare Queue, Karrierequellen-Verifikation, sichtbarer WebIF-Bestand.
-- P3: Roadmap-/Todo-Rotation erst nach gruener Abschlusslane. `TD-0041` bleibt bis dahin `in-progress`.
-- P4: Nach Abschluss von JA-027 mit `TD-0053`/`JA-041` weitermachen.
-
-## Wichtige Dateien fuer den Anschluss
+## Versionierte Aenderungen
 
 - `Roadmap.md`
-- `todo.current.md`
-- `todo.state.json`
-- `todo.events.jsonl`
-- `handoff.latest.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
 - `handoff.latest.json`
-- `docs/handoffs/2026-09-13-ja0273-domain-hostwave-handoff.md`
-- `src/JobAgent.Coverage.psm1`
-- `tools/Verify-JobAgentCompanyCandidates.ps1`
-- `tests/Test-JobAgentCompanyCandidateVerification.ps1`
+- `handoff.latest.md`
+- `html/jobagent/ja-022-viewport-audit.html`
+- `output/playwright/ja-022-fixture-viewport-1366.png`
+- `output/playwright/ja-022-fixture-viewport-1920.png`
+- `output/playwright/ja-022-fixture-viewport-390.png`
+- `output/playwright/ja-022-fixture-viewport-800.png`
+- `output/playwright/ja-022-production-coverage-viewport-1366.png`
+- `output/playwright/ja-022-production-coverage-viewport-1920.png`
+- `output/playwright/ja-022-production-coverage-viewport-390.png`
+- `output/playwright/ja-022-production-coverage-viewport-800.png`
 - `tests/Test-JobAgentHtmlViewportAudit.ps1`
+- `todo.checkpoint.json`
+- `todo.current.md`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
+
+## Verifikation
+
+- `.\ci.cmd sonar` -> Exit ``
+
+## Naechster Anker
+
+JA-041.1: Stellenerfassung standardmäßig von festen IT-Suchbegriffen und Profilpassung entkoppeln; vorhandene Parser- und Pagination-Arbeit erhalten.
+
+## Detaillierter Uebergabestand
+
+`docs/handoffs/2026-09-15-ja027-closure-ja041-next.md` enthält Abschlussnachweise für JA-027 sowie Scope, Akzeptanzkriterien, No-Gos und Startreihenfolge für JA-041.1. Der nächste technische Arbeitsanker ist JA-041.1, nicht UI-001.
