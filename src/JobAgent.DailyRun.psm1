@@ -260,8 +260,18 @@ function Copy-JobAgentRawJobWithClassification {
         -EmploymentType $employmentType `
         -EvaluatedAt $EvaluatedAt
 
+    $entryKind = if ($copy.Contains('entry_kind')) { $copy['entry_kind'] } elseif ($copy.Contains('content_kind')) { $copy['content_kind'] } else { $null }
+    $jobValidity = Get-JobAgentOfficialJobValidity `
+        -Title ([string]$copy['title']) `
+        -OfficialUrl ([string]$copy['detail_url']) `
+        -EntryKind $entryKind `
+        -EvaluatedAt $EvaluatedAt
+    $regionalScope = Get-JobAgentRegionalScope -Location $location -EvaluatedAt $EvaluatedAt
+
     $copy['classification'] = $classification
     $copy['priority'] = [string]$classification.priority
+    $copy['job_validity'] = $jobValidity
+    $copy['regional_scope'] = $regionalScope
     return [pscustomobject]$copy
 }
 

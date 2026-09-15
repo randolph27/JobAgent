@@ -166,6 +166,20 @@
         "UNKNOWN"
       ]
     },
+    "job_validity_result": {
+      "enum": [
+        "VALID",
+        "REJECTED",
+        "UNKNOWN"
+      ]
+    },
+    "regional_scope_result": {
+      "enum": [
+        "IN_SCOPE",
+        "OUT_OF_SCOPE",
+        "UNKNOWN"
+      ]
+    },
     "work_model": {
       "enum": [
         "ON_SITE",
@@ -471,6 +485,8 @@
         "last_seen",
         "changed_at",
         "classification",
+        "job_validity",
+        "regional_scope",
         "priority",
         "requirements",
         "salary",
@@ -574,6 +590,12 @@
         "classification": {
           "$ref": "#/$defs/classification"
         },
+        "job_validity": {
+          "$ref": "#/$defs/job_validity"
+        },
+        "regional_scope": {
+          "$ref": "#/$defs/regional_scope"
+        },
         "priority": {
           "$ref": "#/$defs/priority"
         },
@@ -636,6 +658,33 @@
         "evaluated_at": {
           "$ref": "#/$defs/date_time"
         }
+      }
+    },
+    "job_validity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "reasons", "evaluated_at"],
+      "properties": {
+        "result": { "$ref": "#/$defs/job_validity_result" },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evaluated_at": { "$ref": "#/$defs/date_time" }
+      }
+    },
+    "regional_scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["result", "target_area", "reasons", "evaluated_at"],
+      "properties": {
+        "result": { "$ref": "#/$defs/regional_scope_result" },
+        "target_area": { "$ref": "#/$defs/location/properties/target_area" },
+        "reasons": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "evaluated_at": { "$ref": "#/$defs/date_time" }
       }
     },
     "job_source": {

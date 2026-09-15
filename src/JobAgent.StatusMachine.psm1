@@ -174,6 +174,27 @@ function New-JobAgentUnknownClassification {
     }
 }
 
+function New-JobAgentUnknownJobValidity {
+    param([Parameter(Mandatory)][string]$ObservedAt)
+
+    [pscustomobject]@{
+        result = 'UNKNOWN'
+        reasons = @('Historischer Datensatz ohne erneute Gueltigkeitsbewertung.')
+        evaluated_at = $ObservedAt
+    }
+}
+
+function New-JobAgentUnknownRegionalScope {
+    param([Parameter(Mandatory)][string]$ObservedAt)
+
+    [pscustomobject]@{
+        result = 'UNKNOWN'
+        target_area = 'UNKNOWN'
+        reasons = @('Historischer Datensatz ohne erneute Gebietsbewertung.')
+        evaluated_at = $ObservedAt
+    }
+}
+
 function New-JobAgentStatusChangeEvent {
     param(
         [Parameter(Mandatory)][string]$JobId,
@@ -262,6 +283,8 @@ function New-JobAgentJobFromRawJob {
         last_seen = $ObservedAt
         changed_at = $ObservedAt
         classification = if ($RawJob.PSObject.Properties.Name -contains 'classification') { $RawJob.classification } else { New-JobAgentUnknownClassification -ObservedAt $ObservedAt }
+        job_validity = if ($RawJob.PSObject.Properties.Name -contains 'job_validity') { $RawJob.job_validity } else { New-JobAgentUnknownJobValidity -ObservedAt $ObservedAt }
+        regional_scope = if ($RawJob.PSObject.Properties.Name -contains 'regional_scope') { $RawJob.regional_scope } else { New-JobAgentUnknownRegionalScope -ObservedAt $ObservedAt }
         priority = if ($RawJob.PSObject.Properties.Name -contains 'priority') { [string]$RawJob.priority } else { 'UNRATED' }
         requirements = @()
         salary = if ($RawJob.PSObject.Properties.Name -contains 'salary') { [string]$RawJob.salary } else { 'UNKNOWN' }
@@ -292,6 +315,8 @@ function Update-JobAgentExistingJobFromRawJob {
     $oldDescription = ConvertTo-JobAgentStatusPlainText -Value (Get-JobAgentRawValue -RawJob $job -Name 'description' -Default 'UNKNOWN')
     $newLocation = New-JobAgentStatusLocation -RawLocation (Get-JobAgentRawValue -RawJob $RawJob -Name 'location' -Default (Get-JobAgentRawValue -RawJob $RawJob -Name 'location_label' -Default $job.location))
     $newClassification = if ($RawJob.PSObject.Properties.Name -contains 'classification') { $RawJob.classification } else { $job.classification }
+    $newJobValidity = if ($RawJob.PSObject.Properties.Name -contains 'job_validity') { $RawJob.job_validity } else { $job.job_validity }
+    $newRegionalScope = if ($RawJob.PSObject.Properties.Name -contains 'regional_scope') { $RawJob.regional_scope } else { $job.regional_scope }
     $newPriority = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'priority' -Default $job.priority)
     $newWorkModel = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_model' -Default $job.work_model)
     $newEmploymentType = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'employment_type' -Default $job.employment_type)
@@ -304,6 +329,8 @@ function Update-JobAgentExistingJobFromRawJob {
     $job | Add-Member -NotePropertyName description_source -NotePropertyValue (Get-JobAgentRawDescriptionSource -RawJob $RawJob -Description $newDescription) -Force
     $job.location = $newLocation
     $job.classification = $newClassification
+    $job.job_validity = $newJobValidity
+    $job.regional_scope = $newRegionalScope
     $job.priority = $newPriority
     $job.work_model = $newWorkModel
     $job.employment_type = $newEmploymentType
@@ -315,6 +342,8 @@ function Update-JobAgentExistingJobFromRawJob {
     }
     if (($ExistingJob.location | ConvertTo-Json -Depth 10 -Compress) -ne ($newLocation | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('location') }
     if (($ExistingJob.classification | ConvertTo-Json -Depth 10 -Compress) -ne ($newClassification | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('classification') }
+    if (($ExistingJob.job_validity | ConvertTo-Json -Depth 10 -Compress) -ne ($newJobValidity | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('job_validity') }
+    if (($ExistingJob.regional_scope | ConvertTo-Json -Depth 10 -Compress) -ne ($newRegionalScope | ConvertTo-Json -Depth 10 -Compress)) { $changedFields.Add('regional_scope') }
     if ([string]$ExistingJob.priority -ne $newPriority) { $changedFields.Add('priority') }
     if ([string]$ExistingJob.work_model -ne $newWorkModel) { $changedFields.Add('work_model') }
     if ([string]$ExistingJob.employment_type -ne $newEmploymentType) { $changedFields.Add('employment_type') }
@@ -406,7 +435,13 @@ function Test-JobAgentRawJobValidForStatus {
         return $false
     }
     $detailUrl = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'detail_url' -Default '')
-    return [Uri]::IsWellFormedUriString($detailUrl, [UriKind]::Absolute)
+    if (-not [Uri]::IsWellFormedUriString($detailUrl, [UriKind]::Absolute)) {
+        return $false
+    }
+    if ($RawJob.PSObject.Properties.Name -contains 'job_validity') {
+        return [string]$RawJob.job_validity.result -ne 'REJECTED'
+    }
+    return $true
 }
 
 function Invoke-JobAgentStatusMachine {

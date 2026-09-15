@@ -14,7 +14,7 @@ Der Agent darf keine Bewerbungen ausloesen, keine Kontakte anschreiben, keine pe
 
 - Die Firmen- und Stellenerfassung ist berufsneutral; konkrete Rollen, Berufe oder Profile werden danach ueber lokale Filter gesucht.
 - Leere Suchbegriffe bedeuten alle Berufe. Explizite Suchbegriffe begrenzen nur den jeweiligen Lauf; Quellen mit `search_term_requirement: REQUIRED` werden ohne Suchbegriff als `PARTIAL` markiert und duerfen keine Vollstaendigkeit behaupten.
-- Der Standortbezug muss Muenchen, ein Umkreis von 20 km um Muenchen, Freising oder ein belastbar passendes Remote-/Hybridmodell mit Bezug zum Zielgebiet sein.
+- `regional_scope` bewertet den Stellenort getrennt als `IN_SCOPE`, `OUT_OF_SCOPE` oder `UNKNOWN`: Muenchen, ein Umkreis von 20 km um Muenchen, Freising oder ein belastbar passendes Remote-/Hybridmodell mit Bezug zum Zielgebiet sind `IN_SCOPE`. Fehlende Ortsangaben bleiben `UNKNOWN`.
 - Vollstaendigkeit ist ein langfristiges Ziel, darf aber nie behauptet werden, solange sie nicht belegt ist.
 - Jede ausgegebene Stelle muss eine offizielle URL oder eine vom Unternehmen offiziell angebundene Recruiting-/ATS-URL besitzen.
 - Jede Bewertung muss eine kurze, nachvollziehbare Begruendung enthalten.
@@ -23,7 +23,7 @@ Der Agent darf keine Bewerbungen ausloesen, keine Kontakte anschreiben, keine pe
 
 - Rollen mit Titeln wie `Head of IT`, `Director IT`, `IT Leiter`, `CIO`, `VP IT`, `Leitung Digitalisierung`, `IT Operations Lead`, `IT Security Lead` oder vergleichbaren Varianten sind nur ein optionales Filterprofil, kein versteckter Erfassungsdefault.
 - Stellen werden nach A/B/C priorisiert:
-  - `A`: klare IT-Fuehrungsrolle, belastbarer Zielgebietsbezug, hohe fachliche Passung.
+  - `A`: klare IT-Fuehrungsrolle mit hoher fachlicher Passung.
   - `B`: wahrscheinlich passend, aber einzelne Felder sind unklar oder nur teilweise passend.
   - `C`: fachlich relevant, aber geringe Passung, unklare Fuehrungsverantwortung oder schwacher Standortbezug.
 - Fehlende optionale Angaben werden als `UNKNOWN` markiert, nicht geraten.
@@ -69,7 +69,7 @@ Der JobAgent muss Zustand dauerhaft und lokal unterhalb des Projektverzeichnisse
 Mindestens zu speichern sind:
 
 - Unternehmen mit stabiler `company_id`, kanonischem Namen, Domain, offizieller Website, Karriere-URL, Aliasnamen, Standortbezug, ATS-Hinweisen, Scanstatus und Zeitstempeln.
-- Stellen mit stabiler `job_id`, `company_id`, offizieller URL, externer Job-/ATS-ID, Titel, Standort, Arbeitsmodell, Beschaeftigungsart, Status, `first_seen`, `last_seen`, `changed_at`, Klassifikation, Prioritaet und Quellnachweisen.
+- Stellen mit stabiler `job_id`, `company_id`, offizieller URL, externer Job-/ATS-ID, Titel, Standort, Arbeitsmodell, Beschaeftigungsart, Status, `first_seen`, `last_seen`, `changed_at`, `job_validity`, `regional_scope`, optionaler Profilklassifikation, Prioritaet und Quellnachweisen.
 - Scanlaeufe mit `scan_run_id`, Start-/Endzeit, Status, Fehlern, untersuchten Firmen und erzeugten Artefakten.
 - Scanversuche je Firma oder Quelle mit Fehlerklasse, HTTP-/Adapterstatus, Retry-Empfehlung und Zeitstempel.
 - Schnappschuesse und Aenderungsereignisse fuer Statuswechsel, Inhaltsaenderungen, neue Stellen und entfernte Stellen.
@@ -100,7 +100,7 @@ Ein Tageslauf muss deterministisch und wiederholbar sein:
 5. Quellenadapter je Firma mit Timeout und Fehlerisolation ausfuehren.
 6. Nur offizielle oder offiziell angebundene URLs akzeptieren.
 7. Rohstellen normalisieren und kanonisieren.
-8. Stellen klassifizieren und A/B/C priorisieren, ohne die berufsneutrale Rohbasis zu verwerfen.
+8. Offizielle Stellengueltigkeit, Gebiet und optionale Profilpassung getrennt bewerten und A/B/C priorisieren, ohne die berufsneutrale Rohbasis zu verwerfen.
 9. Deduplikation gegen vorhandene Historie ausfuehren.
 10. Statusmaschine anwenden und ChangeEvents schreiben.
 11. Bericht und maschinenlesbares Ergebnisartefakt erzeugen.

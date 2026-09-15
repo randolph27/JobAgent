@@ -94,6 +94,17 @@ function New-ValidJobAgentDocument {
                     rejected_reasons = @()
                     evaluated_at = '2026-08-17T10:30:00Z'
                 }
+                job_validity = [pscustomobject]@{
+                    result = 'VALID'
+                    reasons = @()
+                    evaluated_at = '2026-08-17T10:30:00Z'
+                }
+                regional_scope = [pscustomobject]@{
+                    result = 'IN_SCOPE'
+                    target_area = 'MUNICH'
+                    reasons = @('Stellenort liegt im Zielgebiet oder belegt dessen Remote-Bezug.')
+                    evaluated_at = '2026-08-17T10:30:00Z'
+                }
                 priority = 'A'
                 requirements = @('Fuehrungserfahrung', 'IT-Strategie')
                 salary = 'UNKNOWN'
@@ -232,7 +243,7 @@ function Test-JobAgentDocument {
     }
 
     foreach ($job in @($Document.jobs)) {
-        foreach ($property in @('job_id', 'company_id', 'official_url', 'alternative_official_urls', 'source_id', 'external_job_id', 'ats_job_id', 'title', 'location', 'work_model', 'employment_type', 'description', 'description_source', 'status', 'first_seen', 'last_seen', 'changed_at', 'classification', 'priority', 'requirements', 'salary', 'identity_basis')) {
+        foreach ($property in @('job_id', 'company_id', 'official_url', 'alternative_official_urls', 'source_id', 'external_job_id', 'ats_job_id', 'title', 'location', 'work_model', 'employment_type', 'description', 'description_source', 'status', 'first_seen', 'last_seen', 'changed_at', 'classification', 'job_validity', 'regional_scope', 'priority', 'requirements', 'salary', 'identity_basis')) {
             Assert-RequiredProperty -Object $job -Property $property -Context 'job'
         }
         Assert-True -Condition ($job.job_id -match '^job:') -Message 'job_id braucht Prefix job:.'
@@ -244,6 +255,8 @@ function Test-JobAgentDocument {
         }
         Assert-True -Condition (@('NEW', 'ACTIVE', 'UPDATED', 'CLOSED', 'REMOVED', 'INVALID') -contains $job.status) -Message "Ungueltiger Jobstatus $($job.status)."
         Assert-True -Condition (@('OFFICIAL_SOURCE', 'NONE') -contains $job.description_source) -Message "Ungueltige description_source $($job.description_source)."
+        Assert-True -Condition (@('VALID', 'REJECTED', 'UNKNOWN') -contains $job.job_validity.result) -Message "Ungueltige job_validity $($job.job_validity.result)."
+        Assert-True -Condition (@('IN_SCOPE', 'OUT_OF_SCOPE', 'UNKNOWN') -contains $job.regional_scope.result) -Message "Ungueltige regional_scope $($job.regional_scope.result)."
         Assert-True -Condition (($job.external_job_id -ne 'UNKNOWN') -or ($job.ats_job_id -ne 'UNKNOWN') -or ($job.identity_basis -eq 'CANONICAL_URL')) -Message 'Job braucht eine stabile Identitaetsgrundlage.'
     }
 

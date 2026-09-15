@@ -55,7 +55,6 @@ $englishDirector = Get-JobAgentLeadershipClassification `
     -EmploymentType 'FULL_TIME' `
     -EvaluatedAt $fixedTime
 Assert-True -Condition ($englishDirector.result -eq 'MATCH') -Message 'Englische Director-IT-Rolle wurde nicht als MATCH klassifiziert.'
-Assert-True -Condition (@($englishDirector.reasons | Where-Object { $_ -match 'Remote' }).Count -eq 1) -Message 'Remote-Deutschland-Bezug wurde nicht begruendet.'
 
 $developer = Get-JobAgentLeadershipClassification `
     -Title 'Senior Software Engineer' `
@@ -95,7 +94,6 @@ $unclearLocation = Get-JobAgentLeadershipClassification `
     -EmploymentType 'FULL_TIME' `
     -EvaluatedAt $fixedTime
 Assert-True -Condition ($unclearLocation.result -eq 'MATCH') -Message 'Unklarer Standort darf starke IT-Leitung nicht automatisch ablehnen.'
-Assert-True -Condition (@($unclearLocation.rejected_reasons | Where-Object { $_ -match 'Standortbezug ist unklar' }).Count -eq 1) -Message 'Unklarer Standort wurde nicht markiert.'
 
 $outOfScope = Get-JobAgentLeadershipClassification `
     -Title 'CIO' `
@@ -104,7 +102,22 @@ $outOfScope = Get-JobAgentLeadershipClassification `
     -WorkModel 'ON_SITE' `
     -EmploymentType 'FULL_TIME' `
     -EvaluatedAt $fixedTime
-Assert-True -Condition ($outOfScope.result -eq 'REJECTED') -Message 'Standort ausserhalb Zielgebiet wurde nicht abgelehnt.'
+Assert-True -Condition ($outOfScope.result -eq 'MATCH') -Message 'Profilpassung darf nicht durch Gebietsbewertung verworfen werden.'
+
+$validAccountingJob = Get-JobAgentOfficialJobValidity -Title 'Sachbearbeitung Buchhaltung' -OfficialUrl 'https://example.invalid/careers/accounting-42' -EvaluatedAt $fixedTime
+Assert-True -Condition ($validAccountingJob.result -eq 'VALID') -Message 'Belegte Buchhaltungsstelle wurde nicht als gueltig erkannt.'
+
+$navigationEntry = Get-JobAgentOfficialJobValidity -Title 'Karriere' -OfficialUrl 'https://example.invalid/careers' -EntryKind 'NAVIGATION' -EvaluatedAt $fixedTime
+Assert-True -Condition ($navigationEntry.result -eq 'REJECTED') -Message 'Navigationseintrag wurde nicht abgelehnt.'
+
+$inScope = Get-JobAgentRegionalScope -Location (New-TestLocation) -EvaluatedAt $fixedTime
+Assert-True -Condition ($inScope.result -eq 'IN_SCOPE' -and $inScope.target_area -eq 'MUNICH') -Message 'Muenchen wurde nicht als separates Zielgebiet bewertet.'
+
+$outsideScope = Get-JobAgentRegionalScope -Location (New-TestLocation -TargetArea 'OUT_OF_SCOPE' -Label 'Hamburg') -EvaluatedAt $fixedTime
+Assert-True -Condition ($outsideScope.result -eq 'OUT_OF_SCOPE') -Message 'Ausserhalb liegender Stellenort wurde nicht separat bewertet.'
+
+$unknownScope = Get-JobAgentRegionalScope -Location (New-TestLocation -TargetArea 'UNKNOWN' -Label 'UNKNOWN') -EvaluatedAt $fixedTime
+Assert-True -Condition ($unknownScope.result -eq 'UNKNOWN') -Message 'Unbelegter Stellenort wurde nicht als UNKNOWN erhalten.'
 
 $emptyTitle = Get-JobAgentLeadershipClassification -Title '' -Summary 'IT-Gesamtverantwortung' -EvaluatedAt $fixedTime
 Assert-True -Condition ($emptyTitle.result -eq 'REJECTED') -Message 'Leerer Titel wurde nicht abgelehnt.'
@@ -149,6 +162,9 @@ Assert-True -Condition ($itLeadLeadership.result -eq 'MATCH') -Message 'IT-Lead-
         'teamlead_rejection',
         'unclear_location',
         'out_of_scope_location',
+        'valid_non_it_job',
+        'navigation_entry_rejected',
+        'regional_scope_separate',
         'empty_title',
         'possible_it_manager',
         'it_manager_with_leadership_match',

@@ -180,7 +180,9 @@ Pflichtfelder:
 - `title`, `location`, `work_model`, `employment_type`.
 - `status`: `NEW`, `ACTIVE`, `UPDATED`, `CLOSED`, `REMOVED` oder `INVALID`.
 - `first_seen`, `last_seen`, `changed_at`.
-- `classification`, `priority`, `requirements`, `salary`, `identity_basis`.
+- `job_validity`: getrennte technische Stellengueltigkeit `VALID`, `REJECTED` oder `UNKNOWN` mit Gruenden und Zeitstempel. Fehlender Titel, fehlende absolute offizielle Detail-URL oder ein explizit als Navigation/FAQ/News gekennzeichneter Eintrag sind `REJECTED`.
+- `regional_scope`: unabhaengige Gebietsbewertung `IN_SCOPE`, `OUT_OF_SCOPE` oder `UNKNOWN` mit `target_area`, Gruenden und Zeitstempel. Firmenstandorte ersetzen keinen Stellenort; unbekannte Stellenorte bleiben `UNKNOWN`.
+- `classification`, `priority`, `requirements`, `salary`, `identity_basis`. `classification` und `priority` sind ausschliesslich die optionale Profilpassung und keine Speichervoraussetzung.
 
 Identitätspriorität:
 
@@ -211,14 +213,16 @@ pwsh -NoProfile -File tests\Test-JobAgentDeduplication.ps1
 
 ## Stellenklassifikation
 
-`src/JobAgent.Classification.psm1` implementiert den Vertrag fuer `JA-007`.
+`src/JobAgent.Classification.psm1` implementiert den Vertrag fuer `JA-007` und die additive Trennung aus `JA-041.2`.
 
-- `Get-JobAgentLeadershipClassification` bewertet Titel, Zusammenfassung, Beschreibung, Standort, Arbeitsmodell und Beschaeftigungsart deterministisch.
+- `Get-JobAgentOfficialJobValidity` bewertet die technische Gueltigkeit einer offiziell gelieferten Stelle unabhaengig vom Profil.
+- `Get-JobAgentRegionalScope` bewertet ausschliesslich den Stellenort. `OUT_OF_SCOPE` oder `UNKNOWN` verwirft keine sonst gueltige Stelle.
+- `Get-JobAgentLeadershipClassification` bewertet Titel, Zusammenfassung, Beschreibung, Arbeitsmodell und Beschaeftigungsart als optionales IT-Fuehrungsprofil; die Gebietsbewertung ist davon getrennt.
 - Ergebniswerte sind `MATCH`, `POSSIBLE` und `REJECTED`; die Schema-Option `UNKNOWN` bleibt fuer noch nicht klassifizierte Alt- oder Rohdaten reserviert.
 - Positive Signale sind IT-Gesamt-/Bereichsleitung, CIO/Head/Director/IT-Leitung, Budget- oder Personalverantwortung und strategische IT-Verantwortung.
 - Negative Signale sind Entwickler-, Spezialisten-, Consultant-, Administrator-, reine Projektleitungs- und Teamlead-Rollen ohne belegte Gesamt- oder Strategie-Verantwortung.
 - Standortbezug wird ueber `target_area` oder lesbaren Standorttext bewertet. `MUNICH`, `MUNICH_20KM`, `FREISING` und `REMOTE_WITH_TARGET_REFERENCE` sind positiv; `OUT_OF_SCOPE` schlaegt fail-closed fehl.
-- Jede Bewertung enthaelt Score, Prioritaet, Gruende, Ausschlussgruende und `evaluated_at`, damit Daily-Reports spaeter nachvollziehbar bleiben.
+- Jede Bewertung enthaelt nachvollziehbare Gruende und `evaluated_at`; das optionale Profil enthaelt zusaetzlich Score, Prioritaet und Ausschlussgruende. Profilwechsel aendert keinen Jobstatus.
 
 Funktionstest:
 
@@ -367,7 +371,7 @@ pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1
 
 `src/JobAgent.DailyRun.psm1` implementiert den Vertrag fuer `JA-010`.
 
-- `Invoke-JobAgentDailyRun` laedt den Store unter exklusivem Lock, waehlt faellige Firmen mit offizieller Quelle, fuehrt Adapter je Firma isoliert aus, klassifiziert Rohjobs, ruft die Statusmaschine auf und schreibt den aktualisierten Store atomar.
+- `Invoke-JobAgentDailyRun` laedt den Store unter exklusivem Lock, waehlt faellige Firmen mit offizieller Quelle, fuehrt Adapter je Firma isoliert aus, bewertet Rohjobs getrennt nach Gueltigkeit, Gebiet und optionalem Profil, ruft die Statusmaschine auf und schreibt den aktualisierten Store atomar.
 - `Get-JobAgentDailyRunCandidateCompanies` priorisiert Firmen mit offizieller Quelle nach fehlendem erfolgreichem Scan, hoher `scan_priority`, faelligem `next_scan_at` und stabilem Namen. Mit `CompanyIds` kann ein Lauf fuer Tests oder fokussierte Wiederholungen begrenzt werden.
 - Adapterfehler werden als `ScanAttempt` mit `FAILED` und konkreter Fehlerklasse persistiert; sie brechen den Gesamtlauf nicht ab und entfernen keine bestehenden Stellen.
 - Jeder Lauf erzeugt genau einen `ScanRun` und ein JSON-Ergebnisartefakt unter `logs/jobagent/daily-run-<timestamp>.json`.

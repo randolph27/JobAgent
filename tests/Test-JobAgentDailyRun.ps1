@@ -152,6 +152,8 @@ try {
     Assert-True -Condition (@($first.document.jobs).Count -eq 2) -Message 'Erfolgreiche Firmen haben keine Jobs erzeugt.'
     Assert-True -Condition (@($first.document.jobs | Where-Object { $_.status -eq 'NEW' }).Count -eq 2) -Message 'Erste Treffer sind nicht NEW.'
     Assert-True -Condition (@($first.document.jobs | Where-Object { $_.classification.result -eq 'MATCH' }).Count -eq 2) -Message 'Daily-Run klassifiziert Rohjobs nicht.'
+    Assert-True -Condition (@($first.document.jobs | Where-Object { $_.job_validity.result -eq 'VALID' }).Count -eq 2) -Message 'Daily-Run speichert die offizielle Stellengueltigkeit nicht getrennt.'
+    Assert-True -Condition (@($first.document.jobs | Where-Object { $_.regional_scope.result -eq 'IN_SCOPE' }).Count -eq 2) -Message 'Daily-Run speichert die Gebietsbewertung nicht getrennt.'
     Assert-True -Condition ($first.document.scan_runs[0].selection_summary.companies_total -eq 3) -Message 'ScanRun persistiert Firmen gesamt nicht.'
     Assert-True -Condition ($first.document.scan_runs[0].selection_summary.companies_selected -eq 3) -Message 'ScanRun persistiert Firmen im Lauf nicht.'
     Assert-True -Condition ($first.document.scan_runs[0].selection_summary.companies_due -eq 3) -Message 'ScanRun persistiert faellige Firmen nicht.'

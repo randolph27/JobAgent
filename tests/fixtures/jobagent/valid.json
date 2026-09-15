@@ -79,6 +79,19 @@
         "rejected_reasons": [],
         "evaluated_at": "2026-08-17T10:30:00Z"
       },
+      "job_validity": {
+        "result": "VALID",
+        "reasons": [],
+        "evaluated_at": "2026-08-17T10:30:00Z"
+      },
+      "regional_scope": {
+        "result": "IN_SCOPE",
+        "target_area": "MUNICH",
+        "reasons": [
+          "Stellenort liegt im Zielgebiet oder belegt dessen Remote-Bezug."
+        ],
+        "evaluated_at": "2026-08-17T10:30:00Z"
+      },
       "priority": "A",
       "requirements": [
         "Fuehrungserfahrung",

@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-15T14:18:21.550+02:00
+Stand: 2026-09-15T14:44:15.405+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-15T14:18:21.550+02:00
 - Status: `in-progress`
 - Ziel: JA-041 Berufsneutrale Stellenerfassung von Suchprofilen trennen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
 - Branch: `master`
-- HEAD: `c67c53cc9a51`
+- HEAD: `12216591f3bd`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -22,14 +22,19 @@ Stand: 2026-09-15T14:18:21.550+02:00
 - `handoff.latest.md`
 - `manual/PROGRAM.md`
 - `schemas/jobagent.schema.json`
-- `src/JobAgent.LiveScan.psm1`
-- `tests/Test-JobAgentLiveScan.ps1`
-- `todo.checkpoint.json`
+- `src/JobAgent.Classification.psm1`
+- `src/JobAgent.DailyRun.psm1`
+- `src/JobAgent.Persistence.psm1`
+- `src/JobAgent.StatusMachine.psm1`
+- `tests/Test-JobAgentClassification.ps1`
+- `tests/Test-JobAgentDailyRun.ps1`
+- `tests/Test-JobAgentPersistence.ps1`
+- `tests/Test-JobAgentSchema.ps1`
+- `tests/Test-JobAgentStatusMachine.ps1`
+- `tests/fixtures/jobagent/valid.json`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
-- `tools/Invoke-JobAgentDailyRun.ps1`
 
 ## Verifikation
 
@@ -37,4 +42,4 @@ Stand: 2026-09-15T14:18:21.550+02:00
 
 ## Naechster Anker
 
-UI-001 Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern bereitstellen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
+JA-041.3 Berufsneutrale Pipeline durchgaengig verifizieren. Vollstaendiger Auftrag, Architekturstand, Testnachweise und No-Gos: `docs/handoffs/2026-09-15-ja041-2-handoff.md`. UI-001 und JA-042 bleiben bis zum Abschluss von JA-041 nachgelagert. Supertest wurde nicht angefragt und ist kein offenes Gate.

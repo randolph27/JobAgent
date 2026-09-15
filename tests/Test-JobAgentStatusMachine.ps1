@@ -171,12 +171,15 @@ $reclassifiedRaw | Add-Member -NotePropertyName classification -NotePropertyValu
 $reclassifiedRaw | Add-Member -NotePropertyName priority -NotePropertyValue 'A'
 $reclassifiedRaw | Add-Member -NotePropertyName work_model -NotePropertyValue 'HYBRID'
 $reclassifiedRaw | Add-Member -NotePropertyName employment_type -NotePropertyValue 'FULL_TIME'
+$reclassifiedRaw | Add-Member -NotePropertyName job_validity -NotePropertyValue ([pscustomobject]@{ result = 'VALID'; reasons = @(); evaluated_at = '2026-08-21T13:00:00.000Z' })
+$reclassifiedRaw | Add-Member -NotePropertyName regional_scope -NotePropertyValue ([pscustomobject]@{ result = 'IN_SCOPE'; target_area = 'FREISING'; reasons = @('Stellenort liegt im Zielgebiet.'); evaluated_at = '2026-08-21T13:00:00.000Z' })
 $reclassified = Invoke-JobAgentStatusMachine `
     -Document $descriptionUpdated `
     -ScanRunId 'scanrun:20260821T130000Z' `
     -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260821T130000Z' -RawJobs @($reclassifiedRaw) -Suffix 'reclassified')) `
     -ObservedAt ([datetime]'2026-08-21T13:00:00Z')
 Assert-True -Condition ($reclassified.jobs[0].classification.result -eq 'MATCH' -and $reclassified.jobs[0].priority -eq 'A' -and $reclassified.jobs[0].work_model -eq 'HYBRID' -and $reclassified.jobs[0].employment_type -eq 'FULL_TIME') -Message 'Aktuelle Klassifikation und Arbeitsdaten werden nicht atomar uebernommen.'
+Assert-True -Condition ($reclassified.jobs[0].job_validity.result -eq 'VALID' -and $reclassified.jobs[0].regional_scope.result -eq 'IN_SCOPE') -Message 'Gueltigkeit und Gebiet werden nicht getrennt gespeichert.'
 Assert-True -Condition (@($reclassified.change_events | Where-Object { $_.event_type -eq 'JOB_UPDATED' -and @($_.changed_fields) -contains 'classification' -and @($_.changed_fields) -contains 'work_model' }).Count -eq 1) -Message 'Aktualisierte Bewertung erzeugt kein vollstaendiges JOB_UPDATED-Event.'
 
 $invalidRaw = [pscustomobject]@{
@@ -195,6 +198,15 @@ $invalid = Invoke-JobAgentStatusMachine `
     -ObservedAt ([datetime]'2026-08-22T10:00:00Z')
 Assert-True -Condition (@($invalid.jobs).Count -eq 0) -Message 'Invalider Treffer wurde als Job gespeichert.'
 Assert-True -Condition (@($invalid.change_events | Where-Object event_type -eq 'JOB_INVALIDATED').Count -eq 1) -Message 'Invalider Treffer erzeugt kein JOB_INVALIDATED.'
+
+$navigationRaw = New-TestRawJob -Title 'Karriere' -DetailUrl 'https://example.invalid/careers'
+$navigationRaw | Add-Member -NotePropertyName job_validity -NotePropertyValue ([pscustomobject]@{ result = 'REJECTED'; reasons = @('Quellkennzeichen NAVIGATION bezeichnet keine Stelle.'); evaluated_at = '2026-08-22T10:00:00.000Z' })
+$navigationRejected = Invoke-JobAgentStatusMachine `
+    -Document (New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')) `
+    -ScanRunId 'scanrun:20260822T110000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260822T110000Z' -RawJobs @($navigationRaw) -Status 'PARTIAL' -ErrorClass 'PARSING_ERROR' -Suffix 'navigation')) `
+    -ObservedAt ([datetime]'2026-08-22T11:00:00Z')
+Assert-True -Condition (@($navigationRejected.jobs).Count -eq 0) -Message 'Explizit ungueltiger Navigationseintrag wurde gespeichert.'
 
 $multiSourceDocument = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')
 $multiSourceFirst = Invoke-JobAgentStatusMachine `
@@ -249,7 +261,9 @@ Assert-True -Condition (@($closedSecond.change_events | Where-Object event_type 
         'successful_empty_scan_removed',
         'incomplete_success_no_removal',
         'updated_classification_and_work_fields',
+        'separate_validity_and_regional_scope',
         'invalid_hit_invalidated',
+        'navigation_entry_invalidated',
         'source_scoped_removal',
         'explicit_closed_signal'
     )

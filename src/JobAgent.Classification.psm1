@@ -72,6 +72,76 @@ function Add-JobAgentClassificationReason {
     }
 }
 
+function ConvertTo-JobAgentClassificationIso {
+    param([Parameter(Mandatory)][datetime]$Value)
+
+    return $Value.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+}
+
+function Get-JobAgentOfficialJobValidity {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][AllowEmptyString()][string]$Title,
+        [Parameter(Mandatory)][AllowEmptyString()][string]$OfficialUrl,
+        [Parameter()][AllowNull()][object]$EntryKind,
+        [Parameter()][datetime]$EvaluatedAt = [datetime]::UtcNow
+    )
+
+    $reasons = [System.Collections.Generic.List[string]]::new()
+    $entryKindText = ConvertTo-JobAgentClassificationText -Value $EntryKind
+    $explicitNonJobKinds = @('navigation', 'faq', 'news', 'article', 'landing_page', 'category')
+
+    if ([string]::IsNullOrWhiteSpace($Title)) {
+        $reasons.Add('Titel fehlt.')
+    }
+    if (-not [Uri]::IsWellFormedUriString($OfficialUrl, [UriKind]::Absolute)) {
+        $reasons.Add('Offizielle Detail-URL ist nicht absolut.')
+    }
+    if ($explicitNonJobKinds -contains $entryKindText) {
+        $reasons.Add("Quellkennzeichen '$EntryKind' bezeichnet keine Stelle.")
+    }
+
+    [pscustomobject]@{
+        result = if ($reasons.Count -eq 0) { 'VALID' } else { 'REJECTED' }
+        reasons = @($reasons.ToArray())
+        evaluated_at = ConvertTo-JobAgentClassificationIso -Value $EvaluatedAt
+    }
+}
+
+function Get-JobAgentRegionalScope {
+    [CmdletBinding()]
+    param(
+        [Parameter()][AllowNull()][object]$Location,
+        [Parameter()][datetime]$EvaluatedAt = [datetime]::UtcNow
+    )
+
+    $targetArea = Get-JobAgentLocationTargetArea -Location $Location
+    $reasons = [System.Collections.Generic.List[string]]::new()
+    $result = switch ($targetArea) {
+        { @('MUNICH', 'MUNICH_20KM', 'FREISING', 'REMOTE_WITH_TARGET_REFERENCE') -contains $_ } {
+            $reasons.Add('Stellenort liegt im Zielgebiet oder belegt dessen Remote-Bezug.')
+            'IN_SCOPE'
+            break
+        }
+        'OUT_OF_SCOPE' {
+            $reasons.Add('Stellenort liegt ausserhalb des Zielgebiets.')
+            'OUT_OF_SCOPE'
+            break
+        }
+        default {
+            $reasons.Add('Stellenort ist nicht ausreichend belegt.')
+            'UNKNOWN'
+        }
+    }
+
+    [pscustomobject]@{
+        result = $result
+        target_area = $targetArea
+        reasons = @($reasons.ToArray())
+        evaluated_at = ConvertTo-JobAgentClassificationIso -Value $EvaluatedAt
+    }
+}
+
 function Get-JobAgentLeadershipClassification {
     [CmdletBinding()]
     param(
@@ -199,28 +269,6 @@ function Get-JobAgentLeadershipClassification {
         $rejectedReasons.Add('Kein expliziter IT-Bezug erkennbar.')
     }
 
-    $targetArea = Get-JobAgentLocationTargetArea -Location $Location
-    switch ($targetArea) {
-        { @('MUNICH', 'MUNICH_20KM', 'FREISING') -contains $_ } {
-            $score += 8
-            Add-JobAgentClassificationReason -Reasons $reasons -Reason 'Standort liegt im Zielgebiet.'
-            break
-        }
-        'REMOTE_WITH_TARGET_REFERENCE' {
-            $score += 6
-            Add-JobAgentClassificationReason -Reasons $reasons -Reason 'Remote-Rolle hat Deutschland- oder Zielgebietsbezug.'
-            break
-        }
-        'OUT_OF_SCOPE' {
-            $score -= 30
-            $rejectedReasons.Add('Standort liegt ausserhalb des Zielgebiets.')
-            break
-        }
-        default {
-            $rejectedReasons.Add('Standortbezug ist unklar.')
-        }
-    }
-
     if ($EmploymentType -eq 'FULL_TIME') {
         $score += 5
         Add-JobAgentClassificationReason -Reasons $reasons -Reason 'Vollzeitbezug ist vorhanden.'
@@ -248,8 +296,7 @@ function Get-JobAgentLeadershipClassification {
     }
 
     $score = [Math]::Max(0, [Math]::Min(100, $score))
-    $hardReject = ($rejectedReasons -contains 'Standort liegt ausserhalb des Zielgebiets.') -or
-        (($hasSpecialistNegative -or $hasProjectOnlyTitle -or $hasTeamLeadTitle) -and ($score -lt 45))
+    $hardReject = (($hasSpecialistNegative -or $hasProjectOnlyTitle -or $hasTeamLeadTitle) -and ($score -lt 45))
 
     if ($hardReject -or $score -lt 45) {
         $result = 'REJECTED'
@@ -257,7 +304,7 @@ function Get-JobAgentLeadershipClassification {
     }
     elseif ($score -ge 70 -and ($hasExecutiveTitle -or ($hasManagerTitle -and $hasLeadershipEvidence -and $hasStrategyEvidence) -or ($hasLeadershipEvidence -and $hasStrategyEvidence))) {
         $result = 'MATCH'
-        $priority = if ($score -ge 85) { 'A' } else { 'B' }
+        $priority = if ($score -ge 75) { 'A' } else { 'B' }
     }
     else {
         $result = 'POSSIBLE'
@@ -275,5 +322,7 @@ function Get-JobAgentLeadershipClassification {
 }
 
 Export-ModuleMember -Function @(
+    'Get-JobAgentOfficialJobValidity',
+    'Get-JobAgentRegionalScope',
     'Get-JobAgentLeadershipClassification'
 )

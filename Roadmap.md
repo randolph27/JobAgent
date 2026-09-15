@@ -46,22 +46,22 @@ M1: vorhandene Grundlagen JA-040/CI-001. M2-A: Akquise beim Jobstart und sichtba
     Audit: Automatischer ID-/Status-/Mengenabgleich; bei sichtbaren Aenderungen echter Browser in 390/800/1366/1920 px, kein Clipping/Overlap, lesbare Kernfelder, korrekte Zaehler. Ohne Darstellungsänderung UI-Lane begruendet nicht anwendbar; keine Android-Lane.
     Supertest: Erst nach allen drei Unterpunkten und gruenen Funktionstests .\ci.cmd supertest; kein eigener Supertest/Miniabschluss pro Unterpunkt. Danach vollstaendige Archivierung des Softwarepunkts, Todo/Handoff und STP synchronisieren. Dieser Planungsauftrag fuehrt ihn nicht aus.
 
-  - [ ] JA-041.2 Gueltigkeit und Gebiet von persoenlicher Profilpassung trennen.
+  - [x] JA-041.2 Gueltigkeit und Gebiet von persoenlicher Profilpassung trennen.
 
     Beschreibung: Eine echte Pflege- oder Buchhaltungsstelle darf nicht wegen fehlender IT-Fuehrung aus der allgemeinen Basis verschwinden. Nicht-Stellen und unbelegte Quellen bleiben ausgeschlossen.
     Scope: src/JobAgent.Classification.psm1; src/JobAgent.DailyRun.psm1; src/JobAgent.Persistence.psm1; src/JobAgent.StatusMachine.psm1; schemas/jobagent.schema.json. Kein Frameworkwechsel, keine Gebietsaufweitung oder Bewerbungen.
-    Ist-Stand (2026-09-13): Grundlagen/Altgrenzen siehe Hauptpunkt; diese neue Anforderung ist noch nicht fertig verifiziert.
+    Ist-Stand (2026-09-15): `job_validity` bewertet offizielle Stellengueltigkeit getrennt von `regional_scope` und der optionalen IT-Fuehrungs-Klassifikation. Navigationseintraege bleiben abgelehnt; gueltige nicht-IT-Stellen und Stellen mit unbekanntem oder ausserhalb liegendem Stellenort bleiben speicherbar. Altjobs erhalten bis zum regulaeren Recheck sichere `UNKNOWN`-Bewertungen ohne Aenderung von `first_seen` oder Lebenszyklusstatus.
     Abhaengigkeiten/Prioritaet: JA-041.1; Score 99/100 intern, Reihenfolge Vertrag → Integration → Abnahme. Aufwand/Dauer anteilig 40 % der Hauptpunktschaetzung bei gleicher Kapazitaet. Meilenstein M2-B. Risiko: Altvertrag oder unvollstaendige Daten verfälschen Ergebnis; Fixtures vor produktiver Integration.
     Schritte:
     1. Entscheidungen fuer offizielle Stellengueltigkeit, Region und optionale Profilpassung trennen. REJECTED nicht pauschal umwerten: Navigation/FAQ/News bleibt ungueltig; echte belegte Stelle mit fehlender IT-Verantwortung ist lediglich fuer das optionale Profil unpassend. Bestehende API-/Statusvertraege additiv migrieren.
     2. Berufsneutrale Attribute erhalten: Titel, Arbeitgeber, Stellenort, Arbeitsmodell, Anstellungsart, Arbeitszeit, Datumsfelder und offizielle URL. Fehlende Angaben UNKNOWN; Kategorie nur aus nachvollziehbaren Quellinformationen. Profilscore als abgeleitete Ansicht speichern, niemals als Speichervoraussetzung.
     3. Altbestand mit Backup idempotent neu bewerten, soweit offizielle Roh-/Detaildaten vorhanden sind; sonst regulaeren Recheck planen. Keine verlorenen Stellen erfinden oder historische first_seen umschreiben. Profilwechsel erzeugt kein NEW/CLOSED/REMOVED; Statusaenderung bleibt vom echten Quellscan abhaengig.
-    Evidence/Done: Bei Umsetzung neu `logs/jobagent/JA-041-2-acceptance.json`: Gitstand, Input-/Resultat-IDs, Commands/Exitcodes und erwartete/erhaltene Zaehler. Alle drei Schritte positiv/negativ nachgewiesen; keine offene Kernanforderung. Geplante Screens bei sichtbaren Aenderungen `doc/roadmap-screenshots/JA-041-2-<width>.png`; noch nicht vorhandene Artefakte.
+    Evidence/Done: `logs/jobagent/JA-041-2-acceptance.json` dokumentiert Gitstand, Fixture-Inputs/-Resultate und Commands/Exitcodes. Alle drei Schritte positiv/negativ nachgewiesen; keine sichtbare Aenderung, daher UI-Lane nicht anwendbar.
     Funktionstest: Bestehende Tests um die genannten Faelle ergaenzen; isolierter Store, Fake Clock/Fetcher und exakte Assertions.
     ~~~powershell
-    pwsh -NoProfile -File .\tests\Test-JobAgentClassification.ps1
-    pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1
-    pwsh -NoProfile -File .\tests\Test-JobAgentStatusMachine.ps1
+    pwsh -NoProfile -File .\tests\Test-JobAgentClassification.ps1 # Exit 0
+    pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1 # Exit 0
+    pwsh -NoProfile -File .\tests\Test-JobAgentStatusMachine.ps1 # Exit 0
     ~~~
     Audit: Automatischer ID-/Status-/Mengenabgleich; bei sichtbaren Aenderungen echter Browser in 390/800/1366/1920 px, kein Clipping/Overlap, lesbare Kernfelder, korrekte Zaehler. Ohne Darstellungsänderung UI-Lane begruendet nicht anwendbar; keine Android-Lane.
     Supertest: Erst nach allen drei Unterpunkten und gruenen Funktionstests .\ci.cmd supertest; kein eigener Supertest/Miniabschluss pro Unterpunkt. Danach vollstaendige Archivierung des Softwarepunkts, Todo/Handoff und STP synchronisieren. Dieser Planungsauftrag fuehrt ihn nicht aus.

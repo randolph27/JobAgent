@@ -140,6 +140,25 @@ function Repair-JobAgentDocumentShape {
             $source | Add-Member -NotePropertyName verification_evidence -NotePropertyValue ([object[]]@(Complete-JobAgentSourceVerificationEvidence -Source $source)) -Force
         }
     }
+    foreach ($job in @($Document.jobs)) {
+        $observedAt = if ($job.PSObject.Properties.Name -contains 'last_seen') { [string]$job.last_seen } else { [string]$Document.generated_at }
+        if ($job.PSObject.Properties.Name -notcontains 'job_validity') {
+            $job | Add-Member -NotePropertyName job_validity -NotePropertyValue ([pscustomobject]@{
+                    result = 'UNKNOWN'
+                    reasons = @('Historischer Datensatz ohne erneute Gueltigkeitsbewertung.')
+                    evaluated_at = $observedAt
+                }) -Force
+        }
+        if ($job.PSObject.Properties.Name -notcontains 'regional_scope') {
+            $targetArea = if (($job.PSObject.Properties.Name -contains 'location') -and ($job.location.PSObject.Properties.Name -contains 'target_area')) { [string]$job.location.target_area } else { 'UNKNOWN' }
+            $job | Add-Member -NotePropertyName regional_scope -NotePropertyValue ([pscustomobject]@{
+                    result = 'UNKNOWN'
+                    target_area = $targetArea
+                    reasons = @('Historischer Datensatz ohne erneute Gebietsbewertung.')
+                    evaluated_at = $observedAt
+                }) -Force
+        }
+    }
     foreach ($property in @('discovery_inventory', 'discovered_urls')) {
         if ($Document.PSObject.Properties.Name -notcontains $property) {
             $Document | Add-Member -NotePropertyName $property -NotePropertyValue @() -Force

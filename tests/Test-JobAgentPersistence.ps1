@@ -201,6 +201,8 @@ try {
     $loaded = Read-JobAgentStore -ProjectRoot $testRoot
     Assert-True -Condition (@($loaded.companies).Count -eq 1) -Message 'Company wurde nicht persistiert.'
     Assert-True -Condition (@($loaded.jobs).Count -eq 1) -Message 'Job wurde nicht persistiert.'
+    Assert-True -Condition ($loaded.jobs[0].job_validity.result -eq 'UNKNOWN') -Message 'Legacy-Job erhielt keinen sicheren UNKNOWN-Gueltigkeitsstatus.'
+    Assert-True -Condition ($loaded.jobs[0].regional_scope.result -eq 'UNKNOWN') -Message 'Legacy-Job erhielt keinen sicheren UNKNOWN-Gebietsstatus.'
     Assert-True -Condition (@($loaded.scan_attempts).Count -eq 1) -Message 'ScanAttempt wurde nicht persistiert.'
     Assert-True -Condition (@($loaded.job_sources[0].verification_evidence).Count -eq 1) -Message 'Verifikationsbeleg wurde nicht persistiert.'
     Assert-True -Condition (@($loaded.discovery_inventory).Count -eq 0) -Message 'Direkter Store-Upsert darf kein Discovery-Inventar erfinden.'
@@ -304,7 +306,7 @@ try {
 
     [pscustomobject]@{
         status = 'ok'
-        cases = @('empty_store', 'write_reload', 'idempotent_upsert', 'backup', 'migration', 'legacy_v1_source_evidence_normalization', 'discovery_retention_shape', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
+        cases = @('empty_store', 'write_reload', 'legacy_job_scope_normalization', 'idempotent_upsert', 'backup', 'migration', 'legacy_v1_source_evidence_normalization', 'discovery_retention_shape', 'corrupt_store', 'lock_violation', 'path_guard', 'missing_jobs', 'source_scoped_missing_jobs')
         store_path = $paths.store_path
     } | ConvertTo-Json -Depth 4
 }
