@@ -141,6 +141,21 @@ function Get-JobAgentDailyRunReason {
     return $null
 }
 
+function Get-JobAgentDailyRunWakeAt {
+    param([Parameter()][AllowNull()][object]$Result = $null)
+
+    $directWakeAt = Get-JobAgentOperationProperty -InputObject $Result -Name 'wake_at'
+    if (-not [string]::IsNullOrWhiteSpace([string]$directWakeAt)) {
+        return [string]$directWakeAt
+    }
+    $acquisition = Get-JobAgentOperationProperty -InputObject $Result -Name 'acquisition'
+    $acquisitionWakeAt = Get-JobAgentOperationProperty -InputObject $acquisition -Name 'wake_at'
+    if (-not [string]::IsNullOrWhiteSpace([string]$acquisitionWakeAt)) {
+        return [string]$acquisitionWakeAt
+    }
+    return $null
+}
+
 function Read-JobAgentDailyRunLockPayload {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$LockPath)
@@ -348,6 +363,7 @@ function Invoke-JobAgentManagedDailyRun {
             markdown_report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'markdown_report_path'
             html_report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'html_report_path'
             published_at = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'published_at'
+            wake_at = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'wake_at'
             is_stale = $null -ne $previousStatus
             reason = if ($null -ne $previousStatus) { 'Neuberechnung laeuft; letzter publizierter Stand bleibt sichtbar.' } else { 'Neuberechnung laeuft.' }
             exit_code = $null
@@ -383,6 +399,7 @@ function Invoke-JobAgentManagedDailyRun {
             markdown_report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'markdown_report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'markdown_report_path' }
             html_report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'html_report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'html_report_path' }
             published_at = if ($exitCode -eq 0) { ConvertTo-JobAgentOperationIso -Value $finishedAt } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'published_at' }
+            wake_at = if ($exitCode -eq 0) { Get-JobAgentDailyRunWakeAt -Result $result } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'wake_at' }
             is_stale = $exitCode -ne 0
             exit_code = $exitCode
             reason = if ($exitCode -ne 0) { 'Neuberechnung fehlgeschlagen; letzter publizierter Stand ist veraltet.' } else { Get-JobAgentDailyRunReason -Result $result }

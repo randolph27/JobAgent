@@ -1,66 +1,37 @@
 # Handoff latest
 
-Stand: 2026-09-15T17:17:19.461+02:00
+Stand: 2026-09-15T17:45:02.540+02:00
 
 ## Zustand
 
-- Active: `TD-0055`
-- Status: `in-progress`
-- Ziel: JA-042 Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
-- Branch: `master`
-- HEAD: `819f0b9f00eb`
-- Upstream: `origin/master`
-- Ahead/Behind: `0/0`
-- Worktree: `dirty`
-- Route: `True`
+- Active: `TD-0055`, Status `in-progress`; der Hauptpunkt `JA-042` bleibt bis JA-042.3 aktiv.
+- Branch/HEAD vor dem geplanten Commit: `master` / `36991e9caeef`; Upstream `origin/master`, vorher `0/0`.
+- JA-042.1 und JA-042.2 sind abgenommen. Es gibt keinen vollstaendig erledigten Roadmap-Hauptpunkt zum Rotieren.
 
-## Versionierte Aenderungen
+## Abgeschlossener Slice: JA-042.2
 
-- `.ci/bin/modules/ci-commands-main.ps1`
-- `Roadmap.md`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `src/JobAgent.Operations.psm1`
-- `tests/Test-JobAgentDailyRun.ps1`
-- `tests/Test-JobAgentOperations.ps1`
-- `todo.checkpoint.json`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `todo.state.json`
-- `tools/Invoke-JobAgentDailyRun.ps1`
+- `tools/Verify-JobAgentCompanyCandidates.ps1` berechnet aus zukuenftigen `RETRY_SCHEDULED`-Eintraegen den fruehesten `wake_at`-Zeitpunkt. Der Lauf endet; er wartet nicht aktiv.
+- `tools/Invoke-JobAgentDailyRun.ps1` uebernimmt den fruehesten Akquise-Wiedervorlagezeitpunkt und gibt ihn im regulaeren Laufresultat aus.
+- `src/JobAgent.Operations.psm1` publiziert `wake_at` atomar mit dem Daily-Run-Status. Ein Fehlerlauf behaelt weiterhin den zuletzt publizierten Report sowie dessen Wiedervorlage als veralteten Stand.
+- Der vorhandene Resultat-Checkpoint der Kandidatenverifikation setzt einen Abbruch vor dem Store-Commit fort; die serielle atomare Commit-Phase uebernimmt Resultate hoechstens einmal. Die Statusmaschine bewahrt Stellen bei Teil- und Fehler-Scans und erzeugt keine falschen NEW/CLOSED/REMOVED-Ereignisse bei Profilfiltern.
+- Evidence: `logs/jobagent/JA-042-2-acceptance.json`.
 
 ## Verifikation
 
-- `.\ci.cmd sonar` -> Exit ``
+```powershell
+pwsh -NoProfile -File .\tests\Test-JobAgentStatusMachine.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentOperations.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1
+```
 
-## Naechster Anker
+Alle drei Funktionstests endeten mit Exit 0. Kein Browseraudit: keine HTML-Aenderung. Kein Supertest: nicht angefragt und daher gemaess Auftrag erledigt/nicht als offenes Gate zu behandeln. Sonar bleibt `not-supported` (kein konfigurierter Scanner fuer diese PowerShell-/HTML-Codebasis).
 
-JA-042.2: Resume, Retry-After und Dublettenfreiheit ueber Abbruch, Storecommit und Reportpublikation nachweisen.
+## Naechster Arbeitsschnitt: JA-042.3
 
-## Fachlicher Uebergabestand: JA-042.1
-
-- `JA-042.1` ist in [Roadmap.md](Roadmap.md) abgehakt; der Hauptpunkt `JA-042` und `TD-0055` bleiben aktiv. Nicht rotieren: JA-042.2 und JA-042.3 sind noch offen.
-- Der regulaere Einstieg bleibt `tools/Invoke-JobAgentDailyRun.ps1`. `Invoke-JobAgentManagedDailyRun` erzeugt jetzt eine gemeinsame `dailyrun:<UTC-Stempel>`-ID und uebergibt sie an den Orchestrator; die bestehende `scanrun:<UTC-Stempel>`-ID bleibt fuer den Scan erhalten.
-- Akquise und Scan behalten getrennte Budgets (`AcquisitionCandidateBudget`, `MaxCompanies`). Ein Fehler in Refill, Website-Ermittlung oder Kandidatenverifikation wird als `PARTIAL` mit Grund protokolliert und verhindert den anschliessenden Scan bekannter Firmen nicht. Ein Storefehler bleibt fail-closed, weil die Reportpublikation erst nach erfolgreichem Store-Commit erfolgt.
-- `logs/jobagent/daily-run.status.json` ist der atomar geschriebene Publikations-Pointer. Er liefert `display_state` mit `laeuft`, `abgeschlossen`, `teilweise` oder `fehlgeschlagen`; bei Neuberechnung und Fehler bleiben die zuletzt publizierten Reportpfade sichtbar und werden als `is_stale` markiert.
-- Die STP-Auswahl bevorzugt nun `next_action` des aktiven Todos. Dadurch verweist der Handoff trotz des nachrangigen offenen Drift-Todos `TD-0056` korrekt auf JA-042.2.
-
-## Nachweise und Verifikation
-
-- Lokale, ignorierte Evidence: `logs/jobagent/JA-042-1-acceptance.json`; enthält Gitstand, IDs, Budgets, erwartete/erhaltene Zähler sowie positive und negative Fälle.
-- `pwsh -NoProfile -File .\tests\Test-JobAgentOperations.ps1` -> Exit 0. Deckt Run-ID, lesbare Statuswerte, Lock, Logrotation und die Stale-Erhaltung des letzten publizierten Reports ab.
-- `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit 0. Deckt Akquise plus Scan im selben Lauf sowie einen isolierten Akquisefehler (`missing-fixture-map.json` -> `PARTIAL`, vorhandene Stelle bleibt erhalten) ab.
-- Isolierter leerer Store: `pwsh -NoProfile -File .\tools\Invoke-JobAgentDailyRun.ps1 -ProjectRoot <temp> -DisableAcquisition -MaxCompanies 1` -> Exit 0, `run_id=dailyrun:20260915T151019142Z`, `scan_run_id=scanrun:20260915T151019142Z`.
-- Kein Browseraudit: Es wurde keine HTML-Ansicht geaendert. Kein Supertest: JA-042 ist noch nicht vollstaendig; gemaess Nutzeranweisung ist kein zusaetzlicher Supertest fuer diesen Teilabschluss erforderlich.
-
-## Naechster Arbeitsschnitt: JA-042.2
-
-1. In `src/JobAgent.Persistence.psm1`, `src/JobAgent.StatusMachine.psm1` und `src/JobAgent.Operations.psm1` gezielt Abbruchpunkte vor/nach Resultatsicherung, Store-Commit und Reportpublikation als isolierte Fixtures abbilden.
-2. Resume muss Cursor, bereits persistierte Resultate und Retry-After wiederverwenden. Keine erneute Neufirmenzaehlung bei gleicher Evidence; `wake_at` ausgeben und nicht warten.
-3. Vollstaendige, eingeschraenkte und partielle Quellabdeckung fuer Stellenstatus pruefen. Nur vollstaendige relevante Abdeckung darf Abwesenheit belegen; lokale Webfilter duerfen persistierte aktive Stellen nicht veraendern.
-4. Fuer JA-042.2 die fokussierten Tests aus der Roadmap ausfuehren und `logs/jobagent/JA-042-2-acceptance.json` erzeugen. Roadmap, Todo, Handoff und STP erst nach vollstaendigem Nachweis synchronisieren.
+1. In `tests/Test-JobAgentCompanyDedupeScale.ps1` eine isolierte 1.000-Firmen-Fixture mit Dubletten, Domain-only-Kandidaten, Berufs-/Gebietsvarianten und Quellenfehlern ausfuehren. Endliche Budgets, Hostwellen und Cursorfortsetzung beweisen; keine reale Firmenwelle starten.
+2. Zwei regulaere Fixture-Daily-Runs in `tests/Test-JobAgentDailyRun.ps1` und `tests/Test-JobAgentReport.ps1` belegen: erster Lauf neue Firma mit offizieller Karrierequelle und mehreren Berufen, zweiter Lauf dieselbe Firma plus genau eine neue; IDs, Zaehler und WebIF-Filter exakt vergleichen.
+3. `docs/company-discovery-operations.md` um Runcommand, Reportpfade, Budgetgrenzen und Resume-Anleitung aktualisieren. Anschliessend fokussierte Tests, Browseraudit bei sichtbarer Aenderung, Evidence `logs/jobagent/JA-042-3-acceptance.json`, Roadmap-/Todo-/Handoff-Sync. Erst dann `JA-042` als ganzes rotieren.
 
 ## Nebenbedingung
 
-- `TD-0056` bleibt nachrangig offen: `manual/PROGRAM.md` meldet Immutable-Drift. Nicht blind zuruecksetzen; zuerst erwarteten Hash und Herkunft pruefen. Der Befund blockiert JA-042 nicht.
+`TD-0056` (Immutable-/Observer-/Route-Drift) bleibt nachrangig offen. Nicht blind zuruecksetzen; Herkunft und erwarteten Hash zuerst pruefen.

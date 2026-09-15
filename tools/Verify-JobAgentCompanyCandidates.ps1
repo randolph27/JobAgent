@@ -670,6 +670,30 @@ function Test-ToolCandidateVerificationQueueEntryReady {
     return $dueAt -le $Now.ToUniversalTime()
 }
 
+function Get-ToolCandidateVerificationQueueWakeAt {
+    param(
+        [Parameter(Mandatory)][object]$Queue,
+        [Parameter(Mandatory)][datetime]$Now
+    )
+
+    $nextAttempts = @(
+        @($Queue.queue) |
+            Where-Object {
+                [string](Get-ToolEntryProperty -Entry $_ -Name 'status' -Default '') -eq 'RETRY_SCHEDULED'
+            } |
+            ForEach-Object {
+                ConvertTo-ToolDateOrNull -Value (Get-ToolEntryProperty -Entry $_ -Name 'next_attempt_at' -Default $null)
+            } |
+            Where-Object { $null -ne $_ -and $_ -gt $Now.ToUniversalTime() } |
+            Sort-Object
+    )
+
+    if ($nextAttempts.Count -eq 0) {
+        return $null
+    }
+    return ConvertTo-ToolIso -Value $nextAttempts[0]
+}
+
 function Get-ToolCandidateHostKey {
     param([Parameter(Mandatory)][object]$Candidate)
 
@@ -1232,6 +1256,7 @@ $summary = [pscustomobject]@{
         manual_review_total = @($queueItems | Where-Object { [string]$_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count
         verified_total = @($queueItems | Where-Object { [string]$_.status -eq 'VERIFIED' }).Count
     }
+    wake_at = Get-ToolCandidateVerificationQueueWakeAt -Queue $queue -Now $completedAt
     checked_candidate_ids = $checkedCandidateIds
     verified_candidate_ids = $verifiedCandidateIds
     official_career_verified_candidate_ids = @($resultItems | Where-Object { @('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$_.status } | ForEach-Object { [string]$_.candidate_id })

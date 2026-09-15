@@ -368,6 +368,8 @@ try {
     Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:example' -and $_.status -eq 'VERIFIED' }).Count -eq 1) -Message 'Queue markiert verifizierten Kandidaten nicht.'
     Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:hays' -and $_.status -eq 'MANUAL_REVIEW_REQUIRED' }).Count -eq 1) -Message 'Queue markiert Manual-Review-Kandidaten nicht.'
     Assert-True -Condition (@($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and $_.status -eq 'RETRY_SCHEDULED' -and $_.retry_count -eq 1 }).Count -eq 1) -Message 'Queue plant unverifizierten Kandidaten nicht fuer Retry ein.'
+    $scheduledRetry = @($scriptQueue.queue | Where-Object { $_.candidate_id -eq 'hint:noresponse' -and $_.status -eq 'RETRY_SCHEDULED' })[0]
+    Assert-True -Condition ($scriptResult.wake_at -eq $scheduledRetry.next_attempt_at) -Message 'Candidate-Verifikation gibt den fruehesten Retry-Zeitpunkt nicht aus.'
     Assert-True -Condition ($scriptCompany.verification_status -eq 'CAREER_URL_VERIFIED') -Message 'Candidate-Verifikationsscript aktualisiert Firmenstatus nicht.'
     Assert-True -Condition (@($scriptStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Candidate-Verifikationsscript erzeugt keine offizielle Karrierequelle.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$scriptResult.log_path) -PathType Leaf) -Message 'Candidate-Verifikationsscript schreibt kein Logartefakt.'

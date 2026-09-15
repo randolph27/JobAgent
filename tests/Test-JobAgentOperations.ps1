@@ -49,6 +49,21 @@ try {
     Assert-True -Condition ($status.last_status.run_id -match '^dailyrun:') -Message 'Statusdatei enthaelt keine gemeinsame Daily-Run-ID.'
     Assert-True -Condition ($status.display_state -eq 'abgeschlossen') -Message 'Statusabfrage liefert keinen lesbaren Abschlussstatus.'
 
+    $deferred = Invoke-JobAgentManagedDailyRun -ProjectRoot $projectRoot -ScriptBlock {
+        [pscustomobject]@{
+            status = 'PARTIAL'
+            scan_run_id = 'scanrun:deferred'
+            wake_at = '2026-08-18T12:00:00.000Z'
+            report_path = 'logs/jobagent/report-deferred.json'
+            markdown_report_path = 'logs/jobagent/report-deferred.md'
+            html_report_path = 'html/jobagent/report-deferred.html'
+        }
+    } -StartedAt ([datetime]'2026-08-18T10:00:00Z') -RetainLogs 10
+    Assert-True -Condition ($deferred.status -eq 'SUCCEEDED') -Message 'Teilweiser Lauf mit Retry-After muss kontrolliert abschliessen.'
+    $deferredStatus = Get-JobAgentDailyRunOperationalStatus -ProjectRoot $projectRoot
+    Assert-True -Condition ($deferredStatus.display_state -eq 'teilweise') -Message 'Teilweiser Lauf wird nicht lesbar markiert.'
+    Assert-True -Condition (-not [string]::IsNullOrWhiteSpace([string]$deferredStatus.last_status.wake_at)) -Message 'Statusdatei gibt den naechsten Retry-Zeitpunkt nicht aus.'
+
     $failure = Invoke-JobAgentManagedDailyRun -ProjectRoot $projectRoot -ScriptBlock {
         throw 'fixture failure'
     } -StartedAt ([datetime]'2026-08-17T11:00:00Z') -RetainLogs 10
@@ -57,7 +72,7 @@ try {
     $failedStatus = Get-JobAgentDailyRunOperationalStatus -ProjectRoot $projectRoot
     Assert-True -Condition ($failedStatus.display_state -eq 'fehlgeschlagen') -Message 'Fehlerstatus ist nicht lesbar markiert.'
     Assert-True -Condition ($failedStatus.last_status.is_stale -eq $true) -Message 'Fehlerlauf markiert den letzten publizierten Stand nicht als veraltet.'
-    Assert-True -Condition ($failedStatus.last_status.html_report_path -eq 'html/jobagent/report.html') -Message 'Fehlerlauf erhaelt den letzten publizierten HTML-Report nicht.'
+    Assert-True -Condition ($failedStatus.last_status.html_report_path -eq 'html/jobagent/report-deferred.html') -Message 'Fehlerlauf erhaelt den letzten publizierten HTML-Report nicht.'
 
     foreach ($index in 0..4) {
         $path = Join-Path $projectRoot ("logs/jobagent/daily-run-old-$index.log")
@@ -102,6 +117,7 @@ try {
         cases = @(
             'managed_daily_run_writes_status_and_log',
             'daily_run_status_reads_last_state',
+            'partial_daily_run_exposes_retry_wake_at_without_waiting',
             'managed_daily_run_failure_sets_exit_code',
             'failure_preserves_last_published_report_as_stale',
             'daily_run_log_rotation_retains_limit',

@@ -54,6 +54,27 @@ function Read-ToolJsonFileIfPresent {
     return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json -Depth 100
 }
 
+function Get-JobAgentDailyEarliestWakeAt {
+    param([Parameter()][AllowEmptyCollection()][object[]]$Values = @())
+
+    $dates = @($Values |
+            Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } |
+            ForEach-Object {
+                try {
+                    [datetime]::Parse([string]$_, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
+                }
+                catch {
+                    $null
+                }
+            } |
+            Where-Object { $null -ne $_ } |
+            Sort-Object)
+    if ($dates.Count -eq 0) {
+        return $null
+    }
+    return $dates[0].ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+}
+
 function Invoke-JobAgentDailyAcquisitionTool {
     [CmdletBinding()]
     param(
@@ -209,9 +230,14 @@ function Invoke-JobAgentDailyAcquisitionPhase {
             verified_total = if ($null -ne $verifyResult) { @($verifyResult.verified_candidate_ids).Count } else { 0 }
             log_path = if ($null -ne $verifyResult) { [string]$verifyResult.log_path } else { $null }
             checkpoint_path = if ($null -ne $verifyResult) { [string]$verifyResult.checkpoint_path } else { $null }
+            wake_at = if ($null -ne $verifyResult -and $verifyResult.PSObject.Properties.Name -contains 'wake_at') { $verifyResult.wake_at } else { $null }
         }
         new_official_career_companies = @($newOfficialCareerCompanyIds).Count
         new_official_career_company_ids = @($newOfficialCareerCompanyIds)
+        wake_at = Get-JobAgentDailyEarliestWakeAt -Values @(
+            if ($null -ne $refillResult -and $refillResult.PSObject.Properties.Name -contains 'wake_at') { $refillResult.wake_at }
+            if ($null -ne $verifyResult -and $verifyResult.PSObject.Properties.Name -contains 'wake_at') { $verifyResult.wake_at }
+        )
     }
 }
 
@@ -326,6 +352,7 @@ $managed = Invoke-JobAgentManagedDailyRun `
             -StartedAt $runStartedAt
         $dailyResult | Add-Member -NotePropertyName acquisition -NotePropertyValue $acquisition -Force
         $dailyResult | Add-Member -NotePropertyName run_id -NotePropertyValue $RunId -Force
+        $dailyResult | Add-Member -NotePropertyName wake_at -NotePropertyValue $(if ($null -ne $acquisition -and $acquisition.PSObject.Properties.Name -contains 'wake_at') { $acquisition.wake_at } else { $null }) -Force
         if ([string]$acquisition.status -eq 'PARTIAL' -and [string]$dailyResult.status -ne 'FAILED') {
             $dailyResult.status = 'PARTIAL'
         }
@@ -348,6 +375,7 @@ $result = $managed.result
     markdown_report_path = if ($result) { $result.markdown_report_path } else { $null }
     html_report_path = if ($result) { $result.html_report_path } else { $null }
     acquisition = if ($result) { $result.acquisition } else { $null }
+    wake_at = if ($result) { $result.wake_at } else { $null }
     run_log_path = $managed.run_log_path
     status_path = $managed.status_path
     statistics = if ($result) { $result.summary.statistics } else { $null }

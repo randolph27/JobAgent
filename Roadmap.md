@@ -19,7 +19,7 @@ M1: vorhandene Grundlagen JA-040/CI-001. M2-A: Akquise beim Jobstart und sichtba
 - [ ] JA-042 Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
 
   Beschreibung: Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern. Abnahme ueber drei funktionale Unterpunkte, keine reale Firmenquote.
-  Ist-Stand (2026-09-15): JA-042.1 ist mit gemeinsamer Daily-Run-ID, getrennten Akquise-/Scanbudgets, atomarem Status-Pointer und Teilfehler-Isolation abgenommen. Offen bleiben Resume-/Dublettenbeweis (JA-042.2) und der integrierte Skalierungs-/Betriebsabschluss (JA-042.3).
+  Ist-Stand (2026-09-15): JA-042.1 und JA-042.2 sind abgenommen. Der regulaere Lauf beherrscht gemeinsame Run-IDs, getrennte Budgets, atomare Statuspublikation, Resume vor Store-Commit, Dublettenfreiheit und Retry-After als `wake_at` ohne Busy-Wait. Offen bleibt der integrierte Skalierungs-/Betriebsabschluss (JA-042.3).
   Abhaengigkeiten: JA-027, JA-041 und UI-001 fuer integrierte Abnahme; bestehende JA-040/CI-001-Grundlagen. Keine reale 1.000er-Menge.
   Aufwand/Dauer: 1,5–2,5 PT / 1,5–2,5 Arbeitstage; ein Entwickler/Agent, acht Nettoarbeitsstunden pro PT; externe Wartezeit UNKNOWN. Kein verbindlicher Termin oder weitere Kapazitaet zugesagt.
   Prioritaetsscore: 94/100, Planungsentscheidung. Ordnungsbegruendung: integrierte Betriebsabnahme nach den drei Funktionsvertraegen.
@@ -44,11 +44,11 @@ M1: vorhandene Grundlagen JA-040/CI-001. M2-A: Akquise beim Jobstart und sichtba
     Audit: Automatischer ID-/Status-/Mengenabgleich; bei sichtbaren Aenderungen echter Browser in 390/800/1366/1920 px, kein Clipping/Overlap, lesbare Kernfelder, korrekte Zaehler. Ohne Darstellungsänderung UI-Lane begruendet nicht anwendbar; keine Android-Lane.
     Supertest: Erst nach allen drei Unterpunkten und gruenen Funktionstests .\ci.cmd supertest; kein eigener Supertest/Miniabschluss pro Unterpunkt. Danach vollstaendige Archivierung des Softwarepunkts, Todo/Handoff und STP synchronisieren. Dieser Planungsauftrag fuehrt ihn nicht aus.
 
-  - [ ] JA-042.2 Resume und Wiederholung ohne Verlust oder Dubletten nachweisen.
+  - [x] JA-042.2 Resume und Wiederholung ohne Verlust oder Dubletten nachweisen.
 
     Beschreibung: Naechster Benutzerstart setzt faellige Arbeit fort; bekannte Firmen und Stellen werden nicht neu dupliziert.
     Scope: src/JobAgent.Persistence.psm1; src/JobAgent.StatusMachine.psm1; src/JobAgent.Operations.psm1; vorhandene Queue/Checkpoints. Kein Frameworkwechsel, keine Gebietsaufweitung oder Bewerbungen.
-    Ist-Stand (2026-09-13): Grundlagen/Altgrenzen siehe Hauptpunkt; diese neue Anforderung ist noch nicht fertig verifiziert.
+    Ist-Stand (2026-09-15): Abbruch vor dem Commit wird durch Resultat-Checkpoints fortgesetzt; die serielle atomare Commit-Phase uebernimmt jedes Resultat hoechstens einmal. RETRY_SCHEDULED liefert den fruehesten zukuenftigen `wake_at` ohne Warten. Vollstaendige, Teil- und Fehler-Scans sowie lokale Profilfilter bewahren aktive Stellen korrekt. Nachweis: `logs/jobagent/JA-042-2-acceptance.json`.
     Abhaengigkeiten/Prioritaet: JA-042.1; Score 99/100 intern, Reihenfolge Vertrag → Integration → Abnahme. Aufwand/Dauer anteilig 40 % der Hauptpunktschaetzung bei gleicher Kapazitaet. Meilenstein M3. Risiko: Altvertrag oder unvollstaendige Daten verfälschen Ergebnis; Fixtures vor produktiver Integration.
     Schritte:
     1. Abbruch vor/nach Resultatsicherung, Storecommit und Reportpublikation mit isolierten Fixtures erzwingen. Wiederanlauf verwendet Cursor/Resultate; uebernommene Firma nicht erneut als neu zaehlen. Alte Firmen-/URL-Funde bleiben auch nach abgelaufener Verifikation erhalten.
