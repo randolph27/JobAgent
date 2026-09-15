@@ -43,6 +43,30 @@ function ConvertTo-JobAgentFixtureJson {
     return ($Document | ConvertTo-Json -Depth 100)
 }
 
+function Get-JobAgentSha256 {
+    param([Parameter(Mandatory)][string]$Path)
+
+    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash.ToLowerInvariant()
+}
+
+function Get-JobAgentSessionValue {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string]$SessionName,
+        [Parameter(Mandatory)][string]$Script,
+        [Parameter(Mandatory)][string]$Case
+    )
+
+    $output = Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'eval', $Script)
+    $result = [regex]::Match($output, '(?ms)### Result\s*\r?\n(?<payload>.+?)\s*$')
+    Assert-True -Condition $result.Success -Message "${Case}: Playwright-CLI lieferte kein Eval-Ergebnis."
+    $value = $result.Groups['payload'].Value.Trim() | ConvertFrom-Json -Depth 20
+    if ($value -is [string]) {
+        return $value | ConvertFrom-Json -Depth 20
+    }
+    return $value
+}
+
 function Invoke-JobAgentPlaywrightCli {
     param(
         [Parameter(Mandatory)][string]$WorkingDirectory,
@@ -291,7 +315,7 @@ $document.jobs += @(
     New-TestJob -JobId 'job:munich-accounting' -CompanyId 'company:fixture_001' -Title 'Buchhalterin Muenchen' -Location $munich -Category 'Buchhaltung'
     New-TestJob -JobId 'job:freising-pflege' -CompanyId 'company:fixture_002' -Title 'Pflegefachkraft Freising' -Location $freising -Category 'Pflege' -WorkModel 'HYBRID' -EmploymentType 'PART_TIME'
     New-TestJob -JobId 'job:part-time-hybrid' -CompanyId 'company:fixture_003' -Title 'Hybrid Teilzeit Beraterin' -Location $munich -Category 'Beratung' -WorkModel 'HYBRID' -EmploymentType 'PART_TIME'
-    New-TestJob -JobId 'job:unknown' -CompanyId 'company:fixture_004' -Title 'Unklare Position' -Location $unknown -Category 'UNKNOWN' -WorkModel 'UNKNOWN' -EmploymentType 'UNKNOWN'
+    New-TestJob -JobId 'job:unknown' -CompanyId 'company:fixture_004' -Title 'Unklare Position <img src=x onerror=window.__qa004Injected=true>' -Location $unknown -Category 'UNKNOWN' -WorkModel 'UNKNOWN' -EmploymentType 'UNKNOWN'
     New-TestJob -JobId 'job:umlaut' -CompanyId 'company:fixture_005' -Title 'Bürokauffrau Muenchen' -Location $munich -Category 'Büro'
     New-TestJob -JobId 'job:remote-contract' -CompanyId 'company:fixture_006' -Title 'Remote Vertrag Spezialistin' -Location $remoteTarget -Category 'Beratung' -WorkModel 'REMOTE' -EmploymentType 'CONTRACT'
     New-TestJob -JobId 'job:munich20-permanent' -CompanyId 'company:fixture_007' -Title 'Dachau Unbefristet' -Location $munich20Km -Category 'Verwaltung' -EmploymentType 'PERMANENT'
@@ -391,11 +415,15 @@ if ($FixtureOnly) {
     return
 }
 
-$htmlPath = Join-Path $root 'html\jobagent\ui-001-browser-audit.html'
-$artifactRoot = Join-Path $root 'output\playwright'
-$evidencePath = Join-Path $root 'logs\jobagent\ui-001-browser-audit.json'
-$reportUrl = 'http://127.0.0.1:8500/html/jobagent/ui-001-browser-audit.html'
+$runId = 'qa004-' + [guid]::NewGuid().ToString('N')
+$evidenceRoot = Join-Path $root (Join-Path 'logs\jobagent\QA-004' $runId)
+$htmlPath = Join-Path $evidenceRoot 'daily-report.html'
+$artifactRoot = Join-Path $evidenceRoot 'playwright'
+$evidencePath = Join-Path $evidenceRoot 'browser-cases.json'
+$reportUrl = 'http://127.0.0.1:8500/logs/jobagent/QA-004/' + $runId + '/daily-report.html'
 Write-Utf8File -Path $htmlPath -Content (ConvertTo-JobAgentDailyReportHtml -Report $report)
+$reportHashBefore = Get-JobAgentSha256 -Path $htmlPath
+$fixtureHashBefore = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($documentBefore))).ToLowerInvariant()
 
 $response = Invoke-WebRequest -UseBasicParsing -Uri $reportUrl -TimeoutSec 10
 Assert-True -Condition ($response.StatusCode -eq 200) -Message 'Browser-Audit-Report ist nicht über den CI-Devserver erreichbar.'
@@ -406,8 +434,12 @@ if (-not (Test-Path -LiteralPath $artifactRoot)) {
 
 $sessionName = 'jobagent-ui001-' + [guid]::NewGuid().ToString('N')
 $screenshots = [System.Collections.Generic.List[string]]::new()
+$caseEvidence = [System.Collections.Generic.List[object]]::new()
+$sessionErrors = @()
+$network = ''
 try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'open', $reportUrl) | Out-Null
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { window.__qa004Errors=[]; const errorEvent=String.fromCharCode(101,114,114,111,114),rejectionEvent=String.fromCharCode(117,110,104,97,110,100,108,101,100,114,101,106,101,99,116,105,111,110),fallback=String.fromCharCode(101,114,114,111,114); window.addEventListener(errorEvent,event=>window.__qa004Errors.push(String(event.message||event.error||fallback))); window.addEventListener(rejectionEvent,event=>window.__qa004Errors.push(String(event.reason||rejectionEvent))); return JSON.stringify({ready:true}); }') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
 
@@ -456,6 +488,32 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Filter-Reset'
+
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'workModel=REMOTE,HYBRID', 'employmentType=PART_TIME')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 2 Treffer, Seite 1 von 1 (sichtbar 2).' -Case 'Mehrfachauswahl im selben Feld als ODER'
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:freising-pflege', 'job:part-time-hybrid') -Case 'Mehrfachauswahl im selben Feld als ODER und felduebergreifendes UND'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'multi_select_or_and'; url_hash = '#view=jobs&workModel=REMOTE%2CHYBRID&employmentType=PART_TIME'; expected_job_ids = @('job:freising-pflege', 'job:part-time-hybrid') })
+
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'q=Bu%25CC%2588rokauffrau%2520Muenchen')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Mehrfach URL-codierte NFC-NFD-Freitextsuche'
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:umlaut') -Case 'Mehrfach URL-codierte NFC-NFD-Freitextsuche'
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=jobs&q=Bu%CC%88rokauffrau+Muenchen' -Case 'Mehrfach URL-codierte NFC-NFD-Freitextsuche'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'double_encoded_nfd_query'; url_hash = '#view=jobs&q=Bu%CC%88rokauffrau+Muenchen'; expected_job_ids = @('job:umlaut') })
+
+    $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, '  BÜROKAUFFRAU !!! MUENCHEN  ') | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:umlaut') -Case 'Freitext Gross-Kleinschreibung Leerzeichen Sonderzeichen und mehrere Begriffe'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'normalized_multi_token_query'; expected_job_ids = @('job:umlaut') })
+
+    $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
 
     foreach ($facetCase in @(
             @{ control = 'Gebiet'; value = 'MUNICH'; expected = 'Grenze Sieben Tage' },
@@ -508,6 +566,15 @@ try {
     Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:umlaut') -Case 'Unicode-normalisierte Umlautsuche'
 
     $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Unklare Position') | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:unknown') -Case 'HTML-Script-Fragment bleibt Textinhalt'
+    $injectionState = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => JSON.stringify({ injected: window.__qa004Injected === true, images: document.querySelectorAll(''[id=jobagent-job-results] img'').length })' -Case 'HTML-Script-Fragment bleibt Textinhalt'
+    Assert-True -Condition (-not [bool]$injectionState.injected) -Message 'HTML-Script-Fragment wurde im Browser ausgefuehrt.'
+    Assert-True -Condition ([int]$injectionState.images -eq 0) -Message 'HTML-Script-Fragment wurde als HTML-Element gerendert.'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'script_fragment_is_inert'; expected_job_ids = @('job:unknown'); injected = [bool]$injectionState.injected; rendered_images = [int]$injectionState.images })
+
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'keine-passende-stelle') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Keine Treffer im angezeigten Bestand.' -Case 'Nulltreffer'
@@ -519,6 +586,17 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 251 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Firmenbestand'
+
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=companies', 'page=999', 'q=Firma%20251', 'area=UNKNOWN')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Firmenfreitext ohne nicht vorhandene Arbeitgeberfacette'
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View companies) -Expected @('company:fixture_251') -Case 'Firmenfreitext ohne nicht vorhandene Arbeitgeberfacette'
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=companies&q=Firma+251&area=UNKNOWN' -Case 'Firmenfreitext ohne nicht vorhandene Arbeitgeberfacette'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'companies_free_text_only_no_employer_facet'; url_hash = '#view=companies&q=Firma+251&area=UNKNOWN'; expected_company_ids = @('company:fixture_251') })
+
+    $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
 
     $jobsTabRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('tab', 'button') -Name 'Stellen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $jobsTabRef) | Out-Null
@@ -579,8 +657,24 @@ try {
         $screenshots.Add($screenshotPath)
     }
 
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=companies')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 251 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Linkzielpruefung in Firmenansicht'
+    $linkEvaluationScript = @'
+() => { const links=Array.from(document.querySelectorAll('#jobagent-company-results a'), link => ({href:link.href,target:link.target,rel:link.rel})); const captures=[]; const intercept=event=>{const link=event.target.closest('a');if(link){event.preventDefault();captures.push({href:link.href,target:link.target,rel:link.rel})}}; document.addEventListener('click',intercept,true); const first=document.querySelector('#jobagent-company-results a'); if(first){first.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true}))}; document.removeEventListener('click',intercept,true); return JSON.stringify({links,captures}); }
+'@
+    $linkEvidence = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script $linkEvaluationScript -Case 'offizielle Linkziele werden abgefangen'
+    Assert-True -Condition (@($linkEvidence.links).Count -gt 0) -Message 'Die Firmenansicht enthaelt keine offiziellen Links.'
+    Assert-True -Condition (@($linkEvidence.links | Where-Object { $_.href -notmatch '^https?://' -or $_.target -ne '_blank' -or $_.rel -notmatch 'noopener' -or $_.rel -notmatch 'noreferrer' }).Count -eq 0) -Message 'Ein offizieller Link verletzt Schema-, Target- oder Rel-Schutz.'
+    Assert-True -Condition (@($linkEvidence.captures).Count -eq 1) -Message 'Der abgefangene externe Linkklick wurde nicht genau einmal erfasst.'
+    Assert-True -Condition ([string]$linkEvidence.captures[0].href -match '^https://firma-') -Message 'Der abgefangene Link verweist nicht auf das erwartete offizielle Ziel.'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'external_link_intent_is_intercepted'; links_total = @($linkEvidence.links).Count; captured_target = [string]$linkEvidence.captures[0].href })
+
     $network = Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'requests')
     Assert-True -Condition ($network -notmatch '(?i)(/api/|daily-run|acquisition|jobagent/store)') -Message 'Filterinteraktion hat einen unzulaessigen API-, Joblauf- oder Store-Request erzeugt.'
+    Assert-True -Condition ($network -notmatch 'https?://(?!127\.0\.0\.1:8500/)') -Message ('Der lokale Browseraudit hat eine unerwartete externe Anfrage erzeugt: ' + $network)
+    $sessionErrors = @(Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => JSON.stringify(window.__qa004Errors || [])' -Case 'Browserfehlernachweis')
+    Assert-True -Condition ($sessionErrors.Count -eq 0) -Message ('Browserfehler waehrend der UI-Interaktion: ' + ($sessionErrors -join '; '))
 }
 finally {
     try {
@@ -593,11 +687,30 @@ finally {
 
 $documentAfter = ConvertTo-JobAgentFixtureJson -Document $document
 Assert-True -Condition ($documentBefore -eq $documentAfter) -Message 'Die lokale Filterinteraktion hat die isolierte Fixture mutiert.'
+$fixtureHashAfter = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($documentAfter))).ToLowerInvariant()
+$reportHashAfter = Get-JobAgentSha256 -Path $htmlPath
+Assert-True -Condition ($fixtureHashBefore -eq $fixtureHashAfter) -Message 'Der Hash der isolierten Browserfixture hat sich veraendert.'
+Assert-True -Condition ($reportHashBefore -eq $reportHashAfter) -Message 'Der Hash des isolierten Daily-/Coverage-Berichts hat sich waehrend der Browserinteraktion veraendert.'
 
 $summary = [pscustomobject]@{
     status = 'ok'
     data_mode = 'isolated_fixture'
     report_url = $reportUrl
+    report_paths = [pscustomobject]@{
+        daily_html = $htmlPath
+        coverage_section = $htmlPath
+    }
+    hashes = [pscustomobject]@{
+        fixture_before = $fixtureHashBefore
+        fixture_after = $fixtureHashAfter
+        daily_coverage_before = $reportHashBefore
+        daily_coverage_after = $reportHashAfter
+    }
+    browser = [pscustomobject]@{
+        requests = $network
+        console_or_page_errors = @($sessionErrors)
+    }
+    controls = @($caseEvidence.ToArray())
     companies = 251
     jobs = 264
     expected_job_ids = $expectedJobIds
@@ -609,11 +722,17 @@ $summary = [pscustomobject]@{
         'qa004_boundary_fixtures_0_1_49_50_51_250_251',
         'qa004_all_offered_facet_values_and_age_boundaries',
         'unicode_free_text_search',
+        'multi_select_or_and',
+        'double_encoded_nfd_query',
+        'normalized_multi_token_query',
+        'script_fragment_is_inert',
+        'companies_free_text_only_no_employer_facet',
+        'external_link_intent_is_intercepted',
         'empty_result',
         'reset_and_browser_back_forward_navigation',
         'hash_normalization_reload_and_all_pages_with_exact_ids',
         'companies_without_open_jobs',
-        'local_filter_does_not_mutate_fixture_or_call_job_api',
+        'local_filter_does_not_mutate_fixture_or_call_job_api_or_external_network',
         'viewports_390_800_1366_1920'
     )
 }
