@@ -19,17 +19,17 @@ M1: vorhandene Grundlagen JA-040/CI-001. M2-A: Akquise beim Jobstart und sichtba
 - [ ] JA-042 Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
 
   Beschreibung: Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern. Abnahme ueber drei funktionale Unterpunkte, keine reale Firmenquote.
-  Ist-Stand (2026-09-13): ManagedDailyRun bietet Lock-/Status-/Reportvertraege. Neue Kombination aus Akquise, allgemeiner Stellenerfassung und Filteransicht noch nicht implementiert oder abgenommen. Historische Live-Stichproben ersetzen diesen Nachweis nicht.
+  Ist-Stand (2026-09-15): JA-042.1 ist mit gemeinsamer Daily-Run-ID, getrennten Akquise-/Scanbudgets, atomarem Status-Pointer und Teilfehler-Isolation abgenommen. Offen bleiben Resume-/Dublettenbeweis (JA-042.2) und der integrierte Skalierungs-/Betriebsabschluss (JA-042.3).
   Abhaengigkeiten: JA-027, JA-041 und UI-001 fuer integrierte Abnahme; bestehende JA-040/CI-001-Grundlagen. Keine reale 1.000er-Menge.
   Aufwand/Dauer: 1,5–2,5 PT / 1,5–2,5 Arbeitstage; ein Entwickler/Agent, acht Nettoarbeitsstunden pro PT; externe Wartezeit UNKNOWN. Kein verbindlicher Termin oder weitere Kapazitaet zugesagt.
   Prioritaetsscore: 94/100, Planungsentscheidung. Ordnungsbegruendung: integrierte Betriebsabnahme nach den drei Funktionsvertraegen.
   Risiken: implizite Altfilter, fehlende Attribute, partielle Quellen und veraltete Anzeige. UNKNOWN sichtbar erhalten. Meilenstein/Parallelisierung: M3; ein zusammenhaengender Slice, Fixtures bei zusaetzlicher Kapazitaet parallel, produktive Writer seriell.
 
-  - [ ] JA-042.1 Phasen unter einem regulaeren Start verbinden.
+  - [x] JA-042.1 Phasen unter einem regulaeren Start verbinden.
 
     Beschreibung: Ein Start erledigt Akquise, allgemeine Stellenerfassung und WebIF-Publikation innerhalb getrennter Budgets.
     Scope: tools/Invoke-JobAgentDailyRun.ps1; src/JobAgent.Operations.psm1; src/JobAgent.DailyRun.psm1; tools/Get-JobAgentDailyRunStatus.ps1. Kein Frameworkwechsel, keine Gebietsaufweitung oder Bewerbungen.
-    Ist-Stand (2026-09-13): Grundlagen/Altgrenzen siehe Hauptpunkt; diese neue Anforderung ist noch nicht fertig verifiziert.
+    Ist-Stand (2026-09-15): Unter einer `dailyrun:`-ID verbindet der bestehende Einstieg Akquise und allgemeinen Scan. Akquise-Phasen werden bei Teilfehlern als `PARTIAL` weitergefuehrt; der Scan bleibt lauffaehig. Die Statusdatei ist der atomare Publikations-Pointer und erhaelt den letzten Report bei Neuberechnung oder Fehler als veralteten Stand. Nachweis: `logs/jobagent/JA-042-1-acceptance.json`.
     Abhaengigkeiten/Prioritaet: Hauptpunkt-Grundlagen; Score 100/100 intern, Reihenfolge Vertrag → Integration → Abnahme. Aufwand/Dauer anteilig 40 % der Hauptpunktschaetzung bei gleicher Kapazitaet. Meilenstein M3. Risiko: Altvertrag oder unvollstaendige Daten verfälschen Ergebnis; Fixtures vor produktiver Integration.
     Schritte:
     1. Unter gemeinsamer Run-ID validieren, budgetierte Akquise starten, Quellen uebergeben, allgemein scannen, Report atomar publizieren und Abschlussstatus schreiben. Bestehenden Benutzereinstieg erhalten; kein manueller Import-/Verify-/Reportbefehl im Normalbetrieb.

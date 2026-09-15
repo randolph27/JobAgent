@@ -1183,7 +1183,13 @@ function Get-StpGoalAndNext([object]$state) {
   foreach ($item in @(Get-Prop $state "items" @())) {
     $id = [string](Get-Prop $item "todo_id" "")
     $title = [string](Get-Prop $item "title" "")
-    if ($id -eq $activeId) { $goal = $title; $seenActive = $true; continue }
+    if ($id -eq $activeId) {
+      $goal = $title
+      $nextAction = [string](Get-Prop $item "next_action" "")
+      if ($nextAction) { $next = $nextAction }
+      $seenActive = $true
+      continue
+    }
     if (-not $next -and (($seenActive -and [string](Get-Prop $item "status" "") -eq "open") -or (-not $activeId -and [string](Get-Prop $item "status" "") -eq "open"))) {
       $next = $title
     }

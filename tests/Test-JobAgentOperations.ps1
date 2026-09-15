@@ -46,12 +46,18 @@ try {
     Assert-True -Condition (-not $status.is_running) -Message 'Statusabfrage markiert abgeschlossenen Lauf als RUNNING.'
     Assert-True -Condition ($status.last_status.scan_run_id -eq 'scanrun:test') -Message 'Statusdatei enthaelt keine ScanRun-ID.'
     Assert-True -Condition ($status.last_status.html_report_path -eq 'html/jobagent/report.html') -Message 'Statusdatei enthaelt keinen HTML-Report-Pfad.'
+    Assert-True -Condition ($status.last_status.run_id -match '^dailyrun:') -Message 'Statusdatei enthaelt keine gemeinsame Daily-Run-ID.'
+    Assert-True -Condition ($status.display_state -eq 'abgeschlossen') -Message 'Statusabfrage liefert keinen lesbaren Abschlussstatus.'
 
     $failure = Invoke-JobAgentManagedDailyRun -ProjectRoot $projectRoot -ScriptBlock {
         throw 'fixture failure'
     } -StartedAt ([datetime]'2026-08-17T11:00:00Z') -RetainLogs 10
     Assert-True -Condition ($failure.status -eq 'FAILED') -Message 'Managed Daily-Run meldet Fehler nicht.'
     Assert-True -Condition ($failure.exit_code -eq 1) -Message 'Fehlerlauf setzt keinen Exitcode 1.'
+    $failedStatus = Get-JobAgentDailyRunOperationalStatus -ProjectRoot $projectRoot
+    Assert-True -Condition ($failedStatus.display_state -eq 'fehlgeschlagen') -Message 'Fehlerstatus ist nicht lesbar markiert.'
+    Assert-True -Condition ($failedStatus.last_status.is_stale -eq $true) -Message 'Fehlerlauf markiert den letzten publizierten Stand nicht als veraltet.'
+    Assert-True -Condition ($failedStatus.last_status.html_report_path -eq 'html/jobagent/report.html') -Message 'Fehlerlauf erhaelt den letzten publizierten HTML-Report nicht.'
 
     foreach ($index in 0..4) {
         $path = Join-Path $projectRoot ("logs/jobagent/daily-run-old-$index.log")
@@ -97,6 +103,7 @@ try {
             'managed_daily_run_writes_status_and_log',
             'daily_run_status_reads_last_state',
             'managed_daily_run_failure_sets_exit_code',
+            'failure_preserves_last_published_report_as_stale',
             'daily_run_log_rotation_retains_limit',
             'parallel_daily_run_is_blocked'
         )

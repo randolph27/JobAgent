@@ -112,6 +112,35 @@ function Get-JobAgentOperationProperty {
     return $property.Value
 }
 
+function Get-JobAgentDailyRunDisplayState {
+    param(
+        [Parameter(Mandatory)][string]$State,
+        [Parameter()][AllowNull()][object]$Result = $null
+    )
+
+    if ($State -eq 'RUNNING') {
+        return 'laeuft'
+    }
+    if ($State -eq 'FAILED') {
+        return 'fehlgeschlagen'
+    }
+    $resultStatus = [string](Get-JobAgentOperationProperty -InputObject $Result -Name 'status')
+    if ($resultStatus -eq 'PARTIAL') {
+        return 'teilweise'
+    }
+    return 'abgeschlossen'
+}
+
+function Get-JobAgentDailyRunReason {
+    param([Parameter()][AllowNull()][object]$Result = $null)
+
+    $acquisition = Get-JobAgentOperationProperty -InputObject $Result -Name 'acquisition'
+    if ($null -ne $acquisition -and [string](Get-JobAgentOperationProperty -InputObject $acquisition -Name 'status') -eq 'PARTIAL') {
+        return [string](Get-JobAgentOperationProperty -InputObject $acquisition -Name 'reason' -Default 'Akquise nur teilweise abgeschlossen.')
+    }
+    return $null
+}
+
 function Read-JobAgentDailyRunLockPayload {
     [CmdletBinding()]
     param([Parameter(Mandatory)][string]$LockPath)
@@ -267,6 +296,7 @@ function Get-JobAgentDailyRunOperationalStatus {
 
     [pscustomobject]@{
         state = if ($isRunning) { 'RUNNING' } elseif ($storedStatus) { [string]$storedStatus.state } else { 'UNKNOWN' }
+        display_state = if ($isRunning) { 'laeuft' } elseif ($storedStatus -and $storedStatus.PSObject.Properties.Name -contains 'display_state') { [string]$storedStatus.display_state } else { 'unbekannt' }
         is_running = $isRunning
         status_path = [string]$paths.status_path
         lock_path = [string]$paths.lock_path
@@ -290,6 +320,16 @@ function Invoke-JobAgentManagedDailyRun {
     $stamp = ConvertTo-JobAgentOperationStamp -Value $StartedAt
     $runLogPath = Join-Path ([string]$paths.log_root) ('daily-run-' + $stamp + '.log')
     $lock = Enter-JobAgentDailyRunLock -Paths $paths -StaleAfterMinutes $StaleAfterMinutes
+    $previousStatus = $null
+    if (Test-Path -LiteralPath ([string]$paths.status_path) -PathType Leaf) {
+        try {
+            $previousStatus = Get-Content -LiteralPath ([string]$paths.status_path) -Raw | ConvertFrom-Json -Depth 40
+        }
+        catch {
+            $previousStatus = $null
+        }
+    }
+    $runId = 'dailyrun:' + $stamp
     $result = $null
     $errorMessage = $null
     $exitCode = 0
@@ -297,14 +337,19 @@ function Invoke-JobAgentManagedDailyRun {
     try {
         $initialStatus = [pscustomobject]@{
             state = 'RUNNING'
+            display_state = 'laeuft'
+            run_id = $runId
             started_at = ConvertTo-JobAgentOperationIso -Value $StartedAt
             finished_at = $null
             pid = $PID
             run_log_path = $runLogPath
             result_status = $null
-            report_path = $null
-            markdown_report_path = $null
-            html_report_path = $null
+            report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'report_path'
+            markdown_report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'markdown_report_path'
+            html_report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'html_report_path'
+            published_at = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'published_at'
+            is_stale = $null -ne $previousStatus
+            reason = if ($null -ne $previousStatus) { 'Neuberechnung laeuft; letzter publizierter Stand bleibt sichtbar.' } else { 'Neuberechnung laeuft.' }
             exit_code = $null
             error = $null
         }
@@ -312,7 +357,7 @@ function Invoke-JobAgentManagedDailyRun {
         Write-JobAgentOperationAtomicFile -Path $runLogPath -Content ("started_at=" + $initialStatus.started_at)
 
         try {
-            $result = & $ScriptBlock
+            $result = & $ScriptBlock $runId
             if ($null -ne $result -and [string]$result.status -eq 'FAILED') {
                 $exitCode = 1
             }
@@ -323,18 +368,24 @@ function Invoke-JobAgentManagedDailyRun {
         }
 
         $finishedAt = [datetime]::UtcNow
+        $finalState = if ($exitCode -eq 0) { 'SUCCEEDED' } else { 'FAILED' }
         $finalStatus = [pscustomobject]@{
-            state = if ($exitCode -eq 0) { 'SUCCEEDED' } else { 'FAILED' }
+            state = $finalState
+            display_state = Get-JobAgentDailyRunDisplayState -State $finalState -Result $result
+            run_id = $runId
             started_at = ConvertTo-JobAgentOperationIso -Value $StartedAt
             finished_at = ConvertTo-JobAgentOperationIso -Value $finishedAt
             pid = $PID
             run_log_path = $runLogPath
             result_status = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'status')
             scan_run_id = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'scan_run_id')
-            report_path = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'report_path')
-            markdown_report_path = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'markdown_report_path')
-            html_report_path = [string](Get-JobAgentOperationProperty -InputObject $result -Name 'html_report_path')
+            report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'report_path' }
+            markdown_report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'markdown_report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'markdown_report_path' }
+            html_report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'html_report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'html_report_path' }
+            published_at = if ($exitCode -eq 0) { ConvertTo-JobAgentOperationIso -Value $finishedAt } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'published_at' }
+            is_stale = $exitCode -ne 0
             exit_code = $exitCode
+            reason = if ($exitCode -ne 0) { 'Neuberechnung fehlgeschlagen; letzter publizierter Stand ist veraltet.' } else { Get-JobAgentDailyRunReason -Result $result }
             error = $errorMessage
         }
         Write-JobAgentDailyRunStatus -Paths $paths -Status $finalStatus | Out-Null

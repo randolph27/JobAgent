@@ -314,6 +314,14 @@ try {
     $acquisitionHtml = Get-Content -LiteralPath ([string]$acquisitionResult.html_report_path) -Raw
     Assert-True -Condition ($acquisitionHtml.Contains('<section><h2>Neue Unternehmen</h2>') -and $acquisitionHtml.Contains('<td>Example AG</td>') -and $acquisitionHtml.Contains('href="https://example.invalid/karriere" target="_blank" rel="noopener noreferrer">Karriere</a>')) -Message 'WebIF zeigt automatisch akquirierte Firma nicht mit Karrierequelle an.'
 
+    $partialAcquisitionOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $acquisitionProjectRoot -FixturePath (Join-Path $acquisitionProjectRoot 'daily-scan-fixture.json') -AcquisitionFixtureMapPath 'missing-fixture-map.json' -AcquisitionCandidateBudget 1 -MaxCompanies 1 -CompanyIds 'company:example_ag' -FetchClient curl -WslDistribution FixtureDistro 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI muss bei isoliertem Akquisefehler weiter scannen: " + ($partialAcquisitionOutput -join "`n"))
+    $partialAcquisitionResult = ($partialAcquisitionOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($partialAcquisitionResult.status -eq 'PARTIAL') -Message 'Isolierter Akquisefehler wird nicht als PARTIAL sichtbar.'
+    Assert-True -Condition ($partialAcquisitionResult.run_id -match '^dailyrun:') -Message 'Daily-Run-CLI gibt keine gemeinsame Run-ID aus.'
+    Assert-True -Condition ($partialAcquisitionResult.acquisition.status -eq 'PARTIAL') -Message 'Akquisefehler wird nicht im Akquisestatus ausgewiesen.'
+    Assert-True -Condition (@((Read-JobAgentStore -ProjectRoot $acquisitionProjectRoot).jobs | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Isolierter Akquisefehler darf vorhandene Stellen nicht entfernen.'
+
     $multiSourceProjectRoot = New-TestProjectRoot
     New-TestStore -ProjectRoot $multiSourceProjectRoot
     Add-TestSource -ProjectRoot $multiSourceProjectRoot -CompanyId 'company:alpha_ag' -SourceId 'source:alpha_ag_ats' -Url 'https://jobs.alpha.example.invalid/search'
@@ -632,6 +640,7 @@ try {
             'daily_run_cli_fixture_mode',
             'daily_run_cli_live_mode_without_fixture',
             'daily_run_cli_acquires_and_scans_new_company',
+            'daily_run_continues_scan_after_isolated_acquisition_failure',
             'daily_run_multi_source_partial_removal',
             'daily_run_prioritizes_refresh_due_companies',
             'daily_run_persists_selection_summary',

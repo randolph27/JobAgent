@@ -54,6 +54,38 @@ function Read-ToolJsonFileIfPresent {
     return Get-Content -LiteralPath $Path -Raw | ConvertFrom-Json -Depth 100
 }
 
+function Invoke-JobAgentDailyAcquisitionTool {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$Phase,
+        [Parameter(Mandatory)][string]$ScriptPath,
+        [Parameter(Mandatory)][object[]]$Arguments
+    )
+
+    $output = @(& pwsh -NoProfile -File $ScriptPath @Arguments 2>&1)
+    if ($LASTEXITCODE -ne 0) {
+        return [pscustomobject]@{
+            status = 'PARTIAL'
+            reason = "$Phase fehlgeschlagen: " + ($output -join "`n")
+            result = $null
+        }
+    }
+    try {
+        return [pscustomobject]@{
+            status = 'COMPLETED'
+            reason = $null
+            result = ($output -join "`n") | ConvertFrom-Json -Depth 100
+        }
+    }
+    catch {
+        return [pscustomobject]@{
+            status = 'PARTIAL'
+            reason = "$Phase lieferte kein lesbares JSON: " + $_.Exception.Message
+            result = $null
+        }
+    }
+}
+
 function Invoke-JobAgentDailyAcquisitionPhase {
     [CmdletBinding()]
     param(
@@ -108,18 +140,12 @@ function Invoke-JobAgentDailyAcquisitionPhase {
     }
 
     $refillScript = Join-Path $repoRoot 'tools\Invoke-JobAgentDiscoveryRefill.ps1'
-    $refillOutput = @(& pwsh -NoProfile -File $refillScript -ProjectRoot $root -DataRoot $DataRoot -LogRoot $LogRoot -MaxSources 1 2>&1)
-    if ($LASTEXITCODE -ne 0) {
-        throw ('Akquise-Quellennachfuellung fehlgeschlagen: ' + ($refillOutput -join "`n"))
-    }
-    $refillResult = ($refillOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $refillPhase = Invoke-JobAgentDailyAcquisitionTool -Phase 'Akquise-Quellennachfuellung' -ScriptPath $refillScript -Arguments @('-ProjectRoot', $root, '-DataRoot', $DataRoot, '-LogRoot', $LogRoot, '-MaxSources', '1')
+    $refillResult = $refillPhase.result
 
     $websiteScript = Join-Path $repoRoot 'tools\Discover-JobAgentCompanyCandidateWebsites.ps1'
-    $websiteOutput = @(& pwsh -NoProfile -File $websiteScript @commonArgs 2>&1)
-    if ($LASTEXITCODE -ne 0) {
-        throw ('Akquise-Website-Ermittlung fehlgeschlagen: ' + ($websiteOutput -join "`n"))
-    }
-    $websiteResult = ($websiteOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $websitePhase = Invoke-JobAgentDailyAcquisitionTool -Phase 'Akquise-Website-Ermittlung' -ScriptPath $websiteScript -Arguments $commonArgs
+    $websiteResult = $websitePhase.result
 
     $verifyArgs = @(
         '-ProjectRoot', $root,
@@ -138,11 +164,8 @@ function Invoke-JobAgentDailyAcquisitionPhase {
     }
 
     $verifyScript = Join-Path $repoRoot 'tools\Verify-JobAgentCompanyCandidates.ps1'
-    $verifyOutput = @(& pwsh -NoProfile -File $verifyScript @verifyArgs 2>&1)
-    if ($LASTEXITCODE -ne 0) {
-        throw ('Akquise-Kandidatenverifikation fehlgeschlagen: ' + ($verifyOutput -join "`n"))
-    }
-    $verifyResult = ($verifyOutput -join "`n") | ConvertFrom-Json -Depth 100
+    $verifyPhase = Invoke-JobAgentDailyAcquisitionTool -Phase 'Akquise-Kandidatenverifikation' -ScriptPath $verifyScript -Arguments $verifyArgs
+    $verifyResult = $verifyPhase.result
 
     $afterDocument = Read-ToolJsonFileIfPresent -Path (Resolve-ToolPath -Root $root -Path (Join-Path $DataRoot 'store.json'))
     $afterOfficialCareerCompanyIds = @(
@@ -157,29 +180,35 @@ function Invoke-JobAgentDailyAcquisitionPhase {
     foreach ($companyId in $beforeOfficialCareerCompanyIds) { [void]$beforeSet.Add($companyId) }
     $newOfficialCareerCompanyIds = @($afterOfficialCareerCompanyIds | Where-Object { -not $beforeSet.Contains([string]$_) })
 
+    $partialPhases = @(@($refillPhase, $websitePhase, $verifyPhase) | Where-Object { $_.status -eq 'PARTIAL' })
     [pscustomobject]@{
         schema_version = 'jobagent/daily-acquisition/v1'
-        status = 'COMPLETED'
+        status = if ($partialPhases.Count -gt 0) { 'PARTIAL' } else { 'COMPLETED' }
         started_at = $startedAt.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         finished_at = ([datetime]::UtcNow).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         budget = $MaxCandidates
+        reason = if ($partialPhases.Count -gt 0) { @($partialPhases | ForEach-Object { [string]$_.reason } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }) -join ' | ' } else { $null }
         source_refill = [pscustomobject]@{
-            status = [string]$refillResult.status
-            reason = [string]$refillResult.reason
-            imported_sources_total = [int]$refillResult.imported_sources_total
-            log_path = if ($refillResult.PSObject.Properties.Name -contains 'log_path') { [string]$refillResult.log_path } else { $null }
-            wake_at = if ($refillResult.PSObject.Properties.Name -contains 'wake_at') { $refillResult.wake_at } else { $null }
+            status = if ($null -ne $refillResult) { [string]$refillResult.status } else { [string]$refillPhase.status }
+            reason = if ($null -ne $refillResult) { [string]$refillResult.reason } else { [string]$refillPhase.reason }
+            imported_sources_total = if ($null -ne $refillResult) { [int]$refillResult.imported_sources_total } else { 0 }
+            log_path = if ($null -ne $refillResult -and $refillResult.PSObject.Properties.Name -contains 'log_path') { [string]$refillResult.log_path } else { $null }
+            wake_at = if ($null -ne $refillResult -and $refillResult.PSObject.Properties.Name -contains 'wake_at') { $refillResult.wake_at } else { $null }
         }
         website_discovery = [pscustomobject]@{
-            processed_total = [int]$websiteResult.processed_total
-            verified_total = [int]$websiteResult.verified_total
-            log_path = [string]$websiteResult.log_path
+            status = if ($null -ne $websiteResult) { 'COMPLETED' } else { [string]$websitePhase.status }
+            reason = if ($null -ne $websiteResult) { $null } else { [string]$websitePhase.reason }
+            processed_total = if ($null -ne $websiteResult) { [int]$websiteResult.processed_total } else { 0 }
+            verified_total = if ($null -ne $websiteResult) { [int]$websiteResult.verified_total } else { 0 }
+            log_path = if ($null -ne $websiteResult) { [string]$websiteResult.log_path } else { $null }
         }
         candidate_verification = [pscustomobject]@{
-            processed_total = [int]$verifyResult.verification_queue.processed_total
-            verified_total = @($verifyResult.verified_candidate_ids).Count
-            log_path = [string]$verifyResult.log_path
-            checkpoint_path = [string]$verifyResult.checkpoint_path
+            status = if ($null -ne $verifyResult) { 'COMPLETED' } else { [string]$verifyPhase.status }
+            reason = if ($null -ne $verifyResult) { $null } else { [string]$verifyPhase.reason }
+            processed_total = if ($null -ne $verifyResult) { [int]$verifyResult.verification_queue.processed_total } else { 0 }
+            verified_total = if ($null -ne $verifyResult) { @($verifyResult.verified_candidate_ids).Count } else { 0 }
+            log_path = if ($null -ne $verifyResult) { [string]$verifyResult.log_path } else { $null }
+            checkpoint_path = if ($null -ne $verifyResult) { [string]$verifyResult.checkpoint_path } else { $null }
         }
         new_official_career_companies = @($newOfficialCareerCompanyIds).Count
         new_official_career_company_ids = @($newOfficialCareerCompanyIds)
@@ -257,6 +286,7 @@ $managed = Invoke-JobAgentManagedDailyRun `
     -RetainLogs $RetainLogs `
     -StartedAt $runStartedAt `
     -ScriptBlock {
+        param([string]$RunId)
         $acquisition = if ($DisableAcquisition) {
             [pscustomobject]@{
                 schema_version = 'jobagent/daily-acquisition/v1'
@@ -295,6 +325,10 @@ $managed = Invoke-JobAgentManagedDailyRun `
             -AlwaysIncludeCompanyIds $acquiredCompanyIds `
             -StartedAt $runStartedAt
         $dailyResult | Add-Member -NotePropertyName acquisition -NotePropertyValue $acquisition -Force
+        $dailyResult | Add-Member -NotePropertyName run_id -NotePropertyValue $RunId -Force
+        if ([string]$acquisition.status -eq 'PARTIAL' -and [string]$dailyResult.status -ne 'FAILED') {
+            $dailyResult.status = 'PARTIAL'
+        }
         return $dailyResult
     }
 
@@ -308,6 +342,7 @@ $result = $managed.result
     fetch_client = if ($resolvedMode -eq 'live') { $FetchClient } else { $null }
     wsl_distribution = if ($resolvedMode -eq 'live') { $WslDistribution } else { $null }
     scan_run_id = if ($result) { $result.scan_run_id } else { $null }
+    run_id = if ($result) { $result.run_id } else { $null }
     store_path = if ($result) { $result.store_path } else { $null }
     report_path = if ($result) { $result.report_path } else { $null }
     markdown_report_path = if ($result) { $result.markdown_report_path } else { $null }
