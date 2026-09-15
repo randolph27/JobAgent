@@ -154,6 +154,10 @@ function ConvertTo-JobAgentReportDisplayLabel {
                 'run_limit' { return 'Limit' }
                 'selection_reason' { return 'Auswahlgrund' }
                 'checked_jobs' { return 'Gepruefte Stellen' }
+                'captured_jobs_total' { return 'Erfasste Stellen gesamt' }
+                'profile_matching_jobs_total' { return 'Profiltreffer gesamt' }
+                'captured_jobs_this_run' { return 'Erfasste Stellen im Lauf' }
+                'profile_matching_jobs_this_run' { return 'Profiltreffer im Lauf' }
                 'new_jobs' { return 'Neue Stellen' }
                 'active_matching_jobs' { return 'Aktive passende Stellen' }
                 'updated_jobs' { return 'Aktualisierte Stellen' }
@@ -407,6 +411,13 @@ function Test-JobAgentReportMatch {
     return (@('MATCH', 'POSSIBLE') -contains $result) -and (@('A', 'B', 'C') -contains [string]$Job.priority)
 }
 
+function Test-JobAgentReportCapturedJob {
+    param([Parameter(Mandatory)][object]$Job)
+
+    $validity = [string](Get-JobAgentReportProperty -Object (Get-JobAgentReportProperty -Object $Job -Name 'job_validity') -Name 'result' -Default 'UNKNOWN')
+    return $validity -ne 'REJECTED'
+}
+
 function Get-JobAgentReportPriorityExplanation {
     param([Parameter(Mandatory)][object]$Job)
 
@@ -538,6 +549,15 @@ function New-JobAgentReportStatistics {
     $attempts = @($Document.scan_attempts | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
     $snapshots = @($Document.job_snapshots | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
     $changes = @($Document.change_events | Where-Object { [string]$_.scan_run_id -eq $ScanRunId })
+    $jobsById = @{}
+    foreach ($job in @($Document.jobs)) {
+        $jobsById[[string]$job.job_id] = $job
+    }
+    $capturedJobs = @($Document.jobs | Where-Object { Test-JobAgentReportCapturedJob -Job $_ })
+    $capturedJobsThisRun = @($snapshots | Where-Object {
+            $jobsById.ContainsKey([string]$_.job_id) -and (Test-JobAgentReportCapturedJob -Job $jobsById[[string]$_.job_id])
+        })
+    $profileMatchingJobsThisRun = @($capturedJobsThisRun | Where-Object { Test-JobAgentReportMatch -Job $jobsById[[string]$_.job_id] })
     $uncertainSourceErrors = @('UNCLEAR_SOURCE', 'BLOCKED', 'PARSING_ERROR', 'TECHNICAL_LIMITATION')
     $unreachableSourceErrors = @('NOT_REACHABLE', 'TIMEOUT')
 
@@ -557,6 +577,10 @@ function New-JobAgentReportStatistics {
         adapter_attempts = $attempts.Count
         checked_jobs = $snapshots.Count
         snapshots = $snapshots.Count
+        captured_jobs_total = $capturedJobs.Count
+        profile_matching_jobs_total = @($capturedJobs | Where-Object { Test-JobAgentReportMatch -Job $_ }).Count
+        captured_jobs_this_run = $capturedJobsThisRun.Count
+        profile_matching_jobs_this_run = $profileMatchingJobsThisRun.Count
         new_jobs = @($changes | Where-Object event_type -eq 'JOB_CREATED').Count
         active_matching_jobs = @($ActiveEntries).Count
         updated_jobs = @($changes | Where-Object event_type -eq 'JOB_UPDATED').Count
@@ -566,6 +590,39 @@ function New-JobAgentReportStatistics {
         uncertain_sources = @($attempts | Where-Object { $uncertainSourceErrors -contains [string]$_.error_class }).Count
         unreachable_career_pages = @($attempts | Where-Object { $unreachableSourceErrors -contains [string]$_.error_class }).Count
         errors = @($attempts | Where-Object { [string]$_.error_class -ne 'NONE' }).Count
+    }
+}
+
+function New-JobAgentReportCaptureManifest {
+    param(
+        [Parameter(Mandatory)][object]$ScanRun,
+        [Parameter()][AllowEmptyCollection()][object[]]$Attempts = @()
+    )
+
+    $scope = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $ScanRun -Name 'collection_scope' -Default 'UNKNOWN')
+    $searchTerms = @((Get-JobAgentReportProperty -Object $ScanRun -Name 'search_terms' -Default @()) | ForEach-Object { [string]$_ })
+    $completeAttempts = @($Attempts | Where-Object { ([string]$_.status -eq 'SUCCESS') -and ([string]$_.error_class -eq 'NONE') -and ([bool](Get-JobAgentReportProperty -Object $_ -Name 'scan_complete' -Default $false)) })
+    $partialAttempts = @($Attempts | Where-Object { ([string]$_.status -eq 'PARTIAL') -or (([string]$_.status -eq 'SUCCESS') -and (-not [bool](Get-JobAgentReportProperty -Object $_ -Name 'scan_complete' -Default $false))) })
+    $failedAttempts = @($Attempts | Where-Object { [string]$_.status -eq 'FAILED' })
+    $selection = Get-JobAgentReportProperty -Object $ScanRun -Name 'selection_summary'
+    $skipped = @((Get-JobAgentReportProperty -Object $selection -Name 'skipped' -Default @()))
+
+    [pscustomobject]@{
+        collection_scope = $scope
+        search_terms = @($searchTerms)
+        run_status = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $ScanRun -Name 'status' -Default 'UNKNOWN')
+        attempted_sources = $Attempts.Count
+        complete_sources = $completeAttempts.Count
+        partial_sources = $partialAttempts.Count
+        failed_sources = $failedAttempts.Count
+        skipped_companies = $skipped.Count
+        completion_boundary = if (($partialAttempts.Count -eq 0) -and ($failedAttempts.Count -eq 0) -and ($skipped.Count -eq 0) -and ($scope -eq 'ALL_ROLES')) { 'COMPLETE_FOR_SELECTED_OFFICIAL_SOURCES' } else { 'LIMITED_OR_PARTIAL' }
+        limitations = @(
+            if ($scope -ne 'ALL_ROLES') { 'Explizite Suchbegriffe begrenzen die Erfassung auf den angegebenen Scope.' }
+            if ($partialAttempts.Count -gt 0) { 'Mindestens eine Quelle war unvollstaendig; fehlende Jobs duerfen nicht als abwesend gelten.' }
+            if ($failedAttempts.Count -gt 0) { 'Mindestens eine Quelle ist fehlgeschlagen; bestehende Jobs dieser Quelle bleiben erhalten.' }
+            if ($skipped.Count -gt 0) { 'Nicht alle auswahlfaehigen Firmen wurden in diesem Lauf verarbeitet.' }
+        )
     }
 }
 
@@ -738,6 +795,7 @@ function New-JobAgentDailyReport {
             source_issues = @($sourceIssues)
         }
         statistics = New-JobAgentReportStatistics -Document $Document -ScanRunId $ScanRunId -ActiveEntries $activeEntries -NewCompanies $newCompanies
+        capture_manifest = New-JobAgentReportCaptureManifest -ScanRun $scanRun -Attempts $attempts
         coverage = New-JobAgentCoverageReport -Document $Document -SourceRegistry $SourceRegistry -HintStore $HintStore -Now $finished -MaxPriorityItems 10
     }
 }
@@ -1032,6 +1090,21 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add("- Snapshots: $($Report.statistics.snapshots)")
     [void]$lines.Add("- Fehler: $($Report.statistics.errors)")
     [void]$lines.Add('')
+    [void]$lines.Add('## Erfassungsscope und Vollstaendigkeit')
+    [void]$lines.Add("- Scope: $($Report.capture_manifest.collection_scope)")
+    [void]$lines.Add("- Suchbegriffe: $(if (@($Report.capture_manifest.search_terms).Count -eq 0) { 'Keine (alle Berufe)' } else { @($Report.capture_manifest.search_terms) -join ', ' })")
+    [void]$lines.Add("- Vollstaendigkeitsgrenze: $($Report.capture_manifest.completion_boundary)")
+    [void]$lines.Add("- Quellen: $($Report.capture_manifest.complete_sources) vollstaendig, $($Report.capture_manifest.partial_sources) teilweise, $($Report.capture_manifest.failed_sources) fehlgeschlagen, $($Report.capture_manifest.skipped_companies) Firmen uebersprungen")
+    foreach ($limitation in @($Report.capture_manifest.limitations)) {
+        [void]$lines.Add("- Grenze: $limitation")
+    }
+    [void]$lines.Add('')
+    [void]$lines.Add('| Metrik | Wert |')
+    [void]$lines.Add('|---|---:|')
+    foreach ($metric in @('captured_jobs_total', 'profile_matching_jobs_total', 'captured_jobs_this_run', 'profile_matching_jobs_this_run')) {
+        [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-JobAgentReportDisplayLabel -Value $metric -Domain 'metric'), $Report.statistics.$metric))
+    }
+    [void]$lines.Add('')
     [void]$lines.Add('## Neue passende Stellen')
     Add-JobAgentReportMarkdownTable -Lines $lines -Items @($Report.sections.new_matching_jobs) -EmptyText 'Keine neuen passenden Stellen im Lauf.'
     [void]$lines.Add('')
@@ -1053,7 +1126,7 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     [void]$lines.Add('## Recherche-Statistik')
     [void]$lines.Add('| Metrik | Wert |')
     [void]$lines.Add('|---|---:|')
-    foreach ($metric in @('checked_jobs', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
+    foreach ($metric in @('checked_jobs', 'captured_jobs_total', 'profile_matching_jobs_total', 'captured_jobs_this_run', 'profile_matching_jobs_this_run', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
         [void]$lines.Add(('| {0} | {1} |' -f (ConvertTo-JobAgentReportDisplayLabel -Value $metric -Domain 'metric'), $Report.statistics.$metric))
     }
     [void]$lines.Add('')
@@ -1172,6 +1245,25 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('</div>')
     [void]$lines.Add('</section>')
 
+    [void]$lines.Add('<section><h2>Erfassungsscope und Vollstaendigkeit</h2>')
+    [void]$lines.Add('<div class="summary">')
+    foreach ($item in @(
+            @{ Label = 'Scope'; Value = $Report.capture_manifest.collection_scope },
+            @{ Label = 'Suchbegriffe'; Value = if (@($Report.capture_manifest.search_terms).Count -eq 0) { 'Keine (alle Berufe)' } else { @($Report.capture_manifest.search_terms) -join ', ' } },
+            @{ Label = 'Vollstaendigkeitsgrenze'; Value = $Report.capture_manifest.completion_boundary },
+            @{ Label = 'Erfasste Stellen gesamt'; Value = $Report.statistics.captured_jobs_total },
+            @{ Label = 'Profiltreffer gesamt'; Value = $Report.statistics.profile_matching_jobs_total },
+            @{ Label = 'Erfasste Stellen im Lauf'; Value = $Report.statistics.captured_jobs_this_run },
+            @{ Label = 'Profiltreffer im Lauf'; Value = $Report.statistics.profile_matching_jobs_this_run }
+        )) {
+        [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportHtmlText $item.Label) + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $item.Value) + '</span></div>')
+    }
+    [void]$lines.Add('</div>')
+    foreach ($limitation in @($Report.capture_manifest.limitations)) {
+        [void]$lines.Add('<p class="unknown">Grenze: ' + (ConvertTo-JobAgentReportHtmlText $limitation) + '</p>')
+    }
+    [void]$lines.Add('</section>')
+
     [void]$lines.Add('<section><h2>Neue passende Stellen</h2>')
     Add-JobAgentReportHtmlTable -Lines $lines -Items @($Report.sections.new_matching_jobs) -EmptyText 'Keine neuen passenden Stellen im Lauf.'
     [void]$lines.Add('</section>')
@@ -1197,7 +1289,7 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('</section>')
 
     [void]$lines.Add('<section><h2>Recherche-Statistik</h2><div class="summary">')
-    foreach ($metric in @('checked_jobs', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
+    foreach ($metric in @('checked_jobs', 'captured_jobs_total', 'profile_matching_jobs_total', 'captured_jobs_this_run', 'profile_matching_jobs_this_run', 'new_jobs', 'active_matching_jobs', 'updated_jobs', 'removed_or_closed_jobs', 'invalid_jobs', 'new_companies', 'uncertain_sources', 'unreachable_career_pages', 'errors')) {
         [void]$lines.Add('<div class="card"><span class="label">' + (ConvertTo-JobAgentReportDisplayHtmlText $metric -Domain 'metric') + '</span><span class="value">' + (ConvertTo-JobAgentReportHtmlText $Report.statistics.$metric) + '</span></div>')
     }
     [void]$lines.Add('</div></section>')

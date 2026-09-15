@@ -260,6 +260,8 @@ Pflichtfelder:
 - `started_at`, `finished_at`
 - `status`
 - `company_ids`
+- `collection_scope`: `ALL_ROLES` bei leeren Suchbegriffen, sonst `EXPLICIT_TERMS`.
+- `search_terms`: die bereinigten expliziten Suchbegriffe; bei `ALL_ROLES` leer.
 - `artifact_paths`
 - `errors`
 
@@ -374,7 +376,8 @@ pwsh -NoProfile -File tests\Test-JobAgentStatusMachine.ps1
 - `Invoke-JobAgentDailyRun` laedt den Store unter exklusivem Lock, waehlt faellige Firmen mit offizieller Quelle, fuehrt Adapter je Firma isoliert aus, bewertet Rohjobs getrennt nach Gueltigkeit, Gebiet und optionalem Profil, ruft die Statusmaschine auf und schreibt den aktualisierten Store atomar.
 - `Get-JobAgentDailyRunCandidateCompanies` priorisiert Firmen mit offizieller Quelle nach fehlendem erfolgreichem Scan, hoher `scan_priority`, faelligem `next_scan_at` und stabilem Namen. Mit `CompanyIds` kann ein Lauf fuer Tests oder fokussierte Wiederholungen begrenzt werden.
 - Adapterfehler werden als `ScanAttempt` mit `FAILED` und konkreter Fehlerklasse persistiert; sie brechen den Gesamtlauf nicht ab und entfernen keine bestehenden Stellen.
-- Jeder Lauf erzeugt genau einen `ScanRun` und ein JSON-Ergebnisartefakt unter `logs/jobagent/daily-run-<timestamp>.json`.
+- Jeder Lauf erzeugt genau einen `ScanRun` und ein JSON-Ergebnisartefakt unter `logs/jobagent/daily-run-<timestamp>.json`. Das zugehoerige Runmanifest im JSON-, Markdown- und HTML-Bericht weist Scope, Suchbegriffe, vollstaendige/teilweise/fehlgeschlagene Quellen, uebersprungene Firmen sowie die Vollstaendigkeitsgrenze aus.
+- Berichte zaehlen `Erfasste Stellen` und `Profiltreffer` getrennt, jeweils fuer Gesamtbestand und aktuellen Lauf. Die optionale IT-Fuehrungs-Profilpassung reduziert nur die Trefferansicht; sie verwirft keine `VALID`-Stelle. Bei Teilscan, Quellenfehler, Limit oder `EXPLICIT_TERMS` darf keine Abwesenheit behauptet werden.
 - `tools/Invoke-JobAgentDailyRun.ps1` stellt den lokalen CLI-Einstieg fuer deterministische Fixture-Laeufe und kontrollierte produktive Live-Laeufe bereit. Mit `-FixturePath` oder `-AdapterMode fixture` wird der Fixture-Adapter genutzt; ohne Fixture waehlt `-AdapterMode auto` den Live-HTML-Adapter. Live-Laeufe reichen `-FetchClient`, `-WslDistribution` und `-HostConcurrency` bis in die gemeinsame HTTP-Policy durch; Fehlartefakte enthalten die konkrete Fetch-Fehlerklasse und den tatsaechlichen Client.
 - Der Orchestrator nutzt in Funktionstests Fixture-Adapter oder injizierte Fake-Fetcher; Live-Recherche bleibt eine separate Betriebs-/Pilot-Lane und wird nicht in Funktionstests gegen externe Websites ausgefuehrt.
 

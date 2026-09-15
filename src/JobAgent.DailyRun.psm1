@@ -425,6 +425,10 @@ function New-JobAgentDailyRunSummary {
             raw_jobs = @($AdapterResults | ForEach-Object { @($_.raw_jobs).Count } | Measure-Object -Sum).Sum
             checked_jobs = if ($null -ne $reportStatistics) { [int]$reportStatistics.checked_jobs } else { $jobsForRun.Count }
             snapshots = $jobsForRun.Count
+            captured_jobs_total = if ($null -ne $reportStatistics) { [int]$reportStatistics.captured_jobs_total } else { $jobsForRun.Count }
+            profile_matching_jobs_total = if ($null -ne $reportStatistics) { [int]$reportStatistics.profile_matching_jobs_total } else { 0 }
+            captured_jobs_this_run = if ($null -ne $reportStatistics) { [int]$reportStatistics.captured_jobs_this_run } else { $jobsForRun.Count }
+            profile_matching_jobs_this_run = if ($null -ne $reportStatistics) { [int]$reportStatistics.profile_matching_jobs_this_run } else { 0 }
             created = @($changesForRun | Where-Object event_type -eq 'JOB_CREATED').Count
             active_matching_jobs = if ($null -ne $reportStatistics) { [int]$reportStatistics.active_matching_jobs } else { 0 }
             updated = @($changesForRun | Where-Object event_type -eq 'JOB_UPDATED').Count
@@ -532,6 +536,7 @@ function Invoke-JobAgentDailyRun {
         [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
         [Parameter()][ValidateRange(1, 600)][int]$TimeoutSeconds = 30,
         [Parameter()][ValidateRange(1, 1000)][int]$MaxResultsPerSource = 100,
+        [Parameter()][string[]]$SearchTerms = @(),
         [Parameter()][string[]]$CompanyIds = @(),
         [Parameter()][string[]]$AlwaysIncludeCompanyIds = @(),
         [Parameter()][datetime]$StartedAt = [datetime]::UtcNow
@@ -539,6 +544,8 @@ function Invoke-JobAgentDailyRun {
 
     $projectRootFull = Resolve-JobAgentStoreRoot -RootPath $ProjectRoot
     $scanRunId = New-JobAgentDailyRunId -StartedAt $StartedAt
+    $normalizedSearchTerms = @($SearchTerms | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | ForEach-Object { $_.Trim() } | Select-Object -Unique)
+    $collectionScope = if ($normalizedSearchTerms.Count -eq 0) { 'ALL_ROLES' } else { 'EXPLICIT_TERMS' }
     $reportRelativePath = 'logs/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.json'
     $markdownReportRelativePath = 'logs/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.md'
     $htmlReportRelativePath = 'html/jobagent/daily-run-' + (ConvertTo-JobAgentDailyStamp -Value $StartedAt) + '.html'
@@ -582,6 +589,8 @@ function Invoke-JobAgentDailyRun {
             finished_at = ConvertTo-JobAgentDailyIso -Value $finishedAt
             status = Get-JobAgentDailyRunStatus -AdapterResults $resultsArray
             company_ids = @($companies | ForEach-Object { [string]$_.company_id })
+            collection_scope = $collectionScope
+            search_terms = @($normalizedSearchTerms)
             selection_summary = $selection.summary
             artifact_paths = @($reportRelativePath, $markdownReportRelativePath, $htmlReportRelativePath)
             errors = @($resultsArray | Where-Object { [string]$_.status -eq 'FAILED' } | ForEach-Object { $_.error_class })

@@ -85,6 +85,8 @@ function New-TestJob {
         last_seen = '2026-08-17T10:00:00.000Z'
         changed_at = '2026-08-17T10:00:00.000Z'
         classification = New-TestClassification -Result 'MATCH' -Priority $Priority -Score $Score -Reasons @('IT-Gesamtverantwortung ist belegt.', 'Standort liegt im Zielgebiet.')
+        job_validity = [pscustomobject]@{ result = 'VALID'; reasons = @('Offizielle Detail-URL und Titel sind belegt.'); evaluated_at = '2026-08-17T10:00:00.000Z' }
+        regional_scope = [pscustomobject]@{ result = 'IN_SCOPE'; target_area = 'MUNICH'; reasons = @('Stellenort liegt im Zielgebiet.'); evaluated_at = '2026-08-17T10:00:00.000Z' }
         priority = $Priority
         requirements = @($Requirements)
         salary = 'UNKNOWN'
@@ -146,6 +148,7 @@ $document.jobs[0].published_at = '2026-08-10T08:00:00.000Z'
 $document.jobs[0].salary = '120000 EUR'
 $document.jobs[2].source_id = 'source:alpha_ag_ats'
 $document.jobs[4].classification = New-TestClassification -Result 'REJECTED' -Priority 'UNRATED' -Score 0 -Reasons @()
+$document.jobs[4].job_validity = [pscustomobject]@{ result = 'REJECTED'; reasons = @('Keine gueltige Stelle.'); evaluated_at = '2026-08-17T10:00:00.000Z' }
 $document.job_sources = @(
     [pscustomobject]@{ source_id = 'source:alpha_ag_career'; company_id = 'company:alpha_ag'; source_type = 'CAREER_PAGE'; url = 'https://alpha_ag.example.invalid/careers'; canonical_url = 'https://alpha_ag.example.invalid/careers'; is_official = $true; verified_at = '2026-08-17T09:00:00.000Z'; verification_basis = 'CAREER_URL'; verification_evidence = @([pscustomobject]@{ status = 'VERIFIED'; evidence_type = 'CAREER_URL'; url = 'https://alpha_ag.example.invalid/careers'; basis_url = 'https://alpha_ag.example.invalid/'; redirect_chain = @(); observed_at = '2026-08-17T09:00:00.000Z'; reason = 'Karriere-URL wurde als offizielle Firmenquelle gepflegt.' }) }
     [pscustomobject]@{ source_id = 'source:alpha_ag_ats'; company_id = 'company:alpha_ag'; source_type = 'OFFICIAL_ATS'; url = 'https://jobs.alpha_ag.example.invalid/search'; canonical_url = 'https://jobs.alpha_ag.example.invalid/search'; is_official = $true; verified_at = '2026-08-17T09:00:00.000Z'; verification_basis = 'COMPANY_LINKED_ATS'; verification_evidence = @([pscustomobject]@{ status = 'VERIFIED'; evidence_type = 'COMPANY_LINKED_ATS'; url = 'https://jobs.alpha_ag.example.invalid/search'; basis_url = 'https://alpha_ag.example.invalid/careers'; redirect_chain = @(); observed_at = '2026-08-17T09:00:00.000Z'; reason = 'ATS-Quelle wurde ueber Karriere-URL belegt.' }) }
@@ -157,6 +160,8 @@ $document.scan_runs = @([pscustomobject]@{
         finished_at = '2026-08-17T10:10:00.000Z'
         status = 'PARTIAL'
         company_ids = @('company:alpha_ag', 'company:beta_ag')
+        collection_scope = 'ALL_ROLES'
+        search_terms = @()
         selection_summary = [pscustomobject]@{
             companies_total = 5
             companies_eligible = 4
@@ -175,8 +180,8 @@ $document.scan_runs = @([pscustomobject]@{
         errors = @()
     })
 $document.scan_attempts = @(
-    [pscustomobject]@{ scan_attempt_id = 'scanattempt:alpha'; scan_run_id = $scanRunId; company_id = 'company:alpha_ag'; source_id = 'source:alpha_ag_career'; started_at = '2026-08-17T10:00:00.000Z'; finished_at = '2026-08-17T10:00:01.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200 }
-    [pscustomobject]@{ scan_attempt_id = 'scanattempt:beta'; scan_run_id = $scanRunId; company_id = 'company:beta_ag'; source_id = 'source:beta_ag_career'; started_at = '2026-08-17T10:00:00.000Z'; finished_at = '2026-08-17T10:00:01.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'NOT_REACHABLE'; retry_recommendation = 'RETRY_NEXT_RUN'; http_status = 503 }
+    [pscustomobject]@{ scan_attempt_id = 'scanattempt:alpha'; scan_run_id = $scanRunId; company_id = 'company:alpha_ag'; source_id = 'source:alpha_ag_career'; started_at = '2026-08-17T10:00:00.000Z'; finished_at = '2026-08-17T10:00:01.000Z'; status = 'SUCCESS'; adapter = 'fixture'; error_class = 'NONE'; retry_recommendation = 'NONE'; http_status = 200; scan_complete = $true }
+    [pscustomobject]@{ scan_attempt_id = 'scanattempt:beta'; scan_run_id = $scanRunId; company_id = 'company:beta_ag'; source_id = 'source:beta_ag_career'; started_at = '2026-08-17T10:00:00.000Z'; finished_at = '2026-08-17T10:00:01.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'NOT_REACHABLE'; retry_recommendation = 'RETRY_NEXT_RUN'; http_status = 503; scan_complete = $false }
 )
 $document.job_snapshots = @(
     [pscustomobject]@{ snapshot_id = 'snapshot:alpha_new'; job_id = 'job:alpha_new'; scan_run_id = $scanRunId; source_id = 'source:alpha_ag_career'; captured_at = '2026-08-17T10:00:00.000Z'; content_hash = ('a' * 64); status = 'NEW'; title = 'Head of IT'; location = New-TestLocation -Label 'Muenchen'; official_url = 'https://alpha.example.invalid/jobs/alpha_new'; summary = 'Fuehrung.' }
@@ -204,6 +209,12 @@ Assert-True -Condition ($report.statistics.run_limit -eq 2) -Message 'Report-Sta
 Assert-True -Condition ($report.statistics.selection_reason -eq 'due_by_next_scan_at_then_priority') -Message 'Report-Statistik enthaelt Auswahlgrund nicht.'
 Assert-True -Condition ($report.statistics.errors -eq 1) -Message 'Recherche-Statistik zaehlt Adapterfehler nicht.'
 Assert-True -Condition ($report.statistics.checked_jobs -eq 2) -Message 'Recherche-Statistik zaehlt gepruefte Stellen falsch.'
+Assert-True -Condition ($report.statistics.captured_jobs_total -eq 4) -Message 'Report trennt erfasste Stellen nicht von abgelehnten Rohdaten.'
+Assert-True -Condition ($report.statistics.profile_matching_jobs_total -eq 4) -Message 'Report weist die Profiltreffer im Gesamtbestand nicht aus.'
+Assert-True -Condition ($report.statistics.captured_jobs_this_run -eq 2) -Message 'Report weist die im Lauf erfasste Menge nicht aus.'
+Assert-True -Condition ($report.statistics.profile_matching_jobs_this_run -eq 2) -Message 'Report weist die Profiltreffer im Lauf nicht aus.'
+Assert-True -Condition ($report.capture_manifest.collection_scope -eq 'ALL_ROLES') -Message 'Runmanifest weist den berufsneutralen Scope nicht aus.'
+Assert-True -Condition ($report.capture_manifest.completion_boundary -eq 'LIMITED_OR_PARTIAL') -Message 'Runmanifest markiert Fehler- und Limitgrenzen nicht.'
 Assert-True -Condition ($report.statistics.active_matching_jobs -eq 1) -Message 'Recherche-Statistik zaehlt aktive passende Stellen falsch.'
 Assert-True -Condition ($report.statistics.new_companies -eq 1) -Message 'Recherche-Statistik zaehlt neue Unternehmen falsch.'
 Assert-True -Condition ($report.statistics.unreachable_career_pages -eq 1) -Message 'Nicht erreichbare Karriereportale werden nicht ausgewiesen.'
@@ -221,7 +232,7 @@ Assert-True -Condition ($report.sections.new_matching_jobs[0].provider_url -eq '
 Assert-True -Condition ($report.sections.changed_jobs[0].provider_url -eq 'https://jobs.alpha_ag.example.invalid/search') -Message 'Provider-Link bevorzugt nicht die offizielle ATS-Quelle der Stelle.'
 
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
-foreach ($expected in @('Firmen gesamt: 5', 'Firmen im Lauf: 2', 'Faellige Firmen: 4', 'Uebersprungene Firmen: 2', 'Limit: 2', 'Auswahlgrund: Faellig nach next_scan_at, danach Prioritaet', '## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '### Quellenbestand', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle |', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.', 'Keine Beschreibung aus offizieller Quelle verfuegbar', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Offizielle Stellen-URL](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere-URL](https://alpha_ag.example.invalid/careers)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
+foreach ($expected in @('Firmen gesamt: 5', 'Firmen im Lauf: 2', 'Faellige Firmen: 4', 'Uebersprungene Firmen: 2', 'Limit: 2', 'Auswahlgrund: Faellig nach next_scan_at, danach Prioritaet', '## Erfassungsscope und Vollstaendigkeit', 'Scope: ALL_ROLES', 'Vollstaendigkeitsgrenze: LIMITED_OR_PARTIAL', 'Erfasste Stellen gesamt | 4', 'Profiltreffer gesamt | 4', '## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '### Quellenbestand', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle |', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.', 'Keine Beschreibung aus offizieller Quelle verfuegbar', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Offizielle Stellen-URL](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere-URL](https://alpha_ag.example.invalid/careers)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
     Assert-True -Condition ($markdown.Contains($expected)) -Message "Markdown-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $markdown.Contains('Software Engineer')) -Message 'Abgelehnte Stellen duerfen nicht als passende Stellen gerendert werden.'
@@ -232,7 +243,7 @@ foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sourc
 $report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
 $report.sections.new_matching_jobs[0].description = '<img src=x onerror=alert(1)>Beschreibung'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
-foreach ($expected in @('<!DOCTYPE html>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', '<h3>Quellenbestand</h3>', 'Firmen gesamt', 'Firmen im Lauf', 'Faellige Firmen', 'Uebersprungene Firmen', 'Limit', 'Auswahlgrund', 'Faellig nach next_scan_at, danach Prioritaet', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', 'JobAgent Daily-Run-Bericht', '<th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th>', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Beschreibung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Offizielle Stellen-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
+foreach ($expected in @('<!DOCTYPE html>', '<h2>Erfassungsscope und Vollstaendigkeit</h2>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', '<h3>Quellenbestand</h3>', 'Scope', 'ALL_ROLES', 'Erfasste Stellen gesamt', 'Profiltreffer gesamt', 'Firmen gesamt', 'Firmen im Lauf', 'Faellige Firmen', 'Uebersprungene Firmen', 'Limit', 'Auswahlgrund', 'Faellig nach next_scan_at, danach Prioritaet', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', 'JobAgent Daily-Run-Bericht', '<th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th>', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Beschreibung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Offizielle Stellen-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
     Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'
@@ -270,6 +281,7 @@ Assert-True -Condition ($emptyHtml.Contains('Keine neuen passenden Stellen im La
         'report_preserves_unknown_optional_values',
         'report_renders_markdown_and_html',
         'report_renders_source_inventory_metrics',
+        'report_separates_neutral_capture_profile_counts_and_completeness',
         'report_renders_secure_job_provider_and_source_links',
         'report_blocks_unofficial_source_issue_links',
         'report_escapes_html_content',

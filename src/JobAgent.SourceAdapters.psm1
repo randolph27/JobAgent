@@ -299,7 +299,7 @@ function Invoke-JobAgentFixtureAdapter {
 
     $jobs = foreach ($job in @($FixtureJobs)) {
         if ($job.PSObject.Properties.Name -contains 'title') {
-            New-JobAgentRawJob `
+            $rawJob = New-JobAgentRawJob `
                 -Title ([string]$job.title) `
                 -DetailUrl ([string]$job.detail_url) `
                 -ExternalJobId ([string]$job.external_job_id) `
@@ -307,6 +307,13 @@ function Invoke-JobAgentFixtureAdapter {
                 -LocationLabel ([string]$job.location_label) `
                 -Summary ([string]$job.summary) `
                 -ExtractionConfidence ([int]$job.extraction_confidence)
+            if ($job.PSObject.Properties.Name -contains 'entry_kind') {
+                $rawJob | Add-Member -NotePropertyName entry_kind -NotePropertyValue ([string]$job.entry_kind)
+            }
+            if ($job.PSObject.Properties.Name -contains 'location') {
+                $rawJob | Add-Member -NotePropertyName location -NotePropertyValue $job.location
+            }
+            $rawJob
         }
         else {
             $job

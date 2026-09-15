@@ -536,6 +536,90 @@ try {
     Assert-True -Condition ($liveJob.employment_type -eq 'FULL_TIME') -Message 'Live-Daily-Run uebernimmt employmentType aus JSON-LD nicht.'
     Assert-True -Condition ($liveJob.description -match 'Strategische IT-Leitung') -Message 'Live-Daily-Run uebernimmt offizielle Beschreibung nicht.'
 
+    $neutralProjectRoot = New-TestProjectRoot
+    New-TestStore -ProjectRoot $neutralProjectRoot
+    Add-TestSource -ProjectRoot $neutralProjectRoot -CompanyId 'company:alpha_ag' -SourceId 'source:alpha_ag_neutral' -Url 'https://alpha.example.invalid/careers/neutral'
+    $neutralRawJobs = [System.Collections.Generic.List[object]]::new()
+    $neutralRoles = @(
+        [pscustomobject]@{ slug = 'it-leitung'; title = 'Head of IT'; summary = 'IT-Gesamtverantwortung mit Strategie, Budget und Personalverantwortung.'; profile = 'MATCH' }
+        [pscustomobject]@{ slug = 'buchhaltung'; title = 'Finanzbuchhalter (m/w/d)'; summary = 'Bearbeitung der laufenden Buchhaltung.'; profile = 'REJECTED' }
+        [pscustomobject]@{ slug = 'pflege'; title = 'Pflegefachkraft (m/w/d)'; summary = 'Stationaere Pflege und Betreuung.'; profile = 'REJECTED' }
+        [pscustomobject]@{ slug = 'ausbildung'; title = 'Ausbildung Kaufmann (m/w/d)'; summary = 'Ausbildung im kaufmaennischen Bereich.'; profile = 'REJECTED' }
+    )
+    $neutralLocations = @(
+        [pscustomobject]@{ slug = 'muenchen'; label = 'Muenchen'; target_area = 'MUNICH'; scope = 'IN_SCOPE' }
+        [pscustomobject]@{ slug = 'freising'; label = 'Freising'; target_area = 'FREISING'; scope = 'IN_SCOPE' }
+        [pscustomobject]@{ slug = 'outside'; label = 'Hamburg'; target_area = 'OUT_OF_SCOPE'; scope = 'OUT_OF_SCOPE' }
+        [pscustomobject]@{ slug = 'unknown'; label = 'UNKNOWN'; target_area = 'UNKNOWN'; scope = 'UNKNOWN' }
+    )
+    foreach ($role in $neutralRoles) {
+        foreach ($location in $neutralLocations) {
+            $id = "$($role.slug)-$($location.slug)"
+            $neutralRawJobs.Add([pscustomobject]@{
+                    title = $role.title
+                    detail_url = "https://alpha.example.invalid/careers/$id"
+                    external_job_id = $id
+                    ats_job_id = 'UNKNOWN'
+                    location_label = $location.label
+                    location = [pscustomobject]@{ label = $location.label; city = $location.label; region = 'UNKNOWN'; country = 'DE'; target_area = $location.target_area }
+                    summary = $role.summary
+                    extraction_confidence = 95
+                })
+        }
+    }
+    $neutralRawJobs.Add([pscustomobject]@{
+            title = 'Karriere'
+            detail_url = 'https://alpha.example.invalid/careers'
+            external_job_id = 'navigation'
+            ats_job_id = 'UNKNOWN'
+            location_label = 'Muenchen'
+            entry_kind = 'NAVIGATION'
+            summary = 'Navigation zur Karriereseite.'
+            extraction_confidence = 95
+        })
+    $neutralMode = 'complete'
+    $neutralAdapter = {
+        param([object]$AdapterInput)
+
+        $status = if ($neutralMode -eq 'partial') { 'PARTIAL' } else { 'SUCCESS' }
+        $errorClass = if ($neutralMode -eq 'partial') { 'TECHNICAL_LIMITATION' } else { 'NONE' }
+        Invoke-JobAgentFixtureAdapter -AdapterInput $AdapterInput -FixtureJobs $neutralRawJobs.ToArray() -Status $status -ErrorClass $errorClass -RetryRecommendation $(if ($neutralMode -eq 'partial') { 'RETRY_NEXT_RUN' } else { 'NONE' }) -HttpStatus 200
+    }
+    $neutralFirst = Invoke-JobAgentDailyRun -ProjectRoot $neutralProjectRoot -AdapterResolver $neutralAdapter -StartedAt ([datetime]'2026-08-22T10:00:00Z') -CompanyIds @('company:alpha_ag')
+    Assert-True -Condition ($neutralFirst.status -eq 'SUCCESS') -Message 'Berufsneutraler Fixture-Lauf muss bei vollstaendiger Quelle SUCCESS sein.'
+    Assert-True -Condition (@($neutralFirst.document.jobs).Count -eq 16) -Message 'Berufsneutrale Erfassung muss alle 16 Rollen-/Gebietsfixturen persistieren.'
+    Assert-True -Condition (@($neutralFirst.document.jobs | Where-Object { $_.external_job_id -eq 'navigation' }).Count -eq 0) -Message 'Explizite Nicht-Stelle darf nicht persistiert werden.'
+    foreach ($role in $neutralRoles) {
+        foreach ($location in $neutralLocations) {
+            $job = @($neutralFirst.document.jobs | Where-Object { $_.external_job_id -eq "$($role.slug)-$($location.slug)" })[0]
+            Assert-True -Condition ($null -ne $job) -Message "Berufsneutrale Fixture fehlt: $($role.slug)/$($location.slug)"
+            Assert-True -Condition ($job.job_validity.result -eq 'VALID') -Message "Gueltige Stelle wurde verworfen: $($role.slug)/$($location.slug)"
+            Assert-True -Condition ($job.regional_scope.result -eq $location.scope) -Message "Gebietsbewertung ist falsch: $($role.slug)/$($location.slug)"
+            Assert-True -Condition ($job.classification.result -eq $role.profile) -Message "Profilbewertung ist falsch: $($role.slug)/$($location.slug)"
+        }
+    }
+    Assert-True -Condition ($neutralFirst.summary.statistics.captured_jobs_total -eq 16) -Message 'Erfasste Stellen und Profiltreffer werden nicht getrennt gezaehlt.'
+    Assert-True -Condition ($neutralFirst.summary.statistics.profile_matching_jobs_total -eq 4) -Message 'Profiltrefferzahl des neutralen Bestands ist falsch.'
+    $neutralMarkdown = Get-Content -LiteralPath $neutralFirst.markdown_report_path -Raw
+    Assert-True -Condition ($neutralMarkdown.Contains('Scope: ALL_ROLES')) -Message 'Runmanifest dokumentiert den berufsneutralen Erfassungsscope nicht.'
+    Assert-True -Condition ($neutralMarkdown.Contains('Erfasste Stellen gesamt | 16')) -Message 'Runmanifest weist die vollstaendige Erfassungsmenge nicht aus.'
+    Assert-True -Condition ($neutralMarkdown.Contains('Profiltreffer gesamt | 4')) -Message 'Runmanifest weist die Profiltrefferzahl nicht getrennt aus.'
+
+    $neutralEventCount = @($neutralFirst.document.change_events).Count
+    $neutralSecond = Invoke-JobAgentDailyRun -ProjectRoot $neutralProjectRoot -AdapterResolver $neutralAdapter -StartedAt ([datetime]'2026-08-23T10:00:00Z') -CompanyIds @('company:alpha_ag') -SearchTerms @('Head of IT')
+    Assert-True -Condition (@($neutralSecond.document.jobs).Count -eq 16) -Message 'Profilwechsel darf keine berufsneutral erfassten Stellen entfernen.'
+    Assert-True -Condition (@($neutralSecond.document.change_events | Where-Object { @('JOB_CREATED', 'JOB_CLOSED', 'JOB_REMOVED') -contains $_.event_type }).Count -eq 16) -Message 'Profilwechsel darf keine NEW-, CLOSED- oder REMOVED-Ereignisse erzeugen.'
+    Assert-True -Condition (@($neutralSecond.document.change_events).Count -ge $neutralEventCount) -Message 'Profilwechsel darf die bestehende Historie nicht verlieren.'
+    $neutralSecondRun = @($neutralSecond.document.scan_runs | Where-Object { $_.scan_run_id -eq $neutralSecond.scan_run_id })[0]
+    Assert-True -Condition ($neutralSecondRun.collection_scope -eq 'EXPLICIT_TERMS') -Message 'Runmanifest speichert den expliziten Suchscope nicht.'
+    Assert-True -Condition (@($neutralSecondRun.search_terms).Count -eq 1) -Message 'Runmanifest speichert Suchbegriffe nicht.'
+
+    $neutralMode = 'partial'
+    $neutralThird = Invoke-JobAgentDailyRun -ProjectRoot $neutralProjectRoot -AdapterResolver $neutralAdapter -StartedAt ([datetime]'2026-08-24T10:00:00Z') -CompanyIds @('company:alpha_ag')
+    Assert-True -Condition ($neutralThird.status -eq 'PARTIAL') -Message 'Teilscan muss als PARTIAL protokolliert werden.'
+    Assert-True -Condition (@($neutralThird.document.jobs).Count -eq 16) -Message 'Teilscan darf bestehende berufsneutrale Jobs nicht entfernen.'
+    Assert-True -Condition (@($neutralThird.document.change_events | Where-Object event_type -eq 'JOB_REMOVED').Count -eq 0) -Message 'Teilscan darf keine Abwesenheit behaupten.'
+
     [pscustomobject]@{
         status = 'ok'
         cases = @(
@@ -553,13 +637,19 @@ try {
             'daily_run_persists_selection_summary',
             'daily_run_report_renders_selection_metrics',
             'daily_run_persists_company_freshness_fields',
-            'daily_run_live_jsonld_ats_source'
+            'daily_run_live_jsonld_ats_source',
+            'daily_run_preserves_neutral_role_and_region_matrix',
+            'daily_run_separates_capture_scope_profile_counts_and_completeness',
+            'daily_run_keeps_jobs_stable_on_profile_change_and_partial_scan'
         )
     } | ConvertTo-Json -Depth 4
 }
 finally {
     if ($null -ne (Get-Variable -Name liveProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $liveProjectRoot)) {
         Remove-Item -LiteralPath $liveProjectRoot -Recurse -Force
+    }
+    if ($null -ne (Get-Variable -Name neutralProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $neutralProjectRoot)) {
+        Remove-Item -LiteralPath $neutralProjectRoot -Recurse -Force
     }
     if ($null -ne (Get-Variable -Name multiSourceProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $multiSourceProjectRoot)) {
         Remove-Item -LiteralPath $multiSourceProjectRoot -Recurse -Force

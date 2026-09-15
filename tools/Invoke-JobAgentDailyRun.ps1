@@ -290,6 +290,7 @@ $managed = Invoke-JobAgentManagedDailyRun `
             -MaxCompanies $MaxCompanies `
             -TimeoutSeconds $TimeoutSeconds `
             -MaxResultsPerSource $MaxResultsPerSource `
+            -SearchTerms $SearchTerms `
             -CompanyIds $CompanyIds `
             -AlwaysIncludeCompanyIds $acquiredCompanyIds `
             -StartedAt $runStartedAt

@@ -1,5 +1,16 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-15 - JA-041
+
+- [x] JA-041 Berufsneutrale Stellenerfassung von Suchprofilen trennen
+  - [x] JA-041.1: Der Standard-Scan ist `ALL_ROLES`; explizite Begriffe sind als `EXPLICIT_TERMS` sichtbar begrenzt. Allgemeine Avature- und SuccessFactors-Listen werden ohne IT-Fallback erfasst.
+  - [x] JA-041.2: `job_validity`, `regional_scope` und optionale IT-Fuehrungs-Profilpassung sind getrennt. Gueltige nicht-IT-Stellen sowie OUT_OF_SCOPE/UNKNOWN bleiben speicherbar; explizite Nicht-Stellen bleiben ausgeschlossen.
+  - [x] JA-041.3: ScanRuns persistieren Scope und Suchbegriffe. JSON-, Markdown- und HTML-Reports enthalten ein Runmanifest mit Quellenvollstaendigkeit, Grenzen sowie getrennten Mengen fuer Erfassung und Profiltreffer. Die Fixture-Matrix prueft IT-Leitung, Buchhaltung, Pflege und Ausbildung jeweils in Muenchen, Freising, ausserhalb und UNKNOWN; 16 gueltige Stellen bleiben bei Profilwechsel und Teilscan stabil, eine Navigation wird nicht persistiert.
+  - [x] Scope: `src/JobAgent.DailyRun.psm1`, `src/JobAgent.Report.psm1`, `src/JobAgent.SourceAdapters.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `schemas/jobagent.schema.json`, `docs/data-model.md` sowie die funktionalen Tests.
+  - [x] Evidence: `logs/jobagent/JA-041-1-acceptance.json`, `logs/jobagent/JA-041-2-acceptance.json`, `logs/jobagent/JA-041-3-acceptance.json`.
+  - [x] Funktionstest: `Test-JobAgentLiveScan`, `Test-JobAgentDailyRun`, `Test-JobAgentReport`, `Test-JobAgentSourceAdapters` und `Test-JobAgentSchema` jeweils Exit 0; der AJV-Schematest benötigte außerhalb der Sandbox Zugriff auf den vorhandenen npm-Cache. `git diff --check` Exit 0.
+  - [x] Audit: Keine sichtbare Layoutaenderung; Browser-/Device-Lane nicht anwendbar. Supertest war nicht angefragt und wird als erledigt behandelt.
+
 ## Archiviert 2026-09-06 - JA-040
 
 - [x] JA-040 Jobidentität, Scanvollständigkeit und Aktualisierung korrekt absichern

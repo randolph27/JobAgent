@@ -913,6 +913,19 @@
             "$ref": "#/$defs/id"
           }
         },
+        "collection_scope": {
+          "enum": [
+            "ALL_ROLES",
+            "EXPLICIT_TERMS"
+          ]
+        },
+        "search_terms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
         "selection_summary": {
           "type": "object",
           "additionalProperties": false,
