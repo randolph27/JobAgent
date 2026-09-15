@@ -437,6 +437,8 @@ $screenshots = [System.Collections.Generic.List[string]]::new()
 $caseEvidence = [System.Collections.Generic.List[object]]::new()
 $sessionErrors = @()
 $network = ''
+$environmentalExternalHosts = @()
+$unexpectedExternalHosts = @()
 try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'open', $reportUrl) | Out-Null
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { window.__qa004Errors=[]; const errorEvent=String.fromCharCode(101,114,114,111,114),rejectionEvent=String.fromCharCode(117,110,104,97,110,100,108,101,100,114,101,106,101,99,116,105,111,110),fallback=String.fromCharCode(101,114,114,111,114); window.addEventListener(errorEvent,event=>window.__qa004Errors.push(String(event.message||event.error||fallback))); window.addEventListener(rejectionEvent,event=>window.__qa004Errors.push(String(event.reason||rejectionEvent))); return JSON.stringify({ready:true}); }') | Out-Null
@@ -672,7 +674,17 @@ try {
 
     $network = Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'requests')
     Assert-True -Condition ($network -notmatch '(?i)(/api/|daily-run|acquisition|jobagent/store)') -Message 'Filterinteraktion hat einen unzulaessigen API-, Joblauf- oder Store-Request erzeugt.'
-    Assert-True -Condition ($network -notmatch 'https?://(?!127\.0\.0\.1:8500/)') -Message ('Der lokale Browseraudit hat eine unerwartete externe Anfrage erzeugt: ' + $network)
+    $externalRequestHosts = @(
+        [regex]::Matches($network, '(?i)https?://(?<host>[^/\s]+)') |
+            ForEach-Object { $_.Groups['host'].Value.ToLowerInvariant() } |
+            Where-Object { $_ -ne '127.0.0.1:8500' } |
+            Sort-Object -Unique
+    )
+    # Kaspersky Web Anti-Virus injiziert eigene Telemetrie in den lokalen Browser.
+    # Diese Requests stammen nicht aus dem Report; sie bleiben als Umgebungsnachweis erhalten.
+    $environmentalExternalHosts = @($externalRequestHosts | Where-Object { $_ -eq 'gc.kis.v2.scr.kaspersky-labs.com' })
+    $unexpectedExternalHosts = @($externalRequestHosts | Where-Object { $_ -ne 'gc.kis.v2.scr.kaspersky-labs.com' })
+    Assert-True -Condition ($unexpectedExternalHosts.Count -eq 0) -Message ('Der lokale Browseraudit hat eine unerwartete externe Anfrage erzeugt: ' + ($unexpectedExternalHosts -join ', '))
     $sessionErrors = @(Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => JSON.stringify(window.__qa004Errors || [])' -Case 'Browserfehlernachweis')
     Assert-True -Condition ($sessionErrors.Count -eq 0) -Message ('Browserfehler waehrend der UI-Interaktion: ' + ($sessionErrors -join '; '))
 }
@@ -708,6 +720,8 @@ $summary = [pscustomobject]@{
     }
     browser = [pscustomobject]@{
         requests = $network
+        environmental_external_hosts = @($environmentalExternalHosts)
+        unexpected_external_hosts = @($unexpectedExternalHosts)
         console_or_page_errors = @($sessionErrors)
     }
     controls = @($caseEvidence.ToArray())
