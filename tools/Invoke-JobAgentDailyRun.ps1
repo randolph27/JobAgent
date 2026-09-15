@@ -334,6 +334,7 @@ $managed = Invoke-JobAgentManagedDailyRun `
                 -WslDistribution $WslDistribution `
                 -FixtureMapPath $AcquisitionFixtureMapPath
         }
+        $acquisition | Add-Member -NotePropertyName run_id -NotePropertyValue $RunId -Force
         $acquiredCompanyIds = @(
             if ($null -ne $acquisition -and $acquisition.PSObject.Properties.Name -contains 'new_official_career_company_ids') {
                 $acquisition.new_official_career_company_ids | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }

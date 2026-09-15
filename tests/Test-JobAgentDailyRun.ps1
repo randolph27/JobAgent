@@ -319,6 +319,7 @@ try {
     $acquisitionResult = ($acquisitionOutput -join "`n") | ConvertFrom-Json -Depth 100
     $acquisitionStore = Read-JobAgentStore -ProjectRoot $acquisitionProjectRoot
     Assert-True -Condition ($acquisitionResult.acquisition.status -eq 'COMPLETED') -Message 'Daily-Run-CLI fuehrt Akquisephase nicht automatisch aus.'
+    Assert-True -Condition ($acquisitionResult.acquisition.run_id -eq $acquisitionResult.run_id) -Message 'Akquise und Stellenscan teilen keine gemeinsame Daily-Run-ID.'
     Assert-True -Condition ($acquisitionResult.acquisition.new_official_career_companies -eq 1) -Message ('Daily-Run-CLI zaehlt neuen offiziellen Karrierearbeitgeber nicht: ' + ($acquisitionResult.acquisition | ConvertTo-Json -Depth 20 -Compress))
     Assert-True -Condition (@($acquisitionStore.companies | Where-Object { $_.company_id -eq 'company:example_ag' -and $_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count -eq 1) -Message 'Automatische Akquise schreibt verifizierte Firma nicht in den Store.'
     Assert-True -Condition (@($acquisitionStore.job_sources | Where-Object { $_.company_id -eq 'company:example_ag' -and $_.is_official -eq $true }).Count -eq 1) -Message 'Automatische Akquise schreibt offizielle Karrierequelle nicht in den Store.'
@@ -383,6 +384,7 @@ try {
     $secondAcquisitionResult = ($secondAcquisitionOutput -join "`n") | ConvertFrom-Json -Depth 100
     $secondAcquisitionStore = Read-JobAgentStore -ProjectRoot $acquisitionProjectRoot
     Assert-True -Condition ($secondAcquisitionResult.status -eq 'SUCCESS') -Message 'Zweiter regulaerer Akquise-Start ist nicht erfolgreich.'
+    Assert-True -Condition ($secondAcquisitionResult.acquisition.run_id -eq $secondAcquisitionResult.run_id) -Message 'Zweiter Akquise-/Scanlauf teilt keine gemeinsame Daily-Run-ID.'
     Assert-True -Condition ($secondAcquisitionResult.acquisition.new_official_career_companies -eq 1) -Message 'Zweiter Start darf genau eine neue offizielle Karrierefirma zaehlen.'
     Assert-True -Condition (@($secondAcquisitionStore.companies | Where-Object { $_.company_id -eq 'company:example_ag' }).Count -eq 1) -Message 'Bekannte Firma wurde beim zweiten Start dupliziert.'
     Assert-True -Condition (@($secondAcquisitionStore.companies | Where-Object { $_.company_id -eq 'company:second_example_gmbh' -and $_.verification_status -eq 'CAREER_URL_VERIFIED' }).Count -eq 1) -Message 'Zweiter Start uebernimmt die neue offizielle Karrierefirma nicht.'
