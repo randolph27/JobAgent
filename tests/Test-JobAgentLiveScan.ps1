@@ -86,7 +86,8 @@ function New-FetchResult {
         [Parameter()][string]$Content = '',
         [Parameter()][string]$ErrorMessage = $null,
         [Parameter()][string]$ErrorClass = $null,
-        [Parameter()][string]$FetchClient = $null
+        [Parameter()][string]$FetchClient = $null,
+        [Parameter()][AllowNull()][int]$RetryAfterSeconds = $null
     )
 
     $result = [pscustomobject]@{
@@ -99,6 +100,7 @@ function New-FetchResult {
         started_at = '2026-08-17T10:00:00.000Z'
         finished_at = '2026-08-17T10:00:01.000Z'
         error = $ErrorMessage
+        retry_after_seconds = $RetryAfterSeconds
     }
     if (-not [string]::IsNullOrWhiteSpace($ErrorClass)) {
         $result | Add-Member -NotePropertyName error_class -NotePropertyValue $ErrorClass -Force
@@ -845,6 +847,95 @@ $mixedFetcher = {
 $mixedResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $collisionPolicy -Fetcher $mixedFetcher
 Assert-True -Condition ($mixedResult.status -eq 'PARTIAL' -and -not $mixedResult.scan_complete -and @($mixedResult.raw_jobs).Count -eq 1) -Message 'Gemischter Detailabruf darf weder vollstaendig noch SUCCESS sein.'
 
+$duplicatePageFetches = [System.Collections.Generic.List[string]]::new()
+$duplicatePagePolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 10 -MaxDetailFetchesPerSource 10 -MaxPagesPerSource 3 -SearchTerms @('IT Manager')
+$duplicatePageFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    $script:duplicatePageFetches.Add($Url)
+    switch ($Url) {
+        'https://example.invalid/careers' { New-FetchResult -Url $Url -Ok $true -Content '<html><a rel="next" href="/careers?page=2">Weiter</a><a rel="next" href="/careers?page=2">Weiter</a></html>'; break }
+        'https://example.invalid/careers?page=2' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/careers/jobs/it-manager-901">IT Manager</a><a href="/careers/jobs/it-manager-901">IT Manager</a></html>'; break }
+        'https://example.invalid/careers/jobs/it-manager-901' { New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager</h1><p>IT-Strategie in Muenchen.</p></main>'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'; break }
+    }
+}
+$duplicatePageResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $duplicatePagePolicy -Fetcher $duplicatePageFetcher
+Assert-True -Condition ($duplicatePageResult.status -eq 'SUCCESS' -and @($duplicatePageResult.raw_jobs).Count -eq 1) -Message 'Doppelte Seiten oder Kandidaten-URLs erzeugen keine eindeutige Stellenmenge.'
+Assert-True -Condition (@($duplicatePageFetches | Where-Object { $_ -eq 'https://example.invalid/careers?page=2' }).Count -eq 1) -Message 'Doppelte Paginierungs-URL wurde mehrfach abgerufen.'
+
+$duplicateIdFetches = [System.Collections.Generic.List[string]]::new()
+$duplicateIdPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 10 -MaxDetailFetchesPerSource 10 -MaxPagesPerSource 1 -SearchTerms @('IT Manager')
+$duplicateIdFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    $script:duplicateIdFetches.Add($Url)
+    switch ($Url) {
+        'https://example.invalid/careers' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/careers/jobs/it-manager-902">IT Manager</a><a href="/careers/jobs/it-manager-902?locale=de_DE">IT Manager duplicate</a></html>'; break }
+        'https://example.invalid/careers/jobs/it-manager-902' { New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager</h1><p>IT-Strategie in Muenchen.</p></main>'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'; break }
+    }
+}
+$duplicateIdResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $duplicateIdPolicy -Fetcher $duplicateIdFetcher
+Assert-True -Condition ($duplicateIdResult.status -eq 'SUCCESS' -and @($duplicateIdResult.raw_jobs).Count -eq 1) -Message 'Wiederholte externe Stellen-ID erzeugt mehr als eine Stelle.'
+Assert-True -Condition (@($duplicateIdFetches | Where-Object { $_ -match 'it-manager-902' }).Count -eq 1) -Message 'Wiederholte externe Stellen-ID erzeugt mehr als einen Detailabruf.'
+
+$limitFetches = [System.Collections.Generic.List[string]]::new()
+$limitPolicy = New-JobAgentLiveScanPolicy -MaxRetries 0 -MaxResultsPerSource 1 -MaxDetailFetchesPerSource 1 -MaxPagesPerSource 1 -SearchTerms @('IT Manager')
+$limitFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    $script:limitFetches.Add($Url)
+    switch ($Url) {
+        'https://example.invalid/careers' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/careers/jobs/it-manager-903">IT Manager</a><a href="/careers/jobs/it-manager-904">IT Manager</a></html>'; break }
+        'https://example.invalid/careers/jobs/it-manager-903' { New-FetchResult -Url $Url -Ok $true -Content '<main><h1>IT Manager</h1><p>IT-Strategie in Muenchen.</p></main>'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404 -ErrorMessage 'not found'; break }
+    }
+}
+$limitResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $limitPolicy -Fetcher $limitFetcher
+Assert-True -Condition ($limitResult.status -eq 'PARTIAL' -and $limitResult.error_class -eq 'TECHNICAL_LIMITATION' -and (@($limitResult.artifact_paths) -contains 'result_limit_reached')) -Message 'Result-Limit wird nicht als unvollstaendiger Adapterlauf ausgewiesen.'
+Assert-True -Condition (@($limitFetches | Where-Object { $_ -match 'it-manager-904' }).Count -eq 0) -Message 'Result-Limit verhindert weitere Detailabrufe nicht.'
+
+$malformedJsonFetches = [System.Collections.Generic.List[string]]::new()
+$malformedJsonFetcher = {
+    param([string]$Url, [object]$Policy, [int]$Attempt)
+
+    $script:malformedJsonFetches.Add("$Url#$Attempt")
+    New-FetchResult -Url $Url -Ok $true -Content '<html><script type="application/json">{"postings":[</script></html>'
+}
+$malformedJsonResult = Invoke-JobAgentLiveHtmlAdapter -AdapterInput $input -Policy $duplicateIdPolicy -Fetcher $malformedJsonFetcher
+Assert-True -Condition ($malformedJsonResult.status -eq 'PARTIAL' -and $malformedJsonResult.error_class -eq 'PARSING_ERROR' -and (@($malformedJsonResult.artifact_paths) -contains 'malformed_structured_json')) -Message 'Defektes strukturiertes JSON wird nicht als Parsingfehler ausgewiesen.'
+Assert-True -Condition ($malformedJsonFetches.Count -eq 1) -Message 'Defektes JSON darf keine Folgeabrufe ausloesen.'
+
+$retryPolicy = New-JobAgentLiveScanPolicy -MaxRetries 1
+$transportCases = @(
+    [pscustomobject]@{ name = 'http_200'; status_code = 200; error_class = $null; retry_after_seconds = $null; expected_attempts = 1 },
+    [pscustomobject]@{ name = 'http_404'; status_code = 404; error_class = 'HTTP_STATUS'; retry_after_seconds = $null; expected_attempts = 1 },
+    [pscustomobject]@{ name = 'http_429_retry_after'; status_code = 429; error_class = 'HTTP_STATUS'; retry_after_seconds = 30; expected_attempts = 1 },
+    [pscustomobject]@{ name = 'http_503'; status_code = 503; error_class = 'HTTP_STATUS'; retry_after_seconds = $null; expected_attempts = 2 },
+    [pscustomobject]@{ name = 'timeout'; status_code = 0; error_class = 'TIMEOUT'; retry_after_seconds = $null; expected_attempts = 2 },
+    [pscustomobject]@{ name = 'dns'; status_code = 0; error_class = 'DNS_RESOLUTION_FAILED'; retry_after_seconds = $null; expected_attempts = 2 },
+    [pscustomobject]@{ name = 'tls'; status_code = 0; error_class = 'TLS_HANDSHAKE_FAILED'; retry_after_seconds = $null; expected_attempts = 1 },
+    [pscustomobject]@{ name = 'redirect_loop'; status_code = 310; error_class = 'HTTP_REQUEST_FAILED'; retry_after_seconds = $null; expected_attempts = 1 }
+)
+foreach ($transportCase in $transportCases) {
+    $requestOrder = [System.Collections.Generic.List[string]]::new()
+    $transportFetcher = {
+        param([string]$Url, [object]$Policy, [int]$Attempt)
+
+        $requestOrder.Add("$Url#$Attempt")
+        New-FetchResult -Url $Url -Ok ($transportCase.status_code -eq 200) -StatusCode $transportCase.status_code -ErrorMessage $transportCase.name -ErrorClass $transportCase.error_class -RetryAfterSeconds $transportCase.retry_after_seconds
+    }.GetNewClosure()
+    $transportResult = Invoke-JobAgentLiveFetchWithRetry -Url ('https://example.invalid/' + $transportCase.name) -Policy $retryPolicy -Fetcher $transportFetcher
+    Assert-True -Condition (@($transportResult.attempts).Count -eq $transportCase.expected_attempts) -Message "Transportfall $($transportCase.name) hat eine falsche Requestanzahl."
+    Assert-True -Condition ($requestOrder.Count -eq $transportCase.expected_attempts -and $requestOrder[0] -match '#1$') -Message "Transportfall $($transportCase.name) protokolliert die Requestreihenfolge nicht."
+    $actualErrorClass = if ($transportResult.PSObject.Properties.Name -contains 'error_class') { [string]$transportResult.error_class } else { '' }
+    Assert-True -Condition ($actualErrorClass -eq [string]$transportCase.error_class) -Message "Transportfall $($transportCase.name) verliert die Fehlerklasse."
+    if ($transportCase.name -eq 'http_429_retry_after') {
+        Assert-True -Condition ($transportResult.retry_after_seconds -eq 30) -Message 'Retry-After wird nicht erhalten oder erzeugt einen sofortigen Wiederholungsabruf.'
+    }
+}
+
 $retryCounter = 0
 $retryFetcher = {
     param([string]$Url, [object]$Policy, [int]$Attempt)
@@ -909,6 +1000,11 @@ Assert-True -Condition (@($retry.attempts).Count -eq 2) -Message 'Live-Fetch-Ret
         'live_adapter_preserves_fetch_error_diagnostics',
         'path_scoped_job_identity',
         'mixed_detail_fetch_is_partial',
+        'duplicate_pagination_url_is_fetched_once',
+        'duplicate_external_job_id_is_fetched_once',
+        'result_limit_is_partial_without_extra_detail_fetch',
+        'malformed_structured_json_is_parsing_error',
+        'controlled_transport_retry_contract',
         'retry_attempt_log'
     )
 } | ConvertTo-Json -Depth 5

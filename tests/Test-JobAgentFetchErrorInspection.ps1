@@ -133,6 +133,37 @@ try {
     $legacyResult = ($legacyOutput -join "`n") | ConvertFrom-Json -Depth 30
     Assert-True -Condition ($legacyResult.dominant_error_class -eq 'TLS_HANDSHAKE_FAILED') -Message 'Inspection klassifiziert Legacy-Fetches ohne error_class nicht.'
     Assert-True -Condition ($legacyResult.status -eq 'environment_tls_check_required') -Message 'Inspection leitet aus dominanten Legacy-TLS-Fehlern keinen Environment-Check ab.'
+
+    $redactionMarker = 'fixture-redaction-marker'
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-verification/v1'
+        run_id = '20260908-124000'
+        results = @(
+            [pscustomobject]@{
+                candidate_id = 'hint:redaction'
+                fetches = @(
+                    [pscustomobject]@{
+                        url = 'https://redaction.example.invalid/'
+                        error_class = 'HTTP_REQUEST_FAILED'
+                        error_detail = 'Authorization: Bearer ' + $redactionMarker
+                    }
+                )
+            }
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $logRoot 'company-candidate-website-discovery-20260908-124000.json') -Encoding UTF8
+
+    $redactionOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Inspect-JobAgentFetchErrors.ps1') -ProjectRoot $projectRoot 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ('Fetch-Error-Inspection-Redaction ist fehlgeschlagen: ' + ($redactionOutput -join "`n"))
+    $redactionJson = $redactionOutput -join "`n"
+    Assert-True -Condition ($redactionJson -notmatch $redactionMarker -and $redactionJson -match '\[REDACTED\]') -Message 'Fetch-Error-Inspection reicht Zugangsdaten aus Fetchlogs weiter.'
+
+    Remove-Item -LiteralPath (Join-Path $logRoot 'JA-027-batch-20260908-123000.json') -Force
+    Remove-Item -LiteralPath (Join-Path $logRoot 'company-candidate-website-discovery-20260908-124000.json') -Force
+    Set-Content -LiteralPath (Join-Path $logRoot 'JA-027-batch-20260908-125000.json') -Value '{defektes json' -Encoding UTF8
+    $malformedOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Inspect-JobAgentFetchErrors.ps1') -ProjectRoot $projectRoot 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ('Fetch-Error-Inspection-Malformed ist fehlgeschlagen: ' + ($malformedOutput -join "`n"))
+    $malformedResult = ($malformedOutput -join "`n") | ConvertFrom-Json -Depth 30
+    Assert-True -Condition ($malformedResult.inspected_file_count -eq 0 -and $malformedResult.status -eq 'no_fetch_error_summary') -Message 'Inspection behandelt defekte oder fehlende Fetchlogs nicht als leeren, klaren Diagnosezustand.'
 }
 finally {
     if (Test-Path -LiteralPath $projectRoot) {

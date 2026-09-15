@@ -94,6 +94,30 @@ function Get-ToolExceptionMessages {
     }
 }
 
+function ConvertTo-ToolSafeDiagnosticText {
+    param([Parameter()][AllowNull()][string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) {
+        return $Text
+    }
+
+    $redacted = [regex]::Replace($Text, '(?i)\b(authorization\s*:\s*bearer\s+|bearer\s+|(?:access[_-]?)?token\s*[=:]\s*|api[_-]?key\s*[=:]\s*)[^\s&;,]+', '$1[REDACTED]')
+    return [regex]::Replace($redacted, '\x00', '')
+}
+
+function ConvertTo-ToolSafeProbeResult {
+    param([Parameter(Mandatory)][object]$Result)
+
+    [pscustomobject]@{
+        client = if ($Result.PSObject.Properties.Name -contains 'client') { [string]$Result.client } else { 'unknown' }
+        ok = if ($Result.PSObject.Properties.Name -contains 'ok') { [bool]$Result.ok } else { $false }
+        status_code = if ($Result.PSObject.Properties.Name -contains 'status_code') { $Result.status_code } else { $null }
+        error = ConvertTo-ToolSafeDiagnosticText -Text $(if ($Result.PSObject.Properties.Name -contains 'error') { [string]$Result.error } else { $null })
+        error_detail = ConvertTo-ToolSafeDiagnosticText -Text $(if ($Result.PSObject.Properties.Name -contains 'error_detail') { [string]$Result.error_detail } else { $null })
+        exception_types = if ($Result.PSObject.Properties.Name -contains 'exception_types') { @($Result.exception_types | ForEach-Object { [string]$_ }) } else { @() }
+    }
+}
+
 function Invoke-ToolDotNetProbe {
     param(
         [Parameter(Mandatory)][string]$Url,
@@ -243,18 +267,18 @@ foreach ($url in $urls) {
         }
         $results.Add([pscustomobject]@{
                 url = [string]$url
-                dotnet = $row[0].dotnet
-                curl = $row[0].curl
-                wsl_curl = if ($row[0].PSObject.Properties.Name -contains 'wsl_curl') { $row[0].wsl_curl } else { [pscustomobject]@{ client = 'wsl-curl'; ok = $false; status_code = $null; error = 'fixture missing wsl_curl'; error_detail = 'fixture missing wsl_curl'; exception_types = @() } }
+                dotnet = ConvertTo-ToolSafeProbeResult -Result $row[0].dotnet
+                curl = ConvertTo-ToolSafeProbeResult -Result $row[0].curl
+                wsl_curl = if ($row[0].PSObject.Properties.Name -contains 'wsl_curl') { ConvertTo-ToolSafeProbeResult -Result $row[0].wsl_curl } else { [pscustomobject]@{ client = 'wsl-curl'; ok = $false; status_code = $null; error = 'fixture missing wsl_curl'; error_detail = 'fixture missing wsl_curl'; exception_types = @() } }
             })
         continue
     }
 
     $results.Add([pscustomobject]@{
             url = [string]$url
-            dotnet = Invoke-ToolDotNetProbe -Url ([string]$url) -Timeout $TimeoutSeconds
-            curl = Invoke-ToolCurlProbe -Url ([string]$url) -Timeout $TimeoutSeconds
-            wsl_curl = Invoke-ToolWslCurlProbe -Url ([string]$url) -Timeout $TimeoutSeconds
+            dotnet = ConvertTo-ToolSafeProbeResult -Result (Invoke-ToolDotNetProbe -Url ([string]$url) -Timeout $TimeoutSeconds)
+            curl = ConvertTo-ToolSafeProbeResult -Result (Invoke-ToolCurlProbe -Url ([string]$url) -Timeout $TimeoutSeconds)
+            wsl_curl = ConvertTo-ToolSafeProbeResult -Result (Invoke-ToolWslCurlProbe -Url ([string]$url) -Timeout $TimeoutSeconds)
         })
 }
 

@@ -38,7 +38,7 @@ try {
     } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $inspectionPath -Encoding UTF8
 
     $fixturePath = Join-Path $projectRoot 'probe-fixture.json'
-    [pscustomobject]@{
+    $fixture = [pscustomobject]@{
         results = @(
             [pscustomobject]@{
                 url = 'https://alpha.example.invalid/'
@@ -95,7 +95,8 @@ try {
                 }
             }
         )
-    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
+    }
+    $fixture | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
 
     $outputPath = Join-Path $logRoot 'JA-027-fetch-environment-test.json'
     $output = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Test-JobAgentFetchEnvironment.ps1') -ProjectRoot $projectRoot -InspectionPath $inspectionPath -FixturePath $fixturePath -OutputPath $outputPath -MaxUrls 2 2>&1)
@@ -108,7 +109,17 @@ try {
     Assert-True -Condition ($result.status -eq 'dotnet_fetch_fails_but_curl_succeeds') -Message 'Fetch-Environment-Probe unterscheidet DotNet- und Curl-Erreichbarkeit nicht.'
     Assert-True -Condition (@($result.results | Where-Object { $_.url -eq 'https://alpha.example.invalid/' -and $_.dotnet.ok -eq $false -and $_.curl.ok -eq $true }).Count -eq 1) -Message 'Fetch-Environment-Probe verliert Client-spezifische Ergebnisse.'
 
-    [pscustomobject]@{
+    $redactionMarker = 'fixture-redaction-marker'
+    $fixture.results[1].curl.error = 'Authorization: Bearer ' + $redactionMarker
+    $fixture.results[1].curl.error_detail = 'Authorization: Bearer ' + $redactionMarker
+    $fixture | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
+    $redactionOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Test-JobAgentFetchEnvironment.ps1') -ProjectRoot $projectRoot -InspectionPath $inspectionPath -FixturePath $fixturePath -OutputPath $outputPath -MaxUrls 2 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ('Fetch-Environment-Redaction ist fehlgeschlagen: ' + ($redactionOutput -join "`n"))
+    $redactionJson = $redactionOutput -join "`n"
+    Assert-True -Condition ($redactionJson -notmatch $redactionMarker -and $redactionJson -match '\[REDACTED\]') -Message 'Fetch-Environment-Probe reicht Zugangsdaten aus der Fixture weiter.'
+    Assert-True -Condition ((Get-Content -Raw -LiteralPath $outputPath) -notmatch $redactionMarker) -Message 'Fetch-Environment-Evidence enthaelt eine Zugangsdatenmarkierung.'
+
+    $fixture = [pscustomobject]@{
         results = @(
             [pscustomobject]@{
                 url = 'https://alpha.example.invalid/'
@@ -117,7 +128,8 @@ try {
                 wsl_curl = [pscustomobject]@{ client = 'wsl-curl'; ok = $true; status_code = 200; error = $null; error_detail = $null; exception_types = @() }
             }
         )
-    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
+    }
+    $fixture | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
 
     $wslOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Test-JobAgentFetchEnvironment.ps1') -ProjectRoot $projectRoot -InspectionPath $inspectionPath -FixturePath $fixturePath -OutputPath $outputPath -MaxUrls 1 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Fetch-Environment-Probe-WSL ist fehlgeschlagen: " + ($wslOutput -join "`n"))
@@ -125,7 +137,7 @@ try {
     Assert-True -Condition ($wslResult.status -eq 'schannel_fetch_fails_but_wsl_curl_succeeds') -Message 'Fetch-Environment-Probe erkennt WSL-Curl als kontrollierten Schannel-Fallback nicht.'
     Assert-True -Condition (@($wslResult.results | Where-Object { $_.wsl_curl.ok -eq $true -and $_.curl.ok -eq $false }).Count -eq 1) -Message 'Fetch-Environment-Probe verliert WSL-Curl-Ergebnisse.'
 
-    [pscustomobject]@{
+    $fixture = [pscustomobject]@{
         results = @(
             [pscustomobject]@{
                 url = 'https://alpha.example.invalid/'
@@ -134,12 +146,18 @@ try {
                 wsl_curl = [pscustomobject]@{ client = 'wsl-curl'; ok = $true; status_code = 200; error = $null; error_detail = $null; exception_types = @() }
             }
         )
-    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
+    }
+    $fixture | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
 
     $successOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Test-JobAgentFetchEnvironment.ps1') -ProjectRoot $projectRoot -InspectionPath $inspectionPath -FixturePath $fixturePath -OutputPath $outputPath -MaxUrls 1 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Fetch-Environment-Probe-Success ist fehlgeschlagen: " + ($successOutput -join "`n"))
     $successResult = ($successOutput -join "`n") | ConvertFrom-Json -Depth 30
     Assert-True -Condition ($successResult.status -eq 'dotnet_fetch_available') -Message 'Fetch-Environment-Probe erkennt wiederhergestellten DotNet-Fetchpfad nicht.'
+
+    $fixture = [pscustomobject]@{ results = @($fixture.results[0]) }
+    $fixture | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath $fixturePath -Encoding UTF8
+    $missingFixtureOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Test-JobAgentFetchEnvironment.ps1') -ProjectRoot $projectRoot -InspectionPath $inspectionPath -FixturePath $fixturePath -OutputPath $outputPath -MaxUrls 2 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -ne 0 -and (($missingFixtureOutput -join "`n") -match 'keine Probe')) -Message 'Fetch-Environment-Probe akzeptiert eine unvollstaendige Fixture als gruene Probe.'
 }
 finally {
     if (Test-Path -LiteralPath $projectRoot) {

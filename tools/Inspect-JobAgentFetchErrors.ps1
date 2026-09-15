@@ -30,6 +30,17 @@ function Read-ToolJsonFile {
     }
 }
 
+function ConvertTo-ToolSafeDiagnosticText {
+    param([Parameter()][AllowNull()][string]$Text)
+
+    if ([string]::IsNullOrWhiteSpace($Text)) {
+        return $Text
+    }
+
+    $redacted = [regex]::Replace($Text, '(?i)\b(authorization\s*:\s*bearer\s+|bearer\s+|(?:access[_-]?)?token\s*[=:]\s*|api[_-]?key\s*[=:]\s*)[^\s&;,]+', '$1[REDACTED]')
+    return [regex]::Replace($redacted, '\x00', '')
+}
+
 function Get-ToolFetchErrorSummaryItems {
     param([Parameter(Mandatory)][object]$Document)
 
@@ -93,7 +104,7 @@ function New-ToolFetchErrorSummaryFromResults {
                             candidate_id = $candidateId
                             error_class = Resolve-ToolFetchErrorClass -Fetch $_
                             url = if ($_.PSObject.Properties.Name -contains 'url') { [string]$_.url } else { '' }
-                            error_detail = if ($_.PSObject.Properties.Name -contains 'error_detail' -and -not [string]::IsNullOrWhiteSpace([string]$_.error_detail)) { [string]$_.error_detail } elseif ($_.PSObject.Properties.Name -contains 'error') { [string]$_.error } else { '' }
+                            error_detail = if ($_.PSObject.Properties.Name -contains 'error_detail' -and -not [string]::IsNullOrWhiteSpace([string]$_.error_detail)) { ConvertTo-ToolSafeDiagnosticText -Text ([string]$_.error_detail) } elseif ($_.PSObject.Properties.Name -contains 'error') { ConvertTo-ToolSafeDiagnosticText -Text ([string]$_.error) } else { '' }
                             exception_types = if ($_.PSObject.Properties.Name -contains 'exception_types') { @($_.exception_types) } else { @() }
                         }
                     })
@@ -165,7 +176,7 @@ function Add-ToolFetchErrorAggregate {
         }
     }
     foreach ($detail in @($SampleDetails)) {
-        $value = ([string]$detail).Trim()
+        $value = (ConvertTo-ToolSafeDiagnosticText -Text ([string]$detail)).Trim()
         if (-not [string]::IsNullOrWhiteSpace($value) -and -not $entry.sample_details.Contains($value) -and $entry.sample_details.Count -lt 3) {
             $entry.sample_details.Add($value)
         }

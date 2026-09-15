@@ -101,11 +101,45 @@ function Invoke-JobAgentLiveFetchWithRetry {
         if ($result.ok -eq $true) {
             break
         }
+        if (-not (Test-JobAgentLiveFetchRetryable -FetchResult $result)) {
+            break
+        }
     }
 
     $last = $attempts[$attempts.Count - 1]
     $last | Add-Member -NotePropertyName attempts -NotePropertyValue @($attempts.ToArray()) -Force
     return $last
+}
+
+function Test-JobAgentLiveFetchRetryable {
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][object]$FetchResult)
+
+    $retryAfterSeconds = if ($FetchResult.PSObject.Properties.Name -contains 'retry_after_seconds' -and $null -ne $FetchResult.retry_after_seconds) {
+        [int]$FetchResult.retry_after_seconds
+    }
+    else {
+        0
+    }
+    if ($retryAfterSeconds -gt 0) {
+        return $false
+    }
+
+    $statusCode = if ($FetchResult.PSObject.Properties.Name -contains 'status_code' -and $null -ne $FetchResult.status_code) {
+        [int]$FetchResult.status_code
+    }
+    else {
+        0
+    }
+    if ($statusCode -eq 408 -or $statusCode -eq 429 -or $statusCode -ge 500) {
+        return $true
+    }
+    if ($statusCode -ge 400) {
+        return $false
+    }
+
+    $errorClass = if ($FetchResult.PSObject.Properties.Name -contains 'error_class') { [string]$FetchResult.error_class } else { '' }
+    return @('TIMEOUT', 'DNS_RESOLUTION_FAILED') -contains $errorClass
 }
 
 function ConvertTo-JobAgentLivePlainText {
@@ -1194,6 +1228,37 @@ function ConvertFrom-JobAgentLiveJsonLdCandidates {
     return $candidates.ToArray()
 }
 
+function Test-JobAgentLiveMalformedStructuredJson {
+    [CmdletBinding()]
+    param([Parameter()][AllowEmptyString()][string]$Html)
+
+    if ([string]::IsNullOrWhiteSpace($Html)) {
+        return $false
+    }
+
+    $jsonTexts = New-Object System.Collections.Generic.List[string]
+    foreach ($match in [regex]::Matches($Html, '<script\b[^>]*type\s*=\s*["'']application/(?:ld\+json|json)["''][^>]*>(?<json>.*?)</script>', [Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [Text.RegularExpressions.RegexOptions]::Singleline)) {
+        $jsonTexts.Add([Net.WebUtility]::HtmlDecode($match.Groups['json'].Value).Trim())
+    }
+    $plainContent = $Html.Trim()
+    if ($jsonTexts.Count -eq 0 -and ($plainContent.StartsWith('{') -or $plainContent.StartsWith('['))) {
+        $jsonTexts.Add($plainContent)
+    }
+
+    foreach ($jsonText in $jsonTexts) {
+        if ([string]::IsNullOrWhiteSpace($jsonText)) {
+            continue
+        }
+        try {
+            $null = $jsonText | ConvertFrom-Json -Depth 100 -ErrorAction Stop
+        }
+        catch {
+            return $true
+        }
+    }
+    return $false
+}
+
 function Test-JobAgentLiveTargetRoleText {
     [CmdletBinding()]
     param(
@@ -1279,10 +1344,13 @@ function ConvertFrom-JobAgentLiveCareerPage {
             continue
         }
         if ($seen.Add([string]$evaluation.canonical_url)) {
+            $externalJobId = Get-JobAgentLiveUrlJobId -Url ([string]$evaluation.canonical_url)
             $candidates.Add((New-JobAgentLiveCandidate `
                     -Title $(if ([string]::IsNullOrWhiteSpace($text)) { 'UNKNOWN' } else { $text }) `
                     -DetailUrl ([string]$evaluation.canonical_url) `
                     -VerificationBasis ([string]$evaluation.verification_basis) `
+                    -ExternalJobId $externalJobId `
+                    -AtsJobId $externalJobId `
                     -ExtractionConfidence 65))
         }
     }
@@ -1569,6 +1637,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
 
     $candidates = New-Object System.Collections.Generic.List[object]
     $seenCandidateUrls = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    $seenCandidateIds = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($fetch in @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true })) {
         $parseBaseUrl = if ($fetch.PSObject.Properties.Name -contains 'content_base_url' -and -not [string]::IsNullOrWhiteSpace([string]$fetch.content_base_url)) { [string]$fetch.content_base_url } else { [string]$fetch.final_url }
         foreach ($candidate in @(ConvertFrom-JobAgentLiveCareerPage `
@@ -1580,7 +1649,8 @@ function Invoke-JobAgentLiveHtmlAdapter {
             if ($candidates.Count -ge [int]$Policy.max_results_per_source) {
                 break
             }
-            if ($seenCandidateUrls.Add([string]$candidate.detail_url)) {
+            $candidateId = if ($candidate.PSObject.Properties.Name -contains 'external_job_id') { ([string]$candidate.external_job_id).Trim() } else { '' }
+            if ($seenCandidateUrls.Add([string]$candidate.detail_url) -and ([string]::IsNullOrWhiteSpace($candidateId) -or $seenCandidateIds.Add($candidateId))) {
                 $candidates.Add($candidate)
             }
         }
@@ -1590,7 +1660,8 @@ function Invoke-JobAgentLiveHtmlAdapter {
     }
     if ($candidates.Count -eq 0) {
         $blockedByContent = Test-JobAgentLiveBlockedContentHint -Html ([string]$sourceFetch.content)
-        $dynamicOnly = if (-not $blockedByContent) { Test-JobAgentLiveDynamicContentHint -Html ([string]$sourceFetch.content) } else { $false }
+        $malformedStructuredJson = @($sourceFetches.ToArray() | Where-Object { $_.ok -eq $true } | Where-Object { Test-JobAgentLiveMalformedStructuredJson -Html ([string]$_.content) }).Count -gt 0
+        $dynamicOnly = if ((-not $blockedByContent) -and (-not $malformedStructuredJson)) { Test-JobAgentLiveDynamicContentHint -Html ([string]$sourceFetch.content) } else { $false }
         $failedPageFetches = @($sourceFetches.ToArray() | Where-Object { $_.ok -ne $true })
         $unprocessedPageHint = @($pageUrlsToFetch.ToArray() | Where-Object { Test-JobAgentLivePaginationQueueUrl -Url ([string]$_.url) }).Count -gt 0
         if ((-not $unprocessedPageHint) -and $sourceFetches.Count -ge $maxPages) {
@@ -1604,7 +1675,7 @@ function Invoke-JobAgentLiveHtmlAdapter {
                 if ($unprocessedPageHint) { break }
             }
         }
-        if ((-not $blockedByContent) -and (-not $dynamicOnly) -and $failedPageFetches.Count -eq 0 -and (-not $unprocessedPageHint)) {
+        if ((-not $blockedByContent) -and (-not $dynamicOnly) -and (-not $malformedStructuredJson) -and $failedPageFetches.Count -eq 0 -and (-not $unprocessedPageHint)) {
             return New-JobAgentAdapterResult `
                 -AdapterInput $AdapterInput `
                 -AdapterName 'live-html-adapter' `
@@ -1618,9 +1689,9 @@ function Invoke-JobAgentLiveHtmlAdapter {
                 -StartedAt $startedAt `
                 -FinishedAt ([datetime]::UtcNow)
         }
-        $errorClass = if ($blockedByContent) { 'BLOCKED' } elseif ($dynamicOnly) { 'TECHNICAL_LIMITATION' } else { 'NO_JOBS_FOUND' }
+        $errorClass = if ($blockedByContent) { 'BLOCKED' } elseif ($dynamicOnly) { 'TECHNICAL_LIMITATION' } elseif ($malformedStructuredJson) { 'PARSING_ERROR' } else { 'NO_JOBS_FOUND' }
         $retryRecommendation = Resolve-JobAgentLiveRetryRecommendation -ErrorClass $errorClass
-        $artifactPath = if ($blockedByContent) { 'source_blocked_or_challenged' } elseif ($dynamicOnly) { 'dynamic_client_side_only' } else { 'no_verified_job_candidates' }
+        $artifactPath = if ($blockedByContent) { 'source_blocked_or_challenged' } elseif ($dynamicOnly) { 'dynamic_client_side_only' } elseif ($malformedStructuredJson) { 'malformed_structured_json' } else { 'no_verified_job_candidates' }
         return New-JobAgentAdapterResult `
             -AdapterInput $AdapterInput `
             -AdapterName 'live-html-adapter' `
