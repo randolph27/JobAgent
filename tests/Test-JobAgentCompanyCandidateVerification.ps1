@@ -79,13 +79,14 @@ function New-FetchResult {
         [Parameter(Mandatory)][string]$Url,
         [Parameter(Mandatory)][bool]$Ok,
         [Parameter()][string]$Content = '',
-        [Parameter()][int]$StatusCode = 200
+        [Parameter()][int]$StatusCode = 200,
+        [Parameter()][AllowNull()][string]$FinalUrl = $null
     )
 
     [pscustomobject]@{
         ok = $Ok
         url = $Url
-        final_url = $Url
+        final_url = if ([string]::IsNullOrWhiteSpace($FinalUrl)) { $Url } else { $FinalUrl }
         status_code = $StatusCode
         content = $Content
         content_type = 'text/html'
@@ -217,6 +218,28 @@ $aggregatorVerification = Resolve-JobAgentCompanyCandidateVerification -Candidat
 Assert-True -Condition ($aggregatorVerification.status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'Aggregator-Link darf nicht als Karrierebeleg akzeptiert werden.'
 Assert-True -Condition ($aggregatorVerification.evidence[0].verification_url -eq 'https://example.invalid/') -Message 'Aggregator-Fall darf nur die offizielle Firmendomain belegen.'
 
+$foreignCareerRedirectFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    switch ($Url) {
+        'https://example.invalid/' { New-FetchResult -Url $Url -Ok $true -Content '<html><a href="/karriere">Karriere</a></html>'; break }
+        'https://example.invalid/sitemap.xml' { New-FetchResult -Url $Url -Ok $true -Content '<urlset></urlset>'; break }
+        'https://example.invalid/sitemap_index.xml' { New-FetchResult -Url $Url -Ok $true -Content '<sitemapindex></sitemapindex>'; break }
+        'https://example.invalid/karriere' { New-FetchResult -Url $Url -Ok $true -Content '<main>Offene Stellen</main>' -FinalUrl 'https://foreign.invalid/careers'; break }
+        default { New-FetchResult -Url $Url -Ok $false -StatusCode 404; break }
+    }
+}
+$foreignCareerRedirect = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($company) -Policy $policy -Fetcher $foreignCareerRedirectFetcher -ObservedAt $observedAt
+Assert-True -Condition ($foreignCareerRedirect.status -ne 'CAREER_URL_VERIFIED' -and @($foreignCareerRedirect.evidence | Where-Object { [string]$_.evidence_type -eq 'CAREER_URL' }).Count -eq 0) -Message 'Redirect einer Karriere-URL auf fremde Domain darf keine offizielle Karrierequelle erzeugen.'
+
+$loginCaptchaFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-FetchResult -Url $Url -Ok $true -Content '<html><form action="/login"><label>Login</label><input name="captcha" /></form></html>'
+}
+$loginCaptchaVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($company) -Policy $policy -Fetcher $loginCaptchaFetcher -ObservedAt $observedAt
+Assert-True -Condition ($loginCaptchaVerification.status -ne 'CAREER_URL_VERIFIED' -and @($loginCaptchaVerification.evidence | Where-Object { [string]$_.evidence_type -in @('CAREER_URL', 'COMPANY_LINKED_ATS') }).Count -eq 0) -Message 'Login-/Captcha-Inhalt darf keine offizielle Karrierequelle erzeugen.'
+
 $domainOnlyStoreCompany = New-TestCompany
 $domainOnlyStoreCompany.verification_status = 'COMPANY_DOMAIN_VERIFIED'
 $domainOnlyStoreCompany.career_url = $null
@@ -282,6 +305,14 @@ $aggregatorWebsiteFetcher = {
 }
 $aggregatorWebsiteDiscovery = Resolve-JobAgentCandidateOfficialWebsiteDiscovery -Candidate (New-TestCandidate -Id 'hint:website-aggregator' -Name 'Example AG') -SourceEvidence $officialDirectoryEvidence -Policy $policy -Fetcher $aggregatorWebsiteFetcher -ObservedAt $observedAt
 Assert-True -Condition ($aggregatorWebsiteDiscovery.status -eq 'MANUAL_REVIEW_REQUIRED') -Message 'Aggregator-Link darf nicht als offizielle Website-Ermittlung gelten.'
+
+$foreignDirectoryRedirectFetcher = {
+    param([string]$Url, [object]$Policy)
+
+    New-FetchResult -Url $Url -Ok $true -Content '<html><a href="https://example.invalid/">Example AG</a></html>' -FinalUrl 'https://foreign.invalid/redirected-directory'
+}
+$foreignDirectoryRedirect = Resolve-JobAgentCandidateOfficialWebsiteDiscovery -Candidate (New-TestCandidate -Id 'hint:website-foreign-redirect' -Name 'Example AG') -SourceEvidence $officialDirectoryEvidence -Policy $policy -Fetcher $foreignDirectoryRedirectFetcher -ObservedAt $observedAt
+Assert-True -Condition ($foreignDirectoryRedirect.status -eq 'MANUAL_REVIEW_REQUIRED' -and $foreignDirectoryRedirect.next_action -eq 'manual_review_official_website_source') -Message 'Redirect einer offiziellen Verzeichnisquelle auf fremde Domain darf keine Firmenwebsite verifizieren.'
 
 $searchRedirectWebsiteFetcher = {
     param([string]$Url, [object]$Policy)
@@ -792,10 +823,13 @@ finally {
         'http_failure_diagnostic_tls_credentials',
         'candidate_js_only_domain_only',
         'aggregator_not_accepted_as_career_source',
+        'foreign_career_redirect_rejected',
+        'login_captcha_not_accepted_as_career_source',
         'domain_only_store_company_requeued_for_career_source',
         'official_directory_website_discovery',
         'official_directory_detail_page_website_discovery',
         'aggregator_rejected_for_website_discovery',
+        'foreign_directory_redirect_rejected_for_website_discovery',
         'search_redirect_rejected_for_website_discovery',
         'name_conflict_rejected_for_website_discovery',
         'jobboard_rejected_for_website_discovery',

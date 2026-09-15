@@ -865,6 +865,23 @@ function Get-JobAgentCompanyVerificationRedirectChain {
     return $chain.ToArray()
 }
 
+function Test-JobAgentCompanyVerificationRedirectMatchesSourceDomain {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$RequestedUrl,
+        [Parameter(Mandatory)][string]$FinalUrl
+    )
+
+    try {
+        $requestedHost = Get-JobAgentUrlHost -Url (ConvertTo-JobAgentCanonicalUrl -Url $RequestedUrl)
+        $finalHost = Get-JobAgentUrlHost -Url (ConvertTo-JobAgentCanonicalUrl -Url $FinalUrl)
+        return Test-JobAgentDomainMatch -Host $finalHost -Domain $requestedHost
+    }
+    catch {
+        return $false
+    }
+}
+
 function ConvertTo-JobAgentCompanyVerificationPlainText {
     param(
         [Parameter()][AllowEmptyString()][string]$Html,
@@ -1277,6 +1294,18 @@ function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
     }
 
     $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$fetch.final_url)) { $canonicalSourceUrl } else { [string]$fetch.final_url }
+    if (-not (Test-JobAgentCompanyVerificationRedirectMatchesSourceDomain -RequestedUrl $canonicalSourceUrl -FinalUrl $finalUrl)) {
+        return [pscustomobject]@{
+            candidate_id = $candidateId
+            status = 'MANUAL_REVIEW_REQUIRED'
+            official_website_url = $null
+            official_website_domain = $null
+            evidence = @()
+            fetches = @($fetch)
+            reason = 'Offizielle Quellseite leitete auf eine fremde Domain weiter; keine automatische Website-Ermittlung.'
+            next_action = 'manual_review_official_website_source'
+        }
+    }
     $links = @(Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks -Html ([string]$fetch.content) -BaseUrl $finalUrl -Candidate $Candidate -MaxCandidates ([int]$Policy.max_candidates_per_company))
     $fetches = New-Object System.Collections.Generic.List[object]
     $fetches.Add($fetch)
@@ -1287,7 +1316,9 @@ function Resolve-JobAgentCandidateOfficialWebsiteDiscovery {
             $fetches.Add($detailFetch)
             if ($detailFetch.ok -eq $true) {
                 $detailFinalUrl = if ([string]::IsNullOrWhiteSpace([string]$detailFetch.final_url)) { [string]$detailLinks[0].url } else { [string]$detailFetch.final_url }
-                $links = @(Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks -Html ([string]$detailFetch.content) -BaseUrl $detailFinalUrl -Candidate $Candidate -MaxCandidates ([int]$Policy.max_candidates_per_company))
+                if (Test-JobAgentCompanyVerificationRedirectMatchesSourceDomain -RequestedUrl ([string]$detailLinks[0].url) -FinalUrl $detailFinalUrl) {
+                    $links = @(Get-JobAgentCandidateOfficialWebsiteDiscoveryLinks -Html ([string]$detailFetch.content) -BaseUrl $detailFinalUrl -Candidate $Candidate -MaxCandidates ([int]$Policy.max_candidates_per_company))
+                }
             }
         }
     }
@@ -1638,6 +1669,9 @@ function Resolve-JobAgentCompanyCareerVerification {
             continue
         }
         $finalUrl = if ([string]::IsNullOrWhiteSpace([string]$fetch.final_url)) { $url } else { [string]$fetch.final_url }
+        if (-not (Test-JobAgentCompanyVerificationRedirectMatchesSourceDomain -RequestedUrl $url -FinalUrl $finalUrl)) {
+            continue
+        }
         foreach ($candidate in @(Get-JobAgentCompanyCareerCandidateLinks -Html ([string]$fetch.content) -BaseUrl $finalUrl -Company $Company -MaxCandidates ([int]$Policy.max_candidates_per_company))) {
             $candidates.Add($candidate)
         }
@@ -1649,10 +1683,14 @@ function Resolve-JobAgentCompanyCareerVerification {
                 $candidateFetch = if ($Fetcher) { & $Fetcher ([string]$candidate.url) $Policy } else { Invoke-JobAgentCompanyVerificationHttpRequest -Url ([string]$candidate.url) -Policy $Policy }
                 $fetches.Add($candidateFetch)
                 if ($candidateFetch.ok -eq $true) {
+                    $candidateFinalUrl = if ([string]::IsNullOrWhiteSpace([string]$candidateFetch.final_url)) { [string]$candidate.url } else { [string]$candidateFetch.final_url }
+                    if (-not (Test-JobAgentCompanyVerificationRedirectMatchesSourceDomain -RequestedUrl ([string]$candidate.url) -FinalUrl $candidateFinalUrl)) {
+                        continue
+                    }
                     $evidence = New-JobAgentVerificationEvidence `
                         -Status 'VERIFIED' `
                         -EvidenceType 'CAREER_URL' `
-                        -Url ([string]$candidateFetch.final_url) `
+                        -Url $candidateFinalUrl `
                         -BasisUrl ([string]$candidate.source_url) `
                         -RedirectChain (Get-JobAgentCompanyVerificationRedirectChain -Fetch $candidateFetch) `
                         -Reason ('Karrierepfad wurde auf der offiziellen Website verlinkt: ' + [string]$candidate.link_text)

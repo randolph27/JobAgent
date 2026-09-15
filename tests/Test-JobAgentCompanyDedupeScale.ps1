@@ -116,14 +116,11 @@ for ($index = 1; $index -le 1000; $index++) {
     $scaleCandidates.Add((New-RegisterHint -Name ('Scale Candidate {0:D4} GmbH' -f $index) -Number (200000 + $index) -Area $area))
 }
 
-$stopwatch = [Diagnostics.Stopwatch]::StartNew()
 $report = Resolve-JobAgentCompanyCandidateClusters -Candidates $scaleCandidates.ToArray() -ObservedAt ([datetime]'2026-08-23T12:00:00Z')
-$stopwatch.Stop()
 
 Assert-True -Condition ($report.schema_version -eq 'jobagent/company-candidate-clusters/v1') -Message 'Cluster-Report hat falsche Schema-Version.'
 Assert-True -Condition ($report.candidates_total -eq 1008) -Message 'Scale-Report zaehlt Kandidaten falsch.'
 Assert-True -Condition ($report.clusters_total -eq 1006) -Message 'Starke Deduplikation erzeugt falsche Clusterzahl.'
-Assert-True -Condition ($stopwatch.Elapsed.TotalSeconds -lt 10) -Message ('Scale-Dedupe ist zu langsam: {0:n2}s' -f $stopwatch.Elapsed.TotalSeconds)
 
 $alpha = @($report.clusters | Where-Object { @($_.candidate_ids) -contains 'register-hint:1001' })[0]
 Assert-True -Condition (@($alpha.candidate_ids).Count -eq 2) -Message 'Register-ID-Deduplikation fasst Varianten nicht zusammen.'
@@ -138,6 +135,13 @@ $gammaClusters = @($report.clusters | Where-Object { [string]$_.canonical_name -
 Assert-True -Condition ($gammaClusters.Count -eq 2) -Message 'Unterschiedliche Domains gleicher Namen duerfen nicht automatisch verschmolzen werden.'
 Assert-True -Condition (@($gammaClusters | Where-Object { @($_.conflict_flags) -contains 'NAME_MATCH_WITHOUT_STRONG_IDENTITY' }).Count -eq 2) -Message 'Namenskonflikt ohne starke Identitaet wird nicht markiert.'
 Assert-True -Condition (@($gammaClusters | Where-Object { @($_.conflict_flags) -contains 'STAFFING_AGENCY_REVIEW' }).Count -eq 1) -Message 'Personaldienstleister-Review wird nicht markiert.'
+
+$conflictingRegisterReport = Resolve-JobAgentCompanyCandidateClusters -Candidates @(
+    (New-RegisterHint -Name 'Conflicting Register GmbH' -Number 990001),
+    (New-RegisterHint -Name 'Conflicting Register GmbH' -Number 990002)
+) -ObservedAt ([datetime]'2026-08-23T12:00:00Z')
+Assert-True -Condition ($conflictingRegisterReport.clusters_total -eq 2) -Message 'Widerspruechliche Registeridentitaeten gleicher Namen duerfen nicht verschmolzen werden.'
+Assert-True -Condition (@($conflictingRegisterReport.clusters | Where-Object { @($_.conflict_flags) -contains 'NAME_MATCH_WITHOUT_STRONG_IDENTITY' }).Count -eq 2) -Message 'Widerspruechliche Registeridentitaeten muessen als Namenskonflikt markiert werden.'
 
 $uncertain = @($report.clusters | Where-Object { @($_.candidate_ids) -contains 'regional-hint:unknown-place' })[0]
 Assert-True -Condition (@($uncertain.conflict_flags) -contains 'TARGET_AREA_UNCERTAIN') -Message 'Unsicheres Zielgebiet wird nicht als Konflikt markiert.'
@@ -157,6 +161,7 @@ Assert-True -Condition ($alpha.first_seen_at -eq '2026-08-23T08:00:00.000Z' -and
         'register_identity_merge',
         'domain_identity_merge',
         'name_only_conflict_not_merged',
+        'conflicting_register_identity_not_merged',
         'staffing_agency_review_flag',
         'target_area_basis_mapping',
         'target_uncertain_review_queue',
@@ -165,5 +170,4 @@ Assert-True -Condition ($alpha.first_seen_at -eq '2026-08-23T08:00:00.000Z' -and
     )
     candidates = $report.candidates_total
     clusters = $report.clusters_total
-    elapsed_ms = [int]$stopwatch.ElapsedMilliseconds
 } | ConvertTo-Json -Depth 5

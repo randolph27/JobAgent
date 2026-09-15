@@ -74,6 +74,7 @@ Assert-True -Condition (@($result.hints | Where-Object { [string]$_.candidate_st
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.company_name -eq 'Alpha Regional AG' -and [string]$_.website_hint -eq 'https://stadt.muenchen.de/alpha' -and [string]$_.career_hint -eq 'https://stadt.muenchen.de/alpha/jobs' }).Count -eq 1) -Message 'Regionalimport transportiert relative Website-/Karrierehinweise nicht.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.company_name -eq 'Alpha Regional AG' -and [string]$_.source_evidence.content_hash -match '^[a-f0-9]{64}$' }).Count -eq 1) -Message 'Regionalimport verliert strukturierte Source-Evidence.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_record_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Hash-Evidenz fehlt.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.next_action -ne 'verify_official_company_website_or_career_url' }).Count -eq 0) -Message 'Regional-Hints dokumentieren keinen eindeutigen Verifikationsentscheid.'
 Assert-True -Condition (@($result.hints | Where-Object { $_.PSObject.Properties.Name -contains 'email' -or $_.PSObject.Properties.Name -contains 'phone' -or $_.PSObject.Properties.Name -contains 'contact' }).Count -eq 0) -Message 'Kontaktfelder duerfen nicht persistiert werden.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.raw_retention_policy -ne 'minimal_regional_metadata_only_no_contact_collection' }).Count -eq 0) -Message 'Retention-Policy fehlt.'
 

@@ -56,6 +56,7 @@ Assert-True -Condition (@($result.hints | Where-Object { @($_.dedupe_keys).Count
 Assert-True -Condition (@($result.hints | Where-Object { @($_.dedupe_keys | Where-Object { [string]$_ -match '^name:' }).Count -ne 1 -or @($_.dedupe_keys | Where-Object { [string]$_ -match '^register:' }).Count -ne 1 }).Count -eq 0) -Message 'Register-Hints brauchen getrennte Name- und Register-Dedupe-Keys.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_snapshot.record_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Record-Hashes fehlen oder sind ungueltig.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.source_evidence.content_hash -notmatch '^[a-f0-9]{64}$' }).Count -eq 0) -Message 'Register-Hints verlieren strukturierte Source-Evidence.'
+Assert-True -Condition (@($result.hints | Where-Object { [string]$_.next_action -ne 'verify_official_company_website_or_career_url' }).Count -eq 0) -Message 'Register-Hints dokumentieren keinen eindeutigen Verifikationsentscheid.'
 Assert-True -Condition (@($result.hints | Where-Object { $_.PSObject.Properties.Name -match 'geschäft|geschaeft|director|shareholder|person' }).Count -eq 0) -Message 'Personenbezogene Registerrollen duerfen nicht persistiert werden.'
 Assert-True -Condition (@($result.hints | Where-Object { [string]$_.review_status -eq 'MANUAL_REVIEW_REQUIRED' }).Count -eq 1) -Message 'Geloeschte Registereintraege muessen Review-Faelle bleiben.'
 
@@ -83,6 +84,35 @@ $csvResult = Import-JobAgentRegisterCandidates `
     -SnapshotDate ([datetime]'2026-08-01T00:00:00Z') `
     -ObservedAt ([datetime]'2026-08-23T08:00:00Z')
 Assert-True -Condition ($csvResult.records_read -eq 3 -and $csvResult.hints_total -eq 2) -Message 'CSV-Import verarbeitet Zielgebiet/Rejects falsch.'
+
+$unknownIdentityFixture = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-register-unknown-identity-' + [guid]::NewGuid().ToString('N') + '.json')
+try {
+    [pscustomobject]@{
+        items = @(
+            [pscustomobject]@{
+                register_name = 'Unknown Identity GmbH'
+                register_city = 'Muenchen'
+                legal_form = 'GmbH'
+                status = 'active'
+            }
+        )
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $unknownIdentityFixture -Encoding UTF8
+    $unknownIdentityResult = Import-JobAgentRegisterCandidates `
+        -InputPath $unknownIdentityFixture `
+        -SourceRegistry $registry `
+        -SnapshotId 'offeneregister-unknown-identity-2026-08' `
+        -SnapshotDate ([datetime]'2026-08-01T00:00:00Z') `
+        -ObservedAt ([datetime]'2026-08-23T08:00:00Z')
+    $unknownIdentityHint = $unknownIdentityResult.hints[0]
+    Assert-True -Condition ($unknownIdentityResult.hints_total -eq 1 -and [string]$unknownIdentityHint.register_court -eq 'UNKNOWN' -and [string]$unknownIdentityHint.register_number -eq 'UNKNOWN') -Message 'Unvollstaendige Registeridentitaet wird nicht als UNKNOWN erhalten.'
+    Assert-True -Condition (@($unknownIdentityHint.dedupe_keys | Where-Object { [string]$_ -match '^register:' }).Count -eq 0) -Message 'UNKNOWN-Registeridentitaet darf keinen starken Register-Dedupe-Key erzeugen.'
+    Assert-True -Condition ($unknownIdentityHint.official_verification_required -eq $true -and [string]$unknownIdentityHint.next_action -eq 'verify_official_company_website_or_career_url') -Message 'UNKNOWN-Registeridentitaet muss bis zur offiziellen Verifikation unverifiziert bleiben.'
+}
+finally {
+    if (Test-Path -LiteralPath $unknownIdentityFixture -PathType Leaf) {
+        Remove-Item -LiteralPath $unknownIdentityFixture -Force
+    }
+}
 
 $openCorporatesFixture = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-register-opencorporates-' + [guid]::NewGuid().ToString('N') + '.jsonl')
 try {
@@ -287,6 +317,7 @@ finally {
         'target_area_mapping',
         'dedupe_keys',
         'snapshot_hashes',
+        'unknown_register_identity_stays_unverified',
         'stale_snapshot',
         'future_snapshot_rejected',
         'no_personal_register_roles',
