@@ -1,0 +1,267 @@
+{
+  "schema_version": "jobagent/roadmap-plan-review/v1",
+  "ts": "2026-09-15T18:37:32.7540949+02:00",
+  "status": "ok",
+  "scope": "planning-only",
+  "source_head": "b3350f7d00284eed0a2391e96bf3e521fc80027a",
+  "roadmap_sha256": "7325C9D0227E3678F59B277A6BAF89FF923E14AC0D895CD57B83FE2C00F2E383",
+  "checks": [
+    "six_unique_open_main_items",
+    "three_ordered_implementation_steps_each",
+    "readme_required_fields",
+    "no_archive_id_collision",
+    "exact_existing_function_commands",
+    "todo_master_checkpoint_parity",
+    "checkpoint_last_event",
+    "unique_event_ids",
+    "preserved_td0056",
+    "no_product_runtime_or_archive_changes",
+    "git_diff_check"
+  ],
+  "items": [
+    {
+      "id": "QA-001",
+      "steps": [
+        "QA-001.1",
+        "QA-001.2",
+        "QA-001.3"
+      ],
+      "required_fields": [
+        "Beschreibung:",
+        "Scope:",
+        "Ist-Stand (",
+        "Abhaengigkeiten:",
+        "Aufwand/Dauer:",
+        "Prioritaetsscore:",
+        "Ordnungsbegruendung:",
+        "Risiken und Unsicherheiten:",
+        "Schritte:",
+        "Evidence:",
+        "Funktionstest:",
+        "Audit:",
+        "Supertest:",
+        "Meilenstein/Parallelisierung:"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "QA-002",
+      "steps": [
+        "QA-002.1",
+        "QA-002.2",
+        "QA-002.3"
+      ],
+      "required_fields": [
+        "Beschreibung:",
+        "Scope:",
+        "Ist-Stand (",
+        "Abhaengigkeiten:",
+        "Aufwand/Dauer:",
+        "Prioritaetsscore:",
+        "Ordnungsbegruendung:",
+        "Risiken und Unsicherheiten:",
+        "Schritte:",
+        "Evidence:",
+        "Funktionstest:",
+        "Audit:",
+        "Supertest:",
+        "Meilenstein/Parallelisierung:"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "QA-003",
+      "steps": [
+        "QA-003.1",
+        "QA-003.2",
+        "QA-003.3"
+      ],
+      "required_fields": [
+        "Beschreibung:",
+        "Scope:",
+        "Ist-Stand (",
+        "Abhaengigkeiten:",
+        "Aufwand/Dauer:",
+        "Prioritaetsscore:",
+        "Ordnungsbegruendung:",
+        "Risiken und Unsicherheiten:",
+        "Schritte:",
+        "Evidence:",
+        "Funktionstest:",
+        "Audit:",
+        "Supertest:",
+        "Meilenstein/Parallelisierung:"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "QA-004",
+      "steps": [
+        "QA-004.1",
+        "QA-004.2",
+        "QA-004.3"
+      ],
+      "required_fields": [
+        "Beschreibung:",
+        "Scope:",
+        "Ist-Stand (",
+        "Abhaengigkeiten:",
+        "Aufwand/Dauer:",
+        "Prioritaetsscore:",
+        "Ordnungsbegruendung:",
+        "Risiken und Unsicherheiten:",
+        "Schritte:",
+        "Evidence:",
+        "Funktionstest:",
+        "Audit:",
+        "Supertest:",
+        "Meilenstein/Parallelisierung:"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "QA-005",
+      "steps": [
+        "QA-005.1",
+        "QA-005.2",
+        "QA-005.3"
+      ],
+      "required_fields": [
+        "Beschreibung:",
+        "Scope:",
+        "Ist-Stand (",
+        "Abhaengigkeiten:",
+        "Aufwand/Dauer:",
+        "Prioritaetsscore:",
+        "Ordnungsbegruendung:",
+        "Risiken und Unsicherheiten:",
+        "Schritte:",
+        "Evidence:",
+        "Funktionstest:",
+        "Audit:",
+        "Supertest:",
+        "Meilenstein/Parallelisierung:"
+      ],
+      "status": "open"
+    },
+    {
+      "id": "QA-006",
+      "steps": [
+        "QA-006.1",
+        "QA-006.2",
+        "QA-006.3"
+      ],
+      "required_fields": [
+        "Beschreibung:",
+        "Scope:",
+        "Ist-Stand (",
+        "Abhaengigkeiten:",
+        "Aufwand/Dauer:",
+        "Prioritaetsscore:",
+        "Ordnungsbegruendung:",
+        "Risiken und Unsicherheiten:",
+        "Schritte:",
+        "Evidence:",
+        "Funktionstest:",
+        "Audit:",
+        "Supertest:",
+        "Meilenstein/Parallelisierung:"
+      ],
+      "status": "open"
+    }
+  ],
+  "test_inventory": {
+    "not_directly_in_runner": [
+      "Test-JobAgentCiContracts.ps1",
+      "Test-JobAgentCompanyCandidateVerification.ps1",
+      "Test-JobAgentFetchEnvironment.ps1",
+      "Test-JobAgentFetchErrorInspection.ps1",
+      "Test-JobAgentHtmlAudit.ps1",
+      "Test-JobAgentHtmlViewportAudit.ps1",
+      "Test-JobAgentSupertest.ps1"
+    ],
+    "supertest_entries": 21,
+    "note": "Aggregator selbst ist absichtlich kein Teiltest; direkte Nichtaufnahme beweist keine fehlende indirekte Abdeckung.",
+    "existing_files": 28
+  },
+  "source_hashes": [
+    {
+      "path": "README.md",
+      "sha256": "5DF302F94E57F66F3021AA386BEA7C28DBED75427FC36AF23185B01D6B90905E"
+    },
+    {
+      "path": "manual/PROGRAM.md",
+      "sha256": "62E616E167CB6F6F707726F84D96B1987066B170BE38A2EE4486927DC0F9EDF3"
+    },
+    {
+      "path": ".ci/ci.config.json",
+      "sha256": "C6F15ECBD86480320FDB8608F83E8C6E088B759AEBAC5655B8B0331102BEE0CE"
+    },
+    {
+      "path": "tests/Test-JobAgentSupertest.ps1",
+      "sha256": "A018BC9DC6CF3DE8306C05899BD577246B4F0A0DF8B62BA152B746662065E788"
+    },
+    {
+      "path": "tests/Test-JobAgentTestMatrix.ps1",
+      "sha256": "01262F43E008AE987284DF146C659C4EAAAFD657DB9BED76E9ADEA07F684280C"
+    },
+    {
+      "path": "tests/Test-JobAgentUiBrowserAudit.ps1",
+      "sha256": "C54AFCACD4907590FB69692F9AC77E23BA5049900A72C3E9F66106AFCF66DB54"
+    },
+    {
+      "path": "src/JobAgent.Report.psm1",
+      "sha256": "1A6A59F909B3AE70A296D78040AFD9823681DC3B8504EC54CB8A48EA49DF2E5D"
+    },
+    {
+      "path": "docs/test-matrix.json",
+      "sha256": "CDB76EB422433EB440B5631291618D0EFF2913AE5F7EE17FA58F965242B86573"
+    }
+  ],
+  "implementation_started": false,
+  "supertest_run": false,
+  "ui_run": false,
+  "next": "QA-001.1, erst nach Folgeauftrag",
+  "workflow_checkpoint_event_id": "EV-20260915-183516-800435",
+  "validation_results": [
+    {
+      "status": "ok",
+      "cmd": "Roadmap-/Todo-/Checkpoint-Strukturvalidierung und git diff --check",
+      "exit": 0
+    },
+    {
+      "function_test": "tests/Test-JobAgentCiContracts.ps1",
+      "status": "ok",
+      "log_path": "logs/verify/verify-20260915-183432.log",
+      "cmd": ".\\ci.cmd verify",
+      "exit": 0
+    },
+    {
+      "status": "ok",
+      "log_path": "logs/terminal/route-check-20260915-183511.log",
+      "cmd": ".\\ci.cmd route-check",
+      "exit": 0
+    },
+    {
+      "status": "ok",
+      "event_id": "EV-20260915-183516-800435",
+      "cmd": ".\\ci.cmd stp",
+      "exit": 0
+    },
+    {
+      "issues": [
+        "immutable_modified: manual\\PROGRAM.md"
+      ],
+      "log_path": "logs/terminal/self-check-20260915-183517.log",
+      "status": "fail",
+      "cmd": ".\\ci.cmd self-check",
+      "exit": 1,
+      "reason": "Vorhandener TD-0056 ausserhalb des Planungsschnitts; Handoff-Paritaetsfehler durch STP behoben."
+    }
+  ],
+  "limitations": [
+    "Keine Implementierung, keine Produkt-/Browser-/Supertestausfuehrung.",
+    "Vorhandener Immutable-Drift TD-0056 bleibt erhalten; keine vollstaendig gruene CI behauptet.",
+    "STP/Git-Snapshot stammt vor dem Abschlusscommit."
+  ]
+}

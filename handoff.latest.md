@@ -1,38 +1,43 @@
 # Handoff latest
 
-Stand: 2026-09-15T18:18:11.395+02:00
+Stand: 2026-09-15T18:35:16.111+02:00
 
-## Abschlusszustand
+## Zustand
 
-- `JA-042` ist vollstaendig abgeschlossen, aus `Roadmap.md` nach `Roadmap_archive.md` rotiert und durch `logs/jobagent/JA-042-3-acceptance.json` belegt. Es gibt keinen aktiven Produkt-Roadmap-Punkt und kein aktives Todo.
-- Der regulaere Daily-Run scannt neu akquirierte Firmen auch dann im selben Lauf, wenn `-CompanyIds` eine explizite Scan-Auswahl setzt. Die Korrektur liegt in `src/JobAgent.DailyRun.psm1`: eine erzwungen einzuschliessende Firmen-ID umgeht ausschliesslich den expliziten Filter, nicht die Pflicht zu einer offiziellen JobSource.
-- Die 1.000er-Isolationsfixture verarbeitet 1.008 Kandidaten zu 1.006 Clustern. Sie prueft Register-/Domain-Dedupe, unverschmolzene Namenskonflikte, unsichere Gebiete und stabile Cluster-IDs.
-- Der Daily-Run-Test belegt zwei regulaere, isolierte Starts: erster Lauf importiert `company:example_ag` mit offizieller Karrierequelle und zwei berufsneutralen Stellen; zweiter Lauf behaelt die bekannte Firma ohne Stellen- oder Firmenduplikat und importiert genau `company:second_example_gmbh` mit einer Stelle. Der HTML-Report zeigt die neue Firma und Stelle.
-- `docs/company-discovery-operations.md` beschreibt Startbefehl, getrennte Budgets, Status-/Reportpfade, Resume, `wake_at` und den Ausschluss von Busy-Wait.
+- Active: ``
+- Status: `open`
+- Ziel:
+- Branch: `master`
+- HEAD: `b3350f7d0028`
+- Upstream: `origin/master`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
+- Route: `True`
+
+## Versionierte Aenderungen
+
+- `Roadmap.md`
+- `Roadmap_index.md`
+- `todo.checkpoint.json`
+- `todo.current.md`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
 
 ## Verifikation
 
-```powershell
-pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1
-pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1
-pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1
-.\ci.cmd supertest
-```
+- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`
 
-Alle vier Befehle endeten mit Exit 0. Der Supertest dauerte 507,07 Sekunden und enthielt den Browseraudit bei 390/800/1366/1920 px. Der erste Sandboxversuch scheiterte nur am nicht erreichbaren npm-Cache (`EPERM`); die Wiederholung mit dem vorhandenen lokalen Cache lief vollständig grün. Keine reale Firmenwelle und keine Android-Lane wurden ausgeführt.
+## Naechster Anker
 
-## Persistierte Artefakte
+QA-001.1 gemaess Roadmap.md; Umsetzung ausschliesslich nach Folgeauftrag. Dieser Planungsschnitt endet nach Commit und Push.
 
-- `logs/jobagent/JA-042-3-acceptance.json`: Abnahme, exakte Fixture-Zähler und Testbefunde.
-- `html/jobagent/ui-001-browser-audit.html` und `output/playwright/ui-001-browser-audit-*.png`: im Supertest erzeugte Browseraudit-Evidence.
-- `data/jobagent/company-candidate-verification.queue.json` und `html/jobagent/company-coverage.html`: vom vollständigen Testlauf neu erzeugte, versionierte Betriebsartefakte; nicht manuell verändern oder zurücksetzen.
+## Planungsabschluss
 
-## Nächster Auftrag: TD-0056 CI-Drift analysieren
-
-`TD-0056` bleibt offen und ist nachrangig. Nicht blind zurücksetzen. `logs/observer/drift-latest.json` meldet eine veraltete Observer-Baseline mit Abweichungen in `manual/PROGRAM.md`, `.ci/ci.config.json`, `.ci/pins/immutable.hashes.json` und der inzwischen rotierten Roadmap. `./ci.cmd self-check` meldete zusätzlich `immutable_modified: manual/PROGRAM.md`.
-
-Vorgehen für den nächsten Agenten:
-
-1. Hash- und Herkunftsabgleich für `manual/PROGRAM.md`, `.ci/ci.config.json` und `.ci/pins/immutable.hashes.json`; prüfen, ob die Änderungen bewusst und vollständig sind.
-2. Erst danach `./ci.cmd drift-check`, `./ci.cmd self-check` und gegebenenfalls `./ci.cmd route-check` ausführen. Keine Immutable- oder Manual-Datei ohne belegte Quelle wiederherstellen.
-3. Bei belegter Bereinigung Todo/Handoff/STP synchronisieren. Ohne neuen Produktauftrag keine reale Akquise oder Firmenwelle starten.
+- `Roadmap.md`: QA-001 bis QA-006 mit je drei detaillierten Umsetzungspunkten; alle offen. Keine Implementierung und kein Supertestlauf in diesem Schnitt.
+- `todo.state.json`: sechs neue offene QA-Eintraege TD-0058 bis TD-0063, keine aktive Umsetzung; TD-0056 erhalten.
+- `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-, Quellen- und Workflowbelege; sechs Hauptpunkte, 18 Umsetzungspunkte, 28 JobAgent-Testdateien und 21 aggregierte Tests.
+- Strukturpruefung, CI-Vertragstest ueber `ci.cmd verify`, `route-check` und `stp`: Exit 0.
+- `ci.cmd self-check`: Exit 1, ausschliesslich der bekannte Befund `immutable_modified: manual\PROGRAM.md`. Drei vorherige Handoff-Paritaetsfehler sind durch STP behoben. Keine Pins oder Produktdaten veraendert.
+- Der Git-Snapshot oben dokumentiert den STP vor Stage/Commit/Push und behauptet keinen bereits sauberen Abschlussworktree.

@@ -1,8 +1,9 @@
 # Roadmap Index
 
-Stand: 2026-09-15, nach Abschluss von JA-042, UI-001 und der Nutzerkorrektur zur berufsneutralen Suche.
+Stand: 2026-09-15. Aktiver Plan: QA-001 bis QA-006 fuer den umfassenden Funktions-/UI-Supertest. Ausschliesslich geplant; keine Implementierung in diesem Schnitt.
 
-- `Roadmap.md`: kein aktiver Produktpunkt. Reale Firmenwellen bleiben kein Software-DoD.
+- `Roadmap.md`: QA-001 -> QA-002 -> QA-003 -> QA-004 -> QA-005 -> QA-006; drei Meilensteine, sechs Hauptpunkte mit jeweils drei fachlichen Unterpunkten. Naechster Ausfuehrungsanker ist QA-001.1. Reale Firmenwellen bleiben kein Software-DoD.
+- `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
 - `docs/reviews/2026-09-13-ja027-roadmap-before.md`: unveraenderter vorheriger Plan mit saemtlichen historischen Fortschritten; alte IT-/Mengenziele gelten nicht als aktuelle Anforderungen.
 - `docs/reviews/2026-09-13-ja027-acquisition-baseline.json`: lokaler Datenbestand und Inputhashes, kein neuer Livebeleg.
 - `docs/reviews/2026-09-13-ja027-plan-validation.json`: aktueller Struktur-/Synchronisationsnachweis.
