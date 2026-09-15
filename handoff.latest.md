@@ -1,36 +1,38 @@
 # Handoff latest
 
-Stand: 2026-09-13T19:42:05+02:00
+Stand: 2026-09-14T08:33:10+02:00
 
 ## Zustand
 
 - Active: `TD-0041`
 - Status: `in-progress`
-- Ziel: JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern.
-- Erledigter Slice: JA-027.2 Quellen mit verwertbaren Website-/Karrierehinweisen priorisieren und die ausfuehrbare Queue automatisch nachfuellen.
+- Ziel: `JA-027 Automatische Firmenakquise beim regulaeren Jobstart mit sichtbarem WebIF-Bestand liefern`
 - Branch: `master`
-- HEAD vor Commit: `f300584bcd19`
+- HEAD vor Commit: `1248ab46ee60`
 - Upstream: `origin/master`
-- Worktree: wird fuer Commit bereinigt.
-- Route: `True`
+- Roadmap-Rotation: keine Rotation. `JA-027` bleibt offen, weil das visuelle Viewport-Audit lokal blockiert ist.
+- Supertest: gemaess aktueller Nutzerregel nicht als Blocker behandelt, weil er nicht separat angefragt wurde.
+- STP: `cmd /c .\ci.cmd stp` -> Exit `0`
 
-## Ergebnis
+## Abgeschlossener Slice
 
-- `tools/Invoke-JobAgentDiscoveryRefill.ps1` fuehrt einen endlichen Snapshot-Refill aus, wenn keine startbare Queue vorliegt.
-- Erlaubte Snapshotquellen werden ueber Registry/Manifest validiert; `BLOCKED`/`REJECT`/nicht freigegebene Quellen bleiben ausgeschlossen.
-- Pro Quelle wird ein Inputhash-Cursor in `data/jobagent/company-discovery.refill.state.json` persistiert; unveraenderte Quellen werden nicht erneut importiert.
-- Regional-, Register- und Jobboard-Importe werden angebunden; danach wird `company-candidate-verification.queue.json` neu aufgebaut.
-- `Invoke-JobAgentDailyRun.ps1` ruft den Refill in der Akquisephase vor Website-Ermittlung und Kandidatenverify auf und dokumentiert `acquisition.source_refill` mit Status, Grund, Importanzahl, Logpfad und `wake_at`.
-- Roadmap, Todo, Handoff und STP-Sync wurden aktualisiert. Es wurde kein kompletter Roadmap-Hauptpunkt herausrotiert, weil `JA-027` weiterhin offen ist.
+`JA-027.3` wurde als Domain-/Hostwellen-Slice umgesetzt:
 
-## Versionierte Aenderungen
+- Domain-only-Bestandsfirmen mit fehlender `career_url` werden in `src/JobAgent.Coverage.psm1` nicht mehr dauerhaft als `ALREADY_VERIFIED_IN_STORE`/`VERIFIED` aus der Arbeit entfernt.
+- Solche Firmen werden mit `next_action = VERIFY_CAREER_SOURCE`, `status = PENDING` und `review_reason = PRODUCTIVE_COMPANY_NEEDS_OFFICIAL_CAREER_SOURCE` wieder startbar.
+- `tools/Verify-JobAgentCompanyCandidates.ps1` akzeptiert `VERIFY_CAREER_SOURCE` als startbare Queue-Aktion.
+- Die Kandidatenauswahl wird nicht mehr nach `HostConcurrency` gekuerzt. `HostConcurrency` bleibt Request-Concurrency-Policy; der logische Batch behaelt alle priorisierten Kandidaten.
+- `logical_host_waves` protokolliert Hostgruppen und Wellen vor der HTTP-Arbeit.
+- Batchmetriken trennen jetzt offizielle Karriere-/ATS-Erfolge von Domain-only-Erfolgen: `official_career_verified_total`, `domain_only_verified_total`, `official_career_verified_candidate_ids`, `domain_only_candidate_ids`.
+- Wenn ein reiner Karrierequellen-Pruefauftrag erneut nur Domain-Erreichbarkeit bestaetigt, bleibt der Queueeintrag als `MANUAL_REVIEW_REQUIRED` mit `CAREER_SOURCE_MISSING_AFTER_DOMAIN_VERIFICATION` sichtbar und wird nicht als erledigte Karrierequelle gezaehlt.
+
+## Geaenderte Dateien
 
 - `Roadmap.md`
-- `tools/Invoke-JobAgentDiscoveryRefill.ps1`
-- `tools/Invoke-JobAgentDailyRun.ps1`
-- `tests/Test-JobAgentDiscoverySourceInventory.ps1`
-- `docs/handoffs/2026-09-13-ja0272-refill-orchestrator-handoff.md`
-- `todo.current.md`
+- `src/JobAgent.Coverage.psm1`
+- `tools/Verify-JobAgentCompanyCandidates.ps1`
+- `tests/Test-JobAgentCompanyCandidateVerification.ps1`
+- `docs/handoffs/2026-09-13-ja0273-domain-hostwave-handoff.md`
 - `todo.state.json`
 - `todo.events.jsonl`
 - `todo.checkpoint.json`
@@ -41,18 +43,25 @@ Stand: 2026-09-13T19:42:05+02:00
 
 ## Verifikation
 
+- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentSourceVerification.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentDiscoverySourceInventory.ps1` -> Exit `0`
 - `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentCoverage.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlAudit.ps1` -> Exit `0`
+- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyDedupeScale.ps1` -> Exit `0`
 - `cmd /c .\ci.cmd stp` -> Exit `0`
-- `cmd /c .\ci.cmd route-check` -> Exit `0`
 
-## Naechster Anker
+## Blocker
 
-JA-027.3: Domain-only-/bereits-verifizierte Kandidaten in getrennte Karrierequellen-Pruefung bringen, Hostwellen logisch planen und neue Karrierearbeitgeber getrennt von Domain-only messen.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` -> Exit `1`
+- Fehler: lokaler Chrome-Headless-Abbruch bei 1920 px mit `GPU process isn't usable`.
+- Gegenprobe mit zusaetzlichen Chrome-Flags hing ebenfalls. Edge wurde lokal nicht unter Standardpfad gefunden.
 
-## Hinweise fuer den neuen Chat
+## Naechster Anker fuer neuen Chat
 
-- Nicht zu `JA-041` springen; aktueller aktiver Punkt bleibt `TD-0041`/`JA-027`.
-- Naechster zusammenhaengender Slice: `JA-027.3`. Ziel ist, Domain-only- und bereits websiteverifizierte Kandidaten nicht mit neuer Firmenakquise zu vermischen, sondern in eine getrennte Karrierequellen-Pruefung/Hostwelle zu bringen.
-- Metrik weiter an neuen belegten Karriere-/ATS-Arbeitgebern ausrichten, nicht an globalen Resets oder Importmengen.
-- Supertest ist nicht ausstehend, weil er nicht angefragt wurde.
+1. `tests/Test-JobAgentHtmlViewportAudit.ps1` stabilisieren oder eine alternative lokale Browser-Lane konfigurieren, ohne die visuellen Akzeptanzkriterien zu verwaessern.
+2. Danach die JA-027-Abschlussabnahme ausfuehren: Funktionstests, Viewport-Audit, `.\ci.cmd route-check`, `.\ci.cmd stp`.
+3. Wenn alle fachlichen Gates gruen sind, `JA-027` aus `Roadmap.md` nach `Roadmap_archive.md` rotieren und Todo/Handoff synchronisieren.
+4. Danach erst zu `JA-041` wechseln: berufsneutrale Stellenerfassung von festen IT-Suchbegriffen und Profilpassung entkoppeln.

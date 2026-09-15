@@ -1273,7 +1273,14 @@ function New-JobAgentCoverageCandidateReviewQueueEntry {
     $reasonArray = @($reasonCodes.ToArray() | Sort-Object -Unique)
     $nextAction = Get-JobAgentCoverageCandidateReviewAction -Cluster $Cluster -Candidate $Candidate -ReasonCodes $reasonArray -FreshnessStatus ([string]$freshness.staleness_status)
     if ($null -ne $VerifiedStoreCompany) {
-        $nextAction = 'ALREADY_VERIFIED_IN_STORE'
+        $verifiedStatus = [string](Get-JobAgentCoverageProperty -Object $VerifiedStoreCompany -Name 'verification_status' -Default 'VERIFIED')
+        $verifiedCareerUrl = [string](Get-JobAgentCoverageProperty -Object $VerifiedStoreCompany -Name 'career_url' -Default '')
+        if (($verifiedStatus -eq 'COMPANY_DOMAIN_VERIFIED') -or [string]::IsNullOrWhiteSpace($verifiedCareerUrl)) {
+            $nextAction = 'VERIFY_CAREER_SOURCE'
+        }
+        else {
+            $nextAction = 'ALREADY_VERIFIED_IN_STORE'
+        }
     }
     $basePriority = [int](Get-JobAgentCoverageProperty -Object $Candidate -Name 'confidence_score' -Default (Get-JobAgentCoverageProperty -Object $Candidate -Name 'priority_score' -Default 50))
     $areaBonus = if (@($Cluster.target_area_basis) -contains 'JOB_LOCATION_IN_TARGET') { 12 } elseif (@($Cluster.target_area_basis) -contains 'REGISTER_SEAT_IN_TARGET') { 10 } elseif (@($Cluster.target_area_basis) -contains 'BRANCH_HINT_IN_TARGET') { 8 } else { -20 }
@@ -1286,17 +1293,20 @@ function New-JobAgentCoverageCandidateReviewQueueEntry {
     }
     $riskPenalty = if ($reasonArray -contains 'STAFFING_AGENCY_REVIEW') { 25 } elseif ($reasonArray -contains 'TARGET_AREA_UNCERTAIN') { 18 } elseif ($reasonArray -contains 'DUPLICATE_CLUSTER_REVIEW') { 8 } else { 0 }
     $priority = [Math]::Max(0, [Math]::Min(100, $basePriority + $areaBonus + $sourceBonus + ([int]$Cluster.source_count * 3) - $riskPenalty))
-    $status = if ($nextAction -eq 'ALREADY_VERIFIED_IN_STORE') { 'VERIFIED' } elseif ($nextAction -eq 'VERIFY_OFFICIAL_SITE') { 'PENDING' } elseif ($nextAction -eq 'WAIT_FOR_REFRESH') { 'RETRY_SCHEDULED' } else { 'MANUAL_REVIEW_REQUIRED' }
+    $status = if ($nextAction -eq 'ALREADY_VERIFIED_IN_STORE') { 'VERIFIED' } elseif ($nextAction -in @('VERIFY_OFFICIAL_SITE', 'VERIFY_CAREER_SOURCE')) { 'PENDING' } elseif ($nextAction -eq 'WAIT_FOR_REFRESH') { 'RETRY_SCHEDULED' } else { 'MANUAL_REVIEW_REQUIRED' }
     if ($null -ne $Previous) {
         $previousStatus = [string](Get-JobAgentCoverageProperty -Object $Previous -Name 'status' -Default '')
         $previousNextAttemptAt = ConvertTo-JobAgentCoverageDate -Value (Get-JobAgentCoverageProperty -Object $Previous -Name 'next_attempt_at' -Default $null)
         if ($nextAction -eq 'ALREADY_VERIFIED_IN_STORE') {
             $status = 'VERIFIED'
         }
+        elseif ($nextAction -eq 'VERIFY_CAREER_SOURCE') {
+            $status = 'PENDING'
+        }
         elseif ($previousStatus -in @('VERIFIED', 'RETRY_EXHAUSTED')) {
             $status = $previousStatus
         }
-        elseif ($previousStatus -eq 'MANUAL_REVIEW_REQUIRED' -and $nextAction -notin @('VERIFY_OFFICIAL_SITE', 'ALREADY_VERIFIED_IN_STORE')) {
+        elseif ($previousStatus -eq 'MANUAL_REVIEW_REQUIRED' -and $nextAction -notin @('VERIFY_OFFICIAL_SITE', 'VERIFY_CAREER_SOURCE', 'ALREADY_VERIFIED_IN_STORE')) {
             $status = 'MANUAL_REVIEW_REQUIRED'
         }
         elseif ($previousStatus -eq 'RETRY_SCHEDULED' -and $nextAction -eq 'DISCOVER_OFFICIAL_WEBSITE') {
@@ -1319,7 +1329,7 @@ function New-JobAgentCoverageCandidateReviewQueueEntry {
         reason_codes = $reasonArray
         target_area_basis = @($Cluster.target_area_basis)
         status = $status
-        review_reason = if ($nextAction -eq 'ALREADY_VERIFIED_IN_STORE') { 'VERIFIED_PRODUCTIVE_COMPANY_EXISTS' } elseif ($reasonArray.Count -gt 0) { $reasonArray -join ',' } else { [string]$Cluster.review_queue_reason }
+        review_reason = if ($nextAction -eq 'ALREADY_VERIFIED_IN_STORE') { 'VERIFIED_PRODUCTIVE_COMPANY_EXISTS' } elseif ($nextAction -eq 'VERIFY_CAREER_SOURCE') { 'PRODUCTIVE_COMPANY_NEEDS_OFFICIAL_CAREER_SOURCE' } elseif ($reasonArray.Count -gt 0) { $reasonArray -join ',' } else { [string]$Cluster.review_queue_reason }
         retry_count = if ($null -eq $Previous) { 0 } else { [int](Get-JobAgentCoverageProperty -Object $Previous -Name 'retry_count' -Default 0) }
         last_attempt_at = if ($null -eq $Previous) { $null } else { Get-JobAgentCoverageProperty -Object $Previous -Name 'last_attempt_at' -Default $null }
         next_attempt_at = if ($status -eq 'PENDING') { $Now.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture) } else { Get-JobAgentCoverageProperty -Object $Previous -Name 'next_attempt_at' -Default $null }

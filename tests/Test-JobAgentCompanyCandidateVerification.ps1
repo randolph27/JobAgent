@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 Import-Module (Join-Path $root 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.CompanyInventory.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $root 'src\JobAgent.Coverage.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.SourceVerification.psm1') -Force -DisableNameChecking
 
 function Assert-True {
@@ -215,6 +216,29 @@ $aggregatorFetcher = {
 $aggregatorVerification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies @($company) -Policy $policy -Fetcher $aggregatorFetcher -ObservedAt $observedAt
 Assert-True -Condition ($aggregatorVerification.status -eq 'COMPANY_DOMAIN_VERIFIED') -Message 'Aggregator-Link darf nicht als Karrierebeleg akzeptiert werden.'
 Assert-True -Condition ($aggregatorVerification.evidence[0].verification_url -eq 'https://example.invalid/') -Message 'Aggregator-Fall darf nur die offizielle Firmendomain belegen.'
+
+$domainOnlyStoreCompany = New-TestCompany
+$domainOnlyStoreCompany.verification_status = 'COMPANY_DOMAIN_VERIFIED'
+$domainOnlyStoreCompany.career_url = $null
+$domainOnlyQueue = New-JobAgentCoverageCandidateReviewQueue `
+    -HintStore ([pscustomobject]@{ hints = @($candidate) }) `
+    -PreviousQueue ([pscustomobject]@{
+        queue = @(
+            [pscustomobject]@{
+                candidate_id = 'hint:example'
+                status = 'VERIFIED'
+                next_action = 'ALREADY_VERIFIED_IN_STORE'
+                retry_count = 0
+                last_attempt_at = '2026-08-23T09:00:00.000Z'
+                next_attempt_at = $null
+            }
+        )
+    }) `
+    -ExistingCompanies @($domainOnlyStoreCompany) `
+    -Now $observedAt
+$domainOnlyEntry = @($domainOnlyQueue.queue | Where-Object { [string]$_.candidate_id -eq 'hint:example' })[0]
+Assert-True -Condition ($domainOnlyEntry.next_action -eq 'VERIFY_CAREER_SOURCE' -and $domainOnlyEntry.status -eq 'PENDING') -Message 'Domain-only-Bestandsfirma wird nicht fuer getrennte Karrierequellen-Pruefung reaktiviert.'
+Assert-True -Condition ($domainOnlyEntry.review_reason -eq 'PRODUCTIVE_COMPANY_NEEDS_OFFICIAL_CAREER_SOURCE') -Message 'Domain-only-Reaktivierung dokumentiert keinen Karrierequellen-Grund.'
 
 $officialDirectoryEvidence = [pscustomobject]@{
     source_id = 'source-registry:test_official_directory'
@@ -459,6 +483,42 @@ try {
 finally {
     if (Test-Path -LiteralPath $parallelRoot) {
         Remove-Item -LiteralPath $parallelRoot -Recurse -Force
+    }
+}
+
+$sameHostRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-candidate-same-host-' + [guid]::NewGuid().ToString('N'))
+New-Item -ItemType Directory -Path $sameHostRoot -Force | Out-Null
+try {
+    Write-JobAgentStore -ProjectRoot $sameHostRoot -Document (New-JobAgentEmptyDocument -GeneratedAt $observedAt) | Out-Null
+    New-Item -ItemType Directory -Path (Join-Path $sameHostRoot 'data\jobagent') -Force | Out-Null
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-discovery-hints/v1'
+        generated_at = '2026-08-23T09:00:00.000Z'
+        hints = @(
+            (New-TestCandidate -Id 'hint:same-host-one' -Name 'Same Host One GmbH' -OfficialWebsiteUrl 'https://same-host.example.invalid/one' -OfficialWebsiteVerified $true),
+            (New-TestCandidate -Id 'hint:same-host-two' -Name 'Same Host Two GmbH' -OfficialWebsiteUrl 'https://same-host.example.invalid/two' -OfficialWebsiteVerified $true)
+        )
+    } | ConvertTo-Json -Depth 20 | Set-Content -LiteralPath (Join-Path $sameHostRoot 'data\jobagent\company-discovery.hints.json') -Encoding UTF8
+    [pscustomobject]@{
+        responses = @(
+            [pscustomobject]@{ url = 'https://same-host.example.invalid/one'; ok = $true; status_code = 200; final_url = 'https://same-host.example.invalid/one'; content = '<html><a href="/about">About</a></html>' },
+            [pscustomobject]@{ url = 'https://same-host.example.invalid/two'; ok = $true; status_code = 200; final_url = 'https://same-host.example.invalid/two'; content = '<html><a href="/about">About</a></html>' },
+            [pscustomobject]@{ url = 'https://same-host.example.invalid/sitemap.xml'; ok = $true; status_code = 200; final_url = 'https://same-host.example.invalid/sitemap.xml'; content = '<urlset></urlset>' },
+            [pscustomobject]@{ url = 'https://same-host.example.invalid/sitemap_index.xml'; ok = $true; status_code = 200; final_url = 'https://same-host.example.invalid/sitemap_index.xml'; content = '<sitemapindex></sitemapindex>' }
+        )
+    } | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath (Join-Path $sameHostRoot 'fixture-map.json') -Encoding UTF8
+
+    $sameHostOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Verify-JobAgentCompanyCandidates.ps1') -ProjectRoot $sameHostRoot -MaxCandidates 2 -FixtureMapPath 'fixture-map.json' -HostConcurrency 1 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Same-Host-Kandidatenlauf ist fehlgeschlagen: " + ($sameHostOutput -join "`n"))
+    $sameHostResult = ($sameHostOutput -join "`n") | ConvertFrom-Json -Depth 100
+    Assert-True -Condition ($sameHostResult.verification_queue.processed_total -eq 2) -Message 'HostConcurrency darf den logischen Batch nicht kuerzen.'
+    Assert-True -Condition (@($sameHostResult.domain_only_candidate_ids).Count -eq 2) -Message 'Domain-only-Kandidaten werden nicht getrennt ausgewiesen.'
+    Assert-True -Condition ($sameHostResult.logical_host_waves.host_total -eq 1 -and $sameHostResult.logical_host_waves.hosts[0].candidate_count -eq 2) -Message 'Logische Hostwellen dokumentieren Same-Host-Kandidaten nicht.'
+    Assert-True -Condition ($sameHostResult.batch_policy.host_planning -eq 'logical_waves_no_candidate_drop') -Message 'Batch-Policy dokumentiert den Hostwellen-Vertrag nicht.'
+}
+finally {
+    if (Test-Path -LiteralPath $sameHostRoot) {
+        Remove-Item -LiteralPath $sameHostRoot -Recurse -Force
     }
 }
 
@@ -730,6 +790,7 @@ finally {
         'http_failure_diagnostic_tls_credentials',
         'candidate_js_only_domain_only',
         'aggregator_not_accepted_as_career_source',
+        'domain_only_store_company_requeued_for_career_source',
         'official_directory_website_discovery',
         'official_directory_detail_page_website_discovery',
         'aggregator_rejected_for_website_discovery',
@@ -746,6 +807,7 @@ finally {
         'candidate_verification_http_policy_host_concurrency',
         'candidate_verification_result_checkpoint_resume_before_commit',
         'candidate_verification_parallel_workers',
+        'candidate_verification_same_host_logical_batch',
         'website_discovery_requeues_domain_missing_reviews_with_official_source_evidence'
     )
 } | ConvertTo-Json -Depth 4

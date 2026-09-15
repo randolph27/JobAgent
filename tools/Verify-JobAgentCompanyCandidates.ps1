@@ -486,6 +486,8 @@ function New-ToolCandidateVerificationBatchMetrics {
         wallclock_seconds = [Math]::Round($wallclockSeconds, 3)
         processed_total = $processedTotal
         verified_total = @($Results | Where-Object { [string]$_.status -in @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') }).Count
+        official_career_verified_total = @($Results | Where-Object { [string]$_.status -in @('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') }).Count
+        domain_only_verified_total = @($Results | Where-Object { [string]$_.status -eq 'COMPANY_DOMAIN_VERIFIED' }).Count
         official_career_verified_before = $before.Count
         official_career_verified_after = $after.Count
         net_official_career_growth = $newCareerCompanyIds.Count
@@ -656,7 +658,7 @@ function Test-ToolCandidateVerificationQueueEntryReady {
     }
 
     $action = [string](Get-ToolEntryProperty -Entry $Entry -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
-    if ($action -ne 'VERIFY_OFFICIAL_SITE') {
+    if ($action -notin @('VERIFY_OFFICIAL_SITE', 'VERIFY_CAREER_SOURCE')) {
         return $false
     }
 
@@ -707,6 +709,44 @@ function Select-ToolHostLimitedCandidates {
         $selected.Add($candidate)
     }
     return $selected.ToArray()
+}
+
+function New-ToolLogicalHostWavePlan {
+    param(
+        [Parameter(Mandatory)][AllowEmptyCollection()][object[]]$Candidates
+    )
+
+    $groups = @($Candidates |
+        Group-Object { Get-ToolCandidateHostKey -Candidate $_ } |
+        Sort-Object Name)
+    $waves = New-Object System.Collections.Generic.List[object]
+    $maxDepth = if ($groups.Count -eq 0) { 0 } else { @($groups | ForEach-Object { $_.Count } | Measure-Object -Maximum).Maximum }
+    for ($index = 0; $index -lt $maxDepth; $index++) {
+        $waveCandidates = New-Object System.Collections.Generic.List[string]
+        foreach ($group in $groups) {
+            if ($group.Count -gt $index) {
+                $waveCandidates.Add((Get-ToolCandidateId -Candidate $group.Group[$index]))
+            }
+        }
+        $waves.Add([pscustomobject]@{
+                wave_index = $index + 1
+                candidate_ids = @($waveCandidates.ToArray())
+            })
+    }
+
+    [pscustomobject]@{
+        schema_version = 'jobagent/company-candidate-logical-host-waves/v1'
+        host_total = $groups.Count
+        wave_total = $waves.Count
+        hosts = @($groups | ForEach-Object {
+                [pscustomobject]@{
+                    host = [string]$_.Name
+                    candidate_count = [int]$_.Count
+                    candidate_ids = @($_.Group | ForEach-Object { Get-ToolCandidateId -Candidate $_ })
+                }
+            })
+        waves = @($waves.ToArray())
+    }
 }
 
 function Get-ToolResultCheckpointRoot {
@@ -834,10 +874,16 @@ function Update-ToolCandidateVerificationQueue {
         $result = $resultsByCandidate[[string]$entry.candidate_id]
         $status = [string]$result.status
         $isVerified = @('CAREER_URL_VERIFIED', 'COMPANY_DOMAIN_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains $status
+        $entryAction = [string](Get-ToolEntryProperty -Entry $entry -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE')
+        $careerVerificationOnly = $entryAction -eq 'VERIFY_CAREER_SOURCE'
+        $isOfficialCareerVerified = @('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains $status
         $retryCount = [int]$entry.retry_count
         $nextAttemptAt = $null
-        $queueStatus = if ($isVerified) {
+        $queueStatus = if ($isOfficialCareerVerified -or ($isVerified -and -not $careerVerificationOnly)) {
             'VERIFIED'
+        }
+        elseif ($careerVerificationOnly -and $status -eq 'COMPANY_DOMAIN_VERIFIED') {
+            'MANUAL_REVIEW_REQUIRED'
         }
         elseif ($status -eq 'MANUAL_REVIEW_REQUIRED') {
             'MANUAL_REVIEW_REQUIRED'
@@ -869,11 +915,11 @@ function Update-ToolCandidateVerificationQueue {
             canonical_name = [string]$entry.canonical_name
             source_count = [int]$entry.source_count
             priority_score = [int]$entry.priority_score
-            next_action = if ($isVerified) { [string]$result.next_action } else { [string](Get-ToolEntryProperty -Entry $entry -Name 'next_action' -Default 'VERIFY_OFFICIAL_SITE') }
+            next_action = if ($isOfficialCareerVerified -or ($isVerified -and -not $careerVerificationOnly)) { [string]$result.next_action } else { $entryAction }
             reason_codes = @((Get-ToolEntryProperty -Entry $entry -Name 'reason_codes' -Default @()))
             target_area_basis = @($entry.target_area_basis)
             status = $queueStatus
-            review_reason = if (@($result.review_reasons).Count -gt 0) { (@($result.review_reasons) -join ',') } elseif ($queueStatus -eq 'RETRY_EXHAUSTED') { 'RETRY_EXHAUSTED' } else { [string]$entry.review_reason }
+            review_reason = if (@($result.review_reasons).Count -gt 0) { (@($result.review_reasons) -join ',') } elseif ($careerVerificationOnly -and $status -eq 'COMPANY_DOMAIN_VERIFIED') { 'CAREER_SOURCE_MISSING_AFTER_DOMAIN_VERIFICATION' } elseif ($queueStatus -eq 'RETRY_EXHAUSTED') { 'RETRY_EXHAUSTED' } else { [string]$entry.review_reason }
             retry_count = $retryCount
             last_attempt_at = ConvertTo-ToolIso -Value $Now
             next_attempt_at = if ($null -eq $nextAttemptAt) { $null } else { ConvertTo-ToolIso -Value $nextAttemptAt }
@@ -1012,9 +1058,7 @@ finally {
     Exit-JobAgentStoreLock -Lock $lock
 }
 
-if (-not $resumedFromCheckpoint) {
-    $targetCandidates = @(Select-ToolHostLimitedCandidates -Candidates $targetCandidates -HostLimit $HostConcurrency)
-}
+$logicalHostWavePlan = New-ToolLogicalHostWavePlan -Candidates $targetCandidates
 $existingCompanies = @($document.companies)
 $plannedCandidateIds = if ($resumedFromCheckpoint) { @($resumeCheckpoint.candidate_ids | ForEach-Object { [string]$_ }) } else { @($targetCandidates | ForEach-Object { Get-ToolCandidateId -Candidate $_ }) }
 foreach ($resumeResult in $resumeResultItems) {
@@ -1173,7 +1217,8 @@ $summary = [pscustomobject]@{
     queue_path = $queueResolved
     checkpoint_path = $checkpointResolved
     run_id = $runId
-    batch_policy = [pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; fetch_client = $FetchClient; wsl_distribution = $WslDistribution; writer = 'serial_atomic_store_writer' }
+    batch_policy = [pscustomobject]@{ worker_count = $WorkerCount; host_concurrency = $HostConcurrency; fetch_client = $FetchClient; wsl_distribution = $WslDistribution; writer = 'serial_atomic_store_writer'; host_planning = 'logical_waves_no_candidate_drop' }
+    logical_host_waves = $logicalHostWavePlan
     batch_metrics = $batchMetrics
     resume_report = $resumeReport
     resume_log_path = $resumeLogPath
@@ -1189,6 +1234,8 @@ $summary = [pscustomobject]@{
     }
     checked_candidate_ids = $checkedCandidateIds
     verified_candidate_ids = $verifiedCandidateIds
+    official_career_verified_candidate_ids = @($resultItems | Where-Object { @('CAREER_URL_VERIFIED', 'OFFICIAL_ATS_VERIFIED') -contains [string]$_.status } | ForEach-Object { [string]$_.candidate_id })
+    domain_only_candidate_ids = @($resultItems | Where-Object { [string]$_.status -eq 'COMPANY_DOMAIN_VERIFIED' } | ForEach-Object { [string]$_.candidate_id })
     manual_review_candidate_ids = $manualReviewCandidateIds
     unverified_candidate_ids = $unverifiedCandidateIds
     fetch_error_summary = $fetchErrorSummary
