@@ -506,16 +506,40 @@ function New-JobAgentReportJobEntry {
     $companySources = if ($SourcesByCompanyId.ContainsKey($companyId)) { @($SourcesByCompanyId[$companyId].ToArray()) } else { @() }
     $providerLink = Get-JobAgentReportProviderLink -Company $company -JobSources $companySources -PreferredSourceId ([string](Get-JobAgentReportProperty -Object $Job -Name 'source_id' -Default ''))
 
+    $location = Get-JobAgentReportProperty -Object $Job -Name 'location'
+    $locationCity = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $location -Name 'city' -Default 'UNKNOWN')
+    $locationRegion = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $location -Name 'region' -Default 'UNKNOWN')
+    $targetArea = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $location -Name 'target_area' -Default 'UNKNOWN')
+    $areaFacets = [System.Collections.Generic.List[string]]::new()
+    if ($targetArea -ne 'UNKNOWN') {
+        $areaFacets.Add($targetArea)
+    }
+    if ($locationCity -eq 'Freising') {
+        $areaFacets.Add('FREISING_CITY')
+    }
+    if ($locationRegion -match '(?i)landkreis\s+freising') {
+        $areaFacets.Add('FREISING_COUNTY')
+    }
+    if (($targetArea -eq 'FREISING') -and ($areaFacets.Count -eq 1)) {
+        $areaFacets.Add('FREISING_UNSPECIFIED')
+    }
+
     [pscustomobject]@{
         job_id = [string]$Job.job_id
         company_id = $companyId
         company = Get-JobAgentReportCompanyName -CompaniesById $CompaniesById -CompanyId $companyId
         title = ConvertTo-JobAgentReportText -Value $Job.title
+        job_category = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'job_category' -Default (Get-JobAgentReportProperty -Object $Job.classification -Name 'category' -Default 'UNKNOWN'))
         priority = ConvertTo-JobAgentReportText -Value $Job.priority
         status = ConvertTo-JobAgentReportText -Value $Job.status
-        location = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job.location -Name 'label' -Default 'UNKNOWN')
+        location = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $location -Name 'label' -Default 'UNKNOWN')
+        location_city = $locationCity
+        location_region = $locationRegion
+        target_area = $targetArea
+        area_facets = @($areaFacets.ToArray() | Select-Object -Unique)
         work_model = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'work_model' -Default 'UNKNOWN')
         employment_type = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'employment_type' -Default 'UNKNOWN')
+        work_time = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'work_time' -Default 'UNKNOWN')
         published_at = $publishedAt
         first_seen = $firstSeen
         last_seen = $lastSeen
@@ -535,6 +559,36 @@ function New-JobAgentReportJobEntry {
         change_reason = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $ChangeEvent -Name 'reason' -Default 'UNKNOWN')
         priority_explanation = Get-JobAgentReportPriorityExplanation -Job $Job
     }
+}
+
+function New-JobAgentReportCompanyEntry {
+    param(
+        [Parameter(Mandatory)][object]$Company,
+        [Parameter()][AllowEmptyCollection()][object[]]$JobSources = @()
+    )
+
+    $providerLink = Get-JobAgentReportProviderLink -Company $Company -JobSources $JobSources
+    $locations = @((Get-JobAgentReportProperty -Object $Company -Name 'locations' -Default @()) | ForEach-Object {
+            ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $_ -Name 'label' -Default 'UNKNOWN')
+        } | Select-Object -Unique)
+    [pscustomobject]@{
+        company_id = [string]$Company.company_id
+        company = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Company -Name 'canonical_name')
+        locations = @($locations)
+        locations_text = ConvertTo-JobAgentReportListText -Values $locations -Fallback 'UNKNOWN' -MaxItems 20
+        official_website_url = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Company -Name 'official_website_url')
+        career_url = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Company -Name 'career_url')
+        verification_status = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Company -Name 'verification_status')
+        scan_status = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Company -Name 'scan_status')
+        provider_link = $providerLink
+    }
+}
+
+function ConvertTo-JobAgentReportClientDataJson {
+    param([Parameter(Mandatory)][object]$Value)
+
+    $json = $Value | ConvertTo-Json -Depth 20 -Compress
+    return $json.Replace('<', '\\u003c').Replace('>', '\\u003e').Replace('&', '\\u0026')
 }
 
 function New-JobAgentReportStatistics {
@@ -750,6 +804,17 @@ function New-JobAgentDailyReport {
         Where-Object { (@('NEW', 'ACTIVE', 'UPDATED') -contains [string]$_.status) -and (Test-JobAgentReportMatch -Job $_) -and (-not $changedIds.Contains([string]$_.job_id)) } |
         ForEach-Object { New-JobAgentReportJobEntry -Job $_ -CompaniesById $companiesById -SourcesByCompanyId $sourcesByCompanyId -ReferenceTime $finished } |
         Sort-Object priority, company, title)
+    $allActiveEntries = @($Document.jobs |
+        Where-Object { (@('NEW', 'ACTIVE', 'UPDATED') -contains [string]$_.status) -and (Test-JobAgentReportCapturedJob -Job $_) } |
+        ForEach-Object { New-JobAgentReportJobEntry -Job $_ -CompaniesById $companiesById -SourcesByCompanyId $sourcesByCompanyId -ReferenceTime $finished } |
+        Sort-Object title, company, location, last_seen, job_id)
+    $allCompanies = @($Document.companies |
+        ForEach-Object {
+            $companyId = [string]$_.company_id
+            $companySources = if ($sourcesByCompanyId.ContainsKey($companyId)) { @($sourcesByCompanyId[$companyId].ToArray()) } else { @() }
+            New-JobAgentReportCompanyEntry -Company $_ -JobSources $companySources
+        } |
+        Sort-Object company, company_id)
     $newCompanies = @($Document.companies |
         Where-Object {
             $created = [datetime]::Parse([string]$_.created_at, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
@@ -787,6 +852,8 @@ function New-JobAgentDailyReport {
         scan_run_id = $ScanRunId
         generated_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
         sections = [pscustomobject]@{
+            companies = @($allCompanies)
+            active_jobs = @($allActiveEntries)
             new_matching_jobs = @($createdEntries.ToArray() | Sort-Object priority, company, title)
             active_matching_jobs = @($activeEntries)
             changed_jobs = @($changedEntries.ToArray() | Sort-Object priority, company, title)
@@ -1186,6 +1253,77 @@ function ConvertTo-JobAgentDailyReportMarkdown {
     return ($lines.ToArray() -join "`n")
 }
 
+function Add-JobAgentReportSearchInterfaceHtml {
+    param(
+        [Parameter(Mandatory)][System.Collections.Generic.List[string]]$Lines,
+        [Parameter(Mandatory)][object]$Report
+    )
+
+    $clientData = [pscustomobject]@{
+        generated_at = $Report.generated_at
+        reference_time = $Report.generated_at
+        jobs = @($Report.sections.active_jobs | ForEach-Object {
+                [pscustomobject]@{
+                    job_id = $_.job_id
+                    company = $_.company
+                    title = $_.title
+                    job_category = $_.job_category
+                    location = $_.location
+                    target_area = $_.target_area
+                    area_facets = @($_.area_facets)
+                    work_model = $_.work_model
+                    employment_type = $_.employment_type
+                    work_time = $_.work_time
+                    age_basis = $_.age_basis
+                    age_days = $_.age_days
+                    last_seen = $_.last_seen
+                    official_url = $_.official_url
+                    career_url = $_.career_url
+                }
+            })
+        companies = @($Report.sections.companies | ForEach-Object {
+                [pscustomobject]@{
+                    company_id = $_.company_id
+                    company = $_.company
+                    locations = @($_.locations)
+                    official_website_url = $_.official_website_url
+                    career_url = $_.career_url
+                    verification_status = $_.verification_status
+                    scan_status = $_.scan_status
+                }
+            })
+    }
+    [void]$Lines.Add('<section id="jobagent-search" aria-labelledby="jobagent-search-heading">')
+    [void]$Lines.Add('<h2 id="jobagent-search-heading">Firmen und Stellen</h2>')
+    [void]$Lines.Add('<p>Die Suche arbeitet ausschliesslich lokal im angezeigten Bestand. Filter starten keinen Joblauf und aendern keine gespeicherten Daten.</p>')
+    [void]$Lines.Add('<div class="search-tabs" role="tablist" aria-label="Bestandsansicht"><button type="button" id="jobagent-tab-jobs" role="tab" aria-selected="true" aria-controls="jobagent-jobs" data-jobagent-view="jobs">Stellen</button><button type="button" id="jobagent-tab-companies" role="tab" aria-selected="false" aria-controls="jobagent-companies" data-jobagent-view="companies">Firmen</button></div>')
+    [void]$Lines.Add('<form id="jobagent-filters" class="filters" novalidate><label>Freitext<input id="jobagent-query" name="q" type="search" autocomplete="off" placeholder="Titel, Firma oder Berufskategorie"></label><label>Gebiet<select id="jobagent-area" name="area" multiple size="5" aria-describedby="jobagent-filter-help"><option value="MUNICH">Muenchen Stadt</option><option value="MUNICH_20KM">Muenchen 20 km</option><option value="FREISING_CITY">Freising Stadt</option><option value="FREISING_COUNTY">Landkreis Freising</option><option value="FREISING_UNSPECIFIED">Freising (Gebiet nicht weiter belegt)</option><option value="REMOTE_WITH_TARGET_REFERENCE">Remote/Hybrid mit Zielgebietsbezug</option><option value="UNKNOWN">Unbekannt</option></select></label><label>Arbeitsmodell<select id="jobagent-work-model" name="workModel" multiple size="4"><option value="REMOTE">Remote</option><option value="HYBRID">Hybrid</option><option value="ONSITE">Vor Ort</option><option value="UNKNOWN">Unbekannt</option></select></label><label>Anstellungsart<select id="jobagent-employment-type" name="employmentType" multiple size="5"><option value="FULL_TIME">Vollzeit</option><option value="PART_TIME">Teilzeit</option><option value="CONTRACT">Befristet/Vertrag</option><option value="PERMANENT">Unbefristet</option><option value="INTERNSHIP">Praktikum</option><option value="UNKNOWN">Unbekannt</option></select></label><label>Arbeitszeit<select id="jobagent-work-time" name="workTime" multiple size="2"><option value="UNKNOWN">Unbekannt</option></select></label><label>Aktualitaet<select id="jobagent-age" name="age"><option value="">Alle</option><option value="7">Letzte 7 Tage</option><option value="30">Letzte 30 Tage</option><option value="older">Aelter als 30 Tage</option><option value="UNKNOWN">Unbekannt</option></select></label><button type="reset" id="jobagent-reset">Filter zuruecksetzen</button></form>')
+    [void]$Lines.Add('<p id="jobagent-filter-help" class="unknown">Mehrfachauswahl: Strg/Cmd oder Touch-Auswahl. Werte im selben Feld werden alternativ, verschiedene Filter gemeinsam angewendet.</p>')
+    [void]$Lines.Add('<p id="jobagent-result-count" class="result-count" role="status" aria-live="polite"></p>')
+    [void]$Lines.Add('<div id="jobagent-jobs" role="tabpanel" aria-labelledby="jobagent-tab-jobs"><div id="jobagent-job-results" class="result-list"></div></div>')
+    [void]$Lines.Add('<div id="jobagent-companies" role="tabpanel" aria-labelledby="jobagent-tab-companies" hidden><div id="jobagent-company-results" class="result-list"></div></div>')
+    [void]$Lines.Add('<nav id="jobagent-pagination" class="pagination" aria-label="Seitennavigation"></nav>')
+    [void]$Lines.Add('<script id="jobagent-search-data" type="application/json">' + (ConvertTo-JobAgentReportClientDataJson -Value $clientData) + '</script>')
+    [void]$Lines.Add('<script>')
+    [void]$Lines.Add('(function () {')
+    [void]$Lines.Add('const data=JSON.parse(document.getElementById("jobagent-search-data").textContent),pageSize=50,form=document.getElementById("jobagent-filters"),count=document.getElementById("jobagent-result-count"),pagination=document.getElementById("jobagent-pagination");')
+    [void]$Lines.Add('const normalize=value=>String(value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("de-DE").replace(/[^\p{L}\p{N}]+/gu," ").trim(),selected=id=>Array.from(document.getElementById(id).selectedOptions,o=>o.value),text=(value,fallback="Unbekannt")=>value&&value!=="UNKNOWN"?String(value):fallback;')
+    [void]$Lines.Add('const link=(url,label)=>{const a=document.createElement("a");if(/^https?:\/\//i.test(String(url||""))){a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=label;return a}const span=document.createElement("span");span.className="unknown";span.textContent="Kein offizieller Link";return span};')
+    [void]$Lines.Add('const read=()=>{const p=new URLSearchParams(location.hash.slice(1));return{view:p.get("view")==="companies"?"companies":"jobs",page:Math.max(1,Number(p.get("page"))||1),q:p.get("q")||"",area:(p.get("area")||"").split(",").filter(Boolean),workModel:(p.get("workModel")||"").split(",").filter(Boolean),employmentType:(p.get("employmentType")||"").split(",").filter(Boolean),workTime:(p.get("workTime")||"").split(",").filter(Boolean),age:p.get("age")||""}};')
+    [void]$Lines.Add('const write=(state,replace)=>{const p=new URLSearchParams();Object.entries(state).forEach(([key,value])=>{const output=Array.isArray(value)?value.join(","):value;if(output&&!(key==="page"&&Number(output)===1))p.set(key,output)});const target="#"+p.toString();if(replace)history.replaceState(null,"",target);else location.hash=target};')
+    [void]$Lines.Add('const setSelect=(id,values)=>Array.from(document.getElementById(id).options).forEach(option=>option.selected=values.includes(option.value));const sync=state=>{document.getElementById("jobagent-query").value=state.q;document.getElementById("jobagent-age").value=state.age;setSelect("jobagent-area",state.area);setSelect("jobagent-work-model",state.workModel);setSelect("jobagent-employment-type",state.employmentType);setSelect("jobagent-work-time",state.workTime)};')
+    [void]$Lines.Add('const currentFilters=()=>({q:document.getElementById("jobagent-query").value,area:selected("jobagent-area"),workModel:selected("jobagent-work-model"),employmentType:selected("jobagent-employment-type"),workTime:selected("jobagent-work-time"),age:document.getElementById("jobagent-age").value});')
+    [void]$Lines.Add('const includesAny=(values,candidates)=>values.length===0||candidates.some(candidate=>values.includes(candidate)),ageMatches=(job,age)=>{if(!age)return true;const days=Number(job.age_days);if(!Number.isFinite(days))return age==="UNKNOWN";return age==="older"?days>30:days<=Number(age)};')
+    [void]$Lines.Add('const jobMatches=(job,state)=>{const tokens=normalize(state.q).split(" ").filter(Boolean),haystack=normalize([job.title,job.company,job.job_category].join(" "));return tokens.every(token=>haystack.includes(token))&&includesAny(state.area,job.area_facets||[job.target_area])&&includesAny(state.workModel,[job.work_model])&&includesAny(state.employmentType,[job.employment_type])&&includesAny(state.workTime,[job.work_time])&&ageMatches(job,state.age)};')
+    [void]$Lines.Add('const companyMatches=(company,state)=>{const tokens=normalize(state.q).split(" ").filter(Boolean),haystack=normalize([company.company,...(company.locations||[])].join(" "));return tokens.every(token=>haystack.includes(token))};')
+    [void]$Lines.Add('const jobCard=job=>{const article=document.createElement("article"),heading=document.createElement("h3"),meta=document.createElement("p"),detail=document.createElement("p");article.className="result-card";heading.textContent=job.title;meta.textContent=text(job.company)+" · "+text(job.location)+" · "+text(job.work_model)+" · "+text(job.employment_type)+" · "+text(job.work_time);detail.textContent="Aktualitaet: "+text(job.age_days,"Unbekannt")+" Tage ("+text(job.age_basis)+")";article.append(heading,meta,detail,link(job.official_url,"Offizielle Stelle"),document.createTextNode(" · "),link(job.career_url,"Karriere"));return article};')
+    [void]$Lines.Add('const companyCard=company=>{const article=document.createElement("article"),heading=document.createElement("h3"),meta=document.createElement("p"),detail=document.createElement("p");article.className="result-card";heading.textContent=company.company;meta.textContent="Orte: "+text((company.locations||[]).join(", "));detail.textContent="Pruefstatus: "+text(company.verification_status)+" · Scan: "+text(company.scan_status);article.append(heading,meta,detail,link(company.official_website_url,"Website"),document.createTextNode(" · "),link(company.career_url,"Karriere"));return article};')
+    [void]$Lines.Add('const render=()=>{const state=read();sync(state);const isJobs=state.view==="jobs",items=(isJobs?data.jobs.filter(job=>jobMatches(job,state)):data.companies.filter(company=>companyMatches(company,state))).sort((a,b)=>isJobs?[a.title,a.company,a.location,a.last_seen,a.job_id].join("\\u0000").localeCompare([b.title,b.company,b.location,b.last_seen,b.job_id].join("\\u0000"),"de"):[a.company,a.company_id].join("\\u0000").localeCompare([b.company,b.company_id].join("\\u0000"),"de")),pages=Math.max(1,Math.ceil(items.length/pageSize)),page=Math.min(state.page,pages),slice=items.slice((page-1)*pageSize,page*pageSize),target=document.getElementById(isJobs?"jobagent-job-results":"jobagent-company-results");document.getElementById("jobagent-jobs").hidden=!isJobs;document.getElementById("jobagent-companies").hidden=isJobs;document.getElementById("jobagent-tab-jobs").setAttribute("aria-selected",String(isJobs));document.getElementById("jobagent-tab-companies").setAttribute("aria-selected",String(!isJobs));target.replaceChildren(...slice.map(isJobs?jobCard:companyCard));if(!slice.length)target.textContent="Keine Treffer im angezeigten Bestand.";count.textContent=(isJobs?"Stellen":"Firmen")+": "+items.length+" Treffer, Seite "+page+" von "+pages+" (sichtbar "+slice.length+").";pagination.replaceChildren();if(pages>1){for(let number=1;number<=pages;number++){const button=document.createElement("button");button.type="button";button.textContent=String(number);button.disabled=number===page;button.addEventListener("click",()=>write({...state,page:number},false));pagination.append(button)}}if(page!==state.page)write({...state,page},true)};')
+    [void]$Lines.Add('form.addEventListener("input",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("change",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("reset",()=>setTimeout(()=>write({view:read().view,page:1,q:"",area:[],workModel:[],employmentType:[],workTime:[],age:""},false),0));document.querySelectorAll("[data-jobagent-view]").forEach(button=>button.addEventListener("click",()=>write({...read(),view:button.dataset.jobagentView,page:1},false)));window.addEventListener("hashchange",render);render();')
+    [void]$Lines.Add('}());')
+    [void]$Lines.Add('</script></section>')
+}
+
 function ConvertTo-JobAgentDailyReportHtml {
     [CmdletBinding()]
     param([Parameter(Mandatory)][object]$Report)
@@ -1219,6 +1357,12 @@ function ConvertTo-JobAgentDailyReportHtml {
     [void]$lines.Add('tbody tr:nth-child(even) { background: rgba(122, 75, 32, 0.04); }')
     [void]$lines.Add('a { color: var(--accent); }')
     [void]$lines.Add('.unknown { color: var(--muted); font-style: italic; }')
+    [void]$lines.Add('.filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; align-items: end; }')
+    [void]$lines.Add('.filters label { display: grid; gap: 5px; font-weight: 600; }')
+    [void]$lines.Add('input, select, button { font: inherit; min-height: 44px; border: 1px solid var(--line); border-radius: 8px; padding: 8px; background: var(--surface); color: var(--text); }')
+    [void]$lines.Add('select[multiple] { min-height: 116px; } button { cursor: pointer; font-weight: 600; } button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible { outline: 3px solid #1d70b8; outline-offset: 2px; }')
+    [void]$lines.Add('.search-tabs, .pagination { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; } .search-tabs button[aria-selected="true"] { background: var(--accent); color: #fff; } .result-count { font-weight: 600; }')
+    [void]$lines.Add('.result-list { display: grid; gap: 10px; } .result-card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--surface-alt); overflow-wrap: anywhere; } .result-card h3, .result-card p { margin: 0 0 8px; }')
     [void]$lines.Add('@media (max-width: 800px) { main { padding: 16px 12px 28px; } section { padding: 12px; } table { min-width: 640px; } .job-table { min-width: 1360px; } th, td { padding: 9px 10px; } }')
     [void]$lines.Add('</style>')
     [void]$lines.Add('</head>')
@@ -1244,6 +1388,8 @@ function ConvertTo-JobAgentDailyReportHtml {
     }
     [void]$lines.Add('</div>')
     [void]$lines.Add('</section>')
+
+    Add-JobAgentReportSearchInterfaceHtml -Lines $lines -Report $Report
 
     [void]$lines.Add('<section><h2>Erfassungsscope und Vollstaendigkeit</h2>')
     [void]$lines.Add('<div class="summary">')

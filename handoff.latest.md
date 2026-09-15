@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-15T15:27:00.366+02:00
+Stand: 2026-09-15T15:51:35.445+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-15T15:27:00.366+02:00
 - Status: `in-progress`
 - Ziel: UI-001 Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern bereitstellen #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
 - Branch: `master`
-- HEAD: `ca3f8bbe77eb`
+- HEAD: `a45a3662f658`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,25 +16,12 @@ Stand: 2026-09-15T15:27:00.366+02:00
 
 ## Versionierte Aenderungen
 
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `docs/data-model.md`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `schemas/jobagent.schema.json`
-- `src/JobAgent.DailyRun.psm1`
+- `html/jobagent/ja-022-viewport-audit.html`
 - `src/JobAgent.Report.psm1`
-- `src/JobAgent.SourceAdapters.psm1`
-- `tests/Test-JobAgentDailyRun.ps1`
+- `tests/Test-JobAgentHtmlAudit.ps1`
 - `tests/Test-JobAgentReport.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
-- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
-- `tools/Invoke-JobAgentDailyRun.ps1`
 
 ## Verifikation
 
@@ -42,4 +29,8 @@ Stand: 2026-09-15T15:27:00.366+02:00
 
 ## Naechster Anker
 
-JA-042 Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern #comment: Regionale Daten automatisch sammeln und berufsneutral filtern statt manuell Firmenwellen abarbeiten.
+UI-001 abschliessen: dedizierten Browser-Funktionstest mit mehr als 250 Fixture-Stellen, exakten IDs/Zählern, Filterkombinationen, Reset und Rücknavigation ergänzen; dann Evidence, Roadmap-Abschluss und Archivierung.
+
+## Detaillierter Wechselstatus
+
+Vollständiger Umsetzungs-, Test- und Restaufgabenstand: docs/handoffs/2026-09-15-ui001-search-slice.md.

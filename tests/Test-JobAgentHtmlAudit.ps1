@@ -181,6 +181,10 @@ foreach ($expected in @(
         'overflow-wrap: anywhere;',
         '@media (max-width: 800px)',
         '<h2>Neue passende Stellen</h2>',
+        '<h2 id="jobagent-search-heading">Firmen und Stellen</h2>',
+        'id="jobagent-query"',
+        'id="jobagent-pagination"',
+        'Filter starten keinen Joblauf und aendern keine gespeicherten Daten.',
         '<h2>Coverage und Adapter-Backlog</h2>',
         '<th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th>',
         'Head of IT mit sehr langem Titel fuer responsiven Layouttest und Ueberlaufpruefung',
@@ -200,6 +204,7 @@ Assert-True -Condition ($html -match '<a href="https://alpha\.example\.invalid/c
     cases = @(
         'html_report_contains_required_sections',
         'html_report_uses_responsive_overflow_guards',
+        'html_report_contains_local_company_and_job_search',
         'html_report_avoids_external_runtime_resources',
         'html_report_preserves_official_job_links'
     )
