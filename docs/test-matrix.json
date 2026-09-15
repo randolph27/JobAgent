@@ -1,12 +1,142 @@
 {
-  "schema_version": "jobagent-test-matrix/v1",
+  "schema_version": "jobagent-test-matrix/v2",
   "updated_at": "2026-09-15T16:31:00+02:00",
   "policy": {
     "default_lane": "deterministic-fixture",
     "live_lane": "separate-not-supertest",
     "supertest_command": ".\\ci.cmd supertest",
-    "no_live_web_in_function_tests": true
+    "no_live_web_in_function_tests": true,
+    "locale": "de-DE",
+    "clock": {
+      "timezone": "UTC",
+      "fixed_instant": "2026-01-15T12:00:00Z"
+    },
+    "seed": "jobagent-qa-fixture-v1",
+    "tool_resolution": "local-verified-tools-only",
+    "external_lanes": {
+      "sonar": "not-supported",
+      "android": "not-applicable"
+    }
   },
+  "cases": [
+    {
+      "case_id": "QA001-CONTRACT-001",
+      "function_refs": ["src\\JobAgent.Persistence.psm1::Write-JobAgentStore"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "valid fixture document",
+      "expected": "atomic persistence result is deterministic",
+      "negative_case": "write failure and path traversal are covered by QA-002",
+      "test_file": "tests\\Test-JobAgentPersistence.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": [],
+      "status": "planned",
+      "owner": "QA-002"
+    },
+    {
+      "case_id": "QA001-CONTRACT-002",
+      "function_refs": ["src\\JobAgent.Deduplication.psm1::Resolve-JobAgentJobDeduplication", "src\\JobAgent.StatusMachine.psm1::Invoke-JobAgentStatusMachine"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "stable company and job identifiers",
+      "expected": "identity and status sequence are explicit",
+      "negative_case": "conflicting identifiers and partial scans are covered by QA-002",
+      "test_file": "tests\\Test-JobAgentDeduplication.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": ["QA001-CONTRACT-001"],
+      "status": "planned",
+      "owner": "QA-002"
+    },
+    {
+      "case_id": "QA001-CONTRACT-003",
+      "function_refs": ["src\\JobAgent.SourceVerification.psm1::Resolve-JobAgentCompanyCandidateVerification"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "controlled verification response",
+      "expected": "official-source verification decision with evidence",
+      "negative_case": "transport and source errors are covered by QA-003",
+      "test_file": "tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "lane": "contract",
+      "dependencies": [],
+      "status": "planned",
+      "owner": "QA-003"
+    },
+    {
+      "case_id": "QA001-CONTRACT-004",
+      "function_refs": ["src\\JobAgent.LiveScan.psm1::Invoke-JobAgentLiveFetchWithRetry", "src\\JobAgent.SourceAdapters.psm1::New-JobAgentAdapterResult"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "controlled adapter response sequence",
+      "expected": "retry and adapter outcome are deterministic",
+      "negative_case": "timeout, malformed response and blocked source are covered by QA-003",
+      "test_file": "tests\\Test-JobAgentLiveScan.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": ["QA001-CONTRACT-003"],
+      "status": "planned",
+      "owner": "QA-003"
+    },
+    {
+      "case_id": "QA001-CONTRACT-005",
+      "function_refs": ["src\\JobAgent.DailyRun.psm1::Invoke-JobAgentDailyRun", "src\\JobAgent.Operations.psm1::Invoke-JobAgentManagedDailyRun"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "isolated daily-run root",
+      "expected": "resume, checkpoint and publication remain atomic",
+      "negative_case": "interrupted run and delayed retry are covered by QA-003",
+      "test_file": "tests\\Test-JobAgentDailyRun.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": ["QA001-CONTRACT-001", "QA001-CONTRACT-004"],
+      "status": "planned",
+      "owner": "QA-003"
+    },
+    {
+      "case_id": "QA001-UI-001",
+      "function_refs": ["src\\JobAgent.Report.psm1::Add-JobAgentReportSearchInterfaceHtml", "src\\JobAgent.Report.psm1::q"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "query control and fixed UI fixture",
+      "expected": "filter state and result count are asserted",
+      "negative_case": "empty and unknown-value searches are covered by QA-004",
+      "test_file": "tests\\Test-JobAgentUiBrowserAudit.ps1",
+      "lane": "local-browser",
+      "dependencies": ["QA001-CONTRACT-005"],
+      "status": "planned",
+      "owner": "QA-004"
+    },
+    {
+      "case_id": "QA001-UI-002",
+      "function_refs": ["src\\JobAgent.Report.psm1::jobs", "src\\JobAgent.Report.psm1::companies"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "tab, pagination and reset controls",
+      "expected": "navigation preserves or resets the defined client state",
+      "negative_case": "invalid page and reset transition are covered by QA-004",
+      "test_file": "tests\\Test-JobAgentUiBrowserAudit.ps1",
+      "lane": "local-browser",
+      "dependencies": ["QA001-UI-001"],
+      "status": "planned",
+      "owner": "QA-004"
+    },
+    {
+      "case_id": "QA001-ACCESSIBILITY-001",
+      "function_refs": ["src\\JobAgent.Report.psm1::jobagent-reset"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "390, 800, 1366 and 1920 viewport fixture",
+      "expected": "control geometry, visible focus and keyboard path are measured",
+      "negative_case": "clipping, overlap and hidden focus are covered by QA-005",
+      "test_file": "tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "lane": "local-browser",
+      "dependencies": ["QA001-UI-002"],
+      "status": "planned",
+      "owner": "QA-005"
+    },
+    {
+      "case_id": "QA001-AGGREGATOR-001",
+      "function_refs": ["src\\JobAgent.Report.psm1::ConvertTo-JobAgentDailyReportHtml"],
+      "fixture": "tests\\fixtures\\jobagent\\valid.json",
+      "input": "validated matrix selection",
+      "expected": "aggregator follows matrix order without duplicate execution",
+      "negative_case": "self-inclusion, missing cases, timeout and child error are covered by QA-006",
+      "test_file": "tests\\Test-JobAgentSupertest.ps1",
+      "lane": "contract",
+      "dependencies": ["QA001-ACCESSIBILITY-001"],
+      "status": "planned",
+      "owner": "QA-006"
+    }
+  ],
   "items": [
     {
       "roadmap_id": "JA-002",

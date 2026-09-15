@@ -14,3 +14,5 @@ Stand: 2026-09-15. Aktiver Plan: QA-001 bis QA-006 fuer den umfassenden Funktion
 - `docs/ROADMAP.md`: mitgefuehrter Bootstrapplan, kein konkurrierender JobAgent-Backlog.
 
 Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein neuer Freising-Radius angenommen. Berufsprofile filtern die Anzeige, nicht den Firmenbestand.
+
+- 2026-09-15: QA-001 nach Roadmap_archive.md rotiert; Evidenz: docs/reviews/QA-001-function-inventory.json, docs/reviews/QA-001-gap-register.md.

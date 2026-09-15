@@ -1,6 +1,6 @@
 # JobAgent Testmatrix
 
-Stand: 2026-09-15
+Stand: 2026-09-15 — QA-001
 
 Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 
@@ -10,6 +10,21 @@ Quelle der maschinenlesbaren Matrix: `docs/test-matrix.json`.
 - Live-Webrecherche ist kein Bestandteil des Supertests; `Test-JobAgentLiveScan.ps1` nutzt deterministische Adapter-/HTTP-Fixtures.
 - `.\ci.cmd supertest` bündelt nur abgeschlossene, einzeln grüne Kernfunktionen.
 - Neue Roadmap-Funktionen erhalten zuerst einen fokussierten Funktionstest; danach wird `docs/test-matrix.json` und zuletzt der Supertest erweitert.
+- Jede Fall-ID in der Matrix enthält Funktions- oder Control-Referenzen, Fixture, Eingabe, Sollwirkung, Negativfall, Lane, Abhängigkeiten und Status. `planned` ist kein bestandener Test.
+- Deterministische Bedingungen: `UTC`, fixer Bezugspunkt `2026-01-15T12:00:00Z`, Locale `de-DE`, Seed `jobagent-qa-fixture-v1` und ausschließlich vorab geprüfte lokale Tools. Sonar ist `not-supported`; Android ist für den Webbericht `not-applicable`.
+- Das kanonische, hashgebundene AST-/Control-Inventar steht in `docs/reviews/QA-001-function-inventory.json`. Es enthält Produktmodule, JobAgent-CLI-Tools, HTML-Controls sowie die Kategorie jeder JobAgent-Testdatei.
+
+## QA-Fallzuordnung
+
+| Fall-ID | Verantwortlich | Lane | Funktionsbereich | Status |
+|---|---|---|---|---|
+| QA001-CONTRACT-001 bis QA001-CONTRACT-002 | QA-002 | deterministic-fixture | Persistenz, Identität, Status | planned |
+| QA001-CONTRACT-003 bis QA001-CONTRACT-005 | QA-003 | contract / deterministic-fixture | Quellen, Adapter, Retry, Daily-Run | planned |
+| QA001-UI-001 bis QA001-UI-002 | QA-004 | local-browser | Suche, Tabs, Pagination, Reset | planned |
+| QA001-ACCESSIBILITY-001 | QA-005 | local-browser | 390/800/1366/1920, Fokus und Geometrie | planned |
+| QA001-AGGREGATOR-001 | QA-006 | contract | Matrixauswahl und Aggregator | planned |
+
+Die detaillierten Vorbedingungen, Eingaben, Sollwerte und Negativfälle sind maschinenlesbar in `docs/test-matrix.json` hinterlegt. Die geplanten Fälle werden erst durch ihren jeweiligen QA-Punkt implementiert und ausgeführt.
 
 ## Matrix
 
