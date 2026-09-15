@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 Import-Module (Join-Path $root 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.Report.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $root 'src\JobAgent.Coverage.psm1') -Force -DisableNameChecking
 
 function Assert-True {
     param(
@@ -264,6 +265,48 @@ foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sourc
     Assert-True -Condition (-not $html.Contains($rawLabel)) -Message "HTML-Report darf technische Metriklabels nicht primaer anzeigen: $rawLabel"
 }
 
+$fixedStoreRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-qa-002-report-coverage-' + [guid]::NewGuid().ToString('N'))
+try {
+    $fixedStoreDocument = ($document | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100)
+    $fixedStoreDocument.companies[0].canonical_name = ('Alpha <script> AG ' + ('ÄÖÜß漢字🙂' * 80))
+    $fixedStoreDocument.jobs[0].title = ('Head of IT <script>alert(1)</script> ' + ('ÄÖÜß漢字🙂' * 80))
+    $fixedStoreDocument.jobs[0].official_url = 'javascript:alert(1)'
+    Write-JobAgentStore -ProjectRoot $fixedStoreRoot -Document $fixedStoreDocument | Out-Null
+    $fixedStore = Read-JobAgentStore -ProjectRoot $fixedStoreRoot
+
+    $fixedReport = New-JobAgentDailyReport -Document $fixedStore -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
+    $fixedCoverage = New-JobAgentCoverageReport -Document $fixedStore -Now ([datetime]'2026-08-17T10:10:00Z')
+    $fixedReportJson = $fixedReport | ConvertTo-Json -Depth 100
+    $fixedCoverageJson = $fixedCoverage | ConvertTo-Json -Depth 100
+    $fixedReportJsonObject = $fixedReportJson | ConvertFrom-Json -Depth 100
+    $fixedCoverageJsonObject = $fixedCoverageJson | ConvertFrom-Json -Depth 100
+    $fixedMarkdown = ConvertTo-JobAgentDailyReportMarkdown -Report $fixedReport
+    $fixedHtml = ConvertTo-JobAgentDailyReportHtml -Report $fixedReport
+
+    Assert-True -Condition (@($fixedReportJsonObject.sections.new_matching_jobs | ForEach-Object { [string]$_.job_id }) -join ',' -eq 'job:alpha_new') -Message 'JSON-Report weicht bei den expliziten neuen Stellen-IDs ab.'
+    Assert-True -Condition (@($fixedReportJsonObject.sections.active_matching_jobs | ForEach-Object { [string]$_.job_id }) -join ',' -eq 'job:alpha_active') -Message 'JSON-Report weicht bei den expliziten aktiven Stellen-IDs ab.'
+    Assert-True -Condition (@($fixedReportJsonObject.sections.changed_jobs | ForEach-Object { [string]$_.job_id }) -join ',' -eq 'job:alpha_updated') -Message 'JSON-Report weicht bei den expliziten geaenderten Stellen-IDs ab.'
+    Assert-True -Condition (@($fixedReportJsonObject.sections.closed_or_removed_jobs | ForEach-Object { [string]$_.job_id }) -join ',' -eq 'job:beta_removed') -Message 'JSON-Report weicht bei den expliziten entfernten Stellen-IDs ab.'
+    Assert-True -Condition ($fixedReportJsonObject.statistics.captured_jobs_total -eq 5 -and $fixedReportJsonObject.statistics.profile_matching_jobs_total -eq 4) -Message 'JSON-Report trennt Erfassungs- und Profilmengen nicht.'
+    Assert-True -Condition ($fixedReportJsonObject.capture_manifest.collection_scope -eq 'ALL_ROLES' -and $fixedReportJsonObject.capture_manifest.completion_boundary -eq 'LIMITED_OR_PARTIAL') -Message 'JSON-Report verliert Capture-Manifest oder Teilquellen-Grenze.'
+    Assert-True -Condition ($fixedReportJsonObject.sections.changed_jobs[0].location -eq 'UNKNOWN') -Message 'JSON-Report erfindet unbekannte optionale Werte.'
+    Assert-True -Condition ($fixedReportJsonObject.sections.new_matching_jobs[0].priority -eq 'A' -and $fixedReportJsonObject.sections.active_matching_jobs[0].priority -eq 'B') -Message 'JSON-Report verliert die unabhaengig erwarteten A/B/C-Prioritaeten.'
+    Assert-True -Condition ($fixedCoverageJsonObject.metrics.companies_total -eq 2 -and $fixedCoverageJsonObject.metrics.sources_total -eq 3 -and $fixedCoverageJsonObject.metrics.matching_jobs -eq 4) -Message 'Coverage-JSON weicht von den expliziten Mengen der festen Storegeneration ab.'
+    Assert-True -Condition ((@($fixedCoverageJsonObject.companies | ForEach-Object { [string]$_.company_id }) -join ',') -eq 'company:alpha_ag,company:beta_ag') -Message 'Coverage-JSON weicht bei den expliziten Firmen-IDs ab.'
+    Assert-True -Condition ($fixedMarkdown.Contains('Head of IT <script>alert(1)</script>') -and $fixedMarkdown.Contains('ÄÖÜß漢字🙂')) -Message 'Markdown-Report verliert lange Unicodewerte aus der festen Storegeneration.'
+    Assert-True -Condition (-not $fixedHtml.Contains('<script>alert(1)</script>') -and $fixedHtml.Contains('&lt;script&gt;alert(1)&lt;/script&gt;')) -Message 'HTML-Report escaped Scriptfragmente aus der festen Storegeneration nicht.'
+    Assert-True -Condition (-not $fixedHtml.Contains('href="javascript:alert(1)"')) -Message 'HTML-Report verlinkt unzulaessige URL-Schemata aus der festen Storegeneration.'
+
+    $secondReportJson = (New-JobAgentDailyReport -Document (Read-JobAgentStore -ProjectRoot $fixedStoreRoot) -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore | ConvertTo-Json -Depth 100)
+    $secondCoverageJson = (New-JobAgentCoverageReport -Document (Read-JobAgentStore -ProjectRoot $fixedStoreRoot) -Now ([datetime]'2026-08-17T10:10:00Z') | ConvertTo-Json -Depth 100)
+    Assert-True -Condition ($fixedReportJson -eq $secondReportJson -and $fixedCoverageJson -eq $secondCoverageJson) -Message 'Zwei normalisierte Laeufe derselben festen Storegeneration sind fachlich nicht identisch.'
+}
+finally {
+    if (Test-Path -LiteralPath $fixedStoreRoot) {
+        Remove-Item -LiteralPath $fixedStoreRoot -Recurse -Force
+    }
+}
+
 $report.sections.new_matching_jobs[0].official_url = 'javascript:alert(1)'
 $unsafeLinkHtml = ConvertTo-JobAgentDailyReportHtml -Report $report
 Assert-True -Condition (-not $unsafeLinkHtml.Contains('href="javascript:alert(1)"')) -Message 'HTML-Report darf unzulaessige URL-Schemata nicht verlinken.'
@@ -301,6 +344,7 @@ Assert-True -Condition ($emptyHtml.Contains('Keine neuen passenden Stellen im La
         'report_blocks_unofficial_source_issue_links',
         'report_escapes_html_content',
         'report_is_deterministic_for_fixed_store_generation',
+        'report_and_coverage_share_a_fixed_persisted_store_generation',
         'report_blocks_unsafe_url_schemes',
         'report_renders_empty_state'
     )

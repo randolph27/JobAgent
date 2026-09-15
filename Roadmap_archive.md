@@ -1,5 +1,21 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-15 - QA-002
+
+- [x] QA-002 Daten-, Identitaets-, Status- und Berichtsvertraege mit Grenzfaellen absichern #comment: Falsche Stellenidentitaeten, Statuswechsel oder Persistenzschreibvorgaenge beschaedigen den Bestand und haben Vorrang vor weiteren UI-Pruefungen.
+  - [x] Beschreibung: Kernfunktionen sind mit reproduzierbaren Mehrfachlaeufen, expliziten IDs, Status, Ereignissen und Mengen abgesichert. Abgebrochene oder fehlerhafte Schreib- und Scanpfade ersetzen keinen gueltigen Bestand und entfernen keine unbelegten Stellen.
+  - [x] Scope: `tests/Test-JobAgentSchema.ps1`, `Test-JobAgentPersistence.ps1`, `Test-JobAgentCompanyInventory.ps1`, `Test-JobAgentClassification.ps1`, `Test-JobAgentDeduplication.ps1`, `Test-JobAgentStatusMachine.ps1`, `Test-JobAgentReport.ps1` und `Test-JobAgentCoverage.ps1`; Produktion blieb unveraendert.
+  - [x] Abhaengigkeiten: QA-001.1 bis QA-001.3 und bestehende Status-/Gebietskontrakte waren erfuellt.
+  - [x] Schritte:
+    1. [x] QA-002.1 - Schema und persistente Transaktionen: Pflichtfeld-, Typ-, Enum-, Migrations-, atomare Fehlergrenzen-, Lock- und Pfadschutzfaelle laufen in containment-geprueften Temp-Wurzeln. `Test-JobAgentPersistence.ps1` und `Test-JobAgentSchema.ps1` Exit 0.
+    2. [x] QA-002.2 - Identitaet, Gebiet und Status: Offizielle ID, ATS-ID, kanonische/alternative URL, Tracking, Update, firmengebundene ATS-ID, Neuausschreibung sowie `NEW -> ACTIVE -> UPDATED -> CLOSED`, `REMOVED` und Wiederauftauchen sind belegt. PARTIAL-/Fehlerquellen aendern `last_seen` nicht und entfernen nichts. Klassifikation prueft vier Rollen in Muenchen, Freising, ausserhalb und `UNKNOWN`; Distanzfunktion und Profilwechsel existieren nicht im Scope. `Test-JobAgentDeduplication.ps1`, `Test-JobAgentStatusMachine.ps1` und `Test-JobAgentClassification.ps1` Exit 0.
+    3. [x] QA-002.3 - Bericht und Persistenz: `Test-JobAgentReport.ps1` schreibt eine feste isolierte Storegeneration, liest sie erneut und erzeugt daraus JSON, Markdown, Daily-HTML und Coverage-JSON. Unabhaengige Sollwerte pruefen Job-/Firmen-IDs, Erfassungs-/Profilmengen, Capture-Manifest, Teilgrenze, A/B-Prioritaeten, `UNKNOWN`, lange Unicodewerte, HTML-/Script-Escaping und die Sperre von `javascript:`-Links. Zwei Laeufe mit festem Zeitpunkt ergeben identische Report- und Coverage-JSONs. Exit 0.
+  - [x] Evidence: Alle acht Funktionstests endeten am 2026-09-15 mit Exit 0. Der Schema-AJV-Test lief ausserhalb der Sandbox mit Zugriff auf den vorhandenen lokalen npm-Cache; alle anderen Tests liefen lokal isoliert. Der neue Fall heisst `report_and_coverage_share_a_fixed_persisted_store_generation`.
+  - [x] Funktionstest: Alle acht oben genannten Tests Exit 0; HTML-Audit nicht erforderlich, da kein Produktionsrenderer geaendert wurde.
+  - [x] Audit: Struktur-, Escape-, Link- und Leerzustandsassertions erfolgen im Reporttest; keine sichtbare Produktionsaenderung und daher keine zusaetzliche Browser-/Viewport-Lane.
+  - [x] Supertest: Nach ausdruecklicher Nutzerregel als erledigt behandelt, weil er nicht angefragt wurde; kein gruener Supertestlauf wird behauptet.
+  - [x] Meilenstein: Erster Teil von M2 abgeschlossen; naechster aktiver Punkt ist QA-003.1.
+
 ## Archiviert 2026-09-15 - JA-042
 
 - [x] JA-042 Wiederholbaren Jobstart mit Akquise und WebIF-Publikation absichern
