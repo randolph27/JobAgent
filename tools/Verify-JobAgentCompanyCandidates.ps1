@@ -1103,6 +1103,11 @@ else {
     $parallelResultCheckpointRoot = $resultCheckpointRoot
     $parallelResults = $targetCandidates | ForEach-Object -Parallel {
         Import-Module $using:sourceVerificationModule -Force -DisableNameChecking
+        # Using-Ausdruecke werden zwischen Runspaces deserialisiert. Die
+        # Verifikationsmodule erwarten PSCustomObjects mit PSObject.Properties.
+        $candidate = ($_ | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100)
+        $workerPolicy = ($using:policy | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100)
+        $workerCompanies = @($using:existingCompanies | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100)
         function Get-ToolCandidateIdLocal {
             param([Parameter(Mandatory)][object]$Candidate)
             foreach ($property in @('candidate_id', 'hint_id', 'company_id')) {
@@ -1137,9 +1142,9 @@ else {
                 }
             }
         }
-        $candidateId = Get-ToolCandidateIdLocal -Candidate $_
+        $candidateId = Get-ToolCandidateIdLocal -Candidate $candidate
         $attemptStartedAt = [datetime]::UtcNow
-        $verification = Resolve-JobAgentCompanyCandidateVerification -Candidate $_ -ExistingCompanies $using:existingCompanies -Policy $using:policy -ObservedAt $using:startedAt -ExpiresAfterDays $using:ExpiresAfterDays
+        $verification = Resolve-JobAgentCompanyCandidateVerification -Candidate $candidate -ExistingCompanies $workerCompanies -Policy $workerPolicy -ObservedAt $using:startedAt -ExpiresAfterDays $using:ExpiresAfterDays
         $durationMs = [Math]::Max(0, [int][Math]::Round((([datetime]::UtcNow).ToUniversalTime() - $attemptStartedAt.ToUniversalTime()).TotalMilliseconds))
         $verification | Add-Member -NotePropertyName batch_telemetry -NotePropertyValue ([pscustomobject]@{
                 candidate_id = $candidateId

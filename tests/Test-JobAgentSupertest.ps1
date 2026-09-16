@@ -6,47 +6,29 @@ param()
 Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
 
-$testRoot = $PSScriptRoot
-$tests = @(
-    'Test-JobAgentSchema.ps1',
-    'Test-JobAgentPersistence.ps1',
-    'Test-JobAgentCompanyInventory.ps1',
-    'Test-JobAgentSourceAdapters.ps1',
-    'Test-JobAgentSourceVerification.ps1',
-    'Test-JobAgentLiveScan.ps1',
-    'Test-JobAgentClassification.ps1',
-    'Test-JobAgentDeduplication.ps1',
-    'Test-JobAgentStatusMachine.ps1',
-    'Test-JobAgentDailyRun.ps1',
-    'Test-JobAgentReport.ps1',
-    'Test-JobAgentUiBrowserAudit.ps1',
-    'Test-JobAgentOperations.ps1',
-    'Test-JobAgentCoverage.ps1',
-    'Test-JobAgentRegisterDiscovery.ps1',
-    'Test-JobAgentJobBoardDiscovery.ps1',
-    'Test-JobAgentRegionalDiscovery.ps1',
-    'Test-JobAgentCompanyDedupeScale.ps1',
-    'Test-JobAgentDiscoverySourceInventory.ps1',
-    'Test-JobAgentImportWaves.ps1',
-    'Test-JobAgentTestMatrix.ps1'
-)
+$root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
+Import-Module (Join-Path $PSScriptRoot 'JobAgent.Supertest.psm1') -Force
+$tests = @(Get-JobAgentSupertestPlan -RepositoryRoot $root)
 
 $results = New-Object System.Collections.Generic.List[object]
 foreach ($test in $tests) {
-    $path = Join-Path $testRoot $test
+    $path = Join-Path $root ([string]$test.test_file)
     $output = @(& pwsh -NoProfile -File $path 2>&1)
     $exitCode = $LASTEXITCODE
     $results.Add([pscustomobject]@{
-        test = $test
+        roadmap_id = [string]$test.roadmap_id
+        test = [string]$test.test_file
+        command = [string]$test.command
         exit = $exitCode
         output_tail = @($output | Select-Object -Last 8)
     })
     if ($exitCode -ne 0) {
-        throw "Supertest-Teiltest fehlgeschlagen: $test`n$($output -join "`n")"
+        throw "Supertest-Teiltest fehlgeschlagen: $($test.test_file)`n$($output -join "`n")"
     }
 }
 
 [pscustomobject]@{
     status = 'ok'
+    planned_test_count = @($tests).Count
     tests = @($results.ToArray())
 } | ConvertTo-Json -Depth 6

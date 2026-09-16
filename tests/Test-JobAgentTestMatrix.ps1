@@ -14,6 +14,7 @@ $matrixPath = Join-Path $root 'docs\test-matrix.json'
 $matrixDocPath = Join-Path $root 'docs\test-matrix.md'
 $inventoryPath = Join-Path $root 'docs\reviews\QA-001-function-inventory.json'
 $supertestPath = Join-Path $root 'tests\Test-JobAgentSupertest.ps1'
+$supertestModulePath = Join-Path $root 'tests\JobAgent.Supertest.psm1'
 
 function Assert-True {
     param([Parameter(Mandatory)][bool]$Condition, [Parameter(Mandatory)][string]$Message)
@@ -205,6 +206,7 @@ Assert-True -Condition (Test-Path -LiteralPath $matrixPath -PathType Leaf) -Mess
 Assert-True -Condition (Test-Path -LiteralPath $matrixDocPath -PathType Leaf) -Message 'docs/test-matrix.md fehlt.'
 Assert-True -Condition (Test-Path -LiteralPath $inventoryPath -PathType Leaf) -Message 'QA-001-Funktionsinventar fehlt.'
 Assert-True -Condition (Test-Path -LiteralPath $supertestPath -PathType Leaf) -Message 'Test-JobAgentSupertest.ps1 fehlt.'
+Assert-True -Condition (Test-Path -LiteralPath $supertestModulePath -PathType Leaf) -Message 'JobAgent.Supertest.psm1 fehlt.'
 
 $storedInventory = Get-Content -LiteralPath $inventoryPath -Raw | ConvertFrom-Json -Depth 100
 $actualInventoryJson = $inventory | ConvertTo-Json -Depth 20 -Compress
@@ -219,11 +221,15 @@ Assert-True -Condition ($matrix.policy.clock.timezone -eq 'UTC') -Message 'Testm
 Assert-True -Condition ($matrix.policy.locale -eq 'de-DE') -Message 'Testmatrix muss de-DE als Locale festlegen.'
 Test-MatrixDocument -Document $matrix -Inventory $inventory -RequireFiles $true
 
-$supertestText = Get-Content -LiteralPath $supertestPath -Raw
-$supertestEntries = [regex]::Matches($supertestText, "'(Test-JobAgent[^']+\.ps1)'") | ForEach-Object { $_.Groups[1].Value }
-$expectedSupertestEntries = @($matrix.items | Where-Object { $_.include_in_supertest -eq $true } | ForEach-Object { Split-Path -Leaf $_.test_file } | Sort-Object)
-Assert-True -Condition ((($supertestEntries | Sort-Object) -join '|') -eq ($expectedSupertestEntries -join '|')) -Message 'Supertest ist nicht synchron zur Testmatrix.'
-Assert-True -Condition ($expectedSupertestEntries -notcontains 'Test-JobAgentSupertest.ps1') -Message 'Aggregator darf sich nicht selbst aufnehmen.'
+Import-Module $supertestModulePath -Force
+$supertestPlan = @(Get-JobAgentSupertestPlan -RepositoryRoot $root)
+$expectedSupertestEntries = @($matrix.items | Where-Object { $_.include_in_supertest -eq $true -and $_.status -eq 'done' } | Sort-Object @{ Expression = { [int]$_.supertest_order } }, roadmap_id | ForEach-Object { [string]$_.test_file })
+$actualSupertestEntries = @($supertestPlan | ForEach-Object { [string]$_.test_file })
+Assert-True -Condition ((($actualSupertestEntries -join '|') -eq ($expectedSupertestEntries -join '|'))) -Message 'Supertest ist nicht synchron zur Testmatrix.'
+Assert-True -Condition ($actualSupertestEntries -notcontains 'tests\Test-JobAgentSupertest.ps1') -Message 'Aggregator darf sich nicht selbst aufnehmen.'
+$cataloguedFunctionTests = @($inventory.test_catalog | Where-Object { $_.category -ne 'aggregator' } | ForEach-Object { ([string]$_.test_file).Replace('\', '/') } | Sort-Object)
+$matrixFunctionTests = @($matrix.items | ForEach-Object { ([string]$_.test_file).Replace('\', '/') } | Sort-Object -Unique)
+Assert-True -Condition ((($cataloguedFunctionTests -join '|') -eq ($matrixFunctionTests -join '|'))) -Message 'Testmatrix ordnet nicht jede inventarisierte Nicht-Aggregator-Testdatei zu.'
 
 $validFixture = $matrix | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100
 Test-MatrixDocument -Document $validFixture -Inventory $inventory -RequireFiles $false

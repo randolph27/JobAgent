@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-16. Aktiver Plan: QA-005 bis QA-006 fuer den umfassenden Funktions-/UI-Supertest. QA-001 bis QA-004 sind abgeschlossen und archiviert.
+Stand: 2026-09-16. Aktiver Plan: QA-006 fuer den umfassenden Funktions-/UI-Supertest. QA-001 bis QA-004 sind abgeschlossen und archiviert.
 
-- `Roadmap.md`: QA-005 -> QA-006; der naechste Ausfuehrungsanker ist QA-005.1. Reale Firmenwellen bleiben kein Software-DoD.
+- `Roadmap.md`: QA-006; der naechste Ausfuehrungsanker ist QA-006.1. Reale Firmenwellen bleiben kein Software-DoD.
 - `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
 - `docs/reviews/2026-09-13-ja027-roadmap-before.md`: unveraenderter vorheriger Plan mit saemtlichen historischen Fortschritten; alte IT-/Mengenziele gelten nicht als aktuelle Anforderungen.
 - `docs/reviews/2026-09-13-ja027-acquisition-baseline.json`: lokaler Datenbestand und Inputhashes, kein neuer Livebeleg.
@@ -19,3 +19,5 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-15: QA-002 nach Roadmap_archive.md rotiert; Evidenz: acht fokussierte Funktionstests mit Exit 0, einschliesslich `report_and_coverage_share_a_fixed_persisted_store_generation`.
 - 2026-09-15: QA-003 nach Roadmap_archive.md rotiert; Evidenz: 14 fokussierte Funktionstests, CI-Contract, frischer Zweiwurzel-CLI-Hashvergleich und `./ci.cmd supertest` Exit 0.
 - 2026-09-16: QA-004 nach Roadmap_archive.md rotiert; Evidenz: `Test-JobAgentReport.ps1`, `Test-JobAgentCoverage.ps1` und `Test-JobAgentUiBrowserAudit.ps1` Exit 0, isolierter Browsernachweis unter `logs/jobagent/QA-004/qa004-f8b0fc7bbe1043e5a287b594afd1c8bf/browser-cases.json`. Supertest ist nach Nutzerregel als erledigt markiert, weil er nicht angefragt wurde.
+
+- 2026-09-16: QA-005 nach Roadmap_archive.md rotiert; Evidenz: docs/reviews/QA-005-acceptance.md, vier versionierte Screenshotreferenzen und Supertest Exit 0 in 755,67 s.

@@ -139,7 +139,8 @@
   ],
   "items": [
     {
-      "roadmap_id": "JA-002",
+    "roadmap_id": "JA-002",
+    "supertest_order": 2,
       "title": "Persistentes Datenmodell fuer Firmen, Stellen, Scanlaeufe und Aenderungen",
       "test_file": "tests/Test-JobAgentSchema.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentSchema.ps1",
@@ -155,7 +156,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-003",
+    "roadmap_id": "JA-003",
+    "supertest_order": 3,
       "title": "Speicher- und Migrationsschicht fuer idempotente Daily-Runs",
       "test_file": "tests/Test-JobAgentPersistence.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentPersistence.ps1",
@@ -174,7 +176,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-004",
+    "roadmap_id": "JA-004",
+    "supertest_order": 4,
       "title": "Firmeninventar-Seed und Erweiterungsstrategie fuer Muenchen/Freising",
       "test_file": "tests/Test-JobAgentCompanyInventory.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyInventory.ps1",
@@ -191,7 +194,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-005",
+    "roadmap_id": "JA-005",
+    "supertest_order": 5,
       "title": "Quellenadapter-Vertrag fuer Karriereseiten und ATS-Systeme",
       "test_file": "tests/Test-JobAgentSourceAdapters.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentSourceAdapters.ps1",
@@ -208,7 +212,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-006",
+    "roadmap_id": "JA-006",
+    "supertest_order": 6,
       "title": "Offizielle Quellenverifikation und URL-Kanonisierung",
       "test_file": "tests/Test-JobAgentSourceVerification.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentSourceVerification.ps1",
@@ -227,7 +232,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-007",
+    "roadmap_id": "JA-007",
+    "supertest_order": 9,
       "title": "Stellenklassifikation fuer IT-Fuehrungspositionen",
       "test_file": "tests/Test-JobAgentClassification.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentClassification.ps1",
@@ -247,7 +253,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-008",
+    "roadmap_id": "JA-008",
+    "supertest_order": 10,
       "title": "Job-ID-, Deduplikations- und Neuausschreibungslogik",
       "test_file": "tests/Test-JobAgentDeduplication.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentDeduplication.ps1",
@@ -265,7 +272,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-009",
+    "roadmap_id": "JA-009",
+    "supertest_order": 11,
       "title": "Statusmaschine fuer Daily-Run-Ergebnisse und Aenderungsverlauf",
       "test_file": "tests/Test-JobAgentStatusMachine.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentStatusMachine.ps1",
@@ -282,7 +290,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-010",
+    "roadmap_id": "JA-010",
+    "supertest_order": 12,
       "title": "Deterministischer Daily-Run-Orchestrator",
       "test_file": "tests/Test-JobAgentDailyRun.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentDailyRun.ps1",
@@ -299,7 +308,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-011",
+    "roadmap_id": "JA-011",
+    "supertest_order": 13,
       "title": "Ausgabeformat und Priorisierung A/B/C fuer Rechercheberichte",
       "test_file": "tests/Test-JobAgentReport.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentReport.ps1",
@@ -315,7 +325,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-012",
+    "roadmap_id": "JA-012",
+    "supertest_order": 14,
       "title": "Lokaler Scheduler- und Betriebsmodus fuer taegliche Laeufe",
       "test_file": "tests/Test-JobAgentOperations.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentOperations.ps1",
@@ -331,7 +342,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-013",
+    "roadmap_id": "JA-013",
+    "supertest_order": 27,
       "title": "Teststrategie und Supertest fuer Kernfunktionen konsolidieren",
       "test_file": "tests/Test-JobAgentTestMatrix.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentTestMatrix.ps1",
@@ -347,7 +359,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-014",
+    "roadmap_id": "JA-014",
+    "supertest_order": 8,
       "title": "Live-Scan-Pilot mit begrenzter Firmenauswahl und Nachweisprotokoll durchfuehren",
       "test_file": "tests/Test-JobAgentLiveScan.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentLiveScan.ps1",
@@ -363,7 +376,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-015",
+    "roadmap_id": "JA-015",
+    "supertest_order": 15,
       "title": "Kontinuierliche Firmenabdeckung und Adapter-Erweiterung priorisieren",
       "test_file": "tests/Test-JobAgentCoverage.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentCoverage.ps1",
@@ -379,7 +393,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-024",
+    "roadmap_id": "JA-024",
+    "supertest_order": 16,
       "title": "Register- und Open-Data-Kandidatenimport fuer Muenchen/Freising",
       "test_file": "tests/Test-JobAgentRegisterDiscovery.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentRegisterDiscovery.ps1",
@@ -396,7 +411,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-025",
+    "roadmap_id": "JA-025",
+    "supertest_order": 17,
       "title": "Jobboersen-Arbeitgeberhinweise rechtssicher importieren",
       "test_file": "tests/Test-JobAgentJobBoardDiscovery.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentJobBoardDiscovery.ps1",
@@ -414,7 +430,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-026",
+    "roadmap_id": "JA-026",
+    "supertest_order": 18,
       "title": "Regionale Branchen-, Kommunal- und Arbeitgeberlisten fuer Muenchen/Freising importieren",
       "test_file": "tests/Test-JobAgentRegionalDiscovery.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentRegionalDiscovery.ps1",
@@ -431,7 +448,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-027",
+    "roadmap_id": "JA-027",
+    "supertest_order": 19,
       "title": "Deduplikation, Standortlogik und Kandidatenqualitaet fuer tausende Firmen skalieren",
       "test_file": "tests/Test-JobAgentCompanyDedupeScale.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyDedupeScale.ps1",
@@ -447,7 +465,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-027.2",
+    "roadmap_id": "JA-027.2",
+    "supertest_order": 20,
       "title": "Quelleninventur und Kandidatenabgleich fuer JA-027.2",
       "test_file": "tests/Test-JobAgentDiscoverySourceInventory.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentDiscoverySourceInventory.ps1",
@@ -463,7 +482,8 @@
       ]
     },
     {
-      "roadmap_id": "JA-029",
+    "roadmap_id": "JA-029",
+    "supertest_order": 21,
       "title": "Produktive Erweiterungswellen fuer tausende Muenchen-/Freising-Arbeitgeber mit Coverage-Gates einfuehren",
       "test_file": "tests/Test-JobAgentImportWaves.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentImportWaves.ps1",
@@ -479,7 +499,8 @@
       ]
     },
     {
-      "roadmap_id": "UI-001",
+    "roadmap_id": "UI-001",
+    "supertest_order": 25,
       "title": "Berufsneutrale Firmen- und Stellensuche mit vollstaendigen Filtern",
       "test_file": "tests/Test-JobAgentUiBrowserAudit.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentUiBrowserAudit.ps1",
@@ -493,6 +514,72 @@
         "Filter mutieren die isolierte Fixture nicht und erzeugen keine API-, Joblauf- oder Store-Requests",
         "390, 800, 1366 und 1920 px werden im echten Browser erfasst"
       ]
+    },
+    {
+      "roadmap_id": "QA-006-CI-CONTRACT",
+      "supertest_order": 1,
+      "title": "CI- und Dispatcher-Vertrag",
+      "test_file": "tests/Test-JobAgentCiContracts.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentCiContracts.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "contract",
+      "coverage": ["PowerShell-Verify-Lane", "Sonar-not-supported", "Devserver-Prozessschutz"]
+    },
+    {
+      "roadmap_id": "QA-003-CANDIDATE-VERIFICATION",
+      "supertest_order": 7,
+      "title": "Kandidatenverifikation",
+      "test_file": "tests/Test-JobAgentCompanyCandidateVerification.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentCompanyCandidateVerification.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": ["Offizielle Quellenentscheidung", "Verifikationsevidence", "Fail-closed Fehlerfälle"]
+    },
+    {
+      "roadmap_id": "QA-003-FETCH-ENVIRONMENT",
+      "supertest_order": 22,
+      "title": "Abrufumgebungs-Vertrag",
+      "test_file": "tests/Test-JobAgentFetchEnvironment.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentFetchEnvironment.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "contract",
+      "coverage": ["Lokale Toolauflösung", "Abrufgrenzen", "Deterministische Umgebung"]
+    },
+    {
+      "roadmap_id": "QA-003-FETCH-ERRORS",
+      "supertest_order": 23,
+      "title": "Abruffehler-Inspektion",
+      "test_file": "tests/Test-JobAgentFetchErrorInspection.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentFetchErrorInspection.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": ["Fehlerklassifikation", "Redigierte Fehlerdiagnose", "Fail-closed Ergebnis"]
+    },
+    {
+      "roadmap_id": "QA-005-HTML-AUDIT",
+      "supertest_order": 24,
+      "title": "HTML-Struktur- und Kontrastaudit",
+      "test_file": "tests/Test-JobAgentHtmlAudit.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlAudit.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "local-browser",
+      "coverage": ["Semantik", "Kontrast", "Lokale Reportstruktur"]
+    },
+    {
+      "roadmap_id": "QA-005-VIEWPORT-AUDIT",
+      "supertest_order": 26,
+      "title": "Viewport- und Geometrieaudit",
+      "test_file": "tests/Test-JobAgentHtmlViewportAudit.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentHtmlViewportAudit.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "local-browser",
+      "coverage": ["390/800/1366/1920 CSS-px", "Overflow", "Controlgeometrie"]
     }
   ]
 }
