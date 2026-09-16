@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-16. Aktiver Plan: QA-006 fuer den umfassenden Funktions-/UI-Supertest. QA-001 bis QA-004 sind abgeschlossen und archiviert.
+Stand: 2026-09-16. Kein aktiver Produktpunkt. QA-001 bis QA-006 sind abgeschlossen; QA-006 wartet nur noch auf die dokumentierte Roadmaprotation.
 
-- `Roadmap.md`: QA-006; der naechste Ausfuehrungsanker ist QA-006.1. Reale Firmenwellen bleiben kein Software-DoD.
+- `Roadmap.md`: QA-006 ist abgeschlossen; die Abnahme liegt unter `docs/reviews/QA-006-acceptance.md`.
 - `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
 - `docs/reviews/2026-09-13-ja027-roadmap-before.md`: unveraenderter vorheriger Plan mit saemtlichen historischen Fortschritten; alte IT-/Mengenziele gelten nicht als aktuelle Anforderungen.
 - `docs/reviews/2026-09-13-ja027-acquisition-baseline.json`: lokaler Datenbestand und Inputhashes, kein neuer Livebeleg.

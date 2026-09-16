@@ -1,5 +1,17 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-16 - QA-006
+
+- [x] QA-006 Vorhandenen Supertest kontrolliert erweitern und seine Vollstaendigkeit nachweisen
+  - [x] Ergebnis: Die Testmatrix ist alleinige Planquelle; der Runner schreibt atomare vollständige Berichte mit Child-Output, Fehlerstatus, Zeitstempeln, PowerShell-Version, Arbeitsverzeichnis und Evidenzhashes.
+  - [x] QA-006.1: 28 freigegebene Tests in eindeutiger, topologisch geprüfter Reihenfolge; Self-Inclusion, Doppelungen, Lücken und Zyklen werden abgewiesen.
+  - [x] QA-006.2: `Test-JobAgentSupertestContract.ps1` deckt Erfolg, Nichtnull-Exit, Exception, ungültige Plandaten, Timeout, Abbruch und `not-run` isoliert ab.
+  - [x] QA-006.3: Zwei vollständige finale Läufe mit 28/28 bestanden und Exit 0; die drei Evidenzhashes und die Testreihenfolge sind identisch. Vergleich: `docs/reviews/QA-006-run-comparison.json`.
+  - [x] Evidence: `docs/reviews/QA-006-acceptance.md`; lokale Laufberichte unter `logs/jobagent/QA-006/20260916T131614134Z/summary.json` und `logs/jobagent/QA-006/20260916T133027413Z/summary.json`.
+  - [x] Funktionstest: `Test-JobAgentSupertestContract.ps1` und `Test-JobAgentTestMatrix.ps1` Exit 0.
+  - [x] Supertest: `./ci.cmd supertest` Exit 0 in 842,31 s und 855,84 s.
+  - [x] Grenzen: Lines/Branches `not-supported`; Sonar `not-supported`; Device `not-applicable`. Browser-/Visual-Lane ist über die vollständige Matrix mit 390/800/1366/1920 px abgedeckt.
+
 ## Archiviert 2026-09-15 - QA-004
 
 - [x] QA-004 Jede UI-Funktion mit exakten Ergebnis- und Zustandsassertions pruefen #comment: Vorhandene Browserstichproben werden zu einer vollstaendigen Bedienmatrix fuer Firmen, Stellen, Filter, Navigation und Ausgabelinks erweitert.

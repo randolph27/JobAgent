@@ -1,0 +1,28 @@
+{
+  "schema_version": "jobagent-supertest-comparison/v1",
+  "runs": [
+    "logs/jobagent/QA-006/20260916T131614134Z/summary.json",
+    "logs/jobagent/QA-006/20260916T133027413Z/summary.json"
+  ],
+  "normalized_equal": true,
+  "compared_fields": {
+    "status": "passed",
+    "planned_test_count": 28,
+    "passed": 28,
+    "failed": 0,
+    "blocked": 0,
+    "not_run": 0,
+    "inventory_sha256": "89dd487b18e4e5478026866199e268ba78256ff3a2b29e7e589d73c9de842f47",
+    "matrix_sha256": "7d3db2d9ac748da70f4ffeece2d84c93954bb01d788a9edb4643ff7b1d22b87b",
+    "source_sha256": "63a4f741d2d1fd12af76f04884b5db463833fd9b0a9321365d727a9904e964b4",
+    "source_file_count": 30,
+    "test_order": "identical"
+  },
+  "normalized_volatile_fields": [
+    "generated_at",
+    "tests[].started_at",
+    "tests[].ended_at",
+    "tests[].stdout",
+    "tests[].working_directory"
+  ]
+}

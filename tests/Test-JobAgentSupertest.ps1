@@ -9,8 +9,9 @@ $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 Import-Module (Join-Path $PSScriptRoot 'JobAgent.Supertest.psm1') -Force
 $plan = @(Get-JobAgentSupertestPlan -RepositoryRoot $root)
+$evidenceHashes = Get-JobAgentSupertestEvidenceHashes -RepositoryRoot $root -TestPlan $plan
 $runId = [DateTimeOffset]::UtcNow.ToString('yyyyMMddTHHmmssfffZ')
 $reportPath = Join-Path $root ("logs\jobagent\QA-006\$runId\summary.json")
-$report = Invoke-JobAgentSupertestRunner -TestPlan $plan -RepositoryRoot $root -ReportPath $reportPath
+$report = Invoke-JobAgentSupertestRunner -TestPlan $plan -RepositoryRoot $root -ReportPath $reportPath -EvidenceHashes $evidenceHashes
 $report | ConvertTo-Json -Depth 12
 if ($report.status -ne 'passed') { exit 1 }

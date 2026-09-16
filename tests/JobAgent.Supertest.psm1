@@ -32,6 +32,42 @@ function Get-JobAgentSupertestPlan {
     return @($selected)
 }
 
+function Get-JobAgentSupertestEvidenceHashes {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$RepositoryRoot,
+        [Parameter(Mandatory)][object[]]$TestPlan
+    )
+
+    $root = [IO.Path]::GetFullPath($RepositoryRoot)
+    $inventoryPath = Join-Path $root 'docs\reviews\QA-001-function-inventory.json'
+    $matrixPath = Join-Path $root 'docs\test-matrix.json'
+    foreach ($path in @($inventoryPath, $matrixPath)) {
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Hashquelle fehlt: $path" }
+    }
+
+    $sourceFiles = @(
+        'tests\JobAgent.Supertest.psm1'
+        'tests\Test-JobAgentSupertest.ps1'
+        @($TestPlan | ForEach-Object { [string]$_.test_file })
+    ) | Sort-Object -Unique
+    $sourceRecords = foreach ($relativePath in $sourceFiles) {
+        $path = Join-Path $root $relativePath
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Hashquelle fehlt: $path" }
+        "$relativePath|$((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash.ToLowerInvariant())"
+    }
+    $sourceText = ($sourceRecords -join "`n")
+    $sourceBytes = [Text.Encoding]::UTF8.GetBytes($sourceText)
+    $sourceHash = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($sourceBytes)).ToLowerInvariant()
+
+    return [pscustomobject][ordered]@{
+        inventory_sha256 = (Get-FileHash -LiteralPath $inventoryPath -Algorithm SHA256).Hash.ToLowerInvariant()
+        matrix_sha256 = (Get-FileHash -LiteralPath $matrixPath -Algorithm SHA256).Hash.ToLowerInvariant()
+        source_sha256 = $sourceHash
+        source_file_count = @($sourceFiles).Count
+    }
+}
+
 function Write-JobAgentSupertestReport {
     param([Parameter(Mandatory)]$Report, [Parameter(Mandatory)][string]$ReportPath)
 
@@ -91,6 +127,7 @@ function Invoke-JobAgentSupertestRunner {
         [Parameter(Mandatory)][object[]]$TestPlan,
         [Parameter(Mandatory)][string]$RepositoryRoot,
         [Parameter(Mandatory)][string]$ReportPath,
+        [object]$EvidenceHashes,
         [ValidateRange(1, 3600)][int]$TimeoutSeconds = 600
     )
 
@@ -116,9 +153,9 @@ function Invoke-JobAgentSupertestRunner {
         if ($result.status -ne 'passed') { $failureSeen = $true }
     }
     $status = if (@($results | Where-Object { $_.status -eq 'failed' }).Count -gt 0) { 'failed' } elseif (@($results | Where-Object { $_.status -eq 'blocked' }).Count -gt 0) { 'blocked' } else { 'passed' }
-    $report = [pscustomobject]@{ schema_version = 'jobagent-supertest/v2'; status = $status; planned_test_count = $TestPlan.Count; passed = @($results | Where-Object status -eq 'passed').Count; failed = @($results | Where-Object status -eq 'failed').Count; blocked = @($results | Where-Object status -eq 'blocked').Count; not_run = @($results | Where-Object status -eq 'not-run').Count; generated_at = [DateTimeOffset]::UtcNow.ToString('o'); tests = @($results) }
+    $report = [pscustomobject]@{ schema_version = 'jobagent-supertest/v2'; status = $status; planned_test_count = $TestPlan.Count; passed = @($results | Where-Object status -eq 'passed').Count; failed = @($results | Where-Object status -eq 'failed').Count; blocked = @($results | Where-Object status -eq 'blocked').Count; not_run = @($results | Where-Object status -eq 'not-run').Count; evidence_hashes = $EvidenceHashes; generated_at = [DateTimeOffset]::UtcNow.ToString('o'); tests = @($results) }
     Write-JobAgentSupertestReport -Report $report -ReportPath $ReportPath
     return $report
 }
 
-Export-ModuleMember -Function Get-JobAgentSupertestPlan, Invoke-JobAgentSupertestRunner
+Export-ModuleMember -Function Get-JobAgentSupertestPlan, Get-JobAgentSupertestEvidenceHashes, Invoke-JobAgentSupertestRunner

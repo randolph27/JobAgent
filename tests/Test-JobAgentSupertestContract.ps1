@@ -37,12 +37,14 @@ function Invoke-ContractCase {
     )
 
     $reportPath = Join-Path $testRoot ("reports\$Name.json")
-    $report = Invoke-JobAgentSupertestRunner -TestPlan $Plan -RepositoryRoot $testRoot -ReportPath $reportPath -TimeoutSeconds $TimeoutSeconds
+    $evidenceHashes = [pscustomobject]@{ inventory_sha256 = ('a' * 64); matrix_sha256 = ('b' * 64); source_sha256 = ('c' * 64); source_file_count = $Plan.Count }
+    $report = Invoke-JobAgentSupertestRunner -TestPlan $Plan -RepositoryRoot $testRoot -ReportPath $reportPath -EvidenceHashes $evidenceHashes -TimeoutSeconds $TimeoutSeconds
     Assert-True -Condition (Test-Path -LiteralPath $reportPath -PathType Leaf) -Message "$Name hat keinen atomar geschriebenen Bericht erzeugt."
     $stored = Get-Content -LiteralPath $reportPath -Raw | ConvertFrom-Json -Depth 20
     Assert-True -Condition ($stored.status -eq $ExpectedStatus) -Message "$Name hat Status $($stored.status) statt $ExpectedStatus."
     Assert-True -Condition ($stored.passed -eq $ExpectedPassed -and $stored.failed -eq $ExpectedFailed -and $stored.blocked -eq $ExpectedBlocked -and $stored.not_run -eq $ExpectedNotRun) -Message "$Name hat ungueltige Summenzaehler."
     Assert-True -Condition ($stored.planned_test_count -eq $Plan.Count) -Message "$Name hat eine ungueltige Sollanzahl."
+    Assert-True -Condition ($stored.evidence_hashes.inventory_sha256 -eq ('a' * 64) -and $stored.evidence_hashes.matrix_sha256 -eq ('b' * 64) -and $stored.evidence_hashes.source_sha256 -eq ('c' * 64)) -Message "$Name protokolliert keine vollstaendigen Evidenzhashes."
     Assert-True -Condition (@($stored.tests).Count -eq $Plan.Count) -Message "$Name hat keine vollstaendige Ergebnisliste."
     if (-not [string]::IsNullOrWhiteSpace($ExpectedErrorKind)) {
         Assert-True -Condition ($stored.tests[0].error_kind -eq $ExpectedErrorKind) -Message "$Name hat Fehlerart $($stored.tests[0].error_kind) statt $ExpectedErrorKind."
