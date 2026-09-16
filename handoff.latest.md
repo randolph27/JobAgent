@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-16T18:26:08.563+02:00
+Stand: 2026-09-16T18:35:41.327+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-16T18:26:08.563+02:00
 - Status: `open`
 - Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `1dfa953fabbc`
+- HEAD: `256c003d6f96`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,14 +16,7 @@ Stand: 2026-09-16T18:26:08.563+02:00
 
 ## Versionierte Aenderungen
 
-- `.ci/bin/modules/ci-commands-main.ps1`
 - `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `docs/handoffs/2026-09-16-ci005-sq001.md`
-- `docs/reviews/SQ-001-acceptance.md`
-- `handoff.latest.json`
-- `handoff.latest.md`
 - `todo.checkpoint.json`
 - `todo.current.md`
 - `todo.events.jsonl`
@@ -37,4 +30,4 @@ Stand: 2026-09-16T18:26:08.563+02:00
 
 ## Naechster Anker
 
-Keine aktive Roadmap-Aufgabe.
+SQ-002 SonarQube-Tokenformat sekretfrei normalisieren und API-Authentifizierung reproduzierbar nachweisen #comment: Der Server auf `localhost:9000` ist `UP`, aber die direkte, sekretfreie Verwendung des lokal hinterlegten Tokeninhalts lieferte für `GET /api/authentication/validate` `valid:false`; ohne erfolgreiche Authentifizierung darf keine projektbezogene SonarQube-Aussage getroffen werden.
