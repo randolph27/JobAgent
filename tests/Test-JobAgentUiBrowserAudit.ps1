@@ -80,7 +80,7 @@ function Get-JobAgentGeometryMeasurement {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'resize', $ViewportWidth, $ViewportHeight) | Out-Null
     $zoomValue = $CssZoom.ToString([Globalization.CultureInfo]::InvariantCulture)
     $script = @"
-() => { const s=(...codes)=>String.fromCharCode(...codes),tags=[s(98,117,116,116,111,110),s(105,110,112,117,116),s(115,101,108,101,99,116)],textTags=[s(104,49),s(104,50),s(104,51),s(112),s(97),...tags,s(108,97,98,101,108),s(111,112,116,105,111,110)],elements=Array.from(document.getElementsByTagName(s(42))); document.documentElement.style.zoom=$zoomValue; const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!==s(110,111,110,101)&&style.visibility!==s(104,105,100,100,101,110)&&rect.width>0&&rect.height>0}; const controls=elements.filter(element=>tags.includes(element.tagName.toLowerCase())).map((element,index)=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||String(element.textContent||String()).trim()||s(99,111,110,116,114,111,108,45)+index,left:rect.left,top:rect.top,right:rect.right,bottom:rect.bottom,width:rect.width,height:rect.height}}).filter(item=>item.width>0&&item.height>0); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); const overlaps=[]; for(let left=0;left<controls.length;left++){for(let right=left+1;right<controls.length;right++){const a=controls[left],b=controls[right];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1){overlaps.push({first:a.id,second:b.id})}}} const clippedText=elements.filter(element=>textTags.includes(element.tagName.toLowerCase())).filter(element=>{const style=getComputedStyle(element);return visible(element)&&style.overflow!==s(118,105,115,105,98,108,101)&&element.scrollWidth>element.clientWidth+1&&!element.title}).map(element=>String(element.textContent||String()).trim()).filter(Boolean); return JSON.stringify({viewport_width:window.innerWidth,viewport_height:window.innerHeight,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,overlaps:overlaps,clipped_text:clippedText,controls:controls}); }
+() => { const s=(...codes)=>String.fromCharCode(...codes),tags=[s(98,117,116,116,111,110),s(105,110,112,117,116),s(115,101,108,101,99,116)],textTags=[s(104,49),s(104,50),s(104,51),s(112),s(97),s(98,117,116,116,111,110),s(108,97,98,101,108),s(111,112,116,105,111,110)],elements=Array.from(document.getElementsByTagName(s(42))); document.documentElement.style.zoom=$zoomValue; const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!==s(110,111,110,101)&&style.visibility!==s(104,105,100,100,101,110)&&rect.width>0&&rect.height>0}; const controls=elements.filter(element=>tags.includes(element.tagName.toLowerCase())).map((element,index)=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||String(element.textContent||String()).trim()||s(99,111,110,116,114,111,108,45)+index,left:rect.left,top:rect.top,right:rect.right,bottom:rect.bottom,width:rect.width,height:rect.height}}).filter(item=>item.width>0&&item.height>0); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); const overlaps=[]; for(let left=0;left<controls.length;left++){for(let right=left+1;right<controls.length;right++){const a=controls[left],b=controls[right];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1){overlaps.push({first:a.id,second:b.id})}}} const clippedText=elements.filter(element=>textTags.includes(element.tagName.toLowerCase())).filter(element=>{const style=getComputedStyle(element);return visible(element)&&style.overflow!==s(118,105,115,105,98,108,101)&&element.scrollWidth>element.clientWidth+1&&!element.title}).map(element=>String(element.textContent||String()).trim()).filter(Boolean); return JSON.stringify({viewport_width:window.innerWidth,viewport_height:window.innerHeight,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,overlaps:overlaps,clipped_text:clippedText,controls:controls}); }
 "@
     $measurement = Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Script $script -Case $Case
     $measurement | Add-Member -NotePropertyName css_zoom -NotePropertyValue $CssZoom
@@ -97,7 +97,8 @@ function Assert-JobAgentGeometryMeasurement {
     Assert-True -Condition ([int]$Measurement.root_scroll_width -le ([int]$Measurement.viewport_width + [int]$VisualContract.max_root_overflow_css_px)) -Message "${Case}: Die Dokumentbreite uebersteigt den Viewport unzulaessig."
     Assert-True -Condition (@($Measurement.invalid_controls).Count -eq 0) -Message "${Case}: Ein sichtbares Control ist kleiner als $($VisualContract.min_control_size_css_px) CSS-px oder ausserhalb des Viewports."
     Assert-True -Condition (@($Measurement.overlaps).Count -eq 0) -Message "${Case}: Sichtbare bedienbare Controls ueberlappen sich."
-    Assert-True -Condition (@($Measurement.clipped_text).Count -eq 0) -Message "${Case}: Text ist ohne vollstaendig erreichbaren Inhalt abgeschnitten."
+    $clippedText = @($Measurement.clipped_text) -join ' | '
+    Assert-True -Condition (@($Measurement.clipped_text).Count -eq 0) -Message "${Case}: Text ist ohne vollstaendig erreichbaren Inhalt abgeschnitten: $clippedText"
 }
 
 function Get-JobAgentAccessibilityMeasurement {
@@ -116,7 +117,7 @@ function Get-JobAgentAccessibilityMeasurement {
 function Get-JobAgentActiveElement {
     param([Parameter(Mandatory)][string]$WorkingDirectory, [Parameter(Mandatory)][string]$SessionName, [Parameter(Mandatory)][string]$Case)
 
-    return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script '() => JSON.stringify({ id:document.activeElement.id, text:String(document.activeElement.textContent||""), disabled:document.activeElement.disabled===true })'
+    return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script '() => JSON.stringify({ id:document.activeElement.id, text:String(document.activeElement.textContent||String()), disabled:document.activeElement.disabled===true })'
 }
 
 function Invoke-JobAgentPlaywrightCli {
@@ -641,6 +642,9 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Filter-Reset'
+    $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Fokus nach Filter-Reset'
+    Assert-True -Condition ($activeElement.id -eq 'jobagent-reset') -Message 'Der Fokus bleibt nach dem Filter-Reset nicht auf dem ausloesenden Control.'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'reset_retains_keyboard_focus'; focused_control = $activeElement.id })
 
     Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'workModel=REMOTE,HYBRID', 'employmentType=PART_TIME')
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
@@ -770,6 +774,13 @@ try {
         $expectedVisible = if ($pageNumber -eq 6) { 14 } else { 50 }
         Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected "Stellen: 264 Treffer, Seite $pageNumber von 6 (sichtbar $expectedVisible)." -Case "Stellenpagination Seite $pageNumber"
         Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected ('button "' + $pageNumber + '" [disabled]') -Case "deaktivierte aktuelle Stellenseite $pageNumber"
+        if ($pageNumber -gt 1) {
+            $paginationFocusReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Stellenpagination Seite $pageNumber" -Script 'async () => { await new Promise(resolve=>setTimeout(resolve,50)); return JSON.stringify({ready:true}); }'
+            Assert-True -Condition ([bool]$paginationFocusReady.ready) -Message "Stellenpagination Seite ${pageNumber}: Der Fokusnachlauf wurde nicht abgeschlossen."
+            $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Stellenpagination Seite $pageNumber"
+            Assert-True -Condition ($activeElement.id -eq '') -Message "Stellenpagination Seite ${pageNumber}: Die aktuelle Seitentaste hat keine stabile technische ID."
+            Assert-True -Condition ($activeElement.text -eq [string]$pageNumber -and [bool]$activeElement.disabled) -Message "Stellenpagination Seite ${pageNumber}: Der Fokus liegt nicht auf der aktuell deaktivierten Seitentaste."
+        }
         foreach ($jobId in Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) {
             $visibleJobIds.Add($jobId)
         }
@@ -795,6 +806,13 @@ try {
         $expectedVisible = if ($pageNumber -eq 6) { 1 } else { 50 }
         Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected "Firmen: 251 Treffer, Seite $pageNumber von 6 (sichtbar $expectedVisible)." -Case "Firmenpagination Seite $pageNumber"
         Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected ('button "' + $pageNumber + '" [disabled]') -Case "deaktivierte aktuelle Firmenseite $pageNumber"
+        if ($pageNumber -gt 1) {
+            $paginationFocusReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Firmenpagination Seite $pageNumber" -Script 'async () => { await new Promise(resolve=>setTimeout(resolve,50)); return JSON.stringify({ready:true}); }'
+            Assert-True -Condition ([bool]$paginationFocusReady.ready) -Message "Firmenpagination Seite ${pageNumber}: Der Fokusnachlauf wurde nicht abgeschlossen."
+            $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Firmenpagination Seite $pageNumber"
+            Assert-True -Condition ($activeElement.id -eq '') -Message "Firmenpagination Seite ${pageNumber}: Die aktuelle Seitentaste hat keine stabile technische ID."
+            Assert-True -Condition ($activeElement.text -eq [string]$pageNumber -and [bool]$activeElement.disabled) -Message "Firmenpagination Seite ${pageNumber}: Der Fokus liegt nicht auf der aktuell deaktivierten Seitentaste."
+        }
         foreach ($companyId in Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View companies) {
             $visibleCompanyIds.Add($companyId)
         }
