@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-16T10:58:24.515+02:00
+Stand: 2026-09-16T11:18:41.642+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-16T10:58:24.515+02:00
 - Status: `in-progress`
 - Ziel: QA-005 Layout, Lesbarkeit und Tastaturbedienung messbar abnehmen #comment: Das blosse Vorhandensein einer Screenshotdatei beweist weder fehlerfreies Layout noch barrierearme Bedienbarkeit.
 - Branch: `master`
-- HEAD: `309cc9e0aa8b`
+- HEAD: `3b68964621e5`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,7 +16,10 @@ Stand: 2026-09-16T10:58:24.515+02:00
 
 ## Versionierte Aenderungen
 
+- `handoff.latest.json`
+- `handoff.latest.md`
 - `tests/Test-JobAgentUiBrowserAudit.ps1`
+- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
@@ -27,9 +30,3 @@ Stand: 2026-09-16T10:58:24.515+02:00
 ## Naechster Anker
 
 QA-005.2: fokussierten Browseraudit ausserhalb der Sandbox nach der String.fromCharCode-Fokuskorrektur vollstaendig wiederholen; dann Fokus nach Reset und Pagination ergaenzen und QA-005.3 beginnen.
-
-## Detaillierte Uebergabe
-
-Die konkrete Syntaxkorrektur, die noch nicht bestandene Browserabnahme, der
-reproduzierbare Fortsetzungsablauf und die unveraenderten Abhaengigkeiten stehen in
-`docs/handoffs/2026-09-16-qa005-browser-audit-fix.md`.
