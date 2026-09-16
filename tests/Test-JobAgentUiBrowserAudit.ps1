@@ -82,7 +82,9 @@ function Get-JobAgentGeometryMeasurement {
     $script = @"
 () => { document.documentElement.style.zoom='$zoomValue'; const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!=='none'&&style.visibility!=='hidden'&&rect.width>0&&rect.height>0}; const controls=Array.from(document.querySelectorAll('button,input,select'),(element,index)=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||element.textContent.trim()||\`control-\${index}\`,left:rect.left,top:rect.top,right:rect.right,bottom:rect.bottom,width:rect.width,height:rect.height}}).filter(item=>item.width>0&&item.height>0); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); const overlaps=[]; for(let left=0;left<controls.length;left++){for(let right=left+1;right<controls.length;right++){const a=controls[left],b=controls[right];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1){overlaps.push({first:a.id,second:b.id})}}} const clippedText=Array.from(document.querySelectorAll('h1,h2,h3,p,a,button,label,option'),element=>{const style=getComputedStyle(element);return visible(element)&&style.overflow!=='visible'&&element.scrollWidth>element.clientWidth+1&&!element.title}).map(element=>element.textContent.trim()).filter(Boolean); return JSON.stringify({viewport_width:window.innerWidth,viewport_height:window.innerHeight,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,overlaps:overlaps,clipped_text:clippedText,controls:controls}); }
 "@
-    return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Script $script -Case $Case
+    $measurement = Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Script $script -Case $Case
+    $measurement | Add-Member -NotePropertyName css_zoom -NotePropertyValue $CssZoom
+    return $measurement
 }
 
 function Assert-JobAgentGeometryMeasurement {
@@ -331,6 +333,7 @@ Assert-True -Condition (Test-Path -LiteralPath $visualContractPath -PathType Lea
 $visualContract = Get-Content -LiteralPath $visualContractPath -Raw | ConvertFrom-Json -Depth 20
 Assert-True -Condition ($visualContract.schema_version -eq 'jobagent-visual-contract/v1') -Message 'QA-005-Visual-Vertragsfixture hat eine ungueltige Schema-Version.'
 Assert-True -Condition (@($visualContract.viewports).Count -eq 4) -Message 'QA-005-Visual-Vertragsfixture muss vier Pflichtviewports enthalten.'
+Assert-True -Condition ([double]$visualContract.desktop_zoom.css_zoom -eq 2) -Message 'QA-005-Visual-Vertragsfixture muss einen 200-%-Desktopzoom festlegen.'
 $referenceTime = [datetime]$uiContract.reference_time
 $munich = New-TestLocation -Label 'Muenchen'
 $freising = New-TestLocation -Label 'Freising' -City 'Freising' -Region 'Landkreis Freising' -TargetArea 'FREISING'
@@ -494,6 +497,10 @@ try {
         $geometryEvidence.Add([pscustomobject]@{ case_id = 'initial_jobs'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
         $geometryEvidence.Add([pscustomobject]@{ case_id = 'long_content'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
     }
+    $desktopZoom = $visualContract.desktop_zoom
+    $zoomMeasurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht 200-Prozent-Zoom' -ViewportWidth ([int]$desktopZoom.viewport_width) -ViewportHeight ([int]$desktopZoom.viewport_height) -CssZoom ([double]$desktopZoom.css_zoom)
+    Assert-JobAgentGeometryMeasurement -Measurement $zoomMeasurement -VisualContract $visualContract -Case 'Initialansicht 200-Prozent-Zoom'
+    $geometryEvidence.Add([pscustomobject]@{ case_id = 'initial_jobs_200_percent_zoom'; viewport_width = [int]$desktopZoom.viewport_width; viewport_height = [int]$desktopZoom.viewport_height; measurement = $zoomMeasurement })
 
     Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=companies', 'page=999', 'q=Firma%20251')
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
