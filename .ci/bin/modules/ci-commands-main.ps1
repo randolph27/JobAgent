@@ -1194,6 +1194,8 @@ function Get-StpGoalAndNext([object]$state) {
       $next = $title
     }
   }
+  if (-not $goal) { $goal = "Keine aktive Roadmap-Aufgabe." }
+  if (-not $next) { $next = "Keine aktive Roadmap-Aufgabe." }
   return @{ goal=$goal; next=$next }
 }
 
