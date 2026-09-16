@@ -100,6 +100,25 @@ function Assert-JobAgentGeometryMeasurement {
     Assert-True -Condition (@($Measurement.clipped_text).Count -eq 0) -Message "${Case}: Text ist ohne vollstaendig erreichbaren Inhalt abgeschnitten."
 }
 
+function Get-JobAgentAccessibilityMeasurement {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string]$SessionName,
+        [Parameter(Mandatory)][string]$Case
+    )
+
+    $script = @'
+() => { const parse=color=>{const values=(color.match(/[\d.]+/g)||[]).map(Number);return values.length>=3?{r:values[0],g:values[1],b:values[2],a:values.length>3?values[3]:1}:null}; const background=element=>{for(let node=element;node;node=node.parentElement){const color=parse(getComputedStyle(node).backgroundColor);if(color&&color.a>=1)return color}return {r:244,g:241,b:234,a:1}}; const channel=value=>{value/=255;return value<=.04045?value/12.92:Math.pow((value+.055)/1.055,2.4)}; const ratio=(first,second)=>{const luminance=color=>.2126*channel(color.r)+.7152*channel(color.g)+.0722*channel(color.b);const a=luminance(first),b=luminance(second);return (Math.max(a,b)+.05)/(Math.min(a,b)+.05)}; const relevant=Array.from(document.querySelectorAll('body,h1,h2,h3,p,label,a,button,input,select'),element=>{const style=getComputedStyle(element),foreground=parse(style.color);let focusOutline='not_focusable';if(element.matches('a,button,input,select')){element.focus();focusOutline=getComputedStyle(element).outlineWidth}return {id:element.id||element.tagName.toLowerCase(),ratio:foreground?ratio(foreground,background(element)):0,font_size:parseFloat(style.fontSize),font_weight:Number(style.fontWeight)||400,focus_outline:focusOutline}}).filter(item=>item.ratio>0); const controls=Array.from(document.querySelectorAll('input,select,button'),element=>({id:element.id,has_label:element.tagName==='BUTTON'?!!String(element.getAttribute('aria-label')||element.textContent||'').trim():!!element.closest('label')||!!(element.id&&document.querySelector('label[for="'+element.id+'"]'))})); const tabs=Array.from(document.querySelectorAll('[role=tab]'),tab=>({id:tab.id,selected:tab.getAttribute('aria-selected'),controls:tab.getAttribute('aria-controls'),target_exists:!!document.getElementById(tab.getAttribute('aria-controls')||'')})); return JSON.stringify({controls,tabs,status:{role:document.getElementById('jobagent-result-count').getAttribute('role'),live:document.getElementById('jobagent-result-count').getAttribute('aria-live')},low_contrast:relevant.filter(item=>item.ratio<(item.font_size>=24||item.font_weight>=700&&item.font_size>=18.66?3:4.5)),focusable_without_focus_style:relevant.filter(item=>['button','input','select','a'].includes(item.id)&&item.focus_outline==='0px')}); }
+'@
+    return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Script $script -Case $Case
+}
+
+function Get-JobAgentActiveElement {
+    param([Parameter(Mandatory)][string]$WorkingDirectory, [Parameter(Mandatory)][string]$SessionName, [Parameter(Mandatory)][string]$Case)
+
+    return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script '() => JSON.stringify({ id:document.activeElement.id, text:String(document.activeElement.textContent||""), disabled:document.activeElement.disabled===true })'
+}
+
 function Invoke-JobAgentPlaywrightCli {
     param(
         [Parameter(Mandatory)][string]$WorkingDirectory,
@@ -517,6 +536,40 @@ try {
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Leitung Digitalisierung mit einem absichtlich sehr langen ungetrennten Layoutpruefwort' -Case 'Langer Titel bleibt erreichbar'
+    $accessibility = Get-JobAgentAccessibilityMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Semantik, Kontrast und Fokus'
+    Assert-True -Condition (@($accessibility.controls | Where-Object { -not $_.has_label }).Count -eq 0) -Message 'Mindestens ein Filter- oder Button-Control hat keine Labelzuordnung.'
+    Assert-True -Condition (@($accessibility.tabs).Count -eq 2) -Message 'Die Tabansicht muss genau zwei semantische Tabs enthalten.'
+    Assert-True -Condition (@($accessibility.tabs | Where-Object { $_.selected -eq 'true' -and $_.target_exists }).Count -eq 1) -Message 'Die aktive Tabansicht ist nicht eindeutig mit ihrem Panel verbunden.'
+    Assert-True -Condition ($accessibility.status.role -eq 'status' -and $accessibility.status.live -eq 'polite') -Message 'Der Trefferstatus hat keine passende Live-Region.'
+    Assert-True -Condition (@($accessibility.low_contrast).Count -eq 0) -Message 'Mindestens ein relevanter Text oder ein Control unterschreitet den Kontrastvertrag.'
+    Assert-True -Condition (@($accessibility.focusable_without_focus_style).Count -eq 0) -Message 'Mindestens ein fokussierbares Element hat keinen sichtbaren Fokusstil.'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'semantic_labels_tabs_live_status_and_calculated_contrast'; measurement = $accessibility })
+
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,113,117,101,114,121)).focus(); return JSON.stringify({focused:document.activeElement.id}); }') | Out-Null
+    foreach ($keyboardStep in @(
+            @{ key = 'Tab'; expected = 'jobagent-area' },
+            @{ key = 'Tab'; expected = 'jobagent-work-model' },
+            @{ key = 'Tab'; expected = 'jobagent-employment-type' },
+            @{ key = 'Tab'; expected = 'jobagent-work-time' },
+            @{ key = 'Tab'; expected = 'jobagent-age' },
+            @{ key = 'Tab'; expected = 'jobagent-reset' }
+        )) {
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', $keyboardStep.key) | Out-Null
+        $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Tastaturreise durch Filter'
+        Assert-True -Condition ($activeElement.id -eq $keyboardStep.expected) -Message "Tastaturreise: erwarteter Fokus '$($keyboardStep.expected)', erhalten '$($activeElement.id)'."
+    }
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,116,97,98,45,106,111,98,115)).focus(); return JSON.stringify({focused:document.activeElement.id}); }') | Out-Null
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', 'ArrowRight') | Out-Null
+    $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Tabreise nach rechts'
+    Assert-True -Condition ($activeElement.id -eq 'jobagent-tab-companies') -Message 'ArrowRight setzt den Fokus nicht auf den naechsten Tab.'
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 251 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Tabreise nach rechts'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', 'ArrowLeft') | Out-Null
+    $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Tabreise nach links'
+    Assert-True -Condition ($activeElement.id -eq 'jobagent-tab-jobs') -Message 'ArrowLeft setzt den Fokus nicht auf den vorherigen Tab.'
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Tabreise nach links'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'keyboard_filter_and_tab_journey'; filter_focus_order = @('jobagent-query', 'jobagent-area', 'jobagent-work-model', 'jobagent-employment-type', 'jobagent-work-time', 'jobagent-age', 'jobagent-reset'); tab_keys = @('ArrowRight', 'ArrowLeft') })
     foreach ($viewport in @($visualContract.viewports)) {
         $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
         Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Initialansicht $($viewport.width)x$($viewport.height)"

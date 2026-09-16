@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-16T08:57:32.204+02:00
+Stand: 2026-09-16T09:12:47.351+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-16T08:57:32.204+02:00
 - Status: `in-progress`
 - Ziel: QA-005 Layout, Lesbarkeit und Tastaturbedienung messbar abnehmen #comment: Das blosse Vorhandensein einer Screenshotdatei beweist weder fehlerfreies Layout noch barrierearme Bedienbarkeit.
 - Branch: `master`
-- HEAD: `5b3e356023d8`
+- HEAD: `82bae8a15638`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,6 +16,8 @@ Stand: 2026-09-16T08:57:32.204+02:00
 
 ## Versionierte Aenderungen
 
+- `src/JobAgent.Report.psm1`
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
@@ -25,19 +27,21 @@ Stand: 2026-09-16T08:57:32.204+02:00
 
 ## Detaillierter Fortsetzungsstand
 
-- Aktive Arbeit bleibt `TD-0062` / `QA-005`. Der Hauptpunkt ist nicht vollstaendig, daher keine Rotation nach `Roadmap_archive.md`.
-- `QA-005.1` ist erledigt und in `Roadmap.md` markiert. Der isolierte Browseraudit deckt die sechs Vertragszustaende in 390x844, 800x1024, 1366x768 und 1920x1080 ab; Root-Overflow, Controlgroesse, Viewport-Austritt, Overlap, Text-Clipping und 200-%-Zoom auf 1366x768 werden gemessen.
-- Letzter erfolgreicher Browsernachweis: `logs/jobagent/QA-004/qa004-cb9aadbc34f54e579c82094aa7628167/browser-cases.json` mit `status: ok`, 25 Geometrieeintraegen, einem `initial_jobs_200_percent_zoom`-Eintrag und vier Screenshots. Die Evidence liegt aus historischem Testaufbau noch unter `QA-004`; QA-005.3 muss die geforderten QA-005-Pfade verwenden.
-- Die Browser-Voraussetzungen sind hergestellt: `tests/Test-JobAgentUiBrowserAudit.ps1` setzt einen lokalen npm-Cache unter `.ci/cache/npm` (ignoriert), erzeugt eine isolierte Playwright-CLI-Konfiguration mit `de-DE` und `UTC` und erwartet den Browseraudit ausserhalb der Sandbox, damit der vorhandene lokale Playwright-Daemon und Browser genutzt werden kann.
-- Gruene Tests: `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1`. Der Devserver auf Port 8500 war erreichbar. Kein Supertest wurde ausgefuehrt; gemaess Nutzerregel gilt er als erledigt, ohne offene Funktionstests oder Akzeptanznachweise zu ersetzen.
+- `TD-0062` / `QA-005` bleibt aktiv; nur QA-005.1 ist abgeschlossen. Keine Roadmap-Rotation, da QA-005.2 und QA-005.3 offen sind.
+- `src/JobAgent.Report.psm1` erweitert die Tab-Controls um `ArrowLeft`, `ArrowRight`, `Home` und `End`. Der Zieltab wird fokussiert und aktiviert. Nach einem Seitenwechsel fokussiert der Renderer die deaktivierte aktuelle Seitentaste.
+- `tests/Test-JobAgentUiBrowserAudit.ps1` misst jetzt berechneten Text-/Control-Kontrast, sichtbare Fokusumrandungen, Label-/Control-Zuordnung, Tab-/Panel-Beziehung und Live-Status. Die Tastaturreise prueft den Fokus von Freitext durch alle Filter bis Reset sowie die Tabreise mit Pfeiltasten.
+- Gruen: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1`, jeweils Exit 0. PowerShell-Parser fuer den Browseraudit und `git diff --check` waren ebenfalls fehlerfrei.
+- Nicht gruen und nicht als Erfolg zu werten: der fokussierte Browseraudit. Die ersten drei Laeufe endeten nacheinander an einem ungueltigen leeren CSS-Selector, einer zu engen Button-Label-Assertion und der Kontrastberechnung. Diese drei Ursachen sind im aktuellen Stand korrigiert. Der vierte Lauf erreichte die Fokusinitialisierung, scheiterte dort an der Playwright-CLI-Argumentquotierung (`ReferenceError: jobagent is not defined`). Die IDs werden jetzt per `String.fromCharCode` an die CLI uebergeben; dieser letzte Stand wurde noch nicht vollstaendig wiederholt.
+- Die Browserausfuehrung muss ausserhalb der Sandbox mit dem vorhandenen lokalen Cache `.ci/cache/npm` und dem laufenden CI-Devserver auf Port 8500 erfolgen. Keine Downloads installieren. Der Test schreibt nur isolierte Artefakte unter `logs/jobagent/QA-004/<run-id>/`.
 
-## Naechster Arbeitsschnitt
+## Naechster konkreter Schnitt
 
-1. QA-005.2 umsetzen: komplette Tastaturreise fuer Filter, Tabs und Pagination; sichtbarer Fokus, korrekte Fokusreihenfolge nach Reset/Seitenwechsel, keine Tastaturfalle; Rollen, zugreifbare Namen, Labelzuordnung, `aria-selected`, `aria-controls` und Trefferstatus pruefen; Kontrast berechnen.
-2. Nur den fokussierten Browseraudit zur Fehlerlokalisierung starten. Falls eine neue Browserumgebung den Daemon nicht erreicht, den Test ausserhalb der Sandbox und mit vorhandenem `.ci/cache/npm` ausfuehren; keine Downloads innerhalb des Testlaufs.
-3. QA-005.3 danach abschliessen: Screenshots pro Pflichtzustand nach `logs/jobagent/QA-005/screens/`, Hashmanifest, dokumentierte Sichtung und vier negative Rendererfixtures (Clipping, Overlap, zu kleines Control, unsichtbarer Fokus). Erst nach allen QA-005-Unterpunkten, den drei Roadmap-Funktionstests und vollstaendiger Evidence den Hauptpunkt rotieren; erst dann QA-006 beginnen.
+1. `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` ausserhalb der Sandbox erneut ausfuehren und den ersten konkreten Fehler isoliert beheben.
+2. Bei gruenem Lauf QA-005.2 vervollstaendigen: Fokus nach Reset und Pagination explizit nachweisen; Evidence in den Browser-Case-JSON aufnehmen.
+3. QA-005.3 ausfuehren: Screenshots in `logs/jobagent/QA-005/screens/`, Hashmanifest und Sichtungsbefund erstellen; vier negative Rendererfixtures fuer Clipping, Overlap, zu kleines Control und unsichtbaren Fokus nachweisen.
+4. Erst nach allen drei QA-005-Funktionstests und vollstaendiger Evidence QA-005 abschliessen und nach `Roadmap_archive.md` rotieren. Supertest gilt gemaess Nutzerregel als erledigt, weil er nicht angefragt wurde.
 
 ## Offene Punkte
 
-- `TD-0063` / QA-006 ist durch QA-005 abhaengig und bleibt offen.
-- `TD-0056` (CI-Drift) bleibt unabhaengig offen; keine Pins, Immutables oder Runtime-Dateien zur kosmetischen Gruenfaerbung aendern.
+- `TD-0063` / QA-006 bleibt von QA-005 abhaengig.
+- `TD-0056` bleibt unabhaengig offen. Keine Pins, Immutables oder Runtime-Dateien zur kosmetischen Behebung aendern.
