@@ -72,13 +72,16 @@ function Get-JobAgentGeometryMeasurement {
         [Parameter(Mandatory)][string]$WorkingDirectory,
         [Parameter(Mandatory)][string]$SessionName,
         [Parameter(Mandatory)][string]$Case,
-        [Parameter(Mandatory)][int]$ViewportWidth
+        [Parameter(Mandatory)][int]$ViewportWidth,
+        [Parameter(Mandatory)][int]$ViewportHeight,
+        [double]$CssZoom = 1
     )
 
-    Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'resize', $ViewportWidth, 1080) | Out-Null
-    $script = @'
-() => { const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!=='none'&&style.visibility!=='hidden'&&rect.width>0&&rect.height>0}; const controls=Array.from(document.querySelectorAll('button,input,select'),element=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||element.textContent.trim(),left:rect.left,right:rect.right,width:rect.width,height:rect.height,visible:visible(element)}}).filter(item=>item.visible); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); return JSON.stringify({viewport_width:window.innerWidth,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,controls:controls.map(item=>({id:item.id,width:item.width,height:item.height,left:item.left,right:item.right}))}); }
-'@
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'resize', $ViewportWidth, $ViewportHeight) | Out-Null
+    $zoomValue = $CssZoom.ToString([Globalization.CultureInfo]::InvariantCulture)
+    $script = @"
+() => { document.documentElement.style.zoom='$zoomValue'; const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!=='none'&&style.visibility!=='hidden'&&rect.width>0&&rect.height>0}; const controls=Array.from(document.querySelectorAll('button,input,select'),(element,index)=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||element.textContent.trim()||\`control-\${index}\`,left:rect.left,top:rect.top,right:rect.right,bottom:rect.bottom,width:rect.width,height:rect.height}}).filter(item=>item.width>0&&item.height>0); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); const overlaps=[]; for(let left=0;left<controls.length;left++){for(let right=left+1;right<controls.length;right++){const a=controls[left],b=controls[right];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1){overlaps.push({first:a.id,second:b.id})}}} const clippedText=Array.from(document.querySelectorAll('h1,h2,h3,p,a,button,label,option'),element=>{const style=getComputedStyle(element);return visible(element)&&style.overflow!=='visible'&&element.scrollWidth>element.clientWidth+1&&!element.title}).map(element=>element.textContent.trim()).filter(Boolean); return JSON.stringify({viewport_width:window.innerWidth,viewport_height:window.innerHeight,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,overlaps:overlaps,clipped_text:clippedText,controls:controls}); }
+"@
     return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Script $script -Case $Case
 }
 
@@ -91,6 +94,8 @@ function Assert-JobAgentGeometryMeasurement {
 
     Assert-True -Condition ([int]$Measurement.root_scroll_width -le ([int]$Measurement.viewport_width + [int]$VisualContract.max_root_overflow_css_px)) -Message "${Case}: Die Dokumentbreite uebersteigt den Viewport unzulaessig."
     Assert-True -Condition (@($Measurement.invalid_controls).Count -eq 0) -Message "${Case}: Ein sichtbares Control ist kleiner als $($VisualContract.min_control_size_css_px) CSS-px oder ausserhalb des Viewports."
+    Assert-True -Condition (@($Measurement.overlaps).Count -eq 0) -Message "${Case}: Sichtbare bedienbare Controls ueberlappen sich."
+    Assert-True -Condition (@($Measurement.clipped_text).Count -eq 0) -Message "${Case}: Text ist ohne vollstaendig erreichbaren Inhalt abgeschnitten."
 }
 
 function Invoke-JobAgentPlaywrightCli {
@@ -475,15 +480,19 @@ $unexpectedExternalHosts = @()
 $geometryEvidence = [System.Collections.Generic.List[object]]::new()
 try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'open', $reportUrl) | Out-Null
+    $browserReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Browser-Render-Voraussetzungen' -Script 'async () => { const style=document.createElement("style"); style.textContent="*,*::before,*::after{animation:none!important;transition:none!important;caret-color:auto!important}"; document.head.appendChild(style); if(document.fonts&&document.fonts.ready){await document.fonts.ready}; return JSON.stringify({locale:navigator.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone,fonts_ready:!document.fonts||document.fonts.status==="loaded"}); }'
+    Assert-True -Condition ([string]$browserReady.locale -eq 'de-DE') -Message 'Browser-Audit verwendet nicht das erwartete Locale de-DE.'
+    Assert-True -Condition ([string]$browserReady.timezone -eq 'UTC') -Message 'Browser-Audit verwendet nicht die erwartete Zeitzone UTC.'
+    Assert-True -Condition ([bool]$browserReady.fonts_ready) -Message 'Browser-Schriften sind vor der Geometriemessung nicht geladen.'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { window.__qa004Errors=[]; const errorEvent=String.fromCharCode(101,114,114,111,114),rejectionEvent=String.fromCharCode(117,110,104,97,110,100,108,101,100,114,101,106,101,99,116,105,111,110),fallback=String.fromCharCode(101,114,114,111,114); window.addEventListener(errorEvent,event=>window.__qa004Errors.push(String(event.message||event.error||fallback))); window.addEventListener(rejectionEvent,event=>window.__qa004Errors.push(String(event.reason||rejectionEvent))); return JSON.stringify({ready:true}); }') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Leitung Digitalisierung mit einem absichtlich sehr langen ungetrennten Layoutpruefwort' -Case 'Langer Titel bleibt erreichbar'
-    foreach ($width in @($visualContract.viewports)) {
-        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht' -ViewportWidth ([int]$width)
-        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Initialansicht ${width}px"
-        $geometryEvidence.Add([pscustomobject]@{ case_id = 'initial_jobs'; viewport_width = [int]$width; measurement = $measurement })
-        $geometryEvidence.Add([pscustomobject]@{ case_id = 'long_content'; viewport_width = [int]$width; measurement = $measurement })
+    foreach ($viewport in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Initialansicht $($viewport.width)x$($viewport.height)"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'initial_jobs'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'long_content'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
     }
 
     Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=companies', 'page=999', 'q=Firma%20251')
@@ -491,10 +500,10 @@ try {
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Firmenhash mit uebergrosser Seitennummer'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firma 251' -Case 'Firma ohne offene Stelle'
     Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=companies&q=Firma+251' -Case 'Firmenhash mit uebergrosser Seitennummer'
-    foreach ($width in @($visualContract.viewports)) {
-        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Firma ohne Stelle' -ViewportWidth ([int]$width)
-        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Firma ohne Stelle ${width}px"
-        $geometryEvidence.Add([pscustomobject]@{ case_id = 'company_without_open_jobs'; viewport_width = [int]$width; measurement = $measurement })
+    foreach ($viewport in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Firma ohne Stelle' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Firma ohne Stelle $($viewport.width)x$($viewport.height)"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'company_without_open_jobs'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
     }
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'reload') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
@@ -531,10 +540,10 @@ try {
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Freising Pflege Teilzeit Hybrid'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Pflegefachkraft Freising' -Case 'Freising Pflege Teilzeit Hybrid'
-    foreach ($width in @($visualContract.viewports)) {
-        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Komplexer Filter' -ViewportWidth ([int]$width)
-        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Komplexer Filter ${width}px"
-        $geometryEvidence.Add([pscustomobject]@{ case_id = 'complex_filter'; viewport_width = [int]$width; measurement = $measurement })
+    foreach ($viewport in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Komplexer Filter' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Komplexer Filter $($viewport.width)x$($viewport.height)"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'complex_filter'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
     }
 
     $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
@@ -631,10 +640,10 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'keine-passende-stelle') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Keine Treffer im angezeigten Bestand.' -Case 'Nulltreffer'
-    foreach ($width in @($visualContract.viewports)) {
-        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Nulltreffer' -ViewportWidth ([int]$width)
-        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Nulltreffer ${width}px"
-        $geometryEvidence.Add([pscustomobject]@{ case_id = 'empty_results'; viewport_width = [int]$width; measurement = $measurement })
+    foreach ($viewport in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Nulltreffer' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Nulltreffer $($viewport.width)x$($viewport.height)"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'empty_results'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
     }
 
     $companiesTabRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('tab', 'button') -Name 'Firmen'
@@ -675,10 +684,10 @@ try {
         }
     }
     Assert-JobAgentSetEqual -Actual $visibleJobIds.ToArray() -Expected @($report.sections.active_jobs.job_id) -Case 'alle Stellenueber Seiten'
-    foreach ($width in @($visualContract.viewports)) {
-        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Letzte Stellenseite' -ViewportWidth ([int]$width)
-        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Letzte Stellenseite ${width}px"
-        $geometryEvidence.Add([pscustomobject]@{ case_id = 'last_jobs_page'; viewport_width = [int]$width; measurement = $measurement })
+    foreach ($viewport in @($visualContract.viewports)) {
+        $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Letzte Stellenseite' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
+        Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Letzte Stellenseite $($viewport.width)x$($viewport.height)"
+        $geometryEvidence.Add([pscustomobject]@{ case_id = 'last_jobs_page'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
     }
 
     $companiesTabRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('tab', 'button') -Name 'Firmen'

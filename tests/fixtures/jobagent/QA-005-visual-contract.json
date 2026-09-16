@@ -1,8 +1,14 @@
 {
   "schema_version": "jobagent-visual-contract/v1",
-  "viewports": [390, 800, 1366, 1920],
+  "viewports": [
+    { "width": 390, "height": 844 },
+    { "width": 800, "height": 1024 },
+    { "width": 1366, "height": 768 },
+    { "width": 1920, "height": 1080 }
+  ],
   "device_scale_factor": 1,
   "max_root_overflow_css_px": 1,
   "min_control_size_css_px": 44,
-  "states": ["initial_jobs", "complex_filter", "empty_results", "company_without_open_jobs", "last_jobs_page", "long_content"]
+  "states": ["initial_jobs", "complex_filter", "empty_results", "company_without_open_jobs", "last_jobs_page", "long_content"],
+  "desktop_zoom": { "viewport_width": 1366, "viewport_height": 768, "css_zoom": 2 }
 }
