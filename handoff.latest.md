@@ -1,40 +1,35 @@
-# Handoff: QA-005.2 Tastatur, Fokus und visuelle Abnahme
+# Handoff latest
 
-Stand: 2026-09-16T10:35:10+02:00
+Stand: 2026-09-16T10:58:24.515+02:00
 
-## Aktiver Arbeitspunkt
+## Zustand
 
-- Todo: `TD-0062`, Status `in-progress`.
-- Roadmap: `QA-005`; QA-005.1 ist erledigt. QA-005.2 und QA-005.3 sind offen.
-- Kein Roadmap-Punkt wurde rotiert: QA-005 verlangt noch Tastatur-/Semantikabnahme, negative Rendererfixtures, Sichtung und Referenzbilder.
-- `QA-006` (`TD-0063`) bleibt bis QA-005 gesperrt. `TD-0056` bleibt unveraendert offen.
+- Active: `TD-0062`
+- Status: `in-progress`
+- Ziel: QA-005 Layout, Lesbarkeit und Tastaturbedienung messbar abnehmen #comment: Das blosse Vorhandensein einer Screenshotdatei beweist weder fehlerfreies Layout noch barrierearme Bedienbarkeit.
+- Branch: `master`
+- HEAD: `309cc9e0aa8b`
+- Upstream: `origin/master`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
+- Route: `True`
 
 ## Versionierte Aenderungen
 
-- `src/JobAgent.Report.psm1`: Pagination speichert einen Seitenwechsel und fokussiert nach dem Rendern synchron die deaktivierte aktuelle Seitentaste. Der vorherige `setTimeout`-Nachlauf war im Browseraudit nicht stabil nachweisbar.
-- `tests/Test-JobAgentUiBrowserAudit.ps1`: Fokus-Eval ohne entfernbare leere doppelte Anfuehrungszeichen; native `select`-Optionslisten nicht mehr als unerreichbares Text-Clipping bewertet; konkrete Clippingdiagnose; Assertions fuer Fokus nach Reset sowie Stellen-/Firmenpagination.
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
+- `todo.history.digest.json`
+- `todo.master.index.json`
 
 ## Verifikation
 
-- Gruen: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` — Exit `0`.
-- Gruen: `git diff --check`.
-- Offen: vollstaendlicher `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` nach der letzten Renderer-Fokuskorrektur.
-- Kein `supertest`; gemaess aktuellem Nutzerauftrag als erledigt behandelt.
+- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`
 
-## Fehlerhistorie des Browseraudits
+## Naechster Anker
 
-1. Die Playwright-CLI entfernte `""` aus dem Eval-Skript; durch `String()` behoben.
-2. Bei `800x1024` war der zusammengefasste Text eines nativen Mehrfach-Selects ein falsch-positiver Clippingbefund; die Optionen sind über das native Control erreichbar.
-3. Die Pagination-Fokusprüfung scheiterte auf Seite 2 mit dem Timer-Ansatz. Die Produktkorrektur fokussiert nun im Renderzyklus; der vollständige Audit muss dies belegen.
+QA-005.2: fokussierten Browseraudit ausserhalb der Sandbox nach der String.fromCharCode-Fokuskorrektur vollstaendig wiederholen; dann Fokus nach Reset und Pagination ergaenzen und QA-005.3 beginnen.
 
-## Naechster konkreter Ablauf
+## Detaillierte Uebergabe
 
-1. `.\ci.cmd devserver-status`; bei Bedarf nur `.\ci.cmd devserver-start` im Hintergrund.
-2. `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` ausserhalb der Sandbox vollständig ausführen. Bei Fehler ausschliesslich den konkreten Browser-/Rendererfall isolieren; keinen Supertest starten.
-3. Bei Gruen QA-005.2 in Roadmap/Todo/Checkpoint/Handoff markieren. Danach QA-005.3: isolierte negative Rendererfixtures fuer Clipping, Overlap, kleine Controls und unsichtbaren Fokus; Screenshotmanifest, Hashes, Sichtungsbefund und erst dann Referenzbilder unter `doc/roadmap-screenshots/`.
-
-## Git und CI
-
-- Branch: `master`, Upstream: `origin/master`.
-- Dieser Stand wird nach dem Handoff per STP synchronisiert, gestaged, committed und gepusht.
-- Sonar bleibt `not-supported`; keine Sonar- oder Android-Lane starten.
+Die konkrete Syntaxkorrektur, die noch nicht bestandene Browserabnahme, der
+reproduzierbare Fortsetzungsablauf und die unveraenderten Abhaengigkeiten stehen in
+`docs/handoffs/2026-09-16-qa005-browser-audit-fix.md`.

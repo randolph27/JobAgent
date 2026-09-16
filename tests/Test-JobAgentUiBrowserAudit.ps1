@@ -726,7 +726,7 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Unklare Position') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:unknown') -Case 'HTML-Script-Fragment bleibt Textinhalt'
-    $injectionState = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => JSON.stringify({ injected: window.__qa004Injected === true, images: document.querySelectorAll(''[id=jobagent-job-results] img'').length })' -Case 'HTML-Script-Fragment bleibt Textinhalt'
+    $injectionState = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => JSON.stringify({ injected: window.__qa004Injected === true, images: document.querySelectorAll("[id=jobagent-job-results] img").length })' -Case 'HTML-Script-Fragment bleibt Textinhalt'
     Assert-True -Condition (-not [bool]$injectionState.injected) -Message 'HTML-Script-Fragment wurde im Browser ausgefuehrt.'
     Assert-True -Condition ([int]$injectionState.images -eq 0) -Message 'HTML-Script-Fragment wurde als HTML-Element gerendert.'
     $caseEvidence.Add([pscustomobject]@{ case_id = 'script_fragment_is_inert'; expected_job_ids = @('job:unknown'); injected = [bool]$injectionState.injected; rendered_images = [int]$injectionState.images })
