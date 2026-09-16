@@ -144,7 +144,7 @@ function Set-JobAgentPaginationFocus {
         [Parameter(Mandatory)][string]$Case
     )
 
-    $script = "() => { const pagination=document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,112,97,103,105,110,97,116,105,111,110)); const target=Array.from(pagination.querySelectorAll(String.fromCharCode(98,117,116,116,111,110))).find(button=>button.textContent===String($PageNumber)); if(!target)throw new Error(String.fromCharCode(83,101,105,116,101,110,116,97,115,116,101,32,102,101,104,108,116)); target.focus(); return JSON.stringify({text:target.textContent,focused:document.activeElement===target}); }"
+    $script = "() => { const pagination=document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,112,97,103,105,110,97,116,105,111,110)); const target=Array.from(pagination.getElementsByTagName(String.fromCharCode(98,117,116,116,111,110))).find(button=>button.textContent===String($PageNumber)); if(!target)throw new Error(String.fromCharCode(83,101,105,116,101,110,116,97,115,116,101,32,102,101,104,108,116)); target.focus(); return JSON.stringify({text:target.textContent,focused:document.activeElement===target}); }"
     $focus = Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script $script
     Assert-True -Condition ([bool]$focus.focused -and $focus.text -eq [string]$PageNumber) -Message "${Case}: Die Seitentaste $PageNumber konnte nicht per Tastatur vorbereitet werden."
 }
@@ -244,9 +244,9 @@ function Get-JobAgentVisibleRecordIds {
         [Parameter(Mandatory)][ValidateSet('jobs', 'companies')][string]$View
     )
 
-    $selector = if ($View -eq 'jobs') { '#jobagent-job-results article' } else { '#jobagent-company-results article' }
+    $resultContainerId = if ($View -eq 'jobs') { 'jobagent-job-results' } else { 'jobagent-company-results' }
     $property = if ($View -eq 'jobs') { 'jobId' } else { 'companyId' }
-    $script = "() => JSON.stringify(Array.from(document.querySelectorAll('$selector')).map(article => article.dataset.$property))"
+    $script = "() => { const container=document.getElementById('$resultContainerId'); if(!container)throw new Error('Ergebniscontainer fehlt: $resultContainerId'); return JSON.stringify(Array.from(container.getElementsByTagName('article')).map(article => article.dataset.$property)); }"
     $output = Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'eval', $script)
     $result = [regex]::Match($output, '(?ms)### Result\s*\r?\n(?<payload>.+?)\s*$')
     Assert-True -Condition $result.Success -Message "Playwright-CLI lieferte keine lesbare ID-Antwort fuer $View."
@@ -773,7 +773,7 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Unklare Position') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:unknown') -Case 'HTML-Script-Fragment bleibt Textinhalt'
-    $injectionState = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => JSON.stringify({ injected: window.__qa004Injected === true, images: document.querySelectorAll("[id=jobagent-job-results] img").length })' -Case 'HTML-Script-Fragment bleibt Textinhalt'
+    $injectionState = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => { const root=document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,106,111,98,45,114,101,115,117,108,116,115)); return JSON.stringify({ injected: window.__qa004Injected === true, images:root?root.getElementsByTagName(String.fromCharCode(105,109,103)).length:0 }); }' -Case 'HTML-Script-Fragment bleibt Textinhalt'
     Assert-True -Condition (-not [bool]$injectionState.injected) -Message 'HTML-Script-Fragment wurde im Browser ausgefuehrt.'
     Assert-True -Condition ([int]$injectionState.images -eq 0) -Message 'HTML-Script-Fragment wurde als HTML-Element gerendert.'
     $caseEvidence.Add([pscustomobject]@{ case_id = 'script_fragment_is_inert'; expected_job_ids = @('job:unknown'); injected = [bool]$injectionState.injected; rendered_images = [int]$injectionState.images })
@@ -889,7 +889,7 @@ try {
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Firmen: 251 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Linkzielpruefung in Firmenansicht'
     $linkEvaluationScript = @'
-() => { const links=Array.from(document.querySelectorAll('#jobagent-company-results a'), link => ({href:link.href,target:link.target,rel:link.rel})); const captures=[]; const intercept=event=>{const link=event.target.closest('a');if(link){event.preventDefault();captures.push({href:link.href,target:link.target,rel:link.rel})}}; document.addEventListener('click',intercept,true); const first=document.querySelector('#jobagent-company-results a'); if(first){first.dispatchEvent(new MouseEvent('click',{bubbles:true,cancelable:true}))}; document.removeEventListener('click',intercept,true); return JSON.stringify({links,captures}); }
+() => { const s=(...codes)=>String.fromCharCode(...codes),root=document.getElementById(s(106,111,98,97,103,101,110,116,45,99,111,109,112,97,110,121,45,114,101,115,117,108,116,115)),links=Array.from(root?root.getElementsByTagName(s(97)):[], link => ({href:link.href,target:link.target,rel:link.rel})),captures=[]; const intercept=event=>{const link=event.target.closest(s(97));if(link){event.preventDefault();captures.push({href:link.href,target:link.target,rel:link.rel})}}; document.addEventListener(s(99,108,105,99,107),intercept,true); const first=links.length?root.getElementsByTagName(s(97))[0]:null; if(first){first.dispatchEvent(new MouseEvent(s(99,108,105,99,107),{bubbles:true,cancelable:true}))}; document.removeEventListener(s(99,108,105,99,107),intercept,true); return JSON.stringify({links,captures}); }
 '@
     $linkEvidence = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script $linkEvaluationScript -Case 'offizielle Linkziele werden abgefangen'
     Assert-True -Condition (@($linkEvidence.links).Count -gt 0) -Message 'Die Firmenansicht enthaelt keine offiziellen Links.'
