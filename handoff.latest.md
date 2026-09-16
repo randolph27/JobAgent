@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-16T18:35:41.327+02:00
+Stand: 2026-09-16T19:01:26.178+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-16T18:35:41.327+02:00
 - Status: `open`
 - Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `256c003d6f96`
+- HEAD: `78a3526d57c5`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -17,12 +17,8 @@ Stand: 2026-09-16T18:35:41.327+02:00
 ## Versionierte Aenderungen
 
 - `Roadmap.md`
-- `todo.checkpoint.json`
-- `todo.current.md`
-- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
 
 ## Verifikation
 
