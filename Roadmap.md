@@ -1,6 +1,6 @@
 # Roadmap
 
-Stand: 2026-09-16. Ein aktiver technischer Punkt.
+Stand: 2026-09-16. Zwei aktive technische Punkte: CI-003 vor CI-002-Abschluss.
 
 - [ ] CI-003 Projektlokale Playwright-Daemon- und Fehlerartefakte fuer die Browser-Lane erzwingen #comment: Der Abschluss-Supertest scheiterte am 2026-09-16 um 16:09 CEST nach 24/29 bestandenen Faellen, weil Playwright eine Daemon-Fehlerdatei im gesperrten Benutzerpfad `C:\Users\ralph\AppData\Local\ms-playwright\daemon\...err` anlegen wollte.
   - [ ] Beschreibung: `tests/Test-JobAgentUiBrowserAudit.ps1` und die von ihm gestartete Playwright-CLI schreiben Daemon-, Browser-, Fehler- und Temp-Artefakte ausschliesslich in eindeutig pro Lauf isolierte, projektlokale und ignorierte Pfade; der UI-Browsertest sowie der Vollsupertest laufen ohne Lese- oder Schreibzugriff auf `C:\Users\ralph\AppData\Local\ms-playwright` mit Exit 0.
