@@ -590,6 +590,20 @@ try {
         $focusStyle = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'sichtbarer Tastaturfokus durch Filter' -Script '() => JSON.stringify({ outline:getComputedStyle(document.activeElement).outlineWidth })'
         Assert-True -Condition ($focusStyle.outline -ne '0px') -Message "Tastaturreise: $($keyboardStep.expected) hat keinen sichtbaren Fokusstil."
     }
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Unklare Position') | Out-Null
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Tastaturreset nach aktivem Filter'
+    Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Tastaturreset vorbereiten' -Script '() => { const reset=document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,114,101,115,101,116)); reset.focus(); return JSON.stringify({focused:document.activeElement===reset}); }' | Out-Null
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', 'Enter') | Out-Null
+    $resetFocusReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Fokus nach Tastaturreset' -Script 'async () => { await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))); return JSON.stringify({ready:true}); }'
+    Assert-True -Condition ([bool]$resetFocusReady.ready) -Message 'Tastaturreset: Der Fokusnachlauf wurde nicht abgeschlossen.'
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Tastaturreset nach aktivem Filter'
+    $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Fokus nach Tastaturreset'
+    Assert-True -Condition ($activeElement.id -eq 'jobagent-reset') -Message 'Tastaturreset: Der Fokus bleibt nicht auf der Reset-Taste.'
+    $focusStyle = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'sichtbarer Tastaturfokus nach Reset' -Script '() => JSON.stringify({ outline:getComputedStyle(document.activeElement).outlineWidth })'
+    Assert-True -Condition ($focusStyle.outline -ne '0px') -Message 'Tastaturreset: Die Reset-Taste hat keinen sichtbaren Fokusstil.'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,116,97,98,45,106,111,98,115)).focus(); return JSON.stringify({focused:document.activeElement.id}); }') | Out-Null
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', 'ArrowRight') | Out-Null
     $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Tabreise nach rechts'
@@ -605,7 +619,7 @@ try {
     Assert-True -Condition ($focusStyle.outline -ne '0px') -Message 'ArrowLeft setzt keinen sichtbaren Fokusstil auf den Zieltab.'
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Tabreise nach links'
-    $caseEvidence.Add([pscustomobject]@{ case_id = 'keyboard_filter_and_tab_journey'; filter_focus_order = @('jobagent-query', 'jobagent-area', 'jobagent-work-model', 'jobagent-employment-type', 'jobagent-work-time', 'jobagent-age', 'jobagent-reset'); tab_keys = @('ArrowRight', 'ArrowLeft') })
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'keyboard_filter_reset_and_tab_journey'; filter_focus_order = @('jobagent-query', 'jobagent-area', 'jobagent-work-model', 'jobagent-employment-type', 'jobagent-work-time', 'jobagent-age', 'jobagent-reset'); reset_focus = 'jobagent-reset'; tab_keys = @('ArrowRight', 'ArrowLeft') })
     foreach ($viewport in @($visualContract.viewports)) {
         $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
         Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Initialansicht $($viewport.width)x$($viewport.height)"
