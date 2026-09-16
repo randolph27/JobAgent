@@ -80,7 +80,7 @@ function Get-JobAgentGeometryMeasurement {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'resize', $ViewportWidth, $ViewportHeight) | Out-Null
     $zoomValue = $CssZoom.ToString([Globalization.CultureInfo]::InvariantCulture)
     $script = @"
-() => { document.documentElement.style.zoom='$zoomValue'; const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!=='none'&&style.visibility!=='hidden'&&rect.width>0&&rect.height>0}; const controls=Array.from(document.querySelectorAll('button,input,select'),(element,index)=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||element.textContent.trim()||\`control-\${index}\`,left:rect.left,top:rect.top,right:rect.right,bottom:rect.bottom,width:rect.width,height:rect.height}}).filter(item=>item.width>0&&item.height>0); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); const overlaps=[]; for(let left=0;left<controls.length;left++){for(let right=left+1;right<controls.length;right++){const a=controls[left],b=controls[right];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1){overlaps.push({first:a.id,second:b.id})}}} const clippedText=Array.from(document.querySelectorAll('h1,h2,h3,p,a,button,label,option'),element=>{const style=getComputedStyle(element);return visible(element)&&style.overflow!=='visible'&&element.scrollWidth>element.clientWidth+1&&!element.title}).map(element=>element.textContent.trim()).filter(Boolean); return JSON.stringify({viewport_width:window.innerWidth,viewport_height:window.innerHeight,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,overlaps:overlaps,clipped_text:clippedText,controls:controls}); }
+() => { document.documentElement.style.zoom='$zoomValue'; const visible=element=>{const style=getComputedStyle(element),rect=element.getBoundingClientRect();return style.display!=='none'&&style.visibility!=='hidden'&&rect.width>0&&rect.height>0}; const controls=Array.from(document.querySelectorAll('button,input,select'),(element,index)=>{const rect=element.getBoundingClientRect();return {id:element.id||element.name||String(element.textContent||String()).trim()||'control-'+index,left:rect.left,top:rect.top,right:rect.right,bottom:rect.bottom,width:rect.width,height:rect.height}}).filter(item=>item.width>0&&item.height>0); const invalidControls=controls.filter(item=>item.width<44||item.height<44||item.left<0||item.right>window.innerWidth+1); const overlaps=[]; for(let left=0;left<controls.length;left++){for(let right=left+1;right<controls.length;right++){const a=controls[left],b=controls[right];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>1){overlaps.push({first:a.id,second:b.id})}}} const clippedText=Array.from(document.querySelectorAll('h1,h2,h3,p,a,button,label,option'),element=>{const style=getComputedStyle(element);return visible(element)&&style.overflow!=='visible'&&element.scrollWidth>element.clientWidth+1&&!element.title}).map(element=>String(element.textContent||String()).trim()).filter(Boolean); return JSON.stringify({viewport_width:window.innerWidth,viewport_height:window.innerHeight,root_scroll_width:document.documentElement.scrollWidth,invalid_controls:invalidControls,overlaps:overlaps,clipped_text:clippedText,controls:controls}); }
 "@
     $measurement = Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Script $script -Case $Case
     $measurement | Add-Member -NotePropertyName css_zoom -NotePropertyValue $CssZoom
@@ -111,6 +111,10 @@ function Invoke-JobAgentPlaywrightCli {
         throw 'npx.cmd fehlt; der Browser-Audit benoetigt die Playwright-CLI.'
     }
 
+    $previousNpmCache = $env:NPM_CONFIG_CACHE
+    $previousTimezone = $env:TZ
+    $env:NPM_CONFIG_CACHE = Join-Path $root '.ci\cache\npm'
+    $env:TZ = 'UTC'
     Push-Location -LiteralPath $WorkingDirectory
     try {
         $output = @(& $npxCommand.Source --no-install --package '@playwright/cli' playwright-cli @Arguments 2>&1)
@@ -121,6 +125,18 @@ function Invoke-JobAgentPlaywrightCli {
     }
     finally {
         Pop-Location
+        if ($null -eq $previousNpmCache) {
+            Remove-Item Env:NPM_CONFIG_CACHE -ErrorAction SilentlyContinue
+        }
+        else {
+            $env:NPM_CONFIG_CACHE = $previousNpmCache
+        }
+        if ($null -eq $previousTimezone) {
+            Remove-Item Env:TZ -ErrorAction SilentlyContinue
+        }
+        else {
+            $env:TZ = $previousTimezone
+        }
     }
 }
 
@@ -473,6 +489,16 @@ if (-not (Test-Path -LiteralPath $artifactRoot)) {
     New-Item -ItemType Directory -Path $artifactRoot -Force | Out-Null
 }
 
+$browserConfigPath = Join-Path $artifactRoot 'playwright-cli.config.json'
+Write-Utf8File -Path $browserConfigPath -Content (@{
+        browser = @{
+            contextOptions = @{
+                locale = 'de-DE'
+                timezoneId = 'UTC'
+            }
+        }
+    } | ConvertTo-Json -Depth 10)
+
 $sessionName = 'jobagent-ui001-' + [guid]::NewGuid().ToString('N')
 $screenshots = [System.Collections.Generic.List[string]]::new()
 $caseEvidence = [System.Collections.Generic.List[object]]::new()
@@ -482,8 +508,8 @@ $environmentalExternalHosts = @()
 $unexpectedExternalHosts = @()
 $geometryEvidence = [System.Collections.Generic.List[object]]::new()
 try {
-    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'open', $reportUrl) | Out-Null
-    $browserReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Browser-Render-Voraussetzungen' -Script 'async () => { const style=document.createElement("style"); style.textContent="*,*::before,*::after{animation:none!important;transition:none!important;caret-color:auto!important}"; document.head.appendChild(style); if(document.fonts&&document.fonts.ready){await document.fonts.ready}; return JSON.stringify({locale:navigator.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone,fonts_ready:!document.fonts||document.fonts.status==="loaded"}); }'
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, '--config', $browserConfigPath, 'open', $reportUrl) | Out-Null
+    $browserReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Browser-Render-Voraussetzungen' -Script 'async () => { for(const animation of document.getAnimations()){animation.cancel()}; if(document.fonts&&document.fonts.ready){await document.fonts.ready}; return JSON.stringify({locale:navigator.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone,fonts_ready:!document.fonts||document.fonts.status.length===6}); }'
     Assert-True -Condition ([string]$browserReady.locale -eq 'de-DE') -Message 'Browser-Audit verwendet nicht das erwartete Locale de-DE.'
     Assert-True -Condition ([string]$browserReady.timezone -eq 'UTC') -Message 'Browser-Audit verwendet nicht die erwartete Zeitzone UTC.'
     Assert-True -Condition ([bool]$browserReady.fonts_ready) -Message 'Browser-Schriften sind vor der Geometriemessung nicht geladen.'

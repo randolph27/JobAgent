@@ -5,6 +5,9 @@ state/
 .ci/tmp/
 .ci/inbox/
 .ci/run/
+.ci/cache/
+.playwright-cli/
+runtime/playwright-localappdata/
 data/jobagent/store.lock
 data/jobagent/backups/
 
