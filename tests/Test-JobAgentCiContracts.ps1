@@ -28,7 +28,11 @@ Assert-True (@($config.immutable_policy.mutable_paths) -contains 'Roadmap.md') '
 Assert-True ($commands -match 'status="not-supported"') 'Sonar-Nichtunterstuetzung wird nicht als eigener Status protokolliert.'
 Assert-True ($commands -match 'analysis_started=\$false') 'Sonar-Nichtunterstuetzung muss einen nicht gestarteten Analysepfad ausweisen.'
 
+$ci005Test = Join-Path $PSScriptRoot 'Test-Ci005Invariants.ps1'
+Assert-True (Test-Path -LiteralPath $ci005Test) 'CI-005-Invariantentest fehlt.'
+& $ci005Test | Out-Null
+
 [pscustomobject]@{
     status = 'ok'
-    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback')
+    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
 } | ConvertTo-Json -Depth 4

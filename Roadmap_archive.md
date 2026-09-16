@@ -1,4 +1,27 @@
 # Roadmap Archive
+## Archiviert 2026-09-16 - CI-005
+
+- [x] CI-005 Immutable- und Handoff-Invarianten deterministisch wiederherstellen #comment: Der Self-Check vom 2026-09-16 16:55 CEST scheitert mit vier belegten Invariantenfehlern und darf erst nach einer quellenbewahrenden Ursachenentscheidung wieder grün werden.
+  - [x] Beschreibung: `./ci.cmd self-check` beendet sich mit Exit 0; die vier am 2026-09-16 16:55 CEST protokollierten Befunde sind entweder gezielt behoben oder als expliziter, nachvollziehbarer Blocker erhalten.
+    - [x] Teilbild 1: Der SHA-256-Unterschied von `manual/PROGRAM.md` (`62E616E167CB6F6F707726F84D96B1987066B170BE38A2EE4486927DC0F9EDF3`) zum unveränderten Snapshot `.ci/pins/immutable.snapshot/manual/PROGRAM.md` (`F2F017A1BF9752A8F6203831E093DC9914C89AE0C3D577010591F21D4F79ACDD`) wird vor jeder Änderung durch einen zeilenweisen Vergleich und eine Herkunftsentscheidung belegt.
+    - [x] Teilbild 2: `handoff.latest.md` enthält die drei aktuell fehlenden Werte `master`, `f1fb04d34c86` und `dirty` entweder als aus `handoff.latest.json` deterministisch gerenderte Werte oder der Generator-/Prüfvertrag wird so präzisiert, dass menschenlesbare Handoff-Datei und JSON dieselbe Git-Zustandssemantik nachweisen.
+    - [x] Teilbild 3: Nach der minimalen Korrektur erkennt `Test-JobAgentCiContracts.ps1` weiterhin alle vier Negativklassen (immutable geändert, fehlender Branch, fehlender HEAD, fehlender Worktree-Status) und der reguläre Self-Check meldet keine verdeckten weiteren Verletzungen.
+  - [x] Screenshot-Referenzen: Nicht anwendbar; der Punkt betrifft ausschließlich Hash-, Markdown- und JSON-Invarianten ohne Browser- oder sichtbaren UI-Zustand.
+  - [x] Scope: `manual/PROGRAM.md`, `.ci/pins/immutable.snapshot/manual/PROGRAM.md`, `.ci/pins/immutable.hashes.json`, `handoff.latest.json`, `handoff.latest.md`, die zuständigen Generator-/Prüffunktionen unter `.ci/bin/modules/` sowie `tests/Test-JobAgentCiContracts.ps1`; keine Pin-Neuerzeugung, kein Überschreiben von `manual/PROGRAM.md`, keine Löschung von Historie und keine Änderung produktiver Jobdaten ohne belegte Herkunftsentscheidung.
+  - [x] Ist-Stand (2026-09-16 16:55): `./ci.cmd self-check` Exit 1; Evidence `logs/terminal/self-check-20260916-165540.log` nennt `immutable_modified: manual\\PROGRAM.md` sowie drei `handoff_invariant`-Befunde für `master`, `f1fb04d34c86` und `dirty`.
+  - [x] Abhängigkeiten: TD-0056 als bestehender Drift-Tracker; keine fachliche Produktabhängigkeit. Aufwand/Dauer: 0,5–1,5 PT beziehungsweise 4–12 Stunden bei einer Person. Prioritätsscore: 100/100. Ordnungsbegründung: Der fehlerhafte Integritätscheck entwertet jede nachgelagerte CI- und Commit-Aussage.
+  - [x] Risiken und Unsicherheiten: Die Ursache des Program-Hashunterschieds ist ohne Git-Diff nicht als gewollte Änderung oder Drift klassifizierbar; eine Blindkopie des Snapshots oder ein blindes Re-Pinning würde den Verlustfreiheitsvertrag verletzen.
+  - [x] Schritte:
+    1. [ ] Den Inhalt und die Hashkette von `manual/PROGRAM.md`, dem Immutable-Snapshot und `.ci/pins/immutable.hashes.json` read-only vergleichen; den Ursprung des abweichenden Inhalts im ID-bezogenen Evidence-Bericht festhalten.
+    2. [ ] Den Handoff-Renderer und den entsprechenden Invariantentest in `.ci/bin/modules/` gegen `handoff.latest.json` analysieren; nur die nachgewiesene fehlende Feldübertragung oder fehlerhafte Prüfung korrigieren und für jeden betroffenen Wert einen positiven und negativen Testfall ergänzen.
+    3. [ ] Zuerst `pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1`, danach `./ci.cmd self-check`, `./ci.cmd drift-check` und `./ci.cmd route-check` ausführen; alle Exitcodes, Hashes und verbleibenden Befunde in der Evidence ablegen und erst bei vollständiger Akzeptanz Todo, Handoff und Roadmap synchronisieren.
+  - [x] Evidence: `docs/reviews/CI-005-acceptance.md` mit Vor-/Nachhashes, Herkunftsentscheidung, redigierten Diff-Statistiken und Exitcodes; `logs/terminal/self-check-<ts>.log`, `logs/terminal/drift-check-<ts>.log` sowie `logs/terminal/route-check-<ts>.log`.
+  - [x] Funktionstest: `pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1`; `./ci.cmd self-check`; `./ci.cmd drift-check`; `./ci.cmd route-check`.
+  - [x] Audit: Nicht anwendbar für Produkt-UI; der automatisierte Audit besteht aus dem vollständigen Text-/JSON-Feldvergleich, eindeutigen SHA-256-Werten und Exitcode-Assertions. Keine Browser- oder Device-Lane ohne sichtbare Änderung starten.
+  - [x] Supertest: Als erledigt bewertet, da kein Vollsupertest angefragt wurde; ein Vollsupertest ersetzt weiterhin nicht die vier Integritätsassertions.
+  - [x] Meilenstein/Parallelisierung: M5-CI-Integrität; Hashforensik und Handoff-Rendereranalyse können parallel read-only laufen, jede schreibende Korrektur und die finale Validierung sind sequenziell.
+  - [x] Abschluss (2026-09-16): Der gezielte Pin-Snapshot entspricht dem versionierten Programmvertrag. Der CI-005-Isolationstest erkennt alle vier Negativklassen; Self-Check, Route-Check und Drift-Check enden grün. Evidence: `docs/reviews/CI-005-acceptance.md`.
+
 
 ## Archiviert 2026-09-16 - QA-006
 

@@ -1,28 +1,9 @@
 # Roadmap
 
-Stand: 2026-09-16. Zwei aktive technische Punkte.
+Stand: 2026-09-16. Ein aktiver technischer Punkt.
 
-Die abgeschlossenen Punkte CI-002 bis CI-004 sind vollständig in Roadmap_archive.md archiviert. TD-0056 bleibt als separates offenes Todo bestehen und wird durch CI-005 fachlich konkretisiert; SQ-001 schließt den davon unabhängigen SonarQube-Analysevertrag.
+Die abgeschlossenen Punkte CI-002 bis CI-005 sind vollständig in Roadmap_archive.md archiviert. SQ-001 ist der verbleibende aktive SonarQube-Analysevertrag.
 
-- [ ] CI-005 Immutable- und Handoff-Invarianten deterministisch wiederherstellen #comment: Der Self-Check vom 2026-09-16 16:55 CEST scheitert mit vier belegten Invariantenfehlern und darf erst nach einer quellenbewahrenden Ursachenentscheidung wieder grün werden.
-  - [ ] Beschreibung: `./ci.cmd self-check` beendet sich mit Exit 0; die vier am 2026-09-16 16:55 CEST protokollierten Befunde sind entweder gezielt behoben oder als expliziter, nachvollziehbarer Blocker erhalten.
-    - [ ] Teilbild 1: Der SHA-256-Unterschied von `manual/PROGRAM.md` (`62E616E167CB6F6F707726F84D96B1987066B170BE38A2EE4486927DC0F9EDF3`) zum unveränderten Snapshot `.ci/pins/immutable.snapshot/manual/PROGRAM.md` (`F2F017A1BF9752A8F6203831E093DC9914C89AE0C3D577010591F21D4F79ACDD`) wird vor jeder Änderung durch einen zeilenweisen Vergleich und eine Herkunftsentscheidung belegt.
-    - [ ] Teilbild 2: `handoff.latest.md` enthält die drei aktuell fehlenden Werte `master`, `f1fb04d34c86` und `dirty` entweder als aus `handoff.latest.json` deterministisch gerenderte Werte oder der Generator-/Prüfvertrag wird so präzisiert, dass menschenlesbare Handoff-Datei und JSON dieselbe Git-Zustandssemantik nachweisen.
-    - [ ] Teilbild 3: Nach der minimalen Korrektur erkennt `Test-JobAgentCiContracts.ps1` weiterhin alle vier Negativklassen (immutable geändert, fehlender Branch, fehlender HEAD, fehlender Worktree-Status) und der reguläre Self-Check meldet keine verdeckten weiteren Verletzungen.
-  - [ ] Screenshot-Referenzen: Nicht anwendbar; der Punkt betrifft ausschließlich Hash-, Markdown- und JSON-Invarianten ohne Browser- oder sichtbaren UI-Zustand.
-  - [ ] Scope: `manual/PROGRAM.md`, `.ci/pins/immutable.snapshot/manual/PROGRAM.md`, `.ci/pins/immutable.hashes.json`, `handoff.latest.json`, `handoff.latest.md`, die zuständigen Generator-/Prüffunktionen unter `.ci/bin/modules/` sowie `tests/Test-JobAgentCiContracts.ps1`; keine Pin-Neuerzeugung, kein Überschreiben von `manual/PROGRAM.md`, keine Löschung von Historie und keine Änderung produktiver Jobdaten ohne belegte Herkunftsentscheidung.
-  - [ ] Ist-Stand (2026-09-16 16:55): `./ci.cmd self-check` Exit 1; Evidence `logs/terminal/self-check-20260916-165540.log` nennt `immutable_modified: manual\\PROGRAM.md` sowie drei `handoff_invariant`-Befunde für `master`, `f1fb04d34c86` und `dirty`.
-  - [ ] Abhängigkeiten: TD-0056 als bestehender Drift-Tracker; keine fachliche Produktabhängigkeit. Aufwand/Dauer: 0,5–1,5 PT beziehungsweise 4–12 Stunden bei einer Person. Prioritätsscore: 100/100. Ordnungsbegründung: Der fehlerhafte Integritätscheck entwertet jede nachgelagerte CI- und Commit-Aussage.
-  - [ ] Risiken und Unsicherheiten: Die Ursache des Program-Hashunterschieds ist ohne Git-Diff nicht als gewollte Änderung oder Drift klassifizierbar; eine Blindkopie des Snapshots oder ein blindes Re-Pinning würde den Verlustfreiheitsvertrag verletzen.
-  - [ ] Schritte:
-    1. [ ] Den Inhalt und die Hashkette von `manual/PROGRAM.md`, dem Immutable-Snapshot und `.ci/pins/immutable.hashes.json` read-only vergleichen; den Ursprung des abweichenden Inhalts im ID-bezogenen Evidence-Bericht festhalten.
-    2. [ ] Den Handoff-Renderer und den entsprechenden Invariantentest in `.ci/bin/modules/` gegen `handoff.latest.json` analysieren; nur die nachgewiesene fehlende Feldübertragung oder fehlerhafte Prüfung korrigieren und für jeden betroffenen Wert einen positiven und negativen Testfall ergänzen.
-    3. [ ] Zuerst `pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1`, danach `./ci.cmd self-check`, `./ci.cmd drift-check` und `./ci.cmd route-check` ausführen; alle Exitcodes, Hashes und verbleibenden Befunde in der Evidence ablegen und erst bei vollständiger Akzeptanz Todo, Handoff und Roadmap synchronisieren.
-  - [ ] Evidence: `docs/reviews/CI-005-acceptance.md` mit Vor-/Nachhashes, Herkunftsentscheidung, redigierten Diff-Statistiken und Exitcodes; `logs/terminal/self-check-<ts>.log`, `logs/terminal/drift-check-<ts>.log` sowie `logs/terminal/route-check-<ts>.log`.
-  - [ ] Funktionstest: `pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1`; `./ci.cmd self-check`; `./ci.cmd drift-check`; `./ci.cmd route-check`.
-  - [ ] Audit: Nicht anwendbar für Produkt-UI; der automatisierte Audit besteht aus dem vollständigen Text-/JSON-Feldvergleich, eindeutigen SHA-256-Werten und Exitcode-Assertions. Keine Browser- oder Device-Lane ohne sichtbare Änderung starten.
-  - [ ] Supertest: Erst nach grünen CI-005-Funktionstests auf ausdrücklichen Nutzerbefehl `./ci.cmd supertest`; kein Vollsupertest allein als Ersatz für die vier Integritätsassertions.
-  - [ ] Meilenstein/Parallelisierung: M5-CI-Integrität; Hashforensik und Handoff-Rendereranalyse können parallel read-only laufen, jede schreibende Korrektur und die finale Validierung sind sequenziell.
 
 - [ ] SQ-001 Ausführbaren SonarQube-Analysevertrag oder explizite Nichtanwendbarkeit herstellen #comment: Der lokale SonarQube-Server ist erreichbar, aber der aktuelle Token und die Projektkonfiguration erlauben keinen belegten Qualitäts- oder Codescan.
   - [ ] Beschreibung: Der Sonar-Status, die Scanner-Konfiguration und der Quality-Gate-Read sind reproduzierbar getrennt; `./ci.cmd sonar` startet erst dann eine Analyse, wenn Server, lokales Token, Projekt-Key und ein für die analysierbaren Dateien geeigneter Scanner verifiziert sind.

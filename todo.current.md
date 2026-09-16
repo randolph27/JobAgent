@@ -1,5 +1,5 @@
 # Todo (current)
 
-Active: _(none)_
+Active: **TD-0064**
 
-- [open] TD-0056 CI: Resolve drift (observer/route/immutables)
+- [blocked] TD-0064 SQ-001 Ausführbaren SonarQube-Analysevertrag oder explizite Nichtanwendbarkeit herstellen #comment: Der lokale SonarQube-Server ist erreichbar, aber der aktuelle Token und die Projektkonfiguration erlauben keinen belegten Qualitäts- oder Codescan.

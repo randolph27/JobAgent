@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-16. Kein aktiver Produktpunkt. QA-001 bis QA-006 sind abgeschlossen; QA-006 wartet nur noch auf die dokumentierte Roadmaprotation.
+Stand: 2026-09-16. CI-005 ist abgeschlossen; SQ-001 bleibt als aktiver SonarQube-Analysevertrag.
 
-- `Roadmap.md`: QA-006 ist abgeschlossen; die Abnahme liegt unter `docs/reviews/QA-006-acceptance.md`.
+- `Roadmap.md`: SQ-001 ist aktiv; die CI-005-Abnahme liegt unter `docs/reviews/CI-005-acceptance.md`.
 - `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
 - `docs/reviews/2026-09-13-ja027-roadmap-before.md`: unveraenderter vorheriger Plan mit saemtlichen historischen Fortschritten; alte IT-/Mengenziele gelten nicht als aktuelle Anforderungen.
 - `docs/reviews/2026-09-13-ja027-acquisition-baseline.json`: lokaler Datenbestand und Inputhashes, kein neuer Livebeleg.
@@ -23,4 +23,5 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-16: QA-005 nach Roadmap_archive.md rotiert; Evidenz: docs/reviews/QA-005-acceptance.md, vier versionierte Screenshotreferenzen und Supertest Exit 0 in 755,67 s.
 
 - 2026-09-16: CI-002 bis CI-004 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/CI-004-acceptance.md, projektlokale Playwright-Laufzeitpins und fokussierte Funktionstests. Vollsupertest gemäß Nutzerregel als erledigt.
+- 2026-09-16: CI-005 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/CI-005-acceptance.md, zielgerichtete Immutable-Snapshot-Synchronisierung und vier isolierte Negativtests. Vollsupertest gemäß Nutzerregel nicht ausgeführt.
 
