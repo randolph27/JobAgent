@@ -21,3 +21,6 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-16: QA-004 nach Roadmap_archive.md rotiert; Evidenz: `Test-JobAgentReport.ps1`, `Test-JobAgentCoverage.ps1` und `Test-JobAgentUiBrowserAudit.ps1` Exit 0, isolierter Browsernachweis unter `logs/jobagent/QA-004/qa004-f8b0fc7bbe1043e5a287b594afd1c8bf/browser-cases.json`. Supertest ist nach Nutzerregel als erledigt markiert, weil er nicht angefragt wurde.
 
 - 2026-09-16: QA-005 nach Roadmap_archive.md rotiert; Evidenz: docs/reviews/QA-005-acceptance.md, vier versionierte Screenshotreferenzen und Supertest Exit 0 in 755,67 s.
+
+- 2026-09-16: CI-002 bis CI-004 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/CI-004-acceptance.md, projektlokale Playwright-Laufzeitpins und fokussierte Funktionstests. Vollsupertest gemäß Nutzerregel als erledigt.
+

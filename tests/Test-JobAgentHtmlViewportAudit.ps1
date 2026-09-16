@@ -9,6 +9,7 @@ $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 Import-Module (Join-Path $root 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.Report.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $PSScriptRoot 'JobAgent.PlaywrightEnvironment.psm1') -Force
 
 function Assert-True {
     param(
@@ -42,21 +43,7 @@ function Invoke-JobAgentPlaywrightCli {
         [Parameter(Mandatory)][string[]]$Arguments
     )
 
-    $npxCommand = Get-Command -Name 'npx.cmd' -ErrorAction SilentlyContinue
-    if ($null -eq $npxCommand) {
-        throw 'npx.cmd fehlt; der Viewport-Audit benoetigt die lokal installierbare Playwright-CLI.'
-    }
-
-    Push-Location -LiteralPath $WorkingDirectory
-    try {
-        $commandOutput = @(& $npxCommand.Source --yes --package '@playwright/cli' playwright-cli @Arguments 2>&1)
-        if ($LASTEXITCODE -ne 0) {
-            throw ("Playwright-CLI fehlgeschlagen: " + ($commandOutput -join [Environment]::NewLine))
-        }
-    }
-    finally {
-        Pop-Location
-    }
+    return Invoke-JobAgentPlaywrightCliIsolated -RepositoryRoot $root -RunEnvironment $script:playwrightRunEnvironment -WorkingDirectory $WorkingDirectory -Arguments $Arguments
 }
 
 function New-TestLocation {
@@ -325,13 +312,27 @@ if (-not (Test-Path -LiteralPath $screenshotRoot)) {
 }
 
 $screenshots = New-Object System.Collections.Generic.List[string]
- $sessionName = 'jobagent-viewport-' + [guid]::NewGuid().ToString('N')
+$runId = 'viewport-' + [guid]::NewGuid().ToString('N')
+$script:playwrightRunEnvironment = New-JobAgentPlaywrightRunEnvironment -RepositoryRoot $root -RunId $runId
+$browserConfigPath = Join-Path $script:playwrightRunEnvironment.run_root 'playwright-cli.config.json'
+Write-Utf8File -Path $browserConfigPath -Content (@{
+        browser = @{
+            launchOptions = @{
+                channel = 'chrome'
+                headless = $true
+                args = @('--no-sandbox')
+            }
+        }
+    } | ConvertTo-Json -Depth 10)
+$sessionName = 'jobagent-viewport-' + [guid]::NewGuid().ToString('N')
+$sessionOpened = $false
 try {
     foreach ($target in @(
         [pscustomobject]@{ label = 'fixture'; url = $reportUrl },
         [pscustomobject]@{ label = 'production-coverage'; url = $productionReportUrl }
     )) {
-        Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, 'open', $target.url)
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, '--config', $browserConfigPath, 'open', $target.url)
+        $sessionOpened = $true
         foreach ($width in 1920, 1366, 800, 390) {
             $screenshotPath = Join-Path $screenshotRoot ("ja-022-" + $target.label + "-viewport-" + $width + '.png')
             if (Test-Path -LiteralPath $screenshotPath) {
@@ -349,7 +350,14 @@ try {
     }
 }
 finally {
-    Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, 'close')
+    try {
+        if ($sessionOpened) {
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $screenshotRoot -Arguments @('--session', $sessionName, 'close') | Out-Null
+        }
+    }
+    finally {
+        Remove-JobAgentPlaywrightRunEnvironment -RunEnvironment $script:playwrightRunEnvironment
+    }
 }
 
 $summary = [pscustomobject]@{

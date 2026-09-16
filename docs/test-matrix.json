@@ -604,6 +604,17 @@
       "coverage": ["projektlokale AJV-CLI", "isolierte Cache-Umgebung", "Umgebungsrestauration", "fehlende CLI fail-closed"]
     },
     {
+      "roadmap_id": "CI-004",
+      "supertest_order": 31,
+      "title": "Node-24-kompatible projektlokale Playwright-CLI-Laufzeit",
+      "test_file": "tests/Test-JobAgentPlaywrightCliRuntime.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentPlaywrightCliRuntime.ps1",
+      "status": "planned",
+      "include_in_supertest": false,
+      "lane": "contract",
+      "coverage": ["projektlokales open/snapshot/close", "Chrome-Start mit explizitem Sandbox-Argument", "Umgebungsrestauration", "Cleanup"]
+    },
+    {
       "roadmap_id": "CI-003",
       "supertest_order": 30,
       "title": "Projektlokale Playwright-Laufumgebung fuer den UI-Audit",

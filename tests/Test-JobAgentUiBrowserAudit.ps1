@@ -521,6 +521,7 @@ Write-Utf8File -Path $browserConfigPath -Content (@{
             launchOptions = @{
                 channel = 'chrome'
                 headless = $true
+                args = @('--no-sandbox')
             }
             contextOptions = @{
                 locale = 'de-DE'
