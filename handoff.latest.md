@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-16T12:41:56.900+02:00
+Stand: 2026-09-16T13:22:34.307+02:00
 
 ## Zustand
 
@@ -8,41 +8,34 @@ Stand: 2026-09-16T12:41:56.900+02:00
 - Status: `in-progress`
 - Ziel: QA-005 Layout, Lesbarkeit und Tastaturbedienung messbar abnehmen #comment: Das blosse Vorhandensein einer Screenshotdatei beweist weder fehlerfreies Layout noch barrierearme Bedienbarkeit.
 - Branch: `master`
-- HEAD: `56075e130199`
+- HEAD: `d150ba6e9514`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
 - Route: `True`
 
-## Versionierte Aenderungen und Fachstand
+## Versionierte Aenderungen
 
-- `src/JobAgent.Report.psm1`: Der eingebettete Report-Client markiert bei einem Formularreset `focusReset` und setzt den Fokus nach dem nachgelagerten Hash-Render per `requestAnimationFrame` auf `jobagent-reset`. Die vorhandene Pagination-Fokuslogik bleibt unveraendert.
-- `tests/Test-JobAgentUiBrowserAudit.ps1`: Der Browseraudit setzt einen aktiven Freitextfilter, loest Reset mit `Enter` aus und behauptet danach wieder 264 Stellen, Fokus auf `jobagent-reset` und sichtbare Outline. Die Evidence-Fall-ID lautet `keyboard_filter_reset_and_tab_journey`.
-- `todo.state.json`: Der naechste Arbeitsschritt referenziert die Reset- und Pagination-Fokuskorrektur.
-- `todo.checkpoint.json`, `todo.events.jsonl`, `todo.history.digest.json`, `todo.master.index.json`, `handoff.latest.json`: durch `ci.cmd stp` synchronisiert.
-
-## Roadmap- und Todo-Entscheidung
-
-- `TD-0062` / `QA-005` bleibt `in-progress`. QA-005.1 ist erledigt; QA-005.2 und QA-005.3 sind nicht vollstaendig nachgewiesen.
-- Es wurde kein Roadmap-Punkt rotiert: QA-005 erfordert weiterhin den vollstaendigen fokussierten Browseraudit, die visuelle Sichtung, negative Rendererfixtures, versionierte Referenzbilder und die drei festgelegten Funktionstests.
-- `TD-0063` / `QA-006` bleibt offen und beginnt erst nach fachlichem Abschluss von QA-005.
-- `TD-0056` bleibt als bekannter CI-Driftbefund offen; keine Pin- oder Runtime-Reparatur wurde vorgenommen.
-- Kein `supertest` wurde ausgefuehrt. Gemass aktuellem Nutzerauftrag ist kein Supertest fuer diesen Arbeitsschnitt nachzuholen.
+- `handoff.latest.md`
+- `src/JobAgent.Report.psm1`
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
+- `todo.history.digest.json`
+- `todo.master.index.json`
 
 ## Verifikation
 
-- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`
-- Parserpruefung fuer `src/JobAgent.Report.psm1` und `tests/Test-JobAgentUiBrowserAudit.ps1` -> Exit `0`
-- `git diff --check` -> Exit `0`
-- `./ci.cmd stp` -> Exit `0`; Todo- und Handoff-Artefakte synchronisiert.
-
-## Nicht abgeschlossene Verifikation
-
-- Der vollstaendige `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` muss im neuen Chat erneut ausserhalb der Sandbox gestartet werden. Vorherige isolierte Laeufe erzeugten keinen verwertbaren Abschlussstatus; sie wurden als eigene Testprozesse beendet. Es gibt keinen behaupteten gruenen Browseraudit fuer die Reset-Erweiterung.
-- Keine Laufzeitprozesse aus diesen abgebrochenen Testlaeufen weiterverwenden. Devserver-Status vor dem neuen Test nur ueber `./ci.cmd devserver-status` pruefen; bei Bedarf ausschliesslich `./ci.cmd devserver-start` verwenden.
+- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`
 
 ## Naechster Anker
 
-1. `./ci.cmd devserver-status` ausfuehren; falls nicht bereit, `./ci.cmd devserver-start` im Hintergrund verwenden.
-2. `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` ausserhalb der Sandbox vollstaendig bis Exitcode und Evidence-Abschluss laufen lassen. Bei Fehler nur den konkreten Browserfall isolieren; kein Supertest.
-3. Bei Erfolg QA-005.2 in Roadmap/Todo abschliessen und QA-005.3 umsetzen: Screenshots aller Pflichtzustaende erzeugen und sichten, negative Clipping-/Overlap-/Kleincontrol-/Fokusfixture verifizieren, Referenzen plus Hashes unter `doc/roadmap-screenshots/` versionieren sowie Evidence/Review aktualisieren.
+QA-005.2: fokussierten Browseraudit ausserhalb der Sandbox nach der Reset- und Pagination-Fokuskorrektur vollstaendig wiederholen; bei Erfolg QA-005.3 beginnen.
+
+## Detailstatus fuer den naechsten Agenten
+
+- Aktiver Punkt bleibt `TD-0062` / `QA-005`; nur QA-005.1 ist abgeschlossen. QA-005.2 und QA-005.3 sind offen, daher keine Roadmap-Rotation.
+- `src/JobAgent.Report.psm1` verwendet fuer die aktuelle Pagination-Seite jetzt `aria-current="page"` statt `disabled`. Dadurch bleibt die aktuelle Seite tastaturfokussierbar. Nach dem Seitenwechsel fokussiert der Renderer die semantisch markierte Seite synchron.
+- `tests/Test-JobAgentUiBrowserAudit.ps1` ermittelt die aktuelle Seite direkt anhand von `aria-current="page"`. Er prueft nach dem Seitenwechsel den Fokus auf dem Seitentext sowie, dass das Element nicht deaktiviert ist. Der CLI-Eval-Helper kodiert Selektoren mit `String.fromCharCode`, weil Playwright-CLI doppelte Anfuehrungszeichen im Eval-Transport entfernt.
+- Erfolgreich: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1`; isolierter lokaler Playwright-Fall Seite 2 mit Ergebnis `active: "2"`, `current: ["2"]`; `git diff --check`; `./ci.cmd stp`.
+- Nicht erfolgreich abgeschlossen: Der vollstaendige Browseraudit brach vor der Helperkorrektur mit `ReferenceError: jobagent is not defined` ab. Der folgende Gesamtlauf fehlt. Den Browseraudit nur im Hintergrund gegen den bestehenden Devserver ausfuehren und bis Exitcode sowie `browser-cases.json` abwarten; bei Fehler ausschliesslich den betroffenen Fall isolieren.
+- Nach erfolgreichem Browseraudit QA-005.2 abhaken. QA-005.3 verlangt danach Sichtung aller Pflichtscreenshots, vier negative Rendererfaelle, versionierte Referenzbilder mit Hashes unter `doc/roadmap-screenshots/` sowie Evidence/Review. Erst danach die drei festgelegten Funktionstests ausfuehren und QA-005 rotieren.
+- Kein Supertest starten: Nicht angeforderte Supertests gelten gemaess Nutzerauftrag als erledigt; dies ersetzt keine offenen Funktionstests. `TD-0063` / `QA-006` bleibt bis QA-005 offen. `TD-0056` bleibt unveraendert offen; keine CI-Pins oder Runtime reparieren.

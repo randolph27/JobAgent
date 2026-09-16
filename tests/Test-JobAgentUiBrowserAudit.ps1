@@ -136,6 +136,12 @@ function Get-JobAgentActiveElement {
     return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script '() => JSON.stringify({ id:document.activeElement.id, text:String(document.activeElement.textContent||String()), disabled:document.activeElement.disabled===true })'
 }
 
+function Get-JobAgentCurrentPaginationPage {
+    param([Parameter(Mandatory)][string]$WorkingDirectory, [Parameter(Mandatory)][string]$SessionName, [Parameter(Mandatory)][string]$Case)
+
+    return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script '() => { const s=(...codes)=>String.fromCharCode(...codes),pagination=document.getElementById(s(106,111,98,97,103,101,110,116,45,112,97,103,105,110,97,116,105,111,110)); return JSON.stringify(Array.from(pagination.getElementsByTagName(s(98,117,116,116,111,110))).filter(button=>button.getAttribute(s(97,114,105,97,45,99,117,114,114,101,110,116))===s(112,97,103,101)).map(button=>button.textContent)); }'
+}
+
 function Set-JobAgentPaginationFocus {
     param(
         [Parameter(Mandatory)][string]$WorkingDirectory,
@@ -834,13 +840,13 @@ try {
 
         $expectedVisible = if ($pageNumber -eq 6) { 14 } else { 50 }
         Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected "Stellen: 264 Treffer, Seite $pageNumber von 6 (sichtbar $expectedVisible)." -Case "Stellenpagination Seite $pageNumber"
-        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected ('button "' + $pageNumber + '" [disabled]') -Case "deaktivierte aktuelle Stellenseite $pageNumber"
+        Assert-JobAgentSetEqual -Actual @(Get-JobAgentCurrentPaginationPage -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "markierte aktuelle Stellenseite $pageNumber") -Expected @([string]$pageNumber) -Case "markierte aktuelle Stellenseite $pageNumber"
         if ($pageNumber -gt 1) {
             $paginationFocusReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Stellenpagination Seite $pageNumber" -Script 'async () => { await new Promise(resolve=>setTimeout(resolve,50)); return JSON.stringify({ready:true}); }'
             Assert-True -Condition ([bool]$paginationFocusReady.ready) -Message "Stellenpagination Seite ${pageNumber}: Der Fokusnachlauf wurde nicht abgeschlossen."
             $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Stellenpagination Seite $pageNumber"
             Assert-True -Condition ($activeElement.id -eq '') -Message "Stellenpagination Seite ${pageNumber}: Die aktuelle Seitentaste hat keine stabile technische ID."
-            Assert-True -Condition ($activeElement.text -eq [string]$pageNumber -and [bool]$activeElement.disabled) -Message "Stellenpagination Seite ${pageNumber}: Der Fokus liegt nicht auf der aktuell deaktivierten Seitentaste."
+            Assert-True -Condition ($activeElement.text -eq [string]$pageNumber -and -not [bool]$activeElement.disabled) -Message "Stellenpagination Seite ${pageNumber}: Der Fokus liegt nicht auf der markierten aktuellen Seitentaste (id='$($activeElement.id)', text='$($activeElement.text)', disabled='$($activeElement.disabled)')."
         }
         foreach ($jobId in Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) {
             $visibleJobIds.Add($jobId)
@@ -866,13 +872,13 @@ try {
 
         $expectedVisible = if ($pageNumber -eq 6) { 1 } else { 50 }
         Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected "Firmen: 251 Treffer, Seite $pageNumber von 6 (sichtbar $expectedVisible)." -Case "Firmenpagination Seite $pageNumber"
-        Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected ('button "' + $pageNumber + '" [disabled]') -Case "deaktivierte aktuelle Firmenseite $pageNumber"
+        Assert-JobAgentSetEqual -Actual @(Get-JobAgentCurrentPaginationPage -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "markierte aktuelle Firmenseite $pageNumber") -Expected @([string]$pageNumber) -Case "markierte aktuelle Firmenseite $pageNumber"
         if ($pageNumber -gt 1) {
             $paginationFocusReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Firmenpagination Seite $pageNumber" -Script 'async () => { await new Promise(resolve=>setTimeout(resolve,50)); return JSON.stringify({ready:true}); }'
             Assert-True -Condition ([bool]$paginationFocusReady.ready) -Message "Firmenpagination Seite ${pageNumber}: Der Fokusnachlauf wurde nicht abgeschlossen."
             $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Fokus nach Firmenpagination Seite $pageNumber"
             Assert-True -Condition ($activeElement.id -eq '') -Message "Firmenpagination Seite ${pageNumber}: Die aktuelle Seitentaste hat keine stabile technische ID."
-            Assert-True -Condition ($activeElement.text -eq [string]$pageNumber -and [bool]$activeElement.disabled) -Message "Firmenpagination Seite ${pageNumber}: Der Fokus liegt nicht auf der aktuell deaktivierten Seitentaste."
+            Assert-True -Condition ($activeElement.text -eq [string]$pageNumber -and -not [bool]$activeElement.disabled) -Message "Firmenpagination Seite ${pageNumber}: Der Fokus liegt nicht auf der markierten aktuellen Seitentaste (id='$($activeElement.id)', text='$($activeElement.text)', disabled='$($activeElement.disabled)')."
         }
         foreach ($companyId in Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View companies) {
             $visibleCompanyIds.Add($companyId)
