@@ -4,20 +4,21 @@ Stand: 2026-09-16
 
 ## Ergebnis
 
-Status: `blocked`.
+Status: `open`.
 
-Der SonarQube-Status-Endpunkt `http://127.0.0.1:9000/api/system/status` antwortet mit `UP`. Der lokale Token aus `D:\_Scripte\_Sonar\token.txt` ist vorhanden, wurde nicht ausgegeben und liefert bei `GET /api/authentication/validate` den Wert `valid:false`. Der authentifizierte Read `GET /api/projects/search?ps=1` liefert HTTP 401.
+Der lokale SonarQube-Container wurde neu installiert und ist unter `http://127.0.0.1:9000` erreichbar (`UP`). Das Standard-Admin-Passwort wurde ersetzt. Der neue, ausschließlich außerhalb des Repositories gespeicherte `Token:`-Eintrag in `D:\_Scripte\_Sonar\token.txt` liefert bei `GET /api/authentication/validate` den Wert `valid:true`; `GET /api/projects/search?ps=1` liefert HTTP 200. Weder Passwort noch Tokenwert wurden ausgegeben.
 
-Die aktuelle Konfiguration bleibt deshalb korrekt auf `sonar.mode: not-supported`; es wurde kein Scanner, keine Projektanlage und keine Analyse gestartet.
+Die aktuelle Konfiguration bleibt auf `sonar.mode: not-supported`; es wurde weiterhin kein Scanner, keine Projektanlage und keine Analyse gestartet.
 
-## Benötigte externe Aktion
+## Nächste technische Aktion
 
-Ein SonarQube-Administrator muss einen neuen lokalen Token mit mindestens Browse- und Execute-Analysis-Berechtigung für den vorgesehenen Projekt-Key bereitstellen. Danach kann der authentifizierte API-Read erneut ausgeführt und erst bei HTTP 200 eine projektlokale Scannerkonfiguration bewertet werden.
+Die Tokenvoraussetzung ist erfüllt. Als Nächstes müssen die unterstützte Scanner-/Analyzer-Kombination und ein Projekt-Key für die vorhandenen PowerShell-, JSON- und statischen HTML-Dateien anhand offizieller SonarQube-Dokumentation belegt werden. Erst dann darf ein projektlokaler Analysemodus aktiviert werden.
 
 ## Reproduzierbarer, sekretfreier Check
 
 ```powershell
-$token = (Get-Content -LiteralPath 'D:\_Scripte\_Sonar\token.txt' -Raw).Trim()
+$tokenLines = @(Get-Content -LiteralPath 'D:\_Scripte\_Sonar\token.txt' | Where-Object { $_ -match '^Token:\s*(.+)\s*$' })
+$token = ($tokenLines[-1] -replace '^Token:\s*', '').Trim()
 $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($token + ':'))
 $headers = @{ Authorization = 'Basic ' + $encoded }
 Invoke-RestMethod -Headers $headers -Uri 'http://127.0.0.1:9000/api/authentication/validate' -TimeoutSec 10
