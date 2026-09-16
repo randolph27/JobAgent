@@ -6,6 +6,7 @@ state/
 .ci/inbox/
 .ci/run/
 .ci/cache/
+node_modules/
 .playwright-cli/
 runtime/playwright-localappdata/
 data/jobagent/store.lock

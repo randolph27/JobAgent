@@ -7240,6 +7240,10 @@
       "category": "function"
     },
     {
+      "test_file": "tests\\Test-JobAgentSchemaTooling.ps1",
+      "category": "function"
+    },
+    {
       "test_file": "tests\\Test-JobAgentSourceAdapters.ps1",
       "category": "function"
     },

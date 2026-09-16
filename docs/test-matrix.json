@@ -591,6 +591,17 @@
       "include_in_supertest": true,
       "lane": "contract",
       "coverage": ["Atomarer Gesamtbericht", "Nichtnull-Exit und Exception", "Ungueltige Ergebnisdaten", "Timeout und Abbruch", "not-run nach Fehler"]
+    },
+    {
+      "roadmap_id": "CI-002",
+      "supertest_order": 29,
+      "title": "Projektlokale AJV-Werkzeugkette fuer den Schematest",
+      "test_file": "tests/Test-JobAgentSchemaTooling.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentSchemaTooling.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "contract",
+      "coverage": ["projektlokale AJV-CLI", "isolierte Cache-Umgebung", "Umgebungsrestauration", "fehlende CLI fail-closed"]
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-16T15:56:28.370+02:00
+Stand: 2026-09-16T16:10:34.283+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-16T15:56:28.370+02:00
 - Status: `open`
 - Ziel: _
 - Branch: `master`
-- HEAD: `575d5cb2b893`
+- HEAD: `5db8e924cd77`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,7 +16,12 @@ Stand: 2026-09-16T15:56:28.370+02:00
 
 ## Versionierte Aenderungen
 
+- `.gitignore`
 - `Roadmap.md`
+- `docs/reviews/QA-001-function-inventory.json`
+- `docs/test-matrix.json`
+- `docs/test-matrix.md`
+- `tests/Test-JobAgentSchema.ps1`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 

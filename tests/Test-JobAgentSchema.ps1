@@ -10,6 +10,7 @@ $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $schemaPath = Join-Path $root 'schemas\jobagent.schema.json'
 $schema = Get-Content -LiteralPath $schemaPath -Raw | ConvertFrom-Json -Depth 100
 $fixtureRoot = Join-Path $root 'tests\fixtures\jobagent'
+Import-Module (Join-Path $PSScriptRoot 'JobAgent.SchemaValidation.psm1') -Force
 
 function Assert-True {
     param(
@@ -329,22 +330,21 @@ catch {
     Assert-True -Condition ($_.Exception.Message -match 'Jobstatus') -Message "Unerwarteter Fehler fuer ungueltigen Jobstatus: $($_.Exception.Message)"
 }
 
-$ajv = Get-Command npx -ErrorAction SilentlyContinue
-if ($null -ne $ajv) {
-    $validFixture = Join-Path $fixtureRoot 'valid.json'
-    $missingOfficialUrlFixture = Join-Path $fixtureRoot 'invalid-missing-official-url.json'
-    $missingJobIdFixture = Join-Path $fixtureRoot 'invalid-missing-job-id.json'
+$ajvCli = Get-JobAgentAjvCliPath -RepositoryRoot $root
+$validFixture = Join-Path $fixtureRoot 'valid.json'
+$missingOfficialUrlFixture = Join-Path $fixtureRoot 'invalid-missing-official-url.json'
+$missingJobIdFixture = Join-Path $fixtureRoot 'invalid-missing-job-id.json'
 
-    $compileOutput = @(& npx --yes --package ajv-cli@5 --package ajv-formats ajv compile -s $schemaPath --spec=draft2020 -c ajv-formats 2>&1)
-    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message "AJV konnte Schema nicht kompilieren: $($compileOutput -join "`n")"
+$compileResult = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('compile', '-s', $schemaPath, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
+Assert-True -Condition ($compileResult.exit -eq 0) -Message "AJV konnte Schema nicht kompilieren: $($compileResult.output -join "`n")"
 
-    $validOutput = @(& npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s $schemaPath -d $validFixture --spec=draft2020 -c ajv-formats 2>&1)
-    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message "AJV hat gueltiges Fixture abgelehnt: $($validOutput -join "`n")"
+$validResult = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', $validFixture, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
+Assert-True -Condition ($validResult.exit -eq 0) -Message "AJV hat gueltiges Fixture abgelehnt: $($validResult.output -join "`n")"
 
-    foreach ($invalidFixture in @($missingOfficialUrlFixture, $missingJobIdFixture)) {
-        $invalidOutput = @(& npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s $schemaPath -d $invalidFixture --spec=draft2020 -c ajv-formats 2>&1)
-        Assert-True -Condition ($LASTEXITCODE -ne 0) -Message "AJV hat ungueltiges Fixture akzeptiert: $invalidFixture`n$($invalidOutput -join "`n")"
-    }
+foreach ($invalidFixture in @($missingOfficialUrlFixture, $missingJobIdFixture)) {
+    $invalidResult = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', $invalidFixture, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
+    Assert-True -Condition ($invalidResult.exit -ne 0) -Message "AJV hat ungueltiges Fixture akzeptiert: $invalidFixture`n$($invalidResult.output -join "`n")"
+}
 
     $generatedFixtureRoot = Join-Path ([IO.Path]::GetTempPath()) ('jobagent-schema-' + [guid]::NewGuid().ToString('N'))
     New-Item -ItemType Directory -Path $generatedFixtureRoot -Force | Out-Null
@@ -364,21 +364,20 @@ if ($null -ne $ajv) {
         $nullRequired.companies[0].canonical_name = $null
         Set-Content -LiteralPath $nullRequiredFixture -Value ($nullRequired | ConvertTo-Json -Depth 100) -Encoding UTF8
 
-        foreach ($invalidFixture in @($wrongEnumFixture, $wrongTypeFixture, $nullRequiredFixture)) {
-            $invalidOutput = @(& npx --yes --package ajv-cli@5 --package ajv-formats ajv validate -s $schemaPath -d $invalidFixture --spec=draft2020 -c ajv-formats 2>&1)
-            Assert-True -Condition ($LASTEXITCODE -ne 0) -Message "AJV hat generiertes ungueltiges Fixture akzeptiert: $invalidFixture`n$($invalidOutput -join "`n")"
-        }
+    foreach ($invalidFixture in @($wrongEnumFixture, $wrongTypeFixture, $nullRequiredFixture)) {
+        $invalidResult = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', $invalidFixture, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
+        Assert-True -Condition ($invalidResult.exit -ne 0) -Message "AJV hat generiertes ungueltiges Fixture akzeptiert: $invalidFixture`n$($invalidResult.output -join "`n")"
     }
-    finally {
-        if (Test-Path -LiteralPath $generatedFixtureRoot) {
-            Remove-Item -LiteralPath $generatedFixtureRoot -Recurse -Force
-        }
+}
+finally {
+    if (Test-Path -LiteralPath $generatedFixtureRoot) {
+        Remove-Item -LiteralPath $generatedFixtureRoot -Recurse -Force
     }
 }
 
 [pscustomobject]@{
     status = 'ok'
     schema = $schemaPath
-    ajv = $(if ($null -ne $ajv) { 'run' } else { 'not-found' })
+    ajv = 'project-local'
     cases = @('valid', 'missing_official_url', 'missing_stable_job_id', 'invalid_job_status', 'invalid_enum', 'invalid_type', 'invalid_null_required', 'updated_job', 'removed_job')
 } | ConvertTo-Json -Depth 4

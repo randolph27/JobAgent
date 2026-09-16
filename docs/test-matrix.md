@@ -31,6 +31,7 @@ Die detaillierten Vorbedingungen, Eingaben, Sollwerte und Negativfälle sind mas
 | Roadmap | Testdatei | Command | Supertest | Fokus |
 |---|---|---|---:|---|
 | JA-002 | `tests/Test-JobAgentSchema.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentSchema.ps1` | ja | Schema, Pflichtfelder, negative Fixtures, Statusvarianten |
+| CI-002 | `tests/Test-JobAgentSchemaTooling.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentSchemaTooling.ps1` | ja | Projektlokale AJV-CLI, Cache-Isolation, Umgebungsrestauration, fehlende CLI fail-closed |
 | JA-003 | `tests/Test-JobAgentPersistence.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentPersistence.ps1` | ja | Store, Transaktion, Backup, Migration, Locks, Pfadschutz |
 | JA-004 | `tests/Test-JobAgentCompanyInventory.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCompanyInventory.ps1` | ja | Seed, Idempotenz, Deduplikation, fehlende Karriere-URL |
 | JA-005 | `tests/Test-JobAgentSourceAdapters.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentSourceAdapters.ps1` | ja | Adaptervertrag, Fixture-Adapter, HTML-Fixture, Fehlerklassen |
