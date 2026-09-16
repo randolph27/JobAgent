@@ -602,6 +602,17 @@
       "include_in_supertest": true,
       "lane": "contract",
       "coverage": ["projektlokale AJV-CLI", "isolierte Cache-Umgebung", "Umgebungsrestauration", "fehlende CLI fail-closed"]
+    },
+    {
+      "roadmap_id": "CI-003",
+      "supertest_order": 30,
+      "title": "Projektlokale Playwright-Laufumgebung fuer den UI-Audit",
+      "test_file": "tests/Test-JobAgentPlaywrightTooling.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentPlaywrightTooling.ps1",
+      "status": "planned",
+      "include_in_supertest": false,
+      "lane": "contract",
+      "coverage": ["projektlokaler Daemon- und Temppfad", "Umgebungsrestauration", "fehlender lokaler CLI-Cache fail-closed", "Cleanup"]
     }
   ]
 }

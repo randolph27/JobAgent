@@ -11,6 +11,7 @@ $ErrorActionPreference = 'Stop'
 $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 Import-Module (Join-Path $root 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $root 'src\JobAgent.Report.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $PSScriptRoot 'JobAgent.PlaywrightEnvironment.psm1') -Force
 
 function Assert-True {
     param(
@@ -161,38 +162,7 @@ function Invoke-JobAgentPlaywrightCli {
         [Parameter(Mandatory)][string[]]$Arguments
     )
 
-    $npxCommand = Get-Command -Name 'npx.cmd' -ErrorAction SilentlyContinue
-    if ($null -eq $npxCommand) {
-        throw 'npx.cmd fehlt; der Browser-Audit benoetigt die Playwright-CLI.'
-    }
-
-    $previousNpmCache = $env:NPM_CONFIG_CACHE
-    $previousTimezone = $env:TZ
-    $env:NPM_CONFIG_CACHE = Join-Path $root '.ci\cache\npm'
-    $env:TZ = 'UTC'
-    Push-Location -LiteralPath $WorkingDirectory
-    try {
-        $output = @(& $npxCommand.Source --no-install --package '@playwright/cli' playwright-cli @Arguments 2>&1)
-        if ($LASTEXITCODE -ne 0) {
-            throw ('Playwright-CLI fehlgeschlagen: ' + ($output -join [Environment]::NewLine))
-        }
-        return ($output -join [Environment]::NewLine)
-    }
-    finally {
-        Pop-Location
-        if ($null -eq $previousNpmCache) {
-            Remove-Item Env:NPM_CONFIG_CACHE -ErrorAction SilentlyContinue
-        }
-        else {
-            $env:NPM_CONFIG_CACHE = $previousNpmCache
-        }
-        if ($null -eq $previousTimezone) {
-            Remove-Item Env:TZ -ErrorAction SilentlyContinue
-        }
-        else {
-            $env:TZ = $previousTimezone
-        }
-    }
+    return Invoke-JobAgentPlaywrightCliIsolated -RepositoryRoot $root -RunEnvironment $script:playwrightRunEnvironment -WorkingDirectory $WorkingDirectory -Arguments $Arguments
 }
 
 function Get-JobAgentCliSnapshot {
@@ -528,6 +498,7 @@ if ($FixtureOnly) {
 }
 
 $runId = 'qa004-' + [guid]::NewGuid().ToString('N')
+$script:playwrightRunEnvironment = New-JobAgentPlaywrightRunEnvironment -RepositoryRoot $root -RunId $runId
 $evidenceRoot = Join-Path $root (Join-Path 'logs\jobagent\QA-004' $runId)
 $htmlPath = Join-Path $evidenceRoot 'daily-report.html'
 $artifactRoot = Join-Path $evidenceRoot 'playwright'
@@ -547,6 +518,10 @@ if (-not (Test-Path -LiteralPath $artifactRoot)) {
 $browserConfigPath = Join-Path $artifactRoot 'playwright-cli.config.json'
 Write-Utf8File -Path $browserConfigPath -Content (@{
         browser = @{
+            launchOptions = @{
+                channel = 'chrome'
+                headless = $true
+            }
             contextOptions = @{
                 locale = 'de-DE'
                 timezoneId = 'UTC'
@@ -941,6 +916,7 @@ finally {
     catch {
         Write-Warning ('Playwright-Sitzung konnte nicht geschlossen werden: ' + $_.Exception.Message)
     }
+    Remove-JobAgentPlaywrightRunEnvironment -RunEnvironment $script:playwrightRunEnvironment
 }
 
 $documentAfter = ConvertTo-JobAgentFixtureJson -Document $document

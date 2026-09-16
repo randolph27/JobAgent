@@ -7224,6 +7224,10 @@
       "category": "function"
     },
     {
+      "test_file": "tests\\Test-JobAgentPlaywrightTooling.ps1",
+      "category": "function"
+    },
+    {
       "test_file": "tests\\Test-JobAgentRegionalDiscovery.ps1",
       "category": "function"
     },

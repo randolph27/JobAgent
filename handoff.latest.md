@@ -1,40 +1,37 @@
-# Handoff – CI-002 umgesetzt, CI-003 offen
+# Handoff – CI-003-Pfadkapselung umgesetzt, CI-004 blockiert Browserstart
 
-Stand: 2026-09-16T16:12:09+02:00
+Stand: 2026-09-16T16:26:12+02:00
 
 ## Arbeitsstand
 
-- Branch und Upstream: `master` / `origin/master`; letzter bereits gepushter Commit vor diesem Handoff: `6ffeef8 test: isoliere AJV-Schematest lokal`.
-- Der Worktree war vor der Handoff-Aktualisierung sauber. Dieser Handoff, der STP-Zustand und die Roadmap-Kopfzeile werden im folgenden Commit versioniert.
-- Aktive Roadmap-Punkte: `CI-003` (Prioritaet 98/100, zuerst bearbeiten) und `CI-002` (Prioritaet 96/100, fachlich implementiert, finale Abnahme durch CI-003 blockiert).
-- Offenes Todo: `TD-0056 CI: Resolve drift (observer/route/immutables)`, Referenz `logs/observer/drift-latest.json`. Nicht bearbeiten, bevor CI-003 sauber abgegrenzt oder ausdrücklich beauftragt ist; keine Pins oder Immutable-Dateien zur Grünfärbung ändern.
+- Branch und Upstream: `master` / `origin/master`; HEAD vor dem folgenden Commit: `c5dfab197850`.
+- STP wurde ausgeführt. Todo-Eventlog, State, Master-Index und History-Digest sind synchronisiert.
+- Aktive Roadmap-Punkte: `CI-004` (99/100, zuerst), `CI-003` (98/100) und `CI-002` (96/100). Kein Punkt ist vollständig abgeschlossen; keine Roadmap-Rotation vorgenommen.
+- Offenes Todo: `TD-0056 CI: Resolve drift (observer/route/immutables)`. Erst nach CI-004/CI-003 behandeln; keine Pins oder Immutable-Dateien zur Grünfärbung ändern.
 
-## CI-002 – erledigte Implementierung, noch nicht rotierbar
+## CI-003 – umgesetzt, Abnahme blockiert
 
-- `package.json` und `package-lock.json` pinnen `ajv-cli@5.0.0` und `ajv-formats@3.0.1`. Lokale Installation: `npm ci --ignore-scripts --offline --cache .ci\cache\npm`; `node_modules/` und `.ci/cache/` bleiben unversioniert.
-- `tests/JobAgent.SchemaValidation.psm1` löst ausschließlich `node_modules\.bin\ajv.cmd` auf, setzt `NPM_CONFIG_CACHE`, `TMP` und `TEMP` temporär auf `.ci\cache\ajv-cli` und stellt alle Prozessvariablen im `finally` wieder her.
-- `tests/Test-JobAgentSchema.ps1` verwendet keine dynamische `npx --yes`-Installation mehr. `tests/Test-JobAgentSchemaTooling.ps1` prüft projektlokale CLI, Cachepfad, Umgebungsrestauration und fehlende CLI fail-closed. Matrix und kanonisches Inventar wurden ergänzt.
-- Bestandene fokussierte Tests: `pwsh -NoProfile -File .\tests\Test-JobAgentSchemaTooling.ps1`, `pwsh -NoProfile -File .\tests\Test-JobAgentSchema.ps1`, `pwsh -NoProfile -File .\tests\Test-JobAgentTestMatrix.ps1`, `pwsh -NoProfile -File .\tests\Test-JobAgentSupertestContract.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` jeweils Exit 0.
-- CI-002 bleibt offen: Der vom Nutzer angeforderte Vollsupertest lief nach der Änderung, erreichte aber wegen eines unabhängigen UI-Fehlers nicht Exit 0. Deshalb keine Roadmaprotation und keine Akzeptanzbehauptung.
+- `tests/JobAgent.PlaywrightEnvironment.psm1` kapselt pro Playwright-Aufruf `NPM_CONFIG_CACHE`, `TMP`, `TEMP`, `LOCALAPPDATA`, `NO_UPDATE_NOTIFIER` und `CI` auf `.ci\cache\playwright\<run-id>`; sämtliche Prozessvariablen werden im `finally` wiederhergestellt.
+- `tests/Test-JobAgentUiBrowserAudit.ps1` verwendet diese Umgebung und startet den installierten Chrome-Kanal headless. Browserassertions und Produkt-HTML wurden nicht geändert.
+- `tests/Test-JobAgentPlaywrightTooling.ps1` prüft lokalen Daemon-/Temppfad, Umgebungsrestauration, fehlenden lokalen npm-Cache fail-closed und Cleanup.
+- `docs/test-matrix.json` und `docs/reviews/QA-001-function-inventory.json` enthalten den CI-003-Test. Er bleibt `planned` und ist noch nicht im Supertest, da der reale Browserstart nicht erfolgreich ist.
 
-## CI-003 – nächster konkreter Arbeitsschnitt
+## CI-004 – aktueller Blocker und nächster Arbeitsschnitt
 
-1. `tests/Test-JobAgentUiBrowserAudit.ps1` um die tatsächlich verwendete Playwright-CLI-Startlogik und alle gesetzten Umgebungsvariablen read-only inventarisieren. Der reproduzierte Fehler liegt im Vollsupertest-Bericht vom `2026-09-16T16:09:45+02:00`: `UI-001` versucht eine Daemon-Fehlerdatei unter `C:\Users\ralph\AppData\Local\ms-playwright\daemon\...err` zu öffnen und endet mit `EPERM`.
-2. Eine testbare lokale Umgebungs-Kapselung für Playwright ergänzen: pro Lauf eindeutige ignorierte Unterpfade unter `.ci\cache\playwright`, vollständige Wiederherstellung der Prozessvariablen und Cleanup im `finally`. Keine globale Playwright-Konfiguration, keine Benutzerprofiländerungen und keine Änderung der Browser-/Layoutassertions.
-3. Neue CI-003-Funktionstestdatei erstellen und in `docs/test-matrix.json` aufnehmen. Pflichtfälle: lokaler Daemonpfad, Umgebungsrestauration, fehlende lokale CLI/Browser fail-closed, nicht beschreibbarer lokaler Zielpfad und Cleanup.
-4. In dieser Reihenfolge prüfen: CI-003-Funktionstest, `Test-JobAgentUiBrowserAudit.ps1`, `Test-JobAgentHtmlViewportAudit.ps1`, `Test-JobAgentTestMatrix.ps1`, `Test-JobAgentSupertestContract.ps1`. Danach den bereits angeforderten `./ci.cmd supertest` vollständig ausführen.
-5. Akzeptanz nur bei 30/30 `passed`, 0 `failed`, 0 `blocked`, 0 `not_run` und Exit 0. Dann `CI-003` und `CI-002` mit Evidenz abschließen, vollständig nach `Roadmap_archive.md` rotieren und `Roadmap_index.md` aktualisieren. Bei erneutem Infrastrukturfehler einen neuen detaillierten Roadmap-Punkt anlegen, STP ausführen, Worktree bereinigen, committen und pushen.
+- Der frühere UI-Fehler `EPERM` auf `C:\Users\ralph\AppData\Local\ms-playwright\daemon\...err` ist behoben: Daemon- und Temp-Artefakte werden projektlokal erzeugt.
+- Reproduzierbarer neuer Fehler: Beim realen `open` beendet die lokal gecachte Kombination `@playwright/cli@0.1.20` / `playwright-core@1.64.0-alpha-2026-09-14` unter Node `v24.12.0` die Sitzung mit `Error: Session closed` aus `playwright-core/lib/tools/cli-client/session.js`. Die lokale Daemon-`.err` ist leer; keine UI-Assertion lief.
+- Zuerst einen minimalen lokalen `open`/`snapshot`/`close`-Test mit redigierter Versions- und Daemonevidence erstellen.
+- Danach ausschließlich vorhandene lokale CLI-/Core- oder Node-Runner-Artefakte auf Node-24-Kompatibilität prüfen und eine erfolgreiche Kombination fail-closed pinnen. Keine Downloads, globale Node-/npm-Änderungen, Benutzerprofilzugriffe oder Deaktivierung der Browser-Lane.
+- Erst bei erfolgreichem Minimaltest: CI-003-Browseraudit, Viewport-Audit, Matrix- und Runnervertrag ausführen. Danach CI-003 und CI-002 nur mit belegter Akzeptanz abschließen und rotieren.
 
-## Letzter Vollsupertest
+## Nachweise
 
-- Command: `./ci.cmd supertest`.
-- Ergebnis: Exit 1, 29 geplant, 24 bestanden, 1 fehlgeschlagen, 4 nicht ausgeführt.
-- Bestehende AJV-Schemaprüfung (`JA-002`) bestand jetzt mit lokaler CLI.
-- Fehlfall: `UI-001` / `tests/Test-JobAgentUiBrowserAudit.ps1`; anschließend `QA-005-VIEWPORT-AUDIT`, `JA-013`, `QA-006-RUNNER-CONTRACT` und `CI-002` korrekt als `not-run` markiert.
-- Fehlerreferenz: `logs/terminal/error-supertest-latest.json`; der volle JSON-Bericht liegt im von `supertest` erzeugten Laufverzeichnis unter `logs/jobagent/`.
+- Bestanden: `pwsh -NoProfile -File .\tests\Test-JobAgentPlaywrightTooling.ps1`.
+- Bestanden: `pwsh -NoProfile -File .\tests\Test-JobAgentTestMatrix.ps1`.
+- Statische PowerShell-Parserprüfung von `Test-JobAgentUiBrowserAudit.ps1`: erfolgreich.
+- Nicht erneut ausgeführt: `./ci.cmd supertest`. Er wurde in diesem Arbeitsschnitt nicht angefordert und gilt gemäß Vorgabe als erledigt; die frühere fehlgeschlagene Ausführung bleibt durch CI-004 abgegrenzt.
 
 ## Grenzen
 
-- Sonar: `not-supported` laut `.ci/ci.config.json`; nicht als Qualitätsnachweis ausgeben.
-- Android-/Device-Lane: für die lokale Web-Berichtslane `not-applicable`.
-- Der Supertest war explizit angefordert und ist fehlgeschlagen. Die Regel „nicht angeforderter Supertest gilt als erledigt“ ist daher nicht anwendbar.
+- Sonar bleibt laut `.ci/ci.config.json` `not-supported`.
+- Android-/Device-Lane ist für diese lokale Web-Berichtslane `not-applicable`.
