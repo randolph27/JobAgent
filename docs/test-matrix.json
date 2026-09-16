@@ -580,6 +580,17 @@
       "include_in_supertest": true,
       "lane": "local-browser",
       "coverage": ["390/800/1366/1920 CSS-px", "Overflow", "Controlgeometrie"]
+    },
+    {
+      "roadmap_id": "QA-006-RUNNER-CONTRACT",
+      "supertest_order": 28,
+      "title": "Supertest-Runner-Fehlervertrag",
+      "test_file": "tests/Test-JobAgentSupertestContract.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentSupertestContract.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "contract",
+      "coverage": ["Atomarer Gesamtbericht", "Nichtnull-Exit und Exception", "Ungueltige Ergebnisdaten", "Timeout und Abbruch", "not-run nach Fehler"]
     }
   ]
 }

@@ -7256,6 +7256,10 @@
       "category": "aggregator"
     },
     {
+      "test_file": "tests\\Test-JobAgentSupertestContract.ps1",
+      "category": "function"
+    },
+    {
       "test_file": "tests\\Test-JobAgentTestMatrix.ps1",
       "category": "contract"
     },

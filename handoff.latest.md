@@ -1,64 +1,43 @@
 # Handoff latest
 
-Stand: 2026-09-16T14:29:23.610+02:00
+Stand: 2026-09-16T14:45:00+02:00
 
-## Zustand
+## Aktiver Auftrag
 
-- Active: `TD-0063`
-- Status: `in-progress`
-- Ziel: QA-006 Vorhandenen Supertest kontrolliert erweitern und seine Vollstaendigkeit nachweisen #comment: Der einzige Startbefehl soll alle abgeschlossenen Funktionalitaeten und die echte UI mit belastbarem Ergebnisprotokoll pruefen.
-- Branch: `master`
-- HEAD: `c54e95962e67`
-- Upstream: `origin/master`
-- Ahead/Behind: `0/0`
-- Worktree: `dirty`
-- Route: `True`
+- Active: `TD-0063` / `QA-006`; Status: `in-progress`.
+- Ziel: Supertest-Auswahl, Fehlerprotokoll und Vollstaendigkeitsnachweis abschliessen.
+- `TD-0056` (CI-Drift) bleibt offen und unveraendert; keine Pins oder Immutable-Dateien zur Gruenfaerbung aendern.
 
-## Versionierte Aenderungen
+## Erledigter Arbeitsschnitt
 
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `docs/reviews/QA-001-function-inventory.json`
-- `docs/test-matrix.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `html/jobagent/ja-022-viewport-audit.html`
-- `output/playwright/ja-022-fixture-viewport-1366.png`
-- `output/playwright/ja-022-fixture-viewport-1920.png`
-- `output/playwright/ja-022-fixture-viewport-390.png`
-- `output/playwright/ja-022-fixture-viewport-800.png`
-- `output/playwright/ja-022-production-coverage-viewport-1366.png`
-- `output/playwright/ja-022-production-coverage-viewport-1920.png`
-- `output/playwright/ja-022-production-coverage-viewport-390.png`
-- `output/playwright/ja-022-production-coverage-viewport-800.png`
-- `tests/Test-JobAgentSupertest.ps1`
-- `tests/Test-JobAgentTestMatrix.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
-- `todo.events.jsonl`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `todo.state.json`
-- `tools/Verify-JobAgentCompanyCandidates.ps1`
+- `tests/JobAgent.Supertest.psm1` nutzt die Matrix als alleinige Planquelle und exportiert einen atomar schreibenden Runner.
+- Der Runner protokolliert pro Child Testdatei, Command, Status, Fehlerart, Exitcode, stdout/stderr, Start/Ende, PowerShell-Version und CWD. Nach erstem Pflichtfehler werden Restfaelle begruendet als `not-run` erfasst.
+- Neu: `tests/Test-JobAgentSupertestContract.ps1`. Er verwendet nur eigene Tempdaten und prueft Erfolg, Nichtnull-Exit, Exception, ungueltigen Plan, Timeout und Abbruch; keine Supertest-Rekursion.
+- `docs/test-matrix.json` hat `QA-006-RUNNER-CONTRACT` mit Reihenfolge 28. Das kanonische Funktionsinventar ist aktualisiert.
+- QA-006.1 und QA-006.2 sind in `Roadmap.md` abgeschlossen. QA-006.3 sowie QA-006 insgesamt bleiben offen; keine Roadmap-Rotation.
 
-## QA-006.1 abgeschlossen
+## Belegte Tests
 
-- `tests/JobAgent.Supertest.psm1` ist die alleinige Quelle der Supertest-Auswahl: nur Matrixeintraege mit `status=done` und `include_in_supertest=true`; leerer Plan, fehlende Datei, doppelte Datei, ungueltige/doppelte Reihenfolge und Selbstaufnahme brechen ab.
-- `tests/Test-JobAgentSupertest.ps1` nutzt den dynamischen Plan und protokolliert Roadmap-ID, Testpfad, Command, Exitcode, Ausgabeende und Sollanzahl.
-- `docs/test-matrix.json` enthaelt 27 eindeutig geordnete freigegebene Tests. Neu eingebunden: CiContracts, Kandidatenverifikation, FetchEnvironment, FetchErrorInspection, HtmlAudit und HtmlViewportAudit.
-- `tests/Test-JobAgentTestMatrix.ps1` erzwingt die Zuordnung jeder inventarisierten Nicht-Aggregator-Testdatei.
-- `tools/Verify-JobAgentCompanyCandidates.ps1` normalisiert Runspace-Inputs zu `PSCustomObject`; der Parallel-Worker-Fall funktioniert wieder.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentSupertestContract.ps1` -> Exit 0.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentTestMatrix.ps1` -> Exit 0.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit 0.
+- `git diff --check` -> Exit 0.
+- `.\ci.cmd stp` -> Exit 0 am 2026-09-16T14:41:37+02:00.
 
-## Verifikation
+## Supertest-Status
 
-- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentTestMatrix.ps1` -> Exit `0`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCompanyCandidateVerification.ps1` -> Exit `0`, inklusive Parallel-Worker-Fall.
-- `Test-JobAgentFetchEnvironment.ps1`, `Test-JobAgentFetchErrorInspection.ps1`, `Test-JobAgentHtmlAudit.ps1` und `Test-JobAgentHtmlViewportAudit.ps1` -> jeweils Exit `0`.
-- `git diff --check` -> Exit `0`.
-- Kein neuer Supertest-Lauf; gemaess Nutzeranweisung gilt er als erledigt, solange er nicht angefragt wurde.
+- Der erste Supertestversuch brach bei `Test-JobAgentSchema.ps1` mit `EPERM` im lokalen npm-Cache ab.
+- Der fokussierte Schema-Test lief danach mit Zugriff auf den lokalen npm-Cache gruen.
+- Es gibt noch keinen belegten vollständigen Supertestlauf mit allen 28 Matrixeintraegen. Deshalb QA-006 nicht als erledigt markieren und nicht rotieren.
 
-## Naechster Anker
+## Naechster konkreter Schritt
 
-QA-006.2: `tests/Test-JobAgentSupertestContract.ps1` mit isolierten Child-Skripten fuer Erfolg, Nichtnull-Exit, Exception, ungueltige Ergebnisdaten, Timeout und Abbruch erstellen. Keine echte Supertest-Rekursion. Der Runner muss nach erstem Fehler atomar einen Gesamtbericht mit `passed`/`failed`/`blocked`/`not-run`, Command, CWD, Start/Ende, Exit und stdout/stderr schreiben. Danach nur Contract-, Matrix- und CI-Contracttest ausfuehren. QA-006.3, Vollsuite und Wiederholbarkeitsnachweis bleiben offen. `TD-0056` bleibt unveraendert offen; keine Roadmap-Rotation, da QA-006 noch nicht abgeschlossen ist.
+1. `.\ci.cmd supertest` mit Zugriff auf den lokalen npm-Cache ausfuehren; bei Fehler nur den ersten fehlenden Funktionstest isolieren.
+2. Nach einem gruenen Lauf einen zweiten ausfuehren und die zwei `summary.json` normalisiert vergleichen (Soll-/Istzahl, Status, Inventar-/Matrixhash).
+3. `logs/jobagent/QA-006/<run-id>/` und `docs/reviews/QA-006-acceptance.md` vervollstaendigen: Commands, Hashes, Browser-/Visual-Evidence, Sonar `not-supported`, Device `not-applicable`.
+4. Erst dann QA-006 abschliessen, Roadmap nach `Roadmap_archive.md` rotieren und Todo/Checkpoint/Handoff erneut mit STP synchronisieren.
+
+## Grenzen
+
+- Keine Android-/Gradle-Lane einbauen. Produkt: PowerShell/HTML; Sonar bleibt laut Konfiguration `not-supported`.
+- Lokale Logs sind keine versionierte Acceptance-Evidence. Keine Secrets in Logs, Evidence oder Handoff schreiben.
