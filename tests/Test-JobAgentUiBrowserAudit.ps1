@@ -101,6 +101,22 @@ function Assert-JobAgentGeometryMeasurement {
     Assert-True -Condition (@($Measurement.clipped_text).Count -eq 0) -Message "${Case}: Text ist ohne vollstaendig erreichbaren Inhalt abgeschnitten: $clippedText"
 }
 
+function Assert-JobAgentExpectedFailure {
+    param(
+        [Parameter(Mandatory)][scriptblock]$Assertion,
+        [Parameter(Mandatory)][string]$Case
+    )
+
+    $failedAsExpected = $false
+    try {
+        & $Assertion
+    }
+    catch {
+        $failedAsExpected = $true
+    }
+    Assert-True -Condition $failedAsExpected -Message "${Case}: Die absichtlich defekte Rendererfixture wurde nicht erkannt."
+}
+
 function Get-JobAgentAccessibilityMeasurement {
     param(
         [Parameter(Mandatory)][string]$WorkingDirectory,
@@ -118,6 +134,19 @@ function Get-JobAgentActiveElement {
     param([Parameter(Mandatory)][string]$WorkingDirectory, [Parameter(Mandatory)][string]$SessionName, [Parameter(Mandatory)][string]$Case)
 
     return Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script '() => JSON.stringify({ id:document.activeElement.id, text:String(document.activeElement.textContent||String()), disabled:document.activeElement.disabled===true })'
+}
+
+function Set-JobAgentPaginationFocus {
+    param(
+        [Parameter(Mandatory)][string]$WorkingDirectory,
+        [Parameter(Mandatory)][string]$SessionName,
+        [Parameter(Mandatory)][int]$PageNumber,
+        [Parameter(Mandatory)][string]$Case
+    )
+
+    $script = "() => { const pagination=document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,112,97,103,105,110,97,116,105,111,110)); const target=Array.from(pagination.querySelectorAll(String.fromCharCode(98,117,116,116,111,110))).find(button=>button.textContent===String($PageNumber)); if(!target)throw new Error(String.fromCharCode(83,101,105,116,101,110,116,97,115,116,101,32,102,101,104,108,116)); target.focus(); return JSON.stringify({text:target.textContent,focused:document.activeElement===target}); }"
+    $focus = Get-JobAgentSessionValue -WorkingDirectory $WorkingDirectory -SessionName $SessionName -Case $Case -Script $script
+    Assert-True -Condition ([bool]$focus.focused -and $focus.text -eq [string]$PageNumber) -Message "${Case}: Die Seitentaste $PageNumber konnte nicht per Tastatur vorbereitet werden."
 }
 
 function Invoke-JobAgentPlaywrightCli {
@@ -543,6 +572,7 @@ try {
     Assert-True -Condition (@($accessibility.tabs | Where-Object { $_.selected -eq 'true' -and $_.target_exists }).Count -eq 1) -Message 'Die aktive Tabansicht ist nicht eindeutig mit ihrem Panel verbunden.'
     Assert-True -Condition ($accessibility.status.role -eq 'status' -and $accessibility.status.live -eq 'polite') -Message 'Der Trefferstatus hat keine passende Live-Region.'
     Assert-True -Condition (@($accessibility.low_contrast).Count -eq 0) -Message 'Mindestens ein relevanter Text oder ein Control unterschreitet den Kontrastvertrag.'
+    Assert-True -Condition (@($accessibility.focusable_without_focus_style).Count -eq 0) -Message 'Mindestens ein bedienbares Element hat keinen sichtbaren Fokusstil.'
     $caseEvidence.Add([pscustomobject]@{ case_id = 'semantic_labels_tabs_live_status_and_calculated_contrast'; measurement = $accessibility })
 
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,113,117,101,114,121)).focus(); return JSON.stringify({focused:document.activeElement.id}); }') | Out-Null
@@ -586,6 +616,23 @@ try {
     $zoomMeasurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht 200-Prozent-Zoom' -ViewportWidth ([int]$desktopZoom.viewport_width) -ViewportHeight ([int]$desktopZoom.viewport_height) -CssZoom ([double]$desktopZoom.css_zoom)
     Assert-JobAgentGeometryMeasurement -Measurement $zoomMeasurement -VisualContract $visualContract -Case 'Initialansicht 200-Prozent-Zoom'
     $geometryEvidence.Add([pscustomobject]@{ case_id = 'initial_jobs_200_percent_zoom'; viewport_width = [int]$desktopZoom.viewport_width; viewport_height = [int]$desktopZoom.viewport_height; measurement = $zoomMeasurement })
+
+    $negativeFixtureSetup = @'
+() => { const s=(...codes)=>String.fromCharCode(...codes),root=document.createElement(s(100,105,118)),small=document.createElement(s(98,117,116,116,111,110)),first=document.createElement(s(98,117,116,116,111,110)),second=document.createElement(s(98,117,116,116,111,110)),clipped=document.createElement(s(112)),reset=document.getElementById(s(106,111,98,97,103,101,110,116,45,114,101,115,101,116)); root.id=s(106,111,98,97,103,101,110,116,45,113,97,48,48,53,45,110,101,103,97,116,105,118,101); small.id=s(106,111,98,97,103,101,110,116,45,113,97,48,48,53,45,115,109,97,108,108); small.textContent=s(120); [s(119,105,100,116,104),s(104,101,105,103,104,116),s(109,105,110,87,105,100,116,104),s(109,105,110,72,101,105,103,104,116)].forEach(property=>small.style[property]=s(50,48,112,120)); small.style.outlineWidth=s(48,112,120); small.style.outlineStyle=s(110,111,110,101); first.textContent=s(49); second.textContent=s(50); [first,second].forEach(button=>{button.style.position=s(97,98,115,111,108,117,116,101);button.style.left=s(48,112,120);button.style.top=s(48,112,120);button.style.width=s(52,52,112,120);button.style.height=s(52,52,112,120);button.style.minWidth=s(52,52,112,120);button.style.minHeight=s(52,52,112,120)}); clipped.textContent=s(97,98,115,105,99,104,116,108,105,99,104,45,97,98,103,101,115,99,104,110,105,116,116,101,110); clipped.style.width=s(52,112,120); clipped.style.overflow=s(104,105,100,100,101,110); clipped.style.whiteSpace=s(110,111,119,114,97,112); root.append(small,first,second,clipped); document.body.append(root); reset.style.outline=s(110,111,110,101); return JSON.stringify({ready:true}); }
+'@
+    Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Negative Rendererfixture vorbereiten' -Script $negativeFixtureSetup | Out-Null
+    try {
+        $negativeGeometry = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Negative Rendererfixture Geometrie' -ViewportWidth 1366 -ViewportHeight 768
+        Assert-JobAgentExpectedFailure -Case 'Negative Rendererfixture: zu kleines Control' -Assertion { Assert-True -Condition (@($negativeGeometry.invalid_controls).Count -eq 0) -Message 'Zu kleines Control erkannt.' }
+        Assert-JobAgentExpectedFailure -Case 'Negative Rendererfixture: Control-Overlap' -Assertion { Assert-True -Condition (@($negativeGeometry.overlaps).Count -eq 0) -Message 'Control-Overlap erkannt.' }
+        Assert-JobAgentExpectedFailure -Case 'Negative Rendererfixture: Text-Clipping' -Assertion { Assert-True -Condition (@($negativeGeometry.clipped_text).Count -eq 0) -Message 'Text-Clipping erkannt.' }
+        $negativeAccessibility = Get-JobAgentAccessibilityMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Negative Rendererfixture Fokus'
+        Assert-JobAgentExpectedFailure -Case 'Negative Rendererfixture: unsichtbarer Fokus' -Assertion { Assert-True -Condition (@($negativeAccessibility.focusable_without_focus_style).Count -eq 0) -Message 'Unsichtbarer Fokus erkannt.' }
+        $caseEvidence.Add([pscustomobject]@{ case_id = 'negative_renderer_fixture_detects_small_control_overlap_clipping_and_invisible_focus'; detected = @('small_control', 'overlap', 'clipping', 'invisible_focus') })
+    }
+    finally {
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { const s=(...codes)=>String.fromCharCode(...codes),fixture=document.getElementById(s(106,111,98,97,103,101,110,116,45,113,97,48,48,53,45,110,101,103,97,116,105,118,101)),reset=document.getElementById(s(106,111,98,97,103,101,110,116,45,114,101,115,101,116)); if(fixture)fixture.remove(); reset.style.outline=s(32); return JSON.stringify({clean:true}); }') | Out-Null
+    }
 
     Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=companies', 'page=999', 'q=Firma%20251')
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
@@ -638,8 +685,8 @@ try {
         $geometryEvidence.Add([pscustomobject]@{ case_id = 'complex_filter'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
     }
 
-    $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
-    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { const reset=document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,114,101,115,101,116)); reset.focus(); return JSON.stringify({focused:document.activeElement===reset}); }') | Out-Null
+    Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', 'Space') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Filter-Reset'
     $activeElement = Get-JobAgentActiveElement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Fokus nach Filter-Reset'
@@ -766,8 +813,8 @@ try {
     $visibleJobIds = [System.Collections.Generic.List[string]]::new()
     foreach ($pageNumber in 1..6) {
         if ($pageNumber -gt 1) {
-            $pageRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name ([string]$pageNumber)
-            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $pageRef) | Out-Null
+            Set-JobAgentPaginationFocus -WorkingDirectory $artifactRoot -SessionName $sessionName -PageNumber $pageNumber -Case "Tastaturreise zur Stellenpagination Seite $pageNumber"
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', 'Enter') | Out-Null
             $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
         }
 
@@ -798,8 +845,8 @@ try {
     $visibleCompanyIds = [System.Collections.Generic.List[string]]::new()
     foreach ($pageNumber in 1..6) {
         if ($pageNumber -gt 1) {
-            $pageRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name ([string]$pageNumber)
-            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $pageRef) | Out-Null
+            Set-JobAgentPaginationFocus -WorkingDirectory $artifactRoot -SessionName $sessionName -PageNumber $pageNumber -Case "Tastaturreise zur Firmenpagination Seite $pageNumber"
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', 'Enter') | Out-Null
             $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
         }
 
