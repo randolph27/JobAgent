@@ -1,23 +1,34 @@
-# SQ-007 – lokaler External-Issue-Adapter
+# SQ-007 – SonarQube-External-Issue-Import
 
 Stand: 2026-09-17
 
-## Nachgewiesener lokaler Teil
+## Abnahme
 
-- Der projektlokale Lieferkettenvertrag steht auf `verified`. Originalpakete und Einstiegspunkte der drei Artefakte werden unter `.ci/tools/sonar` jeweils per SHA-256 und Root-Containment geprüft.
-- `Invoke-SonarExternalIssuesReport` analysiert ausschließlich versionierte PowerShell-Dateien in `.ci/bin` und `tools`. `data/`, `logs/`, `.git`, Caches und Testquellen sind nicht Teil des Source-Satzes und werden vom Adapter auch bei projektrelativen Pfaden abgewiesen.
-- Der Adapter erzeugt SonarQube-9.9-kompatibles Generic-Issue-JSON mit `engineId=PSScriptAnalyzer`, bekannter Regel-ID, projektrelativem Pfad und gültigem Zeilenbereich, sofern PSScriptAnalyzer eine Position liefert. Dateiweite PSScriptAnalyzer-Befunde ohne Zeilenposition bleiben dateigebunden.
-- Der lokale Lauf erzeugte `320` Befunde als UTF-8-Report unter `logs/sonar/sq-007-local-generic-issues.json` mit SHA-256 `858BEBF1CE8D7CA2F8284F3BC44DEC54B14E26893208C7430189B773BC2C9C1B`. Der Report enthält keine Tokens oder Header.
+- Projekt: `jobagent-external-powershell`.
+- Analyseumfang: `external-powershell-issues-only`; ausschließlich versionierte PowerShell-Dateien unter `.ci/bin` und `tools`.
+- Import: 323 PSScriptAnalyzer-External-Issues, Report-SHA-256 `F91B440929EAF44A0357348842A7B6226A6E03DA068F66366310FE006799997D`.
+- Compute Engine: Task `AaCvX7pnOhdKqVTDjfxf`, Analyse `AaCvX78SotDYp2WltXne`, terminaler Status `SUCCESS`.
+- Sekretfreie Evidence: `logs/verify/sq-007-20260917-143744.json`.
+
+## Technischer Vertrag
+
+- Der Command `./ci.cmd sonar-external-import` prüft Paket-, Einstiegspunkt- und Scanner-JAR-Hashes unter `.ci/tools/sonar` vor jedem Lauf.
+- Java 11 und SonarScanner laufen ausschließlich projektlokal. Der Token wird nur über die Child-Umgebung übergeben, nie als Scannerargument, Datei, Log, Evidence oder Handoff-Inhalt.
+- Der Report ist UTF-8 ohne BOM, enthält nur projektrelative Pfade sowie validierte Zeilenbereiche und weist leere Reports, unbekannte Regeln, Traversierung, ausgeschlossene Pfade und ungültige Zeilen fail-closed ab.
+- Der Scanner legt das eindeutig konfigurierte Projekt nur an, wenn es noch nicht existiert. Quality-Gates, Quality-Profile und globale Toolinstallationen bleiben unverändert.
 
 ## Funktionstests
 
-- `pwsh -NoProfile -File .\tests\Test-SonarToolchain.ps1`
-- `pwsh -NoProfile -File .\tests\Test-SonarExternalIssues.ps1`
-- `pwsh -NoProfile -File .\tests\Test-SonarAuth.ps1`
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1`
+```powershell
+pwsh -NoProfile -File .\tests\Test-SonarToolchain.ps1
+pwsh -NoProfile -File .\tests\Test-SonarExternalIssues.ps1
+pwsh -NoProfile -File .\tests\Test-SonarAuth.ps1
+pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1
+.\ci.cmd sonar-external-import
+```
 
-Die Tests decken Paket- und Einstiegspunkthashes, leeren Bericht, unbekannte Regel, Pfad außerhalb des Roots, ausgeschlossene Pfade, ungültige Zeilenbereiche, UTF-8 ohne BOM, Deduplizierung und einen lokalen PSScriptAnalyzer-Lauf ab.
+Alle fünf Läufe endeten mit Exit 0. Der negative Scannerpfad verwendet einen fehlenden lokalen JAR und endet deterministisch mit `sonar_external_scanner_failed`; ein Server-Upload erfolgt dabei nicht.
 
-## Offener Abschlussblocker
+## Grenzen
 
-Es wurde kein SonarQube-Projekt angelegt und kein Report hochgeladen. Die externe Projektanlage, ein erfolgreicher Import, Compute-Engine-Task-Polling und die erwartete negative Importprobe bleiben ausdrücklich offen.
+External Issues sind keine native PowerShell-Sprachanalyse. Es werden keine Aussagen zu Coverage, Duplikation, Quality-Profile-Regeln oder einem Quality Gate als Gesamtfreigabe abgeleitet. Browser-, Viewport- und Android-Audit: `not-applicable`. Der Vollsupertest wurde gemäß Nutzerregel nicht ausgeführt.

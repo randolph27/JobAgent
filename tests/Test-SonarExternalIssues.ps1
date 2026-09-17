@@ -28,6 +28,9 @@ function Assert-Rejected {
 
 $toolchain = Test-SonarExternalToolchain -RepoRoot $root -SonarConfig $config.sonar
 Assert-True ($toolchain.status -eq 'verified') 'Die lokale Sonar-Lieferkette ist nicht verifiziert.'
+$plan = Get-SonarExternalImportPlan -RepoRoot $root -SonarConfig $config.sonar -HostUrl 'http://127.0.0.1:9000'
+Assert-True ($plan.project_key -eq 'jobagent-external-powershell') 'Der External-Import besitzt keinen stabilen Projekt-Key.'
+Assert-True (Test-Path -LiteralPath $plan.scanner_jar_path -PathType Leaf) 'Der Scanner-JAR fehlt.'
 $sourceFiles = Get-SonarExternalSourceFiles -RepoRoot $root
 Assert-True ($sourceFiles.Count -gt 0) 'Der versionierte PowerShell-Quellsatz ist leer.'
 Assert-True (@($sourceFiles.FullName | Where-Object { $_ -like '*\.ci\bin\*' }).Count -gt 0) 'CI-PowerShell-Quellen fehlen im Include-Satz.'
@@ -52,6 +55,13 @@ $analysisOutputPath = Join-Path $root 'logs\sonar\test-sq007-local-analysis.json
 $analysisResult = Invoke-SonarExternalIssuesReport -RepoRoot $root -SonarConfig $config.sonar -OutputPath $analysisOutputPath
 Assert-True ($analysisResult.issue_count -ge 0) 'Der lokale PSScriptAnalyzer-Lauf lieferte keinen Befundzaehler.'
 Assert-True (Test-Path -LiteralPath $analysisResult.output_path -PathType Leaf) 'Der lokale Generic-Issue-Report fehlt.'
+$workDirectory = Join-Path $root 'logs\sonar\test-sq007-work'
+$scannerArgs = Get-SonarExternalImportScannerArguments -Plan $plan -RepoRoot $root -ReportPath $analysisResult.output_path -WorkDirectory $workDirectory
+Assert-True ($scannerArgs -contains '-Dsonar.sources=.ci/bin,tools') 'Der Scanner begrenzt seinen Source-Satz nicht.'
+Assert-True (@($scannerArgs | Where-Object { $_ -match 'sonar\.token|sonar\.login' }).Count -eq 0) 'Der Scanner darf kein Secretargument erhalten.'
+$brokenPlan = $plan.PSObject.Copy()
+$brokenPlan.scanner_jar_path = Join-Path $root 'tests\missing-sonar-scanner.jar'
+Assert-Rejected -ExpectedError 'sonar_external_scanner_failed' -Action { Invoke-SonarExternalScanner -Plan $brokenPlan -RepoRoot $root -ReportPath $analysisResult.output_path -WorkDirectory $workDirectory -Token 'fixture-token' | Out-Null }
 
 Assert-Rejected -ExpectedError 'sonar_external_report_empty' -Action { ConvertTo-SonarGenericExternalIssueReport -RepoRoot $root -Records @() -KnownRules @('PSAvoidUsingWriteHost') -OutputPath $outputPath | Out-Null }
 $unknown = $record.PSObject.Copy(); $unknown.RuleName = 'UnknownRule'
@@ -65,6 +75,6 @@ Assert-Rejected -ExpectedError 'sonar_external_line_invalid' -Action { ConvertTo
 
 [pscustomobject]@{
   status = 'ok'
-  cases = @('verified_toolchain', 'versioned_source_scope', 'utf8_generic_issue_report', 'deduplicated_issues', 'local_psscriptanalyzer_run', 'empty_report_rejected', 'unknown_rule_rejected', 'outside_path_rejected', 'excluded_path_rejected', 'invalid_line_rejected')
+  cases = @('verified_toolchain', 'external_import_plan', 'secret_free_scanner_arguments', 'scanner_failure_rejected', 'versioned_source_scope', 'utf8_generic_issue_report', 'deduplicated_issues', 'local_psscriptanalyzer_run', 'empty_report_rejected', 'unknown_rule_rejected', 'outside_path_rejected', 'excluded_path_rejected', 'invalid_line_rejected')
   secret_sanitized = $true
 } | ConvertTo-Json -Depth 4

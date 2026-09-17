@@ -159,3 +159,89 @@ function Invoke-SonarExternalIssuesReport {
   $records = @(foreach ($file in $files) { Invoke-ScriptAnalyzer -Path $file.FullName -ErrorAction Stop })
   return ConvertTo-SonarGenericExternalIssueReport -RepoRoot $RepoRoot -Records $records -KnownRules $knownRules -OutputPath $OutputPath
 }
+
+function Get-SonarExternalToolchainArtifact {
+  param([Parameter(Mandatory)][object]$SonarConfig, [Parameter(Mandatory)][string]$Id)
+  $artifact = @((Get-SonarExternalProperty $SonarConfig 'toolchain').artifacts | Where-Object { ([string]$_.id) -eq $Id } | Select-Object -First 1)
+  if ($artifact.Count -ne 1) { throw 'sonar_toolchain_artifact_missing' }
+  return $artifact[0]
+}
+
+function Get-SonarExternalImportPlan {
+  param([Parameter(Mandatory)][string]$RepoRoot, [Parameter(Mandatory)][object]$SonarConfig, [Parameter(Mandatory)][string]$HostUrl)
+  $toolchain = Test-SonarExternalToolchain -RepoRoot $RepoRoot -SonarConfig $SonarConfig
+  $import = Get-SonarExternalProperty $SonarConfig 'external_import'
+  $projectKey = [string](Get-SonarExternalProperty $import 'project_key')
+  $projectName = [string](Get-SonarExternalProperty $import 'project_name')
+  if ($projectKey -notmatch '^[A-Za-z0-9_.:-]{1,400}$' -or [string]::IsNullOrWhiteSpace($projectName)) { throw 'sonar_external_import_config_invalid' }
+  if ($HostUrl -notmatch '^https?://[^/]+(?:/[^?#]+)?$') { throw 'sonar_external_host_invalid' }
+  $java = Get-SonarExternalToolchainArtifact -SonarConfig $SonarConfig -Id 'java-runtime'
+  $scanner = Get-SonarExternalToolchainArtifact -SonarConfig $SonarConfig -Id 'sonar-scanner-cli'
+  $javaPath = Test-SonarExternalFileHash -Root $toolchain.artifact_root -RelativePath ([string]$java.relative_path) -ExpectedHash ([string]$java.sha256)
+  $jarPath = Test-SonarExternalFileHash -Root $toolchain.artifact_root -RelativePath ([string](Get-SonarExternalProperty $scanner 'scanner_jar_relative_path')) -ExpectedHash ([string](Get-SonarExternalProperty $scanner 'scanner_jar_sha256'))
+  $scannerHome = Split-Path -Parent (Split-Path -Parent $jarPath)
+  return [pscustomobject]@{ project_key=$projectKey; project_name=$projectName; host_url=$HostUrl.TrimEnd('/'); java_path=$javaPath; scanner_jar_path=$jarPath; scanner_home=$scannerHome; timeout_sec=[int](Get-SonarExternalProperty $import 'timeout_sec' 120); analysis_scope=[string](Get-SonarExternalProperty $import 'analysis_scope') }
+}
+
+function Get-SonarExternalImportScannerArguments {
+  param([Parameter(Mandatory)][object]$Plan, [Parameter(Mandatory)][string]$RepoRoot, [Parameter(Mandatory)][string]$ReportPath, [Parameter(Mandatory)][string]$WorkDirectory)
+  $relativeReport = Get-SonarExternalRelativePath -Root $RepoRoot -Path $ReportPath
+  if (-not $relativeReport.StartsWith('logs/sonar/', [StringComparison]::OrdinalIgnoreCase)) { throw 'sonar_external_report_path_invalid' }
+  $workPath = Resolve-SonarExternalContainedPath -Root $RepoRoot -RelativePath (Get-SonarExternalRelativePath -Root $RepoRoot -Path $WorkDirectory)
+  $properties = @(
+    ('scanner.home=' + $Plan.scanner_home),
+    ('project.home=' + $RepoRoot),
+    ('sonar.host.url=' + $Plan.host_url),
+    ('sonar.projectKey=' + $Plan.project_key),
+    ('sonar.projectName=' + $Plan.project_name),
+    'sonar.sources=.ci/bin,tools',
+    'sonar.exclusions=**/data/**,**/logs/**,**/.git/**,**/tests/**,**/.ci/cache/**,**/.ci/tools/**',
+    ('sonar.externalIssuesReportPaths=' + $relativeReport),
+    ('sonar.working.directory=' + $workPath)
+  )
+  if (@($properties | Where-Object { $_ -match '["\r\n]' }).Count -gt 0) { throw 'sonar_external_scanner_argument_invalid' }
+  return @(
+    ('-Dscanner.home=' + $Plan.scanner_home),
+    ('-Dproject.home=' + $RepoRoot),
+    '-cp',
+    $Plan.scanner_jar_path,
+    'org.sonarsource.scanner.cli.Main'
+  ) + @($properties | Select-Object -Skip 2 | ForEach-Object { '-D' + $_ })
+}
+
+function Read-SonarExternalReportTask {
+  param([Parameter(Mandatory)][string]$WorkDirectory)
+  $taskPath = Join-Path $WorkDirectory 'report-task.txt'
+  if (-not (Test-Path -LiteralPath $taskPath -PathType Leaf)) { throw 'sonar_external_task_missing' }
+  $values = @{}
+  foreach ($line in Get-Content -LiteralPath $taskPath) {
+    if ($line -match '^([^=]+)=(.*)$') { $values[$Matches[1]] = $Matches[2] }
+  }
+  $taskId = [string]$values['ceTaskId']
+  if ($taskId -notmatch '^[A-Za-z0-9_-]+$') { throw 'sonar_external_task_invalid' }
+  return [pscustomobject]@{ task_id=$taskId }
+}
+
+function Invoke-SonarExternalScanner {
+  param([Parameter(Mandatory)][object]$Plan, [Parameter(Mandatory)][string]$RepoRoot, [Parameter(Mandatory)][string]$ReportPath, [Parameter(Mandatory)][string]$WorkDirectory, [Parameter(Mandatory)][string]$Token)
+  if ([string]::IsNullOrWhiteSpace($Token)) { throw 'sonar_token_missing' }
+  New-Item -ItemType Directory -Force -Path $WorkDirectory | Out-Null
+  $arguments = Get-SonarExternalImportScannerArguments -Plan $Plan -RepoRoot $RepoRoot -ReportPath $ReportPath -WorkDirectory $WorkDirectory
+  $processInfo = [System.Diagnostics.ProcessStartInfo]::new()
+  $processInfo.FileName = $Plan.java_path
+  $processInfo.WorkingDirectory = $RepoRoot
+  $processInfo.UseShellExecute = $false
+  $processInfo.RedirectStandardOutput = $true
+  $processInfo.RedirectStandardError = $true
+  $processInfo.Environment['SONAR_TOKEN'] = $Token
+  $processInfo.Environment['SONAR_USER_HOME'] = $WorkDirectory
+  foreach ($argument in $arguments) { [void]$processInfo.ArgumentList.Add($argument) }
+  $process = [System.Diagnostics.Process]::Start($processInfo)
+  $stdoutTask = $process.StandardOutput.ReadToEndAsync()
+  $stderrTask = $process.StandardError.ReadToEndAsync()
+  $process.WaitForExit()
+  $null = $stdoutTask.GetAwaiter().GetResult()
+  $null = $stderrTask.GetAwaiter().GetResult()
+  if ($process.ExitCode -ne 0) { throw 'sonar_external_scanner_failed' }
+  return Read-SonarExternalReportTask -WorkDirectory $WorkDirectory
+}

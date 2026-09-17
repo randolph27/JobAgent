@@ -699,6 +699,70 @@ function Get-SonarProjectKey() {
   return "soundprofile_android"
 }
 
+function Cmd-SonarExternalImport() {
+  Ensure-CoreFolders; Ensure-BootstrapFiles
+  $cfg = Try-ReadJson (Get-ConfigPath)
+  $sonarCfg = Get-Prop $cfg 'sonar' $null
+  $runId = 'sq-007-' + (TsId)
+  $evidencePath = Join-Path $LogsRoot ('verify\\' + $runId + '.json')
+  $stage = 'status'
+  try {
+    $status = Get-SonarStatusSnapshot (Get-SonarStatusUrl) 10
+    if (-not [bool](Get-Prop $status 'ok' $false)) { throw 'sonar_server_unreachable' }
+    $stage = 'authentication'
+    $auth = Test-SonarAuthentication
+    if (-not [bool](Get-Prop $auth 'ok' $false)) { throw ([string](Get-Prop $auth 'error_class' 'sonar_auth_invalid')) }
+    $tokenCandidate = @(Get-SonarTokenCandidates | Where-Object { ([string]$_.source) -eq ([string](Get-Prop $auth 'token_source' '')) } | Select-Object -First 1)
+    if ($tokenCandidate.Count -ne 1) { throw 'sonar_token_missing' }
+    $stage = 'import_plan'
+    $plan = Get-SonarExternalImportPlan -RepoRoot $RepoRoot -SonarConfig $sonarCfg -HostUrl (Get-SonarBaseUrl)
+    $previousTokenVariable = Get-Variable -Name SonarResolvedToken -Scope Script -ErrorAction SilentlyContinue
+    $previousToken = if ($null -eq $previousTokenVariable) { '' } else { [string]$previousTokenVariable.Value }
+    $script:SonarResolvedToken = [string]$tokenCandidate[0].token
+    $reportPath = Join-Path $LogsRoot ('sonar\\' + $runId + '-generic-issues.json')
+    $stage = 'report'
+    $report = Invoke-SonarExternalIssuesReport -RepoRoot $RepoRoot -SonarConfig $sonarCfg -OutputPath $reportPath
+    $stage = 'project_lookup'
+    $project = Invoke-SonarApiJson ('/api/projects/search?projects=' + [System.Uri]::EscapeDataString($plan.project_key))
+    $projectCreated = $false
+    if (@($project.components).Count -eq 0) {
+      $createUrl = (Get-SonarBaseUrl) + '/api/projects/create'
+      $stage = 'project_create'
+      try {
+        Invoke-RestMethod -Method Post -Headers (Get-SonarApiHeaders) -ContentType 'application/x-www-form-urlencoded' -Body @{ project=$plan.project_key; name=$plan.project_name } -Uri $createUrl -TimeoutSec 20 | Out-Null
+      } catch { throw 'sonar_external_project_create_failed' }
+      $projectCreated = $true
+      $project = Invoke-SonarApiJson ('/api/projects/search?projects=' + [System.Uri]::EscapeDataString($plan.project_key))
+      if (@($project.components).Count -ne 1) { throw 'sonar_external_project_missing' }
+    }
+    $stage = 'scanner'
+    $workDirectory = Join-Path $LogsRoot ('sonar\\' + $runId + '-work')
+    $task = Invoke-SonarExternalScanner -Plan $plan -RepoRoot $RepoRoot -ReportPath $report.output_path -WorkDirectory $workDirectory -Token ([string]$tokenCandidate[0].token)
+    $deadline = (Get-Date).AddSeconds($plan.timeout_sec)
+    $taskStatus = ''
+    $analysisId = $null
+    $stage = 'compute_engine'
+    do {
+      $taskResponse = Invoke-SonarApiJson ('/api/ce/task?id=' + [System.Uri]::EscapeDataString($task.task_id))
+      $taskStatus = [string](Get-Prop (Get-Prop $taskResponse 'task' $null) 'status' '')
+      $analysisId = [string](Get-Prop (Get-Prop $taskResponse 'task' $null) 'analysisId' '')
+      if ($taskStatus -in @('SUCCESS', 'FAILED', 'CANCELED')) { break }
+      Start-Sleep -Seconds 2
+    } while ((Get-Date) -lt $deadline)
+    if ($taskStatus -eq 'FAILED' -or $taskStatus -eq 'CANCELED') { throw 'sonar_external_compute_engine_failed' }
+    if ($taskStatus -ne 'SUCCESS' -or -not $analysisId) { throw 'sonar_external_compute_engine_timeout' }
+    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd='.\\ci.cmd sonar-external-import'; project_key=$plan.project_key; project_created=$projectCreated; analysis_scope=$plan.analysis_scope; report_sha256=$report.report_sha256; report_issue_count=$report.issue_count; task_id=$task.task_id; analysis_id=$analysisId; task_status=$taskStatus; exit=0; secret_sanitized=$true })
+    CI-Info ('sonar-external-import: task_status=SUCCESS; analysis_id=' + $analysisId + '; issues=' + $report.issue_count)
+  } catch {
+    $errorClass = [string]$_.Exception.Message
+    if ($errorClass -notmatch '^sonar_[a-z0-9_]+$') { $errorClass = 'sonar_external_import_failed' }
+    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd='.\\ci.cmd sonar-external-import'; analysis_scope='external-powershell-issues-only'; stage=$stage; error_class=$errorClass; exit=1; secret_sanitized=$true })
+    throw ('sonar-external-import: ' + $errorClass)
+  } finally {
+    if (Get-Variable -Name previousToken -ErrorAction SilentlyContinue) { $script:SonarResolvedToken = $previousToken }
+  }
+}
+
 function Get-SonarApiHeaders() {
   $token = [string]$script:SonarResolvedToken
   if (-not $token) { $token = [string]$env:SONAR_TOKEN }
@@ -1615,6 +1679,7 @@ Register-CiCommand "daily-run" { Cmd-JobAgentDailyRun $Args }
 Register-CiCommand "daily-run-status" { Cmd-JobAgentDailyRunStatus $Args }
 Register-CiCommand "sonar" { Cmd-Sonar }
 Register-CiCommand "sonar-auth" { Cmd-SonarAuth }
+Register-CiCommand "sonar-external-import" { Cmd-SonarExternalImport }
 Register-CiCommand "pyserver-start" { Cmd-PyserverStart }
 Register-CiCommand "pyserver-stop" { Cmd-PyserverStop }
 Register-CiCommand "pyserver-status" { Cmd-PyserverStatus }
