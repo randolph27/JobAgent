@@ -699,7 +699,30 @@ function Get-SonarProjectKey() {
   return "soundprofile_android"
 }
 
-function Cmd-SonarExternalImport() {
+function Get-SonarExternalImportFailureClass([string]$Stage, [string]$RawError) {
+  if ($RawError -match '^sonar_[a-z0-9_]+$') { return $RawError }
+  switch ($Stage) {
+    'status' { return 'sonar_server_unreachable' }
+    'authentication' { return 'sonar_auth_invalid' }
+    'import_plan' { return 'sonar_external_import_plan_invalid' }
+    'report' { return 'sonar_external_report_invalid' }
+    'project_lookup' { return 'sonar_external_project_access_failed' }
+    'project_create' { return 'sonar_external_project_create_failed' }
+    'scanner' { return 'sonar_external_scanner_failed' }
+    'compute_engine' { return 'sonar_external_compute_engine_lookup_failed' }
+    default { return 'sonar_external_import_failed' }
+  }
+}
+
+function Get-SonarCommitReference() {
+  $commit = @(& git -C $RepoRoot rev-parse HEAD 2>$null | Select-Object -First 1)
+  if ($LASTEXITCODE -ne 0 -or $commit.Count -ne 1 -or [string]$commit[0] -notmatch '^[a-f0-9]{40}$') {
+    throw 'sonar_commit_reference_unavailable'
+  }
+  return [string]$commit[0]
+}
+
+function Cmd-SonarExternalImport([string]$CommandName = '.\\ci.cmd sonar-external-import') {
   Ensure-CoreFolders; Ensure-BootstrapFiles
   $cfg = Try-ReadJson (Get-ConfigPath)
   $sonarCfg = Get-Prop $cfg 'sonar' $null
@@ -751,13 +774,13 @@ function Cmd-SonarExternalImport() {
     } while ((Get-Date) -lt $deadline)
     if ($taskStatus -eq 'FAILED' -or $taskStatus -eq 'CANCELED') { throw 'sonar_external_compute_engine_failed' }
     if ($taskStatus -ne 'SUCCESS' -or -not $analysisId) { throw 'sonar_external_compute_engine_timeout' }
-    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd='.\\ci.cmd sonar-external-import'; project_key=$plan.project_key; project_created=$projectCreated; analysis_scope=$plan.analysis_scope; report_sha256=$report.report_sha256; report_issue_count=$report.issue_count; task_id=$task.task_id; analysis_id=$analysisId; task_status=$taskStatus; exit=0; secret_sanitized=$true })
-    CI-Info ('sonar-external-import: task_status=SUCCESS; analysis_id=' + $analysisId + '; issues=' + $report.issue_count)
+    $commitReference = Get-SonarCommitReference
+    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd=$CommandName; project_key=$plan.project_key; project_created=$projectCreated; analysis_scope=$plan.analysis_scope; report_sha256=$report.report_sha256; report_issue_count=$report.issue_count; task_id=$task.task_id; analysis_id=$analysisId; task_status=$taskStatus; commit_reference=$commitReference; native_powershell_analysis=$false; quality_gate_statement='not-applicable-for-external-issues'; exit=0; secret_sanitized=$true })
+    CI-Info ($CommandName + ': task_status=SUCCESS; analysis_id=' + $analysisId + '; issues=' + $report.issue_count)
   } catch {
-    $errorClass = [string]$_.Exception.Message
-    if ($errorClass -notmatch '^sonar_[a-z0-9_]+$') { $errorClass = 'sonar_external_import_failed' }
-    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd='.\\ci.cmd sonar-external-import'; analysis_scope='external-powershell-issues-only'; stage=$stage; error_class=$errorClass; exit=1; secret_sanitized=$true })
-    throw ('sonar-external-import: ' + $errorClass)
+    $errorClass = Get-SonarExternalImportFailureClass -Stage $stage -RawError ([string]$_.Exception.Message)
+    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd=$CommandName; analysis_scope='external-powershell-issues-only'; stage=$stage; error_class=$errorClass; exit=1; secret_sanitized=$true })
+    throw ($CommandName + ': ' + $errorClass)
   } finally {
     if (Get-Variable -Name previousToken -ErrorAction SilentlyContinue) { $script:SonarResolvedToken = $previousToken }
   }
@@ -1224,71 +1247,10 @@ function Cmd-Sonar() {
   Ensure-CoreFolders; Ensure-BootstrapFiles
   $cfg = Try-ReadJson (Get-ConfigPath)
   $sonarCfg = Get-Prop $cfg "sonar" $null
-  if ([string](Get-Prop $sonarCfg "mode" "") -eq "not-supported") {
-    $reason = [string](Get-Prop $sonarCfg "reason" "Sonar-Analyse ist fuer dieses Projekt nicht konfiguriert.")
-    Write-Json (Join-Path $LogsRoot "verify\verify.digest.json") @{ ts=NowIso; cmd=".\ci.cmd sonar"; exit=$null; status="not-supported"; reason=$reason; analysis_started=$false; secret_sanitized=$true }
-    CI-Warn ("sonar: not-supported; " + $reason)
-    return
+  if ([string](Get-Prop $sonarCfg "mode" "") -ne 'external-issues-lifecycle') {
+    throw 'sonar_config_mode_invalid'
   }
-  $statusUrl = Get-SonarStatusUrl
-  if (-not (Test-SonarServerHealthy $statusUrl).ok) {
-    throw ("sonar: SonarQube ist nicht gesund erreichbar unter " + $statusUrl + ". Starte zuerst .\\ci.cmd sonar-start")
-  }
-
-  $g = Get-GradleCmdRaw
-  if (-not $g.cmd) { throw "sonar: kein Gradle-Command gefunden." }
-  Persist-GradleInfo $g.mode $g.cmd
-
-  $projectKey = Get-SonarProjectKey
-  $authPreflight = Test-SonarApiAuthentication $projectKey
-  if (-not [bool](Get-Prop $authPreflight "ok" $false)) {
-    $null = Write-SonarFailureEvidence -AuthResult $authPreflight -CommandUnderTest ".\ci.cmd sonar" -ExitCode 1 -StatusUrl $statusUrl -GradleStarted $false -TerminalErrorPath "logs\terminal\error-sonar-latest.json"
-    throw (Format-SonarAuthPreflightFailure $authPreflight)
-  }
-  $previousAnalysis = Get-SonarLatestAnalysis $projectKey
-  $envMap = Get-SonarEnv
-  $ts = TsId
-  $sonarLog = Join-Path $LogsRoot ("terminal\sonar-" + $ts + ".log")
-  $gradleCmd = ((Quote-IfNeeded $g.cmd) + " sonar --console=plain -Dsonar.gradle.skipCompile=true").Trim()
-  CI-Info ("sonar: " + $gradleCmd + " | log=" + $sonarLog)
-  $res = Run-Cmd $gradleCmd $sonarLog $envMap
-  if ($res.exit -ne 0) { throw ("sonar: Gradle-Sonar-Lauf fehlgeschlagen. See " + $sonarLog) }
-
-  $quality = Wait-SonarQualityGate $projectKey ([string](Get-Prop $previousAnalysis "key" $null))
-  $projectStatus = Get-Prop $quality "projectStatus" $null
-  $analysis = Get-Prop $quality "analysis" $null
-  $analysisKey = [string](Get-Prop $analysis "key" $null)
-  $status = [string](Get-Prop $projectStatus "status" "")
-  $failedConditions = @(Format-SonarFailedConditions $projectStatus)
-  if ([bool](Get-Prop $quality "timed_out" $false)) {
-    throw ("sonar: Analyse fuer " + $projectKey + " wurde nicht rechtzeitig bestaetigt. Letzter Quality-Gate-Status=" + $status + $(if ($analysisKey) { " analysis=" + $analysisKey } else { "" }))
-  }
-  if ($status -ne "OK") {
-    $detail = "no failed conditions returned"
-    if ($failedConditions.Count -gt 0) { $detail = ($failedConditions -join "; ") }
-    throw ("sonar: Quality Gate failed for " + $projectKey + ": " + $detail)
-  }
-  $riskGate = Get-SonarRiskGateSnapshot $projectKey
-  Write-Json (Join-Path $LogsRoot "verify\verify.digest.json") @{
-    ts = NowIso
-    cmd = ".\ci.cmd sonar"
-    exit = 0
-    status = "ok"
-    fail_signature = $null
-    failed_tasks = @()
-    log_path = (To-RelPath $sonarLog)
-    project_key = $projectKey
-    analysis_key = $analysisKey
-    quality_gate_status = $status
-    security_rating = [string](Get-Prop $riskGate "security_rating" "")
-    reliability_rating = [string](Get-Prop $riskGate "reliability_rating" "")
-    security_hotspots_reviewed = [decimal](Get-Prop $riskGate "security_hotspots_reviewed" 0)
-    unreviewed_hotspots = [int](Get-Prop $riskGate "unreviewed_hotspots" -1)
-    gradle_started = $true
-    gradle_exit = 0
-    secret_sanitized = $true
-  }
-  CI-Info ("sonar: Quality Gate OK fuer " + $projectKey + $(if ($analysisKey) { " analysis=" + $analysisKey } else { "" }))
+  Cmd-SonarExternalImport -CommandName '.\\ci.cmd sonar'
 }
 
 function Cmd-ReworkTest() {

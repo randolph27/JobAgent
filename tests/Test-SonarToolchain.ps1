@@ -54,7 +54,7 @@ $config = Get-Content -LiteralPath $configPath -Raw | ConvertFrom-Json
 $review = Get-Content -LiteralPath $reviewPath -Raw | ConvertFrom-Json
 $sonar = Get-PropertyValue $config 'sonar'
 $toolchain = Get-PropertyValue $sonar 'toolchain'
-Assert-True (([string](Get-PropertyValue $sonar 'mode')) -eq 'not-supported') 'SQ-007 darf den Scanstatus noch nicht aktivieren.'
+Assert-True (([string](Get-PropertyValue $sonar 'mode')) -eq 'external-issues-lifecycle') 'SQ-008 muss den begrenzten External-Issue-Lifecycle aktivieren.'
 Assert-True (([string](Get-PropertyValue $toolchain 'status')) -eq 'verified') 'Beschaffte Artefakte muessen als verifiziert markiert sein.'
 Assert-True (([string](Get-PropertyValue $toolchain 'analysis_scope')) -eq 'external-powershell-issues-only') 'Der Analyseumfang ist nicht ehrlich begrenzt.'
 

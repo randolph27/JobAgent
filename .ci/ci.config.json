@@ -5,8 +5,8 @@
   "jobagent": { "daily_run": { "fixture_max_companies": 25, "live_pilot_max_companies": 1000 } },
   "verify": { "cmd": "pwsh -NoProfile -File .\\tests\\Test-JobAgentCiContracts.ps1", "shell": "powershell" },
   "sonar": {
-    "mode": "not-supported",
-    "reason": "Der External-Issue-Import ist als separater, begrenzter Command implementiert; bis SQ-008 startet sonar keinen Scanner.",
+    "mode": "external-issues-lifecycle",
+    "reason": "Der sonar-Command importiert ausschliesslich PSScriptAnalyzer-Befunde als SonarQube External Issues. Native PowerShell-Regeln, Coverage, Duplikatmetriken und Quality-Gate-Aussagen bleiben ausgeschlossen.",
     "auth": { "token_file": "D:\\_Scripte\\_Sonar\\token.txt" },
     "external_import": { "project_key": "jobagent-external-powershell", "project_name": "JobAgent external PowerShell issues", "timeout_sec": 120, "analysis_scope": "external-powershell-issues-only" },
     "toolchain": {

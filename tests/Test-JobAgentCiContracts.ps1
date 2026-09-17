@@ -25,16 +25,17 @@ Assert-True ($browserLogic -notmatch 'devserver-stop: killing port') 'Devserver-
 Assert-True ($browserLogic -match 'netstat -ano -p tcp' -and $browserLogic.Contains('ABH\S*REN')) 'Devserver-Listenererkennung braucht einen netstat-Fallback fuer eingeschraenkte Get-NetTCPConnection-Umgebungen.'
 Assert-True ($config.verify.shell -eq 'powershell') 'Verify muss den PowerShell-Funktionstest explizit ausfuehren.'
 Assert-True ($config.verify.cmd -match 'Test-JobAgentCiContracts\.ps1$') 'Verify verweist nicht auf den CI-Vertragstest.'
-Assert-True ($config.sonar.mode -eq 'not-supported') 'Nicht konfigurierte Sonar-Analyse muss explizit als nicht unterstuetzt markiert sein.'
+Assert-True ($config.sonar.mode -eq 'external-issues-lifecycle') 'Sonar muss den begrenzten External-Issue-Lifecycle explizit aktivieren.'
 Assert-True (@($config.immutable_policy.mutable_paths) -contains 'Roadmap.md') 'Roadmap.md ist nicht als autorisierte mutable Planungsdatei gebunden.'
-Assert-True ($commands -match 'status="not-supported"') 'Sonar-Nichtunterstuetzung wird nicht als eigener Status protokolliert.'
-Assert-True ($commands -match 'analysis_started=\$false') 'Sonar-Nichtunterstuetzung muss einen nicht gestarteten Analysepfad ausweisen.'
+Assert-True ($commands -match 'function Get-SonarExternalImportFailureClass') 'Stabile Sonar-Lifecycle-Fehlerklassen fehlen.'
+Assert-True ($commands -match "Cmd-SonarExternalImport -CommandName '.\\\\ci.cmd sonar'") 'Cmd-Sonar delegiert nicht an den begrenzten Lifecycle.'
 Assert-True ($config.sonar.auth.token_file -eq 'D:\_Scripte\_Sonar\token.txt') 'Sonar-Tokenquelle ist nicht explizit konfiguriert.'
 Assert-True ($config.sonar.toolchain.status -eq 'verified') 'Die beschaffte Sonar-Lieferkette muss verifiziert bleiben.'
 Assert-True ($config.sonar.toolchain.analysis_scope -eq 'external-powershell-issues-only') 'Der Sonar-Analyseumfang ist nicht auf externe PowerShell-Befunde begrenzt.'
 $sonarToolchainTest = Join-Path $PSScriptRoot 'Test-SonarToolchain.ps1'
 Assert-True (Test-Path -LiteralPath $sonarToolchainTest) 'Sonar-Lieferkettenfunktionstest fehlt.'
 Assert-True (Test-Path -LiteralPath (Join-Path $PSScriptRoot 'Test-SonarExternalIssues.ps1')) 'Sonar-External-Issues-Funktionstest fehlt.'
+Assert-True (Test-Path -LiteralPath (Join-Path $PSScriptRoot 'Test-SonarCiLifecycle.ps1')) 'Sonar-CI-Lifecycle-Funktionstest fehlt.'
 Assert-True ($commands -match 'function ConvertTo-SonarNormalizedToken') 'Sonar-Token-Normalisierung fehlt.'
 Assert-True ($commands -match 'function Cmd-SonarAuth') 'Sekretfreier Sonar-Authentifizierungscommand fehlt.'
 Assert-True ($commands -match 'Register-CiCommand "sonar-auth"') 'Sonar-Authentifizierungscommand ist nicht registriert.'
@@ -55,5 +56,5 @@ Assert-True (Test-Path -LiteralPath $ci005Test) 'CI-005-Invariantentest fehlt.'
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'sonar_auth_contract', 'sonar_external_import_contract', 'sonar_toolchain_verified_contract', 'sonar_external_issues_test_contract', 'live_daily_run_limit_1000', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
+    cases = @('powershell_verify_lane', 'sonar_external_issues_lifecycle', 'sonar_auth_contract', 'sonar_external_import_contract', 'sonar_toolchain_verified_contract', 'sonar_external_issues_test_contract', 'sonar_lifecycle_test_contract', 'live_daily_run_limit_1000', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
 } | ConvertTo-Json -Depth 4
