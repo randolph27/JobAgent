@@ -181,7 +181,12 @@ foreach ($expected in @(
         'overflow-wrap: anywhere;',
         '@media (max-width: 800px)',
         '<h2>Neue passende Stellen</h2>',
-        '<h2 id="jobagent-search-heading">Firmen und Stellen</h2>',
+        '<h1 id="jobagent-search-heading">Stellenangebote</h1>',
+        '<h2>Datenstand und Quellen</h2>',
+        'class="jobboard-layout"',
+        'class="filter-region"',
+        'Original-Stellenanzeige',
+        'Persoenliche Funktionen erfordern JavaScript und sind in dieser statischen Ansicht nicht verfuegbar.',
         'id="jobagent-query"',
         'id="jobagent-pagination"',
         'Filter starten keinen Joblauf und aendern keine gespeicherten Daten.',
@@ -198,6 +203,8 @@ Assert-True -Condition (-not ($html -match '<link\b[^>]*\bhref=')) -Message 'HTM
 Assert-True -Condition (-not ($html -match '<img\b[^>]*\bsrc=')) -Message 'HTML-Report darf keine externen Bilder einbinden.'
 Assert-True -Condition ($html -match '<a href="https://alpha\.example\.invalid/jobs/head-it" target="_blank" rel="noopener noreferrer">Offizielle Stellen-URL</a>') -Message 'Offizielle Stellen-URLs muessen im HTML-Report erhalten bleiben.'
 Assert-True -Condition ($html -match '<a href="https://alpha\.example\.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>') -Message 'Karriere-URLs muessen im HTML-Report erhalten bleiben.'
+Assert-True -Condition ($html.IndexOf('<section id="jobagent-search"') -lt $html.IndexOf('<section id="jobagent-data-status"')) -Message 'Die Stellenangebote muessen vor dem technischen Datenstand stehen.'
+Assert-True -Condition ($html -match '<article class="result-card job-card" data-job-id="job:alpha_long"') -Message 'Die statische No-JS-Ansicht muss konkrete Stellenkarten enthalten.'
 
 [pscustomobject]@{
     status = 'ok'

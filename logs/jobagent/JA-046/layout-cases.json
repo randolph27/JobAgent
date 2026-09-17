@@ -1,0 +1,20 @@
+{
+  "schema_version": "jobagent-ja-046-layout-cases/v1",
+  "generated_at": "2026-09-17T20:16:53+02:00",
+  "fixture_generation": "scanrun:ja022-viewport-audit",
+  "data_mode": "synthetic_fixture",
+  "report_url": "http://127.0.0.1:8500/html/jobagent/ja-022-viewport-audit.html",
+  "http_status": 200,
+  "cases": [
+    { "viewport": { "width": 1920, "height": 2200 }, "screenshot": "doc/roadmap-screenshots/JA-046-jobs-1920.png", "sha256": "5595D524C23BBFEF26807C59EE6E8FC7782813D554D7351B04397ACA5347D1FD" },
+    { "viewport": { "width": 1366, "height": 2200 }, "screenshot": "doc/roadmap-screenshots/JA-046-jobs-1366.png", "sha256": "3CF0C89FBA41B0AB05721FD09935D2343F1710C1D08A7D4BAC172702749824FF" },
+    { "viewport": { "width": 800, "height": 2200 }, "screenshot": "doc/roadmap-screenshots/JA-046-jobs-800.png", "sha256": "CA167B26148E60B5F719A272E7EF6ACA34AAA225EADDC6C19AD86401E9861F69" },
+    { "viewport": { "width": 390, "height": 2200 }, "screenshot": "doc/roadmap-screenshots/JA-046-jobs-390.png", "sha256": "6D2A91A6955187A5B5CF19480A72031EA88EC4D9690E53AC2FA7062DA3C54410" }
+  ],
+  "assertions": [
+    "Stellenangebote steht vor Datenstand und Quellen.",
+    "No-JS-Karten enthalten konkrete Stellen und sichere Quellenlinks.",
+    "Der Filter wechselt unter 1024 CSS-Pixeln in eine einspaltige aufklappbare Region.",
+    "Die vorhandenen HTML- und Viewportfunktionstests endeten mit Exit 0."
+  ]
+}

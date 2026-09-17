@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Aktiver Backlog: 10 geplante Stellenboersen-Punkte ab JA-046 in zwei offenen Meilensteinen. JA-043, JA-044, JA-045 und JA-051 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-17. Aktiver Backlog: 9 geplante Stellenboersen-Punkte ab JA-047 in zwei offenen Meilensteinen. JA-043 bis JA-046 sowie JA-051 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
-- `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-046; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
+- `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-047; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
 - `docs/reviews/QA-007-acceptance.md`: Ursache, sicherheitsverträgliche Teständerung und sekretfreies Ergebnis des vollständigen Supertests.
 - `docs/reviews/QA-008-acceptance.md`: Inventardiffklasse, Generatorlauf und Matrix-/Runner-Vertrag.
@@ -11,7 +11,7 @@ Stand: 2026-09-17. Aktiver Backlog: 10 geplante Stellenboersen-Punkte ab JA-046 
 - `docs/reviews/2026-09-13-ja027-acquisition-baseline.json`: lokaler Datenbestand und Inputhashes, kein neuer Livebeleg.
 - `docs/reviews/2026-09-13-ja027-plan-validation.json`: aktueller Struktur-/Synchronisationsnachweis.
 - `docs/handoffs/2026-09-13-ja027-acquisition-plan.md`: Planungsabschluss und naechster Implementierungsanker.
-- `Roadmap_archive.md`: historische Abschlüsse einschließlich JA-043, JA-044, JA-045 und JA-051 (2026-09-17), SQ-001 (2026-09-16), QA-003, QA-002 und QA-001 sowie JA-042, UI-001, JA-041 und JA-027 (2026-09-15), JA-040/CI-001. Wiederverwendete IDs nur mit Titel/Datum interpretieren.
+- `Roadmap_archive.md`: historische Abschlüsse einschließlich JA-043 bis JA-046 und JA-051 (2026-09-17), SQ-001 (2026-09-16), QA-003, QA-002 und QA-001 sowie JA-042, UI-001, JA-041 und JA-027 (2026-09-15), JA-040/CI-001. Wiederverwendete IDs nur mit Titel/Datum interpretieren.
 - `docs/reviews/2026-09-05-webreview.md` und `docs/reviews/2026-09-05-baseline.json`: historische UI-Befunde; UI-001 behaelt alle gebundenen Screenshotpfade.
 - `docs/reviews/2026-09-05-roadmap-before.md`: aelterer vollstaendiger Plan.
 - `docs/ROADMAP.md`: mitgefuehrter Bootstrapplan, kein konkurrierender JobAgent-Backlog.
@@ -38,6 +38,7 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-17: JA-044 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/JA-044-acceptance.md`, Fixture `tests/fixtures/jobagent/ja-044-acquisition-replay.json` und `Test-JobAgentJa044AcquisitionReplay.ps1`. Die sechs Replayfaelle sowie die fuenf geforderten Fachtests und der Matrixvertrag endeten mit Exit 0; Vollsupertest gemaess Nutzerregel nicht ausgefuehrt und als erledigt bewertet.
 - 2026-09-17: JA-051 nach Roadmap_archive.md rotiert; Evidence: `docs/contracts/JA-051-time-projection.md`, `docs/reviews/JA-051-acceptance.md`, `tests/fixtures/jobagent/time-projection.json` und `logs/jobagent/JA-051/time-cases.json`. Die Zeit-/Status-/Schema-/Operations-/Matrixfunktionstests und der Abschluss-Supertest endeten mit Exit 0 (29/29 bestanden).
 - 2026-09-17: JA-045 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/JA-045-acceptance.md`, lokales v1-Speichermodul, Schema und Fixtures. Die fokussierten Speicher-/Report-/HTML-/Matrixfunktionstests und der Abschluss-Supertest endeten mit Exit 0 (30/30 bestanden).
+- 2026-09-17: JA-046 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/JA-046-acceptance.md`, `logs/jobagent/JA-046/layout-cases.json` und vier Viewport-Screenshots. Report-, HTML- und Viewportfunktionstest endeten mit Exit 0; Vollsupertest gemaess Nutzerregel nicht separat angefragt und als erledigt bewertet.
 
 
 ## Historischer Basisplanungsschnitt 2026-09-17 (Commit b8e7b04)
@@ -54,10 +55,10 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 ## Aktueller Ergaenzungsplan 2026-09-17
 
 - M1: JA-043 -> JA-044 -> JA-051 -> JA-045 (abgeschlossen); Daten/Zeiten und Verlustschutz vor neuen Ansichten.
-- M2: JA-046 -> JA-047 -> JA-048 -> JA-052 Bewerbungsorganisation -> JA-053 Chronik -> JA-055 Ausblendung; private Migration und Sichtbarkeit vor gespeicherten Suchen.
+- M2: JA-047 -> JA-048 -> JA-052 Bewerbungsorganisation -> JA-053 Chronik -> JA-055 Ausblendung; private Migration und Sichtbarkeit vor gespeicherten Suchen.
 - M3: JA-049 -> JA-054 Abruf-/Aufgabenkalender -> JA-056 Suchauftraege/Sichtungsstand -> JA-050 erweiterte Gesamtabnahme.
 - Gesamtschaetzung: 25,5–42 PT / Summe gerundeter Einzelkorridore 41–67 Arbeitstage bei 0,7 FTE; sechs neue Punkte davon 8,5–15 PT / 14–24 Arbeitstage. Keine Termin-/Kapazitaetszusage; Parallelisierung je Punkt beschrieben.
 - `docs/reviews/2026-09-17-jobboard-extensions-plan-validation.json`: aktueller Struktur-/Abhaengigkeits-/Workflow-/Funktionsnachweis samt Ausgangsstand; ersetzt keinen Implementierungstest.
 - `docs/handoffs/2026-09-17-jobboard-extensions-plan.md`: aktuelle Uebergabe, bekannte globale Pruefgrenzen und Stopgrenze nach Git-Abschluss.
-- 10 offene Punkte, genau 3 Beschreibungs-Unterpunkte je Punkt; naechster Implementierungsanker ist JA-046 (TD-0074).
+- 9 offene Punkte, genau 3 Beschreibungs-Unterpunkte je Punkt; naechster Implementierungsanker ist JA-047 (TD-0075).
 - Vorherige Planungsnachweise bleiben historische Snapshots unveraendert. Originalbildzugriffsluecke und bestehender Sicherungs-Stash werden nicht umgedeutet.

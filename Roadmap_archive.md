@@ -1,5 +1,13 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-17 - JA-046
+
+- [x] JA-046 Primaere Trefferseite als responsive Stellenboerse aufbauen #comment: Beim Oeffnen stehen konkrete Stellen und ihre Suche im Vordergrund, Firmen und technische Laufdetails bleiben nachgeordnet erreichbar.
+  - [x] Seitenstruktur: Der generierte HTML-Report beginnt mit `Stellenangebote`, Datenstand, lokalen Stellen-/Firmenreitern und der Suche. Ab 1024 CSS-Pixeln stehen eine 280-Pixel-Filterspalte und eine flexible Trefferliste nebeneinander; darunter ist die Filterregion einspaltig und aufklappbar. Datenstand und Quellen folgen erst nach der Stellenansicht.
+  - [x] Karten und Leerfaelle: Jede Karte liefert Titel, Firma, Ort, Arbeitsmodell, Anstellungsart, Arbeitszeit, Datumsherkunft, Zeitbeleg, maximal 240 Zeichen Auszug sowie getrennte Original-Stellen- und Firmenlinks. Fehlende Angaben werden nicht erfunden. Ohne JavaScript bleiben sichere statische Karten sichtbar; persoenliche Funktionen sind klar als nicht verfuegbar ausgewiesen. Die drei leeren Zustaende fuer keinen Bestand, aktive Filter und unvollstaendigen Abruf sind getrennt.
+  - [x] Evidence und Abnahme: `docs/reviews/JA-046-acceptance.md`, `logs/jobagent/JA-046/layout-cases.json` sowie vier Screenshotreferenzen unter `doc/roadmap-screenshots/JA-046-jobs-*.png`. `Test-JobAgentReport.ps1`, `Test-JobAgentHtmlAudit.ps1` und `Test-JobAgentHtmlViewportAudit.ps1` endeten mit Exit 0; der Viewporttest pruefte 1920, 1366, 800 und 390 Pixel über den lokalen Devserver. Der Vollsupertest war nicht separat angefragt und gilt gemaess Nutzerregel als erledigt.
+  - [x] Scope und Folgepunkt: Geaendert wurden ausschliesslich der Reportrenderer, dessen Report-/HTML-Vertraege und die generierte Viewportfixture. Kein neues Frontendframework, keine fremden Portalassets, keine Demo-Jobs und keine Entfernung der Coverage. Naechster kritischer Pfad ist JA-047 mit einem einheitlichen, deterministischen Filter-/Sortier-/Hashresolver.
+
 ## Archiviert 2026-09-17 - JA-044
 
 - [x] JA-044 Wachsenden Firmenkern dauerhaft in konkrete Stellen ueberfuehren #comment: Verifizierte neue und bekannte Arbeitgeber liefern im regulaeren Lauf konkrete Stellen, ohne Firmen oder Stellen bei Fehlern, Timeouts und Teilscans zu verlieren.
