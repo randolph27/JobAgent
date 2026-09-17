@@ -1,6 +1,6 @@
 # JA-051 Akzeptanz
 
-Stand: 2026-09-17T17:54:06+02:00
+Stand: 2026-09-17T19:10:38+02:00
 
 ## Ergebnis
 
@@ -12,9 +12,9 @@ Die Reportprojektion trennt Publikationszeit/-datum, erste und letzte konkrete J
 
 | Artefakt | SHA-256 |
 |---|---|
-| `tests/fixtures/jobagent/time-projection.json` | `F811250EF9779991068A40060439D909CFF60E875824AC2540A2AA74A7F6CD43` |
+| `tests/fixtures/jobagent/time-projection.json` | `7D241C5A5FA0E22922B72FE58F8CC940CC06F6265B75D2586815A2BD31745F30` |
 | `schemas/jobagent.schema.json` | `058EDD8D762EA10371F90F7475588A3974E5EEF43E51B735768C1CCE0DECC056` |
-| `src/JobAgent.Report.psm1` | `CB671CA0F6A4A7396BB68097361215EEED2586E6C8FAD1EEFC635AFAFCD04196` |
+| `src/JobAgent.Report.psm1` | `5384F9FB773AB0CEF755F3D67C7C364184404881B69938D5F0D94510A145D37F` |
 | `src/JobAgent.StatusMachine.psm1` | `E45A1A19AED02C74EDA5B3D1824E54F6B436655478FADD449594BB2A22587FC3` |
 
 | Funktionstest | Exit |
@@ -24,4 +24,6 @@ Die Reportprojektion trennt Publikationszeit/-datum, erste und letzte konkrete J
 | `pwsh -NoProfile -File ./tests/Test-JobAgentSchema.ps1` | 0 |
 | `pwsh -NoProfile -File ./tests/Test-JobAgentOperations.ps1` | 0 |
 
-Kein Supertest: Der Arbeitspunkt umfasst noch keinen sichtbaren Kalender; dessen UI-/Viewport-Abnahme liegt erst in JA-054. Die vier geforderten Zeit-/Status-/Reportfunktionstests sind gruen.
+Die Fixture prueft zusaetzlich 24 Stunden und sieben Tage jeweils unmittelbar davor, exakt auf der Grenze und unmittelbar danach; bei weniger als 24 Stunden zeigt die Altersansicht `Unter 1 Tag`.
+
+`./ci.cmd supertest` scheiterte zunaechst ausschliesslich an einem veralteten QA-001-Funktionsinventar. Nach kanonischer Regeneration durch `Test-JobAgentTestMatrix.ps1 -WriteInventory` und erfolgreichem Matrixfunktionstest endete der Abschlusslauf mit 29/29 bestanden, 0 fehlgeschlagen, 0 blockiert, 0 nicht ausgefuehrt und Exit 0 in 682,67 Sekunden.

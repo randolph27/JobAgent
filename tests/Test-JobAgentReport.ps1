@@ -280,6 +280,12 @@ foreach ($case in @($timeFixture.cases)) {
     if ($case.name -eq 'missing_offset') {
         Assert-True -Condition ($caseEntry.age_data_notice -match 'ohne Offset') -Message 'Zeitpunkt ohne Offset wird nicht als mehrdeutig ausgewiesen.'
     }
+    if ($case.name -eq 'invalid_timestamp') {
+        Assert-True -Condition ($caseEntry.age_data_notice -match 'Ungueltiger Zeitpunkt') -Message 'Ungueltiger Zeitpunkt wird nicht als unbekannt ausgewiesen.'
+    }
+    if ($case.name -eq 'timestamp_under_24_hours') {
+        Assert-True -Condition ($caseEntry.age_display -eq 'Unter 1 Tag') -Message 'Zeitpunkt unter 24 Stunden wird nicht lesbar als Unter 1 Tag angezeigt.'
+    }
 }
 $dstBefore = $timeFixture.cases | Where-Object name -eq 'timestamp_before_dst_fallback' | Select-Object -First 1
 $dstAfter = $timeFixture.cases | Where-Object name -eq 'timestamp_after_dst_fallback' | Select-Object -First 1

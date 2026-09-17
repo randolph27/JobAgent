@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Aktiver Backlog: 12 geplante Stellenboersen-Punkte ab JA-051 in drei Meilensteinen. JA-043 und JA-044 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-17. Aktiver Backlog: 11 geplante Stellenboersen-Punkte ab JA-045 in drei Meilensteinen. JA-043, JA-044 und JA-051 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
-- `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-051; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
+- `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-045; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
 - `docs/reviews/QA-007-acceptance.md`: Ursache, sicherheitsverträgliche Teständerung und sekretfreies Ergebnis des vollständigen Supertests.
 - `docs/reviews/QA-008-acceptance.md`: Inventardiffklasse, Generatorlauf und Matrix-/Runner-Vertrag.
@@ -36,6 +36,7 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-17: SQ-006 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-006-analysis-supply-chain.md, docs/reviews/SQ-006-toolchain.json, fail-closed `Test-SonarToolchain.ps1` und Supertest 29/29. Die Toolchain bleibt ohne separat autorisierte Beschaffung `not-installed`.
 - 2026-09-17: SQ-009 und SQ-008 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/SQ-009-compute-engine-read-acceptance.md`, `docs/reviews/SQ-008-ci-lifecycle-acceptance.md`, `logs/verify/sq-009-20260917-152135.json`, Task `AaCvh97JOhdKqVTDjfxk`, Analyse `AaCvh-LnotDYp2WltY0K`, HTTP `200`, Status `SUCCESS` und 323 External Issues. Keine native PowerShell-Analyse oder Quality-Gate-Aussage.
 - 2026-09-17: JA-044 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/JA-044-acceptance.md`, Fixture `tests/fixtures/jobagent/ja-044-acquisition-replay.json` und `Test-JobAgentJa044AcquisitionReplay.ps1`. Die sechs Replayfaelle sowie die fuenf geforderten Fachtests und der Matrixvertrag endeten mit Exit 0; Vollsupertest gemaess Nutzerregel nicht ausgefuehrt und als erledigt bewertet.
+- 2026-09-17: JA-051 nach Roadmap_archive.md rotiert; Evidence: `docs/contracts/JA-051-time-projection.md`, `docs/reviews/JA-051-acceptance.md`, `tests/fixtures/jobagent/time-projection.json` und `logs/jobagent/JA-051/time-cases.json`. Die Zeit-/Status-/Schema-/Operations-/Matrixfunktionstests und der Abschluss-Supertest endeten mit Exit 0 (29/29 bestanden).
 
 
 ## Historischer Basisplanungsschnitt 2026-09-17 (Commit b8e7b04)
@@ -51,11 +52,11 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 
 ## Aktueller Ergaenzungsplan 2026-09-17
 
-- M1: JA-043 -> JA-044 (abgeschlossen) -> JA-051 Zeitprojektion -> JA-045; Daten/Zeiten vor neuen Ansichten.
+- M1: JA-043 -> JA-044 -> JA-051 (abgeschlossen) -> JA-045; Daten/Zeiten vor neuen Ansichten.
 - M2: JA-046 -> JA-047 -> JA-048 -> JA-052 Bewerbungsorganisation -> JA-053 Chronik -> JA-055 Ausblendung; private Migration und Sichtbarkeit vor gespeicherten Suchen.
 - M3: JA-049 -> JA-054 Abruf-/Aufgabenkalender -> JA-056 Suchauftraege/Sichtungsstand -> JA-050 erweiterte Gesamtabnahme.
 - Gesamtschaetzung: 25,5–42 PT / Summe gerundeter Einzelkorridore 41–67 Arbeitstage bei 0,7 FTE; sechs neue Punkte davon 8,5–15 PT / 14–24 Arbeitstage. Keine Termin-/Kapazitaetszusage; Parallelisierung je Punkt beschrieben.
 - `docs/reviews/2026-09-17-jobboard-extensions-plan-validation.json`: aktueller Struktur-/Abhaengigkeits-/Workflow-/Funktionsnachweis samt Ausgangsstand; ersetzt keinen Implementierungstest.
 - `docs/handoffs/2026-09-17-jobboard-extensions-plan.md`: aktuelle Uebergabe, bekannte globale Pruefgrenzen und Stopgrenze nach Git-Abschluss.
-- 12 offene Punkte, genau 3 Beschreibungs-Unterpunkte je Punkt; die aktiven Todo-IDs beginnen mit TD-0079 fuer JA-051. Naechster Implementierungsanker ist JA-051.
+- 11 offene Punkte, genau 3 Beschreibungs-Unterpunkte je Punkt; naechster Implementierungsanker ist JA-045 (TD-0073).
 - Vorherige Planungsnachweise bleiben historische Snapshots unveraendert. Originalbildzugriffsluecke und bestehender Sicherungs-Stash werden nicht umgedeutet.

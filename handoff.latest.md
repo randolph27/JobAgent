@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-17T18:35:48.326+02:00
+Stand: 2026-09-17T19:22:26.307+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-17T18:35:48.326+02:00
 - Status: `open`
 - Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `12ad82a23192`
+- HEAD: `bae39c5cacb4`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,20 +16,23 @@ Stand: 2026-09-17T18:35:48.326+02:00
 
 ## Versionierte Aenderungen
 
+- `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `docs/contracts/JA-051-time-projection.md`
+- `docs/reviews/JA-051-acceptance.md`
 - `docs/reviews/QA-001-function-inventory.json`
-- `html/jobagent/ja-022-viewport-audit.html`
-- `output/playwright/ja-022-fixture-viewport-1366.png`
-- `output/playwright/ja-022-fixture-viewport-1920.png`
-- `output/playwright/ja-022-fixture-viewport-390.png`
-- `output/playwright/ja-022-fixture-viewport-800.png`
-- `schemas/jobagent.schema.json`
+- `handoff.latest.json`
+- `handoff.latest.md`
 - `src/JobAgent.Report.psm1`
-- `src/JobAgent.StatusMachine.psm1`
-- `tests/Test-JobAgentDailyRun.ps1`
 - `tests/Test-JobAgentReport.ps1`
-- `tests/Test-JobAgentStatusMachine.ps1`
+- `tests/fixtures/jobagent/time-projection.json`
+- `todo.checkpoint.json`
+- `todo.current.md`
+- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
+- `todo.state.json`
 
 ## Verifikation
 
@@ -37,4 +40,4 @@ Stand: 2026-09-17T18:35:48.326+02:00
 
 ## Naechster Anker
 
-M1 – Datenbasis und persoenliche Markierungen: JA-051 Stellenalter, Abrufalter und naechste Pruefung aus belegten Zeitdaten ableiten #comment: Eine heute abgerufene Anzeige darf weder als heute veroeffentlicht noch eine fehlgeschlagene Quelle als aktuell bestaetigt erscheinen.
+M1 – Datenbasis und persoenliche Markierungen: JA-045 Favoriten und Bewerbungsstatus verlustarm je Stelle speichern #comment: Zwei unabhaengige persoenliche Markierungen muessen Berichtswechsel und Scans ueberleben, ohne den offiziellen Stellenstatus zu veraendern.

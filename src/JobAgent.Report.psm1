@@ -540,10 +540,18 @@ function Get-JobAgentReportAgeInfo {
         default { [pscustomobject]@{ value = 'UNKNOWN'; display = 'Unbekannt'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = 'Historie nicht vorhanden' } }
     }
 
+    # Die Zeitangabe selbst bleibt in der Projektion vollstaendig. Fuer die
+    # Altersanzeige ist ein Zeitstempel innerhalb der ersten 24 Stunden jedoch
+    # absichtlich nicht als "0 Tage" zu lesen.
+    $ageDisplay = [string]$info.display
+    if (($info.precision -eq 'SECOND') -and ($info.age_days -eq '0') -and ($info.data_notice -eq 'NONE')) {
+        $ageDisplay = 'Unter 1 Tag'
+    }
+
     [pscustomobject]@{
         age_basis = $basis
         age_days = [string]$info.age_days
-        age_display = [string]$info.display
+        age_display = $ageDisplay
         age_precision = [string]$info.precision
         age_data_notice = [string]$info.data_notice
     }
