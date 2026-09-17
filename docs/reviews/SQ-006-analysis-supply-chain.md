@@ -6,7 +6,7 @@ Stand: 2026-09-17
 
 Der Analyseumfang lautet verbindlich `external-powershell-issues-only`. SonarQube Server 9.9 analysiert PowerShell nicht nativ. Deshalb wird kein Community-Plugin installiert. Ein zukuenftiger Lauf darf ausschliesslich einen projektlokal ausgefuehrten PSScriptAnalyzer-Bericht als SonarQube Generic External Issues importieren. Er erzeugt damit weder native PowerShell-Regeln noch Coverage, Duplikatmetriken, Quality-Profile-Regeln oder eine Quality-Gate-Aussage.
 
-Der Server meldet lokal Version `9.9.8.100196`. Die verwendbare Scanner-Linie ist SonarScanner CLI `4.8.x` mit einer Java-11-Laufzeit. Die aktuell im PATH gefundene Java-Laufzeit `26` ist nicht Teil dieser Lieferkette und darf nicht fuer den Scan verwendet werden. Die drei Artefakte sind noch nicht installiert; der Zustand `not-installed` ist absichtlich nicht scanfaehig.
+Der Server meldet lokal Version `9.9.8.100196`. Die verwendbare Scanner-Linie ist SonarScanner CLI `4.8.x` mit einer Java-11-Laufzeit. Die aktuell im PATH gefundene Java-Laufzeit `26` ist nicht Teil dieser Lieferkette und darf nicht fuer den Scan verwendet werden. Die drei Artefakte liegen verifiziert unter `.ci/tools/sonar`; der CI-Command bleibt bis SQ-008 dennoch bewusst nicht scanfaehig.
 
 ## Belegter Vertrag
 
@@ -21,15 +21,15 @@ Die kanonische, ignorierte Wurzel ist `.ci/tools/sonar`. Sie darf nur die in `.c
 
 | Artefakt | Version | Erwarteter relativer Einstieg | Zustand |
 | --- | --- | --- | --- |
-| SonarScanner CLI | 4.8.1.3023 | `sonar-scanner-4.8.1.3023-windows/bin/sonar-scanner.bat` | nicht installiert |
-| Java-Laufzeit | 11 | `jre/bin/java.exe` | nicht installiert |
-| PSScriptAnalyzer | 1.25.0 | `PSScriptAnalyzer/1.25.0/PSScriptAnalyzer.psd1` | nicht installiert |
+| SonarScanner CLI | 4.8.1.3023 | `sonar-scanner-4.8.1.3023-windows/bin/sonar-scanner.bat` | verifiziert |
+| Java-Laufzeit | 11.0.32.1+1 | `jre/bin/java.exe` | verifiziert |
+| PSScriptAnalyzer | 1.25.0 | `PSScriptAnalyzer/1.25.0/PSScriptAnalyzer.psd1` | verifiziert |
 
-Vor der ersten Nutzung werden die Originaldateien in dieser Wurzel gespeichert, jede Datei gegen einen bei der Beschaffung erfassten SHA-256 abgeglichen und die drei Hashes in der Konfiguration eingetragen. Ein fehlendes Artefakt, eine Pfadtraversierung, ein anderer Einstiegspfad oder ein abweichender Hash muss fail-closed enden. Die Beschaffung selbst, eine Modulinstallation und eine SonarQube-Projektanlage sind nicht Teil von SQ-006 und benoetigen jeweils eine separate Ausfuehrungsfreigabe.
+Die Originalpakete liegen unter `packages/`; jedes Paket und jeder Einstiegspunkt wird gegen einen erfassten SHA-256 abgeglichen. Ein fehlendes Artefakt, eine Pfadtraversierung, ein anderer Einstiegspfad oder ein abweichender Hash endet fail-closed. Die Projektanlage und jeder Upload sind nicht Teil von SQ-006 und benötigen eine getrennte Ausführungsfreigabe.
 
 ## Grenzen fuer SQ-007 und SQ-008
 
 - Scanner-Argumente, Berichte, Evidence und Handoff enthalten keinen Token, Authorization-Header oder dessen Laenge.
 - Zulässig sind nur projektrelative Quellpfade; `data/`, `logs/`, `.git/`, Caches und Testausgaben sind ausgeschlossen.
 - Ein externer Befundimport ist keine native Sprachunterstuetzung. Ein technischer Quality-Gate-Status darf nicht als Gesamtfreigabe oder PowerShell-Qualitaetsurteil ausgegeben werden.
-- Bis zur verifizierten Beschaffung bleibt `./ci.cmd sonar` korrekt bei `not-supported` und startet keine Analyse.
+- Bis zum abgeschlossenen SQ-008-Lifecycle bleibt `./ci.cmd sonar` korrekt bei `not-supported` und startet keine Analyse.

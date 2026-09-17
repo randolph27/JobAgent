@@ -54,8 +54,8 @@ $config = Get-Content -LiteralPath $configPath -Raw | ConvertFrom-Json
 $review = Get-Content -LiteralPath $reviewPath -Raw | ConvertFrom-Json
 $sonar = Get-PropertyValue $config 'sonar'
 $toolchain = Get-PropertyValue $sonar 'toolchain'
-Assert-True (([string](Get-PropertyValue $sonar 'mode')) -eq 'not-supported') 'SQ-006 darf den Scanstatus noch nicht aktivieren.'
-Assert-True (([string](Get-PropertyValue $toolchain 'status')) -eq 'not-installed') 'Ohne verifizierte Artefakte muss die Toolchain not-installed bleiben.'
+Assert-True (([string](Get-PropertyValue $sonar 'mode')) -eq 'not-supported') 'SQ-007 darf den Scanstatus noch nicht aktivieren.'
+Assert-True (([string](Get-PropertyValue $toolchain 'status')) -eq 'verified') 'Beschaffte Artefakte muessen als verifiziert markiert sein.'
 Assert-True (([string](Get-PropertyValue $toolchain 'analysis_scope')) -eq 'external-powershell-issues-only') 'Der Analyseumfang ist nicht ehrlich begrenzt.'
 
 $artifactRoot = Resolve-ContainedPath -Root $root -RelativePath ([string](Get-PropertyValue $toolchain 'artifact_root' ''))
@@ -63,13 +63,14 @@ $artifacts = @((Get-PropertyValue $toolchain 'artifacts' @()))
 Assert-True ($artifacts.Count -eq 3) 'Die SQ-006-Lieferkette muss genau drei Artefakte enthalten.'
 Assert-True (@($artifacts.id | Sort-Object) -join ',' -eq 'java-runtime,PSScriptAnalyzer,sonar-scanner-cli') 'Die erwarteten SQ-006-Artefakte fehlen oder sind fremd.'
 foreach ($artifact in $artifacts) {
-    $null = Test-PinnedArtifact -Root $artifactRoot -Artifact $artifact
-    Assert-True ($null -eq (Get-PropertyValue $artifact 'sha256' $null)) 'Nicht installierte Artefakte duerfen keinen unbelegten Hashpin enthalten.'
+    $package = [pscustomobject]@{ source=(Get-PropertyValue $artifact 'source'); version=(Get-PropertyValue $artifact 'version'); relative_path=(Get-PropertyValue $artifact 'package_relative_path'); sha256=(Get-PropertyValue $artifact 'package_sha256') }
+    $null = Test-PinnedArtifact -Root $artifactRoot -Artifact $package -RequireFile
+    $null = Test-PinnedArtifact -Root $artifactRoot -Artifact $artifact -RequireFile
 }
 
-Assert-True (([string](Get-PropertyValue $review 'status')) -eq 'not-installed') 'Review-Inventur meldet einen unbelegten Installationsstatus.'
+Assert-True (([string](Get-PropertyValue $review 'status')) -eq 'verified') 'Review-Inventur meldet keinen verifizierten Installationsstatus.'
 Assert-True (([string](Get-PropertyValue (Get-PropertyValue $review 'server') 'analysis_scope')) -eq 'external-powershell-issues-only') 'Review-Inventur verliert den Analyseumfang.'
-Assert-True (([string](Get-PropertyValue (Get-PropertyValue $review 'local_inventory') 'decision')) -eq 'not-approved-for-analysis') 'Lokale Inventur darf keine Scanfreigabe behaupten.'
+Assert-True (([string](Get-PropertyValue (Get-PropertyValue $review 'local_inventory') 'decision')) -eq 'approved-for-fixture-implementation-only') 'Lokale Inventur darf keine Server-Scanfreigabe behaupten.'
 
 $selfArtifact = [pscustomobject]@{
     source = 'https://example.invalid/sq-006-fixture'
@@ -102,7 +103,7 @@ Assert-True $hashRejected 'Hashabweichung wurde nicht fail-closed abgewiesen.'
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('not_installed_contract', 'artifact_root_containment', 'missing_artifact_rejected', 'foreign_artifact_rejected', 'hash_mismatch_rejected', 'no_global_toolchain_assumption')
+    cases = @('verified_toolchain_contract', 'artifact_root_containment', 'package_and_entrypoint_hashes', 'missing_artifact_rejected', 'foreign_artifact_rejected', 'hash_mismatch_rejected', 'no_global_toolchain_assumption')
     analysis_scope = 'external-powershell-issues-only'
     secret_sanitized = $true
 } | ConvertTo-Json -Depth 4

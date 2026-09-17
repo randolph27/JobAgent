@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "not-installed",
+  "status": "verified",
   "server": {
     "version": "9.9.8.100196",
     "analysis_scope": "external-powershell-issues-only"
@@ -11,24 +11,30 @@
       "id": "sonar-scanner-cli",
       "version": "4.8.1.3023",
       "source": "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.1.3023-windows.zip",
+      "package_relative_path": "packages/sonar-scanner-cli-4.8.1.3023-windows.zip",
+      "package_sha256": "86CF35133384E2D28B233C2A57114E04F96620A25E158FC052559ACC3D49AEC5",
       "relative_path": "sonar-scanner-4.8.1.3023-windows/bin/sonar-scanner.bat",
-      "sha256": null,
+      "sha256": "3382FB15AB206E9FF3D65D149B798FFC3C12C0D48812A3E2CDF2EEE33F7EC91E",
       "license": "LGPL-3.0-or-later"
     },
     {
       "id": "java-runtime",
-      "version": "11",
-      "source": "https://adoptium.net/temurin/releases/?version=11",
+      "version": "11.0.32.1+1",
+      "source": "https://api.adoptium.net/v3/binary/latest/11/ga/windows/x64/jre/hotspot/normal/eclipse",
+      "package_relative_path": "packages/temurin-jre-11.0.32.1+1-windows-x64.zip",
+      "package_sha256": "F8C7DA672F5DBA36B6F870608820B6B598CFAE91296929F1B8F21EF2F1E8A0DD",
       "relative_path": "jre/bin/java.exe",
-      "sha256": null,
+      "sha256": "9FCC7D5D43918E389DF240D44601C98A4D3AA9E7D0CBBD6D208304E0B574C7E2",
       "license": "GPL-2.0-with-classpath-exception"
     },
     {
       "id": "PSScriptAnalyzer",
       "version": "1.25.0",
       "source": "https://www.powershellgallery.com/packages/PSScriptAnalyzer/1.25.0",
+      "package_relative_path": "packages/PSScriptAnalyzer.1.25.0.nupkg",
+      "package_sha256": "14E634C828EB98EFB9F40B2918BA90F139ED5ECCDF663A2A747736D996995D60",
       "relative_path": "PSScriptAnalyzer/1.25.0/PSScriptAnalyzer.psd1",
-      "sha256": null,
+      "sha256": "2B219F688BCDD67101040F845E530B22907D39BBF49089B4B5B2AFABA7996791",
       "license": "MIT"
     }
   ],
@@ -36,7 +42,7 @@
     "java_path_runtime": "26",
     "scanner_cli": "not-found",
     "psscriptanalyzer": "not-found",
-    "decision": "not-approved-for-analysis"
+    "decision": "approved-for-fixture-implementation-only"
   },
   "secret_sanitized": true
 }

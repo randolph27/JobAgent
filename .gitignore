@@ -6,6 +6,7 @@ state/
 .ci/inbox/
 .ci/run/
 .ci/cache/
+.ci/tools/sonar/
 node_modules/
 .playwright-cli/
 runtime/playwright-localappdata/
