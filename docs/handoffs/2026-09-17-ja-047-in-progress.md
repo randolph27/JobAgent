@@ -1,55 +1,68 @@
-# Uebergabe: JA-047 in Arbeit
+# Übergabe: JA-047 in Arbeit
 
-Stand: 2026-09-17 21:08 CEST
+Stand: 2026-09-17, 22:15 CEST
 
-## Aktueller Zustand
+## Status
 
-`TD-0075` / `JA-047` bleibt offen. Keine Roadmap-Rotation und kein Supertest: Die Browser-Abnahme ist noch nicht gruen. Der fokussierte Reporttest ist nach dem letzten Quellstand gruen.
+`TD-0075` / `JA-047` bleibt offen. Es wurden keine Roadmap-Punkte rotiert. Der Abschluss-Supertest gilt auftragsgemäß als erledigt und wurde nicht ausgeführt; die beiden erforderlichen Funktionstests sind jedoch noch nicht beide grün.
 
-```text
-pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1
-Exit 0
-```
-
-Der letzte Browserlauf brach vor Abschluss ab:
+`pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` war vor dieser Übergabe grün. Der reine Fixture-Teil des Browseraudits war ebenfalls grün:
 
 ```text
-pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1
-Fehler: Playwright-Snapshot enthaelt kein steuerbares Element
-"Filter zuruecksetzen".
+pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -FixtureOnly
+status: ok
+companies: 251
+jobs: 264
+boundary_counts: 0, 1, 49, 50, 51, 250, 251
 ```
 
-Der Ausloeser war die grosse Arbeitgeberauswahl mit 250 Optionen: Der Playwright-Snapshot wird nach der Keyboard-Interaktion abgeschnitten. Die letzte Quellaenderung verzögert die Arbeitgeberoptionen deshalb bis zu `pointerdown` oder Auswahl-Tasten (`ArrowDown`, `ArrowUp`, `Enter`, Leertaste). Der grüne Browsernachweis dafür fehlt noch.
+## Implementierter Produktumfang
 
-## Implementierter Umfang
+`src/JobAgent.Report.psm1` enthält bereits die JA-047-Funktionalität:
 
-`src/JobAgent.Report.psm1` erweitert den lokalen Jobboard-Resolver um:
+- Volltextsuche über Titel, Firma, Berufsgruppe, Beschreibung und Anforderungen.
+- Mehrfachfilter für Arbeitgeber (`company_id`), Berufsgruppe, Gebiet, Arbeitsmodell, Anstellungsart, Arbeitszeit und Alter; ODER innerhalb, UND zwischen Facetten.
+- Favoriten-/Bewerbungsfilter ausschließlich über browserlokalen `JobAgentUserState`.
+- Kanonischer URL-Hash, deterministische Sortierungen und Pagination mit 50 Karten.
+- Facettenzähler aus der unpaginierten reduzierten Ergebnismenge.
+- Lazy Loading der 251 Arbeitgeberoptionen beim ersten Pointer-/Tastaturzugriff, um Snapshot-Trunkierung zu begrenzen.
 
-- Volltext über Titel, Firma, Berufsgruppe, Beschreibung und Anforderungen;
-- Mehrfachfilter Arbeitgeber über stabile `company_id` und Berufsgruppe über Kategoriecode;
-- ODER innerhalb, UND zwischen Facetten;
-- Favoriten- und Bewerbungsfilter ausschließlich aus `JobAgentUserState`/`localStorage`;
-- Sortierung `published_desc`, `title_asc`, `company_asc`, `confirmed_desc` mit `job_id` als Gleichstand;
-- kanonische Hashwerte, einschließlich Entfernung ungültiger Werte;
-- seitengrenzenunabhängige Facettenzahlen und entfernbare Filterchips;
-- unveränderte lokale Filter-/kein-Netzwerk-Semantik.
+## Noch offener Browseraudit
 
-`tests/Test-JobAgentReport.ps1` prüft die neuen HTML-Controls. `tests/Test-JobAgentUiBrowserAudit.ps1` enthält die zusätzlichen Fixturefälle für Arbeitgeber/Kategorie, Anforderungen, Beschreibung, Favoriten, Bewerbungsfilter, Sortierung und Hash-Normalisierung.
+Der vollständige Lauf von `Test-JobAgentUiBrowserAudit.ps1` scheitert reproduzierbar im ersten Gebiet-Fall. Der Hash wird korrekt gesetzt, aber die sichtbare Karte bleibt die unfiltrierte erste Seite:
+
+```text
+Facet Gebiet=MUNICH: erwarteter Karteninhalt fehlt: Grenze Sieben Tage.
+Sichtbare IDs: job:company_001 ... job:company_050
+```
+
+Der letzte Lauf war `logs/jobagent/JA-047/ui-browser-audit-20260917-2213.err.log`. Ein früherer Browserlauf hing nach der Ausführung ohne aktive Playwright-/Chrome-Kindprozesse; der zugehörige PowerShell-Prozess wurde beendet. Die isolierten QA-004-Artefakte sind Laufdaten und nicht zu committen.
+
+## Bereits eingecheckte Testanpassung
+
+`tests/Test-JobAgentUiBrowserAudit.ps1` wurde gegen die gekürzten Playwright-Snapshots vorbereitet:
+
+- `Invoke-JobAgentFilterReset` fokussiert den Reset per DOM und löst ihn per Leertaste aus.
+- `Set-JobAgentSelectValues` prüft Fokus und Vorhandensein der Optionswerte ohne große Optionslisten aus Snapshots zu lesen.
+- Hashnavigation wartet auf die asynchrone Renderphase.
+- Die Facettenfälle lesen Ergebnis-IDs/-texte per DOM statt über den abgeschnittenen Snapshot.
+
+Diese Änderung ist absichtlich noch kein JA-047-Abschlussnachweis. Der Folgeagent soll zuerst den Zustand unmittelbar nach `Set-JobAgentLocationHash(... area=MUNICH ...)` ermitteln: URL-Hash, `read()`-Zustand, `jobagent-area.selectedOptions` und gerenderte `data-job-id`s in derselben Playwright-Sitzung. Anschließend entweder die Synchronisationsursache im Reportskript beheben oder die Auditsequenz so ändern, dass kein konkurrierender Reset-/Hash-Handler den Render überschreibt. Tests nicht abschwächen.
 
 ## Nächste Schritte
 
-1. Browseraudit erneut ausführen:
+1. Den spezifischen Gebiet-/Hash-Fall mit einer minimalen Browserfixture isolieren; kein Supertest.
+2. Nach Korrektur ausführen:
 
 ```powershell
+pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1
 pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1
 ```
 
-2. Bei erneutem Fehler zuerst den einzelnen betroffenen Snapshot-/Hashfall korrigieren. Nicht den Test abschwächen und keine Quellen- oder Netzwerklogik hinzufügen.
-3. Wenn Report- und Browseraudit grün sind, JA-047-Acceptance/Evidence erstellen, Roadmap und Todo abschließen/rotieren und den Supertest als erledigt dokumentieren; ein tatsächlicher Supertest ist gemäß Nutzerregel nicht erforderlich.
+3. Erst bei beiden grünen Tests `docs/reviews/JA-047-acceptance.md` und `logs/jobagent/JA-047/filter-matrix.json` erzeugen, JA-047 nach `Roadmap_archive.md` rotieren sowie Todo/Checkpoint/Handoff synchronisieren.
+4. Anschließend mit JA-048 fortsetzen.
 
-## Umgebung und Risiken
+## Unveränderte Risiken
 
-- Der Devserver auf Port 8500 war erreichbar; Start/Status ausschließlich über `./ci.cmd devserver-*`.
-- `./ci.cmd stp` lief am 2026-09-17 21:08 CEST und synchronisierte die Todo-Artefakte.
-- Route bleibt wegen unveränderter, gebündelter Sonar-JRE-Lizenzdateien `False`; diese Dateien nicht bereinigen oder ändern.
-- Der Worktree soll nach dem Commit dieses Übergabestands sauber sein. Es gibt keine uncommitteten Testartefakte außerhalb der ignorierten Logs.
+- `TD-0085` bleibt offen: Route ist wegen gebündelter Sonar-JRE-Lizenzdateien `False`; diese Dateien nicht löschen oder verändern.
+- Kein Livecrawl, keine externe Filteranfrage und keine personenbezogenen Markierungen im URL-Hash.
