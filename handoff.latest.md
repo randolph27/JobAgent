@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-17T14:21:02.188+02:00
+Stand: 2026-09-17T14:22:05.305+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-17T14:21:02.188+02:00
 - Status: `blocked`
 - Ziel: SQ-007 PowerShell-Befunde als SonarQube-External-Issues deterministisch erzeugen und importieren #comment: Der PowerShell-Bestand wird über einen projektlokalen Scannerlauf als klar gekennzeichneter externer Befundbericht sichtbar, ohne native Sprachunterstützung vorzutäuschen.
 - Branch: `master`
-- HEAD: `33d3efd5cff2`
+- HEAD: `9458749fe950`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,23 +16,8 @@ Stand: 2026-09-17T14:21:02.188+02:00
 
 ## Versionierte Aenderungen
 
-- `.ci/ci.config.json`
-- `.ci/pins/immutable.hashes.json`
-- `.ci/pins/immutable.snapshot/.ci/ci.config.json`
-- `.ci/pins/immutable.snapshot/Roadmap.md`
-- `.gitignore`
-- `Roadmap.md`
-- `docs/reviews/SQ-006-analysis-supply-chain.md`
-- `docs/reviews/SQ-006-toolchain.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `tests/Test-JobAgentCiContracts.ps1`
-- `tests/Test-SonarToolchain.ps1`
-- `todo.checkpoint.json`
-- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
 
 ## Verifikation
 
