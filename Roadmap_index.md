@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Kein aktiver Backlog. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-17. Aktiver Backlog: acht geplante Stellenboersen-Punkte JA-043 bis JA-050 in drei Meilensteinen; keine Implementierung in diesem Auftrag. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
-- `Roadmap.md`: enthält keine aktiven Punkte.
+- `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte JA-043 bis JA-050; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
 - `docs/reviews/QA-007-acceptance.md`: Ursache, sicherheitsverträgliche Teständerung und sekretfreies Ergebnis des vollständigen Supertests.
 - `docs/reviews/QA-008-acceptance.md`: Inventardiffklasse, Generatorlauf und Matrix-/Runner-Vertrag.
@@ -36,3 +36,13 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-17: SQ-006 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-006-analysis-supply-chain.md, docs/reviews/SQ-006-toolchain.json, fail-closed `Test-SonarToolchain.ps1` und Supertest 29/29. Die Toolchain bleibt ohne separat autorisierte Beschaffung `not-installed`.
 - 2026-09-17: SQ-009 und SQ-008 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/SQ-009-compute-engine-read-acceptance.md`, `docs/reviews/SQ-008-ci-lifecycle-acceptance.md`, `logs/verify/sq-009-20260917-152135.json`, Task `AaCvh97JOhdKqVTDjfxk`, Analyse `AaCvh-LnotDYp2WltY0K`, HTTP `200`, Status `SUCCESS` und 323 External Issues. Keine native PowerShell-Analyse oder Quality-Gate-Aussage.
 
+
+## Stellenboersen-Planung 2026-09-17
+
+- M1: JA-043 Daten/Verfuegbarkeit -> JA-044 Firmen-/Stellenerfassung und JA-045 persoenlicher Speicher (nach JA-043 teilweise parallel).
+- M2: JA-046 Trefferseite -> JA-047 Filter/Sortierung -> JA-048 Details/Favoriten-/Bewerbungssterne.
+- M3: JA-049 stabiler Einstieg/Publikation -> JA-050 Gesamtworkflow/Abnahme.
+- `doc/roadmap-screenshots/JA-043-reference-manifest.md`: Bildanforderung, vorhandene historische Referenz und offen ausgewiesener fehlender Originaldateizugriff.
+- `docs/reviews/2026-09-17-jobboard-plan-baseline.json`: Ausgangs-HEAD und hashgesicherte vorbestehende Aenderungen; kein Livebefund.
+- `docs/reviews/2026-09-17-jobboard-plan-validation.json`: Struktur-/Synchronisations-/Funktionspruefung der Planung, keine Produktabnahme der neuen Stellenboerse.
+- `docs/handoffs/2026-09-17-jobboard-plan.md`: Abschluss-/Fortsetzungsgrenze; alle acht Produktpunkte bleiben offen, naechster Implementierungsanker JA-043.

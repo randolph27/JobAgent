@@ -1,0 +1,28 @@
+{
+  "captured_at": "2026-09-17T16:13:17.6595678+02:00",
+  "head": "7666978ae8b0005f67169543b5684734148d46b9",
+  "scope": "roadmap-only",
+  "preexisting_changes": [
+    {
+      "backup": "D:\\_Scripte\\JobAgent\\backups\\roadmap-jobboard-20260917\\data\\jobagent\\company-candidate-verification.queue.json",
+      "sha256": "E78980B53D8402907384D856C528C56B8361E9507A892D604908F7D0628578EF",
+      "path": "data/jobagent/company-candidate-verification.queue.json"
+    },
+    {
+      "backup": "D:\\_Scripte\\JobAgent\\backups\\roadmap-jobboard-20260917\\html\\jobagent\\company-coverage.html",
+      "sha256": "457F8485F8EF38ACE2DB85B1ED7867AFED75380518B30A1F508E949605AA2CA7",
+      "path": "html/jobagent/company-coverage.html"
+    }
+  ],
+  "screenshot_manifest": "doc/roadmap-screenshots/JA-043-reference-manifest.md",
+  "source_paths": [
+    "README.md",
+    "Roadmap.md",
+    "Roadmap_archive.md",
+    "Roadmap_index.md",
+    "src/JobAgent.Report.psm1",
+    "src/JobAgent.Persistence.psm1",
+    "src/JobAgent.DailyRun.psm1"
+  ],
+  "supertest": "not-run: planning only"
+}

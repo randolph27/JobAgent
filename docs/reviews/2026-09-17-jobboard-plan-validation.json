@@ -1,0 +1,251 @@
+{
+  "checked_at": "2026-09-17T16:33:22.7984233+02:00",
+  "scope": "planning-only",
+  "status": "planning-passed-with-unrelated-global-gate-failures",
+  "roadmap_items": [
+    {
+      "priority_score": 100,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-043",
+      "status": "open"
+    },
+    {
+      "priority_score": 96,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-044",
+      "status": "open"
+    },
+    {
+      "priority_score": 92,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-045",
+      "status": "open"
+    },
+    {
+      "priority_score": 88,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-046",
+      "status": "open"
+    },
+    {
+      "priority_score": 84,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-047",
+      "status": "open"
+    },
+    {
+      "priority_score": 80,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-048",
+      "status": "open"
+    },
+    {
+      "priority_score": 76,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-049",
+      "status": "open"
+    },
+    {
+      "priority_score": 72,
+      "description_parts": 3,
+      "steps": 3,
+      "id": "JA-050",
+      "status": "open"
+    }
+  ],
+  "description_parts_total": 24,
+  "todo_open_count": 8,
+  "new_product_code": false,
+  "existing_test_paths_verified": [
+    "./tests/Test-JobAgentCiContracts.ps1",
+    "./tests/Test-JobAgentCompanyInventory.ps1",
+    "./tests/Test-JobAgentCoverage.ps1",
+    "./tests/Test-JobAgentDailyRun.ps1",
+    "./tests/Test-JobAgentHtmlAudit.ps1",
+    "./tests/Test-JobAgentHtmlViewportAudit.ps1",
+    "./tests/Test-JobAgentOperations.ps1",
+    "./tests/Test-JobAgentPersistence.ps1",
+    "./tests/Test-JobAgentReport.ps1",
+    "./tests/Test-JobAgentSchema.ps1",
+    "./tests/Test-JobAgentSourceAdapters.ps1",
+    "./tests/Test-JobAgentSourceVerification.ps1",
+    "./tests/Test-JobAgentStatusMachine.ps1",
+    "./tests/Test-JobAgentTestMatrix.ps1",
+    "./tests/Test-JobAgentUiBrowserAudit.ps1",
+    "./tests/Test-JobAgentUserState.ps1"
+  ],
+  "planning_markdown": "passed",
+  "source_hashes": [
+    {
+      "sha256": "5DF302F94E57F66F3021AA386BEA7C28DBED75427FC36AF23185B01D6B90905E",
+      "path": "README.md"
+    },
+    {
+      "sha256": "5B731ED18049C53012F74F468EC1C0322F8375641071F020EB4E495CDF96FD75",
+      "path": "Roadmap_archive.md"
+    },
+    {
+      "sha256": "6F0FF9383B34B57DD94A8E352F133C1396C6DD23802CF018E31084D7B7E977C2",
+      "path": "src/JobAgent.Report.psm1"
+    },
+    {
+      "sha256": "8BF0AD4CE08B87AD478E0B6BAA7C68E2DE57C0D64E453A16A0F22551EDCA0809",
+      "path": "src/JobAgent.Persistence.psm1"
+    },
+    {
+      "sha256": "6B3CE54AF67A146CF53D4C75B6A7CC8B561859E7CA3DE506F3D9E97FD3CD5DAC",
+      "path": "src/JobAgent.DailyRun.psm1"
+    }
+  ],
+  "focused_ci_contracts": {
+    "cases": 14,
+    "exit": 0
+  },
+  "ci_verify": {
+    "test": "Test-JobAgentCiContracts.ps1",
+    "exit": 0
+  },
+  "global_route_check": {
+    "status": "failed-unmodified-local-toolchain-markdown",
+    "violations": [
+      {
+        "offset": 11509,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 14511,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 17707,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 20848,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 23793,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 10157,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 13159,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 16355,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 19496,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "offset": 22441,
+        "kind": "markdown_control_char",
+        "byte": "0x0C",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md"
+      },
+      {
+        "line": 4,
+        "kind": "markdown_unclosed_code_fence",
+        "marker": "```",
+        "rule": "markdown_render_guard",
+        "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/giflib.md"
+      }
+    ],
+    "exit": 1
+  },
+  "preexisting_changes": {
+    "stash_name": "preexisting-jobagent-generated-data-before-roadmap-20260917",
+    "byte_exact_backups": "backups/roadmap-jobboard-20260917/manifest.json",
+    "paths": [
+      "data/jobagent/company-candidate-verification.queue.json",
+      "html/jobagent/company-coverage.html"
+    ],
+    "stash_commit": "b75275258acdf5c883c59fc73c396da4a0012596"
+  },
+  "screenshot_original": {
+    "status": "not-available-as-file",
+    "manifest": "doc/roadmap-screenshots/JA-043-reference-manifest.md"
+  },
+  "supertest": "not-run: roadmap planning only",
+  "next_implementation": "JA-043",
+  "self_check": {
+    "issues": [
+      "immutable_modified: .ci\\ci.config.json"
+    ],
+    "pin": [
+      {
+        "sha256": "069a56bdfecae8e5461587a8d77aeef12641705087432283da81f7598eb2660c",
+        "path": ".ci\\ci.config.json"
+      }
+    ],
+    "config_sha256": "9B46298DF06D679D1E65DFB2B90655AE5ECF75269115C553997686C0EB215C41",
+    "config_equals_head": true,
+    "exit": 1,
+    "config_git_blob": "642cba44e2deb0a1af2857df08216bd457a305fa",
+    "log_path": "logs/terminal/self-check-20260917-163139.log"
+  },
+  "stp": {
+    "exit": 0,
+    "checkpoint_boundary_synchronized": true,
+    "checkpoint_event_id": "EV-20260917-163108-6ffadd"
+  },
+  "workflow_validation": {
+    "invariants_test_exit": 0,
+    "status": "passed",
+    "changed_scope": "14 planning-and-workflow-files",
+    "exact_checkpoint_boundary": "EV-20260917-163108-6ffadd",
+    "invariants_test_cases": 6,
+    "handoff_next": "JA-043",
+    "index_matches_state": true,
+    "open_todos": 8,
+    "active_count": 0
+  },
+  "diff_check": {
+    "exit": 0,
+    "readme_unchanged": true,
+    "roadmap_sha256": "988ED4AEFF15C62994C942C3069EF2B87962C3D0886D54B47C88F56FAB546791",
+    "product_source_unchanged": true
+  }
+}
