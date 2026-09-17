@@ -29,6 +29,12 @@ Assert-True ($config.sonar.mode -eq 'not-supported') 'Nicht konfigurierte Sonar-
 Assert-True (@($config.immutable_policy.mutable_paths) -contains 'Roadmap.md') 'Roadmap.md ist nicht als autorisierte mutable Planungsdatei gebunden.'
 Assert-True ($commands -match 'status="not-supported"') 'Sonar-Nichtunterstuetzung wird nicht als eigener Status protokolliert.'
 Assert-True ($commands -match 'analysis_started=\$false') 'Sonar-Nichtunterstuetzung muss einen nicht gestarteten Analysepfad ausweisen.'
+Assert-True ($config.sonar.auth.token_file -eq 'D:\_Scripte\_Sonar\token.txt') 'Sonar-Tokenquelle ist nicht explizit konfiguriert.'
+Assert-True ($commands -match 'function ConvertTo-SonarNormalizedToken') 'Sonar-Token-Normalisierung fehlt.'
+Assert-True ($commands -match 'function Cmd-SonarAuth') 'Sekretfreier Sonar-Authentifizierungscommand fehlt.'
+Assert-True ($commands -match 'Register-CiCommand "sonar-auth"') 'Sonar-Authentifizierungscommand ist nicht registriert.'
+$sonarAuthTest = Join-Path $PSScriptRoot 'Test-SonarAuth.ps1'
+Assert-True (Test-Path -LiteralPath $sonarAuthTest) 'Sonar-Authentifizierungsfunktionstest fehlt.'
 Assert-True ([int]$config.jobagent.daily_run.live_pilot_max_companies -eq 1000) 'Der reguläre Live-Lauf muss bis zu 1000 Firmen und damit den aktuellen Gesamtbestand verarbeiten können.'
 Assert-True ($dailyRunScript -match '\[Parameter\(\)\]\[ValidateRange\(1, 1000\)\]\[int\]\$MaxCompanies\s*=\s*1000') 'Der reguläre Daily-Run-Default muss dem Live-Limit von 1000 entsprechen.'
 Assert-True ($dailyRunScript -match '\[Parameter\(\)\]\[switch\]\$FullScan') 'Der Daily-Run muss einen expliziten Vollscanmodus ohne lange Befehlszeile bereitstellen.'
@@ -41,5 +47,5 @@ Assert-True (Test-Path -LiteralPath $ci005Test) 'CI-005-Invariantentest fehlt.'
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'live_daily_run_limit_1000', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
+    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'sonar_auth_contract', 'live_daily_run_limit_1000', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
 } | ConvertTo-Json -Depth 4

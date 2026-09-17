@@ -527,13 +527,85 @@ function Get-SonarPrivateJsonToken() {
   return $null
 }
 
+function Get-SonarTokenFilePath() {
+  $fromEnvironment = [string]$env:SONAR_TOKEN_FILE
+  if ($fromEnvironment) { return $fromEnvironment }
+
+  $cfg = Try-ReadJson (Get-ConfigPath)
+  $sonarCfg = Get-Prop $cfg "sonar" $null
+  $authCfg = Get-Prop $sonarCfg "auth" $null
+  return [string](Get-Prop $authCfg "token_file" "")
+}
+
+function ConvertTo-SonarNormalizedToken([string]$Text) {
+  if ($null -eq $Text) {
+    return @{ ok=$false; token=$null; format="missing"; error_class="sonar_token_missing" }
+  }
+
+  $value = $Text.TrimStart([char]0xFEFF)
+  if ($value.IndexOf([char]0) -ge 0) {
+    return @{ ok=$false; token=$null; format="invalid"; error_class="sonar_token_format_invalid" }
+  }
+
+  $nonEmptyLines = @($value -split "`r?`n" | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+  if ($nonEmptyLines.Count -eq 1) {
+    $line = [string]$nonEmptyLines[0]
+    if ($line -match '^\s*SONAR_TOKEN\s*[:=]\s*(.*?)\s*$') {
+      $token = [string]$Matches[1]
+      $format = "marked"
+    } else {
+      $token = $line.Trim()
+      $format = "plain"
+    }
+  } else {
+    $assignments = @($nonEmptyLines | Where-Object { $_ -match '^\s*SONAR_TOKEN\s*[:=]\s*(.*?)\s*$' })
+    if ($assignments.Count -ne 1) {
+      return @{ ok=$false; token=$null; format="invalid"; error_class="sonar_token_format_invalid" }
+    }
+    $assignment = [string]$assignments[0]
+    $null = $assignment -match '^\s*SONAR_TOKEN\s*[:=]\s*(.*?)\s*$'
+    $token = [string]$Matches[1]
+    $format = "marked"
+  }
+
+  $token = $token.Trim()
+  if (($token.Length -ge 2 -and (($token.StartsWith('"') -and $token.EndsWith('"')) -or ($token.StartsWith("'") -and $token.EndsWith("'"))))) {
+    $token = $token.Substring(1, $token.Length - 2).Trim()
+  }
+  if (-not $token -or $token -match '[\r\n\x00]') {
+    return @{ ok=$false; token=$null; format=$format; error_class="sonar_token_format_invalid" }
+  }
+
+  return @{ ok=$true; token=$token; format=$format; error_class="ok" }
+}
+
+function Get-SonarTokenFileCandidate() {
+  $path = Get-SonarTokenFilePath
+  if (-not $path -or -not (Test-Path -LiteralPath $path -PathType Leaf)) {
+    return @{ source="token-file"; token=$null; token_format="missing"; error_class="sonar_token_file_missing" }
+  }
+
+  try {
+    $normalized = ConvertTo-SonarNormalizedToken ([System.IO.File]::ReadAllText($path))
+    return @{
+      source = "token-file"
+      token = [string](Get-Prop $normalized "token" "")
+      token_format = [string](Get-Prop $normalized "format" "invalid")
+      error_class = [string](Get-Prop $normalized "error_class" "sonar_token_format_invalid")
+    }
+  } catch {
+    return @{ source="token-file"; token=$null; token_format="invalid"; error_class="sonar_token_file_unreadable" }
+  }
+}
+
 function Get-SonarTokenCandidates([bool]$IncludeFallback = $true) {
   $raw = New-Object System.Collections.Generic.List[object]
-  $raw.Add(@{ source = "process-env"; token = [string]$env:SONAR_TOKEN })
+  $raw.Add((Get-SonarTokenFileCandidate))
+  $raw.Add(@{ source = "process-env"; token = [string]$env:SONAR_TOKEN; token_format="environment" })
   if ($IncludeFallback) {
-    $raw.Add(@{ source = "private-json"; token = [string](Get-SonarPrivateJsonToken) })
-    $raw.Add(@{ source = "user-env"; token = [string][Environment]::GetEnvironmentVariable("SONAR_TOKEN", "User") })
-    $raw.Add(@{ source = "machine-env"; token = [string][Environment]::GetEnvironmentVariable("SONAR_TOKEN", "Machine") })
+    $raw.Add(@{ source = "private-json"; token = [string](Get-SonarPrivateJsonToken); token_format="private-json" })
+    $raw.Add(@{ source = "user-env"; token = [string][Environment]::GetEnvironmentVariable("SONAR_TOKEN", "User"); token_format="environment" })
+    $raw.Add(@{ source = "machine-env"; token = [string][Environment]::GetEnvironmentVariable("SONAR_TOKEN", "Machine"); token_format="environment" })
   }
 
   $seen = @{}
@@ -543,7 +615,7 @@ function Get-SonarTokenCandidates([bool]$IncludeFallback = $true) {
     if (-not $token) { continue }
     if ($seen.ContainsKey($token)) { continue }
     $seen[$token] = $true
-    $candidates.Add(@{ source = [string](Get-Prop $entry "source" "unknown"); token = $token })
+    $candidates.Add(@{ source = [string](Get-Prop $entry "source" "unknown"); token = $token; token_format=[string](Get-Prop $entry "token_format" "unknown") })
   }
 
   return $candidates.ToArray()
@@ -557,6 +629,58 @@ function New-SonarApiHeadersFromToken([string]$token) {
   $pair = $token + ":"
   $basic = [Convert]::ToBase64String([System.Text.Encoding]::ASCII.GetBytes($pair))
   return @{ Authorization = ("Basic " + $basic) }
+}
+
+function Test-SonarAuthentication(
+  [scriptblock]$Request = $null,
+  [int]$TimeoutSec = 10,
+  [object[]]$TokenCandidates = $null
+) {
+  $endpoint = (Get-SonarBaseUrl) + "/api/authentication/validate"
+  if ($null -eq $TokenCandidates) { $TokenCandidates = @(Get-SonarTokenCandidates) }
+  $result = [ordered]@{ ok=$false; valid=$false; error_class="sonar_token_missing"; endpoint=$endpoint; status_code=$null; token_source=$null; token_format=$null; attempted_token_sources=@(); timeout_sec=$TimeoutSec }
+
+  foreach ($candidate in @($TokenCandidates)) {
+    $token = [string](Get-Prop $candidate "token" "")
+    if (-not $token) { continue }
+    $source = [string](Get-Prop $candidate "source" "unknown")
+    $result.attempted_token_sources = @($result.attempted_token_sources) + @($source)
+    try {
+      $headers = New-SonarApiHeadersFromToken $token
+      $response = if ($null -ne $Request) { & $Request $endpoint $headers $TimeoutSec } else { Invoke-RestMethod -Headers $headers -Uri $endpoint -TimeoutSec $TimeoutSec }
+      $result.status_code = 200
+      $result.token_source = $source
+      $result.token_format = [string](Get-Prop $candidate "token_format" "unknown")
+      $result.valid = [bool](Get-Prop $response "valid" $false)
+      if ($result.valid) {
+        $result.ok=$true
+        $result.error_class="ok"
+        return $result
+      }
+      $result.error_class="sonar_auth_invalid"
+    } catch {
+      $statusCode = Get-SonarHttpStatusCodeFromError $_
+      $message = [string]$_.Exception.Message
+      $result.status_code = $statusCode
+      $result.token_source = $source
+      $result.token_format = [string](Get-Prop $candidate "token_format" "unknown")
+      $result.error_class = if ((Test-SonarTimeoutError $_) -and ($null -eq $statusCode)) { "sonar_api_timeout" } else { Get-SonarApiAuthErrorClass $statusCode $message }
+      if ($result.error_class -ne "sonar_auth_unauthorized" -and $result.error_class -ne "sonar_auth_forbidden") { return $result }
+    }
+  }
+  return $result
+}
+
+function Cmd-SonarAuth() {
+  Ensure-CoreFolders; Ensure-BootstrapFiles
+  $statusUrl = Get-SonarStatusUrl
+  $status = Get-SonarStatusSnapshot $statusUrl 10
+  $result = if ([bool](Get-Prop $status "ok" $false)) { Test-SonarAuthentication } else { @{ ok=$false; valid=$false; error_class="sonar_server_unreachable"; endpoint=(Get-SonarBaseUrl) + "/api/authentication/validate"; status_code=$null; token_source=$null; token_format=$null; attempted_token_sources=@() } }
+  $evidence = [ordered]@{ ts=NowIso; cmd=".\\ci.cmd sonar-auth"; server_status=[string](Get-Prop $status "status" "UNKNOWN"); valid=[bool](Get-Prop $result "valid" $false); http_status=Get-Prop $result "status_code" $null; error_class=[string](Get-Prop $result "error_class" "sonar_api_unreachable"); token_source=[string](Get-Prop $result "token_source" ""); token_format=[string](Get-Prop $result "token_format" ""); secret_sanitized=$true }
+  $evidencePath = Join-Path $LogsRoot "verify\sq-002-sonar-auth.json"
+  Write-Json $evidencePath $evidence
+  if (-not [bool](Get-Prop $result "ok" $false)) { throw ("sonar-auth: validation failed: " + [string](Get-Prop $result "error_class" "sonar_api_unreachable")) }
+  CI-Info ("sonar-auth: valid=true; http_status=200; source=" + [string](Get-Prop $result "token_source" "unknown") + "; format=" + [string](Get-Prop $result "token_format" "unknown"))
 }
 
 function Get-SonarProjectKey() {
@@ -1490,6 +1614,7 @@ Register-CiCommand "devserver-status" { Cmd-DevserverStatus }
 Register-CiCommand "daily-run" { Cmd-JobAgentDailyRun $Args }
 Register-CiCommand "daily-run-status" { Cmd-JobAgentDailyRunStatus $Args }
 Register-CiCommand "sonar" { Cmd-Sonar }
+Register-CiCommand "sonar-auth" { Cmd-SonarAuth }
 Register-CiCommand "pyserver-start" { Cmd-PyserverStart }
 Register-CiCommand "pyserver-stop" { Cmd-PyserverStop }
 Register-CiCommand "pyserver-status" { Cmd-PyserverStatus }
