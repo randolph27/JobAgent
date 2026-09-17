@@ -715,20 +715,52 @@ function Get-SonarExternalImportFailureClass([string]$Stage, [string]$RawError) 
 }
 
 function Get-SonarCommitReference() {
-  $commit = @(& git -C $RepoRoot rev-parse HEAD 2>$null | Select-Object -First 1)
-  if ($LASTEXITCODE -ne 0 -or $commit.Count -ne 1 -or [string]$commit[0] -notmatch '^[a-f0-9]{40}$') {
+  $gitOutput = @(& git -c core.excludesfile=NUL -C $RepoRoot rev-parse HEAD 2>$null)
+  $gitExitCode = $LASTEXITCODE
+  $commit = @($gitOutput | Select-Object -First 1)
+  if ($gitExitCode -ne 0 -or $commit.Count -ne 1 -or [string]$commit[0] -notmatch '^[a-f0-9]{40}$') {
     throw 'sonar_commit_reference_unavailable'
   }
   return [string]$commit[0]
+}
+
+function Get-SonarComputeEngineReadFailureClass([object]$StatusCode, [bool]$TimedOut = $false) {
+  if ($null -ne $StatusCode -and [string]$StatusCode -ne '') {
+    $code = [int]$StatusCode
+    if ($code -eq 401) { return 'sonar_external_compute_engine_unauthorized' }
+    if ($code -eq 403) { return 'sonar_external_compute_engine_forbidden' }
+    if ($code -eq 404) { return 'sonar_external_compute_engine_task_not_found' }
+    if ($code -eq 408 -or $code -eq 504) { return 'sonar_external_compute_engine_api_timeout' }
+    if ($code -ge 500 -and $code -le 599) { return 'sonar_external_compute_engine_server_error' }
+    return ('sonar_external_compute_engine_http_' + $code)
+  }
+  if ($TimedOut) { return 'sonar_external_compute_engine_transport_timeout' }
+  return 'sonar_external_compute_engine_transport_failed'
+}
+
+function Invoke-SonarComputeEngineTaskRead([string]$TaskId, [int]$TimeoutSec = 20) {
+  $endpointClass = 'sonar-api-ce-task'
+  $relativeUrl = '/api/ce/task?id=' + [System.Uri]::EscapeDataString($TaskId)
+  $url = (Get-SonarBaseUrl) + $relativeUrl
+  try {
+    $response = Invoke-RestMethod -Headers (Get-SonarApiHeaders) -Uri $url -TimeoutSec $TimeoutSec
+    return [ordered]@{ ok=$true; endpoint_class=$endpointClass; http_status=200; transport_class=$null; task_status=$null; task=(Get-Prop $response 'task' $null); error_class='ok' }
+  } catch {
+    $statusCode = Get-SonarHttpStatusCodeFromError $_
+    $timedOut = (Test-SonarTimeoutError $_) -and ($null -eq $statusCode)
+    return [ordered]@{ ok=$false; endpoint_class=$endpointClass; http_status=$statusCode; transport_class=$(if ($timedOut) { 'timeout' } else { 'request-failed' }); task_status=$null; task=$null; error_class=(Get-SonarComputeEngineReadFailureClass $statusCode $timedOut) }
+  }
 }
 
 function Cmd-SonarExternalImport([string]$CommandName = '.\\ci.cmd sonar-external-import') {
   Ensure-CoreFolders; Ensure-BootstrapFiles
   $cfg = Try-ReadJson (Get-ConfigPath)
   $sonarCfg = Get-Prop $cfg 'sonar' $null
-  $runId = 'sq-007-' + (TsId)
+  $runId = 'sq-009-' + (TsId)
   $evidencePath = Join-Path $LogsRoot ('verify\\' + $runId + '.json')
   $stage = 'status'
+  $taskId = $null
+  $computeEngine = [ordered]@{ endpoint_class='sonar-api-ce-task'; http_status=$null; transport_class=$null; task_status=$null }
   try {
     $status = Get-SonarStatusSnapshot (Get-SonarStatusUrl) 10
     if (-not [bool](Get-Prop $status 'ok' $false)) { throw 'sonar_server_unreachable' }
@@ -761,25 +793,36 @@ function Cmd-SonarExternalImport([string]$CommandName = '.\\ci.cmd sonar-externa
     $stage = 'scanner'
     $workDirectory = Join-Path $LogsRoot ('sonar\\' + $runId + '-work')
     $task = Invoke-SonarExternalScanner -Plan $plan -RepoRoot $RepoRoot -ReportPath $report.output_path -WorkDirectory $workDirectory -Token ([string]$tokenCandidate[0].token)
+    $taskId = [string](Get-Prop $task 'task_id' '')
     $deadline = (Get-Date).AddSeconds($plan.timeout_sec)
     $taskStatus = ''
     $analysisId = $null
     $stage = 'compute_engine'
+    if ($taskId -notmatch '^[A-Za-z0-9_-]{1,200}$') { throw 'sonar_external_compute_engine_task_id_invalid' }
     do {
-      $taskResponse = Invoke-SonarApiJson ('/api/ce/task?id=' + [System.Uri]::EscapeDataString($task.task_id))
-      $taskStatus = [string](Get-Prop (Get-Prop $taskResponse 'task' $null) 'status' '')
-      $analysisId = [string](Get-Prop (Get-Prop $taskResponse 'task' $null) 'analysisId' '')
+      $computeEngine = Invoke-SonarComputeEngineTaskRead -TaskId $taskId -TimeoutSec 20
+      if (-not [bool](Get-Prop $computeEngine 'ok' $false)) { throw ([string](Get-Prop $computeEngine 'error_class' 'sonar_external_compute_engine_lookup_failed')) }
+      $taskPayload = Get-Prop $computeEngine 'task' $null
+      if ($null -eq $taskPayload) { throw 'sonar_external_compute_engine_response_invalid' }
+      $taskStatus = [string](Get-Prop $taskPayload 'status' '')
+      if ($taskStatus -notin @('PENDING', 'IN_PROGRESS', 'SUCCESS', 'FAILED', 'CANCELED')) { throw 'sonar_external_compute_engine_response_invalid' }
+      $computeEngine.task_status = $taskStatus
+      $analysisId = [string](Get-Prop $taskPayload 'analysisId' '')
       if ($taskStatus -in @('SUCCESS', 'FAILED', 'CANCELED')) { break }
       Start-Sleep -Seconds 2
     } while ((Get-Date) -lt $deadline)
-    if ($taskStatus -eq 'FAILED' -or $taskStatus -eq 'CANCELED') { throw 'sonar_external_compute_engine_failed' }
-    if ($taskStatus -ne 'SUCCESS' -or -not $analysisId) { throw 'sonar_external_compute_engine_timeout' }
+    if ($taskStatus -eq 'FAILED') { throw 'sonar_external_compute_engine_failed' }
+    if ($taskStatus -eq 'CANCELED') { throw 'sonar_external_compute_engine_canceled' }
+    if ($taskStatus -ne 'SUCCESS') { throw 'sonar_external_compute_engine_timeout' }
+    if ($analysisId -notmatch '^[A-Za-z0-9_-]{1,200}$') { throw 'sonar_external_compute_engine_analysis_id_invalid' }
     $commitReference = Get-SonarCommitReference
-    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd=$CommandName; project_key=$plan.project_key; project_created=$projectCreated; analysis_scope=$plan.analysis_scope; report_sha256=$report.report_sha256; report_issue_count=$report.issue_count; task_id=$task.task_id; analysis_id=$analysisId; task_status=$taskStatus; commit_reference=$commitReference; native_powershell_analysis=$false; quality_gate_statement='not-applicable-for-external-issues'; exit=0; secret_sanitized=$true })
+    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd=$CommandName; project_key=$plan.project_key; project_created=$projectCreated; analysis_scope=$plan.analysis_scope; report_sha256=$report.report_sha256; report_issue_count=$report.issue_count; task_id=$taskId; analysis_id=$analysisId; task_status=$taskStatus; compute_engine_endpoint_class=$computeEngine.endpoint_class; compute_engine_http_status=$computeEngine.http_status; commit_reference=$commitReference; native_powershell_analysis=$false; quality_gate_statement='not-applicable-for-external-issues'; exit=0; secret_sanitized=$true })
+    Write-Json (Join-Path $LogsRoot 'verify\verify.digest.json') ([ordered]@{ ts=NowIso; cmd=$CommandName; status='ok'; exit=0; analysis_started=$true; project_key=$plan.project_key; analysis_scope=$plan.analysis_scope; report_issue_count=$report.issue_count; task_id=$taskId; analysis_id=$analysisId; task_status=$taskStatus; commit_reference=$commitReference; evidence_path=(To-RelPath $evidencePath); secret_sanitized=$true })
     CI-Info ($CommandName + ': task_status=SUCCESS; analysis_id=' + $analysisId + '; issues=' + $report.issue_count)
   } catch {
     $errorClass = Get-SonarExternalImportFailureClass -Stage $stage -RawError ([string]$_.Exception.Message)
-    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd=$CommandName; analysis_scope='external-powershell-issues-only'; stage=$stage; error_class=$errorClass; exit=1; secret_sanitized=$true })
+    Write-Json $evidencePath ([ordered]@{ ts=NowIso; cmd=$CommandName; analysis_scope='external-powershell-issues-only'; stage=$stage; error_class=$errorClass; task_id=$taskId; compute_engine_endpoint_class=$computeEngine.endpoint_class; compute_engine_http_status=$computeEngine.http_status; compute_engine_transport_class=$computeEngine.transport_class; task_status=$computeEngine.task_status; exit=1; secret_sanitized=$true })
+    Write-Json (Join-Path $LogsRoot 'verify\verify.digest.json') ([ordered]@{ ts=NowIso; cmd=$CommandName; status='failed'; exit=1; analysis_started=($stage -in @('scanner', 'compute_engine')); stage=$stage; error_class=$errorClass; task_id=$taskId; compute_engine_endpoint_class=$computeEngine.endpoint_class; compute_engine_http_status=$computeEngine.http_status; evidence_path=(To-RelPath $evidencePath); secret_sanitized=$true })
     throw ($CommandName + ': ' + $errorClass)
   } finally {
     if (Get-Variable -Name previousToken -ErrorAction SilentlyContinue) { $script:SonarResolvedToken = $previousToken }
@@ -1353,6 +1396,7 @@ function Render-StpHandoffMarkdown([object]$handoff) {
   $git = Get-Prop $handoff "git" @{}
   $verified = @(Get-Prop $handoff "verified" @())
   $changed = @(Get-Prop $handoff "changed" @())
+  $verifyDigest = Get-Prop $handoff "verify_digest" @{}
   $lines = New-Object System.Collections.Generic.List[string]
   $lines.Add("# Handoff latest")
   $lines.Add("")
@@ -1377,6 +1421,12 @@ function Render-StpHandoffMarkdown([object]$handoff) {
   $lines.Add("## Verifikation")
   $lines.Add("")
   if ($verified.Count -eq 0) { $lines.Add("- Keine Verify-Evidence vorhanden") } else { foreach ($entry in $verified) { $lines.Add('- `' + [string](Get-Prop $entry "cmd" "") + '` -> Exit `' + [string](Get-Prop $entry "exit" "") + '`') } }
+  $analysisId = [string](Get-Prop $verifyDigest 'analysis_id' '')
+  if ($analysisId) {
+    $lines.Add('- Sonar-Task: `' + [string](Get-Prop $verifyDigest 'task_id' '') + '`')
+    $lines.Add('- Sonar-Analyse: `' + $analysisId + '`')
+    $lines.Add('- Sonar-Evidence: `' + [string](Get-Prop $verifyDigest 'evidence_path' '') + '`')
+  }
   $lines.Add("")
   $lines.Add("## Naechster Anker")
   $lines.Add("")

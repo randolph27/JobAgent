@@ -47,6 +47,8 @@ function Get-Prop([object]$Object, [string]$Name, [object]$Default = $null) {
 }
 
 Import-FunctionFromAst 'Get-SonarExternalImportFailureClass'
+Import-FunctionFromAst 'Get-SonarComputeEngineReadFailureClass'
+Import-FunctionFromAst 'Invoke-SonarComputeEngineTaskRead'
 Import-FunctionFromAst 'Cmd-SonarExternalImport'
 Import-FunctionFromAst 'Cmd-Sonar'
 
@@ -61,14 +63,34 @@ function Get-ConfigPath { return (Join-Path $script:RepoRoot '.ci\ci.config.json
 function Try-ReadJson([string]$Path) { return [pscustomobject]@{ sonar = [pscustomobject]@{ mode = (Get-Prop $script:Lifecycle 'mode' '') } } }
 function TsId { return 'fixture' }
 function NowIso { return '2026-09-17T15:00:00.000+02:00' }
+function To-RelPath([string]$Path) { return $Path }
 function CI-Info([string]$Message) { $script:Lifecycle.info = $Message }
-function Write-Json([string]$Path, [object]$Object) { $script:Evidence += $Object }
+function Write-Json([string]$Path, [object]$Object) { if ($Path -match 'verify\.digest\.json$') { $script:Lifecycle.verify_digest = $Object; return }; $script:Evidence += $Object }
 function Start-Sleep { param([int]$Seconds) }
 function Get-SonarStatusSnapshot([string]$Url, [int]$Timeout) { return @{ ok = -not [bool](Get-Prop $script:Lifecycle 'status_failure' $false) } }
 function Get-SonarStatusUrl { return 'http://fixture:9000/api/system/status' }
 function Test-SonarAuthentication { return @{ ok = -not [bool](Get-Prop $script:Lifecycle 'auth_failure' $false); error_class = 'sonar_auth_invalid'; token_source = 'fixture' } }
 function Get-SonarTokenCandidates { return @(@{ source = 'fixture'; token = 'fixture-token' }) }
 function Get-SonarBaseUrl { return 'http://fixture:9000' }
+function Get-SonarApiHeaders { return @{ Authorization = 'Basic fixture' } }
+function Get-SonarHttpStatusCodeFromError([object]$ErrorRecord) { return (Get-Prop $script:Lifecycle 'direct_status_code' $null) }
+function Test-SonarTimeoutError([object]$ErrorRecord) { return [bool](Get-Prop $script:Lifecycle 'direct_timeout' $false) }
+function Invoke-RestMethod { param($Headers, $Uri, $TimeoutSec) if ([bool](Get-Prop $script:Lifecycle 'direct_request_failure' $false)) { throw 'fixture request failure' }; return (Get-Prop $script:Lifecycle 'direct_response' ([pscustomobject]@{ task = [pscustomobject]@{ status = 'SUCCESS'; analysisId = 'analysis-fixture' } })) }
+
+foreach ($case in @(
+  @{ state = @{ direct_request_failure = $true; direct_status_code = 401 }; expected = 'sonar_external_compute_engine_unauthorized' },
+  @{ state = @{ direct_request_failure = $true; direct_status_code = 403 }; expected = 'sonar_external_compute_engine_forbidden' },
+  @{ state = @{ direct_request_failure = $true; direct_status_code = 404 }; expected = 'sonar_external_compute_engine_task_not_found' },
+  @{ state = @{ direct_request_failure = $true; direct_status_code = 503 }; expected = 'sonar_external_compute_engine_server_error' },
+  @{ state = @{ direct_request_failure = $true; direct_timeout = $true }; expected = 'sonar_external_compute_engine_transport_timeout' },
+  @{ state = @{ direct_request_failure = $true }; expected = 'sonar_external_compute_engine_transport_failed' }
+)) {
+  $script:Lifecycle = $case.state
+  $read = Invoke-SonarComputeEngineTaskRead -TaskId 'task-fixture' -TimeoutSec 1
+  Assert-True (-not $read.ok -and $read.error_class -eq $case.expected) ('Compute-Engine-Read klassifiziert die API-Grenze nicht: ' + $case.expected)
+  Assert-True ($read.endpoint_class -eq 'sonar-api-ce-task' -and -not ($read.PSObject.Properties.Name -match 'token|header|url')) 'Compute-Engine-Read gibt geheime oder queryhaltige Diagnosefelder aus.'
+}
+
 function Get-SonarExternalImportPlan {
   if (Get-Prop $script:Lifecycle 'plan_failure' $null) { throw (Get-Prop $script:Lifecycle 'plan_failure') }
   return [pscustomobject]@{ project_key = 'fixture-project'; project_name = 'Fixture project'; timeout_sec = 0; analysis_scope = 'external-powershell-issues-only' }
@@ -80,11 +102,25 @@ function Invoke-SonarExternalIssuesReport {
 function Invoke-SonarApiJson([string]$RelativeUrl) {
   if ([bool](Get-Prop $script:Lifecycle 'project_failure' $false) -and $RelativeUrl -match '/api/projects/search') { throw 'fixture project request failed' }
   if ($RelativeUrl -match '/api/projects/search') { return [pscustomobject]@{ components = @([pscustomobject]@{ key = 'fixture-project' }) } }
+  return [pscustomobject]@{ components = @([pscustomobject]@{ key = 'fixture-project' }) }
+}
+function Invoke-SonarComputeEngineTaskRead([string]$TaskId, [int]$TimeoutSec) {
   $computeFailure = [string](Get-Prop $script:Lifecycle 'compute_failure' '')
-  if ($computeFailure -eq 'api') { throw 'fixture task request failed' }
-  if ($computeFailure -eq 'failed') { return [pscustomobject]@{ task = [pscustomobject]@{ status = 'FAILED'; analysisId = '' } } }
-  if ($computeFailure -eq 'timeout') { return [pscustomobject]@{ task = [pscustomobject]@{ status = 'PENDING'; analysisId = '' } } }
-  return [pscustomobject]@{ task = [pscustomobject]@{ status = 'SUCCESS'; analysisId = 'analysis-fixture' } }
+  $base = [ordered]@{ ok=$true; endpoint_class='sonar-api-ce-task'; http_status=200; transport_class=$null; task_status=$null; task=$null; error_class='ok' }
+  if ($computeFailure -eq 'api401') { $base.ok=$false; $base.http_status=401; $base.error_class='sonar_external_compute_engine_unauthorized'; return $base }
+  if ($computeFailure -eq 'api403') { $base.ok=$false; $base.http_status=403; $base.error_class='sonar_external_compute_engine_forbidden'; return $base }
+  if ($computeFailure -eq 'api404') { $base.ok=$false; $base.http_status=404; $base.error_class='sonar_external_compute_engine_task_not_found'; return $base }
+  if ($computeFailure -eq 'api5xx') { $base.ok=$false; $base.http_status=503; $base.error_class='sonar_external_compute_engine_server_error'; return $base }
+  if ($computeFailure -eq 'transport_timeout') { $base.ok=$false; $base.http_status=$null; $base.transport_class='timeout'; $base.error_class='sonar_external_compute_engine_transport_timeout'; return $base }
+  if ($computeFailure -eq 'transport') { $base.ok=$false; $base.http_status=$null; $base.transport_class='request-failed'; $base.error_class='sonar_external_compute_engine_transport_failed'; return $base }
+  if ($computeFailure -eq 'missing_task') { return $base }
+  if ($computeFailure -eq 'invalid_status') { $base.task=[pscustomobject]@{ status='UNKNOWN'; analysisId='' }; return $base }
+  if ($computeFailure -eq 'failed') { $base.task=[pscustomobject]@{ status='FAILED'; analysisId='' }; return $base }
+  if ($computeFailure -eq 'canceled') { $base.task=[pscustomobject]@{ status='CANCELED'; analysisId='' }; return $base }
+  if ($computeFailure -eq 'timeout') { $base.task=[pscustomobject]@{ status='PENDING'; analysisId='' }; return $base }
+  if ($computeFailure -eq 'analysis_id_invalid') { $base.task=[pscustomobject]@{ status='SUCCESS'; analysisId='' }; return $base }
+  $base.task=[pscustomobject]@{ status='SUCCESS'; analysisId='analysis-fixture' }
+  return $base
 }
 function Invoke-SonarExternalScanner {
   if ([bool](Get-Prop $script:Lifecycle 'scanner_failure' $false)) { throw 'sonar_external_scanner_failed' }
@@ -105,6 +141,7 @@ Assert-True ($success.task_status -eq 'SUCCESS' -and $success.analysis_id -eq 'a
 Assert-True ($success.report_issue_count -eq 3 -and $success.analysis_scope -eq 'external-powershell-issues-only') 'Erfolgsfall verliert Befundzähler oder Analyseumfang.'
 Assert-True ($success.commit_reference -match '^[a-f]{40}$') 'Erfolgsfall verliert die Commitreferenz.'
 Assert-True ($success.quality_gate_statement -eq 'not-applicable-for-external-issues') 'External-Issue-Lauf behauptet unzulässig ein Quality Gate.'
+Assert-True ($script:Lifecycle.verify_digest.status -eq 'ok' -and $script:Lifecycle.verify_digest.analysis_id -eq 'analysis-fixture') 'Verify-Digest verliert die bestätigte Analyse-ID.'
 
 foreach ($case in @(
   @{ state = @{ status_failure = $true }; expected = 'sonar_server_unreachable' },
@@ -114,8 +151,17 @@ foreach ($case in @(
   @{ state = @{ project_failure = $true }; expected = 'sonar_external_project_access_failed' },
   @{ state = @{ scanner_failure = $true }; expected = 'sonar_external_scanner_failed' },
   @{ state = @{ compute_failure = 'failed' }; expected = 'sonar_external_compute_engine_failed' },
+  @{ state = @{ compute_failure = 'canceled' }; expected = 'sonar_external_compute_engine_canceled' },
   @{ state = @{ compute_failure = 'timeout' }; expected = 'sonar_external_compute_engine_timeout' },
-  @{ state = @{ compute_failure = 'api' }; expected = 'sonar_external_compute_engine_lookup_failed' }
+  @{ state = @{ compute_failure = 'api401' }; expected = 'sonar_external_compute_engine_unauthorized' },
+  @{ state = @{ compute_failure = 'api403' }; expected = 'sonar_external_compute_engine_forbidden' },
+  @{ state = @{ compute_failure = 'api404' }; expected = 'sonar_external_compute_engine_task_not_found' },
+  @{ state = @{ compute_failure = 'api5xx' }; expected = 'sonar_external_compute_engine_server_error' },
+  @{ state = @{ compute_failure = 'transport_timeout' }; expected = 'sonar_external_compute_engine_transport_timeout' },
+  @{ state = @{ compute_failure = 'transport' }; expected = 'sonar_external_compute_engine_transport_failed' },
+  @{ state = @{ compute_failure = 'missing_task' }; expected = 'sonar_external_compute_engine_response_invalid' },
+  @{ state = @{ compute_failure = 'invalid_status' }; expected = 'sonar_external_compute_engine_response_invalid' },
+  @{ state = @{ compute_failure = 'analysis_id_invalid' }; expected = 'sonar_external_compute_engine_analysis_id_invalid' }
 )) {
   Assert-ThrowsClass -ExpectedClass $case.expected -Action {
     $script:Lifecycle = $case.state
@@ -123,10 +169,15 @@ foreach ($case in @(
     Cmd-SonarExternalImport -CommandName '.\ci.cmd sonar'
   }
   Assert-True ($script:Evidence[-1].error_class -eq $case.expected) ('Fehlerevidence enthält nicht die erwartete Klasse: ' + $case.expected)
+  Assert-True ($script:Lifecycle.verify_digest.status -eq 'failed' -and $script:Lifecycle.verify_digest.error_class -eq $case.expected) 'Verify-Digest verliert die Fehlerklasse.'
+  if ($case.expected -match '^sonar_external_compute_engine_') {
+    Assert-True ($script:Evidence[-1].stage -eq 'compute_engine' -and $script:Evidence[-1].compute_engine_endpoint_class -eq 'sonar-api-ce-task') 'Compute-Engine-Fehlerevidence verliert Stage oder Endpointklasse.'
+    Assert-True (-not ($script:Evidence[-1].PSObject.Properties.Name -match 'token|header|url')) 'Compute-Engine-Fehlerevidence enthält geheime oder queryhaltige Felder.'
+  }
 }
 
 [pscustomobject]@{
   status = 'ok'
-  cases = @('success', 'server_unreachable', 'auth_invalid', 'toolchain_missing', 'report_invalid', 'project_access_failed', 'scanner_failed', 'compute_engine_failed', 'compute_engine_timeout', 'compute_engine_api_failed')
+  cases = @('success', 'server_unreachable', 'auth_invalid', 'toolchain_missing', 'report_invalid', 'project_access_failed', 'scanner_failed', 'compute_engine_failed', 'compute_engine_canceled', 'compute_engine_timeout', 'compute_engine_http', 'compute_engine_transport', 'compute_engine_response', 'compute_engine_analysis_id')
   secret_sanitized = $true
 } | ConvertTo-Json -Depth 4

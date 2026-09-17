@@ -1375,3 +1375,18 @@ Abschluss: CI-002-Schema und Tooling, CI-003-Umgebung und Browser-/Viewport-Audi
   - [x] Audit: Keine Secretwerte, Header, Queryparameter, Tokenlängen oder Scanner-Debugausgaben werden persistiert. External Issues werden nicht als native PowerShell-Analyse, Coverage, Duplikatquote, Quality-Profile-Regel oder Quality-Gate-Aussage ausgegeben. Browser-, Viewport- und Android-Audit: `not-applicable`.
   - [x] Supertest: Gemäß Nutzerregel nicht ausgeführt; die funktionsbezogenen Nachweise sind vollständig.
 
+## Archiviert 2026-09-17 – SQ-009 und SQ-008
+
+- [x] SQ-009 Compute-Engine-Task-Read des kanonischen Sonar-Lifecycles deterministisch diagnostizieren und absichern
+  - [x] Beschreibung und Scope: Der ausschließlich read-only Compute-Engine-Helper `Invoke-SonarComputeEngineTaskRead` liest den Server-Task mit einer Endpointklasse ohne Querywert. Erfolgs- und Fehlerevidence enthalten nur erlaubte Task-, Status- und HTTP-Metadaten. Geändert wurden ausschließlich `.ci/bin/modules/ci-commands-main.ps1`, `tests/Test-SonarCiLifecycle.ps1` sowie die Abnahmeunterlagen; SonarQube-Projekt, Quality Gate, Quality Profile, Token, Server, Toolchain-Pins und Analysequellen blieben unverändert.
+  - [x] Fehlervertrag: 401, 403, 404, 5xx, HTTP- und Transporttimeout, Transportfehler, ungültige Task-ID, fehlendes oder ungültiges `task`-Objekt, `FAILED`, `CANCELED`, `PENDING` bis Timeout und ungültige `analysisId` werden mit stabiler Fehlerklasse und nichtnull Exit fail-closed beendet. Fehlerevidence enthält Stage, Fehlerklasse, bekannte Task-ID, Endpointklasse, HTTP-Status soweit verfügbar und Transportklasse; Token, Header, Querywerte, Tokenlängen, Responses und Scannerdebug bleiben ausgeschlossen.
+  - [x] Realnachweis: `./ci.cmd sonar` endete am 2026-09-17 15:21 CEST mit Exit `0`; `logs/verify/sq-009-20260917-152135.json` belegt Projekt `jobagent-external-powershell`, Scope `external-powershell-issues-only`, 323 Befunde, Commit `027fe60185a190ad5eb56159e3140377d186d329`, Endpointklasse `sonar-api-ce-task`, HTTP `200`, Task `AaCvh97JOhdKqVTDjfxk`, Analyse `AaCvh-LnotDYp2WltY0K` und `SUCCESS`.
+  - [x] Funktionstest: `Test-SonarCiLifecycle.ps1`, `Test-SonarExternalIssues.ps1`, `Test-SonarAuth.ps1`, `Test-SonarToolchain.ps1` und `Test-JobAgentCiContracts.ps1` jeweils Exit `0`. Browser-, Viewport- und Android-Audit: nicht anwendbar. Kein Supertest; er ist kein Ersatz für diesen Funktionsnachweis.
+  - [x] Evidence: `docs/reviews/SQ-009-compute-engine-read-acceptance.md` und `logs/verify/sq-009-20260917-152135.json`.
+
+- [x] SQ-008 SonarQube-Analysevertrag, Fehlergate und Betriebsnachweis in die CI überführen
+  - [x] Beschreibung und Scope: `./ci.cmd sonar` führt ausschließlich den fail-closed External-Issue-Lifecycle mit Toolchain-, Report-, Authentifizierungs-, Projekt-, Scanner- und Compute-Engine-Grenzen aus. Der zugelassene Quellsatz bleibt `.ci/bin` und `tools`; keine globale Toolinstallation, Projekt-/Gate-Mutation oder Commit-/Push-Auslösung wurde hinzugefügt.
+  - [x] Realnachweis: Der oben belegte Lauf enthält Scope, Commit, Befundzähler, Taskstatus und Analyse-ID. Erfolgs- und Fehlerevidence bleiben sekretfrei.
+  - [x] Audit: Keine Aussage zu nativer PowerShell-Analyse, Coverage, Duplikatmetriken, Quality Profiles oder Quality Gates. Token, Header, Queryparameter, Tokenlängen und Scanner-Debugausgaben sind ausgeschlossen.
+  - [x] Funktionstest und Evidence: dieselben fünf fokussierten Funktionstests jeweils Exit `0`; `docs/reviews/SQ-008-ci-lifecycle-acceptance.md` und `logs/verify/sq-009-20260917-152135.json`. Browser-, Viewport- und Android-Audit: nicht anwendbar. Kein Supertest; er ist kein Ersatz für den SonarQube-Nachweis.
+

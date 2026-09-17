@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Aktiver Backlog: SQ-008. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-17. Kein aktiver Backlog. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
-- `Roadmap.md`: enthält nur den aktiven Punkt SQ-008.
+- `Roadmap.md`: enthält keine aktiven Punkte.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
 - `docs/reviews/QA-007-acceptance.md`: Ursache, sicherheitsverträgliche Teständerung und sekretfreies Ergebnis des vollständigen Supertests.
 - `docs/reviews/QA-008-acceptance.md`: Inventardiffklasse, Generatorlauf und Matrix-/Runner-Vertrag.
@@ -34,4 +34,5 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-17: QA-007 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/QA-007-acceptance.md, `Test-Ci005Invariants.ps1` ohne Fixture-Kopien, Datei-Mutationen, rekursive Löschung oder verschachtelte CI-Starts sowie `./ci.cmd supertest` mit 29/29 Fällen und Exit 0 in 692,59 s.
 - 2026-09-17: QA-008 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/QA-008-acceptance.md, kanonisch durch `-WriteInventory` erzeugtes QA-001-Inventar mit 577 Einträgen, Matrix- und Runner-Vertrag mit Exit 0 sowie derselbe Vollsupertest 29/29.
 - 2026-09-17: SQ-006 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-006-analysis-supply-chain.md, docs/reviews/SQ-006-toolchain.json, fail-closed `Test-SonarToolchain.ps1` und Supertest 29/29. Die Toolchain bleibt ohne separat autorisierte Beschaffung `not-installed`.
+- 2026-09-17: SQ-009 und SQ-008 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/SQ-009-compute-engine-read-acceptance.md`, `docs/reviews/SQ-008-ci-lifecycle-acceptance.md`, `logs/verify/sq-009-20260917-152135.json`, Task `AaCvh97JOhdKqVTDjfxk`, Analyse `AaCvh-LnotDYp2WltY0K`, HTTP `200`, Status `SUCCESS` und 323 External Issues. Keine native PowerShell-Analyse oder Quality-Gate-Aussage.
 
