@@ -3569,7 +3569,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Add-JobAgentReportCompanyHtmlTable",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -3584,7 +3584,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Add-JobAgentReportCompanyMarkdownTable",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -3599,7 +3599,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Add-JobAgentReportHtmlTable",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -3614,7 +3614,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Add-JobAgentReportMarkdownTable",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -3629,7 +3629,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Add-JobAgentReportSearchInterfaceHtml",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -3644,7 +3644,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Add-JobAgentReportSourceIssueHtmlTable",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -3659,7 +3659,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Add-JobAgentReportSourceIssueMarkdownTable",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -3674,7 +3674,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentDailyReportHtml",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3689,7 +3689,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentDailyReportMarkdown",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3704,7 +3704,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportClientDataJson",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3719,7 +3719,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportDateText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3734,7 +3734,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportDescriptionText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3749,7 +3749,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportDisplayHtmlText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3764,7 +3764,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportDisplayLabel",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3779,7 +3779,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportDisplayMarkdownText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3794,7 +3794,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportHtmlLink",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3809,7 +3809,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportHtmlText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3824,7 +3824,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportListText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3839,7 +3839,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportMarkdownLink",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3854,7 +3854,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportMarkdownText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3869,7 +3869,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportProviderHtmlLink",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3884,7 +3884,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportProviderMarkdownLink",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3899,7 +3899,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "ConvertTo-JobAgentReportText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3914,7 +3914,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Get-JobAgentReportAgeInfo",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3929,7 +3929,22 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
+      "symbol": "Get-JobAgentReportAvailabilityInfo",
+      "entry_point": false,
+      "side_effect": "read-only-or-pure",
+      "contract_source": "product-module",
+      "test_references": [
+        "tests\\Test-JobAgentReport.ps1",
+        "tests\\Test-JobAgentUiBrowserAudit.ps1",
+        "tests\\Test-JobAgentHtmlAudit.ps1",
+        "tests\\Test-JobAgentHtmlViewportAudit.ps1"
+      ]
+    },
+    {
+      "kind": "powershell-function",
+      "source_path": "src\\JobAgent.Report.psm1",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Get-JobAgentReportCompanyName",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3944,7 +3959,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Get-JobAgentReportPriorityExplanation",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3959,7 +3974,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Get-JobAgentReportProperty",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3974,7 +3989,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Get-JobAgentReportProviderLink",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -3989,7 +4004,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "New-JobAgentDailyReport",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4004,7 +4019,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "New-JobAgentReportCaptureManifest",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4019,7 +4034,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "New-JobAgentReportCompanyEntry",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4034,7 +4049,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "New-JobAgentReportJobEntry",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4049,7 +4064,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "New-JobAgentReportMissingLink",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4064,7 +4079,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "New-JobAgentReportSourceIssueEntry",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4079,7 +4094,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "New-JobAgentReportStatistics",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4094,7 +4109,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Test-JobAgentReportCapturedJob",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4109,7 +4124,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Test-JobAgentReportHttpUrl",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4124,7 +4139,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "Test-JobAgentReportMatch",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -4139,7 +4154,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "age",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4153,7 +4168,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "area",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4167,7 +4182,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "companies",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4181,7 +4196,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "employmentType",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4195,7 +4210,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "jobagent-reset",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4209,7 +4224,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "jobs",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4223,7 +4238,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "q",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4237,7 +4252,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "workModel",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -4251,7 +4266,7 @@
     {
       "kind": "ui-control",
       "source_path": "src\\JobAgent.Report.psm1",
-      "source_sha256": "6f0ff9383b34b57dd94a8e352f133c1396c6dd23802cf018e31084d7b7e977c2",
+      "source_sha256": "37152ad20d13c8818444f7dbd177419a530cab485f01ef1db9758242c7f31938",
       "symbol": "workTime",
       "entry_point": false,
       "side_effect": "user-interaction",
@@ -5209,7 +5224,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Close-JobAgentExistingJobFromRawJob",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5221,7 +5236,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "ConvertTo-JobAgentStatusIso",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5233,7 +5248,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "ConvertTo-JobAgentStatusPlainText",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5245,7 +5260,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "ConvertTo-JobAgentStatusSlug",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5257,7 +5272,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Get-JobAgentRawDescription",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5269,7 +5284,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Get-JobAgentRawDescriptionSource",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5281,7 +5296,19 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
+      "symbol": "Get-JobAgentRawPublishedAt",
+      "entry_point": false,
+      "side_effect": "read-only-or-pure",
+      "contract_source": "product-module",
+      "test_references": [
+        "tests\\Test-JobAgentStatusMachine.ps1"
+      ]
+    },
+    {
+      "kind": "powershell-function",
+      "source_path": "src\\JobAgent.StatusMachine.psm1",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Get-JobAgentRawSourceLifecycleState",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5293,7 +5320,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Get-JobAgentRawValue",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5305,7 +5332,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Get-JobAgentStatusHash",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5317,7 +5344,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Invoke-JobAgentStatusMachine",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -5329,7 +5356,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "New-JobAgentJobFromRawJob",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5341,7 +5368,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "New-JobAgentSnapshotFromRawJob",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5353,7 +5380,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "New-JobAgentStatusChangeEvent",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5365,7 +5392,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "New-JobAgentStatusLocation",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5377,7 +5404,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "New-JobAgentUnknownClassification",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5389,7 +5416,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "New-JobAgentUnknownJobValidity",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5401,7 +5428,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "New-JobAgentUnknownRegionalScope",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5413,7 +5440,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Test-JobAgentRawJobValidForStatus",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5425,7 +5452,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Test-JobAgentRemovalEligibleAdapterResult",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5437,7 +5464,7 @@
     {
       "kind": "powershell-function",
       "source_path": "src\\JobAgent.StatusMachine.psm1",
-      "source_sha256": "3de35d2d2a709d620ab4fb5cdb54729640f092cacac4452f41ce087615ed09e6",
+      "source_sha256": "f55dcaf383cc517c1c1a8073edd5c76138ef7d19332fd78c5d96dad7113b6549",
       "symbol": "Update-JobAgentExistingJobFromRawJob",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -7205,6 +7232,10 @@
     },
     {
       "test_file": "tests\\Test-JobAgentImportWaves.ps1",
+      "category": "function"
+    },
+    {
+      "test_file": "tests\\Test-JobAgentJa044AcquisitionReplay.ps1",
       "category": "function"
     },
     {

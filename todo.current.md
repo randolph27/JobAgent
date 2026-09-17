@@ -2,7 +2,6 @@
 
 Active: _(none)_
 
-- [open] TD-0072 M1 – Datenbasis und persoenliche Markierungen: JA-044 Wachsenden Firmenkern dauerhaft in konkrete Stellen ueberfuehren #comment: Verifizierte neue und bekannte Arbeitgeber muessen im regulaeren Lauf konkrete Stellen liefern, ohne Firmen ohne Treffer zu verlieren.
 - [open] TD-0079 M1 – Datenbasis und persoenliche Markierungen: JA-051 Stellenalter, Abrufalter und naechste Pruefung aus belegten Zeitdaten ableiten #comment: Eine heute abgerufene Anzeige darf weder als heute veroeffentlicht noch eine fehlgeschlagene Quelle als aktuell bestaetigt erscheinen.
 - [open] TD-0073 M1 – Datenbasis und persoenliche Markierungen: JA-045 Favoriten und Bewerbungsstatus verlustarm je Stelle speichern #comment: Zwei unabhaengige persoenliche Markierungen muessen Berichtswechsel und Scans ueberleben, ohne den offiziellen Stellenstatus zu veraendern.
 - [open] TD-0074 M2 – Stellenboersen-Oberflaeche: JA-046 Primaere Trefferseite als responsive Stellenboerse aufbauen #comment: Beim Oeffnen stehen konkrete Stellen und ihre Suche im Vordergrund, Firmen und technische Laufdetails bleiben nachgeordnet erreichbar.

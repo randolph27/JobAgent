@@ -1,5 +1,14 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-17 - JA-044
+
+- [x] JA-044 Wachsenden Firmenkern dauerhaft in konkrete Stellen ueberfuehren #comment: Verifizierte neue und bekannte Arbeitgeber liefern im regulaeren Lauf konkrete Stellen, ohne Firmen oder Stellen bei Fehlern, Timeouts und Teilscans zu verlieren.
+  - [x] Ergebnis und Scope: Der bestehende Firmen-, Verifikations-, Adapter-, Daily-Run- und Persistenzvertrag erfuellt die geforderte Uebergabe bereits. Ergaenzt wurden nur die deterministische Fixture `tests/fixtures/jobagent/ja-044-acquisition-replay.json`, der Integrationsfunktionstest `tests/Test-JobAgentJa044AcquisitionReplay.ps1`, die Testmatrix und der Akzeptanznachweis. Keine Produktivdaten, Quellbudgets, Login-/CAPTCHA-Wege oder Netzwerkquellen wurden veraendert.
+  - [x] Firmenretention und Identitaet: Der Replay startet mit einer bekannten Alpha AG, uebernimmt genau eine neue verifizierte Beta GmbH, erkennt einen Doppelhinweis und behaelt die leere Gamma GmbH. Identische Wiederholung und Prozessrestart erhalten drei stabile Firmen-IDs sowie die festen externen Stellen-IDs `alpha-100` und `beta-200` ohne Dublette.
+  - [x] Vollstaendigkeit und Fehlergrenze: Ein vollstaendiger erfolgreicher Leerscan der Beta-Quelle setzt nur `beta-200` auf `REMOVED`. Timeout und Teilscan bleiben `PARTIAL` und behalten `alpha-100` aktiv. Damit werden erfolgreicher Leerbefund, Fehler, Pagination-/Budgetunterbrechung und Resume nicht gleichgesetzt.
+  - [x] Evidence und Funktionstests: `docs/reviews/JA-044-acceptance.md`; die ignorierte Replay-Evidence `logs/jobagent/JA-044/acquisition-replay.json` mit SHA-256 `0d5c3b1a7c18270a88c17073f7e67255663f3c678c7cb8e3add457dbfefd6e93`. `Test-JobAgentCompanyInventory.ps1` (18), `Test-JobAgentSourceVerification.ps1` (28), `Test-JobAgentSourceAdapters.ps1` (12), `Test-JobAgentDailyRun.ps1` (22), `Test-JobAgentCoverage.ps1` (18), `Test-JobAgentJa044AcquisitionReplay.ps1` (6) sowie der regenerierende und pruefende `Test-JobAgentTestMatrix.ps1` (579 Inventareintraege, 9 Matrixfaelle) endeten jeweils mit Exit 0.
+  - [x] Audit und Folgepunkt: Pipeline-, ID- und Zaehler-Audit ohne UI-, Browser-, Emulator- oder Livecrawl-Lane. Der Vollsupertest wurde nicht angefragt und gilt gemaess Nutzerregel als erledigt; er wurde nicht ausgefuehrt. Naechster kritischer Punkt ist JA-051 mit gemeinsamer, festen Referenzzeit gesteuerter Zeitprojektion.
+
 ## Archiviert 2026-09-17 - JA-043
 
 - [x] JA-043 Kanonischen Stellenbestand, Anzeigefelder und Verfuegbarkeit definieren #comment: Ein Firmenlink wird erst durch eine identifizierte, quellenbelegte offene Stelle zum Treffer der Stellenboerse.

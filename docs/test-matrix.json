@@ -624,6 +624,17 @@
       "include_in_supertest": false,
       "lane": "contract",
       "coverage": ["projektlokaler Daemon- und Temppfad", "Umgebungsrestauration", "fehlender lokaler CLI-Cache fail-closed", "Cleanup"]
+    },
+    {
+      "roadmap_id": "JA-044",
+      "supertest_order": 32,
+      "title": "Quellenuebergabe vom verifizierten Firmenkern in den Stellenbestand",
+      "test_file": "tests/Test-JobAgentJa044AcquisitionReplay.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentJa044AcquisitionReplay.ps1",
+      "status": "planned",
+      "include_in_supertest": false,
+      "lane": "deterministic-fixture",
+      "coverage": ["verifizierte neue Firma und Doppelhinweis", "idempotenter Zweitlauf", "vollstaendiger Leerscan", "Timeout und Teilscan ohne falsches REMOVED", "Restart ohne Firmen- oder Stellendublette"]
     }
   ]
 }

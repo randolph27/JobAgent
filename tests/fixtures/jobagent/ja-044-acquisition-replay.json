@@ -1,0 +1,85 @@
+{
+  "reference_time": "2026-09-17T08:00:00.000Z",
+  "companies": [
+    {
+      "canonical_name": "Alpha AG",
+      "official_website_url": "https://alpha.example.invalid/",
+      "career_url": "https://alpha.example.invalid/karriere",
+      "industry": "Technology",
+      "scan_priority": 90,
+      "location": { "label": "Muenchen", "city": "Muenchen", "target_area": "MUNICH" }
+    },
+    {
+      "canonical_name": "Beta GmbH",
+      "official_website_url": "https://beta.example.invalid/",
+      "career_url": "https://beta.example.invalid/jobs",
+      "industry": "Manufacturing",
+      "scan_priority": 80,
+      "location": { "label": "Freising", "city": "Freising", "target_area": "FREISING" }
+    },
+    {
+      "canonical_name": "Gamma GmbH",
+      "official_website_url": "https://gamma.example.invalid/",
+      "career_url": "https://gamma.example.invalid/karriere",
+      "industry": "Services",
+      "scan_priority": 70,
+      "location": { "label": "Muenchen", "city": "Muenchen", "target_area": "MUNICH" }
+    }
+  ],
+  "duplicate_candidate": {
+    "canonical_name": "Beta AG",
+    "official_website_url": "https://beta.example.invalid/",
+    "career_url": "https://beta.example.invalid/jobs",
+    "industry": "Manufacturing",
+    "scan_priority": 75,
+    "location": { "label": "Freising", "city": "Freising", "target_area": "FREISING" }
+  },
+  "expected": {
+    "company_ids": ["company:alpha_ag", "company:beta_gmbh", "company:gamma_gmbh"],
+    "job_external_ids": ["alpha-100", "beta-200"],
+    "removed_external_id": "beta-200",
+    "retained_after_failure_external_id": "alpha-100"
+  },
+  "phases": {
+    "initial": {
+      "company:alpha_ag": {
+        "status": "SUCCESS",
+        "error_class": "NONE",
+        "retry_recommendation": "NONE",
+        "raw_jobs": [{ "title": "Head of IT", "detail_url": "https://alpha.example.invalid/karriere/jobs/alpha-100", "external_job_id": "alpha-100", "ats_job_id": "UNKNOWN", "location_label": "Muenchen", "summary": "Stabile Alpha-Stelle.", "extraction_confidence": 95 }]
+      },
+      "company:beta_gmbh": {
+        "status": "SUCCESS",
+        "error_class": "NONE",
+        "retry_recommendation": "NONE",
+        "raw_jobs": [{ "title": "Leitung Finanzen", "detail_url": "https://beta.example.invalid/jobs/beta-200", "external_job_id": "beta-200", "ats_job_id": "UNKNOWN", "location_label": "Freising", "summary": "Neue verifizierte Beta-Stelle.", "extraction_confidence": 95 }]
+      },
+      "company:gamma_gmbh": { "status": "SUCCESS", "error_class": "NONE", "retry_recommendation": "NONE", "complete_empty": true, "raw_jobs": [] }
+    },
+    "timeout": {
+      "company:alpha_ag": { "status": "FAILED", "error_class": "TIMEOUT", "retry_recommendation": "RETRY_NEXT_RUN", "raw_jobs": [] },
+      "company:beta_gmbh": {
+        "status": "SUCCESS",
+        "error_class": "NONE",
+        "retry_recommendation": "NONE",
+        "raw_jobs": [{ "title": "Leitung Finanzen", "detail_url": "https://beta.example.invalid/jobs/beta-200", "external_job_id": "beta-200", "ats_job_id": "UNKNOWN", "location_label": "Freising", "summary": "Neue verifizierte Beta-Stelle.", "extraction_confidence": 95 }]
+      },
+      "company:gamma_gmbh": { "status": "SUCCESS", "error_class": "NONE", "retry_recommendation": "NONE", "complete_empty": true, "raw_jobs": [] }
+    },
+    "complete_empty_beta": {
+      "company:alpha_ag": {
+        "status": "SUCCESS",
+        "error_class": "NONE",
+        "retry_recommendation": "NONE",
+        "raw_jobs": [{ "title": "Head of IT", "detail_url": "https://alpha.example.invalid/karriere/jobs/alpha-100", "external_job_id": "alpha-100", "ats_job_id": "UNKNOWN", "location_label": "Muenchen", "summary": "Stabile Alpha-Stelle.", "extraction_confidence": 95 }]
+      },
+      "company:beta_gmbh": { "status": "SUCCESS", "error_class": "NONE", "retry_recommendation": "NONE", "complete_empty": true, "raw_jobs": [] },
+      "company:gamma_gmbh": { "status": "SUCCESS", "error_class": "NONE", "retry_recommendation": "NONE", "complete_empty": true, "raw_jobs": [] }
+    },
+    "partial_alpha": {
+      "company:alpha_ag": { "status": "PARTIAL", "error_class": "TECHNICAL_LIMITATION", "retry_recommendation": "RETRY_NEXT_RUN", "raw_jobs": [] },
+      "company:beta_gmbh": { "status": "SUCCESS", "error_class": "NONE", "retry_recommendation": "NONE", "complete_empty": true, "raw_jobs": [] },
+      "company:gamma_gmbh": { "status": "SUCCESS", "error_class": "NONE", "retry_recommendation": "NONE", "complete_empty": true, "raw_jobs": [] }
+    }
+  }
+}

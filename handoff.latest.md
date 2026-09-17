@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-17T17:20:57.889+02:00
+Stand: 2026-09-17T17:44:38.323+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-17T17:20:57.889+02:00
 - Status: `open`
 - Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `0eed5b582c62`
+- HEAD: `3b0bc1cd0abb`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -19,14 +19,10 @@ Stand: 2026-09-17T17:20:57.889+02:00
 - `Roadmap.md`
 - `Roadmap_archive.md`
 - `Roadmap_index.md`
+- `docs/reviews/QA-001-function-inventory.json`
+- `docs/test-matrix.json`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `schemas/jobagent.schema.json`
-- `src/JobAgent.Report.psm1`
-- `src/JobAgent.StatusMachine.psm1`
-- `tests/Test-JobAgentReport.ps1`
-- `tests/Test-JobAgentSchema.ps1`
-- `tests/Test-JobAgentStatusMachine.ps1`
 - `todo.checkpoint.json`
 - `todo.current.md`
 - `todo.events.jsonl`
@@ -40,4 +36,4 @@ Stand: 2026-09-17T17:20:57.889+02:00
 
 ## Naechster Anker
 
-M1 – Datenbasis und persoenliche Markierungen: JA-044 Wachsenden Firmenkern dauerhaft in konkrete Stellen ueberfuehren #comment: Verifizierte neue und bekannte Arbeitgeber muessen im regulaeren Lauf konkrete Stellen liefern, ohne Firmen ohne Treffer zu verlieren.
+M1 – Datenbasis und persoenliche Markierungen: JA-051 Stellenalter, Abrufalter und naechste Pruefung aus belegten Zeitdaten ableiten #comment: Eine heute abgerufene Anzeige darf weder als heute veroeffentlicht noch eine fehlgeschlagene Quelle als aktuell bestaetigt erscheinen.
