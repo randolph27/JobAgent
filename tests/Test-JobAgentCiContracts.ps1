@@ -10,6 +10,8 @@ $root = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $config = Get-Content -LiteralPath (Join-Path $root '.ci\ci.config.json') -Raw | ConvertFrom-Json
 $browserLogic = Get-Content -LiteralPath (Join-Path $root '.ci\bin\modules\browser-logic.ps1') -Raw
 $commands = Get-Content -LiteralPath (Join-Path $root '.ci\bin\modules\ci-commands-main.ps1') -Raw
+$ciRuntime = Get-Content -LiteralPath (Join-Path $root '.ci\bin\ci.ps1') -Raw
+$dailyRunScript = Get-Content -LiteralPath (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -Raw
 
 function Assert-True {
     param([bool]$Condition, [string]$Message)
@@ -27,6 +29,11 @@ Assert-True ($config.sonar.mode -eq 'not-supported') 'Nicht konfigurierte Sonar-
 Assert-True (@($config.immutable_policy.mutable_paths) -contains 'Roadmap.md') 'Roadmap.md ist nicht als autorisierte mutable Planungsdatei gebunden.'
 Assert-True ($commands -match 'status="not-supported"') 'Sonar-Nichtunterstuetzung wird nicht als eigener Status protokolliert.'
 Assert-True ($commands -match 'analysis_started=\$false') 'Sonar-Nichtunterstuetzung muss einen nicht gestarteten Analysepfad ausweisen.'
+Assert-True ([int]$config.jobagent.daily_run.live_pilot_max_companies -eq 1000) 'Der reguläre Live-Lauf muss bis zu 1000 Firmen und damit den aktuellen Gesamtbestand verarbeiten können.'
+Assert-True ($dailyRunScript -match '\[Parameter\(\)\]\[ValidateRange\(1, 1000\)\]\[int\]\$MaxCompanies\s*=\s*1000') 'Der reguläre Daily-Run-Default muss dem Live-Limit von 1000 entsprechen.'
+Assert-True ($dailyRunScript -match '\[Parameter\(\)\]\[switch\]\$FullScan') 'Der Daily-Run muss einen expliziten Vollscanmodus ohne lange Befehlszeile bereitstellen.'
+Assert-True ($dailyRunScript -match 'Read-JobAgentStore -ProjectRoot \$ProjectRoot -DataRoot \$DataRoot') 'Der Vollscan muss die Firmenliste intern aus dem aktuellen Store ableiten.'
+Assert-True ($ciRuntime -match '& \$script:CiCommands\[\$cmdKey\] @Args') 'Der CI-Entrypoint muss verbleibende Daily-Run-Argumente an den registrierten Command weiterreichen.'
 
 $ci005Test = Join-Path $PSScriptRoot 'Test-Ci005Invariants.ps1'
 Assert-True (Test-Path -LiteralPath $ci005Test) 'CI-005-Invariantentest fehlt.'
@@ -34,5 +41,5 @@ Assert-True (Test-Path -LiteralPath $ci005Test) 'CI-005-Invariantentest fehlt.'
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
+    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'live_daily_run_limit_1000', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
 } | ConvertTo-Json -Depth 4

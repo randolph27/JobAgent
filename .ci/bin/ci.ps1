@@ -380,7 +380,7 @@ try {
 
   $cmdKey = $cmdLower
   if ($script:CiCommands.ContainsKey($cmdKey)) {
-    & $script:CiCommands[$cmdKey]
+    & $script:CiCommands[$cmdKey] @Args
   } else {
     throw "Unknown command: $Command"
   }

@@ -313,6 +313,35 @@ try {
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.report_path)) -Message 'Daily-Run-CLI schreibt kein Reportartefakt.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.html_report_path)) -Message 'Daily-Run-CLI schreibt kein HTML-Artefakt.'
 
+    $fullScanProjectRoot = New-TestProjectRoot
+    New-TestStore -ProjectRoot $fullScanProjectRoot
+    $fullScanFixturePath = Join-Path $fullScanProjectRoot 'daily-fixture.json'
+    Copy-Item -LiteralPath $fixturePath -Destination $fullScanFixturePath
+    $fullScanOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $fullScanProjectRoot -FixturePath $fullScanFixturePath -FullScan -DisableAcquisition 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI-Vollscan ist fehlgeschlagen: " + ($fullScanOutput -join "`n"))
+    $fullScanResult = ($fullScanOutput -join "`n") | ConvertFrom-Json -Depth 20
+    Assert-True -Condition ($fullScanResult.full_scan -eq $true) -Message 'Daily-Run-CLI weist den expliziten Vollscan nicht aus.'
+    Assert-True -Condition ($fullScanResult.statistics.companies_total -eq 3) -Message 'Daily-Run-CLI-Vollscan zaehlt nicht den vollstaendigen Firmenbestand.'
+    Assert-True -Condition ($fullScanResult.statistics.companies_selected -eq 3) -Message 'Daily-Run-CLI-Vollscan waehlt nicht alle Store-Firmen intern aus.'
+    Assert-True -Condition ($fullScanResult.statistics.companies_skipped -eq 0) -Message 'Daily-Run-CLI-Vollscan kuerzt die explizite Auswahl.'
+    Assert-True -Condition ($fullScanResult.statistics.run_limit -eq 1000) -Message 'Daily-Run-CLI-Vollscan verliert das konfigurierte Limit.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$fullScanResult.html_report_path)) -Message 'Daily-Run-CLI-Vollscan schreibt keinen HTML-Report.'
+
+    $fullScanCiProjectRoot = New-TestProjectRoot
+    New-TestStore -ProjectRoot $fullScanCiProjectRoot
+    $fullScanCiFixturePath = Join-Path $fullScanCiProjectRoot 'daily-fixture.json'
+    Copy-Item -LiteralPath $fixturePath -Destination $fullScanCiFixturePath
+    $fullScanCiOutput = @(& (Join-Path $root 'ci.cmd') daily-run -ProjectRoot $fullScanCiProjectRoot -FixturePath $fullScanCiFixturePath -FullScan -DisableAcquisition 2>&1)
+    Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("CI-Daily-Run-Vollscan ist fehlgeschlagen: " + ($fullScanCiOutput -join "`n"))
+    $fullScanCiText = $fullScanCiOutput -join "`n"
+    $fullScanCiJsonStart = $fullScanCiText.IndexOf('{')
+    $fullScanCiJsonEnd = $fullScanCiText.LastIndexOf("`n[CI] OK:")
+    Assert-True -Condition ($fullScanCiJsonStart -ge 0 -and $fullScanCiJsonEnd -gt $fullScanCiJsonStart) -Message 'CI-Daily-Run-Vollscan liefert kein abgrenzbares JSON-Resultat.'
+    $fullScanCiResult = $fullScanCiText.Substring($fullScanCiJsonStart, $fullScanCiJsonEnd - $fullScanCiJsonStart).Trim() | ConvertFrom-Json -Depth 20
+    Assert-True -Condition ($fullScanCiResult.full_scan -eq $true) -Message 'Der CI-Entrypoint verwirft den FullScan-Switch.'
+    Assert-True -Condition ($fullScanCiResult.statistics.companies_selected -eq 3) -Message 'Der CI-Entrypoint-Vollscan waehlt nicht alle Store-Firmen aus.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$fullScanCiResult.html_report_path)) -Message 'Der CI-Entrypoint-Vollscan schreibt keinen HTML-Report.'
+
     $cliLiveProjectRoot = New-TestProjectRoot
     $cliLiveOutput = @(& pwsh -NoProfile -File (Join-Path $root 'tools\Invoke-JobAgentDailyRun.ps1') -ProjectRoot $cliLiveProjectRoot -MaxCompanies 1 -MaxResultsPerSource 2 -MaxDetailFetchesPerSource 2 -MaxPagesPerSource 2 -MaxRetries 0 -FetchClient curl -WslDistribution FixtureDistro 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ("Daily-Run-CLI-Live-Modus ohne Fixture ist fehlgeschlagen: " + ($cliLiveOutput -join "`n"))
@@ -806,6 +835,8 @@ try {
             'daily_run_persists_selection_summary',
             'daily_run_report_renders_selection_metrics',
             'daily_run_persists_company_freshness_fields',
+            'daily_run_cli_full_scan_selects_all_companies_without_long_command_line',
+            'daily_run_ci_entrypoint_forwards_full_scan_switch',
             'daily_run_live_jsonld_ats_source',
             'daily_run_preserves_neutral_role_and_region_matrix',
             'daily_run_separates_capture_scope_profile_counts_and_completeness',
@@ -828,6 +859,12 @@ finally {
     }
     if ($null -ne (Get-Variable -Name cliProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $cliProjectRoot)) {
         Remove-Item -LiteralPath $cliProjectRoot -Recurse -Force
+    }
+    if ($null -ne (Get-Variable -Name fullScanProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $fullScanProjectRoot)) {
+        Remove-Item -LiteralPath $fullScanProjectRoot -Recurse -Force
+    }
+    if ($null -ne (Get-Variable -Name fullScanCiProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $fullScanCiProjectRoot)) {
+        Remove-Item -LiteralPath $fullScanCiProjectRoot -Recurse -Force
     }
     if ($null -ne (Get-Variable -Name cliLiveProjectRoot -ErrorAction SilentlyContinue) -and (Test-Path -LiteralPath $cliLiveProjectRoot)) {
         Remove-Item -LiteralPath $cliLiveProjectRoot -Recurse -Force

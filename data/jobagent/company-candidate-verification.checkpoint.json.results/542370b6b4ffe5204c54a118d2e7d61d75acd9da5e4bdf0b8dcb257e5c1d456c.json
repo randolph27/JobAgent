@@ -19,11 +19,11 @@
       ],
       "evidence_type": "COMPANY_DOMAIN",
       "evidence_text_hash": "7a60e588e1086e7c13373b1705385d45684d5776614f714c706f27479d1550ae",
-      "observed_at": "2026-09-07T11:19:32.541Z",
+      "observed_at": "2026-09-16T18:02:04.918Z",
       "http_status": 200,
       "final_url": "https://amplifold.com/",
       "reason": "Kein offiziell belegter Karriere- oder ATS-Link wurde gefunden.",
-      "expires_at": "2026-12-06T11:19:32.541Z"
+      "expires_at": "2026-12-15T18:02:04.918Z"
     }
   ],
   "fetches": [
@@ -35,7 +35,9 @@
       "content": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>amplifold</title>\n  <style>\n    body {\n      margin: 0;\n      background-color: #ffffff;\n      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n      display: flex;\n      flex-direction: column;\n      justify-content: center;\n      align-items: center;\n      height: 100vh;\n      color: #00189F;\n      text-align: center;\n    }\n\n    img {\n      max-width: 50%;\n      height: auto;\n      margin-bottom: 20px;\n    }\n\n    .message {\n      font-size: 1.2rem;\n    }\n  </style>\n</head>\n<body>\n  <img src=\"Amplifold-LogoAndText.png\" alt=\"Amplifold Logo\">\n  <div class=\"message\">Getting started... More updates coming soon. </div>\n</body>\n</html>\n",
       "content_type": "text/html; charset=utf-8",
       "retry_after_seconds": null,
-      "error": null
+      "error_class": null,
+      "error": null,
+      "error_detail": null
     },
     {
       "ok": false,
@@ -45,7 +47,9 @@
       "content": "",
       "content_type": "text/html; charset=utf-8",
       "retry_after_seconds": null,
-      "error": "HTTP 404"
+      "error_class": "HTTP_STATUS",
+      "error": "HTTP 404",
+      "error_detail": "HTTP 404"
     },
     {
       "ok": false,
@@ -55,7 +59,9 @@
       "content": "",
       "content_type": "text/html; charset=utf-8",
       "retry_after_seconds": null,
-      "error": "HTTP 404"
+      "error_class": "HTTP_STATUS",
+      "error": "HTTP 404",
+      "error_detail": "HTTP 404"
     }
   ],
   "company": {
@@ -77,9 +83,9 @@
   "next_action": "upsert_verified_company_without_job_source",
   "batch_telemetry": {
     "candidate_id": "regional-hint:izb_startups_amplifold_gmbh_martinsried_und_freising_weihenstephan",
-    "attempt_started_at": "2026-09-07T11:20:41.545Z",
-    "attempt_completed_at": "2026-09-07T11:20:42.188Z",
-    "duration_ms": 644,
+    "attempt_started_at": "2026-09-16T18:03:30.457Z",
+    "attempt_completed_at": "2026-09-16T18:03:30.872Z",
+    "duration_ms": 415,
     "request_count": 3
   }
 }

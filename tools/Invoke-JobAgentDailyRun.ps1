@@ -6,7 +6,7 @@ param(
     [Parameter()][string]$DataRoot = 'data/jobagent',
     [Parameter()][string]$FixturePath,
     [Parameter()][ValidateSet('auto', 'fixture', 'live')][string]$AdapterMode = 'auto',
-    [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 25,
+    [Parameter()][ValidateRange(1, 1000)][int]$MaxCompanies = 1000,
     [Parameter()][ValidateRange(1, 600)][int]$TimeoutSeconds = 30,
     [Parameter()][ValidateRange(0, 5)][int]$MaxRetries = 1,
     [Parameter()][ValidateRange(1, 100)][int]$MaxResultsPerSource = 100,
@@ -20,6 +20,7 @@ param(
     [Parameter()][string]$WslDistribution = 'Ubuntu-22.04',
     [Parameter()][string[]]$SearchTerms = @(),
     [Parameter()][string[]]$CompanyIds = @(),
+    [Parameter()][switch]$FullScan,
     [Parameter()][string]$LogRoot = 'logs/jobagent',
     [Parameter()][ValidateRange(1, 1000)][int]$RetainLogs = 30
 )
@@ -31,6 +32,7 @@ $repoRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 Import-Module (Join-Path $repoRoot 'src\JobAgent.DailyRun.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $repoRoot 'src\JobAgent.LiveScan.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $repoRoot 'src\JobAgent.Operations.psm1') -Force -DisableNameChecking
+Import-Module (Join-Path $repoRoot 'src\JobAgent.Persistence.psm1') -Force -DisableNameChecking
 Import-Module (Join-Path $repoRoot 'src\JobAgent.SourceAdapters.psm1') -Force -DisableNameChecking
 
 function Resolve-ToolPath {
@@ -340,6 +342,19 @@ $managed = Invoke-JobAgentManagedDailyRun `
                 $acquisition.new_official_career_company_ids | ForEach-Object { [string]$_ } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
             }
         )
+        $effectiveCompanyIds = @($CompanyIds)
+        if ($FullScan) {
+            $fullScanDocument = Read-JobAgentStore -ProjectRoot $ProjectRoot -DataRoot $DataRoot
+            $effectiveCompanyIds = @(
+                $fullScanDocument.companies |
+                    ForEach-Object { [string]$_.company_id } |
+                    Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+                    Sort-Object -Unique
+            )
+            if ($effectiveCompanyIds.Count -gt $MaxCompanies) {
+                throw "FullScan verlangt mindestens MaxCompanies=$($effectiveCompanyIds.Count); konfiguriert sind $MaxCompanies."
+            }
+        }
         $dailyResult = Invoke-JobAgentDailyRun `
             -ProjectRoot $ProjectRoot `
             -DataRoot $DataRoot `
@@ -348,7 +363,7 @@ $managed = Invoke-JobAgentManagedDailyRun `
             -TimeoutSeconds $TimeoutSeconds `
             -MaxResultsPerSource $MaxResultsPerSource `
             -SearchTerms $SearchTerms `
-            -CompanyIds $CompanyIds `
+            -CompanyIds $effectiveCompanyIds `
             -AlwaysIncludeCompanyIds $acquiredCompanyIds `
             -StartedAt $runStartedAt
         $dailyResult | Add-Member -NotePropertyName acquisition -NotePropertyValue $acquisition -Force
@@ -369,6 +384,7 @@ $result = $managed.result
     adapter_mode = $resolvedMode
     fetch_client = if ($resolvedMode -eq 'live') { $FetchClient } else { $null }
     wsl_distribution = if ($resolvedMode -eq 'live') { $WslDistribution } else { $null }
+    full_scan = [bool]$FullScan
     scan_run_id = if ($result) { $result.scan_run_id } else { $null }
     run_id = if ($result) { $result.run_id } else { $null }
     store_path = if ($result) { $result.store_path } else { $null }
