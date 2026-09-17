@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-17T14:57:49.914+02:00
+Stand: 2026-09-17T15:08:30.296+02:00
 
 ## Zustand
 
-- Active: `TD-0069`
+- Active: `TD-0070`
 - Status: `in-progress`
-- Ziel: SQ-008 SonarQube-Analysevertrag, Fehlergate und Betriebsnachweis in die CI überführen #comment: Erst nach belegtem External-Issue-Import darf der bisherige `not-supported`-Pfad durch einen fail-closed, eindeutig begrenzten Analysecommand ersetzt werden.
+- Ziel: SQ-009 Compute-Engine-Task-Read des kanonischen Sonar-Lifecycles deterministisch diagnostizieren und absichern #comment: Priorisierter Blocker für den realen Abschluss von SQ-008.
 - Branch: `master`
-- HEAD: `65d0a47ae178`
+- HEAD: `816bb7882349`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,12 +16,9 @@ Stand: 2026-09-17T14:57:49.914+02:00
 
 ## Versionierte Aenderungen
 
-- `.ci/bin/modules/ci-commands-main.ps1`
-- `.ci/ci.config.json`
 - `Roadmap.md`
-- `tests/Test-JobAgentCiContracts.ps1`
-- `tests/Test-SonarToolchain.ps1`
 - `todo.checkpoint.json`
+- `todo.current.md`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 - `todo.state.json`
@@ -32,4 +29,4 @@ Stand: 2026-09-17T14:57:49.914+02:00
 
 ## Naechster Anker
 
-`sonar` auf den getesteten Import-Lifecycle umstellen und den gemockten SQ-008-Lifecycle-Test ergänzen.
+Den realen `/api/ce/task`-Read sekretfrei nach Fehlerursache klassifizieren, die API-Grenztests erweitern und erst danach `./ci.cmd sonar` erneut ausführen.
