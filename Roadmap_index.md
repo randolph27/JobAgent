@@ -1,8 +1,9 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Keine aktiven Roadmap-Punkte. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und den erfolgreichen Vollsupertest; QA-008 dokumentiert das kanonisch regenerierte Funktionsinventar. SQ-001 ist als explizite SonarQube-Nichtanwendbarkeit und SQ-002 als sekretfreier Authentifizierungsnachweis abgeschlossen.
+Stand: 2026-09-17. Aktiver Backlog: SQ-007 und SQ-008. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; die Artefakte sind bewusst noch nicht installiert. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
-- `Roadmap.md`: enthält nur den aktiven Backlog; derzeit leer.
+- `Roadmap.md`: enthält nur die aktiven Punkte SQ-007 und SQ-008.
+- `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
 - `docs/reviews/QA-007-acceptance.md`: Ursache, sicherheitsverträgliche Teständerung und sekretfreies Ergebnis des vollständigen Supertests.
 - `docs/reviews/QA-008-acceptance.md`: Inventardiffklasse, Generatorlauf und Matrix-/Runner-Vertrag.
 - `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
@@ -31,4 +32,5 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-17: SQ-002 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-002-acceptance.md, Token-Normalisierung und `./ci.cmd sonar-auth` mit `valid:true`. Kein Codescan oder Quality Gate wird behauptet; Vollsupertest gemäß Nutzerregel als erledigt bewertet.
 - 2026-09-17: QA-007 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/QA-007-acceptance.md, `Test-Ci005Invariants.ps1` ohne Fixture-Kopien, Datei-Mutationen, rekursive Löschung oder verschachtelte CI-Starts sowie `./ci.cmd supertest` mit 29/29 Fällen und Exit 0 in 692,59 s.
 - 2026-09-17: QA-008 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/QA-008-acceptance.md, kanonisch durch `-WriteInventory` erzeugtes QA-001-Inventar mit 577 Einträgen, Matrix- und Runner-Vertrag mit Exit 0 sowie derselbe Vollsupertest 29/29.
+- 2026-09-17: SQ-006 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-006-analysis-supply-chain.md, docs/reviews/SQ-006-toolchain.json, fail-closed `Test-SonarToolchain.ps1` und Supertest 29/29. Die Toolchain bleibt ohne separat autorisierte Beschaffung `not-installed`.
 

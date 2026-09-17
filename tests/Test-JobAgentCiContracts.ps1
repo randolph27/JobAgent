@@ -30,6 +30,10 @@ Assert-True (@($config.immutable_policy.mutable_paths) -contains 'Roadmap.md') '
 Assert-True ($commands -match 'status="not-supported"') 'Sonar-Nichtunterstuetzung wird nicht als eigener Status protokolliert.'
 Assert-True ($commands -match 'analysis_started=\$false') 'Sonar-Nichtunterstuetzung muss einen nicht gestarteten Analysepfad ausweisen.'
 Assert-True ($config.sonar.auth.token_file -eq 'D:\_Scripte\_Sonar\token.txt') 'Sonar-Tokenquelle ist nicht explizit konfiguriert.'
+Assert-True ($config.sonar.toolchain.status -eq 'not-installed') 'Die noch nicht beschaffte Sonar-Lieferkette muss fail-closed bleiben.'
+Assert-True ($config.sonar.toolchain.analysis_scope -eq 'external-powershell-issues-only') 'Der Sonar-Analyseumfang ist nicht auf externe PowerShell-Befunde begrenzt.'
+$sonarToolchainTest = Join-Path $PSScriptRoot 'Test-SonarToolchain.ps1'
+Assert-True (Test-Path -LiteralPath $sonarToolchainTest) 'Sonar-Lieferkettenfunktionstest fehlt.'
 Assert-True ($commands -match 'function ConvertTo-SonarNormalizedToken') 'Sonar-Token-Normalisierung fehlt.'
 Assert-True ($commands -match 'function Cmd-SonarAuth') 'Sekretfreier Sonar-Authentifizierungscommand fehlt.'
 Assert-True ($commands -match 'Register-CiCommand "sonar-auth"') 'Sonar-Authentifizierungscommand ist nicht registriert.'
@@ -47,5 +51,5 @@ Assert-True (Test-Path -LiteralPath $ci005Test) 'CI-005-Invariantentest fehlt.'
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'sonar_auth_contract', 'live_daily_run_limit_1000', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
+    cases = @('powershell_verify_lane', 'explicit_sonar_not_supported', 'sonar_auth_contract', 'sonar_toolchain_not_installed_contract', 'live_daily_run_limit_1000', 'mutable_roadmap_policy', 'devserver_listener_identity', 'external_listener_protection', 'unique_devserver_logs', 'devserver_netstat_listener_fallback', 'ci005_immutable_and_handoff_invariants')
 } | ConvertTo-Json -Depth 4

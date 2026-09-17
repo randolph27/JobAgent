@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "not-installed",
+  "server": {
+    "version": "9.9.8.100196",
+    "analysis_scope": "external-powershell-issues-only"
+  },
+  "artifact_root": ".ci/tools/sonar",
+  "artifacts": [
+    {
+      "id": "sonar-scanner-cli",
+      "version": "4.8.1.3023",
+      "source": "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.1.3023-windows.zip",
+      "relative_path": "sonar-scanner-4.8.1.3023-windows/bin/sonar-scanner.bat",
+      "sha256": null,
+      "license": "LGPL-3.0-or-later"
+    },
+    {
+      "id": "java-runtime",
+      "version": "11",
+      "source": "https://adoptium.net/temurin/releases/?version=11",
+      "relative_path": "jre/bin/java.exe",
+      "sha256": null,
+      "license": "GPL-2.0-with-classpath-exception"
+    },
+    {
+      "id": "PSScriptAnalyzer",
+      "version": "1.25.0",
+      "source": "https://www.powershellgallery.com/packages/PSScriptAnalyzer/1.25.0",
+      "relative_path": "PSScriptAnalyzer/1.25.0/PSScriptAnalyzer.psd1",
+      "sha256": null,
+      "license": "MIT"
+    }
+  ],
+  "local_inventory": {
+    "java_path_runtime": "26",
+    "scanner_cli": "not-found",
+    "psscriptanalyzer": "not-found",
+    "decision": "not-approved-for-analysis"
+  },
+  "secret_sanitized": true
+}
