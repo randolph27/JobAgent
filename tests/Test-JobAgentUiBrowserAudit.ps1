@@ -252,7 +252,7 @@ function Assert-JobAgentLocationHash {
     )
 
     $output = Invoke-JobAgentPlaywrightCli -WorkingDirectory $WorkingDirectory -Arguments @('--session', $SessionName, 'eval', '() => window.location.hash')
-    Assert-True -Condition ($output -match [regex]::Escape('"' + $Expected + '"')) -Message "${Case}: URL-Hash ist nicht normalisiert auf $Expected."
+    Assert-True -Condition ($output -match [regex]::Escape('"' + $Expected + '"')) -Message "${Case}: URL-Hash ist nicht normalisiert auf $Expected. Erhalten: $output"
 }
 
 function Set-JobAgentLocationHash {
@@ -359,6 +359,7 @@ function New-TestJob {
         }
         priority = 'D'
         requirements = @()
+        description = 'UNKNOWN'
         salary = 'UNKNOWN'
         identity_basis = 'OFFICIAL_JOB_ID'
     }
@@ -408,6 +409,10 @@ $document.jobs += @(
 )
 $longContentJob = @($document.jobs | Where-Object { $_.job_id -eq 'job:company_001' })[0]
 $longContentJob.title = 'Leitung Digitalisierung mit einem absichtlich sehr langen ungetrennten Layoutpruefwort ' + ('Verantwortungsbereich' * 12)
+$requirementsSearchJob = @($document.jobs | Where-Object { $_.job_id -eq 'job:freising-pflege' })[0]
+$requirementsSearchJob.requirements = @('Pflegedokumentation nach SGB XI')
+$descriptionSearchJob = @($document.jobs | Where-Object { $_.job_id -eq 'job:remote-contract' })[0]
+$descriptionSearchJob.description = 'Spezialprozess fuer lokale Filtertests ohne Netzwerkanfrage.'
 $document.job_sources = @()
 $document.scan_runs = @([pscustomobject]@{
         scan_run_id = $scanRunId
@@ -559,11 +564,16 @@ try {
 
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { document.getElementById(String.fromCharCode(106,111,98,97,103,101,110,116,45,113,117,101,114,121)).focus(); return JSON.stringify({focused:document.activeElement.id}); }') | Out-Null
     foreach ($keyboardStep in @(
+            @{ key = 'Tab'; expected = 'jobagent-company' },
+            @{ key = 'Tab'; expected = 'jobagent-category' },
             @{ key = 'Tab'; expected = 'jobagent-area' },
             @{ key = 'Tab'; expected = 'jobagent-work-model' },
             @{ key = 'Tab'; expected = 'jobagent-employment-type' },
             @{ key = 'Tab'; expected = 'jobagent-work-time' },
             @{ key = 'Tab'; expected = 'jobagent-age' },
+            @{ key = 'Tab'; expected = 'jobagent-favorites' },
+            @{ key = 'Tab'; expected = 'jobagent-applied' },
+            @{ key = 'Tab'; expected = 'jobagent-sort' },
             @{ key = 'Tab'; expected = 'jobagent-reset' }
         )) {
         Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', $keyboardStep.key) | Out-Null
@@ -572,7 +582,7 @@ try {
         $focusStyle = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'sichtbarer Tastaturfokus durch Filter' -Script '() => JSON.stringify({ outline:getComputedStyle(document.activeElement).outlineWidth })'
         Assert-True -Condition ($focusStyle.outline -ne '0px') -Message "Tastaturreise: $($keyboardStep.expected) hat keinen sichtbaren Fokusstil."
     }
-    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Was?'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Unklare Position') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Tastaturreset nach aktivem Filter'
@@ -601,7 +611,7 @@ try {
     Assert-True -Condition ($focusStyle.outline -ne '0px') -Message 'ArrowLeft setzt keinen sichtbaren Fokusstil auf den Zieltab.'
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Tabreise nach links'
-    $caseEvidence.Add([pscustomobject]@{ case_id = 'keyboard_filter_reset_and_tab_journey'; filter_focus_order = @('jobagent-query', 'jobagent-area', 'jobagent-work-model', 'jobagent-employment-type', 'jobagent-work-time', 'jobagent-age', 'jobagent-reset'); reset_focus = 'jobagent-reset'; tab_keys = @('ArrowRight', 'ArrowLeft') })
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'keyboard_filter_reset_and_tab_journey'; filter_focus_order = @('jobagent-query', 'jobagent-company', 'jobagent-category', 'jobagent-area', 'jobagent-work-model', 'jobagent-employment-type', 'jobagent-work-time', 'jobagent-age', 'jobagent-favorites', 'jobagent-applied', 'jobagent-sort', 'jobagent-reset'); reset_focus = 'jobagent-reset'; tab_keys = @('ArrowRight', 'ArrowLeft') })
     foreach ($viewport in @($visualContract.viewports)) {
         $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Initialansicht' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
         Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Initialansicht $($viewport.width)x$($viewport.height)"
@@ -647,7 +657,7 @@ try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'goto', $reportUrl) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
 
-    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Was?'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Position 251') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Freitext und Firma hinter der Altgrenze'
@@ -666,7 +676,30 @@ try {
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'Ruecknavigation nach Vorwaertsnavigation'
 
-    $areaRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Gebiet'
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'company=company:fixture_001', 'category=Buchhaltung')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Arbeitgeber- und Kategorie-Filter mit UND'
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:munich-accounting') -Case 'Arbeitgeber-ID und Kategoriecode filtern dieselbe Gesamtmenge'
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=jobs&company=company:fixture_001&category=Buchhaltung' -Case 'Arbeitgeber- und Kategoriehash'
+
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'q=Pflegedokumentation')
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:freising-pflege') -Case 'Freitext durchsucht Anforderungen'
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'q=Spezialprozess')
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:remote-contract') -Case 'Freitext durchsucht Beschreibung'
+
+    Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Persoenliche Filterfixture speichern' -Script '() => { const favorite={job_id:"job:freising-pflege",title:"Pflegefachkraft Freising",company:"Firma 002",official_url:"https://jobs.example.invalid/job/freising-pflege"},applied={job_id:"job:remote-contract",title:"Remote Vertrag Spezialistin",company:"Firma 006",official_url:"https://jobs.example.invalid/job/remote-contract"}; window.JobAgentUserState.setMark(localStorage,favorite,"favorite",true,"2026-09-15T12:00:00.000Z"); window.JobAgentUserState.setMark(localStorage,applied,"applied",true,"2026-09-15T12:01:00.000Z"); return JSON.stringify({ready:true}); }' | Out-Null
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'favorite=1')
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:freising-pflege') -Case 'Favoritenfilter nutzt nur browserlokalen Zustand'
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'applied=beworben')
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:remote-contract') -Case 'Bewerbungsfilter nutzt nur browserlokalen Zustand'
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'sort=title_asc')
+    $sortOrder = @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs)
+    Assert-True -Condition ($sortOrder[0] -eq 'job:age-older') -Message 'Titel-Sortierung beginnt nicht deterministisch mit der alphabetisch ersten Stelle.'
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'company=not-a-company', 'category=not-a-category', 'favorite=not-a-boolean', 'applied=invalid', 'sort=invalid')
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=jobs' -Case 'Unbekannte Filterwerte werden kanonisch entfernt'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'ja047_employer_category_full_text_personal_sort_and_hash'; employer_category_job_ids = @('job:munich-accounting'); requirements_job_ids = @('job:freising-pflege'); description_job_ids = @('job:remote-contract'); favorite_job_ids = @('job:freising-pflege'); applied_job_ids = @('job:remote-contract'); title_sort_first = $sortOrder[0] })
+
+    $areaRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Wo?'
     $workModelRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Arbeitsmodell'
     $employmentTypeRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('listbox', 'combobox') -Name 'Anstellungsart'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'select', $areaRef, 'FREISING_CITY') | Out-Null
@@ -705,7 +738,7 @@ try {
     $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Was?'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, '  BÜROKAUFFRAU !!! MUENCHEN  ') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:umlaut') -Case 'Freitext Gross-Kleinschreibung Leerzeichen Sonderzeichen und mehrere Begriffe'
@@ -759,13 +792,13 @@ try {
     $resetRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('button') -Name 'Filter zuruecksetzen'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'click', $resetRef) | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Was?'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Burokauffrau') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'Unicode-normalisierte Umlautsuche'
     Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:umlaut') -Case 'Unicode-normalisierte Umlautsuche'
 
-    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Was?'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'Unklare Position') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:unknown') -Case 'HTML-Script-Fragment bleibt Textinhalt'
@@ -774,7 +807,7 @@ try {
     Assert-True -Condition ([int]$injectionState.images -eq 0) -Message 'HTML-Script-Fragment wurde als HTML-Element gerendert.'
     $caseEvidence.Add([pscustomobject]@{ case_id = 'script_fragment_is_inert'; expected_job_ids = @('job:unknown'); injected = [bool]$injectionState.injected; rendered_images = [int]$injectionState.images })
 
-    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Freitext'
+    $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Was?'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'keine-passende-stelle') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Keine Treffer im angezeigten Bestand.' -Case 'Nulltreffer'
