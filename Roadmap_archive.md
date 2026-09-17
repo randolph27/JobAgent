@@ -1,5 +1,12 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-17 - JA-047
+
+- [x] JA-047 Stellenfilter, Suche, Sortierung und Navigation deterministisch verbinden #comment: Filter begrenzen den gesamten offenen Stellenbestand reproduzierbar.
+  - [x] Angebot und Mengen: Die gemeinsame lokale Projektion deckt normalisierte UND-Freitextsuche, ODER innerhalb und UND zwischen Facetten, Arbeitgeber-/Kategorie-IDs, Mehrorte, `UNKNOWN`, Altersgrenzen, Favoriten und Bewerbungsstatus ab. Facettenzaehler berechnen sich vor der Pagination; 264 Stellen und 251 Firmen sind ueber sechs Seiten vollstaendig erreichbar.
+  - [x] Reihenfolge und Hash: Sortierung, Filterchips, Reset, Seitenschnitt und URL-Hash sind an denselben Resolver gebunden. Dynamisch unbekannte Arbeitgeber-/Kategoriewerte werden normalisiert entfernt. Ein unbekannter Gebietswert bleibt als leere Abfrage aktiv und verbreitert keinen Deep-Link. Reload sowie Zurueck/Vor erhalten die kanonische Ansicht.
+  - [x] Evidence und Abnahme: `docs/reviews/JA-047-acceptance.md`, `logs/jobagent/JA-047/filter-matrix.json` und `logs/jobagent/QA-004/qa004-2580bdbef1f147a4b88750bf6a5091c4/browser-cases.json` belegen Fixture-/Reporthashgleichheit, exakte Mengen, 0 Job-API-/Store-Anfragen, Tastatur-/Viewportaudit bei 390/800/1366/1920 Pixeln und leere Browserfehler. `Test-JobAgentReport.ps1` und `Test-JobAgentUiBrowserAudit.ps1` endeten mit Exit 0. Der Abschluss-Supertest wurde gemaess Nutzeranweisung nicht ausgefuehrt.
+
 ## Archiviert 2026-09-17 - JA-046
 
 - [x] JA-046 Primaere Trefferseite als responsive Stellenboerse aufbauen #comment: Beim Oeffnen stehen konkrete Stellen und ihre Suche im Vordergrund, Firmen und technische Laufdetails bleiben nachgeordnet erreichbar.

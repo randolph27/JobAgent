@@ -874,7 +874,7 @@ try {
     $queryRef = Get-JobAgentCliRef -Snapshot $snapshot -Roles @('searchbox', 'textbox') -Name 'Was?'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'fill', $queryRef, 'keine-passende-stelle') | Out-Null
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
-    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Keine Treffer im angezeigten Bestand.' -Case 'Nulltreffer'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Keine Treffer fuer diese Filter' -Case 'Nulltreffer'
     foreach ($viewport in @($visualContract.viewports)) {
         $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Nulltreffer' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
         Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Nulltreffer $($viewport.width)x$($viewport.height)"
