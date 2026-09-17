@@ -364,7 +364,12 @@ foreach ($invalidFixture in @($missingOfficialUrlFixture, $missingJobIdFixture))
         $nullRequired.companies[0].canonical_name = $null
         Set-Content -LiteralPath $nullRequiredFixture -Value ($nullRequired | ConvertTo-Json -Depth 100) -Encoding UTF8
 
-    foreach ($invalidFixture in @($wrongEnumFixture, $wrongTypeFixture, $nullRequiredFixture)) {
+        $invalidPublishedAtFixture = Join-Path $generatedFixtureRoot 'invalid-published-at.json'
+        $invalidPublishedAt = New-ValidJobAgentDocument
+        $invalidPublishedAt.jobs[0] | Add-Member -NotePropertyName published_at -NotePropertyValue 'not-a-date'
+        Set-Content -LiteralPath $invalidPublishedAtFixture -Value ($invalidPublishedAt | ConvertTo-Json -Depth 100) -Encoding UTF8
+
+    foreach ($invalidFixture in @($wrongEnumFixture, $wrongTypeFixture, $nullRequiredFixture, $invalidPublishedAtFixture)) {
         $invalidResult = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', $invalidFixture, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
         Assert-True -Condition ($invalidResult.exit -ne 0) -Message "AJV hat generiertes ungueltiges Fixture akzeptiert: $invalidFixture`n$($invalidResult.output -join "`n")"
     }
@@ -379,5 +384,5 @@ finally {
     status = 'ok'
     schema = $schemaPath
     ajv = 'project-local'
-    cases = @('valid', 'missing_official_url', 'missing_stable_job_id', 'invalid_job_status', 'invalid_enum', 'invalid_type', 'invalid_null_required', 'updated_job', 'removed_job')
+    cases = @('valid', 'missing_official_url', 'missing_stable_job_id', 'invalid_job_status', 'invalid_enum', 'invalid_type', 'invalid_null_required', 'invalid_published_at', 'updated_job', 'removed_job')
 } | ConvertTo-Json -Depth 4

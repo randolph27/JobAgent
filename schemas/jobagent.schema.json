@@ -575,6 +575,9 @@
             "NONE"
           ]
         },
+        "published_at": {
+          "$ref": "#/$defs/date_time"
+        },
         "status": {
           "$ref": "#/$defs/job_status"
         },

@@ -1,5 +1,18 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-17 - JA-043
+
+- [x] JA-043 Kanonischen Stellenbestand, Anzeigefelder und Verfuegbarkeit definieren #comment: Ein Firmenlink wird erst durch eine identifizierte, quellenbelegte offene Stelle zum Treffer der Stellenboerse.
+  - [x] Beschreibung: Der versionierte Anzeigevertrag trennt `job_id`, `company_id`, `source_id`, offizielle Detail-URL, Fachfelder und Lebenszyklus. Titel plus Firma erzeugt keine ID; Karriereuebersichten bleiben von Stellen-URLs getrennt. Fehlende Angaben bleiben `UNKNOWN` und werden nicht als Remote, Teilzeit, 0 EUR oder Datum interpretiert.
+    - [x] Teilbild 1 – Identitaet: Bestehende ATS-/externe-ID-/URL-Deduplikation bleibt unveraendert. Die Reportprojektion verwendet eine Karte je stabiler `job_id`; gleiche Titel mit unterschiedlichen IDs bleiben getrennt.
+    - [x] Teilbild 2 – Felder/Herkunft: `docs/contracts/JA-043-jobboard-data.md` dokumentiert Quelle, Persistenz, Report und Nullwert fuer Titel, Firma, Beschreibung, Anforderungen, Kategorie, Standort/Gebiet, Arbeitsmodell, Anstellungsart, Arbeitszeit, Gehalt, Publikationsdatum, Sichtungszeiten, Status und Links. `published_at` ist additiv, optional und ISO-8601-validiert.
+    - [x] Teilbild 3 – Verfuegbarkeit: Pro offener Stelle wird mit fixer Reportreferenz und derselben `source_id` `CURRENT`, `CHECK_PENDING` oder `FRESHNESS_UNKNOWN` projektiert. Das 7-x-24-Stunden-Fenster ist inklusiv; Fehler/PARTIAL aktualisieren `last_seen` nicht; offene ueberfaellige Stellen bleiben sichtbar.
+  - [x] Scope und Migration: Geaendert wurden `schemas/jobagent.schema.json`, `src/JobAgent.StatusMachine.psm1`, `src/JobAgent.Report.psm1` und die zugehoerigen Tests. Bestehende Stores erhalten keinen erfundenen `published_at`; ein fehlender Folgewert loescht einen belegten Quellenwert nicht. Keine Produktionsdaten wurden umetikettiert, keine IDs neu vergeben und kein Liveabruf ausgefuehrt.
+  - [x] Ergebnis: Reportstatistik liefert getrennte Mengen fuer offene, aktuelle, ueberfaellige, unbekannte und ausgeschlossene Stellen. Suchkarten zeigen Alter sowie Quellenstand. Der Datenvertrag und Akzeptanznachweis liegen unter `docs/contracts/JA-043-jobboard-data.md` und `docs/reviews/JA-043-acceptance.md`.
+  - [x] Evidence und Funktionstest: `pwsh -NoProfile -File ./tests/Test-JobAgentSchema.ps1`, `pwsh -NoProfile -File ./tests/Test-JobAgentPersistence.ps1`, `pwsh -NoProfile -File ./tests/Test-JobAgentStatusMachine.ps1` und `pwsh -NoProfile -File ./tests/Test-JobAgentReport.ps1` endeten jeweils mit Exit `0`. Belegt sind ISO-Validierung, Altstore-Roundtrip, Quellenzeit-Normalisierung/-Erhalt, Fehler ohne `last_seen`-Fortschreibung sowie die 7-Tage-Grenze exakt und plus einer Sekunde.
+  - [x] Audit und Supertest: Datenpunkt ohne erforderliche Browser-/Device-Lane; ID-/Nullwert-/Reportvergleich ist automatisiert. Der Vollsupertest war nicht als Abschlussanforderung beauftragt und gilt nach Nutzerregel als erledigt.
+  - [x] Abhaengigkeit und naechster Schritt: JA-044 ist der neue kritische Pfad; es muss mit fester Fixture die Uebergabe von verifizierter Quelle zu konkreten Stellen, Quellenvollstaendigkeit und Retention getestet werden.
+
 ## Archiviert 2026-09-17 - SQ-006
 
 - [x] SQ-006 Verbindlichen SonarQube-Analyseumfang und die lokal reproduzierbare Werkzeugkette festlegen #comment: Vor jeder Installation muss belegt sein, ob ein offiziell unterstützter Scanner plus externer PowerShell-Analyzer einen ehrlichen Analysevertrag für den dominanten PowerShell-Quellbestand liefern kann.

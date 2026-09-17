@@ -239,6 +239,21 @@ Assert-True -Condition ($report.sections.changed_jobs[0].provider_url -eq 'https
 Assert-True -Condition (@($report.sections.companies).Count -eq 2) -Message 'Firmenbasis muss alle gespeicherten Firmen enthalten.'
 Assert-True -Condition (@($report.sections.active_jobs).Count -eq 4) -Message 'Berufsneutrale Stellenbasis darf nicht auf Profiltreffer begrenzt sein.'
 Assert-True -Condition (@($report.sections.active_jobs | Where-Object { $_.title -eq 'Software Engineer' }).Count -eq 1) -Message 'Berufsneutrale Stellenbasis verliert nicht passende Berufe.'
+Assert-True -Condition ($report.sections.new_matching_jobs[0].availability -eq 'CURRENT') -Message 'Erfolgreich bestaetigte Quelle innerhalb von sieben Tagen ist nicht aktuell.'
+
+$freshnessDocument = ($document | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100)
+$freshnessDocument.scan_runs[0].finished_at = '2026-08-24T10:10:00.000Z'
+$freshnessDocument.scan_attempts[0].finished_at = '2026-08-17T10:10:00.000Z'
+$exactWindowReport = New-JobAgentDailyReport -Document $freshnessDocument -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
+Assert-True -Condition ((@($exactWindowReport.sections.new_matching_jobs | Where-Object job_id -eq 'job:alpha_new')[0]).availability -eq 'CURRENT') -Message 'Die 7-Tage-Grenze muss inklusive aktuell sein.'
+
+$freshnessDocument.scan_runs[0].finished_at = '2026-08-24T10:10:01.000Z'
+$staleWindowReport = New-JobAgentDailyReport -Document $freshnessDocument -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
+Assert-True -Condition ((@($staleWindowReport.sections.new_matching_jobs | Where-Object job_id -eq 'job:alpha_new')[0]).availability -eq 'CHECK_PENDING') -Message 'Eine Quellenbestaetigung eine Sekunde nach dem 7-Tage-Fenster muss als Pruefung ausstehend gelten.'
+
+$freshnessDocument.jobs[0].source_id = 'source:missing_confirmation'
+$unknownFreshnessReport = New-JobAgentDailyReport -Document $freshnessDocument -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
+Assert-True -Condition ((@($unknownFreshnessReport.sections.new_matching_jobs | Where-Object job_id -eq 'job:alpha_new')[0]).availability -eq 'FRESHNESS_UNKNOWN') -Message 'Eine fehlende erfolgreiche Quellenbestaetigung muss als unbekannt ausgewiesen werden.'
 
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
 foreach ($expected in @('Firmen gesamt: 5', 'Firmen im Lauf: 2', 'Faellige Firmen: 4', 'Uebersprungene Firmen: 2', 'Limit: 2', 'Auswahlgrund: Faellig nach next_scan_at, danach Prioritaet', '## Erfassungsscope und Vollstaendigkeit', 'Scope: ALL_ROLES', 'Vollstaendigkeitsgrenze: LIMITED_OR_PARTIAL', 'Erfasste Stellen gesamt | 5', 'Profiltreffer gesamt | 4', '## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '### Quellenbestand', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle |', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.', 'Keine Beschreibung aus offizieller Quelle verfuegbar', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Offizielle Stellen-URL](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere-URL](https://alpha_ag.example.invalid/careers)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
@@ -346,6 +361,7 @@ Assert-True -Condition ($emptyHtml.Contains('Keine neuen passenden Stellen im La
         'report_is_deterministic_for_fixed_store_generation',
         'report_and_coverage_share_a_fixed_persisted_store_generation',
         'report_blocks_unsafe_url_schemes',
-        'report_renders_empty_state'
+        'report_renders_empty_state',
+        'report_projects_source_freshness_at_7_day_boundary'
     )
 } | ConvertTo-Json -Depth 4

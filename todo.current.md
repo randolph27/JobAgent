@@ -2,7 +2,6 @@
 
 Active: _(none)_
 
-- [open] TD-0071 M1 – Datenbasis und persoenliche Markierungen: JA-043 Kanonischen Stellenbestand, Anzeigefelder und Verfuegbarkeit definieren #comment: Ein Firmenlink wird erst durch eine identifizierte, quellenbelegte offene Stelle zum Treffer der Stellenboerse.
 - [open] TD-0072 M1 – Datenbasis und persoenliche Markierungen: JA-044 Wachsenden Firmenkern dauerhaft in konkrete Stellen ueberfuehren #comment: Verifizierte neue und bekannte Arbeitgeber muessen im regulaeren Lauf konkrete Stellen liefern, ohne Firmen ohne Treffer zu verlieren.
 - [open] TD-0079 M1 – Datenbasis und persoenliche Markierungen: JA-051 Stellenalter, Abrufalter und naechste Pruefung aus belegten Zeitdaten ableiten #comment: Eine heute abgerufene Anzeige darf weder als heute veroeffentlicht noch eine fehlgeschlagene Quelle als aktuell bestaetigt erscheinen.
 - [open] TD-0073 M1 – Datenbasis und persoenliche Markierungen: JA-045 Favoriten und Bewerbungsstatus verlustarm je Stelle speichern #comment: Zwei unabhaengige persoenliche Markierungen muessen Berichtswechsel und Scans ueberleben, ohne den offiziellen Stellenstatus zu veraendern.

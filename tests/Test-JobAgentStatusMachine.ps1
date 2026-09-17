@@ -260,6 +260,23 @@ $closedSecond = Invoke-JobAgentStatusMachine `
 Assert-True -Condition ($closedSecond.jobs[0].status -eq 'CLOSED') -Message 'Explizites Closed-Signal setzt Status nicht auf CLOSED.'
 Assert-True -Condition (@($closedSecond.change_events | Where-Object event_type -eq 'JOB_CLOSED').Count -eq 1) -Message 'Explizites Closed-Signal erzeugt kein JOB_CLOSED.'
 
+$publishedRaw = New-TestRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/head-it-123' -ExternalJobId '123'
+$publishedRaw | Add-Member -NotePropertyName published_at -NotePropertyValue '2026-08-01T08:30:00+02:00'
+$publishedFirst = Invoke-JobAgentStatusMachine `
+    -Document (New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')) `
+    -ScanRunId 'scanrun:20260827T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260827T100000Z' -RawJobs @($publishedRaw) -Suffix 'published-first')) `
+    -ObservedAt ([datetime]'2026-08-27T10:00:00Z')
+Assert-True -Condition ($publishedFirst.jobs[0].published_at -eq '2026-08-01T06:30:00.000Z') -Message 'Belegtes Publikationsdatum wird nicht normalisiert gespeichert.'
+
+$publishedUnchanged = New-TestRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/head-it-123' -ExternalJobId '123'
+$publishedSecond = Invoke-JobAgentStatusMachine `
+    -Document $publishedFirst `
+    -ScanRunId 'scanrun:20260828T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260828T100000Z' -RawJobs @($publishedUnchanged) -Suffix 'published-second')) `
+    -ObservedAt ([datetime]'2026-08-28T10:00:00Z')
+Assert-True -Condition ($publishedSecond.jobs[0].published_at -eq '2026-08-01T06:30:00.000Z') -Message 'Fehlendes Publikationsdatum darf vorhandenen Quellenwert nicht loeschen.'
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -277,6 +294,7 @@ Assert-True -Condition (@($closedSecond.change_events | Where-Object event_type 
         'invalid_hit_invalidated',
         'navigation_entry_invalidated',
         'source_scoped_removal',
-        'explicit_closed_signal'
+        'explicit_closed_signal',
+        'published_at_normalization_and_retention'
     )
 } | ConvertTo-Json -Depth 4
