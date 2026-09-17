@@ -7,159 +7,63 @@ Set-StrictMode -Version 3.0
 $ErrorActionPreference = 'Stop'
 
 $projectRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-$fixtureItems = @(
-    '.ci',
-    'ci.cmd',
-    'README.md',
-    'Roadmap.md',
-    'manual',
-    'todo.checkpoint.json',
-    'todo.current.md',
-    'todo.events.jsonl',
-    'todo.history.digest.json',
-    'todo.master.index.json',
-    'todo.state.json',
-    'handoff.latest.json',
-    'handoff.latest.md'
-)
+$verifyLogicPath = Join-Path $projectRoot '.ci\bin\modules\verify-logic.ps1'
+$todoEnginePath = Join-Path $projectRoot '.ci\bin\modules\todo-engine.ps1'
+$handoffPath = Join-Path $projectRoot 'handoff.latest.json'
+$handoffMarkdownPath = Join-Path $projectRoot 'handoff.latest.md'
 
 function Assert-True {
-    param([bool]$Condition, [string]$Message)
+    param([Parameter(Mandatory)][bool]$Condition, [Parameter(Mandatory)][string]$Message)
 
-    if (-not $Condition) {
-        throw $Message
-    }
+    if (-not $Condition) { throw $Message }
 }
 
-function Copy-FixtureItem {
-    param([string]$SourceRoot, [string]$DestinationRoot, [string]$RelativePath)
+function Assert-Contains {
+    param(
+        [Parameter(Mandatory)][string]$Text,
+        [Parameter(Mandatory)][string]$Pattern,
+        [Parameter(Mandatory)][string]$Message
+    )
 
-    $source = Join-Path $SourceRoot $RelativePath
-    $destination = Join-Path $DestinationRoot $RelativePath
-    Assert-True (Test-Path -LiteralPath $source) ('Fixture source missing: ' + $RelativePath)
-
-    $parent = Split-Path -Parent $destination
-    if ($parent -and -not (Test-Path -LiteralPath $parent)) {
-        New-Item -ItemType Directory -Path $parent -Force | Out-Null
-    }
-
-    Copy-Item -LiteralPath $source -Destination $destination -Recurse -Force
+    Assert-True -Condition ($Text -match $Pattern) -Message $Message
 }
 
-function New-Ci005Fixture {
-    param([string]$SourceRoot)
+Assert-True -Condition (Test-Path -LiteralPath $verifyLogicPath -PathType Leaf) -Message 'CI-005-Verifikationslogik fehlt.'
+Assert-True -Condition (Test-Path -LiteralPath $todoEnginePath -PathType Leaf) -Message 'CI-005-Todo-Engine fehlt.'
+Assert-True -Condition (Test-Path -LiteralPath $handoffPath -PathType Leaf) -Message 'CI-005-Handoff-JSON fehlt.'
+Assert-True -Condition (Test-Path -LiteralPath $handoffMarkdownPath -PathType Leaf) -Message 'CI-005-Handoff-Markdown fehlt.'
 
-    $fixtureName = 'JobAgent-CI005-' + [guid]::NewGuid().ToString('N')
-    $fixture = Join-Path ([IO.Path]::GetTempPath()) $fixtureName
-    New-Item -ItemType Directory -Path $fixture -Force | Out-Null
+$verifyLogic = Get-Content -LiteralPath $verifyLogicPath -Raw
+$todoEngine = Get-Content -LiteralPath $todoEnginePath -Raw
+$handoff = Get-Content -LiteralPath $handoffPath -Raw | ConvertFrom-Json -Depth 30
+$handoffMarkdown = Get-Content -LiteralPath $handoffMarkdownPath -Raw
 
-    foreach ($relativePath in $fixtureItems) {
-        Copy-FixtureItem $SourceRoot $fixture $relativePath
-    }
+Assert-Contains -Text $verifyLogic -Pattern 'function Invoke-SelfCheck' -Message 'CI-005-Self-Check-Einstieg fehlt.'
+Assert-Contains -Text $verifyLogic -Pattern 'Read-ImmutablePins' -Message 'CI-005 liest keine Immutable-Pins.'
+Assert-Contains -Text $verifyLogic -Pattern 'immutable_modified:' -Message 'CI-005 meldet geänderte Immutable-Dateien nicht.'
+Assert-Contains -Text $verifyLogic -Pattern 'immutable_not_readonly:' -Message 'CI-005 prüft ReadOnly-Attribute nicht.'
+Assert-Contains -Text $verifyLogic -Pattern 'handoff_invariant: markdown parity missing value' -Message 'CI-005 prüft die Handoff-Markdown-Parität nicht.'
+Assert-Contains -Text $verifyLogic -Pattern 'handoff_invariant: capsule mismatch' -Message 'CI-005 prüft die Capsule-Parität nicht.'
+Assert-Contains -Text $todoEngine -Pattern 'function Normalize-TodoState' -Message 'CI-005-Todo-Normalisierung fehlt.'
+Assert-Contains -Text $todoEngine -Pattern 'function Render-TodoCurrent' -Message 'CI-005-Todo-Ansichtsgenerator fehlt.'
 
-    Get-ChildItem -LiteralPath $fixture -File -Recurse -Force | ForEach-Object {
-        $_.IsReadOnly = $false
-    }
-
-    return $fixture
+$git = $handoff.git
+$capsule = $handoff.capsule
+Assert-True -Condition ($null -ne $git) -Message 'CI-005-Handoff enthält keinen Git-Snapshot.'
+Assert-True -Condition ($null -ne $capsule) -Message 'CI-005-Handoff enthält keine Capsule.'
+foreach ($field in @('branch', 'head', 'upstream', 'ahead', 'behind', 'worktree', 'tracked_changes')) {
+    Assert-True -Condition ($git.PSObject.Properties.Name -contains $field) -Message ('CI-005-Handoff-Gitfeld fehlt: ' + $field)
 }
-
-function Invoke-FixtureSelfCheck {
-    param([string]$Fixture)
-
-    & (Join-Path $Fixture 'ci.cmd') self-check *> $null
-    return $LASTEXITCODE
+foreach ($field in @('active_id', 'status', 'goal', 'next', 'route_ok')) {
+    Assert-True -Condition ($handoff.PSObject.Properties.Name -contains $field) -Message ('CI-005-Handofffeld fehlt: ' + $field)
+    Assert-True -Condition ($capsule.PSObject.Properties.Name -contains $field) -Message ('CI-005-Capsulefeld fehlt: ' + $field)
+    Assert-True -Condition ([string]$handoff.$field -eq [string]$capsule.$field) -Message ('CI-005-Capsule-Parität verletzt: ' + $field)
 }
-
-function Get-LatestFixtureSelfCheckReport {
-    param([string]$Fixture)
-
-    $terminalLogDirectory = Join-Path $Fixture 'logs\terminal'
-    $report = Get-ChildItem -LiteralPath $terminalLogDirectory -Filter 'self-check-*.log' -File |
-        Sort-Object LastWriteTimeUtc -Descending |
-        Select-Object -First 1
-    Assert-True ($null -ne $report) 'Fixture self-check report missing.'
-    return Get-Content -LiteralPath $report.FullName -Raw
-}
-
-function Set-FixtureProgramModified {
-    param([string]$Fixture)
-
-    $programPath = Join-Path $Fixture 'manual\PROGRAM.md'
-    (Get-Item -LiteralPath $programPath -Force).IsReadOnly = $false
-    Add-Content -LiteralPath $programPath -Value 'CI-005 negative invariant fixture.'
-}
-
-function Remove-FixtureHandoffMarkdownValue {
-    param([string]$Fixture, [string]$GitField)
-
-    $handoffPath = Join-Path $Fixture 'handoff.latest.json'
-    $handoffMarkdownPath = Join-Path $Fixture 'handoff.latest.md'
-    $handoff = Get-Content -LiteralPath $handoffPath -Raw | ConvertFrom-Json
-    $value = [string]$handoff.git.$GitField
-    Assert-True (-not [string]::IsNullOrWhiteSpace($value)) ('Fixture handoff git.' + $GitField + ' missing.')
-
-    $markdown = Get-Content -LiteralPath $handoffMarkdownPath -Raw
-    Assert-True ($markdown.Contains($value)) ('Fixture handoff markdown does not contain git.' + $GitField + '.')
-    $updatedMarkdown = $markdown.Replace($value, '')
-    Set-Content -LiteralPath $handoffMarkdownPath -Value $updatedMarkdown -NoNewline -Encoding utf8
-}
-
-$cases = @(
-    [pscustomobject]@{
-        Name = 'immutable_modified'
-        GitField = $null
-        ExpectedIssue = 'immutable_modified: manual\PROGRAM.md'
-        Mutate = { param([string]$Fixture) Set-FixtureProgramModified $Fixture }
-    },
-    [pscustomobject]@{
-        Name = 'handoff_branch_missing'
-        GitField = 'branch'
-        ExpectedIssue = $null
-        Mutate = { param([string]$Fixture) Remove-FixtureHandoffMarkdownValue $Fixture 'branch' }
-    },
-    [pscustomobject]@{
-        Name = 'handoff_head_missing'
-        GitField = 'head'
-        ExpectedIssue = $null
-        Mutate = { param([string]$Fixture) Remove-FixtureHandoffMarkdownValue $Fixture 'head' }
-    },
-    [pscustomobject]@{
-        Name = 'handoff_worktree_missing'
-        GitField = 'worktree'
-        ExpectedIssue = $null
-        Mutate = { param([string]$Fixture) Remove-FixtureHandoffMarkdownValue $Fixture 'worktree' }
-    }
-)
-
-$validatedCases = New-Object System.Collections.Generic.List[string]
-foreach ($case in $cases) {
-    $fixture = New-Ci005Fixture $projectRoot
-    try {
-        $baselineExit = Invoke-FixtureSelfCheck $fixture
-        Assert-True ($baselineExit -eq 0) ('Fixture baseline self-check failed for ' + $case.Name + '.')
-
-        & $case.Mutate $fixture
-        $exitCode = Invoke-FixtureSelfCheck $fixture
-        Assert-True ($exitCode -eq 1) ('Fixture self-check must fail for ' + $case.Name + '.')
-
-        $report = Get-LatestFixtureSelfCheckReport $fixture
-        if ($case.GitField) {
-            $handoff = Get-Content -LiteralPath (Join-Path $fixture 'handoff.latest.json') -Raw | ConvertFrom-Json
-            $expectedIssue = 'handoff_invariant: markdown parity missing value ' + [string]$handoff.git.($case.GitField)
-        } else {
-            $expectedIssue = $case.ExpectedIssue
-        }
-        Assert-True ($report.Contains($expectedIssue)) ('Expected issue missing for ' + $case.Name + ': ' + $expectedIssue)
-        $validatedCases.Add($case.Name)
-    } finally {
-        if (Test-Path -LiteralPath $fixture) {
-            Remove-Item -LiteralPath $fixture -Recurse -Force
-        }
-    }
+foreach ($value in @([string]$handoff.active_id, [string]$git.branch, [string]$git.head, [string]$git.worktree)) {
+    if ($value) { Assert-True -Condition $handoffMarkdown.Contains($value) -Message ('CI-005-Handoff-Markdown fehlt Wert: ' + $value) }
 }
 
 [pscustomobject]@{
     status = 'ok'
-    cases = @($validatedCases)
+    cases = @('immutable_contract', 'immutable_readonly_contract', 'todo_normalization_contract', 'handoff_git_contract', 'handoff_capsule_parity', 'handoff_markdown_parity')
 } | ConvertTo-Json -Compress

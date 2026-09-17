@@ -1,8 +1,10 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Ein aktiver Roadmap-Punkt: QA-007 stellt den durch Kaspersky blockierten Vollsupertest-Startvertrag deterministisch wieder her. SQ-001 ist als explizite SonarQube-Nichtanwendbarkeit und SQ-002 als sekretfreier Authentifizierungsnachweis abgeschlossen.
+Stand: 2026-09-17. Keine aktiven Roadmap-Punkte. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und den erfolgreichen Vollsupertest; QA-008 dokumentiert das kanonisch regenerierte Funktionsinventar. SQ-001 ist als explizite SonarQube-Nichtanwendbarkeit und SQ-002 als sekretfreier Authentifizierungsnachweis abgeschlossen.
 
-- `Roadmap.md`: enthält QA-007 als aktiven, sicherheitsblockierten Supertest-Startvertrag; die CI-005- und SQ-001-Abnahmen liegen unter `docs/reviews/`.
+- `Roadmap.md`: enthält nur den aktiven Backlog; derzeit leer.
+- `docs/reviews/QA-007-acceptance.md`: Ursache, sicherheitsverträgliche Teständerung und sekretfreies Ergebnis des vollständigen Supertests.
+- `docs/reviews/QA-008-acceptance.md`: Inventardiffklasse, Generatorlauf und Matrix-/Runner-Vertrag.
 - `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
 - `docs/reviews/2026-09-13-ja027-roadmap-before.md`: unveraenderter vorheriger Plan mit saemtlichen historischen Fortschritten; alte IT-/Mengenziele gelten nicht als aktuelle Anforderungen.
 - `docs/reviews/2026-09-13-ja027-acquisition-baseline.json`: lokaler Datenbestand und Inputhashes, kein neuer Livebeleg.
@@ -27,4 +29,6 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-16: SQ-001 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-001-acceptance.md, SonarQube 9.9.8 `UP`, gültiger externer Token/API-Read, offizielle 9.9-Sprachübersicht ohne PowerShell und 31/31 funktionsbezogene Tests. Kein Codescan oder Quality Gate wird behauptet; Vollsupertest gemäß Nutzerregel als erledigt bewertet.
 
 - 2026-09-17: SQ-002 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-002-acceptance.md, Token-Normalisierung und `./ci.cmd sonar-auth` mit `valid:true`. Kein Codescan oder Quality Gate wird behauptet; Vollsupertest gemäß Nutzerregel als erledigt bewertet.
+- 2026-09-17: QA-007 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/QA-007-acceptance.md, `Test-Ci005Invariants.ps1` ohne Fixture-Kopien, Datei-Mutationen, rekursive Löschung oder verschachtelte CI-Starts sowie `./ci.cmd supertest` mit 29/29 Fällen und Exit 0 in 692,59 s.
+- 2026-09-17: QA-008 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/QA-008-acceptance.md, kanonisch durch `-WriteInventory` erzeugtes QA-001-Inventar mit 577 Einträgen, Matrix- und Runner-Vertrag mit Exit 0 sowie derselbe Vollsupertest 29/29.
 

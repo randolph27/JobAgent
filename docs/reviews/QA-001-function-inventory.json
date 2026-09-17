@@ -5869,7 +5869,7 @@
     {
       "kind": "powershell-function",
       "source_path": "tools\\Invoke-JobAgentDailyRun.ps1",
-      "source_sha256": "86ab929c70b95afc6e752bcc0b4f1608d2b0ee3db98bae0539a21a45e001bf16",
+      "source_sha256": "a39c75b6ac2bc88260534d1ca2f64506fb00228cf55016c10a549addcdfb7db0",
       "symbol": "Get-JobAgentDailyEarliestWakeAt",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5881,7 +5881,7 @@
     {
       "kind": "powershell-function",
       "source_path": "tools\\Invoke-JobAgentDailyRun.ps1",
-      "source_sha256": "86ab929c70b95afc6e752bcc0b4f1608d2b0ee3db98bae0539a21a45e001bf16",
+      "source_sha256": "a39c75b6ac2bc88260534d1ca2f64506fb00228cf55016c10a549addcdfb7db0",
       "symbol": "Invoke-JobAgentDailyAcquisitionPhase",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -5893,7 +5893,7 @@
     {
       "kind": "powershell-function",
       "source_path": "tools\\Invoke-JobAgentDailyRun.ps1",
-      "source_sha256": "86ab929c70b95afc6e752bcc0b4f1608d2b0ee3db98bae0539a21a45e001bf16",
+      "source_sha256": "a39c75b6ac2bc88260534d1ca2f64506fb00228cf55016c10a549addcdfb7db0",
       "symbol": "Invoke-JobAgentDailyAcquisitionTool",
       "entry_point": false,
       "side_effect": "mutating-or-orchestrating",
@@ -5905,7 +5905,7 @@
     {
       "kind": "powershell-function",
       "source_path": "tools\\Invoke-JobAgentDailyRun.ps1",
-      "source_sha256": "86ab929c70b95afc6e752bcc0b4f1608d2b0ee3db98bae0539a21a45e001bf16",
+      "source_sha256": "a39c75b6ac2bc88260534d1ca2f64506fb00228cf55016c10a549addcdfb7db0",
       "symbol": "Read-ToolJsonFileIfPresent",
       "entry_point": false,
       "side_effect": "read-only-or-pure",
@@ -5917,7 +5917,7 @@
     {
       "kind": "powershell-function",
       "source_path": "tools\\Invoke-JobAgentDailyRun.ps1",
-      "source_sha256": "86ab929c70b95afc6e752bcc0b4f1608d2b0ee3db98bae0539a21a45e001bf16",
+      "source_sha256": "a39c75b6ac2bc88260534d1ca2f64506fb00228cf55016c10a549addcdfb7db0",
       "symbol": "Resolve-ToolPath",
       "entry_point": false,
       "side_effect": "read-only-or-pure",

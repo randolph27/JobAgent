@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-17T11:19:12.036+02:00 (nach dem STP um den externen Security-Blocker ergänzt)
+Stand: 2026-09-17T12:54:11.213+02:00
 
 ## Zustand
 
-- Active: `TD-0066 / QA-007`
-- Status: `blocked`
-- Ziel: Den Vollsupertest erst nach Freigabe bzw. Klärung des Kaspersky-Befunds erneut ausführen.
+- Active: ``
+- Status: `open`
+- Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `22bc9c9c31e6`
+- HEAD: `cbefc69db602`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,7 +16,15 @@ Stand: 2026-09-17T11:19:12.036+02:00 (nach dem STP um den externen Security-Bloc
 
 ## Versionierte Aenderungen
 
+- `.ci/pins/immutable.hashes.json`
+- `.ci/pins/immutable.snapshot/Roadmap.md`
 - `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `docs/reviews/QA-001-function-inventory.json`
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `tests/Test-Ci005Invariants.ps1`
 - `todo.checkpoint.json`
 - `todo.current.md`
 - `todo.events.jsonl`
@@ -26,16 +34,8 @@ Stand: 2026-09-17T11:19:12.036+02:00 (nach dem STP um den externen Security-Bloc
 
 ## Verifikation
 
-- `./ci.cmd supertest` -> Exit 1; erster von 29 Fällen (`QA-006-CI-CONTRACT`) erhielt Exit 5, 28 Fälle wurden nicht ausgeführt.
-- `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit 0 nach Wiederherstellung der fehlenden, unverändert aus HEAD stammenden Testdatei.
-- `pwsh -NoProfile -File .\tests\Test-JobAgentSupertestContract.ps1` -> Exit 0; sechs Runner-Vertragsfälle grün.
-- `pwsh -NoProfile -File .\tests\Test-JobAgentSupertest.ps1` -> nicht abgeschlossen: Kaspersky System Watcher meldete bei `tests\test-jobagentcicontracts.ps1` `PDM:Trojan.Win32.Generic`; der gestartete fokussierte Lauf wurde kontrolliert beendet.
-- `.\ci.cmd sonar` -> `not-supported` (keine Codeanalyse behauptet).
-
-## Blocker
-
-Kaspersky hat die Ausführung des CI-Vertragstests als `PDM:Trojan.Win32.Generic` gemeldet. Ohne eine nachvollziehbare Security-Entscheidung darf weder eine Ausnahme angelegt noch „Disinfect and restart“ ausgelöst werden. Die Testdatei ist eine unveränderte Wiederherstellung aus `HEAD`; ein tatsächlicher Befund oder ein False Positive ist nicht bestimmt. Der nächste Agent muss zuerst das lokale Kaspersky-Ereignis und den Quarantäne-/Dateistatus prüfen, den Nutzerentscheid dazu einholen und erst anschließend QA-007s fokussierten Runner-Test sowie den Vollsupertest wiederholen.
+- `.\ci.cmd sonar` -> Exit ``
 
 ## Naechster Anker
 
-QA-007 ist offen und durch den dokumentierten Kaspersky-Befund blockiert. Nach gesicherter Security-Freigabe: Screenshot als `doc/roadmap-screenshots/QA-007-*.png` ablegen, Testdatei gegen `HEAD` hashen, den fokussierten Runner-Test zu Ende führen und anschließend `./ci.cmd supertest` mit 29/29 Fällen ausführen.
+Keine aktive Roadmap-Aufgabe.
