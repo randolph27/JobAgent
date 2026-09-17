@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-17T17:44:38.323+02:00
+Stand: 2026-09-17T18:35:48.326+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-17T17:44:38.323+02:00
 - Status: `open`
 - Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `3b0bc1cd0abb`
+- HEAD: `12ad82a23192`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,19 +16,20 @@ Stand: 2026-09-17T17:44:38.323+02:00
 
 ## Versionierte Aenderungen
 
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
 - `docs/reviews/QA-001-function-inventory.json`
-- `docs/test-matrix.json`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `todo.checkpoint.json`
-- `todo.current.md`
-- `todo.events.jsonl`
+- `html/jobagent/ja-022-viewport-audit.html`
+- `output/playwright/ja-022-fixture-viewport-1366.png`
+- `output/playwright/ja-022-fixture-viewport-1920.png`
+- `output/playwright/ja-022-fixture-viewport-390.png`
+- `output/playwright/ja-022-fixture-viewport-800.png`
+- `schemas/jobagent.schema.json`
+- `src/JobAgent.Report.psm1`
+- `src/JobAgent.StatusMachine.psm1`
+- `tests/Test-JobAgentDailyRun.ps1`
+- `tests/Test-JobAgentReport.ps1`
+- `tests/Test-JobAgentStatusMachine.ps1`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
 
 ## Verifikation
 

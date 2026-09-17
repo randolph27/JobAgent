@@ -456,33 +456,96 @@ function Get-JobAgentReportPriorityExplanation {
     return ($parts.ToArray() -join ' ')
 }
 
+function Get-JobAgentReportBerlinTimeZone {
+    try {
+        return [TimeZoneInfo]::FindSystemTimeZoneById('W. Europe Standard Time')
+    }
+    catch {
+        return [TimeZoneInfo]::FindSystemTimeZoneById('Europe/Berlin')
+    }
+}
+
+function ConvertTo-JobAgentReportTimestampInfo {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter(Mandatory)][datetime]$ReferenceTime
+    )
+
+    $text = ConvertTo-JobAgentReportText -Value $Value
+    if ($text -eq 'UNKNOWN') {
+        return [pscustomobject]@{ value = 'UNKNOWN'; display = 'Unbekannt'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = 'Historie nicht vorhanden' }
+    }
+    if ($text -notmatch '(?i)(Z|[+-]\d{2}:\d{2})$') {
+        return [pscustomobject]@{ value = $text; display = 'Unbekannt'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = 'Zeitpunkt ohne Offset ist nicht eindeutig' }
+    }
+    try {
+        $timestamp = [datetimeoffset]::Parse($text, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AllowWhiteSpaces).ToUniversalTime()
+        $reference = [datetimeoffset]::new($ReferenceTime.ToUniversalTime())
+        if ($timestamp -gt $reference) {
+            return [pscustomobject]@{ value = $timestamp.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture); display = 'Unbekannt'; precision = 'SECOND'; age_days = 'UNKNOWN'; data_notice = 'Zeitpunkt liegt nach der Reportreferenz' }
+        }
+        $berlin = [TimeZoneInfo]::ConvertTime($timestamp, (Get-JobAgentReportBerlinTimeZone))
+        return [pscustomobject]@{
+            value = $timestamp.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+            display = $berlin.ToString('dd.MM.yyyy HH:mm:ss', [Globalization.CultureInfo]::GetCultureInfo('de-DE')) + ' UTC' + $berlin.ToString('zzz', [Globalization.CultureInfo]::InvariantCulture)
+            precision = 'SECOND'
+            age_days = [string][int][math]::Floor(($reference - $timestamp).TotalSeconds / 86400)
+            data_notice = 'NONE'
+        }
+    }
+    catch {
+        return [pscustomobject]@{ value = $text; display = 'Unbekannt'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = 'Ungueltiger Zeitpunkt' }
+    }
+}
+
+function ConvertTo-JobAgentReportDateInfo {
+    param(
+        [Parameter()][AllowNull()][object]$Value,
+        [Parameter(Mandatory)][datetime]$ReferenceTime
+    )
+
+    $text = ConvertTo-JobAgentReportText -Value $Value
+    if ($text -notmatch '^\d{4}-\d{2}-\d{2}$') {
+        return [pscustomobject]@{ value = if ($text -eq 'UNKNOWN') { 'UNKNOWN' } else { $text }; display = 'Unbekannt'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = if ($text -eq 'UNKNOWN') { 'Historie nicht vorhanden' } else { 'Ungueltiges Quelldatum' } }
+    }
+    try {
+        $date = [datetime]::ParseExact($text, 'yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::None).Date
+        $referenceLocal = [TimeZoneInfo]::ConvertTimeFromUtc($ReferenceTime.ToUniversalTime(), (Get-JobAgentReportBerlinTimeZone)).Date
+        if ($date -gt $referenceLocal) {
+            return [pscustomobject]@{ value = $text; display = 'Unbekannt'; precision = 'DAY'; age_days = 'UNKNOWN'; data_notice = 'Quelldatum liegt nach der Reportreferenz' }
+        }
+        return [pscustomobject]@{ value = $text; display = $date.ToString('dd.MM.yyyy', [Globalization.CultureInfo]::GetCultureInfo('de-DE')) + ' (Uhrzeit unbekannt)'; precision = 'DAY'; age_days = [string][int]($referenceLocal - $date).TotalDays; data_notice = 'NONE' }
+    }
+    catch {
+        return [pscustomobject]@{ value = $text; display = 'Unbekannt'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = 'Ungueltiges Quelldatum' }
+    }
+}
+
 function Get-JobAgentReportAgeInfo {
     param(
         [Parameter()][AllowNull()][object]$PublishedAt,
+        [Parameter()][AllowNull()][object]$PublishedOn,
         [Parameter()][AllowNull()][object]$FirstSeen,
         [Parameter(Mandatory)][datetime]$ReferenceTime
     )
 
     $publishedText = ConvertTo-JobAgentReportText -Value $PublishedAt
+    $publishedOnText = ConvertTo-JobAgentReportText -Value $PublishedOn
     $firstSeenText = ConvertTo-JobAgentReportText -Value $FirstSeen
-    $basis = if ($publishedText -ne 'UNKNOWN') { 'published_at' } elseif ($firstSeenText -ne 'UNKNOWN') { 'first_seen' } else { 'UNKNOWN' }
-    $value = if ($basis -eq 'published_at') { $publishedText } elseif ($basis -eq 'first_seen') { $firstSeenText } else { 'UNKNOWN' }
-    $ageDays = 'UNKNOWN'
-    if ($value -ne 'UNKNOWN') {
-        try {
-            $baseline = [datetime]::Parse($value, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime()
-            $delta = $ReferenceTime.ToUniversalTime() - $baseline
-            $days = [math]::Floor([math]::Max(0, $delta.TotalDays))
-            $ageDays = [string][int]$days
-        }
-        catch {
-            $ageDays = 'UNKNOWN'
-        }
+    $basis = if ($publishedText -ne 'UNKNOWN') { 'published_at' } elseif ($publishedOnText -ne 'UNKNOWN') { 'published_on' } elseif ($firstSeenText -ne 'UNKNOWN') { 'first_seen' } else { 'UNKNOWN' }
+    $info = switch ($basis) {
+        'published_at' { ConvertTo-JobAgentReportTimestampInfo -Value $publishedText -ReferenceTime $ReferenceTime; break }
+        'published_on' { ConvertTo-JobAgentReportDateInfo -Value $publishedOnText -ReferenceTime $ReferenceTime; break }
+        'first_seen' { ConvertTo-JobAgentReportTimestampInfo -Value $firstSeenText -ReferenceTime $ReferenceTime; break }
+        default { [pscustomobject]@{ value = 'UNKNOWN'; display = 'Unbekannt'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = 'Historie nicht vorhanden' } }
     }
 
     [pscustomobject]@{
         age_basis = $basis
-        age_days = $ageDays
+        age_days = [string]$info.age_days
+        age_display = [string]$info.display
+        age_precision = [string]$info.precision
+        age_data_notice = [string]$info.data_notice
     }
 }
 
@@ -538,6 +601,55 @@ function Get-JobAgentReportAvailabilityInfo {
     }
 }
 
+function Get-JobAgentReportSourceTimeInfo {
+    param(
+        [Parameter(Mandatory)][object]$Job,
+        [Parameter()][AllowEmptyCollection()][object[]]$ScanAttempts = @(),
+        [Parameter()][AllowNull()][object]$Company = $null,
+        [Parameter(Mandatory)][datetime]$ReferenceTime
+    )
+
+    $sourceId = [string](Get-JobAgentReportProperty -Object $Job -Name 'source_id' -Default '')
+    $latestAttempt = $null
+    $latestSuccess = $null
+    $latestComplete = $null
+    foreach ($attempt in @($ScanAttempts)) {
+        if ([string](Get-JobAgentReportProperty -Object $attempt -Name 'source_id' -Default '') -ne $sourceId) {
+            continue
+        }
+        $finished = ConvertTo-JobAgentReportTimestampInfo -Value (Get-JobAgentReportProperty -Object $attempt -Name 'finished_at') -ReferenceTime $ReferenceTime
+        $started = ConvertTo-JobAgentReportTimestampInfo -Value (Get-JobAgentReportProperty -Object $attempt -Name 'started_at') -ReferenceTime $ReferenceTime
+        $sortValue = if ($finished.precision -eq 'SECOND') { $finished.value } elseif ($started.precision -eq 'SECOND') { $started.value } else { '' }
+        if ([string]::IsNullOrWhiteSpace($sortValue)) {
+            continue
+        }
+        $entry = [pscustomobject]@{
+            scan_attempt_id = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $attempt -Name 'scan_attempt_id')
+            scan_run_id = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $attempt -Name 'scan_run_id')
+            status = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $attempt -Name 'status')
+            error_class = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $attempt -Name 'error_class')
+            finished = $finished
+            started = $started
+            sort_value = $sortValue
+            scan_complete = if ($attempt.PSObject.Properties.Name -contains 'scan_complete') { [bool]$attempt.scan_complete } else { $null }
+        }
+        if (($null -eq $latestAttempt) -or ($entry.sort_value -gt $latestAttempt.sort_value)) { $latestAttempt = $entry }
+        if (($entry.status -eq 'SUCCESS') -and ($entry.error_class -eq 'NONE')) {
+            if (($null -eq $latestSuccess) -or ($entry.sort_value -gt $latestSuccess.sort_value)) { $latestSuccess = $entry }
+            if (($entry.scan_complete -eq $true) -and (($null -eq $latestComplete) -or ($entry.sort_value -gt $latestComplete.sort_value))) { $latestComplete = $entry }
+        }
+    }
+    $nextScan = ConvertTo-JobAgentReportTimestampInfo -Value (Get-JobAgentReportProperty -Object $Company -Name 'next_scan_at') -ReferenceTime ([datetime]::MaxValue)
+    [pscustomobject]@{
+        source_id = $sourceId
+        latest_attempt = $latestAttempt
+        latest_successful_attempt = $latestSuccess
+        latest_complete_list_attempt = $latestComplete
+        next_company_scan = if ($nextScan.precision -eq 'SECOND') { $nextScan } else { [pscustomobject]@{ value = 'UNKNOWN'; display = 'Nicht geplant'; precision = 'UNKNOWN'; age_days = 'UNKNOWN'; data_notice = 'Firmenplanung nicht vorhanden' } }
+        history_status = if ($null -eq $latestAttempt) { 'HISTORY_UNAVAILABLE' } else { 'AVAILABLE' }
+    }
+}
+
 function New-JobAgentReportJobEntry {
     param(
         [Parameter(Mandatory)][object]$Job,
@@ -549,14 +661,20 @@ function New-JobAgentReportJobEntry {
     )
 
     $publishedAt = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'published_at' -Default 'UNKNOWN')
+    $publishedOn = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'published_on' -Default 'UNKNOWN')
     $firstSeen = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'first_seen' -Default 'UNKNOWN')
     $lastSeen = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'last_seen' -Default 'UNKNOWN')
     $requirements = @((Get-JobAgentReportProperty -Object $Job -Name 'requirements' -Default @()) | Where-Object { -not [string]::IsNullOrWhiteSpace([string]$_) } | ForEach-Object { [string]$_ })
     $description = ConvertTo-JobAgentReportDescriptionText -Value (Get-JobAgentReportProperty -Object $Job -Name 'description' -Default (Get-JobAgentReportProperty -Object $Job -Name 'summary' -Default 'UNKNOWN'))
-    $ageInfo = Get-JobAgentReportAgeInfo -PublishedAt $publishedAt -FirstSeen $firstSeen -ReferenceTime $ReferenceTime
-    $availabilityInfo = Get-JobAgentReportAvailabilityInfo -Job $Job -ScanAttempts $ScanAttempts -ReferenceTime $ReferenceTime
     $companyId = [string]$Job.company_id
     $company = if ($CompaniesById.ContainsKey($companyId)) { $CompaniesById[$companyId] } else { [pscustomobject]@{ company_id = $companyId; canonical_name = $companyId; verification_status = 'UNVERIFIED' } }
+    $ageInfo = Get-JobAgentReportAgeInfo -PublishedAt $publishedAt -PublishedOn $publishedOn -FirstSeen $firstSeen -ReferenceTime $ReferenceTime
+    $availabilityInfo = Get-JobAgentReportAvailabilityInfo -Job $Job -ScanAttempts $ScanAttempts -ReferenceTime $ReferenceTime
+    $sourceTimeInfo = Get-JobAgentReportSourceTimeInfo -Job $Job -ScanAttempts $ScanAttempts -Company $company -ReferenceTime $ReferenceTime
+    $publishedAtInfo = ConvertTo-JobAgentReportTimestampInfo -Value $publishedAt -ReferenceTime $ReferenceTime
+    $publishedOnInfo = ConvertTo-JobAgentReportDateInfo -Value $publishedOn -ReferenceTime $ReferenceTime
+    $firstSeenInfo = ConvertTo-JobAgentReportTimestampInfo -Value $firstSeen -ReferenceTime $ReferenceTime
+    $lastSeenInfo = ConvertTo-JobAgentReportTimestampInfo -Value $lastSeen -ReferenceTime $ReferenceTime
     $companySources = if ($SourcesByCompanyId.ContainsKey($companyId)) { @($SourcesByCompanyId[$companyId].ToArray()) } else { @() }
     $providerLink = Get-JobAgentReportProviderLink -Company $company -JobSources $companySources -PreferredSourceId ([string](Get-JobAgentReportProperty -Object $Job -Name 'source_id' -Default ''))
 
@@ -598,6 +716,7 @@ function New-JobAgentReportJobEntry {
         employment_type = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'employment_type' -Default 'UNKNOWN')
         work_time = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'work_time' -Default 'UNKNOWN')
         published_at = $publishedAt
+        published_on = $publishedOn
         first_seen = $firstSeen
         last_seen = $lastSeen
         salary = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'salary' -Default 'UNKNOWN')
@@ -607,6 +726,18 @@ function New-JobAgentReportJobEntry {
         description_source = ConvertTo-JobAgentReportText -Value (Get-JobAgentReportProperty -Object $Job -Name 'description_source' -Default 'NONE')
         age_basis = [string]$ageInfo.age_basis
         age_days = [string]$ageInfo.age_days
+        age_display = [string]$ageInfo.age_display
+        age_precision = [string]$ageInfo.age_precision
+        age_data_notice = [string]$ageInfo.age_data_notice
+        time_projection = [pscustomobject]@{
+            reference_time = $ReferenceTime.ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+            timezone = 'Europe/Berlin'
+            published_at = $publishedAtInfo
+            published_on = $publishedOnInfo
+            first_seen = $firstSeenInfo
+            last_seen = $lastSeenInfo
+            source = $sourceTimeInfo
+        }
         availability = [string]$availabilityInfo.availability
         source_confirmed_at = [string]$availabilityInfo.source_confirmed_at
         freshness_age_seconds = [string]$availabilityInfo.freshness_age_seconds
@@ -1350,6 +1481,9 @@ function Add-JobAgentReportSearchInterfaceHtml {
                     work_time = $_.work_time
                     age_basis = $_.age_basis
                     age_days = $_.age_days
+                    age_display = $_.age_display
+                    age_precision = $_.age_precision
+                    time_projection = $_.time_projection
                     last_seen = $_.last_seen
                     availability = $_.availability
                     availability_reason = $_.availability_reason
@@ -1392,7 +1526,7 @@ function Add-JobAgentReportSearchInterfaceHtml {
     [void]$Lines.Add('const includesAny=(values,candidates)=>values.length===0||candidates.some(candidate=>values.includes(candidate)),ageMatches=(job,age)=>{if(!age)return true;const days=Number(job.age_days);if(!Number.isFinite(days))return age==="UNKNOWN";return age==="older"?days>30:days<=Number(age)};')
     [void]$Lines.Add('const jobMatches=(job,state)=>{const tokens=normalize(state.q).split(" ").filter(Boolean),haystack=normalize([job.title,job.company,job.job_category].join(" "));return tokens.every(token=>haystack.includes(token))&&includesAny(state.area,job.area_facets||[job.target_area])&&includesAny(state.workModel,[job.work_model])&&includesAny(state.employmentType,[job.employment_type])&&includesAny(state.workTime,[job.work_time])&&ageMatches(job,state.age)};')
     [void]$Lines.Add('const companyMatches=(company,state)=>{const tokens=normalize(state.q).split(" ").filter(Boolean),haystack=normalize([company.company,...(company.locations||[])].join(" "));return tokens.every(token=>haystack.includes(token))};')
-    [void]$Lines.Add('const jobCard=job=>{const article=document.createElement("article"),heading=document.createElement("h3"),meta=document.createElement("p"),detail=document.createElement("p"),availability=document.createElement("p"),availabilityText={CURRENT:"Aktuell bestaetigt",CHECK_PENDING:"Pruefung ausstehend",FRESHNESS_UNKNOWN:"Aktualitaet unbekannt"};article.className="result-card";article.dataset.jobId=job.job_id;article.dataset.companyId=job.company_id;heading.textContent=job.title;meta.textContent=text(job.company)+" · "+text(job.location)+" · "+text(job.work_model)+" · "+text(job.employment_type)+" · "+text(job.work_time);detail.textContent="Alter: "+text(job.age_days,"Unbekannt")+" Tage ("+text(job.age_basis)+")";availability.textContent="Quellenstand: "+(availabilityText[job.availability]||"Aktualitaet unbekannt")+". "+text(job.availability_reason,"");article.append(heading,meta,detail,availability,link(job.official_url,"Offizielle Stelle"),document.createTextNode(" · "),link(job.career_url,"Karriere"));return article};')
+    [void]$Lines.Add('const jobCard=job=>{const article=document.createElement("article"),heading=document.createElement("h3"),meta=document.createElement("p"),detail=document.createElement("p"),availability=document.createElement("p"),timeDetails=document.createElement("details"),timeSummary=document.createElement("summary"),timeContent=document.createElement("p"),availabilityText={CURRENT:"Aktuell bestaetigt",CHECK_PENDING:"Pruefung ausstehend",FRESHNESS_UNKNOWN:"Aktualitaet unbekannt"};article.className="result-card";article.dataset.jobId=job.job_id;article.dataset.companyId=job.company_id;heading.textContent=job.title;meta.textContent=text(job.company)+" · "+text(job.location)+" · "+text(job.work_model)+" · "+text(job.employment_type)+" · "+text(job.work_time);detail.textContent="Alter: "+text(job.age_days,"Unbekannt")+" Tage ("+text(job.age_basis)+"): "+text(job.age_display);availability.textContent="Quellenstand: "+(availabilityText[job.availability]||"Aktualitaet unbekannt")+". "+text(job.availability_reason,"");const projection=job.time_projection||{},source=projection.source||{},attempt=source.latest_attempt||{},success=source.latest_successful_attempt||{},complete=source.latest_complete_list_attempt||{},next=source.next_company_scan||{};timeSummary.textContent="Zeitbelege und Herkunft";timeContent.textContent="Stand: "+text(projection.reference_time)+" · Erst erfasst: "+text(projection.first_seen&&projection.first_seen.display)+" · Zuletzt bei dieser Stelle gesehen: "+text(projection.last_seen&&projection.last_seen.display)+" · Letzter Abrufversuch: "+text(attempt.finished&&attempt.finished.display,"Historie nicht vorhanden")+" · Letzter erfolgreicher Abruf: "+text(success.finished&&success.finished.display,"Historie nicht vorhanden")+" · Letzte vollstaendige Listenpruefung: "+text(complete.finished&&complete.finished.display,"Historie nicht vorhanden")+" · Naechste Firmenpruefung: "+text(next.display,"Nicht geplant");timeDetails.append(timeSummary,timeContent);article.append(heading,meta,detail,availability,timeDetails,link(job.official_url,"Offizielle Stelle"),document.createTextNode(" · "),link(job.career_url,"Karriere"));return article};')
     [void]$Lines.Add('const companyCard=company=>{const article=document.createElement("article"),heading=document.createElement("h3"),meta=document.createElement("p"),detail=document.createElement("p");article.className="result-card";article.dataset.companyId=company.company_id;heading.textContent=company.company;meta.textContent="Orte: "+text((company.locations||[]).join(", "));detail.textContent="Pruefstatus: "+text(company.verification_status)+" · Scan: "+text(company.scan_status);article.append(heading,meta,detail,link(company.official_website_url,"Website"),document.createTextNode(" · "),link(company.career_url,"Karriere"));return article};')
     [void]$Lines.Add('let focusCurrentPage=false,focusReset=false;const render=()=>{const state=read();sync(state);const isJobs=state.view==="jobs",items=(isJobs?data.jobs.filter(job=>jobMatches(job,state)):data.companies.filter(company=>companyMatches(company,state))).sort((a,b)=>isJobs?[a.title,a.company,a.location,a.last_seen,a.job_id].join("\\u0000").localeCompare([b.title,b.company,b.location,b.last_seen,b.job_id].join("\\u0000"),"de"):[a.company,a.company_id].join("\\u0000").localeCompare([b.company,b.company_id].join("\\u0000"),"de")),pages=Math.max(1,Math.ceil(items.length/pageSize)),page=Math.min(state.page,pages),slice=items.slice((page-1)*pageSize,page*pageSize),target=document.getElementById(isJobs?"jobagent-job-results":"jobagent-company-results");document.getElementById("jobagent-jobs").hidden=!isJobs;document.getElementById("jobagent-companies").hidden=isJobs;document.getElementById("jobagent-tab-jobs").setAttribute("aria-selected",String(isJobs));document.getElementById("jobagent-tab-companies").setAttribute("aria-selected",String(!isJobs));target.replaceChildren(...slice.map(isJobs?jobCard:companyCard));if(!slice.length)target.textContent="Keine Treffer im angezeigten Bestand.";count.textContent=(isJobs?"Stellen":"Firmen")+": "+items.length+" Treffer, Seite "+page+" von "+pages+" (sichtbar "+slice.length+").";pagination.replaceChildren();if(pages>1){for(let number=1;number<=pages;number++){const button=document.createElement("button");button.type="button";button.textContent=String(number);if(number===page)button.setAttribute("aria-current","page");button.addEventListener("click",()=>{focusCurrentPage=true;write({...state,page:number},false)});pagination.append(button)}}if(focusCurrentPage){focusCurrentPage=false;const current=Array.from(pagination.getElementsByTagName("button")).find(candidate=>candidate.getAttribute("aria-current")==="page");if(current)current.focus({preventScroll:true})}if(focusReset){focusReset=false;const reset=document.getElementById("jobagent-reset");if(reset)requestAnimationFrame(()=>reset.focus({preventScroll:true}))}if(page!==state.page||state._pageNeedsNormalization||state._queryNeedsNormalization)write({...state,page},true)};')
     [void]$Lines.Add('form.addEventListener("input",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("change",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("reset",()=>{focusReset=true;setTimeout(()=>write({view:read().view,page:1,q:"",area:[],workModel:[],employmentType:[],workTime:[],age:""},false),0)});document.querySelectorAll("[data-jobagent-view]").forEach(button=>{button.addEventListener("click",()=>write({...read(),view:button.dataset.jobagentView,page:1},false));button.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;event.preventDefault();const tabs=Array.from(document.querySelectorAll("[data-jobagent-view]")),index=tabs.indexOf(button),target=event.key==="Home"?tabs[0]:event.key==="End"?tabs[tabs.length-1]:tabs[(index+(event.key==="ArrowRight"?1:tabs.length-1))%tabs.length];target.focus();target.click()})});window.addEventListener("hashchange",render);render();')

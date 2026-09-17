@@ -277,6 +277,24 @@ $publishedSecond = Invoke-JobAgentStatusMachine `
     -ObservedAt ([datetime]'2026-08-28T10:00:00Z')
 Assert-True -Condition ($publishedSecond.jobs[0].published_at -eq '2026-08-01T06:30:00.000Z') -Message 'Fehlendes Publikationsdatum darf vorhandenen Quellenwert nicht loeschen.'
 
+$dateOnlyRaw = New-TestRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/head-it-124' -ExternalJobId '124'
+$dateOnlyRaw | Add-Member -NotePropertyName published_at -NotePropertyValue '2026-08-01'
+$dateOnly = Invoke-JobAgentStatusMachine `
+    -Document (New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')) `
+    -ScanRunId 'scanrun:20260829T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260829T100000Z' -RawJobs @($dateOnlyRaw) -Suffix 'published-date-only')) `
+    -ObservedAt ([datetime]'2026-08-29T10:00:00Z')
+Assert-True -Condition (($dateOnly.jobs[0].PSObject.Properties.Name -notcontains 'published_at') -and ($dateOnly.jobs[0].published_on -eq '2026-08-01')) -Message 'Tagesgenaues Quelldatum darf nicht als Mitternachtszeitpunkt gespeichert werden.'
+
+$offsetMissingRaw = New-TestRawJob -Title 'Head of IT' -DetailUrl 'https://example.invalid/careers/head-it-125' -ExternalJobId '125'
+$offsetMissingRaw | Add-Member -NotePropertyName published_at -NotePropertyValue '2026-08-01T10:00:00'
+$offsetMissing = Invoke-JobAgentStatusMachine `
+    -Document (New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')) `
+    -ScanRunId 'scanrun:20260830T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260830T100000Z' -RawJobs @($offsetMissingRaw) -Suffix 'published-offset-missing')) `
+    -ObservedAt ([datetime]'2026-08-30T10:00:00Z')
+Assert-True -Condition (($offsetMissing.jobs[0].PSObject.Properties.Name -notcontains 'published_at') -and ($offsetMissing.jobs[0].PSObject.Properties.Name -notcontains 'published_on')) -Message 'Zeitpunkt ohne Offset darf nicht als belegte Publikationszeit gespeichert werden.'
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -295,6 +313,7 @@ Assert-True -Condition ($publishedSecond.jobs[0].published_at -eq '2026-08-01T06
         'navigation_entry_invalidated',
         'source_scoped_removal',
         'explicit_closed_signal',
-        'published_at_normalization_and_retention'
+        'published_at_normalization_and_retention',
+        'published_date_precision_and_missing_offset'
     )
 } | ConvertTo-Json -Depth 4

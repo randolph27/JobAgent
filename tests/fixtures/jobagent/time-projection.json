@@ -1,0 +1,31 @@
+{
+  "reference_time": "2026-10-25T02:00:00.000Z",
+  "timezone": "Europe/Berlin",
+  "cases": [
+    {
+      "name": "timestamp_before_dst_fallback",
+      "published_at": "2026-10-25T00:30:00.000Z",
+      "expected_age_days": "0"
+    },
+    {
+      "name": "timestamp_after_dst_fallback",
+      "published_at": "2026-10-25T01:30:00.000Z",
+      "expected_age_days": "0"
+    },
+    {
+      "name": "date_precision",
+      "published_on": "2026-10-20",
+      "expected_age_days": "5"
+    },
+    {
+      "name": "future_timestamp",
+      "published_at": "2026-10-26T02:00:00.000Z",
+      "expected_age_days": "UNKNOWN"
+    },
+    {
+      "name": "missing_offset",
+      "published_at": "2026-10-24T12:00:00",
+      "expected_age_days": "UNKNOWN"
+    }
+  ]
+}

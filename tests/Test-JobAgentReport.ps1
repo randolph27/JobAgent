@@ -255,6 +255,41 @@ $freshnessDocument.jobs[0].source_id = 'source:missing_confirmation'
 $unknownFreshnessReport = New-JobAgentDailyReport -Document $freshnessDocument -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
 Assert-True -Condition ((@($unknownFreshnessReport.sections.new_matching_jobs | Where-Object job_id -eq 'job:alpha_new')[0]).availability -eq 'FRESHNESS_UNKNOWN') -Message 'Eine fehlende erfolgreiche Quellenbestaetigung muss als unbekannt ausgewiesen werden.'
 
+$timeFixture = Get-Content -LiteralPath (Join-Path $root 'tests\fixtures\jobagent\time-projection.json') -Raw | ConvertFrom-Json -Depth 20 -DateKind String
+$timeDocument = ($document | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100 -DateKind String)
+$timeDocument.scan_runs[0].finished_at = [string]$timeFixture.reference_time
+$timeDocument.scan_attempts += [pscustomobject]@{ scan_attempt_id = 'scanattempt:alpha-later-failed'; scan_run_id = $scanRunId; company_id = 'company:alpha_ag'; source_id = 'source:alpha_ag_career'; started_at = '2026-10-25T01:45:00.000Z'; finished_at = '2026-10-25T01:46:00.000Z'; status = 'FAILED'; adapter = 'fixture'; error_class = 'TIMEOUT'; retry_recommendation = 'RETRY_SOON'; http_status = 504; scan_complete = $false }
+foreach ($case in @($timeFixture.cases)) {
+    $caseDocument = ($timeDocument | ConvertTo-Json -Depth 100 | ConvertFrom-Json -Depth 100 -DateKind String)
+    $caseDocument.jobs[0].published_at = if ($case.PSObject.Properties.Name -contains 'published_at') { [string]$case.published_at } else { 'UNKNOWN' }
+    if ($case.PSObject.Properties.Name -contains 'published_on') {
+        $caseDocument.jobs[0] | Add-Member -NotePropertyName published_on -NotePropertyValue ([string]$case.published_on) -Force
+    }
+    else {
+        $caseDocument.jobs[0].PSObject.Properties.Remove('published_on')
+    }
+    $caseReport = New-JobAgentDailyReport -Document $caseDocument -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
+    $caseEntry = @($caseReport.sections.new_matching_jobs | Where-Object job_id -eq 'job:alpha_new')[0]
+    Assert-True -Condition ($caseEntry.age_days -eq [string]$case.expected_age_days) -Message "Zeitfall $($case.name) hat ein falsches Stellenalter: $($caseEntry.age_days), published_at=$($caseEntry.published_at), Hinweis=$($caseEntry.age_data_notice)."
+    if ($case.name -eq 'date_precision') {
+        Assert-True -Condition ($caseEntry.age_basis -eq 'published_on' -and $caseEntry.age_precision -eq 'DAY' -and $caseEntry.age_display -match 'Uhrzeit unbekannt') -Message 'Tagesgenaues Quelldatum wird als Zeitstempel behandelt.'
+    }
+    if ($case.name -eq 'future_timestamp') {
+        Assert-True -Condition ($caseEntry.age_data_notice -match 'nach der Reportreferenz') -Message 'Zukunftszeitpunkt erzeugt keinen Datenhinweis.'
+    }
+    if ($case.name -eq 'missing_offset') {
+        Assert-True -Condition ($caseEntry.age_data_notice -match 'ohne Offset') -Message 'Zeitpunkt ohne Offset wird nicht als mehrdeutig ausgewiesen.'
+    }
+}
+$dstBefore = $timeFixture.cases | Where-Object name -eq 'timestamp_before_dst_fallback' | Select-Object -First 1
+$dstAfter = $timeFixture.cases | Where-Object name -eq 'timestamp_after_dst_fallback' | Select-Object -First 1
+Assert-True -Condition ([string]$dstBefore.published_at -ne [string]$dstAfter.published_at) -Message 'Die DST-Fixture braucht zwei unterschiedliche UTC-Zeitpunkte.'
+$sourceCaseReport = New-JobAgentDailyReport -Document $timeDocument -ScanRunId $scanRunId -SourceRegistry $isolatedSourceRegistry -HintStore $isolatedHintStore
+$sourceCaseEntry = @($sourceCaseReport.sections.new_matching_jobs | Where-Object job_id -eq 'job:alpha_new')[0]
+Assert-True -Condition ($sourceCaseEntry.time_projection.source.latest_attempt.status -eq 'FAILED') -Message 'Letzter Abrufversuch wird nicht getrennt vom letzten Erfolg projektiert.'
+Assert-True -Condition ($sourceCaseEntry.time_projection.source.latest_successful_attempt.status -eq 'SUCCESS' -and $sourceCaseEntry.time_projection.source.latest_complete_list_attempt.status -eq 'SUCCESS') -Message 'Erfolgreicher Abruf und vollstaendige Listenpruefung werden nicht getrennt projektiert.'
+Assert-True -Condition ($sourceCaseEntry.time_projection.source.next_company_scan.display -match '18\.08\.2026') -Message 'Naechste Firmenpruefung stammt nicht aus company.next_scan_at.'
+
 $markdown = ConvertTo-JobAgentDailyReportMarkdown -Report $report
 foreach ($expected in @('Firmen gesamt: 5', 'Firmen im Lauf: 2', 'Faellige Firmen: 4', 'Uebersprungene Firmen: 2', 'Limit: 2', 'Auswahlgrund: Faellig nach next_scan_at, danach Prioritaet', '## Erfassungsscope und Vollstaendigkeit', 'Scope: ALL_ROLES', 'Vollstaendigkeitsgrenze: LIMITED_OR_PARTIAL', 'Erfasste Stellen gesamt | 5', 'Profiltreffer gesamt | 4', '## Neue passende Stellen', '## Aktive passende Stellen', '## Aenderungen', '## Geschlossene oder entfernte Stellen', '## Neue Unternehmen', '## Fehler und unsichere Quellen', '## Recherche-Statistik', '### Quellenbestand', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', '| Titel | Firma | Standort | Prioritaet | Status | Offizielle Stellen-URL | Karriere-URL | Quelle |', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Offizielle Kurzbeschreibung mit Aufgaben und Verantwortung.', 'Keine Beschreibung aus offizieller Quelle verfuegbar', 'Veroeffentlicht', '[Quelle](https://beta_ag.example.invalid/careers)', '[Offizielle Stellen-URL](https://alpha_ag.example.invalid/jobs/alpha_new)', '[Karriere-URL](https://alpha_ag.example.invalid/careers)', '[Karriere](https://alpha_ag.example.invalid/careers)', '[ATS](https://jobs.alpha_ag.example.invalid/search)')) {
     Assert-True -Condition ($markdown.Contains($expected)) -Message "Markdown-Report enthaelt erwarteten Inhalt nicht: $expected"
@@ -267,7 +302,7 @@ foreach ($rawLabel in @('checked_jobs', 'active_matching_jobs', 'uncertain_sourc
 $report.sections.new_matching_jobs[0].title = '<script>alert(1)</script>'
 $report.sections.new_matching_jobs[0].description = '<img src=x onerror=alert(1)>Beschreibung'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
-foreach ($expected in @('<!DOCTYPE html>', '<h2>Erfassungsscope und Vollstaendigkeit</h2>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', '<h3>Quellenbestand</h3>', 'Scope', 'ALL_ROLES', 'Erfasste Stellen gesamt', 'Profiltreffer gesamt', 'Firmen gesamt', 'Firmen im Lauf', 'Faellige Firmen', 'Uebersprungene Firmen', 'Limit', 'Auswahlgrund', 'Faellig nach next_scan_at, danach Prioritaet', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', 'JobAgent Daily-Run-Bericht', '<th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th>', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Beschreibung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Offizielle Stellen-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
+foreach ($expected in @('<!DOCTYPE html>', '<h2>Erfassungsscope und Vollstaendigkeit</h2>', '<h2>Neue passende Stellen</h2>', '<h2>Fehler und unsichere Quellen</h2>', '<h3>Quellenbestand</h3>', 'Scope', 'ALL_ROLES', 'Erfasste Stellen gesamt', 'Profiltreffer gesamt', 'Firmen gesamt', 'Firmen im Lauf', 'Faellige Firmen', 'Uebersprungene Firmen', 'Limit', 'Auswahlgrund', 'Faellig nach next_scan_at, danach Prioritaet', 'Quellen gesamt', 'Offizielle Quellen', 'Im letzten Lauf gescannt', 'JobAgent Daily-Run-Bericht', 'Zeitbelege und Herkunft', 'Letzte vollstaendige Listenpruefung', '<th>Titel</th><th>Firma</th><th>Standort</th><th>Prioritaet</th><th>Status</th><th>Offizielle Stellen-URL</th><th>Karriere-URL</th><th>Quelle</th>', '120000 EUR', 'Budgetverantwortung', 'Kurzprofil', 'Beschreibung', 'href="https://beta_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>', 'href="https://alpha_ag.example.invalid/jobs/alpha_new" target="_blank" rel="noopener noreferrer">Offizielle Stellen-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>', 'href="https://alpha_ag.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>', 'href="https://jobs.alpha_ag.example.invalid/search" target="_blank" rel="noopener noreferrer">ATS</a>')) {
     Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt erwarteten Inhalt nicht: $expected"
 }
 foreach ($expected in @('id="jobagent-search"', 'id="jobagent-query"', 'id="jobagent-area"', 'id="jobagent-work-model"', 'id="jobagent-employment-type"', 'id="jobagent-work-time"', 'id="jobagent-age"', 'id="jobagent-pagination"', 'Software Engineer')) {
@@ -362,6 +397,8 @@ Assert-True -Condition ($emptyHtml.Contains('Keine neuen passenden Stellen im La
         'report_and_coverage_share_a_fixed_persisted_store_generation',
         'report_blocks_unsafe_url_schemes',
         'report_renders_empty_state',
-        'report_projects_source_freshness_at_7_day_boundary'
+        'report_projects_source_freshness_at_7_day_boundary',
+        'report_projects_timestamp_date_precision_future_and_dst_cases',
+        'report_separates_attempt_success_and_complete_list_evidence'
     )
 } | ConvertTo-Json -Depth 4

@@ -112,6 +112,9 @@ function Get-JobAgentRawPublishedAt {
     if ([string]::IsNullOrWhiteSpace($candidate)) {
         return $null
     }
+    if ($candidate -notmatch '(?i)(Z|[+-]\d{2}:\d{2})$') {
+        return $null
+    }
 
     try {
         return ([datetime]::Parse($candidate, [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::AssumeUniversal).ToUniversalTime().ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture))
@@ -119,6 +122,26 @@ function Get-JobAgentRawPublishedAt {
     catch {
         return $null
     }
+}
+
+function Get-JobAgentRawPublishedOn {
+    param([Parameter(Mandatory)][object]$RawJob)
+
+    foreach ($property in @('published_on', 'published_at')) {
+        if ($RawJob.PSObject.Properties.Name -notcontains $property) {
+            continue
+        }
+        $candidate = [string]$RawJob.$property
+        if ($candidate -match '^\d{4}-\d{2}-\d{2}$') {
+            try {
+                return [datetime]::ParseExact($candidate, 'yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture, [Globalization.DateTimeStyles]::None).ToString('yyyy-MM-dd', [Globalization.CultureInfo]::InvariantCulture)
+            }
+            catch {
+                return $null
+            }
+        }
+    }
+    return $null
 }
 
 function Get-JobAgentRawSourceLifecycleState {
@@ -314,6 +337,10 @@ function New-JobAgentJobFromRawJob {
     if ($null -ne $publishedAt) {
         $job | Add-Member -NotePropertyName published_at -NotePropertyValue $publishedAt
     }
+    $publishedOn = Get-JobAgentRawPublishedOn -RawJob $RawJob
+    if ($null -ne $publishedOn) {
+        $job | Add-Member -NotePropertyName published_on -NotePropertyValue $publishedOn
+    }
     return $job
 }
 
@@ -346,6 +373,7 @@ function Update-JobAgentExistingJobFromRawJob {
     $newWorkModel = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_model' -Default $job.work_model)
     $newEmploymentType = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'employment_type' -Default $job.employment_type)
     $newPublishedAt = Get-JobAgentRawPublishedAt -RawJob $RawJob
+    $newPublishedOn = Get-JobAgentRawPublishedOn -RawJob $RawJob
 
     $job.title = $newTitle
     $job.official_url = $newUrl
@@ -365,6 +393,12 @@ function Update-JobAgentExistingJobFromRawJob {
             $changedFields.Add('published_at')
         }
         $job | Add-Member -NotePropertyName published_at -NotePropertyValue $newPublishedAt -Force
+    }
+    if ($null -ne $newPublishedOn) {
+        if (($job.PSObject.Properties.Name -notcontains 'published_on') -or ([string]$job.published_on -ne $newPublishedOn)) {
+            $changedFields.Add('published_on')
+        }
+        $job | Add-Member -NotePropertyName published_on -NotePropertyValue $newPublishedOn -Force
     }
     $job.last_seen = $ObservedAt
     $job.identity_basis = $Decision.identity_basis
