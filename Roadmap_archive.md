@@ -1412,6 +1412,13 @@ Abschluss: CI-002-Schema und Tooling, CI-003-Umgebung und Browser-/Viewport-Audi
   - [x] Audit: Keine Aussage zu nativer PowerShell-Analyse, Coverage, Duplikatmetriken, Quality Profiles oder Quality Gates. Token, Header, Queryparameter, Tokenlängen und Scanner-Debugausgaben sind ausgeschlossen.
   - [x] Funktionstest und Evidence: dieselben fünf fokussierten Funktionstests jeweils Exit `0`; `docs/reviews/SQ-008-ci-lifecycle-acceptance.md` und `logs/verify/sq-009-20260917-152135.json`. Browser-, Viewport- und Android-Audit: nicht anwendbar. Kein Supertest; er ist kein Ersatz für den SonarQube-Nachweis.
 
+## Archiviert 2026-09-17 – JA-045
+
+- [x] JA-045 Favoriten und Bewerbungsstatus verlustarm je Stelle speichern #comment: Zwei unabhaengige persoenliche Markierungen ueberleben Berichtswechsel und Scans, ohne offizielle Stellenstatus zu veraendern.
+  - [x] Zustandsvertrag: `jobagent-user-state/v1` und `jobagent:personal:v1` speichern `favorite` und `applied` je stabiler `job_id` getrennt mit Feldzeitstempeln. Alle vier Kombinationen, manuelle Idempotenz, `applied_at` beim Ein-/Ausschalten und lokale Referenzfelder fuer entfernte Stellen sind abgedeckt; neue IDs erben keinen Zustand.
+  - [x] Recovery und Grenzen: Blockierter Speicher, Quota, korruptes JSON und unbekannte Version bleiben unveraendert und liefern einen nicht persistenten Status. Export, vollstaendig validierte Vorschau und feldweiser UTC-Merge erhalten nicht enthaltene Jobs; `storage` aktualisiert andere Tabs. Kein Konto, Cloudsync, HTTP-Schreibserver oder automatische Bewerbung.
+  - [x] Evidence und Abschluss: `html/jobagent/assets/jobboard-state.js`, `schemas/jobagent.user-state.schema.json`, `tests/Test-JobAgentUserState.ps1`, `tests/fixtures/jobagent/user-state/` und `docs/reviews/JA-045-acceptance.md`. `Test-JobAgentUserState.ps1`, `Test-JobAgentReport.ps1`, `Test-JobAgentHtmlAudit.ps1` und `Test-JobAgentTestMatrix.ps1` jeweils Exit 0. Abschluss-Supertest `./ci.cmd supertest`: 30/30 bestanden, 0 fehlgeschlagen, 0 blockiert, 0 nicht ausgefuehrt, Exit 0; Evidence `logs/jobagent/QA-006/20260917T173836924Z/summary.json`.
+
 ## Archiviert 2026-09-17 – JA-051
 
 - [x] JA-051 Stellenalter, Abrufalter und naechste Pruefung aus belegten Zeitdaten ableiten #comment: Eine heute abgerufene Anzeige wird nicht als heute veroeffentlicht und eine fehlgeschlagene Quelle nicht als aktuell bestaetigt ausgegeben.

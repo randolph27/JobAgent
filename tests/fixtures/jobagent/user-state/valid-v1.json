@@ -1,0 +1,20 @@
+{
+  "schema_version": "jobagent-user-state/v1",
+  "project_key": "jobagent:personal:v1",
+  "updated_at": "2026-09-17T18:00:00.000Z",
+  "jobs": {
+    "job:alpha": {
+      "favorite": true,
+      "applied": false,
+      "favorite_updated_at": "2026-09-17T18:00:00.000Z",
+      "applied_updated_at": null,
+      "applied_at": null,
+      "reference": {
+        "title": "Leitung IT",
+        "company": "Alpha AG",
+        "official_url": "https://alpha.example.invalid/jobs/alpha",
+        "observed_at": "2026-09-17T18:00:00.000Z"
+      }
+    }
+  }
+}

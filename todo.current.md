@@ -2,7 +2,6 @@
 
 Active: _(none)_
 
-- [open] TD-0073 M1 – Datenbasis und persoenliche Markierungen: JA-045 Favoriten und Bewerbungsstatus verlustarm je Stelle speichern #comment: Zwei unabhaengige persoenliche Markierungen muessen Berichtswechsel und Scans ueberleben, ohne den offiziellen Stellenstatus zu veraendern.
 - [open] TD-0074 M2 – Stellenboersen-Oberflaeche: JA-046 Primaere Trefferseite als responsive Stellenboerse aufbauen #comment: Beim Oeffnen stehen konkrete Stellen und ihre Suche im Vordergrund, Firmen und technische Laufdetails bleiben nachgeordnet erreichbar.
 - [open] TD-0075 M2 – Stellenboersen-Oberflaeche: JA-047 Stellenfilter, Suche, Sortierung und Navigation deterministisch verbinden #comment: Filter muessen den gesamten offenen Stellenbestand eingrenzen und reproduzierbare Ergebnismengen liefern.
 - [open] TD-0076 M2 – Stellenboersen-Oberflaeche: JA-048 Stellendetails und zwei eindeutig bedienbare Sterne integrieren #comment: Jede Stelle muss vollstaendig pruefbar, separat merkbar und manuell als schon beworben markierbar sein.

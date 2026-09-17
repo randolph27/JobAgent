@@ -465,6 +465,23 @@
       ]
     },
     {
+      "roadmap_id": "JA-045",
+      "supertest_order": 33,
+      "title": "Browserlokaler Favoriten- und Bewerbungsstatus v1",
+      "test_file": "tests/Test-JobAgentUserState.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentUserState.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": [
+        "vier unabhaengige Favorit-/Bewerbungskombinationen",
+        "getrennte Feldzeitstempel und idempotente Bedienaktion",
+        "blockierter, korrupter und unbekannt versionierter Speicher bleibt unveraendert",
+        "validierter Vorschauimport und zeitbasierter Feldmerge ohne Loeschung fehlender Jobs",
+        "Export/Reload und storage-Tabbenachrichtigung"
+      ]
+    },
+    {
     "roadmap_id": "JA-027.2",
     "supertest_order": 20,
       "title": "Quelleninventur und Kandidatenabgleich fuer JA-027.2",

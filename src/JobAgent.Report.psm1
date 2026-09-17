@@ -1522,6 +1522,7 @@ function Add-JobAgentReportSearchInterfaceHtml {
     [void]$Lines.Add('<div id="jobagent-companies" role="tabpanel" aria-labelledby="jobagent-tab-companies" hidden><div id="jobagent-company-results" class="result-list"></div></div>')
     [void]$Lines.Add('<nav id="jobagent-pagination" class="pagination" aria-label="Seitennavigation"></nav>')
     [void]$Lines.Add('<script id="jobagent-search-data" type="application/json">' + (ConvertTo-JobAgentReportClientDataJson -Value $clientData) + '</script>')
+    [void]$Lines.Add('<script>' + (Get-JobAgentReportUserStateScript) + '</script>')
     [void]$Lines.Add('<script>')
     [void]$Lines.Add('(function () {')
     [void]$Lines.Add('const data=JSON.parse(document.getElementById("jobagent-search-data").textContent),pageSize=50,form=document.getElementById("jobagent-filters"),count=document.getElementById("jobagent-result-count"),pagination=document.getElementById("jobagent-pagination");')
@@ -1540,6 +1541,19 @@ function Add-JobAgentReportSearchInterfaceHtml {
     [void]$Lines.Add('form.addEventListener("input",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("change",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("reset",()=>{focusReset=true;setTimeout(()=>write({view:read().view,page:1,q:"",area:[],workModel:[],employmentType:[],workTime:[],age:""},false),0)});document.querySelectorAll("[data-jobagent-view]").forEach(button=>{button.addEventListener("click",()=>write({...read(),view:button.dataset.jobagentView,page:1},false));button.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;event.preventDefault();const tabs=Array.from(document.querySelectorAll("[data-jobagent-view]")),index=tabs.indexOf(button),target=event.key==="Home"?tabs[0]:event.key==="End"?tabs[tabs.length-1]:tabs[(index+(event.key==="ArrowRight"?1:tabs.length-1))%tabs.length];target.focus();target.click()})});window.addEventListener("hashchange",render);render();')
     [void]$Lines.Add('}());')
     [void]$Lines.Add('</script></section>')
+}
+
+function Get-JobAgentReportUserStateScript {
+    $assetPath = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\html\jobagent\assets\jobboard-state.js'))
+    if (-not (Test-Path -LiteralPath $assetPath -PathType Leaf)) {
+        throw "JobAgent UserState-Asset fehlt: $assetPath"
+    }
+
+    $script = [IO.File]::ReadAllText($assetPath)
+    if ($script -match '(?i)</script') {
+        throw 'JobAgent UserState-Asset enthaelt einen unzulaessigen Script-Abschluss.'
+    }
+    return $script
 }
 
 function ConvertTo-JobAgentDailyReportHtml {

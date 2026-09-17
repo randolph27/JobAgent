@@ -51,6 +51,7 @@ Die detaillierten Vorbedingungen, Eingaben, Sollwerte und Negativfälle sind mas
 | JA-027 | `tests/Test-JobAgentCompanyDedupeScale.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCompanyDedupeScale.ps1` | ja | Skalierte Kandidaten-Cluster, starke Identitaetskeys, Konfliktflags, Review-Queue, 5.000+ Kandidaten |
 | JA-027.2 | `tests/Test-JobAgentDiscoverySourceInventory.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentDiscoverySourceInventory.ps1` | ja | Quelleninventur, Hint-/Queue-Abgleich, kleine Bestaende, Recherchematrix, fail-closed Quellen |
 | JA-029 | `tests/Test-JobAgentImportWaves.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentImportWaves.ps1` | ja | Importwellen-Konfiguration, produktive Gate-Pruefung, Rollback-Backup, fail-closed CLI ohne Store-Aenderung |
+| JA-045 | `tests/Test-JobAgentUserState.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUserState.ps1` | ja | Browserlokaler v1-Zustand, vier Markierungskombinationen, Feldzeitstempel, Export/Import, Speicherfehler und Tab-Synchronisation |
 | UI-001 | `tests/Test-JobAgentUiBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUiBrowserAudit.ps1` | ja | Lokale Browser-Fixture mit 251 Firmen/256 Stellen, Filterkombinationen, UNKNOWN, Umlautsuche, Pagination, Reset, Ruecknavigation, Store- und Request-Invarianz sowie 390/800/1366/1920 px |
 
 ## Live-Lane

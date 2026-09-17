@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://jobagent.local/schemas/jobagent.user-state.schema.json",
+  "title": "JobAgent persoenlicher Browserzustand v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "project_key", "updated_at", "jobs"],
+  "properties": {
+    "schema_version": { "const": "jobagent-user-state/v1" },
+    "project_key": { "const": "jobagent:personal:v1" },
+    "updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
+    "jobs": {
+      "type": "object",
+      "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" },
+      "additionalProperties": { "$ref": "#/$defs/job_state" }
+    }
+  },
+  "$defs": {
+    "utc_time": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "job_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["favorite", "applied", "favorite_updated_at", "applied_updated_at", "applied_at"],
+      "properties": {
+        "favorite": { "type": "boolean" },
+        "applied": { "type": "boolean" },
+        "favorite_updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
+        "applied_updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
+        "applied_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
+        "reference": { "$ref": "#/$defs/reference" }
+      },
+      "allOf": [
+        { "if": { "properties": { "applied": { "const": true } } }, "then": { "properties": { "applied_updated_at": { "$ref": "#/$defs/utc_time" }, "applied_at": { "$ref": "#/$defs/utc_time" } } }, "else": { "properties": { "applied_at": { "type": "null" } } } }
+      ]
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "company", "official_url", "observed_at"],
+      "properties": {
+        "title": { "type": "string", "maxLength": 1000 },
+        "company": { "type": "string", "maxLength": 1000 },
+        "official_url": { "type": ["string", "null"], "format": "uri", "pattern": "^https?://" },
+        "observed_at": { "$ref": "#/$defs/utc_time" }
+      }
+    }
+  }
+}

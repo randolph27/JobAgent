@@ -314,6 +314,7 @@ foreach ($expected in @('<!DOCTYPE html>', '<h2>Erfassungsscope und Vollstaendig
 foreach ($expected in @('id="jobagent-search"', 'id="jobagent-query"', 'id="jobagent-area"', 'id="jobagent-work-model"', 'id="jobagent-employment-type"', 'id="jobagent-work-time"', 'id="jobagent-age"', 'id="jobagent-pagination"', 'Software Engineer')) {
     Assert-True -Condition ($html.Contains($expected)) -Message "HTML-Report enthaelt die berufsneutrale Filteransicht nicht: $expected"
 }
+Assert-True -Condition ($html.Contains('root.JobAgentUserState = api;')) -Message 'HTML-Report bindet den browserlokalen UserState-Vertrag nicht ein.'
 Assert-True -Condition (-not $html.Contains('<script>alert(1)</script>')) -Message 'HTML-Report muss unescaped Script-Titel verhindern.'
 Assert-True -Condition ($html.Contains('&lt;script&gt;alert(1)&lt;/script&gt;')) -Message 'HTML-Report escaped problematische Inhalte nicht.'
 Assert-True -Condition (-not $html.Contains('<img src=x onerror=alert(1)>')) -Message 'HTML-Report muss unsanitisiertes Beschreibungs-Markup escapen.'
