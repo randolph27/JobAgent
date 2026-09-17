@@ -1,0 +1,564 @@
+{
+  "checked_at": "2026-09-17T16:57:11.7356316+02:00",
+  "scope": "six-roadmap-additions-only",
+  "status": "planning-passed-with-known-unmodified-global-gate-failures",
+  "baseline": {
+    "captured_at": "2026-09-17T16:44:16.8504145+02:00",
+    "head": "b8e7b04ce25c335fe95316afe3de3faeda7867d8",
+    "initial_worktree": "clean",
+    "existing_stash": "b75275258acdf5c883c59fc73c396da4a0012596",
+    "source_hashes": [
+      {
+        "path": "README.md",
+        "sha256": "5DF302F94E57F66F3021AA386BEA7C28DBED75427FC36AF23185B01D6B90905E"
+      },
+      {
+        "path": "Roadmap.md",
+        "sha256": "988ED4AEFF15C62994C942C3069EF2B87962C3D0886D54B47C88F56FAB546791"
+      },
+      {
+        "path": "Roadmap_index.md",
+        "sha256": "161A504A9A1769F3EF16800EACECD076472F26806B52ABD4B37544EF44A7DD3F"
+      },
+      {
+        "path": "Roadmap_archive.md",
+        "sha256": "5B731ED18049C53012F74F468EC1C0322F8375641071F020EB4E495CDF96FD75"
+      },
+      {
+        "path": "todo.state.json",
+        "sha256": "3F74ABD9C988BDDE64FA3CBDC14294BE3131898906402093B4C171840327E85E"
+      },
+      {
+        "path": "todo.events.jsonl",
+        "sha256": "9E1B0C5FEC75EBC3DA4C583F8A4419D532B9BE2A1554A9721813DF98C03E1C63"
+      },
+      {
+        "path": "src/JobAgent.Report.psm1",
+        "sha256": "6F0FF9383B34B57DD94A8E352F133C1396C6DD23802CF018E31084D7B7E977C2"
+      },
+      {
+        "path": "src/JobAgent.Persistence.psm1",
+        "sha256": "8BF0AD4CE08B87AD478E0B6BAA7C68E2DE57C0D64E453A16A0F22551EDCA0809"
+      },
+      {
+        "path": "src/JobAgent.StatusMachine.psm1",
+        "sha256": "3DE35D2D2A709D620AB4FB5CDB54729640F092CACAC4452F41CE087615ED09E6"
+      },
+      {
+        "path": "src/JobAgent.DailyRun.psm1",
+        "sha256": "6B3CE54AF67A146CF53D4C75B6A7CC8B561859E7CA3DE506F3D9E97FD3CD5DAC"
+      },
+      {
+        "path": "src/JobAgent.Operations.psm1",
+        "sha256": "CF33FB731FB77075ED5CF4FFB6DD0FA6EBB8FD12F1A5AD866B4D6ABB6FA2EBD4"
+      },
+      {
+        "path": "schemas/jobagent.schema.json",
+        "sha256": "0A7D72167249AD95AE4170001976DDDB068F5AB27DBA9D1E49054DB6277D6651"
+      },
+      {
+        "path": ".ci/ci.config.json",
+        "sha256": "9B46298DF06D679D1E65DFB2B90655AE5ECF75269115C553997686C0EB215C41"
+      },
+      {
+        "path": ".ci/bin/modules/todo-engine.ps1",
+        "sha256": "23E4D443F8ED32ECB9991507D64A97746E5B2A4DD4CF308E5BA1AE868DD9054E"
+      }
+    ],
+    "scope": "six-roadmap-additions-only",
+    "supertest": "not-run: planning only"
+  },
+  "roadmap_items": [
+    {
+      "id": "JA-043",
+      "effort_pt": [
+        2.0,
+        3.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-040",
+        "JA-041"
+      ],
+      "duration_days": [
+        3,
+        5
+      ],
+      "status": "open",
+      "priority_score": 100
+    },
+    {
+      "id": "JA-044",
+      "effort_pt": [
+        3.0,
+        5.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043"
+      ],
+      "duration_days": [
+        5,
+        8
+      ],
+      "status": "open",
+      "priority_score": 96
+    },
+    {
+      "id": "JA-051",
+      "effort_pt": [
+        1.0,
+        2.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043",
+        "JA-044"
+      ],
+      "duration_days": [
+        2,
+        3
+      ],
+      "status": "open",
+      "priority_score": 92
+    },
+    {
+      "id": "JA-045",
+      "effort_pt": [
+        2.0,
+        3.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043"
+      ],
+      "duration_days": [
+        3,
+        5
+      ],
+      "status": "open",
+      "priority_score": 88
+    },
+    {
+      "id": "JA-046",
+      "effort_pt": [
+        2.0,
+        4.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043",
+        "JA-044",
+        "JA-045",
+        "JA-051"
+      ],
+      "duration_days": [
+        3,
+        6
+      ],
+      "status": "open",
+      "priority_score": 84
+    },
+    {
+      "id": "JA-047",
+      "effort_pt": [
+        3.0,
+        4.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043",
+        "JA-045",
+        "JA-046"
+      ],
+      "duration_days": [
+        5,
+        6
+      ],
+      "status": "open",
+      "priority_score": 80
+    },
+    {
+      "id": "JA-048",
+      "effort_pt": [
+        2.0,
+        3.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043",
+        "JA-045",
+        "JA-046",
+        "JA-047"
+      ],
+      "duration_days": [
+        3,
+        5
+      ],
+      "status": "open",
+      "priority_score": 76
+    },
+    {
+      "id": "JA-052",
+      "effort_pt": [
+        2.0,
+        4.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-045",
+        "JA-047",
+        "JA-048",
+        "JA-051"
+      ],
+      "duration_days": [
+        3,
+        6
+      ],
+      "status": "open",
+      "priority_score": 72
+    },
+    {
+      "id": "JA-053",
+      "effort_pt": [
+        1.0,
+        2.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043",
+        "JA-044",
+        "JA-048",
+        "JA-051"
+      ],
+      "duration_days": [
+        2,
+        3
+      ],
+      "status": "open",
+      "priority_score": 68
+    },
+    {
+      "id": "JA-055",
+      "effort_pt": [
+        0.5,
+        1.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-045",
+        "JA-047",
+        "JA-048",
+        "JA-052"
+      ],
+      "duration_days": [
+        1,
+        2
+      ],
+      "status": "open",
+      "priority_score": 64
+    },
+    {
+      "id": "JA-049",
+      "effort_pt": [
+        1.0,
+        2.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-044",
+        "JA-046",
+        "JA-047",
+        "JA-048",
+        "JA-051",
+        "JA-052",
+        "JA-053",
+        "JA-055"
+      ],
+      "duration_days": [
+        2,
+        3
+      ],
+      "status": "open",
+      "priority_score": 60
+    },
+    {
+      "id": "JA-054",
+      "effort_pt": [
+        2.0,
+        3.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-046",
+        "JA-047",
+        "JA-049",
+        "JA-051",
+        "JA-052"
+      ],
+      "duration_days": [
+        3,
+        5
+      ],
+      "status": "open",
+      "priority_score": 56
+    },
+    {
+      "id": "JA-056",
+      "effort_pt": [
+        2.0,
+        3.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-047",
+        "JA-049",
+        "JA-051",
+        "JA-052",
+        "JA-053",
+        "JA-055"
+      ],
+      "duration_days": [
+        3,
+        5
+      ],
+      "status": "open",
+      "priority_score": 52
+    },
+    {
+      "id": "JA-050",
+      "effort_pt": [
+        2.0,
+        3.0
+      ],
+      "steps": 3,
+      "description_parts": 3,
+      "dependencies": [
+        "JA-043",
+        "JA-044",
+        "JA-045",
+        "JA-046",
+        "JA-047",
+        "JA-048",
+        "JA-049",
+        "JA-051",
+        "JA-052",
+        "JA-053",
+        "JA-054",
+        "JA-055",
+        "JA-056"
+      ],
+      "duration_days": [
+        3,
+        5
+      ],
+      "status": "open",
+      "priority_score": 48
+    }
+  ],
+  "new_ids": [
+    "JA-051",
+    "JA-052",
+    "JA-053",
+    "JA-054",
+    "JA-055",
+    "JA-056"
+  ],
+  "description_parts_total": 42,
+  "new_description_parts": 18,
+  "dependency_order": "passed",
+  "estimates": {
+    "total_rounded_workdays": [
+      41,
+      67
+    ],
+    "capacity_fte": 0.7,
+    "new_pt": [
+      8.5,
+      15
+    ],
+    "total_pt": [
+      25.5,
+      42.0
+    ]
+  },
+  "existing_test_paths_verified": [
+    "./tests/Test-JobAgentCiContracts.ps1",
+    "./tests/Test-JobAgentCompanyInventory.ps1",
+    "./tests/Test-JobAgentCoverage.ps1",
+    "./tests/Test-JobAgentDailyRun.ps1",
+    "./tests/Test-JobAgentHtmlAudit.ps1",
+    "./tests/Test-JobAgentHtmlViewportAudit.ps1",
+    "./tests/Test-JobAgentOperations.ps1",
+    "./tests/Test-JobAgentPersistence.ps1",
+    "./tests/Test-JobAgentReport.ps1",
+    "./tests/Test-JobAgentSchema.ps1",
+    "./tests/Test-JobAgentSourceAdapters.ps1",
+    "./tests/Test-JobAgentSourceVerification.ps1",
+    "./tests/Test-JobAgentStatusMachine.ps1",
+    "./tests/Test-JobAgentTestMatrix.ps1",
+    "./tests/Test-JobAgentUiBrowserAudit.ps1"
+  ],
+  "planned_new_test_paths": [
+    "./tests/Test-JobAgentUserState.ps1",
+    "./tests/Test-JobAgentCalendar.ps1",
+    "./tests/Test-JobAgentSavedSearches.ps1"
+  ],
+  "product_source_unchanged": true,
+  "readme_unchanged": true,
+  "supertest": "not-run: planning only",
+  "next_implementation": "JA-043",
+  "verification": {
+    "self_check": {
+      "exit": 1,
+      "issues": [
+        "immutable_modified: .ci\\ci.config.json"
+      ],
+      "config_sha256": "9B46298DF06D679D1E65DFB2B90655AE5ECF75269115C553997686C0EB215C41",
+      "log": "logs/terminal/self-check-20260917-165523.log",
+      "config_equals_head": true
+    },
+    "ci_verify": {
+      "exit": 0,
+      "cases": 14,
+      "log": "logs/verify/verify-20260917-165425.log",
+      "test": "Test-JobAgentCiContracts.ps1"
+    },
+    "stp": {
+      "event_id": "EV-20260917-165452-57be03",
+      "exit": 0
+    },
+    "route": {
+      "exit": 1,
+      "violations": [
+        {
+          "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md",
+          "offset": 11509,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md",
+          "offset": 14511,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md",
+          "offset": 17707,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md",
+          "offset": 20848,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/jre/legal/java.desktop/freetype.md",
+          "offset": 23793,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md",
+          "offset": 10157,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md",
+          "offset": 13159,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md",
+          "offset": 16355,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md",
+          "offset": 19496,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/freetype.md",
+          "offset": 22441,
+          "kind": "markdown_control_char",
+          "byte": "0x0C",
+          "rule": "markdown_render_guard"
+        },
+        {
+          "path": ".ci/tools/sonar/sonar-scanner-4.8.1.3023-windows/jre/legal/java.desktop/giflib.md",
+          "kind": "markdown_unclosed_code_fence",
+          "line": 4,
+          "marker": "```",
+          "rule": "markdown_render_guard"
+        }
+      ],
+      "unmodified_local_toolchain": true
+    }
+  },
+  "workflow_validation": {
+    "new_todos": 6,
+    "invariants_cases": 6,
+    "existing_todo_ids_preserved": 8,
+    "index_matches_state": true,
+    "status": "passed",
+    "invariants_exit": 0,
+    "open_todos": 14,
+    "appended_events": 2,
+    "event_history_prefix_unchanged": true,
+    "handoff_next": "JA-043",
+    "active_count": 0,
+    "checkpoint_event_id": "EV-20260917-165452-57be03"
+  },
+  "final_diff_check": {
+    "source_unchanged": true,
+    "roadmap_sha256": "F885D1C4C4E25E0E8DE561B768594EB9667CEC1989F5AFDA15B4FC4BD2FC4B37",
+    "exit": 0,
+    "changed_file_count": 12,
+    "existing_stash_unchanged": true,
+    "new_stash_required": false,
+    "allowed_paths": [
+      "Roadmap.md",
+      "Roadmap_index.md",
+      "handoff.latest.json",
+      "handoff.latest.md",
+      "todo.checkpoint.json",
+      "todo.current.md",
+      "todo.events.jsonl",
+      "todo.history.digest.json",
+      "todo.master.index.json",
+      "todo.state.json",
+      "docs/handoffs/2026-09-17-jobboard-extensions-plan.md",
+      "docs/reviews/2026-09-17-jobboard-extensions-plan-validation.json"
+    ]
+  }
+}

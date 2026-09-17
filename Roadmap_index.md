@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Aktiver Backlog: acht geplante Stellenboersen-Punkte JA-043 bis JA-050 in drei Meilensteinen; keine Implementierung in diesem Auftrag. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-17. Aktiver Backlog: 14 geplante Stellenboersen-Punkte JA-043 bis JA-056 in drei Meilensteinen; sechs Ergaenzungen fuer Zeitdaten/Kalender/Bewerbungsorganisation/Chronik/Suchauftraege/Ausblendung, keine Implementierung in diesem Auftrag. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
-- `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte JA-043 bis JA-050; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
+- `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte JA-043 bis JA-056; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
 - `docs/reviews/QA-007-acceptance.md`: Ursache, sicherheitsverträgliche Teständerung und sekretfreies Ergebnis des vollständigen Supertests.
 - `docs/reviews/QA-008-acceptance.md`: Inventardiffklasse, Generatorlauf und Matrix-/Runner-Vertrag.
@@ -37,7 +37,7 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-17: SQ-009 und SQ-008 nach Roadmap_archive.md rotiert; Evidence: `docs/reviews/SQ-009-compute-engine-read-acceptance.md`, `docs/reviews/SQ-008-ci-lifecycle-acceptance.md`, `logs/verify/sq-009-20260917-152135.json`, Task `AaCvh97JOhdKqVTDjfxk`, Analyse `AaCvh-LnotDYp2WltY0K`, HTTP `200`, Status `SUCCESS` und 323 External Issues. Keine native PowerShell-Analyse oder Quality-Gate-Aussage.
 
 
-## Stellenboersen-Planung 2026-09-17
+## Historischer Basisplanungsschnitt 2026-09-17 (Commit b8e7b04)
 
 - M1: JA-043 Daten/Verfuegbarkeit -> JA-044 Firmen-/Stellenerfassung und JA-045 persoenlicher Speicher (nach JA-043 teilweise parallel).
 - M2: JA-046 Trefferseite -> JA-047 Filter/Sortierung -> JA-048 Details/Favoriten-/Bewerbungssterne.
@@ -46,3 +46,15 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - `docs/reviews/2026-09-17-jobboard-plan-baseline.json`: Ausgangs-HEAD und hashgesicherte vorbestehende Aenderungen; kein Livebefund.
 - `docs/reviews/2026-09-17-jobboard-plan-validation.json`: Struktur-/Synchronisations-/Funktionspruefung der Planung, keine Produktabnahme der neuen Stellenboerse.
 - `docs/handoffs/2026-09-17-jobboard-plan.md`: Abschluss-/Fortsetzungsgrenze; alle acht Produktpunkte bleiben offen, naechster Implementierungsanker JA-043.
+
+
+## Aktueller Ergaenzungsplan 2026-09-17
+
+- M1: JA-043 -> JA-044 -> JA-051 Zeitprojektion -> JA-045; Daten/Zeiten vor neuen Ansichten.
+- M2: JA-046 -> JA-047 -> JA-048 -> JA-052 Bewerbungsorganisation -> JA-053 Chronik -> JA-055 Ausblendung; private Migration und Sichtbarkeit vor gespeicherten Suchen.
+- M3: JA-049 -> JA-054 Abruf-/Aufgabenkalender -> JA-056 Suchauftraege/Sichtungsstand -> JA-050 erweiterte Gesamtabnahme.
+- Gesamtschaetzung: 25,5–42 PT / Summe gerundeter Einzelkorridore 41–67 Arbeitstage bei 0,7 FTE; sechs neue Punkte davon 8,5–15 PT / 14–24 Arbeitstage. Keine Termin-/Kapazitaetszusage; Parallelisierung je Punkt beschrieben.
+- `docs/reviews/2026-09-17-jobboard-extensions-plan-validation.json`: aktueller Struktur-/Abhaengigkeits-/Workflow-/Funktionsnachweis samt Ausgangsstand; ersetzt keinen Implementierungstest.
+- `docs/handoffs/2026-09-17-jobboard-extensions-plan.md`: aktuelle Uebergabe, bekannte globale Pruefgrenzen und Stopgrenze nach Git-Abschluss.
+- 14 offene Punkte, genau 3 Beschreibungs-Unterpunkte je Punkt; vorhandene acht Todo-IDs bleiben erhalten. Naechster Implementierungsanker weiterhin JA-043; im aktuellen Auftrag keine Implementierung beginnen.
+- Vorherige Planungsnachweise bleiben historische Snapshots unveraendert. Originalbildzugriffsluecke und bestehender Sicherungs-Stash werden nicht umgedeutet.

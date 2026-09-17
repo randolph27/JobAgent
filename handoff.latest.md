@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-17T16:31:07.890+02:00
+Stand: 2026-09-17T16:54:51.743+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-17T16:31:07.890+02:00
 - Status: `open`
 - Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `7666978ae8b0`
+- HEAD: `b8e7b04ce25c`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -33,10 +33,10 @@ Stand: 2026-09-17T16:31:07.890+02:00
 
 M1 – Datenbasis und persoenliche Markierungen: JA-043 Kanonischen Stellenbestand, Anzeigefelder und Verfuegbarkeit definieren #comment: Ein Firmenlink wird erst durch eine identifizierte, quellenbelegte offene Stelle zum Treffer der Stellenboerse.
 
-## Planungsabschluss
+## Ergaenzungsplanung und Stopgrenze
 
-Acht offene Roadmap-Punkte JA-043 bis JA-050 mit je drei Beschreibungs-Unterpunkten; keine Produktimplementierung. Nach Stage/Commit/Push dieses Planungsschnitts stoppen. Detaillierte Uebergabe: `docs/handoffs/2026-09-17-jobboard-plan.md`; Nachweis: `docs/reviews/2026-09-17-jobboard-plan-validation.json`.
+Sechs neue Punkte JA-051 bis JA-056, insgesamt 14 offene Punkte/42 Beschreibungs-Unterpunkte. Acht bisherige Todo-IDs erhalten, sechs neue aufgenommen; naechster Implementierungsanker JA-043. Keine Implementierung oder Supertest in diesem Auftrag; nach geprueftem Stage/Commit/Push stoppen.
 
-Route bleibt `False`: elf Befunde ausschliesslich in unveraenderten ignorierten Sonar-Toolchain-Lizenzdateien; geaenderte Planungsdateien separat geprueft. Vorbestehende Produktivaenderungen sind in Stash `b75275258acdf5c883c59fc73c396da4a0012596` sowie bytegleich unter `backups/roadmap-jobboard-20260917/` erhalten. Das Nutzer-Screenshotoriginal ist nur im Chat verfuegbar; die Referenzbindung benennt diese Grenze.
+Aktuelle Uebergabe: `docs/handoffs/2026-09-17-jobboard-extensions-plan.md`; Nachweis: `docs/reviews/2026-09-17-jobboard-extensions-plan-validation.json`. Globale Routepruefung bleibt rot mit elf bekannten Befunden ausschliesslich in ignorierten lokalen Sonar-Lizenzdateien. Bestehender Sicherungs-Stash und Screenshotreferenzen bleiben unveraendert. Dieser STP-Git-Snapshot liegt vor dem Abschlusscommit.
 
-Self-Check: Exit 1, einzig `immutable_modified: .ci/ci.config.json`; Konfiguration im Git-Blobvergleich unveraendert gegen HEAD. Kein Repinning im Planungsschnitt. Workflowinvarianten ohne Befund; Details im Validierungsnachweis.
+Aktueller Self-Check: Exit 1, einziger Befund `immutable_modified: .ci/ci.config.json`; Konfiguration gegen HEAD und Ausgangshash unveraendert. Kein neuer Workflow-Invariantenbefund; keine Pin-/Toolchainreparatur im Planungsschnitt.
