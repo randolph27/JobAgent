@@ -1,8 +1,8 @@
 # Roadmap Index
 
-Stand: 2026-09-17. Keine aktiven Roadmap-Punkte; SQ-001 ist als explizite SonarQube-Nichtanwendbarkeit und SQ-002 als sekretfreier Authentifizierungsnachweis abgeschlossen.
+Stand: 2026-09-17. Ein aktiver Roadmap-Punkt: QA-007 stellt den durch Kaspersky blockierten Vollsupertest-Startvertrag deterministisch wieder her. SQ-001 ist als explizite SonarQube-Nichtanwendbarkeit und SQ-002 als sekretfreier Authentifizierungsnachweis abgeschlossen.
 
-- `Roadmap.md`: enthält keine aktiven Punkte; die CI-005- und SQ-001-Abnahmen liegen unter `docs/reviews/`.
+- `Roadmap.md`: enthält QA-007 als aktiven, sicherheitsblockierten Supertest-Startvertrag; die CI-005- und SQ-001-Abnahmen liegen unter `docs/reviews/`.
 - `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
 - `docs/reviews/2026-09-13-ja027-roadmap-before.md`: unveraenderter vorheriger Plan mit saemtlichen historischen Fortschritten; alte IT-/Mengenziele gelten nicht als aktuelle Anforderungen.
 - `docs/reviews/2026-09-13-ja027-acquisition-baseline.json`: lokaler Datenbestand und Inputhashes, kein neuer Livebeleg.
