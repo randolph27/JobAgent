@@ -818,13 +818,38 @@ try {
         Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected $facetHash -Case "Facet $($facetCase.control)=$($facetCase.value)"
         $visibleText = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Facet $($facetCase.control)=$($facetCase.value)" -Script '() => { const root=document.getElementById("jobagent-job-results"); return JSON.stringify(root?root.textContent:""); }'
         $visibleIds = @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs)
-        Assert-True -Condition $visibleText.Contains($facetCase.expected) -Message "Facet $($facetCase.control)=$($facetCase.value): erwarteter Karteninhalt fehlt: $($facetCase.expected). Sichtbare IDs: $($visibleIds -join ', ')."
+        $matchingJobs = switch ($facetCase.control) {
+            'Gebiet' { @($report.sections.active_jobs | Where-Object { @($_.area_facets) -contains $facetCase.value }) }
+            'Arbeitsmodell' { @($report.sections.active_jobs | Where-Object { [string]$_.work_model -eq $facetCase.value }) }
+            'Anstellungsart' { @($report.sections.active_jobs | Where-Object { [string]$_.employment_type -eq $facetCase.value }) }
+            'Arbeitszeit' { @($report.sections.active_jobs | Where-Object { [string]$_.work_time -eq $facetCase.value }) }
+            'Aktualitaet' {
+                @($report.sections.active_jobs | Where-Object {
+                        $ageDays = [string]$_.age_days
+                        switch ($facetCase.value) {
+                            'older' { $ageDays -ne 'UNKNOWN' -and [int]$ageDays -gt 30 }
+                            'UNKNOWN' { $ageDays -eq 'UNKNOWN' }
+                            default { $ageDays -ne 'UNKNOWN' -and [int]$ageDays -le [int]$facetCase.value }
+                        }
+                    })
+            }
+            default { throw "Unbekanntes Facet-Control: $($facetCase.control)" }
+        }
+        $expectedCount = @($matchingJobs).Count
+        $expectedPages = [Math]::Max(1, [Math]::Ceiling($expectedCount / 50.0))
+        $expectedVisible = [Math]::Min(50, $expectedCount)
+        $resultCount = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Facet $($facetCase.control)=$($facetCase.value)" -Script '() => JSON.stringify(document.getElementById("jobagent-result-count").textContent)'
+        Assert-True -Condition ($resultCount -eq "Stellen: $expectedCount Treffer, Seite 1 von $expectedPages (sichtbar $expectedVisible).") -Message "Facet $($facetCase.control)=$($facetCase.value): Trefferzahl oder Pagination weicht von der Fixturemenge ab. Erhalten: $resultCount."
+        if ($expectedCount -le 50) {
+            Assert-True -Condition $visibleText.Contains($facetCase.expected) -Message "Facet $($facetCase.control)=$($facetCase.value): erwarteter Karteninhalt fehlt: $($facetCase.expected). Sichtbare IDs: $($visibleIds -join ', ')."
+        }
 
         Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs')
         Assert-True -Condition (@(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs).Count -eq 50) -Message "Reset nach Facet $($facetCase.control)=$($facetCase.value): Der erste Seitenschnitt enthaelt nicht 50 Stellen."
     }
 
     Set-JobAgentSelectValues -WorkingDirectory $artifactRoot -SessionName $sessionName -ElementId 'jobagent-work-model' -Values @('UNKNOWN') -Case 'UNKNOWN-Auswahl'
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'workModel=UNKNOWN')
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Unklare Position' -Case 'UNKNOWN-Auswahl'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 1 Treffer, Seite 1 von 1 (sichtbar 1).' -Case 'UNKNOWN-Auswahl'
