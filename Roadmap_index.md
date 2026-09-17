@@ -1,6 +1,6 @@
 # Roadmap Index
 
-Stand: 2026-09-16. Keine aktiven Roadmap-Punkte; SQ-001 ist als explizite SonarQube-Nichtanwendbarkeit abgeschlossen.
+Stand: 2026-09-17. Keine aktiven Roadmap-Punkte; SQ-001 ist als explizite SonarQube-Nichtanwendbarkeit und SQ-002 als sekretfreier Authentifizierungsnachweis abgeschlossen.
 
 - `Roadmap.md`: enthält keine aktiven Punkte; die CI-005- und SQ-001-Abnahmen liegen unter `docs/reviews/`.
 - `docs/reviews/2026-09-15-supertest-roadmap-plan.json`: Struktur-/Quellnachweis dieses Planungsschnitts; kein Produktabnahmetest.
@@ -25,4 +25,6 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 - 2026-09-16: CI-002 bis CI-004 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/CI-004-acceptance.md, projektlokale Playwright-Laufzeitpins und fokussierte Funktionstests. Vollsupertest gemäß Nutzerregel als erledigt.
 - 2026-09-16: CI-005 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/CI-005-acceptance.md, zielgerichtete Immutable-Snapshot-Synchronisierung und vier isolierte Negativtests. Vollsupertest gemäß Nutzerregel nicht ausgeführt.
 - 2026-09-16: SQ-001 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-001-acceptance.md, SonarQube 9.9.8 `UP`, gültiger externer Token/API-Read, offizielle 9.9-Sprachübersicht ohne PowerShell und 31/31 funktionsbezogene Tests. Kein Codescan oder Quality Gate wird behauptet; Vollsupertest gemäß Nutzerregel als erledigt bewertet.
+
+- 2026-09-17: SQ-002 nach Roadmap_archive.md rotiert; Evidence: docs/reviews/SQ-002-acceptance.md, Token-Normalisierung und `./ci.cmd sonar-auth` mit `valid:true`. Kein Codescan oder Quality Gate wird behauptet; Vollsupertest gemäß Nutzerregel als erledigt bewertet.
 

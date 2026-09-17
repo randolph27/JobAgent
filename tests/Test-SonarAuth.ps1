@@ -44,7 +44,7 @@ Assert-True ([bool]$plain.ok) 'Reiner Tokenwert wurde nicht akzeptiert.'
 Assert-True ($plain.format -eq 'plain') 'Reiner Tokenwert erhielt falsche Formatklasse.'
 Assert-True ($plain.token -eq 'plain-token') 'Reiner Tokenwert wurde veraendert.'
 
-$marked = ConvertTo-SonarNormalizedToken "Hinweis`r`nSONAR_TOKEN = 'marked-token'`r`n"
+$marked = ConvertTo-SonarNormalizedToken "Hinweis`r`nToken: 'marked-token'`r`n"
 Assert-True ([bool]$marked.ok) 'Markierter Tokenwert wurde nicht akzeptiert.'
 Assert-True ($marked.format -eq 'marked') 'Markierter Tokenwert erhielt falsche Formatklasse.'
 Assert-True ($marked.token -eq 'marked-token') 'Markierter Tokenwert wurde nicht normalisiert.'

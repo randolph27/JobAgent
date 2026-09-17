@@ -550,7 +550,7 @@ function ConvertTo-SonarNormalizedToken([string]$Text) {
   $nonEmptyLines = @($value -split "`r?`n" | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
   if ($nonEmptyLines.Count -eq 1) {
     $line = [string]$nonEmptyLines[0]
-    if ($line -match '^\s*SONAR_TOKEN\s*[:=]\s*(.*?)\s*$') {
+    if ($line -match '^\s*(?:SONAR_TOKEN|TOKEN)\s*[:=]\s*(.*?)\s*$') {
       $token = [string]$Matches[1]
       $format = "marked"
     } else {
@@ -558,12 +558,12 @@ function ConvertTo-SonarNormalizedToken([string]$Text) {
       $format = "plain"
     }
   } else {
-    $assignments = @($nonEmptyLines | Where-Object { $_ -match '^\s*SONAR_TOKEN\s*[:=]\s*(.*?)\s*$' })
+    $assignments = @($nonEmptyLines | Where-Object { $_ -match '^\s*(?:SONAR_TOKEN|TOKEN)\s*[:=]\s*(.*?)\s*$' })
     if ($assignments.Count -ne 1) {
       return @{ ok=$false; token=$null; format="invalid"; error_class="sonar_token_format_invalid" }
     }
     $assignment = [string]$assignments[0]
-    $null = $assignment -match '^\s*SONAR_TOKEN\s*[:=]\s*(.*?)\s*$'
+    $null = $assignment -match '^\s*(?:SONAR_TOKEN|TOKEN)\s*[:=]\s*(.*?)\s*$'
     $token = [string]$Matches[1]
     $format = "marked"
   }
