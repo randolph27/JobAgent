@@ -8,10 +8,10 @@ Stand: 2026-09-18T20:49:29.3665356+02:00
 - Status: `in-progress`
 - Ziel: M3 - Publikation und Gesamtabnahme: JA-056 Gespeicherte Suchauftraege und neue Treffer seit letzter Sichtung bereitstellen #comment: Wiederholbare Suchprofile und ein generationengebundener Treffervergleich sollen Sucharbeit sparen, ohne alte Jobs nach jedem Scrape erneut als neu auszugeben.
 - Branch: `master`
-- HEAD: `f5b84803f80d`
+- Basis-Commit: `45673ce` (`feat(jobagent): add saved search state contract`)
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
-- Worktree: `dirty`
+- Worktree: nach dem Basis-Commit und Push bereinigt
 - Route: `False`
 
 ## Übergabe JA-056
@@ -38,6 +38,7 @@ Der erste JA-056-Schritt ist erledigt und in der Roadmap markiert: Der lokale v2
 - `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`
 - `git diff --check` -> Exit `0`
 - `./ci.cmd stp` -> Exit `0`
+- `git push origin master` -> `f5b8480..45673ce`
 
 ## Naechster Anker
 

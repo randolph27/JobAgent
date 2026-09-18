@@ -31,6 +31,8 @@ Der Suchauftrag-/Sichtungsvertrag ist nun als `docs/contracts/JA-056-saved-searc
 
 Belegt durch `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` (je Exit 0). Kein Supertest, Browseraudit, Livecrawl oder Sonarlauf in diesem unvollständigen Roadmap-Punkt.
 
+Der Basis-Commit `45673ce` ist auf `origin/master` gepusht. Die Übergabedateien selbst werden in einem folgenden Metadaten-Commit mitgeführt; der neue Agent startet anhand der hier dokumentierten Roadmap- und Todo-Lage, nicht bei JA-050.
+
 1. Suchauftrag-UI mit Speichern, Aufrufen, Bearbeiten, Duplizieren und Löschen integrieren; Aufruf setzt Stellenansicht und Seite 1. Fehlende Firmen/Kategorien bleiben als nicht verfügbare aktive Auswahl sichtbar.
 2. Die stabile `scan_run_id` aus der Reportpublikation als Generationskennung in die Clientdaten aufnehmen und die bestehende Filterfunktion für Baseline und Vergleich wiederverwenden.
 3. „Als gesehen markieren“ erst nach erfolgreicher Speicherung der exakt geladenen Generation aktivieren; Quota-, Import- und unbekannte-Generationen-Fehler lassen den Altzustand unverändert.
