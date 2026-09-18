@@ -1,6 +1,6 @@
 # Roadmap Index
 
-Stand: 2026-09-18. Aktiver Backlog: 3 geplante Stellenboersen-Punkte ab JA-054 im offenen Meilenstein M3 sowie TD-0085 fuer CI-Drift. JA-043 bis JA-049, JA-051 bis JA-053 und JA-055 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-18. Aktiver Backlog: 2 geplante Stellenboersen-Punkte ab JA-056 im offenen Meilenstein M3 sowie TD-0085 fuer CI-Drift. JA-043 bis JA-049, JA-051 bis JA-055 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
 - `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-052; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
@@ -12,7 +12,7 @@ Stand: 2026-09-18. Aktiver Backlog: 3 geplante Stellenboersen-Punkte ab JA-054 i
 - `docs/reviews/2026-09-13-ja027-plan-validation.json`: aktueller Struktur-/Synchronisationsnachweis.
 - `docs/handoffs/2026-09-13-ja027-acquisition-plan.md`: Planungsabschluss und naechster Implementierungsanker.
 - `docs/handoffs/2026-09-17-ja-047-complete.md`: Abschluss, Hashvertrag, Nachweise und direkter Fortsetzungsauftrag fuer JA-048.
-- `Roadmap_archive.md`: historische Abschlüsse einschließlich JA-043 bis JA-048 und JA-051 (2026-09-17), SQ-001 (2026-09-16), QA-003, QA-002 und QA-001 sowie JA-042, UI-001, JA-041 und JA-027 (2026-09-15), JA-040/CI-001. Wiederverwendete IDs nur mit Titel/Datum interpretieren.
+- `Roadmap_archive.md`: historische Abschlüsse einschließlich JA-043 bis JA-049, JA-051 bis JA-055, SQ-001 (2026-09-16), QA-003, QA-002 und QA-001 sowie JA-042, UI-001, JA-041 und JA-027 (2026-09-15), JA-040/CI-001. Wiederverwendete IDs nur mit Titel/Datum interpretieren.
 - `docs/reviews/2026-09-05-webreview.md` und `docs/reviews/2026-09-05-baseline.json`: historische UI-Befunde; UI-001 behaelt alle gebundenen Screenshotpfade.
 - `docs/reviews/2026-09-05-roadmap-before.md`: aelterer vollstaendiger Plan.
 - `docs/ROADMAP.md`: mitgefuehrter Bootstrapplan, kein konkurrierender JobAgent-Backlog.

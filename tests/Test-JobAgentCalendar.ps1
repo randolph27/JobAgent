@@ -37,7 +37,7 @@ Assert-True -Condition ((@($attempts | Where-Object { $_.event_id -eq 'attempt:s
 Assert-True -Condition (@($report.calendar.planned_scans).Count -eq [int]$contract.expected.planned_scan_count) -Message 'Aktuelle Firmenplanung fehlt oder ist doppelt.'
 Assert-True -Condition (([datetime]$report.calendar.reference_time).ToUniversalTime() -eq ([datetime]$contract.reference_time).ToUniversalTime()) -Message 'Kalenderreferenz ist nicht stabil am Reportabschluss gebunden.'
 $html = ConvertTo-JobAgentDailyReportHtml -Report $report
-foreach ($token in @('jobagent-tab-calendar', 'jobagent-calendar', 'calendarMode', 'Keine gespeicherten Abrufe', 'Gespeicherte Abrufe')) {
+foreach ($token in @('jobagent-tab-calendar', 'jobagent-calendar', 'calendarMode', 'Keine gespeicherten Abrufe', 'Gespeicherte Abrufe', 'calendar-static-fallback')) {
     Assert-True -Condition ($html.Contains($token)) -Message "Kalendervertrag fehlt im HTML: $token"
 }
 

@@ -1,5 +1,18 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-18 - JA-054
+
+- [x] JA-054 Kalender fuer tatsaechliche Abrufe, geplante Pruefungen und eigene Termine anbieten #comment: Der Kalender macht Datenaktualisierung und persoenliche Fristen sichtbar, ohne geplante Abrufe als durchgefuehrte Scrapes auszugeben.
+  - [x] Beschreibung: Lokale Monats-, Wochen- und mobile Agendaansicht mit `view=calendar`, `calendarMode`, `calendarDate` und optionaler Firmen-ID. Monat zeigt 42, Woche 7 Montag-basierte Tagesfelder; Reload/Zurueck/Vor, Ereignis-/Firmen-/Statusfilter, Tastaturwahl und 50er-Seitenwechsel bleiben lokal.
+    - [x] Teilbild 1 – Abrufe: Jeder gespeicherte Versuch wird genau einmal geführt, Abschluss am lokalen Enddatum und ein laufender Versuch am Startdatum. Retryversuche, Firmen-, Abruf-, Fehler- und distinct-neue-Stellen-Zähler bleiben getrennt; Leer- und Historienlücken behaupten keinen fehlenden Abruf.
+    - [x] Teilbild 2 – Planung: Je Firma wird nur der aktuelle `next_scan_at` als gestrichelte „Geplante Pruefung“ geführt; Navigation, Filter und vergangene Termine starten keinen Abruf, Scheduler oder Kontakt.
+    - [x] Teilbild 3 – Eigene Termine: Browserlokale Aufgaben bleiben getrennt, nutzen das lokale Datum bzw. ihren Offset und lassen offen/erledigt filtern. Bei JavaScript-Ausfall bleibt eine statische Liste gespeicherter Abrufe sichtbar; persönliche Termine sind dabei explizit nicht verfügbar.
+  - [x] Scope: `src/JobAgent.Report.psm1`, `html/jobagent/assets/jobboard-calendar.js`, `tests/Test-JobAgentCalendar.ps1`, `tests/Test-JobAgentCalendarBrowserAudit.ps1`, `tests/fixtures/jobagent/calendar.json`. No-Gos eingehalten: kein Scheduler, kein externer Kalenderconnector, keine Mail/Push-Funktion, keine Löschung historischer Läufe.
+  - [x] Evidence: `docs/reviews/JA-054-acceptance.md`, `logs/jobagent/JA-054/calendar-cases.json`, `doc/roadmap-screenshots/JA-054-calendar-1920.png`, `doc/roadmap-screenshots/JA-054-calendar-1366.png`, `doc/roadmap-screenshots/JA-054-calendar-800.png`, `doc/roadmap-screenshots/JA-054-calendar-390.png`.
+  - [x] Funktionstest: `Test-JobAgentCalendar.ps1`, `Test-JobAgentReport.ps1` und `Test-JobAgentCalendarBrowserAudit.ps1` jeweils Exit 0; Browseraudit mit 42/7 Feldern, Februar 2028, DST-Doppel-02:30, Mitternacht, Retryorakel, 50/51 Tagesdetails, Aufgabenstatus, Verlauf und ohne unerwartete externe Ressourcen.
+  - [x] Audit: 1920x1080, 1366x900, 800x1024 und 390x844 ohne Horizontaloverflow oder Ziele unter 44 CSS-Pixeln; sichtbare Text-/Symbollegende und Montag-basierte Pfeil/Home/End/Enter-Steuerung belegt.
+  - [x] Abschluss: Kein Supertest angefragt; gemaess Nutzerregel als erledigt bewertet.
+
 ## Archiviert 2026-09-18 - JA-049
 
 - [x] JA-049 Stellenboerse als stabilen HTML-Einstieg atomar publizieren #comment: Der regulaere Lauf stellt die Stellenansicht reproduzierbar bereit und behaelt bisherige Berichtspfade sowie persoenliche Markierungen.

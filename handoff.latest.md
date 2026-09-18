@@ -1,14 +1,14 @@
 # Handoff latest
 
-Stand: 2026-09-18T20:10:39.141+02:00
+Stand: 2026-09-18T20:36:14.186+02:00
 
 ## Zustand
 
-- Active: `TD-0083`
+- Active: `TD-0084`
 - Status: `in-progress`
-- Ziel: M3 - Publikation und Gesamtabnahme: JA-054 Kalender fuer tatsaechliche Abrufe, geplante Pruefungen und eigene Termine anbieten #comment: Der Kalender macht Datenaktualisierung und persoenliche Fristen sichtbar, ohne geplante Abrufe als durchgefuehrte Scrapes auszugeben.
+- Ziel: M3 - Publikation und Gesamtabnahme: JA-056 Gespeicherte Suchauftraege und neue Treffer seit letzter Sichtung bereitstellen #comment: Wiederholbare Suchprofile und ein generationengebundener Treffervergleich sollen Sucharbeit sparen, ohne alte Jobs nach jedem Scrape erneut als neu auszugeben.
 - Branch: `master`
-- HEAD: `e76a9cb36cf3`
+- HEAD: `be3ba570a4d6`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,11 +16,21 @@ Stand: 2026-09-18T20:10:39.141+02:00
 
 ## Versionierte Aenderungen
 
+- `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `docs/reviews/JA-054-acceptance.md`
 - `handoff.latest.detail.md`
+- `handoff.latest.json`
 - `handoff.latest.md`
 - `src/JobAgent.Report.psm1`
+- `tests/Test-JobAgentCalendar.ps1`
+- `todo.checkpoint.json`
+- `todo.current.md`
+- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
+- `todo.state.json`
 
 ## Verifikation
 
@@ -28,4 +38,4 @@ Stand: 2026-09-18T20:10:39.141+02:00
 
 ## Naechster Anker
 
-`TD-0083` / `JA-054` fortsetzen. Erst nach belegtem Kalender-Browser-/Viewport-Audit, Sommerzeit- und 50/51-Tagesdetailfaellen den Punkt abschliessen; danach folgt `TD-0084` / `JA-056`.
+M3 - Publikation und Gesamtabnahme: JA-050 Stellenworkflow mit Wachstum, Markierungen und Grenzfaellen abnehmen #comment: Abschluss erfordert belegtes Zusammenspiel von regulaerem Lauf, Suche, Details, persoenlichen Markierungen und erneuter Publikation.
