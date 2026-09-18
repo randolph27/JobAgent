@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-18T11:13:03.858+02:00
+Stand: 2026-09-18T11:14:20.690+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-18T11:13:03.858+02:00
 - Status: `in-progress`
 - Ziel: M2 – Stellenboersen-Oberflaeche: JA-052 Bewerbungsuebersicht mit Status, Notizen und Wiedervorlagen erweitern #comment: Persoenliche Bewerbungsarbeit braucht einen konsistenten Verlauf und Fristen, waehrend Bewerbungsstern und Detailstatus dieselbe Wahrheit darstellen.
 - Branch: `master`
-- HEAD: `623b795226d3`
+- HEAD: `bcc23eb15f72`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,16 +16,8 @@ Stand: 2026-09-18T11:13:03.858+02:00
 
 ## Versionierte Aenderungen
 
-- `html/jobagent/assets/jobboard-state.js`
-- `schemas/jobagent.user-state.schema.json`
-- `src/JobAgent.Report.psm1`
-- `tests/Test-JobAgentReport.ps1`
-- `tests/Test-JobAgentUserState.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
 
 ## Verifikation
 
