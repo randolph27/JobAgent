@@ -47,7 +47,7 @@ function Get-InventoryTestReferences {
         'src\JobAgent.Persistence.psm1' = @('tests\Test-JobAgentPersistence.ps1')
         'src\JobAgent.RegionalDiscovery.psm1' = @('tests\Test-JobAgentRegionalDiscovery.ps1')
         'src\JobAgent.RegisterDiscovery.psm1' = @('tests\Test-JobAgentRegisterDiscovery.ps1')
-        'src\JobAgent.Report.psm1' = @('tests\Test-JobAgentReport.ps1', 'tests\Test-JobAgentUserState.ps1', 'tests\Test-JobAgentUiBrowserAudit.ps1', 'tests\Test-JobAgentHtmlAudit.ps1', 'tests\Test-JobAgentHtmlViewportAudit.ps1')
+        'src\JobAgent.Report.psm1' = @('tests\Test-JobAgentReport.ps1', 'tests\Test-JobAgentUserState.ps1', 'tests\Test-JobAgentUiBrowserAudit.ps1', 'tests\Test-JobAgentChangeHistoryBrowserAudit.ps1', 'tests\Test-JobAgentHtmlAudit.ps1', 'tests\Test-JobAgentHtmlViewportAudit.ps1')
         'src\JobAgent.SourceAdapters.psm1' = @('tests\Test-JobAgentSourceAdapters.ps1')
         'src\JobAgent.SourceVerification.psm1' = @('tests\Test-JobAgentSourceVerification.ps1', 'tests\Test-JobAgentCompanyCandidateVerification.ps1', 'tests\Test-JobAgentFetchEnvironment.ps1')
         'src\JobAgent.StatusMachine.psm1' = @('tests\Test-JobAgentStatusMachine.ps1')

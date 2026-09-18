@@ -52,6 +52,8 @@ Die detaillierten Vorbedingungen, Eingaben, Sollwerte und Negativfälle sind mas
 | JA-027.2 | `tests/Test-JobAgentDiscoverySourceInventory.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentDiscoverySourceInventory.ps1` | ja | Quelleninventur, Hint-/Queue-Abgleich, kleine Bestaende, Recherchematrix, fail-closed Quellen |
 | JA-029 | `tests/Test-JobAgentImportWaves.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentImportWaves.ps1` | ja | Importwellen-Konfiguration, produktive Gate-Pruefung, Rollback-Backup, fail-closed CLI ohne Store-Aenderung |
 | JA-045 | `tests/Test-JobAgentUserState.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUserState.ps1` | ja | Browserlokaler v1-Zustand, vier Markierungskombinationen, Feldzeitstempel, Export/Import, Speicherfehler und Tab-Synchronisation |
+| JA-053 | `tests/Test-JobAgentChangeHistoryBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentChangeHistoryBrowserAudit.ps1` | ja | Isolierte Quellenchronik mit 0/20/21 Eintraegen, Vorher/Nachher-Klartext, Tastatur, Erweiterung, Viewports und Bediennetzwerk-Guard |
+| JA-053-Projektion | `tests/Test-JobAgentChangeHistory.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentChangeHistory.ps1` | ja | Deterministische Snapshot-/Event-Projektion, Mehrfelddiff, fehlender Altsnapshot, 20-von-21-Grenze und Idempotenz |
 | UI-001 | `tests/Test-JobAgentUiBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUiBrowserAudit.ps1` | ja | Lokale Browser-Fixture mit 251 Firmen/256 Stellen, Filterkombinationen, UNKNOWN, Umlautsuche, Pagination, Reset, Ruecknavigation, Store- und Request-Invarianz sowie 390/800/1366/1920 px |
 
 ## Live-Lane

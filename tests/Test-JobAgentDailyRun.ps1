@@ -59,7 +59,7 @@ function Get-TestDeterministicCliArtifactHash {
             $content = $content.Replace($ProjectRoot, '<PROJECT_ROOT>')
             $escapedProjectRoot = [regex]::Escape($ProjectRoot.Replace('\', '\\'))
             $content = [regex]::Replace($content, $escapedProjectRoot, '<PROJECT_ROOT>')
-            $content = $content -replace '(?:dailyrun|scan|scanrun|scanattempt):[A-Za-z0-9._:-]+', '<RUN_ID>'
+            $content = $content -replace '(?:dailyrun|scan|scanrun|scanattempt|change):[A-Za-z0-9._:-]+', '<RUN_ID>'
             $content = $content -replace 'daily-run-\d{8}T\d{9}Z', 'daily-run-<RUN_STAMP>'
             $content = $content -replace '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z', '<UTC_TIMESTAMP>'
             $content = $content -replace '\d{2}\.\d{2}\.\d{4} \d{2}:\d{2}:\d{2} UTC[+-]\d{2}:\d{2}', '<BERLIN_TIMESTAMP>'

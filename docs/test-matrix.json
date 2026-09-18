@@ -1,6 +1,6 @@
 {
   "schema_version": "jobagent-test-matrix/v2",
-  "updated_at": "2026-09-15T16:31:00+02:00",
+  "updated_at": "2026-09-18T12:58:00+02:00",
   "policy": {
     "default_lane": "deterministic-fixture",
     "live_lane": "separate-not-supertest",
@@ -122,6 +122,19 @@
       "dependencies": ["QA001-UI-002"],
       "status": "planned",
       "owner": "QA-005"
+    },
+    {
+      "case_id": "JA053-CHRONICLE-001",
+      "function_refs": ["src\\JobAgent.Report.psm1::Get-JobAgentReportChangeHistory", "src\\JobAgent.Report.psm1::Add-JobAgentReportSearchInterfaceHtml"],
+      "fixture": "tests\\fixtures\\jobagent\\job-change-history.json",
+      "input": "0/20/21 Quellenchronikeintraege in einer isolierten lokalen Browserfixture",
+      "expected": "Leerzustand, Vorher/Nachher-Klartext, Tastaturaktion, Erweiterung und vier Viewports bleiben deterministisch und ohne Bediennetzwerk",
+      "negative_case": "Roh-HTML, fehlende Altinhalte, Clipping, Browserfehler und ein versteckter 21. Eintrag werden abgelehnt",
+      "test_file": "tests\\Test-JobAgentChangeHistoryBrowserAudit.ps1",
+      "lane": "local-browser",
+      "dependencies": ["QA001-UI-001"],
+      "status": "done",
+      "owner": "JA-053"
     },
     {
       "case_id": "QA001-AGGREGATOR-001",
@@ -652,6 +665,28 @@
       "include_in_supertest": false,
       "lane": "deterministic-fixture",
       "coverage": ["verifizierte neue Firma und Doppelhinweis", "idempotenter Zweitlauf", "vollstaendiger Leerscan", "Timeout und Teilscan ohne falsches REMOVED", "Restart ohne Firmen- oder Stellendublette"]
+    },
+    {
+      "roadmap_id": "JA-053",
+      "supertest_order": 34,
+      "title": "Belegte Quellenchronik in der Stellen-Detailansicht",
+      "test_file": "tests/Test-JobAgentChangeHistoryBrowserAudit.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentChangeHistoryBrowserAudit.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "local-browser",
+      "coverage": ["0/20/21 Chronikeintraege", "Vorher/Nachher als Klartext", "Weitere Aenderungen", "Tastaturaktion", "1920/1366/800/390 CSS-px", "kein Bediennetzwerk und keine Browserfehler"]
+    },
+    {
+      "roadmap_id": "JA-053-PROJECTION",
+      "supertest_order": 35,
+      "title": "Quellenchronik-Projektion aus Snapshots und Change-Events",
+      "test_file": "tests/Test-JobAgentChangeHistory.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentChangeHistory.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": ["Erstbeobachtung und Mehrfelddiff", "Klartextnormalisierung", "fehlender Altsnapshot", "20-von-21-Grenze", "deterministische Zeitgleichheit", "idempotente Projektion"]
     }
   ]
 }

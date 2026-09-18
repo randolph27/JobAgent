@@ -1,8 +1,7 @@
 # Todo (current)
 
-Active: **TD-0081**
+Active: **TD-0082**
 
-- [open] TD-0081 M2 – Stellenboersen-Oberflaeche: JA-053 Fachliche Aenderungen einer Stelle als belegte Chronik anzeigen #comment: Eine erneute Erfassung ist keine neue Stelle und eine technische Quellenstoerung kein belegtes Ende einer Ausschreibung.
 - [open] TD-0082 M2 – Stellenboersen-Oberflaeche: JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden #comment: Wiederkehrende irrelevante Treffer sollen die Suche nicht fuellen, waehrend Erfassung, Firmenkern und Bewerbungsdaten erhalten bleiben.
 - [open] TD-0077 M3 – Publikation und Gesamtabnahme: JA-049 Stellenboerse als stabilen HTML-Einstieg atomar publizieren #comment: Der regulaere Lauf muss die Stellenansicht reproduzierbar bereitstellen und bisherige Berichtspfade sowie persoenliche Markierungen erhalten.
 - [open] TD-0083 M3 – Publikation und Gesamtabnahme: JA-054 Kalender fuer tatsaechliche Abrufe, geplante Pruefungen und eigene Termine anbieten #comment: Der Kalender macht Datenaktualisierung und persoenliche Fristen sichtbar, ohne geplante Abrufe als durchgefuehrte Scrapes auszugeben.
