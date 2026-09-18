@@ -1,0 +1,21 @@
+{
+  "filters": {
+    "q": "Leitung IT",
+    "company": ["company:alpha"],
+    "category": ["IT"],
+    "area": ["MUNICH"],
+    "workModel": ["HYBRID"],
+    "employmentType": ["PERMANENT"],
+    "workTime": ["UNKNOWN"],
+    "age": "7",
+    "favorite": false,
+    "applied": "all",
+    "sort": "published_desc",
+    "visibility": "visible"
+  },
+  "initial_baseline": {
+    "generation_id": "scan:one",
+    "confirmed_job_ids": ["job:alpha"],
+    "confirmed_change_event_ids": ["event:alpha-created"]
+  }
+}

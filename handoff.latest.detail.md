@@ -1,6 +1,6 @@
 # Uebergabe-Details
 
-Stand: 2026-09-18T20:35:00+02:00
+Stand: 2026-09-18T20:46:28.9862896+02:00
 
 ## Aktiver Arbeitsauftrag
 
@@ -27,13 +27,14 @@ Die Browserumgebung injiziert Anfragen an `gc.kis.v2.scr.kaspersky-labs.com`; de
 
 ## Nächster Schnitt JA-056
 
-Vor Implementierung den vorhandenen kanonischen JA-047-Filterresolver und das v2-UserState-Schema lesen. Kein zweiter Filteralgorithmus und keine Speicherung von Kalenderdatum, Detail-ID, Seite oder privaten Notizen in einem Suchauftrag.
+Der Suchauftrag-/Sichtungsvertrag ist nun als `docs/contracts/JA-056-saved-searches.md` festgelegt. `saved_searches` ist im v2-Schema optional und leer vorbelegt. `jobboard-state.js` validiert maximal 50 stabile Aufträge, normalisierte Namen, kanonische Filter und atomare Baseline-/Löschoperationen. `compareSavedSearch` verarbeitet ausschliesslich bereits kanonisch gefilterte IDs und trennt neue, geänderte und durch persönliche Auswahl sichtbare Treffer.
 
-1. Vertrag und Fixtures für maximal 50 benannte Suchen, 1–80 Unicode-Codepoints, normalisierte Namensduplikate, Generationen und Sichtungsstände festlegen.
-2. Suchauftrag speichern, aufrufen, bearbeiten, duplizieren und löschen; beim Aufruf Stellenansicht auf Seite 1. Fehlende Firmen/Kategorien sichtbar, aber nicht still entfernen.
-3. Vergleich ausschließlich gegen die zuletzt explizit bestätigte erfolgreiche Reportgeneration: neue passende IDs, fachlich geänderte bekannte IDs, neu passend gewordene Altjobs und durch persönliche Auswahl sichtbar gewordene Jobs getrennt beschriften.
-4. „Als gesehen markieren“ atomar nur für aktuell geladene Generation/Menge; Reload, Filtervorschau und Navigation dürfen keinen Sichtungsstand ändern. Quota-, Import- und unbekannte-Generationen-Fehler erhalten den Altzustand.
-5. Fokussierte UserState-, Report- und Browsertests hinzufügen. Screenshots 1366/390 und Evidence ohne private Suchparameter erzeugen. Erst dann TD-0084 abschließen und JA-056 rotieren.
+Belegt durch `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` (je Exit 0). Kein Supertest, Browseraudit, Livecrawl oder Sonarlauf in diesem unvollständigen Roadmap-Punkt.
+
+1. Suchauftrag-UI mit Speichern, Aufrufen, Bearbeiten, Duplizieren und Löschen integrieren; Aufruf setzt Stellenansicht und Seite 1. Fehlende Firmen/Kategorien bleiben als nicht verfügbare aktive Auswahl sichtbar.
+2. Die stabile `scan_run_id` aus der Reportpublikation als Generationskennung in die Clientdaten aufnehmen und die bestehende Filterfunktion für Baseline und Vergleich wiederverwenden.
+3. „Als gesehen markieren“ erst nach erfolgreicher Speicherung der exakt geladenen Generation aktivieren; Quota-, Import- und unbekannte-Generationen-Fehler lassen den Altzustand unverändert.
+4. Fokussierten SavedSearch-/Browser-Test, Screenshots 1366/390 und Evidence ohne private Suchparameter ergänzen. Erst dann TD-0084 abschließen und JA-056 rotieren.
 
 ## Betriebsgrenzen
 

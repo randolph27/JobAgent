@@ -11,7 +11,8 @@
     "updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
     "jobs": { "type": "object", "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" }, "additionalProperties": { "$ref": "#/$defs/job_state" } },
     "hidden_jobs": { "type": "object", "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" }, "additionalProperties": { "$ref": "#/$defs/visibility_state" } },
-    "hidden_companies": { "type": "object", "propertyNames": { "pattern": "^[A-Za-z0-9][A-Za-z0-9:_-]{0,500}$" }, "additionalProperties": { "$ref": "#/$defs/visibility_state" } }
+    "hidden_companies": { "type": "object", "propertyNames": { "pattern": "^[A-Za-z0-9][A-Za-z0-9:_-]{0,500}$" }, "additionalProperties": { "$ref": "#/$defs/visibility_state" } },
+    "saved_searches": { "type": "object", "maxProperties": 50, "propertyNames": { "pattern": "^search:[A-Za-z0-9][A-Za-z0-9_-]{0,127}$" }, "additionalProperties": { "$ref": "#/$defs/saved_search" } }
   },
   "$defs": {
     "utc_time": { "type": "string", "format": "date-time", "pattern": "Z$" },
@@ -37,6 +38,32 @@
       },
       "allOf": [{ "if": { "properties": { "application_stage": { "enum": ["NONE", "PREPARING"] } } }, "then": { "properties": { "applied": { "const": false }, "applied_at": { "type": "null" } } }, "else": { "properties": { "applied": { "const": true }, "applied_at": { "$ref": "#/$defs/utc_time" }, "application_updated_at": { "$ref": "#/$defs/utc_time" } } } }]
     },
-    "reference": { "type": "object", "additionalProperties": false, "required": ["title", "company", "official_url", "observed_at"], "properties": { "title": { "type": "string", "maxLength": 1000 }, "company": { "type": "string", "maxLength": 1000 }, "official_url": { "type": ["string", "null"], "format": "uri", "pattern": "^https?://" }, "observed_at": { "$ref": "#/$defs/utc_time" } } }
+    "reference": { "type": "object", "additionalProperties": false, "required": ["title", "company", "official_url", "observed_at"], "properties": { "title": { "type": "string", "maxLength": 1000 }, "company": { "type": "string", "maxLength": 1000 }, "official_url": { "type": ["string", "null"], "format": "uri", "pattern": "^https?://" }, "observed_at": { "$ref": "#/$defs/utc_time" } } },
+    "saved_search_filters": {
+      "type": "object", "additionalProperties": false,
+      "required": ["q", "company", "category", "area", "workModel", "employmentType", "workTime", "age", "favorite", "applied", "sort", "visibility"],
+      "properties": {
+        "q": { "type": "string", "maxLength": 500 },
+        "company": { "$ref": "#/$defs/id_list" }, "category": { "$ref": "#/$defs/id_list" }, "area": { "$ref": "#/$defs/id_list" }, "workModel": { "$ref": "#/$defs/id_list" }, "employmentType": { "$ref": "#/$defs/id_list" }, "workTime": { "$ref": "#/$defs/id_list" },
+        "age": { "enum": ["", "1", "7", "30", "older", "UNKNOWN"] }, "favorite": { "type": "boolean" }, "applied": { "enum": ["all", "beworben", "nicht_beworben"] }, "sort": { "enum": ["published_desc", "title_asc", "company_asc", "confirmed_desc"] }, "visibility": { "enum": ["visible", "all", "hidden"] }
+      }
+    },
+    "id_list": { "type": "array", "maxItems": 10000, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 500, "pattern": "^\\S+$" } },
+    "saved_search_baseline": {
+      "type": ["object", "null"],
+      "required": ["generation_id", "confirmed_job_ids", "confirmed_change_event_ids", "confirmed_at"],
+      "additionalProperties": false,
+      "properties": {
+        "generation_id": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "confirmed_job_ids": { "$ref": "#/$defs/id_list" }, "confirmed_change_event_ids": { "$ref": "#/$defs/id_list" }, "confirmed_at": { "$ref": "#/$defs/utc_time" }
+      }
+    },
+    "saved_search": {
+      "type": "object", "additionalProperties": false,
+      "required": ["search_id", "name", "filters", "created_at", "updated_at", "baseline", "last_visit_at"],
+      "properties": {
+        "search_id": { "type": "string", "pattern": "^search:[A-Za-z0-9][A-Za-z0-9_-]{0,127}$" }, "name": { "type": "string", "minLength": 1, "maxLength": 80 }, "filters": { "$ref": "#/$defs/saved_search_filters" }, "created_at": { "$ref": "#/$defs/utc_time" }, "updated_at": { "$ref": "#/$defs/utc_time" }, "baseline": { "$ref": "#/$defs/saved_search_baseline" }, "last_visit_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" }
+      }
+    }
   }
 }

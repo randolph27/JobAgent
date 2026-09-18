@@ -17,6 +17,13 @@
     const TASK_TYPES = ['APPLICATION_DEADLINE', 'INTERVIEW', 'FOLLOW_UP', 'OTHER'];
     const TASK_STATUSES = ['OPEN', 'DONE'];
     const HIDDEN_REASONS = ['', 'ROLE', 'LOCATION', 'CONDITIONS', 'EMPLOYER', 'OTHER'];
+    const SEARCH_LIMIT = 50;
+    const SAVED_SEARCH_ID = /^search:[A-Za-z0-9][A-Za-z0-9_-]{0,127}$/;
+    const SAVED_SEARCH_FILTER_FIELDS = ['q', 'company', 'category', 'area', 'workModel', 'employmentType', 'workTime', 'age', 'favorite', 'applied', 'sort', 'visibility'];
+    const SEARCH_AGES = ['', '1', '7', '30', 'older', 'UNKNOWN'];
+    const SEARCH_APPLIED = ['all', 'beworben', 'nicht_beworben'];
+    const SEARCH_SORTS = ['published_desc', 'title_asc', 'company_asc', 'confirmed_desc'];
+    const SEARCH_VISIBILITY = ['visible', 'all', 'hidden'];
 
     function fail(code, message) { const error = new Error(message); error.code = code; throw error; }
     function isPlainObject(value) { return value !== null && typeof value === 'object' && !Array.isArray(value) && Object.getPrototypeOf(value) === Object.prototype; }
@@ -24,6 +31,7 @@
     function assertOnlyKeys(value, permitted, name) { Object.keys(value).forEach(key => { if (!permitted.has(key)) { fail('invalid_state', `${name} enthaelt das nicht erlaubte Feld ${key}.`); } }); }
     function assertJobId(value) { if (typeof value !== 'string' || !/^job:[^\s]{1,500}$/.test(value) || FORBIDDEN_KEYS.has(value)) { fail('invalid_job_id', 'job_id muss eine stabile, nicht leere JobAgent-ID sein.'); } return value; }
     function assertCompanyId(value) { if (typeof value !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9:_-]{0,500}$/.test(value) || FORBIDDEN_KEYS.has(value)) { fail('invalid_company_id', 'company_id muss eine stabile, nicht leere Firmen-ID sein.'); } return value; }
+    function assertSavedSearchId(value) { if (typeof value !== 'string' || !SAVED_SEARCH_ID.test(value) || FORBIDDEN_KEYS.has(value)) { fail('invalid_search_id', 'search_id muss eine stabile, nicht leere Suchauftrags-ID sein.'); } return value; }
     function codePointLength(value) { return Array.from(value).length; }
     function assertText(value, field, maximum, nullable) { if (nullable && value === null) { return null; } if (typeof value !== 'string' || codePointLength(value) > maximum) { fail('invalid_state', `${field} muss Text mit maximal ${maximum} Unicode-Codepoints sein.`); } return value; }
     function assertUtcTimestamp(value, field, nullable) { if (nullable && value === null) { return null; } if (typeof value !== 'string' || !UTC_TIMESTAMP.test(value) || Number.isNaN(Date.parse(value))) { fail('invalid_timestamp', `${field} muss ein gueltiger UTC-Zeitpunkt mit Z-Offset sein.`); } return new Date(value).toISOString(); }
@@ -33,7 +41,7 @@
     function later(first, second) { return first !== null && (second === null || Date.parse(first) > Date.parse(second)); }
     function appliedFromStage(stage) { return !['NONE', 'PREPARING'].includes(stage); }
 
-    function emptyState() { return { schema_version: SCHEMA_VERSION, project_key: PROJECT_KEY, updated_at: null, jobs: {}, hidden_jobs: {}, hidden_companies: {} }; }
+    function emptyState() { return { schema_version: SCHEMA_VERSION, project_key: PROJECT_KEY, updated_at: null, jobs: {}, hidden_jobs: {}, hidden_companies: {}, saved_searches: {} }; }
     function emptyRecord() { return { favorite: false, favorite_updated_at: null, application_stage: 'NONE', application_updated_at: null, applied: false, applied_at: null, note: '', next_action: '', tasks: [], application_history: [] }; }
     function normalizeReference(value) {
         if (value === undefined) { return undefined; }
@@ -81,13 +89,51 @@
         Object.keys(source).sort().forEach(id => { if (kind === 'hidden_jobs') { assertJobId(id); } else { assertCompanyId(id); } target[id] = normalizeVisibility(source[id], `${kind}.${id}`); });
         return target;
     }
+    function normalizeIdList(value, field) {
+        if (!Array.isArray(value) || value.length > 10000) { fail('invalid_state', `${field} muss eine Liste mit hoechstens 10000 IDs sein.`); }
+        const ids = value.map((id, index) => { if (typeof id !== 'string' || !/^\S{1,500}$/.test(id) || FORBIDDEN_KEYS.has(id)) { fail('invalid_state', `${field}.${index} ist keine gueltige ID.`); } return id; });
+        if (new Set(ids).size !== ids.length) { fail('invalid_state', `${field} darf keine doppelten IDs enthalten.`); }
+        return ids.slice().sort((left, right) => left.localeCompare(right, 'de'));
+    }
+    function normalizedSearchName(value) {
+        const name = assertText(value, 'search.name', 80, false).normalize('NFKC').trim();
+        if (codePointLength(name) === 0) { fail('invalid_search_name', 'Der Suchauftragsname darf nach dem Kuetzen nicht leer sein.'); }
+        return name;
+    }
+    function searchNameKey(value) { return normalizedSearchName(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('de-DE').replace(/\s+/g, ' ').trim(); }
+    function normalizeSearchFilters(value) {
+        const filters = requireObject(value, 'search.filters'); assertOnlyKeys(filters, new Set(SAVED_SEARCH_FILTER_FIELDS), 'search.filters');
+        SAVED_SEARCH_FILTER_FIELDS.forEach(field => { if (!(field in filters)) { fail('invalid_state', `search.filters.${field} fehlt.`); } });
+        ['company', 'category', 'area', 'workModel', 'employmentType', 'workTime'].forEach(field => normalizeIdList(filters[field], `search.filters.${field}`));
+        if (!SEARCH_AGES.includes(filters.age) || typeof filters.favorite !== 'boolean' || !SEARCH_APPLIED.includes(filters.applied) || !SEARCH_SORTS.includes(filters.sort) || !SEARCH_VISIBILITY.includes(filters.visibility)) { fail('invalid_state', 'Suchfilter enthaelt einen ungueltigen Auswahlwert.'); }
+        return { q: assertText(filters.q, 'search.filters.q', 500, false), company: normalizeIdList(filters.company, 'search.filters.company'), category: normalizeIdList(filters.category, 'search.filters.category'), area: normalizeIdList(filters.area, 'search.filters.area'), workModel: normalizeIdList(filters.workModel, 'search.filters.workModel'), employmentType: normalizeIdList(filters.employmentType, 'search.filters.employmentType'), workTime: normalizeIdList(filters.workTime, 'search.filters.workTime'), age: filters.age, favorite: filters.favorite, applied: filters.applied, sort: filters.sort, visibility: filters.visibility };
+    }
+    function normalizeSearchBaseline(value) {
+        if (value === null) { return null; }
+        const baseline = requireObject(value, 'search.baseline'); assertOnlyKeys(baseline, new Set(['generation_id', 'confirmed_job_ids', 'confirmed_change_event_ids', 'confirmed_at']), 'search.baseline');
+        ['generation_id', 'confirmed_job_ids', 'confirmed_change_event_ids', 'confirmed_at'].forEach(field => { if (!(field in baseline)) { fail('invalid_state', `search.baseline.${field} fehlt.`); } });
+        const generationId = assertText(baseline.generation_id, 'search.baseline.generation_id', 500, false); if (!generationId.trim()) { fail('invalid_state', 'search.baseline.generation_id darf nicht leer sein.'); }
+        return { generation_id: generationId, confirmed_job_ids: normalizeIdList(baseline.confirmed_job_ids, 'search.baseline.confirmed_job_ids'), confirmed_change_event_ids: normalizeIdList(baseline.confirmed_change_event_ids, 'search.baseline.confirmed_change_event_ids'), confirmed_at: assertUtcTimestamp(baseline.confirmed_at, 'search.baseline.confirmed_at', false) };
+    }
+    function normalizeSavedSearch(value, expectedId) {
+        const search = requireObject(value, 'saved_searches.*'); assertOnlyKeys(search, new Set(['search_id', 'name', 'filters', 'created_at', 'updated_at', 'baseline', 'last_visit_at']), 'saved_searches.*');
+        ['search_id', 'name', 'filters', 'created_at', 'updated_at', 'baseline', 'last_visit_at'].forEach(field => { if (!(field in search)) { fail('invalid_state', `saved_searches.*.${field} fehlt.`); } });
+        const id = assertSavedSearchId(search.search_id); if (expectedId !== undefined && id !== expectedId) { fail('invalid_state', 'Suchauftrags-ID und Map-Schluessel stimmen nicht ueberein.'); }
+        return { search_id: id, name: normalizedSearchName(search.name), filters: normalizeSearchFilters(search.filters), created_at: assertUtcTimestamp(search.created_at, 'search.created_at', false), updated_at: assertUtcTimestamp(search.updated_at, 'search.updated_at', false), baseline: normalizeSearchBaseline(search.baseline), last_visit_at: assertUtcTimestamp(search.last_visit_at, 'search.last_visit_at', true) };
+    }
+    function normalizeSavedSearches(value) {
+        const source = value === undefined ? {} : requireObject(value, 'saved_searches'), target = {};
+        const ids = Object.keys(source); if (ids.length > SEARCH_LIMIT) { fail('search_limit', `Es sind hoechstens ${SEARCH_LIMIT} Suchauftraege erlaubt.`); }
+        const names = new Set(); ids.sort().forEach(id => { assertSavedSearchId(id); const search = normalizeSavedSearch(source[id], id), nameKey = searchNameKey(search.name); if (names.has(nameKey)) { fail('duplicate_search_name', 'Der Suchauftragsname ist bereits vergeben.'); } names.add(nameKey); target[id] = search; });
+        return target;
+    }
     function normalizeState(value) {
-        const state = requireObject(value, 'state'); assertOnlyKeys(state, new Set(['schema_version', 'project_key', 'updated_at', 'jobs', 'hidden_jobs', 'hidden_companies']), 'state');
+        const state = requireObject(value, 'state'); assertOnlyKeys(state, new Set(['schema_version', 'project_key', 'updated_at', 'jobs', 'hidden_jobs', 'hidden_companies', 'saved_searches']), 'state');
         if (state.schema_version !== SCHEMA_VERSION) { fail(state.schema_version ? 'unsupported_version' : 'invalid_state', 'Die Zustandsversion wird nicht unterstuetzt.'); }
         if (state.project_key !== PROJECT_KEY) { fail('invalid_state', 'Der Zustand gehoert nicht zu diesem JobAgent-Projekt.'); }
         const jobs = requireObject(state.jobs, 'jobs'), normalizedJobs = {};
         Object.keys(jobs).sort().forEach(jobId => { assertJobId(jobId); normalizedJobs[jobId] = normalizeRecord(jobs[jobId]); });
-        return { schema_version: SCHEMA_VERSION, project_key: PROJECT_KEY, updated_at: assertUtcTimestamp(state.updated_at, 'updated_at', true), jobs: normalizedJobs, hidden_jobs: normalizeVisibilityMap(state.hidden_jobs, 'hidden_jobs'), hidden_companies: normalizeVisibilityMap(state.hidden_companies, 'hidden_companies') };
+        return { schema_version: SCHEMA_VERSION, project_key: PROJECT_KEY, updated_at: assertUtcTimestamp(state.updated_at, 'updated_at', true), jobs: normalizedJobs, hidden_jobs: normalizeVisibilityMap(state.hidden_jobs, 'hidden_jobs'), hidden_companies: normalizeVisibilityMap(state.hidden_companies, 'hidden_companies'), saved_searches: normalizeSavedSearches(state.saved_searches) };
     }
     function normalizeLegacyState(value) {
         const legacy = requireObject(value, 'legacy state');
@@ -129,6 +175,51 @@
         if (company && company.hidden) { return { hidden: true, scope: 'company', entry: clone(company), company_hidden: true }; }
         return { hidden: false, scope: '', entry: null, company_hidden: false };
     }
+    function createSavedSearchBaseline(value, now) {
+        const input = requireObject(value, 'search baseline'); assertOnlyKeys(input, new Set(['generation_id', 'confirmed_job_ids', 'confirmed_change_event_ids']), 'search baseline');
+        ['generation_id', 'confirmed_job_ids', 'confirmed_change_event_ids'].forEach(field => { if (!(field in input)) { fail('invalid_state', `search baseline.${field} fehlt.`); } });
+        return normalizeSearchBaseline({ generation_id: input.generation_id, confirmed_job_ids: input.confirmed_job_ids, confirmed_change_event_ids: input.confirmed_change_event_ids, confirmed_at: toUtc(now) });
+    }
+    function saveSearchMutation(storage, input, baselineInput, now) {
+        const request = requireObject(input, 'saved search'); assertOnlyKeys(request, new Set(['search_id', 'name', 'filters']), 'saved search');
+        ['search_id', 'name', 'filters'].forEach(field => { if (!(field in request)) { fail('invalid_state', `saved search.${field} fehlt.`); } });
+        const searchId = assertSavedSearchId(request.search_id), name = normalizedSearchName(request.name), filters = normalizeSearchFilters(request.filters), baseline = createSavedSearchBaseline(baselineInput, now), loaded = read(storage);
+        if (!loaded.persistent) { return { persistent: false, changed: false, reason: loaded.reason, state: loaded.state }; }
+        const state = clone(loaded.state), existing = state.saved_searches[searchId], nameKey = searchNameKey(name);
+        Object.values(state.saved_searches).forEach(search => { if (search.search_id !== searchId && searchNameKey(search.name) === nameKey) { fail('duplicate_search_name', 'Der Suchauftragsname ist bereits vergeben.'); } });
+        if (!existing && Object.keys(state.saved_searches).length >= SEARCH_LIMIT) { fail('search_limit', `Es sind hoechstens ${SEARCH_LIMIT} Suchauftraege erlaubt.`); }
+        const timestamp = toUtc(now), next = { search_id: searchId, name, filters, created_at: existing ? existing.created_at : timestamp, updated_at: timestamp, baseline, last_visit_at: existing ? existing.last_visit_at : null };
+        if (existing && JSON.stringify(existing) === JSON.stringify(next)) { return { persistent: true, changed: false, reason: 'unchanged', state, search: clone(existing) }; }
+        state.saved_searches[searchId] = next; state.updated_at = timestamp;
+        const saved = write(storage, state); return saved.persistent ? { persistent: true, changed: true, reason: existing ? 'updated_and_rebased' : 'created_with_baseline', state: clone(state), search: clone(next) } : { persistent: false, changed: false, reason: saved.reason, state: loaded.state };
+    }
+    function deleteSavedSearch(storage, searchId, now) {
+        const id = assertSavedSearchId(searchId), loaded = read(storage); if (!loaded.persistent) { return { persistent: false, changed: false, reason: loaded.reason, state: loaded.state }; }
+        if (!loaded.state.saved_searches[id]) { return { persistent: true, changed: false, reason: 'missing', state: loaded.state }; }
+        const state = clone(loaded.state), deleted = clone(state.saved_searches[id]); delete state.saved_searches[id]; state.updated_at = toUtc(now);
+        const saved = write(storage, state); return saved.persistent ? { persistent: true, changed: true, reason: 'deleted', state: clone(state), search: deleted } : { persistent: false, changed: false, reason: saved.reason, state: loaded.state };
+    }
+    function markSavedSearchSeen(storage, searchId, baselineInput, now) {
+        const id = assertSavedSearchId(searchId), loaded = read(storage); if (!loaded.persistent) { return { persistent: false, changed: false, reason: loaded.reason, state: loaded.state }; }
+        const existing = loaded.state.saved_searches[id]; if (!existing) { return { persistent: true, changed: false, reason: 'missing', state: loaded.state }; }
+        const timestamp = toUtc(now), state = clone(loaded.state), next = clone(existing); next.baseline = createSavedSearchBaseline(baselineInput, timestamp); next.last_visit_at = timestamp; next.updated_at = timestamp; state.saved_searches[id] = next; state.updated_at = timestamp;
+        const saved = write(storage, state); return saved.persistent ? { persistent: true, changed: true, reason: 'seen', state: clone(state), search: clone(next) } : { persistent: false, changed: false, reason: saved.reason, state: loaded.state };
+    }
+    function compareSavedSearch(searchValue, currentValue) {
+        const search = normalizeSavedSearch(searchValue), current = requireObject(currentValue, 'current search comparison'); assertOnlyKeys(current, new Set(['generation_id', 'matching_job_ids', 'visible_job_ids', 'change_events_by_job', 'personal_visibility_job_ids']), 'current search comparison');
+        ['generation_id', 'matching_job_ids', 'visible_job_ids', 'change_events_by_job', 'personal_visibility_job_ids'].forEach(field => { if (!(field in current)) { fail('invalid_state', `current search comparison.${field} fehlt.`); } });
+        const generationId = assertText(current.generation_id, 'current search comparison.generation_id', 500, false), matchingIds = normalizeIdList(current.matching_job_ids, 'current search comparison.matching_job_ids'), visibleIds = normalizeIdList(current.visible_job_ids, 'current search comparison.visible_job_ids'), personalVisibilityIds = new Set(normalizeIdList(current.personal_visibility_job_ids, 'current search comparison.personal_visibility_job_ids'));
+        if (!generationId.trim() || !search.baseline) { return { available: false, reason: 'comparison_unavailable', generation_id: generationId, new_job_ids: [], changed_job_ids: [], personal_visibility_job_ids: [] }; }
+        const matching = new Set(matchingIds), visible = new Set(visibleIds); visibleIds.forEach(id => { if (!matching.has(id)) { fail('invalid_state', 'Sichtbare Treffer muessen Teil der passenden Treffer sein.'); } });
+        const baselineJobs = new Set(search.baseline.confirmed_job_ids), baselineEvents = new Set(search.baseline.confirmed_change_event_ids), changed = [], newlyVisible = [], personal = [];
+        visibleIds.forEach(id => {
+            if (!baselineJobs.has(id)) {
+                if (personalVisibilityIds.has(id)) { personal.push(id); } else { newlyVisible.push(id); }
+            }
+        });
+        const eventMap = requireObject(current.change_events_by_job, 'current search comparison.change_events_by_job'); Object.keys(eventMap).sort().forEach(jobId => { assertJobId(jobId); const events = normalizeIdList(eventMap[jobId], `current search comparison.change_events_by_job.${jobId}`); if (visible.has(jobId) && baselineJobs.has(jobId) && events.some(eventId => !baselineEvents.has(eventId))) { changed.push(jobId); } });
+        return { available: true, reason: search.baseline.generation_id === generationId ? 'same_generation' : 'generation_changed', generation_id: generationId, baseline_generation_id: search.baseline.generation_id, new_job_ids: newlyVisible, changed_job_ids: changed, personal_visibility_job_ids: personal, current_job_ids: visibleIds };
+    }
     function updateApplicationText(storage, job, values, now) { const update = requireObject(values, 'application data'); assertOnlyKeys(update, new Set(['note', 'next_action']), 'application data'); return saveMutation(storage, job, now, record => { let changed = false; ['note', 'next_action'].forEach(key => { if (Object.prototype.hasOwnProperty.call(update, key)) { const value = assertText(update[key], key, key === 'note' ? 4000 : 200, false); if (record[key] !== value) { record[key] = value; changed = true; } } }); return changed; }); }
     function upsertTask(storage, job, task, now) { const input = requireObject(task, 'task'); return saveMutation(storage, job, now, (record, timestamp) => { const item = normalizeTask({ task_id: input.task_id, type: input.type, title: input.title, local_date: input.local_date, time_with_offset: input.time_with_offset === undefined ? null : input.time_with_offset, status: input.status === undefined ? 'OPEN' : input.status, updated_at: timestamp, deleted_at: null }); const index = record.tasks.findIndex(candidate => candidate.task_id === item.task_id); if (index < 0 && item.status === 'OPEN' && record.tasks.filter(candidate => candidate.deleted_at === null && candidate.status === 'OPEN').length >= 20) { fail('task_limit', 'Pro Stelle sind hoechstens 20 offene Termine erlaubt.'); } if (index >= 0 && record.tasks[index].deleted_at !== null) { fail('task_deleted', 'Ein geloeschter Termin darf nicht still wiederbelebt werden.'); } if (index >= 0 && JSON.stringify(Object.assign({}, record.tasks[index], { updated_at: item.updated_at })) === JSON.stringify(item)) { return false; } if (index >= 0) { record.tasks[index] = item; } else { record.tasks.push(item); } return true; }); }
     function deleteTask(storage, job, taskId, now) { if (typeof taskId !== 'string') { fail('invalid_task_id', 'task_id ist ungueltig.'); } return saveMutation(storage, job, now, (record, timestamp) => { const task = record.tasks.find(candidate => candidate.task_id === taskId); if (!task || task.deleted_at !== null) { return false; } task.deleted_at = timestamp; task.updated_at = timestamp; return true; }); }
@@ -138,5 +229,5 @@
     function importState(storage, serialized) { const preview = previewImport(storage, serialized), changed = preview.changed_job_ids.length > 0 || preview.changed_visibility_ids.length > 0; if (!preview.valid || !preview.persistent || !changed) { return Object.assign({}, preview, { changed: false }); } const saved = write(storage, preview.state); return saved.persistent ? Object.assign({}, preview, { changed: true, reason: 'imported' }) : { valid: true, persistent: false, changed: false, reason: saved.reason, state: read(storage).state, changed_job_ids: [], changed_visibility_ids: [] }; }
     function exportState(storage) { const loaded = read(storage); return { persistent: loaded.persistent, reason: loaded.reason, serialized: JSON.stringify(loaded.state), state: clone(loaded.state) }; }
     function subscribeStorage(storage, callback, eventTarget) { const target = eventTarget || root; if (!target || typeof target.addEventListener !== 'function' || typeof callback !== 'function') { return () => {}; } const listener = event => { if (!event || event.key !== PROJECT_KEY || (event.storageArea && storage && event.storageArea !== storage)) { return; } if (event.newValue === null) { callback({ persistent: true, reason: 'missing', state: emptyState() }); return; } try { callback({ persistent: true, reason: 'valid', state: normalizeState(JSON.parse(event.newValue)) }); } catch (error) { callback({ persistent: false, reason: error.code || 'corrupt', state: emptyState() }); } }; target.addEventListener('storage', listener); return () => target.removeEventListener('storage', listener); }
-    return Object.freeze({ SCHEMA_VERSION, PROJECT_KEY, LEGACY_PROJECT_KEY, STAGES, TASK_TYPES, TASK_STATUSES, HIDDEN_REASONS, createEmptyState: emptyState, createEmptyRecord: emptyRecord, normalizeState, read, setMark, setVisibility, visibilityFor, transitionApplication, updateApplicationText, upsertTask, deleteTask, previewImport, importState, exportState, subscribeStorage });
+    return Object.freeze({ SCHEMA_VERSION, PROJECT_KEY, LEGACY_PROJECT_KEY, STAGES, TASK_TYPES, TASK_STATUSES, HIDDEN_REASONS, SEARCH_LIMIT, createEmptyState: emptyState, createEmptyRecord: emptyRecord, normalizeState, read, setMark, setVisibility, visibilityFor, transitionApplication, updateApplicationText, upsertTask, deleteTask, saveSavedSearch: saveSearchMutation, deleteSavedSearch, markSavedSearchSeen, compareSavedSearch, createSavedSearchBaseline, previewImport, importState, exportState, subscribeStorage });
 }));
