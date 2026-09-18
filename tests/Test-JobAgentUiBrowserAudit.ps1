@@ -578,6 +578,7 @@ $unexpectedExternalHosts = @()
 $geometryEvidence = [System.Collections.Generic.List[object]]::new()
 try {
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, '--config', $browserConfigPath, 'open', $reportUrl) | Out-Null
+    Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Browser-Session-Isolation' -Script '() => { localStorage.clear(); history.replaceState(null,"","#view=jobs"); return JSON.stringify({cleared:true}); }' | Out-Null
     $browserReady = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Browser-Render-Voraussetzungen' -Script 'async () => { for(const animation of document.getAnimations()){animation.cancel()}; if(document.fonts&&document.fonts.ready){await document.fonts.ready}; return JSON.stringify({locale:navigator.language,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone,fonts_ready:!document.fonts||document.fonts.status.length===6}); }'
     Assert-True -Condition ([string]$browserReady.locale -eq 'de-DE') -Message 'Browser-Audit verwendet nicht das erwartete Locale de-DE.'
     Assert-True -Condition ([string]$browserReady.timezone -eq 'UTC') -Message 'Browser-Audit verwendet nicht die erwartete Zeitzone UTC.'
@@ -667,6 +668,7 @@ try {
             @{ key = 'Tab'; expected = 'jobagent-favorites' },
             @{ key = 'Tab'; expected = 'jobagent-applied' },
             @{ key = 'Tab'; expected = 'jobagent-sort' },
+            @{ key = 'Tab'; expected = 'jobagent-visibility' },
             @{ key = 'Tab'; expected = 'jobagent-reset' }
         )) {
         Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'press', $keyboardStep.key) | Out-Null
@@ -968,7 +970,8 @@ try {
         $expectedPages = [Math]::Max(1, [Math]::Ceiling($expectedCount / 50.0))
         $expectedVisible = [Math]::Min(50, $expectedCount)
         $resultCount = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case "Facet $($facetCase.control)=$($facetCase.value)" -Script '() => JSON.stringify(document.getElementById("jobagent-result-count").textContent)'
-        Assert-True -Condition ($resultCount -eq "Stellen: $expectedCount Treffer, Seite 1 von $expectedPages (sichtbar $expectedVisible).") -Message "Facet $($facetCase.control)=$($facetCase.value): Trefferzahl oder Pagination weicht von der Fixturemenge ab. Erhalten: $resultCount."
+        $resultCountWithoutVisibilitySummary = $resultCount -replace ' \d+ sichtbare Treffer, \d+ durch Ausblendung ausgeschlossen\.$', ''
+        Assert-True -Condition ($resultCountWithoutVisibilitySummary -eq "Stellen: $expectedCount Treffer, Seite 1 von $expectedPages (sichtbar $expectedVisible).") -Message "Facet $($facetCase.control)=$($facetCase.value): Trefferzahl oder Pagination weicht von der Fixturemenge ab. Erhalten: $resultCount."
         if ($expectedCount -le 50) {
             Assert-True -Condition $visibleText.Contains($facetCase.expected) -Message "Facet $($facetCase.control)=$($facetCase.value): erwarteter Karteninhalt fehlt: $($facetCase.expected). Sichtbare IDs: $($visibleIds -join ', ')."
         }

@@ -1,5 +1,24 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-18 - JA-055
+
+- [x] JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden #comment: Wiederkehrende irrelevante Treffer sollen die Suche nicht fuellen, waehrend Erfassung, Firmenkern und Bewerbungsdaten erhalten bleiben.
+  - [x] Beschreibung: Persistente browserlokale Ausblendung fuer stabile Job- und Firmen-IDs mit expliziter Wiederherstellung, sichtbaren Zaehlern und kanonischer Sichtbarkeitssemantik.
+    - [x] Teilbild 1 – Aktionen und Vorrang: Job- und Firmenausblendungen speichern optionalen Grund (`ROLE`, `LOCATION`, `CONDITIONS`, `EMPLOYER`, `OTHER`) sowie bis zu 500 Unicode-Codepoints Text. Effektive Ausblendung ist Job ODER Firma; das Einblenden eines Jobs hebt eine Firmenausblendung nicht auf.
+    - [x] Teilbild 2 – Ansichten und Wiederherstellung: `visibility=visible|hidden|all`, Verwaltungsansicht, sofortiges Rueckgaengig, sichtbare/ausgeschlossene Zaehler, Reset ohne Datenverlust sowie textliche Kennzeichnung des weiter wirksamen Firmenvorrangs sind umgesetzt.
+    - [x] Teilbild 3 – Daten-/Fehlervertrag: `jobagent-user-state/v2` verwaltet `hidden_jobs` und `hidden_companies`; Migration, Export/Import/Merge, Quota-Rueckfall und neue Stellen einer ausgeblendeten Firma sind ohne Aenderung des Crawl-/Reportbestands nachgewiesen.
+  - [x] Scope: `html/jobagent/assets/jobboard-state.js`, `html/jobagent/assets/jobboard-ui.js`, `html/jobagent/assets/jobboard.css`, `schemas/jobagent.user-state.schema.json`, `src/JobAgent.Report.psm1`, `tests/Test-JobAgentUserState.ps1` und `tests/Test-JobAgentUiBrowserAudit.ps1`.
+  - [x] Ergebnis (2026-09-18): Die isolierte Browserfixture weist 262 sichtbare und 2 ausgeschlossene Stellen nach; Jobgrund/-text, Rueckgaengig, Firmenvorrang, Verwaltungsansicht und Reset sind bedienbar. Gleiche Namen mit verschiedenen IDs bleiben getrennt; private Gruende gelangen nicht in URL oder Reportstore.
+  - [x] Abhaengigkeiten: JA-045, JA-047, JA-048, JA-052. Aufwand: 0,5–1 PT; Dauer: 1–2 Arbeitstage. Prioritaetsscore: 64. Risiken: Firmen-/Jobvorrang, Import-Reihenfolge und unsichtbare Favoriten sind durch gezielte Speicher- und Browserfaelle abgedeckt. Meilenstein: M2 reversible persoenliche Auswahl abgeschlossen.
+  - [x] Schritte:
+    1. [x] V2-Vertrag, Wahrheitstabelle und stabile ID-Fixtures fuer Job-/Firmenvorrang festgelegt.
+    2. [x] Aktionen, Verwaltung, Rueckgaengig und Sichtbarkeitsfilter an den gemeinsamen Store angeschlossen; Zaehler und Tastaturfokus aktualisiert.
+    3. [x] Reload, Reset, Export/Import, Textgrenzen, neue Firmenstelle und Speicherfehler ohne Aenderung des Erfassungsbestands nachgewiesen.
+  - [x] Evidence: `docs/reviews/JA-055-acceptance.md`, `logs/jobagent/JA-055/visibility-cases.json`, `doc/roadmap-screenshots/JA-055-hidden-management-390.png` (SHA-256 `36AD4EE1826776F78871AE399F8B82FBD5C74DDA1BE1D934A043F0B274DE266D`).
+  - [x] Funktionstest: `Test-JobAgentUserState.ps1`, `Test-JobAgentUiBrowserAudit.ps1`, `Test-JobAgentReport.ps1` und `Test-JobAgentDailyRun.ps1` jeweils Exit 0; der Vollbrowseraudit prueft die Viewports 390/800/1366/1920.
+  - [x] Audit: Grund, Anzahl und Wiederherstellung sind ohne alleinige Farbcodierung auffindbar; keine horizontalen Ueberlaeufe oder zu kleinen Controls in den vier Pflicht-Viewports.
+  - [x] Supertest: Erster Lauf deckte ausschliesslich das veraltete QA-001-Funktionsinventar auf. Nach kanonischer Neuerzeugung mit `Test-JobAgentTestMatrix.ps1 -WriteInventory` bestand `./ci.cmd supertest` mit 32/32 bestanden, 0 fehlgeschlagen, 0 blockiert und 0 nicht ausgefuehrt (Exit 0, 1025,83 s).
+
 ## Archiviert 2026-09-18 - JA-053
 
 - [x] JA-053 Fachliche Aenderungen einer Stelle als belegte Chronik anzeigen #comment: Eine erneute Erfassung ist keine neue Stelle und eine technische Quellenstoerung kein belegtes Ende einer Ausschreibung.

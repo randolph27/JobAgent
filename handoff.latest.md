@@ -1,26 +1,21 @@
 # Handoff latest
 
-Stand: 2026-09-18T15:18:57.703+02:00
+Stand: 2026-09-18T19:11:38.846+02:00
 
 ## Zustand
 
-- Active: `TD-0082`
-- Status: `open`
-- Ziel: M2 – Stellenboersen-Oberflaeche: JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden #comment: Wiederkehrende irrelevante Treffer sollen die Suche nicht fuellen, waehrend Erfassung, Firmenkern und Bewerbungsdaten erhalten bleiben.
+- Active: `TD-0077`
+- Status: `in-progress`
+- Ziel: M3 – Publikation und Gesamtabnahme: JA-049 Stellenboerse als stabilen HTML-Einstieg atomar publizieren #comment: Der regulaere Lauf muss die Stellenansicht reproduzierbar bereitstellen und bisherige Berichtspfade sowie persoenliche Markierungen erhalten.
 - Branch: `master`
-- HEAD: `f0651abf4ea1`
+- HEAD: `8ac390440fe5`
 - Upstream: `origin/master`
-- Ahead/Behind: `0/0`
+- Ahead/Behind: `1/0`
 - Worktree: `dirty`
 - Route: `False`
 
 ## Versionierte Aenderungen
 
-- `handoff.latest.detail.md`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `tests/Test-JobAgentUiBrowserAudit.ps1`
-- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
@@ -30,4 +25,4 @@ Stand: 2026-09-18T15:18:57.703+02:00
 
 ## Naechster Anker
 
-M3 – Publikation und Gesamtabnahme: JA-049 Stellenboerse als stabilen HTML-Einstieg atomar publizieren #comment: Der regulaere Lauf muss die Stellenansicht reproduzierbar bereitstellen und bisherige Berichtspfade sowie persoenliche Markierungen erhalten.
+M3 – Publikation und Gesamtabnahme: JA-054 Kalender fuer tatsaechliche Abrufe, geplante Pruefungen und eigene Termine anbieten #comment: Der Kalender macht Datenaktualisierung und persoenliche Fristen sichtbar, ohne geplante Abrufe als durchgefuehrte Scrapes auszugeben.
