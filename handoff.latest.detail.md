@@ -24,19 +24,23 @@ Stand: 2026-09-18. Der zugehoerige maschinelle Zustand steht in `handoff.latest.
 - `schemas/jobagent.user-state.schema.json`: additive Schemafelder und Validierung fuer beide Bereiche. Alte v1- und bestehende v2-Zustaende ohne Bereiche migrieren weiterhin zu leeren Bereichen.
 - `src/JobAgent.Report.psm1`: Stellenansicht bietet Sichtbarkeit `visible`, `all` und `hidden`; Karten haben die Jobaktion „Nicht interessant“/„Stelle wieder einblenden“, Firmen die Aktion zum Ausblenden/Wiederherstellen. In Standardansicht bleiben lokal markierte Favoriten/Bewerbungen trotz Ausblendung sichtbar und erhalten ein Text-Badge.
 - `tests/fixtures/jobagent/hidden-jobs.json`, `tests/Test-JobAgentUserState.ps1` und `tests/Test-JobAgentReport.ps1` decken ID-Trennung, Vorrang, Wiederherstellung, Textgrenze, Import gegen Wiederbelebung aelterer Werte, Schema und gerenderte Bedienelemente ab.
+- `importState` persistiert jetzt auch einen Import, der ausschliesslich geaenderte Ausblendungen enthaelt. Zuvor wurde dieser Fall wegen einer Pruefung nur auf `changed_job_ids` nicht geschrieben.
+- Die Ausblendungsbedienung ergaenzt Grundauswahl, maximal 500 Codepoints Erlaeuterung, global erreichbares „Rueckgaengig“ und einen Firmenhinweis mit Anzahl erfasster/offen ausgeblendeter Stellen. Ausblendgruende bleiben im Local Storage; sie werden nicht in URL oder Reportdaten geschrieben.
+- `tests/Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly` ist als gezielter Browserfall angelegt. Er prueft Grund/Text, Rueckgaengig, Firmenvorrang, einzelne Wiederherstellung, Reset und externe Netzwerkanfragen. Der Lauf hat im Tool-Runner jedoch nicht innerhalb der Laufzeit abgeschlossen; es liegt kein gruener Browsernachweis vor.
 
 ### Verifiziert
 
 - `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` -> Exit `0`.
 - `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`.
-- Kein Supertest ausgefuehrt; nach Arbeitsvertrag kein Abschlussblocker.
+- `./ci.cmd devserver-status` -> Exit `0`, vorhandener CI-verwalteter Devserver auf Port 8500.
+- Kein Supertest ausgefuehrt; laut Nutzerauftrag ist das kein Abschlussblocker.
 
 ### Konkreter Fortsetzungsschnitt
 
-1. Einen fokussierten Browserfunktionstest fuer JA-055 erstellen oder `Test-JobAgentUiBrowserAudit.ps1` gezielt erweitern: Job/Firma/Job+Firma/keine Ausblendung je `visible`/`all`/`hidden`, gleiche Namen mit verschiedenen IDs, Reload, Reset, Favorit/Bewerbung, Speicherfehler, Import und eine neue Stelle derselben ausgeblendeten Firma.
-2. Die Kopfzeile im gemeinsamen Filterresolver auf exakte Distinct-Job-Zaehler erweitern: passende sichtbare IDs und durch Ausblendung ausgeschlossene passende IDs ohne Doppelzaehlung bei Job plus Firma.
-3. Den optionalen Grund und Text als zugängliche Eingabe an der Ausblendaktion ergänzen; weder URL noch technische Diagnoseausgaben dürfen diese Daten enthalten.
-4. Nach den konkreten Funktionstests den Browseraudit fuer 1920/1366/800/390 ausführen, Evidence/Matrix/Inventar aktualisieren und erst dann JA-055 rotieren.
+1. Den Browserfall `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly` diagnostizieren. Der letzte Lauf blieb im Playwright-Abschnitt haengen und wurde beendet; zuerst erzeugte `logs/jobagent/QA-004/qa004-*` und Browserkonsolen read-only auswerten. Keine unbestaetigte Gruenmeldung daraus ableiten.
+2. Sichtbarkeitsresolver vervollstaendigen: fuer Job/Firma/Job+Firma/keine Ausblendung in `visible`, `all`, `hidden` exakte Distinct-IDs, lokale Favoriten/Bewerbungen, Reset, Reload, Speicherfehler, Import und neue Stelle derselben ausgeblendeten Firma nachweisen. Gleiche Namen mit unterschiedlichen IDs muessen getrennt bleiben.
+3. Die Kopfzeile des gemeinsamen Filterresolvers um exakte Werte „X sichtbare Treffer, Y durch Ausblendung ausgeschlossen“ erweitern. Y darf einen Job mit eigener und Firmenausblendung nur einmal zählen und muss weitere Filter bereits berücksichtigen.
+4. Nach gruenem fokussiertem Browserfall die vier Viewports 1920/1366/800/390 pruefen, Evidence, Matrix und Funktionsinventar aktualisieren. Erst bei belegter Erfuellung Roadmap/Todo rotieren; sonst `TD-0082` offen lassen.
 
 ## Betriebsregeln und bekannte Restlage
 

@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-18T13:50:24.109+02:00
+Stand: 2026-09-18T14:13:40.155+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-18T13:50:24.109+02:00
 - Status: `open`
 - Ziel: M2 – Stellenboersen-Oberflaeche: JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden #comment: Wiederkehrende irrelevante Treffer sollen die Suche nicht fuellen, waehrend Erfassung, Firmenkern und Bewerbungsdaten erhalten bleiben.
 - Branch: `master`
-- HEAD: `fb6f11d7d2a0`
+- HEAD: `4d0025920475`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -20,9 +20,8 @@ Stand: 2026-09-18T13:50:24.109+02:00
 - `handoff.latest.json`
 - `handoff.latest.md`
 - `html/jobagent/assets/jobboard-state.js`
-- `schemas/jobagent.user-state.schema.json`
 - `src/JobAgent.Report.psm1`
-- `tests/Test-JobAgentReport.ps1`
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
 - `tests/Test-JobAgentUserState.ps1`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
@@ -34,4 +33,4 @@ Stand: 2026-09-18T13:50:24.109+02:00
 
 ## Naechster Anker
 
-M3 – Publikation und Gesamtabnahme: JA-049 Stellenboerse als stabilen HTML-Einstieg atomar publizieren #comment: Der regulaere Lauf muss die Stellenansicht reproduzierbar bereitstellen und bisherige Berichtspfade sowie persoenliche Markierungen erhalten.
+TD-0082 / JA-055 abschliessen: fokussierten Browserfall stabilisieren, genaue Sichtbarkeitszaehler integrieren und erst bei belegter Vollabnahme rotieren. Danach: JA-049 -> JA-054 -> JA-056 -> JA-050.

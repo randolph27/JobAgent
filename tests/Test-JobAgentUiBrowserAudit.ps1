@@ -3,7 +3,8 @@
 [CmdletBinding()]
 param(
     [switch]$FixtureOnly,
-    [switch]$ApplicationOverviewOnly
+    [switch]$ApplicationOverviewOnly,
+    [switch]$VisibilityOnly
 )
 
 Set-StrictMode -Version 3.0
@@ -613,6 +614,19 @@ try {
         $targetEvidence | ConvertTo-Json -Depth 20
         return
     }
+    if ($VisibilityOnly) {
+        $visibility = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Ausblendung: Grund, Rueckgaengig und Firmenvorrang' -Script 'async () => { const wait=()=>new Promise(resolve=>setTimeout(resolve,60)),api=window.JobAgentUserState,job={job_id:"job:munich-accounting",title:"Buchhaltung",company:"Firma 001",company_id:"company:fixture_001",official_url:"https://jobs.example.invalid/job/munich-accounting"}; api.setVisibility(localStorage,"job",job.job_id,false,{}); api.setVisibility(localStorage,"company",job.company_id,false,{}); location.hash="#view=jobs"; await wait(); let card=document.querySelector(`[data-job-id="${job.job_id}"]`),reason=card.querySelector("[data-job-visibility-reason] select"),text=card.querySelector("[data-job-visibility-text]"); reason.value="ROLE"; text.value="Nicht passende Rolle"; card.querySelector("[data-job-visibility=job]").click(); await wait(); const hidden=api.read(localStorage).state.hidden_jobs[job.job_id],notice=document.getElementById("jobagent-visibility-notice"),undo=notice.querySelector("button"); undo.click(); await wait(); const afterUndo=api.read(localStorage).state.hidden_jobs[job.job_id]; api.setVisibility(localStorage,"company",job.company_id,true,{reason:"EMPLOYER",text:""}); location.hash="#view=jobs&visibility=hidden"; await wait(); card=document.querySelector(`[data-job-id="${job.job_id}"]`); const companyBadge=card&&card.textContent.includes("Durch ausgeblendeten Arbeitgeber verborgen."); reason=card.querySelector("[data-job-visibility-reason] select"); reason.value="OTHER"; card.querySelector("[data-job-visibility=job]").click(); await wait(); card=document.querySelector(`[data-job-id="${job.job_id}"]`); card.querySelector("[data-job-visibility=job]").click(); await wait(); const finalState=api.read(localStorage).state,reset=document.getElementById("jobagent-filters"); reset.reset(); await wait(); return JSON.stringify({hidden_reason:hidden.reason,hidden_text:hidden.text,undo_hidden:afterUndo.hidden,company_badge:companyBadge,company_hidden:finalState.hidden_companies[job.company_id].hidden,job_hidden_after_restore:finalState.hidden_jobs[job.job_id].hidden,visibility_hash_after_reset:new URLSearchParams(location.hash.slice(1)).get("visibility"),external_resources:performance.getEntriesByType("resource").map(entry=>entry.name).filter(name=>/^https?:\\/\\/(?!127\\.0\\.0\\.1:8500|localhost:8500)/.test(name))}); }'
+        Assert-True -Condition ($visibility.hidden_reason -eq 'ROLE' -and $visibility.hidden_text -eq 'Nicht passende Rolle') -Message 'Ausblendung: Grund oder Erlaeuterung wurde nicht lokal gespeichert.'
+        Assert-True -Condition (-not [bool]$visibility.undo_hidden) -Message 'Ausblendung: Rueckgaengig stellt die Stelle nicht wieder her.'
+        Assert-True -Condition ([bool]$visibility.company_badge -and [bool]$visibility.company_hidden -and -not [bool]$visibility.job_hidden_after_restore) -Message 'Ausblendung: Firmenvorrang oder einzelne Wiederherstellung ist inkonsistent.'
+        Assert-True -Condition ([string]$visibility.visibility_hash_after_reset -eq '') -Message 'Ausblendung: Filter-Reset behaelt den Sichtbarkeitsmodus statt des Ansichtsdefaults.'
+        Assert-True -Condition (@($visibility.external_resources).Count -eq 0) -Message 'Ausblendung: Die lokale Bedienung hat externe Netzwerkressourcen geladen.'
+        $targetEvidence = [pscustomobject]@{ status = 'ok'; mode = 'visibility_only'; report_url = $reportUrl; case = $visibility; report_hash = $reportHashBefore; fixture_hash = $fixtureHashBefore }
+        Write-Utf8File -Path $evidencePath -Content ($targetEvidence | ConvertTo-Json -Depth 20)
+        $targetEvidence | ConvertTo-Json -Depth 20
+        return
+    }
+
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Leitung Digitalisierung mit einem absichtlich sehr langen ungetrennten Layoutpruefwort' -Case 'Langer Titel bleibt erreichbar'
