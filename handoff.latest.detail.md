@@ -13,15 +13,30 @@ Stand: 2026-09-18. Der zugehoerige maschinelle Zustand steht in `handoff.latest.
 - Ein zuerst erkannter Fehler in `Test-JobAgentDailyRun.ps1` war ausschliesslich eine fehlende Normalisierung dynamischer `change:`-Event-IDs in Reporthashes. Die Regex deckt dieses Praefix nun ab; der fokussierte Test ist gruen.
 - `./ci.cmd supertest` endete danach gruen mit 32/32 bestanden, 0 fehlgeschlagen, 0 blockiert, 0 nicht ausgefuehrt. `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` ist ebenfalls gruen.
 
-## Naechster Punkt: TD-0082 / JA-055
+## Laufender Punkt: TD-0082 / JA-055
 
-Als naechstes `JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden` nach `Roadmap.md` umsetzen. Fachliche Reihenfolge: `JA-055 -> JA-049 -> JA-054 -> JA-056 -> JA-050`.
+`JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden` ist begonnen, aber nicht abnahmebereit. Die Roadmap bleibt unveraendert aktiv; keine Rotation. Fachliche Reihenfolge danach: `JA-049 -> JA-054 -> JA-056 -> JA-050`.
 
-1. Den browserlokalen v2-Zustand mit `hidden_jobs` und `hidden_companies` auf stabilen IDs spezifizieren; Grund, optionalen Text, UTC-Aenderungszeit, Import-/Exportkonflikte und v1-Kompatibilitaet abdecken.
-2. Job- und Firmenausblendung mit eindeutigem Vorrang implementieren: effektiv verborgen bei Job **oder** Firma; eine Job-Wiederherstellung hebt die Firmenausblendung nicht auf. Keine Loeschung von Crawl-, Firmen-, Favoriten-, Bewerbungs- oder Termindaten.
-3. Sichtbarkeitsmodi `visible`, `all`, `hidden`, genaue sichtbare/ausgeschlossene Distinct-Job-Zaehler sowie Verwaltungs-/Wiederherstellungsansicht in den bestehenden gemeinsamen Filterresolver integrieren. Filterreset darf keine gespeicherte Ausblendung loeschen.
-4. Fixture- und Funktionsfälle fuer gleiche Namen mit verschiedenen IDs, gleiche Firma/mehrere Jobs, alle Job-/Firmenkombinationen, ausgeblendete Favoriten/Bewerbungen, Reload, Export/Import, Quota-Fehler und neue Stellen einer ausgeblendeten Firma erstellen.
-5. Erst nach fachlichem Abschluss Browseraudit bei 1920/1366/800/390 CSS-Pixeln ausfuehren, Matrix/Inventar aktualisieren und den Punkt rotieren. Ein nicht angefragter Supertest gilt als erledigt; bei Ausfuehrung zuerst den konkreten Funktionsfall isolieren.
+### Bereits umgesetzt
+
+- `html/jobagent/assets/jobboard-state.js`: v2-Zustand besitzt additive optionale Bereiche `hidden_jobs` und `hidden_companies`. Eintrag: `hidden`, Grund (`ROLE`, `LOCATION`, `CONDITIONS`, `EMPLOYER`, `OTHER` oder leer), Text mit maximal 500 Unicode-Codepoints und UTC-`updated_at`.
+- Neue APIs `setVisibility(storage, scope, id, hidden, options, now)` und `visibilityFor(state, jobId, companyId)`. Job-Ausblendung hat Vorrang; die Wiederherstellung eines Jobs hebt eine wirksame Firmenausblendung nicht auf. Der Import vereinigt Ausblendungen je stabiler ID nach neuerem Zeitstempel; bei Gleichstand bleibt der lokale Wert erhalten.
+- `schemas/jobagent.user-state.schema.json`: additive Schemafelder und Validierung fuer beide Bereiche. Alte v1- und bestehende v2-Zustaende ohne Bereiche migrieren weiterhin zu leeren Bereichen.
+- `src/JobAgent.Report.psm1`: Stellenansicht bietet Sichtbarkeit `visible`, `all` und `hidden`; Karten haben die Jobaktion „Nicht interessant“/„Stelle wieder einblenden“, Firmen die Aktion zum Ausblenden/Wiederherstellen. In Standardansicht bleiben lokal markierte Favoriten/Bewerbungen trotz Ausblendung sichtbar und erhalten ein Text-Badge.
+- `tests/fixtures/jobagent/hidden-jobs.json`, `tests/Test-JobAgentUserState.ps1` und `tests/Test-JobAgentReport.ps1` decken ID-Trennung, Vorrang, Wiederherstellung, Textgrenze, Import gegen Wiederbelebung aelterer Werte, Schema und gerenderte Bedienelemente ab.
+
+### Verifiziert
+
+- `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` -> Exit `0`.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`.
+- Kein Supertest ausgefuehrt; nach Arbeitsvertrag kein Abschlussblocker.
+
+### Konkreter Fortsetzungsschnitt
+
+1. Einen fokussierten Browserfunktionstest fuer JA-055 erstellen oder `Test-JobAgentUiBrowserAudit.ps1` gezielt erweitern: Job/Firma/Job+Firma/keine Ausblendung je `visible`/`all`/`hidden`, gleiche Namen mit verschiedenen IDs, Reload, Reset, Favorit/Bewerbung, Speicherfehler, Import und eine neue Stelle derselben ausgeblendeten Firma.
+2. Die Kopfzeile im gemeinsamen Filterresolver auf exakte Distinct-Job-Zaehler erweitern: passende sichtbare IDs und durch Ausblendung ausgeschlossene passende IDs ohne Doppelzaehlung bei Job plus Firma.
+3. Den optionalen Grund und Text als zugängliche Eingabe an der Ausblendaktion ergänzen; weder URL noch technische Diagnoseausgaben dürfen diese Daten enthalten.
+4. Nach den konkreten Funktionstests den Browseraudit fuer 1920/1366/800/390 ausführen, Evidence/Matrix/Inventar aktualisieren und erst dann JA-055 rotieren.
 
 ## Betriebsregeln und bekannte Restlage
 

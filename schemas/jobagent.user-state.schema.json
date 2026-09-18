@@ -9,10 +9,13 @@
     "schema_version": { "const": "jobagent-user-state/v2" },
     "project_key": { "const": "jobagent:personal:v2" },
     "updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
-    "jobs": { "type": "object", "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" }, "additionalProperties": { "$ref": "#/$defs/job_state" } }
+    "jobs": { "type": "object", "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" }, "additionalProperties": { "$ref": "#/$defs/job_state" } },
+    "hidden_jobs": { "type": "object", "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" }, "additionalProperties": { "$ref": "#/$defs/visibility_state" } },
+    "hidden_companies": { "type": "object", "propertyNames": { "pattern": "^[A-Za-z0-9][A-Za-z0-9:_-]{0,500}$" }, "additionalProperties": { "$ref": "#/$defs/visibility_state" } }
   },
   "$defs": {
     "utc_time": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "visibility_state": { "type": "object", "additionalProperties": false, "required": ["hidden", "reason", "text", "updated_at"], "properties": { "hidden": { "type": "boolean" }, "reason": { "enum": ["", "ROLE", "LOCATION", "CONDITIONS", "EMPLOYER", "OTHER"] }, "text": { "type": "string", "maxLength": 500 }, "updated_at": { "$ref": "#/$defs/utc_time" } } },
     "task": {
       "type": "object", "additionalProperties": false,
       "required": ["task_id", "type", "title", "local_date", "time_with_offset", "status", "updated_at", "deleted_at"],

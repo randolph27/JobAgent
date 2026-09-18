@@ -1,0 +1,28 @@
+{
+  "schema_version": "jobagent-user-state/v2",
+  "project_key": "jobagent:personal:v2",
+  "updated_at": "2026-09-18T09:36:00.000Z",
+  "jobs": {},
+  "hidden_jobs": {
+    "job:alpha": {
+      "hidden": false,
+      "reason": "",
+      "text": "",
+      "updated_at": "2026-09-18T09:36:00.000Z"
+    },
+    "job:same-name-other-id": {
+      "hidden": true,
+      "reason": "ROLE",
+      "text": "Nicht passend",
+      "updated_at": "2026-09-18T09:34:00.000Z"
+    }
+  },
+  "hidden_companies": {
+    "company:alpha": {
+      "hidden": true,
+      "reason": "EMPLOYER",
+      "text": "",
+      "updated_at": "2026-09-18T09:35:00.000Z"
+    }
+  }
+}

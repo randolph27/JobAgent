@@ -19,7 +19,7 @@ function Assert-True {
 
 function Invoke-UserStateNode {
     param([Parameter(Mandatory)][string]$Script)
-    $output = @(& node.exe -e $Script $modulePath (Join-Path $fixtureRoot 'valid-v1.json') 2>&1)
+    $output = @(& node.exe -e $Script $modulePath (Join-Path $fixtureRoot 'valid-v1.json') (Join-Path $root 'tests\fixtures\jobagent\hidden-jobs.json') 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ('UserState-Node-Test fehlgeschlagen: ' + ($output -join "`n"))
     return (($output -join "`n") | ConvertFrom-Json -Depth 30)
 }
@@ -36,9 +36,12 @@ $valid = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $
 Assert-True -Condition ($valid.exit -eq 0) -Message ('AJV lehnt die gueltige v2-Fixture ab: ' + ($valid.output -join "`n"))
 $invalid = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', (Join-Path $fixtureRoot 'valid-v1.json'), '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
 Assert-True -Condition ($invalid.exit -ne 0) -Message 'AJV akzeptiert eine v1-Fixture als v2.'
+$hiddenFixture = Join-Path $root 'tests\fixtures\jobagent\hidden-jobs.json'
+$hiddenValid = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', $hiddenFixture, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
+Assert-True -Condition ($hiddenValid.exit -eq 0) -Message ('AJV lehnt die gueltige Ausblendungsfixture ab: ' + ($hiddenValid.output -join "`n"))
 
 $nodeResult = Invoke-UserStateNode -Script @'
-const api=require(process.argv[1]),legacy=require('fs').readFileSync(process.argv[2],'utf8');
+const api=require(process.argv[1]),legacy=require('fs').readFileSync(process.argv[2],'utf8'),hiddenFixture=require(process.argv[3]);
 class Storage { constructor(initial){this.data=new Map(Object.entries(initial||{}));this.throwWrite=false;} getItem(key){return this.data.has(key)?this.data.get(key):null;} setItem(key,value){if(this.throwWrite)throw new Error('quota');this.data.set(key,value);} }
 const assert=(condition,message)=>{if(!condition)throw new Error(message)};
 const job={job_id:'job:alpha',title:'Leitung IT',company:'Alpha AG',official_url:'https://alpha.example.invalid/jobs/alpha'};
@@ -53,8 +56,14 @@ const task={task_id:'task-1',type:'APPLICATION_DEADLINE',title:'Unterlagen sende
 for(let index=2;index<=20;index++){api.upsertTask(storage,job,{...task,task_id:'task-'+index,status:'OPEN'},`2026-09-18T09:${String(index).padStart(2,'0')}:00.000Z`)}let limited=false;try{api.upsertTask(storage,job,{...task,task_id:'task-21'},'2026-09-18T09:30:00.000Z')}catch(error){limited=error.code==='task_limit'}assert(limited,'open task limit');
 const deleted=api.deleteTask(storage,job,'task-1','2026-09-18T09:31:00.000Z');assert(deleted.record.tasks.find(task=>task.task_id==='task-1').deleted_at!==null,'delete marker');let resurrection=false;try{api.upsertTask(storage,job,task,'2026-09-18T09:32:00.000Z')}catch(error){resurrection=error.code==='task_deleted'}assert(resurrection,'delete marker prevents resurrection');
 const beforeQuota=storage.getItem(api.PROJECT_KEY);storage.throwWrite=true;const quota=api.setMark(storage,job,'favorite',false,'2026-09-18T09:33:00.000Z');storage.throwWrite=false;assert(!quota.persistent&&storage.getItem(api.PROJECT_KEY)===beforeQuota,'quota atomic');
+const hiddenJob=api.setVisibility(storage,'job','job:alpha',true,{reason:'ROLE',text:'Nicht passend'},'2026-09-18T09:34:00.000Z');assert(hiddenJob.persistent&&hiddenJob.entry.hidden&&hiddenJob.entry.reason==='ROLE','job hidden');
+const hiddenCompany=api.setVisibility(storage,'company','company:alpha',true,{reason:'EMPLOYER',text:''},'2026-09-18T09:35:00.000Z');assert(hiddenCompany.persistent&&api.visibilityFor(hiddenCompany.state,'job:alpha','company:alpha').scope==='job','job precedence');
+const restoredJob=api.setVisibility(storage,'job','job:alpha',false,{},'2026-09-18T09:36:00.000Z');assert(restoredJob.persistent&&api.visibilityFor(restoredJob.state,'job:alpha','company:alpha').scope==='company','company remains after job restore');
+assert(api.visibilityFor(hiddenFixture,'job:alpha','company:alpha').scope==='company'&&api.visibilityFor(hiddenFixture,'job:same-name-other-id','company:alpha').scope==='job','fixture keeps IDs independent');
+let visibilityTooLong=false;try{api.setVisibility(storage,'company','company:alpha',true,{text:'😀'.repeat(501)},'2026-09-18T09:37:00.000Z')}catch(error){visibilityTooLong=error.code==='invalid_state'}assert(visibilityTooLong,'visibility text limit');
+const importedVisibility=JSON.parse(api.exportState(storage).serialized);importedVisibility.hidden_jobs['job:alpha']={hidden:true,reason:'OTHER',text:'Alt',updated_at:'2026-09-18T09:33:00.000Z'};const preview=api.previewImport(storage,importedVisibility);assert(preview.valid&&preview.state.hidden_jobs['job:alpha'].hidden===false,'older import does not revive hidden job');
 const exported=api.exportState(storage),reload=api.read(new Storage({[api.PROJECT_KEY]:exported.serialized}));assert(reload.persistent&&reload.state.jobs['job:alpha'].tasks.length===20,'export import');
-console.log(JSON.stringify({status:'ok',cases:['v1_migration_preserves_backup','stage_projection_and_correction_history','transition_contract','unicode_text_limits','task_crud_offset_and_limit','delete_marker','quota_atomicity','export_reload']}));
+console.log(JSON.stringify({status:'ok',cases:['v1_migration_preserves_backup','stage_projection_and_correction_history','transition_contract','unicode_text_limits','task_crud_offset_and_limit','delete_marker','quota_atomicity','visibility_precedence_restore_and_merge','export_reload']}));
 '@
 
 Assert-True -Condition ($nodeResult.status -eq 'ok') -Message 'Der DOM-unabhaengige UserState-Funktionstest lieferte kein vollstaendiges Ergebnis.'
