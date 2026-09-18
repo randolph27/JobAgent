@@ -1,48 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://jobagent.local/schemas/jobagent.user-state.schema.json",
-  "title": "JobAgent persoenlicher Browserzustand v1",
+  "title": "JobAgent persoenlicher Browserzustand v2",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "project_key", "updated_at", "jobs"],
   "properties": {
-    "schema_version": { "const": "jobagent-user-state/v1" },
-    "project_key": { "const": "jobagent:personal:v1" },
+    "schema_version": { "const": "jobagent-user-state/v2" },
+    "project_key": { "const": "jobagent:personal:v2" },
     "updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
-    "jobs": {
-      "type": "object",
-      "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" },
-      "additionalProperties": { "$ref": "#/$defs/job_state" }
-    }
+    "jobs": { "type": "object", "propertyNames": { "pattern": "^job:[^\\s]{1,500}$" }, "additionalProperties": { "$ref": "#/$defs/job_state" } }
   },
   "$defs": {
     "utc_time": { "type": "string", "format": "date-time", "pattern": "Z$" },
-    "job_state": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["favorite", "applied", "favorite_updated_at", "applied_updated_at", "applied_at"],
+    "task": {
+      "type": "object", "additionalProperties": false,
+      "required": ["task_id", "type", "title", "local_date", "time_with_offset", "status", "updated_at", "deleted_at"],
       "properties": {
-        "favorite": { "type": "boolean" },
-        "applied": { "type": "boolean" },
-        "favorite_updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
-        "applied_updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
-        "applied_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
-        "reference": { "$ref": "#/$defs/reference" }
-      },
-      "allOf": [
-        { "if": { "properties": { "applied": { "const": true } } }, "then": { "properties": { "applied_updated_at": { "$ref": "#/$defs/utc_time" }, "applied_at": { "$ref": "#/$defs/utc_time" } } }, "else": { "properties": { "applied_at": { "type": "null" } } } }
-      ]
-    },
-    "reference": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "company", "official_url", "observed_at"],
-      "properties": {
-        "title": { "type": "string", "maxLength": 1000 },
-        "company": { "type": "string", "maxLength": 1000 },
-        "official_url": { "type": ["string", "null"], "format": "uri", "pattern": "^https?://" },
-        "observed_at": { "$ref": "#/$defs/utc_time" }
+        "task_id": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,127}$" }, "type": { "enum": ["APPLICATION_DEADLINE", "INTERVIEW", "FOLLOW_UP", "OTHER"] }, "title": { "type": "string", "maxLength": 200 },
+        "local_date": { "type": "string", "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }, "time_with_offset": { "type": ["string", "null"], "pattern": "^\\d{2}:\\d{2}(?:\\+|-)(?:0\\d|1\\d|2[0-3]):[0-5]\\d$" },
+        "status": { "enum": ["OPEN", "DONE"] }, "updated_at": { "$ref": "#/$defs/utc_time" }, "deleted_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" }
       }
-    }
+    },
+    "history": { "type": "object", "additionalProperties": false, "required": ["from_stage", "to_stage", "at", "reason"], "properties": { "from_stage": { "enum": ["NONE", "PREPARING", "APPLIED", "INTERVIEW", "REJECTED", "WITHDRAWN"] }, "to_stage": { "enum": ["NONE", "PREPARING", "APPLIED", "INTERVIEW", "REJECTED", "WITHDRAWN"] }, "at": { "$ref": "#/$defs/utc_time" }, "reason": { "type": "string", "maxLength": 200 } } },
+    "job_state": {
+      "type": "object", "additionalProperties": false,
+      "required": ["favorite", "favorite_updated_at", "application_stage", "application_updated_at", "applied", "applied_at", "note", "next_action", "tasks", "application_history"],
+      "properties": {
+        "favorite": { "type": "boolean" }, "favorite_updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
+        "application_stage": { "enum": ["NONE", "PREPARING", "APPLIED", "INTERVIEW", "REJECTED", "WITHDRAWN"] }, "application_updated_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
+        "applied": { "type": "boolean" }, "applied_at": { "type": ["string", "null"], "format": "date-time", "pattern": "Z$" },
+        "note": { "type": "string", "maxLength": 4000 }, "next_action": { "type": "string", "maxLength": 200 }, "tasks": { "type": "array", "items": { "$ref": "#/$defs/task" } }, "application_history": { "type": "array", "items": { "$ref": "#/$defs/history" } }, "reference": { "$ref": "#/$defs/reference" }
+      },
+      "allOf": [{ "if": { "properties": { "application_stage": { "enum": ["NONE", "PREPARING"] } } }, "then": { "properties": { "applied": { "const": false }, "applied_at": { "type": "null" } } }, "else": { "properties": { "applied": { "const": true }, "applied_at": { "$ref": "#/$defs/utc_time" }, "application_updated_at": { "$ref": "#/$defs/utc_time" } } } }]
+    },
+    "reference": { "type": "object", "additionalProperties": false, "required": ["title", "company", "official_url", "observed_at"], "properties": { "title": { "type": "string", "maxLength": 1000 }, "company": { "type": "string", "maxLength": 1000 }, "official_url": { "type": ["string", "null"], "format": "uri", "pattern": "^https?://" }, "observed_at": { "$ref": "#/$defs/utc_time" } } }
   }
 }

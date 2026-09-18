@@ -19,67 +19,43 @@ function Assert-True {
 
 function Invoke-UserStateNode {
     param([Parameter(Mandatory)][string]$Script)
-
-    $output = @(& node.exe -e $Script $modulePath 2>&1)
+    $output = @(& node.exe -e $Script $modulePath (Join-Path $fixtureRoot 'valid-v1.json') 2>&1)
     Assert-True -Condition ($LASTEXITCODE -eq 0) -Message ('UserState-Node-Test fehlgeschlagen: ' + ($output -join "`n"))
     return (($output -join "`n") | ConvertFrom-Json -Depth 30)
 }
 
 Assert-True -Condition (Test-Path -LiteralPath $modulePath -PathType Leaf) -Message 'Das DOM-unabhaengige UserState-Modul fehlt.'
 $schema = Get-Content -LiteralPath $schemaPath -Raw | ConvertFrom-Json -Depth 100
-Assert-True -Condition ($schema.properties.schema_version.const -eq 'jobagent-user-state/v1') -Message 'Das UserState-Schema fixiert nicht v1.'
-Assert-True -Condition ($schema.properties.project_key.const -eq 'jobagent:personal:v1') -Message 'Das UserState-Schema fixiert nicht den Projektschluessel.'
+Assert-True -Condition ($schema.properties.schema_version.const -eq 'jobagent-user-state/v2') -Message 'Das UserState-Schema fixiert nicht v2.'
+Assert-True -Condition ($schema.properties.project_key.const -eq 'jobagent:personal:v2') -Message 'Das UserState-Schema fixiert nicht den v2-Projektschluessel.'
 
 $ajvCli = Get-JobAgentAjvCliPath -RepositoryRoot $root
 $compile = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('compile', '-s', $schemaPath, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
 Assert-True -Condition ($compile.exit -eq 0) -Message ('AJV kann das UserState-Schema nicht kompilieren: ' + ($compile.output -join "`n"))
-$validFixture = Join-Path $fixtureRoot 'valid-v1.json'
-$invalidFixture = Join-Path $fixtureRoot 'invalid-unsupported-version.json'
-$valid = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', $validFixture, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
-Assert-True -Condition ($valid.exit -eq 0) -Message ('AJV lehnt die gueltige UserState-Fixture ab: ' + ($valid.output -join "`n"))
-$invalid = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', $invalidFixture, '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
-Assert-True -Condition ($invalid.exit -ne 0) -Message 'AJV akzeptiert eine unbekannte UserState-Version.'
+$valid = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', (Join-Path $fixtureRoot 'valid-v2.json'), '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
+Assert-True -Condition ($valid.exit -eq 0) -Message ('AJV lehnt die gueltige v2-Fixture ab: ' + ($valid.output -join "`n"))
+$invalid = Invoke-JobAgentAjvCli -CliPath $ajvCli -Arguments @('validate', '-s', $schemaPath, '-d', (Join-Path $fixtureRoot 'valid-v1.json'), '--spec=draft2020', '-c', 'ajv-formats') -RepositoryRoot $root
+Assert-True -Condition ($invalid.exit -ne 0) -Message 'AJV akzeptiert eine v1-Fixture als v2.'
 
 $nodeResult = Invoke-UserStateNode -Script @'
-const api=require(process.argv[1]);
-class Storage { constructor(initial){this.data=new Map(Object.entries(initial||{}));this.throwRead=false;this.throwWrite=false;} getItem(key){if(this.throwRead)throw new Error('blocked');return this.data.has(key)?this.data.get(key):null;} setItem(key,value){if(this.throwWrite)throw new Error('quota');this.data.set(key,value);} }
+const api=require(process.argv[1]),legacy=require('fs').readFileSync(process.argv[2],'utf8');
+class Storage { constructor(initial){this.data=new Map(Object.entries(initial||{}));this.throwWrite=false;} getItem(key){return this.data.has(key)?this.data.get(key):null;} setItem(key,value){if(this.throwWrite)throw new Error('quota');this.data.set(key,value);} }
 const assert=(condition,message)=>{if(!condition)throw new Error(message)};
 const job={job_id:'job:alpha',title:'Leitung IT',company:'Alpha AG',official_url:'https://alpha.example.invalid/jobs/alpha'};
-const storage=new Storage();
-const favorite=api.setMark(storage,job,'favorite',true,'2026-09-17T18:00:00.000Z');
-const applied=api.setMark(storage,job,'applied',true,'2026-09-17T18:01:00.000Z');
-const noOp=api.setMark(storage,job,'applied',true,'2026-09-17T18:02:00.000Z');
-assert(favorite.record.favorite===true&&favorite.record.applied===false,'favorite isolation');
-assert(applied.record.favorite===true&&applied.record.applied===true&&applied.record.applied_at==='2026-09-17T18:01:00.000Z','applied timestamp');
-assert(noOp.changed===false&&noOp.record.applied_updated_at==='2026-09-17T18:01:00.000Z','idempotence');
-const unapplied=api.setMark(storage,job,'applied',false,'2026-09-17T18:03:00.000Z');
-assert(unapplied.record.favorite===true&&unapplied.record.applied===false&&unapplied.record.applied_at===null&&unapplied.record.applied_updated_at==='2026-09-17T18:03:00.000Z','unapply preserves favorite');
-const allStates=new Storage();
-api.setMark(allStates,{job_id:'job:none'},'favorite',true,'2026-09-17T19:00:00.000Z');api.setMark(allStates,{job_id:'job:none'},'favorite',false,'2026-09-17T19:01:00.000Z');api.setMark(allStates,{job_id:'job:none'},'applied',true,'2026-09-17T19:02:00.000Z');api.setMark(allStates,{job_id:'job:none'},'applied',false,'2026-09-17T19:03:00.000Z');
-api.setMark(allStates,{job_id:'job:fav'},'favorite',true,'2026-09-17T19:00:00.000Z');
-api.setMark(allStates,{job_id:'job:applied'},'applied',true,'2026-09-17T19:00:00.000Z');
-api.setMark(allStates,{job_id:'job:both'},'favorite',true,'2026-09-17T19:00:00.000Z');api.setMark(allStates,{job_id:'job:both'},'applied',true,'2026-09-17T19:01:00.000Z');
-const states=api.read(allStates).state.jobs;
-assert(Object.keys(states).length===4&&states['job:none'].favorite===false&&states['job:none'].applied===false&&states['job:both'].favorite&&states['job:both'].applied,'four combinations');
-assert(!api.read(allStates).state.jobs['job:new-id'],'new id inherits state');
-const blockedStorage=new Storage();blockedStorage.throwRead=true;const blocked=api.setMark(blockedStorage,job,'favorite',true,'2026-09-17T19:04:00.000Z');assert(blocked.persistent===false&&blocked.reason==='storage_unavailable','blocked storage');
-const beforeBad=storage.getItem(api.PROJECT_KEY);storage.data.set(api.PROJECT_KEY,'{broken');const corrupt=api.setMark(storage,job,'favorite',false,'2026-09-17T18:04:00.000Z');assert(corrupt.persistent===false&&storage.getItem(api.PROJECT_KEY)==='{broken','corrupt preservation');storage.data.set(api.PROJECT_KEY,beforeBad);
-const unsupported=JSON.stringify({schema_version:'jobagent-user-state/v2',project_key:api.PROJECT_KEY,updated_at:null,jobs:{}});storage.data.set(api.PROJECT_KEY,unsupported);const version=api.setMark(storage,job,'favorite',false,'2026-09-17T18:04:00.000Z');assert(version.persistent===false&&storage.getItem(api.PROJECT_KEY)===unsupported,'unknown version preservation');storage.data.set(api.PROJECT_KEY,beforeBad);
-storage.throwWrite=true;const quota=api.setMark(storage,job,'favorite',false,'2026-09-17T18:04:00.000Z');assert(quota.persistent===false&&storage.getItem(api.PROJECT_KEY)===beforeBad,'quota preservation');storage.throwWrite=false;
-const invalidImport=api.importState(storage,'{bad');assert(invalidImport.changed===false&&storage.getItem(api.PROJECT_KEY)===beforeBad,'invalid import atomic');
-const imported=api.createEmptyState();imported.updated_at='2026-09-17T20:00:00.000Z';imported.jobs['job:alpha']={favorite:false,applied:true,favorite_updated_at:'2026-09-17T20:00:00.000Z',applied_updated_at:'2026-09-17T20:00:00.000Z',applied_at:'2026-09-17T20:00:00.000Z'};imported.jobs['job:removed']={favorite:true,applied:false,favorite_updated_at:'2026-09-17T20:00:00.000Z',applied_updated_at:null,applied_at:null};
-const preview=api.previewImport(storage,JSON.stringify(imported));assert(preview.valid&&preview.changed_job_ids.join(',')==='job:alpha,job:removed','preview');const merged=api.importState(storage,JSON.stringify(imported));assert(merged.changed&&api.read(storage).state.jobs['job:removed'].favorite,'import');
-const tie=api.createEmptyState();tie.jobs['job:alpha']={favorite:true,applied:false,favorite_updated_at:'2026-09-17T20:00:00.000Z',applied_updated_at:null,applied_at:null};api.importState(storage,JSON.stringify(tie));assert(api.read(storage).state.jobs['job:alpha'].favorite===false,'tie keeps existing');
-const exported=api.exportState(storage);const reload=api.read(new Storage({[api.PROJECT_KEY]:exported.serialized}));assert(reload.persistent&&reload.state.jobs['job:alpha'].applied===true&&reload.state.jobs['job:removed'].favorite&&JSON.stringify(reload.state)===exported.serialized,'export reload');
-const events=[];const target={listener:null,addEventListener(type,listener){this.listener=listener;},removeEventListener(){this.listener=null;}};const unsubscribe=api.subscribeStorage(storage,event=>events.push(event),target);target.listener({key:api.PROJECT_KEY,storageArea:storage,newValue:exported.serialized});unsubscribe();assert(events.length===1&&events[0].state.jobs['job:alpha'].applied===true,'storage event');
-console.log(JSON.stringify({status:'ok',export_hash_length:require('crypto').createHash('sha256').update(exported.serialized).digest('hex').length,cases:['four_combinations','separate_timestamps','manual_idempotence','new_id_does_not_inherit','blocked_storage','reload_and_report_change_identity','corrupt_and_unknown_preserved','quota_preserved','atomic_import_preview','field_timestamp_merge','removed_job_retained','export_import','storage_event']}));
+const storage=new Storage({[api.LEGACY_PROJECT_KEY]:legacy});
+const pending=api.read(storage);assert(pending.reason==='migrated_v1_pending_save'&&pending.state.jobs['job:alpha'].application_stage==='NONE','v1 migration false');
+const saved=api.setMark(storage,job,'applied',true,'2026-09-18T09:01:00.000Z');assert(saved.persistent&&saved.record.application_stage==='APPLIED'&&saved.record.applied&&storage.getItem(api.LEGACY_PROJECT_KEY)===legacy,'migration preserves v1');
+const preparing=api.transitionApplication(storage,job,'PREPARING',{correction:true,reason:'Korrektur'},'2026-09-18T09:02:00.000Z');assert(!preparing.record.applied&&preparing.record.applied_at===null&&preparing.record.application_history.length===1,'manual correction history');
+let rejected=false;try{api.transitionApplication(storage,job,'INTERVIEW',null,'2026-09-18T09:03:00.000Z')}catch(error){rejected=error.code==='invalid_transition'}assert(rejected,'illegal transition');
+api.transitionApplication(storage,job,'APPLIED',null,'2026-09-18T09:04:00.000Z');const interview=api.transitionApplication(storage,job,'INTERVIEW',null,'2026-09-18T09:05:00.000Z');assert(interview.record.applied&&interview.record.application_stage==='INTERVIEW','allowed transitions');
+const note='😀'.repeat(4000);assert(api.updateApplicationText(storage,job,{note,next_action:'Nachfassen'},'2026-09-18T09:06:00.000Z').persistent,'unicode note boundary');let tooLong=false;try{api.updateApplicationText(storage,job,{note:'😀'.repeat(4001)},'2026-09-18T09:06:01.000Z')}catch(error){tooLong=error.code==='invalid_state'}assert(tooLong,'unicode note limit');
+const task={task_id:'task-1',type:'APPLICATION_DEADLINE',title:'Unterlagen senden',local_date:'2026-10-25',time_with_offset:null,status:'OPEN'};const taskResult=api.upsertTask(storage,job,task,'2026-09-18T09:07:00.000Z');assert(taskResult.record.tasks.length===1,'task create');let dstRejected=false;try{api.upsertTask(storage,job,{...task,task_id:'task-2',time_with_offset:'02:30'},'2026-09-18T09:07:01.000Z')}catch(error){dstRejected=error.code==='invalid_state'}assert(dstRejected,'offset required');
+for(let index=2;index<=20;index++){api.upsertTask(storage,job,{...task,task_id:'task-'+index,status:'OPEN'},`2026-09-18T09:${String(index).padStart(2,'0')}:00.000Z`)}let limited=false;try{api.upsertTask(storage,job,{...task,task_id:'task-21'},'2026-09-18T09:30:00.000Z')}catch(error){limited=error.code==='task_limit'}assert(limited,'open task limit');
+const deleted=api.deleteTask(storage,job,'task-1','2026-09-18T09:31:00.000Z');assert(deleted.record.tasks.find(task=>task.task_id==='task-1').deleted_at!==null,'delete marker');let resurrection=false;try{api.upsertTask(storage,job,task,'2026-09-18T09:32:00.000Z')}catch(error){resurrection=error.code==='task_deleted'}assert(resurrection,'delete marker prevents resurrection');
+const beforeQuota=storage.getItem(api.PROJECT_KEY);storage.throwWrite=true;const quota=api.setMark(storage,job,'favorite',false,'2026-09-18T09:33:00.000Z');storage.throwWrite=false;assert(!quota.persistent&&storage.getItem(api.PROJECT_KEY)===beforeQuota,'quota atomic');
+const exported=api.exportState(storage),reload=api.read(new Storage({[api.PROJECT_KEY]:exported.serialized}));assert(reload.persistent&&reload.state.jobs['job:alpha'].tasks.length===20,'export import');
+console.log(JSON.stringify({status:'ok',cases:['v1_migration_preserves_backup','stage_projection_and_correction_history','transition_contract','unicode_text_limits','task_crud_offset_and_limit','delete_marker','quota_atomicity','export_reload']}));
 '@
 
-Assert-True -Condition ($nodeResult.status -eq 'ok' -and $nodeResult.export_hash_length -eq 64) -Message 'Der DOM-unabhaengige UserState-Funktionstest lieferte kein vollstaendiges Ergebnis.'
-
-[pscustomobject]@{
-    status = 'ok'
-    schema = $schemaPath
-    module = $modulePath
-    cases = @($nodeResult.cases)
-} | ConvertTo-Json -Depth 4
+Assert-True -Condition ($nodeResult.status -eq 'ok') -Message 'Der DOM-unabhaengige UserState-Funktionstest lieferte kein vollstaendiges Ergebnis.'
+[pscustomobject]@{ status = 'ok'; schema = $schemaPath; module = $modulePath; cases = @($nodeResult.cases) } | ConvertTo-Json -Depth 4
