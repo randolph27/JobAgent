@@ -624,7 +624,20 @@ try {
         Assert-True -Condition ([string]$visibility.visibility_hash_after_reset -eq '') -Message 'Ausblendung: Filter-Reset behaelt den Sichtbarkeitsmodus statt des Ansichtsdefaults.'
         $unexpectedExternalResources = @($visibility.external_resources | Where-Object { $_ -notmatch '^https?://gc\.kis\.v2\.scr\.kaspersky-labs\.com/' })
         Assert-True -Condition ($unexpectedExternalResources.Count -eq 0) -Message ('Ausblendung: Die lokale Bedienung hat externe Netzwerkressourcen geladen: ' + ($unexpectedExternalResources -join ', '))
-        $targetEvidence = [pscustomobject]@{ status = 'ok'; mode = 'visibility_only'; report_url = $reportUrl; case = $visibility; report_hash = $reportHashBefore; fixture_hash = $fixtureHashBefore }
+        Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'visibility=hidden')
+        foreach ($viewport in @($visualContract.viewports)) {
+            $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Ausblendungsverwaltung' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
+            Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Ausblendungsverwaltung $($viewport.width)x$($viewport.height)"
+            $geometryEvidence.Add([pscustomobject]@{ case_id = 'ja055_hidden_management'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
+        }
+        $visibilityScreenshot = Join-Path $artifactRoot 'JA-055-hidden-management-390.png'
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'resize', 390, 844) | Out-Null
+        $managementScreenshotState = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Ausblendung: mobile Verwaltungsansicht vorbereiten' -Script '() => { const filters=document.querySelector(".filter-region"),management=document.getElementById("jobagent-visibility-management"); if(filters)filters.removeAttribute("open"); if(!management)throw new Error("Ausblendungsverwaltung fehlt"); return JSON.stringify({filter_closed:!filters||!filters.open}); }'
+        Assert-True -Condition ([bool]$managementScreenshotState.filter_closed) -Message 'Ausblendung: Die mobile Filteransicht ist nicht schliessbar.'
+        Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'screenshot', '#jobagent-visibility-management', '--filename', $visibilityScreenshot) | Out-Null
+        Assert-True -Condition (Test-Path -LiteralPath $visibilityScreenshot) -Message 'Ausblendung: Mobiler Verwaltungs-Screenshot fehlt.'
+        Assert-True -Condition ((Get-Item -LiteralPath $visibilityScreenshot).Length -gt 1000) -Message 'Ausblendung: Mobiler Verwaltungs-Screenshot ist unplausibel klein.'
+        $targetEvidence = [pscustomobject]@{ status = 'ok'; mode = 'visibility_only'; report_url = $reportUrl; case = $visibility; geometry = @($geometryEvidence); screenshots = @($visibilityScreenshot); report_hash = $reportHashBefore; fixture_hash = $fixtureHashBefore }
         Write-Utf8File -Path $evidencePath -Content ($targetEvidence | ConvertTo-Json -Depth 20)
         $targetEvidence | ConvertTo-Json -Depth 20
         return

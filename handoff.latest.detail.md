@@ -15,6 +15,14 @@ Stand: 2026-09-18. Der zugehoerige maschinelle Zustand steht in `handoff.latest.
 
 ## Laufender Punkt: TD-0082 / JA-055
 
+### Aktualisierung 2026-09-18 15:10+02:00
+
+- Ausführlicher Einstieg für den nächsten Chat: `docs/handoffs/2026-09-18-ja055-continuation.md`.
+- Die Sichtbarkeitsverwaltung wird jetzt zusätzlich an 390×844, 800×1024, 1366×768 und 1920×1080 funktional auditiert. Der isolierte Browserlauf prüft horizontalen Overflow, Überlappungen, mindestens 44 CSS-Pixel hohe Controls und abgeschnittenen Text in der Verwaltungsansicht.
+- Neu erzeugte Evidence: `logs/jobagent/JA-055/visibility-cases.json`, `doc/roadmap-screenshots/JA-055-hidden-management-390.png` und `docs/reviews/JA-055-acceptance.md`. Der Browserfall belegt 262 sichtbare sowie 2 ausgeschlossene Stellen, Grund/Text, Rückgängig, Arbeitgebervorrang, lokalen Reset und keine fachlichen Bediennetzwerkzugriffe.
+- Grün: `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly`.
+- Offen bleibt allein der geforderte bestehende Daily-Run-Funktionstest: `Test-JobAgentDailyRun.ps1` beendet sich im Akquisepfad nicht innerhalb des beobachteten Zeitfensters. Der letzte Trace befand sich in der Kandidatenaufbereitung; daraus wurde keine fachliche Aussage abgeleitet. JA-055 bleibt offen. Ein nicht angefragter Supertest gilt als erledigt und ist kein Restpunkt.
+
 ### Aktualisierung 2026-09-18 14:49+02:00
 
 - Aktiver Punkt bleibt `TD-0082` / `JA-055`; keine Roadmap-Rotation. Die Kernfunktion ist umgesetzt, die vollständige Abnahme und die geforderten Evidence-Artefakte fehlen noch.
@@ -37,21 +45,21 @@ Stand: 2026-09-18. Der zugehoerige maschinelle Zustand steht in `handoff.latest.
 - `tests/fixtures/jobagent/hidden-jobs.json`, `tests/Test-JobAgentUserState.ps1` und `tests/Test-JobAgentReport.ps1` decken ID-Trennung, Vorrang, Wiederherstellung, Textgrenze, Import gegen Wiederbelebung aelterer Werte, Schema und gerenderte Bedienelemente ab.
 - `importState` persistiert jetzt auch einen Import, der ausschliesslich geaenderte Ausblendungen enthaelt. Zuvor wurde dieser Fall wegen einer Pruefung nur auf `changed_job_ids` nicht geschrieben.
 - Die Ausblendungsbedienung ergaenzt Grundauswahl, maximal 500 Codepoints Erlaeuterung, global erreichbares „Rueckgaengig“ und einen Firmenhinweis mit Anzahl erfasster/offen ausgeblendeter Stellen. Ausblendgruende bleiben im Local Storage; sie werden nicht in URL oder Reportdaten geschrieben.
-- `tests/Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly` ist als gezielter Browserfall angelegt. Er prueft Grund/Text, Rueckgaengig, Firmenvorrang, einzelne Wiederherstellung, Reset und externe Netzwerkanfragen. Der Lauf hat im Tool-Runner jedoch nicht innerhalb der Laufzeit abgeschlossen; es liegt kein gruener Browsernachweis vor.
+- `tests/Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly` ist als gezielter Browserfall angelegt. Er prueft Grund/Text, Rueckgaengig, Firmenvorrang, einzelne Wiederherstellung, Reset, externe Netzwerkanfragen und die vier Pflichtviewports; der aktuelle Lauf ist gruen.
 
 ### Verifiziert
 
 - `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` -> Exit `0`.
 - `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly` -> Exit `0`.
 - `./ci.cmd devserver-status` -> Exit `0`, vorhandener CI-verwalteter Devserver auf Port 8500.
 - Kein Supertest ausgefuehrt; laut Nutzerauftrag ist das kein Abschlussblocker.
 
 ### Konkreter Fortsetzungsschnitt
 
-1. Den Browserfall `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly` diagnostizieren. Der letzte Lauf blieb im Playwright-Abschnitt haengen und wurde beendet; zuerst erzeugte `logs/jobagent/QA-004/qa004-*` und Browserkonsolen read-only auswerten. Keine unbestaetigte Gruenmeldung daraus ableiten.
-2. Sichtbarkeitsresolver vervollstaendigen: fuer Job/Firma/Job+Firma/keine Ausblendung in `visible`, `all`, `hidden` exakte Distinct-IDs, lokale Favoriten/Bewerbungen, Reset, Reload, Speicherfehler, Import und neue Stelle derselben ausgeblendeten Firma nachweisen. Gleiche Namen mit unterschiedlichen IDs muessen getrennt bleiben.
-3. Die Kopfzeile des gemeinsamen Filterresolvers um exakte Werte „X sichtbare Treffer, Y durch Ausblendung ausgeschlossen“ erweitern. Y darf einen Job mit eigener und Firmenausblendung nur einmal zählen und muss weitere Filter bereits berücksichtigen.
-4. Nach gruenem fokussiertem Browserfall die vier Viewports 1920/1366/800/390 pruefen, Evidence, Matrix und Funktionsinventar aktualisieren. Erst bei belegter Erfuellung Roadmap/Todo rotieren; sonst `TD-0082` offen lassen.
+1. Den bestehenden Akquisepfad von `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` isolieren. Der Lauf blieb bei der Kandidatenaufbereitung CPU-gebunden; den konkreten Teiltest mit begrenzter Fixture reproduzieren, bevor ein Produkt- oder Testfix erfolgt.
+2. Danach die noch offenen JA-055-Fälle für alle Sichtbarkeitsmodi als feste Wahrheitstabelle nachziehen: Job/Firma/Job+Firma/keine Ausblendung, lokale Favoriten/Bewerbungen, Reload, Speicherfehler, Import und neue Stelle derselben Firma. Gleiche Namen mit unterschiedlichen IDs bleiben getrennt.
+3. Testmatrix und Funktionsinventar erst nach einem vollständigen, reproduzierbar grünen Daily-Run ergänzen. Erst dann Roadmap/Todo rotieren und den Supertest ausführen.
 
 ## Betriebsregeln und bekannte Restlage
 

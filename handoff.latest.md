@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-18T14:54:16.450+02:00
+Stand: 2026-09-18T15:18:57.703+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-18T14:54:16.450+02:00
 - Status: `open`
 - Ziel: M2 – Stellenboersen-Oberflaeche: JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden #comment: Wiederkehrende irrelevante Treffer sollen die Suche nicht fuellen, waehrend Erfassung, Firmenkern und Bewerbungsdaten erhalten bleiben.
 - Branch: `master`
-- HEAD: `dded6d377c5c`
+- HEAD: `f0651abf4ea1`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -19,7 +19,6 @@ Stand: 2026-09-18T14:54:16.450+02:00
 - `handoff.latest.detail.md`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `src/JobAgent.Report.psm1`
 - `tests/Test-JobAgentUiBrowserAudit.ps1`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
