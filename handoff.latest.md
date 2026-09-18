@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-18T08:39:57.589+02:00
+Stand: 2026-09-18T08:54:41.435+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-18T08:39:57.589+02:00
 - Status: `open`
 - Ziel: Keine aktive Roadmap-Aufgabe.
 - Branch: `master`
-- HEAD: `c6c0f0d261a2`
+- HEAD: `92441e14f5f8`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,9 +16,11 @@ Stand: 2026-09-18T08:39:57.589+02:00
 
 ## Versionierte Aenderungen
 
+- `handoff.latest.json`
 - `handoff.latest.md`
 - `src/JobAgent.Report.psm1`
 - `tests/Test-JobAgentUiBrowserAudit.ps1`
+- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
@@ -30,22 +32,31 @@ Stand: 2026-09-18T08:39:57.589+02:00
 
 M2 – Stellenboersen-Oberflaeche: JA-048 Stellendetails und zwei eindeutig bedienbare Sterne integrieren #comment: Jede Stelle muss vollstaendig pruefbar, separat merkbar und manuell als schon beworben markierbar sein.
 
-## Fachlicher Uebergabestand JA-048
+## Fortsetzungsstand JA-048 / TD-0076
 
-- `src/JobAgent.Report.psm1` hat zwei getrennte Schalter fuer Favorit und Bewerbungsmarkierung auf Karte und Detailansicht. Beide nutzen den browserlokalen v1-Store, haben eigene Texte und `aria-pressed`, verhindern Navigation und zeigen ein Speicherergebnis.
-- Ein Jobtitel oeffnet die lokale Detailansicht via `#job=<job_id>` und behaelt Filterzustand. Die Detailansicht zeigt Firma, Ort, Arbeitsbedingungen, Zeit-/Aktualitaetsdaten, Beschreibung, Anforderungen sowie getrennte Original-/Firmenlinks. Der Rueckweg setzt den Fokus auf den zuvor geoeffneten Titel.
-- Neu in diesem Commit: Unbekannte `job`-IDs bleiben im Hash und rendern den sicheren Leerzustand `Stellendetail nicht verfuegbar`; die Ruecktaste entfernt nur `job`. Kein Fallback auf einen beliebigen aktiven Job.
-- Neu in diesem Commit: Markierte Jobs, die im aktiven offenen Report fehlen, bleiben als lokale Referenz erhalten. Bei Favoriten- oder Bewerbungsfilter erscheinen sie getrennt als historische Karten mit dem Status `Nicht mehr im aktuellen offenen Stellenbestand`; sie zaehlen nicht zum offenen Bestand und beide Markierungen bleiben getrennt bedienbar.
+### Implementierung
 
-## Tests und offene Nachweise
+- `src/JobAgent.Report.psm1` rendert fuer jede Stellenkarte und Detailansicht zwei getrennte Schalter: `favorite` und `applied`. Beide schreiben ausschliesslich in den browserlokalen v1-Store, besitzen getrennte Texte und `aria-pressed`-Werte und unterbinden Navigation.
+- Nach jeder Markierungsaktion wird die Ansicht neu gerendert. Eine jobbezogene Statusmeldung bleibt dabei im aktuellen Browserdokument bestehen. Damit werden Liste, Detailansicht, Filter und Schalterzustand gemeinsam aktualisiert.
+- Die Detailansicht verwendet `#job=<job_id>`, bewahrt Filterparameter, zeigt sichere Leeransicht bei unbekannter ID und setzt beim Rueckweg den Fokus auf den zuvor geoeffneten Stellentitel.
+- Markierte, im offenen Report nicht mehr vorhandene Jobs bleiben als lokale historische Referenz in Favoriten- und Bewerbungsansicht sichtbar. Sie tragen den Status `Nicht mehr im aktuellen offenen Stellenbestand` und zaehlen nicht als offene Stellen.
 
-- Gruen: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1`.
-- Gruen: `git diff --check`.
-- `tests/Test-JobAgentUiBrowserAudit.ps1` enthaelt neue Assertions fuer unbekannte Detail-ID, Hash-Erhalt/Rueckkehr und einen historischen zugleich favorisierten/beworbenen Job.
-- Der vollstaendige Browser- und Viewportlauf ist noch nicht als Erfolg belegt. Zwei manuell gestartete Browserlaeufe hinterliessen nicht terminierende Child-Prozesse und wurden beendet; diese Laeufe gelten nicht als Testresultat. Vor Wiederholung `./ci.cmd devserver-status` verwenden, den vorhandenen Listener auf 8500 nutzen und nur eine Testinstanz starten.
-- Noch ergaenzen: Browserassertions fuer die unabhängigen Karten-/Detail-Schalter, ihre gegenseitige Nichtbeeinflussung und den Rueckfokus. Danach `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` ausfuehren.
-- JA-048/TD-0076 bleibt offen und wird nicht rotiert. Gemäss Nutzerauftrag ist kein Supertest erforderlich.
+### Bereits verifiziert
 
-## Bekannte externe Einschränkung
+- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit `0`.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` -> Exit `0`.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`.
+- `git diff --check` -> Exit `0` vor dem Commit.
 
-- Der Route-Check meldet elf vorbestehende Funde ausschliesslich in unveraenderten Sonar-JRE-Lizenzdateien unter `.ci/tools/sonar/**/jre/legal/**`. Diese Dateien nicht loeschen oder umschreiben; TD-0085 behandelt die CI-Abweichung separat.
+### Browser-/Viewport-Blocker
+
+- `tests/Test-JobAgentUiBrowserAudit.ps1` enthaelt neue Assertions fuer Detail- und Kartenmarkierung, getrennte Zustandsfelder, fehlende Navigation, persistente Statusmeldung, Hash-Erhalt und Rueckfokus.
+- Drei komplette Browseraudit-Starts erreichten keinen Abschluss und hinterliessen jeweils vom Test gestartete Unterprozesse. Beim dritten Versuch wurde die eigene Prozessstruktur nach rund sieben Minuten beendet; daraus resultiert kein gueltiger Testbefund.
+- Der vorhandene Devserver auf Port 8500 war dabei erreichbar: `./ci.cmd devserver-status` meldete Listener-PID `23256`, `managed=False`. Dieser fremde Listener wurde nicht beendet.
+- Vor einer erneuten Abnahme den Cleanup-Pfad in `tests/JobAgent.PlaywrightEnvironment.psm1` beziehungsweise die Prozessbeendigung der Playwright-CLI isoliert reproduzieren. Erst danach genau eine Instanz von `Test-JobAgentUiBrowserAudit.ps1` ausfuehren, anschliessend `Test-JobAgentHtmlViewportAudit.ps1`.
+
+### Planungs- und Git-Status
+
+- JA-048 / TD-0076 bleibt offen; die erforderlichen Browser- und Viewportnachweise fehlen. Der Punkt wurde nicht aus `Roadmap.md` rotiert.
+- Kein Supertest wurde angefragt; fuer vollstaendig abgenommene Roadmap-Punkte gilt er nach Nutzerregel als erledigt. Diese Regel ersetzt nicht die noch fehlenden spezifischen Browser- und Viewporttests von JA-048.
+- TD-0085 bleibt ein separater CI-Driftpunkt. Die Route-Verletzungen stammen unveraendert aus Sonar-JRE-Lizenzdateien unter `.ci/tools/sonar/**/jre/legal/**`; nicht loeschen oder umschreiben.
