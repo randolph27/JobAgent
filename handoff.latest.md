@@ -1,55 +1,40 @@
 # Handoff latest
 
-Stand: 2026-09-18T11:26:00.434+02:00
+Stand: 2026-09-18T12:01:03.210+02:00
 
-## Zustand
+## Aktiver Arbeitspunkt
 
-- Active: `TD-0080`
-- Status: `in-progress`
-- Ziel: M2 – Stellenboersen-Oberflaeche: JA-052 Bewerbungsuebersicht mit Status, Notizen und Wiedervorlagen erweitern #comment: Persoenliche Bewerbungsarbeit braucht einen konsistenten Verlauf und Fristen, waehrend Bewerbungsstern und Detailstatus dieselbe Wahrheit darstellen.
-- Branch: `master`
-- HEAD: `bfe8cd0a539d`
-- Upstream: `origin/master`
-- Ahead/Behind: `0/0`
-- Worktree: `dirty`
-- Route: `False`
+- Active: `TD-0080` / Roadmap `JA-052`.
+- Status: `in-progress`; nicht rotieren. Der geforderte Browser-Audit hat noch keinen erfolgreichen Komplettabschluss.
+- Branch: `master`; Upstream: `origin/master`.
+- Supertest: nicht angefragt; nach Nutzerregel für diesen Übergang nicht ausstehend.
 
-## Versionierte Aenderungen
+## Umgesetzter Stand in JA-052
 
-- `docs/reviews/JA-052-work-status.md`
-- `handoff.latest.md`
-- `src/JobAgent.Report.psm1`
-- `todo.checkpoint.json`
-- `todo.history.digest.json`
-- `todo.master.index.json`
-- `todo.state.json`
+- Der Report erzeugt im Tab `Bewerbungen` lokale, barrierefrei bezeichnete Filter für Notiz/Aktion/Stelle, Bewerbungsstufe, Fälligkeit und Sortierung.
+- Fälligkeitsfilter: alle Termine, überfällig, innerhalb von sieben Tagen, mit offenem Termin und ohne offenen Termin. Referenz ist ausschließlich `reference_time` des angezeigten Reports; es gibt keinen Browserzeit- oder Netzwerkkontakt.
+- Sortierung: offenes lokales Datum, danach Task-ID, danach Stellen-ID; alternativ Status/Stellen-ID oder Stellen-ID.
+- Die Karten zeigen Status, nächste Aktion, Notiz sowie offene Termine mit lokalem Datum und optionaler Uhrzeit mit Offset.
+- Der Wechsel zurück zu Stellen oder Firmen blendet den Bewerbungs-Tab aus und setzt dessen `aria-selected` auf `false`. Vorher konnten Stellen- und Bewerbungs-Panel gleichzeitig sichtbar sein.
+- Die Persistenz bleibt ausschließlich `localStorage` über `JobAgentUserState`; Reportstore, URL und technische Logs bekommen keine persönlichen Daten.
 
-## Verifikation
+## Teststand
 
-- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`
+- Grün: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1`.
+- Grün: `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1`.
+- `tests\Test-JobAgentUiBrowserAudit.ps1` enthält einen neuen isolierten Fall `ja052_application_overview_local_note_stage_due_and_sort_filters`. Er erzeugt eine lokale Interview-Stufe, Notiz, Folgeaufgabe und Termin mit Offset; prüft Notizsuche, Stufen- und Fälligkeitsfilter, Sortierung sowie keine während der Filteraktion gestartete Ressource.
+- Der vollständige `Test-JobAgentUiBrowserAudit.ps1`-Lauf blieb nach dem neuen Fall in einem bestehenden langen Playwright-Abschnitt ohne weitere Artefaktfortschreibung hängen und wurde kontrolliert beendet. Er ist deshalb `not-run`/nicht grün, nicht als Fehler der neuen Assertions zu werten. Für die Fortsetzung zuerst denselben Test erneut in isoliertem Hintergrundprofil starten und bei erneutem Hängen den letzten Playwright-CLI-Aufruf unter `logs/jobagent/QA-004/<run-id>/playwright/.playwright-cli/` bestimmen.
+- Der Audit-Helper berücksichtigt nun geschlossene `<details>`-Inhalte nicht als sichtbare Controls. Das beseitigt falsche mobile Overlap-Befunde aus nicht dargestellten Bewerbungseditoren. Der A11y-Helper akzeptiert sichtbare `aria-label`-Beschriftungen zusätzlich zu nativen Labels.
 
-## Naechster Anker
+## Nächste konkrete Schritte
 
-Isolierten Browserprofiltest fuer Statuswechsel, Notiz- und Termin-CRUD erweitern; danach Bewerbungsuebersicht um Stufen-/Faelligkeitsfilter und Sortierung abnehmen.
+1. `./ci.cmd devserver-status` prüfen; falls nicht erreichbar, ausschließlich über `./ci.cmd devserver-start` im Hintergrund starten.
+2. `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` im isolierten Hintergrundprofil ausführen. Kein Supertest erforderlich.
+3. Bei Hängen: letzten CLI-Befehl und zugehörige Momentaufnahme im aktuellen `logs/jobagent/QA-004/<run-id>/playwright/.playwright-cli/` vergleichen; nur den betroffenen Browserpfad gezielt ausführen. Keine generische Lockerung von Assertions.
+4. Nach grünem Browser-Audit: `docs/reviews/JA-052-acceptance.md` und `logs/jobagent/JA-052/application-cases.json` mit Testbefehl, Exitcode, Reportreferenz, Fixture-IDs und lokalen Filterergebnissen erzeugen; dann Roadmap/Todo/Checkpoint synchronisieren und `JA-052` erst bei vollständig belegten Akzeptanzkriterien rotieren.
+5. Danach `TD-0081` / `JA-053` beginnen: fachliche Stellenchronik ausschließlich aus Snapshots und Change-Events; technische Quellenfehler dürfen kein Stellenende behaupten.
 
-## Detaillierter Arbeitsstand fuer den Folgeagenten
+## Unabhängige offene Punkte
 
-### Aktiver Roadmap-Punkt: JA-052 / TD-0080
-
-- Die browserlokale V2-Persistenz in `html/jobagent/assets/jobboard-state.js` ist vorhanden und durch `tests/Test-JobAgentUserState.ps1` abgedeckt: V1-Migration mit erhaltener Sicherung, Statusprojektion, Korrekturhistorie, Textgrenzen, Termin-CRUD, Offsetpflicht, Loeschmarker, Quota-Atomaritaet sowie Export/Import.
-- `src/JobAgent.Report.psm1` erzeugt nun in Stellenliste und Stellendetail einen lokalen Bearbeitungsbereich fuer Status, Notiz, naechste Aktion und Termin-CRUD. Die Formulare schreiben ausschliesslich in `localStorage`; sie erzeugen keine Netzwerkanfragen und veraendern keinen Reportstore.
-- Ein regulaerer Statuswechsel nutzt den State-Vertrag direkt. Nicht regulaere Wechsel zeigen vor dem Speichern eine Bestaetigung und schreiben die vorhandene Korrekturhistorie. Das Zuruecksetzen eines fortgeschrittenen Status per Bewerbungsmarkierung verlangt ebenfalls eine Bestaetigung; Notiz, Termine und Chronik bleiben erhalten.
-- Die Bewerbungsregisterkarte zeigt bisher nur die vorhandene Anzeige. Es fehlen noch Stufen- und Faelligkeitsfilter, Sortierung nach offenem Termin und danach Job-/Task-ID sowie lokale Notizsuche.
-- `Test-JobAgentUiBrowserAudit.ps1` wurde nach der UI-Aenderung angestossen, lieferte innerhalb des Tool-Zeitlimits jedoch keinen Abschlussnachweis. Dieser Lauf ist nicht als gruen zu behandeln. Zuerst isolierte V2-Browserfaelle in diesem Test ergänzen: erlaubter und korrigierter Stufenwechsel, beide Sternrichtungen, Notiz 4000/4001, Termin anlegen/erledigen/loeschen, Offsetfehler, Quota, Speicherfehler ohne Datenverlust, Reload und kein Bediennetzwerk.
-- Danach die Bewerbungsansicht vervollstaendigen, gezielt `Test-JobAgentUiBrowserAudit.ps1`, `Test-JobAgentUserState.ps1` und `Test-JobAgentReport.ps1` ausfuehren, Evidence unter `docs/reviews/JA-052-acceptance.md` und `logs/jobagent/JA-052/application-cases.json` erzeugen und erst dann JA-052 rotieren.
-
-### Reihenfolge danach
-
-1. JA-053 / TD-0081: fachliche Stellenchronik auf vorhandenen Snapshots und Change-Events.
-2. JA-055 / TD-0082: reversible lokale Ausblendung auf dem gemeinsamen V2-Store.
-3. JA-049 / TD-0077: atomare stabile HTML-Publikation.
-4. JA-054 / TD-0083: Kalender auf Zeitprojektion und persoenlichen Terminen.
-5. JA-056 / TD-0084: gespeicherte Suchen mit generationengebundener Sichtung.
-6. JA-050 / TD-0078: integrierte Gesamtabnahme.
-
-`TD-0085` bleibt ein separater CI-Driftpunkt. Der letzte STP-Nachweis meldet bekannte Route-Verstoesse ausschliesslich in gebuendelten Sonar-JRE-Lizenzdateien unter `.ci/tools/sonar/...`; diese Dateien nicht ohne gezielte CI-Driftanalyse aendern.
+- `TD-0085` bleibt offen. STP meldet bekannte Route-Verstöße ausschließlich in gebündelten Sonar-JRE-Lizenzdateien unter `.ci/tools/sonar/...`; keine Änderung ohne eigene CI-Driftanalyse.
+- Reihenfolge nach JA-052: `JA-053`, `JA-055`, `JA-049`, `JA-054`, `JA-056`, `JA-050`.
