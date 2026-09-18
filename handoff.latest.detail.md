@@ -68,3 +68,23 @@ Empfohlene Reihenfolge:
 ## Abschlussprotokoll dieses Standes
 
 `./ci.cmd stp` wurde ausgefuehrt. Todo, Roadmap und Handoff zeigen jetzt `TD-0083` als aktiven Punkt. Vor dem naechsten Eingriff zuerst die Kalenderfixture und ihre fachlichen Orakel festlegen; keine globale Bereinigung oder erneute Publikationsarchitektur beginnen.
+
+## Fortschritt JA-054 (2026-09-18)
+
+Die Kalenderprojektion ist jetzt Teil von `New-JobAgentDailyReport`: Sie liefert alle gespeicherten Versuche, die aktuellen `next_scan_at`-Planungen pro Firma, distinct `JOB_CREATED`-IDs je Lauf und eine feste `Europe/Berlin`-Reportreferenz. `html/jobagent/assets/jobboard-calendar.js` liest diese Projektion sowie lokale Aufgaben und stellt Monat, Woche und die mobile Agenda unter `#view=calendar` dar. Abrufe, Planungen und persoenliche Termine bleiben getrennt; Hashnavigation und Filter starten keine Abfrage.
+
+Neu vorhanden: `tests/Test-JobAgentCalendar.ps1`, `tests/fixtures/jobagent/calendar.json`, `docs/reviews/JA-054-acceptance.md` und `logs/jobagent/JA-054/calendar-cases.json`.
+
+Bestanden: `node --check .\\html\\jobagent\\assets\\jobboard-calendar.js`, `pwsh -NoProfile -File .\\tests\\Test-JobAgentCalendar.ps1`, `pwsh -NoProfile -File .\\tests\\Test-JobAgentReport.ps1`, `pwsh -NoProfile -File .\\tests\\Test-JobAgentUserState.ps1` und `git diff --check`.
+
+Offen bleiben der isolierte Kalender-Browser-/Viewport-Audit, Sommerzeit- und 50/51-Ereignisfaelle sowie Screenshots. `TD-0083` bleibt deshalb `in-progress`; Roadmap und Todo werden noch nicht abgeschlossen oder rotiert.
+
+## Uebergabe an den naechsten Chat
+
+1. Bei `TD-0083` bleiben und keine Roadmap-Rotation vornehmen. `JA-054` ist fachlich noch nicht vollstaendig; die Nutzerregel macht einen nicht angeforderten Supertest nur dann erledigt, wenn die sonstigen Akzeptanzkriterien belegt sind.
+2. Die vorhandene Projektion pruefen und erweitern: 42 Monatsfelder/Montagstart, sieben Wochenfelder, Februar 2028, Dez/Jan, die zwei lokalen 02:30-Zeitpunkte am 2026-10-25 mit unterschiedlichen Offsets, laufend-zu-fertig ohne Duplikat, 0/50/51 Tagesereignisse, fehlende/verschobene Planung sowie offene/erledigte lokale Aufgaben.
+3. Einen isolierten Playwright-/Browserfall fuer `#view=calendar` auf einer Fixture ausfuehren. Nachweisen: Reload/Zurueck/Vor, Pfeiltasten/Home/End/Enter, keine externen oder Bediennetzwerkanfragen, Linkziele, 50er-Seitenwechsel und Fokus. Die bisherigen Aufrufe von `Test-JobAgentUiBrowserAudit.ps1 -FixtureOnly` lieferten innerhalb des Tool-Zeitfensters keinen Abschluss; daraus folgt kein Testergebnis.
+4. Danach `Test-JobAgentHtmlViewportAudit.ps1` oder einen spezifischen Kalender-Viewporttest fuer 1920x1080, 1366x900, 800x1024 und 390x844 ausfuehren; Screenshots nur bei bestandenem Audit unter den in Roadmap.md vorgesehenen Pfaden ablegen.
+5. Bestehen alle spezifischen Tests, `JA-054` in Roadmap/Todo abschliessen und nach `Roadmap_archive.md` rotieren. Ein Supertest ist nicht erneut erforderlich, solange er nicht ausdruecklich angefordert wird. Erst dann `TD-0084` / `JA-056` aktivieren.
+
+Der `stp`-Routefehler ist weiterhin ausschliesslich ein gebuendelter Sonar-JRE-Lizenzbestand in `.ci/tools/sonar` (Steuerzeichen bzw. offene Markdown-Fence). Nicht im Rahmen von JA-054 aendern.
