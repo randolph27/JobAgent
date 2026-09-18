@@ -58,6 +58,7 @@ Die detaillierten Vorbedingungen, Eingaben, Sollwerte und Negativfälle sind mas
 | JA-054-Kalender | `tests/Test-JobAgentCalendar.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCalendar.ps1` | nein | Retry- und Tagesprojektion, geplante Pruefung, stabile Reportreferenz und HTML-Vertrag |
 | JA-054-Kalender-Browser | `tests/Test-JobAgentCalendarBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCalendarBrowserAudit.ps1` | nein | Lokale Kalenderbedienung, Tastaturpfad, vier Viewports und kein Produktnetzwerk |
 | JA-056 | `tests/Test-JobAgentSavedSearches.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentSavedSearches.ps1` | ja | Baseline, generationengebundene Treffer, expliziter Sichtungsstand, kanonischer Filterresolver |
+| JA-050 | `tests/Test-JobAgentAcceptance.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentAcceptance.ps1` | nein | Isolierter Wachstumsworkflow mit Quellenfehler, Schliessung, browserlokalen Markierungen, Ausblendung und Sichtungsstand |
 | UI-001 | `tests/Test-JobAgentUiBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUiBrowserAudit.ps1` | ja | Lokale Browser-Fixture mit 251 Firmen/256 Stellen, Filterkombinationen, UNKNOWN, Umlautsuche, Pagination, Reset, Ruecknavigation, Store- und Request-Invarianz sowie 390/800/1366/1920 px |
 
 ## Live-Lane

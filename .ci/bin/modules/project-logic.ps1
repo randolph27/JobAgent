@@ -189,6 +189,7 @@ function Test-MarkdownRenderFiles() {
     ".git",
     ".gradle",
     ".sonarqube",
+    ".ci/tools",
     "build",
     "node_modules",
     "apk"

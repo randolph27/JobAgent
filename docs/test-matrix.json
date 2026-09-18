@@ -207,6 +207,26 @@
       "owner": "JA-056"
     },
     {
+      "case_id": "JA050-ACCEPTANCE-001",
+      "function_refs": [
+        "src\\JobAgent.DailyRun.psm1::Invoke-JobAgentDailyRun",
+        "src\\JobAgent.Persistence.psm1::Mark-JobAgentMissingJobs",
+        "src\\JobAgent.StatusMachine.psm1::Invoke-JobAgentStatusMachine"
+      ],
+      "fixture": "isolated temporary JA-050 project root",
+      "input": "A/B/D first run; A update, B source failure, C addition and D complete empty second run",
+      "expected": "four firms and four historical jobs, three open jobs, preserved browser-local marks, a hidden C1 and an explicitly seen saved-search generation",
+      "negative_case": "a successful empty source closes A2, a failed source retains B1, and local hiding never removes C1 from the canonical store",
+      "test_file": "tests\\Test-JobAgentAcceptance.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": [
+        "JA049-PUBLICATION-001",
+        "JA056-SAVED-SEARCH-001"
+      ],
+      "status": "done",
+      "owner": "JA-050"
+    },
+    {
       "case_id": "QA001-AGGREGATOR-001",
       "function_refs": ["src\\JobAgent.Report.psm1::ConvertTo-JobAgentDailyReportHtml"],
       "fixture": "tests\\fixtures\\jobagent\\valid.json",
@@ -709,7 +729,7 @@
       "title": "Node-24-kompatible projektlokale Playwright-CLI-Laufzeit",
       "test_file": "tests/Test-JobAgentPlaywrightCliRuntime.ps1",
       "command": "pwsh -NoProfile -File tests\\Test-JobAgentPlaywrightCliRuntime.ps1",
-      "status": "planned",
+      "status": "done",
       "include_in_supertest": false,
       "lane": "contract",
       "coverage": ["projektlokales open/snapshot/close", "Chrome-Start mit explizitem Sandbox-Argument", "Umgebungsrestauration", "Cleanup"]
@@ -801,6 +821,17 @@
       "include_in_supertest": true,
       "lane": "deterministic-fixture",
       "coverage": ["Baseline beim Speichern", "generationengebundene neue und geaenderte Treffer", "explizites Als-gesehen-Markieren", "Reportgeneration und kanonischer Filterresolver"]
+    },
+    {
+      "roadmap_id": "JA-050",
+      "supertest_order": 40,
+      "title": "Deterministische Stellenworkflow-Gesamtabnahme",
+      "test_file": "tests/Test-JobAgentAcceptance.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentAcceptance.ps1",
+      "status": "done",
+      "include_in_supertest": false,
+      "lane": "deterministic-fixture",
+      "coverage": ["Wachstum 3 auf 4 Firmen und Stellen", "A1-Update und A2-Schliessung", "B-Quellenfehler erhaelt B1", "lokale Markierungen und Nachfassaufgabe", "Ausblendung, Suchvergleich und explizite Sichtung"]
     }
   ]
 }

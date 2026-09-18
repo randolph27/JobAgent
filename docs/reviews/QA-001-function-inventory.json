@@ -7671,6 +7671,10 @@
   ],
   "test_catalog": [
     {
+      "test_file": "tests\\Test-JobAgentAcceptance.ps1",
+      "category": "function"
+    },
+    {
       "test_file": "tests\\Test-JobAgentCalendar.ps1",
       "category": "function"
     },
