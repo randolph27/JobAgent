@@ -2,7 +2,6 @@
 
 Active: _(none)_
 
-- [open] TD-0076 M2 – Stellenboersen-Oberflaeche: JA-048 Stellendetails und zwei eindeutig bedienbare Sterne integrieren #comment: Jede Stelle muss vollstaendig pruefbar, separat merkbar und manuell als schon beworben markierbar sein.
 - [open] TD-0080 M2 – Stellenboersen-Oberflaeche: JA-052 Bewerbungsuebersicht mit Status, Notizen und Wiedervorlagen erweitern #comment: Persoenliche Bewerbungsarbeit braucht einen konsistenten Verlauf und Fristen, waehrend Bewerbungsstern und Detailstatus dieselbe Wahrheit darstellen.
 - [open] TD-0081 M2 – Stellenboersen-Oberflaeche: JA-053 Fachliche Aenderungen einer Stelle als belegte Chronik anzeigen #comment: Eine erneute Erfassung ist keine neue Stelle und eine technische Quellenstoerung kein belegtes Ende einer Ausschreibung.
 - [open] TD-0082 M2 – Stellenboersen-Oberflaeche: JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden #comment: Wiederkehrende irrelevante Treffer sollen die Suche nicht fuellen, waehrend Erfassung, Firmenkern und Bewerbungsdaten erhalten bleiben.
