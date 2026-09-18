@@ -34,6 +34,8 @@ try {
             report_path = 'logs/jobagent/report.json'
             markdown_report_path = 'logs/jobagent/report.md'
             html_report_path = 'html/jobagent/report.html'
+            jobboard_path = 'html/jobagent/index.html'
+            publication_manifest_path = 'logs/jobagent/JA-049/publication-manifest.json'
         }
     } -StartedAt ([datetime]'2026-08-17T10:00:00Z') -RetainLogs 10
 
@@ -46,6 +48,8 @@ try {
     Assert-True -Condition (-not $status.is_running) -Message 'Statusabfrage markiert abgeschlossenen Lauf als RUNNING.'
     Assert-True -Condition ($status.last_status.scan_run_id -eq 'scanrun:test') -Message 'Statusdatei enthaelt keine ScanRun-ID.'
     Assert-True -Condition ($status.last_status.html_report_path -eq 'html/jobagent/report.html') -Message 'Statusdatei enthaelt keinen HTML-Report-Pfad.'
+    Assert-True -Condition ($status.last_status.jobboard_path -eq 'html/jobagent/index.html') -Message 'Statusdatei enthaelt keinen Stellenboersenpfad.'
+    Assert-True -Condition ($status.last_status.publication_manifest_path -eq 'logs/jobagent/JA-049/publication-manifest.json') -Message 'Statusdatei enthaelt keinen Publikationsmanifestpfad.'
     Assert-True -Condition ($status.last_status.run_id -match '^dailyrun:') -Message 'Statusdatei enthaelt keine gemeinsame Daily-Run-ID.'
     Assert-True -Condition ($status.display_state -eq 'abgeschlossen') -Message 'Statusabfrage liefert keinen lesbaren Abschlussstatus.'
 
@@ -57,6 +61,8 @@ try {
             report_path = 'logs/jobagent/report-deferred.json'
             markdown_report_path = 'logs/jobagent/report-deferred.md'
             html_report_path = 'html/jobagent/report-deferred.html'
+            jobboard_path = 'html/jobagent/index.html'
+            publication_manifest_path = 'logs/jobagent/JA-049/publication-manifest-deferred.json'
         }
     } -StartedAt ([datetime]'2026-08-18T10:00:00Z') -RetainLogs 10
     Assert-True -Condition ($deferred.status -eq 'SUCCEEDED') -Message 'Teilweiser Lauf mit Retry-After muss kontrolliert abschliessen.'
@@ -73,6 +79,7 @@ try {
     Assert-True -Condition ($failedStatus.display_state -eq 'fehlgeschlagen') -Message 'Fehlerstatus ist nicht lesbar markiert.'
     Assert-True -Condition ($failedStatus.last_status.is_stale -eq $true) -Message 'Fehlerlauf markiert den letzten publizierten Stand nicht als veraltet.'
     Assert-True -Condition ($failedStatus.last_status.html_report_path -eq 'html/jobagent/report-deferred.html') -Message 'Fehlerlauf erhaelt den letzten publizierten HTML-Report nicht.'
+    Assert-True -Condition ($failedStatus.last_status.jobboard_path -eq 'html/jobagent/index.html') -Message 'Fehlerlauf erhaelt den letzten publizierten Stellenboersenpfad nicht.'
 
     foreach ($index in 0..4) {
         $path = Join-Path $projectRoot ("logs/jobagent/daily-run-old-$index.log")

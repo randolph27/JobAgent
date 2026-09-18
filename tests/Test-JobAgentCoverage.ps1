@@ -531,6 +531,7 @@ Assert-True -Condition ($toolHtml.Contains('<h2>Kandidaten-Verifikationsqueue</h
 Assert-True -Condition ($toolHtml.Contains('<th>Aktion</th>')) -Message 'Coverage-Tool-HTML enthaelt keine Aktionsspalte fuer die Queue.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Review-/Reject-Report</h2>')) -Message 'Coverage-Tool-HTML enthaelt keinen Review-/Reject-Report.'
 Assert-True -Condition ($toolHtml.Contains('<h1>Arbeitgeber mit offizieller Karriereseite</h1>')) -Message 'Coverage-Tool-HTML nutzt keine menschenlesbare Ergebnisansicht.'
+Assert-True -Condition ($toolHtml.Contains('href="index.html">Zur Stellenboerse</a>')) -Message 'Coverage-Tool-HTML verlinkt nicht zur stabilen Stellenboerse.'
 Assert-True -Condition ($toolHtml.Contains('<h2>Firmen in Muenchen und Freising</h2>')) -Message 'Coverage-Tool-HTML zeigt die Firmenliste nicht als Hauptansicht.'
 Assert-True -Condition ($toolHtml.Contains('class="job-card"')) -Message 'Coverage-Tool-HTML rendert Firmen nicht als Kartenliste.'
 foreach ($rawUiValue in @('FAIL_CLOSED_REVIEW_OR_REJECT', 'ALREADY_VERIFIED_IN_STORE', 'identity-cluster:', 'source-registry:', 'Unbekannt (ALREADY_VERIFIED_IN_STORE)', 'Quellen-ID (Diagnose)')) {

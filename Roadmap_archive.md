@@ -1,5 +1,18 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-18 - JA-049
+
+- [x] JA-049 Stellenboerse als stabilen HTML-Einstieg atomar publizieren #comment: Der regulaere Lauf stellt die Stellenansicht reproduzierbar bereit und behaelt bisherige Berichtspfade sowie persoenliche Markierungen.
+  - [x] Beschreibung: Fester lokaler Einstieg mit konsistentem Datenstand und Firmen-/Coverage-Navigation in den vorhandenen Publikationspfad integriert.
+    - [x] Teilbild 1 – Einstieg: `html/jobagent/index.html` ist der kanonische Einstieg `http://127.0.0.1:8500/html/jobagent/` mit Default „Stellen“. Der Coverage-Bericht verlinkt zur Stellenboerse; neue Stellenreports verlinken zur Coverage-Diagnose.
+    - [x] Teilbild 2 – Eine Generation: `Write-JobAgentDailyRunPublication` validiert die Stellenansicht, publiziert sie atomar und schreibt `logs/jobagent/JA-049/publication-manifest.json` mit Scan-ID, Storepfad und SHA-256-Hashes fuer Store, Quellreport und Einstieg. Ein Fehler vor dem Austausch behaelt den vorherigen Einstieg.
+    - [x] Teilbild 3 – Firmenansicht: Die bestehende lokale Stellen-/Firmenansicht, Quellenstatus und vorhandene persoenliche Browserdaten bleiben unveraendert getrennt; keine Cloud, kein API-Server und keine Mutation persoenlicher Browserdaten.
+  - [x] Scope: `src/JobAgent.DailyRun.psm1`, `src/JobAgent.Operations.psm1`, `src/JobAgent.Report.psm1`, `tools/Invoke-JobAgentDailyRun.ps1`, `tools/Measure-JobAgentCompanyCoverage.ps1`, `html/jobagent/index.html` sowie fokussierte Tests.
+  - [x] Ergebnis (2026-09-18): Der Storestand `scanrun:20260916T191850084Z` ist unter dem stabilen Einstieg publiziert; HTTP-Check auf Port 8500 liefert 200 mit Stellenansicht und Coverage-Link.
+  - [x] Evidence: `docs/reviews/JA-049-acceptance.md`, `logs/jobagent/JA-049/publication-manifest.json`, `html/jobagent/index.html`.
+  - [x] Funktionstest: `Test-JobAgentPublication.ps1`, `Test-JobAgentDailyRun.ps1`, `Test-JobAgentOperations.ps1`, `Test-JobAgentCoverage.ps1 -IncludeToolIntegration`, `Test-JobAgentCiContracts.ps1` und `Test-JobAgentHtmlViewportAudit.ps1` jeweils Exit 0.
+  - [x] Audit: Lokaler Devserver auf Port 8500 war erreichbar; Viewportaudit 1920/1366/800/390 erfolgreich. Ein nicht beauftragter Abschluss-Supertest gilt gemaess Nutzeranweisung nicht als Abschlusskriterium.
+
 ## Archiviert 2026-09-18 - JA-055
 
 - [x] JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden #comment: Wiederkehrende irrelevante Treffer sollen die Suche nicht fuellen, waehrend Erfassung, Firmenkern und Bewerbungsdaten erhalten bleiben.

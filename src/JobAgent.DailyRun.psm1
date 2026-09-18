@@ -503,6 +503,73 @@ function Write-JobAgentDailyRunHtmlReport {
     return $path
 }
 
+function Write-JobAgentDailyRunPublication {
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][string]$ProjectRoot,
+        [Parameter(Mandatory)][string]$ScanRunId,
+        [Parameter(Mandatory)][string]$HtmlReportPath,
+        [Parameter(Mandatory)][string]$StorePath,
+        [Parameter()][scriptblock]$FaultInjector
+    )
+
+    $root = Resolve-JobAgentStoreRoot -RootPath $ProjectRoot
+    $sourcePath = if ([IO.Path]::IsPathRooted($HtmlReportPath)) { [IO.Path]::GetFullPath($HtmlReportPath) } else { Join-Path $root $HtmlReportPath }
+    if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+        throw "HTML-Report fuer die Stellenboerse fehlt: $sourcePath"
+    }
+
+    $html = [IO.File]::ReadAllText($sourcePath)
+    if ($html -notmatch '<!DOCTYPE html>' -or $html -notmatch 'id="jobagent-search"') {
+        throw 'HTML-Report erfuellt den Stellenboersenvertrag nicht.'
+    }
+    if ($null -ne $FaultInjector) {
+        & $FaultInjector 'before_jobboard_publish'
+    }
+
+    $jobboardRelativePath = 'html/jobagent/index.html'
+    $manifestRelativePath = 'logs/jobagent/JA-049/publication-manifest.json'
+    $jobboardPath = Join-Path $root $jobboardRelativePath
+    $manifestPath = Join-Path $root $manifestRelativePath
+    $jobboardDirectory = Split-Path -Parent $jobboardPath
+    if (-not (Test-Path -LiteralPath $jobboardDirectory)) {
+        New-Item -ItemType Directory -Path $jobboardDirectory -Force | Out-Null
+    }
+    $jobboardTemporaryPath = Join-Path $jobboardDirectory ('.' + [IO.Path]::GetFileName($jobboardPath) + '.' + [guid]::NewGuid().ToString('N') + '.tmp')
+    try {
+        [IO.File]::WriteAllBytes($jobboardTemporaryPath, [IO.File]::ReadAllBytes($sourcePath))
+        Move-Item -LiteralPath $jobboardTemporaryPath -Destination $jobboardPath -Force
+    }
+    finally {
+        if (Test-Path -LiteralPath $jobboardTemporaryPath) {
+            Remove-Item -LiteralPath $jobboardTemporaryPath -Force
+        }
+    }
+
+    if ($null -ne $FaultInjector) {
+        & $FaultInjector 'after_jobboard_publish'
+    }
+
+    $manifest = [pscustomobject]@{
+        schema_version = 'jobagent/publication-manifest/v1'
+        scan_run_id = $ScanRunId
+        generated_at = [datetime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ss.fffZ', [Globalization.CultureInfo]::InvariantCulture)
+        store_path = $StorePath
+        jobboard_path = $jobboardRelativePath
+        source_html_report_path = $sourcePath
+        hashes = [pscustomobject]@{
+            store_sha256 = (Get-FileHash -LiteralPath $StorePath -Algorithm SHA256).Hash.ToLowerInvariant()
+            source_html_sha256 = (Get-FileHash -LiteralPath $sourcePath -Algorithm SHA256).Hash.ToLowerInvariant()
+            jobboard_sha256 = (Get-FileHash -LiteralPath $jobboardPath -Algorithm SHA256).Hash.ToLowerInvariant()
+        }
+    }
+    Write-JobAgentDailyAtomicFile -Path $manifestPath -Content ($manifest | ConvertTo-Json -Depth 10)
+    return [pscustomobject]@{
+        jobboard_path = $jobboardPath
+        publication_manifest_path = $manifestPath
+    }
+}
+
 function Write-JobAgentDailyAtomicFile {
     param(
         [Parameter(Mandatory)][string]$Path,
@@ -602,9 +669,12 @@ function Invoke-JobAgentDailyRun {
         $summary = New-JobAgentDailyRunSummary -Document $document -ScanRunId $scanRunId -AdapterResults $resultsArray -ReportPath $reportRelativePath -StartedAt $StartedAt -FinishedAt $finishedAt -Report $report
         $markdownReportPath = Write-JobAgentDailyRunMarkdownReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $markdownReportRelativePath -Report $report
         $htmlReportPath = Write-JobAgentDailyRunHtmlReport -ProjectRoot $projectRootFull -Document $document -ScanRunId $scanRunId -ReportPath $htmlReportRelativePath -Report $report
+        $publication = Write-JobAgentDailyRunPublication -ProjectRoot $projectRootFull -ScanRunId $scanRunId -HtmlReportPath $htmlReportPath -StorePath $storePath
         $summary.report_path = Join-Path $projectRootFull $reportRelativePath
         $summary | Add-Member -NotePropertyName markdown_report_path -NotePropertyValue $markdownReportPath -Force
         $summary | Add-Member -NotePropertyName html_report_path -NotePropertyValue $htmlReportPath -Force
+        $summary | Add-Member -NotePropertyName jobboard_path -NotePropertyValue $publication.jobboard_path -Force
+        $summary | Add-Member -NotePropertyName publication_manifest_path -NotePropertyValue $publication.publication_manifest_path -Force
         $reportPath = Write-JobAgentDailyRunReport -ProjectRoot $projectRootFull -Summary $summary
 
         [pscustomobject]@{
@@ -614,6 +684,8 @@ function Invoke-JobAgentDailyRun {
             report_path = $reportPath
             markdown_report_path = $markdownReportPath
             html_report_path = $htmlReportPath
+            jobboard_path = $publication.jobboard_path
+            publication_manifest_path = $publication.publication_manifest_path
             summary = $summary
             document = $document
         }
@@ -627,5 +699,6 @@ Export-ModuleMember -Function @(
     'Get-JobAgentDailyRunCandidateCompanies',
     'Invoke-JobAgentDailyRun',
     'New-JobAgentDailyRunSelection',
-    'New-JobAgentDailyRunId'
+    'New-JobAgentDailyRunId',
+    'Write-JobAgentDailyRunPublication'
 )

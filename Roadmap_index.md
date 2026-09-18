@@ -1,6 +1,6 @@
 # Roadmap Index
 
-Stand: 2026-09-18. Aktiver Backlog: 4 geplante Stellenboersen-Punkte ab JA-049 im offenen Meilenstein M3 sowie TD-0085 fuer CI-Drift. JA-043 bis JA-048, JA-051 bis JA-053 und JA-055 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-18. Aktiver Backlog: 3 geplante Stellenboersen-Punkte ab JA-054 im offenen Meilenstein M3 sowie TD-0085 fuer CI-Drift. JA-043 bis JA-049, JA-051 bis JA-053 und JA-055 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
 - `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-052; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
@@ -47,7 +47,7 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 
 - M1: JA-043 Daten/Verfuegbarkeit -> JA-044 Firmen-/Stellenerfassung und JA-045 persoenlicher Speicher (nach JA-043 teilweise parallel).
 - M2: JA-046 Trefferseite -> JA-047 Filter/Sortierung -> JA-048 Details/Favoriten-/Bewerbungssterne.
-- M3: JA-049 stabiler Einstieg/Publikation -> JA-050 Gesamtworkflow/Abnahme.
+- M3: JA-049 stabiler Einstieg/Publikation abgeschlossen -> JA-054 Kalender -> JA-056 Suchauftraege/Sichtungsstand -> JA-050 Gesamtworkflow/Abnahme.
 - `doc/roadmap-screenshots/JA-043-reference-manifest.md`: Bildanforderung, vorhandene historische Referenz und offen ausgewiesener fehlender Originaldateizugriff.
 - `docs/reviews/2026-09-17-jobboard-plan-baseline.json`: Ausgangs-HEAD und hashgesicherte vorbestehende Aenderungen; kein Livebefund.
 - `docs/reviews/2026-09-17-jobboard-plan-validation.json`: Struktur-/Synchronisations-/Funktionspruefung der Planung, keine Produktabnahme der neuen Stellenboerse.

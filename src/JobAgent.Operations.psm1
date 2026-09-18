@@ -362,6 +362,8 @@ function Invoke-JobAgentManagedDailyRun {
             report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'report_path'
             markdown_report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'markdown_report_path'
             html_report_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'html_report_path'
+            jobboard_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'jobboard_path'
+            publication_manifest_path = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'publication_manifest_path'
             published_at = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'published_at'
             wake_at = Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'wake_at'
             is_stale = $null -ne $previousStatus
@@ -398,6 +400,8 @@ function Invoke-JobAgentManagedDailyRun {
             report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'report_path' }
             markdown_report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'markdown_report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'markdown_report_path' }
             html_report_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'html_report_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'html_report_path' }
+            jobboard_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'jobboard_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'jobboard_path' }
+            publication_manifest_path = if ($exitCode -eq 0) { [string](Get-JobAgentOperationProperty -InputObject $result -Name 'publication_manifest_path') } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'publication_manifest_path' }
             published_at = if ($exitCode -eq 0) { ConvertTo-JobAgentOperationIso -Value $finishedAt } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'published_at' }
             wake_at = if ($exitCode -eq 0) { Get-JobAgentDailyRunWakeAt -Result $result } else { Get-JobAgentOperationProperty -InputObject $previousStatus -Name 'wake_at' }
             is_stale = $exitCode -ne 0

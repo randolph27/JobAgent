@@ -225,6 +225,8 @@ try {
     Assert-True -Condition (Test-Path -LiteralPath $first.report_path) -Message 'Daily-Run-Report wurde nicht geschrieben.'
     Assert-True -Condition (Test-Path -LiteralPath $first.markdown_report_path) -Message 'Daily-Run-Markdown-Report wurde nicht geschrieben.'
     Assert-True -Condition (Test-Path -LiteralPath $first.html_report_path) -Message 'Daily-Run-HTML-Report wurde nicht geschrieben.'
+    Assert-True -Condition (Test-Path -LiteralPath $first.jobboard_path) -Message 'Stabile Stellenboerse wurde nicht publiziert.'
+    Assert-True -Condition (Test-Path -LiteralPath $first.publication_manifest_path) -Message 'Publikationsmanifest wurde nicht geschrieben.'
     Assert-True -Condition (@($first.document.scan_runs).Count -eq 1) -Message 'ScanRun wurde nicht persistiert.'
     Assert-True -Condition (@($first.document.scan_attempts).Count -eq 3) -Message 'Nicht alle ScanAttempts wurden persistiert.'
     Assert-True -Condition (@($first.document.jobs).Count -eq 2) -Message 'Erfolgreiche Firmen haben keine Jobs erzeugt.'
@@ -263,6 +265,8 @@ try {
     Assert-True -Condition ($report.statistics.snapshots -eq 2) -Message 'Report enthaelt falsche Snapshot-Anzahl.'
     Assert-True -Condition ($report.statistics.unreachable_career_pages -eq 1) -Message 'Report enthaelt falsche Anzahl nicht erreichbarer Karriereportale.'
     Assert-True -Condition ($report.html_report_path -eq $second.html_report_path) -Message 'Summary-JSON verliert den HTML-Report-Pfad.'
+    Assert-True -Condition ($report.jobboard_path -eq $second.jobboard_path) -Message 'Summary-JSON verliert den Stellenboersenpfad.'
+    Assert-True -Condition ($report.publication_manifest_path -eq $second.publication_manifest_path) -Message 'Summary-JSON verliert den Publikationsmanifestpfad.'
     $markdownReport = Get-Content -LiteralPath $second.markdown_report_path -Raw
     foreach ($expected in @('Firmen gesamt: 3', 'Firmen im Lauf: 3', 'Faellige Firmen: 3', 'Uebersprungene Firmen: 0', 'Limit: 25', 'Auswahlgrund: Explizite Firmenauswahl')) {
         Assert-True -Condition ($markdownReport.Contains($expected)) -Message "Markdown-Report enthaelt Auswahlmetrik nicht: $expected"
@@ -279,6 +283,7 @@ try {
         Assert-True -Condition ($htmlReport.Contains($expected)) -Message "HTML-Report enthaelt Auswahlmetrik nicht: $expected"
     }
     Assert-True -Condition ($htmlReport.Contains('<h2>Aktive passende Stellen</h2>')) -Message 'HTML-Report enthaelt keine aktiven passenden Stellen.'
+    Assert-True -Condition ($htmlReport.Contains('Zur Firmen- und Coverage-Diagnose')) -Message 'HTML-Report verlinkt nicht zur Coverage-Diagnose.'
     Assert-True -Condition ($htmlReport.Contains('IT-Gesamtverantwortung mit Strategie, Budget und Fuehrung.')) -Message 'HTML-Report enthaelt keine Stellenbeschreibung.'
     Assert-True -Condition ($htmlReport.Contains('<h2>Fehler und unsichere Quellen</h2>')) -Message 'HTML-Report enthaelt keine Fehler-/Quellen-Sektion.'
     Assert-True -Condition ($htmlReport.Contains('href="https://gamma.example.invalid/careers" target="_blank" rel="noopener noreferrer">Quelle</a>')) -Message 'HTML-Report enthaelt keine sichere klickbare Fehlerquelle.'
@@ -286,6 +291,27 @@ try {
     Assert-True -Condition ($htmlReport.Contains('href="https://alpha.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere-URL</a>')) -Message 'HTML-Report enthaelt keine sichere Karriere-URL-Spalte.'
     Assert-True -Condition ($htmlReport.Contains('href="https://alpha.example.invalid/careers" target="_blank" rel="noopener noreferrer">Karriere</a>')) -Message 'HTML-Report enthaelt keinen sicheren Anbieterlink.'
     Assert-True -Condition (@($second.document.scan_runs[0].artifact_paths).Count -eq 3) -Message 'ScanRun-Artefakte muessen JSON, Markdown und HTML enthalten.'
+    $jobboardHtml = Get-Content -LiteralPath $second.jobboard_path -Raw
+    Assert-True -Condition ($jobboardHtml -eq $htmlReport) -Message 'Stabile Stellenboerse stimmt nicht mit der publizierten Reportgeneration ueberein.'
+    $publicationManifest = Get-Content -LiteralPath $second.publication_manifest_path -Raw | ConvertFrom-Json -Depth 20
+    Assert-True -Condition ($publicationManifest.scan_run_id -eq $second.scan_run_id) -Message 'Publikationsmanifest verweist auf die falsche Scan-Generation.'
+    Assert-True -Condition ($publicationManifest.jobboard_path -eq 'html/jobagent/index.html') -Message 'Publikationsmanifest verwendet keinen stabilen Stellenboersenpfad.'
+    Assert-True -Condition ($publicationManifest.hashes.source_html_sha256 -eq $publicationManifest.hashes.jobboard_sha256) -Message 'Publikationsmanifest erkennt unterschiedliche Report- und Stellenboerseninhalte nicht.'
+    $previousJobboardHtml = Get-Content -LiteralPath $second.jobboard_path -Raw
+    $publicationFailedBeforeReplace = $false
+    try {
+        Write-JobAgentDailyRunPublication -ProjectRoot $projectRoot -ScanRunId $second.scan_run_id -HtmlReportPath $second.html_report_path -StorePath $second.store_path -FaultInjector {
+            param([string]$Point)
+            if ($Point -eq 'before_jobboard_publish') {
+                throw 'fixture publication interruption'
+            }
+        } | Out-Null
+    }
+    catch {
+        $publicationFailedBeforeReplace = $_.Exception.Message -match 'fixture publication interruption'
+    }
+    Assert-True -Condition $publicationFailedBeforeReplace -Message 'Publikationsfehler vor dem Austausch wird nicht transparent abgebrochen.'
+    Assert-True -Condition ((Get-Content -LiteralPath $second.jobboard_path -Raw) -eq $previousJobboardHtml) -Message 'Publikationsfehler vor dem Austausch ersetzt die letzte gueltige Stellenboerse.'
 
     $cliProjectRoot = New-TestProjectRoot
     New-TestStore -ProjectRoot $cliProjectRoot
@@ -313,6 +339,8 @@ try {
     Assert-True -Condition ($cliResult.status -eq 'SUCCESS') -Message 'Daily-Run-CLI liefert keinen SUCCESS-Status.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.report_path)) -Message 'Daily-Run-CLI schreibt kein Reportartefakt.'
     Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.html_report_path)) -Message 'Daily-Run-CLI schreibt kein HTML-Artefakt.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.jobboard_path)) -Message 'Daily-Run-CLI publiziert keinen stabilen Stellenboerseneinstieg.'
+    Assert-True -Condition (Test-Path -LiteralPath ([string]$cliResult.publication_manifest_path)) -Message 'Daily-Run-CLI schreibt kein Stellenboersenmanifest.'
 
     $fullScanProjectRoot = New-TestProjectRoot
     New-TestStore -ProjectRoot $fullScanProjectRoot
