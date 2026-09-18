@@ -1,40 +1,46 @@
 # Handoff latest
 
-Stand: 2026-09-18T12:01:03.210+02:00
+Stand: 2026-09-18T12:25:02.919+02:00
 
-## Aktiver Arbeitspunkt
+## Zustand
 
-- Active: `TD-0080` / Roadmap `JA-052`.
-- Status: `in-progress`; nicht rotieren. Der geforderte Browser-Audit hat noch keinen erfolgreichen Komplettabschluss.
-- Branch: `master`; Upstream: `origin/master`.
-- Supertest: nicht angefragt; nach Nutzerregel für diesen Übergang nicht ausstehend.
+- Active: `TD-0081`
+- Status: `open`
+- Ziel: M2 – Stellenboersen-Oberflaeche: JA-053 Fachliche Aenderungen einer Stelle als belegte Chronik anzeigen #comment: Eine erneute Erfassung ist keine neue Stelle und eine technische Quellenstoerung kein belegtes Ende einer Ausschreibung.
+- Branch: `master`
+- HEAD: `7e383feb5f0e`
+- Upstream: `origin/master`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
+- Route: `False`
 
-## Umgesetzter Stand in JA-052
+## Versionierte Aenderungen
 
-- Der Report erzeugt im Tab `Bewerbungen` lokale, barrierefrei bezeichnete Filter für Notiz/Aktion/Stelle, Bewerbungsstufe, Fälligkeit und Sortierung.
-- Fälligkeitsfilter: alle Termine, überfällig, innerhalb von sieben Tagen, mit offenem Termin und ohne offenen Termin. Referenz ist ausschließlich `reference_time` des angezeigten Reports; es gibt keinen Browserzeit- oder Netzwerkkontakt.
-- Sortierung: offenes lokales Datum, danach Task-ID, danach Stellen-ID; alternativ Status/Stellen-ID oder Stellen-ID.
-- Die Karten zeigen Status, nächste Aktion, Notiz sowie offene Termine mit lokalem Datum und optionaler Uhrzeit mit Offset.
-- Der Wechsel zurück zu Stellen oder Firmen blendet den Bewerbungs-Tab aus und setzt dessen `aria-selected` auf `false`. Vorher konnten Stellen- und Bewerbungs-Panel gleichzeitig sichtbar sein.
-- Die Persistenz bleibt ausschließlich `localStorage` über `JobAgentUserState`; Reportstore, URL und technische Logs bekommen keine persönlichen Daten.
+- `Roadmap.md`
+- `Roadmap_archive.md`
+- `Roadmap_index.md`
+- `handoff.latest.json`
+- `handoff.latest.md`
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
+- `todo.checkpoint.json`
+- `todo.current.md`
+- `todo.events.jsonl`
+- `todo.history.digest.json`
+- `todo.master.index.json`
+- `todo.state.json`
 
-## Teststand
+## Verifikation
 
-- Grün: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1`.
-- Grün: `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1`.
-- `tests\Test-JobAgentUiBrowserAudit.ps1` enthält einen neuen isolierten Fall `ja052_application_overview_local_note_stage_due_and_sort_filters`. Er erzeugt eine lokale Interview-Stufe, Notiz, Folgeaufgabe und Termin mit Offset; prüft Notizsuche, Stufen- und Fälligkeitsfilter, Sortierung sowie keine während der Filteraktion gestartete Ressource.
-- Der vollständige `Test-JobAgentUiBrowserAudit.ps1`-Lauf blieb nach dem neuen Fall in einem bestehenden langen Playwright-Abschnitt ohne weitere Artefaktfortschreibung hängen und wurde kontrolliert beendet. Er ist deshalb `not-run`/nicht grün, nicht als Fehler der neuen Assertions zu werten. Für die Fortsetzung zuerst denselben Test erneut in isoliertem Hintergrundprofil starten und bei erneutem Hängen den letzten Playwright-CLI-Aufruf unter `logs/jobagent/QA-004/<run-id>/playwright/.playwright-cli/` bestimmen.
-- Der Audit-Helper berücksichtigt nun geschlossene `<details>`-Inhalte nicht als sichtbare Controls. Das beseitigt falsche mobile Overlap-Befunde aus nicht dargestellten Bewerbungseditoren. Der A11y-Helper akzeptiert sichtbare `aria-label`-Beschriftungen zusätzlich zu nativen Labels.
+- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`
 
-## Nächste konkrete Schritte
+## Naechster Anker
 
-1. `./ci.cmd devserver-status` prüfen; falls nicht erreichbar, ausschließlich über `./ci.cmd devserver-start` im Hintergrund starten.
-2. `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` im isolierten Hintergrundprofil ausführen. Kein Supertest erforderlich.
-3. Bei Hängen: letzten CLI-Befehl und zugehörige Momentaufnahme im aktuellen `logs/jobagent/QA-004/<run-id>/playwright/.playwright-cli/` vergleichen; nur den betroffenen Browserpfad gezielt ausführen. Keine generische Lockerung von Assertions.
-4. Nach grünem Browser-Audit: `docs/reviews/JA-052-acceptance.md` und `logs/jobagent/JA-052/application-cases.json` mit Testbefehl, Exitcode, Reportreferenz, Fixture-IDs und lokalen Filterergebnissen erzeugen; dann Roadmap/Todo/Checkpoint synchronisieren und `JA-052` erst bei vollständig belegten Akzeptanzkriterien rotieren.
-5. Danach `TD-0081` / `JA-053` beginnen: fachliche Stellenchronik ausschließlich aus Snapshots und Change-Events; technische Quellenfehler dürfen kein Stellenende behaupten.
+TD-0081 / JA-053: Snapshot-/Change-Event-Felder und feste Vorher/Nachher-Fixtures pruefen; danach die fachliche Chronikprojektion implementieren. JA-055 folgt erst nach JA-053.
 
-## Unabhängige offene Punkte
+## Uebergabe fuer den naechsten Chat
 
-- `TD-0085` bleibt offen. STP meldet bekannte Route-Verstöße ausschließlich in gebündelten Sonar-JRE-Lizenzdateien unter `.ci/tools/sonar/...`; keine Änderung ohne eigene CI-Driftanalyse.
-- Reihenfolge nach JA-052: `JA-053`, `JA-055`, `JA-049`, `JA-054`, `JA-056`, `JA-050`.
+- JA-052 ist vollstaendig nach `Roadmap_archive.md` rotiert. Die Evidence liegt unter `docs/reviews/JA-052-acceptance.md`, `logs/jobagent/JA-052/application-cases.json` und den zwei JA-052-Screenshots.
+- Der neue fokussierte Browsermodus `pwsh -NoProfile -File ./tests/Test-JobAgentUiBrowserAudit.ps1 -ApplicationOverviewOnly` endet mit Exit 0. Er prueft APPLIED -> INTERVIEW, Notizsuche, Stufen-/Faelligkeitsfilter, Sortierung, offenen Offset-Termin, 0 Bediennetzwerk und 390/800/1366/1920 ohne Ueberlauf, Overlap oder Clipping.
+- `Test-JobAgentUserState.ps1` und `Test-JobAgentReport.ps1` endeten ebenfalls mit Exit 0. Der Vollsupertest wurde nicht angefragt und gilt gemaess Nutzerregel als erledigt.
+- Aktiver Punkt ist TD-0081 / JA-053. Keine Produktivdaten, Live-Crawls oder privaten Browserdaten verwenden. Chronik nur aus vorhandenen Snapshots und Change-Events ableiten; technische Quellenfehler duerfen nie ein Stellenende behaupten.
+- Bekannter unabhängiger CI-Drift bleibt TD-0085: Route-Verstoesse liegen ausschliesslich in gepinnten Sonar-JRE-Lizenzdateien. Ohne eigene Driftentscheidung nicht aendern.

@@ -2,7 +2,8 @@
 
 [CmdletBinding()]
 param(
-    [switch]$FixtureOnly
+    [switch]$FixtureOnly,
+    [switch]$ApplicationOverviewOnly
 )
 
 Set-StrictMode -Version 3.0
@@ -581,6 +582,37 @@ try {
     Assert-True -Condition ([string]$browserReady.timezone -eq 'UTC') -Message 'Browser-Audit verwendet nicht die erwartete Zeitzone UTC.'
     Assert-True -Condition ([bool]$browserReady.fonts_ready) -Message 'Browser-Schriften sind vor der Geometriemessung nicht geladen.'
     Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'eval', '() => { window.__qa004Errors=[]; const errorEvent=String.fromCharCode(101,114,114,111,114),rejectionEvent=String.fromCharCode(117,110,104,97,110,100,108,101,100,114,101,106,101,99,116,105,111,110),fallback=String.fromCharCode(101,114,114,111,114); window.addEventListener(errorEvent,event=>window.__qa004Errors.push(String(event.message||event.error||fallback))); window.addEventListener(rejectionEvent,event=>window.__qa004Errors.push(String(event.reason||rejectionEvent))); return JSON.stringify({ready:true}); }') | Out-Null
+    if ($ApplicationOverviewOnly) {
+        $applicationOverview = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Bewerbungsuebersicht: lokale Stufen-, Termin- und Notizfilter' -Script '() => { const api=window.JobAgentUserState,job={job_id:"job:remote-contract",title:"Remote Vertrag Spezialistin",company:"Firma 006",official_url:"https://jobs.example.invalid/job/remote-contract"}; api.setMark(localStorage,job,"applied",true,"2026-09-15T12:03:00.000Z"); api.transitionApplication(localStorage,job,"INTERVIEW",null,"2026-09-15T12:04:00.000Z"); api.updateApplicationText(localStorage,job,{note:"Rueckruf mit Personalteam",next_action:"Unterlagen pruefen"},"2026-09-15T12:05:00.000Z"); api.upsertTask(localStorage,job,{task_id:"task_remote_follow_up",type:"FOLLOW_UP",title:"Rueckruf",local_date:"2026-09-16",time_with_offset:"09:00+02:00",status:"OPEN"},"2026-09-15T12:06:00.000Z"); const resourcesBefore=new Set(performance.getEntriesByType("resource").map(entry=>entry.name)); document.getElementById("jobagent-tab-applications").click(); const query=document.getElementById("jobagent-application-query"),stage=document.getElementById("jobagent-application-stage"),due=document.getElementById("jobagent-application-due"),sort=document.getElementById("jobagent-application-sort"),root=document.getElementById("jobagent-application-results"); query.value="Rueckruf"; query.dispatchEvent(new Event("input",{bubbles:true})); const queryIds=Array.from(root.querySelectorAll("[data-job-id]")).map(item=>item.dataset.jobId); stage.value="INTERVIEW"; stage.dispatchEvent(new Event("change",{bubbles:true})); due.value="next_7"; due.dispatchEvent(new Event("change",{bubbles:true})); sort.value="due_then_id"; sort.dispatchEvent(new Event("change",{bubbles:true})); const filteredIds=Array.from(root.querySelectorAll("[data-job-id]")).map(item=>item.dataset.jobId),text=root.textContent; return JSON.stringify({query_ids:queryIds,filtered_ids:filteredIds,text,selected_tab:document.getElementById("jobagent-tab-applications").getAttribute("aria-selected"),network_entries:performance.getEntriesByType("resource").map(entry=>entry.name).filter(name=>!resourcesBefore.has(name))}); }'
+        Assert-True -Condition ((@($applicationOverview.query_ids) -join ',') -eq 'job:remote-contract') -Message 'Bewerbungsuebersicht: Die lokale Notizsuche liefert nicht exakt die erwartete Stelle.'
+        Assert-True -Condition ((@($applicationOverview.filtered_ids) -join ',') -eq 'job:remote-contract') -Message 'Bewerbungsuebersicht: Stufen- oder Faelligkeitsfilter liefert nicht exakt die erwartete Stelle.'
+        Assert-True -Condition ($applicationOverview.text -match '2026-09-16' -and $applicationOverview.text -match '09:00\+02:00' -and $applicationOverview.text -match 'Rueckruf') -Message 'Bewerbungsuebersicht: Der offene Termin mit Offset fehlt.'
+        Assert-True -Condition ($applicationOverview.selected_tab -eq 'true') -Message 'Bewerbungsuebersicht: Der Bewerbungs-Tab ist nicht eindeutig aktiv.'
+        Assert-True -Condition (@($applicationOverview.network_entries).Count -eq 0) -Message 'Bewerbungsuebersicht: Eine lokale Filteraktion hat eine externe Netzwerkressource geladen.'
+        Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Bewerbungsuebersicht: mobile Sicht vorbereiten' -Script '() => { const filter=document.querySelector("details"); if(filter)filter.removeAttribute("open"); return JSON.stringify({filter_closed:!filter||!filter.open}); }' | Out-Null
+        foreach ($viewport in @($visualContract.viewports)) {
+            $measurement = Get-JobAgentGeometryMeasurement -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Bewerbungsuebersicht' -ViewportWidth ([int]$viewport.width) -ViewportHeight ([int]$viewport.height)
+            Assert-JobAgentGeometryMeasurement -Measurement $measurement -VisualContract $visualContract -Case "Bewerbungsuebersicht $($viewport.width)x$($viewport.height)"
+            $geometryEvidence.Add([pscustomobject]@{ case_id = 'ja052_application_overview'; viewport_width = [int]$viewport.width; viewport_height = [int]$viewport.height; measurement = $measurement })
+        }
+        foreach ($screenshot in @(
+                [pscustomobject]@{ width = 1366; height = 900; path = (Join-Path $artifactRoot 'JA-052-applications-1366.png') },
+                [pscustomobject]@{ width = 390; height = 844; path = (Join-Path $artifactRoot 'JA-052-deadlines-390.png') }
+            )) {
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'resize', $screenshot.width, $screenshot.height) | Out-Null
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'screenshot', '--filename', $screenshot.path) | Out-Null
+            Assert-True -Condition (Test-Path -LiteralPath $screenshot.path) -Message "Bewerbungsuebersicht: Screenshot fehlt: $($screenshot.path)."
+            Assert-True -Condition ((Get-Item -LiteralPath $screenshot.path).Length -gt 10000) -Message "Bewerbungsuebersicht: Screenshot ist unplausibel klein: $($screenshot.path)."
+            $screenshots.Add($screenshot.path)
+        }
+        $sessionErrors = @(Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script '() => JSON.stringify(window.__qa004Errors || [])' -Case 'Bewerbungsuebersicht: Browserfehlernachweis')
+        Assert-True -Condition ($sessionErrors.Count -eq 0) -Message ('Bewerbungsuebersicht: Browserfehler waehrend der Interaktion: ' + ($sessionErrors -join '; '))
+        $caseEvidence.Add([pscustomobject]@{ case_id = 'ja052_application_overview_local_note_stage_due_and_sort_filters'; query_job_ids = @($applicationOverview.query_ids); filtered_job_ids = @($applicationOverview.filtered_ids); screenshots = @($screenshots); no_external_network = $true })
+        $targetEvidence = [pscustomobject]@{ status = 'ok'; mode = 'application_overview_only'; report_url = $reportUrl; case = $caseEvidence[0]; geometry = @($geometryEvidence); screenshots = @($screenshots); report_hash = $reportHashBefore; fixture_hash = $fixtureHashBefore }
+        Write-Utf8File -Path $evidencePath -Content ($targetEvidence | ConvertTo-Json -Depth 20)
+        $targetEvidence | ConvertTo-Json -Depth 20
+        return
+    }
     $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellen: 264 Treffer, Seite 1 von 6 (sichtbar 50).' -Case 'vollstaendiger Stellenbestand'
     Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Leitung Digitalisierung mit einem absichtlich sehr langen ungetrennten Layoutpruefwort' -Case 'Langer Titel bleibt erreichbar'

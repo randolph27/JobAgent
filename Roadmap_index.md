@@ -1,6 +1,6 @@
 # Roadmap Index
 
-Stand: 2026-09-18. Aktiver Backlog: 7 geplante Stellenboersen-Punkte ab JA-052 in zwei offenen Meilensteinen sowie TD-0085 fuer CI-Drift. JA-043 bis JA-048 sowie JA-051 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-18. Aktiver Backlog: 6 geplante Stellenboersen-Punkte ab JA-053 in zwei offenen Meilensteinen sowie TD-0085 fuer CI-Drift. JA-043 bis JA-048 sowie JA-051 und JA-052 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
 - `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-052; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.
@@ -57,10 +57,10 @@ Gebiet unveraendert: Muenchen mit bestehendem 20-km-Bereich und Freising; kein n
 ## Aktueller Ergaenzungsplan 2026-09-17
 
 - M1: JA-043 -> JA-044 -> JA-051 -> JA-045 (abgeschlossen); Daten/Zeiten und Verlustschutz vor neuen Ansichten.
-- M2: JA-047 -> JA-048 -> JA-052 Bewerbungsorganisation -> JA-053 Chronik -> JA-055 Ausblendung; private Migration und Sichtbarkeit vor gespeicherten Suchen. JA-047 und JA-048 sind abgeschlossen, naechster Anker JA-052.
+- M2: JA-047 -> JA-048 -> JA-052 Bewerbungsorganisation -> JA-053 Chronik -> JA-055 Ausblendung; private Migration und Sichtbarkeit vor gespeicherten Suchen. JA-047, JA-048 und JA-052 sind abgeschlossen, naechster Anker JA-053.
 - M3: JA-049 -> JA-054 Abruf-/Aufgabenkalender -> JA-056 Suchauftraege/Sichtungsstand -> JA-050 erweiterte Gesamtabnahme.
 - Gesamtschaetzung: 25,5–42 PT / Summe gerundeter Einzelkorridore 41–67 Arbeitstage bei 0,7 FTE; sechs neue Punkte davon 8,5–15 PT / 14–24 Arbeitstage. Keine Termin-/Kapazitaetszusage; Parallelisierung je Punkt beschrieben.
 - `docs/reviews/2026-09-17-jobboard-extensions-plan-validation.json`: aktueller Struktur-/Abhaengigkeits-/Workflow-/Funktionsnachweis samt Ausgangsstand; ersetzt keinen Implementierungstest.
 - `docs/handoffs/2026-09-17-jobboard-extensions-plan.md`: aktuelle Uebergabe, bekannte globale Pruefgrenzen und Stopgrenze nach Git-Abschluss.
-- 7 offene Produktpunkte, genau 3 Beschreibungs-Unterpunkte je Punkt; naechster Implementierungsanker ist JA-052 (TD-0080). TD-0085 bleibt als separater CI-Driftpunkt offen.
+- 6 offene Produktpunkte; naechster Implementierungsanker ist JA-053 (TD-0081). TD-0085 bleibt als separater CI-Driftpunkt offen.
 - Vorherige Planungsnachweise bleiben historische Snapshots unveraendert. Originalbildzugriffsluecke und bestehender Sicherungs-Stash werden nicht umgedeutet.
