@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-18T20:36:14.186+02:00
+Stand: 2026-09-18T20:37:07.521+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-18T20:36:14.186+02:00
 - Status: `in-progress`
 - Ziel: M3 - Publikation und Gesamtabnahme: JA-056 Gespeicherte Suchauftraege und neue Treffer seit letzter Sichtung bereitstellen #comment: Wiederholbare Suchprofile und ein generationengebundener Treffervergleich sollen Sucharbeit sparen, ohne alte Jobs nach jedem Scrape erneut als neu auszugeben.
 - Branch: `master`
-- HEAD: `be3ba570a4d6`
+- HEAD: `a3c6e071fe0f`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,21 +16,8 @@ Stand: 2026-09-18T20:36:14.186+02:00
 
 ## Versionierte Aenderungen
 
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
-- `docs/reviews/JA-054-acceptance.md`
-- `handoff.latest.detail.md`
-- `handoff.latest.json`
-- `handoff.latest.md`
-- `src/JobAgent.Report.psm1`
-- `tests/Test-JobAgentCalendar.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
-- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
 
 ## Verifikation
 
