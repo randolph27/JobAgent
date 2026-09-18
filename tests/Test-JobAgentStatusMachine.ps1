@@ -26,7 +26,10 @@ function New-TestRawJob {
         [string]$DetailUrl = 'https://example.invalid/careers/head-it-123',
         [string]$ExternalJobId = '123',
         [string]$Summary = 'IT-Gesamtverantwortung mit Strategie und Fuehrung.',
-        [string]$LocationLabel = 'Muenchen'
+        [string]$LocationLabel = 'Muenchen',
+        [string]$WorkTime = 'UNKNOWN',
+        [string[]]$Requirements = @(),
+        [string]$Salary = 'UNKNOWN'
     )
 
     [pscustomobject]@{
@@ -36,6 +39,9 @@ function New-TestRawJob {
         ats_job_id = 'UNKNOWN'
         location_label = $LocationLabel
         summary = $Summary
+        work_time = $WorkTime
+        requirements = @($Requirements)
+        salary = $Salary
         extraction_confidence = 90
     }
 }
@@ -295,6 +301,20 @@ $offsetMissing = Invoke-JobAgentStatusMachine `
     -ObservedAt ([datetime]'2026-08-30T10:00:00Z')
 Assert-True -Condition (($offsetMissing.jobs[0].PSObject.Properties.Name -notcontains 'published_at') -and ($offsetMissing.jobs[0].PSObject.Properties.Name -notcontains 'published_on')) -Message 'Zeitpunkt ohne Offset darf nicht als belegte Publikationszeit gespeichert werden.'
 
+$enrichedFirst = Invoke-JobAgentStatusMachine `
+    -Document (New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-08-17T09:00:00Z')) `
+    -ScanRunId 'scanrun:20260831T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260831T100000Z' -RawJobs @((New-TestRawJob -WorkTime 'VOLLZEIT' -Requirements @('ITIL') -Salary '90000 EUR')) -Suffix 'enriched-first')) `
+    -ObservedAt ([datetime]'2026-08-31T10:00:00Z')
+$enrichedSecond = Invoke-JobAgentStatusMachine `
+    -Document $enrichedFirst `
+    -ScanRunId 'scanrun:20260901T100000Z' `
+    -AdapterResults @((New-TestAdapterResult -ScanRunId 'scanrun:20260901T100000Z' -RawJobs @((New-TestRawJob -WorkTime 'TEILZEIT' -Requirements @('ITIL', 'CISSP') -Salary '100000 EUR')) -Suffix 'enriched-second')) `
+    -ObservedAt ([datetime]'2026-09-01T10:00:00Z')
+$enrichedEvent = @($enrichedSecond.change_events | Where-Object { $_.scan_run_id -eq 'scanrun:20260901T100000Z' })[0]
+Assert-True -Condition ((@($enrichedEvent.changed_fields) -join ',') -match 'work_time' -and (@($enrichedEvent.changed_fields) -join ',') -match 'requirements' -and (@($enrichedEvent.changed_fields) -join ',') -match 'salary') -Message 'Archivierte Fachfelder muessen als ein JOB_UPDATED-Event erkannt werden.'
+Assert-True -Condition ($enrichedSecond.job_snapshots[-1].work_time -eq 'TEILZEIT' -and (@($enrichedSecond.job_snapshots[-1].requirements) -join ',') -eq 'ITIL,CISSP' -and $enrichedSecond.job_snapshots[-1].salary -eq '100000 EUR') -Message 'Neue Snapshots muessen Arbeitszeit, Anforderungen und Gehalt vollstaendig archivieren.'
+
 [pscustomobject]@{
     status = 'ok'
     cases = @(
@@ -314,6 +334,7 @@ Assert-True -Condition (($offsetMissing.jobs[0].PSObject.Properties.Name -notcon
         'source_scoped_removal',
         'explicit_closed_signal',
         'published_at_normalization_and_retention',
-        'published_date_precision_and_missing_offset'
+        'published_date_precision_and_missing_offset',
+        'snapshot_archives_whitelisted_job_content_fields'
     )
 } | ConvertTo-Json -Depth 4

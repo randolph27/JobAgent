@@ -761,6 +761,109 @@ function New-JobAgentReportJobEntry {
     }
 }
 
+function ConvertTo-JobAgentReportChangeText {
+    param([Parameter()][AllowNull()][object]$Value)
+
+    if ($null -eq $Value) {
+        return 'UNKNOWN'
+    }
+    if ($Value -is [System.Collections.IEnumerable] -and $Value -isnot [string]) {
+        $items = @($Value | ForEach-Object { ConvertTo-JobAgentReportChangeText -Value $_ } | Sort-Object -Unique)
+        if ($items.Count -eq 0) {
+            return 'UNKNOWN'
+        }
+        return ($items -join '; ')
+    }
+    $text = [System.Net.WebUtility]::HtmlDecode([string]$Value)
+    $text = [regex]::Replace($text, '<[^>]*>', ' ')
+    $text = $text.Normalize([Text.NormalizationForm]::FormKC)
+    $text = [regex]::Replace($text.Replace("`r`n", "`n").Replace("`r", "`n"), '\s+', ' ').Trim()
+    if ([string]::IsNullOrWhiteSpace($text)) {
+        return 'UNKNOWN'
+    }
+    return $text
+}
+
+function Get-JobAgentReportSnapshotFieldText {
+    param(
+        [Parameter()][AllowNull()][object]$Snapshot,
+        [Parameter(Mandatory)][string]$Field
+    )
+
+    if ($null -eq $Snapshot) {
+        return 'Vorheriger Inhalt nicht archiviert'
+    }
+    switch ($Field) {
+        'location' {
+            return ConvertTo-JobAgentReportChangeText -Value (Get-JobAgentReportProperty -Object (Get-JobAgentReportProperty -Object $Snapshot -Name 'location') -Name 'label' -Default 'UNKNOWN')
+        }
+        'description' {
+            return ConvertTo-JobAgentReportChangeText -Value (Get-JobAgentReportProperty -Object $Snapshot -Name 'description' -Default (Get-JobAgentReportProperty -Object $Snapshot -Name 'summary' -Default 'UNKNOWN'))
+        }
+        default {
+            return ConvertTo-JobAgentReportChangeText -Value (Get-JobAgentReportProperty -Object $Snapshot -Name $Field -Default 'UNKNOWN')
+        }
+    }
+}
+
+function Get-JobAgentReportChangeHistory {
+    param(
+        [Parameter(Mandatory)][object]$Document,
+        [Parameter(Mandatory)][string]$JobId,
+        [Parameter()][ValidateRange(1, 10000)][int]$MaximumEntries = 10000
+    )
+
+    $whitelist = @('title', 'location', 'work_model', 'employment_type', 'work_time', 'description', 'requirements', 'salary', 'official_url', 'status')
+    $snapshots = @($Document.job_snapshots | Where-Object { [string]$_.job_id -eq $JobId } | Sort-Object @{ Expression = { [string]$_.captured_at } }, @{ Expression = { [string]$_.snapshot_id } })
+    $snapshotsByRun = @{}
+    foreach ($snapshot in $snapshots) {
+        $snapshotsByRun[[string]$snapshot.scan_run_id] = $snapshot
+    }
+    $entries = [System.Collections.Generic.List[object]]::new()
+    $events = @($Document.change_events | Where-Object {
+            ([string]$_.job_id -eq $JobId) -and (@('JOB_CREATED', 'JOB_UPDATED', 'JOB_CLOSED', 'JOB_REMOVED') -contains [string]$_.event_type)
+        } | Sort-Object @{ Expression = { [string]$_.created_at } }, @{ Expression = { [string]$_.change_event_id } })
+    foreach ($event in $events) {
+        $current = $snapshotsByRun[[string]$event.scan_run_id]
+        $previousCandidates = @($snapshots | Where-Object {
+                ([string]$_.captured_at -lt [string](Get-JobAgentReportProperty -Object $current -Name 'captured_at' -Default '')) -or
+                (([string]$_.captured_at -eq [string](Get-JobAgentReportProperty -Object $current -Name 'captured_at' -Default '')) -and ([string]$_.snapshot_id -lt [string](Get-JobAgentReportProperty -Object $current -Name 'snapshot_id' -Default '')))
+            } | Select-Object -Last 1)
+        $previous = if ($previousCandidates.Count -eq 0) { $null } else { $previousCandidates[0] }
+        $fields = @((Get-JobAgentReportProperty -Object $event -Name 'changed_fields' -Default @()) | Where-Object { $whitelist -contains [string]$_ } | ForEach-Object { [string]$_ } | Select-Object -Unique)
+        if (([string]$event.event_type -eq 'JOB_CREATED') -and $fields.Count -eq 0) {
+            $fields = @('status')
+        }
+        if (([string]$event.event_type -in @('JOB_CLOSED', 'JOB_REMOVED')) -and ($fields -notcontains 'status')) {
+            $fields = @($fields + 'status')
+        }
+        $fieldChanges = [System.Collections.Generic.List[object]]::new()
+        foreach ($field in $fields) {
+            $before = if ($field -eq 'status') { ConvertTo-JobAgentReportChangeText -Value (Get-JobAgentReportProperty -Object $event -Name 'old_status' -Default 'UNKNOWN') } else { Get-JobAgentReportSnapshotFieldText -Snapshot $previous -Field $field }
+            $after = if ($field -eq 'status') { ConvertTo-JobAgentReportChangeText -Value (Get-JobAgentReportProperty -Object $event -Name 'new_status' -Default 'UNKNOWN') } else { Get-JobAgentReportSnapshotFieldText -Snapshot $current -Field $field }
+            $fieldChanges.Add([pscustomobject]@{
+                    field = $field
+                    before = $before
+                    after = $after
+                    previous_content_archived = ($null -ne $previous)
+                })
+        }
+        $eventType = [string]$event.event_type
+        $entries.Add([pscustomobject]@{
+                change_event_id = [string]$event.change_event_id
+                event_type = $eventType
+                observed_at = [string]$event.created_at
+                scan_run_id = [string]$event.scan_run_id
+                source_id = if ($null -eq $current) { 'UNKNOWN' } else { ConvertTo-JobAgentReportChangeText -Value (Get-JobAgentReportProperty -Object $current -Name 'source_id' -Default 'UNKNOWN') }
+                label = switch ($eventType) { 'JOB_CREATED' { 'Erstmals erfasst' } 'JOB_UPDATED' { 'Inhaltsaenderung erkannt' } 'JOB_CLOSED' { 'Als geschlossen erfasst' } 'JOB_REMOVED' { 'Nicht mehr aufgefunden' } }
+                changed_fields = @($fields)
+                fields = @($fieldChanges.ToArray())
+                reason = ConvertTo-JobAgentReportChangeText -Value (Get-JobAgentReportProperty -Object $event -Name 'reason' -Default 'UNKNOWN')
+            })
+    }
+    return @($entries | Sort-Object @{ Expression = { [string]$_.observed_at }; Descending = $true }, @{ Expression = { [string]$_.change_event_id }; Descending = $false } | Select-Object -First $MaximumEntries)
+}
+
 function New-JobAgentReportCompanyEntry {
     param(
         [Parameter(Mandatory)][object]$Company,
@@ -1040,6 +1143,21 @@ function New-JobAgentDailyReport {
         Where-Object { [string]$_.error_class -ne 'NONE' } |
         Sort-Object company_id, source_id |
         ForEach-Object { New-JobAgentReportSourceIssueEntry -Attempt $_ -CompaniesById $companiesById -SourcesById $sourcesById })
+
+    $historyByJobId = @{}
+    $historyJobIds = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    foreach ($event in @($Document.change_events)) {
+        if (@('JOB_CREATED', 'JOB_UPDATED', 'JOB_CLOSED', 'JOB_REMOVED') -contains [string]$event.event_type) {
+            [void]$historyJobIds.Add([string]$event.job_id)
+        }
+    }
+    foreach ($entry in @($allActiveEntries + $createdEntries.ToArray() + $activeEntries + $changedEntries.ToArray() + $removedEntries.ToArray())) {
+        $jobId = [string]$entry.job_id
+        if (-not $historyByJobId.ContainsKey($jobId)) {
+            $historyByJobId[$jobId] = if ($historyJobIds.Contains($jobId)) { @(Get-JobAgentReportChangeHistory -Document $Document -JobId $jobId) } else { @() }
+        }
+        $entry | Add-Member -NotePropertyName change_history -NotePropertyValue @($historyByJobId[$jobId]) -Force
+    }
 
     if ($null -eq $SourceRegistry) {
         $sourceRegistryPath = Join-Path (Split-Path -Parent $PSScriptRoot) 'data\jobagent\company-discovery.sources.json'
@@ -1561,6 +1679,7 @@ function Add-JobAgentReportSearchInterfaceHtml {
                     published_at = $_.published_at
                     published_on = $_.published_on
                     first_seen = $_.first_seen
+                    change_history = @($_.change_history)
                 }
             })
         companies = @($Report.sections.companies | ForEach-Object {
@@ -1620,6 +1739,8 @@ function Add-JobAgentReportSearchInterfaceHtml {
     [void]$Lines.Add('form.addEventListener("input",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("change",()=>write({...read(),...currentFilters(),page:1},false));form.addEventListener("reset",()=>{focusReset=true;setTimeout(()=>write({view:read().view,page:1,q:"",company:[],category:[],area:[],workModel:[],employmentType:[],workTime:[],age:"",favorite:false,applied:"all",sort:"published_desc"},false),0)});window.addEventListener("storage",render);document.querySelectorAll("[data-jobagent-view]").forEach(button=>{button.addEventListener("click",()=>write({...read(),view:button.dataset.jobagentView,page:1},false));button.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;event.preventDefault();const tabs=Array.from(document.querySelectorAll("[data-jobagent-view]")),index=tabs.indexOf(button),target=event.key==="Home"?tabs[0]:event.key==="End"?tabs[tabs.length-1]:tabs[(index+(event.key==="ArrowRight"?1:tabs.length-1))%tabs.length];target.focus();target.click()})});window.addEventListener("hashchange",render);render();')
     [void]$Lines.Add('}());')
     [void]$Lines.Add('</script>')
+    [void]$Lines.Add('<script>(function(){const limit=section=>{if(section.dataset.historyLimited)return;const entries=Array.from(section.children).filter(node=>node.tagName==="DETAILS");if(entries.length<=20){section.dataset.historyLimited="true";return}section.dataset.historyLimited="true";entries.slice(20).forEach(node=>node.hidden=true);const more=document.createElement("button");more.type="button";more.textContent="Weitere Aenderungen ("+(entries.length-20)+")";more.addEventListener("click",()=>{entries.slice(20).forEach(node=>node.hidden=false);more.remove()});section.append(more)};const root=document.getElementById("jobagent-job-results");if(!root)return;new MutationObserver(()=>root.querySelectorAll(".job-change-history").forEach(limit)).observe(root,{childList:true,subtree:true});root.querySelectorAll(".job-change-history").forEach(limit)}());</script>')
+    [void]$Lines.Add('<script>(function(){const dataNode=document.getElementById("jobagent-search-data");if(!dataNode)return;let jobs={};try{jobs=Object.fromEntries(JSON.parse(dataNode.textContent).jobs.map(job=>[job.job_id,job]))}catch{return}const renderHistory=card=>{if(card.querySelector(".job-change-history"))return;const job=jobs[card.dataset.jobId],history=job&&job.change_history||[];const section=document.createElement("section"),heading=document.createElement("h3");section.className="job-change-history";heading.textContent="Quellenchronik";section.append(heading);if(!history.length){const empty=document.createElement("p");empty.textContent="Keine belegten Inhaltsaenderungen archiviert.";section.append(empty)}history.forEach(entry=>{const details=document.createElement("details"),summary=document.createElement("summary"),meta=document.createElement("p");summary.textContent=entry.label+": Aenderung erkannt am "+entry.observed_at;meta.textContent="Lauf: "+entry.scan_run_id+" · Quelle: "+entry.source_id;details.append(summary,meta);(entry.fields||[]).forEach(field=>{const text=document.createElement("p");text.textContent=field.field+" – Vorher: "+field.before+" · Nachher: "+field.after;details.append(text)});section.append(details)});const links=card.querySelector(".job-card-links");card.insertBefore(section,links)};new MutationObserver(()=>document.querySelectorAll(".job-detail[data-job-id]").forEach(renderHistory)).observe(document.getElementById("jobagent-job-results"),{childList:true,subtree:true});document.querySelectorAll(".job-detail[data-job-id]").forEach(renderHistory)}());</script>')
     [void]$Lines.Add('<script>(function(){const panel=document.getElementById("jobagent-applications"),tab=document.getElementById("jobagent-tab-applications");if(!panel||!tab)return;["jobagent-tab-jobs","jobagent-tab-companies"].forEach(id=>{const button=document.getElementById(id);if(button)button.addEventListener("click",()=>{panel.hidden=true;tab.setAttribute("aria-selected","false")})})}());</script>')
     [void]$Lines.Add('<script>(function(){const tab=document.getElementById("jobagent-tab-applications"),panel=document.getElementById("jobagent-applications"),jobsPanel=document.getElementById("jobagent-jobs"),companiesPanel=document.getElementById("jobagent-companies"),count=document.getElementById("jobagent-result-count"),pagination=document.getElementById("jobagent-pagination"),dataNode=document.getElementById("jobagent-search-data"),form=document.getElementById("jobagent-application-filters");if(!tab||!panel||!dataNode||!form)return;const labels={PREPARING:"Vorbereiten",APPLIED:"Beworben",INTERVIEW:"Gespraech",REJECTED:"Absage",WITHDRAWN:"Zurueckgezogen"},query=document.getElementById("jobagent-application-query"),stage=document.getElementById("jobagent-application-stage"),due=document.getElementById("jobagent-application-due"),sort=document.getElementById("jobagent-application-sort"),today=reference=>String(reference||"").slice(0,10),openTasks=record=>(record.tasks||[]).filter(task=>task.deleted_at===null&&task.status==="OPEN").sort((a,b)=>a.local_date.localeCompare(b.local_date)||a.task_id.localeCompare(b.task_id)),matches=entry=>{const tasks=openTasks(entry.record),first=tasks[0],needle=String(query.value||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLocaleLowerCase("de-DE").trim(),haystack=[entry.job.title,entry.job.company,entry.record.note,entry.record.next_action].join(" ").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLocaleLowerCase("de-DE"),reference=today(entry.reference),limit=new Date(reference+"T00:00:00Z");limit.setUTCDate(limit.getUTCDate()+7);const dueMatches=due.value==="all"||(due.value==="open"&&tasks.length>0)||(due.value==="none"&&tasks.length===0)||(due.value==="overdue"&&first&&first.local_date<reference)||(due.value==="next_7"&&first&&first.local_date>=reference&&first.local_date<=limit.toISOString().slice(0,10));return(stage.value==="all"||entry.record.application_stage===stage.value)&&(!needle||haystack.includes(needle))&&dueMatches},compare=(left,right)=>{const leftTask=openTasks(left.record)[0],rightTask=openTasks(right.record)[0],byId=()=>left.job.job_id.localeCompare(right.job.job_id,"de");if(sort.value==="job_id")return byId();if(sort.value==="stage_then_id")return labels[left.record.application_stage].localeCompare(labels[right.record.application_stage],"de")||byId();return String(leftTask&&leftTask.local_date||"9999-12-31").localeCompare(String(rightTask&&rightTask.local_date||"9999-12-31"))||String(leftTask&&leftTask.task_id||"~").localeCompare(String(rightTask&&rightTask.task_id||"~"),"de")||byId()},render=()=>{let data,records={};try{data=JSON.parse(dataNode.textContent);const loaded=window.JobAgentUserState.read(window.localStorage);records=loaded.persistent?loaded.state.jobs:{}}catch{return}const known=new Map((data.jobs||[]).map(job=>[job.job_id,job])),entries=Object.entries(records).filter(([,record])=>record&&labels[record.application_stage]).map(([id,record])=>({job:known.get(id)||{job_id:id,title:record.reference&&record.reference.title||"Lokale Stellenreferenz",company:record.reference&&record.reference.company||"Keine Angabe"},record,reference:data.reference_time})).filter(matches).sort(compare),root=document.getElementById("jobagent-application-results");root.replaceChildren(...entries.map(entry=>{const card=document.createElement("article"),heading=document.createElement("h3"),status=document.createElement("p"),next=document.createElement("p"),note=document.createElement("p"),tasks=document.createElement("ul"),open=openTasks(entry.record);card.className="result-card application-card";card.dataset.jobId=entry.job.job_id;heading.textContent=entry.job.title+" · "+entry.job.company;status.textContent="Status: "+labels[entry.record.application_stage];next.textContent=entry.record.next_action?"Naechste Aktion: "+entry.record.next_action:"Keine naechste Aktion gespeichert.";note.textContent=entry.record.note?"Notiz: "+entry.record.note:"Keine Notiz gespeichert.";open.forEach(task=>{const item=document.createElement("li");item.textContent="Offen: "+task.local_date+(task.time_with_offset?" "+task.time_with_offset:"")+" · "+task.title;tasks.append(item)});if(!tasks.childElementCount){const item=document.createElement("li");item.textContent="Keine offenen Termine.";tasks.append(item)}card.append(heading,status,next,note,tasks);return card}));if(!entries.length){const empty=document.createElement("p");empty.className="empty-state";empty.textContent="Keine Bewerbungen fuer diese lokalen Filter.";root.append(empty)}count.textContent="Bewerbungen: "+entries.length+" Treffer.";pagination.replaceChildren()};tab.addEventListener("click",event=>{event.stopImmediatePropagation();event.preventDefault();jobsPanel.hidden=true;companiesPanel.hidden=true;panel.hidden=false;document.getElementById("jobagent-tab-jobs").setAttribute("aria-selected","false");document.getElementById("jobagent-tab-companies").setAttribute("aria-selected","false");tab.setAttribute("aria-selected","true");render()},{capture:true});form.addEventListener("input",render);form.addEventListener("change",render);form.addEventListener("reset",()=>setTimeout(render,0));window.addEventListener("storage",()=>{if(!panel.hidden)render()})}());</script></section>')
 }
@@ -1803,5 +1924,6 @@ function ConvertTo-JobAgentDailyReportHtml {
 Export-ModuleMember -Function @(
     'ConvertTo-JobAgentDailyReportHtml',
     'ConvertTo-JobAgentDailyReportMarkdown',
+    'Get-JobAgentReportChangeHistory',
     'New-JobAgentDailyReport'
 )

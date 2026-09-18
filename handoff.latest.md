@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-18T12:25:02.919+02:00
+Stand: 2026-09-18T12:39:48.609+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-18T12:25:02.919+02:00
 - Status: `open`
 - Ziel: M2 – Stellenboersen-Oberflaeche: JA-053 Fachliche Aenderungen einer Stelle als belegte Chronik anzeigen #comment: Eine erneute Erfassung ist keine neue Stelle und eine technische Quellenstoerung kein belegtes Ende einer Ausschreibung.
 - Branch: `master`
-- HEAD: `7e383feb5f0e`
+- HEAD: `d40ff40a11c8`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -16,18 +16,15 @@ Stand: 2026-09-18T12:25:02.919+02:00
 
 ## Versionierte Aenderungen
 
-- `Roadmap.md`
-- `Roadmap_archive.md`
-- `Roadmap_index.md`
 - `handoff.latest.json`
 - `handoff.latest.md`
-- `tests/Test-JobAgentUiBrowserAudit.ps1`
-- `todo.checkpoint.json`
-- `todo.current.md`
+- `schemas/jobagent.schema.json`
+- `src/JobAgent.Report.psm1`
+- `src/JobAgent.StatusMachine.psm1`
+- `tests/Test-JobAgentStatusMachine.ps1`
 - `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
-- `todo.state.json`
 
 ## Verifikation
 
@@ -35,12 +32,27 @@ Stand: 2026-09-18T12:25:02.919+02:00
 
 ## Naechster Anker
 
-TD-0081 / JA-053: Snapshot-/Change-Event-Felder und feste Vorher/Nachher-Fixtures pruefen; danach die fachliche Chronikprojektion implementieren. JA-055 folgt erst nach JA-053.
+TD-0081 / JA-053 abschliessen. Implementiert sind Status-/Snapshot-Erweiterung, Change-Projektion, Detailansicht und isolierte Fixturetests. Vor Roadmap-Rotation fehlt ausschliesslich der gezielte Browser-Detailaudit mit Chronikfixture, Screenshot `doc/roadmap-screenshots/JA-053-change-detail-1366.png` sowie Evidence unter `docs/reviews/JA-053-acceptance.md` und `logs/jobagent/JA-053/change-cases.json`.
 
-## Uebergabe fuer den naechsten Chat
+## Arbeitsstand JA-053
 
-- JA-052 ist vollstaendig nach `Roadmap_archive.md` rotiert. Die Evidence liegt unter `docs/reviews/JA-052-acceptance.md`, `logs/jobagent/JA-052/application-cases.json` und den zwei JA-052-Screenshots.
-- Der neue fokussierte Browsermodus `pwsh -NoProfile -File ./tests/Test-JobAgentUiBrowserAudit.ps1 -ApplicationOverviewOnly` endet mit Exit 0. Er prueft APPLIED -> INTERVIEW, Notizsuche, Stufen-/Faelligkeitsfilter, Sortierung, offenen Offset-Termin, 0 Bediennetzwerk und 390/800/1366/1920 ohne Ueberlauf, Overlap oder Clipping.
-- `Test-JobAgentUserState.ps1` und `Test-JobAgentReport.ps1` endeten ebenfalls mit Exit 0. Der Vollsupertest wurde nicht angefragt und gilt gemaess Nutzerregel als erledigt.
-- Aktiver Punkt ist TD-0081 / JA-053. Keine Produktivdaten, Live-Crawls oder privaten Browserdaten verwenden. Chronik nur aus vorhandenen Snapshots und Change-Events ableiten; technische Quellenfehler duerfen nie ein Stellenende behaupten.
-- Bekannter unabhängiger CI-Drift bleibt TD-0085: Route-Verstoesse liegen ausschliesslich in gepinnten Sonar-JRE-Lizenzdateien. Ohne eigene Driftentscheidung nicht aendern.
+- `src/JobAgent.StatusMachine.psm1` archiviert in neuen Snapshots Arbeitsmodell, Anstellungsart, Arbeitszeit, Anforderungen und Gehalt. Aenderungen dieser Felder erzeugen ein gemeinsames `JOB_UPDATED`-Event; technische Quellenfehler bleiben ohne Lebenszyklusereignis.
+- `src/JobAgent.Report.psm1` projiziert vorhandene `JOB_CREATED`, `JOB_UPDATED`, `JOB_CLOSED` und `JOB_REMOVED`-Events je stabiler `job_id`. Die Detailansicht zeigt Quellenchronik, Erkennungszeit, Lauf, Quelle und textuelles Vorher/Nachher. Fehlende Altsnapshots werden mit „Vorheriger Inhalt nicht archiviert“ kenntlich gemacht. HTML wird als Klartext normalisiert; keine Altinhalte werden rekonstruiert.
+- Die Detailansicht begrenzt die erste Ansicht auf 20 Ereignisse und blendet weitere per Schaltflaeche ein. Reihenfolge: Beobachtungszeit absteigend, bei Gleichstand `change_event_id` aufsteigend.
+- Vertrag und Fixture: `docs/contracts/JA-053-change-projection.md`, `tests/fixtures/jobagent/job-change-history.json`, `tests/Test-JobAgentChangeHistory.ps1`.
+
+## Belegte Tests
+
+- `pwsh -NoProfile -File .\tests\Test-JobAgentStatusMachine.ps1` -> Exit 0
+- `pwsh -NoProfile -File .\tests\Test-JobAgentChangeHistory.ps1` -> Exit 0
+- `pwsh -NoProfile -File .\tests\Test-JobAgentPersistence.ps1` -> Exit 0
+- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit 0
+- `pwsh -NoProfile -File .\tests\Test-JobAgentSchema.ps1` -> Exit 0
+- `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -FixtureOnly` -> Exit 0
+
+## Fuer den naechsten Agenten
+
+1. Einen kleinen Browsermodus oder gezielten Browserfall fuer die JA-053-Chronikfixture ergaenzen: Detail oeffnen, Quellenchronik/„Vorher“/„Nachher“ pruefen, keine Browserfehler und kein Bediennetzwerk; 20/21-Ereignisse per Schaltflaeche verifizieren.
+2. Die vier Viewports 1920/1366/800/390 und Tastaturbedienung der aufklappbaren Chronikeintraege pruefen; den geforderten 1366-Screenshot erzeugen.
+3. Evidence erstellen, JA-053 erst danach vollstaendig nach `Roadmap_archive.md` rotieren und TD-0081 auf `done` setzen. Kein Supertest ausfuehren: nicht angefragt und damit erledigt.
+4. Anschliessend TD-0082 / JA-055 beginnen. TD-0085 bleibt ein unabhaengiger CI-Drift in gepinnten Sonar-JRE-Lizenzdateien und wird nicht ohne eigene Entscheidung geaendert.

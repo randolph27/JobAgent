@@ -293,6 +293,11 @@ function New-JobAgentSnapshotFromRawJob {
         official_url = $Job.official_url
         summary = $summary
         description = $summary
+        work_model = [string]$Job.work_model
+        employment_type = [string]$Job.employment_type
+        work_time = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_time' -Default 'UNKNOWN')
+        requirements = @((Get-JobAgentRawValue -RawJob $RawJob -Name 'requirements' -Default @()) | ForEach-Object { ConvertTo-JobAgentStatusPlainText -Value $_ })
+        salary = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'salary' -Default 'UNKNOWN')
     }
 }
 
@@ -319,6 +324,7 @@ function New-JobAgentJobFromRawJob {
         location = $location
         work_model = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_model' -Default 'UNKNOWN')
         employment_type = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'employment_type' -Default 'UNKNOWN')
+        work_time = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_time' -Default 'UNKNOWN')
         description = $description
         description_source = Get-JobAgentRawDescriptionSource -RawJob $RawJob -Description $description
         status = 'NEW'
@@ -329,7 +335,7 @@ function New-JobAgentJobFromRawJob {
         job_validity = if ($RawJob.PSObject.Properties.Name -contains 'job_validity') { $RawJob.job_validity } else { New-JobAgentUnknownJobValidity -ObservedAt $ObservedAt }
         regional_scope = if ($RawJob.PSObject.Properties.Name -contains 'regional_scope') { $RawJob.regional_scope } else { New-JobAgentUnknownRegionalScope -ObservedAt $ObservedAt }
         priority = if ($RawJob.PSObject.Properties.Name -contains 'priority') { [string]$RawJob.priority } else { 'UNRATED' }
-        requirements = @()
+        requirements = @((Get-JobAgentRawValue -RawJob $RawJob -Name 'requirements' -Default @()) | ForEach-Object { ConvertTo-JobAgentStatusPlainText -Value $_ })
         salary = if ($RawJob.PSObject.Properties.Name -contains 'salary') { [string]$RawJob.salary } else { 'UNKNOWN' }
         identity_basis = $Decision.identity_basis
     }
@@ -372,6 +378,9 @@ function Update-JobAgentExistingJobFromRawJob {
     $newPriority = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'priority' -Default $job.priority)
     $newWorkModel = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_model' -Default $job.work_model)
     $newEmploymentType = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'employment_type' -Default $job.employment_type)
+    $newWorkTime = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'work_time' -Default (Get-JobAgentRawValue -RawJob $job -Name 'work_time' -Default 'UNKNOWN'))
+    $newRequirements = @((Get-JobAgentRawValue -RawJob $RawJob -Name 'requirements' -Default (Get-JobAgentRawValue -RawJob $job -Name 'requirements' -Default @())) | ForEach-Object { ConvertTo-JobAgentStatusPlainText -Value $_ })
+    $newSalary = [string](Get-JobAgentRawValue -RawJob $RawJob -Name 'salary' -Default (Get-JobAgentRawValue -RawJob $job -Name 'salary' -Default 'UNKNOWN'))
     $newPublishedAt = Get-JobAgentRawPublishedAt -RawJob $RawJob
     $newPublishedOn = Get-JobAgentRawPublishedOn -RawJob $RawJob
 
@@ -388,6 +397,9 @@ function Update-JobAgentExistingJobFromRawJob {
     $job.priority = $newPriority
     $job.work_model = $newWorkModel
     $job.employment_type = $newEmploymentType
+    $job | Add-Member -NotePropertyName work_time -NotePropertyValue $newWorkTime -Force
+    $job | Add-Member -NotePropertyName requirements -NotePropertyValue @($newRequirements) -Force
+    $job | Add-Member -NotePropertyName salary -NotePropertyValue $newSalary -Force
     if ($null -ne $newPublishedAt) {
         if (($job.PSObject.Properties.Name -notcontains 'published_at') -or ([string]$job.published_at -ne $newPublishedAt)) {
             $changedFields.Add('published_at')
@@ -413,6 +425,9 @@ function Update-JobAgentExistingJobFromRawJob {
     if ([string]$ExistingJob.priority -ne $newPriority) { $changedFields.Add('priority') }
     if ([string]$ExistingJob.work_model -ne $newWorkModel) { $changedFields.Add('work_model') }
     if ([string]$ExistingJob.employment_type -ne $newEmploymentType) { $changedFields.Add('employment_type') }
+    if ([string](Get-JobAgentRawValue -RawJob $ExistingJob -Name 'work_time' -Default 'UNKNOWN') -ne $newWorkTime) { $changedFields.Add('work_time') }
+    if ((@((Get-JobAgentRawValue -RawJob $ExistingJob -Name 'requirements' -Default @()) | ForEach-Object { ConvertTo-JobAgentStatusPlainText -Value $_ }) -join "`n") -ne ($newRequirements -join "`n")) { $changedFields.Add('requirements') }
+    if ([string](Get-JobAgentRawValue -RawJob $ExistingJob -Name 'salary' -Default 'UNKNOWN') -ne $newSalary) { $changedFields.Add('salary') }
 
     if (($Decision.decision -eq 'UPDATED') -or ($oldDescription -ne $newDescription)) {
         $job.status = 'UPDATED'

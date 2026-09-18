@@ -566,6 +566,9 @@
         "employment_type": {
           "$ref": "#/$defs/employment_type"
         },
+        "work_time": {
+          "$ref": "#/$defs/unknownable_string"
+        },
         "description": {
           "$ref": "#/$defs/unknownable_string"
         },
@@ -1304,6 +1307,24 @@
           "$ref": "#/$defs/uri"
         },
         "summary": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "work_model": {
+          "$ref": "#/$defs/work_model"
+        },
+        "employment_type": {
+          "$ref": "#/$defs/employment_type"
+        },
+        "work_time": {
+          "$ref": "#/$defs/unknownable_string"
+        },
+        "requirements": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/unknownable_string"
+          }
+        },
+        "salary": {
           "$ref": "#/$defs/unknownable_string"
         },
         "description": {
