@@ -15,6 +15,17 @@ Stand: 2026-09-18. Der zugehoerige maschinelle Zustand steht in `handoff.latest.
 
 ## Laufender Punkt: TD-0082 / JA-055
 
+### Aktualisierung 2026-09-18 14:49+02:00
+
+- Aktiver Punkt bleibt `TD-0082` / `JA-055`; keine Roadmap-Rotation. Die Kernfunktion ist umgesetzt, die vollständige Abnahme und die geforderten Evidence-Artefakte fehlen noch.
+- `src/JobAgent.Report.psm1` ergänzt die Sichtbarkeitsverwaltung: Im Modus `visibility=hidden` erscheint eine explizite Liste aller lokalen Job- und Firmenausblendungen mit Grund, optionalem Text und Wiederherstellung. Auch nicht mehr im aktuellen Report vorhandene IDs bleiben dort wiederherstellbar.
+- Die Trefferkopfzeile weist die zur aktuellen Filtermenge passenden Werte als „X sichtbare Treffer, Y durch Ausblendung ausgeschlossen“ aus. Eine ausgeblendete Stelle mit zusätzlicher Firmenausblendung zählt genau einmal. Favoriten und Bewerbungen bleiben trotz Ausblendung sichtbar und werden nicht als ausgeschlossen gezählt.
+- `tests/Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly` ist grün. Der Test belegt Grund/Text, sofortiges Rückgängig, Firmenvorrang, erneutes Einblenden einer einzelnen Stelle bei weiterhin ausgeblendetem Arbeitgeber, Reset des Sichtbarkeitsfilters, Verwaltungsansicht und den Zählerfall `262` sichtbar / `2` ausgeschlossen. Die externen Kaspersky-Web-Anti-Virus-Injektionen werden als Umgebungsrauschen ausgefiltert; fachliche Browsernetzwerkzugriffe treten nicht auf.
+- Grün: `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1`; `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -VisibilityOnly`.
+- `pwsh -NoProfile -File .\tests\Test-JobAgentDailyRun.ps1` lieferte innerhalb von rund vier Minuten keine Ausgabe und wurde mit Strg+C beendet. Kein Ergebnis daraus ableiten; als nächstes gezielt dessen Hänger analysieren, bevor JA-055 abgeschlossen wird.
+- Nicht erstellt bzw. nicht verifiziert: `docs/reviews/JA-055-acceptance.md`, `logs/jobagent/JA-055/visibility-cases.json`, `doc/roadmap-screenshots/JA-055-hidden-management-390.png`, vollständiger Browseraudit mit 1920/1366/800/390 und Aktualisierung von Testmatrix/Funktionsinventar.
+- Kein Supertest ausgeführt. Gemäß aktuellem Nutzerauftrag ist ein nicht angefragter Supertest kein Abschlussblocker.
+
 `JA-055 Unpassende Stellen und Arbeitgeber reversibel aus der persoenlichen Anzeige ausblenden` ist begonnen, aber nicht abnahmebereit. Die Roadmap bleibt unveraendert aktiv; keine Rotation. Fachliche Reihenfolge danach: `JA-049 -> JA-054 -> JA-056 -> JA-050`.
 
 ### Bereits umgesetzt
