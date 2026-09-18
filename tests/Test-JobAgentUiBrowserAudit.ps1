@@ -4,7 +4,8 @@
 param(
     [switch]$FixtureOnly,
     [switch]$ApplicationOverviewOnly,
-    [switch]$VisibilityOnly
+    [switch]$VisibilityOnly,
+    [switch]$SavedSearchOnly
 )
 
 Set-StrictMode -Version 3.0
@@ -611,6 +612,29 @@ try {
         Assert-True -Condition ($sessionErrors.Count -eq 0) -Message ('Bewerbungsuebersicht: Browserfehler waehrend der Interaktion: ' + ($sessionErrors -join '; '))
         $caseEvidence.Add([pscustomobject]@{ case_id = 'ja052_application_overview_local_note_stage_due_and_sort_filters'; query_job_ids = @($applicationOverview.query_ids); filtered_job_ids = @($applicationOverview.filtered_ids); screenshots = @($screenshots); no_external_network = $true })
         $targetEvidence = [pscustomobject]@{ status = 'ok'; mode = 'application_overview_only'; report_url = $reportUrl; case = $caseEvidence[0]; geometry = @($geometryEvidence); screenshots = @($screenshots); report_hash = $reportHashBefore; fixture_hash = $fixtureHashBefore }
+        Write-Utf8File -Path $evidencePath -Content ($targetEvidence | ConvertTo-Json -Depth 20)
+        $targetEvidence | ConvertTo-Json -Depth 20
+        return
+    }
+    if ($SavedSearchOnly) {
+        $savedSearch = Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Gespeicherte Suche: lokal speichern, anwenden und explizit sichten' -Script 'async () => { const wait=()=>new Promise(resolve=>setTimeout(resolve,80)); localStorage.clear(); history.replaceState(null,"","#view=jobs&q=Pflegedokumentation"); window.dispatchEvent(new HashChangeEvent("hashchange")); await wait(); const name=document.getElementById("jobagent-saved-search-name"),save=document.getElementById("jobagent-saved-search-save"),api=window.JobAgentUserState; if(!name||!save)throw new Error("Saved-Search-Bedienung fehlt"); name.value="Pflege Freising"; save.click(); await wait(); const searches=Object.values(api.read(localStorage).state.saved_searches),created=searches[0]; const card=document.querySelector("[data-saved-search-id]"),open=card.querySelector("button"),seen=Array.from(card.querySelectorAll("button")).find(button=>button.textContent==="Als gesehen markieren"),resourcesBefore=new Set(performance.getEntriesByType("resource").map(entry=>entry.name)); open.click(); await wait(); const appliedHash=location.hash; seen.click(); await wait(); const stored=api.read(localStorage).state.saved_searches[created.search_id],duplicate=name.value="pflege   freising"; save.click(); await wait(); return JSON.stringify({count:searches.length,filters:created.filters,baseline:created.baseline,applied_hash:appliedHash,seen_generation:stored.baseline.generation_id,seen_at:stored.last_visit_at,duplicate_message:document.getElementById("jobagent-saved-search-notice").textContent,external_resources:performance.getEntriesByType("resource").map(entry=>entry.name).filter(name=>!resourcesBefore.has(name))}); }'
+        Assert-True -Condition ([int]$savedSearch.count -eq 1) -Message 'Gespeicherte Suche: Der neue Auftrag wurde nicht genau einmal lokal gespeichert.'
+        Assert-True -Condition ([string]$savedSearch.filters.q -eq 'Pflegedokumentation' -and [string]$savedSearch.filters.visibility -eq 'visible') -Message 'Gespeicherte Suche: Der kanonische Filterzustand wurde nicht gespeichert.'
+        Assert-True -Condition (-not [string]::IsNullOrWhiteSpace([string]$savedSearch.baseline.generation_id) -and [string]$savedSearch.seen_generation -eq [string]$savedSearch.baseline.generation_id -and -not [string]::IsNullOrWhiteSpace([string]$savedSearch.seen_at)) -Message 'Gespeicherte Suche: Die explizite Sichtungsbestaetigung ist nicht generationsgebunden gespeichert.'
+        Assert-True -Condition ([string]$savedSearch.applied_hash -match 'view=jobs' -and [string]$savedSearch.applied_hash -match 'q=Pflegedokumentation') -Message 'Gespeicherte Suche: Aufrufen setzt nicht die Stellenansicht mit dem gespeicherten Filter.'
+        Assert-True -Condition ([string]$savedSearch.duplicate_message -match 'bereits vergeben') -Message 'Gespeicherte Suche: Ein normalisierter Doppelname wird nicht abgelehnt.'
+        Assert-True -Condition (@($savedSearch.external_resources).Count -eq 0) -Message ('Gespeicherte Suche: Lokale Bedienung hat externe Netzwerkressourcen geladen: ' + ($savedSearch.external_resources -join ', '))
+        $screenshots = @(
+            Join-Path $artifactRoot 'JA-056-search-overview-1366.png',
+            Join-Path $artifactRoot 'JA-056-search-overview-390.png'
+        )
+        foreach ($index in 0..1) {
+            $size = if ($index -eq 0) { @(1366, 900) } else { @(390, 844) }
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'resize', $size[0], $size[1]) | Out-Null
+            Invoke-JobAgentPlaywrightCli -WorkingDirectory $artifactRoot -Arguments @('--session', $sessionName, 'screenshot', '#jobagent-saved-searches', '--filename', $screenshots[$index]) | Out-Null
+            Assert-True -Condition ((Test-Path -LiteralPath $screenshots[$index]) -and (Get-Item -LiteralPath $screenshots[$index]).Length -gt 1000) -Message "Gespeicherte Suche: Screenshot fehlt oder ist unplausibel klein: $($screenshots[$index])."
+        }
+        $targetEvidence = [pscustomobject]@{ status = 'ok'; mode = 'saved_search_only'; report_url = $reportUrl; saved_search = $savedSearch; screenshots = $screenshots; report_hash = $reportHashBefore; fixture_hash = $fixtureHashBefore }
         Write-Utf8File -Path $evidencePath -Content ($targetEvidence | ConvertTo-Json -Depth 20)
         $targetEvidence | ConvertTo-Json -Depth 20
         return

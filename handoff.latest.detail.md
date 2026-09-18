@@ -1,6 +1,6 @@
 # Uebergabe-Details
 
-Stand: 2026-09-18T20:46:28.9862896+02:00
+Stand: 2026-09-18T21:07:05.2527927+02:00
 
 ## Aktiver Arbeitsauftrag
 
@@ -25,18 +25,19 @@ Erfolgreich ausgeführt: `Test-JobAgentCalendar.ps1`, `Test-JobAgentReport.ps1`,
 
 Die Browserumgebung injiziert Anfragen an `gc.kis.v2.scr.kaspersky-labs.com`; der Audit dokumentiert nur den Hostnamen als Umgebungsartefakt. Es gab keine unerwartete Produktnetzwerkanfrage.
 
-## Nächster Schnitt JA-056
+## Aktueller Schnitt JA-056
 
-Der Suchauftrag-/Sichtungsvertrag ist nun als `docs/contracts/JA-056-saved-searches.md` festgelegt. `saved_searches` ist im v2-Schema optional und leer vorbelegt. `jobboard-state.js` validiert maximal 50 stabile Aufträge, normalisierte Namen, kanonische Filter und atomare Baseline-/Löschoperationen. `compareSavedSearch` verarbeitet ausschliesslich bereits kanonisch gefilterte IDs und trennt neue, geänderte und durch persönliche Auswahl sichtbare Treffer.
+Der Suchauftrag-/Sichtungsvertrag ist als `docs/contracts/JA-056-saved-searches.md` festgelegt. `saved_searches` ist im v2-Schema optional und leer vorbelegt. `jobboard-state.js` validiert maximal 50 stabile Aufträge, normalisierte Namen, kanonische Filter und atomare Baseline-/Löschoperationen. `compareSavedSearch` verarbeitet ausschliesslich bereits kanonisch gefilterte IDs und trennt neue, geänderte und durch persönliche Auswahl sichtbare Treffer.
 
-Belegt durch `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` (je Exit 0). Kein Supertest, Browseraudit, Livecrawl oder Sonarlauf in diesem unvollständigen Roadmap-Punkt.
+Die Report-Clientdaten enthalten `scan_run_id`. `window.JobAgentSearch` verwendet die bestehende Filterfunktion sowohl für das Rendern als auch für die Suchauftrags-Baseline. Das eingebettete `jobboard-saved-searches.js` bietet getrennte lokale Aktionen für Speichern, Aufrufen, Bearbeiten, Duplizieren, Löschen und Sichtungsbestätigung; die Teilmenge „Neu seit letzter Sichtung“ markiert neue und fachlich geänderte Karten ohne zusätzlichen Filteralgorithmus. `tests/Test-JobAgentSavedSearches.ps1` prüft Generationsbaseline, Neu-/Änderungsvergleich, explizite Sichtung, UI-Assetsyntax und die Reportverdrahtung.
+
+Belegt durch `pwsh -NoProfile -File .\tests\Test-JobAgentSavedSearches.ps1`, `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` (je Exit 0). Kein Supertest, Livecrawl oder Sonarlauf in diesem unvollständigen Roadmap-Punkt. Der neue gezielte Browserpfad ist vorhanden, aber noch nicht erfolgreich als Evidence abgeschlossen.
 
 Der Basis-Commit `45673ce` ist auf `origin/master` gepusht. Die Übergabedateien selbst werden in einem folgenden Metadaten-Commit mitgeführt; der neue Agent startet anhand der hier dokumentierten Roadmap- und Todo-Lage, nicht bei JA-050.
 
-1. Suchauftrag-UI mit Speichern, Aufrufen, Bearbeiten, Duplizieren und Löschen integrieren; Aufruf setzt Stellenansicht und Seite 1. Fehlende Firmen/Kategorien bleiben als nicht verfügbare aktive Auswahl sichtbar.
-2. Die stabile `scan_run_id` aus der Reportpublikation als Generationskennung in die Clientdaten aufnehmen und die bestehende Filterfunktion für Baseline und Vergleich wiederverwenden.
-3. „Als gesehen markieren“ erst nach erfolgreicher Speicherung der exakt geladenen Generation aktivieren; Quota-, Import- und unbekannte-Generationen-Fehler lassen den Altzustand unverändert.
-4. Fokussierten SavedSearch-/Browser-Test, Screenshots 1366/390 und Evidence ohne private Suchparameter ergänzen. Erst dann TD-0084 abschließen und JA-056 rotieren.
+1. Den fokussierten Browserpfad `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1 -SavedSearchOnly` mit isolierter Session ausführen und dessen 1366/390-Evidence sichern.
+2. Mehrgenerationen-, Import-/Export-, Quota- und unbekannte-Generationen-Fälle in den fokussierten Pfad aufnehmen; alte Baselines müssen bei jedem Fehler unverändert bleiben.
+3. `docs/reviews/JA-056-acceptance.md` und die vorgesehenen Evidence-Dateien ohne private Suchparameter erstellen. Erst dann TD-0084 abschließen und JA-056 rotieren.
 
 ## Betriebsgrenzen
 
