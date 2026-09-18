@@ -729,6 +729,24 @@ try {
     Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=jobs' -Case 'Unbekannte Filterwerte werden kanonisch entfernt'
     $caseEvidence.Add([pscustomobject]@{ case_id = 'ja047_employer_category_full_text_personal_sort_and_hash'; employer_category_job_ids = @('job:munich-accounting'); requirements_job_ids = @('job:freising-pflege'); description_job_ids = @('job:remote-contract'); favorite_job_ids = @('job:freising-pflege'); applied_job_ids = @('job:remote-contract'); title_sort_first = $sortOrder[0] })
 
+    Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Historische Markierung speichern' -Script '() => { const job={job_id:"job:historical",title:"Historische Referenzstelle",company:"Ehemalige Firma",official_url:"https://jobs.example.invalid/job/historical"}; window.JobAgentUserState.setMark(localStorage,job,"favorite",true,"2026-09-15T12:02:00.000Z"); window.JobAgentUserState.setMark(localStorage,job,"applied",true,"2026-09-15T12:03:00.000Z"); return JSON.stringify(window.JobAgentUserState.read(localStorage).state.jobs["job:historical"]); }' | Out-Null
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'favorite=1')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Fruehere persoenliche Markierungen' -Case 'Historische Favoritenmarkierung'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Nicht mehr im aktuellen offenen Stellenbestand' -Case 'Historische Favoritenmarkierung'
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:freising-pflege', 'job:historical') -Case 'Historischer Favorit bleibt getrennt vom offenen Stellenbestand sichtbar'
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'applied=beworben')
+    Assert-JobAgentSetEqual -Actual @(Get-JobAgentVisibleRecordIds -WorkingDirectory $artifactRoot -SessionName $sessionName -View jobs) -Expected @('job:historical', 'job:remote-contract') -Case 'Historische Bewerbungsmarkierung bleibt getrennt vom offenen Stellenbestand sichtbar'
+
+    Set-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Segments @('view=jobs', 'job=job:not-current')
+    $snapshot = Get-JobAgentCliSnapshot -WorkingDirectory $artifactRoot -SessionName $sessionName
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Stellendetail nicht verfuegbar' -Case 'Unbekannte Job-ID zeigt Leerzustand'
+    Assert-JobAgentSnapshotContains -Snapshot $snapshot -Expected 'Die angeforderte Stelle ist im aktuellen offenen Stellenbestand nicht enthalten.' -Case 'Unbekannte Job-ID zeigt sicheren Hinweis'
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=jobs&job=job%3Anot-current' -Case 'Unbekannte Job-ID bleibt fuer sicheren Leerzustand erhalten'
+    Get-JobAgentSessionValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Case 'Rueckkehr aus unbekannter Detail-ID' -Script '() => { const back=document.querySelector(".job-detail button"); if(!back)throw new Error("Ruecktaste fehlt"); back.click(); return JSON.stringify({hash:location.hash}); }' | Out-Null
+    Assert-JobAgentLocationHash -WorkingDirectory $artifactRoot -SessionName $sessionName -Expected '#view=jobs' -Case 'Rueckkehr aus unbekannter Detail-ID'
+    $caseEvidence.Add([pscustomobject]@{ case_id = 'ja048_unknown_detail_and_historical_marks'; unknown_job_hash = '#view=jobs&job=job%3Anot-current'; historical_job_id = 'job:historical'; historical_status = 'Nicht mehr im aktuellen offenen Stellenbestand' })
+
     Set-JobAgentSelectValues -WorkingDirectory $artifactRoot -SessionName $sessionName -ElementId 'jobagent-area' -Values @('FREISING_CITY') -Case 'Gebietsfilter per fokussierbarem Select'
     Set-JobAgentSelectValues -WorkingDirectory $artifactRoot -SessionName $sessionName -ElementId 'jobagent-work-model' -Values @('HYBRID') -Case 'Arbeitsmodellfilter per fokussierbarem Select'
     Set-JobAgentSelectValues -WorkingDirectory $artifactRoot -SessionName $sessionName -ElementId 'jobagent-employment-type' -Values @('PART_TIME') -Case 'Anstellungsfilter per fokussierbarem Select'

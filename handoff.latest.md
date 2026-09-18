@@ -1,34 +1,51 @@
 # Handoff latest
 
-Stand: 2026-09-18T08:24:54.903+02:00
+Stand: 2026-09-18T08:39:57.589+02:00
 
 ## Zustand
 
-- Branch: `master`; Arbeitsbaum wird mit diesem Handoff committed und gepusht.
-- Aktiver fachlicher Anker: `TD-0076` / `JA-048`; Roadmap und Todo bleiben offen.
-- Kein Supertest ausgefuehrt: gemaess Nutzeranweisung gilt der nicht angeforderte Supertest als erledigt.
-- Der Route-Check bleibt wegen elf vorbestehender Steuerzeichen/Markdown-Fence-Funde unter `.ci/tools/sonar/**/jre/legal/**` rot. Diese Dateien wurden nicht geaendert und sind nicht Teil von JA-048.
+- Active: ``
+- Status: `open`
+- Ziel: Keine aktive Roadmap-Aufgabe.
+- Branch: `master`
+- HEAD: `c6c0f0d261a2`
+- Upstream: `origin/master`
+- Ahead/Behind: `0/0`
+- Worktree: `dirty`
+- Route: `False`
 
-## Umgesetzter Stand JA-048
+## Versionierte Aenderungen
 
-- `src/JobAgent.Report.psm1` rendert auf Karten zwei getrennte Schalter: Favorit und Bewerbungsmarkierung. Beide verwenden den vorhandenen browserlokalen v1-Store, haben eigene Texte, `aria-pressed`, sichtbare Speicherergebnisse und mindestens 44 CSS-Pixel.
-- Ein Titel oeffnet die lokale Detailansicht ueber `#job=<job_id>` und behaelt den bestehenden Filterzustand. Die Detailansicht zeigt Firma, Ort, Arbeitsbedingungen, Zeit-/Aktualitaetsdaten, Beschreibung, Anforderungen und getrennte Original-/Firmenlinks.
-- Der Rueckweg in die Trefferliste setzt den Fokus auf den zuvor geoeffneten Jobtitel. Eine Markierung wird nach erfolgreichem lokalen Speichern erneut gerendert; Karten, Detailansicht und bestehende Favoriten-/Bewerbungsfilter lesen damit dieselbe Wahrheit.
-- Der derzeitige Hash-Parser verwirft unbekannte `job`-IDs und normalisiert zur Liste. Der in JA-048 geforderte explizite Leerzustand fuer unbekannte Job-IDs fehlt noch.
-
-## Noch offen vor Abschluss von JA-048
-
-1. Unbekannte `job`-ID als sicheren Leerzustand rendern statt zum Listenhash zu normalisieren.
-2. Markierte, nicht mehr im aktiven Report enthaltene Jobs aus dem lokalen Store als historische Favoriten-/Bewerbungseintraege mit Status „Nicht mehr im aktuellen offenen Stellenbestand“ darstellen; keine falsche Verfuegbarkeit oder Loeschung persoenlicher Historie.
-3. Spezifische Browserassertions fuer Detail-Hash, zwei unabhaengige Schalter, Karten-/Detail-Synchronisierung, Rueckfokus, unbekannte ID und historische Markierungen ergaenzen. Danach JA-048 gegen die Roadmap-Akzeptanz pruefen und erst dann rotieren.
+- `handoff.latest.md`
+- `src/JobAgent.Report.psm1`
+- `tests/Test-JobAgentUiBrowserAudit.ps1`
+- `todo.history.digest.json`
+- `todo.master.index.json`
 
 ## Verifikation
 
-- `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` -> Exit 0
-- `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1` -> Exit 0
-- `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` -> Exit 0; isolierte Fixture, 264 Stellen/251 Firmen, Viewports 390/800/1366/1920.
-- `git diff --check` -> keine Whitespace-Fehler.
+- `ps: pwsh -NoProfile -File .\tests\Test-JobAgentCiContracts.ps1` -> Exit `0`
 
-## Naechster Schritt
+## Naechster Anker
 
-`TD-0076` fortsetzen, zuerst den unbekannten-ID-Leerzustand und die historischen lokalen Markierungen implementieren. Danach die spezifischen JA-048-Browserfaelle erweitern. JA-052/JA-053/JA-055 bleiben abhaengige Folgepunkte; keine Rotation der Roadmap vor vollstaendiger Akzeptanz.
+M2 – Stellenboersen-Oberflaeche: JA-048 Stellendetails und zwei eindeutig bedienbare Sterne integrieren #comment: Jede Stelle muss vollstaendig pruefbar, separat merkbar und manuell als schon beworben markierbar sein.
+
+## Fachlicher Uebergabestand JA-048
+
+- `src/JobAgent.Report.psm1` hat zwei getrennte Schalter fuer Favorit und Bewerbungsmarkierung auf Karte und Detailansicht. Beide nutzen den browserlokalen v1-Store, haben eigene Texte und `aria-pressed`, verhindern Navigation und zeigen ein Speicherergebnis.
+- Ein Jobtitel oeffnet die lokale Detailansicht via `#job=<job_id>` und behaelt Filterzustand. Die Detailansicht zeigt Firma, Ort, Arbeitsbedingungen, Zeit-/Aktualitaetsdaten, Beschreibung, Anforderungen sowie getrennte Original-/Firmenlinks. Der Rueckweg setzt den Fokus auf den zuvor geoeffneten Titel.
+- Neu in diesem Commit: Unbekannte `job`-IDs bleiben im Hash und rendern den sicheren Leerzustand `Stellendetail nicht verfuegbar`; die Ruecktaste entfernt nur `job`. Kein Fallback auf einen beliebigen aktiven Job.
+- Neu in diesem Commit: Markierte Jobs, die im aktiven offenen Report fehlen, bleiben als lokale Referenz erhalten. Bei Favoriten- oder Bewerbungsfilter erscheinen sie getrennt als historische Karten mit dem Status `Nicht mehr im aktuellen offenen Stellenbestand`; sie zaehlen nicht zum offenen Bestand und beide Markierungen bleiben getrennt bedienbar.
+
+## Tests und offene Nachweise
+
+- Gruen: `pwsh -NoProfile -File .\tests\Test-JobAgentReport.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentUserState.ps1`.
+- Gruen: `git diff --check`.
+- `tests/Test-JobAgentUiBrowserAudit.ps1` enthaelt neue Assertions fuer unbekannte Detail-ID, Hash-Erhalt/Rueckkehr und einen historischen zugleich favorisierten/beworbenen Job.
+- Der vollstaendige Browser- und Viewportlauf ist noch nicht als Erfolg belegt. Zwei manuell gestartete Browserlaeufe hinterliessen nicht terminierende Child-Prozesse und wurden beendet; diese Laeufe gelten nicht als Testresultat. Vor Wiederholung `./ci.cmd devserver-status` verwenden, den vorhandenen Listener auf 8500 nutzen und nur eine Testinstanz starten.
+- Noch ergaenzen: Browserassertions fuer die unabhängigen Karten-/Detail-Schalter, ihre gegenseitige Nichtbeeinflussung und den Rueckfokus. Danach `pwsh -NoProfile -File .\tests\Test-JobAgentUiBrowserAudit.ps1` und `pwsh -NoProfile -File .\tests\Test-JobAgentHtmlViewportAudit.ps1` ausfuehren.
+- JA-048/TD-0076 bleibt offen und wird nicht rotiert. Gemäss Nutzerauftrag ist kein Supertest erforderlich.
+
+## Bekannte externe Einschränkung
+
+- Der Route-Check meldet elf vorbestehende Funde ausschliesslich in unveraenderten Sonar-JRE-Lizenzdateien unter `.ci/tools/sonar/**/jre/legal/**`. Diese Dateien nicht loeschen oder umschreiben; TD-0085 behandelt die CI-Abweichung separat.
