@@ -54,6 +54,10 @@ Die detaillierten Vorbedingungen, Eingaben, Sollwerte und Negativfälle sind mas
 | JA-045 | `tests/Test-JobAgentUserState.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUserState.ps1` | ja | Browserlokaler v1-Zustand, vier Markierungskombinationen, Feldzeitstempel, Export/Import, Speicherfehler und Tab-Synchronisation |
 | JA-053 | `tests/Test-JobAgentChangeHistoryBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentChangeHistoryBrowserAudit.ps1` | ja | Isolierte Quellenchronik mit 0/20/21 Eintraegen, Vorher/Nachher-Klartext, Tastatur, Erweiterung, Viewports und Bediennetzwerk-Guard |
 | JA-053-Projektion | `tests/Test-JobAgentChangeHistory.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentChangeHistory.ps1` | ja | Deterministische Snapshot-/Event-Projektion, Mehrfelddiff, fehlender Altsnapshot, 20-von-21-Grenze und Idempotenz |
+| JA-049-Publikation | `tests/Test-JobAgentPublication.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentPublication.ps1` | nein | Stabiler Einstieg, einheitlicher Generationshash und atomarer Unterbrechungsschutz |
+| JA-054-Kalender | `tests/Test-JobAgentCalendar.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCalendar.ps1` | nein | Retry- und Tagesprojektion, geplante Pruefung, stabile Reportreferenz und HTML-Vertrag |
+| JA-054-Kalender-Browser | `tests/Test-JobAgentCalendarBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentCalendarBrowserAudit.ps1` | nein | Lokale Kalenderbedienung, Tastaturpfad, vier Viewports und kein Produktnetzwerk |
+| JA-056 | `tests/Test-JobAgentSavedSearches.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentSavedSearches.ps1` | ja | Baseline, generationengebundene Treffer, expliziter Sichtungsstand, kanonischer Filterresolver |
 | UI-001 | `tests/Test-JobAgentUiBrowserAudit.ps1` | `pwsh -NoProfile -File tests\Test-JobAgentUiBrowserAudit.ps1` | ja | Lokale Browser-Fixture mit 251 Firmen/256 Stellen, Filterkombinationen, UNKNOWN, Umlautsuche, Pagination, Reset, Ruecknavigation, Store- und Request-Invarianz sowie 390/800/1366/1920 px |
 
 ## Live-Lane

@@ -29,6 +29,7 @@
     name.maxLength = 160;
     name.autocomplete = 'off';
     nameLabel.htmlFor = name.id;
+    nameLabel.append(name);
     save.type = 'button';
     save.id = 'jobagent-saved-search-save';
     save.textContent = 'Suchauftrag speichern';

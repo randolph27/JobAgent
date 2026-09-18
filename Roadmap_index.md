@@ -1,6 +1,6 @@
 # Roadmap Index
 
-Stand: 2026-09-18. Aktiver Backlog: 2 geplante Stellenboersen-Punkte ab JA-056 im offenen Meilenstein M3 sowie TD-0085 fuer CI-Drift. JA-043 bis JA-049, JA-051 bis JA-055 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
+Stand: 2026-09-18. Aktiver Backlog: JA-050 im offenen Meilenstein M3 sowie TD-0085 fuer CI-Drift. JA-043 bis JA-049 und JA-051 bis JA-056 sind abgeschlossen archiviert. SQ-006 dokumentiert den fail-closed SonarQube-Lieferkettenvertrag; SQ-007 den erfolgreichen, begrenzten External-Issue-Import; SQ-008 und SQ-009 den erfolgreich belegten CI-Lifecycle und Compute-Engine-Read. QA-007 dokumentiert die sicherheitsverträgliche CI-005-Testkorrektur und QA-008 das kanonisch regenerierte Funktionsinventar.
 
 - `Roadmap.md`: aktive, abhaengigkeitsgeordnet priorisierte Punkte ab JA-052; jeder mit genau drei Beschreibungs-Unterpunkten, Aufwand/Dauer, Score, Risiken, Meilenstein und Testvertrag.
 - `docs/reviews/SQ-006-analysis-supply-chain.md` und `docs/reviews/SQ-006-toolchain.json`: Quellen, Analysegrenzen, zugelassene Projektwurzel und geplanter, noch nicht installierter Artefaktvertrag.

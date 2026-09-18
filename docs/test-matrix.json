@@ -137,6 +137,76 @@
       "owner": "JA-053"
     },
     {
+      "case_id": "JA049-PUBLICATION-001",
+      "function_refs": [
+        "src\\JobAgent.DailyRun.psm1::Write-JobAgentDailyRunPublication"
+      ],
+      "fixture": "isolated temporary publication root",
+      "input": "one rendered report and one interrupted replacement",
+      "expected": "stable entry and manifest keep one generation; an interruption preserves the previous entry",
+      "negative_case": "missing report, wrong manifest generation and injected publication fault are rejected",
+      "test_file": "tests\\Test-JobAgentPublication.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": [
+        "QA001-CONTRACT-005"
+      ],
+      "status": "done",
+      "owner": "JA-049"
+    },
+    {
+      "case_id": "JA054-CALENDAR-001",
+      "function_refs": [
+        "src\\JobAgent.Report.psm1::New-JobAgentDailyReport",
+        "src\\JobAgent.Report.psm1::ConvertTo-JobAgentDailyReportHtml"
+      ],
+      "fixture": "tests\\fixtures\\jobagent\\calendar.json",
+      "input": "fixed retry, midnight and planned-scan sequence",
+      "expected": "calendar projection uses the report reference and retains every required event class",
+      "negative_case": "duplicate planning, wrong finish day and missing calendar HTML contract are rejected",
+      "test_file": "tests\\Test-JobAgentCalendar.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": [
+        "QA001-CONTRACT-005"
+      ],
+      "status": "done",
+      "owner": "JA-054"
+    },
+    {
+      "case_id": "JA054-CALENDAR-002",
+      "function_refs": [
+        "src\\JobAgent.Report.psm1::Add-JobAgentReportSearchInterfaceHtml"
+      ],
+      "fixture": "tests\\fixtures\\jobagent\\calendar.json",
+      "input": "isolated browser calendar fixture across four viewports",
+      "expected": "calendar actions, keyboard path, geometry and zero product requests remain deterministic",
+      "negative_case": "overflow, missing focus, browser error and unexpected product request are rejected",
+      "test_file": "tests\\Test-JobAgentCalendarBrowserAudit.ps1",
+      "lane": "local-browser",
+      "dependencies": [
+        "JA054-CALENDAR-001"
+      ],
+      "status": "done",
+      "owner": "JA-054"
+    },
+    {
+      "case_id": "JA056-SAVED-SEARCH-001",
+      "function_refs": [
+        "src\\JobAgent.Report.psm1::Get-JobAgentReportSavedSearchScript",
+        "src\\JobAgent.Report.psm1::Add-JobAgentReportSearchInterfaceHtml"
+      ],
+      "fixture": "tests\\fixtures\\jobagent\\saved-searches.json",
+      "input": "fixed baseline plus current generation with new and changed job IDs",
+      "expected": "baseline, generation comparison and explicit seen marker are stored without changing canonical filters",
+      "negative_case": "invalid script syntax, missing report generation and nonpersistent seen marker are rejected",
+      "test_file": "tests\\Test-JobAgentSavedSearches.ps1",
+      "lane": "deterministic-fixture",
+      "dependencies": [
+        "JA053-CHRONICLE-001"
+      ],
+      "status": "done",
+      "owner": "JA-056"
+    },
+    {
       "case_id": "QA001-AGGREGATOR-001",
       "function_refs": ["src\\JobAgent.Report.psm1::ConvertTo-JobAgentDailyReportHtml"],
       "fixture": "tests\\fixtures\\jobagent\\valid.json",
@@ -687,6 +757,50 @@
       "include_in_supertest": true,
       "lane": "deterministic-fixture",
       "coverage": ["Erstbeobachtung und Mehrfelddiff", "Klartextnormalisierung", "fehlender Altsnapshot", "20-von-21-Grenze", "deterministische Zeitgleichheit", "idempotente Projektion"]
+    },
+    {
+      "roadmap_id": "JA-049-PUBLICATION",
+      "supertest_order": 36,
+      "title": "Atomare Publikation des stabilen Stellenboersen-Einstiegs",
+      "test_file": "tests/Test-JobAgentPublication.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentPublication.ps1",
+      "status": "done",
+      "include_in_supertest": false,
+      "lane": "deterministic-fixture",
+      "coverage": ["stabiler Einstieg", "einheitlicher Generationshash", "unterbrochene Publikation behaelt den vorherigen Einstieg"]
+    },
+    {
+      "roadmap_id": "JA-054-CALENDAR",
+      "supertest_order": 37,
+      "title": "Deterministische Kalenderprojektion",
+      "test_file": "tests/Test-JobAgentCalendar.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentCalendar.ps1",
+      "status": "done",
+      "include_in_supertest": false,
+      "lane": "deterministic-fixture",
+      "coverage": ["Retry- und Tagesprojektion", "geplante Pruefung", "stabile Reportreferenz", "Kalender-HTML-Vertrag"]
+    },
+    {
+      "roadmap_id": "JA-054-CALENDAR-BROWSER",
+      "supertest_order": 38,
+      "title": "Lokales Kalender-Browseraudit",
+      "test_file": "tests/Test-JobAgentCalendarBrowserAudit.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentCalendarBrowserAudit.ps1",
+      "status": "done",
+      "include_in_supertest": false,
+      "lane": "local-browser",
+      "coverage": ["Kalenderbedienung", "Tastaturpfad", "vier Viewports", "kein Produktnetzwerk"]
+    },
+    {
+      "roadmap_id": "JA-056",
+      "supertest_order": 39,
+      "title": "Gespeicherte Suchauftraege und Sichtungsstand",
+      "test_file": "tests/Test-JobAgentSavedSearches.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentSavedSearches.ps1",
+      "status": "done",
+      "include_in_supertest": true,
+      "lane": "deterministic-fixture",
+      "coverage": ["Baseline beim Speichern", "generationengebundene neue und geaenderte Treffer", "explizites Als-gesehen-Markieren", "Reportgeneration und kanonischer Filterresolver"]
     }
   ]
 }
