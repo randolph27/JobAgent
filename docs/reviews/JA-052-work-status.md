@@ -28,12 +28,10 @@ Stand: 2026-09-18
 
 ## Noch offen – vor Abschluss von JA-052
 
-1. Detail- und Listenansicht mit bedienbaren Formularen fuer Stufe, Notiz, nächste Aktion und Termin-CRUD verbinden. Der bestehende Bewerbungs-Tab ist derzeit eine Anzeige, kein Editor.
-2. Rücksetzen eines fortgeschrittenen Status über den Bewerbungsstern mit sichtbarer Wirkungsbestätigung umsetzen.
-3. Bewerbungsübersicht um Stufen-/Faelligkeitsfilter sowie Sortierung nach offenen Terminen, danach Job-/Task-ID erweitern.
-4. Lokale Suchfunktion in Notizen, klare Speicherfehleranzeige, Fokusfolge und Formularabbruch nach Roadmap-Contract nachweisen.
-5. `Test-JobAgentUiBrowserAudit.ps1` gezielt um isolierte V2-Browserprofile erweitern. Kein Supertest vor dem vollständigen JA-052-Abschluss.
-6. Akzeptanznachweis und synthetische Evidence erst nach erfolgreichem Browserfunktionstest erstellen; dann Roadmap-Punkt rotieren sowie Todo/Handoff erneut synchronisieren.
+1. Bewerbungsübersicht um Stufen-/Faelligkeitsfilter sowie Sortierung nach offenen Terminen, danach Job-/Task-ID erweitern.
+2. Lokale Suchfunktion in Notizen, klare Speicherfehleranzeige, Fokusfolge und Formularabbruch nach Roadmap-Contract nachweisen.
+3. `Test-JobAgentUiBrowserAudit.ps1` gezielt um isolierte V2-Browserprofile erweitern. Kein Supertest vor dem vollständigen JA-052-Abschluss.
+4. Akzeptanznachweis und synthetische Evidence erst nach erfolgreichem Browserfunktionstest erstellen; dann Roadmap-Punkt rotieren sowie Todo/Handoff erneut synchronisieren.
 
 ## Wichtige Verträge
 
@@ -41,3 +39,4 @@ Stand: 2026-09-18
 - Ein Termin mit Uhrzeit braucht immer einen expliziten Offset; eine DST-Mehrdeutigkeit ohne Offset bleibt unzulässig.
 - Geschlossene oder später ausgeblendete Stellen dürfen Bewerbungsdaten nicht verlieren.
 - Die Roadmap verlangt sichtbare Bedienung, Browserfunktionstests und Evidence. Deshalb bleibt `JA-052` offen und `TD-0080` in Bearbeitung.
+- Detail- und Listenansicht enthalten lokale Bearbeitungsformulare fuer Stufe, Notiz, naechste Aktion und Termin-CRUD. Nicht regulaere Stufenwechsel sowie das Zuruecksetzen einer fortgeschrittenen Stufe ueber den Bewerbungsstern verlangen eine sichtbare Bestaetigung.
