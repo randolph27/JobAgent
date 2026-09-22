@@ -832,6 +832,17 @@
       "include_in_supertest": false,
       "lane": "deterministic-fixture",
       "coverage": ["Wachstum 3 auf 4 Firmen und Stellen", "A1-Update und A2-Schliessung", "B-Quellenfehler erhaelt B1", "lokale Markierungen und Nachfassaufgabe", "Ausblendung, Suchvergleich und explizite Sichtung"]
+    },
+    {
+      "roadmap_id": "JA-050-PERFORMANCE",
+      "supertest_order": 41,
+      "title": "Lokaler Lasttest der Stellenfilterung",
+      "test_file": "tests/Test-JobAgentPerformance.ps1",
+      "command": "pwsh -NoProfile -File tests\\Test-JobAgentPerformance.ps1",
+      "status": "done",
+      "include_in_supertest": false,
+      "lane": "local-browser",
+      "coverage": ["0/1/50/51/121/1000/10000 synthetische Stellen", "maximal 50 sichtbare Karten", "fuenf Warmups und 20 Filtermessungen je Menge", "p95 <= 500 ms", "Erstrender mit 10000 Stellen <= 3 s"]
     }
   ]
 }

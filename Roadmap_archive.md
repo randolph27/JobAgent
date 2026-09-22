@@ -1,5 +1,15 @@
 # Roadmap Archive
 
+## Archiviert 2026-09-22 – JA-050
+
+- [x] JA-050 Stellenworkflow mit Wachstum, Markierungen und Grenzfällen abnehmen
+  - [x] Scope und Ergebnis: Die Gesamtabnahme verbindet die abgeschlossenen Produktpunkte JA-043 bis JA-049 und JA-051 bis JA-056. Der deterministische A/B/D-zu-A/B/C/D-Wachstumsfall belegt vier Firmen, vier historisch bekannte Stellen, drei offene Stellen, erhaltene Markierungen, die explizite Schließung von A2, Erhalt von B1 bei Quellenfehler, Ausblendung von C1 sowie Sichtung einer gespeicherten Suche.
+  - [x] Browser und Bedienung: `Test-JobAgentUiBrowserAudit.ps1` bestand gegen eine isolierte Fixture. Der Nachweis `logs/jobagent/QA-004/qa004-e2492513466441e085af254888cd4900/` deckt Suche, Details, Markierungen, Navigation und die Viewports 390, 800, 1366 und 1920 ab. Kalender, Bewerbungsübersicht, gespeicherte Suche, Ausblendung, v1-zu-v2-Migration sowie Export/Import sind durch die zugehörigen Funktionstests abgedeckt.
+  - [x] Lastgrenze: `Test-JobAgentPerformance.ps1` bestand mit 0/1/50/51/121/1000/10000 synthetischen Stellen, fünf Warmups und zwanzig Messungen je Menge. `logs/jobagent/JA-050/performance.json` dokumentiert bei 10.000 Stellen maximal 50 sichtbare Karten, Filter-p95 0,7 ms und ersten interaktiven Render nach 2.107 ms. Dies sind lokale Messwerte, keine allgemeine Leistungszusage.
+  - [x] Verifikation: Exit 0 für `Test-JobAgentDailyRun.ps1`, `Test-JobAgentReport.ps1`, `Test-JobAgentUserState.ps1`, `Test-JobAgentCalendar.ps1`, `Test-JobAgentSavedSearches.ps1`, `Test-JobAgentUiBrowserAudit.ps1`, `Test-JobAgentHtmlViewportAudit.ps1`, `Test-JobAgentAcceptance.ps1`, `Test-JobAgentPerformance.ps1` und `Test-JobAgentTestMatrix.ps1`. Das kanonische Funktionsinventar wurde auf 606 Einträge regeneriert.
+  - [x] Supertest: Nicht angefragt; gemäß Nutzerregel als erledigt bewertet und nicht ausgeführt. Die Testmatrix führt die fehlende Supertest-Aggregation deshalb als `not-applicable`.
+  - [x] Evidence: `docs/reviews/JA-050-acceptance.md`, `logs/jobagent/JA-050/performance.json`, `logs/jobagent/QA-004/qa004-e2492513466441e085af254888cd4900/` und `docs/handoffs/2026-09-22-ja-050-complete.md`.
+
 ## Archiviert 2026-09-18 - JA-056
 
 - [x] JA-056 Gespeicherte Suchauftraege und neue Treffer seit letzter Sichtung bereitstellen #comment: Wiederholbare Suchprofile und ein generationengebundener Treffervergleich sparen Sucharbeit, ohne alte Jobs nach einem erneuten Lauf erneut als neu auszugeben.

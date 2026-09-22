@@ -52,3 +52,11 @@ Die folgenden isolierten Browserfaelle wurden gegen den lokalen CI-Devserver auf
 | `pwsh -NoProfile -File .\tests\Test-JobAgentAcceptance.ps1` | Exit 0 | `logs/jobagent/JA-050/acceptance-latest.log` |
 
 Die gezielten Faelle belegen Kalenderansichten, Tastaturpfad und vier Viewports; lokale Stufen-, Notiz-, Termin- und Fälligkeitsfilter; gespeicherte Suche mit expliziter Sichtung; Ausblendung mit Grund, Rueckgaengig und Firmenvorrang sowie die v1->v2- und Export-/Import-Vertraege. Der noch ausstehende Massentest und die abschliessende, zusammengeführte Browserreise bleiben Teilbild 3 beziehungsweise der verbleibende Anteil von Teilbild 2.
+
+## Abschluss 2026-09-22
+
+Der vollständige Funktionsumfang von JA-050 ist lokal belegt. `Test-JobAgentUiBrowserAudit.ps1` lief gegen die isolierte Fixture mit Exit 0 und erzeugte den Nachweis unter `logs/jobagent/QA-004/qa004-e2492513466441e085af254888cd4900/` für Suche, Details, Markierungen, Navigation und die vier Viewports.
+
+`Test-JobAgentPerformance.ps1` lief mit 0/1/50/51/121/1000/10000 synthetischen Stellen, fünf Warmups und 20 Messungen je Menge mit Exit 0. Das kanonische Ergebnis liegt in `logs/jobagent/JA-050/performance.json`: 10.000 Stellen, maximal 50 sichtbare Karten, Filter-p95 0,7 ms und erster interaktiver Render 2.107 ms. Die Werte sind lokale Messwerte dieser Hardware, keine allgemeine Leistungszusage.
+
+Zusätzlich bestanden mit Exit 0: `Test-JobAgentDailyRun.ps1`, `Test-JobAgentReport.ps1`, `Test-JobAgentUserState.ps1`, `Test-JobAgentCalendar.ps1`, `Test-JobAgentSavedSearches.ps1`, `Test-JobAgentHtmlViewportAudit.ps1`, `Test-JobAgentAcceptance.ps1` und `Test-JobAgentTestMatrix.ps1`. Die Matrix enthält den Lasttest und akzeptiert das gemäß Nutzerauftrag nicht vorhandene Supertest-Aggregat als `not-applicable`; `./ci.cmd supertest` wurde nicht ausgeführt.

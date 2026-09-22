@@ -94,12 +94,17 @@ function New-TestCompany {
 }
 
 function New-TestJob {
-    param([Parameter(Mandatory)][int]$Number, [Parameter(Mandatory)][object]$Location)
+    param(
+        [Parameter(Mandatory)][int]$Number,
+        [Parameter(Mandatory)][object]$Location,
+        [Parameter(Mandatory)][ValidateRange(1, 50)][int]$CompanyCount
+    )
 
     $suffix = $Number.ToString('00000', [Globalization.CultureInfo]::InvariantCulture)
+    $companySuffix = ((($Number - 1) % $CompanyCount) + 1).ToString('00000', [Globalization.CultureInfo]::InvariantCulture)
     [pscustomobject]@{
         job_id = "job:performance_$suffix"
-        company_id = "company:performance_$suffix"
+        company_id = "company:performance_$companySuffix"
         official_url = "https://leistung-$suffix.example.invalid/karriere/$suffix"
         alternative_official_urls = @()
         source_id = 'UNKNOWN'
@@ -127,7 +132,7 @@ function New-TestJob {
         }
         priority = 'D'
         requirements = @('Synthetische Leistungsprobe')
-        description = 'Lokale, deterministische Benchmarkdaten ohne Netzwerkanfrage.'
+        description = "Lokale, deterministische Benchmarkdaten ohne Netzwerkanfrage. Benchmarktoken J$suffix."
         salary = 'UNKNOWN'
         identity_basis = 'OFFICIAL_JOB_ID'
     }
@@ -138,15 +143,15 @@ function New-PerformanceDocument {
 
     $location = New-TestLocation
     $document = New-JobAgentEmptyDocument -GeneratedAt ([datetime]'2026-09-21T10:00:00Z')
-    # Der Report projektiert auch fuer einen leeren Stellenbestand einen Firmenbestand.
-    # Eine isolierte Firma verhindert, dass leere PowerShell-Collections als Nullobjekt in den Report gelangen.
-    $companyCount = [Math]::Max(1, $JobCount)
+    # Der Lastfall misst die Stellenliste; der Firmenbestand wird deshalb auf 50
+    # repräsentative Firmen begrenzt und nicht künstlich mit jeder Stelle vervielfacht.
+    $companyCount = [Math]::Min(50, [Math]::Max(1, $JobCount))
     $document.companies = @(1..$companyCount | ForEach-Object { New-TestCompany -Number $_ -Location $location })
     if ($JobCount -eq 0) {
         $document.jobs = @()
     }
     else {
-        $document.jobs = @(1..$JobCount | ForEach-Object { New-TestJob -Number $_ -Location $location })
+        $document.jobs = @(1..$JobCount | ForEach-Object { New-TestJob -Number $_ -Location $location -CompanyCount $companyCount })
     }
     $document.job_sources = @()
     $companyIds = @($document.companies | ForEach-Object { $_.company_id })
@@ -192,15 +197,20 @@ Write-Utf8File -Path $browserConfigPath -Content (@{
     } | ConvertTo-Json -Depth 10)
 
 function Get-JobAgentFilterMeasurementScript {
-    param([Parameter(Mandatory)][string]$Query)
+    param(
+        [Parameter(Mandatory)][string]$Query,
+        [Parameter(Mandatory)][int]$ExpectedVisibleCards
+    )
 
     $queryJson = $Query | ConvertTo-Json -Compress
+    $expectedVisibleCardsJson = $ExpectedVisibleCards.ToString([Globalization.CultureInfo]::InvariantCulture)
     return @"
 async () => {
-  const query=document.getElementById("jobagent-query"), root=document.getElementById("jobagent-job-results"), expected=$queryJson;
-  const wait=()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
-  const start=performance.now();query.value=expected;query.dispatchEvent(new InputEvent("input",{bubbles:true,inputType:"insertText",data:expected}));await wait();
-  return JSON.stringify({elapsed_ms:performance.now()-start,visible_cards:root.querySelectorAll("[data-job-id]").length});
+  const query=document.getElementById("jobagent-query"), root=document.getElementById("jobagent-job-results"), expected=$queryJson, expectedVisibleCards=$expectedVisibleCardsJson;
+  const start=performance.now(), deadline=start+2000, cards=()=>root.querySelectorAll("[data-job-id]").length;
+  query.value=expected;query.dispatchEvent(new InputEvent("input",{bubbles:true,inputType:"insertText",data:expected}));
+  while(cards()!==expectedVisibleCards&&performance.now()<deadline){await new Promise(resolve=>requestAnimationFrame(resolve));}
+  return JSON.stringify({elapsed_ms:performance.now()-start,visible_cards:cards()});
 }
 "@
 }
@@ -241,16 +251,16 @@ try {
 
             $queryValues = @(1..($WarmupCount + $MeasurementCount) | ForEach-Object {
                     $suffix = if ($jobCount -eq 0) { 'keine-stelle' } else { (($_ - 1) % $jobCount + 1).ToString('00000', [Globalization.CultureInfo]::InvariantCulture) }
-                    "Leistungsprobe Stelle $suffix"
+                    "Benchmarktoken J$suffix"
                 })
             $expectedCards = if ($jobCount -eq 0) { 0 } else { 1 }
             foreach ($queryValue in @($queryValues | Select-Object -First $WarmupCount)) {
-                $warmupResult = Get-JobAgentBrowserValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script (Get-JobAgentFilterMeasurementScript -Query $queryValue) -Case "Warmup $jobCount"
+                $warmupResult = Get-JobAgentBrowserValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script (Get-JobAgentFilterMeasurementScript -Query $queryValue -ExpectedVisibleCards $expectedCards) -Case "Warmup $jobCount"
                 Assert-True -Condition ([int]$warmupResult.visible_cards -eq $expectedCards) -Message "Warmup fuer $jobCount Stellen: Filterergebnis ist nicht korrekt."
             }
             $samples = [System.Collections.Generic.List[double]]::new()
             foreach ($queryValue in @($queryValues | Select-Object -Skip $WarmupCount)) {
-                $measurement = Get-JobAgentBrowserValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script (Get-JobAgentFilterMeasurementScript -Query $queryValue) -Case "Messung $jobCount"
+                $measurement = Get-JobAgentBrowserValue -WorkingDirectory $artifactRoot -SessionName $sessionName -Script (Get-JobAgentFilterMeasurementScript -Query $queryValue -ExpectedVisibleCards $expectedCards) -Case "Messung $jobCount"
                 Assert-True -Condition ([int]$measurement.visible_cards -eq $expectedCards) -Message "Messung fuer $jobCount Stellen: Filterergebnis ist nicht korrekt."
                 Assert-True -Condition ([double]$measurement.elapsed_ms -ge 0) -Message "Messung fuer $jobCount Stellen: negative Laufzeit."
                 $samples.Add([double]$measurement.elapsed_ms)
