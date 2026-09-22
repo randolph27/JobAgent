@@ -1,6 +1,6 @@
 # Handoff latest
 
-Stand: 2026-09-21T13:30:22.044+02:00
+Stand: 2026-09-22T14:07:59.734+02:00
 
 ## Zustand
 
@@ -8,7 +8,7 @@ Stand: 2026-09-21T13:30:22.044+02:00
 - Status: `in-progress`
 - Ziel: M3 - Publikation und Gesamtabnahme: JA-050 Stellenworkflow mit Wachstum, Markierungen und Grenzfaellen abnehmen #comment: Abschluss erfordert belegtes Zusammenspiel von regulaerem Lauf, Suche, Details, persoenlichen Markierungen und erneuter Publikation.
 - Branch: `master`
-- HEAD: `8281c5593bde`
+- HEAD: `565040e6bd18`
 - Upstream: `origin/master`
 - Ahead/Behind: `0/0`
 - Worktree: `dirty`
@@ -17,11 +17,7 @@ Stand: 2026-09-21T13:30:22.044+02:00
 ## Versionierte Aenderungen
 
 - `Roadmap.md`
-- `docs/reviews/JA-050-acceptance.md`
-- `handoff.latest.json`
 - `handoff.latest.md`
-- `tests/Test-JobAgentSupertest.ps1`
-- `todo.events.jsonl`
 - `todo.history.digest.json`
 - `todo.master.index.json`
 
@@ -31,14 +27,13 @@ Stand: 2026-09-21T13:30:22.044+02:00
 
 ## Naechster Anker
 
-`TD-0078` / `JA-050`: Teilbild 3, lokaler Last- und Renderbenchmark fuer 0/1/50/51/121/1000/10000 Stellen mit 5 Warmups und 20 Messungen pro Filterfall.
+`TD-0078` / `JA-050` bleibt aktiv. Zuerst den vollständigen lokalen Benchmark mit `pwsh -NoProfile -File .\tests\Test-JobAgentPerformance.ps1` erfolgreich abschließen und `logs/jobagent/JA-050/performance.json` sichern. Anschließend den vollständigen UI-Browseraudit gezielt gegen die nach `JA-048-stars-390.png` hängende Filterinteraktion reproduzieren und schließen.
 
-## Fortsetzung fuer den naechsten Chat
+## Technischer Stand für die Fortsetzung
 
-- Roadmapstatus: Ausschliesslich `JA-050` ist aktiv; keine Rotation moeglich. Teilbild 1 ist durch `Test-JobAgentAcceptance.ps1` belegt: 4 Firmen, 4 historische Stellen, 3 offene Stellen, Update/Schliessung/Quellenfehler sowie generationengebundene Markierungen, Ausblendung und Sichtung.
-- Teilbild 2 hat gezielte grüne Nachweise: `Test-JobAgentCalendarBrowserAudit.ps1`, `Test-JobAgentUiBrowserAudit.ps1 -ApplicationOverviewOnly`, `-SavedSearchOnly`, `-VisibilityOnly`, `Test-JobAgentUserState.ps1`, `Test-JobAgentSavedSearches.ps1` und `Test-JobAgentAcceptance.ps1`. Artefaktpfade und Exitcodes: `docs/reviews/JA-050-acceptance.md`.
-- Der ungekürzte `Test-JobAgentUiBrowserAudit.ps1` ist nicht als bestanden belegt: Die lokale Playwright-CLI-Sitzung blieb nach `JA-048-stars-390.png` bei der folgenden Filterinteraktion stehen und wurde kontrolliert beendet. Vor der Gesamtabnahme isoliert reproduzieren; keine Teilausgabe als Volltest werten.
-- Als Nächstes Benchmarkhost und Test für 0/1/50/51/121/1000/10000 Stellen implementieren. Akzeptanz: höchstens 50 sichtbare Karten, p95 Filter <=500 ms, erster bedienbarer Render bei 10000 <=3 s; 5 Warmups + 20 Messungen, Browser-/Hardwareversion, Referenzzeit, Exitcode und `logs/jobagent/JA-050/performance.json` erfassen.
-- Danach die zusammengeführte Browserreise von Teilbild 2 schließen: stabile URL, Suche/Firma/Gebiet/Arbeitsbedingungen, persönliche Filter, Pagination, Detail/Quellenlink, beide Sterne, Reload/neuer Report, Zurück/Vor, Export/Import, Nulltreffer, Speicherfehler, unbekannte Detail-ID sowie Kalender/Chronik an einer gemeinsamen Generation mit ID-, DOM- und Fokusassertions.
-- `tests/Test-JobAgentSupertest.ps1` wird mit diesem Arbeitsstand gelöscht. Gemäß Nutzerauftrag ist kein Supertest auszuführen. Deshalb schlägt `Test-JobAgentTestMatrix.ps1` derzeit mit `Test-JobAgentSupertest.ps1 fehlt.` fehl; die Testmatrix-/Supertest-Abhängigkeit nur bei einer fachlichen Konsolidierung ändern.
-- Devserver ist beendet. Für spätere Browserläufe nur `./ci.cmd devserver-start` auf Port 8500 verwenden.
+- Teilbild 1 ist belegt: `Test-JobAgentAcceptance.ps1` prüft A/B/D -> A/B/C/D, vier Firmen, vier historische Stellen, drei offene Stellen, A1-Update, A2-Schließung, B-Quellenfehler, Markierungen, Ausblendung und Suchsichtung.
+- Teilbild 2 hat grüne fokussierte Browsernachweise für Kalender, Bewerbungsübersicht, gespeicherte Suche und Ausblendung. Der vollständige `Test-JobAgentUiBrowserAudit.ps1` ist nicht als bestanden belegt.
+- `tests/Test-JobAgentPerformance.ps1` ist neu. Standardumfang: 0/1/50/51/121/1000/10000 Stellen, fünf Warmups und 20 echte Filtermessungen je Menge, maximal 50 Karten, p95 <=500 ms und 10000er-Erstrender <=3 s. Ein fokussierter 121er-Lauf mit jeweils einer Messung war grün: p95 15,5 ms, Erstrender 139,2 ms.
+- Mehrere unvollständige Performance-Artefakte wurden bereinigt. Ein verwaister Chrome-/Node-Lauf mit dem isolierten Profil `ja050-performance-4f9fa3c50f8b4f729871e68222228edb` hält noch Runtime-Dateien offen; dessen Prozessbezug vor einem Stop eindeutig verifizieren. Keine fremde Chrome-Sitzung beenden.
+- Kein Supertest ausführen: Er gilt gemäß Nutzerauftrag als erledigt. `Test-JobAgentTestMatrix.ps1` scheitert derzeit erwartbar, weil `tests/Test-JobAgentSupertest.ps1` fehlt.
+- Keine Roadmap-Rotation: ausschließlich `JA-050` ist offen.
